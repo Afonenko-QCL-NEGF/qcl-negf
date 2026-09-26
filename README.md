@@ -99,7 +99,7 @@ archive to that exact address through your artifact storage. The command itself 
 The primary Proxmox host runs storage, control, compute and isolated CI VMs. The existing Arch
 server hosts an additional NixOS worker through QEMU/KVM and libvirt; Arch is retained.
 Main NFS storage is on the primary Proxmox host in a dedicated NixOS storage VM. Worker scratch
-is local. The initial Arch worker uses 24 GiB RAM and 10 vCPUs out of a 32 GiB, 12-logical-CPU
+is local. The initial Arch worker uses 30 GiB RAM and 12 vCPUs out of a 32 GiB, 12-logical-CPU
 host; these are configurable caps, not a claim that SMT threads are physical cores.
 
 Keep real host addresses, credentials, disk choices and application state outside this public
