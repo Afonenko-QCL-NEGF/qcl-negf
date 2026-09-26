@@ -1,0 +1,33 @@
+name: Integrated checks
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: qcl-negf-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  integration:
+    runs-on: [self-hosted, linux, x64, qcl-negf-ci]
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - name: Check source graph
+        run: deno task graph
+      - name: Bootstrap the pinned Julia runtime
+        run: deno task --cwd components/QCLNEGFRunner.jl bootstrap
+      - name: Prepare native locked environments
+        run: deno task prepare
+        env:
+          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
+      - name: Check typed operations
+        run: deno task check
+      - name: Test packages and infrastructure definitions
+        run: deno task test
+        env:
+          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia

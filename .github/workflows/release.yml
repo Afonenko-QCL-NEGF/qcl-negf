@@ -1,0 +1,16 @@
+name: Retain application release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  assemble:
+    runs-on: [self-hosted, linux, x64, qcl-negf-ci]
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - name: Build and retain the locked application
+        run: deno task release /var/lib/qcl-negf-releases --build

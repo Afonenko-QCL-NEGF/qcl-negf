@@ -1,0 +1,24 @@
+[submodule "QCLNEGF.jl"]
+	path = components/QCLNEGF.jl
+	url = https://github.com/AfonenkoA/QCLNEGF.jl.git
+[submodule "QCLNEGFRunner.jl"]
+	path = components/QCLNEGFRunner.jl
+	url = https://github.com/AfonenkoA/QCLNEGFRunner.jl.git
+[submodule "qcl-negf-contracts"]
+	path = components/qcl-negf-contracts
+	url = https://github.com/AfonenkoA/qcl-negf-contracts.git
+[submodule "qcl-negf-results"]
+	path = components/qcl-negf-results
+	url = https://github.com/AfonenkoA/qcl-negf-results.git
+[submodule "qcl-negf-aiida"]
+	path = components/qcl-negf-aiida
+	url = https://github.com/AfonenkoA/qcl-negf-aiida.git
+[submodule "qcl-negf-portal"]
+	path = components/qcl-negf-portal
+	url = https://github.com/AfonenkoA/qcl-negf-portal.git
+[submodule "qcl-negf-research"]
+	path = components/qcl-negf-research
+	url = https://github.com/AfonenkoA/qcl-negf-research.git
+[submodule "qcl-negf-platform"]
+	path = components/qcl-negf-platform
+	url = https://github.com/AfonenkoA/qcl-negf-platform.git
