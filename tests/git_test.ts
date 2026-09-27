@@ -28,7 +28,8 @@ Deno.test("source graph refuses absent gitlinks and escaping paths", () => {
 });
 Deno.test("publication resolves exact HTTPS repositories", () => {
   assert(
-    githubRepository("https://github.com/AfonenkoA/QCLNEGF.jl.git") === "AfonenkoA/QCLNEGF.jl",
+    githubRepository("https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl.git") ===
+      "Afonenko-QCL-NEGF/QCLNEGF.jl",
   );
   rejects(() => githubRepository("https://github.com/owner/repo/extra"));
   rejects(() => githubRepository("https://example.org/owner/repo"));

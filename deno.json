@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "check": "deno fmt --check ops tests deno.json && deno lint ops tests && deno check ops/*.ts && deno test --allow-read --allow-run=git tests",
+    "check": "deno fmt --check ops tests deno.json && deno lint ops tests && deno check ops/*.ts && deno test --allow-read --allow-run=git tests && deno task transfer:check",
+    "transfer:check": "bash -n ops/transfer-github.sh && python3 -m unittest discover -s tests -p 'test_transfer.py'",
     "graph": "deno run --allow-read --allow-run=git ops/git.ts",
     "prepare": "deno run --allow-read --allow-write --allow-env --allow-run ops/environment.ts sync",
     "lock": "deno run --allow-read --allow-write --allow-env --allow-run ops/environment.ts lock",

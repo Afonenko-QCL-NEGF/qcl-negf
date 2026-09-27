@@ -1,5 +1,8 @@
 # Initial Git and GitHub setup
 
+For the existing repositories, follow [organization transfer](organization-transfer.md).
+Do not run initial repository creation to move an existing project to another owner.
+
 The prepared distribution contains a real `qcl-negf` Git repository, eight initialized submodules,
 `main` branches, neutral initial commits, `v0.2.0` tags and GitHub `origin` URLs. Keep its `.git`
 directory and each component's `.git` file. Submodule objects are stored under the superproject's
@@ -36,14 +39,14 @@ The source archive itself has not performed publication.
 The underlying commands for one component are ordinary GitHub CLI and Git:
 
 ```sh
-gh repo create AfonenkoA/QCLNEGF.jl --public
+gh repo create Afonenko-QCL-NEGF/QCLNEGF.jl --public
 git -C components/QCLNEGF.jl push --atomic origin main:main refs/tags/v0.2.0:refs/tags/v0.2.0
 ```
 
 After publishing all eight components, the corresponding superproject commands are:
 
 ```sh
-gh repo create AfonenkoA/qcl-negf --public
+gh repo create Afonenko-QCL-NEGF/qcl-negf --public
 git push --atomic origin main:main refs/tags/v0.2.0:refs/tags/v0.2.0
 ```
 
@@ -62,7 +65,7 @@ git -C QCLNEGF.jl init -b main
 git -C QCLNEGF.jl add .
 git -C QCLNEGF.jl commit -m "Initial source"
 git -C QCLNEGF.jl tag v0.2.0
-gh repo create AfonenkoA/QCLNEGF.jl --public --source=QCLNEGF.jl --remote=origin --push
+gh repo create Afonenko-QCL-NEGF/QCLNEGF.jl --public --source=QCLNEGF.jl --remote=origin --push
 git -C QCLNEGF.jl push origin v0.2.0
 ```
 
@@ -75,7 +78,7 @@ the tested source identity of the supplied distribution.
 ## Normal development
 
 ```sh
-git clone --recurse-submodules https://github.com/AfonenkoA/qcl-negf.git
+git clone --recurse-submodules https://github.com/Afonenko-QCL-NEGF/qcl-negf.git
 cd qcl-negf
 git -C components/QCLNEGF.jl switch -c experiment/operator
 ```
