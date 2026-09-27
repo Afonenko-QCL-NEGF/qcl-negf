@@ -22,13 +22,14 @@ complete compatible source set; there is no separate manually maintained source-
 
 See [architecture](docs/architecture.md), [GitHub initialization](docs/publication.md), and
 [infrastructure](components/qcl-negf-platform/docs/infrastructure.md).
+For existing checkouts, see [the organization transfer procedure](docs/organization-transfer.md).
 
 ## Prepare and test
 
 After publication, clone the workspace with its component commits:
 
 ```sh
-git clone --recurse-submodules https://github.com/AfonenkoA/qcl-negf.git
+git clone --recurse-submodules https://github.com/Afonenko-QCL-NEGF/qcl-negf.git
 cd qcl-negf
 git submodule update --init --recursive
 nix develop

@@ -16,7 +16,7 @@ function response(status: string, body: unknown): string {
   return `HTTP/2.0 ${status}\nContent-Type: application/json\r\n\r\n${JSON.stringify(body)}`;
 }
 const item = {
-  repository: "AfonenkoA/qcl-negf",
+  repository: "Afonenko-QCL-NEGF/qcl-negf",
   directory: "/checkout with spaces/qcl-negf",
   revision: "a".repeat(40),
 };

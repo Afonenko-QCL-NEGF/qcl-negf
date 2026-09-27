@@ -69,10 +69,10 @@ if (import.meta.main) {
       await Deno.writeTextFile(`${temporary}/release.json`, manifest);
       await Deno.writeTextFile(
         `${temporary}/README.md`,
-        `# QCL-NEGF application release\n\nSource superproject: https://github.com/AfonenkoA/qcl-negf/commit/${graph.revision}\n\n` +
+        `# QCL-NEGF application release\n\nSource superproject: https://github.com/Afonenko-QCL-NEGF/qcl-negf/commit/${graph.revision}\n\n` +
           "The superproject Git tree pins all component commits. Its native package-manager locks pin external dependencies. " +
           "The wheels carry the Python application and frontend. They do not include Julia, NixOS images or external Python packages.\n\n" +
-          `Build the Nix application from the published source with:\n\n\`\`\`sh\nnix build 'git+https://github.com/AfonenkoA/qcl-negf?rev=${graph.revision}&submodules=1#application'\n\`\`\`\n`,
+          `Build the Nix application from the published source with:\n\n\`\`\`sh\nnix build 'git+https://github.com/Afonenko-QCL-NEGF/qcl-negf?rev=${graph.revision}&submodules=1#application'\n\`\`\`\n`,
       );
       const final = `${root}/${identity}`;
       await Deno.rename(temporary, final);
