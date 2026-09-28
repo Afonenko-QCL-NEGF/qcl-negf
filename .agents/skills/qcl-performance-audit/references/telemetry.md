@@ -1,0 +1,87 @@
+# Телеметрия и доказательства аудита
+
+Это карта исходников, а не отчёт о производительности реального запуска. Snapshot изучен read-only 2026-09-28: umbrella `efb68778a9267cb11c6e9f49701ea2c247c35645`. Solver, тесты, build и профайлер не запускались. В просмотренном дереве не обнаружены сохранённые production `phases.jsonl`, `*.parquet`, `*.h5`/`*.hdf5`, `hardware_profile.yaml`, `execution_plan.yaml` или `series_result.json`; тесты генерируют fixtures. Это ограниченный факт об этом checkout, не утверждение об отсутствии пользовательских результатов вне него.
+
+## Точные версии и локаторы
+
+Все пути ниже относительно корня umbrella. Имя символа — основной locator; номера строк привязаны к snapshot и могут сдвинуться. Перед новым аудитом проверь `git rev-parse HEAD`, `git submodule status` и найди символ через `rg -n`; dirty changes учитывай отдельно. Компоненты — самостоятельные submodule repositories.
+
+| Компонент | Snapshot HEAD |
+| --- | --- |
+| `components/QCLNEGF.jl` | `4143ed54cecef7a858a6a372b624dfab11280df5` |
+| `components/QCLNEGFRunner.jl` | `f21cbfc386d63bab89373aa98253ab074fbf9b46` |
+| `components/qcl-negf-contracts` | `69abedd7429ea81e7a36a6cadc39702ab9d56def` |
+| `components/qcl-negf-results` | `8fadceebe819e94b95310767f463c1b0f0ffc7b1` |
+| `components/qcl-negf-aiida` | `4a81b93b35040d4cac4afda24cfebff22aa7fa8e` |
+| `components/qcl-negf-platform` | `f4766be33d3aa66a75bcb2c6354c334b23471380` |
+
+| Что исследовать | Точный путь и anchor | Что код позволяет утверждать |
+| --- | --- | --- |
+| Core timing switch | `components/QCLNEGF.jl/src/numerics/optimized/production_contracts.jl:89`, `ProductionOptions`; `phase_timing` около строки 97 | Phase timing по умолчанию выключен. Наличие кода не доказывает включение в конкретном run. |
+| Iteration metrics | `components/QCLNEGF.jl/src/numerics/optimized/production_telemetry.jl:1`, `_emit_scba_progress` | `t_total` в секундах; `t_candidate`, candidate subphases, `t_dyson`, `t_mixing`, `t_observables`, `t_residuals`, `t_physics_markers` условны по `phase_timing`. Residuals/quality/streaks рядом дают scientific context. |
+| Producer counters | Там же: `_production_counter_sample` около строки 108, `_production_phase_begin:119`, `_production_phase_end:213` | `time_ns`, process `clock`, `Base.gc_bytes`, `Base.gc_num`; CPU/allocated/GC counters process-inclusive, begin/end deltas. Recording требует `phase_timing && event_sink !== nothing`. Не thread-local accounting и не измеренный JIT. |
+| Placement и coverage | `components/QCLNEGF.jl/src/numerics/optimized/production_solver.jl`, вызовы `_production_phase_begin` (initialization около 101; iteration около 435; final audit около 1253) | Читай фактические границы, вложенность, exceptions и ранние выходы. `task_width` — разрешённая ширина фазы, не measured active CPU. |
+| Numerical memory/work | `components/QCLNEGF.jl/src/numerics/optimized/production_contracts.jl:166`, `ProductionMemoryEstimate`; `components/QCLNEGF.jl/src/numerics/optimized/kernels.jl:717`, `_preflight_production_memory`; `components/QCLNEGF.jl/src/numerics/optimized/fft_parallel.jl:305`, `production_fft_workspace_bytes` | Модель numerical storage/FLOPs и admission preflight. Требует сопоставления с фактическим RSS/native workspace и выбранными dimensions/workers. |
+| Native journal | `components/QCLNEGFRunner.jl/src/composition/native_phase_telemetry.jl:43`, `_record_native_phase!` | `phases.jsonl`, `phase-current.json`, schema `qcl-negf.producer-phase.v2`; producer monotonic clock, UTC anchor, session/sequence, parent/span IDs. Запись flush на событие; overhead не измерен этим фактом. |
+| Admission | Там же: `_native_phase_request`, `_native_phase_memory_permit!` | Ширина ограничена fixed Julia pool. Memory admission читает cgroup ancestors, может выполнить full GC до allocation и записать `resource-pressure.json`. Clean-cache credit равен нулю. Admission происходит перед producer phase sample: duration фазы не измеряет полный admission wait. |
+| Hardware envelope | `components/QCLNEGFRunner.jl/src/infrastructure/resources/linux_resources.jl:138`, `probe_hardware` | Linux affinity, cpuset, ancestor CPU quotas/memory bounds; finite quota ограничивает worker capacity. Это discovery, не непрерывный utilization sampler. |
+| Resource artifacts | `components/QCLNEGFRunner.jl/src/infrastructure/resources/resource_reports.jl:5`, `hardware_profile_dict`; `execution_plan_dict:28`, `execution_calibration_dict:50`, `save_resource_diagnostics:118`; `components/QCLNEGFRunner.jl/src/composition/configured_run.jl` около 696 | `hardware_profile.yaml`, `execution_plan.yaml` для configured path; выбор backend/workers/BLAS, memory estimate и причины. Проверяй наличие в actual artifact tree, не предполагая одинаковую выдачу каждого path. |
+| Scheduled BLAS | `components/QCLNEGFRunner.jl/src/composition/scientific_execution.jl` около 556, `BLAS.set_num_threads(1)`; `components/QCLNEGFRunner.jl/src/composition/configured_run.jl` около 166 | Scheduled scientific path задаёт 1 BLAS thread; configured path использует configuration. Не универсальная характеристика core callers. |
+| Synthetic calibration | `components/QCLNEGFRunner.jl/src/application/execution_calibration.jl:67`, `_benchmark_execution_candidate`; `calibrate_execution_plan:170` | Bounded synthetic dense contraction, repetitions/median/spread, E1 scheduling evidence. Не full-solver benchmark; чтение кода не требует запускать калибровку. |
+| Result durability | `components/QCLNEGFRunner.jl/src/infrastructure/persistence/point_artifacts.jl:510`, `commit_point_artifacts`; `verify_point_artifacts:735`; `components/QCLNEGFRunner.jl/docs/src/user/results.md` | SHA-bound committed artifacts; analysis и recovery state имеют разное назначение. Native HDF5 layout `4.0`, contract set `qcl-negf.results.v1`. |
+| Acceptance metadata | `components/QCLNEGF.jl/src/numerics/reference/acceptance_metadata.jl:439`, `_acceptance_metric_metadata`; Runner results doc выше | Residual definition/context/units и причины missing evidence. Process completion, convergence, physical acceptance, discretization и validation разделены. |
+| Telemetry field contract | `components/qcl-negf-contracts/src/qcl_negf_contracts/telemetry.py`, `TELEMETRY_SCHEMA`, `COMMON_FIELDS`, `SPAN_FIELDS`, `RESOURCE_FIELDS`, `CONTROL_FIELDS` | Schema `qcl-negf.performance.v2`; имеются поля CPU/RSS/I/O/cgroup/threads/pressure/coverage. Schema не является producer и не доказывает заполнение этих полей. |
+| CPU integration | `components/qcl-negf-results/src/qcl_negf_results/telemetry.py:31`, `CpuCoverage` | Stable cumulative deltas, identity/capacity discontinuities, excluded profile samples, mean busy logical CPUs, allocation и observed-capacity fractions. Длинные интервалы сохраняются как coarse averages, не приписываются фазам. |
+| Typed durable storage | Там же: `TelemetryWriter:137`, `_normalise`, `record_resource`, `_publish` | Bounded Parquet batches, `performance/index.json`, `sessions/<id>/hardware.json`, `current.json`, immutable commit/catalog/summary и сегменты. Не обнаружен production вызов `record_resource` в просмотренных Python/Julia файлах компонентов: найдены writer, tests и benchmark. Не объявляй proposed sampler уже подключённым. |
+| AiiDA resource request | `components/qcl-negf-aiida/src/aiida_qcl_negf/validation.py:76`, `scheduler_options`; `components/qcl-negf-aiida/src/aiida_qcl_negf/calculation.py:13`, `QCLExecutionCalculation` | Один node, один threaded process, без MPI; `JULIA_NUM_THREADS` совпадает с `num_cores_per_mpiproc`, `OPENBLAS_NUM_THREADS=1`. Requested resources не равны measured utilization. |
+| AiiDA result boundary | `components/qcl-negf-aiida/src/aiida_qcl_negf/parser.py:17`, `QCLExecutionParser`; `components/qcl-negf-aiida/src/aiida_qcl_negf/service.py`, `list_artifacts`/`open_artifact` | Retrieval result/stdout/stderr, bounded file inventory, plan/scientific fingerprint и point identity validation, отдельные scientific failure/unconverged exits. Полного resource sampler/Slurm accounting collector в этих модулях не установлено. |
+
+## Что подтверждают исходники тестов
+
+Читай их как executable specifications; не называй их пройденными без запуска и не используй синтетические числа как production evidence.
+
+| Путь | Проверяемое поведение |
+| --- | --- |
+| `components/QCLNEGFRunner.jl/test/integration/native_phase_resource_contract.jl` | Producer clocks, nesting, phase deltas, memory admission и отказ до allocation. |
+| `components/QCLNEGFRunner.jl/test/infrastructure/linux_process_resource_probe.jl` | Resource discovery через подставленные proc/cgroup paths. |
+| `components/QCLNEGFRunner.jl/test/application/execution_resource_contract.jl` | Ограничения execution envelope. |
+| `components/QCLNEGF.jl/test/domain/production_parallel_options_and_memory_accounting.jl` | Options validity и analytical memory/work accounting. |
+| `components/QCLNEGF.jl/test/numerics/production_parallel_scheduler_and_exact_contractions.jl` | Scheduler и numerical equivalence exact contractions; само название не доказывает измеренный speedup. |
+| `components/qcl-negf-results/tests/test_telemetry.py` | Nulls/unknown fields, durable batches, producer counters, CPU coverage/gaps/identity changes, profile exclusion, missing capabilities. |
+| `components/qcl-negf-results/tests/test_contract_set_compaction.py` | Contract-set/telemetry compaction evidence. |
+
+## Семантика, которую нельзя потерять
+
+`CpuCoverage` использует baseline deltas и отдельно сообщает coverage. Её `cpu_count` должен соответствовать заявленному allocation scope; не подставляй произвольное число host CPUs. `observed_capacity_scope` прямо ограничен наблюдаемой quota: неизвестные ancestor limits нельзя считать отсутствующими. PID/start ticks, clock domain и capacity changes разрывают сопоставимость. Длинный интервал со стабильными cumulative counters сохраняет среднюю CPU стоимость, но теряет фазовую детализацию.
+
+`TelemetryWriter._publish` явно сообщает `jit_separately_measured=false`, `phase_sum_is_not_wall_time=true`, возможный compilation в initialization, unknown admission wait и incomplete tail risk. `warmup` означает first observed call по phase/source session. Default buffer limits — 256 rows, 4 MiB payload, 15 s; это параметры хранения, **не resource sampling cadence** и не гарантия общего overhead. Science windows выбирают отдельные реальные batches (policy period 900 s), не полный профиль. Committed pointers/catalog/hashes отделяют durable данные от staging; `samples_dropped`, source cursors и capture errors входят в оценку полноты.
+
+В core CPU/GC/allocation deltas охватывают процесс за границы фазы, включая другую одновременную работу. Nested spans перекрываются. Admission full-GC time может быть отдельным полем Runner; не добавляй его повторно без проверки границ. `capability_reasons`, `missing_reason`, `not_measured`, `unavailable` и null сохраняют смысл отсутствия; ноль допустим только при реально измеренном нуле.
+
+## Минимальный предлагаемый план телеметрии
+
+Следующие cadence и бюджеты — **предложение для будущей реализации/измерения**, не обнаруженные production настройки. Сначала используй существующие артефакты. Не добавляй новый contract/collector из аудита без отдельной задачи. Владельцы — компоненты ответственности, не назначение работы конкретным людям. Для каждого нового поля согласуй contracts → producer → results consumer; при изменении публикации также AiiDA/portal.
+
+| Измерение / текущая опора | Единицы и scope | Proposed sampling / границы | Стоимость и проверка | Producer → downstream owner |
+| --- | --- | --- | --- | --- |
+| Научная identity и acceptance; plan/result/artifact contracts существуют | SHA/IDs, dimensions/counts, residual units из metadata, quality/gates; point и attempt | Один паспорт на execution + terminal/restart/acceptance events; append consumed budget | Малые метаданные; hashes больших файлов считать на существующем commit path, избегая повторного чтения | Runner/core acceptance → contracts, results, AiiDA |
+| Hardware/runtime passport; Runner hardware/plan уже существуют | logical/physical CPU counts, SMT/NUMA, affinity list, quota cores, memory bytes; Julia/BLAS/GC threads и versions, node/process/allocation IDs | На launch и смену allocation; missing capabilities явно | Read-only metadata probe; не переносить OS discovery в numerical core | Runner + AiiDA allocation metadata → contracts/results |
+| Producer phase wall/CPU/allocated/GC; частично уже существует | ns monotonic, s wall/CPU/GC, bytes allocated, count; process-inclusive, span/parent IDs | Begin/end существенных фаз; не per matrix element. Admission/I/O spans добавить лишь при установленном пробеле | Измерить journal serialization/flush стоимость отдельно; не обещать нулевой overhead | Core counters, Runner journal → contracts/results |
+| Resource baseline; поля schema есть, production sampler в snapshot не установлен | CPU s cumulative, RSS/peak bytes, I/O bytes, wall s, quota/throttle/pressure s; однозначный process/process-group/cgroup scope | Предлагаемый старт: каждые 1–5 s, плюс launch/exit; actual interval хранить. Для коротких фаз — producer counters | Probe cost/lag/coverage measured; не читать все thread stacks в baseline. Начальная цель overhead ≤1% wall — критерий измерения, не факт | Runner observer; AiiDA job/step link → contracts/results |
+| Memory admission и peak | Bytes: estimate/workspace/burst, RSS, cgroup current/max/high/cache; GC s, events count | Существующие admission boundaries; baseline samples плюс available peak counter | Не опрашивать внутри hot loop; sampled maximum — lower bound observed peak, kernel high-water имеет иной scope | Runner resource/admission → results, AiiDA recovery decision |
+| I/O и durability | Bytes, s wall/CPU, count; checkpoint/write/compress/hash/fsync/stage-out/retrieval, artifact role | По существующему artifact commit или transfer; связывать с attempt и bytes | Не дублировать сериализацию ради instrumentation; отдельно оценить telemetry own writes | Runner persistence, AiiDA retrieval → contracts/results |
+| Cold start/JIT separation | s; process lifetime, first call, warmed phase; Julia version/profile metadata | Из existing logs; explicit compilation/profile evidence только отдельным разрешённым bounded measurement | Профилирование может менять поведение. First-call excess не объявлять чистым JIT | Runner/runtime diagnostics → results |
+| CPU threads / contention, только для нерешённого scaling вопроса | Per-thread CPU/runtime/runqueue s, thread count/identity, sampling completeness | Отдельное короткое profile window, например 10–30 s; точный scope/cadence и cap указывать до запуска | Cost может расти с threads; missing/new/vanished threads не нули; исключить duplicate baseline intervals | Runner observer → contracts/results |
+| Telemetry health и self-cost | bytes/rows, dropped/coalesced count, s read/serialize/flush/lag, coverage fraction | На flush и control transitions; compare disabled/enabled только в разрешённой сопоставимой проверке | Ограничить buffer/retention/observer CPU; отклонить sampling, если эффект сопоставим с измеряемым speedup | Producer/TelemetryWriter → results, artifact consumers |
+| Scheduler accounting, если Slurm доступен | Elapsed s, TotalCPU s, AllocCPUS logical count, CPUTimeRAW CPU-s, MaxRSS с исходной единицей; job/step IDs | Сохранённый terminal accounting плюс при необходимости существующий live snapshot | Не частый polling scheduler; не складывать job и его steps повторно | AiiDA/scheduler integration → results audit |
+
+Для согласованного bounded measurement заранее запиши: representative accepted input/checkpoint, commits, неизменяемый scientific contract, сравниваемые execution settings, cold/warm режим, число повторов, максимальное время/RAM/output, нужные counters, stop condition и критерий scientific equivalence. Малый synthetic kernel годится для локального механизма, но не подменяет time-to-accepted-solution. При отсутствии разрешения отдай план, не запускай его.
+
+## Первичные внешние источники
+
+Проверены 2026-09-28; Julia `v1` и Slurm online docs движутся со временем. Для фактического запуска сверяй версии runtime/scheduler. Ни один источник не доказывает, где bottleneck этого проекта.
+
+- [Julia Performance Tips](https://docs.julialang.org/en/v1/manual/performance-tips/): first-call compilation, allocations, concrete types, preallocation и array access; раздел Multithreading and linear algebra объясняет взаимодействие Julia/OpenBLAS pools. Эти механизмы дают гипотезы, требующие измерений на данном workload.
+- [Julia Profiling](https://docs.julialang.org/en/v1/manual/profile/): sampling uncertainty, ограничения CPU-profile для ожиданий/I/O, зависимость overhead от частоты; allocation profiling имеет собственную стоимость. Проверяй доступность конкретного API в версии Julia проекта; наличие текущего API в online docs не разрешает запуск профайлера.
+- [Slurm sacct](https://slurm.schedmd.com/sacct.html): `TotalCPU` — used user+system CPU; `CPUTime` — allocated CPU-time, иной показатель. На interrupted steps учёт descendants может быть неполным; поддержка полей зависит от accounting plugin.
+- [Slurm sstat](https://slurm.schedmd.com/sstat.html): scope — tasks/steps, live metrics и aggregation. `MaxRSS` — максимум среди задач step, не сумма памяти всего узла; сохраняй units и job/step identity. Scheduler accounting не заменяет фазовые producer counters.
