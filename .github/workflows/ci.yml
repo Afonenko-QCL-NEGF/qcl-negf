@@ -3,6 +3,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      scope:
+        description: Full integration checks or a bounded runner admission check
+        type: choice
+        options: [full, runner-smoke]
+        default: full
 permissions:
   contents: read
 concurrency:
@@ -11,7 +17,7 @@ concurrency:
 jobs:
   integration:
     runs-on: [self-hosted, linux, x64, qcl-negf-ci]
-    timeout-minutes: 180
+    timeout-minutes: ${{ github.event.inputs.scope == 'runner-smoke' && 5 || 180 }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -20,14 +26,30 @@ jobs:
       - name: Check source graph
         run: deno task graph
       - name: Bootstrap the pinned Julia runtime
+        if: github.event.inputs.scope != 'runner-smoke'
         run: deno task --cwd components/QCLNEGFRunner.jl bootstrap
       - name: Prepare native locked environments
+        if: github.event.inputs.scope != 'runner-smoke'
         run: deno task prepare
         env:
           JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
       - name: Check typed operations
         run: deno task check
       - name: Test packages and infrastructure definitions
+        if: github.event.inputs.scope != 'runner-smoke'
         run: deno task test
         env:
           JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
+      - name: Check isolated runner account and shared build limits
+        if: github.event.inputs.scope == 'runner-smoke'
+        run: |
+          test "$(id -un)" = github-runner-qcl-negf
+          case " $(id -Gn) " in
+            *" wheel "*|*" qcl-negf-build "*) exit 1 ;;
+          esac
+          if sudo -n true 2>/dev/null; then
+            exit 1
+          fi
+          id
+          nix config show trusted-users
+          systemctl show qcl-build.slice -p CPUQuotaPerSecUSec -p MemoryMax -p MemorySwapMax

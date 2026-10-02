@@ -13,4 +13,4 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - name: Build and retain the locked application
-        run: deno task release /var/lib/qcl-negf-releases --build
+        run: deno task release /var/lib/qcl-negf-ci/releases --build
