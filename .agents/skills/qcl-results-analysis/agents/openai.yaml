@@ -1,0 +1,4 @@
+interface:
+  display_name: "QCL: анализ результатов"
+  short_description: "Архивы, HDF5, provenance и научные выводы"
+  default_prompt: "Используй $qcl-results-analysis для анализа готовых архивов QCL-NEGF с проверкой сопоставимости и доказательности."

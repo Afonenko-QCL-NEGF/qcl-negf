@@ -24,6 +24,14 @@ See [architecture](docs/architecture.md), [GitHub initialization](docs/publicati
 [infrastructure](components/qcl-negf-platform/docs/infrastructure.md).
 For existing checkouts, see [the organization transfer procedure](docs/organization-transfer.md).
 
+## Исследовательская работа с агентами
+
+Правила с приоритетом физической корректности находятся в [AGENTS.md](AGENTS.md).
+Четыре навыка в `.agents/skills` помогают подготовить постановку, проверить
+физику, разобрать готовые результаты и оценить производительность.
+См. [рабочий процесс, Codex и веб-ChatGPT](docs/research-workflow.md) и
+[задачу упаковки результатов в RO-Crate](TODO.md#results-ro-crate).
+
 ## Prepare and test
 
 After publication, clone the workspace with its component commits:
