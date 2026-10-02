@@ -70,6 +70,7 @@ build = [
 ]
 test = [
     { name = "pytest" },
+    { name = "qcl-negf-results" },
 ]
 
 [package.metadata]
@@ -80,6 +81,7 @@ requires-dist = [
     { name = "jsonschema", specifier = ">=4.23,<5" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8,<10" },
     { name = "qcl-negf-contracts", editable = "components/qcl-negf-contracts" },
+    { name = "qcl-negf-results", marker = "extra == 'test'", editable = "components/qcl-negf-results" },
 ]
 provides-extras = ["test", "build"]
 
@@ -1462,6 +1464,7 @@ source = { editable = "components/qcl-negf-portal" }
 dependencies = [
     { name = "aiida-qcl-negf" },
     { name = "fastapi" },
+    { name = "qcl-negf-results" },
     { name = "uvicorn" },
 ]
 
@@ -1476,6 +1479,7 @@ test = [
 requires-dist = [
     { name = "aiida-qcl-negf", editable = "components/qcl-negf-aiida" },
     { name = "fastapi", specifier = ">=0.116,<1" },
+    { name = "qcl-negf-results", editable = "components/qcl-negf-results" },
     { name = "uvicorn", specifier = ">=0.35,<1" },
 ]
 
@@ -1517,7 +1521,7 @@ dependencies = [
     { name = "ijson" },
     { name = "numpy" },
     { name = "pyarrow" },
-    { name = "qcl-negf-contracts" },
+    { name = "qcl-negf-contracts", extra = ["validation"] },
 ]
 
 [package.optional-dependencies]
@@ -1534,7 +1538,7 @@ requires-dist = [
     { name = "numpy", specifier = ">=2.3,<3" },
     { name = "pyarrow", specifier = ">=21,<26" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8.4,<10" },
-    { name = "qcl-negf-contracts", editable = "components/qcl-negf-contracts" },
+    { name = "qcl-negf-contracts", extras = ["validation"], editable = "components/qcl-negf-contracts" },
 ]
 provides-extras = ["test"]
 
