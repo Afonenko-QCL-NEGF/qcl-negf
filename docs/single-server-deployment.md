@@ -37,6 +37,9 @@ deno task solver:build /var/lib/qcl-negf-artifacts/first-install/solver-depot.js
 sandbox не видит произвольный архив в `/var/lib`. Оригинал архива сохраняется
 для повторного prefetch после garbage collection; копия в store входит в общий
 дисковый бюджет. Для другого builder нужен опубликованный HTTP(S) artifact URL.
+Owning Nix package закрепляет публичный CA bundle и для build environment,
+и для installed wrapper: Julia Pkg инициализирует LibGit2 также в offline mode.
+Проверка CA-контракта через pure Nix evaluation не заменяет native solver build.
 Приватный flake использует этот receipt, `mkApplication`, `mkSolver` и
 `platform.lib.mkImages`. Для режима с четырьмя VM `build-images.ts` принимает `-`
 вместо Arch inventory. Образы и depot остаются на сервере; передачей образов
