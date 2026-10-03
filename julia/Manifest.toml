@@ -474,7 +474,7 @@ uuid = "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
 version = "0.2.0"
 
 [[deps.QCLNEGFRunner]]
-deps = ["FFTW", "HDF5", "LinearAlgebra", "Logging", "QCLNEGF", "SHA", "Unitful", "YAML"]
+deps = ["Downloads", "FFTW", "HDF5", "LinearAlgebra", "Logging", "QCLNEGF", "SHA", "Unitful", "YAML"]
 path = "../components/QCLNEGFRunner.jl"
 uuid = "5a147728-d76f-4a23-a474-c91379216907"
 version = "0.2.0"
