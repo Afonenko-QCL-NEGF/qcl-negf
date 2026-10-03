@@ -1,17 +1,16 @@
 # Packages для локального development lab
 
-Этот путь собирает точный private development snapshot. Он не публикует release:
-production `ops/git.ts` / `ops/solver.ts` сохраняют GitHub-only source guard.
-Состав автоматически выводит `lab:snapshot` из authoritative Gitlinks и clean
-component HEADs; generated JSON является provenance одной попытки.
+Этот путь собирает точный private development snapshot. Он не публикует release: production
+`ops/git.ts` / `ops/solver.ts` сохраняют GitHub-only source guard. Состав автоматически выводит
+`lab:snapshot` из authoritative Gitlinks и clean component HEADs; generated JSON является provenance
+одной попытки.
 
-Команды выполняются из root checkout на Linux x86_64. До запуска задайте конечный
-бюджет и проверьте свободные RAM/диск с учётом работающих VM. Пример ниже ограничивает
-каждую package build 3600 s, двумя Nix jobs и двумя cores. Это конечный пример бюджета,
-а не обещание времени сборки. После timeout нужен явный новый бюджет. SCBA/Poisson
-не запускаются. Nix flags сами не ограничивают число внутренних Julia subprocesses:
-owning Runner задаёт `JULIA_CPU_THREADS=2` для upstream install-check и проверяет
-`Sys.CPU_THREADS` / `Sys.EFFECTIVE_CPU_THREADS`, сохраняя весь выбранный upstream suite.
+Команды выполняются из root checkout на Linux x86_64. До запуска задайте конечный бюджет и проверьте
+свободные RAM/диск с учётом работающих VM. Пример ниже ограничивает каждую package build 3600 s,
+двумя Nix jobs и двумя cores. Это конечный пример бюджета, а не обещание времени сборки. После
+timeout нужен явный новый бюджет. SCBA/Poisson не запускаются. Nix flags сами не ограничивают число
+внутренних Julia subprocesses: owning Runner задаёт `JULIA_CPU_THREADS=2` для upstream install-check
+и проверяет `Sys.CPU_THREADS` / `Sys.EFFECTIVE_CPU_THREADS`, сохраняя весь выбранный upstream suite.
 Имена ignored каталогов каждой попытки должны быть новыми; snapshot нельзя переносить.
 
 ## Snapshot и dependency depot
@@ -26,12 +25,12 @@ mkdir -m 700 "$LAB_PACKAGES"
 export LAB_EVIDENCE="$LAB_CAPTURE/snapshot.json"
 ```
 
-Нужен `qcl-negf.julia-depot.v1` metadata file с `julia: "1.13.0"`, SHA-256 native
-Manifest, URL и SRI hash архива. Для существующего внешнего dependency depot задайте
-`LAB_DEPOT_METADATA` на его проверенный receipt. `juliaManifest` должен совпасть с
-snapshot; hash архива проверяет `nix store prefetch-file` ниже. Поле `sources` нового
-metadata выбирает build graph. Оно не утверждает, что переиспользованный архив был
-подготовлен из позднейшего snapshot commit; происхождение подготовки сохраняйте отдельно.
+Нужен `qcl-negf.julia-depot.v1` metadata file с `julia: "1.13.0"`, SHA-256 native Manifest, URL и
+SRI hash архива. Для существующего внешнего dependency depot задайте `LAB_DEPOT_METADATA` на его
+проверенный receipt. `juliaManifest` должен совпасть с snapshot; hash архива проверяет
+`nix store prefetch-file` ниже. Поле `sources` нового metadata выбирает build graph. Оно не
+утверждает, что переиспользованный архив был подготовлен из позднейшего snapshot commit;
+происхождение подготовки сохраняйте отдельно.
 
 Для нового depot используйте owning Runner, exact Julia 1.13.0 и snapshot environment:
 
@@ -69,9 +68,9 @@ PY
 ```
 
 Runner проверяет exact Julia, неизменность Manifest и artifact tree hashes; удаляет
-compiled/log/scratch caches и сохраняет captured registry. Не используйте receipt
-неудачной подготовки. Для готового depot пропустите этот блок, сохранив исходный
-receipt и архив. Далее новый binding создаётся одинаково для обоих случаев:
+compiled/log/scratch caches и сохраняет captured registry. Не используйте receipt неудачной
+подготовки. Для готового depot пропустите этот блок, сохранив исходный receipt и архив. Далее новый
+binding создаётся одинаково для обоих случаев:
 
 ```sh
 python3 - <<'PY'
@@ -113,8 +112,8 @@ with (output / 'depot-prefetch.json').open('xb') as out:
 PY
 ```
 
-Verified prefetch использует exact `fetchurl` name: Nix sandbox не читает произвольный
-host path архива. Сохраните оригинальный архив для prefetch после garbage collection.
+Verified prefetch использует exact `fetchurl` name: Nix sandbox не читает произвольный host path
+архива. Сохраните оригинальный архив для prefetch после garbage collection.
 
 ## Сборка и installed integrity
 
@@ -134,13 +133,13 @@ for LAB_PACKAGE in application solver synthetic; do
 done
 ```
 
-Не продолжайте после failed command; перед следующей build повторите RAM/disk admission.
-Сохраните `nix path-info --json` outputs для NAR hashes и `nix flake metadata --json`
-для exact source store path. Application/synthetic сами не требуют depot fields:
-для них достаточно автоматически полученных `source`, `snapshotRevision`, `sourceGraph`.
+Не продолжайте после failed command; перед следующей build повторите RAM/disk admission. Сохраните
+`nix path-info --json` outputs для NAR hashes и `nix flake metadata --json` для exact source store
+path. Application/synthetic сами не требуют depot fields: для них достаточно автоматически
+полученных `source`, `snapshotRevision`, `sourceGraph`.
 
-Из application Python проверьте imports, locked versions, console metadata и factories
-в свежем scoped `AIIDA_PATH`:
+Из application Python проверьте imports, locked versions, console metadata и factories в свежем
+scoped `AIIDA_PATH`:
 
 ```sh
 export LAB_SOURCE_URL="$(python3 -c 'import json,os; print(json.load(open(os.environ["LAB_PACKAGES"]+"/package-input.json"))["source"])')"
@@ -184,15 +183,58 @@ PY
 Controller profile/bootstrap identity проверяется после closure delivery по
 [platform handoff](../components/qcl-negf-platform/docs/local-lab.md).
 
-Synthetic package устанавливает `bin/qcl-negf-synthetic-transport-1`: installed application
-Python исполняет immutable snapshot `components/qcl-negf-aiida/tests/transport_fixture.py`.
-Проверьте actual closure references на application и source, затем доставьте wrapper closure
-обоим workers. Это отдельный `SYNTHETIC-` InstalledCode. Controller rehearsal исполняет
-immutable `tests/run_transport_acceptance.py` через installed `verdi -p PROFILE run`
-с внешним deadline. Production Code allowlist и admission predicates сохраняются.
+## Application stage: четыре role closures
 
-Приёмка transport требует ровно один owned Slurm attempt, WorkChain 400 / CalcJob 303,
-unchanged frozen plan, `converged:false`, `scientific_accepted:false` и измеренный terminal
-scheduler receipt. `qcl-negf self-check` — отдельная finite проверка (например, 300 s,
-1 CPU, 2 GiB на worker). Integrity, завершение процесса, сходимость, физические проверки,
-дискретизация и экспериментальная валидация остаются отдельными утверждениями.
+Public API `nix/local-lab-systems.nix { inputFile, siteFile }` возвращает `systems`, `application`,
+`solver` из exact captured snapshot. Application и solver проходят существующий
+`local-lab-packages.nix`, включая source graph, prepared Manifest и depot guards, даже при выборе
+только storage-роли. `siteFile` — JSON public lab configuration для platform `mkLocalLab`: hosts,
+nodes, partitions, SSH public key, service email и optional API resource limits. Secret bytes,
+private SSH/Munge keys и API token в этот JSON не входят.
+
+Следующие команды только вычисляют четыре `.drv` и ожидаемые output paths; они не создают image, не
+собирают closures и не активируют VM.
+
+Для evaluation четырёх ролей задайте resident `MemoryMax=3GiB`, swap 0 и `CPUQuota=100%` в transient
+user scope; перед запуском нужны ≥4GiB MemAvailable и свободного диска. Ограничение virtual address
+space отдельно от resident RAM может прервать Nix evaluator до завершения.
+
+```sh
+export LAB_SITE_JSON="$PWD/.build/local-lab/private/app-role-site.json"
+export LAB_INPUT_FILE="$LAB_PACKAGES/package-input.json"
+timeout --kill-after=10s 240s nix --extra-experimental-features 'nix-command flakes' \
+  eval --impure --json --file nix/local-lab-systems.nix \
+  --apply 'make: let result = make { inputFile = builtins.getEnv "LAB_INPUT_FILE";
+    siteFile = builtins.getEnv "LAB_SITE_JSON"; };
+    in builtins.mapAttrs (_: system: system.drvPath) result.systems' \
+  > "$LAB_PACKAGES/role-derivations.json"
+timeout --kill-after=10s 240s nix --extra-experimental-features 'nix-command flakes' \
+  eval --impure --json --file nix/local-lab-systems.nix \
+  --apply 'make: let result = make { inputFile = builtins.getEnv "LAB_INPUT_FILE";
+    siteFile = builtins.getEnv "LAB_SITE_JSON"; };
+    in builtins.mapAttrs (_: system: system.outPath) result.systems' \
+  > "$LAB_PACKAGES/systems.json"
+```
+
+`systems.json` имеет ровно `control`, `storage`, `worker-1`, `worker-2` и подходит существующему
+[platform helper](../components/qcl-negf-platform/docs/local-lab-orchestration.md). После отдельно
+разрешённых bounded build и signed closure delivery повторный
+`prepare --systems "$LAB_PACKAGES/systems.json"` с прежними namespace, image, pool и libvirt URI
+обновляет только выбранные role paths. Затем `inventory` передаёт их как `qcl_lab_system`
+существующему Ansible playbook. Сохраните protected backing image, disks и private keys; image
+replacement для этой стадии не требуется. Cold profile preparation, controller API token и порядок
+первого handoff описаны в platform docs. Evaluation этих paths не подтверждает delivery, activation,
+application readiness или научную приёмку.
+
+Synthetic package устанавливает `bin/qcl-negf-synthetic-transport-1`: installed application Python
+исполняет immutable snapshot `components/qcl-negf-aiida/tests/transport_fixture.py`. Проверьте
+actual closure references на application и source, затем доставьте wrapper closure обоим workers.
+Это отдельный `SYNTHETIC-` InstalledCode. Controller rehearsal исполняет immutable
+`tests/run_transport_acceptance.py` через installed `verdi -p PROFILE run` с внешним deadline.
+Production Code allowlist и admission predicates сохраняются.
+
+Приёмка transport требует ровно один owned Slurm attempt, WorkChain 400 / CalcJob 303, unchanged
+frozen plan, `converged:false`, `scientific_accepted:false` и измеренный terminal scheduler receipt.
+`qcl-negf self-check` — отдельная finite проверка (например, 300 s, 1 CPU, 2 GiB на worker).
+Integrity, завершение процесса, сходимость, физические проверки, дискретизация и экспериментальная
+валидация остаются отдельными утверждениями.
