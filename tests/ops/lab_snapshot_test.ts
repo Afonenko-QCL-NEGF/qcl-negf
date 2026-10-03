@@ -344,3 +344,80 @@ Deno.test("snapshot copies borrowed Git objects instead of inheriting source alt
     );
   });
 });
+
+for (const replacement of ["symlink", "directory"] as const) {
+  Deno.test(`snapshot refuses destination parent ${replacement} replacement during source selection`, async () => {
+    await fixture(async (root, component, area) => {
+      const parent = join(root, ".build/local-lab");
+      const destination = join(parent, "sources");
+      const previous = join(root, ".build/previous-parent");
+      const outside = join(area, "outside");
+      await Deno.mkdir(parent, { recursive: true });
+      await Deno.mkdir(outside);
+      await Deno.writeTextFile(join(outside, "keep.txt"), "foreign data\n");
+      const original = Deno.lstat;
+      let changed = false;
+      Deno.lstat = async (path) => {
+        const result = await original(path);
+        // Real source selection has started, after destination preflight.
+        if (path === component && !changed) {
+          changed = true;
+          await Deno.rename(parent, previous);
+          if (replacement === "symlink") await Deno.symlink(outside, parent);
+          else await Deno.mkdir(parent);
+        }
+        return result;
+      };
+      try {
+        await rejects(() => captureLabSnapshot(destination, root), /symlink|location changed/);
+      } finally {
+        Deno.lstat = original;
+      }
+      assert(changed, "Regression must replace parent during source selection");
+      assert(await absent(destination), "Replacement parent must receive no capture");
+      assert(await absent(join(outside, "sources")), "No private Git writes outside .build");
+      assert(await absent(join(previous, "sources")), "Reject before reserving output");
+      assert(
+        await Deno.readTextFile(join(outside, "keep.txt")) === "foreign data\n",
+        "Preserve foreign data",
+      );
+    });
+  });
+}
+
+Deno.test("snapshot rechecks destination after reservation before Git writes", async () => {
+  await fixture(async (root, _component, area) => {
+    const parent = join(root, ".build/local-lab");
+    const destination = join(parent, "sources");
+    const previous = join(root, ".build/previous-parent");
+    const outside = join(area, "outside");
+    await Deno.mkdir(parent, { recursive: true });
+    await Deno.mkdir(join(outside, "sources"), { recursive: true });
+    await Deno.writeTextFile(join(outside, "sources/keep.txt"), "foreign capture\n");
+    const original = Deno.mkdir;
+    let changed = false;
+    Deno.mkdir = async (path, options) => {
+      await original(path, options);
+      if (path === destination && !changed) {
+        changed = true;
+        await Deno.rename(parent, previous);
+        await Deno.symlink(outside, parent);
+      }
+    };
+    try {
+      await rejects(() => captureLabSnapshot(destination, root), /symlink|location changed/);
+    } finally {
+      Deno.mkdir = original;
+    }
+    assert(changed, "Regression must replace parent after reservation");
+    assert(
+      await absent(join(outside, "sources/components")),
+      "No Git preparation in foreign output",
+    );
+    assert(await absent(join(outside, "sources/repository")), "No Git clone in foreign output");
+    assert(
+      await Deno.readTextFile(join(outside, "sources/keep.txt")) === "foreign capture\n",
+      "Cleanup must preserve foreign output",
+    );
+  });
+});

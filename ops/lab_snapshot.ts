@@ -97,6 +97,47 @@ async function destinationPath(destination: string, root: string): Promise<strin
   return path;
 }
 
+type DirectoryIdentity = Pick<Deno.FileInfo, "dev" | "ino">;
+
+function directoryIdentity(info: Deno.FileInfo): DirectoryIdentity {
+  if (!info.isDirectory || info.dev === null || info.ino === null) {
+    throw new Error("Local snapshot requires directory device/inode identity");
+  }
+  return { dev: info.dev, ino: info.ino };
+}
+
+async function recordLocation(root: string, output: string) {
+  await noSymlinks(output);
+  const identities = new Map<string, DirectoryIdentity>();
+  let path = root;
+  for (const part of ["", ...relative(root, dirname(output)).split(sep)]) {
+    path = join(path, part);
+    try {
+      identities.set(path, directoryIdentity(await Deno.lstat(path)));
+      if (await Deno.realPath(path) !== path) {
+        throw new Error("Local snapshot location changed");
+      }
+    } catch (error) {
+      if (error instanceof Deno.errors.NotFound) break;
+      throw error;
+    }
+  }
+  return identities;
+}
+
+async function verifyLocation(output: string, identities: Map<string, DirectoryIdentity>) {
+  await noSymlinks(output);
+  for (const [path, identity] of identities) {
+    const current = directoryIdentity(await Deno.lstat(path));
+    if (
+      current.dev !== identity.dev || current.ino !== identity.ino ||
+      await Deno.realPath(path) !== path
+    ) {
+      throw new Error(`Local snapshot location changed: ${path}`);
+    }
+  }
+}
+
 async function selections(root: string, initial: GitState): Promise<SelectedComponent[]> {
   const links = gitlinks(await command(root, ["ls-tree", "-rz", initial.revision]));
   const allowed = new Set(links.map((link) => link.path));
@@ -174,6 +215,8 @@ async function verifySources(root: string, initial: GitState, selected: Selected
 /** Capture only committed tracked inputs into a new ignored local Git composition.
  * Absolute file URLs bind the snapshot to its destination; do not relocate it.
  * Recursive component submodules are rejected explicitly, matching the flat workspace.
+ * Trusted single-owner filesystem: checks detect parent changes at boundaries,
+ * but path-based Deno APIs are not openat and cannot exclude adversarial races.
  */
 export async function captureLabSnapshot(
   destination: string,
@@ -188,13 +231,24 @@ export async function captureLabSnapshot(
     throw new Error("Local snapshot source must be a canonical Git repository root");
   }
   const output = await destinationPath(destination, source);
+  let location = await recordLocation(source, output);
   const initial = await state(source);
   const selected = await selections(source, initial);
+  await verifyLocation(output, location);
   await Deno.mkdir(dirname(output), { recursive: true, mode: 0o700 });
+  await verifyLocation(output, location);
+  location = await recordLocation(source, output);
   // A collision here must not be removed by cleanup: ownership starts only after
   // this non-recursive mkdir succeeds.
   await Deno.mkdir(output, { mode: 0o700 });
+  let owned: DirectoryIdentity | undefined;
   try {
+    await verifyLocation(output, location);
+    if (await Deno.realPath(output) !== output) {
+      throw new Error("Local snapshot location changed after reservation");
+    }
+    owned = directoryIdentity(await Deno.lstat(output));
+    location.set(output, owned);
     const repository = join(output, "repository");
     const copied = join(output, "components");
     await Deno.mkdir(copied, { mode: 0o700 });
@@ -280,6 +334,7 @@ export async function captureLabSnapshot(
     }
     const sourceGraph: SourceGraph = { format: "qcl-negf.git-graph.v1", revision, components };
     await verifySources(source, initial, selected);
+    await verifyLocation(output, location);
     const evidence = join(output, "snapshot.json");
     await Deno.writeTextFile(
       evidence,
@@ -308,7 +363,19 @@ export async function captureLabSnapshot(
     );
     return { repository, evidence, revision, sourceGraph };
   } catch (error) {
-    await Deno.remove(output, { recursive: true });
+    // A changed path cannot be safely adopted for cleanup. Retain the original
+    // reservation for diagnosis instead of deleting a replacement directory.
+    if (owned) {
+      try {
+        await verifyLocation(output, location);
+        const current = directoryIdentity(await Deno.lstat(output));
+        if (current.dev === owned.dev && current.ino === owned.ino) {
+          await Deno.remove(output, { recursive: true });
+        }
+      } catch {
+        // Preserve the original failure and every unverified replacement.
+      }
+    }
     throw error;
   }
 }
