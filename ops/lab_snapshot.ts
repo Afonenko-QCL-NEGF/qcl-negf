@@ -255,6 +255,7 @@ export async function captureLabSnapshot(
     await command(source, [
       "clone",
       "--quiet",
+      "--no-local",
       "--no-hardlinks",
       "--dissociate",
       "--no-checkout",
@@ -270,6 +271,7 @@ export async function captureLabSnapshot(
         "clone",
         "--quiet",
         "--bare",
+        "--no-local",
         "--no-hardlinks",
         "--dissociate",
         "--",

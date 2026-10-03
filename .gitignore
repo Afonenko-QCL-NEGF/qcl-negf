@@ -1,5 +1,6 @@
 .venv/
 .build/
+/results/
 dist/
 site/
 result

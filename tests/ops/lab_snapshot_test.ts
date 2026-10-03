@@ -84,6 +84,16 @@ async function absent(path: string): Promise<boolean> {
   }
 }
 
+async function hasGitObject(root: string, object: string): Promise<boolean> {
+  const result = await new Deno.Command("git", {
+    args: ["-C", root, "cat-file", "-e", object],
+    env: { GIT_CONFIG_NOSYSTEM: "1", GIT_CONFIG_GLOBAL: "/dev/null" },
+    stdout: "null",
+    stderr: "null",
+  }).output();
+  return result.success;
+}
+
 Deno.test("local snapshot selects the clean component HEAD and preserves original checkout", async () => {
   await fixture(async (root, component) => {
     await sourceGraph(root);
@@ -147,15 +157,11 @@ Deno.test("snapshot remains cloneable with submodules after original repositorie
     const result = await captureLabSnapshot(join(root, ".build/local-lab/sources"), root);
     const copiedRepo = new URL(result.sourceGraph.components[0].url);
     const bare = decodeURIComponent(copiedRepo.pathname);
-    const blob = await git(_component, ["rev-parse", "HEAD:model.jl"]);
-    const originalGit = await git(_component, ["rev-parse", "--absolute-git-dir"]);
-    const originalObject = await Deno.stat(
-      join(originalGit, "objects", blob.slice(0, 2), blob.slice(2)),
-    );
-    const copiedObject = await Deno.stat(join(bare, "objects", blob.slice(0, 2), blob.slice(2)));
-    assert(originalObject.ino !== copiedObject.ino, "Object copies must not use hardlinks");
+    // Transport clones may pack objects. Independence must survive source loss
+    // regardless of whether the source or destination uses loose objects.
     await Deno.remove(join(root, "components"), { recursive: true });
     await Deno.remove(join(root, ".git/modules"), { recursive: true });
+    await Deno.remove(join(root, ".git"), { recursive: true });
     await Deno.remove(join(area, "component source"), { recursive: true });
     assert(await absent(join(bare, "objects/info/alternates")), "No shared object alternates");
     assert(
@@ -179,6 +185,56 @@ Deno.test("snapshot remains cloneable with submodules after original repositorie
       await Deno.readTextFile(join(clone, "components/QCLNEGF.jl/model.jl")) ===
         "selected version one\n",
       "Copied object store survives source loss",
+    );
+  });
+});
+
+Deno.test("snapshot transfers selected history without private refs, orphan blobs or temporary objects", async () => {
+  await fixture(async (root, component, area) => {
+    const sentinels: { role: string; objects: string[] }[] = [];
+    for (const [role, source] of [["root", root], ["component", component]]) {
+      const objects: string[] = [];
+      for (const kind of ["orphan", "private-ref"]) {
+        const file = join(area, `${role}-${kind}.txt`);
+        await Deno.writeTextFile(file, `must never enter the build: ${role} ${kind}\n`);
+        objects.push(await git(source, ["hash-object", "-w", file]));
+      }
+      await git(source, ["update-ref", "refs/codex/turn-diffs/test", objects[1]]);
+      const objectsDir = join(
+        await git(source, ["rev-parse", "--absolute-git-dir"]),
+        "objects",
+        "ab",
+      );
+      await Deno.mkdir(objectsDir, { recursive: true });
+      await Deno.writeTextFile(
+        join(objectsDir, "tmp_obj_test_sentinel"),
+        "incomplete temporary object\n",
+      );
+      sentinels.push({ role, objects });
+    }
+    const result = await captureLabSnapshot(join(root, ".build/local-lab/sources"), root);
+    const bare = decodeURIComponent(new URL(result.sourceGraph.components[0].url).pathname);
+    for (const sentinel of sentinels) {
+      const destination = sentinel.role === "root" ? result.repository : bare;
+      for (const object of sentinel.objects) {
+        assert(
+          !await hasGitObject(destination, object),
+          `Do not copy ${sentinel.role} private/orphan object ${object}`,
+        );
+      }
+      const destinationGit = await git(destination, ["rev-parse", "--absolute-git-dir"]);
+      assert(
+        await absent(join(destinationGit, "objects/ab/tmp_obj_test_sentinel")),
+        "No temporary object copy",
+      );
+      assert(
+        await git(destination, ["for-each-ref", "refs/codex/"]) === "",
+        "Private refs stay in source",
+      );
+    }
+    assert(
+      await git(component, ["cat-file", "-e", sentinels[1].objects[1]]) === "",
+      "Source objects retained",
     );
   });
 });
