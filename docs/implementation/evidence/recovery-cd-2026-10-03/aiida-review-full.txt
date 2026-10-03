@@ -1,0 +1,159 @@
+........................................................................ [ 78%]
+....................                                                     [100%]
+=============================== warnings summary ===============================
+tests/test_deployment_release.py::test_service_binds_deployment_release_to_exact_installed_code_and_guard[None]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_service_binds_deployment_0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py: 5 warnings
+tests/test_execution.py: 11 warnings
+tests/test_restart_integration.py: 31 warnings
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/backend.py:299: SAWarning: Object of type <DbNode> not in session, add operation along 'DbUser.dbnodes' will not proceed
+    with session.begin_nested() as savepoint:
+
+tests/test_deployment_release.py::test_service_binds_deployment_release_to_exact_installed_code_and_guard[None]
+tests/test_deployment_release.py::test_service_binds_deployment_release_to_exact_installed_code_and_guard[release-1]
+tests/test_deployment_release.py::test_standalone_service_without_deployment_environment_does_not_invent_release
+tests/test_execution.py::test_workflow_continues_independent_executions_after_failure
+tests/test_restart_integration.py::test_verified_pause_or_crash_resumes_as_one_sequential_attempt[pause-once]
+tests/test_restart_integration.py::test_verified_pause_or_crash_resumes_as_one_sequential_attempt[crash-once]
+tests/test_restart_integration.py::test_pause_retry_budget_exhausts_without_reset
+tests/test_restart_integration.py::test_plan_pins_completed_attempt_for_artifacts_and_export
+tests/test_restart_integration.py::test_portable_restart_preserves_prior_final_without_reexecuting_point
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/orm/querybuilder/main.py:198: SAWarning: Object of type <DbNode> not in session, add operation along 'DbUser.dbnodes' will not proceed (This warning originated from the Session 'autoflush' process, which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush`` context manager if this warning happened while initializing objects.)
+    result = build.query.count()
+
+tests/test_deployment_release.py: 2 warnings
+tests/test_execution.py: 18 warnings
+tests/test_restart_integration.py: 37 warnings
+tests/test_submission_identity.py: 3 warnings
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/orm/utils.py:84: SAWarning: Object of type <DbNode> not in session, add operation along 'DbUser.dbnodes' will not proceed (This warning originated from the Session 'autoflush' process, which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush`` context manager if this warning happened while initializing objects.)
+    return getattr(self._model, item)
+
+tests/test_deployment_release.py: 2 warnings
+tests/test_execution.py: 4 warnings
+tests/test_restart_integration.py: 3 warnings
+tests/test_submission_identity.py: 3 warnings
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/orm/nodes.py:225: SAWarning: Object of type <DbNode> not in session, add operation along 'DbComputer.dbnodes' will not proceed
+    session.commit()
+
+tests/test_deployment_release.py::test_service_binds_deployment_release_to_exact_installed_code_and_guard[release-1]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_service_binds_deployment_1/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_standalone_service_without_deployment_environment_does_not_invent_release
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_standalone_service_withou0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_conflicting_or_incomplete_release_before_dispatch[release-1-/nix/store/deployment-solver/bin/qcl-negf-release-other-pinned-conflict]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_conflicting_or_incomplete_release_before_dispatch[release-1-/nix/store/other-solver/bin/qcl-negf-None-pinned-executable]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_1/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_conflicting_or_incomplete_release_before_dispatch[release-1-/nix/store/deployment-solver/bin/qcl-negf-None-mutable-immutable]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_2/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_conflicting_or_incomplete_release_before_dispatch[release-1-None-None-pinned-together]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_3/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_conflicting_or_incomplete_release_before_dispatch[None-/nix/store/deployment-solver/bin/qcl-negf-None-pinned-together]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_4/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_conflicting_or_incomplete_release_before_dispatch[release-1-/nix/store/../mutable/solver-None-pinned-immutable]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_5/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_conflicting_or_incomplete_release_before_dispatch[release invalid-/nix/store/deployment-solver/bin/qcl-negf-None-pinned-release_id]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_6/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_closed_missing_or_conflicting_shared_gate[contents0]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_7/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_closed_missing_or_conflicting_shared_gate[contents1]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_8/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_closed_missing_or_conflicting_shared_gate[None]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_9/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_closed_missing_or_conflicting_shared_gate[malformed]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_10/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_deployment_release.py::test_deployed_service_refuses_closed_missing_or_conflicting_shared_gate[contents4]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_deployed_service_refuses_11/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_execution.py::test_calcjob_retrieves_and_parses
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_calcjob_retrieves_and_par0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_execution.py: 5 warnings
+tests/test_restart_integration.py: 10 warnings
+tests/test_submission_identity.py: 1 warning
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/orm/utils.py:84: SAWarning: Object of type <DbNode> not in session, add operation along 'DbComputer.dbnodes' will not proceed (This warning originated from the Session 'autoflush' process, which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush`` context manager if this warning happened while initializing objects.)
+    return getattr(self._model, item)
+
+tests/test_execution.py::test_plan_bytes_preserved
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_plan_bytes_preserved0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_execution.py::test_scratch_argument_is_preserved_as_one_argument
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_scratch_argument_is_prese0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_execution.py::test_parser_rejects_wrong_conditions_under_correct_fingerprint
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_parser_rejects_wrong_cond0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_execution.py::test_workflow_continues_independent_executions_after_failure
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_workflow_continues_indepe0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_execution.py::test_direct_calcjob_rejects_thread_mismatch
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_direct_calcjob_rejects_th0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_restart_integration.py::test_verified_pause_or_crash_resumes_as_one_sequential_attempt[pause-once]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_verified_pause_or_crash_r0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_restart_integration.py::test_verified_pause_or_crash_resumes_as_one_sequential_attempt[crash-once]
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_verified_pause_or_crash_r1/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_restart_integration.py::test_pause_retry_budget_exhausts_without_reset
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_pause_retry_budget_exhaus0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_restart_integration.py::test_plan_pins_completed_attempt_for_artifacts_and_export
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_plan_pins_completed_attem0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_restart_integration.py::test_portable_restart_preserves_prior_final_without_reexecuting_point
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_portable_restart_preserve0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_submission_identity.py::test_slurm_script_binds_attempt_and_disables_independent_requeue
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_slurm_script_binds_attemp0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_submission_identity.py::test_release_pin_refuses_mutable_installed_executable
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_release_pin_refuses_mutab0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_submission_identity.py::test_release_guard_uses_pinned_identity_before_solver
+  /home/tolya/Загрузки/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-implementation-tests/aiida-review-full/test_release_guard_uses_pinned0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+92 passed, 173 warnings in 68.79s (0:01:08)

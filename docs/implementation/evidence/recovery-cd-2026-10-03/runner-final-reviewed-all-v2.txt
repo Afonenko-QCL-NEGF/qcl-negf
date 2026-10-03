@@ -1,0 +1,175 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+WARNING: Imported binding Logging.AbstractLogger was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.LogLevel was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.Info was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.with_logger was undeclared at import time during import to Test.
+[suite] application/anderson_memory_appears_only_when_selected.jl
+[suite] application/application_identity_canonical_and_content_addressed.jl
+[suite] application/complete_coordinate_basis_and_pzp_alias_build_on_the_reference2019_layers.jl
+[suite] application/configuration_merge_order_and_fail_closed_validation.jl
+[suite] application/configured_production_study_orchestration.jl
+[suite] application/declarative_automatic_e1_execution_strategy.jl
+[suite] application/diagnostic_invocation_failure_isolation.jl
+[suite] application/effective_method_catalog_provenance.jl
+[suite] application/every_scattering_channel_is_isolated_and_configured.jl
+[suite] application/execution_resource_contract.jl
+[suite] application/failed_point_unwinds_descendants_and_admits_the_next_point.jl
+[suite] application/interrupted_nested_sweep_resumes_only_unfinished_points.jl
+[suite] application/per_case_campaign_ram_planning_uses_effective_method_overrides.jl
+[suite] application/physics_marker_configuration.jl
+[suite] application/production_operating_point_retargeting.jl
+[suite] application/production_sweep_records_require_complete_diagnostics.jl
+[suite] application/restored_stage_progress_consumes_the_original_budget.jl
+[suite] application/strict_hierarchical_yaml_configuration.jl
+[suite] application/study_repetition_aggregation_and_report_files.jl
+[suite] application/unified_configured_execution_budget.jl
+[suite] contracts/archive_dependency_budget_preflight.jl
+[suite] contracts/bounded_approximate_acceptance_and_warning_provenance.jl
+[suite] contracts/configured_production_runtime_adapter.jl
+[suite] contracts/draft_2020_12_configuration_contract.jl
+[suite] contracts/fail_closed_yaml_output_contract.jl
+[suite] contracts/final_acceptance_preserves_approximate_scba_and_physical_gates.jl
+[suite] contracts/multilevel_spectral_resolution_oracles.jl
+[suite] contracts/neutral_solver_events_and_application_progress_adapter.jl
+[suite] contracts/package_dependency_identity.jl
+[suite] contracts/pause_cli_archive_budget.jl
+[suite] contracts/production_convergence_diagnostics_are_complete.jl
+[suite] contracts/quality_warnings_survive_stored_method_reports.jl
+[suite] contracts/scientific_plan_contracts.jl
+[suite] contracts/scientific_resources.jl
+[suite] contracts/unified_scientific_output.jl
+[suite] infrastructure/anderson_checkpoint_native_history.jl
+[suite] infrastructure/bounded_portable_recovery.jl
+[suite] infrastructure/bounded_scalar_telemetry.jl
+[suite] infrastructure/configured_cavity_retargeting_and_restart_share_one_shift_contract.jl
+[suite] infrastructure/csv_records_preserve_multiline_scientific_provenance.jl
+[suite] infrastructure/fresh_point_verifies_artifacts_before_completed_status.jl
+[suite] infrastructure/lifecycle_journal_and_separate_timing_samples.jl
+[suite] infrastructure/light_physics_snapshots_without_hdf5.jl
+[suite] infrastructure/linux_process_resource_probe.jl
+[suite] infrastructure/native_v3_schema_precision.jl
+[suite] infrastructure/optical_source_receipt.jl
+[suite] infrastructure/output_artifacts_and_snapshot_cadence.jl
+[suite] infrastructure/physical_markers_and_packed_history.jl
+[suite] infrastructure/portable_execution_progress.jl
+[suite] infrastructure/production_csv_outputs.jl
+[suite] infrastructure/production_estimate_obeys_an_explicit_synthetic_memory_envelope.jl
+[suite] infrastructure/production_files_replace_an_existing_destination_in_one_rename.jl
+[suite] infrastructure/production_restart_validates_metadata_and_restores_state.jl
+[suite] infrastructure/psd_witness_matrix_roundtrip.jl
+[suite] infrastructure/resource_pause_checkpoint_provenance.jl
+[suite] infrastructure/retention_and_viewer_downsampling_preserve_durable_data.jl
+[suite] infrastructure/runner_self_check.jl
+{"experimental_validation":"not_evaluated","hdf5_roundtrip":true,"julia_version":"1.13.0","oracle":"triangular finite-window principal value; QCLNEGF src/numerics/reference/kernels.jl::product_integration_hilbert_transform","julia_threads":2,"analytic_absolute_error":1.766974823035287e-17,"discretization_verified":"not_evaluated","blas_threads":1,"status":"completed","schema":"qcl-negf-self-check-v1","iterative_converged":"not_evaluated","scientific_accepted":false}
+[suite] infrastructure/scba_seed_explicit_status_and_hdf5_roundtrip.jl
+
+[13] signal 15: Terminated
+in expression starting at /home/tolya/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/scba_seed_explicit_status_and_hdf5_roundtrip.jl:5
+unknown function (ip: 0x7f73048b5a20) at /usr/lib/libc.so.6
+unknown function (ip: 0x7f73048a9089) at /usr/lib/libc.so.6
+pthread_cond_wait at /usr/lib/libc.so.6 (unknown line)
+uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:822
+jl_parallel_gc_threadfun at /cache/build/builder-amdci4-4/julialang/julia-ci/src/gc-stock.c:3740
+unknown function (ip: 0x7f73048ac93e) at /usr/lib/libc.so.6
+unknown function (ip: 0x7f730494eeeb) at /usr/lib/libc.so.6
+unknown function (ip: (nil)) at (unknown file)
+unknown function (ip: 0x7f73048b5a20) at /usr/lib/libc.so.6
+unknown function (ip: 0x7f73048a9089) at /usr/lib/libc.so.6
+pthread_cond_wait at /usr/lib/libc.so.6 (unknown line)
+uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:822
+ijl_task_get_next at /cache/build/builder-amdci4-4/julialang/julia-ci/src/scheduler.c:599
+wait at ./task.jl:1296
+wait_forever at ./task.jl:1196
+jfptr_wait_forever_65680.1 at /tmp/qcl-julia-1.13.0/lib/julia/sys.so (unknown line)
+jl_apply at /cache/build/builder-amdci4-4/julialang/julia-ci/src/julia.h:2318 [inlined]
+start_task at /cache/build/builder-amdci4-4/julialang/julia-ci/src/task.c:1285
+unknown function (ip: (nil)) at (unknown file)
+unknown function (ip: 0x7f73048b5a20) at /usr/lib/libc.so.6
+unknown function (ip: 0x7f73048a9089) at /usr/lib/libc.so.6
+pthread_cond_wait at /usr/lib/libc.so.6 (unknown line)
+uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:822
+ijl_task_get_next at /cache/build/builder-amdci4-4/julialang/julia-ci/src/scheduler.c:599
+wait at ./task.jl:1296
+wait_forever at ./task.jl:1196
+jfptr_wait_forever_65680.1 at /tmp/qcl-julia-1.13.0/lib/julia/sys.so (unknown line)
+jl_apply at /cache/build/builder-amdci4-4/julialang/julia-ci/src/julia.h:2318 [inlined]
+start_task at /cache/build/builder-amdci4-4/julialang/julia-ci/src/task.c:1285
+unknown function (ip: (nil)) at (unknown file)
+_ZN4llvm16InstCombinerImpl14visitAllocSiteERNS_11InstructionE at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+_ZN4llvm16InstCombinerImpl15visitAllocaInstERNS_10AllocaInstE at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+_ZN4llvm16InstCombinerImpl3runEv at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+_ZL31combineInstructionsOverFunctionRN4llvm8FunctionERNS_19InstructionWorklistEPNS_9AAResultsERNS_15AssumptionCacheERNS_17TargetLibraryInfoERNS_19TargetTransformInfoERNS_13DominatorTreeERNS_25OptimizationRemarkEmitterEPNS_18BlockFrequencyInfoEPNS_21BranchProbabilityInfoEPNS_18ProfileSummaryInfoERKNS_18InstCombineOptionsE at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+_ZN4llvm15InstCombinePass3runERNS_8FunctionERNS_15AnalysisManagerIS1_JEEE at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+warning: address range table at offset 0x3900 has a premature terminator entry at offset 0x4260
+warning: address range table at offset 0x3900 has a premature terminator entry at offset 0x42c0
+run at /cache/build/builder-amdci4-4/julialang/julia-ci/usr/include/llvm/IR/PassManagerInternal.h:91
+_ZN4llvm11PassManagerINS_8FunctionENS_15AnalysisManagerIS1_JEEEJEE3runERS1_RS3_ at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+run at /cache/build/builder-amdci4-4/julialang/julia-ci/usr/include/llvm/IR/PassManagerInternal.h:91
+_ZN4llvm27ModuleToFunctionPassAdaptor3runERNS_6ModuleERNS_15AnalysisManagerIS1_JEEE at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+run at /cache/build/builder-amdci4-4/julialang/julia-ci/usr/include/llvm/IR/PassManagerInternal.h:91
+_ZN4llvm11PassManagerINS_6ModuleENS_15AnalysisManagerIS1_JEEEJEE3runERS1_RS3_ at /tmp/qcl-julia-1.13.0/bin/../lib/julia/libLLVM.so.20.1jl (unknown line)
+run at /cache/build/builder-amdci4-4/julialang/julia-ci/src/pipeline.cpp:792
+operator() at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jitlayers.cpp:1512
+withModuleDo<(anonymous namespace)::sizedOptimizerT<N>::operator()(llvm::orc::ThreadSafeModule) [with long unsigned int N = 4]::<lambda(llvm::Module&)> > at /cache/build/builder-amdci4-4/julialang/julia-ci/usr/include/llvm/ExecutionEngine/Orc/ThreadSafeModule.h:136 [inlined]
+operator() at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jitlayers.cpp:1473 [inlined]
+operator() at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jitlayers.cpp:1648 [inlined]
+addModule at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jitlayers.cpp:2117
+jl_compile_codeinst_now at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jitlayers.cpp:681
+jl_compile_codeinst_impl at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jitlayers.cpp:875
+jl_compile_method_internal at /cache/build/builder-amdci4-4/julialang/julia-ci/src/gf.c:3709
+_jl_invoke at /cache/build/builder-amdci4-4/julialang/julia-ci/src/gf.c:4171 [inlined]
+ijl_apply_generic at /cache/build/builder-amdci4-4/julialang/julia-ci/src/gf.c:4380
+mktemp at ./file.jl:910
+jfptr_mktemp_70136.1 at /tmp/qcl-julia-1.13.0/lib/julia/sys.so (unknown line)
+jl_apply at /cache/build/builder-amdci4-4/julialang/julia-ci/src/julia.h:2318 [inlined]
+do_call at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:123
+eval_value at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:243
+eval_stmt_value at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:194 [inlined]
+eval_body at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:679
+eval_body at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:550
+eval_body at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:558
+eval_body at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:558
+eval_body at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:558
+jl_interpret_toplevel_thunk at /cache/build/builder-amdci4-4/julialang/julia-ci/src/interpreter.c:884
+jl_toplevel_eval_flex at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:742
+jl_eval_toplevel_stmts at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:585
+jl_eval_module_expr at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:248 [inlined]
+jl_toplevel_eval_flex at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:650
+jl_eval_toplevel_stmts at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:585
+jl_toplevel_eval_flex at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:683
+ijl_toplevel_eval at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:754
+ijl_toplevel_eval_in at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:799
+eval at ./boot.jl:489
+include_string at ./loading.jl:3016
+_include at ./loading.jl:3076
+include at ./Base.jl:310
+IncludeInto at ./Base.jl:311 [inlined]
+macro expansion at /home/tolya/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:15 [inlined]
+macro expansion at /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+run_test_group at /home/tolya/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:12
+unknown function (ip: 0x7f72e738b082) at (unknown file)
+macro expansion at /home/tolya/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:7 [inlined]
+macro expansion at /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+top-level scope at /home/tolya/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:6
+jl_toplevel_eval_flex at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:731
+jl_eval_toplevel_stmts at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:585
+jl_toplevel_eval_flex at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:683
+ijl_toplevel_eval at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:754
+ijl_toplevel_eval_in at /cache/build/builder-amdci4-4/julialang/julia-ci/src/toplevel.c:799
+eval at ./boot.jl:489
+include_string at ./loading.jl:3016
+_include at ./loading.jl:3076
+include at ./Base.jl:309
+exec_options at ./client.jl:344
+_start at ./client.jl:577
+jfptr__start_59126.1 at /tmp/qcl-julia-1.13.0/lib/julia/sys.so (unknown line)
+jl_apply at /cache/build/builder-amdci4-4/julialang/julia-ci/src/julia.h:2318 [inlined]
+true_main at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jlapi.c:985
+jl_repl_entrypoint at /cache/build/builder-amdci4-4/julialang/julia-ci/src/jlapi.c:1152
+main at /cache/build/builder-amdci4-4/julialang/julia-ci/cli/loader_exe.c:58
+unknown function (ip: 0x7f7304827d0d) at /usr/lib/libc.so.6
+__libc_start_main at /usr/lib/libc.so.6 (unknown line)
+unknown function (ip: 0x4010b8) at /workspace/srcdir/glibc-2.17/csu/../sysdeps/x86_64/start.S
+unknown function (ip: (nil)) at (unknown file)
+Allocations: 453107308 (Pool: 453099496; Big: 7812); GC: 199

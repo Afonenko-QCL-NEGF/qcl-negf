@@ -1,0 +1,38 @@
+Task check deno fmt --check ops tests tofu/*.ts deno.json && deno lint ops tests tofu/*.ts && deno check ops/*.ts tests/*.ts tests/infrastructure/*.ts tofu/*.ts && deno test tests && deno task test:state
+Checked 8 files
+Checked 6 files
+Check ops/bootstrap.ts
+Check ops/main.ts
+Check ops/plan.ts
+Check tests/plan_test.ts
+Check tests/infrastructure/images_test.ts
+Check tofu/build-images.ts
+Check tests/infrastructure/images_test.ts
+Check tests/plan_test.ts
+running 2 tests from ./tests/infrastructure/images_test.ts
+image inputs require all four Proxmox role objects ... ok (2ms)
+single-server image build excludes the optional Arch worker ... ok (460µs)
+running 7 tests from ./tests/plan_test.ts
+target and output selectors cannot inject executable options ... ok (3ms)
+duplicate names and invalid shapes fail closed ... ok (675µs)
+build does not contact target or activate configuration ... ok (397µs)
+activation uses upstream nixos-rebuild with argument vector ... ok (215µs)
+clean installation requires a separate mounted root ... ok (974µs)
+bootstrap registers the immutable installed code as part of recovery ... ok (3ms)
+existing profile permits recovery only for the same local storage contract ... ok (776µs)
+
+ok | 9 passed | 0 failed (104ms)
+
+Task test:state python3 -m unittest discover -s tests -p 'test_*.py'
+.................................................................................................Waiting for job 101 (execution-101 attempt 1): durable receipt unavailable on permanent node
+.Waiting for job 101 (execution-101 attempt 1): durable receipt unavailable on permanent node
+Waiting for job 101 (execution-101 attempt 1): durable receipt unavailable on permanent node
+..Waiting for job 101 (execution-101 attempt 1): durable receipt unavailable on permanent node
+Waiting for job 102 (execution-102 attempt 2): durable receipt unavailable on permanent node
+Waiting for job 102 (execution-102 attempt 2): durable receipt unavailable on permanent node
+..Waiting for job 101 (execution-101 attempt 1): durable receipt unavailable on permanent node
+.....
+----------------------------------------------------------------------
+Ran 107 tests in 4.122s
+
+OK

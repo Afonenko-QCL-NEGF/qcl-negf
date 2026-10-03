@@ -1,0 +1,54 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+WARNING: Imported binding Logging.AbstractLogger was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.LogLevel was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.Info was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.with_logger was undeclared at import time during import to Test.
+[suite] infrastructure/scba_seed_explicit_status_and_hdf5_roundtrip.jl
+[suite] infrastructure/scoped_pause_receipt.jl
+/tmp/jl_HaIeQr/control/pause.json
+{"point_id":"p","state_id":"cd94121e84aed10df03dad0af7d0333e89e046887b6df0767ea13baee0a6382c","commit_path":"attempt-1/artifacts/generation-000001/commit.json","status":"paused","execution_id":"e","schema":"qcl-negf-pause-receipt-v1","commit_sha256":"b0653e96b7144e745dbae86e768542bf90ceb1cc0039d24045e7d27673bd1aa5","attempt":1,"state_sequence":1,"publication_scope":"local_filesystem"}{"point_id":"p","state_id":"cd94121e84aed10df03dad0af7d0333e89e046887b6df0767ea13baee0a6382c","commit_path":"attempt-1/artifacts/generation-000001/commit.json","status":"paused","execution_id":"e","schema":"qcl-negf-pause-receipt-v1","commit_sha256":"b0653e96b7144e745dbae86e768542bf90ceb1cc0039d24045e7d27673bd1aa5","attempt":1,"state_sequence":1,"publication_scope":"local_filesystem"}{"point_id":"p","state_id":"cd94121e84aed10df03dad0af7d0333e89e046887b6df0767ea13baee0a6382c","commit_path":"attempt-1/artifacts/generation-000001/commit.json","status":"paused","execution_id":"e","schema":"qcl-negf-pause-receipt-v1","commit_sha256":"b0653e96b7144e745dbae86e768542bf90ceb1cc0039d24045e7d27673bd1aa5","attempt":1,"state_sequence":1,"publication_scope":"local_filesystem"}[suite] infrastructure/scratch_execution.jl
+[suite] infrastructure/unowned_hdf5_storage.jl
+[suite] infrastructure/yaml_repository_provenance_spans_and_checkpoint_integrity.jl
+[suite] presentation/declarative_configured_report_templates.jl
+[suite] presentation/failed_methods_remain_visible_beside_completed_methods.jl
+[suite] presentation/hierarchical_progress_observability.jl
+[suite] presentation/method_validation_report_survives_isolated_phase_failures.jl
+[suite] presentation/method_validation_template_wraps_existing_expert_evidence.jl
+[suite] presentation/nested_runtime_report_is_selected_and_materialized.jl
+[suite] presentation/stored_method_expert_comparison.jl
+[suite] integration/checkpoint_memory_lifecycle.jl
+[suite] integration/clean_architecture_source_boundaries.jl
+[suite] integration/exact_anderson_and_bounded_method_diagnostics_profiles.jl
+[suite] integration/fixed_work_production_calibration.jl
+[suite] integration/native_phase_resource_contract.jl
+[suite] integration/portable_two_point_resume.jl
+[suite] integration/unified_entrypoint_executes_plan_only_in_a_fresh_julia_process.jl
+ArgumentError: pause has no durable acknowledgement
+ArgumentError: archive verification byte budget must be positive
+ArgumentError: pause acknowledgement belongs to another attempt
+ArgumentError: artifact byte count differs
+Test Summary:                                                                        | Pass  Total      Time
+QCLNEGFRunner remaining files on c4e5b37                                             |  405    405  14m46.1s
+  SCBA seed, explicit status and HDF5 roundtrip                                      |   34     34   2m57.4s
+  Pause acknowledgement requires a verified scoped bundle                            |   10     10     40.1s
+  Verified scratch delivery                                                          |    6      6      0.4s
+  Hash-valid native bundles reject unowned HDF5 storage                              |    5      5      4.9s
+  YAML repository, provenance, spans, and checkpoint integrity                       |   15     15     10.8s
+  Declarative configured report templates                                            |   20     20      2.5s
+  Failed methods remain visible beside completed methods                             |   10     10     13.8s
+  Hierarchical progress observability                                                |   48     48      6.9s
+  Machine progress preserves nonfinite diagnostics as text                           |    7      7      1.0s
+  Method-validation report survives isolated phase failures                          |    5      5     10.6s
+  Method-validation template wraps existing expert evidence                          |   12     12      6.5s
+  Nested runtime report is selected and materialized                                 |   10     10      2.0s
+  Stored-method expert comparison                                                    |   55     55      2.8s
+  Memory admission checks every cgroup ancestor without cache credit                 |    4      4      1.4s
+  Real checkpoint, subsequent SCBA, resource pause, exact restart, next checkpoint   |   10     10   1m29.3s
+  Reused serialization slabs preserve ragged multidimensional values                 |    3      3      5.6s
+  Explicit module ownership and independent numerical implementations                |   13     13      0.0s
+  Exact Anderson and bounded method diagnostics profiles                             |   50     50      1.7s
+  Fixed production work preserves finite full states without acceptance              |   51     51     52.8s
+  Producer clocks and immutable worker phase budget                                  |   15     15      0.8s
+  Portable resume keeps a completed first point and the original second-point budget |   19     19   2m30.8s
+  Frozen-plan CLI in an isolated process                                             |    3      3   2m57.2s

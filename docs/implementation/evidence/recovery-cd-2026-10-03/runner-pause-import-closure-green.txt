@@ -1,0 +1,18 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+WARNING: Imported binding Logging.AbstractLogger was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.LogLevel was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.Info was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.with_logger was undeclared at import time during import to Test.
+ArgumentError: pause has no durable acknowledgement
+ArgumentError: pause acknowledgement belongs to another attempt
+ArgumentError: artifact byte count differs
+Test Summary:                                                            | Pass  Total     Time
+A portable second point retains the first final without recalculating it |    7      7  3m56.0s
+Test Summary:                                                                      | Pass  Total  Time
+A prior stationary archive needs physical, history and model closure before import |    2      2  2.6s
+/tmp/jl_socOBx/control/pause.json
+{"point_id":"p","state_id":"8711d2c56d80ca37d203d1a9788be59d528f59ffb5f458329e0a8b0fefc6a0e5","commit_path":"attempt-1/artifacts/generation-000001/commit.json","status":"paused","execution_id":"e","schema":"qcl-negf-pause-receipt-v1","commit_sha256":"7a8cb0efb67031a780be0dc4968177fbb490700b0df1148d6f08eacfa716d6fd","attempt":1,"state_sequence":1,"publication_scope":"local_filesystem"}Test Summary:                                           | Pass  Total   Time
+Pause acknowledgement requires a verified scoped bundle |    7      7  49.7s
+Test Summary:                                                                      | Pass  Total     Time
+Portable resume keeps a completed first point and the original second-point budget |   19     19  6m28.8s
