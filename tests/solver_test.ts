@@ -1,9 +1,67 @@
-import { buildSolver } from "../ops/solver.ts";
+import { buildSolver, parseBuildOptions } from "../ops/solver.ts";
 import { type Command } from "../ops/process.ts";
 
 const revision = "a".repeat(40);
 const hash = "sha256-" + btoa(String.fromCharCode(...Array(32).fill(1)));
 const target = decodeURIComponent(new URL("../flake.nix", import.meta.url).pathname);
+
+Deno.test("build resource options reject ambiguous or executable input before running commands", () => {
+  assert(parseBuildOptions([]).profile === "production-build", "Default is production");
+  assert(
+    parseBuildOptions(["--profile", "local-debug"]).testWorkerLimit === null,
+    "Debug selects its owning worker policy",
+  );
+  assert(
+    parseBuildOptions(["--test-workers", "16"]).testWorkerLimit === 16,
+    "Explicit production worker budget",
+  );
+  for (
+    const flags of [
+      ["--profile", "unknown"],
+      ["--test-workers", "0"],
+      ["--test-workers", "-1"],
+      ["--test-workers", "1.5"],
+      ["--test-workers", 'builtins.abort "bad"'],
+      ["--test-workers", "9007199254740992"],
+      ["--profile"],
+      ["--test-workers", "16", "--test-workers", "32"],
+      ["--profile", "local-debug", "--test-workers", "16"],
+    ]
+  ) {
+    let refused = false;
+    try {
+      parseBuildOptions(flags);
+    } catch {
+      refused = true;
+    }
+    assert(refused, "Invalid or conflicting worker budget must be refused");
+  }
+});
+
+Deno.test("explicit production worker budget reaches Nix as validated arguments", async () => {
+  const commands: Command[] = [];
+  await buildSolver(
+    { sources: { revision }, url: "https://artifacts.example.org/depot.tar.gz", hash },
+    revision,
+    target,
+    (command) => {
+      commands.push(command);
+      return Promise.resolve("");
+    },
+    parseBuildOptions(["--profile", "production-build", "--test-workers", "16"]),
+  );
+  const args = commands[0].args;
+  const profile = args.indexOf("juliaTestProfile");
+  const limit = args.indexOf("juliaTestWorkerLimit");
+  assert(
+    profile > 0 && args[profile - 1] === "--argstr" && args[profile + 1] === "production-build",
+    "Profile must be explicit string data",
+  );
+  assert(
+    limit > 0 && args[limit - 1] === "--arg" && args[limit + 1] === "16",
+    "Limit must be a validated integer",
+  );
+});
 
 function assert(value: boolean, message: string): void {
   if (!value) throw new Error(message);

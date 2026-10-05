@@ -7,12 +7,55 @@ export interface DepotSpec {
   hash: string;
 }
 
+export interface BuildOptions {
+  profile: "production-build" | "local-debug";
+  testWorkerLimit: number | null;
+}
+
+export function parseBuildOptions(flags: string[]): BuildOptions {
+  const options: BuildOptions = { profile: "production-build", testWorkerLimit: null };
+  const seen = new Set<string>();
+  for (let index = 0; index < flags.length; index += 2) {
+    const flag = flags[index];
+    const value = flags[index + 1];
+    if (seen.has(flag) || value === undefined) throw new Error("Missing or duplicate build option");
+    seen.add(flag);
+    if (flag === "--profile" && ["production-build", "local-debug"].includes(value)) {
+      options.profile = value as BuildOptions["profile"];
+    } else if (flag === "--test-workers" && /^[1-9][0-9]*$/.test(value)) {
+      const workers = Number(value);
+      if (!Number.isSafeInteger(workers)) {
+        throw new Error("Worker limit must be a safe positive integer");
+      }
+      options.testWorkerLimit = workers;
+    } else {
+      throw new Error("Expected --profile production-build|local-debug or --test-workers INTEGER");
+    }
+  }
+  if (
+    options.profile === "local-debug" && options.testWorkerLimit !== null &&
+    options.testWorkerLimit !== 2
+  ) {
+    throw new Error("local-debug uses two test workers");
+  }
+  return options;
+}
+
 export async function buildSolver(
   spec: DepotSpec,
   revision: string,
   target: string,
   execute: (command: Command) => Promise<string> = run,
+  options: BuildOptions = parseBuildOptions([]),
 ): Promise<void> {
+  // Validate programmatic callers before prefetch/build as well as CLI input.
+  options = parseBuildOptions([
+    "--profile",
+    options.profile,
+    ...(options.testWorkerLimit === null
+      ? []
+      : ["--test-workers", String(options.testWorkerLimit)]),
+  ]);
   if (spec.sources?.revision !== revision) {
     throw new Error("Depot belongs to a different source graph");
   }
@@ -53,6 +96,14 @@ export async function buildSolver(
       "--argstr",
       "depotManifest",
       await Deno.realPath(target),
+      "--argstr",
+      "juliaTestProfile",
+      options.profile,
+      ...(options.testWorkerLimit === null ? [] : [
+        "--arg",
+        "juliaTestWorkerLimit",
+        String(options.testWorkerLimit),
+      ]),
     ],
     cwd: workspace,
   });
@@ -73,13 +124,15 @@ function sri(hex: string): string {
 async function solver(): Promise<void> {
   const [operation, target, ...flags] = Deno.args;
   if (!target || !["depot", "build"].includes(operation)) {
-    throw new Error("Usage: solver.ts depot OUTPUT_DIRECTORY [--url URL] | build DEPOT_JSON");
+    throw new Error(
+      "Usage: solver.ts depot OUTPUT_DIRECTORY [--url URL] | build DEPOT_JSON [--profile PROFILE] [--test-workers INTEGER]",
+    );
   }
   const graph = await sourceGraph();
   if (operation === "build") {
-    if (flags.length) throw new Error("Unexpected build arguments");
+    const options = parseBuildOptions(flags);
     const spec = JSON.parse(await Deno.readTextFile(target));
-    await buildSolver(spec, graph.revision, target);
+    await buildSolver(spec, graph.revision, target, run, options);
     return;
   }
   if (flags.length && (flags.length !== 2 || flags[0] !== "--url")) {

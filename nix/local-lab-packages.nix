@@ -27,4 +27,8 @@ else
   assert metadata.sources == input.sourceGraph;
   assert metadata.juliaManifest == manifestHash;
   assert input.preparedManifestSha256 == manifestHash;
-  project.lib.mkSolver { system = "x86_64-linux"; inherit preparedDepot; }
+  project.lib.mkSolver {
+    system = "x86_64-linux";
+    inherit preparedDepot;
+    juliaTestProfile = "local-debug";
+  }
