@@ -19,7 +19,8 @@ releases. Его артефакты размещаются в `/var/lib/qcl-negf
 остаётся отдельным запуском.
 
 В build VM нужно получить точный опубликованный checkout с submodules,
-проверить `git status --short` и выполнить штатные команды:
+проверить `git status --short` и выполнить штатные команды. Перед тяжёлой native
+сборкой выполнить preflight ниже; команды не являются разрешением обойти его:
 
 ```sh
 deno task --cwd components/QCLNEGFRunner.jl bootstrap
@@ -45,6 +46,66 @@ Owning Nix package закрепляет публичный CA bundle и для b
 вместо Arch inventory. Образы и depot остаются на сервере; передачей образов
 владеет [platform](../components/qcl-negf-platform/docs/image-transfer.md).
 
+## Preflight до тяжёлой сборки
+
+Из корня superproject запускать owning проверку platform:
+
+```sh
+deno task bootstrap:preflight --receipt /absolute/private-site/preflight.json preflight \
+  --site /absolute/private-site --nix /run/current-system/sw/bin/nix --check-nginx
+```
+
+Она сохраняет bounded stdout/stderr и проверяет роли до сборки nginx config.
+Подробный контракт и отдельная команда root accounting описаны в
+[platform bootstrap](../components/qcl-negf-platform/docs/bootstrap.md).
+
+После подготовки приватного site и реальных depot metadata, до native
+installCheck и полной сборки образов, проверить все четыре роли `storage`,
+`control`, `compute`, `ci`. Для каждой получить
+`nixosConfigurations.<role>.config.system.build.toplevel.drvPath` через bounded
+`nix eval`; это evaluation, а не system build. Использовать те же source inputs,
+site files, runtime modules и `mkSolver` arguments, что в будущей сборке.
+Fixture constructor check отдельно обозначается как fixture и не заменяет
+evaluation реального site. NixOS assertions, в частности явный interface для
+`networking.defaultGateway` при networkd, должны пройти до длинного запуска.
+
+Для control получить context
+`nixosConfigurations.control.config.systemd.services.nginx.serviceConfig.ExecStart`
+и выбрать единственную зарегистрированную derivation `nginx.conf.drv`. Затем
+собрать только её `^out` строгим config writer. Этот gate требует build exit
+code 0 и включённой validation. Severity counters gixy фиксируются отдельно:
+отсутствующий вывод, в том числе при cache hit, остаётся `not_measured`, а не
+измеренным нулём. Не заменять config writer
+полной image/system сборкой и не ослаблять gixy. `proxy_set_header Host $host;`
+согласуется с нормализованным host; forwarded headers, TLS и relative portal
+routes проверяются для конкретного site отдельно.
+
+Runtime environment фиксируется до запуска: проверенные абсолютные executable
+paths, явный `PATH`, рабочий каталог builder и принадлежащие ему Git indexes.
+Успешная interactive shell не доказывает, что `nix`, `deno` или другой tool
+доступен в systemd unit. Использовать абсолютный путь из выбранного NixOS
+toolchain; для `qemu-img` выбрать declared `out` реальной image-input derivation,
+а не первый результат multi-output query. Параметры flake inputs относятся к
+выбранной системе, а не к directory name Nix output. Путь, добавленный внутрь
+read-only store tree, не использовать как новый изменяемый source.
+
+Private site flake должен иметь явный существующий input path/URL и frozen
+source revision; после переноса checkout проверить resolved input и generated
+lock. Выражение для source revision применяется к flake; для функции из файла
+`{ siteDir }: ...` передать
+`--apply 'f: f { siteDir = builtins.getEnv "QCL_SITE_DIR"; }'` с явно заданным
+существующим site directory. Сама lambda не является строкой revision.
+Если Nix string context проверяется словарём, context снимается только с ключа
+такого словаря; derivation/output dependency не заменяется plain string.
+
+Для административных read-only Git проверок задавать `GIT_OPTIONAL_LOCKS=0`
+либо `git --no-optional-locks`, чтобы status после передачи владельца не создал
+root-owned index. Проверить root и все восемь owning checkouts. Состав derive
+из committed gitlinks; не создавать второй вручную поддерживаемый список SHA.
+Новые private helpers сначала проходят bounded source/metadata fixtures и
+независимый review на одном immutable наборе входов. Первый отказ сохраняется;
+повтор разрешён после конкретного диагноза с новой attempt identity и бюджетом.
+
 Все этапы одной попытки сборки используют общий сохранённый deadline, один
 параллельный build и не более 100 GiB дополнительных артефактов, включая
 server store, depot и новые копии образов на гипервизоре.
@@ -66,6 +127,18 @@ Bootstrap может совместно использовать все физи
 распределению ресурсов; CI запускают после серверной и локальной проверки
 готового результата.
 
+`production-build` использует доступные CPU для компиляции через
+`NIX_BUILD_CORES`; предел test workers задаётся отдельно по памяти. Пример:
+32 доступных CPU, explicit `juliaTestWorkerLimit = 16`, 2 GiB на каждый worker
+и 4 GiB резерва требуют envelope 36 GiB. Это эвристика admission, а не доказанная
+верхняя граница RSS; нужны telemetry/OOM counters. На builder с меньшим числом
+доступных CPU launcher берёт минимум CPU, числа тестов и explicit limit.
+Без explicit limit остаётся upstream поведение, допустимое при достаточной RAM.
+`local-debug` сохраняет два workers и две precompile tasks. Ни один профиль
+не задаёт `JULIA_CPU_THREADS`: `Sys.CPU_THREADS`, `Sys.EFFECTIVE_CPU_THREADS`
+и native BLAS affinity остаются реальными. Версия Julia, upstream factory,
+native phases и исходный declared test skip list сохраняются.
+
 Совместимые исторические профили builder: `standard` — 4 vCPU / 8 GiB RAM;
 `burst` —
 12 vCPU / 24 GiB RAM при выключенной compute VM, пустой очереди и проверенном
@@ -78,6 +151,68 @@ Nix daemon, административной сборки и jobs runner при�
 runbook согласно поручению пользователя. Смена профиля сохраняет прежние журналы
 и создаёт новую попытку с точной source identity. Новые SCBA/Poisson и научные
 benchmarks сюда не входят.
+
+## Сохранение попытки и приёмка
+
+Main build запускать в owned normal runtime systemd unit с ограничениями CPU/RAM,
+deadline и output. Сохранить unit bytes, InvocationID, source graph, command logs
+и terminal state. Transient unit может исчезнуть сразу после успеха и оставить
+пустой InvocationID; для main provenance этого недостаточно. Observer связывает
+каждый sample с captured InvocationID. Перед reboot сохранить completed receipts
+в постоянном artifact directory: `/run` после reboot не является источником
+истории. Не изменять already executed script или прежний receipt ради новой
+попытки.
+
+Если все owning commands завершены, но final accounting отказал из-за прав на
+root-only history, не пересобирать native/images только ради этого bookkeeping.
+Отдельный root read-only verifier проверяет original failed unit и disk report,
+source/depot/native/image identities и новый полный учёт тех же каталогов.
+Original failure сохраняется. Composite engineering receipt отдельно фиксирует
+`owning_commands = pass`, original accounting failure и fresh root accounting
+pass; он не объявляет failed main unit успешным.
+
+Дисковая политика считает одним `du -B1 -s` allocated bytes `/nix/store`, releases
+и artifacts в исходном порядке, включая все retained histories. Отдельные du по
+каждому root меняют cross-root hardlink deduplication. К сумме добавляется только
+`max(0, st_size - st_blocks * 512)` для каждого из четырёх новых QCOW файлов.
+Это mixed allocated-plus-QCOW-sparse policy; apparent bytes всего дерева,
+QCOW virtual size и `df` не заменяют её. Не добавлять полный размер образа второй
+раз и не исключать history ради лимита. Root reader снимает permission blocker,
+а не ослабляет права. `df` может показать `/nix/store` как отдельный bind-mount
+target того же filesystem; serial used/free rows могут различаться. Проверять
+соответствующие mount ancestors и реальный filesystem identity, а не требовать
+одинакового target `/` или атомарного совпадения всех строк. Сканирование не
+атомарно при посторонних writes/GC; эту границу evidence следует сохранить.
+
+Доказанный native output можно повторно использовать при совпадении точных
+derivation/output, проверенных contents, версии, factory/phases и profile/worker
+arguments. Original proof сохраняет собственные root/gitlinks, producer и
+attempt. Новая continuation содержит explicit carry-forward и отдельно
+проверяет текущий source graph; она не переписывает старую source identity.
+Changed native contract или неподтверждённые contents требуют новой native
+приёмки. Новый root HEAD сам по себе не доказывает, что прежние solver/images
+построены из него.
+
+После этих исправлений следующий опубликованный HEAD отличается от исторически
+собранного `fade6f021edf`; старые receipts остаются свидетельствами своего freeze.
+Этот runbook фиксирует engineering procedure и не заявляет live production
+deployment, guest/service success или scientific acceptance для нового HEAD.
+
+| Gate | Необходимое свидетельство | Что остаётся отдельным |
+| --- | --- | --- |
+| Engineering build | Source graph, selected native suite/content proof, packages, four images и disk accounting | Подписи, recipient trust, image staging, guest boot |
+| Production acceptance | Реальные guest boot/services и transport/cancellation/failure contracts | Restore и scientific validation |
+| Restore | Согласованная archive boundary, проверка manifest/hash и фактическое восстановление | Независимость внешней backup-копии |
+| Final CI | Ready source ref, verified PR heads, empty queue и один full dispatch | Научная приёмка |
+
+Перед final CI публикуются и проверяются восемь owning component refs/PRs,
+затем superproject с exact gitlinks. Remote refs, PR state и защиты читаются
+заново. Runner registration выполняется на final ready stage после fresh empty
+queue check; административный PAT не передаётся jobs runner. Один full CI run
+должен иметь expected root `head_sha`; automatic reruns запрещены. До готового
+результата нужны дешёвые локальные/server checks, а не промежуточные CI dispatches.
+Отсутствующий inventory, admission, credentials или обязательное evidence
+останавливает зависимый этап; доступная независимая подготовка продолжается.
 
 Перед apply следует проверить plan, идентификаторы и размеры дисков. Storage
 и control защищены от уничтожения. Первоначальное форматирование разрешается

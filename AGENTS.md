@@ -68,6 +68,22 @@ Julia. Сохраняй память гипервизора и других VM; 
 долгого запуска оценивай прогресс, CPU/RAM/I/O и ожидаемое свидетельство;
 ресурсный профиль не меняет физическую модель или критерии приёмки.
 
+Перед тяжёлым серверным bootstrap выполни дешёвый preflight четырёх NixOS roles
+и строгую проверку nginx config по [deployment runbook](docs/single-server-deployment.md).
+Проверь реальные executable paths, flake inputs, builder identity, владельцев
+Git indexes и свежий admission; административный read-only Git использует
+`GIT_OPTIONAL_LOCKS=0`. Сохраняй original failed logs/receipts и новую attempt
+identity. Повторно используй доказанный native output только при совпадении
+его derivation, contents и native test contract; новый root HEAD не наследует
+старую full release приёмку. Engineering build, подписи, staging, guest services,
+restore, final CI и scientific acceptance — отдельные gates.
+
+В уже порученном scope выполняй доступные действия без повторного разрешения.
+Отсутствующие обязательные inventory, admission или credentials обозначай как
+blocker; не подменяй их догадкой и не обещай автоматический deploy без этих данных.
+На этом bootstrap CI выполняется один раз на final ready source ref,
+без автоматических reruns.
+
 Запрос подготовить PR разрешает ветку, изменения по теме и открытие PR, но не
 merge, deploy, отмену текущих расчётов или изменение сервера. Проверки документации
 и формата навыков входят в такой PR. Для docs-only изменения не поднимай научное
