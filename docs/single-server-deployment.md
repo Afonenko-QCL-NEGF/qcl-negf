@@ -69,9 +69,11 @@ Fixture constructor check отдельно обозначается как fixtu
 evaluation реального site. NixOS assertions, в частности явный interface для
 `networking.defaultGateway` при networkd, должны пройти до длинного запуска.
 
-Для control получить context
-`nixosConfigurations.control.config.systemd.services.nginx.serviceConfig.ExecStart`
-и выбрать единственную зарегистрированную derivation `nginx.conf.drv`. Затем
+Для control получить context строго выбранного nginx config: при
+`services.nginx.enableReload = true` использовать
+`environment.etc."nginx/nginx.conf".source`, иначе
+`systemd.services.nginx.serviceConfig.ExecStart` из control configuration.
+Выбрать единственную зарегистрированную derivation `nginx.conf.drv`. Затем
 собрать только её `^out` строгим config writer. Этот gate требует build exit
 code 0 и включённой validation. Severity counters gixy фиксируются отдельно:
 отсутствующий вывод, в том числе при cache hit, остаётся `not_measured`, а не
