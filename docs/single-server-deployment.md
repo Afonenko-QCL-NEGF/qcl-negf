@@ -43,7 +43,10 @@ Owning Nix package закрепляет публичный CA bundle и для b
 Проверка CA-контракта через pure Nix evaluation не заменяет native solver build.
 Приватный flake использует этот receipt, `mkApplication`, `mkSolver` и
 `platform.lib.mkImages`. Для режима с четырьмя VM `build-images.ts` принимает `-`
-вместо Arch inventory. Образы и depot остаются на сервере; передачей образов
+вместо Arch inventory и обязательный `--preflight-receipt ACTUAL_PREFLIGHT.json`.
+Перед первым image stage он сопоставляет четыре role derivations, nginx
+executable/config и актуальный hash с успешным native preflight receipt.
+Образы и depot остаются на сервере; передачей образов
 владеет [platform](../components/qcl-negf-platform/docs/image-transfer.md).
 
 ## Preflight до тяжёлой сборки
@@ -52,12 +55,21 @@ Owning Nix package закрепляет публичный CA bundle и для b
 
 ```sh
 deno task bootstrap:preflight --receipt /absolute/private-site/preflight.json preflight \
-  --site /absolute/private-site --nix /run/current-system/sw/bin/nix --check-nginx
+  --site /absolute/private-site --nix /run/current-system/sw/bin/nix --check-nginx \
+  --openssl /absolute/measured/openssl --mount /absolute/measured/mount \
+  --nginx-namespace '["/run/current-system/sw/bin/sudo","-n","/run/current-system/sw/bin/unshare","--mount","--net","--propagation","private"]'
 ```
 
-Она сохраняет bounded stdout/stderr и проверяет роли до сборки nginx config.
+Она сохраняет bounded stdout/stderr, проверяет четыре роли, собирает только
+generated nginx config и запускает фактический nginx executable с `-t`.
+Namespace entry разрешён доверенному административному builder, отдельно от
+изолированного Actions runner. Пути openssl/mount/sudo/unshare сначала измеряют;
+оператор root может выбрать prefix без sudo. Недоступный namespace означает
+отказ проверки. Инженерный тест подставляет собственный сертификат только в
+объявленные TLS directives и не читает production private key.
 Подробный контракт и отдельная команда root accounting описаны в
-[platform bootstrap](../components/qcl-negf-platform/docs/bootstrap.md).
+[platform bootstrap](../components/qcl-negf-platform/docs/bootstrap.md) и
+[nginx preflight](../components/qcl-negf-platform/docs/nginx-preflight.md).
 
 После подготовки приватного site и реальных depot metadata, до native
 installCheck и полной сборки образов, проверить все четыре роли `storage`,
@@ -74,13 +86,26 @@ evaluation реального site. NixOS assertions, в частности яв
 `environment.etc."nginx/nginx.conf".source`, иначе
 `systemd.services.nginx.serviceConfig.ExecStart` из control configuration.
 Выбрать единственную зарегистрированную derivation `nginx.conf.drv`. Затем
-собрать только её `^out` строгим config writer. Этот gate требует build exit
-code 0 и включённой validation. Severity counters gixy фиксируются отдельно:
+собрать только её `^out` строгим config writer и выполнить обязательный native
+`nginx -t` на фактической конфигурации. Writer exit code 0 и включённая
+validation сами по себе этот gate не закрывают. Native test должен завершиться
+успешно с нулевыми warn/error/crit/alert/emerg counters. Severity counters gixy фиксируются отдельно:
 отсутствующий вывод, в том числе при cache hit, остаётся `not_measured`, а не
 измеренным нулём. Не заменять config writer
 полной image/system сборкой и не ослаблять gixy. `proxy_set_header Host $host;`
 согласуется с нормализованным host; forwarded headers, TLS и relative portal
 routes проверяются для конкретного site отдельно.
+
+Для штатного API proxy site включает `qclNegf.application.api.tls.enable`,
+задаёт runtime certificate/key paths и удаляет дублирующий site vhost.
+Owning module использует `onlySSL`, loopback listener и systemd runtime
+credentials. Ручное `listen.ssl = true` без `onlySSL`/`addSSL`/`forceSSL` не
+гарантирует, что nginx module добавит certificate directives.
+
+Bootstrap профиля использует supported `engine_kwargs.connect_args` для
+PostgreSQL Unix socket. Холодная инициализация запрещена при любой непустой или
+частичной repository либо существующем database catalog; `reset=False` не
+заменяет этот guard. Существующий совместимый профиль сохраняет UUID и данные.
 
 Runtime environment фиксируется до запуска: проверенные абсолютные executable
 paths, явный `PATH`, рабочий каталог builder и принадлежащие ему Git indexes.
