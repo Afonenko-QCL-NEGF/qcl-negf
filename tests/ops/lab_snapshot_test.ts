@@ -10,7 +10,8 @@ function assert(value: unknown, message: string): asserts value {
 async function git(root: string, args: string[]): Promise<string> {
   const result = await new Deno.Command("git", {
     args: ["-c", "protocol.file.allow=always", "-C", root, ...args],
-    env: { GIT_CONFIG_NOSYSTEM: "1", GIT_CONFIG_GLOBAL: "/dev/null" },
+    env: { GIT_CONFIG_NOSYSTEM: "1", GIT_CONFIG_GLOBAL: "/dev/null", GIT_OPTIONAL_LOCKS: "0" },
+    clearEnv: true,
     stdin: "null",
     stdout: "piped",
     stderr: "piped",
@@ -87,7 +88,8 @@ async function absent(path: string): Promise<boolean> {
 async function hasGitObject(root: string, object: string): Promise<boolean> {
   const result = await new Deno.Command("git", {
     args: ["-C", root, "cat-file", "-e", object],
-    env: { GIT_CONFIG_NOSYSTEM: "1", GIT_CONFIG_GLOBAL: "/dev/null" },
+    env: { GIT_CONFIG_NOSYSTEM: "1", GIT_CONFIG_GLOBAL: "/dev/null", GIT_OPTIONAL_LOCKS: "0" },
+    clearEnv: true,
     stdout: "null",
     stderr: "null",
   }).output();
