@@ -3,6 +3,7 @@ export interface Command {
   args: string[];
   cwd?: string;
   env?: Record<string, string>;
+  clearEnv?: boolean;
 }
 
 export function display(command: Command): string {
@@ -14,6 +15,7 @@ export async function run(command: Command, capture = false): Promise<string> {
     args: command.args,
     cwd: command.cwd,
     env: command.env,
+    clearEnv: command.clearEnv,
     stdin: "inherit",
     stdout: capture ? "piped" : "inherit",
     stderr: "inherit",
