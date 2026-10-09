@@ -1,0 +1,133 @@
+Command: deno task check
+Limits: 1 CPU affinity, aggregate RSS 2 GiB, 120 s wall, 2 MiB output; one attempt
+Task check deno fmt --check ops tests tofu/*.ts deno.json && deno lint ops tests tofu/*.ts && deno check ops/*.ts tests/*.ts tests/infrastructure/*.ts tofu/*.ts && deno test tests && deno task test:state
+Checked 9 files
+Checked 7 files
+Check ops/bootstrap.ts
+Check ops/main.ts
+Check ops/plan.ts
+Check tests/bootstrap_socket_test.ts
+Check tests/plan_test.ts
+Check tests/infrastructure/images_test.ts
+Check tofu/build-images.ts
+Check tests/bootstrap_socket_test.ts
+Check tests/infrastructure/images_test.ts
+Check tests/plan_test.ts
+running 2 tests from ./tests/bootstrap_socket_test.ts
+cold bootstrap uses the declared Python before a database profile exists ... ok (574µs)
+warm bootstrap reconciles a legacy raw socket profile before registering Code ... ok (140µs)
+running 13 tests from ./tests/infrastructure/images_test.ts
+image inputs require all four Proxmox role objects ... ok (698µs)
+single-server image build excludes the optional Arch worker ... ok (152µs)
+all roles and strict nginx pass before the first image stage ... ok (791µs)
+rejected preflight prevents every image stage ... ok (311µs)
+disabled validation and non-nginx targets prevent image builds ... ok (275µs)
+writer-only default image entry point refuses an absent native receipt ... ok (140µs)
+native receipt role failure refuses every image ... ok (151µs)
+native receipt hash failure refuses every image ... ok (133µs)
+native receipt native-exit failure refuses every image ... ok (15ms)
+native receipt severity failure refuses every image ... ok (98µs)
+native receipt fake-native failure refuses every image ... ok (81µs)
+native receipt writer-output failure refuses every image ... ok (80µs)
+default CLI requires native receipt before any input read ... ok (353µs)
+running 7 tests from ./tests/plan_test.ts
+target and output selectors cannot inject executable options ... ok (824µs)
+duplicate names and invalid shapes fail closed ... ok (131µs)
+build does not contact target or activate configuration ... ok (95µs)
+activation uses upstream nixos-rebuild with argument vector ... ok (50µs)
+clean installation requires a separate mounted root ... ok (226µs)
+bootstrap registers the immutable installed code as part of recovery ... ok (631µs)
+existing profile permits recovery only for the same local storage contract ... ok (259µs)
+
+ok | 22 passed | 0 failed (83ms)
+
+Task test:state python3 -m pytest -q tests
+.............................................................................F..sss....................................................................................................................s......... [ 82%]
+............................................              [100%]
+=================================== FAILURES ===================================
+_____ test_public_trust_block_is_idempotent_and_preserves_existing_config ______
+
+tmp_path = PosixPath('/tmp/pytest-of-tolya/pytest-0/test_public_trust_block_is_ide0')
+
+    def test_public_trust_block_is_idempotent_and_preserves_existing_config(tmp_path):
+        source = (Path(__file__).parents[2] / "ansible/local-lab.yml").read_text()
+        start = "    - name: Configure optional public Nix cache trust\n"
+        assert start in source, "playbook lacks the optional pre-import public trust block"
+        block = start + source.split(start, 1)[1].split("    - name: Confirm role closure", 1)[0]
+        assert source.index(start) < source.index("    - name: Confirm role closure")
+        assert "tags: [nix-trust]" in block
+        assert "owner: root" in block and "group: root" in block
+        assert "require-sigs" not in block and "trusted-users" not in block
+        target = tmp_path / "nix"
+        target.mkdir()
+        config = target / "nix.conf"
+        original = "require-sigs = true\ntrusted-users = root\n# preserve caller settings\n"
+        config.write_text(original)
+        public = tmp_path / "public.key"
+        key = "qcl-test-1:" + base64.b64encode(bytes(range(224, 256))).decode()
+        public.write_text(key + "\n")
+        # Production fixed root paths/owners are checked above; translate only for
+        # local module execution as the test UID. No guest or host trust is changed.
+        block = block.replace("/root/.config/nix", str(target))
+        block = block.replace("owner: root", f"owner: '{os.getuid()}'")
+        block = block.replace("group: root", f"group: '{os.getgid()}'")
+        play = tmp_path / "play.yml"
+        play.write_text("- hosts: localhost\n  connection: local\n  gather_facts: false\n"
+                        f"  vars:\n    qcl_lab_nix_public_key_file: '{public}'\n  tasks:\n" + block)
+        env = dict(os.environ, ANSIBLE_LOCAL_TEMP=str(tmp_path / "ansible-local"),
+                   ANSIBLE_REMOTE_TEMP=str(tmp_path / "ansible-remote"))
+        command = ["ansible-playbook", "-i", "localhost,", str(play), "--tags", "nix-trust"]
+        first = subprocess.run(command, capture_output=True, text=True, env=env, timeout=60)
+>       assert first.returncode == 0, first.stdout + first.stderr
+E       AssertionError: [ERROR]: Unexpected Exception, this is probably a bug: Local RPC server did not start.
+E         
+E         Traceback (most recent call last):
+E           File "/usr/lib/python3.14/site-packages/ansible/cli/__init__.py", line 663, in cli_executor
+E             exit_code = cli.run()
+E           File "/usr/lib/python3.14/site-packages/ansible/cli/playbook.py", line 148, in run
+E             pbex = PlaybookExecutor(playbooks=context.CLIARGS['args'], inventory=inventory,
+E                                     variable_manager=variable_manager, loader=loader,
+E                                     passwords=passwords)
+E           File "/usr/lib/python3.14/site-packages/ansible/executor/playbook_executor.py", line 59, in __init__
+E             self._tqm = TaskQueueManager(
+E                         ~~~~~~~~~~~~~~~~^
+E                 inventory=inventory,
+E                 ^^^^^^^^^^^^^^^^^^^^
+E             ...<3 lines>...
+E                 forks=context.CLIARGS.get('forks'),
+E                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             )
+E             ^
+E           File "/usr/lib/python3.14/site-packages/ansible/executor/task_queue_manager.py", line 173, in __init__
+E             _rpc_host.LocalManager.shared_instance()  # ensure the RPC host is available
+E             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+E           File "/usr/lib/python3.14/site-packages/ansible/_internal/_rpc_host.py", line 113, in shared_instance
+E             instance.start()
+E             ~~~~~~~~~~~~~~^^
+E           File "/usr/lib/python3.14/multiprocessing/managers.py", line 566, in start
+E             self._process.start()
+E             ~~~~~~~~~~~~~~~~~~~^^
+E           File "/usr/lib/python3.14/site-packages/ansible/_internal/_rpc_host.py", line 51, in start
+E             raise TimeoutError("Local RPC server did not start.")
+E         TimeoutError: Local RPC server did not start.
+E         
+E         The above exception was the direct cause of the following exception:
+E         
+E         Traceback (most recent call last):
+E           File "/usr/lib/python3.14/site-packages/ansible/cli/__init__.py", line 672, in cli_executor
+E             raise AnsibleError("Unexpected Exception, this is probably a bug.") from ex
+E         ansible.errors.AnsibleError: Unexpected Exception, this is probably a bug: Local RPC server did not start.
+E         
+E         
+E       assert 250 == 0
+E        +  where 250 = CompletedProcess(args=['ansible-playbook', '-i', 'localhost,', '/tmp/pytest-of-tolya/pytest-0/test_public_trust_block_...om ex\nansible.errors.AnsibleError: Unexpected Exception, this is probably a bug: Local RPC server did not start.\n\n').returncode
+
+tests/ops/test_nix_trust.py:38: AssertionError
+=========================== short test summary info ============================
+FAILED tests/ops/test_nix_trust.py::test_public_trust_block_is_idempotent_and_preserves_existing_config
+1 failed, 248 passed, 5 skipped, 166 subtests passed in 15.52s
+
+Exit code: 1
+Wall time: 19.209 s
+Peak sampled aggregate RSS: 341778432 bytes
+Stop reason: none
