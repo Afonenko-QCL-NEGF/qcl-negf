@@ -1,0 +1,1 @@
+{"controllerStart":"/nix/var/nix/profiles/qcl-negf-application/bin/verdi -p qcl-negf daemon start --foreground","profileInit":"!/nix/var/nix/profiles/qcl-negf-application","workerGate":"/nix/store/5vcqz5d24an5qymcjx91hx1azpqkqcnf-qcl-negf-release/bin/qcl-negf-release node-check"}

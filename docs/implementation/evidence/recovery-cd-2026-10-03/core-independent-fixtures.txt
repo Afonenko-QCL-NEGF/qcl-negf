@@ -1,0 +1,18 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+WARNING: Imported binding Logging.AbstractLogger was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.LogLevel was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.Info was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.with_logger was undeclared at import time during import to Test.
+[frozen-support] bias_shift=0.0 sectors=2 edges=47 total_balance=-1.0547118733938987e-15
+[frozen-support] bias_shift=0.5 sectors=1 edges=77 total_balance=-7.771561172376096e-16
+Test Summary:                                    | Pass  Total   Time
+Fixed spectral energy support and sector balance |    9      9  14.6s
+[frozen-impurity] oracle_change=8.059506788280591e-7 weighted_contraction_error=3.8065916387746864e-7 scale=0.0007898656815498527
+Test Summary:                                   | Pass  Total   Time
+Frozen impurity occupation-weighted contraction |    4      4  43.4s
+[frozen-PV] analytic_triangle_error=1.766974823035287e-17
+Test Summary:                                               | Pass  Total  Time
+Finite window PV has an independent analytic element oracle |    1      1  2.4s
+Test Summary:                       | Pass  Total  Time
+Four-index static contraction order |    1      1  0.2s

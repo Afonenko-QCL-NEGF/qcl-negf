@@ -1,0 +1,42 @@
+Task check deno fmt --check ops tests deno.json && deno lint ops tests && deno check ops/*.ts && deno test --allow-read --allow-run=git tests && deno task transfer:check
+Checked 13 files
+Checked 12 files
+Check ops/application_cd.ts
+Check ops/ci.ts
+Check ops/environment.ts
+Check ops/git.ts
+Check ops/process.ts
+Check ops/publish.ts
+Check ops/release.ts
+Check ops/solver.ts
+Check tests/application_cd_test.ts
+Check tests/git_test.ts
+Check tests/publish_test.ts
+Check tests/solver_test.ts
+running 3 tests from ./tests/application_cd_test.ts
+CD binds executable identity to both source and immutable closure hashes ... ok (3ms)
+CD refuses mutable paths and missing closure evidence ... ok (1ms)
+CD carries the selected cache without changing binary release identity ... ok (1ms)
+running 3 tests from ./tests/git_test.ts
+source graph uses Git gitlinks, not arbitrary file records ... ok (1ms)
+source graph refuses absent gitlinks and escaping paths ... ok (1ms)
+publication resolves exact HTTPS repositories ... ok (583µs)
+running 5 tests from ./tests/publish_test.ts
+publication preserves origin and atomically pushes the selected commit and release tag ... ok (996µs)
+resuming publication of an existing repository performs no creation or force push ... ok (189µs)
+repository preflight accepts a matching successful API response ... ok (680µs)
+only an explicit GitHub API 404 permits repository creation ... ok (1ms)
+publication refuses wrong identity, failed API calls and visibility mismatches ... ok (608µs)
+running 3 tests from ./tests/solver_test.ts
+local depot is hash-prefetched before a solver build with the matching fetchurl name ... ok (2ms)
+a rejected local depot hash prevents the solver build ... ok (1ms)
+HTTPS depot builds keep normal fetchurl admission and source mismatch executes nothing ... ok (1ms)
+
+ok | 14 passed | 0 failed (277ms)
+
+Task transfer:check bash -n ops/transfer-github.sh && python3 -m unittest discover -s tests -p 'test_transfer.py'
+........
+----------------------------------------------------------------------
+Ran 8 tests in 10.167s
+
+OK

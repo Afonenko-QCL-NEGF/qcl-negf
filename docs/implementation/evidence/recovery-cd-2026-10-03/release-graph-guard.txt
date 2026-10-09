@@ -1,0 +1,2 @@
+Task graph deno run --allow-read --allow-run=git ops/git.ts
+Commit the superproject and component changes before building a release

@@ -31,7 +31,7 @@ export function githubRepository(url: string): string {
 }
 
 export function git(root: string, args: string[]): Promise<string> {
-  return run({ executable: "git", args: ["-C", root, ...args] }, true);
+  return run({ executable: "git", args: ["--no-optional-locks", "-C", root, ...args] }, true);
 }
 
 export async function sourceGraph(root = workspace, requireClean = true): Promise<SourceGraph> {

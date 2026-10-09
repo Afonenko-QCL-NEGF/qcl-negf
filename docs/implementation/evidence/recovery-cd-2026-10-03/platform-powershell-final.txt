@@ -1,0 +1,2 @@
+Shutdown-QclWorker.ps1: syntax OK
+Start-QclWorker.ps1: syntax OK

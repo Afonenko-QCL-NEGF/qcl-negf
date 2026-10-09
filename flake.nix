@@ -19,11 +19,17 @@
         inherit system;
         workspaceRoot = self.outPath;
       };
-      mkSolver = { system, preparedDepot }: let
+      mkSolver = { system, preparedDepot, juliaTestProfile ? "production-build",
+        juliaTestWorkerLimit ? null }: let
         pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
       in import ./components/QCLNEGFRunner.jl/nix/package.nix {
         inherit pkgs preparedDepot;
-        julia = import ./components/QCLNEGFRunner.jl/nix/julia.nix { inherit pkgs; };
+        testProfile = juliaTestProfile;
+        julia = import ./components/QCLNEGFRunner.jl/nix/julia.nix {
+          inherit pkgs;
+          testProfile = juliaTestProfile;
+          testWorkerLimit = juliaTestWorkerLimit;
+        };
         coreSrc = ./components/QCLNEGF.jl;
         runnerSrc = ./components/QCLNEGFRunner.jl;
         environmentSrc = ./julia;

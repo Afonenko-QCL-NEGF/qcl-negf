@@ -1,0 +1,10 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+WARNING: Imported binding Logging.AbstractLogger was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.LogLevel was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.Info was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.with_logger was undeclared at import time during import to Test.
+ArgumentError: execution id and attempt are required
+ArgumentError: verify-stop expects OUTPUT --execution-id ID --attempt N [--archive-byte-budget BYTES]
+Test Summary:                                                                 | Pass  Total  Time
+Stop verifiers accept one finite archive budget without losing required scope |    6      6  3.5s

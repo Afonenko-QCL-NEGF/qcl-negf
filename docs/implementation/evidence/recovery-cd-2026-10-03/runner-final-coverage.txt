@@ -1,0 +1,7 @@
+HEAD c4e5b37bbe476668783ea8929de4ff65ab6d32ca
+57 completed prefix files +19 fully repeated/focused tail files =76 expected Julia test files.
+The two manifests are unique, disjoint, and their union equals the five owning test directories.
+Whole guard 2100s: SIGTERM then own-group SIGKILL, final exit137; NOT pass.
+Tail guard1200s: final exit0,405/405 assertions,14m46.1s.
+Previous interrupted part of the current SCBA file is not counted.
+No combined assertion total is inferred from the interrupted whole process.

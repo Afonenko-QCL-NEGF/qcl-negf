@@ -1,0 +1,31 @@
+aiida.calculations qcl_negf.execution aiida_qcl_negf.calculation:QCLExecutionCalculation
+aiida.parsers qcl_negf.execution aiida_qcl_negf.parser:QCLExecutionParser
+aiida.workflows qcl_negf.execution_restart aiida_qcl_negf.workflow:QCLExecutionRestartWorkChain
+aiida.workflows qcl_negf.plan aiida_qcl_negf.workflow:QCLPlanWorkChain
+console_scripts qcl-negf-receive qcl_negf_results.archive:main
+console_scripts qcl-negf-results qcl_negf_results.cli:main
+Wheel-only imports, packaged schema and entrypoint loads passed: 6
+{
+  "schema": "qcl-negf-local-package-build-evidence-v1",
+  "scope": "local wheel evidence; not a published Git release graph or revision lock",
+  "packages": [
+    {
+      "file": "aiida_qcl_negf-0.2.0-py3-none-any.whl",
+      "sha256": "2bd0d458fa084747d70e0446c71b0918479c90ca0e2dce8e87a681a5f7eafe91",
+      "bytes": 27031,
+      "component_commit": "74fb0c3231cba25b5a005e88f6c609f997411fc8"
+    },
+    {
+      "file": "qcl_negf_contracts-0.2.0-py3-none-any.whl",
+      "sha256": "9f8d16ff6d9610830667a4cf618bf90340a1acae2dd1937269bae814433a8eb2",
+      "bytes": 33791,
+      "component_commit": "026c122cd386752c0792727a75f86cdac25d2dd0"
+    },
+    {
+      "file": "qcl_negf_results-0.2.0-py3-none-any.whl",
+      "sha256": "10e85b63425897163562de7d4196f053a93e8f4f6d98038f412d8ebe72e61a81",
+      "bytes": 92819,
+      "component_commit": "f50c35abfbf2706cd6809be1b3f9f3ba2f8adcd9"
+    }
+  ]
+}

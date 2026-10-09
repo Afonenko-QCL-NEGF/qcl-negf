@@ -1,0 +1,8 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+WARNING: Imported binding Logging.AbstractLogger was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.LogLevel was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.Info was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.with_logger was undeclared at import time during import to Test.
+Test Summary:                                         | Pass  Total     Time
+Hash-valid native bundles reject unowned HDF5 storage |    5      5  3m39.8s

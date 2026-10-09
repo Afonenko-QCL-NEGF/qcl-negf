@@ -1,0 +1,9 @@
+Runner HEAD: c4e5b37bbe476668783ea8929de4ff65ab6d32ca
+Runner tree: 14a853d97a3684e959ba01528c50ea8e2ca6f35a
+Working directory: /home/tolya/Загрузки/qcl-negf/components/QCLNEGFRunner.jl
+Started: 2026-10-03 14:10 UTC
+Log: /tmp/qcl-implementation-tests/runner-final-reviewed-all-v2.log
+
+JULIA_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 JULIA_DEPOT_PATH=/tmp/qcl-implementation-depot:/home/tolya/.julia timeout 2100s /tmp/qcl-julia-1.13.0/bin/julia --compiled-modules=no --project=/tmp/qcl-implementation-julia --startup-file=no --check-bounds=yes test/runtests.jl application contracts infrastructure presentation integration > /tmp/qcl-implementation-tests/runner-final-reviewed-all-v2.log 2>&1
+
+This is a fresh run after the archive dependency preflight, HDF5 API lock, and CLI inference barrier changes. Its result is recorded separately when the session finishes; the previous 2001/2001 run applies to an earlier tree.

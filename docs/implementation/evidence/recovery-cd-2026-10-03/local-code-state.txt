@@ -1,0 +1,95 @@
+Automatically captured local code state before the documentation handoff commit.
+Not a release lock or build input; published composition remains the umbrella gitlinks.
+2026-10-03T14:16:05.426043+00:00
+
+[umbrella]
+$ git rev-parse HEAD
+4341692b0d40e4d7b381b4525cf19dd6750ebf66
+$ git branch --show-current
+codex/recovery-cd-preparation
+$ git status --short
+ M components/QCLNEGF.jl
+ M components/QCLNEGFRunner.jl
+ M components/qcl-negf-aiida
+ M components/qcl-negf-contracts
+ M components/qcl-negf-platform
+ M components/qcl-negf-research
+ M components/qcl-negf-results
+?? docs/implementation/
+?? docs/superpowers/
+?? qcl-negf-codex-requirements.md
+?? results/
+
+[components/QCLNEGF.jl]
+$ git rev-parse HEAD
+aebe1812a2d66d933a3bc1584f65685c91fd93fc
+$ git branch --show-current
+codex/frozen-operator-fixtures
+$ git status --short
+(empty)
+
+[components/QCLNEGFRunner.jl]
+$ git rev-parse HEAD
+c4e5b37bbe476668783ea8929de4ff65ab6d32ca
+$ git branch --show-current
+codex/recovery-archive-portable
+$ git status --short
+(empty)
+
+[components/qcl-negf-aiida]
+$ git rev-parse HEAD
+74fb0c3231cba25b5a005e88f6c609f997411fc8
+$ git branch --show-current
+codex/attempt-recovery
+$ git status --short
+(empty)
+
+[components/qcl-negf-contracts]
+$ git rev-parse HEAD
+026c122cd386752c0792727a75f86cdac25d2dd0
+$ git branch --show-current
+codex/output-state-contracts
+$ git status --short
+(empty)
+
+[components/qcl-negf-platform]
+$ git rev-parse HEAD
+953d9558d2f8aaa0d65d8bfc72f2ced48d87730b
+$ git branch --show-current
+codex/application-release-cpu
+$ git status --short
+(empty)
+
+[components/qcl-negf-portal]
+$ git rev-parse HEAD
+3a1a1e27b9f9576a3ba4e421cc98bcd887f639a8
+$ git branch --show-current
+codex/single-archive-download
+$ git status --short
+(empty)
+
+[components/qcl-negf-research]
+$ git rev-parse HEAD
+ab2d616f600981c112ba45658af490ba1ebcfb18
+$ git branch --show-current
+codex/fresh-fixture-plan
+$ git status --short
+(empty)
+
+[components/qcl-negf-results]
+$ git rev-parse HEAD
+f50c35abfbf2706cd6809be1b3f9f3ba2f8adcd9
+$ git branch --show-current
+codex/verified-state-readers
+$ git status --short
+(empty)
+
+$ git submodule status --recursive
++aebe1812a2d66d933a3bc1584f65685c91fd93fc components/QCLNEGF.jl (v0.2.0-3-gaebe181)
++c4e5b37bbe476668783ea8929de4ff65ab6d32ca components/QCLNEGFRunner.jl (v0.2.0-5-gc4e5b37)
++74fb0c3231cba25b5a005e88f6c609f997411fc8 components/qcl-negf-aiida (v0.2.0-4-g74fb0c3)
++026c122cd386752c0792727a75f86cdac25d2dd0 components/qcl-negf-contracts (v0.2.0-4-g026c122)
++953d9558d2f8aaa0d65d8bfc72f2ced48d87730b components/qcl-negf-platform (v0.2.0-15-g953d955)
+ 3a1a1e27b9f9576a3ba4e421cc98bcd887f639a8 components/qcl-negf-portal (v0.2.0-4-g3a1a1e2)
++ab2d616f600981c112ba45658af490ba1ebcfb18 components/qcl-negf-research (v0.2.0-4-gab2d616)
++f50c35abfbf2706cd6809be1b3f9f3ba2f8adcd9 components/qcl-negf-results (v0.2.0-13-gf50c35a)

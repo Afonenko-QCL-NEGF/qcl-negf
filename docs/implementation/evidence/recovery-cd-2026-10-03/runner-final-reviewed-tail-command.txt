@@ -1,0 +1,12 @@
+Immutable Runner HEAD: c4e5b37bbe476668783ea8929de4ff65ab6d32ca
+Immutable tree: 14a853d97a3684e959ba01528c50ea8e2ca6f35a
+Working directory: /home/tolya/Загрузки/qcl-negf/components/QCLNEGFRunner.jl
+Started: 2026-10-03 14:49 UTC
+Unfinished files: runner-final-reviewed-tail-files.txt (19 files)
+Previously completed: runner-final-reviewed-completed-files.txt (57 files)
+Harness: runner-final-reviewed-tail.jl (includes actual component files)
+Log: runner-final-reviewed-tail.log
+
+JULIA_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 JULIA_DEPOT_PATH=/tmp/qcl-implementation-depot:/home/tolya/.julia timeout --signal=KILL 1200s /tmp/qcl-julia-1.13.0/bin/julia --compiled-modules=no --project=/tmp/qcl-implementation-julia --startup-file=no --check-bounds=yes /tmp/qcl-implementation-tests/runner-final-reviewed-tail.jl > /tmp/qcl-implementation-tests/runner-final-reviewed-tail.log 2>&1
+
+This is the single authorized focused run after the original whole process exceeded its 2100-second guard (SIGTERM), then required SIGKILL of the verified own process group and returned exit 137. The interrupted SCBA file is included here once and is not counted as completed in the earlier process. There is no third run and no whole-suite success claim.

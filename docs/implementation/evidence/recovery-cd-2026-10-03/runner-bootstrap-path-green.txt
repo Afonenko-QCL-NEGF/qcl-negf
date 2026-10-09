@@ -1,0 +1,8 @@
+Task test:depot deno test --allow-read --allow-write --allow-env --allow-run tools/ci_test.ts
+Check tools/ci_test.ts
+running 3 tests from ./tools/ci_test.ts
+prepared depot retains frozen registry and package bytes while removing transient data ... ok (265ms)
+preparation refuses to replace an existing frozen depot ... ok (234ms)
+bootstrap writes to a Cyrillic checkout path with spaces and percent signs ... ok (273ms)
+
+ok | 3 passed | 0 failed (776ms)

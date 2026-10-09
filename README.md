@@ -102,6 +102,12 @@ web client does not re-prepare the numerical environment.
 depot, creates an archive and computes its hash automatically. It writes `solver-depot.json` for
 the local build and private site flake. Copy this JSON into the private site repository; retain
 the archive outside source control. The default artifact URL is local to the build machine.
+`solver:build` first uses `nix store prefetch-file` to verify a local archive against the receipt's
+hash, with the same stable output name as the Nix depot fetcher. Run this step on the builder
+before building private-site images: a cold, direct site build cannot read an arbitrary local
+`file://` archive through the filesystem sandbox. Retain the original archive so the verified
+prefetch can be repeated after garbage collection; its store copy counts toward the artifact
+disk budget. A receipt still contains only the artifact URL and hash, never archive bytes.
 For another builder, pass `--url https://YOUR-ARTIFACT-SERVER/depot.tar.gz` and upload the generated
 archive to that exact address through your artifact storage. The command itself does not upload.
 
@@ -114,5 +120,8 @@ host; these are configurable caps, not a claim that SMT threads are physical cor
 Keep real host addresses, credentials, disk choices and application state outside this public
 workspace. Use the platform's private-site example and its image/provisioning commands.
 The source repository never contains generated VM images, dependency depots or scientific results.
+
+For an initial deployment with only the four Proxmox roles, see the
+[single-server deployment procedure](docs/single-server-deployment.md).
 
 MIT license. See [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -1,16 +1,75 @@
-name: Retain application release
+name: Application release
 on:
   workflow_dispatch:
+    inputs:
+      deliver:
+        description: Deliver in the selected maintenance window after prior research has stopped
+        type: boolean
+        default: false
 permissions:
   contents: read
+concurrency:
+  group: qcl-negf-application-release
+  cancel-in-progress: false
 jobs:
   assemble:
     runs-on: [self-hosted, linux, x64, qcl-negf-ci]
-    timeout-minutes: 180
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           submodules: recursive
           persist-credentials: false
-      - name: Build and retain the locked application
-        run: deno task release /var/lib/qcl-negf-releases --build
+      - name: Verify the committed source graph
+        run: deno task graph
+      - name: Prepare the exact runtime and locked environments
+        run: |
+          deno task --cwd components/QCLNEGFRunner.jl bootstrap
+          deno task prepare
+        env:
+          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
+      - name: Check and test selected components
+        run: |
+          deno task check
+          deno task test
+        env:
+          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
+      - name: Retain package artifacts and prepare pinned solver dependencies
+        run: |
+          deno task release /var/lib/qcl-negf-ci/releases
+          deno task solver:depot "$RUNNER_TEMP/depot-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+        env:
+          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
+      - name: Build and publish immutable application and solver closures
+        run: |
+          test -n "$QCL_NIX_CACHE_URI"
+          deno run --allow-read --allow-write --allow-env --allow-run ops/application_cd.ts \
+            "$RUNNER_TEMP/depot-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}/solver-depot.json" \
+            "$RUNNER_TEMP/application-release.json" "$QCL_NIX_CACHE_URI"
+        env:
+          QCL_NIX_CACHE_URI: ${{ vars.QCL_NIX_CACHE_URI }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: application-release
+          path: ${{ runner.temp }}/application-release.json
+          if-no-files-found: error
+          retention-days: 30
+  deliver:
+    needs: assemble
+    if: github.event.inputs.deliver == 'true'
+    environment: qcl-negf-delivery
+    runs-on: [self-hosted, linux, x64, qcl-negf-delivery]
+    timeout-minutes: 60
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: application-release
+          path: ${{ runner.temp }}/qcl-release
+      - name: Deliver and verify the complete selected active pool
+        run: |
+          test -n "$QCL_DEPLOY_TARGET"
+          ssh -o BatchMode=yes "$QCL_DEPLOY_TARGET" \
+            'sudo -n qcl-negf-release deliver --manifest /dev/stdin --pool /var/lib/qcl-negf/runtime/active-pool.json' \
+            < "$RUNNER_TEMP/qcl-release/application-release.json"
+        env:
+          QCL_DEPLOY_TARGET: ${{ vars.QCL_DEPLOY_TARGET }}

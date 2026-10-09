@@ -1,0 +1,4 @@
+ArgumentError: execution id and attempt are required
+ArgumentError: verify-stop expects OUTPUT --execution-id ID --attempt N [--archive-byte-budget BYTES]
+Test Summary:                                                                 | Pass  Total  Time
+Stop verifiers accept one finite archive budget without losing required scope |    6      6  1.0s

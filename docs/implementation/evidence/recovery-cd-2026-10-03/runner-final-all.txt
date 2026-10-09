@@ -1,0 +1,362 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+WARNING: Imported binding Logging.AbstractLogger was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.LogLevel was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.Info was undeclared at import time during import to Test.
+WARNING: Imported binding Logging.with_logger was undeclared at import time during import to Test.
+[suite] application/anderson_memory_appears_only_when_selected.jl
+[suite] application/application_identity_canonical_and_content_addressed.jl
+[suite] application/complete_coordinate_basis_and_pzp_alias_build_on_the_reference2019_layers.jl
+[suite] application/configuration_merge_order_and_fail_closed_validation.jl
+[suite] application/configured_production_study_orchestration.jl
+[suite] application/declarative_automatic_e1_execution_strategy.jl
+[suite] application/diagnostic_invocation_failure_isolation.jl
+[suite] application/effective_method_catalog_provenance.jl
+[suite] application/every_scattering_channel_is_isolated_and_configured.jl
+[suite] application/execution_resource_contract.jl
+[suite] application/failed_point_unwinds_descendants_and_admits_the_next_point.jl
+[suite] application/interrupted_nested_sweep_resumes_only_unfinished_points.jl
+[suite] application/per_case_campaign_ram_planning_uses_effective_method_overrides.jl
+[suite] application/physics_marker_configuration.jl
+[suite] application/production_operating_point_retargeting.jl
+[suite] application/production_sweep_records_require_complete_diagnostics.jl
+[suite] application/restored_stage_progress_consumes_the_original_budget.jl
+[suite] application/strict_hierarchical_yaml_configuration.jl
+[suite] application/study_repetition_aggregation_and_report_files.jl
+[suite] application/unified_configured_execution_budget.jl
+[suite] contracts/bounded_approximate_acceptance_and_warning_provenance.jl
+[suite] contracts/configured_production_runtime_adapter.jl
+[suite] contracts/draft_2020_12_configuration_contract.jl
+[suite] contracts/fail_closed_yaml_output_contract.jl
+[suite] contracts/final_acceptance_preserves_approximate_scba_and_physical_gates.jl
+[suite] contracts/multilevel_spectral_resolution_oracles.jl
+[suite] contracts/neutral_solver_events_and_application_progress_adapter.jl
+[suite] contracts/package_dependency_identity.jl
+[suite] contracts/production_convergence_diagnostics_are_complete.jl
+[suite] contracts/quality_warnings_survive_stored_method_reports.jl
+[suite] contracts/scientific_plan_contracts.jl
+[suite] contracts/scientific_resources.jl
+[suite] contracts/unified_scientific_output.jl
+[suite] infrastructure/anderson_checkpoint_native_history.jl
+[suite] infrastructure/bounded_portable_recovery.jl
+[suite] infrastructure/bounded_scalar_telemetry.jl
+[suite] infrastructure/configured_cavity_retargeting_and_restart_share_one_shift_contract.jl
+[suite] infrastructure/csv_records_preserve_multiline_scientific_provenance.jl
+[suite] infrastructure/fresh_point_verifies_artifacts_before_completed_status.jl
+[suite] infrastructure/lifecycle_journal_and_separate_timing_samples.jl
+[suite] infrastructure/light_physics_snapshots_without_hdf5.jl
+[suite] infrastructure/linux_process_resource_probe.jl
+[suite] infrastructure/native_v3_schema_precision.jl
+[suite] infrastructure/output_artifacts_and_snapshot_cadence.jl
+[suite] infrastructure/physical_markers_and_packed_history.jl
+[suite] infrastructure/portable_execution_progress.jl
+[suite] infrastructure/production_csv_outputs.jl
+[suite] infrastructure/production_estimate_obeys_an_explicit_synthetic_memory_envelope.jl
+[suite] infrastructure/production_files_replace_an_existing_destination_in_one_rename.jl
+[suite] infrastructure/production_restart_validates_metadata_and_restores_state.jl
+[suite] infrastructure/psd_witness_matrix_roundtrip.jl
+[suite] infrastructure/resource_pause_checkpoint_provenance.jl
+[suite] infrastructure/retention_and_viewer_downsampling_preserve_durable_data.jl
+[suite] infrastructure/runner_self_check.jl
+{"experimental_validation":"not_evaluated","hdf5_roundtrip":true,"julia_version":"1.13.0","oracle":"triangular finite-window principal value; QCLNEGF src/numerics/reference/kernels.jl::product_integration_hilbert_transform","julia_threads":2,"analytic_absolute_error":1.766974823035287e-17,"discretization_verified":"not_evaluated","blas_threads":1,"status":"completed","schema":"qcl-negf-self-check-v1","iterative_converged":"not_evaluated","scientific_accepted":false}
+[suite] infrastructure/scba_seed_explicit_status_and_hdf5_roundtrip.jl
+[suite] infrastructure/scoped_pause_receipt.jl
+/tmp/jl_DjUI6Z/control/pause.json
+{"point_id":"p","state_id":"5da983450dca0df688945539882e9defec18e57efca9c799dca3c49581d8a3f8","commit_path":"attempt-1/artifacts/generation-000001/commit.json","status":"paused","execution_id":"e","schema":"qcl-negf-pause-receipt-v1","commit_sha256":"eceb01a48d5e08e72f292e7afc56571d8da8ac2d28076b675e92bdff31b832c3","attempt":1,"state_sequence":1,"publication_scope":"local_filesystem"}[suite] infrastructure/scratch_execution.jl
+[suite] infrastructure/yaml_repository_provenance_spans_and_checkpoint_integrity.jl
+[suite] presentation/declarative_configured_report_templates.jl
+[suite] presentation/failed_methods_remain_visible_beside_completed_methods.jl
+[suite] presentation/hierarchical_progress_observability.jl
+[suite] presentation/method_validation_report_survives_isolated_phase_failures.jl
+[suite] presentation/method_validation_template_wraps_existing_expert_evidence.jl
+[suite] presentation/nested_runtime_report_is_selected_and_materialized.jl
+[suite] presentation/stored_method_expert_comparison.jl
+[suite] integration/checkpoint_memory_lifecycle.jl
+[suite] integration/clean_architecture_source_boundaries.jl
+[suite] integration/exact_anderson_and_bounded_method_diagnostics_profiles.jl
+[suite] integration/fixed_work_production_calibration.jl
+[suite] integration/native_phase_resource_contract.jl
+[suite] integration/portable_two_point_resume.jl
+[suite] integration/unified_entrypoint_executes_plan_only_in_a_fresh_julia_process.jl
+┌ Error: diagnostic invocation failed; continuing because fail_fast=false
+│   invocation_kind = :method_repetition
+│   identity = "synthetic"
+│   exception =
+│    synthetic diagnostic failure
+│    Stacktrace:
+│      [1] error(s::String)
+│        @ Base ./error.jl:44
+│      [2] (::Main.Suite_T039.var"#11#12")(::QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration)
+│        @ Main.Suite_T039 ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:20
+│      [3] _run_diagnostic_invocation(configuration::QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration; invocation_kind::Symbol, identity::String, runner::Main.Suite_T039.var"#11#12")
+│        @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/configured_study.jl:408
+│      [4] kwcall(::@NamedTuple{invocation_kind::Symbol, identity::String, runner::Main.Suite_T039.var"#11#12"}, ::typeof(QCLNEGFRunner._run_diagnostic_invocation), configuration::QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration)
+│        @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/configured_study.jl:400
+│      [5] (::Main.Suite_T039.var"#9#10"{QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, Module})(temporary::String)
+│        @ Main.Suite_T039 ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:16
+│      [6] mktempdir(fn::Main.Suite_T039.var"#9#10"{QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, Module}, parent::String; prefix::String)
+│        @ Base.Filesystem ./file.jl:941
+│      [7] mktempdir(fn::Function, parent::String)
+│        @ Base.Filesystem ./file.jl:937
+│      [8] top-level scope
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:6
+│      [9] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [10] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:13 [inlined]
+│     [11] include(mapexpr::Function, mod::Module, _path::String)
+│        @ Base ./Base.jl:310
+│     [12] IncludeInto
+│        @ ./Base.jl:311 [inlined]
+│     [13] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:15 [inlined]
+│     [14] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [15] run_test_group(group::String)
+│        @ Main ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:12
+│     [16] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:7 [inlined]
+│     [17] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [18] top-level scope
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:6
+│     [19] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:309
+│     [20] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:344
+│     [21] _start()
+│        @ Base ./client.jl:577
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/configured_study.jl:416
+┌ Error: diagnostic invocation failed; continuing because fail_fast=false
+│   invocation_kind = :method_repetition
+│   identity = "pilot-default"
+│   exception =
+│    pilot point failed; keep the study running
+│    Stacktrace:
+│      [1] error(s::String)
+│        @ Base ./error.jl:44
+│      [2] (::Main.Suite_T039.var"#17#18")(::QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration)
+│        @ Main.Suite_T039 ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:51
+│      [3] _run_diagnostic_invocation(configuration::QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration; invocation_kind::Symbol, identity::String, runner::Main.Suite_T039.var"#17#18")
+│        @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/configured_study.jl:408
+│      [4] kwcall(::@NamedTuple{invocation_kind::Symbol, identity::String, runner::Main.Suite_T039.var"#17#18"}, ::typeof(QCLNEGFRunner._run_diagnostic_invocation), configuration::QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration)
+│        @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/configured_study.jl:400
+│      [5] (::Main.Suite_T039.var"#15#16"{QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, Module})(temporary::String)
+│        @ Main.Suite_T039 ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:47
+│      [6] mktempdir(fn::Main.Suite_T039.var"#15#16"{QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, QCLNEGFRunner.QCLConfiguration.ResolvedRunConfiguration, Module}, parent::String; prefix::String)
+│        @ Base.Filesystem ./file.jl:941
+│      [7] mktempdir(fn::Function, parent::String)
+│        @ Base.Filesystem ./file.jl:937
+│      [8] top-level scope
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:6
+│      [9] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [10] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/diagnostic_invocation_failure_isolation.jl:44 [inlined]
+│     [11] include(mapexpr::Function, mod::Module, _path::String)
+│        @ Base ./Base.jl:310
+│     [12] IncludeInto
+│        @ ./Base.jl:311 [inlined]
+│     [13] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:15 [inlined]
+│     [14] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [15] run_test_group(group::String)
+│        @ Main ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:12
+│     [16] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:7 [inlined]
+│     [17] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [18] top-level scope
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:6
+│     [19] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:309
+│     [20] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:344
+│     [21] _start()
+│        @ Base ./client.jl:577
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/configured_study.jl:416
+[ Info: Solving T=250.0 K, Vₚ=60.0 mV | peak≤0.002143 GiB
+┌ Warning: independent point failed; continuing sweep
+│   exception =
+│    ArgumentError: restart N_z mismatch: stored=47, expected=48
+│    Stacktrace:
+│      [1] load_production_restart(path::String, problem::QCLNEGF.QCLDomain.NEGFProblem{QCLNEGF.QCLNumerics.EnergyShiftPlan}; incompatible::Symbol, algorithms::QCLNEGF.QCLDomain.AlgorithmOptions, solver_options::QCLNEGF.QCLDomain.SolverOptions)
+│        @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/persistence/production_state.jl:582
+│      [2] kwcall(::@NamedTuple{incompatible::Symbol, algorithms::QCLNEGF.QCLDomain.AlgorithmOptions, solver_options::QCLNEGF.QCLDomain.SolverOptions}, ::typeof(QCLNEGFRunner.load_production_restart), path::String, problem::QCLNEGF.QCLDomain.NEGFProblem{QCLNEGF.QCLNumerics.EnergyShiftPlan})
+│        @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/persistence/production_state.jl:568
+│      [3] run_production_sweep(base_problem::QCLNEGF.QCLDomain.NEGFProblem{Matrix{Float64}}, voltages::Vector{Unitful.Quantity{Float64, 𝐋^2 𝐌 𝐈^-1 𝐓^-3, Unitful.FreeUnits{(mV,), 𝐋^2 𝐌 𝐈^-1 𝐓^-3, nothing}}}, temperatures::Vector{Unitful.Quantity{Float64, 𝚯, Unitful.FreeUnits{(K,), 𝚯, nothing}}}; output_directory::String, options::QCLNEGF.QCLDomain.SolverOptions, production_options::QCLNEGF.QCLNumerics.ProductionOptions, resume_from_checkpoints::Bool, checkpoint_prefix::String, save_full_state::Bool, save_csv::Bool, Tᴸᴼ_of_Tᴸ::typeof(identity), fail_fast::Bool, photon_energies::Nothing, optical_edge_tolerance::Float64, incompatible_checkpoint::Symbol, solution_observer::Main.Suite_T093.var"#12#13"{Vector{Tuple{Int64, Int64}}}, checkpoint_observer::Nothing, checkpoint_request::Nothing, history_observer::Nothing, domain_adaptation::QCLNEGF.QCLDomain.DomainAdaptationPolicy, kernel_options::QCLNEGF.QCLNumerics.ProductionKernelOptions)
+│        @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/production_workflow.jl:161
+│      [4] run_production_sweep
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/production_workflow.jl:75 [inlined]
+│      [5] (::Main.Suite_T093.var"#8#9"{QCLNEGF.QCLDomain.SolverOptions, QCLNEGF.QCLNumerics.ProductionOptions, QCLNEGF.QCLDomain.NEGFProblem{Matrix{Float64}}})(directory::String)
+│        @ Main.Suite_T093 ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/production_operating_point_retargeting.jl:271
+│      [6] mktempdir(fn::Main.Suite_T093.var"#8#9"{QCLNEGF.QCLDomain.SolverOptions, QCLNEGF.QCLNumerics.ProductionOptions, QCLNEGF.QCLDomain.NEGFProblem{Matrix{Float64}}}, parent::String; prefix::String)
+│        @ Base.Filesystem ./file.jl:941
+│      [7] mktempdir(fn::Function, parent::String)
+│        @ Base.Filesystem ./file.jl:937
+│      [8] top-level scope
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/production_operating_point_retargeting.jl:6
+│      [9] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [10] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/application/production_operating_point_retargeting.jl:234 [inlined]
+│     [11] include(mapexpr::Function, mod::Module, _path::String)
+│        @ Base ./Base.jl:310
+│     [12] IncludeInto
+│        @ ./Base.jl:311 [inlined]
+│     [13] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:15 [inlined]
+│     [14] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [15] run_test_group(group::String)
+│        @ Main ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/run_group.jl:12
+│     [16] macro expansion
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:7 [inlined]
+│     [17] macro expansion
+│        @ /tmp/qcl-julia-1.13.0/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+│     [18] top-level scope
+│        @ ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/test/runtests.jl:6
+│     [19] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:309
+│     [20] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:344
+│     [21] _start()
+│        @ Base ./client.jl:577
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/composition/production_workflow.jl:416
+[ Info: Solving T=250.0 K, Vₚ=64.0 mV | peak≤0.002143 GiB
+[ Info: Solving T=250.0 K, Vₚ=60.0 mV | peak≤0.002143 GiB
+┌ Warning: legacy outputs migrated to output.archive; full_final is always true
+└ @ QCLNEGFRunner.QCLScientificWorkflow ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/scientific/definitions.jl:91
+┌ Warning: legacy outputs migrated to output.archive; full_final is always true
+└ @ QCLNEGFRunner.QCLScientificWorkflow ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/scientific/definitions.jl:91
+[ Info: Solving T=250.0 K, Vₚ=60.0 mV | peak≤0.00866 GiB
+┌ Warning: ignoring metadata-incompatible production checkpoint; starting fresh
+│   checkpoint = "/tmp/jl_AFm7dT/old_without_contract.h5"
+│   reason = "checkpoint lacks the required exact numerical restart contract; start a new run"
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/persistence/production_state.jl:584
+┌ Warning: ignoring metadata-incompatible production checkpoint; starting fresh
+│   checkpoint = "/tmp/jl_AFm7dT/Результаты reference design/restart.h5"
+│   reason = "restart N_z mismatch: stored=47, expected=48"
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/persistence/production_state.jl:584
+┌ Warning: quarantined metadata-incompatible production checkpoint; starting fresh
+│   checkpoint = "/tmp/jl_AFm7dT/Результаты reference design/restart.h5"
+│   quarantined = "/tmp/jl_AFm7dT/Результаты reference design/restart.incompatible.4.17167391716407.h5"
+│   reason = "restart N_z mismatch: stored=47, expected=48"
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/persistence/production_state.jl:589
+┌ Warning: quarantined metadata-incompatible production checkpoint; starting fresh
+│   checkpoint = "/tmp/jl_AFm7dT/Результаты reference design/restart.h5"
+│   quarantined = "/tmp/jl_AFm7dT/Результаты reference design/restart.incompatible.4.17167411857737.h5"
+│   reason = "restart N_z mismatch: stored=47, expected=48"
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/persistence/production_state.jl:589
+┌ Warning: ignoring metadata-incompatible production checkpoint; starting fresh
+│   checkpoint = "/tmp/jl_AFm7dT/foreign-package.h5"
+│   reason = "unsupported restart package ForeignNEGF (expected QCLNEGF)"
+└ @ QCLNEGFRunner ~/Загрузки/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/persistence/production_state.jl:584
+ArgumentError: node self-check failed: IOError: mktempdir("/tmp/jl_7J00c4/not-a-directory"): not a directory (ENOTDIR)
+ArgumentError: pause has no durable acknowledgement
+ArgumentError: pause acknowledgement belongs to another attempt
+ArgumentError: artifact byte count differs
+Test Summary:                                                                           | Pass  Total      Time
+QCLNEGFRunner                                                                           | 2001   2001  23m32.0s
+  application                                                                           |  766    766  11m30.9s
+    Anderson memory appears only when selected                                          |    3      3      2.5s
+    Application identity: canonical and content-addressed                               |   14     14      7.0s
+    Complete coordinate basis and PzP representation build on the QCL layers            |   10     10     39.7s
+    Canonical file merge order and fail-closed validation                               |   17     17      3.7s
+    Configured production-study orchestration                                           |  154    154   2m27.8s
+    Declarative automatic E1 execution strategy                                         |   54     54     11.9s
+    Diagnostic invocation failure isolation                                             |   22     22     24.0s
+    Effective method catalog provenance                                                 |    9      9     13.8s
+    Every scattering channel is isolated and configured                                 |   17     17      0.9s
+    Managed execution resource authority                                                |   28     28      1.2s
+    Execution envelope rejects malformed grants                                         |   19     19      0.6s
+    Phase width respects the fixed Julia pool                                           |    4      4      0.2s
+    Failed point unwinds descendants and admits the next point                          |   42     42      7.6s
+    Interrupted nested sweep resumes only unfinished points                             |   25     25      8.9s
+    Per-case campaign RAM planning uses effective method overrides                      |    9      9      3.8s
+    Physical diagnostics are configurable without relaxing solver gates                 |   13     13     13.8s
+    Production operating-point retargeting                                              |   76     76   4m17.2s
+    Production sweep records require complete diagnostics                               |    8      8      0.1s
+    Restored stage progress consumes the original budget                                |    3      3      0.1s
+    Strict hierarchical YAML configuration                                              |  194    194     34.3s
+    Explicit repeats retain physical state and separate timing statistics               |   28     28      5.8s
+    Unified configured execution budget                                                 |   17     17      0.4s
+  contracts                                                                             |  367    367   1m48.9s
+    Bounded approximate acceptance and warning provenance                               |   15     15      0.4s
+    Configured production runtime adapter                                               |   88     88     20.0s
+    Draft 2020-12 configuration contract                                                |   60     60      4.2s
+    Fail-closed YAML output contract                                                    |   26     26      0.7s
+    Fresh final acceptance rejects stale history and preserves physical gates           |   24     24     15.7s
+    Finite-window analytic matrix integral has an independent scalar limit              |    2      2      5.3s
+    Narrow noncommuting spectra reject coarse grids and pass true fine tolerances       |   27     27     15.8s
+    Neutral solver events and application progress adapter                              |   19     19      1.6s
+    Both package sources bind runtime identity                                          |    6      6      0.1s
+    Production convergence diagnostics are complete                                     |   22     22      0.3s
+    Quality warnings survive stored-method reports                                      |    3      3      0.3s
+    Scientific plan freeze, shared inclusions and explicit repeats                      |   30     30     16.9s
+    Offline derivative and analytic campaign ledger                                     |    9      9      1.6s
+    Attempt history survives repeated resumes and explicit operator reruns              |   20     20     22.0s
+    Adaptive scientific memory is reserved before raw model allocation                  |    7      7      0.3s
+    Admission failure stops later children before preparation                           |    4      4      1.5s
+    Scientific output has one archive, recovery and telemetry authority                 |    5      5      0.7s
+  infrastructure                                                                        |  537    537   4m27.6s
+    Anderson accepted-boundary restart retains the iteration trajectory                 |   18     18     43.8s
+    Lossless history exceeds old 3896-row quota across outer loops and resume           |    9      9      8.9s
+    Live history index exposes only durable closed segments on elapsed cadence          |    9      9      0.6s
+    Recovery publication verifies, bounds generations and falls back                    |    8      8     11.7s
+    Failed staging retains acknowledged recovery and final remains separate             |    7      7      2.4s
+    An explicit algorithm must not overwrite a different executed contract              |    1      1      0.2s
+    An interrupted publication does not acknowledge or prune the prior checkpoint       |    8      8      3.3s
+    Oversized scalar input is rejected before copying the entire mapping                |    2      2      0.1s
+    Slow or failed telemetry sink cannot block solver event publication                 |    7      7      0.7s
+    Configured cavity, retargeting and restart share one shift contract                 |   40     40     39.8s
+    CSV records preserve multiline scientific provenance                                |   17     17      7.1s
+    Fresh point verifies artifacts before completed status                              |    3      3      0.4s
+    Lifecycle journal and separate timing samples                                       |    8      8      1.2s
+    Canonical machine reporter has no duplicate scientific CSV or quantile cache        |   12     12      0.3s
+    Native physics, immutable commits and explicit scientific capabilities              |   40     40     10.4s
+    Monotonic recovery deadline does not modify scientific acceptance                   |    5      5      0.0s
+    Linux process resource probe                                                        |   23     23      0.7s
+    Native v3 marker precision is mandatory even when unmeasured                        |    6      6      1.3s
+    Native artifact schema fixes media type before dispatch                             |    4      4      0.2s
+    Output artifacts and snapshot cadence                                               |   28     28      5.3s
+    Strict native v4 markers survive analysis, recovery and complete history            |   30     30      5.1s
+    Packed witnesses retain every native bit and reject legacy groups                   |    7      7      1.4s
+    Lossless numeric chunks preserve precision and empty-array compatibility            |    3      3      0.6s
+    Packed UTF-8 metadata uses lossless filtered fixed-width strings                    |    2      2      0.7s
+    Commit declarations bind native schemas and artifact roles                          |    2      2      1.1s
+    A portable second point retains the first final without recalculating it            |    7      7      4.1s
+    Production CSV outputs                                                              |   10     10      0.5s
+    Production estimate obeys an explicit synthetic memory envelope                     |   11     11      0.1s
+    Production files replace an existing destination in one rename                      |    4      4      0.1s
+    Production restart validates metadata and restores state                            |   84     84   1m27.5s
+    Every scalar PSD witness and selected complex blocks survive HDF5                   |   12     12      2.2s
+    Closed history segments consolidate measured witnesses and payloads                 |    4      4      0.6s
+    Final native physics separates local diagnostics from physical certification        |    8      8      2.6s
+    Pressure before a resumed attempt commits keeps verified source identity            |   14     14      4.0s
+    Retention and viewer downsampling preserve durable data                             |   13     13      0.8s
+    Node self-check exercises an analytic kernel and HDF5 without scientific acceptance |    9      9      2.6s
+    SCBA seed, explicit status and HDF5 roundtrip                                       |   34     34      9.1s
+    Pause acknowledgement requires a verified scoped bundle                             |    7      7      2.0s
+    Verified scratch delivery                                                           |    6      6      0.3s
+    YAML repository, provenance, spans, and checkpoint integrity                        |   15     15      1.3s
+  presentation                                                                          |  167    167     15.5s
+    Declarative configured report templates                                             |   20     20      1.6s
+    Failed methods remain visible beside completed methods                              |   10     10      1.0s
+    Hierarchical progress observability                                                 |   48     48      2.1s
+    Machine progress preserves nonfinite diagnostics as text                            |    7      7      0.5s
+    Method-validation report survives isolated phase failures                           |    5      5      1.7s
+    Method-validation template wraps existing expert evidence                           |   12     12      4.9s
+    Nested runtime report is selected and materialized                                  |   10     10      1.5s
+    Stored-method expert comparison                                                     |   55     55      1.5s
+  integration                                                                           |  164    164   5m27.2s
+    Memory admission checks every cgroup ancestor without cache credit                  |    4      4      1.2s
+    Real checkpoint, subsequent SCBA, resource pause, exact restart, next checkpoint    |   10     10     19.3s
+    Reused serialization slabs preserve ragged multidimensional values                  |    3      3      4.6s
+    Explicit module ownership and independent numerical implementations                 |   13     13      0.0s
+    Exact Anderson and bounded method diagnostics profiles                              |   50     50      0.3s
+    Fixed production work preserves finite full states without acceptance               |   51     51     10.2s
+    Producer clocks and immutable worker phase budget                                   |   15     15      0.8s
+    Portable resume keeps a completed first point and the original second-point budget  |   15     15   1m33.4s
+    Frozen-plan CLI in an isolated process                                              |    3      3   3m16.7s

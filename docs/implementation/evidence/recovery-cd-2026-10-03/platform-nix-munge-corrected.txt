@@ -1,0 +1,1 @@
+{"checked":[{"daemon":"munged.service","role":"controller"},{"daemon":"munged.service","role":"worker"},{"daemon":"munged.service","role":"submit"}]}

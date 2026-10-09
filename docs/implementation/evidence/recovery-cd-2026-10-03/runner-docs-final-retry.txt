@@ -1,0 +1,17 @@
+WARNING: Imported binding StyledStrings.@styled_str was undeclared at import time during import to Markdown.
+WARNING: Imported binding StyledStrings.styled was undeclared at import time during import to Markdown.
+[ Info: SetupBuildDirectory: setting up build directory.
+[ Info: Doctest: running doctests.
+[ Info: ExpandTemplates: expanding markdown templates.
+[ Info: CrossReferences: building cross-references.
+[ Info: CheckDocument: running document checks.
+[ Info: Populate: populating indices.
+[ Info: RenderDocument: rendering document.
+[ Info: HTMLWriter: rendering HTML pages.
+┌ Warning: Generated HTML over size_threshold_warn limit: api/public.md
+│     Generated file size: 117.51 (KiB)
+│     size_threshold_warn: 100.0 (KiB)
+│     size_threshold:      200.0 (KiB)
+│     HTML file:           api/public.html
+└ @ Documenter.HTMLWriter ~/.julia/packages/Documenter/AXNMp/src/html/HTMLWriter.jl:2003
+[ Info: Automatic `version="0.2.0"` for inventory from ../Project.toml
