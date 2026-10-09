@@ -66,10 +66,31 @@ jobs:
           name: application-release
           path: ${{ runner.temp }}/qcl-release
       - name: Deliver and verify the complete selected active pool
+        shell: bash
         run: |
-          test -n "$QCL_DEPLOY_TARGET"
-          ssh -o BatchMode=yes "$QCL_DEPLOY_TARGET" \
-            'sudo -n qcl-negf-release deliver --manifest /dev/stdin --pool /var/lib/qcl-negf/runtime/active-pool.json' \
+          set -euo pipefail
+          export LC_ALL=C
+          if [[ -z "${QCL_DEPLOY_TARGET:-}" || -z "${QCL_DEPLOY_ENROLLMENT_PATH:-}" ]]; then
+            printf '%s\n' 'Delivery requires explicit target and enrollment path configuration.' >&2
+            exit 1
+          fi
+          if [[ ! "$QCL_DEPLOY_TARGET" =~ ^([a-z_][a-z0-9_-]*@)?[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]; then
+            printf '%s\n' 'Delivery target configuration is invalid.' >&2
+            exit 1
+          fi
+          if [[ ! "$QCL_DEPLOY_ENROLLMENT_PATH" =~ ^(/[A-Za-z0-9_.-]+)+$ ]]; then
+            printf '%s\n' 'Delivery enrollment path configuration is invalid.' >&2
+            exit 1
+          fi
+          case "$QCL_DEPLOY_ENROLLMENT_PATH" in
+            */./*|*/../*|*/.|*/..)
+              printf '%s\n' 'Delivery enrollment path configuration is invalid.' >&2
+              exit 1
+              ;;
+          esac
+          remote_command="sudo -n qcl-negf-release deliver --manifest /dev/stdin --pool /var/lib/qcl-negf/runtime/active-pool.json --enrollment '$QCL_DEPLOY_ENROLLMENT_PATH'"
+          ssh -o BatchMode=yes "$QCL_DEPLOY_TARGET" "$remote_command" \
             < "$RUNNER_TEMP/qcl-release/application-release.json"
         env:
           QCL_DEPLOY_TARGET: ${{ vars.QCL_DEPLOY_TARGET }}
+          QCL_DEPLOY_ENROLLMENT_PATH: ${{ vars.QCL_DEPLOY_ENROLLMENT_PATH }}
