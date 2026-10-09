@@ -1,0 +1,9 @@
+Command: python3 -m unittest discover -s tests -p test_application_release.py
+Limits: 1 CPU affinity, RLIMIT_AS=2147483648, timeout=60s
+........................................
+----------------------------------------------------------------------
+Ran 40 tests in 0.079s
+
+OK
+
+Exit code: 0

@@ -1,0 +1,259 @@
+Command: python3 -m unittest discover -s tests -p test_application_release.py
+Limits: 1 CPU affinity, RLIMIT_AS=2147483648, timeout=60s
+...FFFF..............FFFFFFFF..............FFFFFF......
+======================================================================
+FAIL: test_check_rejects_missing_or_wrong_solver_profile_before_health (test_application_release.ApplicationReleaseTests.test_check_rejects_missing_or_wrong_solver_profile_before_health) (role='worker', target=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 550, in test_check_rejects_missing_or_wrong_solver_profile_before_health
+    with self.assertRaisesRegex(ValueError, "solver profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_check_rejects_missing_or_wrong_solver_profile_before_health (test_application_release.ApplicationReleaseTests.test_check_rejects_missing_or_wrong_solver_profile_before_health) (role='worker', target='/nix/store/other')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 550, in test_check_rejects_missing_or_wrong_solver_profile_before_health
+    with self.assertRaisesRegex(ValueError, "solver profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_check_rejects_missing_or_wrong_solver_profile_before_health (test_application_release.ApplicationReleaseTests.test_check_rejects_missing_or_wrong_solver_profile_before_health) (role='controller', target=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 550, in test_check_rejects_missing_or_wrong_solver_profile_before_health
+    with self.assertRaisesRegex(ValueError, "solver profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_check_rejects_missing_or_wrong_solver_profile_before_health (test_application_release.ApplicationReleaseTests.test_check_rejects_missing_or_wrong_solver_profile_before_health) (role='controller', target='/nix/store/other')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 550, in test_check_rejects_missing_or_wrong_solver_profile_before_health
+    with self.assertRaisesRegex(ValueError, "solver profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='worker', damaged='profile', target=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 531, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual([call for call in commands.calls if call[0] == "nix-env"],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [["nix-env", "--profile", str(root / damaged), "--set", selected]])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [['ni[78 chars]ion'], ['nix-env', '--profile', '/tmp/tmp2zomc[46 chars]er']] != [['ni[78 chars]ion']]
+
+First list contains 1 additional elements.
+First extra element 1:
+['nix-env', '--profile', '/tmp/tmp2zomcvq6/profile-solver', '--set', '/nix/store/solver']
+
+  [['nix-env',
+    '--profile',
+    '/tmp/tmp2zomcvq6/profile',
+    '--set',
+-   '/nix/store/application'],
+?                            ^
+
++   '/nix/store/application']]
+?                            ^
+
+-  ['nix-env',
+-   '--profile',
+-   '/tmp/tmp2zomcvq6/profile-solver',
+-   '--set',
+-   '/nix/store/solver']]
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='worker', damaged='profile', target='/nix/store/other')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 531, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual([call for call in commands.calls if call[0] == "nix-env"],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [["nix-env", "--profile", str(root / damaged), "--set", selected]])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [['ni[78 chars]ion'], ['nix-env', '--profile', '/tmp/tmpus6u0[46 chars]er']] != [['ni[78 chars]ion']]
+
+First list contains 1 additional elements.
+First extra element 1:
+['nix-env', '--profile', '/tmp/tmpus6u01gw/profile-solver', '--set', '/nix/store/solver']
+
+  [['nix-env',
+    '--profile',
+    '/tmp/tmpus6u01gw/profile',
+    '--set',
+-   '/nix/store/application'],
+?                            ^
+
++   '/nix/store/application']]
+?                            ^
+
+-  ['nix-env',
+-   '--profile',
+-   '/tmp/tmpus6u01gw/profile-solver',
+-   '--set',
+-   '/nix/store/solver']]
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='worker', damaged='profile-solver', target=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 530, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual((root / damaged).resolve(), Path(selected))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: PosixPath('/tmp/tmp9cqn23j0/profile-solver') != PosixPath('/nix/store/solver')
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='worker', damaged='profile-solver', target='/nix/store/other')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 530, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual((root / damaged).resolve(), Path(selected))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: PosixPath('/nix/store/other') != PosixPath('/nix/store/solver')
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='controller', damaged='profile', target=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 531, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual([call for call in commands.calls if call[0] == "nix-env"],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [["nix-env", "--profile", str(root / damaged), "--set", selected]])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [['ni[78 chars]ion'], ['nix-env', '--profile', '/tmp/tmpaatx5[46 chars]er']] != [['ni[78 chars]ion']]
+
+First list contains 1 additional elements.
+First extra element 1:
+['nix-env', '--profile', '/tmp/tmpaatx5irt/profile-solver', '--set', '/nix/store/solver']
+
+  [['nix-env',
+    '--profile',
+    '/tmp/tmpaatx5irt/profile',
+    '--set',
+-   '/nix/store/application'],
+?                            ^
+
++   '/nix/store/application']]
+?                            ^
+
+-  ['nix-env',
+-   '--profile',
+-   '/tmp/tmpaatx5irt/profile-solver',
+-   '--set',
+-   '/nix/store/solver']]
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='controller', damaged='profile', target='/nix/store/other')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 531, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual([call for call in commands.calls if call[0] == "nix-env"],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [["nix-env", "--profile", str(root / damaged), "--set", selected]])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [['ni[78 chars]ion'], ['nix-env', '--profile', '/tmp/tmph_24m[46 chars]er']] != [['ni[78 chars]ion']]
+
+First list contains 1 additional elements.
+First extra element 1:
+['nix-env', '--profile', '/tmp/tmph_24mipk/profile-solver', '--set', '/nix/store/solver']
+
+  [['nix-env',
+    '--profile',
+    '/tmp/tmph_24mipk/profile',
+    '--set',
+-   '/nix/store/application'],
+?                            ^
+
++   '/nix/store/application']]
+?                            ^
+
+-  ['nix-env',
+-   '--profile',
+-   '/tmp/tmph_24mipk/profile-solver',
+-   '--set',
+-   '/nix/store/solver']]
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='controller', damaged='profile-solver', target=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 530, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual((root / damaged).resolve(), Path(selected))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: PosixPath('/tmp/tmpb0b702kq/profile-solver') != PosixPath('/nix/store/solver')
+
+======================================================================
+FAIL: test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity (test_application_release.ApplicationReleaseTests.test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity) (role='controller', damaged='profile-solver', target='/nix/store/other')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 530, in test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+    self.assertEqual((root / damaged).resolve(), Path(selected))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: PosixPath('/nix/store/other') != PosixPath('/nix/store/solver')
+
+======================================================================
+FAIL: test_profile_setter_failure_or_wrong_result_cannot_publish_ready (test_application_release.ApplicationReleaseTests.test_profile_setter_failure_or_wrong_result_cannot_publish_ready) (role='worker', damaged='profile', mode='wrong-result')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 580, in test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+    with self.assertRaisesRegex(error, "profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_profile_setter_failure_or_wrong_result_cannot_publish_ready (test_application_release.ApplicationReleaseTests.test_profile_setter_failure_or_wrong_result_cannot_publish_ready) (role='worker', damaged='profile-solver', mode='failure')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 580, in test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+    with self.assertRaisesRegex(error, "profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_profile_setter_failure_or_wrong_result_cannot_publish_ready (test_application_release.ApplicationReleaseTests.test_profile_setter_failure_or_wrong_result_cannot_publish_ready) (role='worker', damaged='profile-solver', mode='wrong-result')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 580, in test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+    with self.assertRaisesRegex(error, "profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_profile_setter_failure_or_wrong_result_cannot_publish_ready (test_application_release.ApplicationReleaseTests.test_profile_setter_failure_or_wrong_result_cannot_publish_ready) (role='controller', damaged='profile', mode='wrong-result')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 580, in test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+    with self.assertRaisesRegex(error, "profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_profile_setter_failure_or_wrong_result_cannot_publish_ready (test_application_release.ApplicationReleaseTests.test_profile_setter_failure_or_wrong_result_cannot_publish_ready) (role='controller', damaged='profile-solver', mode='failure')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 580, in test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+    with self.assertRaisesRegex(error, "profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_profile_setter_failure_or_wrong_result_cannot_publish_ready (test_application_release.ApplicationReleaseTests.test_profile_setter_failure_or_wrong_result_cannot_publish_ready) (role='controller', damaged='profile-solver', mode='wrong-result')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/tolya/Загрузки/qcl-negf/components/qcl-negf-platform/tests/test_application_release.py", line 580, in test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+    with self.assertRaisesRegex(error, "profile"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 40 tests in 0.107s
+
+FAILED (failures=18)
+
+Exit code: 1
