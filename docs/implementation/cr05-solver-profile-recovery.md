@@ -77,10 +77,43 @@ RED отказы: solver guard — 4; независимый repair — 8; sette
 
 Тесты вызывают реальный Python activation/check и пишут реальные временные
 symlinks/runtime records; внешние Nix/systemd/registration/self-check команды
-заменены stdlib `Commands`. Полный suite, Nix builds/GC, services, SSH, CI,
-solver и численные scientific checks не выполнялись. Инфраструктурные credentials
-не читались и сервер не менялся. Draft PR publication не запускает root CI:
+заменены stdlib `Commands`. В первоначальном targeted бюджете полный suite,
+Nix builds/GC, services, SSH, CI, solver и численные scientific checks
+не выполнялись. Инфраструктурные credentials при реализации не читались;
+сервер не менялся. Draft PR publication не запускает root CI:
 workflow имеет только push на `main` и ручной dispatch.
+
+### Расширенные локальные проверки перед публикацией
+
+Пользователь затем явно разрешил GitHub publication при отсутствии секретов
+и поручил проводить максимально доступные локальные проверки перед final CI.
+Production/bootstrap/solver scope этим не расширен. Выполнен один
+`deno task check` без `nix develop`, установки окружения и builds: одна CPU
+affinity, 2 GiB sampled aggregate RSS, 120 s wall, 2 MiB вывода. Опциональный
+`QCL_TEST_NIXPKGS` удалён из test environment для исключения native Nix eval;
+отключён auto-load сторонних pytest plugins.
+
+Формат, lint и typecheck прошли; Deno: **22 passed**. Python:
+**248 passed, 5 skipped, 166 subtests passed, 1 failed**. Итого command exit 1,
+19.209 s wall, sampled peak RSS 341778432 bytes; лимиты не достигнуты.
+Отказ: `tests/ops/test_nix_trust.py::test_public_trust_block_is_idempotent_and_preserves_existing_config`,
+Ansible `Local RPC server did not start`. Это не замаскировано как green.
+[Полный вывод](evidence/cr05-2026-10-09/local-check.log).
+Raw pytest log сохранён byte-for-byte, включая trailing spaces в traceback.
+Для нового root evidence `diff --check` применяется к prose/code, исключая
+raw `.log`; original failed receipt не нормализуется ради форматирования.
+
+Отдельная дешёвая средовая проба установила: AF_UNIX socket creation разрешён,
+bind/listen внутри sandbox даёт `PermissionError`, errno 1. Исходник установленного
+Ansible `_internal/_rpc_host.py:LocalManager` использует local RPC listener.
+Проверены side effects fixtures: только временные файлы, public dummy key,
+local connection, без root/VM configuration. Поэтому выполнен **один**
+изолированный запуск `python3 -m pytest -q tests/ops/test_nix_trust.py`
+вне sandbox: 1 CPU, 2 GiB sampled RSS, 60 s, 2 MiB вывода. **3 passed**, exit 0,
+4.890 s wall, sampled peak RSS 105250816 bytes. Это различающее свидетельство
+средового ограничения первоначального отказа, а не повтор полного suite.
+[Полный вывод](evidence/cr05-2026-10-09/nix-trust.log).
+Пропуски Nix/AiiDA-dependent fixtures не заполнены установкой окружения.
 
 ## Независимая проверка и решение
 
@@ -91,11 +124,21 @@ Component change зафиксирован в `7eaa515fcf4ad1146d7767b350286814e7
 ветка `codex/cr05-solver-profile-recovery`; local root integration candidate
 подготовлен в `codex/cr05-platform-integration`.
 
-Публикация не выполнена: automatic approval review отклонил component `git push`,
-указав отсутствие явного поручения публикации во внешний GitHub repository
-и подтверждения trusted destination. Обход или повтор push не выполнялись.
-Для двух draft PR требуется подтверждение пользователя. Порядок после
-подтверждения: опубликовать component/owning PR, затем root gitlink candidate.
+Первый component push был отклонён automatic approval review: отсутствовало
+явное поручение publication во внешний GitHub repository и подтверждение
+trusted destination. До явного разрешения пользователя обход/повтор не выполнялся.
+После разрешения полный независимый аудит двух commit ranges не обнаружил
+секретов и закрытых инфраструктурных адресов.
+[Publication audit](evidence/cr05-2026-10-09/publication-audit.md).
+Дополнительно pattern scan и сравнение с четырьмя literal sensitive values из
+порученного `environment.fish` не нашли совпадений; файл не исполнялся,
+значения не выводились и не сохранялись в evidence. Публикуются публичные
+GitHub URLs, synthetic example.invalid emails, Nix fixtures и локаторы тестов.
+Проверка ограничена новым diff и не даёт абсолютной гарантии для неизвестных
+форматов секретов или всей pre-existing Git history.
+Owning component опубликован первым:
+[Platform draft PR #5](https://github.com/Afonenko-QCL-NEGF/qcl-negf-platform/pull/5).
+Следующий publication step — root gitlink draft PR с этим report/evidence.
 Root HEAD этого кандидата выбирает component через Git tree; полный релиз
 и production runtime не наследуют приёмку исходного root.
 
