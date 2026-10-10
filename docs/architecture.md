@@ -1,5 +1,9 @@
 # Architecture and repository boundaries
 
+This document describes the implemented baseline. The proposed next-release architecture and
+normative requirements are in the [current system corpus](system/README.md). Keep implementation
+facts here separate from target decisions there; historical session reports do not override either.
+
 ## Source composition
 
 The superproject contains eight direct submodules. Git gitlinks are the source authority: they
