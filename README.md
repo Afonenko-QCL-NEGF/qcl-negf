@@ -4,6 +4,26 @@ An integrated, reproducible workspace for quantum-cascade transport research.
 Julia computes the numerical model, AiiDA records scientific workflows, Slurm allocates resources,
 and NixOS defines the machines. GitHub hosts source and workflow state; CI runs on your own runner.
 
+## Спецификация следующего релиза
+
+[Единый корпус требований и проект системы](docs/system/README.md) содержит новую
+архитектуру, сравнение с актуальными PR-исходниками, code review и порядок рефакторинга.
+Он отделяет согласованные требования от предлагаемых решений и реализованных возможностей.
+[Точка входа в реализацию для новой сессии CODEX](docs/system/implementation-entrypoint.md)
+задаёт первый адресный ticket этапа 1 и сохраняет минимальный путь к S01;
+policy ролей находится в roadmap. Корпус включён в эту версию исходников;
+для свежего clone выбирайте опубликованный docs ref, содержащий эти файлы.
+Первый научный рубеж — одна обоснованная стационарная точка опубликованной
+GaAs/AlGaAs-структуры при 0 mV/period и 70 K. Чистая пересборка QCL VM и изменения дисков сейчас описаны только в плане.
+
+Ниже описан workspace и его инструменты. Расхождение доставки через GitHub workflow
+относится к историческому аудиту `bce0aee` и source `13d4560`
+([границы аудита](docs/system/README.md#состав-аудита)).
+В текущих исходниках release workflow содержит только assemble;
+локальная доставка I14 и её native gates описаны в
+[отчёте I14](docs/implementation/i14-local-update-ci-boundary.md).
+Публикация source не подтверждает native delivery/bootstrap или научную приёмку.
+
 ## Components
 
 Each directory below is an independent Git submodule. The superproject commit identifies the

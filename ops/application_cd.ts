@@ -57,8 +57,9 @@ export async function deploymentManifest(
   };
 }
 
-// Builds already pinned source inputs. Deployment is the platform adapter's
-// separate command and runs under its dedicated maintenance credentials.
+// Builds pinned source inputs and retains the immutable release manifest.
+// Local publication and whole-cluster delivery belong to the platform controller
+// under local operator authority.
 if (import.meta.main) {
   await main(async () => {
     const [depotFile, output, cache] = Deno.args;
