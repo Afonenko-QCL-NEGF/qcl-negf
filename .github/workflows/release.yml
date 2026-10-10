@@ -1,11 +1,6 @@
 name: Application release
 on:
   workflow_dispatch:
-    inputs:
-      deliver:
-        description: Deliver in the selected maintenance window after prior research has stopped
-        type: boolean
-        default: false
 permissions:
   contents: read
 concurrency:
@@ -40,57 +35,14 @@ jobs:
           deno task solver:depot "$RUNNER_TEMP/depot-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
         env:
           JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
-      - name: Build and publish immutable application and solver closures
+      - name: Build immutable application and solver closures
         run: |
-          test -n "$QCL_NIX_CACHE_URI"
           deno run --allow-read --allow-write --allow-env --allow-run ops/application_cd.ts \
             "$RUNNER_TEMP/depot-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}/solver-depot.json" \
-            "$RUNNER_TEMP/application-release.json" "$QCL_NIX_CACHE_URI"
-        env:
-          QCL_NIX_CACHE_URI: ${{ vars.QCL_NIX_CACHE_URI }}
+            "$RUNNER_TEMP/application-release.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: application-release
           path: ${{ runner.temp }}/application-release.json
           if-no-files-found: error
           retention-days: 30
-  deliver:
-    needs: assemble
-    if: github.event.inputs.deliver == 'true'
-    environment: qcl-negf-delivery
-    runs-on: [self-hosted, linux, x64, qcl-negf-delivery]
-    timeout-minutes: 60
-    steps:
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          name: application-release
-          path: ${{ runner.temp }}/qcl-release
-      - name: Deliver and verify the complete selected active pool
-        shell: bash
-        run: |
-          set -euo pipefail
-          export LC_ALL=C
-          if [[ -z "${QCL_DEPLOY_TARGET:-}" || -z "${QCL_DEPLOY_ENROLLMENT_PATH:-}" ]]; then
-            printf '%s\n' 'Delivery requires explicit target and enrollment path configuration.' >&2
-            exit 1
-          fi
-          if [[ ! "$QCL_DEPLOY_TARGET" =~ ^([a-z_][a-z0-9_-]*@)?[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]; then
-            printf '%s\n' 'Delivery target configuration is invalid.' >&2
-            exit 1
-          fi
-          if [[ ! "$QCL_DEPLOY_ENROLLMENT_PATH" =~ ^(/[A-Za-z0-9_.-]+)+$ ]]; then
-            printf '%s\n' 'Delivery enrollment path configuration is invalid.' >&2
-            exit 1
-          fi
-          case "$QCL_DEPLOY_ENROLLMENT_PATH" in
-            */./*|*/../*|*/.|*/..)
-              printf '%s\n' 'Delivery enrollment path configuration is invalid.' >&2
-              exit 1
-              ;;
-          esac
-          remote_command="sudo -n qcl-negf-release deliver --manifest /dev/stdin --pool /var/lib/qcl-negf/runtime/active-pool.json --enrollment '$QCL_DEPLOY_ENROLLMENT_PATH'"
-          ssh -o BatchMode=yes "$QCL_DEPLOY_TARGET" "$remote_command" \
-            < "$RUNNER_TEMP/qcl-release/application-release.json"
-        env:
-          QCL_DEPLOY_TARGET: ${{ vars.QCL_DEPLOY_TARGET }}
-          QCL_DEPLOY_ENROLLMENT_PATH: ${{ vars.QCL_DEPLOY_ENROLLMENT_PATH }}

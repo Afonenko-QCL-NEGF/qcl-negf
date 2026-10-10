@@ -1,5 +1,11 @@
 # CR03: root delivery caller
 
+> Historical notice: этот report описывает прежний GitHub delivery caller. По I02/GAP04 caller
+> retired в подготовленном текущем source candidate: SSH job/environment/vars удалены из selected
+> workflow. CR03 Platform enrollment/identity guards сохраняются локально. Старые 34 synthetic cases
+> не подтверждают новую whole I14 operation; actual credential revocation не измерена. См.
+> [новую implementation note](i14-local-update-ci-boundary.md).
+
 Existing release workflow передаёт обязательный `--enrollment` опубликованному Platform API.
 Controller-side path задаётся только protected configuration `vars.QCL_DEPLOY_ENROLLMENT_PATH`, без
 default, inventory или site value в Git. Target/path проходят bounded ASCII syntax checks до SSH;
