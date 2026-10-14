@@ -33,6 +33,10 @@
 
 ## Текущая программа и рабочий цикл
 
+[План автономного выполнения Codex](autonomous-review-plan.md) раскрывает все
+RV00–RV19 и SI01–SI07 в подробных карточках: входы, шаги, outputs, зависимости,
+проверки, конечные бюджеты и продолжение по checkpoint. Это точка входа исполнителя.
+
 [Программа комплексного ревью](comprehensive-review.md) задаёт четыре
 параллельные линии и переход к owning refactor tickets.
 [Рабочий цикл агента](agent-review-workflow.md) описывает готовое ограниченное
@@ -46,8 +50,9 @@
 
 ## Порядок чтения
 
-Сначала прочитать текущий контекст выше, [программу](comprehensive-review.md)
-и [рабочий цикл](agent-review-workflow.md). Затем выбрать линию и owning sources:
+Сначала прочитать текущий контекст выше и [автономный план](autonomous-review-plan.md).
+Основания задания находятся в [программе](comprehensive-review.md)
+и [рабочем цикле](agent-review-workflow.md). Затем выбрать линию и owning sources:
 [baseline по коду](../architecture.md), применимые API/schema/runbooks,
 [методику документации](documentation-methodology.md) либо
 [проверку инструкций](skills-and-instructions-review.md).
