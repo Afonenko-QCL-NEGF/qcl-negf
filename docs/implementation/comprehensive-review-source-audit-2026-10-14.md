@@ -30,8 +30,12 @@ README, TODO, architecture и deployment runbook; docs/system находится
 уже опубликованы byte-for-byte. Три local версии — root README,
 docs/system/README и implementation-entrypoint — содержат отличающиеся
 устаревшие uncommitted declarations. Их нельзя перепубликовать как есть.
-Текущая правка system README добавляет ссылки на новые материалы, не выполняя
-полную reconciliation прежнего текста.
+Первая публикация system README добавляла ссылки на новые материалы.
+Текущая корректировка также обозначает повторную проверку применимости старого
+корпуса и новый маршрут к программе, agent workflow и аудиту skills. Она
+собирается поверх опубликованного индекса, чтобы не перенести устаревшие local
+declarations. Полная reconciliation прежних требований и архитектуры остаётся
+адресной задачей RV00; старый статус решения не принимается за текущий автоматически.
 
 Полезные local worktree materials сохранены. У двух Platform test drafts
 итоговые assertions уже опубликованы в ae6a6ca85b8094378eb9dc99a04b3b25fb575a6f;

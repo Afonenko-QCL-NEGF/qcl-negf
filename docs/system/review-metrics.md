@@ -7,16 +7,35 @@
 объяснить, какое свойство проверено, каким свидетельством и в каких пределах.
 Их применение к полному review описывается в
 [программе review](comprehensive-review.md), документации — в
-[методологии](documentation-methodology.md).
+[методологии](documentation-methodology.md). Формализация, документация,
+ревью кода и научная приёмка имеют равный приоритет. Метрики помогают
+декомпозировать каждое направление до проверяемых задач; ни одна группа не
+задаёт общую очередь для остальных.
 
 Срез исходников: root `e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1` и восемь
 его gitlinks. На 2026-10-14 root содержит уже существовавшие изменения
 `AGENTS.md`, `README.md`, `TODO.md`, `docs/architecture.md`,
 `docs/single-server-deployment.md` и локальный `docs/system/`; они сохранены.
-Описание target использует этот локальный корпус; факты о компонентах —
-выбранный исходный состав. Bootstrap и более новые PR имеют собственные
+Прежние документы этого корпуса — источники утверждений для перепроверки,
+а не автоматически актуальное ТЗ. Каталог требований и target необходимо
+актуализировать по RV00; факты о компонентах относятся к выбранному исходному
+составу. Bootstrap и более новые PR имеют собственные
 source/runtime identities и не наследуют приёмку этого среза. Gitlinks остаются
 источником ревизий; таблица ниже не является вторым lock-файлом.
+
+| Равноприоритетное направление | Что раскрывают существующие метрики | Что проверяется отдельным review |
+| --- | --- | --- |
+| Формализация | M01 — проверяемые требования; M06/M12 — состав и границы; M15 — ограничения конфигурации | Актуальность цели, альтернатив, оснований и статусов решений по RV00/RV03; число документов не мера полноты требований |
+| Документация | M14–M17 — смысл API/config, drift, примеры и три человеческих сценария | Связное объяснение и применимость методики; generated reference не заменяет учебный текст |
+| Код и инфраструктура | M02/M04–M13 — исполнение, отрицательные случаи, воспроизводимость, восстановление, связность и сложность | Адресные дефекты и refactoring tickets с owner; агрегированный балл качества не вводится |
+| Научная приёмка | M03/M18–M20 — независимость oracle, полнота данных, критерии и стоимость свидетельства | Физическая применимость и сопоставимость с литературой; зелёный CI не является научным результатом |
+
+Готовность agent ticket определяется [контрактом задачи](agent-review-workflow.md),
+а применимость skills — [их отдельным аудитом](skills-and-instructions-review.md).
+Отсутствие входа, oracle или конечного бюджета отмечается в конкретной карточке.
+Закрытие карточки означает достижение её объявленного результата, а не общий
+`pass` проекта. Один ticket выбирает нужные M-ID; все двадцать одновременно
+не требуются.
 
 ## Репозитории, языки и область измерения
 
@@ -54,7 +73,8 @@ M01, M06 и M12 применимы ко всем репозиториям; ос�
 
 ## Реестр предлагаемых метрик
 
-Каждое множество в denominator фиксируется **до проверки**: версия каталога,
+Каждое множество в denominator фиксируется **до проверки** после актуализации
+его требований: версия каталога,
 owner, source, applicability, exclusions с причиной. Запись свидетельства
 содержит source ref, report hash, query/selection, tool/version и runtime hash;
 неизмеренные поля имеют статус `not_measured`, не нулевые значения. Показывать
@@ -73,7 +93,7 @@ production backend; **3** — solver, numerical experiment или профили
 
 | ID / назначение | Определение, scope и denominator | Источник / требуемое свидетельство; стоимость | Смысл и ограничение |
 | --- | --- | --- | --- |
-| **M01 Property coverage** | `n/N`: принятые проверяемые properties с воспроизводимым evidence / все применимые properties выбранного ticket/release. Отдельно наличие проверки и её результат | Requirements/owner contract → test/scenario → report на exact source; 0/1–3 | Не процент строк; mock, production и scientific claims раздельны |
+| **M01 Property coverage** | `n/N`: актуальные принятые проверяемые properties с воспроизводимым evidence / все применимые properties выбранного ticket/release. Отдельно наличие проверки и её результат | Перепроверенные requirements/owner contract → test/scenario → report на exact source; статус и основание решения; 0/1–3 | Не процент строк; старый docs-каталог не автоматически denominator. Mock, production и scientific claims раздельны |
 | **M02 Исполнение кода** | Для каждой пары repo×язык: executed/instrumentable lines; taken/declared branch outcomes. Scope production source, exclusions/generated/vendor/tests перечислены | Instrumentation report, tool/version, suite/environment, skipped paths; 1–3 | Не усреднять языки или line/branch. Julia line report не подменяет branch report |
 | **M03 Независимые oracles** | `n/N`: numerical properties, имеющие проверенный независимый oracle / каталог требующих oracle properties; аналитика, manufactured solution, внешний high-precision путь отдельно | Core `test/physics`, `test/numerics`, Results analytic fixtures; derivation и зависимостный graph oracle; 0/1/3 | Общий helper/reference допускает общую ошибку; oracle применим лишь к объявленной области |
 | **M04 Fault-case coverage** | `n/N`: проверенные пары property×failure case / согласованный risk catalogue: wrong attempt/hash, truncation, duplicate, zero/NaN, restart/cancel/resource denial | Contracts/Runner/Results/AiiDA/Portal/Platform fixtures и observed outcome; 0/1/2 | Количество tests не denominator. Synthetic solver подтверждает orchestration, не SCBA |
@@ -107,15 +127,19 @@ source mapping к TS. Они не установлены и не запуска�
 
 ## Как вводить без превращения метрик в самоцель
 
-Первая волна для обсуждения: **M01, M03, M04, M06, M12, M14, M18, M19**.
-Сначала на уровне 0 сформировать небольшие каталоги критических properties,
-oracles, failures, публичных API и closure выбранных artifacts. Например,
+Первая волна — по одному ограниченному срезу каждого направления, параллельно
+на уровне 0: актуализировать requirements/owner properties (M01/M12),
+сопоставить один API и его объяснение (M14/M16), разобрать один риск границы
+компонентов и уже сохранённые tests (M04/M06), проверить определения одного
+научного критерия и полноту доступного evidence (M03/M18/M19).
+Полученные каталоги и gaps обсуждаются до назначения численных targets.
+Например,
 property «export выбирает один exact attempt вместе с plan и raw bytes»
 проверяется интеграционной synthetic fixture нескольких attempts; line coverage
 каждой функции по отдельности не подтверждает согласованность границы.
 Будущий запуск этой fixture требует своего bounded ticket.
 
-Затем добавить M02/M15–M17 к owning changes и документации; M05 — только
+При owning changes выбирать M02/M15–M17 для кода и документации; M05 — только
 с настоящей историей повторений; M07–M11/M20 — к порученному build/operator/
 scientific этапу; M13 — к конкретному hotspot. Все двадцать метрик не становятся
 обязательными gates каждого PR. Target обсуждать по baseline, цене ошибки,
