@@ -41,8 +41,8 @@ master владеет progress. Перед чтением зафиксирова
 Наблюдения архивного audit о Portal `36837e98…` и AiiDA `53e2a205…` относятся
 к отдельным refs; текущие gitlinks — Portal `10b6c871…`, AiiDA `69aa1309…`.
 
-Предлагаемый envelope будущего статического аудита: общий предел master
-6 часов, включая всех агентов и независимое review; до трёх работников,
+Envelope будущего статического аудита: общий предел master
+14 часов, включая всех агентов и независимое review; до трёх работников,
 если доступны. Atomic source-bound packet ≤20 минут, включая review;
 максимум две коррекции готового отчёта после review. Resource/output caps
 назначает [master](autonomous-review-plan.md): 96 KiB показанных extracts и
