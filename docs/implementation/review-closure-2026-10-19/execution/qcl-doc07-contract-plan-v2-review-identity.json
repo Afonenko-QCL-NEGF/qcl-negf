@@ -1,0 +1,32 @@
+{
+  "schema": "qcl-doc07-D2-narrow-high-review-v1",
+  "date": "2026-10-20",
+  "verdict": "PASS_CP_DESIGN",
+  "scope": "narrow D1 review closure; ready C1 medium design basis only; STOP",
+  "plan_sha256": "20e712a051b3ba9e326bf4dccc3598513b43beefbcab0862d57e287d676dcb8b",
+  "author_identity_sha256": "528ecfc40d1c1453321b768553387bd5d31672e42c571a62cd52bec71e427eb2",
+  "canonical_patch_sha256": "fc9cf40c2a19c7d98369dca72af0922f37906635f0003cb14a57525cc2bee2f5",
+  "canonical_original_sha256": "4b046312d0c1f04566c3a80ca6fb8a441ca7b025003c3c3b1c4c2bab2242f6cb",
+  "canonical_candidate_sha256": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+  "canonical_added_text_sha256": "491c0894ef50774d4d88aec8bf762243a11b567fe2b7dad86f1061d7346d68de",
+  "preservation": {"original_bytes": 88916, "candidate_bytes": 97722, "full_prefix_cmp_exit": 0, "suffix_equals_added_text_cmp_exit": 0, "regenerated_diff_matches_patch_sha": true, "root_primary_unchanged": true, "patch_applied": false, "new_anchor": "model-help-doc07-v1-clarifications"},
+  "contracts_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "contracts_clean": true,
+  "closure": {
+    "R1": "all ten facts coverage, duplicates for authored contexts, no exact-ten restriction",
+    "R2": "closed Origin/Atom/ValueOriginView matrices and finite/missing/corrupt proof separation",
+    "R3": "closed documentation/input reason/null matrices; known retained scalar identities preserved; independent availability axes",
+    "R4": "exact checked retained selected Bundle+Fragment bytes/digests/descriptor/receipt context; absent mapping inputs=[]; declared and used independent; no current/historical fallback",
+    "R5": "query-free pilot emission, nonstripping/nonfetching; existing reviewed-source recipe evidence required; no new trust registry/secret heuristics",
+    "R6": "private pure helper boundary, no new serialization/capture/API/re-export; schema-only validity never proof"
+  },
+  "blocking_findings": [],
+  "minor_interpretation": "D2 wording URL remains null means fragment=null per explicit closed matrix/canonical text; no nullable descriptor URL or new View field",
+  "C1_design_ready": true,
+  "runtime_or_publication_grant_created": false,
+  "scientific_acceptance": false,
+  "budget": {"wall_minutes_max": 15, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 2097152, "output_bytes_max": 65536, "logical_text_conservative_upper_bytes": 1572864, "physical_io_telemetry": "not instrumented", "execution_tree_search": false},
+  "execution": {"patch_apply": 0, "product_edits": 0, "imports": 0, "parsers": 0, "validators": 0, "tests": 0, "network": 0, "children": 0, "Nix": 0, "Julia": 0, "build": 0, "solver": 0, "server": 0, "git_mutations": 0, "checkpoint_writes": 0},
+  "outputs": {"report": "/tmp/qcl-doc07-contract-plan-v2-review.md", "report_sha256": "f62bbe6998b178ea746a3a28ae73e4e910c751742e0e7887ac4d77b63786b231", "report_bytes": 11510, "identity": "/tmp/qcl-doc07-contract-plan-v2-review-identity.json"},
+  "stop": true
+}

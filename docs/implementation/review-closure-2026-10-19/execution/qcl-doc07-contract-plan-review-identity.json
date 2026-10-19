@@ -1,0 +1,35 @@
+{
+  "schema": "qcl-doc07-contract-plan-high-review-v1",
+  "date": "2026-10-20",
+  "stage": "source-only CP_DESIGN; STOP narrow independent-author D2",
+  "verdict": "request_narrow_D2",
+  "root_head": "d4113f43cddf02d46025434eb3a9dd8e110e90d6",
+  "contracts_head_and_root_gitlink": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "contracts_clean": true,
+  "primary_sha256": "4b046312d0c1f04566c3a80ca6fb8a441ca7b025003c3c3b1c4c2bab2242f6cb",
+  "candidate_sha256": "44434ac8f418c5ad80c1750e34b1dd868112cd2c393d8bc0e3c2d59737a370a8",
+  "candidate_identity_sha256": "84d63e3d41e3ee1b1de9e49351f1adac8e6dec81d0765ba0fbafc3691e02373d",
+  "inventory": {"five_formats": true, "full_shared_nested_fields": true, "all_ten_fact_classes": true, "closed_objects": true, "local_defs_offline_loader": true, "model_value_assigning_effective_used_distinctions": true, "no_new_scientific_schema_or_registry": true},
+  "focused_decisions": {
+    "R1": "approve coverage with repeated fact names; no invented exact-ten cardinality",
+    "R2": "approve derived invariants; D2 freeze exact value-origin status/null/reason matrix without invented DOI/unit catalog",
+    "R3": "approve proposed reason map; D2 freeze bound proof/fragment-null rules, preserving known unbound identity and independent input availability",
+    "R4": "D2 required: paths only from exact checked requested retained fragment; absent mapping inputs=[]; no current/global registry fallback; independent declared/used/effective/value-origin evidence",
+    "R5": "D2 required: freeze query-free pilot public-locator subset consistent with primary public output ban; query URI not stripped/heuristically accepted; existing recipe review for any demonstrated exception, no new trust registry",
+    "R6": "approve focused private pure helper boundary, existing ContractError and missing-proof unknown versus corrupt attempted-bound rejection; no new public API/receipt/capture ingress"
+  },
+  "minor_locator_correction": "Documenter UUID/tree facts are primary226-228, not candidate cited235-237",
+  "human_scope_approval_required_for_proposed_D2": false,
+  "new_math_or_implementation_authored_by_reviewer": false,
+  "source_sha256": {
+    "contracts_loader": "41b5b746bbf28cd0e60bb85bc927f1c55ba0ac2695f3271b875f83c057a744d1",
+    "contracts_messages": "fd82f76a005519962b1edbfd5b9971f6e8d50c0806ca1f4070359e908fa205fa",
+    "contracts_artifacts": "639ebd85f0a1612d2c036d11d8926f7c4bdd04778d5690a8778eb03e8cb6ccaa",
+    "contracts_tests": "0231b4d437ed3086a2cb365a0ce2a3926da93008d67e99df598e8aced6f63fd7"
+  },
+  "boundary": "schema-valid is not bound/source-valid or scientific acceptance; original actual-origin receipts absent; no provenance backfill",
+  "budget": {"wall_minutes_max": 25, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 4194304, "output_bytes_max": 98304, "logical_text_conservative_upper_bytes": 2097152, "physical_io_telemetry": "not instrumented", "execution_tree_content_search": false},
+  "actions": {"source_edits": 0, "imports": 0, "parsers": 0, "validators": 0, "tests": 0, "network": 0, "children": 0, "Nix": 0, "Julia": 0, "build": 0, "solver": 0, "server": 0, "git_mutations": 0, "checkpoint_writes": 0},
+  "outputs": {"report": "/tmp/qcl-doc07-contract-plan-review.md", "report_sha256": "7b0c262a1368d53cd98ed964ba46ae3f037de4f5c9b3dd9ab0d89a8d6ceeebdb", "report_bytes": 20191, "identity": "/tmp/qcl-doc07-contract-plan-review-identity.json"},
+  "stop": true
+}

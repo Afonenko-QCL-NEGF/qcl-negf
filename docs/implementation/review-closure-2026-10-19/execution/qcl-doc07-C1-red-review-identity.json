@@ -1,0 +1,29 @@
+{
+  "schema": "qcl-doc07-C1-red-source-high-review-v1",
+  "date": "2026-10-20",
+  "verdict": "changes_requested_R1_three_cap_negative_rows",
+  "stage": "source-only; STOP before Root RED",
+  "base_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "worktree": "/tmp/qcl-doc07-contract-worktree",
+  "sha256": {
+    "canonical_DOC03": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+    "D2": "20e712a051b3ba9e326bf4dccc3598513b43beefbcab0862d57e287d676dcb8b",
+    "D2_review": "f62bbe6998b178ea746a3a28ae73e4e910c751742e0e7887ac4d77b63786b231",
+    "test_source": "c2fdf66a51a5b772e270cd520e1c560794c11a39c191bfe2ed8abc61e33bf684",
+    "author_report": "844f6e1f9124237a27241be4984b23cafa102c355073369a604b2aadb50ea68a",
+    "author_identity": "90b1caebc279461d7b209916a8e2d3822949776a8608d4ba9737b29bc0164cb9",
+    "patch": "45d7cb0e2184363932da4ec5b5160b55cb453605a7935a562f9e404984b34d92",
+    "tracked_test_contracts": "0231b4d437ed3086a2cb365a0ce2a3926da93008d67e99df598e8aced6f63fd7",
+    "loader": "41b5b746bbf28cd0e60bb85bc927f1c55ba0ac2695f3271b875f83c057a744d1",
+    "messages": "fd82f76a005519962b1edbfd5b9971f6e8d50c0806ca1f4070359e908fa205fa"
+  },
+  "R1": {"locator": "tests/test_model_help.py:576,581,588", "symbol": "test_declared_array_caps", "problem": "boundary+1 uses exact duplicate first row, so uniqueness can reject missing-cap mutant", "minimal_fix": "new unique fragment256, public_leaf32 and pointP-10000/path rows; keep all other fields healthy", "conditions_cap_line594": "already unique; no correction needed", "executed_mutation_test": false},
+  "nonblocking_coverage": ["Fact.status partial/not_assigned/not_applicable lacks distinct positive controls; accepted enum must be checked on schema code review", "meaning_source Research PublicRef is only shape fixture; cannot reuse as Core/Runner semantic-positive ownership proof"],
+  "source_findings": {"five_authored_formats": true, "not_schema_ref_derived_fixtures": true, "nested_required_closure_pairs": true, "ten_fact_coverage_multiplicity": true, "Atom_finite_boundary": true, "Origin_ValueOrigin_matrices": true, "View_binding_input_null_axes": true, "Snapshot_Index_shapes": true, "shape_bound_is_not_proof_bound": true},
+  "unchanged": {"tracked_tests_diff_exit": 0, "sole_status": "?? tests/test_model_help.py", "diff_check": "no output", "schema_absent_check_exit": 0, "helper_absent_check_exit": 0, "patch_payload_cmp_exit": 0},
+  "expected_RED": "missing resource or validator fixture ValueError; not executed; no count or syntax success claim",
+  "budget": {"wall_minutes_max": 20, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 3145728, "output_bytes_max": 98304, "logical_text_conservative_upper_bytes": 1048576, "physical_io_telemetry": "not instrumented", "execution_tree_search": false},
+  "actions": {"imports": 0, "parsers": 0, "Python": 0, "schema_validation": 0, "tests": 0, "collection": 0, "HDF": 0, "network": 0, "children": 0, "source_edits": 0, "git_mutations": 0, "build": 0, "solver": 0, "fullCI": 0, "runtime_calls_consumed": 0},
+  "outputs": {"report": "/tmp/qcl-doc07-C1-red-review.md", "report_sha256": "412d4bdaef6aed837faad9748f77b04b7215f00d2cf7b5a389fa69b8df4ca0d2", "report_bytes": 13944, "identity": "/tmp/qcl-doc07-C1-red-review-identity.json"},
+  "stop": true
+}

@@ -1,0 +1,32 @@
+{
+  "scope": "OPS04.S Root phase1 RED source v2 CLI seam continuation",
+  "base_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "branch": "codex/review-closure-depot-byte-binding",
+  "design_sha256": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+  "cli_seam_design_sha256": "93ffbbcdd50770295f2f21e1a9befc47acc63231279b1ff79aebf48e7cc69a7f",
+  "cli_seam_review_sha256": "626159c6307b5664025d800f7d3d8101fb1ab55a4bd8a809f76b4aa949e653d5",
+  "frozen_sha256": {
+    "tests/solver_test.ts": "d26512392d63eaccf44ab7711ea07b1b6c8a15a3fb3108afd47c1ccacbf9d542",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85"
+  },
+  "unchanged_production_sha256": {
+    "ops/solver.ts": "bc513f610cce976d108e17902ebd423c434992ba0edb91e2bdc3da2e5f3c247f",
+    "ops/application_cd.ts": "91989d0171e011f4518e178e247d4f7a466d08bd02b7931308a202c4354ee9ce",
+    "nix/solver.nix": "16c99da166ee2d9afc7d238fa317e43f0bcc71e2eccb8de3ff11e97b70aa858f"
+  },
+  "prior_preserved_artifacts_sha256": {
+    "report": "48726ade53b5db9455091ea7b4e7b184e73159b7f5c4401536d54eef358ab49d",
+    "identity": "0092c82c07daae602495c07036b317c78af173016c7c3807eec8d8690223bacd",
+    "patch": "bcdc55a82f9a47d23f9d72deba1e9f4b986f3889eb30531aa6e1e60ae97587d3"
+  },
+  "tests_executed": 0,
+  "observed_red": false,
+  "production_changed": false,
+  "source_grep_controls": 0,
+  "subprocess_harness": false,
+  "checkpoint_writes": 0,
+  "resource_envelope": { "wall_minutes": 25, "cpu": 1, "ram_gib": 2, "read_mib": 3, "output_kib": 96 },
+  "resource_measurement": "Not instrumented; source-only reads and writes",
+  "stop": "Separate high CPP before coordinator RED"
+}

@@ -258,6 +258,18 @@
     "receipt_sha256": "2bc6444cc375c543606bba248f897503e41a51e5e09934bf73f229768b70bf52"
   },
   {
+    "id": "qcl-DOC04-NODE-RED-1",
+    "wall_seconds": 0.152,
+    "exit_code": 1,
+    "receipt_sha256": "7bada01584783740ffe35ec48e685f923b436697a8c54dea5a95e4c56f9faf9a"
+  },
+  {
+    "id": "qcl-DOC04-PY-RED-1",
+    "wall_seconds": 0.747,
+    "exit_code": 2,
+    "receipt_sha256": "33fe5f5018fd6b127f19292af725e5e1ca90c6ecd769dcd8ce371a5bcc202ca0"
+  },
+  {
     "id": "qcl-OPS03-DIAG-1",
     "wall_seconds": 1.995,
     "exit_code": 1,
@@ -298,6 +310,42 @@
     "wall_seconds": 1.624,
     "exit_code": 1,
     "receipt_sha256": "3503e916dae00613eccc7282dbdadad46a3d9a88df4d9a66f5e2ba633430d998"
+  },
+  {
+    "id": "qcl-OPS04-PLATFORM-FIRST-1",
+    "wall_seconds": 1.2,
+    "exit_code": 1,
+    "receipt_sha256": "a9d239bab5f5cb564b450d7168d3ba0262893c952e33bb7f579519efa73727db"
+  },
+  {
+    "id": "qcl-OPS04-PLATFORM-GREEN-2",
+    "wall_seconds": 1.558,
+    "exit_code": 0,
+    "receipt_sha256": "a3483add4b4c805e6719a78c9e9cc5ca4657a30594954b61e5f7a86248574fc8"
+  },
+  {
+    "id": "qcl-OPS04-ROOT-GREEN-2",
+    "wall_seconds": 1.707,
+    "exit_code": 0,
+    "receipt_sha256": "c8707b3dd6d0529488adb1d641cf8d5a874baaa17a7ddc85f2355144b327b765"
+  },
+  {
+    "id": "qcl-OPS04-ROOT-RED-1",
+    "wall_seconds": 1.639,
+    "exit_code": 1,
+    "receipt_sha256": "3dff28530a17d48d4bb28fadffa1f8692d8f06dd935fb08acaca4329688491d3"
+  },
+  {
+    "id": "qcl-SCI03-M1-GREEN-2",
+    "wall_seconds": 11.797,
+    "exit_code": 0,
+    "receipt_sha256": "af34e8c899fb220c798b9679faa9b4c389ad8752591730cf518b6133d1fa88a0"
+  },
+  {
+    "id": "qcl-SCI03-M1-RED-1",
+    "wall_seconds": 12.212,
+    "exit_code": 1,
+    "receipt_sha256": "f685a7460f8c0747b73e5559fb36af44b5a3f7a956f36db38ee18d5dec718fa4"
   },
   {
     "id": "qcl-SCI05-C08-COMPATIBILITY-6",

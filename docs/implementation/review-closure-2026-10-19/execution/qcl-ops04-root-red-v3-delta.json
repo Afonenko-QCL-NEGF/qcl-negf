@@ -1,0 +1,13 @@
+{
+  "from": "qcl-ops04-root-red-v2",
+  "to": "qcl-ops04-root-red-v3",
+  "correction_cycle": 1,
+  "finding": "F1 wrong duplicate-member JSON expected key order",
+  "change": "Replace JSON.stringify(spec) expected with independent explicit ordered hash,url,format,sources,julia,juliaManifest object preserving accepted first-insertion positions",
+  "solver_from_sha256": "d26512392d63eaccf44ab7711ea07b1b6c8a15a3fb3108afd47c1ccacbf9d542",
+  "solver_to_sha256": "d2c5da7ad9783bbc65e5e76baef8cb43282eb4388393f8dc130172be74c8b1d5",
+  "application_unchanged_sha256": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85",
+  "production_changed": false,
+  "execution_delta": 0,
+  "prior_artifacts_preserved": true
+}

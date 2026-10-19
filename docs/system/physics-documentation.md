@@ -965,3 +965,120 @@ hosting всех docs не должно стать его prerequisite: дост
 | Два описания расходятся с текущими code conditions/scope | SCBA approximate gate и optical e–e scope | Runtime и numerical correctness не проверены | Изменить |
 | Локальная HTML публикация реализуема без нового live service | Existing build, static HTML, serving boundary | Offline/light behavior и стоимость сборки не измерены | Дополнительно измерить |
 | Равновесный рубеж 0 V / 70 K пока не следует из документации | Разделённые source/check/illustration статусы | Нет научных runs в этой задаче | Данных недостаточно |
+
+<a id="model-help-doc07-v1-clarifications"></a>
+
+### Уточнения DOC07 v1: matrices и retained projection
+
+Это уточнение закрывает технические branches принятого model/source help
+contract. Пять форматов и перечисленные поля, owning boundaries, scientific
+model/criteria и полномочия не меняются. Schema-valid object сам по себе не
+доказывает source/release/origin binding.
+
+В каждом `facts` fixed slice присутствуют все десять классов. Несколько facts
+одного класса допустимы для разных authored contexts, в частности schema,
+typed constructor и example defaults; ограничения «ровно десять» и uniqueness
+по name нет.
+
+Все поля Origin обязательны. Для status=known kind — один из publication,
+measurement, interpolation, fit, research_assumption, code_policy. Schema не
+вводит обязательный DOI или обязательный locator для каждого kind; known
+research_assumption с locators=[] требует непустую note, называющую owning
+assumption. Для unknown: kind=unknown, locators=[], непустая note. Для
+not_applicable: kind=not_applicable, locators=[]; note остаётся plain-text
+string. Unknown не заменяется not_applicable из-за отсутствия данных.
+
+Atom quantity имеет numeric value и непустую строку canonical unit. Integer,
+number, boolean, enum и null имеют соответственно JSON integer, number,
+boolean, string и null value; boolean не numeric/integer. Их unit по форме
+string|null; каноничность и применимость единицы доказывает owning dimensional
+mapping, без нового unit registry. Для dimensionless canonical unit — `1`.
+Finite JSON boundary отклоняет NaN/Inf и другие nonfinite values до schema;
+known-null отличается от unknown/missing.
+
+| ValueOriginView.status | origin | binding | reason |
+| --- | --- | --- | --- |
+| bound | Origin known | Nonnull ValueOriginBinding | ok |
+| unknown | Origin unknown/kindunknown/[]/непустая note | null | origin_not_recorded, override_unbound, conditions_unbound, source_unbound или value_unavailable |
+| not_applicable | Origin not_applicable/kindnot_applicable/[] | null | not_applicable |
+
+Branch bound дополнительно требует всех четырёх retained-proof условий
+контракта value origin. Missing proof даёт accepted unknown reason или отказ
+проверки attempted bound record; corrupt/contradictory identity/hash/context
+claim не сохраняется как bound. Scientific value/context mismatch с reference
+может быть законным override и даёт unknown, а не фиктивную атрибуцию.
+Никакого backfill из equality, filename history или current defaults нет.
+
+| binding.status | Допустимые reason | fragment |
+| --- | --- | --- |
+| bound | ok | Nonnull exact descriptor id/url/sha256 |
+| unknown | source_binding_missing | null |
+| incompatible | wrong_release или unsupported_version | null |
+| unavailable | bundle_missing или fragment_missing | null |
+
+Bound требует nonnull retained release_id, release_manifest_sha256,
+source_revision и bundle_sha256, а также проверенную цепочку selected release
+receipt → exact graph → bundle → fragment bytes. На unbound branches каждый
+неизвестный identity scalar равен null; уже известные verified retained scalars
+не обнуляются только из-за статуса. Trusted actor run_uuid/calcjob_uuid/attempt
+обязательны после child selection независимо от availability docs/snapshot.
+Configuration_hash nullable только при отсутствии declared point passport.
+
+| input_status.status | Допустимые reason |
+| --- | --- |
+| available | ok |
+| invalid | snapshot_invalid |
+| unavailable | snapshot_missing, point_not_executed_by_selected_child, inventory_unavailable или inventory_incomplete |
+
+Input metadata availability, documentation binding, value_origin и scientific
+status независимы. Invalid/unavailable snapshot не заполняет used из plan или
+current defaults. Available означает проверенную metadata выбранного child;
+это не обещание полноты каждого scalar mapping или scientific pass.
+
+Публичный input path slice берётся только из inputs[].path exact requested
+Fragment v1 того же retained selected source context. Для этого owning adapter
+проверяет exact fragment и Bundle manifest bytes, descriptor id/file/hash,
+manifest digest и graph, привязанные retained source/release receipt именно к
+выбранному run/execution. Это existing bundle/fragment artifacts, а не новый
+mapping registry или sidecar format. Detached internal validation inputs
+содержат эти bytes/selection evidence, не unverified status booleans.
+
+Если exact retained fragment/manifest/mapping proof отсутствует, inputs=[].
+Context и input_status сохраняют доказанные selected-child факты. Current
+fragment, global leaf list, first fragment, имя поля или весь plan не заменяют
+missing mapping. Отсутствие source binding само по себе не даёт права выбрать
+source context по текущему deployment.
+
+Если mapping доказана, declared и used оцениваются независимо по своим retained
+evidence. Fragment descriptor остаётся null на unbound documentation branch.
+Unserved/missing public bundle assets не обнуляют verified used metadata из
+snapshot этого child, когда exact retained fragment/manifest доступны для
+mapping. Missing used snapshot оставляет used unknown; declared при этом может
+быть known из exact frozen point configuration. Available/ok с inputs=[]
+допустим, когда snapshot valid, а безопасной path mapping нет. Reference origin
+остаётся reference-only; actual origin по-прежнему требует отдельного proof.
+
+Для public emission этого pilot выбран query-free locator subset. URI parser
+допускает только schemes https/doi, запрещает userinfo/credentials и control
+characters; https должен быть корректным absolute URI. Presence query delimiter
+или query component, включая пустой `?`, блокирует emission affected artifact.
+Query не вырезается, locator не переписывается и не fetch. Одного format:uri
+недостаточно; arbitrary secret scanner или новый trusted URI registry не нужен.
+
+Источник locator — authored annotation/owning public source exact revision/hash
+из versioned input allowlist уже reviewed recipe. Evidence этого public-content
+review сохраняется в owning source/build review receipt. Query-free URI сама по
+себе не доказывает отсутствие private token в path, scientific attribution или
+measurement: public source review и output guards остаются обязательны. Без
+такого review evidence artifact остаётся unverified/rejected для publication.
+Query-bearing locator не публикуется в pilot; дальнейшее harmless-query support
+требует отдельного reviewed technical recipe contract, а не выбора текущего
+исполнителя или скрытой эвристики. Это ограничение публичного payload не меняет
+scientific model или numeric value.
+
+Contracts использует private pure binding validation над finite schema-valid
+objects и bounded detached retained evidence. Она не выбирает actor child,
+не выполняет filesystem/network/ORM/Julia/derive, не вводит новый serialized
+receipt/capture API и не требует __init__ re-export. Existing loader/schema API
+остаётся достаточным для shape validation; source/release/origin/full-chain
+claims требуют отдельного proof, а не evidence.length>0.

@@ -1,0 +1,45 @@
+{
+  "task": "OPS04",
+  "attempt": "FORMAT-1",
+  "started_utc": "2026-10-19T21:08:58.706534+00:00",
+  "recorded_at_utc": "2026-10-19T21:08:58.810050+00:00",
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "fmt",
+    "ops/solver.ts",
+    "ops/application_cd.ts",
+    "tests/solver_test.ts",
+    "tests/application_cd_test.ts"
+  ],
+  "cwd": "/tmp/qcl-ops04-root-worktree",
+  "harness_sha256": "59713f45b28a7ae665106da36fadbe7878a0aee36841348bb2acc3241fd45f2c",
+  "fixture_sha256": {
+    "ops/solver.ts": "63c26b64d981d5436172a676dd309a6f74cee1184b3e1b392a9c8a99d5193912",
+    "ops/application_cd.ts": "5e79f0ac36f922cc77805d68ca8122bd8b9fc34267109362d5fc4a6299b5bf71",
+    "tests/solver_test.ts": "d17eaf24461d702f202209a086f3f819b287690c9ebbd14fce20ef7cb949a025",
+    "tests/application_cd_test.ts": "da25777fc58752236b3e8b812bbbbc11fa63b328bb7e8aaf0c3fcf987d1bfcc2"
+  },
+  "exit_code": 0,
+  "wall_seconds": 0.104,
+  "sampled_peak_process_tree_RSS_bytes": 49283072,
+  "sampled_owned_temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 218,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 20,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "pinned Deno2.8.3 source formatter only; no product imports/tests/Nix/fullCI",
+  "original_log": "/tmp/qcl-OPS04-FORMAT-1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 2,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

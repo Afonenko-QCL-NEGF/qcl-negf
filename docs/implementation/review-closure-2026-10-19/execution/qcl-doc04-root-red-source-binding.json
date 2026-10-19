@@ -1,0 +1,14 @@
+{
+  "state": "source_only_RED_fixtures_bound_not_executed",
+  "root_head": "d4113f43cddf02d46025434eb3a9dd8e110e90d6",
+  "files": {
+    "tests/test_docs_assembly.py": "ecacc18239241c45ac1ed9c4e7c4935cfd20919cc88ac236a69ffa435bdf038e",
+    "tests/docs_math_test.mjs": "7ae60b15740e7e9790318f8724d364f2a9ce567b2a0480cf13c988172966aef3"
+  },
+  "test_review": "f6d437e7f6e875643baaf374c96e6d04ab2b1c718892e40741a9bcf06700c79b",
+  "harness_review": "dca5d87440947cd27ae518a2a8054d934538ecc0c7f97db7df4622ebbc19b0ab",
+  "harness": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+  "unit_calls": 0,
+  "BUILD": "not_admitted",
+  "science_accepted": false
+}

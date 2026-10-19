@@ -1,0 +1,20 @@
+{
+  "scope": "OPS04.S Root phase1 correction cycle1 v3 F1 only",
+  "base_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "review_sha256": "e5b0802310206241992194308e7ac5962483b25c0d7c73cf4e496107c8f17d74",
+  "frozen_sha256": {
+    "tests/solver_test.ts": "d2c5da7ad9783bbc65e5e76baef8cb43282eb4388393f8dc130172be74c8b1d5",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85",
+    "patch": "f5b8cd3efe2f3e8708cbdfe5b88f979f1f502b85a19daab707635288a64fb7e2"
+  },
+  "production_changed": false,
+  "application_tests_changed_from_v2": false,
+  "prior_artifacts_preserved": true,
+  "execution_count": 0,
+  "observed_red": false,
+  "checkpoint_writes": 0,
+  "resource_envelope": { "wall_minutes": 10, "cpu": 1, "ram_gib": 2, "read_mib": 1, "output_kib": 32 },
+  "telemetry": "Not instrumented; source-only correction",
+  "stop": "Narrow independent review before Root RED"
+}

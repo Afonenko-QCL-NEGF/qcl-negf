@@ -1,0 +1,32 @@
+{
+  "scope": "OPS04.S Root phase2 functional source freeze before formatting",
+  "base_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "branch": "codex/review-closure-depot-byte-binding",
+  "production_sha256": {
+    "ops/solver.ts": "22b6a3cd5bb847538ea790d4f644c12763e2e9705e9b776f4b3df2227512822a",
+    "ops/application_cd.ts": "4062fa974dd319d28f73c7906a13704a40fcd65721b11fdd5bcdb7d3ad218ce1",
+    "nix/solver.nix": "dacc900b41f3e9866e3b164243385ce81fdf9df3925061573bc8731f26e71e8b"
+  },
+  "immutable_tests_sha256": {
+    "tests/solver_test.ts": "d2c5da7ad9783bbc65e5e76baef8cb43282eb4388393f8dc130172be74c8b1d5",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85"
+  },
+  "red_original_sha256": {
+    "original.log": "5ab3e0c1ba7a178fd6dd60c297119cac38e86a0d39df0bfa24df7d8a88ccb943",
+    "receipt.json": "3dff28530a17d48d4bb28fadffa1f8692d8f06dd935fb08acaca4329688491d3"
+  },
+  "patch_sha256": "c54078e4d06fea5b5d7c11f11c33a1e3f0e06e9583bdf14927583c79dfbe4488",
+  "patch_scope": "Production-only three files relative to base; immutable tests already frozen separately",
+  "red_failures_classified": 17,
+  "red_passes_reported": 9,
+  "author_runtime_invocations": 0,
+  "formatting_executed": false,
+  "tests_changed": false,
+  "checkpoint_writes": 0,
+  "callers": ["ops/solver.ts::solver/build -> runSolverBuildCli -> buildSolver", "ops/application_cd.ts::main -> runApplicationCdCli -> buildSolver"],
+  "unchanged_separate_route": "nix/local-lab-packages.nix::input.depotManifest",
+  "resource_envelope": { "wall_minutes": 40, "cpu": 1, "ram_gib": 2, "read_mib": 5, "output_kib": 128 },
+  "resource_telemetry": "Not instrumented; no runtime/build/child execution",
+  "stop": "Coordinator formatting authorization then final high CPP then sole remaining GREEN"
+}

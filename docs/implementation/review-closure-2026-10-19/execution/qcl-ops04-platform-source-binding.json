@@ -1,0 +1,16 @@
+{
+  "state": "tests_only_first_runtime_pending",
+  "base": "b067723c82382689bff5cc366981c56e99b926f8",
+  "head": "cb0e7beb3f35cf9331bc708bdf116c050c87c619",
+  "branch": "codex/review-closure-protected-reader-boundaries-integration",
+  "files": {
+    "tests/test_node_enrollment.py": "27b733487737501880023dc55607b21c357654821da5a65f53940873c0f0cfe5",
+    "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6"
+  },
+  "production": {
+    "ops/application_release.py": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0"
+  },
+  "review": "ae225ee188ab7f98c647cdecfa32bf4e6a05d7057639a81c771725fc74510120",
+  "tests_only": true,
+  "harness": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b"
+}

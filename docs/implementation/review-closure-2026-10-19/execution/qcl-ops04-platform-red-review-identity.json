@@ -1,0 +1,33 @@
+{
+  "task": "Independent high OPS04 Platform T2/T3 Phase1 test-source review",
+  "verdict": "REQUEST_CHANGES",
+  "report": "/tmp/qcl-ops04-platform-red-review.md",
+  "report_sha256": "1f2da5b3154c7a9958a8332a048e113423e3878fccc60ca23b4be60bcf9be791",
+  "worktree": "/tmp/qcl-ops04-platform-worktree",
+  "head": "b067723c82382689bff5cc366981c56e99b926f8",
+  "source_hashes": {
+    "ops/application_release.py": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0",
+    "tests/test_node_enrollment.py": "68c56e1f6d86966a7e9ad7294bef550f2a74511d131dd067ae11ad1569000a00",
+    "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6"
+  },
+  "artifact_hashes": {
+    "design": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+    "design_review": "12e811ec56093734fdeb7fd6aac370f312ef880c2b7a64edd9689c8bca26ec42",
+    "patch": "b5aa36236fa373c709b6428198afbbf40c54895e2fa2c06fd8dbd365ea3bddef",
+    "author_identity": "ad764c8dc849e046205536936783992fca26d06537ff018704351599b5f3fd31",
+    "author_report": "c103de9ae30afb15d38eece1f60d423c5b4821d9f66b96514ab3bdade5d4d252"
+  },
+  "findings": [
+    {"id":"F1","priority":"P2","locator":"tests/test_node_enrollment.py:211","issue":"readonly access mode not observed; O_RDWR mutant passes"},
+    {"id":"F2","priority":"P2","locator":"tests/test_node_enrollment.py:226","issue":"overflow fixture EOF at limit+1 masks over-read; constant read-size mutant passes"}
+  ],
+  "production_unchanged": true,
+  "target_execution_or_import_or_parser_calls": 0,
+  "tests_or_build_or_network_or_native_calls": 0,
+  "git_mutations": false,
+  "source_edits": false,
+  "children": 0,
+  "runtime_budget_consumed": 0,
+  "OPS04_N": "unknown",
+  "state": "STOP"
+}

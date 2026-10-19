@@ -1,0 +1,41 @@
+Check tests/solver_test.ts
+Check tests/application_cd_test.ts
+running 16 tests from ./tests/solver_test.ts
+build resource options reject ambiguous or executable input before commands ... ok (24ms)
+OPS04 HTTPS metadata binds exact consumed JSON bytes and production worker arguments ... ok (1ms)
+OPS04 path replacement after capture keeps A while replacement before capture consistently selects B ... ok (5ms)
+OPS04 first callback cannot mutate captured operative metadata or resource arguments ... ok (0ms)
+OPS04 graph and object order are immaterial while raw duplicate members normalize once ... ok (0ms)
+OPS04 rejected prefetch and command failures never return success observation ... ok (0ms)
+OPS04 same-root wrong component graph and malformed archive metadata execute nothing ... ok (2ms)
+OPS04 accepts exactly 65536 captured UTF8 bytes without truncation ... ok (0ms)
+OPS04 programmatic invalid options reject before callback ... ok (0ms)
+OPS04 unchecked legacy object plus pathname invocation is rejected before callback ... ok (0ms)
+OPS04 capture uses one descriptor and bounded progressing short reads through exact UTF8 roundtrip ... ok (2ms)
+OPS04 capture sentinel oversize closes without an additional read ... ok (0ms)
+OPS04 capture closes after stat/read/no-progress/decoder failures and never reads nonregular input ... ok (0ms)
+OPS04 default capture validates actual regular-file UTF8 bytes and closes directory rejection ... ok (1ms)
+OPS04 solver CLI preserves argv compatibility and captures once for HTTPS/file builds ... ok (1ms)
+OPS04 solver CLI invalid argv encoding size graph and lock preflight dispatch no commands ... ok (1ms)
+running 10 tests from ./tests/application_cd_test.ts
+CD binds executable identity to both source and immutable closure hashes ... ok (24ms)
+CD refuses mutable paths and missing closure evidence ... ok (0ms)
+CD carries the selected cache without changing binary release identity ... ok (0ms)
+OPS04 cache password parity rejects explicit empty and encoded passwords ... ok (0ms)
+OPS04 cache username-only and existing local routes preserve literal URI and release identity ... ok (0ms)
+OPS04 application CLI captures A before first application callback and publishes via actual pending rename ...
+------- post-test output -------
+Application release manifest: /tmp/qcl-OPS04-ROOT-GREEN-2/tmp/ops04-assembly-89702b6a48a3d77e/release.json
+----- post-test output end -----
+OPS04 application CLI captures A before first application callback and publishes via actual pending rename ... ok (7ms)
+OPS04 application CLI accepts captured B with its archive and no cache while preserving owned identity snapshots ...
+------- post-test output -------
+Application release manifest: /tmp/qcl-OPS04-ROOT-GREEN-2/tmp/ops04-assembly-B-6a51eb2fb05d0277/release.json
+----- post-test output end -----
+OPS04 application CLI accepts captured B with its archive and no cache while preserving owned identity snapshots ... ok (2ms)
+OPS04 application CLI metadata argv and cache preflight rejects before every execute and publication ... ok (4ms)
+OPS04 application graph drift blocks copy and all manifest writes after path-info ... ok (1ms)
+OPS04 application pending collision preserves original attempt and refuses final rename ... ok (1ms)
+
+ok | 26 passed | 0 failed (131ms)
+

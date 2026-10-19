@@ -1,0 +1,67 @@
+{
+  "schema": "qcl-sci03-M1-documentation-freeze-v1",
+  "recorded_local_date": "2026-10-20",
+  "stage": "docs-only-awaiting-independent-review",
+  "writer": "/root/doc03_design",
+  "owning_worktree": "/tmp/qcl-sci03-M1-results-worktree",
+  "owning_head": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "primary_root_observed_head": "d4113f43cddf02d46025434eb3a9dd8e110e90d6",
+  "allowed_product_paths": ["README.md"],
+  "changed_product_paths": ["README.md"],
+  "readme": {
+    "baseline_sha256": "39c5c06b1335e6820b980ba3967a42ac25f8fad4b80a771e7297a5982d1363e9",
+    "baseline_bytes": 14585,
+    "frozen_sha256": "830c67bc0fc0e43c2ae698dbe5c5aa8f518728b6f3f5d760dafb505d3da9e648",
+    "frozen_bytes": 18619,
+    "added_lines": 38,
+    "removed_lines": 0,
+    "unchanged_prefix_cmp_exit_code": 0,
+    "new_section_start_line": 240
+  },
+  "inputs": {
+    "accepted_design_path": "/tmp/qcl-sci03-current-bound-design.md",
+    "accepted_design_sha256": "ca84b1cc763aa7bc017364ece4f7e95aff5bd0107c0c7277fb87eed250f215f7",
+    "research_commit": "3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731",
+    "research_path": "docs/equilibrium-measurement-contract.md",
+    "research_sha256": "61058d7b33b21e8b43232239569012567e764035dd15900b80d742bd9d6ed38c",
+    "production_sha256_before_and_after": "bb3d204378fd7d95691cfd9b58360afc6f48ede1b37fe7a0f6d2a6ff06944915",
+    "tests_sha256_before_and_after": "d4bb720fff951df9ed402709a4f11422f07680925e0dddf6e91dcc2dcef87f79",
+    "independent_implementation_review_sha256": "c529835dfdb9ac374b3933af4403bab26ea2fb0b89494a56918f7960f8be7e8c"
+  },
+  "static_checks": {
+    "readme_diff_check_exit_code": 0,
+    "canonical_commit_path_locally_present": true,
+    "canonical_section_heading_checked": true,
+    "canonical_github_anchor": "53-абсолютный-represented-current-без-divisionj",
+    "network_link_check": "not_run",
+    "markdown_source_review": true,
+    "render_build_parser_tests_by_writer": "not_run"
+  },
+  "coordinator_existing_green_evidence_read_only": {
+    "receipt_path": "/tmp/qcl-SCI03-M1-GREEN-2/receipt.json",
+    "receipt_sha256": "af34e8c899fb220c798b9679faa9b4c389ad8752591730cf518b6133d1fa88a0",
+    "original_log_sha256": "4a9c76be35565e97288f064ef85313f8b0b726018c12f1cd68e768fa90c2a350",
+    "exit_code": 0,
+    "passed": 51,
+    "pytest_seconds": 11.13,
+    "wall_seconds": 11.797,
+    "raw_capture_complete": true,
+    "scope": "synthetic software fixtures; no scientific or S1 acceptance"
+  },
+  "artifacts": {
+    "report_path": "/tmp/qcl-sci03-M1-doc-report.md",
+    "report_sha256": "fd696cf6d575efe2fa0e7d8d5c05a686a454c65bbef9fd397e87637630b974b9",
+    "patch_path": "/tmp/qcl-sci03-M1-doc-patch.diff",
+    "patch_sha256": "44be8861b19bf04966eb9a692af95bed9fdb7d8b0975f573dcadea02488a6f32"
+  },
+  "execution_by_writer": {
+    "target_imports_parsers_tests_builds": 0,
+    "solver_runs": 0,
+    "network_server_calls": 0,
+    "children": 0,
+    "git_mutations": 0,
+    "root_checkpoint_edits": 0
+  },
+  "next_gate": "independent documentation review and coordinator publication",
+  "stop": true
+}

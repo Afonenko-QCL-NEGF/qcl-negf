@@ -1,0 +1,20 @@
+{
+  "stage": "coordinator actual binary byte-read identities; no target import",
+  "observed_tool_chunk": "866fb6",
+  "logical_bytes_hashed": 217435448,
+  "telemetry_limit": "binary file sizes and SHA observed; CPU/RSS/physicalIO not sampled; these are not scientific reads or native acceptance",
+  "binaries": [
+    {
+      "path": "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+      "bytes": 141648992,
+      "sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c"
+    },
+    {
+      "path": "/nix/store/frlyjd2wya3rk8xmdc98yq3x0rhpkh9n-nodejs-24.21.0/bin/node",
+      "bytes": 75786456,
+      "sha256": "decd3927d7a6b9f7c00a58da94f209ea92377a647fd232d4d865ba0e3a28e928"
+    }
+  ],
+  "locked_store_binding_receipt": "/tmp/qcl-local-runtime-metadata-preflight-3.json",
+  "guard": "each unit invocation rehashes actual executable before spawning, compare exactpins"
+}
