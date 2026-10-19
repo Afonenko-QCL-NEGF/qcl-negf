@@ -1,0 +1,13 @@
+# RV15 blind source notes
+
+Candidate/fixes unread. S=e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1; Portal T=10b6c871bb89cce4f2bdc1c4cdaa91e500111ceb, AiiDA A=69aa1309c8465a838e4778b9dff464a306229f01, Platform P=4ce214e29b72276157b10a9267e2f30fef4ac66f. N=7; single trusted team model, not multitenant. No secret reads/network/tests.
+
+1. T api authenticate uses constant-time token compare; protected read/submit/cancel routes finite service surface, Code allowlist and strict resource ceilings. Token holds broad team authority, not per-user isolation.
+2. Download capability HMAC signs exact target+expiry, HttpOnly/SameSite strict cookie, Secure depends actual https request scheme. Authorize artifact resolves immutable attempt/calcjob selection, download verifies target then metadata/open pins it. Proxy/request-scheme correctness native unmeasured.
+3. A `_artifact_path` normalized relative POSIX; repository selection explicit, shared plan export gap belongs RV07. Path/UUID reject before payload fixtures separate from production auth test.
+4. BodyLimit enforces actual received bytes including chunked body; no source inbound wall deadline/rate bound. byte_range accepts one valid range, not arbitrary resumed offsets. Strict model types prevent bool resource coercion.
+5. A scheduler_options allowlist integers/token queue/account, one node/threaded process; validate_scratch_root normalizes path. Release-pinned code requires InstalledCode under /nix/store; generic trusted InstalledCode remains operator authority, not arbitrary hostile executable safe sandbox. Prepared command args use scoped identity, shell scheduler metadata only controlled strings.
+6. P read_protected_file traverses root-owned non-writable directories via dir_fd/O_NOFOLLOW, regular-file/O_NONBLOCK bounds prevent symlink/FIFO; freeze_ssh_trust exclusive snapshot with fsync/hash, trust options ignore global/user config and require StrictHostKeyChecking. bootstrap_ownership validates exact singleton firmware args/root identities, not full VM ownership proof.
+7. Root CI workflow permissions/trusted event gating and self-hosted runner isolation require exact selected workflow read. Public source boundary and token/trust snapshots do not certify deployment secrets/remote protections/native runner.
+
+Negative corpus traversal/symlink/FIFO/body oversize/unlisted executable/scheduler injection/download locator race; tests read as assertion contracts, not executed evidence. Public API LOG.exception server-side; generic sanitized HTTP messages avoid traceback disclosure, server logs still trusted evidence surface. No independent blocking implementation defect established within selected paths; whole security/runtime production acceptance unmeasured.

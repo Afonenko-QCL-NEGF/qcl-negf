@@ -1,0 +1,13 @@
+# RV02 selected-check ticket — предложение, не разрешённый запуск
+
+Owner Results. Source: Results H=`a1492b7b86b788885eff683ac71ca1167cbbaff1`, B=`fe27a2a9ed065f9afacecc84113311f30d0c68d6`; root receipt S=`e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1`. Exact Contracts ref/wheel SHA256 и environment versions фиксируются до запуска. Scientific assertions из 36-case fixture сохраняются.
+
+Preflight read-only: head/ref, Python 3.14, pytest/coverage versions, dependency availability, installed distribution metadata, actual imports state/artifacts/equilibrium, expected resolved owners, отсутствие оптимизации assertions; сохранить paths/receipt. Environment setup/install не включены: при отсутствии зависимостей остановиться с gap. Не вызывать root sync/CI или integration suite.
+
+Первый отдельный grant: одна attempt, ≤1 CPU, ≤1 GiB RAM/process, ≤5 минут wall, output ≤2 MiB. Selected command из component root: `coverage run --branch -m pytest -q tests/test_equilibrium_diagnostics.py`; затем сохранить scoped Results production line/branch denominator и missing paths, исключив tests/vendor. Ownership tests `tests/test_source_ownership.py` — отдельная одна attempt с теми же caps. Stop по budget, fixture error, mismatch source; без rerun/изменения tolerances.
+
+Сценарии чистого чужого пользователя заранее фиксировать: arbitrary absolute checkout с editable Results + sibling Contracts; standalone с declared 0.2.0 wheel; standalone editable Contracts с explicit absolute src. Negative: другой Results checkout; shadow Contracts path; wrong wheel version; conflicting sibling override; missing wheel file row; editable без explicit root; relative explicit root. Для branch cases потребуется отдельный проверяемый test change в Results owner PR; это не выполнено данным ticket. Runtime grant должен перечислить attempts этих сценариев до запуска и задать общий wall/output cap.
+
+Ожидаемое различающее evidence: correct selected imports проходят guard, foreign imports отвергаются, numerical expectations unchanged на H; все original logs, exact source identity, skips/errors и dependency provenance сохранены. Наличие wheel metadata не заменяет SHA256 доверенного wheel. M02 coverage относится только к выбранной suite, не полной Results приёмке.
+
+M05 — отдельный будущий grant: три идентичных повтора `tests/test_equilibrium_diagnostics.py`, каждый ≤1 CPU/1 GiB/3 минут, всего ≤9 минут/3 MiB logs; сохранить все результаты, прекращать по resource cap без исправлений и замены неудач. Три успеха — ограниченная выборка, не доказательство отсутствия flakes. Никаких solver runs, полномасштабной CI, server actions, merge/deploy.

@@ -1,0 +1,15 @@
+# RV02 — blind source review
+
+Первичный stage завершён до чтения RV02 candidate/fixes. Start 2026-10-14 17:52:30 UTC. Inputs: S Results `fe27a2a9ed065f9afacecc84113311f30d0c68d6`, baseline `tests/test_equilibrium_diagnostics.py` / `pyproject.toml`; connector PR6 metadata и полный diff, подтверждённые base fe27a2a9… / head `a1492b7b86b788885eff683ac71ca1167cbbaff1`, 4 changed files. Repo не обновлялся; candidate commit отсутствует локально, exact diff получен read-only connector. Tests/install/import/solver не исполнялись.
+
+Вопрос: сохраняются ли независимые ownership guards и numerical assertions при foreign-user checkout, чужих installed imports, editable/wheel selection?
+
+- Наблюдение: baseline EXPECTED_RESULTS/EXPECTED_CONTRACTS с личными абсолютными путями делает clean checkout другого пользователя неприемлемым даже при owning imports.
+- Наблюдение: head `tests/source_ownership.py::assert_source_ownership` ожидает Results state.py относительно собственного test checkout и сравнивает exact resolved file path, не путь выбранного imported Results. Exact path guard сильнее старого is_relative_to(src).
+- Наблюдение: `contracts_artifacts_path` предпочитает sibling src; explicit override обязан быть absolute и тем же resolved sibling. Standalone explicit src требует artifacts.py. Без explicit используется distribution 0.2.0 и единственная metadata row artifacts.py, затем exact imported file equality. Это независимая от imported Contracts identity выборка ожидаемого owner, не checksum/source commit verification.
+- Наблюдение: test_equilibrium_diagnostics diff меняет только import/helper и замену fixture guard; `inverse2`, `literal_sum`, manufactured data, numerical assertions и tolerances не изменены. No solver science acceptance следует из fixture.
+- Наблюдение: четыре test_source_ownership cases покрывают actual imports, copied Results path, shadow Contracts path и conflicting workspace override. Они не содержат explicit standalone-valid/relative/missing-artifacts и distribution wrong-version/absent/duplicate files cases. Runtime acceptance этих branches неизвестна; считать 4 теста всеми branch outcomes нельзя.
+- Ограничение: README сменяет install на editable Results, описывает wheel/explicit Contracts. Clean foreign-user, sibling-missing, conflicting editable/wheel и dirty metadata routes **статически рассмотрены**, не исполнены.
+- Вопрос: future selected check должен фиксировать exact head + Contracts source/version/import paths; published PR body 40-tests receipt является historical claim, оригинал здесь не проверен и новый report не воспроизведён. Научные independent arithmetic oracles не подменять helper ownership проверкой.
+
+Независимый preliminary verdict: статический diff сохраняет arithmetic oracle и усиливает owner guards; блокирующая code-regression не установлена. Gap: runtime/branch evidence standalone wheel/editable modes и trust самой distribution metadata. Минимальная коррекция любых слишком сильных report claims — обозначить эти routes not_measured и targeted case catalogue, без новых tests/build в этом review.

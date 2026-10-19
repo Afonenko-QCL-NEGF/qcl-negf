@@ -1,0 +1,190 @@
+{
+  "kind": "review-source-reading-receipt",
+  "campaign": "2026-10-14-e48e5b2-01",
+  "started_utc": "2026-10-14T17:41:00Z",
+  "snapshot": "/tmp/qcl-review-2026-10-14-e48e5b2-01/source",
+  "note": "Derived evidence receipt, not a maintained composition lock; Git gitlinks are authoritative. Snapshot excludes reports created by this campaign.",
+  "commands": {
+    "git rev-parse HEAD": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1\n",
+    "git status --short": " M AGENTS.md\n M README.md\n M TODO.md\n M docs/architecture.md\n M docs/single-server-deployment.md\n?? docs/implementation/comprehensive-review-source-audit-2026-10-14.md\n?? docs/system/\n",
+    "git submodule status --recursive": " 3108150dd1b6b1377470b384b15c26e272fe5c5d components/QCLNEGF.jl (v0.2.0-5-g3108150)\n 0c53c6d0f68e0b25fce79388db831da6fc3ae856 components/QCLNEGFRunner.jl (v0.2.0-21-g0c53c6d)\n 69aa1309c8465a838e4778b9dff464a306229f01 components/qcl-negf-aiida (v0.2.0-9-g69aa130)\n 923e0c6cd9cbbe63bd1fb9c77892ef171385ed76 components/qcl-negf-contracts (v0.2.0-6-g923e0c6)\n 4ce214e29b72276157b10a9267e2f30fef4ac66f components/qcl-negf-platform (v0.2.0-52-g4ce214e)\n 10b6c871bb89cce4f2bdc1c4cdaa91e500111ceb components/qcl-negf-portal (v0.2.0-8-g10b6c87)\n 5458212063a41051328ef8b5d14d63d5ac7dc781 components/qcl-negf-research (v0.2.0-5-g5458212)\n fe27a2a9ed065f9afacecc84113311f30d0c68d6 components/qcl-negf-results (v0.2.0-16-gfe27a2a)\n",
+    "git ls-tree HEAD components/": "160000 commit 3108150dd1b6b1377470b384b15c26e272fe5c5d\tcomponents/QCLNEGF.jl\n160000 commit 0c53c6d0f68e0b25fce79388db831da6fc3ae856\tcomponents/QCLNEGFRunner.jl\n160000 commit 69aa1309c8465a838e4778b9dff464a306229f01\tcomponents/qcl-negf-aiida\n160000 commit 923e0c6cd9cbbe63bd1fb9c77892ef171385ed76\tcomponents/qcl-negf-contracts\n160000 commit 4ce214e29b72276157b10a9267e2f30fef4ac66f\tcomponents/qcl-negf-platform\n160000 commit 10b6c871bb89cce4f2bdc1c4cdaa91e500111ceb\tcomponents/qcl-negf-portal\n160000 commit 5458212063a41051328ef8b5d14d63d5ac7dc781\tcomponents/qcl-negf-research\n160000 commit fe27a2a9ed065f9afacecc84113311f30d0c68d6\tcomponents/qcl-negf-results\n"
+  },
+  "frozen_texts": [
+    {
+      "path": ".agents/skills/qcl-performance-audit/SKILL.md",
+      "sha256": "0ccc0aaed3c88c3620082bf9808113c3c725aaa2bc3b47b56db9d349e0d58f74",
+      "bytes": 10475
+    },
+    {
+      "path": ".agents/skills/qcl-performance-audit/references/telemetry.md",
+      "sha256": "1b7168a1bb12525f6e8c7677266ed3adb64faafebf6e1a7816337cb8df399d1b",
+      "bytes": 21682
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/SKILL.md",
+      "sha256": "1ec906ee78824504ea7b8036a48f8e70f6338f3724d7675e61a5b5f9de09d93e",
+      "bytes": 4033
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/references/physics-checks.md",
+      "sha256": "6fcba7b193003ae315e6158f47528f5ed87b45d78c457a01c305154c7aa4c315",
+      "bytes": 5307
+    },
+    {
+      "path": ".agents/skills/qcl-research-framing/SKILL.md",
+      "sha256": "9e5f756d1a98dde7a4104e1f134432e5c414548bce338d4114c619adac2d76c3",
+      "bytes": 4067
+    },
+    {
+      "path": ".agents/skills/qcl-research-framing/references/brief.md",
+      "sha256": "b98635fb4df9ac2c4671523c7c1d88ebd163d78284f9422df4572dba4746e271",
+      "bytes": 2846
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/SKILL.md",
+      "sha256": "d7bda599b3b222c16f04c9513f7615a4e70fbe266238c8bc3267b5f84339c578",
+      "bytes": 4939
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/references/comparison.md",
+      "sha256": "4e7aa8013da33e0ee0f47ab4c00b5471b28cb0aae7fbb93c3c2162acf1e5ff78",
+      "bytes": 3245
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "b795916b286983cc4c71ed3614bc0fb431acfc1d29974594565e71a30e66b648",
+      "bytes": 13393
+    },
+    {
+      "path": "README.md",
+      "sha256": "fffa603593e830a81a22c9e5b1807be930509cb9c7569b15a33381cf9725e525",
+      "bytes": 9168
+    },
+    {
+      "path": "TODO.md",
+      "sha256": "b34f0a12468f816411a5e3e6ef406f1c72338f293a3ef3fbb9265813ad8406b0",
+      "bytes": 9897
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7",
+      "bytes": 5501
+    },
+    {
+      "path": "docs/implementation/comprehensive-review-source-audit-2026-10-14.md",
+      "sha256": "d22c0c2992c1408f51b71ba783e779aca647c61972b51c154b5d27dbd359eb66",
+      "bytes": 12680
+    },
+    {
+      "path": "docs/research-workflow.md",
+      "sha256": "0e99c9709bcb105dc4340b981282e5f6619e14197c8034002075651397e4f020",
+      "bytes": 12416
+    },
+    {
+      "path": "docs/single-server-deployment.md",
+      "sha256": "6c13cf7c8a912b8d9ad03adc6333d30d78da9a75b64f1ab20e34c4061bbbdd20",
+      "bytes": 25684
+    },
+    {
+      "path": "docs/system/README.md",
+      "sha256": "fce37b03523f22ec07d22996065f239924b9cdfaf8d493f08fe2e21ee863b82d",
+      "bytes": 16865
+    },
+    {
+      "path": "docs/system/agent-review-workflow.md",
+      "sha256": "c018491d66c286604b3b389c63b6beeced36be759dcc5353470486aaa2793ae0",
+      "bytes": 30604
+    },
+    {
+      "path": "docs/system/architecture.md",
+      "sha256": "797e513773783984d7cfe2a706061093ca3b9e1c82983d9a480436bcf5eb0829",
+      "bytes": 38245
+    },
+    {
+      "path": "docs/system/autonomous-review-docs-skills.md",
+      "sha256": "900375d44c25ffc5ae720d5dfcfa67bd07a1aabd8c6f651321bd6f519b6348fe",
+      "bytes": 23072
+    },
+    {
+      "path": "docs/system/autonomous-review-engineering.md",
+      "sha256": "f85b70820237c3d091d797c403036807b12f900611a01f822cbcd7e1a89d5dad",
+      "bytes": 25737
+    },
+    {
+      "path": "docs/system/autonomous-review-formal-science.md",
+      "sha256": "832a9e61fbe2c92398497a3b96674e7b5610c221c18e0277ffe7296f98bdbe89",
+      "bytes": 19216
+    },
+    {
+      "path": "docs/system/autonomous-review-plan.md",
+      "sha256": "af714fed65682d0f3dbf64e48284934ef3dfe01b3c94d5468dafb7b5695cec4f",
+      "bytes": 26752
+    },
+    {
+      "path": "docs/system/comprehensive-review.md",
+      "sha256": "dcb07591925062723fe97d722d048e7145ddbb78350ff88d3b690d06ca83acbc",
+      "bytes": 38280
+    },
+    {
+      "path": "docs/system/documentation-methodology.md",
+      "sha256": "709356cb384f6c05b0351e0f36787f96883b89cd69323bb6f9c61c9d9bbb396c",
+      "bytes": 18188
+    },
+    {
+      "path": "docs/system/feasibility.md",
+      "sha256": "9db369fed5d71e0220429f728ffb5be659b8cb5ea5b8e1e1f266773e6321af4a",
+      "bytes": 26281
+    },
+    {
+      "path": "docs/system/implementation-entrypoint.md",
+      "sha256": "245dce0d004505ec556495715fa9db54c6bd4b15345c3de1d73a4322facab1fc",
+      "bytes": 23314
+    },
+    {
+      "path": "docs/system/physics-documentation.md",
+      "sha256": "434ad2513188d52c915ea2de5dee92b4257711abad3e19d51be47f31f2b7da20",
+      "bytes": 28349
+    },
+    {
+      "path": "docs/system/rebuild.md",
+      "sha256": "276fc919eeb4ef3f8f609bc099d3f547ad893c1f0ff87382220d58f5c666357f",
+      "bytes": 19193
+    },
+    {
+      "path": "docs/system/release-roadmap.md",
+      "sha256": "863b8c9b34144b57a851b159e04813cc56fad71a76d94e7bf05dd55f91969576",
+      "bytes": 28897
+    },
+    {
+      "path": "docs/system/requirements.md",
+      "sha256": "aaf01fe9b803a0aa34ba5ae9e71559606482e2ad96c3314388dc6c6667096e0d",
+      "bytes": 28751
+    },
+    {
+      "path": "docs/system/results-and-postprocessing.md",
+      "sha256": "cb27e6af7e52098abe9929c416dfa566a9cedf1da016108a5015fc37bcdee5e4",
+      "bytes": 20074
+    },
+    {
+      "path": "docs/system/review-metrics.md",
+      "sha256": "71cef8a23f948fa7eb43e13d4baf17f9af6cdfdeaf907a1efcf81be1eace3e31",
+      "bytes": 32009
+    },
+    {
+      "path": "docs/system/review.md",
+      "sha256": "1496ef1538b15c26b6bd4f7780eed0b50653e3c2f3807c69a14110bc227867c3",
+      "bytes": 26358
+    },
+    {
+      "path": "docs/system/scientific-milestone.md",
+      "sha256": "f0ecc3d657d2ac04de3bc5601ec8695b3f66c8f4e93bd2f8c4b0e177ed7a45af",
+      "bytes": 19401
+    },
+    {
+      "path": "docs/system/skills-and-instructions-review.md",
+      "sha256": "f6941af9eaf709e4b19cef21c28a42ae06f6ef82641e9cbc9bbc47a39a58f4b3",
+      "bytes": 28760
+    }
+  ]
+}

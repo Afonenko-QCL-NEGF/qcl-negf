@@ -1,0 +1,17 @@
+[
+  {
+    "card": "RV16-scope.md",
+    "old": "documentation-methodology.md",
+    "new": "/home/tolya/Загрузки/qcl-negf/docs/system/documentation-methodology.md"
+  },
+  {
+    "card": "RV17-scope.md",
+    "old": "skills-and-instructions-review.md",
+    "new": "/home/tolya/Загрузки/qcl-negf/docs/system/skills-and-instructions-review.md"
+  },
+  {
+    "card": "RV17-scope.md",
+    "old": "agent-review-workflow.md",
+    "new": "/home/tolya/Загрузки/qcl-negf/docs/system/agent-review-workflow.md"
+  }
+]

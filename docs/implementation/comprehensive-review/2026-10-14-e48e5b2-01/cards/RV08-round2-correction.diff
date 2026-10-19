@@ -1,0 +1,116 @@
+--- docs/implementation/comprehensive-review/2026-10-14-e48e5b2-01/reviews-input/RV08-v2.md	2026-10-14 21:10:19.305766345 +0300
++++ docs/implementation/comprehensive-review/2026-10-14-e48e5b2-01/RV08.md	2026-10-14 21:22:09.671817475 +0300
+@@ -1,4 +1,4 @@
+-# RV08 — операторные научные карточки (candidate revision 2)
++# RV08 — операторные научные карточки (candidate revision 3)
+ 
+ Этап: статический source/formula/oracle review. Root S: `e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1`
+ с frozen dirty overlay из [receipt](source-receipt.json). Core S:
+@@ -14,11 +14,18 @@
+ (только K/current section). Очередь 22 reference symbols и 6 PROD contracts
+ не закрыта initial snapshot; latest administrative coverage 34/34 ниже.
+ Статус полного audit Core **partial**, oracle/criteria coverage M03/M19 partial.
+-S01-first-wave raw report/arrays не supplied и не воспроизводятся догадкой.
+-Frozen scientific plan, model identity, run/attempt и HDF5 отсутствуют:
++RV08 не использовал архивные originals/HDF5: его первичный input — source/fixtures.
++Сведения о frozen plan/model/run/attempt **известны в кампании** из predecessor
++[RV01](RV01.md): plan46353bytes SHA-256 `4d69332f0770734102c77089ad6cbe4cb2a35b1dde71380cfb59fa13680929f9`,
++schema `qcl-negf-scientific-plan-v2`, model_revision `transport-contract-v2`,
++scientific fingerprint `49ed42000d616857f4e11cf56f7350d9c7ffdb8550e494cf8b53725761e9ed8a`,
++run CalcJob `bb7b9d59-863f-440e-b687-b83ac596f9bb`, attempt1.
++Это predecessor output scope, не повторное чтение originals и не доказательство
++runtime imported solver source; raw HDF5 completeness не установлена RV01/RV08.
+ **все numeric verdict — `not_measured`**, tests/solver/build/import/install не запускались.
+ First6 независимо reviewed в [blind review](reviews/RV08-first6-blind.md);
+-remaining22+PROD6 independent review pending. Reviewer дополнительно прочитал
++remaining22+PROD6 independently source-reviewed в [remaining blind review](reviews/RV08-remaining-blind.md);
++только touched round2 statements ожидают scoped rereview. Reviewer дополнительно прочитал
+ named supplemental fixtures; сравнение/исправления сохранены ниже.
+ 
+ ## D — Dyson inversion/causality
+@@ -374,6 +381,14 @@
+ full-window reference basis preserves eigenspace and density expectation;
+ это **не** independent proof deleted central-cell tails were harmless.
+ No literal PzP degenerate/tail or rank-deficiency fixture read here.
++Independent remaining reviewer дополнительно выявил owning-doc mismatch:
++`docs/src/theory/05_basis.md:58–59` называет `legacy_pzp` рабочим режимом/alias
++для `pzp`, тогда как `basis.jl:110` разрешает только `:pzp/:none/:real_space`.
++Actual negative `test/physics/full_window_basis_preserves_the_spectral_subspace.jl:70–78`
++ожидает ArgumentError от `build_basis(...;localization=:legacy_pzp)`;
++positive `:pzp` вызов follows at79. Это проверенное текстом assertion,
++execution0. Предложение — согласовать owning prose с accepted `pzp`,
++не вводить code compatibility alias и не менять модель.
+ 
+ | Утверждение | Свидетельство | Ограничение | Решение |
+ |---|---|---|---|
+@@ -857,7 +872,7 @@
+ ## R22 — validate_solution
+ 
+ Denominator1/3 cap20min; `EQ-VALIDATE-001`, theory12#eq-validation-residuals
+-→ `validation.jl:516::_validate_solution`, `final_audit::fresh_fixed_point_metrics`,
++→ `validation.jl:516::validate_solution`, `final_audit::fresh_fixed_point_metrics`,
+ `:751::_validate_solution_metrics`. Fresh same-state U/G candidate required,
+ raw and stored gates both; history missing marks Inf, final check uses
+ `get(metrics,name,Inf)` and nonfinite fails. `solution_scientific_assessment`
+@@ -1103,8 +1118,9 @@
+ Это конечный selected catalogue, не все Core code/physics/operators: optical,
+ electron-electron, hot-LO closure, alternate dispersion/bases и full production
+ outer loop вне полного покрытия. First6 independent static review reconciled;
+-remaining28 review pending. Administrative counters34/34 source packets и
+-6/34 independently reviewed не M03/M19. M03/M19=`partial`: applicable numerical
++remaining28 independently source-reviewed; round2 touched statements pending
++scoped rereview. Administrative counters34/34 source packets и34/34 blind
++source-reviewed не M03/M19. M03/M19=`partial`: applicable numerical
+ oracle/fully-defined-criteria denominators не заморожены/не подсчитаны; complete
+ 102-property static disposition не превращается в numerical acceptance.
+ Tests run0, scientific raw verdict
+@@ -1114,10 +1130,10 @@
+ 
+ | Утверждение | Свидетельство | Ограничение | Решение |
+ |---|---|---|---|
+-| selected formulas/operator maps documented and inspected | S + 34 finite sections + properties cards | static review, independent review pending | сохранить |
++| selected formulas/operator maps documented and inspected | S + 34 finite sections + properties cards + blind source reviews | static review, round2 touched statements rereview pending | сохранить |
+ | physical operator fixtures полностью независимы | общие prefactors/helpers и distinct operator fixtures explicitly marked | перечисленные oracle gaps + partial broader catalogue | изменить |
+ | current/seed theory совпадает с source | J factor2π / P04 obsolete normalization wording candidates | require reviewer and owning doc decision | изменить |
+-| S01 scientific accepted / current accurate | no raw frozen plan/model/run/attempt/HDF5 | numeric not_measured | данных недостаточно |
++| S01 scientific accepted / current accurate | RV01 known plan/model/fingerprint/run/attempt1; RV08 source-only input | raw HDF5/run numeric evidence not used; not_measured | данных недостаточно |
+ | production optimization preserves model in selected exact maps | same finite shift/tensor/PV equations, raw candidate order | low-rank/conservative/embedding variants require separate identity | дополнительно измерить |
+ 
+ ## Reconciliation round 1 — blind reviewer first6
+@@ -1135,9 +1151,10 @@
+ | continuum Poisson/scalar nonlinear anchors already exist | reviewer + author supplemental read independent_nonlinear... | proposed reuse, no duplicated future fixture | сохранить |
+ | K/P/J named fixtures indirect/shared helper gaps | author + blind reviewer same source locators | agreement is corroboration, source assertions are evidence | дополнительно измерить |
+ 
+-Неразрешённое: remaining28 author-only static sections; seed-doc wording
+-candidate не independently reviewed. Cheapest resolution — independent reader
+-на том же S с predeclared properties и named source/fixtures, без simulation.
++Исторический round1: remaining28 author-only; затем independent remaining
++source review supplied. Round2 затрагивает doc alias, exact validator locator
++и RV01 archive-input scope; cheapest resolution — scoped rereview этих
++statements на том же S, без whole-Core claim или simulation.
+ RV09 не начат; перечисленные RV09 предложения — handoff/reuse candidates.
+ 
+ ## Disposition ledger — все predeclared properties
+@@ -1191,3 +1208,22 @@
+ R08 qz вопрос не применим к exponential already-integrated Coulomb potential;
+ R09 correlated interfaces не входят independent-interface model. Ledger не
+ требует скрытого изменения исходных properties или ослабления scientific gates.
++
++## Correction round 2 — четыре ограниченных изменения
++
++Immutable source S и denominators34packets/102properties не изменены.
++Reviewer [remaining84-properties](reviews/RV08-remaining-blind.md) прочитал
++source независимо до candidate; это corroboration static statements,
++не numerical acceptance. V1/V2 snapshots не переписываются.
++
++| Утверждение | Свидетельство | Ограничение | Решение |
++|---|---|---|---|
++| legacy_pzp accepted alias заявлен неверно | theory05_basis:58–59; basis:110; full_window fixture:70–79 negative legacy / positive pzp | doc-only proposal D08-03, API/code unchanged | изменить |
++| R22 final evaluator locator | actual validation.jl:516::validate_solution и :751::_validate_solution_metrics | correction nonexistent symbol spelling only | изменить |
++| plan/model/run/attempt metadata отсутствуют в кампании | RV01 output hash/schema/model/fingerprint/run/attempt1 | прежняя global-absence формулировка неверна; RV08 archives не использовал, raw HDF5 numeric still not_measured | изменить |
++| обновлённый aggregate tracked | candidate revision3 + correction diff / revision3 receipt | scoped rereview touched statements pending; whole-Core pass не добавлен | сохранить |
++
++Остановка после этих четырёх groups; tests/solver/product docs/code/skills не
++менялись. Private archive originals не перечитывались; использован только
++predecessor RV01 output. M03/M19 partial и scientific numeric not_measured
++сохранены. Further source/fixture review/RV09 здесь не начат.

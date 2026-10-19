@@ -1,0 +1,21 @@
+--- RV09.md (candidate0)
++++ RV09.md (round1)
+@@ -49,7 +49,7 @@
+ | --- | --- | --- | --- |
+ | T03.1 Discrete matrix roundtrip | C build_poisson_matrix→solve_periodic_poisson; manufactured_periodic_poisson_solution:10–18 n=ND+L*Utest/λP, U≈cos2e−12, ζ/rP/neutral small | Same L в RHS и solver: discrete inverse/gauge sanity, не independent stencil/face/Δx accuracy. Uniform Nz≥3, ε>0, positive donor sheet | Wrong shared stencil может сократиться. Selected fixture не имеет mass/interface/source-negative; execution0 |
+ | T03.2 Independent continuum stencil | C solve_periodic_poisson; independent_nonlinear_and_continuum_anchors:151–187 independent sine derivative RHS, Nz32/64/128, ratios>3.9 | RHS никогда не L*U; independent second-order anchor при constant ε. Variable interface flux не покрыт. Existing fixture переиспользован вместо дубля | Менять stencil/Δx при неизменной analytic RHS должно менять error/ratio — proposal. Positive refinement assertions прочитаны, не исполнены |
+-| T03.3 Incompatible source negative | C bordered solver→ζ/rneutral/rP; два selected Poisson fixtures совместимы | Gap: explicit nonneutral expected-failure assertion не найден в этих двух fixtures. Source не вычитает mean, positive donor denominator безfloor, rP/(‖b‖+λP1e−14) | Proposal фиксированный nonzero mean charge и specific ζ/rneutral/rP отказ. Нулевое отсутствие raw source не accepted neutrality |
++| T03.3 Incompatible source negative | C poisson:50–63 solve_periodic_poisson возвращает Uᴴ, ζ, rP, neutrality; validation:636–640 validate_solution передаёт r_P/r_neutral/r_ζ в assessment | Gap: explicit nonneutral assessment-negative assertion не найден в двух selected совместимых fixtures. Source не вычитает mean, positive donor denominator безfloor, rP/(‖b‖+λP1e−14) | Proposal фиксированный nonzero mean charge: проверить nonzero ζ/rneutral/rP diagnostics и превышение соответствующих limits→ConvergenceReport.passed=false через _validate_solution_metrics:751–775. Это assessment gate failure, не ожидаемый solver throw; raw source отсутствует, neutrality не принята |
+ 
+ Stop: source/assertion→ограниченный вывод либо exact gap. Numerical tolerances — project/fixture policy; no universal physics/experimental threshold. Weights/norm/units/nearzero и applicability source описаны в строках и corresponding RV08 packets; no criteria relaxed.
+ 
+--- fixes/RV09-selected-check.md (candidate0)
++++ fixes/RV09-selected-check.md (round1)
+@@ -9,6 +9,6 @@
+ ```sh
+ uv run --locked --no-sync pytest -c components/qcl-negf-contracts/pyproject.toml -q components/qcl-negf-contracts/tests/test_state_identity.py
+ ```
+- Это текст предложения, не выполненная команда/permission. Save originallogs/errors/skips/toolversions/actualowning import path/exactsource. Four parametric invalidstate expected ContractError locator; exitcode plus cases only selected metadata behavior, не scientific acceptance.
++ Это текст предложения, не выполненная команда/permission. Save originallogs/errors/skips/toolversions/actualowning import path/exactsource. Все четыре parametric cases ожидают ContractError для invalid/conflicting state identity (tests/test_state_identity.py:7–18); это только negative-only subset. Always-rejecting validator также мог бы пройти эти четыре случая: принятие matching valid commit остаётся unknown и не проверяется выбранной командой. Exitcode плюс эти cases свидетельствуют только об отказах selected metadata subset, не scientific acceptance; positive control потребует отдельного future scope/grant.
+ 
+ Stop resource cap/setup/importmismatch/unexpected outcome; сохранить failed originals, не менять criteria и не повторять до pass. M02 scoped instrumentation report отдельно, M05 repeats отдельный finitegrant. Julia/solver/AiiDAprofile/VM/NFS/installation не нужны для этогоpure check.

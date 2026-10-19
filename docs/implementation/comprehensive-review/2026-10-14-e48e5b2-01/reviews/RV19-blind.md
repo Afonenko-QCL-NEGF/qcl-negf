@@ -1,0 +1,20 @@
+# RV19 blind-first primary answer
+
+Candidate/fixes не читались. S/overlay receipt, Runner 0c53c6d0f68e0b25fce79388db831da6fc3ae856; supporting Core/Contracts/Portal/Platform exact gitlinks. Selected P19A ten semantic fields + P19B eight generators + one READY checklist =19 static items; wider API partial.
+
+API configuration_source в application/configuration_types.jl принимает resolved config/dotted path и возвращает последний source path String либо nothing, а не published physical value/formula. Config validate_configuration_source в infrastructure/config/configuration_sources.jl читает YAML/JSON canonical realpaths, merges в заданном порядке, later leaves win, validates schema, возвращает document+provenance. _deep_merge! пишет assigning source history. Units/domain constraints принадлежат schema/resolver и физической модели; assigning source list не содержит formula derivation, литературного origin каждого числа или normalization guarantee. read/source/schema effects/errors явно документировать. default schema_path — package resource, не fixed private path. Canonical example с model→numerical→override требует доступных exact fragments, не придуманных defaults.
+
+Documenter retained docstrings/formulas/crossrefs, local make.jl imports Julia modules и doctest=true executes examples; locks/environment prerequisite, compile cost не static read. Griffe static AST с allow_inspection=False может сохранить signatures/docstrings без fallback imports, но extensions/config сами executable и dynamic values unknown. [Official loading](https://mkdocstrings.github.io/griffe/guide/users/loading/).
+
+Sphinx autodoc imports target modules и их side effects, mock imports не authentic runtime evidence. [Official autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html). OpenAPI создаёт app/routes/schema; current create_app читает settings и allocates capability bytes, lifespan создаёт AiiDA service/store. app construction не static extraction. [Official FastAPI](https://fastapi.tiangolo.com/how-to/extending-openapi/).
+
+TypeDoc использует TS compiler, config/plugins могут исполняться, не application runtime oracle. [Official configuration](https://typedoc.org/documents/Options.Configuration.html). Nix options docs нуждаются module evaluation, descriptions/types/defaults не гарантируют actual site value или deploy admission. terraform-docs parses module inputs/outputs и templates/config hooks не scientific semantics, provider apply не нужен для tables. [Official output](https://terraform-docs.io/user-guide/configuration/output/).
+
+Literate сохраняет один Julia example как source и outputs; execute/doctest/@example runtime зависит format/options, не считать markdown pipeline всегда безопасным. [Official formats](https://fredrikekre.github.io/Literate.jl/stable/outputformats/). Первоначальный juliadocs URL был недоступен; исправленный official source подтвердил execute default notebook=true/markdown=false. Nix declared-options pipeline подтверждён [official implementation](https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/make-options-doc/default.nix), не locked version experiment. Documenter execution подтверждён [doctests docs](https://documenter.juliadocs.org/latest/man/doctests/) и owning make.jl. Все варианты требуют explicit generator/version/dependency lock, output isolation, side-effect authority, offline assets/security and bounded cost. Static AST pilot предпочтителен для нового Python surface; существующий Julia Documenter не заменять только ради нового generator.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Assigning/value/formula origins различны | Runner configuration_source/_deep_merge!/schema | Missing physical origin cannot be inferred | сохранить |
+| Existing Julia docs execute | Owning make.jl doctest=true/imports | Build не выполнен | сохранить |
+| Griffe needs no-inspection guard | Official loading API | Extensions/version unknown | дополнительно измерить |
+| Generator output не semantic acceptance | Eight source/effect distinctions | No prototype/runtime | данных недостаточно |
