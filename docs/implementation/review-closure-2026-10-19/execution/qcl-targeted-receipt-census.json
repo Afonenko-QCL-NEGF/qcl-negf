@@ -30,6 +30,12 @@
     "receipt_sha256": "557f60ed37c4f325d09d552672730f6ad6db414781a0da84d57946c467b67c95"
   },
   {
+    "id": "qcl-DEV05-GREEN-2",
+    "wall_seconds": 44.636,
+    "exit_code": 0,
+    "receipt_sha256": "74b4c571b0d6cd9239cb26e3ef697a4b0a2d3164dd51f6db120d115dd250e49c"
+  },
+  {
     "id": "qcl-DEV06-GREEN-1",
     "wall_seconds": 16.303,
     "exit_code": 0,
@@ -238,6 +244,12 @@
     "wall_seconds": 4.992,
     "exit_code": 0,
     "receipt_sha256": "1a804be7a8d04b53cf2c418dedf5640e3ccd61b52851da4b25dcd95db0448b3e"
+  },
+  {
+    "id": "qcl-DEV24-GREEN-2",
+    "wall_seconds": 4.853,
+    "exit_code": 0,
+    "receipt_sha256": "2bc6444cc375c543606bba248f897503e41a51e5e09934bf73f229768b70bf52"
   },
   {
     "id": "qcl-OPS03-DIAG-1",

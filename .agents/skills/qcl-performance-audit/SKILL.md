@@ -9,7 +9,11 @@ description: Аудит производительности QCL NEGF по ис�
 
 ## Полномочия и источники
 
-Начинай с read-only анализа кода, конфигурации, сохранённых результатов и уже собранных профилей. Прочитай корневой `AGENTS.md` и инструкции компонента. Карта кода, snapshot SHA, семантика метрик и минимальная предлагаемая телеметрия находятся в [references/telemetry.md](references/telemetry.md); проверь актуальность локаторов.
+Начинай с read-only анализа кода, конфигурации, сохранённых результатов и уже собранных профилей. При доступном checkout прочитай применимые `AGENTS.md` и инструкции компонента; используй один канонический контракт `docs/system/agent-review-workflow.md`, «Разбиение до READY».
+
+Три маршрута current source-only / immutable archive / standalone, essential task content, карта кода и границы метрик находятся в [references/telemetry.md](references/telemetry.md). Root checkout не обязателен для анализа переданных материалов: назови точный missing owning module/docs/version или counter, не угадывая его содержание. Current source, archived producer/metric contract и фактический runtime различаются; current README не заполняет старые missing данные.
+
+Последнее применимое поручение определяет этап и сильнее historical PLAN/snapshot. Grant сохраняется при review/commit/resume; уже разрешённые bounded checks внутри scope не требуют нового вопроса. Missing блокирует только dependents; invocation не расширяет общий конечный бюджет, protected inputs, неотменённые scientific/resource/CI-once limits или required fresh admission/technical BIND/READY.
 
 Не запускай solver, тесты, build, benchmark, калибровку, профайлер, установку зависимостей или сервер только ради аудита. Новое вычисление допустимо в явно разрешённой текущей задаче с определённым бюджетом времени/ресурсов и критерием остановки. Уже данное разрешение повторно не запрашивай. Иначе подготовь ограниченный план измерения. Это правило действует и без корневого `AGENTS.md`.
 
@@ -25,7 +29,7 @@ description: Аудит производительности QCL NEGF по ис�
 ## Главные ловушки
 
 - «Запрошено 16 CPU, используется 1–2» недостаточно для вердикта. Уточни единицу CPU, окно, фазу, allocation versus effective quota/affinity, реальные threads, work units, SMT, serial fraction, bandwidth, I/O/admission wait и конкуренцию. Process CPU не показывает, какие Julia/BLAS threads работали.
-- Разделяй cold start и steady state: first observed call и `warmup` не являются измеренным JIT. Проверяй фактический BLAS/backend и вложенные thread pools. Scheduled scientific path задаёт BLAS=1; direct/configured callers могут отличаться. Это не доказательство универсально лучшей настройки.
+- Разделяй cold start и steady state: first observed call и `warmup` не являются измеренным JIT. Проверяй фактический BLAS/backend и вложенные thread pools. Настройку scheduled path сверяй с его archived/selected source; direct/configured callers могут отличаться. Это не доказательство универсально лучшей настройки.
 - `ΔCPU_s/Δwall_s` даёт mean busy logical CPUs только при совпадающих identity и границах. Allocation utilization требует соответствующего знаменателя и coverage. Пропуски, resets, PID reuse и смена clock domain не равны нулю. Метка фазы в конце resource interval не описывает весь интервал.
 - Не смешивай Julia allocation bytes, RSS, cgroup memory/cache и analytical storage estimates. Process-inclusive CPU/GC counters могут включать другую работу; вложенные интервалы перекрываются. Учитывай worker/native workspace, checkpoint duplication и headroom.
 - Compression, hashing, fsync, retrieval, telemetry serialization/flush и polling имеют стоимость. Их устранение допустимо лишь при сохранении durability/recovery контракта. Наличие измерительной инфраструктуры не означает нулевой overhead.
