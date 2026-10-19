@@ -1,0 +1,17 @@
+# RV19 independent review
+
+Blind answer RV19-blind.md сохранён прежде чтения candidate/fixes; последующее уточнение official Literate/Nix URLs не использует готовый диагноз. Candidate SHA256 `cabb6a151e30b2f9d0142744678bf7598d0cdbe73e1b5db815d27bb5e077db4a`; selected predecessor RV16 hash `5fa75c3a40c95a7c7be736c68f28f1ae33aafd622eb8485c0f4d9e637fcde3b7` совпал. Source S + exact Runner/Core/Contracts/Portal/Platform gitlinks. Denominator 10+8+1=19 static dispositions, wider APIs partial. Imports/eval/tests/install/prototypes/build не выполнялись.
+
+Report-quality verdict **сохранить**, blocking findings нет. P19A: configuration_source читает provenance history/last и возвращает String/nothing, не schema default. Explicit required energy_chunk>=1/no schema default совпадает с Contracts source; Core typed64, parser mapping, test17→23/reverse17 подтверждены. Assignment history (_deep_merge!) не value/formula origin. Scheme hashes обеих копий `01ebc5aa635ae98d864fda23606d3228efc6020c68066496539227002ada6390` перепроверены. Narrow proposed docstring устраняет «nothing только nonleaf» без изменения API.
+
+P19B effect distinctions independently checked по official primaries: [Documenter doctests](https://documenter.juliadocs.org/latest/man/doctests/), [Griffe loading](https://mkdocstrings.github.io/griffe/guide/users/loading/), [Sphinx import warning](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html), [FastAPI schema/routes](https://fastapi.tiangolo.com/how-to/extending-openapi/), [TypeDoc compiler/config](https://typedoc.org/documents/Options.Configuration.html), [Nix options implementation](https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/make-options-doc/default.nix), [terraform-docs output modes](https://terraform-docs.io/user-guide/configuration/output/), [Literate formats](https://fredrikekre.github.io/Literate.jl/stable/outputformats/). Moving online docs не устанавливают pinned compatibility. Current make.jl imports/doctest=true и root Documenter1.17.0/tree pin подтверждены source; docs compat не exact Manifest.
+
+Prototype CLI flags --search/--no-inspection/--no-resolve-external/--output поддержаны текущей [official CLI](https://mkdocstrings.github.io/griffe/reference/cli/); version gate в ticket обязателен. App creation environment/capability allocation отдельно от lifespan AiidaService/ExportStore; OpenAPI schema generation не handler execution. Conditional Nix allowedCodesFile/default KiB numbers совпали owner source. Offline/light/anchor success не заявлен без rendering/browser evidence.
+
+Source finding priority: P2 docstring/default-origin precision — owning additive prose proposal; это не scientific defect. Static report quality: принятый matrix и NEEDS_VERSION_AND_AUTHORIZATION ticket не требуют blocker correction. Smallest report fix не нужен. Остаток — versions/extensions/runtime/renderer/offline claims требуют отдельного bounded evidence.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Origins/defaults не смешаны | Exact lookup/schema/merge/test + candidate facts | Test not executed; catalogue partial | сохранить |
+| Eight generators effects/locks разведены | Official docs и local make.jl/Manifest | No measured compatibility/cost | сохранить |
+| Prototype не объявлен безопасным run без prerequisites | Conditional CLI/version grant | Current review no execution | дополнительно измерить |

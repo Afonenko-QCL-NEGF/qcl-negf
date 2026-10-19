@@ -1,0 +1,24 @@
+# RV10 blind-first primary answer
+
+Candidate/fixes не читались. Research R=5458212063a41051328ef8b5d14d63d5ac7dc781; S/overlay receipt, framing SKILL/brief. Selected denominator P10A8+P10B6=14, семь unknowns/five cases subcatalogues. Predecessor RV00/RV01/RV08 прочитан лишь для declared historical gates/metadata limits; current RV08 evolved не принят вместо frozen input. Source/literature reading only, no HDF5/tests/solver.
+
+Question: достаточно ли existing exact S01 final evidence принять thermal fixed point ordinary published-structure model при 0mV/period/common70K baths, и какой минимальный следующий evidence различит raw final defect/seed normalization/discretization limits? Decision — следующий evidence/научный выбор, не обязательно accepted status. Observables: full GR/GL/GG/A FDR с одной μ/eV, charge density m^-2, raw U/G residual по owning norm, integrated J A/m² с near-zero absolute error basis; physical/discretization/experimental verdicts отдельны.
+
+Model/reference-48/equilibrium sources: same geometry/doping/70K/model+policy/scattering/algorithm composition, intentional physical bias48→0, labels/identity административны. Policy includes alloy despite model preset false; frozen plan is effective authority. nine grid variants controlled changes, некоторые multi-axis/embedding model sensitivity, не автоматически запускаемое refinement acceptance. Toy LO operator не published-structure acceptance; arbitrary localized occupations не FD energy occupations.
+
+Literature primary [Bosco arXiv1911.06582](https://arxiv.org/pdf/1911.06582): p3 body (PDF index2, lines251–255) layer sequence32.6/79.9/19.0/84.0/29.0/51.6Å и sheet4.5e10cm^-2; Fig3 caption (PDF index3, lines483–490) 56mV/period maximum и simulated200K IV. Caption text has cm^-3 unlike body cm^-2: use body for sheet density, figure underlining визуально не перепроверено (web screenshot unavailable). PDF bytes не сравнены с declared artifact hash. Publication does not source every material/screening/roughness parameter.
+
+CSV SHAaf6d222b4b1cbdf351f569628c5e62c7983e85909670e26663892bd08477da88: six digitized calculated NEGF samples40–60mV, J kA/cm², uncertainties0.3mV/0.02kA/cm²; не experimental raw current. 56mV maximum использован как calibration axis anchor, поэтому agreement maximum не независимая validation этого scale. 70K/0mV S01 не сравним с200K/finite-bias curve; current density conversion1kA/cm²=1e7A/m². Device periods405 не published terminal-voltage target. Terminal I–V/gain/threshold/light/Tmax require excluded physics.
+
+RV01 binds historical run dfb75b38-6019-4861-b868-f51648c71f02/CalcJob bb7b9d59-863f-440e-b687-b83ac596f9bb/attempt1/plan SHA4d69332f0770734102c77089ad6cbe4cb2a35b1dde71380cfb59fa13680929f9, scientific fingerprint49ed420…; saved waiting/RUNNING/exit=null not live-now status. Imported solver ref/final HDF5 completeness unresolved. RV00 leaves next-S01 prioritization needs_decision, not direct current solver grant.
+
+First gate: establish exact compatible raw final state/plan/imported runtime source and owning criteria/application scope before numeric acceptance. Seven unknowns: next scientific priority; imported solver identity; complete final state/residual/weights; justified near-zero/FDR tolerances; nonpublication material value origins; unbiased200K comparison/calibration covariance; runtime resource/admission+bounds. Local needs_data/decision/budget do not block full brief completion. Proposed numeric envelope fields attempts/CPU/RAM/wall/I/O/output/stop/resume остаются unset; текущий0attempts/0CPU-hours grant. Do not infer compute budget from recovery8GiB/iteration caps.
+
+Five cases: small mixed residual vs nonzero raw defect; two unconverged matched outputs; wrong archived/imported revision or absent final U/G; 200K finite-bias curve vs70K zero-bias model; calibration anchor reused as independent pass/near-zero relative division. Three routes: existing exact archive/metadata analysis; source/analytic/manufactured oracle in declared reduced scope; separately designed physically comparable bounded transport study after explicit scientific decision/budget. Exit insufficient data or scoped answer/cap; resume only with missing evidence/grant, originals retained.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Geometry/doping trace has primary support | Bosco body/Fig3; Research exact sources | Some caption/source origins unverified | сохранить |
+| Digitized simulated curve не S01/experiment oracle | CSV/passport/primary200K caption | Calibration/model uncertainty separate | сохранить |
+| Historical plan identity не final physics evidence | RV01 locators/metadata limits | Raw final/imported source missing | данных недостаточно |
+| Full brief can close without new solver | Framing fields/14-property scope | Future model/tolerances/budget decision | сохранить |

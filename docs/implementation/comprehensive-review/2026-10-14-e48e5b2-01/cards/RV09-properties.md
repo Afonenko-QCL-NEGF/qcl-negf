@@ -1,0 +1,14 @@
+# RV09 — selected source-test properties (predeclared)
+
+Writer requirements; review-only source audit, 2026-10-14. RootS e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1; components gitlinks source-receipt. This declaration precedes new selected fixture bodies for RV09; RV08/RV02 prior reads reused with exact scope. Numerical fixtures not executed. Six packets×3 properties=18 selected properties; full test/branch catalog partial, no all-tests denominator.
+
+| Packet | Three selected properties | Primary producer/consumer/fixtures |
+| --- | --- | --- |
+| T01 Greens | Scalar Dyson spectrum; finite-window spectral sum; actual Keldysh product coverage | Core greens/validation; T070 scalar_dyson_and_spectral_identity; analytic_equilibrium_sum_rule_lo_balance_and_zero_current_anchors |
+| T02 Nonlinear | Fresh pole negative gate; independent quadratic-root finite-budget map; exact candidate equivalence common-helper limit | Core final_audit/scba/production_solver; fresh_candidate_residual; independent_nonlinear_and_continuum_anchors; physics_first_exact_scba_candidate_equivalence |
+| T03 Poisson | Discrete matrix roundtrip; independent continuum stencil/refinement; incompatible-source negative gap | Core poisson; manufactured_periodic_poisson_solution; independent_nonlinear_and_continuum_anchors |
+| T04 Transfer | Shift support/weight/negative mutations; four-index wk/qK map; LO thermal/fractional balance | Core periodicity/kernels/production_cache; non_periodic_energy_shift; energy_shift_validation_follows_declared_discretization; four_index_static_contraction_order; production_lo_equilibrium_discretization; frozen_scientific_fixtures |
+| T05 Results | Manufactured residual/PSD arithmetic oracle; exact owning-import harness; attempt/hash mismatch refusals | Results basefe27a2a and exact PR6H a1492b7; equilibrium.py/StateReader; test_equilibrium_diagnostics; source_ownership/test_source_ownership |
+| T06 Contracts/consumers | Strict bool/nonfinite validation; worker result identity/attempt; causal branch/unknown statuses vs zero | Contracts schema/messages/branch_reasons tests; AiiDA parser tests; Runner branch/output fixtures and RV07 selected scope |
+
+Matrix shape property→producer/consumer→fixture→actual assertion→literal/shared/mock boundary. Classify tests present/read vs executed/outcome; weight/sign/attempt mutation differences named as predicted unless explicit assertion already exists. Mutation injection not performed. M02 repo×language scopes Python/Julia, Julia branch unknown, M04 only selected negative assertions not full risk denominator, M05 no repeats. All future runs need separate finite grant and environment/source admission. Packet≤20min incl independentreview author≤12/reviewer≤8, oneCPU/oneGiBboundedtext, shownextract≤96KiB/section≤8KiB. Coordinator assigns independentreview aftercandidate.

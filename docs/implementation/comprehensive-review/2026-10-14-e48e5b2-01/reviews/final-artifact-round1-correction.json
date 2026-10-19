@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-14T18:52:40.996051+00:00",
+  "round": 1,
+  "changes": [
+    "queue exact owner for RV07 attempt export",
+    "queue exact owner for RV09 selected Contracts check",
+    "queue exact owner for RV10 next gate",
+    "index source-preservation statement distinguishes authorized backlink"
+  ],
+  "files": {
+    "index.md": {
+      "before": "36a146a303ebc77199d8ee17493f777a21d1402e6d9f508207fe5a1ec1cdb16a",
+      "after": "f90a49f89157767b1943365fb9fdea805ef675d94e3a79ce6c69118ccd4d5b27"
+    },
+    "fixes/index.md": {
+      "before": "0a6148a53f2c83ca9d7ff9a471889b83e414b542c383f2548055d5853fef7e3e",
+      "after": "c1e2a3f1d5e28d42bba1b67feef941a48c391a340f0494da4ed5ad535f7978f4"
+    }
+  }
+}

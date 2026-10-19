@@ -1,0 +1,20 @@
+# RV18 blind-first primary answer
+
+Candidate/fixes не читались. Source S/overlay receipt, Portal10b6c871…, Platform4ce214e…; selected RV16/19 как predecessor routing, не native evidence. Frozen catalogue P18A12+P18B5=17 static properties. Builds/browser/install/server не выполнялись.
+
+Пять ADR alternatives: minimal owning links дешевле всего/сохраняют authority, но без unified search; MkDocs static hub+existing Documenter подходит для трёх small journeys, content inclusion/link ownership и release receipts нужны явно; Quarto уместен richer scientific narrative, execute engines требуют separate grant; Antora native component/version graph уместен большему multi-repo corpus, migration AsciiDoc/source-family дороже; Backstage TechDocs добавляет catalog/backend/storage для platform portal, для трёх chapters burden пока не обоснован. Primary capabilities: [MkDocs configuration](https://www.mkdocs.org/user-guide/configuration/), [Quarto search](https://quarto.org/docs/websites/website-search.html), [Antora component version](https://docs.antora.org/antora/latest/component-version/), [Backstage TechDocs architecture](https://backstage.io/docs/features/techdocs/architecture/). Это slice-specific design judgments, не measured cost.
+
+Три journeys: глава physics acceptance/distinction→owning Core prose/formula/API; API provenance/defaults→Runner configuration_source/generated reference; runbook admission/restore→Platform/root sanitized public instructions. Один пилот должен связать эти journeys через stable source/release stamp, не переписать три владельца или объявить scope всей documentation platform. Multi-repo binding берётся gitlinks, docs build имеет отдельный receipt/hash; old artifacts не current release. Metadata search indexes не научный model authority.
+
+Portal api.py:457–459 монтирует StaticFiles('/') последним; docs prefix должен быть зарегистрирован до catch-all, protected API/docs schema boundaries сохраняются. Platform immutable applicationProfile/packaged wheel delivery владеют shipped assets; hub build/source selection owning docs, operational activation отдельна. Migration: old canonical URLs/anchors сохранить или explicit alias table, not silent changed meaning. Public allowlist excludes private inventory/credentials/logs/supplements; source/build receipt не private runtime inventory.
+
+Existing Runner HTML static inventory: index7338B SHA25635965085fe75eee7dbb66d047522eab681881eda02c25ba30671eab0ef22cf49; objects.inv2713B SHA25602ed68b8745ba8ae84b8c950a5929ae3a4158475ee17d3df52209257a5e46f2d; search_index85256B SHA2565ba32eca6284905f397e48558ac2baf0d0f96b8608ac7c594930e5c8f6dbef81; assets9files/2315329B. Build source receipt неизвестен. HTML содержит CDN Lato/JuliaMono/FontAwesome/KaTeX/require.js; themeswap.js читает localStorage и prefers-color-scheme dark, выбирает dark theme. Это observed source incompatibility с fixed-light/offline claim для existing artifact, не browser pass/fail. Portal CSS color-scheme:light не распространяется автоматически на отдельный HTML.
+
+Будущий пилот READY только после selected generator/pin/input hashes, minimal bundle layout, local math/fonts/search assets, explicit fixed-light child pages, exact build/browser commands и общего attempts/CPU/RAM/wall/output envelope. Browser protocol: direct deep-link+anchor/reload, denied external network, dark OS preference, math/fonts/search, keyboard/focus/contrast/loading/error. Current offline/light/a11y not_measured. Не hotlink/download assets или publish из static review.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Lean static hub/links достаточны selected slice | Five alternatives/three journeys above | Search/migration cost unmeasured | сохранить |
+| Existing docs contain auto-dark/CDN behavior source | Hash-bound HTML/themeswap.js | Build provenance/browser unknown | изменить |
+| Prefix must precede root static mount | Exact Portal api.py catch-all | Routing execution not measured | сохранить |
+| Pilot требует separate build/browser grant | Frozen card READY requirements | No runtime/static-site output | дополнительно измерить |

@@ -1,0 +1,11 @@
+# RV13-01 — bounded coordinated restore evidence
+
+Proposal only, decision «дополнительно измерить»; Platform P=`4ce214e29b72276157b10a9267e2f30fef4ac66f`. No live authorization is inferred.
+
+Gap locators: `ops/state_archive.py::main(restore)` lines 260–281 commits `pg_restore --single-transaction` before profile/Slurm `copytree` and chown; no machine-readable incident→recovered receipt. `pack/verify` hash files but do not establish DB-object/repository generation coherence or independent medium durability. `tests/test_state_archive.py::test_complete_local_state_archive_verifies_and_restores_exact_fixture_bytes` extracts synthetic dump bytes only; does not exercise PostgreSQL restore. Documentation `docs/state-archive.md` explicitly requires offline empty target, manual UUID/storage checks and independent medium, so these are missing measurements, not concealed guarantees.
+
+Next distinct work: design sanitized restore receipt and finite rehearsal before relying on backup. Inputs: exact S/P, recorded coordinated capture time, pinned OS/application/PostgreSQL/AiiDA compatibility, trusted copied archive hash, separate NFS manifest, isolated empty target/mount identities, all-writer pause/admission, secret availability by reference only. Missing input blocks dependent operation only.
+
+Discriminating scenarios: restore correct consistent dataset and independently verify representative DB referenced objects/Code+Computer UUIDs; intentional DB/repository generation mismatch must fail acceptance; interrupt after DB commit before repository copy and prove target remains offline/unaccepted with original failed evidence preserved; retain foreign/data disks and NFS datasets across cold image replacement; verify separate external copy, not same-host staging. Future source fixtures can model sequence/failures but cannot settle live storage consistency.
+
+Runtime budget must be assigned explicitly (attempt count, CPU/RAM/wall/output/I/O/disk/stop) by coordinator/operator; this packet grants none. Record timestamps/phase outcomes, archive/source identities, original failed logs, actual service/mount states, measured reserve, RPO/RTO definitions. Completion requires restored-storage checks and synthetic transport gate; science validation separate. Do not erase partial targets or loosen acceptance automatically to get a pass.
