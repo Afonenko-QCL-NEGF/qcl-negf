@@ -1,0 +1,22 @@
+Test Summary:                                                        | Pass  Total  Time
+Analytic equilibrium, sum-rule, LO balance, and zero-current anchors |   11     11  3.0s
+Test Summary:                                                         | Pass  Total   Time
+Actual LO kernel: integer shifts, fractional KMS error and refinement |   14     14  12.5s
+Test Summary:                        | Pass  Total  Time
+Literal final audit transport guards |   40     40  3.3s
+Test Summary:                                                   | Pass  Total  Time
+Required candidate gates cannot disappear in stationary summary |   13     13  1.2s
+Test Summary:                                     | Pass  Total   Time
+Actual native writer and semantic commit readback |  100    100  39.8s
+Test Summary:                                                    | Pass  Total  Time
+Recovery publication verifies, bounds generations and falls back |    8      8  7.1s
+Test Summary:                                                           | Pass  Total  Time
+Failed staging retains acknowledged recovery and final remains separate |    7      7  1.5s
+Test Summary:                                                          | Pass  Total  Time
+An explicit algorithm must not overwrite a different executed contract |    1      1  0.1s
+Test Summary:                                                                 | Pass  Total  Time
+An interrupted publication does not acknowledge or prune the prior checkpoint |    8      8  2.4s
+Test Summary:                                                           | Pass  Total  Time
+Recovery metadata tail cannot advance acknowledgement beyond the budget |   17     17  2.5s
+Test Summary:                                                           | Pass  Total  Time
+Incomplete archive indexes refuse before any heavy receipt verification |    2      2  1.3s

@@ -1,0 +1,26 @@
+{
+  "task": "SCI05-N1-E4-role-selector-v5",
+  "stage": "frozen_source_pending_independent_review",
+  "worktree": "/tmp/qcl-sci05-results-worktree",
+  "branch": "codex/review-closure-final-audit-reader",
+  "head": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+  "review_sha256": "91e1ab77033d3c95f2cd03cb4efa7aeb7a9216c6d49b6260bac9c112b83da198",
+  "E4_checkpoint_sha256": "63f0b1679f94522f2143c12e49877aeccbe0fc51f900057602acfdf502c0505e",
+  "original_F1_review_erratum": "Original F1 point_identity_json recommendation for analysis was inaccurate; actual native4 analysis authority is identity_json. Prior reports remain byte-exact.",
+  "identity_paths": {"physics.full": "metadata/point_identity_json", "physics.analysis": "metadata/identity_json", "fallback": false},
+  "files": {
+    "src/qcl_negf_results/native.py": {"bytes": 16498, "sha256": "532fbedf8b1b296e0fb5bc026788a522bf92aeee94ae1192ca651e2e34a407e5", "unchanged": true},
+    "src/qcl_negf_results/state.py": {"bytes": 29863, "sha256": "335e67678120fd0c8e222fcb5e937b277ccadac35303fca2250c9f345983b477"},
+    "tests/test_final_fixed_point_audit.py": {"bytes": 33890, "sha256": "45111262df9b7744ca9f7397a887af4133ee602d9b6e325af2d3ee4a5e12f95a"}
+  },
+  "patch": {"path": "/tmp/qcl-sci05-results-v5-patch.diff", "bytes": 48313, "sha256": "7be93766f021e2e8a3a4c4afc5a4d56f1302d5317c001d36c108408c9d2034c1"},
+  "preserved": {
+    "v2": {"report": "0f121f3f3f6cd699b516e5d713d408116e7a196a13f94ec1c7ebc056f375786a", "identity": "078894c9107de84d123daa8e799cee535bd7ff3833a791f464185bff063810cc", "patch": "fb936c596a035670426ad64c90c4c97a2e0a663dfd663c34a594e51a2853a55e"},
+    "v3": {"report": "d313606547313efe81e0f92fcbcb98870f5953101f422e00c8056d2a5614e9b8", "identity": "a8eae785481379d1763439e2ab6c5426970b46e8380e084a2778edd42a6dc1fd", "patch": "c6b9a9cf45ae0cfbc284de64ddc82cb1eae32567ddec5f30406a3594636a67e3"},
+    "v4": {"report": "de1a8c421ac9ed09596d46309e05b00c6ac23b45bfaaee7e083791927cd02c4b", "identity": "8fbe43b60f8cbcb45ebf4d050a63be5c9965c123d36217340743e545204828b6", "patch": "d2fe0d8e4830cfca663e734950294ebf3292c39c0d1061e0790ef4d869706c88"}
+  },
+  "checks": {"git_diff_check": "exit_0", "imports_parser_tests_Julia_HDF5_execution": 0, "build_network_server": 0, "Git_mutations": 0, "children": 0},
+  "budget": {"E4_source_rounds_used": 1, "effective_shared_corrective_cap": 6, "C08_consumed": 6, "C08_cap": 8, "new_calls": 0},
+  "pending": ["independent_high_source_review", "actual_Runner_fixture_binding", "coordinator_only_sole_call8"],
+  "source_mutation_stopped": true
+}

@@ -1,0 +1,69 @@
+{
+  "stage": "source discovery only, not DOC04 design/recipe/browser/build acceptance",
+  "root": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "installed_source_directory": ".build/local-julia-int01/depot-1/packages/Documenter/AXNMp/",
+  "manifest_Documenter": {
+    "version": "1.17.0",
+    "git_tree_sha1": "56e9c37b5e7c3b4f080ab1da18d72d5c290e184a",
+    "uuid": "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+  },
+  "source_observations": [
+    "Existing docs recipes import owning packages and enable doctest; standalone Runner docs source pins Corev0.2.0 unlike root selected gitlink",
+    "Pinned HTMLWriter includes all themes, picker and themeswap reading localStorage+OS dark preference; fixed-light recipe not yet implemented",
+    "Pinned RD uses versioned remote RequireJS/fonts/jQuery/highlight/KaTeX URLs; offline asset closure not yet present/proven",
+    "No executable @example/@repl/jldoctest/@eval/include/solve/run match in the four inspected DOC02 reader Markdown slices; this does not audit all docstrings/transitive imports"
+  ],
+  "files": [
+    {
+      "path": "julia/Project.toml",
+      "bytes": 659,
+      "sha256": "859c6e7b2aedf4b58cd48731ea9a3970d70a43e018796472ec99550d186fdafe"
+    },
+    {
+      "path": "julia/Manifest.toml",
+      "bytes": 25261,
+      "sha256": "a6cb226a2d6fe990e9a067658c16b44acdbaf984e68c3474232a22f72d8d8b47"
+    },
+    {
+      "path": "components/QCLNEGF.jl/docs/make.jl",
+      "bytes": 1553,
+      "sha256": "edafb4e03b0fd9982039267dc24ba7c6332551f7e3770fca20b35fc8dae9380f"
+    },
+    {
+      "path": "components/QCLNEGF.jl/docs/Project.toml",
+      "bytes": 259,
+      "sha256": "89f75b805803f233b9f4a0d2d38c0eac59fbd2c9cd316f222ba47276254df74c"
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/docs/make.jl",
+      "bytes": 744,
+      "sha256": "0749b9989ce07c34034dddac2fe8127a9ecca72d43105425928f7468dae16cbc"
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/docs/Project.toml",
+      "bytes": 404,
+      "sha256": "d62edc078612a911a8c8e596fd86b938c90f9e106545e7733ecf8a4ece73efc4"
+    },
+    {
+      "path": ".build/local-julia-int01/depot-1/packages/Documenter/AXNMp/Project.toml",
+      "bytes": 2083,
+      "sha256": "64bef91a742ae872da8c2b7cc0133efb89c9c650426fe74f9bdefd00b761701a"
+    },
+    {
+      "path": ".build/local-julia-int01/depot-1/packages/Documenter/AXNMp/src/html/HTMLWriter.jl",
+      "bytes": 113880,
+      "sha256": "72b261cbef5e06e9edc4159c038d740b5f5372134f9d75db06eeb35b894b29dd"
+    },
+    {
+      "path": ".build/local-julia-int01/depot-1/packages/Documenter/AXNMp/src/html/RD.jl",
+      "bytes": 5032,
+      "sha256": "23f894f57a42f1892911b96b06ca15bc2e23f76dd4269484d56198319ea5ce79"
+    },
+    {
+      "path": ".build/local-julia-int01/depot-1/packages/Documenter/AXNMp/assets/html/themeswap.js",
+      "bytes": 4152,
+      "sha256": "55f38b961d1c725dab51f7bfdffc68e1224e14911cbaaafb4e2405c57c4da4b9"
+    }
+  ],
+  "limits": "No target import, Julia execution, generator render, downloads, browser or server action. Installed source tree full git-tree verification and actual binary toolchain identity still pending; manifest selection alone not native evidence."
+}

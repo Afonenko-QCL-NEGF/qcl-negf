@@ -1,0 +1,26 @@
+{
+  "schema": "qcl-sci03-owningdoc-transfer-identity-v1",
+  "date": "2026-10-19",
+  "stage": "source-only documentation transfer; separate high CPP pending; STOP FREEZE",
+  "role": "D Sol ultra",
+  "accepted_design": {"path": "/tmp/qcl-sci03-current-bound-design.md", "sha256": "ca84b1cc763aa7bc017364ece4f7e95aff5bd0107c0c7277fb87eed250f215f7", "preserved": true},
+  "accepted_design_review": {"path": "/tmp/qcl-sci03-current-bound-design-review.md", "sha256": "fa1311a4bf16f08f6e417590b77b7e6179aa9320907934fbd4496ebc059ca4a9", "preserved": true, "verdict": "CP-DESIGN high APPROVED"},
+  "worktree": {"path": "/tmp/qcl-sci03-current-bound-doc-worktree", "repository": "qcl-negf-research", "branch": "codex/review-closure-current-bound-contract", "base_head": "1eacefcd81a50e245ea9da74a0b717b33818c61e", "final_head": "1eacefcd81a50e245ea9da74a0b717b33818c61e", "baseline_status_short": "", "baseline_recursive_submodule_status": "", "final_status_short": " M docs/equilibrium-measurement-contract.md", "creation": "explicitly authorized git worktree add -b; sandbox escalation approved", "staged": false, "committed": false, "pushed": false},
+  "owning_path": "docs/equilibrium-measurement-contract.md",
+  "baseline_file": {"bytes": 45385, "sha256": "758ac11c19317aba27ee6275d0ce3fdd9f40b639205d89228f4b08405872ad5f"},
+  "frozen_file": {"bytes": 78562, "sha256": "61058d7b33b21e8b43232239569012567e764035dd15900b80d742bd9d6ed38c", "added_bytes": 33177, "added_lines": 439, "deleted_lines": 0},
+  "preservation_check": {"method": "head -c 45385 target | sha256sum", "actual_prefix_sha256": "758ac11c19317aba27ee6275d0ce3fdd9f40b639205d89228f4b08405872ad5f", "matches_baseline": true, "old_anchors_and_reviewed_body_unchanged": true},
+  "checks": {"git_diff_check": "exit0", "sole_owning_diff": true, "exact_theorem_fragment": "D33-116 equals target474-557", "exact_report_fragment": "D204-279 equals target596-671", "exact_streaming_fragment": "D283-336 equals target680-733", "code_fence_lines": 30, "new_markdown_links": 0, "table_modulus_escaping": "four cells; formatting only", "external_links_network_check": "not run", "render_or_target_parser": "not run"},
+  "protected_original": {"path": "/home/tolya/Загрузки/qcl-negf", "read": false, "written": false},
+  "integration_research_checkout": {"path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-research", "final_head": "1eacefcd81a50e245ea9da74a0b717b33818c61e", "final_status_short": "", "source_edits": false},
+  "budget": {"wall_minutes_max": 20, "cpu_max": 1, "ram_bytes_max": 2147483648, "source_read_bytes_max": 3145728, "deliverable_bytes_max": 65536, "filesystem_byte_telemetry": "not instrumented; no retrospective read-cap certification", "repository_wide_content_scan": false, "source_arrays_opened": false, "C08_calls": 0},
+  "actions": {"owning_document_edits": 1, "authorized_isolated_worktree_creations": 1, "staging": 0, "commits": 0, "pushes": 0, "imports": 0, "target_parsers": 0, "tests": 0, "hdf_reads": 0, "julia": 0, "solver": 0, "builds": 0, "network": 0, "server": 0, "children": 0},
+  "outputs": {
+    "report": {"path": "/tmp/qcl-sci03-current-bound-owningdoc-report.md", "bytes": 6687, "sha256": "b1ad4abfab8a86fe0e89d5c4be5d414233271a5ef8618f14e4bc21f8dd00217b"},
+    "patch": {"path": "/tmp/qcl-sci03-current-bound-owningdoc-patch.diff", "bytes": 34380, "sha256": "c99fd8c983caaed04239cc20b58c9480fb992316f5fdff1d9136395c114bfbfc"},
+    "body_mapping": {"path": "/tmp/qcl-sci03-current-bound-owningdoc-body-mapping.json", "bytes": 6211, "sha256": "522c3b4bc41ba6ea61dc0f653baf4a8b8a234e01c4d67f52ae05e959aef89eb3"},
+    "identity": "/tmp/qcl-sci03-current-bound-owningdoc-identity.json"
+  },
+  "claims": {"mathematical_redesign": false, "new_public_api_signature": false, "new_scientific_or_fixture_values": false, "new_scientific_tolerances": false, "instrumentation_implemented": false, "runtime_pass": false, "scientific_acceptance": false, "native_admission": "not supplied"},
+  "next_gate": "coordinator-arranged independent high CPP before Research PR; Results M1 owning I separately"
+}

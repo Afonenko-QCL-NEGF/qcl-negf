@@ -1,0 +1,54 @@
+{
+  "stage": "source-discovery-only; no D acceptance, no execution",
+  "root": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "files": [
+    {
+      "path": "ops/git.ts",
+      "bytes": 3580,
+      "sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7"
+    },
+    {
+      "path": "ops/solver.ts",
+      "bytes": 6188,
+      "sha256": "bc513f610cce976d108e17902ebd423c434992ba0edb91e2bdc3da2e5f3c247f"
+    },
+    {
+      "path": "ops/application_cd.ts",
+      "bytes": 4030,
+      "sha256": "91989d0171e011f4518e178e247d4f7a466d08bd02b7931308a202c4354ee9ce"
+    },
+    {
+      "path": "nix/solver.nix",
+      "bytes": 486,
+      "sha256": "16c99da166ee2d9afc7d238fa317e43f0bcc71e2eccb8de3ff11e97b70aa858f"
+    },
+    {
+      "path": "components/qcl-negf-platform/ops/application_release.py",
+      "bytes": 190991,
+      "sha256": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0"
+    },
+    {
+      "path": "components/qcl-negf-platform/modules/cache.nix",
+      "bytes": 1190,
+      "sha256": "ce3e814b222516efe91a5b14913177828444f500b5195530776cb8e59bbf921c"
+    },
+    {
+      "path": "components/qcl-negf-platform/tests/test_application_release.py",
+      "bytes": 262026,
+      "sha256": "f56062eef912a7c63ab9743a24f1db8a5043c2e24620db0732ab516485c0ce21"
+    },
+    {
+      "path": "components/qcl-negf-platform/docs/application-cd.md",
+      "bytes": 28454,
+      "sha256": "2d7add594947768ed1423efd0e8b3dae45b6c1f904e583b0cb1eb2e8f4f97414"
+    }
+  ],
+  "questions": [
+    "Exact source/derivation/contents/import test-contract binding and permissible carry-forward",
+    "Trust protected file FIFO/symlink/size and frozen snapshot evidence",
+    "Credential-free cache URI semantics versus accepted Nix transport username, no new trust root",
+    "Which existing guard controls suffice and exact uncovered source-only tickets"
+  ],
+  "native": "inventory/admission/access unknown; no Nix evaluation/build/import/SSH/self-check performed",
+  "authority": "P1 B/G1/S1 active; native BIND still required; public release separate"
+}

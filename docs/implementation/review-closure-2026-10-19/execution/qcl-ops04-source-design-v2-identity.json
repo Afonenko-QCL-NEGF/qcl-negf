@@ -1,0 +1,23 @@
+{
+  "artifact_kind": "qcl-ops04-source-design-D2-audit-identity",
+  "status": "frozen_D2_awaiting_second_independent_high_review_and_CP_DESIGN",
+  "date": "2026-10-19",
+  "role": "Sol/ultra D; coordinator assignment",
+  "design_file": "/tmp/qcl-ops04-source-design-v2.md",
+  "design_bytes": 55685,
+  "design_sha256": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+  "root_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "source_authority": "selected root HEAD Git gitlinks; audit locator only, no parallel revision lock",
+  "platform_observed_clean_commit": "b067723c82382689bff5cc366981c56e99b926f8",
+  "original_D": {"path": "/tmp/qcl-ops04-source-design.md", "sha256": "9c13f16187d0801dce35bebb55ed8aaeb332fba0594eed9ab0405cfc4162a355", "preserved": true},
+  "original_identity": {"path": "/tmp/qcl-ops04-source-design-identity.json", "sha256": "7ddbbe1cd0174aca0c248d3807e9e47a9c7f6b8cc0cf6c38e42fc53459bbd291", "preserved": true},
+  "first_independent_review": {"path": "/tmp/qcl-ops04-source-design-review.md", "sha256": "0d2c9f3eca0bc62c9c82af4918c1b562d5c10376a06cdffe3760e32ff7bdcf73", "outcome": "REQUEST_CHANGES F1/F2", "preserved": true},
+  "correction_round": "one finite D2 round within original two-review allowance; counters not reset",
+  "resolved_design_findings": ["F1 authoritative validated/produced/consumed depot JSON bytes", "F2 progressing short writes positive versus zero/incomplete/exception/fsync failure"],
+  "actual_operations": "text/Git metadata reads; /tmp D2 artifacts only; SHA and byte-size inspection",
+  "prohibited_operations_executed": {"imports_parsers_tests": 0, "Deno_Nix_Julia_build_install": 0, "network_SSH_server": 0, "secrets_private_inventory": 0, "Git_mutations": 0, "children": 0, "product_edits": 0, "full_CI": 0, "science_submissions": 0},
+  "budget": {"wall_minutes_max": 20, "cpu_max": 1, "ram_gib_max": 2, "read_mib_max": 3, "report_kib_max": 64},
+  "measurement_limit": "cumulative reads/CPU/RAM not instrumented; authorized maxima are not claimed as measured usage",
+  "native_status": "OPS04.N unknown; no native claims or new admission/trust root",
+  "next_gate": "second independent high review, coordinator CP-DESIGN; STOP before I/tests/native"
+}

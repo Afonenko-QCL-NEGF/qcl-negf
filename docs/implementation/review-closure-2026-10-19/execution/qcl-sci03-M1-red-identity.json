@@ -1,0 +1,58 @@
+{
+  "schema": "qcl-sci03-M1-red-source-identity-v1",
+  "stage": "phase1 RED source frozen; STOP awaiting independent high review and coordinator sole RED call",
+  "author": "I Sol medium",
+  "source_date": "2026-10-19",
+  "freeze_utc": "2026-10-19T18:59:28Z",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head_at_read": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "protected_original": "/home/tolya/Загрузки/qcl-negf",
+  "protected_original_written": false,
+  "protected_object_store_read": true,
+  "worktree": "/tmp/qcl-sci03-M1-results-worktree",
+  "clone": "/tmp/qcl-sci03-M1-results-source.git",
+  "clone_method": "local git clone --shared --no-checkout; read-only object alternates, all metadata writes in /tmp; no network",
+  "objects_alternate": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-results/objects",
+  "base_commit": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "head_at_freeze": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "branch": "codex/review-closure-current-bound-measurements",
+  "component_submodules": [],
+  "preparation_attempts": [
+    {
+      "id": "SCI03-M1-PREP-1",
+      "command": "git -C /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-results worktree add -b codex/review-closure-current-bound-measurements /tmp/qcl-sci03-M1-results-worktree 33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+      "result": "failed before ref creation: protected source gitdir read-only",
+      "original_error": "fatal: cannot lock ref 'refs/heads/codex/review-closure-current-bound-measurements': Unable to create '/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-results/refs/heads/codex/review-closure-current-bound-measurements.lock': Read-only file system",
+      "runtime_calls_consumed": 0,
+      "repeated": false
+    },
+    {"id": "SCI03-M1-PREP-2", "result": "successful isolated /tmp clone and requested worktree/branch at exact base", "runtime_calls_consumed": 0}
+  ],
+  "inputs_sha256": {
+    "/tmp/qcl-sci03-current-bound-design.md": "ca84b1cc763aa7bc017364ece4f7e95aff5bd0107c0c7277fb87eed250f215f7",
+    "/tmp/qcl-sci03-current-bound-design-review.md": "fa1311a4bf16f08f6e417590b77b7e6179aa9320907934fbd4496ebc059ca4a9",
+    "/tmp/qcl-sci03-current-bound-doc-worktree/docs/equilibrium-measurement-contract.md": "61058d7b33b21e8b43232239569012567e764035dd15900b80d742bd9d6ed38c",
+    "/tmp/qcl-checkpoint-M1-DOC04-OPS04-next.json": "985029c884dbf688f9629813c71a819d8954ef76c5978f3840dc9ba75cf6d90d",
+    "baseline_tests/test_equilibrium_diagnostics.py": "ce35954b2503d7a910048d6e95bcc6b6b0c88eea40f8a018dc13bdf8ca4bbad0"
+  },
+  "changed_files": ["tests/test_equilibrium_diagnostics.py"],
+  "diff": {"insertions": 324, "deletions": 0, "existing_36_tests_prefix_byte_equal": true, "diff_check_passed": true},
+  "frozen_sha256": {
+    "tests/test_equilibrium_diagnostics.py": "7d2a9d69a0d4cb02334b9b4617a09a9cb3746247eba17f7ebff364eb62ab8921",
+    "src/qcl_negf_results/equilibrium.py": "3f8ee56390741e15bc2c709de67d4b0c80260733c99752d8fbbb4f538e3042e6",
+    "README.md": "39c5c06b1335e6820b980ba3967a42ac25f8fad4b80a771e7297a5982d1363e9",
+    "/tmp/qcl-sci03-M1-red-patch.diff": "8c7aa6f21518e86534135c99fec4d354a1162b546f03f8dd85598c9dcc7575b1",
+    "/tmp/qcl-sci03-M1-red-report.md": "dd95cd8eabc86f7978c11a0e0af457a449b02f1b721ef1779acb507b98848d7e"
+  },
+  "expected_collection_not_executed": {"baseline": 36, "new_functions": 9, "new_parametrized_cases": 15, "total": 51, "predicted_red_failed": 13, "predicted_red_passed": 38},
+  "expected_red_mechanisms": ["12 cases: assertion missing SCI03-5.3 measured current-bound instrumentation", "M1_06: expected ContractError invalid_data absent on old finite bound-overflow input"],
+  "verification_executed": ["git identity/status/submodule read", "sha256sum", "git diff --check", "baseline full-prefix byte cmp", "manual literal algebra/source inspection"],
+  "execution": {"imports": 0, "parsers": 0, "tests": 0, "pytest": 0, "hdf_reads": 0, "julia": 0, "solver": 0, "benchmarks": 0, "builds": 0, "installs": 0, "network": 0, "server": 0, "stage": 0, "commit": 0, "push": 0, "children": 0, "production_edits": 0, "readme_edits": 0},
+  "author_budget": {"wall_minutes_max": 30, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 4194304, "output_bytes_max": 65536, "resource_telemetry": "not instrumented; targeted source text/hashes only, no arrays"},
+  "coordinator_engineering_budget": {"maximum_calls": 2, "consumed_here": 0, "purpose": "one RED after review then one GREEN after implementation review", "per_call_seconds_max": 90, "combined_seconds_max": 180, "cpu_max": 1, "rss_bytes_max": 1073741824, "owned_tmp_bytes_max": 33554432, "raw_output_bytes_max": 2097152, "automatic_third_call": false},
+  "SCI05_08_C08": {"cap": 8, "consumed_prior": 8, "consumed_here": 0, "reset": false},
+  "scientific_caps": "unchanged; no scientific experiment; S1 0mV/70K five channels, electron-electron none",
+  "missing": {"H": null, "epsilon_J_abs": null, "immutable_final_arrays": null, "run": null, "attempt": null, "frozen_plan": null, "native_admission": null},
+  "next_gate": "independent high source review, then coordinator RED once; no production edit until that receipt",
+  "publisher_order": "owning Research contract publication before Results consumer publication"
+}

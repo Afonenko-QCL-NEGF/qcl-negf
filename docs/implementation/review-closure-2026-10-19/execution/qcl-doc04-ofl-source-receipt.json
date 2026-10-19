@@ -1,0 +1,17 @@
+{
+  "id": "DOC04-OFL-SOURCE-1",
+  "state": "failed_HTTP403_no_raw_license_admitted",
+  "url": "https://openfontlicense.org/documents/OFL.txt",
+  "tool_chunk_id": "feb433",
+  "exit_code": 1,
+  "tool_wall_seconds": 0.189605763,
+  "attempts": 1,
+  "automatic_retry": false,
+  "partial_artifact_exists": false,
+  "retained_failure": "/tmp/qcl-doc04-katex-0.16.8/license-inputs/download-failure-tool-trace.txt",
+  "failure_capture_limit": "tool traceback retained; HTTP response body/headers were not captured by initial inline urllib call, unavailable notzero",
+  "official_web_text": "officialpage+plaintext link verified via web tool, byte-level rawdownload notadmitted",
+  "source_facts": "template header includes placeholders; actual copyright/RFN must derivefontdistribution",
+  "imports_render_install": 0,
+  "recorded_utc": "2026-10-19T18:51:50.187463+00:00"
+}

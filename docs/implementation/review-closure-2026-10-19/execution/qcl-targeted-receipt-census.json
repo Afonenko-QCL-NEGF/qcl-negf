@@ -42,6 +42,12 @@
     "receipt_sha256": "b30b51c860de104f11c63a61f824e3cc5c076be0e4e9d05f7616040e7a8b0fa0"
   },
   {
+    "id": "qcl-DEV07-ABSOLUTE-1",
+    "wall_seconds": 7.415,
+    "exit_code": 0,
+    "receipt_sha256": "3185a8b6a27a61a64e02f6608b4ff372fb364318d73b8c3fd994b2541afad236"
+  },
+  {
     "id": "qcl-DEV08-GREEN-1",
     "wall_seconds": 6.111,
     "exit_code": 1,
@@ -328,5 +334,17 @@
     "wall_seconds": 29.377,
     "exit_code": 1,
     "receipt_sha256": "15c50c17b266692734fc58afcb806c0613a0cd7fe67734734f1f3c543328fd93"
+  },
+  {
+    "id": "qcl-SCI05-C08-RESULTS-8",
+    "wall_seconds": 10.612,
+    "exit_code": 0,
+    "receipt_sha256": "fe33bf551025b97d1375bbb1dcece2b2c66dfedde4181b229a84046cf363635d"
+  },
+  {
+    "id": "qcl-SCI05-C08-RUNNER-7",
+    "wall_seconds": 86.627,
+    "exit_code": 0,
+    "receipt_sha256": "a4f36879beea61bb97f6b42f1808179578b1bf259a748566f32c273c65a9a23f"
   }
 ]

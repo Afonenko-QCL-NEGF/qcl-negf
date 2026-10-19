@@ -1,0 +1,45 @@
+{
+  "state": "source_bound_runtime_pending",
+  "head": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+  "base": "9378396a3681c1eddf2c62f16674834fc4465583",
+  "branch": "codex/review-closure-final-audit-writer-integration",
+  "review": "002a592d503be8fbbce1dc4424a387617419fe3f19d0e4d31ea2ce7d7c4ea25a",
+  "candidate_identity": "60e466612ef9ab6ef336cf8f07d7599807baa8622502bbbe6dfd0574ee068b5d",
+  "files": {
+    "src/infrastructure/persistence/physics_diagnostics.jl": {
+      "sha256": "fb4eda44e533c171678d8d8efe18b60c03fdaf72f16db72efebf69ded0901ba9",
+      "bytes": 31201,
+      "changed": true
+    },
+    "src/infrastructure/persistence/hdf5.jl": {
+      "sha256": "d9ceeec9a76b8a7bc4c41eb24aaa2d4bb1fc1994cbce0407b9a344bdacb8d143",
+      "bytes": 31055,
+      "changed": true
+    },
+    "src/infrastructure/persistence/point_artifacts.jl": {
+      "sha256": "9e8c1d8f624bb828134129c10226211968360950cbac9ffd82e247a8ec294cd4",
+      "bytes": 77381,
+      "changed": true
+    },
+    "src/infrastructure/persistence/light_results.jl": {
+      "sha256": "75c418fcc02e1023f951ccca216d60a0fd78e662f2a21fac1a477e609b141f06",
+      "bytes": 10363,
+      "changed": false
+    },
+    "test/infrastructure/final_fixed_point_audit.jl": {
+      "sha256": "dbb1b210374060f85b96ee82355bd5afacb9a4b6244515d00ea1930cd45caa5c",
+      "bytes": 19705,
+      "changed": true
+    },
+    "docs/src/user/results.md": {
+      "sha256": "39e1178fc88a940b69ad61298d54538f44d1e39df6b9d9c2dd8e5264f395f561",
+      "bytes": 17568,
+      "changed": true
+    }
+  },
+  "runtime_sha256": "02618fb870c4b0f35976837605b39026b55ed998fc51dfe1edb95ae928c85d4f",
+  "retained_fixture_root": "/tmp/qcl-SCI05-C08-RUNNER-7/tmp/producer-fixture",
+  "C08_calls_before_run": 6,
+  "published": false,
+  "scientific_accepted": false
+}
