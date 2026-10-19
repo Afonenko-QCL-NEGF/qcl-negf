@@ -1,0 +1,43 @@
+{
+  "task": "DEV18",
+  "attempt": "GREEN-1",
+  "started_utc": "2026-10-19T15:18:16.752030+00:00",
+  "recorded_at_utc": "2026-10-19T15:18:35.004135+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/bin/julia",
+    "--startup-file=no",
+    "--threads=1",
+    "--check-bounds=yes",
+    "--project=/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.build/local-julia-int01/import-phase-1/environment/julia",
+    "-e",
+    "foreach(include, ARGS)",
+    "components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl",
+    "components/QCLNEGFRunner.jl/test/infrastructure/yaml_repository_provenance_spans_and_checkpoint_integrity.jl"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "da42ab9bf913dd28715824fe4c0b5efbba004d1d5f23be0a32efdadcf6096911",
+  "fixture_sha256": {
+    "components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl": "4e74a26ab5caf80e12ddae3e85ca4b3bb793081686bd0bbaeeb0fa35028ac429",
+    "components/QCLNEGFRunner.jl/test/infrastructure/yaml_repository_provenance_spans_and_checkpoint_integrity.jl": "a672cc8313f92446b05778422c9d23408f47983782da0dc14822c94d92bc45ef"
+  },
+  "exit_code": 1,
+  "wall_seconds": 18.252,
+  "sampled_peak_process_tree_RSS_bytes": 530972672,
+  "sampled_owned_temporary_bytes_peak": 283633,
+  "stdout_stderr_bytes": 9646,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 120,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 2147483648,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "selected Julia1.13.0/copied byte-equal project/prepared offline depot, generic CPU/checkboundsyes/BLAS1; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-DEV18-GREEN-1/original.log"
+}

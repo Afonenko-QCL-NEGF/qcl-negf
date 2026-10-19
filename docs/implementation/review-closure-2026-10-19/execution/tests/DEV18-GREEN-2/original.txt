@@ -1,0 +1,22 @@
+┌ Info: DEV18 source-selected fixture
+│   source = "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/src/composition/application_runtime.jl"
+│   sha256 = "ad8b0fe43df8d21765d91dbfcbef7cbbc498453b0d1b41a8193c0db8d2a99efe"
+│   repository_source = "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/runtime/filesystem_repository.jl"
+└   repository_sha256 = "44a1d6e907b985bdcd5fb89b73a50ca434ab6209462564d63936562317521849"
+┌ Info: DEV18 retained raw fixture trees
+│   trees =
+│    55-element Vector{String}:
+│     "/tmp/qcl-DEV18-GREEN-2/tmp/qcl-dev18-tYzlOg"
+│     "/tmp/qcl-DEV18-GREEN-2/tmp/qcl-dev18-vTbe7V"
+│     ⋮
+│     "/tmp/qcl-DEV18-GREEN-2/tmp/qcl-dev18-D6PYh4"
+│   cells =
+│    55-element Vector{String}:
+│     "C01"
+│     "C02"
+│     ⋮
+└     "L03"
+Test Summary:                         | Pass  Total   Time
+Runtime checkpoint publication faults | 3199   3199  13.4s
+Test Summary:                                                | Pass  Total  Time
+YAML repository, provenance, spans, and checkpoint integrity |   15     15  7.3s

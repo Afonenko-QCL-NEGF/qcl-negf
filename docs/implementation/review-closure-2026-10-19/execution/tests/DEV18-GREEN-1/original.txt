@@ -1,0 +1,120 @@
+┌ Info: DEV18 source-selected fixture
+│   source = "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/src/composition/application_runtime.jl"
+│   sha256 = "ad8b0fe43df8d21765d91dbfcbef7cbbc498453b0d1b41a8193c0db8d2a99efe"
+│   repository_source = "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/runtime/filesystem_repository.jl"
+└   repository_sha256 = "44a1d6e907b985bdcd5fb89b73a50ca434ab6209462564d63936562317521849"
+
+H01: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:125
+  Expression: observed.bytes == collect(codeunits(bytes))
+   Evaluated: UInt8[0x73, 0x74, 0x61, 0x74, 0x65, 0x3a, 0x20, 0x22, 0x6e, 0x65, 0x77, 0x22, 0x0a] == UInt8[0x73, 0x74, 0x61, 0x74, 0x65, 0x3a, 0x20, 0x6e, 0x65, 0x77, 0x0a]
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] complete(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, g::Int64, a::Int64, bytes::String; guarded::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:125
+   [3] complete
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:119 [inlined]
+   [4] (::Main.Suite_RuntimeCheckpointDurability.var"#139#140")(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:347
+   [5] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:110 [inlined]
+   [6] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [7] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [8] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#139#140"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H01: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:126
+  Expression: observed.sha256 == bytes2hex(SHA.sha256(codeunits(bytes)))
+   Evaluated: "2d121155c5f4b7b2e0d966fe46a4d124fddd1465d3c23193ff05c3fda050e16f" == "e4b35af9bfa1ed5cccb92b8675b70a13cbeabaa72945d890b16b41989f752260"
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] complete(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, g::Int64, a::Int64, bytes::String; guarded::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:126
+   [3] complete
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:119 [inlined]
+   [4] (::Main.Suite_RuntimeCheckpointDurability.var"#139#140")(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:347
+   [5] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:110 [inlined]
+   [6] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [7] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [8] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#139#140"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+┌ Info: DEV18 retained raw fixture trees
+│   trees =
+│    55-element Vector{String}:
+│     "/tmp/qcl-DEV18-GREEN-1/tmp/qcl-dev18-z4Rjcm"
+│     "/tmp/qcl-DEV18-GREEN-1/tmp/qcl-dev18-9k2Y3t"
+│     ⋮
+│     "/tmp/qcl-DEV18-GREEN-1/tmp/qcl-dev18-9js0rK"
+│   cells =
+│    55-element Vector{String}:
+│     "C01"
+│     "C02"
+│     ⋮
+└     "L03"
+Test Summary:                         | Pass  Fail  Total   Time
+Runtime checkpoint publication faults | 3197     2   3199  15.9s
+  C01                                 |   16           16   0.4s
+  C02                                 |   26           26   0.0s
+  C03                                 |   38           38   0.2s
+  C04                                 |   48           48   0.2s
+  C05                                 |   58           58   0.0s
+  C06                                 |   69           69   0.9s
+  C07                                 |   81           81   0.0s
+  C08                                 |   94           94   2.9s
+  C09                                 |  104          104   0.0s
+  C10                                 |  114          114   0.1s
+  C11                                 |   24           24   0.0s
+  C12                                 |   34           34   0.0s
+  C13                                 |   46           46   0.0s
+  C14                                 |   56           56   0.0s
+  C15                                 |   66           66   0.0s
+  C16                                 |   77           77   0.0s
+  C17                                 |   89           89   0.0s
+  C18                                 |   98           98   0.0s
+  C19                                 |  108          108   0.0s
+  C20                                 |  118          118   0.0s
+  E01                                 |   15           15   0.0s
+  E02                                 |   36           36   0.2s
+  E03                                 |   48           48   0.1s
+  E04                                 |   58           58   0.0s
+  E05                                 |   70           70   0.1s
+  E06                                 |   78           78   0.2s
+  E07                                 |   90           90   0.0s
+  E08                                 |   99           99   0.0s
+  E09                                 |  106          106   0.1s
+  R01                                 |    8            8   0.0s
+  R02                                 |    8            8   0.0s
+  R03                                 |    8            8   0.0s
+  R04                                 |    8            8   0.0s
+  R05                                 |    8            8   0.0s
+  R06                                 |    8            8   0.3s
+  R07                                 |    8            8   0.0s
+  R08                                 |    8            8   0.0s
+  R09                                 |    8            8   0.0s
+  R10                                 |    8            8   0.0s
+  R11                                 |    8            8   0.0s
+  R12                                 |    8            8   0.0s
+  R13                                 |    8            8   0.0s
+  R14                                 |    8            8   0.0s
+  R15                                 |    9            9   0.0s
+  R16                                 |    9            9   0.0s
+  R17                                 |    7            7   0.0s
+  R18                                 |    7            7   0.0s
+  H01                                 |  111     2    113   2.2s
+  H02                                 |  221          221   0.0s
+  H03                                 |  115          115   0.0s
+  H04                                 |   17           17   0.0s
+  H05                                 |  119          119   0.0s
+  L01                                 |  223          223   0.4s
+  L02                                 |  161          161   0.1s
+  L03                                 |  120          120   0.1s
+RNG of the outermost testset: Random.Xoshiro(0x83b8e886920aa01e, 0x5bea06e60d834eb5, 0xe251ed2f3373e21b, 0xc5c2216a39580e75, 0x6b5f890c4d405bf7)
+ERROR: LoadError: Some tests did not pass: 3197 passed, 2 failed, 0 errored, 0 broken.
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:1
