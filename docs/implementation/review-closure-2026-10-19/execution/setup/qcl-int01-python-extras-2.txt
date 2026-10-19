@@ -1,0 +1,18 @@
+Resolved 112 packages in 1ms
+Downloading ruff (9.9MiB)
+ Downloaded ruff
+Prepared 6 packages in 1.25s
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 10 packages in 16ms
+ + build==1.6.1
+ + editables==0.6
+ + hatchling==1.29.0
+ + httpcore2==2.13.1
+ + httpx2==2.13.1
+ + pathspec==1.1.1
+ + pyproject-hooks==1.3.3
+ + ruff==0.16.9
+ + trove-classifiers==2026.9.21.13
+ + truststore==0.10.4
