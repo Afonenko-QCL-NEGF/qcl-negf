@@ -234,6 +234,12 @@
     "receipt_sha256": "065d0af00b389f782242cf2a103469cd466348e80f96b344b7e2315b03158dd3"
   },
   {
+    "id": "qcl-DEV24-GREEN-1",
+    "wall_seconds": 4.992,
+    "exit_code": 0,
+    "receipt_sha256": "1a804be7a8d04b53cf2c418dedf5640e3ccd61b52851da4b25dcd95db0448b3e"
+  },
+  {
     "id": "qcl-OPS03-DIAG-1",
     "wall_seconds": 1.995,
     "exit_code": 1,
