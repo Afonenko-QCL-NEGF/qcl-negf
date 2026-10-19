@@ -25,12 +25,14 @@
   "worktree_operation_id": "6e12e70a-18ea-4ce6-ab7e-fed5b6f98641",
   "worktree_operation_state": "completed",
   "counters": {
-    "setup_attempts": 4,
+    "setup_attempts": 6,
     "targeted_test_active": null,
     "targeted_tests_by_task": {
       "DEV10": 5,
-      "DEV11": 8,
-      "DEV21": 1
+      "DEV11": 9,
+      "DEV21": 1,
+      "DEV13": 2,
+      "DEV16": 1
     },
     "heavy_build_attempts": 0,
     "heavy_build_wall_hours": 0,
@@ -41,8 +43,10 @@
     "scientific_resident_bytes": 0,
     "scientific_read_bytes": 0,
     "scientific_written_bytes": 0,
-    "local_julia_preparation_attempts": 1,
-    "local_julia_preparation_wall_seconds": 0
+    "local_julia_preparation_attempts": 2,
+    "local_julia_preparation_wall_seconds": 313.2506093978882,
+    "local_frontend_asset_build_attempts": 1,
+    "native_build_active": null
   },
   "resource_observation": {
     "logical_cpus": 12,
@@ -59,12 +63,12 @@
   },
   "tasks": {
     "INT01": {
-      "state": "local_Julia_preparation_READY_launch",
-      "owner": "coordinator",
-      "operation_id": "INT01-JULIA-PREP-1",
-      "python": "ready lockedallpackageextras",
-      "node": "ready24.21.0",
-      "fullCI": 0
+      "state": "local_targeted_environments_ready",
+      "python": "3.14.7 lockedallpackages/extras owningimportsverified",
+      "node": "24.21.0 lockedmodules; localofflineassetsverified",
+      "Julia": "1.13.0 lockeddepot actualCore/Runnerimportsverified BLAS1",
+      "native_server": "blocked missingfreshinventory/admission; no probes",
+      "scientific_and_fullCI": "not_measured"
     },
     "DEV01": {
       "state": "done",
@@ -120,14 +124,17 @@
       "no_runtime_acceptance": true
     },
     "DEV03": {
-      "state": "planned",
-      "definition": "development.md#DEV03",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "frozen_fixture_waiting_import",
+      "owner": "/root/core_oracles_impl",
+      "fixture_sha256": "9a22526d104dc15e25b203a52631687819999ea1c84872627199c00062373d42",
+      "runtime_tests": 0
     },
     "DEV04": {
-      "state": "planned",
-      "definition": "development.md#DEV04",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "carrier_conditional_ready_explicit_precondition_frozen",
+      "design_sha256": "17c6dda56a2223bde9d20e98928e659d9e60fb7d6615b72ff94dcf190b829ea1",
+      "review_sha256": "b5b3f58eb879272ed4be2081f36fa5c21c9f3733e961951d4649b6feb2edc348",
+      "coordinator_freeze": "RetainallliteralRHSandrequiredEXACT profiles.ND==ones(4) precondition beforePoisson/routing. If false STOP/replan; no silentisapprox or densitynormalization changes.",
+      "runtime": 0
     },
     "DEV05": {
       "state": "planned",
@@ -135,9 +142,11 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "DEV06": {
-      "state": "planned",
-      "definition": "development.md#DEV06",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "carrier_CP_DESIGN_PASS_readyI",
+      "design_sha256": "17c6dda56a2223bde9d20e98928e659d9e60fb7d6615b72ff94dcf190b829ea1",
+      "review_sha256": "b5b3f58eb879272ed4be2081f36fa5c21c9f3733e961951d4649b6feb2edc348",
+      "scope": "consistentcheckedNE3Nk2manufacturedfunctional; noS1modelchange",
+      "runtime": 0
     },
     "DEV07": {
       "state": "planned",
@@ -145,9 +154,10 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "DEV08": {
-      "state": "planned",
-      "definition": "development.md#DEV08",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "frozen_fixture_waiting_import",
+      "owner": "/root/core_oracles_impl",
+      "fixture_sha256": "bae8a57957cd9df4da0d7369521a7d7ffa776b4c095859e0d1a9f86a9607eb6e",
+      "runtime_tests": 0
     },
     "DEV09": {
       "state": "done",
@@ -168,24 +178,27 @@
       "review": "CP-CODE PASS; native acceptance not_measured"
     },
     "DEV11": {
-      "state": "published_independent_CP_CODE_pass",
+      "state": "published_merged_source_closure",
       "head": "6ff9f6100623c578028506d43a39972dbfbc00dc",
       "pr": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-portal/pull/8",
-      "checks": "125Pythonpass+1unchangedbrowser404;9Nodepass;tsc0",
-      "packaging": "notaccepted; separate nativeassets gate",
-      "review_sha256": "dcd70da086e0e07506f7e6b84b594575a9b76d19e2399f561f630e71dea1cc0f"
+      "checks": "125Pythonpass+historicalstatic404 thensoleassert1passafterofflinebuild;9Nodepass;TSC0; independentCP-CODEPASS",
+      "limitations": "No wheel/canonicalreleasebuild/browserrender/native/fullCI/science acceptance"
     },
     "DEV12": {
-      "state": "design_correction_round2",
-      "owner": "/root/dev12_design",
-      "reviewer": "/root/reviewer",
-      "round1_review_sha256": "325eb95b13fe77c2b8bba37ee49965dfd6b9b4750731f53810aea11eb625e9a3",
-      "gap": "ExportStore lock held across actualFSIO can block boundedclose; preserveoriginalv1; no productchanges"
+      "state": "owningdoc_published_draft_PR9",
+      "head": "fa80b5b5920dc16dfb911d164939b3d23e6be186",
+      "pr": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-portal/pull/9",
+      "review_sha256": "fcbb73cfd7f887381ec0a3ef83f851a88349a0d732ee0751d22cc21708dc5ef3",
+      "codeimplementation": "DEV13 failing candidate not committed or root-gitlinked"
     },
     "DEV13": {
-      "state": "planned",
-      "definition": "development.md#DEV13",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "regression_tests_only_in_progress",
+      "owner": "/root/dev13_impl",
+      "reviewer": "/root/reviewer",
+      "source_diff_sha256": "7ace94cc51e485340e8812f9cca2ba02eb7d2c6735a94660b6bce67bf14fecc3",
+      "CP_CODE": "CHANGES_REQUESTED",
+      "review": "evidence/qcl-dev13-code-review.md",
+      "next": "source-diagnose 2 ASGI failures; add R1-R3 Event/caplog controls, root semantic RED before production fixes"
     },
     "DEV14": {
       "state": "published_merged",
@@ -194,15 +207,18 @@
       "checks": "independentCP-DESIGN+CP-CODEPASS one-leafparsed equality;runtime0"
     },
     "DEV15": {
-      "state": "design",
+      "state": "CP_DESIGN_v2_PASS_readyI",
       "owner": "/root/dev15_design",
-      "role": "ultra",
-      "narrow_DEV16_replan": "add private guard invocation/root injection at src/infrastructure/config/configuration.jl::_resolve_configuration; sameguard bothYAML+frozenplan; pendingindependentCPDESIGN"
+      "reviewer": "/root/schema_reviewer",
+      "candidate_sha256": "61c07b249740e435b9b4c2e2becfdaf558ad96304e275adcda370f652df9a1c6",
+      "limits": "YAMLsourceoverloadreadconfirmed; metadata-onlymergeTAGrejectrequired preservingcustomschemas"
     },
     "DEV16": {
-      "state": "planned",
-      "definition": "development.md#DEV16",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "RED1_environment_timeout_before_assertions",
+      "owner": "/root/dev16_impl",
+      "base": "0c53c6d0f68e0b25fce79388db831da6fc3ae856",
+      "diff_sha256": "ab39c80b0d583d10411e5fd6c4024c28a680935986fb1876817c33ca7430e00c",
+      "next": "checked compiler preparation needs independent READY, then distinct semantic RED attempt; production untouched"
     },
     "DEV17": {
       "state": "planned",
@@ -225,12 +241,10 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "DEV21": {
-      "state": "CP_CODE_pass_committed_push_verifying",
-      "head": "17574ca",
+      "state": "published_merged",
+      "head": "17574ca4c5495f74d86ed9bef51c60dea8265062",
       "pr": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results/pull/6",
-      "reviewer": "/root high independent from mediumauthor; sourcefirst originalPRbeforecandidate",
-      "review_sha256": "7c17d0b56e7f7d0372c35bb8e419b2164133a778cb5c01bd1283817511f393be",
-      "checks": "42passed;36numericfixtures unchanged; syntheticmetadata notwheelproof"
+      "checks": "42passed;36numericalfixtures unchanged; independentCP-CODEPASS; syntheticmetadata notwheelproof"
     },
     "DEV22": {
       "state": "planned",
@@ -258,10 +272,16 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "OPS02": {
-      "state": "source_only_design",
+      "state": "CP_DESIGN_scoped_PASS",
       "owner": "/root/ops02_design",
-      "role": "ultra",
-      "scope": "Platformlifecycleownership; no server access required/performed"
+      "reviewer": "/root/ops02_reviewer",
+      "candidate_sha256": "26374bcfb194aa5c9701bd00ceaae6016cd535dcc722e8b221719fec72450030",
+      "review_sha256": "3d5f3c7e33f8c9f1e8a863c73fdefab4969c3af85c737415e294ac366a17a54a",
+      "next": "OPS03 medium ready in cooperative owning scope only",
+      "residuals": [
+        "Provisioning OS/systemd writer closure requires followon design/native phase exclusion",
+        "CR04 effective job admission crash atomicity requires followon design/proof"
+      ]
     },
     "OPS03": {
       "state": "planned",
@@ -610,7 +630,7 @@
     },
     {
       "id": "INT01-JULIA-PREP-1",
-      "state": "active",
+      "state": "completed",
       "unit": "qcl-int01-julia-attempt-1.service",
       "READY_receipt_private": "/tmp/qcl-local-julia-ready-1.json",
       "READY_sha256": "4fd200f6615c75648e46e6af649996499b931cfa7be5ea8abe78c9bf7d3305fa",
@@ -624,7 +644,59 @@
       "observed_CPUUsageNSec": 165342215000,
       "raw_log_private": ".build/local-julia-int01/attempt-1/original.log",
       "result_receipt_private": ".build/local-julia-int01/attempt-1/guard-receipt.json",
-      "resume": "Inspect owned unit and receipt before wait/reconcile. Never duplicate launch on missing transcript."
+      "resume": "Inspect owned unit and receipt before wait/reconcile. Never duplicate launch on missing transcript.",
+      "wall_seconds": 184.83080410957336,
+      "raw_log_sha256": "eebcdc6f40e3cb424fc0562faf3704a29e00a4ff824813cf54727cde31e6ae37",
+      "owned_allocated_sampled_peak_bytes": 2613858304,
+      "runtime_registry_identity_sha256": "ffe85c7b4f6d202327a3b6fcb045bef32df6a9c2061eccf14657745935f92d9f",
+      "unit_state": "collected/inactive",
+      "package_import": "not_measured",
+      "result_summary": "qcl-int01-julia-prep-1-summary.json"
+    },
+    {
+      "id": "G1-RESULTS-PR6-17574ca",
+      "state": "completed",
+      "head": "17574ca4c5495f74d86ed9bef51c60dea8265062",
+      "base": "fe27a2a9ed065f9afacecc84113311f30d0c68d6",
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results/pull/6",
+      "checks": [],
+      "protected": false,
+      "merge_state": "CLEAN",
+      "CP_CODE_review_sha256": "7c17d0b56e7f7d0372c35bb8e419b2164133a778cb5c01bd1283817511f393be",
+      "merge_commit": "c9b613b01d492208475106cfe312f49763802f32",
+      "merged_at": "2026-10-19T13:29:31Z"
+    },
+    {
+      "id": "INT01-FRONTEND-ASSETS-1",
+      "state": "completed",
+      "unit": "qcl-int01-frontend-assets-attempt-1.service",
+      "ready_sha256": "d600172bcc8a371f186521b4c40499c68b8e3db90860df542ed9f7b1f47cd057",
+      "spec_sha256": "25cd9c1cbfd860f29b89a1a4cf6f70b59895433a64941967199c2005c16e184f",
+      "guard_sha256": "8904f41b5664899d47f40d44155ff4cc06bdbf51995c1e618005530ffd1aac0e",
+      "review_sha256": "ebf2315eb4c042205c4429e56ae3e13a03f4f13e0150432bcaf76ed419f356b9",
+      "bounds": "1localassetpacket90s2CPU1GiBhardmemoryswap0 AF_UNIXonly;64MiBoutput2MiBlogmonitored; preserveoriginals; noinstall/fullCI/solver",
+      "portal_head": "6ff9f6100623c578028506d43a39972dbfbc00dc",
+      "exec_session_id": 35621,
+      "wall_seconds": 3.60336971282959,
+      "output_summary": "qcl-int01-frontend-assets-1-summary.json",
+      "unit_state": "collected/inactive",
+      "asset_refs": "allHTMLassetrefsconfined/exist; noexternalURLs",
+      "hard_peak_CPU_time": "not_measured"
+    },
+    {
+      "id": "INT01-JULIA-IMPORT-2",
+      "state": "completed",
+      "unit": "qcl-int01-julia-import-attempt-2.service",
+      "ready_sha256": "056420a77afd7e837d23db3fb90be5b6a0f25faf2c3a2623cd9f999dd4bbce52",
+      "spec_sha256": "400c0114c870b9d6c5a709bd48cfa19f0936765f59db53eeae976ad823621da2",
+      "guard_sha256": "23628bc3fad8189efd0a20ff4f63e12c379e5642dfbb186ff6e097d8eb93b229",
+      "review_sha256": "6c7428b624491b776663ca38f02e98f09ed4d0b244ac50552d1412f7d3d8266e",
+      "bounds": "final2/2INT01Juliapackets; global40min maxactual184.831+1200s;8GiB10CPUhard/swap0 offlineAF_UNIX; sharedmonitoreddisk/log; no solver/fullCI",
+      "exec_session_id": 51749,
+      "wall_seconds": 128.41980528831482,
+      "raw_log_sha256": "772966d6024baf10f1607077fe76d9222b273deabe1515e05155436193c3c8d3",
+      "unit_state": "collected/inactive",
+      "result_summary": "qcl-int01-julia-import-2-summary.json"
     }
   ],
   "unknown_outcomes": [],
@@ -642,12 +714,12 @@
     "OPS02 owner lifecycle design",
     "remaining DEV02 O08-03/O08-05 design"
   ],
-  "updated_at": "2026-10-19T13:24:39.515106+00:00",
+  "updated_at": "2026-10-19T14:05:13.050162+00:00",
   "source": {
-    "root_head": "eb59809a4e601c9bd1d4859228d68502679b6d93",
+    "root_head": "04eecba1ea795a7c8861c4bfd0bb5aa49f093ee6",
     "branch": "codex/review-closure-exec",
     "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
-    "status_short": "M components/qcl-negf-contracts\n M components/qcl-negf-portal\n M components/qcl-negf-results\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev11-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev11-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev14-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev14-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev14-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev14-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev21-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/setup/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV21-GREEN-1/",
+    "status_short": "? components/QCLNEGF.jl\n m components/QCLNEGFRunner.jl\n M components/qcl-negf-portal\n M components/qcl-negf-results\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-core-oracles-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-design-v2.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-owningdoc-body-mapping.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-owningdoc-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-owningdoc-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev13-author-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev13-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev15-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev15-design-v2.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev16-red-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops02-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops02-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-oracle-carrier-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-oracle-carrier-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-int01-frontend-assets-1-summary.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-int01-julia-import-2-summary.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-int01-julia-prep-1-summary.json\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-STATIC-ASSERT-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV13-GREEN-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV13-RED-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV16-RED-1/",
     "gitlinks_authority": "git ls-tree HEAD components/; no maintained parallel component SHA lock",
     "submodules_verified_against_gitlinks": false
   },
@@ -986,23 +1058,160 @@
       "sha256": "325eb95b13fe77c2b8bba37ee49965dfd6b9b4750731f53810aea11eb625e9a3",
       "bytes": 10595,
       "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-design-review.md"
+    },
+    "qcl-int01-julia-prep-1-summary.json": {
+      "sha256": "ec7f97f27363b85ac0fadc7d9e60a7187e17a7696a9f7ee4e7346c579201072a",
+      "bytes": 1348,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-int01-julia-prep-1-summary.json"
+    },
+    "qcl-int01-frontend-assets-1-summary.json": {
+      "sha256": "db8e33ae7fe482ffa128ebcf7ce9b49b0fd73500bd170f32139d0da32397f4a0",
+      "bytes": 1144,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-int01-frontend-assets-1-summary.json"
+    },
+    "qcl-DEV11-STATIC-ASSERT-1/receipt.json": {
+      "sha256": "0228eb2e03984cac363910d352cb7096138b8eedc75e08ba29afe7a90308b086",
+      "bytes": 1122,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-STATIC-ASSERT-1/receipt.json"
+    },
+    "qcl-DEV11-STATIC-ASSERT-1/original.log": {
+      "sha256": "71cecd4a03d26fc192e472bf26020cdc2172e564ac64a719b16960d8dffd73a1",
+      "bytes": 98,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-STATIC-ASSERT-1/original.txt"
+    },
+    "qcl-int01-julia-import-2-summary.json": {
+      "sha256": "ee4176c848ae31ffacf15f7f142fbe136a2e0fe5dcc5d422f7aa30eeb8efc0df",
+      "bytes": 1126,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-int01-julia-import-2-summary.json"
+    },
+    "qcl-dev12-design-v2.md": {
+      "sha256": "fa3ca630f7b44ef9d72582ff91ced2e0c671f0986cecb4e20cddf5b294255712",
+      "bytes": 64164,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-design-v2.md"
+    },
+    "qcl-dev12-design-v2-review.md": {
+      "sha256": "e55a503c0a01bbfdd171d6681ff0299c614ea554bcb3c93e317b08fe273c3da5",
+      "bytes": 8333,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-design-v2-review.md"
+    },
+    "qcl-dev12-owningdoc-report.md": {
+      "sha256": "906ddb6bf86a7bc1dd8693f84f5373307a62166a87ce1b7992362c460828b451",
+      "bytes": 8429,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-owningdoc-report.md"
+    },
+    "qcl-dev12-owningdoc-review.md": {
+      "sha256": "fcbb73cfd7f887381ec0a3ef83f851a88349a0d732ee0751d22cc21708dc5ef3",
+      "bytes": 5922,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-owningdoc-review.md"
+    },
+    "qcl-dev12-owningdoc-body-mapping.md": {
+      "sha256": "34b2760f4823a5999546a5a1f93241e2c895bac5741d4fc63917e05bd7a97bba",
+      "bytes": 2454,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev12-owningdoc-body-mapping.md"
+    },
+    "qcl-dev15-design-v2.md": {
+      "sha256": "61c07b249740e435b9b4c2e2becfdaf558ad96304e275adcda370f652df9a1c6",
+      "bytes": 38385,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev15-design-v2.md"
+    },
+    "qcl-dev15-design-v2-review.md": {
+      "sha256": "a5d33b05d28b3ec1686971b69a6e415529366881db7b198aca8c3b02ff1ed486",
+      "bytes": 6680,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev15-design-v2-review.md"
+    },
+    "qcl-oracle-carrier-design.md": {
+      "sha256": "17c6dda56a2223bde9d20e98928e659d9e60fb7d6615b72ff94dcf190b829ea1",
+      "bytes": 28488,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-oracle-carrier-design.md"
+    },
+    "qcl-oracle-carrier-design-review.md": {
+      "sha256": "b5b3f58eb879272ed4be2081f36fa5c21c9f3733e961951d4649b6feb2edc348",
+      "bytes": 12741,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-oracle-carrier-design-review.md"
+    },
+    "qcl-core-oracles-report.md": {
+      "sha256": "c895e43ca99a2da2813435c99aeb8cf14179d5df8e35d46e34f462ec23d13339",
+      "bytes": 5901,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-core-oracles-report.md"
+    },
+    "qcl-dev16-red-report.md": {
+      "sha256": "dac6bf7352559b9ad75919f124c9ab07ba6c4eb9d42385a9ce3c87fb4b12a30e",
+      "bytes": 2442,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev16-red-report.md"
+    },
+    "qcl-DEV13-RED-1/receipt.json": {
+      "sha256": "55985157d188e0a511d873a716fe50f1b86d4531ce19244952d2abbec6c9c7ea",
+      "bytes": 1238,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV13-RED-1/receipt.json"
+    },
+    "qcl-DEV13-RED-1/original.log": {
+      "sha256": "b6b1f1fe3f690f1fb042b522b31a53b6213be88177989a4131863cdfdf3a5b8c",
+      "bytes": 15808,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV13-RED-1/original.txt"
+    },
+    "qcl-DEV16-RED-1/receipt.json": {
+      "sha256": "141c1bdaf47047e20a895edb2f00996ed41293c5fc3356afcb016395c37c4658",
+      "bytes": 1509,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV16-RED-1/receipt.json"
+    },
+    "qcl-DEV16-RED-1/original.log": {
+      "sha256": "3936232489da3099ee52714da9f11d1b8c121cefb94d0fb933b51524e9ca651c",
+      "bytes": 1266,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV16-RED-1/original.txt"
+    },
+    "qcl-dev13-code-review.md": {
+      "sha256": "e749318061cdaaf4fd224750c94ddbdb9833574118ebaed358078cf22b593d2b",
+      "bytes": 11027,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev13-code-review.md"
+    },
+    "qcl-dev13-author-report.md": {
+      "sha256": "072cd0e51704793972a716982057c2b5a68cf8c9fcd69d11c0af7a84b6a1702c",
+      "bytes": 8468,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev13-author-report.md"
+    },
+    "qcl-ops02-design.md": {
+      "sha256": "26374bcfb194aa5c9701bd00ceaae6016cd535dcc722e8b221719fec72450030",
+      "bytes": 50824,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops02-design.md"
+    },
+    "qcl-ops02-design-review.md": {
+      "sha256": "3d5f3c7e33f8c9f1e8a863c73fdefab4969c3af85c737415e294ac366a17a54a",
+      "bytes": 11358,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops02-design-review.md"
+    },
+    "qcl-DEV13-GREEN-1/receipt.json": {
+      "sha256": "1d69f21887649b0ada35fca5eb0fd371c1a4f7a884bf31d8be155f874605b020",
+      "bytes": 1296,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV13-GREEN-1/receipt.json"
+    },
+    "qcl-DEV13-GREEN-1/original.log": {
+      "sha256": "4912ae62d389b3ff821324446c7f3832f63ee9ad8dcd067fabd1d50147d1c1dd",
+      "bytes": 13625,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV13-GREEN-1/original.txt"
     }
   },
   "resume_note": "Operator switched to auto approvals; old writer apply_patch approval interrupted. Reconcile exact paths before limited exec require_escalated apply; no duplicate mutations.",
   "test_intent": {
-    "id": "DEV21-GREEN-1",
-    "state": "completed_pass",
-    "source": "Results originalPRa149 plus frozen diff e39426fecd08d19786187369c0f635e71e3a6cda7be6fe08d10cbc3d46cda126",
-    "command": "python3 /tmp/qcl-targeted-run.py DEV21 GREEN-1 components/qcl-negf-results/tests/test_source_ownership.py components/qcl-negf-results/tests/test_equilibrium_diagnostics.py",
-    "bounds": "90s1CPU1GiBsampledRSS16MiBtmp2MiBlogs; no solver; small manufacturedHDF5",
-    "exit_code": 0
+    "id": "DEV13-GREEN-1",
+    "state": "completed_failed",
+    "source_diff_sha256": "7ace94cc51e485340e8812f9cca2ba02eb7d2c6735a94660b6bce67bf14fecc3",
+    "wall_seconds": 90,
+    "CPU": 1,
+    "RAM_bytes": 1073741824,
+    "temporary_bytes": 16777216,
+    "logs_bytes": 2097152,
+    "command": "python3 /tmp/qcl-targeted-run.py DEV13 GREEN-1 five frozen Portal test files",
+    "review_status": "three independent source blockers open; green alone cannot accept",
+    "exit_code": 1
   },
   "test_result": {
-    "id": "DEV21-GREEN-1",
-    "state": "completed_pass",
-    "exit_code": 0,
-    "assertions": "42passed;36existingnumericalproperties+6ownershipcases",
-    "receipt": "tests/DEV21-GREEN-1/receipt.json"
+    "id": "DEV13-GREEN-1",
+    "state": "completed_failed",
+    "exit_code": 1,
+    "passed": 156,
+    "failed": 2,
+    "receipt": "tests/DEV13-GREEN-1/receipt.json",
+    "limitations": "existing tests fail in two ASGI disconnect cells; independent R1/R2/R3 also remain; no acceptance"
   },
   "previous_test_result": {
     "id": "DEV10-RED-2",
@@ -1043,7 +1252,7 @@
     "lock_changes": false
   },
   "verification_note": "git diff --cached --check passes excluding preserved original.txt raw test logs; full diff check reports only original pytest whitespace in DEV11-RED-1, retained byte-for-byte by policy",
-  "setup_counter_semantics": "Counts command invocations: initial Python + Node setup, then failed sandbox extras and same exact canonical extras escalated; synthetic import/TestClient probes are separate metadata checks, no testsuite. Previous2 omitted extras invocations; corrected without resetting history.",
+  "setup_counter_semantics": "Top-level setup invocations: initialPython,initialNode,sandboxextrasfailed,escalatedextrassuccess,Julia guardedprep. Childcommands/probes separately recorded in receipts; no resets.",
   "scientific_counter_scope": "Zero execution counters refer to new S1 runs only (none submitted). Historical saved metadata and primary-paper preparation read existing bytes; actual cumulative host read syscalls not measured and not represented as zero. No scientific raw arrays read/changed.",
   "preparation_IO": {
     "SCI01_unique_original_metadata_bytes": 151136,

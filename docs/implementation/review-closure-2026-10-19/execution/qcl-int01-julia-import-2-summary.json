@@ -1,0 +1,23 @@
+{
+  "operation_id": "INT01-JULIA-IMPORT-2",
+  "state": "completed",
+  "wall_seconds": 128.41980528831482,
+  "total_INT01_Julia_wall_seconds": 313.2506093978882,
+  "owned_allocated_sampled_peak_bytes": 2619518976,
+  "minimum_global_MemAvailable_bytes": 11966480384,
+  "raw_log_bytes": 18843,
+  "raw_log_sha256": "772966d6024baf10f1607077fe76d9222b273deabe1515e05155436193c3c8d3",
+  "runtime_import": {
+    "julia_version": "1.13.0",
+    "core_path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/src/QCLNEGF.jl",
+    "runner_path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/src/QCLNEGFRunner.jl",
+    "julia_threads": "10",
+    "blas_threads": "1",
+    "blas_config": "LBTConfig([ILP64] libopenblas64_.so)"
+  },
+  "immutable_unchanged": true,
+  "copies_unchanged": true,
+  "raw_capture_complete": true,
+  "unit_state": "collected/inactive",
+  "limitations": "Owningmoduleimport+tinyexistingcompileworkload only; no solver/fullCI/scientificacceptance; librarylist preservedlocalraw; hardcgroupCPU/RAM/wall/offlineguard, disk/freeRAM/logmonitored"
+}

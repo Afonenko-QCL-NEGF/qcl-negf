@@ -1,0 +1,23 @@
+{
+  "operation_id": "INT01-JULIA-PREP-1",
+  "status": "completed",
+  "Julia": "1.13.0",
+  "source_root_at_launch": "eb59809a4e601c9bd1d4859228d68502679b6d93",
+  "selected_Core": "a8d2c0de21dfdce3ed3c7c585c555656443f6d89",
+  "selected_Runner": "0c53c6d0f68e0b25fce79388db831da6fc3ae856",
+  "wall_seconds": 184.83080410957336,
+  "owned_allocated_sampled_peak_bytes": 2613858304,
+  "minimum_global_MemAvailable_bytes": 12050694144,
+  "raw_log_bytes": 6876,
+  "raw_log_sha256": "eebcdc6f40e3cb424fc0562faf3704a29e00a4ff824813cf54727cde31e6ae37",
+  "runtime_archive_sha256": "8975da61c128a5e5ded3e719e868da8c8781deb7ad7913d37fb99be02a81904b",
+  "runtime_and_registry_identity_sha256": "ffe85c7b4f6d202327a3b6fcb045bef32df6a9c2061eccf14657745935f92d9f",
+  "metadata_hash_read_bytes": 1390173584,
+  "metadata_hash_wall_seconds": 3.3020922309951857,
+  "runtime_registry_file_count": 5307,
+  "immutable_locks_unchanged": true,
+  "raw_capture_complete": true,
+  "unit_state": "collected/inactive",
+  "limitations": "Dependency capture+lazyartifact verification only; packageimport route, native tests, solver/scientific acceptance/fullCI not_measured. Storage/freeRAM/log guards monitored, cgroupmemoryCPUwall enforced. Full file inventory remains local ignored.",
+  "identity_encoding": "UTF8 JSON sorted path rows, sort_keys=True, separators comma/colon"
+}
