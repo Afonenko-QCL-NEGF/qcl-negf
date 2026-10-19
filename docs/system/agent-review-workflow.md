@@ -61,25 +61,39 @@ hash frozen текста. Архивный source, publication branch, уста�
 
 ## Разбиение до READY
 
-Draft может содержать пробелы. Координатор разбивает его, пока каждая атомарная
-карточка содержит следующие поля.
+Это канонический повторно используемый контракт задания. Карточка, issue, PR
+или checkpoint с этими полями достаточны; handoff и skills ссылаются на него,
+а не вводят вторую обязательную форму или регистрацию. Датированный статус
+этого review и четыре исторические карточки ниже не задают mode нового
+поручения: цель, этап и active grants определяет последнее применимое указание
+пользователя, а source и evidence привязываются к выбранному заданию.
+
+Draft может содержать пробелы. До READY координатор разбивает его, пока каждая
+атомарная карточка однозначно содержит следующие девять полей.
 
 | Поле | Что должно быть однозначно |
 | --- | --- |
-| Вопрос, роль и owner | Одно поведение или утверждение; пользу для трёх ролей либо обоснованную неприменимость; owning repository и исполнитель |
-| Входы | Неизменяемые source/data refs, пути и hashes; publication branch/PR, если существует; доступность обязательных входов |
-| Граница | Разрешённые действия и paths, исключённые соседние изменения; один writer на файл/ветку без перекрытия |
+| Вопрос, роль и owner | Task/requirement IDs, одно проверяемое поведение или утверждение; польза для трёх ролей либо обоснованная неприменимость; owning repository, один writer и отдельный reviewer по canonical role policy |
+| Входы | Неизменяемые source/data refs, paths и hashes; исходные артефакты и доступность обязательных входов; publication branch/PR, runtime и candidate различаются |
+| Граница | Уже разрешённые stage/actions/grants и permitted paths, исключённые соседние изменения; один writer на файл/ветку; READY или invocation не расширяет полномочия |
 | Invariants | Сохраняемые model, units, grids/basis, tolerances, statuses, identity и durability по применимости |
-| Oracle и acceptance | Проверяемое свойство, независимый источник, positive и negative case; применимость, нормировка и ограничения |
-| Проверка | Точные команды с окружением или явный протокол чтения; стоимость каждой проверки и предел mocks |
-| Зависимости | Конкретные outputs предшественников; задачи, которые можно начать параллельно |
-| Бюджет и остановка | Общий конечный предел пакета; действия при исчерпании, несовпадении identity или выходе за scope |
-| Выход | Finding/design/patch/report, его путь, воспроизводимые локаторы и допустимый уровень заключения |
+| Oracle и acceptance | Заранее объявленные property catalogue и denominator; уровень вывода source/metadata/runtime/science; независимый oracle, healthy positive control и применимые negative/near-zero cases; применимость, units, нормировка, веса, допуск и его основание из owning contract |
+| Проверка | Точные команды с окружением либо явный static reading protocol; стоимость каждой проверки, граница mocks и наблюдаемого свойства; docs-only не требует численной среды |
+| Зависимости | Конкретные outputs предшественников и необходимые checkpoints; missing input блокирует только зависимые действия/выводы, независимые READY задачи продолжаются |
+| Бюджет и остановка | Назначенный конечный предел attempts/author-review cycles и общий CPU/RAM/storage/I/O/wall/output envelope всех исполнителей; stop при исчерпании, identity mismatch, unknown outcome или выходе за scope |
+| Выход | Finding/design/patch/report и путь; candidate hash/diff, original evidence/failed receipts и фактические checks; disposition каждого declared item, ограничения, решение и residual; resume state, active IDs и оставшийся envelope |
 
 READY означает отсутствие блокирующего неизвестного в контракте задания,
 а не заранее известный ответ. Карточка «установить, какие raw данные отсутствуют»
 готова, если доступен ограниченный inventory. Карточка «доказать FDR на final
 матрицах» требует самих матриц и соответствующих identity до READY.
+
+Unknown, missing и неприменимость получают явную disposition и не исчезают
+из denominator молча. Отрицательный результат или установленная недостаточность
+данных могут завершить карточку, чей вопрос именно об этом; они не означают
+pass недоказанного свойства. Source/static, metadata, runtime и scientific
+evidence не подменяют друг друга; process exit, сходимость, physical checks,
+достаточность дискретизации и experimental validation принимаются раздельно.
 
 Если locator устарел, агент ищет актуальный symbol в frozen source, проверяет
 native metadata и добавляет отдельную подзадачу разведки. Он может самостоятельно
@@ -113,19 +127,32 @@ tools. Файл карточки, GitHub issue/PR и сохранённый от
 для этого review не нужны. Публикация issue, review comment или PR выполняется
 только в scope, включающем такую запись; локальный finding не требует её.
 
-Перед каждым review round фиксируются candidate commit/diff, входные hashes,
-полученные receipts и список реально выполненных checks. Первый независимый
-рецензент получает вопрос, предпосылки и оригиналы без готового диагноза автора.
-Он воспроизводит finding по locator, оценивает negative case и достаточность
-oracle. После этого координатор сопоставляет замечания с авторским объяснением.
+Перед каждым review round замораживаются candidate commit/diff hash, input
+refs/hashes, original evidence/failed logs, полученные receipts и реально
+выполненные checks. Автор и reviewer используют один набор bytes; изменение
+входа создаёт новую ревизию карточки и локально инвалидирует зависимые checks.
+Первый независимый reviewer получает вопрос, предпосылки, acceptance contract
+и оригиналы без готового диагноза автора или его ожидаемого verdict. Он
+воспроизводит locator, проверяет negative case вместе с healthy positive
+control и достаточность независимого oracle. Затем координатор сопоставляет
+замечания с авторским объяснением; согласие не является новым evidence.
 
 Implementer исправляет только owned paths. Новая проверка допустима внутри
 порученного бюджета, когда изменился проверяемый материал, появилась ошибка
 или осталось открытое свойство. Повтор прежнего успешного suite без причины
-не добавляет свидетельства. Предлагаемый предел — два корректирующих раунда
-после первого review и единый бюджет пакета; это предложение для принятия
-при поручении реализации, не уже выданное разрешение. Исчерпание ведёт к replan
-с сохранением failed logs и точным остатком, без цикла «до зелёного».
+не добавляет свидетельства. При assignment фиксируется собственный конечный
+предел author/review cycles и общий бюджет; прежнее предложение двух
+корректирующих раундов после первого review не является grant. Конкретные пределы
+берутся из последнего применимого указания пользователя; датированный
+[P1](../implementation/review-closure-2026-10-19/operator-permissions.md)
+не вводит дополнительного фиксированного лимита поверх более позднего grant.
+Более позднее разрешение использовать доступные ресурсы не отменяет конечный
+envelope каждого пакета и не изменяет неотменённые scientific caps, protected
+reserves или CI-once. Author/review cycles не увеличивают отдельные
+test/attempt counters. Исчерпание ведёт к replan с original failed logs и точным
+остатком, а не к циклу «до зелёного» или принятию load-bearing дефекта. Unknown
+или отрицательный итог может закрыть порученный read-only вопрос без correction,
+когда его acceptance выполнена.
 
 Разногласие разбивается на проверяемые утверждения. Для каждого выбирается
 самый дешёвый независимый source check, аналитический oracle или доступный
@@ -138,12 +165,39 @@ ref, без автоматических reruns; общий цикл review не
 
 ## Полномочия, стоимость и маршрутизация
 
-Агенты продолжают уже разрешённые чтение, планирование и исправления без
-повторного запроса того же разрешения. Человек нужен для научного или продуктового
-выбора, который нельзя вывести из принятой цели, обязательных private inputs,
-расширения бюджета, разрушительного действия или перехода за текущий scope.
-Глобальное историческое правило approval не становится новым per-ticket approval
-автоматически: применимость проверяется по текущему пользовательскому поручению.
+Уже выданный scope grant сохраняется после commit, review, compaction и
+resume до изменения или отзыва пользователем. Внутри него агенты выполняют
+доступные действия и обратимые внутренние design/implementation choices без
+повторного вопроса «продолжать ли?». Последнее применимое указание пользователя
+имеет приоритет над historical PLAN prose и прежним proposal; текст workflow,
+invocation или READY сами grant не создают. Недостающий факт агент ищет в
+active read scope. Missing data/inventory/admission/credentials блокируют
+только зависимые действия и claims; другие READY задачи продолжаются.
+
+Для активированных [B/G1/S1 из P1](../implementation/review-closure-2026-10-19/operator-permissions.md)
+human policy approval CP-OPS/CP-SCI уже задано: coordinator и независимый
+reviewer закрывают technical BIND/READY на конкретных source/targets/resources
+и criteria без нового human approval каждой точки или hash. CP-EXCEPTION
+остаётся человеку для выхода за approved predicates: новой scientific/model
+цели, невыводимого существенного требования, нового trust/credential scope,
+destructive target вне разрешённого множества, protected old/foreign jobs,
+public release или превышения конечного envelope. Молчание не является согласием.
+
+Grants не заменяют fresh admission и required preflight: four-role NixOS и
+strict nginx checks до тяжёлого bootstrap, backup/restore bindings, сохранение
+original logs и separate engineering/OPS/science gates задаются
+[AGENTS](../../AGENTS.md) и [deployment runbook](../single-server-deployment.md).
+Старый S01 и foreign resources защищены; fixed light theme сохраняется.
+Общий review loop не разрешает второй final full CI.
+
+Resume начинается с последнего указания пользователя, mode/grants,
+source/dirty state, active operation/run/attempt IDs, receipts и оставшегося
+envelope; затем проверяется READY зависимых задач. Tool timeout, потеря SSH
+или закрытие клиента не доказывают остановку remote action. Перед повтором
+обязательна reconciliation по persisted IDs: unknown submit/stop не порождает
+duplicate action. Завершённая задача не назначается снова без нового diff,
+failure или unresolved свойства. Необходимое расширение оформляется одним
+конкретным CP-EXCEPTION, пока независимая разрешённая работа продолжается.
 
 Для будущего дорогого check envelope обязательно содержит: stage и точную
 команду; source/model/plan identity; число попыток и раундов; суммарные CPU/core·s,

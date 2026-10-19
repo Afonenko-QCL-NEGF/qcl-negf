@@ -1,0 +1,17 @@
+...........................................F............................ [ 57%]
+......................................................                   [100%]
+=================================== FAILURES ===================================
+________________ test_browser_is_served_from_the_python_package ________________
+
+client = <starlette.testclient.TestClient object at 0x7f7ec0165950>
+
+    def test_browser_is_served_from_the_python_package(client):
+        response = client.get("/")
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+components/qcl-negf-portal/tests/test_api.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-portal/tests/test_api.py::test_browser_is_served_from_the_python_package
+1 failed, 125 passed in 5.88s

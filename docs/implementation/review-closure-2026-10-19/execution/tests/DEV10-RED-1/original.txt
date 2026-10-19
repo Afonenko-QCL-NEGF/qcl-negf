@@ -1,0 +1,1564 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 97%]
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_______________________ test_export_selection_pins_child _______________________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cbee350>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+
+    def test_export_selection_pins_child(source):
+        children, node, selection, events = source
+>       binding = service.get_export_selection(RUN, "E")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:67: AttributeError
+___________ test_selected_status_uses_only_selected_result[running] ____________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc3b060>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+status = 'running'
+
+    @pytest.mark.parametrize("status", ["running", "completed", "completed_with_warnings", "failed", "cancelled", "paused"])
+    def test_selected_status_uses_only_selected_result(source, status):
+        children, _, _, events = source
+        children[0].outputs.result.raw = b"unrelated invalid result"
+        children[1].outputs.result.raw = ('{"status":"' + status + '","selected_execution_id":"E"}').encode()
+        children[1].exit_status = 0
+>       assert service.get_export_selection(RUN, "E")["status"] == status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:87: AttributeError
+__________ test_selected_status_uses_only_selected_result[completed] ___________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc3ba00>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+status = 'completed'
+
+    @pytest.mark.parametrize("status", ["running", "completed", "completed_with_warnings", "failed", "cancelled", "paused"])
+    def test_selected_status_uses_only_selected_result(source, status):
+        children, _, _, events = source
+        children[0].outputs.result.raw = b"unrelated invalid result"
+        children[1].outputs.result.raw = ('{"status":"' + status + '","selected_execution_id":"E"}').encode()
+        children[1].exit_status = 0
+>       assert service.get_export_selection(RUN, "E")["status"] == status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:87: AttributeError
+___ test_selected_status_uses_only_selected_result[completed_with_warnings] ____
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc643b0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+status = 'completed_with_warnings'
+
+    @pytest.mark.parametrize("status", ["running", "completed", "completed_with_warnings", "failed", "cancelled", "paused"])
+    def test_selected_status_uses_only_selected_result(source, status):
+        children, _, _, events = source
+        children[0].outputs.result.raw = b"unrelated invalid result"
+        children[1].outputs.result.raw = ('{"status":"' + status + '","selected_execution_id":"E"}').encode()
+        children[1].exit_status = 0
+>       assert service.get_export_selection(RUN, "E")["status"] == status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:87: AttributeError
+____________ test_selected_status_uses_only_selected_result[failed] ____________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc64ca0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+status = 'failed'
+
+    @pytest.mark.parametrize("status", ["running", "completed", "completed_with_warnings", "failed", "cancelled", "paused"])
+    def test_selected_status_uses_only_selected_result(source, status):
+        children, _, _, events = source
+        children[0].outputs.result.raw = b"unrelated invalid result"
+        children[1].outputs.result.raw = ('{"status":"' + status + '","selected_execution_id":"E"}').encode()
+        children[1].exit_status = 0
+>       assert service.get_export_selection(RUN, "E")["status"] == status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:87: AttributeError
+__________ test_selected_status_uses_only_selected_result[cancelled] ___________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc657a0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+status = 'cancelled'
+
+    @pytest.mark.parametrize("status", ["running", "completed", "completed_with_warnings", "failed", "cancelled", "paused"])
+    def test_selected_status_uses_only_selected_result(source, status):
+        children, _, _, events = source
+        children[0].outputs.result.raw = b"unrelated invalid result"
+        children[1].outputs.result.raw = ('{"status":"' + status + '","selected_execution_id":"E"}').encode()
+        children[1].exit_status = 0
+>       assert service.get_export_selection(RUN, "E")["status"] == status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:87: AttributeError
+____________ test_selected_status_uses_only_selected_result[paused] ____________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc661f0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+status = 'paused'
+
+    @pytest.mark.parametrize("status", ["running", "completed", "completed_with_warnings", "failed", "cancelled", "paused"])
+    def test_selected_status_uses_only_selected_result(source, status):
+        children, _, _, events = source
+        children[0].outputs.result.raw = b"unrelated invalid result"
+        children[1].outputs.result.raw = ('{"status":"' + status + '","selected_execution_id":"E"}').encode()
+        children[1].exit_status = 0
+>       assert service.get_export_selection(RUN, "E")["status"] == status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:87: AttributeError
+_________ test_absent_result_is_unknown_independent_of_process_exit[0] _________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc66c40>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+exit_status = 0
+
+    @pytest.mark.parametrize("exit_status", [0, 1])
+    def test_absent_result_is_unknown_independent_of_process_exit(source, exit_status):
+        children = source[0]
+        del children[1].outputs["result"]
+        children[1].exit_status = exit_status
+>       assert service.get_export_selection(RUN, "E")["status"] == "unknown"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:96: AttributeError
+_________ test_absent_result_is_unknown_independent_of_process_exit[1] _________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc67740>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+exit_status = 1
+
+    @pytest.mark.parametrize("exit_status", [0, 1])
+    def test_absent_result_is_unknown_independent_of_process_exit(source, exit_status):
+        children = source[0]
+        del children[1].outputs["result"]
+        children[1].exit_status = exit_status
+>       assert service.get_export_selection(RUN, "E")["status"] == "unknown"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:96: AttributeError
+_____________ test_present_invalid_result_rejects_and_closes[\xff] _____________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc3ac40>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'\xff'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+______________ test_present_invalid_result_rejects_and_closes[{] _______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cbee1f0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+______________ test_present_invalid_result_rejects_and_closes[[]] ______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc64510>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'[]'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+______________ test_present_invalid_result_rejects_and_closes[{}] ______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc66980>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{}'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+_ test_present_invalid_result_rejects_and_closes[{"status":"unknown","selected_execution_id":"E"}] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc652d0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{"status":"unknown","selected_execution_id":"E"}'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+_ test_present_invalid_result_rejects_and_closes[{"status":true,"selected_execution_id":"E"}] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc64670>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{"status":true,"selected_execution_id":"E"}'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+_____ test_present_invalid_result_rejects_and_closes[{"status":"failed"}] ______
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc67a00>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{"status":"failed"}'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+_ test_present_invalid_result_rejects_and_closes[{"status":"failed","selected_execution_id":"other"}] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca905c0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{"status":"failed","selected_execution_id":"other"}'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+_ test_present_invalid_result_rejects_and_closes[{"status":"failed","status":"completed","selected_execution_id":"E"}] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca90f60>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{"status":"failed","status":"completed","selected_execution_id":"E"}'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+_ test_present_invalid_result_rejects_and_closes[{"status":"failed","selected_execution_id":"E","x":NaN}] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca91d20>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+raw = b'{"status":"failed","selected_execution_id":"E","x":NaN}'
+
+    @pytest.mark.parametrize("raw", [b"\xff", b"{", b"[]", b"{}", b'{"status":"unknown","selected_execution_id":"E"}',
+        b'{"status":true,"selected_execution_id":"E"}', b'{"status":"failed"}',
+        b'{"status":"failed","selected_execution_id":"other"}',
+        b'{"status":"failed","status":"completed","selected_execution_id":"E"}',
+        b'{"status":"failed","selected_execution_id":"E","x":NaN}'])
+    def test_present_invalid_result_rejects_and_closes(source, raw):
+        result = source[0][1].outputs.result
+        result.raw = raw
+        with pytest.raises(ValueError, match="Selected scientific result metadata is invalid"):
+>           service.get_export_selection(RUN, "E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:108: AttributeError
+___________________ test_result_bound_probes_one_extra_byte ____________________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca92980>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83ca9f150>
+
+    def test_result_bound_probes_one_extra_byte(source, monkeypatch):
+        result = source[0][1].outputs.result
+>       monkeypatch.setattr(service, "MAX_RESULT_BYTES", len(result.raw) - 1)
+E       AttributeError: <module 'aiida_qcl_negf.service' from '/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-aiida/src/aiida_qcl_negf/service.py'> has no attribute 'MAX_RESULT_BYTES'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:114: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs0-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca93480>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'attempt': True}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs0-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cc64510>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'attempt': True}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs1-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca92b90>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'attempt': 0}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs1-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca90f60>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'attempt': 0}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs2-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca93d70>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'attempt': -1}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs2-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caac880>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'attempt': -1}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs3-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caad2d0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'attempt': 1.0}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs3-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caadd20>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'attempt': 1.0}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs4-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caae770>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'attempt': '2'}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs4-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caaf1c0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'attempt': '2'}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs5-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caafc10>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'calcjob_uuid': ''}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs5-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb04720>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'calcjob_uuid': ''}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs6-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb05170>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'calcjob_uuid': '20dd2a4c'}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs6-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caad2d0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'calcjob_uuid': '20dd2a4c'}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs7-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83ca90f60>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'calcjob_uuid': 1}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs7-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb04720>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'calcjob_uuid': 1}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs8-ValueError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb05c70>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection'
+kwargs = {'attempt': 2, 'calcjob_uuid': '10dd2a4c-031b-425c-90b8-2f7ea564d313'}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs8-ValueError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb066c0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts'
+kwargs = {'attempt': 2, 'calcjob_uuid': '10dd2a4c-031b-425c-90b8-2f7ea564d313'}
+error = <class 'ValueError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs9-LookupError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb07110>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection'
+kwargs = {'attempt': 2, 'calcjob_uuid': 'e7f5313d-22fd-49fa-9be5-85fbe29e1974'}
+error = <class 'LookupError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs9-LookupError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb07b60>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts'
+kwargs = {'attempt': 2, 'calcjob_uuid': 'e7f5313d-22fd-49fa-9be5-85fbe29e1974'}
+error = <class 'LookupError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs10-LookupError-get_export_selection] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb08670>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'get_export_selection', kwargs = {'attempt': 3}
+error = <class 'LookupError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+_ test_invalid_selectors_before_metadata_and_payload[kwargs10-LookupError-list_execution_artifacts] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb090c0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+operation = 'list_execution_artifacts', kwargs = {'attempt': 3}
+error = <class 'LookupError'>
+
+    @pytest.mark.parametrize("operation", ["get_export_selection", "list_execution_artifacts"])
+    @pytest.mark.parametrize("kwargs,error", [
+        ({"attempt": True}, ValueError), ({"attempt": 0}, ValueError), ({"attempt": -1}, ValueError),
+        ({"attempt": 1.0}, ValueError), ({"attempt": "2"}, ValueError),
+        ({"calcjob_uuid": ""}, ValueError), ({"calcjob_uuid": C2[:8]}, ValueError),
+        ({"calcjob_uuid": 1}, ValueError), ({"calcjob_uuid": C1, "attempt": 2}, ValueError),
+        ({"calcjob_uuid": RUN, "attempt": 2}, LookupError), ({"attempt": 3}, LookupError)])
+    def test_invalid_selectors_before_metadata_and_payload(source, operation, kwargs, error):
+        with pytest.raises(error):
+>           getattr(service, operation)(RUN, "E", **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:129: AttributeError
+______________ test_invalid_scalar_input_before_node_lookup[1-E] _______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb09a60>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83caf9da0>
+identifier = 1, execution = 'E'
+
+    @pytest.mark.parametrize("identifier,execution", [(1,"E"), (RUN[:8],"E"), (RUN,""), (RUN,1), (RUN,"x"*129)])
+    def test_invalid_scalar_input_before_node_lookup(source, monkeypatch, identifier, execution):
+        def forbidden(identifier):
+            raise AssertionError("Invalid input reached node lookup")
+        monkeypatch.setattr(service, "_node", forbidden)
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:139: AttributeError
+___________ test_invalid_scalar_input_before_node_lookup[e7f5313d-E] ___________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb0a560>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cafa200>
+identifier = 'e7f5313d', execution = 'E'
+
+    @pytest.mark.parametrize("identifier,execution", [(1,"E"), (RUN[:8],"E"), (RUN,""), (RUN,1), (RUN,"x"*129)])
+    def test_invalid_scalar_input_before_node_lookup(source, monkeypatch, identifier, execution):
+        def forbidden(identifier):
+            raise AssertionError("Invalid input reached node lookup")
+        monkeypatch.setattr(service, "_node", forbidden)
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:139: AttributeError
+_ test_invalid_scalar_input_before_node_lookup[e7f5313d-22fd-49fa-9be5-85fbe29e1974-] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb0b060>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cafa6d0>
+identifier = 'e7f5313d-22fd-49fa-9be5-85fbe29e1974', execution = ''
+
+    @pytest.mark.parametrize("identifier,execution", [(1,"E"), (RUN[:8],"E"), (RUN,""), (RUN,1), (RUN,"x"*129)])
+    def test_invalid_scalar_input_before_node_lookup(source, monkeypatch, identifier, execution):
+        def forbidden(identifier):
+            raise AssertionError("Invalid input reached node lookup")
+        monkeypatch.setattr(service, "_node", forbidden)
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:139: AttributeError
+_ test_invalid_scalar_input_before_node_lookup[e7f5313d-22fd-49fa-9be5-85fbe29e1974-1] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb049e0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cc6f770>
+identifier = 'e7f5313d-22fd-49fa-9be5-85fbe29e1974', execution = 1
+
+    @pytest.mark.parametrize("identifier,execution", [(1,"E"), (RUN[:8],"E"), (RUN,""), (RUN,1), (RUN,"x"*129)])
+    def test_invalid_scalar_input_before_node_lookup(source, monkeypatch, identifier, execution):
+        def forbidden(identifier):
+            raise AssertionError("Invalid input reached node lookup")
+        monkeypatch.setattr(service, "_node", forbidden)
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:139: AttributeError
+_ test_invalid_scalar_input_before_node_lookup[e7f5313d-22fd-49fa-9be5-85fbe29e1974-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx] _
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb09bc0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cc6ef20>
+identifier = 'e7f5313d-22fd-49fa-9be5-85fbe29e1974'
+execution = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+
+    @pytest.mark.parametrize("identifier,execution", [(1,"E"), (RUN[:8],"E"), (RUN,""), (RUN,1), (RUN,"x"*129)])
+    def test_invalid_scalar_input_before_node_lookup(source, monkeypatch, identifier, execution):
+        def forbidden(identifier):
+            raise AssertionError("Invalid input reached node lookup")
+        monkeypatch.setattr(service, "_node", forbidden)
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:139: AttributeError
+______________ test_legacy_and_canonical_uuid_selectors[kwargs0] _______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E')), outputs=...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+kwargs = {}
+
+    @pytest.mark.parametrize("kwargs", [{}, {"attempt":1}, {"calcjob_uuid":C1}, {"attempt":1,"calcjob_uuid":C1.upper()}])
+    def test_legacy_and_canonical_uuid_selectors(source, kwargs):
+        children, node, _, events = source
+        children.pop()
+        node.outputs.clear()
+        del children[0].inputs.attempt
+>       assert service.get_export_selection(RUN.upper(), "E", **kwargs) == {
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "execution_id":"E", "attempt":1, "calcjob_uuid":C1, "status":"completed"}
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:150: AttributeError
+______________ test_legacy_and_canonical_uuid_selectors[kwargs1] _______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E')), outputs=...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+kwargs = {'attempt': 1}
+
+    @pytest.mark.parametrize("kwargs", [{}, {"attempt":1}, {"calcjob_uuid":C1}, {"attempt":1,"calcjob_uuid":C1.upper()}])
+    def test_legacy_and_canonical_uuid_selectors(source, kwargs):
+        children, node, _, events = source
+        children.pop()
+        node.outputs.clear()
+        del children[0].inputs.attempt
+>       assert service.get_export_selection(RUN.upper(), "E", **kwargs) == {
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "execution_id":"E", "attempt":1, "calcjob_uuid":C1, "status":"completed"}
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:150: AttributeError
+______________ test_legacy_and_canonical_uuid_selectors[kwargs2] _______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E')), outputs=...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+kwargs = {'calcjob_uuid': '10dd2a4c-031b-425c-90b8-2f7ea564d313'}
+
+    @pytest.mark.parametrize("kwargs", [{}, {"attempt":1}, {"calcjob_uuid":C1}, {"attempt":1,"calcjob_uuid":C1.upper()}])
+    def test_legacy_and_canonical_uuid_selectors(source, kwargs):
+        children, node, _, events = source
+        children.pop()
+        node.outputs.clear()
+        del children[0].inputs.attempt
+>       assert service.get_export_selection(RUN.upper(), "E", **kwargs) == {
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "execution_id":"E", "attempt":1, "calcjob_uuid":C1, "status":"completed"}
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:150: AttributeError
+______________ test_legacy_and_canonical_uuid_selectors[kwargs3] _______________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E')), outputs=...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+kwargs = {'attempt': 1, 'calcjob_uuid': '10DD2A4C-031B-425C-90B8-2F7EA564D313'}
+
+    @pytest.mark.parametrize("kwargs", [{}, {"attempt":1}, {"calcjob_uuid":C1}, {"attempt":1,"calcjob_uuid":C1.upper()}])
+    def test_legacy_and_canonical_uuid_selectors(source, kwargs):
+        children, node, _, events = source
+        children.pop()
+        node.outputs.clear()
+        del children[0].inputs.attempt
+>       assert service.get_export_selection(RUN.upper(), "E", **kwargs) == {
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "execution_id":"E", "attempt":1, "calcjob_uuid":C1, "status":"completed"}
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:150: AttributeError
+_________ test_invalid_published_selection_never_falls_back[conflict] __________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cab4720>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+corruption = 'conflict'
+
+    @pytest.mark.parametrize("corruption", ["conflict", "bad_attempt", "bad_uuid", "foreign", "pair", "nonobject"])
+    def test_invalid_published_selection_never_falls_back(source, corruption):
+        children, node, selection, events = source
+        if corruption == "conflict":
+            node.outputs.selections["second"] = NS(get_dict=lambda: dict(selection))
+        elif corruption == "nonobject":
+            node.outputs.selections["E"] = NS(get_dict=lambda: ["E"])
+        else:
+            selection.update({"bad_attempt":{"attempt":True}, "bad_uuid":{"calcjob_uuid":"bad"},
+                              "foreign":{"calcjob_uuid":RUN}, "pair":{"attempt":1}}[corruption])
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:166: AttributeError
+________ test_invalid_published_selection_never_falls_back[bad_attempt] ________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...x7fe83cab5c70>)}}), {'attempt': True, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+corruption = 'bad_attempt'
+
+    @pytest.mark.parametrize("corruption", ["conflict", "bad_attempt", "bad_uuid", "foreign", "pair", "nonobject"])
+    def test_invalid_published_selection_never_falls_back(source, corruption):
+        children, node, selection, events = source
+        if corruption == "conflict":
+            node.outputs.selections["second"] = NS(get_dict=lambda: dict(selection))
+        elif corruption == "nonobject":
+            node.outputs.selections["E"] = NS(get_dict=lambda: ["E"])
+        else:
+            selection.update({"bad_attempt":{"attempt":True}, "bad_uuid":{"calcjob_uuid":"bad"},
+                              "foreign":{"calcjob_uuid":RUN}, "pair":{"attempt":1}}[corruption])
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:166: AttributeError
+_________ test_invalid_published_selection_never_falls_back[bad_uuid] __________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...nction source.<locals>.<lambda> at 0x7fe83cab66c0>)}}), {'attempt': 2, 'calcjob_uuid': 'bad', 'execution_id': 'E'}, [])
+corruption = 'bad_uuid'
+
+    @pytest.mark.parametrize("corruption", ["conflict", "bad_attempt", "bad_uuid", "foreign", "pair", "nonobject"])
+    def test_invalid_published_selection_never_falls_back(source, corruption):
+        children, node, selection, events = source
+        if corruption == "conflict":
+            node.outputs.selections["second"] = NS(get_dict=lambda: dict(selection))
+        elif corruption == "nonobject":
+            node.outputs.selections["E"] = NS(get_dict=lambda: ["E"])
+        else:
+            selection.update({"bad_attempt":{"attempt":True}, "bad_uuid":{"calcjob_uuid":"bad"},
+                              "foreign":{"calcjob_uuid":RUN}, "pair":{"attempt":1}}[corruption])
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:166: AttributeError
+__________ test_invalid_published_selection_never_falls_back[foreign] __________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cab7110>)}}), {'attempt': 2, 'calcjob_uuid': 'e7f5313d-22fd-49fa-9be5-85fbe29e1974', 'execution_id': 'E'}, [])
+corruption = 'foreign'
+
+    @pytest.mark.parametrize("corruption", ["conflict", "bad_attempt", "bad_uuid", "foreign", "pair", "nonobject"])
+    def test_invalid_published_selection_never_falls_back(source, corruption):
+        children, node, selection, events = source
+        if corruption == "conflict":
+            node.outputs.selections["second"] = NS(get_dict=lambda: dict(selection))
+        elif corruption == "nonobject":
+            node.outputs.selections["E"] = NS(get_dict=lambda: ["E"])
+        else:
+            selection.update({"bad_attempt":{"attempt":True}, "bad_uuid":{"calcjob_uuid":"bad"},
+                              "foreign":{"calcjob_uuid":RUN}, "pair":{"attempt":1}}[corruption])
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:166: AttributeError
+___________ test_invalid_published_selection_never_falls_back[pair] ____________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cab7b60>)}}), {'attempt': 1, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+corruption = 'pair'
+
+    @pytest.mark.parametrize("corruption", ["conflict", "bad_attempt", "bad_uuid", "foreign", "pair", "nonobject"])
+    def test_invalid_published_selection_never_falls_back(source, corruption):
+        children, node, selection, events = source
+        if corruption == "conflict":
+            node.outputs.selections["second"] = NS(get_dict=lambda: dict(selection))
+        elif corruption == "nonobject":
+            node.outputs.selections["E"] = NS(get_dict=lambda: ["E"])
+        else:
+            selection.update({"bad_attempt":{"attempt":True}, "bad_uuid":{"calcjob_uuid":"bad"},
+                              "foreign":{"calcjob_uuid":RUN}, "pair":{"attempt":1}}[corruption])
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:166: AttributeError
+_________ test_invalid_published_selection_never_falls_back[nonobject] _________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cab7e20>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+corruption = 'nonobject'
+
+    @pytest.mark.parametrize("corruption", ["conflict", "bad_attempt", "bad_uuid", "foreign", "pair", "nonobject"])
+    def test_invalid_published_selection_never_falls_back(source, corruption):
+        children, node, selection, events = source
+        if corruption == "conflict":
+            node.outputs.selections["second"] = NS(get_dict=lambda: dict(selection))
+        elif corruption == "nonobject":
+            node.outputs.selections["E"] = NS(get_dict=lambda: ["E"])
+        else:
+            selection.update({"bad_attempt":{"attempt":True}, "bad_uuid":{"calcjob_uuid":"bad"},
+                              "foreign":{"calcjob_uuid":RUN}, "pair":{"attempt":1}}[corruption])
+>       for operation in (service.get_export_selection, service.list_execution_artifacts):
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:166: AttributeError
+_________ test_published_record_is_read_once_and_both_selectors_pinned _________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cab6e50>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cafb770>
+
+    def test_published_record_is_read_once_and_both_selectors_pinned(source, monkeypatch):
+        children, node, selection, _ = source
+        reads, calls = [], []
+        def changing():
+            reads.append(1)
+            return dict(selection) if len(reads) == 1 else {"execution_id":"E","attempt":1,"calcjob_uuid":C1}
+        node.outputs.selections["E"] = NS(get_dict=changing)
+        original = service._select_child
+        def select(node, execution_id, **kwargs):
+            calls.append(kwargs)
+            return original(node, execution_id, **kwargs)
+        monkeypatch.setattr(service,"_select_child",select)
+>       assert service.get_export_selection(RUN,"E")["calcjob_uuid"] == C2
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:185: AttributeError
+_____________ test_invalid_selected_stored_identity[attempt-True] ______________
+
+source = ([namespace(uuid='20dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+field = 'attempt', value = True
+
+    @pytest.mark.parametrize("field,value", [("attempt",True),("attempt",0),("attempt","2"),("uuid","bad")])
+    def test_invalid_selected_stored_identity(source, field, value):
+        children, node, _, _ = source
+        children.pop(0)
+        node.outputs.clear()
+        if field == "attempt":
+            children[0].inputs.attempt.value = value
+        else:
+            children[0].uuid = value
+        with pytest.raises(ValueError, match="Selected child identity is invalid"):
+>           service.get_export_selection(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:199: AttributeError
+_______________ test_invalid_selected_stored_identity[attempt-0] _______________
+
+source = ([namespace(uuid='20dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+field = 'attempt', value = 0
+
+    @pytest.mark.parametrize("field,value", [("attempt",True),("attempt",0),("attempt","2"),("uuid","bad")])
+    def test_invalid_selected_stored_identity(source, field, value):
+        children, node, _, _ = source
+        children.pop(0)
+        node.outputs.clear()
+        if field == "attempt":
+            children[0].inputs.attempt.value = value
+        else:
+            children[0].uuid = value
+        with pytest.raises(ValueError, match="Selected child identity is invalid"):
+>           service.get_export_selection(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:199: AttributeError
+_______________ test_invalid_selected_stored_identity[attempt-2] _______________
+
+source = ([namespace(uuid='20dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+field = 'attempt', value = '2'
+
+    @pytest.mark.parametrize("field,value", [("attempt",True),("attempt",0),("attempt","2"),("uuid","bad")])
+    def test_invalid_selected_stored_identity(source, field, value):
+        children, node, _, _ = source
+        children.pop(0)
+        node.outputs.clear()
+        if field == "attempt":
+            children[0].inputs.attempt.value = value
+        else:
+            children[0].uuid = value
+        with pytest.raises(ValueError, match="Selected child identity is invalid"):
+>           service.get_export_selection(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:199: AttributeError
+_______________ test_invalid_selected_stored_identity[uuid-bad] ________________
+
+source = ([namespace(uuid='bad', inputs=namespace(execution_id=namespace(value='E'), attempt=namespace(value=2)), outputs={'ret...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+field = 'uuid', value = 'bad'
+
+    @pytest.mark.parametrize("field,value", [("attempt",True),("attempt",0),("attempt","2"),("uuid","bad")])
+    def test_invalid_selected_stored_identity(source, field, value):
+        children, node, _, _ = source
+        children.pop(0)
+        node.outputs.clear()
+        if field == "attempt":
+            children[0].inputs.attempt.value = value
+        else:
+            children[0].uuid = value
+        with pytest.raises(ValueError, match="Selected child identity is invalid"):
+>           service.get_export_selection(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'get_export_selection'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:199: AttributeError
+_____ test_export_inventory_rejects_foreign_or_incomplete_child[inventory] _____
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cae5c70>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cafa0b0>
+corruption = 'inventory'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+_____ test_export_inventory_rejects_foreign_or_incomplete_child[retrieved] _____
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cae66c0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cc6e4a0>
+corruption = 'retrieved'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+____ test_export_inventory_rejects_foreign_or_incomplete_child[incomplete] _____
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cae6fb0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cafa2e0>
+corruption = 'incomplete'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+______ test_export_inventory_rejects_foreign_or_incomplete_child[marker] _______
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cae7ab0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83caf1160>
+corruption = 'marker'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+_______ test_export_inventory_rejects_foreign_or_incomplete_child[files] _______
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb5c670>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83caf17f0>
+corruption = 'files'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+________ test_export_inventory_rejects_foreign_or_incomplete_child[row] ________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb5d170>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83caf1e80>
+corruption = 'row'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+_______ test_export_inventory_rejects_foreign_or_incomplete_child[path] ________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb5dc70>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83caf2510>
+corruption = 'path'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+_______ test_export_inventory_rejects_foreign_or_incomplete_child[size] ________
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83caac5c0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cbf51d0>
+corruption = 'size'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+_____ test_export_inventory_rejects_foreign_or_incomplete_child[bool_size] _____
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb5cbf0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83caf9860>
+corruption = 'bool_size'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+_____ test_export_inventory_rejects_foreign_or_incomplete_child[duplicate] _____
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb5e4b0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cafaa50>
+corruption = 'duplicate'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+_______ test_export_inventory_rejects_foreign_or_incomplete_child[bound] _______
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb5efb0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe83cc6c670>
+corruption = 'bound'
+
+    @pytest.mark.parametrize("corruption", ["inventory", "retrieved", "incomplete", "marker", "files", "row", "path", "size", "bool_size", "duplicate", "bound"])
+    def test_export_inventory_rejects_foreign_or_incomplete_child(source, monkeypatch, corruption):
+        children, _, _, events = source
+        inventory = children[1].outputs.inventory.get_dict()
+        error = ValueError
+        if corruption in ("inventory", "retrieved"):
+            del children[1].outputs[corruption]
+            error = LookupError
+        elif corruption == "incomplete": inventory["complete"] = False
+        elif corruption == "marker": inventory["complete"] = 1
+        elif corruption == "files": inventory["files"] = {}
+        elif corruption == "row": inventory["files"][0] = []
+        elif corruption == "path": inventory["files"][0]["path"] = "../bad"
+        elif corruption == "size": inventory["files"][0]["size"] = -1
+        elif corruption == "bool_size": inventory["files"][0]["size"] = True
+        elif corruption == "duplicate": inventory["files"] *= 2
+        elif corruption == "bound": monkeypatch.setattr(service,"MAX_ARTIFACTS",1)
+        with pytest.raises(error):
+>           service.list_execution_artifacts(RUN,"E")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:220: AttributeError
+___ test_inventory_ignores_unselected_corruption_and_strips_source_identity ____
+
+source = ([namespace(uuid='10dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...t 0x7fe83cb5fab0>)}}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+
+    def test_inventory_ignores_unselected_corruption_and_strips_source_identity(source):
+        children = source[0]
+        children[0].outputs.inventory.get_dict()["files"] *= 2
+        children[1].outputs.inventory.get_dict()["files"][0].update(attempt=1,calcjob_uuid=C1,extra="unused")
+>       rows = service.list_execution_artifacts(RUN,"E")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'aiida_qcl_negf.service' has no attribute 'list_execution_artifacts'
+
+components/qcl-negf-aiida/tests/test_export_selection.py:228: AttributeError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_selection_pins_child
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_selected_status_uses_only_selected_result[running]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_selected_status_uses_only_selected_result[completed]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_selected_status_uses_only_selected_result[completed_with_warnings]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_selected_status_uses_only_selected_result[failed]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_selected_status_uses_only_selected_result[cancelled]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_selected_status_uses_only_selected_result[paused]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_absent_result_is_unknown_independent_of_process_exit[0]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_absent_result_is_unknown_independent_of_process_exit[1]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[\xff]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[[]]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{}]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{"status":"unknown","selected_execution_id":"E"}]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{"status":true,"selected_execution_id":"E"}]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{"status":"failed"}]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{"status":"failed","selected_execution_id":"other"}]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{"status":"failed","status":"completed","selected_execution_id":"E"}]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_invalid_result_rejects_and_closes[{"status":"failed","selected_execution_id":"E","x":NaN}]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_result_bound_probes_one_extra_byte
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs0-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs0-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs1-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs1-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs2-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs2-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs3-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs3-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs4-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs4-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs5-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs5-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs6-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs6-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs7-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs7-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs8-ValueError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs8-ValueError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs9-LookupError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs9-LookupError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs10-LookupError-get_export_selection]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selectors_before_metadata_and_payload[kwargs10-LookupError-list_execution_artifacts]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_scalar_input_before_node_lookup[1-E]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_scalar_input_before_node_lookup[e7f5313d-E]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_scalar_input_before_node_lookup[e7f5313d-22fd-49fa-9be5-85fbe29e1974-]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_scalar_input_before_node_lookup[e7f5313d-22fd-49fa-9be5-85fbe29e1974-1]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_scalar_input_before_node_lookup[e7f5313d-22fd-49fa-9be5-85fbe29e1974-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_legacy_and_canonical_uuid_selectors[kwargs0]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_legacy_and_canonical_uuid_selectors[kwargs1]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_legacy_and_canonical_uuid_selectors[kwargs2]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_legacy_and_canonical_uuid_selectors[kwargs3]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_published_selection_never_falls_back[conflict]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_published_selection_never_falls_back[bad_attempt]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_published_selection_never_falls_back[bad_uuid]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_published_selection_never_falls_back[foreign]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_published_selection_never_falls_back[pair]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_published_selection_never_falls_back[nonobject]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_published_record_is_read_once_and_both_selectors_pinned
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selected_stored_identity[attempt-True]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selected_stored_identity[attempt-0]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selected_stored_identity[attempt-2]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_invalid_selected_stored_identity[uuid-bad]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[inventory]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[retrieved]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[incomplete]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[marker]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[files]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[row]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[path]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[size]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[bool_size]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[duplicate]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_export_inventory_rejects_foreign_or_incomplete_child[bound]
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_inventory_ignores_unselected_corruption_and_strips_source_identity
+74 failed in 0.59s

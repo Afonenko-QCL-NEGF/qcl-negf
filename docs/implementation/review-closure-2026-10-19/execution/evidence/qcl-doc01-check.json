@@ -1,0 +1,28 @@
+{
+  "source": "e0f244d075dd49874ba4f3847f4efa693f3b3622",
+  "paths": [
+    "docs/system/README.md",
+    "docs/system/requirements.md",
+    "docs/system/comprehensive-review.md",
+    "docs/system/architecture.md",
+    "docs/system/release-roadmap.md",
+    "docs/system/requirement-dispositions-2026-10-19.md"
+  ],
+  "requirements_original_sha256": "aaf01fe9b803a0aa34ba5ae9e71559606482e2ad96c3314388dc6c6667096e0d",
+  "original_id_count": 59,
+  "disposition_id_count": 59,
+  "original_row_mismatches": 0,
+  "local_links_checked": 139,
+  "missing_links": [],
+  "patch_sha256": "0452d6f36e54fddf5b1504ad271bcedd0cac1ed021d21fa37075b9e752db9095",
+  "review_diff_sha256": "bfae8e75c3f3322bd5f0c5df038fb1a68d0c7ba7ad2dee46b6fa38765708eb06",
+  "candidate_sha256": {
+    "docs/system/README.md": "16794ff946879c1995a427647b64bf514fcab81d7eb2605abf13be40d59d0a08",
+    "docs/system/requirements.md": "af8febf7c71a409ee3f8e05720103ef4013117e67215dfabb2c87dfe96e7c6d8",
+    "docs/system/comprehensive-review.md": "8108bee776777edb52a512d1854d68a61e93b0eab57893150f7db8f7c97b2f08",
+    "docs/system/architecture.md": "051565402fb61d3a36642ebbfa7a38fa6d2bf2a5cfe5cc3cb2790c1b373758ff",
+    "docs/system/release-roadmap.md": "58c7ce6007fe13b71027a397908555138065e2b9d72da24aba588542fd0256e3",
+    "docs/system/requirement-dispositions-2026-10-19.md": "feb8457cdedabee3e68743bea7d2739040758b6af79e9ff11ff289165952433a"
+  },
+  "applied_by": "root exact-byte I/O; author verified reverse apply and all 6 candidate bytes"
+}

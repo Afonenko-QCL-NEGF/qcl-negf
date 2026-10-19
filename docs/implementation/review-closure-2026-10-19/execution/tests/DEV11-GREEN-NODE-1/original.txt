@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: validation errors produce readable messages
+ok 1 - validation errors produce readable messages
+  ---
+  duration_ms: 0.964761
+  type: 'test'
+  ...
+# Subtest: download delegates streaming to the browser without buffering a Blob
+ok 2 - download delegates streaming to the browser without buffering a Blob
+  ---
+  duration_ms: 25.520033
+  type: 'test'
+  ...
+# Subtest: scientific failure is not inferred from terminal scheduler state
+ok 3 - scientific failure is not inferred from terminal scheduler state
+  ---
+  duration_ms: 0.191184
+  type: 'test'
+  ...
+# Subtest: API carries credentials only in header and serializes one submission
+ok 4 - API carries credentials only in header and serializes one submission
+  ---
+  duration_ms: 0.618877
+  type: 'test'
+  ...
+# Subtest: API surfaces service refusal without retrying submission
+ok 5 - API surfaces service refusal without retrying submission
+  ---
+  duration_ms: 0.788853
+  type: 'test'
+  ...
+# Subtest: run-view agent report endpoints preserve author JSON and stay authenticated without cache
+ok 6 - run-view agent report endpoints preserve author JSON and stay authenticated without cache
+  ---
+  duration_ms: 2.241461
+  type: 'test'
+  ...
+# Subtest: agent report service refusal is surfaced once without retry
+ok 7 - agent report service refusal is surfaced once without retry
+  ---
+  duration_ms: 0.448054
+  type: 'test'
+  ...
+# Subtest: composite request pins explicit child and preserves returned status identity
+ok 8 - composite request pins explicit child and preserves returned status identity
+  ---
+  duration_ms: 26.777249
+  type: 'test'
+  ...
+# Subtest: export download follows exact export ID using native browser transfer
+ok 9 - export download follows exact export ID using native browser transfer
+  ---
+  duration_ms: 0.581693
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 325.308745

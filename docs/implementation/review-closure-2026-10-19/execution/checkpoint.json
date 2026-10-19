@@ -1,0 +1,908 @@
+{
+  "campaign_id": "review-closure-2026-10-19-exec",
+  "mode": "EXEC",
+  "operator_authority": "Direct user activation 2026-10-19 in thread 01a15405-f67d-75b1-881c-9ac86e4b9cc1; P1 B/G1/S1 without electron-electron scattering",
+  "grants": [
+    "DEV",
+    "PUBLISH",
+    "MERGE_G1",
+    "READ_NATIVE",
+    "BUILD",
+    "OPS",
+    "SCI"
+  ],
+  "conditional_gates": "BUILD/OPS/SCI require fresh admission and technical BIND/READY; public release separate",
+  "model": {
+    "id": "gpt-6.1-sol",
+    "coordinator_effort": "high",
+    "design_effort": "ultra",
+    "implementation_effort": "medium",
+    "review_effort": "high",
+    "evidence": "current session JSONL turn_context"
+  },
+  "preserved_checkout": "/home/tolya/Загрузки/qcl-negf",
+  "preserved_head": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "worktree_operation_id": "6e12e70a-18ea-4ce6-ab7e-fed5b6f98641",
+  "worktree_operation_state": "completed",
+  "counters": {
+    "setup_attempts": 2,
+    "targeted_test_active": null,
+    "targeted_tests_by_task": {
+      "DEV10": 5,
+      "DEV11": 8
+    },
+    "heavy_build_attempts": 0,
+    "heavy_build_wall_hours": 0,
+    "preflight_attempts": 0,
+    "final_full_ci_dispatches": 0,
+    "scientific_submits": 0,
+    "scientific_execution_node_hours": 0,
+    "scientific_resident_bytes": 0,
+    "scientific_read_bytes": 0,
+    "scientific_written_bytes": 0
+  },
+  "resource_observation": {
+    "logical_cpus": 12,
+    "memory_total_MiB": 31939,
+    "memory_available_MiB": 13672,
+    "workspace_available_GiB": 683,
+    "server_admission": "missing"
+  },
+  "runtime_observation": {
+    "python": "Python3.14.7, locked owning imports verified",
+    "node": "Node24.21.0; npm ci exit0,22packages,55MiB node_modules/14MiB cache; esbuild postinstall blocked by npm allowScripts, build not verified",
+    "uv": "/nix/store/zvdbpcaqqjmnzs2dpmgsszg3hh229cbp-uv-0.11.21/bin/uv",
+    "julia": "system1.13.1 vs lock1.13.0; no native/depot prep"
+  },
+  "tasks": {
+    "INT01": {
+      "state": "running",
+      "owner": "/root/environment medium",
+      "phase": "canonical lockedallpackages/extras/groups Python correction; no lockchanges; localJulia read-onlyadmissionproposal next"
+    },
+    "DEV01": {
+      "state": "done",
+      "owner": "/root/dev01 ultra",
+      "reviewer": "/root/reviewer high",
+      "CP_DESIGN": "PASS",
+      "CP_CODE": "PASS",
+      "commit": "4af6e94808c6e60affbf1050a5184dbc12083335",
+      "branch": "codex/review-closure-dev01",
+      "PR": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/6",
+      "G1": "MERGED 2026-10-19T12:27:28Z",
+      "merge_commit": "2514345328714dc0504ad41ced13a6ffe61a51ab",
+      "integration_selected_commit": "4af6e94808c6e60affbf1050a5184dbc12083335 (exact reviewed head, published and retained)",
+      "numerical_checks": "not executed docs-only"
+    },
+    "DOC01": {
+      "state": "awaiting_publication",
+      "owner": "/root/doc01 ultra",
+      "reviewer": "/root/reviewer high",
+      "CP_CODE": "PASS",
+      "receipt": "/tmp/qcl-doc01-review.md",
+      "publication_dependency": "include verified sanitized checkpoint target"
+    },
+    "INT02": {
+      "state": "planned",
+      "definition": "README.md#INT02",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "INT03": {
+      "state": "planned",
+      "definition": "README.md#INT03",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "INT04": {
+      "state": "planned",
+      "definition": "README.md#INT04",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV02": {
+      "state": "partial_contracts_published_merged",
+      "head": "a8d2c0de21dfdce3ed3c7c585c555656443f6d89",
+      "pr": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/7",
+      "ready_oracles": [
+        "O08-01",
+        "O08-02",
+        "O08-04",
+        "O08-06"
+      ],
+      "design_blocked": [
+        "O08-03",
+        "O08-05"
+      ],
+      "no_runtime_acceptance": true
+    },
+    "DEV03": {
+      "state": "planned",
+      "definition": "development.md#DEV03",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV04": {
+      "state": "planned",
+      "definition": "development.md#DEV04",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV05": {
+      "state": "planned",
+      "definition": "development.md#DEV05",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV06": {
+      "state": "planned",
+      "definition": "development.md#DEV06",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV07": {
+      "state": "planned",
+      "definition": "development.md#DEV07",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV08": {
+      "state": "planned",
+      "definition": "development.md#DEV08",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV09": {
+      "state": "done",
+      "owner": "/root/dev09 ultra",
+      "reviewer": "/root/reviewer high",
+      "CP_DESIGN": "PASS",
+      "CP_CODE": "PASS",
+      "commit": "67287af",
+      "branch": "codex/review-closure-export-contract",
+      "minor_deferred": "footer still says CP-DESIGN reviewer required although accepted header; no semantic effect",
+      "receipt": "/tmp/qcl-dev09-review.md"
+    },
+    "DEV10": {
+      "state": "published_merged",
+      "head": "5579d55684939495230241f446b7ea07c8ae0224",
+      "pr": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-aiida/pull/7",
+      "test": "118 passed GREEN-3",
+      "review": "CP-CODE PASS; native acceptance not_measured"
+    },
+    "DEV11": {
+      "state": "implementation",
+      "owner": "/root/dev11",
+      "branch": "codex/review-closure-export-consumer",
+      "tests": "backend semantic RED preserved; Node semantic RED confirmed under escalated context; frontend implementing",
+      "reviewer": "separate high reviewer pending"
+    },
+    "DEV12": {
+      "state": "planned",
+      "definition": "development.md#DEV12",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV13": {
+      "state": "planned",
+      "definition": "development.md#DEV13",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV14": {
+      "state": "design",
+      "owner": "/root/dev14_design",
+      "role": "ultra",
+      "reviewer": "separate high reviewer pending"
+    },
+    "DEV15": {
+      "state": "planned",
+      "definition": "development.md#DEV15",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV16": {
+      "state": "planned",
+      "definition": "development.md#DEV16",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV17": {
+      "state": "planned",
+      "definition": "development.md#DEV17",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV18": {
+      "state": "planned",
+      "definition": "development.md#DEV18",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV19": {
+      "state": "planned",
+      "definition": "development.md#DEV19",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV20": {
+      "state": "planned",
+      "definition": "development.md#DEV20",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV21": {
+      "state": "planned",
+      "definition": "development.md#DEV21",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV22": {
+      "state": "planned",
+      "definition": "development.md#DEV22",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV23": {
+      "state": "planned",
+      "definition": "development.md#DEV23",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV24": {
+      "state": "planned",
+      "definition": "development.md#DEV24",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DEV25": {
+      "state": "planned",
+      "definition": "development.md#DEV25",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS01": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS01",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS02": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS02",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS03": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS03",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS04": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS04",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS05": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS05",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS06": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS06",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS07": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS07",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS08": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS08",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS09": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS09",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS10": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS10",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS11": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS11",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS12": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS12",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS13": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS13",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS14": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS14",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS15": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS15",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS16": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS16",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "OPS17": {
+      "state": "planned",
+      "definition": "platform-worker.md#OPS17",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DOC02": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#DOC02",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DOC03": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#DOC03",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DOC04": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#DOC04",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DOC05": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#DOC05",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DOC06": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#DOC06",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "DOC07": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#DOC07",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SI01": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#SI01",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SI02": {
+      "state": "reviewed_pending_root_publication",
+      "owner": "/root/si02",
+      "reviewer": "/root/instruction_reviewer",
+      "diff_sha256": "b47940597639f56658cef6f8bfdd9666ab38b715604aab58551c7c59f913f8eb",
+      "checks": "CP-DESIGN+CP-CODE TEXT PASS; four scenarios static only"
+    },
+    "SI03": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#SI03",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SI04": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#SI04",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SI05": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#SI05",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SI06": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#SI06",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SI07": {
+      "state": "planned",
+      "definition": "documentation-instructions.md#SI07",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI01": {
+      "state": "done",
+      "owner": "coordinator high audit",
+      "reviewer": "/root/reviewer high",
+      "receipt": "execution/qcl-sci01-saved-audit.json",
+      "review_receipt": "execution/evidence/qcl-sci01-review.md",
+      "review_sha256": "b934f46e670b6ffd335f857760baec1541061743f82236869367b45928564d0d",
+      "result": "five originals hashes151136B matched, historical submit+RUNNING; terminal/final/raw completeness unknown; convergence/physics/discretization/experiment not_measured",
+      "limitations": "bounded named-input metadata analysis, not global search or live evidence; oldS01 untouched"
+    },
+    "SCI02": {
+      "state": "published_merged",
+      "head": "b1a3be2b0f4b3adf423cc2a611bcca2b5e0a5ff3",
+      "pr": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-research/pull/5",
+      "checks": "CP-DESIGN+CP-CODE TEXT PASS; six protected input hashes unchanged",
+      "scientific_acceptance": "not_measured"
+    },
+    "SCI03": {
+      "state": "planned",
+      "definition": "science.md#SCI03",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI04": {
+      "state": "planned",
+      "definition": "science.md#SCI04",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI05": {
+      "state": "planned",
+      "definition": "science.md#SCI05",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI06": {
+      "state": "planned",
+      "definition": "science.md#SCI06",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI07": {
+      "state": "planned",
+      "definition": "science.md#SCI07",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI08": {
+      "state": "planned",
+      "definition": "science.md#SCI08",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI09": {
+      "state": "planned",
+      "definition": "science.md#SCI09",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI10": {
+      "state": "planned",
+      "definition": "science.md#SCI10",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI11": {
+      "state": "planned",
+      "definition": "science.md#SCI11",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI12": {
+      "state": "planned",
+      "definition": "science.md#SCI12",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI13": {
+      "state": "planned",
+      "definition": "science.md#SCI13",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI14": {
+      "state": "planned",
+      "definition": "science.md#SCI14",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    },
+    "SCI15": {
+      "state": "planned",
+      "definition": "science.md#SCI15",
+      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+    }
+  },
+  "operations": [
+    {
+      "id": "INT01-PY-setup-1",
+      "state": "completed",
+      "tool_session_id": 74738,
+      "exit_code": 0
+    },
+    {
+      "id": "INT01-owning-imports-1",
+      "state": "completed",
+      "tool_session_id": 53869,
+      "exit_code": 0
+    },
+    {
+      "id": "INT01-NODE-setup-1",
+      "state": "completed",
+      "tool_session_id": 30583,
+      "exit_code": 0,
+      "limitations": "esbuild postinstall not approved by installed npm defaults; no build claim"
+    },
+    {
+      "id": "DEV01-PUBLISH-1",
+      "state": "failed",
+      "failure": "HTTPS credential helper absent; no remote mutation"
+    },
+    {
+      "id": "DEV01-PUBLISH-2",
+      "state": "completed",
+      "tool_session_id": 57638,
+      "commit": "4af6e94808c6e60affbf1050a5184dbc12083335"
+    },
+    {
+      "id": "DEV01-PR-CREATE",
+      "state": "completed",
+      "tool_session_id": 74120,
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/6"
+    },
+    {
+      "id": "DEV01-G1-MERGE",
+      "state": "completed",
+      "exact_head": "4af6e94808c6e60affbf1050a5184dbc12083335",
+      "base": "3108150dd1b6b1377470b384b15c26e272fe5c5d",
+      "branch_protected": false,
+      "required_checks": [],
+      "no_public_release": true,
+      "tool_session_id": 14548,
+      "verified_by": "gh pr view state MERGED, mergedAt and mergeCommit",
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/6",
+      "public_release": false
+    },
+    {
+      "id": "G1-AII-PR7-5579d556",
+      "state": "completed",
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-aiida/pull/7",
+      "reviewed_head": "5579d55684939495230241f446b7ea07c8ae0224",
+      "merge_commit": "9d7a309a76ebe580dfe0b0a1e32c54c7dfdd8623",
+      "merged_at": "2026-10-19T12:49:07Z",
+      "checks": [],
+      "protected": false
+    },
+    {
+      "id": "G1-CORE-PR7-a8d2c0de",
+      "state": "completed",
+      "head": "a8d2c0de21dfdce3ed3c7c585c555656443f6d89",
+      "base": "4af6e94808c6e60affbf1050a5184dbc12083335",
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/7",
+      "checks": [],
+      "protected": false,
+      "merge_state": "CLEAN",
+      "merge_commit": "ca306f0e172be192a326af9e706e82396d7e80bf",
+      "merged_at": "2026-10-19T13:02:55Z"
+    },
+    {
+      "id": "G1-RESEARCH-PR5-b1a3be2",
+      "state": "completed",
+      "head": "b1a3be2b0f4b3adf423cc2a611bcca2b5e0a5ff3",
+      "base": "5458212063a41051328ef8b5d14d63d5ac7dc781",
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-research/pull/5",
+      "checks": [],
+      "protected": false,
+      "merge_state": "CLEAN",
+      "merge_commit": "981c260cf6edf3b7dcd600121d4318662c76a619",
+      "merged_at": "2026-10-19T13:03:42Z"
+    }
+  ],
+  "unknown_outcomes": [],
+  "blockers": [
+    {
+      "scope": "BUILD/OPS/SCI native actions",
+      "reason": "fresh admission, protected private inventory, trusted available server and technical BIND/READY not established; no server probes submitted"
+    }
+  ],
+  "next_ready": [
+    "DEV11 Portal consumer implementation from published5579d55",
+    "DEV02 owningdocCP-CODE",
+    "SCI02 CP-DESIGN",
+    "SI02 CP-DESIGN",
+    "DEV14 descriptions",
+    "OPS02 lifecycle design"
+  ],
+  "updated_at": "2026-10-19T13:05:05.915773+00:00",
+  "source": {
+    "root_head": "e0f244d075dd49874ba4f3847f4efa693f3b3622",
+    "branch": "codex/review-closure-exec",
+    "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+    "status_short": "M  components/QCLNEGF.jl\nM  components/qcl-negf-aiida\n m components/qcl-negf-portal\nM  components/qcl-negf-research\nA  docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev01-design-receipt.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev01-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev01-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev02-code-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev02-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev02-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev09-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev09-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev10-fix-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev10-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev10-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc01-check.json\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc01-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc01-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci01-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci02-code-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci02-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci02-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si02-code-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si02-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si02-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-int01-imports.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-int01-python-extras-2-receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci01-saved-audit.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci02-primary-audit.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-3/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-3/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-NODE-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-NODE-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-NODE-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-NODE-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-TSC-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-TSC-1/receipt.json\nM  docs/system/README.md\nM  docs/system/agent-review-workflow.md\nM  docs/system/architecture.md\nM  docs/system/comprehensive-review.md\nM  docs/system/release-roadmap.md\nA  docs/system/requirement-dispositions-2026-10-19.md\nM  docs/system/requirements.md",
+    "gitlinks_authority": "git ls-tree HEAD components/; no maintained parallel component SHA lock",
+    "submodules_verified_against_gitlinks": true
+  },
+  "receipts": {
+    "qcl-int01-python-setup-1.log": {
+      "sha256": "7aef090cb67624547aa6685a4510781dafd8406d34ccce1c2fa5c5a071519acb",
+      "bytes": 4443,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-int01-python-setup-1.log"
+    },
+    "qcl-int01-node-setup-1.log": {
+      "sha256": "b39d004ad463b34cf1245308d17f7b355bfb187b8208c01e5497cb5f20fcdc2d",
+      "bytes": 534,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-int01-node-setup-1.log"
+    },
+    "qcl-sci02-primary-audit.json": {
+      "sha256": "4f22e816875033be7b26157fa19cbe92b77477f44365d8fe5e402255a150ee6e",
+      "bytes": 1939,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci02-primary-audit.json"
+    },
+    "qcl-sci01-saved-audit.json": {
+      "sha256": "ba11775b21d00ea14fa07b3152725b3e17943db8f6e83fa122a2c1c59d468316",
+      "bytes": 3454,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci01-saved-audit.json"
+    },
+    "qcl-int01-imports.json": {
+      "sha256": "240cd2cf2dc1c72806ca3158b2f39dbdac0aa5f2d09833ea823f9d4ee1c9b762",
+      "bytes": 1456,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-int01-imports.json"
+    },
+    "qcl-dev01-design-receipt.md": {
+      "sha256": "32056ea677159946c95161be18f072c387f3497b444f802b347e9b03bfde85b5",
+      "bytes": 6384,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev01-design-receipt.md"
+    },
+    "qcl-dev01-report.md": {
+      "sha256": "f45b20c1ff9cb0eaad443c116d5b25d6ac1d26e9db898b84326dafd878a0b74a",
+      "bytes": 1537,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev01-report.md"
+    },
+    "qcl-dev01-review.md": {
+      "sha256": "84f3143047a3e08b9aed47c90163728046a44b0c44842ebaad4c44ca87058365",
+      "bytes": 3957,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev01-review.md"
+    },
+    "qcl-doc01-report.md": {
+      "sha256": "b2d27b7d65c4441ff0a340da74d48eee1039e1055cfeb54355b8a1deb4ea28ff",
+      "bytes": 8464,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc01-report.md"
+    },
+    "qcl-doc01-review.md": {
+      "sha256": "6c0345d10c4d8630eab6f26995ff86413fd322800567be98c27d393687ace7ea",
+      "bytes": 6639,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc01-review.md"
+    },
+    "qcl-doc01-check.json": {
+      "sha256": "71c77217362fc4c5a347c764d5d8ff0edafb9fb02a8a8d21d20a5ab4902d4322",
+      "bytes": 1506,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc01-check.json"
+    },
+    "qcl-dev09-report.md": {
+      "sha256": "3b609de95cdd851172aded4e6f1dbbf51744dc7fc08198283f9e85626296382f",
+      "bytes": 3845,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev09-report.md"
+    },
+    "qcl-dev09-review.md": {
+      "sha256": "9f8126ddb11f556334dbb9a35e985348860abb3284865397fb3048624c672f2e",
+      "bytes": 3282,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev09-review.md"
+    },
+    "qcl-sci01-review.md": {
+      "sha256": "b934f46e670b6ffd335f857760baec1541061743f82236869367b45928564d0d",
+      "bytes": 10011,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci01-review.md"
+    },
+    "qcl-DEV10-GREEN-2/receipt.json": {
+      "sha256": "0be2431fee755a6f95d2c78e88c8edffbee53360bc91bc60dc576f0b561ed5eb",
+      "bytes": 1186,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-2/receipt.json"
+    },
+    "qcl-DEV10-GREEN-2/original.log": {
+      "sha256": "088172b9afb1155bf327b7656f8aa1c842f9aef51328893ce74ab7472f426862",
+      "bytes": 180,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-2/original.txt"
+    },
+    "qcl-DEV10-RED-2/receipt.json": {
+      "sha256": "76322456a69a66952da697c81d531d97320135229c32b4cbafcd4eb9feb1ec04",
+      "bytes": 1117,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-2/receipt.json"
+    },
+    "qcl-DEV10-RED-2/original.log": {
+      "sha256": "e9fbeeb7ac20ecd34ab5d4f05cf0d7a4fbe9f5c81735c29330205ade682e06e4",
+      "bytes": 1215,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-2/original.txt"
+    },
+    "qcl-DEV10-GREEN-1/receipt.json": {
+      "sha256": "5b56662b03a82e31d3c43255ee8d780cbd4a74d9250e6edaeed721c7dc72fa45",
+      "bytes": 1186,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-1/receipt.json"
+    },
+    "qcl-DEV10-GREEN-1/original.log": {
+      "sha256": "4304e52152d18c5d21b74a25f781ae3a456da9f5463042930d39548835c8dfae",
+      "bytes": 180,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-1/original.txt"
+    },
+    "qcl-DEV10-RED-1/receipt.json": {
+      "sha256": "bca3a6a042b4cf3b96cf35388b45dd987d421ea37e3611c0080a0589d9f0c46b",
+      "bytes": 1004,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-1/receipt.json"
+    },
+    "qcl-DEV10-RED-1/original.log": {
+      "sha256": "8ee323ffeea214e873154d33b32b44ea8e35a8025905062ebca2aa97827e77fe",
+      "bytes": 111668,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-RED-1/original.txt"
+    },
+    "qcl-dev10-report.md": {
+      "sha256": "d2054a6826e3b2aa3e9d37a30e542e5fb4c33cde98f109e54b9dcc51733532e2",
+      "bytes": 10160,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev10-report.md"
+    },
+    "qcl-dev02-report.md": {
+      "sha256": "685323a87384eea758467f2b67b66c183af55eaf18cc8062ac4b235df175f8d8",
+      "bytes": 7289,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev02-report.md"
+    },
+    "qcl-dev02-review.md": {
+      "sha256": "80d0281721d77ba425a373824f49225c4713683958c2f646bba99cb1c7f4503e",
+      "bytes": 9188,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev02-review.md"
+    },
+    "qcl-dev10-review.md": {
+      "sha256": "3936369ab6bcea02a950ed2d5c3ba6f4dd8ed4e0576bd3505c8958cd02e5f30c",
+      "bytes": 6634,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev10-review.md"
+    },
+    "qcl-dev10-fix-review.md": {
+      "sha256": "a40889371a20c1a6b89c34022e1e85066d7bcd7c896db13392bfbd8b1dc49029",
+      "bytes": 4868,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev10-fix-review.md"
+    },
+    "qcl-DEV10-GREEN-3/receipt.json": {
+      "sha256": "abf7111146ad3621ae09f9c9e1446b85a0be82f4ea8adecafed244e66ddd7d4f",
+      "bytes": 1186,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-3/receipt.json"
+    },
+    "qcl-DEV10-GREEN-3/original.log": {
+      "sha256": "a436cbdac0b203d1627e8ae967813190f0a00dc9707cf13da4befccfef13b31d",
+      "bytes": 180,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV10-GREEN-3/original.txt"
+    },
+    "qcl-DEV11-RED-1/receipt.json": {
+      "sha256": "15a47277af5fa2211a83fc09c8bae5b982f4c93f1204201895caeb6c36b992b3",
+      "bytes": 1159,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-1/receipt.json"
+    },
+    "qcl-DEV11-RED-1/original.log": {
+      "sha256": "14e5331d0ded5e0edf8652a0230f9c46d4a79b68683f3d07cab958a28e505457",
+      "bytes": 7979,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-1/original.txt"
+    },
+    "qcl-DEV11-RED-NODE-1/receipt.json": {
+      "sha256": "b99c7564664367d2625ac778da9b571b05ae58211e85557eef05961d2c058516",
+      "bytes": 1014,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-NODE-1/receipt.json"
+    },
+    "qcl-DEV11-RED-NODE-1/original.log": {
+      "sha256": "29aa040ca14871c780dc5e63026da8235f4f6444cd72a2ad0782973f44a0bf76",
+      "bytes": 294,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-RED-NODE-1/original.txt"
+    },
+    "qcl-DEV11-GREEN-1/receipt.json": {
+      "sha256": "59d5e8fc04371e518c4196f27b4ccdb8207457322d2dfa38fd13dea19943f99f",
+      "bytes": 1163,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-1/receipt.json"
+    },
+    "qcl-DEV11-GREEN-1/original.log": {
+      "sha256": "0480d456b4392362cc9c970b32217dc63cfc3bc9fcc7bb99e40a45d38e2b7134",
+      "bytes": 987,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-1/original.txt"
+    },
+    "qcl-DEV11-NODE-DIAG-1/receipt.json": {
+      "sha256": "5b062badb87df676fa94b635c0be3ceeb573583d8a8ba590145152b2ff10f8a6",
+      "bytes": 1041,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-1/receipt.json"
+    },
+    "qcl-DEV11-NODE-DIAG-1/original.log": {
+      "sha256": "730a15ed56c23d0ed02362b817004a7edbffc7cb0fc509a73e4b4e8a11748e29",
+      "bytes": 508,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-1/original.txt"
+    },
+    "qcl-int01-python-extras-2-receipt.json": {
+      "sha256": "6e65a528d2b9aecc2f9bb4198d05e630385e53af6889c726434986a1a4fa4bb4",
+      "bytes": 3015,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-int01-python-extras-2-receipt.json"
+    },
+    "qcl-dev02-code-review.md": {
+      "sha256": "a7961ab4a6d9ba13267078f993193fd74248e9221a6bbe4512efb5f4e0affcf0",
+      "bytes": 2926,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev02-code-review.md"
+    },
+    "qcl-si02-report.md": {
+      "sha256": "e2c752b44a04e19f04acb327a4e5119065bb1c2a7cd282fa7d2f4e49a4e4999b",
+      "bytes": 13648,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si02-report.md"
+    },
+    "qcl-si02-review.md": {
+      "sha256": "1493519cd5ccbd9f1d7d97f574719987f5106e890cd9276fb13ca36891926eca",
+      "bytes": 14816,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si02-review.md"
+    },
+    "qcl-si02-code-review.md": {
+      "sha256": "ca82a95ce59ea359c14e533565cb60d78c921b3d4b814e013a349c6deff5b5c7",
+      "bytes": 8179,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si02-code-review.md"
+    },
+    "qcl-sci02-report.md": {
+      "sha256": "6bfea18a4f34565948413d48ac213cd2891fa527436a673daae3f9f6472c1689",
+      "bytes": 8938,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci02-report.md"
+    },
+    "qcl-sci02-review.md": {
+      "sha256": "45258bc2665b4dacdb95f76e4d1c7adc0c219b4cf0ca5093e02cf6a33c098609",
+      "bytes": 10246,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci02-review.md"
+    },
+    "qcl-sci02-code-review.md": {
+      "sha256": "18cdb21759c0dd72795cf43b04e53af970f9c06d20199cd645559f784a4336d2",
+      "bytes": 3904,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci02-code-review.md"
+    },
+    "qcl-DEV11-NODE-DIAG-2/receipt.json": {
+      "sha256": "55391f9bbdef4a9bb8c3cbb3d9657013594258433e6bacdbafb66585f6dc7e36",
+      "bytes": 1044,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-2/receipt.json"
+    },
+    "qcl-DEV11-NODE-DIAG-2/original.log": {
+      "sha256": "1e155bbd0b7b86f71569df587134b83cb7d116b098cbea7c01dc98e91d2016a1",
+      "bytes": 1243,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-NODE-DIAG-2/original.txt"
+    },
+    "qcl-DEV11-GREEN-2/receipt.json": {
+      "sha256": "336b8e80d80c4a35672cf57c8141a5496054c630867595a4798828f464d22e01",
+      "bytes": 1164,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-2/receipt.json"
+    },
+    "qcl-DEV11-GREEN-2/original.log": {
+      "sha256": "5c4a9ee297388dd6dbdf8d04643ce3b6d51264f2bea972b873d57458033422da",
+      "bytes": 900,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-2/original.txt"
+    },
+    "qcl-DEV11-GREEN-NODE-1/receipt.json": {
+      "sha256": "d8d9c910e7bf223d84cf2d89dd52974a7e8bee4b673a690ffc1e48bbd417dd7b",
+      "bytes": 1071,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-NODE-1/receipt.json"
+    },
+    "qcl-DEV11-GREEN-NODE-1/original.log": {
+      "sha256": "9dc634ba4407baa29b3764f2ba102686d4867b6cdff6b6a61a51ed15cd6fb244",
+      "bytes": 1944,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-GREEN-NODE-1/original.txt"
+    },
+    "qcl-DEV11-TSC-1/receipt.json": {
+      "sha256": "0597efdbcb8697dd8cae194257e979aed90f3a28c4e958dc48a5aede0bd3359b",
+      "bytes": 1056,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-TSC-1/receipt.json"
+    },
+    "qcl-DEV11-TSC-1/original.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DEV11-TSC-1/original.txt"
+    }
+  },
+  "resume_note": "Operator switched to auto approvals; old writer apply_patch approval interrupted. Reconcile exact paths before limited exec require_escalated apply; no duplicate mutations.",
+  "test_intent": {
+    "id": "DEV11-TSC-1",
+    "state": "completed_pass",
+    "command": "Node24 locked TypeScript5.9.3 tsc --noEmit",
+    "source": "Portal frozen775fd77480598ad1be338282957ce62ae989688d88fd0070e63236afea773a98",
+    "bounds": "90s1CPU1GiBsampledRSS2MiBlogs; no emit/build",
+    "exit_code": 0
+  },
+  "test_result": {
+    "id": "DEV11-TSC-1",
+    "state": "completed_pass",
+    "exit_code": 0,
+    "assertions": "TypeScript noEmit pass",
+    "receipt": "tests/DEV11-TSC-1/receipt.json"
+  },
+  "previous_test_result": {
+    "id": "DEV10-RED-2",
+    "exit_code": 1,
+    "outcome": "expected DIDNOTRAISE malformed attempt counterexample",
+    "wall_seconds": 3.934,
+    "sampled_peak_process_tree_RSS_bytes": 144793600,
+    "log_bytes": 1215,
+    "temporary_bytes": 0,
+    "original_log": "/tmp/qcl-DEV10-RED-2/original.log"
+  },
+  "G1_operation_result": {
+    "id": "DEV01-G1-MERGE",
+    "state": "completed",
+    "tool_session_id": 14548,
+    "verified_by": "gh pr view state MERGED, mergedAt and mergeCommit",
+    "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/6",
+    "public_release": false
+  },
+  "pending_decisions": [
+    {
+      "id": "CP-EXCEPTION-DEV10-one-check",
+      "state": "approved",
+      "authority": "human reply authorizes here and further engineering resources; no scientific expansion"
+    }
+  ],
+  "operator_resource_update": {
+    "date": "2026-10-19",
+    "authority": "Direct human reply to CP-EXCEPTION-DEV10-one-check: разрешаю здесь и дальше использовать все доступные ресурсы для ускорения процесса разработки и развертывания",
+    "scope": "development/deployment resources; safe measured available CPU/RAM/storage with protected reserves; necessary engineering checks continue without per-check resource questions",
+    "engineering_policy": "use concrete bounded diagnostic/verification packets, record every invocation and stop fingerprints; no unlimited blind retry; prior four-call DEV10 limit extended by this direct instruction",
+    "preserved_limits": "S1 scientific13attempts936nodehours/bytes/model unchanged; sole final fullCI; protected oldS01/foreign resources; fresh admission and technical BIND/READY; public release separate"
+  },
+  "python_readiness": {
+    "state": "ready",
+    "receipt": "qcl-int01-python-extras-2-receipt.json",
+    "canonical_sync": "--locked --all-packages --all-extras --all-groups",
+    "lock_changes": false
+  },
+  "verification_note": "git diff --cached --check passes excluding preserved original.txt raw test logs; full diff check reports only original pytest whitespace in DEV11-RED-1, retained byte-for-byte by policy"
+}
