@@ -1,0 +1,40 @@
+{
+  "task": "DEV16",
+  "attempt": "GREEN-1",
+  "started_utc": "2026-10-19T14:22:22.701965+00:00",
+  "recorded_at_utc": "2026-10-19T14:22:47.707405+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/bin/julia",
+    "--startup-file=no",
+    "--threads=1",
+    "--check-bounds=yes",
+    "--project=/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.build/local-julia-int01/import-phase-1/environment/julia",
+    "-e",
+    "foreach(include, ARGS)",
+    "components/QCLNEGFRunner.jl/test/contracts/schema_copy_provenance.jl",
+    "components/QCLNEGFRunner.jl/test/application/configuration_merge_order_and_fail_closed_validation.jl"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "fixture_sha256": {
+    "components/QCLNEGFRunner.jl/test/contracts/schema_copy_provenance.jl": "1d56940eb6202f8b957ed43ce8aa94d1b20a566a80a1d32805ee79ca2c56088f",
+    "components/QCLNEGFRunner.jl/test/application/configuration_merge_order_and_fail_closed_validation.jl": "09fa7cccc6ec8c701cf86135ce6d50c5ca1881323d8b91e9729846b75f8e9cbb"
+  },
+  "exit_code": 0,
+  "wall_seconds": 25.006,
+  "sampled_peak_process_tree_RSS_bytes": 828452864,
+  "temporary_bytes_peak": 57838,
+  "stdout_stderr_bytes": 308,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 120,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 2147483648,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS/output/disk monitored, no hard cgroup quota; original bytes retained including honest overrun"
+  },
+  "environment": "selected Julia1.13.0/copied byte-equal project/prepared offline depot, generic CPU, BLAS1; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-DEV16-GREEN-1/original.log"
+}

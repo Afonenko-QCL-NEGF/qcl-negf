@@ -1,0 +1,4 @@
+Test Summary:                                              | Pass  Total   Time
+Packaged schema provenance rejects drift before resolution |   80     80  14.9s
+Test Summary:                                         | Pass  Total  Time
+Canonical file merge order and fail-closed validation |   22     22  3.9s

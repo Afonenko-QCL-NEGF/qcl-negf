@@ -1,0 +1,13 @@
+{
+  "files": {
+    "docs/src/development/review_oracle_contracts.md": "673bc9641318b01ffe29bcbe6edc6198b5e243a0d246af8072a2190a70e072f2",
+    "test/numerics/keldysh_literal_matrix_oracle.jl": "6adaeea85abf95e21dd0beb763dada3a73d588cae1ed5a5d536eb0e8841a2a1e",
+    "test/numerics/principal_value_independent_oracle.jl": "4533b1058eb351d5796df18c86ac3b2e2af767078e16bd4cec25588b8e34f70a",
+    "test/physics/nonneutral_periodic_poisson_assessment.jl": "9aab7a4eea3a7fcb93033d2c9f6f3b420f6b1872843168e0deb98461f2602730",
+    "test/physics/nonzero_public_current_oracle.jl": "17fed2fae5b45549c65cec576cc108f68922a04e3830c0246313ccafd4ee8d01"
+  },
+  "staged_diff_sha256": "7c8b32b177d3d4b43a400ff20cb53478d29c219f25a3047adf4cf617e1e769e2",
+  "source_review": "2cc83ef336d85cd96d0b9e3dde9b6f677524d8f8dacde8379b4c422f9b459f98",
+  "factual_doc_review": "6f9a6746f56826865c3ef93a6a3deab40e4c04f33c36de70648ac63a1775e08d",
+  "assertions_passed": 658
+}

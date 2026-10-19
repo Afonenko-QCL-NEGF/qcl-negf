@@ -1,0 +1,226 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases[read] _
+
+backend = (namespace(list_runs=<function test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases.<locals>.bl...hout_losing_other_leases.<locals>.opened at 0x7f4f37fc8f60>), [('load', 139978197059264), ('unload', 139978197059264)])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f4f38161ba0>
+operation = 'read'
+
+    @pytest.mark.parametrize("operation", ["read", "seek"])
+    def test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases(
+        backend,
+        monkeypatch,
+        operation,
+    ):
+        plugin, events = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, exits, blocker_errors, reader_errors = [], [], [], []
+        # A broken owner intentionally retains its process guard. Isolate this
+        # negative fixture's guard, restoring it only after its owner has returned;
+        # the assertions below still require that the actor itself remains healthy.
+        monkeypatch.setattr(actor_module, "OWNER_GUARD", threading.Lock())
+    
+        def blocking_read():
+            started.set()
+            assert release.wait(3)
+            return []
+    
+        class Stream(BytesIO):
+            def __init__(self, path):
+                super().__init__(b"data")
+                self.path = path
+    
+            def read(self, size):
+                assert not self.closed, "backend must never read an already exited resource"
+                backend_calls.append((self.path, "read"))
+                return super().read(size)
+    
+            def seek(self, offset):
+                assert not self.closed, "backend must never seek an already exited resource"
+                backend_calls.append((self.path, "seek"))
+                return super().seek(offset)
+    
+        @contextmanager
+        def opened(run, execution, path, **kwargs):
+            stream = Stream(path)
+            try:
+                yield stream
+            finally:
+                exits.append((path, threading.get_ident()))
+                stream.close()
+    
+        plugin.list_runs = blocking_read
+        plugin.get_run = lambda run: {"uuid": run}
+        plugin.open_artifact = opened
+        settings = Settings(
+            TOKEN,
+            (CODE,),
+            actor_call_timeout_seconds=1,
+            actor_io_timeout_seconds=1,
+            actor_close_timeout_seconds=0.08,
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+        primary_context = actor.open_artifact(RUN, "point_1", "primary.bin")
+        primary = primary_context.__enter__()
+        other_context = actor.open_artifact(RUN, "point_1", "independent.bin")
+        other = other_context.__enter__()
+    
+        def blocker():
+            try:
+                actor.list_runs()
+            except BaseException as exc:
+                blocker_errors.append(exc)
+    
+        def reading():
+            try:
+                getattr(primary, operation)(1)
+            except BaseException as exc:
+                reader_errors.append(exc)
+    
+        blocker_thread = threading.Thread(target=blocker)
+        reader_thread = threading.Thread(target=reading)
+        reader_started = False
+        blocker_thread.start()
+        try:
+            assert started.wait(1)
+            reader_thread.start()
+            reader_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == "reader_" + operation for message in actor._queue),
+                    timeout=1,
+                ), "reader work must already be queued behind the unrelated owner call"
+            result = primary.close(deadline=time.monotonic())
+            assert result.state == "stopping" and result.pending_leases == 1
+            with actor._condition:
+                assert primary._lease.state == "closing"
+            assert not release.is_set() and exits == []
+            release.set()
+            blocker_thread.join(1.2)
+            reader_thread.join(1.2)
+            assert not blocker_thread.is_alive() and not reader_thread.is_alive()
+            assert blocker_errors == []
+            assert len(reader_errors) == 1
+>           assert isinstance(reader_errors[0], ValueError), (
+                "an admitted but closed reader must return a local closed-reader refusal, "
+                f"not {type(reader_errors[0]).__name__}"
+            )
+E           AssertionError: an admitted but closed reader must return a local closed-reader refusal, not KeyError
+E           assert False
+E            +  where False = isinstance(KeyError('964d17a1-01d1-429e-9115-817ccfd3339c'), ValueError)
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:975: AssertionError
+_ test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases[seek] _
+
+backend = (namespace(list_runs=<function test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases.<locals>.bl...hout_losing_other_leases.<locals>.opened at 0x7f4f37fcb7f0>), [('load', 139978180273856), ('unload', 139978180273856)])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f4f37ef1ba0>
+operation = 'seek'
+
+    @pytest.mark.parametrize("operation", ["read", "seek"])
+    def test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases(
+        backend,
+        monkeypatch,
+        operation,
+    ):
+        plugin, events = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, exits, blocker_errors, reader_errors = [], [], [], []
+        # A broken owner intentionally retains its process guard. Isolate this
+        # negative fixture's guard, restoring it only after its owner has returned;
+        # the assertions below still require that the actor itself remains healthy.
+        monkeypatch.setattr(actor_module, "OWNER_GUARD", threading.Lock())
+    
+        def blocking_read():
+            started.set()
+            assert release.wait(3)
+            return []
+    
+        class Stream(BytesIO):
+            def __init__(self, path):
+                super().__init__(b"data")
+                self.path = path
+    
+            def read(self, size):
+                assert not self.closed, "backend must never read an already exited resource"
+                backend_calls.append((self.path, "read"))
+                return super().read(size)
+    
+            def seek(self, offset):
+                assert not self.closed, "backend must never seek an already exited resource"
+                backend_calls.append((self.path, "seek"))
+                return super().seek(offset)
+    
+        @contextmanager
+        def opened(run, execution, path, **kwargs):
+            stream = Stream(path)
+            try:
+                yield stream
+            finally:
+                exits.append((path, threading.get_ident()))
+                stream.close()
+    
+        plugin.list_runs = blocking_read
+        plugin.get_run = lambda run: {"uuid": run}
+        plugin.open_artifact = opened
+        settings = Settings(
+            TOKEN,
+            (CODE,),
+            actor_call_timeout_seconds=1,
+            actor_io_timeout_seconds=1,
+            actor_close_timeout_seconds=0.08,
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+        primary_context = actor.open_artifact(RUN, "point_1", "primary.bin")
+        primary = primary_context.__enter__()
+        other_context = actor.open_artifact(RUN, "point_1", "independent.bin")
+        other = other_context.__enter__()
+    
+        def blocker():
+            try:
+                actor.list_runs()
+            except BaseException as exc:
+                blocker_errors.append(exc)
+    
+        def reading():
+            try:
+                getattr(primary, operation)(1)
+            except BaseException as exc:
+                reader_errors.append(exc)
+    
+        blocker_thread = threading.Thread(target=blocker)
+        reader_thread = threading.Thread(target=reading)
+        reader_started = False
+        blocker_thread.start()
+        try:
+            assert started.wait(1)
+            reader_thread.start()
+            reader_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == "reader_" + operation for message in actor._queue),
+                    timeout=1,
+                ), "reader work must already be queued behind the unrelated owner call"
+            result = primary.close(deadline=time.monotonic())
+            assert result.state == "stopping" and result.pending_leases == 1
+            with actor._condition:
+                assert primary._lease.state == "closing"
+            assert not release.is_set() and exits == []
+            release.set()
+            blocker_thread.join(1.2)
+            reader_thread.join(1.2)
+            assert not blocker_thread.is_alive() and not reader_thread.is_alive()
+            assert blocker_errors == []
+            assert len(reader_errors) == 1
+>           assert isinstance(reader_errors[0], ValueError), (
+                "an admitted but closed reader must return a local closed-reader refusal, "
+                f"not {type(reader_errors[0]).__name__}"
+            )
+E           AssertionError: an admitted but closed reader must return a local closed-reader refusal, not KeyError
+E           assert False
+E            +  where False = isinstance(KeyError('99224ab0-e59d-4beb-9518-513043ab8c87'), ValueError)
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:975: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases[read]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_reader_close_cancels_unstarted_work_without_losing_other_leases[seek]
+2 failed in 2.38s

@@ -1,0 +1,36 @@
+{
+  "task": "DEV03",
+  "attempt": "GREEN-1",
+  "started_utc": "2026-10-19T14:12:23.300338+00:00",
+  "recorded_at_utc": "2026-10-19T14:12:28.010576+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/bin/julia",
+    "--startup-file=no",
+    "--threads=1",
+    "--check-bounds=yes",
+    "--project=/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.build/local-julia-int01/import-phase-1/environment/julia",
+    "-e",
+    "include(ARGS[1])",
+    "components/QCLNEGF.jl/test/numerics/keldysh_literal_matrix_oracle.jl"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "fixture_sha256": "9a22526d104dc15e25b203a52631687819999ea1c84872627199c00062373d42",
+  "exit_code": 1,
+  "wall_seconds": 4.71,
+  "sampled_peak_process_tree_RSS_bytes": 506245120,
+  "temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 1429,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 120,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 2147483648,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS/output/disk monitored, no hard cgroup quota; original bytes retained including honest overrun"
+  },
+  "environment": "selected Julia1.13.0/copied byte-equal project/prepared offline depot, generic CPU, BLAS1; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-DEV03-GREEN-1/original.log"
+}

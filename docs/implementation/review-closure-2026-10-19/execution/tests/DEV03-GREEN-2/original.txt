@@ -1,0 +1,2 @@
+Test Summary:                        | Pass  Total  Time
+Literal noncommuting Keldysh product |   16     16  0.9s

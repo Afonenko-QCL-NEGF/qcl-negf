@@ -1,0 +1,627 @@
+........................FFFFFFFFF                                        [100%]
+=================================== FAILURES ===================================
+_ test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[ValueError-submit_plan] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df39640>, save_agent_report=<function test_queued_m...tation_becomes_unknown.<locals>.<lambda> at 0x7f7c6df39590>), [('load', 140172388705984), ('unload', 140172388705984)])
+queued_operation = 'submit_plan', error_type = <class 'ValueError'>
+
+    @pytest.mark.parametrize("queued_operation", ["submit_plan", "kill_run", "save_agent_report"])
+    @pytest.mark.parametrize("error_type", [ValueError, RuntimeError])
+    def test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown(
+        backend,
+        queued_operation,
+        error_type,
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, first_errors, second_errors, second_values = [], [], [], []
+    
+        def store(run, raw):
+            if raw == b"first report":
+                started.set()
+                assert release.wait(3)
+                raise error_type("synthetic post-store failure")
+            backend_calls.append("save_agent_report")
+            return {"uuid": CODE}
+    
+        plugin.save_agent_report = store
+        plugin.submit_plan = lambda *args: backend_calls.append("submit_plan")
+        plugin.kill_run = lambda *args: backend_calls.append("kill_run")
+        plugin.get_run = lambda run: {"uuid": run}
+        settings = Settings(
+            TOKEN, (CODE,), actor_call_timeout_seconds=1, actor_close_timeout_seconds=0.08
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+    
+        def first():
+            try:
+                actor.save_agent_report(RUN, b"first report")
+            except BaseException as exc:
+                first_errors.append(exc)
+    
+        def second():
+            args = (RUN, b"second report") if queued_operation == "save_agent_report" else (RUN,)
+            try:
+                second_values.append(getattr(actor, queued_operation)(*args))
+            except BaseException as exc:
+                second_errors.append(exc)
+    
+        first_thread, second_thread = threading.Thread(target=first), threading.Thread(target=second)
+        first_thread.start()
+        second_started = False
+        try:
+            assert started.wait(1)
+            second_thread.start()
+            second_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == queued_operation for message in actor._queue),
+                    timeout=1,
+                ), "second mutation must be admitted before the first backend exception"
+            assert not release.is_set()
+            release.set()
+            first_thread.join(1)
+            second_thread.join(1)
+            assert not first_thread.is_alive() and not second_thread.is_alive()
+            assert len(first_errors) == 1 and isinstance(
+                first_errors[0], actor_module.ActorOutcomeUnknown
+            )
+            assert first_errors[0].receipt.outcome == "unknown"
+>           assert backend_calls == [], (
+                "queued mutation must not cross the existing unknown-effect fence"
+            )
+E           AssertionError: queued mutation must not cross the existing unknown-effect fence
+E           assert ['submit_plan'] == []
+E             
+E             Left contains one more item: 'submit_plan'
+E             Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:754: AssertionError
+_ test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[ValueError-kill_run] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df38f60>, save_agent_report=<function test_queued_m...tation_becomes_unknown.<locals>.<lambda> at 0x7f7c6df38eb0>), [('load', 140172289107648), ('unload', 140172289107648)])
+queued_operation = 'kill_run', error_type = <class 'ValueError'>
+
+    @pytest.mark.parametrize("queued_operation", ["submit_plan", "kill_run", "save_agent_report"])
+    @pytest.mark.parametrize("error_type", [ValueError, RuntimeError])
+    def test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown(
+        backend,
+        queued_operation,
+        error_type,
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, first_errors, second_errors, second_values = [], [], [], []
+    
+        def store(run, raw):
+            if raw == b"first report":
+                started.set()
+                assert release.wait(3)
+                raise error_type("synthetic post-store failure")
+            backend_calls.append("save_agent_report")
+            return {"uuid": CODE}
+    
+        plugin.save_agent_report = store
+        plugin.submit_plan = lambda *args: backend_calls.append("submit_plan")
+        plugin.kill_run = lambda *args: backend_calls.append("kill_run")
+        plugin.get_run = lambda run: {"uuid": run}
+        settings = Settings(
+            TOKEN, (CODE,), actor_call_timeout_seconds=1, actor_close_timeout_seconds=0.08
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+    
+        def first():
+            try:
+                actor.save_agent_report(RUN, b"first report")
+            except BaseException as exc:
+                first_errors.append(exc)
+    
+        def second():
+            args = (RUN, b"second report") if queued_operation == "save_agent_report" else (RUN,)
+            try:
+                second_values.append(getattr(actor, queued_operation)(*args))
+            except BaseException as exc:
+                second_errors.append(exc)
+    
+        first_thread, second_thread = threading.Thread(target=first), threading.Thread(target=second)
+        first_thread.start()
+        second_started = False
+        try:
+            assert started.wait(1)
+            second_thread.start()
+            second_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == queued_operation for message in actor._queue),
+                    timeout=1,
+                ), "second mutation must be admitted before the first backend exception"
+            assert not release.is_set()
+            release.set()
+            first_thread.join(1)
+            second_thread.join(1)
+            assert not first_thread.is_alive() and not second_thread.is_alive()
+            assert len(first_errors) == 1 and isinstance(
+                first_errors[0], actor_module.ActorOutcomeUnknown
+            )
+            assert first_errors[0].receipt.outcome == "unknown"
+>           assert backend_calls == [], (
+                "queued mutation must not cross the existing unknown-effect fence"
+            )
+E           AssertionError: queued mutation must not cross the existing unknown-effect fence
+E           assert ['kill_run'] == []
+E             
+E             Left contains one more item: 'kill_run'
+E             Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:754: AssertionError
+_ test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[ValueError-save_agent_report] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df07950>, save_agent_report=<function test_queued_m...tation_becomes_unknown.<locals>.<lambda> at 0x7f7c6df06fb0>), [('load', 140172297500352), ('unload', 140172297500352)])
+queued_operation = 'save_agent_report', error_type = <class 'ValueError'>
+
+    @pytest.mark.parametrize("queued_operation", ["submit_plan", "kill_run", "save_agent_report"])
+    @pytest.mark.parametrize("error_type", [ValueError, RuntimeError])
+    def test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown(
+        backend,
+        queued_operation,
+        error_type,
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, first_errors, second_errors, second_values = [], [], [], []
+    
+        def store(run, raw):
+            if raw == b"first report":
+                started.set()
+                assert release.wait(3)
+                raise error_type("synthetic post-store failure")
+            backend_calls.append("save_agent_report")
+            return {"uuid": CODE}
+    
+        plugin.save_agent_report = store
+        plugin.submit_plan = lambda *args: backend_calls.append("submit_plan")
+        plugin.kill_run = lambda *args: backend_calls.append("kill_run")
+        plugin.get_run = lambda run: {"uuid": run}
+        settings = Settings(
+            TOKEN, (CODE,), actor_call_timeout_seconds=1, actor_close_timeout_seconds=0.08
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+    
+        def first():
+            try:
+                actor.save_agent_report(RUN, b"first report")
+            except BaseException as exc:
+                first_errors.append(exc)
+    
+        def second():
+            args = (RUN, b"second report") if queued_operation == "save_agent_report" else (RUN,)
+            try:
+                second_values.append(getattr(actor, queued_operation)(*args))
+            except BaseException as exc:
+                second_errors.append(exc)
+    
+        first_thread, second_thread = threading.Thread(target=first), threading.Thread(target=second)
+        first_thread.start()
+        second_started = False
+        try:
+            assert started.wait(1)
+            second_thread.start()
+            second_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == queued_operation for message in actor._queue),
+                    timeout=1,
+                ), "second mutation must be admitted before the first backend exception"
+            assert not release.is_set()
+            release.set()
+            first_thread.join(1)
+            second_thread.join(1)
+            assert not first_thread.is_alive() and not second_thread.is_alive()
+            assert len(first_errors) == 1 and isinstance(
+                first_errors[0], actor_module.ActorOutcomeUnknown
+            )
+            assert first_errors[0].receipt.outcome == "unknown"
+>           assert backend_calls == [], (
+                "queued mutation must not cross the existing unknown-effect fence"
+            )
+E           AssertionError: queued mutation must not cross the existing unknown-effect fence
+E           assert ['save_agent_report'] == []
+E             
+E             Left contains one more item: 'save_agent_report'
+E             Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:754: AssertionError
+_ test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[RuntimeError-submit_plan] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df056f0>, save_agent_report=<function test_queued_m...tation_becomes_unknown.<locals>.<lambda> at 0x7f7c6df55f30>), [('load', 140172397098688), ('unload', 140172397098688)])
+queued_operation = 'submit_plan', error_type = <class 'RuntimeError'>
+
+    @pytest.mark.parametrize("queued_operation", ["submit_plan", "kill_run", "save_agent_report"])
+    @pytest.mark.parametrize("error_type", [ValueError, RuntimeError])
+    def test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown(
+        backend,
+        queued_operation,
+        error_type,
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, first_errors, second_errors, second_values = [], [], [], []
+    
+        def store(run, raw):
+            if raw == b"first report":
+                started.set()
+                assert release.wait(3)
+                raise error_type("synthetic post-store failure")
+            backend_calls.append("save_agent_report")
+            return {"uuid": CODE}
+    
+        plugin.save_agent_report = store
+        plugin.submit_plan = lambda *args: backend_calls.append("submit_plan")
+        plugin.kill_run = lambda *args: backend_calls.append("kill_run")
+        plugin.get_run = lambda run: {"uuid": run}
+        settings = Settings(
+            TOKEN, (CODE,), actor_call_timeout_seconds=1, actor_close_timeout_seconds=0.08
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+    
+        def first():
+            try:
+                actor.save_agent_report(RUN, b"first report")
+            except BaseException as exc:
+                first_errors.append(exc)
+    
+        def second():
+            args = (RUN, b"second report") if queued_operation == "save_agent_report" else (RUN,)
+            try:
+                second_values.append(getattr(actor, queued_operation)(*args))
+            except BaseException as exc:
+                second_errors.append(exc)
+    
+        first_thread, second_thread = threading.Thread(target=first), threading.Thread(target=second)
+        first_thread.start()
+        second_started = False
+        try:
+            assert started.wait(1)
+            second_thread.start()
+            second_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == queued_operation for message in actor._queue),
+                    timeout=1,
+                ), "second mutation must be admitted before the first backend exception"
+            assert not release.is_set()
+            release.set()
+            first_thread.join(1)
+            second_thread.join(1)
+            assert not first_thread.is_alive() and not second_thread.is_alive()
+            assert len(first_errors) == 1 and isinstance(
+                first_errors[0], actor_module.ActorOutcomeUnknown
+            )
+            assert first_errors[0].receipt.outcome == "unknown"
+>           assert backend_calls == [], (
+                "queued mutation must not cross the existing unknown-effect fence"
+            )
+E           AssertionError: queued mutation must not cross the existing unknown-effect fence
+E           assert ['submit_plan'] == []
+E             
+E             Left contains one more item: 'submit_plan'
+E             Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:754: AssertionError
+_ test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[RuntimeError-kill_run] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df56f00>, save_agent_report=<function test_queued_m...tation_becomes_unknown.<locals>.<lambda> at 0x7f7c6df57320>), [('load', 140172431718080), ('unload', 140172431718080)])
+queued_operation = 'kill_run', error_type = <class 'RuntimeError'>
+
+    @pytest.mark.parametrize("queued_operation", ["submit_plan", "kill_run", "save_agent_report"])
+    @pytest.mark.parametrize("error_type", [ValueError, RuntimeError])
+    def test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown(
+        backend,
+        queued_operation,
+        error_type,
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, first_errors, second_errors, second_values = [], [], [], []
+    
+        def store(run, raw):
+            if raw == b"first report":
+                started.set()
+                assert release.wait(3)
+                raise error_type("synthetic post-store failure")
+            backend_calls.append("save_agent_report")
+            return {"uuid": CODE}
+    
+        plugin.save_agent_report = store
+        plugin.submit_plan = lambda *args: backend_calls.append("submit_plan")
+        plugin.kill_run = lambda *args: backend_calls.append("kill_run")
+        plugin.get_run = lambda run: {"uuid": run}
+        settings = Settings(
+            TOKEN, (CODE,), actor_call_timeout_seconds=1, actor_close_timeout_seconds=0.08
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+    
+        def first():
+            try:
+                actor.save_agent_report(RUN, b"first report")
+            except BaseException as exc:
+                first_errors.append(exc)
+    
+        def second():
+            args = (RUN, b"second report") if queued_operation == "save_agent_report" else (RUN,)
+            try:
+                second_values.append(getattr(actor, queued_operation)(*args))
+            except BaseException as exc:
+                second_errors.append(exc)
+    
+        first_thread, second_thread = threading.Thread(target=first), threading.Thread(target=second)
+        first_thread.start()
+        second_started = False
+        try:
+            assert started.wait(1)
+            second_thread.start()
+            second_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == queued_operation for message in actor._queue),
+                    timeout=1,
+                ), "second mutation must be admitted before the first backend exception"
+            assert not release.is_set()
+            release.set()
+            first_thread.join(1)
+            second_thread.join(1)
+            assert not first_thread.is_alive() and not second_thread.is_alive()
+            assert len(first_errors) == 1 and isinstance(
+                first_errors[0], actor_module.ActorOutcomeUnknown
+            )
+            assert first_errors[0].receipt.outcome == "unknown"
+>           assert backend_calls == [], (
+                "queued mutation must not cross the existing unknown-effect fence"
+            )
+E           AssertionError: queued mutation must not cross the existing unknown-effect fence
+E           assert ['kill_run'] == []
+E             
+E             Left contains one more item: 'kill_run'
+E             Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:754: AssertionError
+_ test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[RuntimeError-save_agent_report] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6dff4040>, save_agent_report=<function test_queued_m...tation_becomes_unknown.<locals>.<lambda> at 0x7f7c6dff4460>), [('load', 140172423325376), ('unload', 140172423325376)])
+queued_operation = 'save_agent_report', error_type = <class 'RuntimeError'>
+
+    @pytest.mark.parametrize("queued_operation", ["submit_plan", "kill_run", "save_agent_report"])
+    @pytest.mark.parametrize("error_type", [ValueError, RuntimeError])
+    def test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown(
+        backend,
+        queued_operation,
+        error_type,
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        backend_calls, first_errors, second_errors, second_values = [], [], [], []
+    
+        def store(run, raw):
+            if raw == b"first report":
+                started.set()
+                assert release.wait(3)
+                raise error_type("synthetic post-store failure")
+            backend_calls.append("save_agent_report")
+            return {"uuid": CODE}
+    
+        plugin.save_agent_report = store
+        plugin.submit_plan = lambda *args: backend_calls.append("submit_plan")
+        plugin.kill_run = lambda *args: backend_calls.append("kill_run")
+        plugin.get_run = lambda run: {"uuid": run}
+        settings = Settings(
+            TOKEN, (CODE,), actor_call_timeout_seconds=1, actor_close_timeout_seconds=0.08
+        )
+        actor = actor_module.AiidaService("example", settings=settings)
+    
+        def first():
+            try:
+                actor.save_agent_report(RUN, b"first report")
+            except BaseException as exc:
+                first_errors.append(exc)
+    
+        def second():
+            args = (RUN, b"second report") if queued_operation == "save_agent_report" else (RUN,)
+            try:
+                second_values.append(getattr(actor, queued_operation)(*args))
+            except BaseException as exc:
+                second_errors.append(exc)
+    
+        first_thread, second_thread = threading.Thread(target=first), threading.Thread(target=second)
+        first_thread.start()
+        second_started = False
+        try:
+            assert started.wait(1)
+            second_thread.start()
+            second_started = True
+            with actor._condition:
+                assert actor._condition.wait_for(
+                    lambda: any(message.name == queued_operation for message in actor._queue),
+                    timeout=1,
+                ), "second mutation must be admitted before the first backend exception"
+            assert not release.is_set()
+            release.set()
+            first_thread.join(1)
+            second_thread.join(1)
+            assert not first_thread.is_alive() and not second_thread.is_alive()
+            assert len(first_errors) == 1 and isinstance(
+                first_errors[0], actor_module.ActorOutcomeUnknown
+            )
+            assert first_errors[0].receipt.outcome == "unknown"
+>           assert backend_calls == [], (
+                "queued mutation must not cross the existing unknown-effect fence"
+            )
+E           AssertionError: queued mutation must not cross the existing unknown-effect fence
+E           assert ['save_agent_report'] == []
+E             
+E             Left contains one more item: 'save_agent_report'
+E             Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:754: AssertionError
+_ test_reader_close_counts_include_timed_out_backend_operation_until_actual_return[read] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df57b60>, open_artifact=<function test_reader_close...tion_until_actual_return.<locals>.opened at 0x7f7c6df57270>), [('load', 140172431718080), ('unload', 140172431718080)])
+operation = 'read'
+
+    @pytest.mark.parametrize("operation", ["read", "seek"])
+    def test_reader_close_counts_include_timed_out_backend_operation_until_actual_return(
+        backend, operation
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        exits = []
+    
+        class Stream(BytesIO):
+            def read(self, size):
+                started.set()
+                assert release.wait(3)
+                return super().read(size)
+    
+            def seek(self, offset):
+                started.set()
+                assert release.wait(3)
+                return super().seek(offset)
+    
+        @contextmanager
+        def opened(*args, **kwargs):
+            try:
+                yield Stream(b"data")
+            finally:
+                exits.append(threading.get_ident())
+    
+        plugin.open_artifact = opened
+        actor = actor_module.AiidaService("example", settings=policy())
+        context = actor.open_artifact(RUN, "point_1", "raw.bin")
+        reader = context.__enter__()
+        try:
+            with pytest.raises(actor_module.ActorDeadline):
+                getattr(reader, operation)(1)
+            assert started.is_set() and not release.is_set()
+            for _ in range(2):
+                result = reader.close(deadline=time.monotonic())
+                assert result.state == "stopping"
+>               assert (result.pending_operations, result.pending_leases) == (1, 1)
+E               assert (0, 1) == (1, 1)
+E                 
+E                 At index 0 diff: 0 != 1
+E                 Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:811: AssertionError
+_ test_reader_close_counts_include_timed_out_backend_operation_until_actual_return[seek] _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df57530>, open_artifact=<function test_reader_close...tion_until_actual_return.<locals>.opened at 0x7f7c6df56c40>), [('load', 140172397098688), ('unload', 140172397098688)])
+operation = 'seek'
+
+    @pytest.mark.parametrize("operation", ["read", "seek"])
+    def test_reader_close_counts_include_timed_out_backend_operation_until_actual_return(
+        backend, operation
+    ):
+        plugin, _ = backend
+        started, release = threading.Event(), threading.Event()
+        exits = []
+    
+        class Stream(BytesIO):
+            def read(self, size):
+                started.set()
+                assert release.wait(3)
+                return super().read(size)
+    
+            def seek(self, offset):
+                started.set()
+                assert release.wait(3)
+                return super().seek(offset)
+    
+        @contextmanager
+        def opened(*args, **kwargs):
+            try:
+                yield Stream(b"data")
+            finally:
+                exits.append(threading.get_ident())
+    
+        plugin.open_artifact = opened
+        actor = actor_module.AiidaService("example", settings=policy())
+        context = actor.open_artifact(RUN, "point_1", "raw.bin")
+        reader = context.__enter__()
+        try:
+            with pytest.raises(actor_module.ActorDeadline):
+                getattr(reader, operation)(1)
+            assert started.is_set() and not release.is_set()
+            for _ in range(2):
+                result = reader.close(deadline=time.monotonic())
+                assert result.state == "stopping"
+>               assert (result.pending_operations, result.pending_leases) == (1, 1)
+E               assert (0, 1) == (1, 1)
+E                 
+E                 At index 0 diff: 0 != 1
+E                 Use -v to get more diff
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:811: AssertionError
+_ test_late_report_uuid_is_logged_with_original_operation_without_report_bytes _
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7f7c6df56350>, save_agent_report=<function test_late_rep...tion_without_report_bytes.<locals>.store at 0x7f7c6df56820>), [('load', 140172297500352), ('unload', 140172297500352)])
+caplog = <_pytest.logging.LogCaptureFixture object at 0x7f7c6df1c590>
+
+    def test_late_report_uuid_is_logged_with_original_operation_without_report_bytes(backend, caplog):
+        import logging
+    
+        plugin, _ = backend
+        started, release, returned = threading.Event(), threading.Event(), threading.Event()
+        report_uuid = "017b5339-4d28-4839-8239-d8a229a691f8"
+        raw = b"private report content must never enter operational diagnostics"
+        writes = []
+    
+        def store(run, data):
+            assert (run, data) == (RUN, raw)
+            writes.append(report_uuid)
+            started.set()
+            assert release.wait(3)
+            returned.set()
+            return {"uuid": report_uuid, "filename": "agent-report.json", "bytes": len(raw)}
+    
+        plugin.save_agent_report = store
+        actor = actor_module.AiidaService("example", settings=policy())
+        caplog.set_level(logging.INFO, logger=actor_module.__name__)
+        try:
+            with pytest.raises(actor_module.ActorOutcomeUnknown) as caught:
+                actor.save_agent_report(RUN, raw)
+            operation_id = caught.value.receipt.operation_id
+            assert started.is_set() and not release.is_set()
+            release.set()
+            assert returned.wait(1)
+            with actor._condition:
+                assert actor._condition.wait_for(lambda: actor._state == "ready", timeout=1)
+            records = [
+                record.getMessage() for record in caplog.records if record.name == actor_module.__name__
+            ]
+>           assert any(
+                operation_id in message
+                and report_uuid in message
+                and RUN in message
+                and "returned" in message
+                for message in records
+            ), "late report effect must retain report UUID, anchor and original operation UUID together"
+E           AssertionError: late report effect must retain report UUID, anchor and original operation UUID together
+E           assert False
+E            +  where False = any(<generator object test_late_report_uuid_is_logged_with_original_operation_without_report_bytes.<locals>.<genexpr> at 0x7f7c6df0b4c0>)
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:862: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     qcl_negf_api.service:service.py:233 AiiDA actor admitted time=266311.527017634 operation=28be48a6-a112-46fb-8450-8b6d8ad4e456 name=save_agent_report outcome=not_started state=ready run=e7f5313d-22fd-49fa-9be5-85fbe29e1974 child=None attempt=None
+INFO     qcl_negf_api.service:service.py:233 AiiDA actor started time=266311.527130875 operation=28be48a6-a112-46fb-8450-8b6d8ad4e456 name=save_agent_report outcome=unknown state=ready run=e7f5313d-22fd-49fa-9be5-85fbe29e1974 child=None attempt=None
+INFO     qcl_negf_api.service:service.py:233 AiiDA actor deadline time=266311.60723557 operation=28be48a6-a112-46fb-8450-8b6d8ad4e456 name=save_agent_report outcome=unknown state=blocked run=e7f5313d-22fd-49fa-9be5-85fbe29e1974 child=None attempt=None
+INFO     qcl_negf_api.service:service.py:233 AiiDA actor returned time=266311.607292511 operation=28be48a6-a112-46fb-8450-8b6d8ad4e456 name=save_agent_report outcome=returned state=blocked run=e7f5313d-22fd-49fa-9be5-85fbe29e1974 child=None attempt=None
+=========================== short test summary info ============================
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[ValueError-submit_plan]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[ValueError-kill_run]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[ValueError-save_agent_report]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[RuntimeError-submit_plan]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[RuntimeError-kill_run]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_queued_mutation_is_refused_when_earlier_dispatched_mutation_becomes_unknown[RuntimeError-save_agent_report]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_reader_close_counts_include_timed_out_backend_operation_until_actual_return[read]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_reader_close_counts_include_timed_out_backend_operation_until_actual_return[seek]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_late_report_uuid_is_logged_with_original_operation_without_report_bytes
+9 failed, 24 passed in 2.43s

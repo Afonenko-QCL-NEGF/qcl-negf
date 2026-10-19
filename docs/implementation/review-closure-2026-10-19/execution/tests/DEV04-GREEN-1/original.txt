@@ -1,0 +1,19 @@
+ERROR: LoadError: ParseError:
+# Error @ /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/physics/nonneutral_periodic_poisson_assessment.jl:113:41
+    for e in 1:3,m in 1:2
+        hm=H+hopping*problem.grids.κ[m]^2.*I4
+#                                       └┘ ── ambiguous `.` syntax; add whitespace to clarify (eg `1.+2` might be `1.0+2` or `1 .+ 2`)
+Stacktrace:
+ [1] top-level scope
+   @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/physics/nonneutral_periodic_poisson_assessment.jl:113
+ [2] include(mapexpr::Function, mod::Module, _path::String)
+   @ Base ./Base.jl:310
+ [3] top-level scope
+   @ none:1
+ [4] eval(m::Module, e::Any)
+   @ Core ./boot.jl:489
+ [5] exec_options(opts::Base.JLOptions)
+   @ Base ./client.jl:310
+ [6] _start()
+   @ Base ./client.jl:577
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/physics/nonneutral_periodic_poisson_assessment.jl:113

@@ -1,0 +1,7 @@
+{
+  "frozen_diff_sha256": "8b7d735e6b1026dc921e77e797a437cfd3f21ea1a650443be3b26b07c9a8c22d",
+  "staged_diff_sha256": "c7a18cf7692f10be5a01d9c6806dc87bed7fd8daa73334f65515a4f28cfa35e4",
+  "per_file_patches_byte_identical": true,
+  "files": 10,
+  "aggregate_difference": "onlysectionorderifany"
+}
