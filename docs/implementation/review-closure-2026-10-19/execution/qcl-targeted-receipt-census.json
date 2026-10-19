@@ -2,211 +2,277 @@
   {
     "id": "qcl-DEV03-GREEN-1",
     "wall_seconds": 4.71,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "33ddb8fb2db9fea8cfd0a27d8ed9a4d1620ed1c9283d1d2abab846ea1524af1c"
   },
   {
     "id": "qcl-DEV03-GREEN-2",
     "wall_seconds": 2.451,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "2c4a574a116d9300fe64bf9da61436d6eb6d8dd24cb3818a40845b61b29a4ab9"
   },
   {
     "id": "qcl-DEV04-GREEN-1",
     "wall_seconds": 2.272,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "659d82d3c977538b7704dbe12d012ce9f985d2e82c61b1c592ba890b443129a8"
   },
   {
     "id": "qcl-DEV04-GREEN-2",
     "wall_seconds": 16.03,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "8f69ce737c8fde8797947124797be6fd3c9b65b5a5f2726f322dd48164f986da"
+  },
+  {
+    "id": "qcl-DEV05-GREEN-1",
+    "wall_seconds": 39.449,
+    "exit_code": 1,
+    "receipt_sha256": "557f60ed37c4f325d09d552672730f6ad6db414781a0da84d57946c467b67c95"
   },
   {
     "id": "qcl-DEV06-GREEN-1",
     "wall_seconds": 16.303,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "b30b51c860de104f11c63a61f824e3cc5c076be0e4e9d05f7616040e7a8b0fa0"
   },
   {
     "id": "qcl-DEV08-GREEN-1",
     "wall_seconds": 6.111,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "e0f7a3b5a8b2afb987232333d04cb3ab6a2600de25dc871f388af5836b8ef775"
   },
   {
     "id": "qcl-DEV08-GREEN-2",
     "wall_seconds": 3.889,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "96d71dbe946a481cb5b85d6c13f4bd93ae94030794138d88a809699ba92f2811"
   },
   {
     "id": "qcl-DEV10-GREEN-1",
     "wall_seconds": 4.17,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "5b56662b03a82e31d3c43255ee8d780cbd4a74d9250e6edaeed721c7dc72fa45"
   },
   {
     "id": "qcl-DEV10-GREEN-2",
     "wall_seconds": 4.18,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "0be2431fee755a6f95d2c78e88c8edffbee53360bc91bc60dc576f0b561ed5eb"
   },
   {
     "id": "qcl-DEV10-GREEN-3",
     "wall_seconds": 4.12,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "abf7111146ad3621ae09f9c9e1446b85a0be82f4ea8adecafed244e66ddd7d4f"
   },
   {
     "id": "qcl-DEV10-RED-1",
     "wall_seconds": 4.441,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "bca3a6a042b4cf3b96cf35388b45dd987d421ea37e3611c0080a0589d9f0c46b"
   },
   {
     "id": "qcl-DEV10-RED-2",
     "wall_seconds": 3.934,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "76322456a69a66952da697c81d531d97320135229c32b4cbafcd4eb9feb1ec04"
   },
   {
     "id": "qcl-DEV11-GREEN-1",
     "wall_seconds": 1.438,
-    "exit_code": 2
+    "exit_code": 2,
+    "receipt_sha256": "59d5e8fc04371e518c4196f27b4ccdb8207457322d2dfa38fd13dea19943f99f"
   },
   {
     "id": "qcl-DEV11-GREEN-2",
     "wall_seconds": 7.461,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "336b8e80d80c4a35672cf57c8141a5496054c630867595a4798828f464d22e01"
   },
   {
     "id": "qcl-DEV11-GREEN-NODE-1",
     "wall_seconds": 0.436,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "d8d9c910e7bf223d84cf2d89dd52974a7e8bee4b673a690ffc1e48bbd417dd7b"
   },
   {
     "id": "qcl-DEV11-NODE-DIAG-1",
     "wall_seconds": 0.2,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "5b062badb87df676fa94b635c0be3ceeb573583d8a8ba590145152b2ff10f8a6"
   },
   {
     "id": "qcl-DEV11-NODE-DIAG-2",
     "wall_seconds": 0.257,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "55391f9bbdef4a9bb8c3cbb3d9657013594258433e6bacdbafb66585f6dc7e36"
   },
   {
     "id": "qcl-DEV11-RED-1",
     "wall_seconds": 4.066,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "15a47277af5fa2211a83fc09c8bae5b982f4c93f1204201895caeb6c36b992b3"
   },
   {
     "id": "qcl-DEV11-RED-NODE-1",
     "wall_seconds": 0.203,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "b99c7564664367d2625ac778da9b571b05ae58211e85557eef05961d2c058516"
   },
   {
     "id": "qcl-DEV11-STATIC-ASSERT-1",
     "wall_seconds": 1.225,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "0228eb2e03984cac363910d352cb7096138b8eedc75e08ba29afe7a90308b086"
   },
   {
     "id": "qcl-DEV11-TSC-1",
     "wall_seconds": 2.234,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "0597efdbcb8697dd8cae194257e979aed90f3a28c4e958dc48a5aede0bd3359b"
   },
   {
     "id": "qcl-DEV13-GREEN-1",
     "wall_seconds": 9.246,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "1d69f21887649b0ada35fca5eb0fd371c1a4f7a884bf31d8be155f874605b020"
   },
   {
     "id": "qcl-DEV13-GREEN-2",
     "wall_seconds": 9.738,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "e6a1999becbf9271e4f3b725f7407c6798a2c649752bfef9f58e6a8c0d0c427d"
   },
   {
     "id": "qcl-DEV13-GREEN-3",
     "wall_seconds": 9.682,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "30fd99dea9bff05e4070bb93454f2ebf232a115fb168826ed2709f982a422b3f"
   },
   {
     "id": "qcl-DEV13-RED-1",
     "wall_seconds": 4.965,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "55985157d188e0a511d873a716fe50f1b86d4531ce19244952d2abbec6c9c7ea"
   },
   {
     "id": "qcl-DEV13-RED-2",
     "wall_seconds": 3.189,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "c13b95ba8c32877b4066f121c9849c7368e553e33b4be6ce2668f654908ded6c"
   },
   {
     "id": "qcl-DEV13-RED-3",
     "wall_seconds": 3.027,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "26531ddb71bf123bf262e27d15384b67a21a6d28046455d5bee1eeff2e85b25b"
   },
   {
     "id": "qcl-DEV16-GREEN-1",
     "wall_seconds": 25.006,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "3afe7c78ccd122b1f3927a34502dad072a35645c29855f64907dd78bf68f51de"
   },
   {
     "id": "qcl-DEV16-RED-1",
     "wall_seconds": 120.336,
-    "exit_code": -15
+    "exit_code": -15,
+    "receipt_sha256": "141c1bdaf47047e20a895edb2f00996ed41293c5fc3356afcb016395c37c4658"
   },
   {
     "id": "qcl-DEV16-RED-2",
     "wall_seconds": 8.631,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "a19bd8f57a49258b29a1cec005915154aecdc6f722656a4735e0c380949c4808"
   },
   {
     "id": "qcl-DEV18-GREEN-1",
     "wall_seconds": 18.252,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "fa7fed11498d5c6ba30622d2497800cb7d7cfa246d31c6ee6937d988ea33d0c4"
   },
   {
     "id": "qcl-DEV18-GREEN-2",
     "wall_seconds": 27.7,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "b8f811d1c3c802f1803c4cbd8cb31c82e3bdab6ac2fed80224a5ad33fa5fe7e1"
   },
   {
     "id": "qcl-DEV18-RED-1",
     "wall_seconds": 12.353,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "f81995d5db0554b42203f1a70521bd52d9a3332c0d745b383f59c487c05c38ee"
   },
   {
     "id": "qcl-DEV20-GREEN-1",
     "wall_seconds": 2.183,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "8578ffe2cf6f2e4d4b3014445628f938f9cd8193d0d3a30606b431c8089e0192"
   },
   {
     "id": "qcl-DEV20-RED-1",
     "wall_seconds": 0.745,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "04ff200b4291b3bbe903129654212dc22968f14f0e280fb54b19fc4c9cb2d4fd"
   },
   {
     "id": "qcl-DEV21-GREEN-1",
     "wall_seconds": 7.84,
-    "exit_code": 0
+    "exit_code": 0,
+    "receipt_sha256": "96c01aa5e78a086f6105d1efaa0e97d78fcb43612f702421f011c8e5b3df4fee"
+  },
+  {
+    "id": "qcl-DEV23-GREEN-1",
+    "wall_seconds": 4.698,
+    "exit_code": 0,
+    "receipt_sha256": "b5f8f6bac2946f35aebea77ef4c4d86e366e8eb183d474409a84af66841d0f1c"
   },
   {
     "id": "qcl-DEV23-RED-1",
     "wall_seconds": 3.891,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "065d0af00b389f782242cf2a103469cd466348e80f96b344b7e2315b03158dd3"
   },
   {
     "id": "qcl-OPS03-DIAG-1",
     "wall_seconds": 1.995,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "1fe37ad7b16cbdb3ecb98b2e87137426432ff07743fbb7400fd89c28ab66fa87"
   },
   {
     "id": "qcl-OPS03-GREEN-1",
     "wall_seconds": 53.093,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "7d750f0db40d1a314d048dbf9d644791ade8c86efcfa521b24b0633b3dcd3781"
   },
   {
     "id": "qcl-OPS03-GREEN-2",
     "wall_seconds": 1.964,
-    "exit_code": -9
+    "exit_code": -9,
+    "receipt_sha256": "0f230716871aff0abcb749289aeab3cd413a90b453645eaeb4ffc0ae68a54ade"
+  },
+  {
+    "id": "qcl-OPS03-GREEN-3",
+    "wall_seconds": 90.044,
+    "exit_code": -15,
+    "receipt_sha256": "a9180a1dbe71c129e936dc71f46337abf28e182a0f500489302243442c358bab"
+  },
+  {
+    "id": "qcl-OPS03-GREEN-4",
+    "wall_seconds": 94.294,
+    "exit_code": 0,
+    "receipt_sha256": "b2411039050e39b38b8a95fc02e1a77f867d6933fc83836ffa049b33540ba7c7"
   },
   {
     "id": "qcl-OPS03-RED-1",
     "wall_seconds": 2.433,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "4b9ff685d068318fcaf20104a0f6b89bb1c35894926d9ba9deef6b3e7e1642d2"
   },
   {
     "id": "qcl-OPS03-RED-2",
     "wall_seconds": 1.624,
-    "exit_code": 1
+    "exit_code": 1,
+    "receipt_sha256": "3503e916dae00613eccc7282dbdadad46a3d9a88df4d9a66f5e2ba633430d998"
   }
 ]

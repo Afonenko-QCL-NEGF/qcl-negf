@@ -1,0 +1,49 @@
+{
+  "task": "DEV23",
+  "attempt": "GREEN-1",
+  "started_utc": "2026-10-19T15:50:15.950563+00:00",
+  "recorded_at_utc": "2026-10-19T15:50:20.648211+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "components/qcl-negf-aiida/tests/test_cancellation_contract.py",
+    "components/qcl-negf-aiida/tests/test_restart.py",
+    "components/qcl-negf-aiida/tests/test_submission_identity.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-DEV23-GREEN-1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "16e908e64bfc6fd9a4467897b9eade95cd8a353535610c52144c2ca912e41b75",
+  "fixture_sha256": {
+    "components/qcl-negf-aiida/tests/test_cancellation_contract.py": "8b276505d190811526bd6d308acb09bf0b00317c36be14a92861236141204809",
+    "components/qcl-negf-aiida/tests/test_restart.py": "eaf3b5e78cce5e8dc1ca7a919b299a76443bb5dab3fed584010b523a65c1ad70",
+    "components/qcl-negf-aiida/tests/test_submission_identity.py": "2a16bf11fd6f5404897ec367acd72f59ace09ef0597e27e5da5712c635efab5d"
+  },
+  "exit_code": 0,
+  "wall_seconds": 4.698,
+  "sampled_peak_process_tree_RSS_bytes": 163184640,
+  "sampled_owned_temporary_bytes_peak": 736459,
+  "stdout_stderr_bytes": 3475,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "selected locked .venv Python3.14.7, owning editable imports; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-DEV23-GREEN-1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 63,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

@@ -1,0 +1,946 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0 -- /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python
+rootdir: /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collecting ... collected 234 items
+
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_activation_publishes_only_after_identity_and_health_check_then_retry_is_idempotent PASSED [  0%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_aggregate_deadline_and_output_do_not_reset PASSED [  0%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_bootstrap_after_reboot_uses_selected_solver_code_instead_of_image_seed PASSED [  1%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cache_fetch_failure_leaves_gate_and_services_unchanged PASSED [  1%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_missing_or_wrong_solver_profile_before_health PASSED [  2%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_profile_path_that_mismatches_runtime_identity PASSED [  2%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_initial_phase_runs_real_preparation_with_common_owner PASSED [  2%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_keeps_operational_cache_and_closure_fields_for_controller_prefetch PASSED [  3%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_activation_registers_immutable_code_before_ready_and_publishes_uuid PASSED [  3%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission PASSED [  4%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_custom_gate_and_nonroot_reader_do_not_change_credentials PASSED [  4%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_deadline_after_returned_mutation_retains_started_unknown PASSED [  5%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_final_resume_leaves_admission_closed_with_node_report PASSED [  5%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_health_check_does_not_publish_ready_identity PASSED [  5%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_pinned_solver_self_check_cannot_publish_ready PASSED [  6%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry PASSED [  6%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_first_initial_controller_refuses_jobs_before_creating_gate_or_profiles PASSED [  7%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_gate_rejects_stale_worker_and_queued_job_then_allows_exact_pin PASSED [  7%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_hash_mismatch_missing_paths_or_malformed_evidence_does_not_quiesce PASSED [  8%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_health_executes_pinned_solver_as_scientific_user_with_finite_budget PASSED [  8%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_controller_delivery_recovers_services_stopped_for_maintenance PASSED [  8%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity PASSED [  9%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_bad_closure_or_hash_leaves_prior_identity_and_gate_unchanged PASSED [  9%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_conflicts_refuse_before_any_state_or_profile_mutation PASSED [ 10%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_does_not_recreate_deleted_gate_for_existing_identity PASSED [ 10%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_prepares_closed_identity_before_worker_role_switch PASSED [ 11%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_gate_changed_during_closure_verification_is_not_overwritten PASSED [ 11%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_malformed_existing_runtime_is_never_treated_as_absent PASSED [ 11%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_worker_requires_controller_gate_and_does_not_publish_one PASSED [ 12%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_invalid_cache_argument_or_absent_manifest_hashes_refuses_before_commands PASSED [ 12%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_manifest_closure_inventory_refuses_before_commands PASSED [ 13%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_check_is_unknown_and_stops_pool PASSED [ 13%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_identity_is_reported_per_node PASSED [ 14%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_manifest_without_cache_uri_verifies_local_closures_before_quiesce PASSED [ 14%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_bounded_prefix_and_retained_descendant_pipe PASSED [ 14%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_combined_cap_nonzero_and_finite_validation PASSED [ 15%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_ssh_options_and_nix_environment_are_isolated PASSED [ 15%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_one_failed_controller_unit_cannot_publish_ready PASSED [ 16%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies PASSED [ 16%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_pending_node_identity_cannot_run_job_or_open_pool PASSED [ 17%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_profile_setter_failure_or_wrong_result_cannot_publish_ready PASSED [ 17%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_quiesce_failure_keeps_gate_closed_and_no_node_activates PASSED [ 17%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_repeated_initial_preparation_preserves_pending_and_ready_provenance PASSED [ 18%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_all_native_cli_actions_receive_selected_command_flags PASSED [ 18%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker PASSED [ 19%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_native_environment_error_is_before_child PASSED [ 19%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards PASSED [ 20%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_shared_gate_read_restores_credentials_after_missing_or_permission_error PASSED [ 20%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_uncertain_activation_receipt_blocks_retry PASSED [ 20%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_unverified_node_identity_cannot_open_admission PASSED [ 21%]
+components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_worker_boot_refuses_stale_release_but_allows_prepared_selected_release_with_closed_gate PASSED [ 21%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_active_paused_retry_parent_blocks_empty_slurm PASSED [ 22%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_alias_cannot_bypass_update_guards PASSED [ 22%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_all_worker_stop_barrier_precedes_first_copy PASSED [ 23%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_cap_deadline_cleanup_uncertain_no_admission PASSED [ 23%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_crash_gate_write_failure_retains_intent PASSED [ 23%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_final_fleet_recheck_after_all_mutations PASSED [ 24%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_force_is_only_bound_daemon_after_empty_job_proof PASSED [ 24%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_incomplete_proc_read_is_not_empty PASSED [ 25%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_job_process_after_terminal_queue_blocks PASSED [ 25%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_missing_offline_node_no_skip PASSED [ 26%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_native_stop_readback_and_mask_not_argv_only PASSED [ 26%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_no_cancel_submit_retry_calls PASSED [ 26%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_null_query_or_db_error_is_unknown PASSED [ 27%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_one_release_nfs_failure_closed PASSED [ 27%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_ordinary_identity_still_requires_daemon PASSED [ 28%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_orphan_active_calcjob_blocks PASSED [ 28%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_post_restart_check_reuses_complete_two_workflow_type_guard PASSED [ 29%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_rejects_uninstalled_update_capability_before_gate PASSED [ 29%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_requires_complete_enrollment_before_gate_change PASSED [ 29%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_restart_paused_or_null_missing_state_blocks PASSED [ 30%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_standalone_restart_waiting_without_plan_or_calcjob_blocks PASSED [ 30%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_stopped_identity_requires_own_marker_same_boot_config PASSED [ 31%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_owned_workflows_and_calcjobs_are_clear PASSED [ 31%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_plan_nonterminal_restart_child_blocks PASSED [ 32%]
+components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_unexpected_down_reason_no_resume PASSED [ 32%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_mask_removal_preserves_blocking_marker PASSED [ 32%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_runtime_mask_lifecycle PASSED [ 33%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_exact_legacy_repair_then_owned_restore PASSED [ 33%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_inactive_invocation_is_rejected PASSED [ 34%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_mask_owner_rejects_unmask PASSED [ 34%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_four_actual_sized_scans_fit_finite_cap PASSED [ 35%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_job_appearing_after_unmask_blocks_restart PASSED [ 35%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_legacy_digest_mismatch_cannot_adopt PASSED [ 35%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_mask_reload_failure_preserves_owned_blocker PASSED [ 36%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_replaced_mask_inode_is_not_removed PASSED [ 36%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_runtime_mask_collision_prevents_stop PASSED [ 37%]
+components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_unmask_reload_failure_preserves_pending_blocker PASSED [ 37%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation PASSED [ 38%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_controller_fleet_health_body_uses_own_role_units PASSED [ 38%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift PASSED [ 38%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_empty_daemon_foreign_member_forbids_force PASSED [ 39%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_positive_singleton_scope_force_then_stopped PASSED [ 39%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse PASSED [ 40%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_unknown_root_member_forbids_force PASSED [ 40%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry PASSED [ 41%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_precopy_stopped_drift_halts_later_nodes PASSED [ 41%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_foreign_down_reason_not_overwritten PASSED [ 41%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_known_retry_retains_original_provenance PASSED [ 42%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_reason_drift_before_drain_refuses PASSED [ 42%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_retry_without_retained_provenance_blocks PASSED [ 43%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_changed_or_down_never_opens PASSED [ 43%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_wait_and_exact_idle PASSED [ 44%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_registration_shape_generation_stale_refuse PASSED [ 44%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_finish_expiry_before_marker_unlink PASSED [ 44%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_health_expiry_before_probe_write PASSED [ 45%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_iterator_slot_before_next PASSED [ 45%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_read_reservation_precedes_access_and_sentinel PASSED [ 46%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_update_duration_validation_before_io PASSED [ 46%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_actual_nfs_body_positive_and_io_failures PASSED [ 47%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition PASSED [ 47%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_unmask_requires_actual_masked_observation PASSED [ 47%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_annotated_unset_reason_completes_update_without_losing_raw PASSED [ 48%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force PASSED [ 48%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_nfs_automount_effective_mount_contract PASSED [ 49%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r1_global_classification_and_full_own_member PASSED [ 49%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_healthy_idle_optional_reason PASSED [ 50%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_own_native_reason_causality_and_retry PASSED [ 50%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r3_identity_and_safety_ignore_only_accounting PASSED [ 50%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_actual_main_update_budget_routes PASSED [ 51%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_controller_code_publication_deadline PASSED [ 51%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r5_nested_stopped_types_are_unknown PASSED [ 52%]
+components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_resume_explicitly_clears_own_reason_before_opening_admission PASSED [ 52%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation PASSED [ 52%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_controller_fleet_health_body_uses_own_role_units PASSED [ 53%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift PASSED [ 53%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_empty_daemon_foreign_member_forbids_force PASSED [ 54%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_positive_singleton_scope_force_then_stopped PASSED [ 54%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse PASSED [ 55%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_unknown_root_member_forbids_force PASSED [ 55%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry PASSED [ 55%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_precopy_stopped_drift_halts_later_nodes PASSED [ 56%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_foreign_down_reason_not_overwritten PASSED [ 56%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_known_retry_retains_original_provenance PASSED [ 57%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_reason_drift_before_drain_refuses PASSED [ 57%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_retry_without_retained_provenance_blocks PASSED [ 58%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_changed_or_down_never_opens PASSED [ 58%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_wait_and_exact_idle PASSED [ 58%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_registration_shape_generation_stale_refuse PASSED [ 59%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_finish_expiry_before_marker_unlink PASSED [ 59%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_health_expiry_before_probe_write PASSED [ 60%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_iterator_slot_before_next PASSED [ 60%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_read_reservation_precedes_access_and_sentinel PASSED [ 61%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_update_duration_validation_before_io PASSED [ 61%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_actual_nfs_body_positive_and_io_failures PASSED [ 61%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_positive_factory_full_body_transition PASSED [ 62%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_unmask_requires_actual_masked_observation PASSED [ 62%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_alias_active_stopped_and_force_survival PASSED [ 63%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_negative_boundaries PASSED [ 63%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_annotated_unset_reason_completes_update_without_losing_raw PASSED [ 64%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force PASSED [ 64%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_nfs_automount_effective_mount_contract PASSED [ 64%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r1_global_classification_and_full_own_member PASSED [ 65%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_healthy_idle_optional_reason PASSED [ 65%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_own_native_reason_causality_and_retry PASSED [ 66%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r3_identity_and_safety_ignore_only_accounting PASSED [ 66%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_actual_main_update_budget_routes PASSED [ 67%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_controller_code_publication_deadline PASSED [ 67%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r5_nested_stopped_types_are_unknown PASSED [ 67%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_resume_explicitly_clears_own_reason_before_opening_admission PASSED [ 68%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_selected_wrapper_exact_grammar_and_config PASSED [ 68%]
+components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_stopped_without_keeper_scope_is_measured_empty PASSED [ 69%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_actual_update_process_blocks_public_activate_and_prepare PASSED [ 69%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_reverse_public_activate_process_blocks_actual_update PASSED [ 70%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o03_real_owned_helper_does_not_reacquire_or_dispatch_self_ssh PASSED [ 70%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_copy_does_not_create_authority_and_context_exit_revokes PASSED [ 70%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_forged_capabilities_rejected_before_any_mutation PASSED [ 71%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_pickle_and_constructor_cannot_transport_capability PASSED [ 71%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_closed_fd_and_replaced_runtime_revoke_before_publish PASSED [ 72%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_lock_namespace_symlink_fifo_and_hardlink_refuse PASSED [ 72%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_replaced_common_lock_inode_revokes_live_owner PASSED [ 73%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_wrong_runtime_release_operation_or_deadline_rejected PASSED [ 73%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_dead_owner_releases_flock_but_orphan_remains_inhibiting PASSED [ 73%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_fork_child_cannot_use_or_unlock_parent_capability PASSED [ 74%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_deadlines_at_profiles_registration_ready_and_cleanup PASSED [ 74%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_expiry_after_command_stops_next_persistent_mutation PASSED [ 75%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o08_killed_local_publisher_retains_intent_and_blocks_retry PASSED [ 75%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_fsync_failure_precedes_application_mutation PASSED [ 76%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_write_and_directory_fsync_faults_are_before_commands PASSED [ 76%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_and_terminal_durable_publisher_syscall_fault_matrix PASSED [ 76%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_replace_and_terminal_receipt_failure_retain_original_bytes PASSED [ 77%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation PASSED [ 77%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_same_attempt_lookalike_and_replaced_own_intent_are_foreign PASSED [ 78%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o11_legacy_activation_fence_blocks_update_without_truncation PASSED [ 78%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o12_completed_release_repairs_only_one_gc_root_and_closed_gate PASSED [ 79%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o14_public_activate_requires_matching_closed_selected_gate PASSED [ 79%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o17_worker_stop_invocation_serializes_foreign_activate_and_finish PASSED [ 79%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_no_owner_and_expired_owner_cannot_publish_or_clean PASSED [ 80%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_service_environment_uses_selected_gate PASSED [ 80%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire PASSED [ 81%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o11_legacy_protocol_rejected_before_quiesce PASSED [ 81%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o14_forged_local_controller_binding_never_reaches_application PASSED [ 82%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li01_trusted_none_roles_complete_without_full_observer_or_invented_identity PASSED [ 82%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li02_invalid_role_and_worker_update_none_refuse_before_journal PASSED [ 82%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li03_schema_role_and_process_boot_mismatch_refuse_before_journal PASSED [ 83%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li04_provided_expected_never_falls_back_after_bad_actual_observation PASSED [ 83%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_actual_final_drift_blocks_ready_and_retains_journal PASSED [ 84%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_mutating_caller_dict_cannot_change_pinned_identity PASSED [ 84%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li06_whole_update_cannot_downgrade_to_process_only PASSED [ 85%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li07_binding_once_forbids_full_none_role_and_identity_rebind PASSED [ 85%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li08_cli_none_cannot_bypass_protected_role PASSED [ 85%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li10_none_cannot_bypass_changed_process_generation PASSED [ 86%]
+components/qcl-negf-platform/tests/test_application_release.py::OPS03StoppedIdentityTests::test_li09_stopped_proof_precedes_mask_removal_and_running_observer_waits_for_restart PASSED [ 86%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_configuring_allocation_waits_for_stop_proof PASSED [ 87%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_disappeared_job_without_receipt_is_retained_across_repeated_shutdown PASSED [ 87%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_escaping_shared_directory_is_rejected_before_pause PASSED [ 88%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_every_owner_is_paused_and_both_durable_verification_and_exit_are_required PASSED [ 88%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_idle_drains_and_returns_without_waiting_for_a_checkpoint PASSED [ 88%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_new_allocation_does_not_need_to_exist_for_shutdown_to_finish PASSED [ 89%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_returning_worker_only_resumes_after_current_ready_identity_is_verified PASSED [ 89%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_suspended_allocation_blocks_shutdown_instead_of_becoming_false_idle PASSED [ 90%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_terminal_and_unallocated_pending_records_do_not_require_new_checkpoint PASSED [ 90%]
+components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_unmanaged_job_cannot_be_treated_as_idle_or_safe PASSED [ 91%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_attempt_collision_never_overwrites_and_initial_admission_has_no_fake_old_boot PASSED [ 91%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_authorized_alias_and_omitted_pool_worker_inhibit PASSED [ 91%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_creation_and_unlink_failure_never_trust_completion PASSED [ 92%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_foreign_machine_and_wrong_event_cannot_clear_safe_scope PASSED [ 92%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_global_busy_lock_cannot_mutate_shutdown PASSED [ 93%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_health_boot_drift_is_unknown_no_resume_and_no_retry_dispatch PASSED [ 93%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_idle_safe_stop_retains_durable_inhibit_before_any_allocation PASSED [ 94%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_intent_is_durable_before_drain_and_common_lock_free_during_runner PASSED [ 94%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_first_state_parent_barrier_and_retry_failure_before_drain PASSED [ 94%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_marker_parent_failure_precedes_resume_and_preserves_unknown PASSED [ 95%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_nested_entries_are_reachable_before_state_publication PASSED [ 95%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_other_node_progresses_while_runner_waits_and_update_is_inhibited PASSED [ 96%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_same_node_startup_contends_during_runner_wait PASSED [ 96%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o16_startup_node_lock_released_after_failed_preflight PASSED [ 97%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_orphan_capture_empty_retry_and_new_boot_never_clear PASSED [ 97%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_owned_client_process_exit_leaves_idle_inhibit_and_free_lock PASSED [ 97%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_same_boot_denied_new_boot_authorized_and_idempotent PASSED [ 98%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_terminal_replace_failure_after_resume_keeps_independent_blocker PASSED [ 98%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_unknown_receipt_and_update_guard_precede_snapshot_and_remote PASSED [ 99%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_v1_bytes_retained_and_malformed_missing_boot_fail_closed PASSED [ 99%]
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_wrong_local_never_reads_runtime_or_mutates PASSED [100%]
+
+============================== slowest durations ===============================
+12.12s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_changed_or_down_never_opens
+12.08s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_changed_or_down_never_opens
+3.06s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r3_identity_and_safety_ignore_only_accounting
+3.04s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_own_native_reason_causality_and_retry
+2.75s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse
+2.74s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_alias_active_stopped_and_force_survival
+2.74s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_own_native_reason_causality_and_retry
+2.72s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse
+2.63s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_wait_and_exact_idle
+2.63s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_wait_and_exact_idle
+2.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r3_identity_and_safety_ignore_only_accounting
+1.66s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_nfs_automount_effective_mount_contract
+1.64s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r1_global_classification_and_full_own_member
+1.62s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r1_global_classification_and_full_own_member
+1.59s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_nfs_automount_effective_mount_contract
+1.55s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker
+1.41s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_actual_nfs_body_positive_and_io_failures
+1.40s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_actual_nfs_body_positive_and_io_failures
+1.40s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry
+1.38s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry
+1.24s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_bounded_prefix_and_retained_descendant_pipe
+1.22s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire
+1.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r5_nested_stopped_types_are_unknown
+1.03s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r5_nested_stopped_types_are_unknown
+1.01s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_positive_factory_full_body_transition
+0.84s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_unmask_requires_actual_masked_observation
+0.75s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_known_retry_retains_original_provenance
+0.75s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_known_retry_retains_original_provenance
+0.64s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_positive_singleton_scope_force_then_stopped
+0.63s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_positive_singleton_scope_force_then_stopped
+0.63s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_force_is_only_bound_daemon_after_empty_job_proof
+0.62s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition
+0.62s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+0.60s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+0.59s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+0.59s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_healthy_idle_optional_reason
+0.58s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_final_fleet_recheck_after_all_mutations
+0.58s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+0.58s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_no_cancel_submit_retry_calls
+0.58s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_all_worker_stop_barrier_precedes_first_copy
+0.58s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_healthy_idle_optional_reason
+0.57s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_crash_gate_write_failure_retains_intent
+0.48s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_empty_daemon_foreign_member_forbids_force
+0.47s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_empty_daemon_foreign_member_forbids_force
+0.47s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_unmask_requires_actual_masked_observation
+0.42s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_registration_shape_generation_stale_refuse
+0.42s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_registration_shape_generation_stale_refuse
+0.41s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_post_restart_check_reuses_complete_two_workflow_type_guard
+0.40s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission
+0.39s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_one_release_nfs_failure_closed
+0.39s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_manifest_without_cache_uri_verifies_local_closures_before_quiesce
+0.39s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry
+0.33s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation
+0.33s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation
+0.32s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03StoppedIdentityTests::test_li09_stopped_proof_precedes_mask_removal_and_running_observer_waits_for_restart
+0.31s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_check_is_unknown_and_stops_pool
+0.30s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_null_query_or_db_error_is_unknown
+0.27s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_hash_mismatch_missing_paths_or_malformed_evidence_does_not_quiesce
+0.26s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_native_environment_error_is_before_child
+0.26s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_exact_legacy_repair_then_owned_restore
+0.25s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift
+0.24s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift
+0.23s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_health_expiry_before_probe_write
+0.23s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_health_expiry_before_probe_write
+0.21s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_precopy_stopped_drift_halts_later_nodes
+0.21s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_precopy_stopped_drift_halts_later_nodes
+0.17s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_cap_deadline_cleanup_uncertain_no_admission
+0.17s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+0.16s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_uncertain_activation_receipt_blocks_retry
+0.16s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o08_killed_local_publisher_retains_intent_and_blocks_retry
+0.16s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_deadline_after_returned_mutation_retains_started_unknown
+0.15s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_standalone_restart_waiting_without_plan_or_calcjob_blocks
+0.15s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_orphan_active_calcjob_blocks
+0.15s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_active_paused_retry_parent_blocks_empty_slurm
+0.15s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_plan_nonterminal_restart_child_blocks
+0.14s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_legacy_digest_mismatch_cannot_adopt
+0.14s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_runtime_mask_lifecycle
+0.13s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_job_appearing_after_unmask_blocks_restart
+0.13s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_mask_removal_preserves_blocking_marker
+0.13s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_unmask_reload_failure_preserves_pending_blocker
+0.13s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_mask_owner_rejects_unmask
+0.13s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_inactive_invocation_is_rejected
+0.13s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_replaced_mask_inode_is_not_removed
+0.13s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force
+0.12s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_finish_expiry_before_marker_unlink
+0.12s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_finish_expiry_before_marker_unlink
+0.12s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force
+0.12s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+0.11s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_combined_cap_nonzero_and_finite_validation
+0.11s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_stopped_identity_requires_own_marker_same_boot_config
+0.11s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_native_stop_readback_and_mask_not_argv_only
+0.11s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire
+0.10s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_ssh_options_and_nix_environment_are_isolated
+0.10s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_negative_boundaries
+0.09s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_aggregate_deadline_and_output_do_not_reset
+0.09s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o12_completed_release_repairs_only_one_gc_root_and_closed_gate
+0.09s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_and_terminal_durable_publisher_syscall_fault_matrix
+0.08s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_selected_wrapper_exact_grammar_and_config
+0.08s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_reason_drift_before_drain_refuses
+0.08s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_reason_drift_before_drain_refuses
+0.06s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_actual_main_update_budget_routes
+0.06s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_mask_reload_failure_preserves_owned_blocker
+0.06s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_actual_main_update_budget_routes
+0.06s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li01_trusted_none_roles_complete_without_full_observer_or_invented_identity
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_replace_and_terminal_receipt_failure_retain_original_bytes
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_conflicts_refuse_before_any_state_or_profile_mutation
+0.05s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03StoppedIdentityTests::test_li09_stopped_proof_precedes_mask_removal_and_running_observer_waits_for_restart
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_retry_without_retained_provenance_blocks
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_unexpected_down_reason_no_resume
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_foreign_down_reason_not_overwritten
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_foreign_down_reason_not_overwritten
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_retry_without_retained_provenance_blocks
+0.05s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_unknown_root_member_forbids_force
+0.04s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_every_owner_is_paused_and_both_durable_verification_and_exit_are_required
+0.04s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_unknown_root_member_forbids_force
+0.04s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_creation_and_unlink_failure_never_trust_completion
+0.04s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_actual_update_process_blocks_public_activate_and_prepare
+0.04s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_deadlines_at_profiles_registration_ready_and_cleanup
+0.04s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation
+0.04s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_job_process_after_terminal_queue_blocks
+0.04s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_mask_removal_preserves_blocking_marker
+0.04s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_activation_publishes_only_after_identity_and_health_check_then_retry_is_idempotent
+0.04s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation
+0.04s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_active_paused_retry_parent_blocks_empty_slurm
+0.04s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_controller_code_publication_deadline
+0.04s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_other_node_progresses_while_runner_waits_and_update_is_inhibited
+0.04s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_controller_code_publication_deadline
+0.04s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_intent_is_durable_before_drain_and_common_lock_free_during_runner
+0.04s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li01_trusted_none_roles_complete_without_full_observer_or_invented_identity
+0.03s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_disappeared_job_without_receipt_is_retained_across_repeated_shutdown
+0.03s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_terminal_replace_failure_after_resume_keeps_independent_blocker
+0.03s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_update_duration_validation_before_io
+0.03s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_update_duration_validation_before_io
+0.03s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o11_legacy_protocol_rejected_before_quiesce
+0.03s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_same_boot_denied_new_boot_authorized_and_idempotent
+0.03s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_marker_parent_failure_precedes_resume_and_preserves_unknown
+0.03s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cache_fetch_failure_leaves_gate_and_services_unchanged
+0.03s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_authorized_alias_and_omitted_pool_worker_inhibit
+0.03s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_repeated_initial_preparation_preserves_pending_and_ready_provenance
+0.03s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_health_boot_drift_is_unknown_no_resume_and_no_retry_dispatch
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o17_worker_stop_invocation_serializes_foreign_activate_and_finish
+0.02s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_new_allocation_does_not_need_to_exist_for_shutdown_to_finish
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_bad_closure_or_hash_leaves_prior_identity_and_gate_unchanged
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_service_environment_uses_selected_gate
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_rejects_uninstalled_update_capability_before_gate
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_controller_delivery_recovers_services_stopped_for_maintenance
+0.02s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_owned_client_process_exit_leaves_idle_inhibit_and_free_lock
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_runtime_mask_collision_prevents_stop
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_activation_publishes_only_after_identity_and_health_check_then_retry_is_idempotent
+0.02s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_same_node_startup_contends_during_runner_wait
+0.02s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_foreign_machine_and_wrong_event_cannot_clear_safe_scope
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_missing_offline_node_no_skip
+0.02s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_reverse_public_activate_process_blocks_actual_update
+0.01s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_attempt_collision_never_overwrites_and_initial_admission_has_no_fake_old_boot
+0.01s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o16_startup_node_lock_released_after_failed_preflight
+0.01s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_configuring_allocation_waits_for_stop_proof
+0.01s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_global_busy_lock_cannot_mutate_shutdown
+0.01s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_idle_safe_stop_retains_durable_inhibit_before_any_allocation
+0.01s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_terminal_and_unallocated_pending_records_do_not_require_new_checkpoint
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies
+0.01s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_idle_drains_and_returns_without_waiting_for_a_checkpoint
+0.01s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_orphan_capture_empty_retry_and_new_boot_never_clear
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_mutating_caller_dict_cannot_change_pinned_identity
+0.01s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_returning_worker_only_resumes_after_current_ready_identity_is_verified
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_activation_registers_immutable_code_before_ready_and_publishes_uuid
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_dead_owner_releases_flock_but_orphan_remains_inhibiting
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o03_real_owned_helper_does_not_reacquire_or_dispatch_self_ssh
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_health_executes_pinned_solver_as_scientific_user_with_finite_budget
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_initial_phase_runs_real_preparation_with_common_owner
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_actual_update_process_blocks_public_activate_and_prepare
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_actual_final_drift_blocks_ready_and_retains_journal
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_does_not_recreate_deleted_gate_for_existing_identity
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_prepares_closed_identity_before_worker_role_switch
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_identity_is_reported_per_node
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_one_failed_controller_unit_cannot_publish_ready
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_worker_requires_controller_gate_and_does_not_publish_one
+0.01s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_configuring_allocation_waits_for_stop_proof
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_no_owner_and_expired_owner_cannot_publish_or_clean
+0.01s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_v1_bytes_retained_and_malformed_missing_boot_fail_closed
+0.01s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_escaping_shared_directory_is_rejected_before_pause
+0.01s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_suspended_allocation_blocks_shutdown_instead_of_becoming_false_idle
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_pinned_solver_self_check_cannot_publish_ready
+0.01s call     components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_unmanaged_job_cannot_be_treated_as_idle_or_safe
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_write_and_directory_fsync_faults_are_before_commands
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_same_attempt_lookalike_and_replaced_own_intent_are_foreign
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li03_schema_role_and_process_boot_mismatch_refuse_before_journal
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_health_check_does_not_publish_ready_identity
+0.01s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_first_state_parent_barrier_and_retry_failure_before_drain
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_fork_child_cannot_use_or_unlock_parent_capability
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li04_provided_expected_never_falls_back_after_bad_actual_observation
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_final_resume_leaves_admission_closed_with_node_report
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_controller_fleet_health_body_uses_own_role_units
+0.01s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_controller_fleet_health_body_uses_own_role_units
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_pending_node_identity_cannot_run_job_or_open_pool
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_quiesce_failure_keeps_gate_closed_and_no_node_activates
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_unverified_node_identity_cannot_open_admission
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_expiry_after_command_stops_next_persistent_mutation
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_malformed_existing_runtime_is_never_treated_as_absent
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li07_binding_once_forbids_full_none_role_and_identity_rebind
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_first_initial_controller_refuses_jobs_before_creating_gate_or_profiles
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_fsync_failure_precedes_application_mutation
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_gate_changed_during_closure_verification_is_not_overwritten
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_restart_paused_or_null_missing_state_blocks
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o14_public_activate_requires_matching_closed_selected_gate
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_alias_cannot_bypass_update_guards
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_stopped_without_keeper_scope_is_measured_empty
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_iterator_slot_before_next
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li02_invalid_role_and_worker_update_none_refuse_before_journal
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_read_reservation_precedes_access_and_sentinel
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_iterator_slot_before_next
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_closed_fd_and_replaced_runtime_revoke_before_publish
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_read_reservation_precedes_access_and_sentinel
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_four_actual_sized_scans_fit_finite_cap
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_incomplete_proc_read_is_not_empty
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li08_cli_none_cannot_bypass_protected_role
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_invalid_cache_argument_or_absent_manifest_hashes_refuses_before_commands
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o17_worker_stop_invocation_serializes_foreign_activate_and_finish
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o14_forged_local_controller_binding_never_reaches_application
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_missing_or_wrong_solver_profile_before_health
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_all_native_cli_actions_receive_selected_command_flags
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_wrong_runtime_release_operation_or_deadline_rejected
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li06_whole_update_cannot_downgrade_to_process_only
+0.00s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_nested_entries_are_reachable_before_state_publication
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li10_none_cannot_bypass_changed_process_generation
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o11_legacy_activation_fence_blocks_update_without_truncation
+0.00s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_unknown_receipt_and_update_guard_precede_snapshot_and_remote
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_keeps_operational_cache_and_closure_fields_for_controller_prefetch
+0.00s call     components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_wrong_local_never_reads_runtime_or_mutates
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_owned_workflows_and_calcjobs_are_clear
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_gate_rejects_stale_worker_and_queued_job_then_allows_exact_pin
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_custom_gate_and_nonroot_reader_do_not_change_credentials
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_lock_namespace_symlink_fifo_and_hardlink_refuse
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_replaced_common_lock_inode_revokes_live_owner
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_ordinary_identity_still_requires_daemon
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_copy_does_not_create_authority_and_context_exit_revokes
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_worker_boot_refuses_stale_release_but_allows_prepared_selected_release_with_closed_gate
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_pickle_and_constructor_cannot_transport_capability
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_profile_path_that_mismatches_runtime_identity
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_forged_capabilities_rejected_before_any_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_same_attempt_lookalike_and_replaced_own_intent_are_foreign
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_bootstrap_after_reboot_uses_selected_solver_code_instead_of_image_seed
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_requires_complete_enrollment_before_gate_change
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_shared_gate_read_restores_credentials_after_missing_or_permission_error
+0.00s call     components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_manifest_closure_inventory_refuses_before_commands
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_unmask_requires_actual_masked_observation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_service_environment_uses_selected_gate
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_controller_fleet_health_body_uses_own_role_units
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o17_worker_stop_invocation_serializes_foreign_activate_and_finish
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_no_owner_and_expired_owner_cannot_publish_or_clean
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o11_legacy_activation_fence_blocks_update_without_truncation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_no_owner_and_expired_owner_cannot_publish_or_clean
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_and_terminal_durable_publisher_syscall_fault_matrix
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o12_completed_release_repairs_only_one_gc_root_and_closed_gate
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o11_legacy_activation_fence_blocks_update_without_truncation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o14_forged_local_controller_binding_never_reaches_application
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o08_killed_local_publisher_retains_intent_and_blocks_retry
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o14_public_activate_requires_matching_closed_selected_gate
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o14_public_activate_requires_matching_closed_selected_gate
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li03_schema_role_and_process_boot_mismatch_refuse_before_journal
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o12_completed_release_repairs_only_one_gc_root_and_closed_gate
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_replace_and_terminal_receipt_failure_retain_original_bytes
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_positive_factory_full_body_transition
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_service_environment_uses_selected_gate
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_fsync_failure_precedes_application_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o14_forged_local_controller_binding_never_reaches_application
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_write_and_directory_fsync_faults_are_before_commands
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o11_legacy_protocol_rejected_before_quiesce
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_fork_child_cannot_use_or_unlock_parent_capability
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_actual_update_process_blocks_public_activate_and_prepare
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li04_provided_expected_never_falls_back_after_bad_actual_observation
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o16_startup_node_lock_released_after_failed_preflight
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_attempt_collision_never_overwrites_and_initial_admission_has_no_fake_old_boot
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_dead_owner_releases_flock_but_orphan_remains_inhibiting
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_other_node_progresses_while_runner_waits_and_update_is_inhibited
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li03_schema_role_and_process_boot_mismatch_refuse_before_journal
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_same_node_startup_contends_during_runner_wait
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_reverse_public_activate_process_blocks_actual_update
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_same_boot_denied_new_boot_authorized_and_idempotent
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_unmask_requires_actual_masked_observation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_deadlines_at_profiles_registration_ready_and_cleanup
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_fork_child_cannot_use_or_unlock_parent_capability
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_and_terminal_durable_publisher_syscall_fault_matrix
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_wrong_local_never_reads_runtime_or_mutates
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_same_node_startup_contends_during_runner_wait
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_same_attempt_lookalike_and_replaced_own_intent_are_foreign
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_owned_client_process_exit_leaves_idle_inhibit_and_free_lock
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o03_real_owned_helper_does_not_reacquire_or_dispatch_self_ssh
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_reverse_public_activate_process_blocks_actual_update
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_cap_deadline_cleanup_uncertain_no_admission
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_ready_replace_and_terminal_receipt_failure_retain_original_bytes
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03StoppedIdentityTests::test_li09_stopped_proof_precedes_mask_removal_and_running_observer_waits_for_restart
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_actual_nfs_body_positive_and_io_failures
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li04_provided_expected_never_falls_back_after_bad_actual_observation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li10_none_cannot_bypass_changed_process_generation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_actual_final_drift_blocks_ready_and_retains_journal
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_bounded_prefix_and_retained_descendant_pipe
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cache_fetch_failure_leaves_gate_and_services_unchanged
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_unexpected_down_reason_no_resume
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_fsync_failure_precedes_application_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_actual_final_drift_blocks_ready_and_retains_journal
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o11_legacy_protocol_rejected_before_quiesce
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_uncertain_activation_receipt_blocks_retry
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_conflicts_refuse_before_any_state_or_profile_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o08_killed_local_publisher_retains_intent_and_blocks_retry
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_health_expiry_before_probe_write
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_unmanaged_job_cannot_be_treated_as_idle_or_safe
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_unknown_receipt_and_update_guard_precede_snapshot_and_remote
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_alias_active_stopped_and_force_survival
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_escaping_shared_directory_is_rejected_before_pause
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_pending_node_identity_cannot_run_job_or_open_pool
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_unmask_reload_failure_preserves_pending_blocker
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_deadlines_at_profiles_registration_ready_and_cleanup
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li01_trusted_none_roles_complete_without_full_observer_or_invented_identity
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_stopped_without_keeper_scope_is_measured_empty
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_known_retry_retains_original_provenance
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_known_retry_retains_original_provenance
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li02_invalid_role_and_worker_update_none_refuse_before_journal
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_iterator_slot_before_next
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li02_invalid_role_and_worker_update_none_refuse_before_journal
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li06_whole_update_cannot_downgrade_to_process_only
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_mutating_caller_dict_cannot_change_pinned_identity
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_other_node_progresses_while_runner_waits_and_update_is_inhibited
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_healthy_idle_optional_reason
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_marker_parent_failure_precedes_resume_and_preserves_unknown
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_owned_client_process_exit_leaves_idle_inhibit_and_free_lock
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o09_intent_write_and_directory_fsync_faults_are_before_commands
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li08_cli_none_cannot_bypass_protected_role
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r5_nested_stopped_types_are_unknown
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_creation_and_unlink_failure_never_trust_completion
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_terminal_replace_failure_after_resume_keeps_independent_blocker
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_expiry_after_command_stops_next_persistent_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_expiry_after_command_stops_next_persistent_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li06_whole_update_cannot_downgrade_to_process_only
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_idle_drains_and_returns_without_waiting_for_a_checkpoint
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_final_fleet_recheck_after_all_mutations
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_foreign_down_reason_not_overwritten
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_own_native_reason_causality_and_retry
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_crash_gate_write_failure_retains_intent
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_no_cancel_submit_retry_calls
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_stopped_without_keeper_scope_is_measured_empty
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li07_binding_once_forbids_full_none_role_and_identity_rebind
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li07_binding_once_forbids_full_none_role_and_identity_rebind
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_worker_boot_refuses_stale_release_but_allows_prepared_selected_release_with_closed_gate
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_health_boot_drift_is_unknown_no_resume_and_no_retry_dispatch
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li05_mutating_caller_dict_cannot_change_pinned_identity
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_healthy_idle_optional_reason
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_stopped_identity_requires_own_marker_same_boot_config
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_disappeared_job_without_receipt_is_retained_across_repeated_shutdown
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_wrong_local_never_reads_runtime_or_mutates
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_activation_publishes_only_after_identity_and_health_check_then_retry_is_idempotent
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_first_state_parent_barrier_and_retry_failure_before_drain
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_every_owner_is_paused_and_both_durable_verification_and_exit_are_required
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_health_boot_drift_is_unknown_no_resume_and_no_retry_dispatch
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_aggregate_deadline_and_output_do_not_reset
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_global_busy_lock_cannot_mutate_shutdown
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li10_none_cannot_bypass_changed_process_generation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_own_native_reason_causality_and_retry
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_creation_and_unlink_failure_never_trust_completion
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_unmanaged_job_cannot_be_treated_as_idle_or_safe
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_global_busy_lock_cannot_mutate_shutdown
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_returning_worker_only_resumes_after_current_ready_identity_is_verified
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_all_worker_stop_barrier_precedes_first_copy
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_registration_shape_generation_stale_refuse
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_controller_code_publication_deadline
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_selected_wrapper_exact_grammar_and_config
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_prepares_closed_identity_before_worker_role_switch
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_deadline_after_returned_mutation_retains_started_unknown
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_post_restart_check_reuses_complete_two_workflow_type_guard
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_suspended_allocation_blocks_shutdown_instead_of_becoming_false_idle
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_terminal_and_unallocated_pending_records_do_not_require_new_checkpoint
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r3_identity_and_safety_ignore_only_accounting
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_intent_is_durable_before_drain_and_common_lock_free_during_runner
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_new_allocation_does_not_need_to_exist_for_shutdown_to_finish
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_one_release_nfs_failure_closed
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_healthy_idle_optional_reason
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_nested_entries_are_reachable_before_state_publication
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_authorized_alias_and_omitted_pool_worker_inhibit
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o06_dead_owner_releases_flock_but_orphan_remains_inhibiting
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_registration_shape_generation_stale_refuse
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_active_paused_retry_parent_blocks_empty_slurm
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_actual_main_update_budget_routes
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_terminal_and_unallocated_pending_records_do_not_require_new_checkpoint
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry
+0.00s setup    components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_idle_drains_and_returns_without_waiting_for_a_checkpoint
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_negative_boundaries
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_orphan_capture_empty_retry_and_new_boot_never_clear
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_foreign_machine_and_wrong_event_cannot_clear_safe_scope
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_changed_or_down_never_opens
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_exact_legacy_repair_then_owned_restore
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_precopy_stopped_drift_halts_later_nodes
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_known_retry_retains_original_provenance
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_foreign_machine_and_wrong_event_cannot_clear_safe_scope
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_marker_parent_failure_precedes_resume_and_preserves_unknown
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_precopy_stopped_drift_halts_later_nodes
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_empty_daemon_foreign_member_forbids_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_health_expiry_before_probe_write
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_unknown_root_member_forbids_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_controller_code_publication_deadline
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_own_native_reason_causality_and_retry
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_orphan_active_calcjob_blocks
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_idle_safe_stop_retains_durable_inhibit_before_any_allocation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_actual_main_update_budget_routes
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o16_startup_node_lock_released_after_failed_preflight
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_nfs_automount_effective_mount_contract
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_incomplete_proc_read_is_not_empty
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r1_global_classification_and_full_own_member
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_unmask_requires_actual_masked_observation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_wrong_runtime_release_operation_or_deadline_rejected
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_legacy_digest_mismatch_cannot_adopt
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_terminal_replace_failure_after_resume_keeps_independent_blocker
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_copy_does_not_create_authority_and_context_exit_revokes
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_mask_reload_failure_preserves_owned_blocker
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_legacy_digest_mismatch_cannot_adopt
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_retry_without_retained_provenance_blocks
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_positive_singleton_scope_force_then_stopped
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_nfs_automount_effective_mount_contract
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_health_expiry_before_probe_write
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_actual_nfs_body_positive_and_io_failures
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_empty_daemon_foreign_member_forbids_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_rejects_uninstalled_update_capability_before_gate
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_reason_drift_before_drain_refuses
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_orphan_capture_empty_retry_and_new_boot_never_clear
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_attempt_collision_never_overwrites_and_initial_admission_has_no_fake_old_boot
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_same_boot_denied_new_boot_authorized_and_idempotent
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_iterator_slot_before_next
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_disappeared_job_without_receipt_is_retained_across_repeated_shutdown
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_idle_safe_stop_retains_durable_inhibit_before_any_allocation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_owned_workflows_and_calcjobs_are_clear
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r5_nested_stopped_types_are_unknown
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_runtime_mask_lifecycle
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_pickle_and_constructor_cannot_transport_capability
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_positive_singleton_scope_force_then_stopped
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_final_fleet_recheck_after_all_mutations
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_missing_offline_node_no_skip
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_retry_without_retained_provenance_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_update_duration_validation_before_io
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_post_stop_bad_receipt_halts_and_blocks_retry
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f2_precopy_stopped_drift_halts_later_nodes
+0.00s setup    components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_v1_bytes_retained_and_malformed_missing_boot_fail_closed
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_own_native_reason_causality_and_retry
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_retry_without_retained_provenance_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_first_state_parent_barrier_and_retry_failure_before_drain
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_escaping_shared_directory_is_rejected_before_pause
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_inactive_invocation_is_rejected
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_unknown_root_member_forbids_force
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_v1_bytes_retained_and_malformed_missing_boot_fail_closed
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_finish_expiry_before_marker_unlink
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r3_identity_and_safety_ignore_only_accounting
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_finish_expiry_before_marker_unlink
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_replaced_mask_inode_is_not_removed
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_new_allocation_does_not_need_to_exist_for_shutdown_to_finish
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_authorized_alias_and_omitted_pool_worker_inhibit
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_runtime_mask_collision_prevents_stop
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_known_retry_retains_original_provenance
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_finish_expiry_before_marker_unlink
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_reason_drift_before_drain_refuses
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_first_initial_controller_refuses_jobs_before_creating_gate_or_profiles
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_unverified_node_identity_cannot_open_admission
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_selected_wrapper_exact_grammar_and_config
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_wait_and_exact_idle
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_returning_worker_only_resumes_after_current_ready_identity_is_verified
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_registration_shape_generation_stale_refuse
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_wait_and_exact_idle
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_retry_without_retained_provenance_blocks
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_invalid_cache_argument_or_absent_manifest_hashes_refuses_before_commands
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_lock_namespace_symlink_fifo_and_hardlink_refuse
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_identity_is_reported_per_node
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_alias_cannot_bypass_update_guards
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_mask_owner_rejects_unmask
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_native_environment_error_is_before_child
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_post_restart_check_reuses_complete_two_workflow_type_guard
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r1_global_classification_and_full_own_member
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_intent_is_durable_before_drain_and_common_lock_free_during_runner
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_every_owner_is_paused_and_both_durable_verification_and_exit_are_required
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_ordinary_identity_still_requires_daemon
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_null_query_or_db_error_is_unknown
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_foreign_down_reason_not_overwritten
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_bootstrap_after_reboot_uses_selected_solver_code_instead_of_image_seed
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_force_is_only_bound_daemon_after_empty_job_proof
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_crash_gate_write_failure_retains_intent
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_controller_code_publication_deadline
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_changed_or_down_never_opens
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f2_precopy_stopped_drift_halts_later_nodes
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_unexpected_down_reason_no_resume
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_positive_factory_full_body_transition
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_custom_gate_and_nonroot_reader_do_not_change_credentials
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_does_not_recreate_deleted_gate_for_existing_identity
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LocalIdentityTests::test_li08_cli_none_cannot_bypass_protected_role
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_four_actual_sized_scans_fit_finite_cap
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_final_resume_leaves_admission_closed_with_node_report
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_no_cancel_submit_retry_calls
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_gate_rejects_stale_worker_and_queued_job_then_allows_exact_pin
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_replaced_common_lock_inode_revokes_live_owner
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_bad_closure_or_hash_leaves_prior_identity_and_gate_unchanged
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_read_reservation_precedes_access_and_sentinel
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r3_identity_and_safety_ignore_only_accounting
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_registration_shape_generation_stale_refuse
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_job_process_after_terminal_queue_blocks
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_controller_fleet_health_body_uses_own_role_units
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_controller_fleet_health_body_uses_own_role_units
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_configuring_allocation_waits_for_stop_proof
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_health_executes_pinned_solver_as_scientific_user_with_finite_budget
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_healthy_idle_optional_reason
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_unmask_reload_failure_preserves_pending_blocker
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_cap_deadline_cleanup_uncertain_no_admission
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_alias_active_stopped_and_force_survival
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r3_identity_and_safety_ignore_only_accounting
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_annotated_unset_rejects_malformed_or_foreign_reason_before_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_one_release_nfs_failure_closed
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_foreign_down_reason_not_overwritten
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_one_failed_controller_unit_cannot_publish_ready
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_update_duration_validation_before_io
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_native_stop_readback_and_mask_not_argv_only
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_requires_complete_enrollment_before_gate_change
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_foreign_down_reason_not_overwritten
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_job_appearing_after_unmask_blocks_restart
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_ssh_options_and_nix_environment_are_isolated
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_null_query_or_db_error_is_unknown
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_quiesce_failure_keeps_gate_closed_and_no_node_activates
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_nfs_automount_effective_mount_contract
+0.00s teardown components/qcl-negf-platform/tests/test_worker_lifecycle.py::WorkerLifecycleTests::test_suspended_allocation_blocks_shutdown_instead_of_becoming_false_idle
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_missing_or_wrong_solver_profile_before_health
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r5_nested_stopped_types_are_unknown
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_empty_daemon_foreign_member_forbids_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_forged_capabilities_rejected_before_any_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_manifest_without_cache_uri_verifies_local_closures_before_quiesce
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_worker_boot_refuses_stale_release_but_allows_prepared_selected_release_with_closed_gate
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_missing_offline_node_no_skip
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r1_global_classification_and_full_own_member
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_combined_cap_nonzero_and_finite_validation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_all_native_cli_actions_receive_selected_command_flags
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_conflicts_refuse_before_any_state_or_profile_mutation
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cache_fetch_failure_leaves_gate_and_services_unchanged
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_positive_singleton_scope_force_then_stopped
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_reason_drift_before_drain_refuses
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_keeper_negative_boundaries
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_unknown_root_member_forbids_force
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_positive_singleton_scope_force_then_stopped
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_gate_changed_during_closure_verification_is_not_overwritten
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_closed_fd_and_replaced_runtime_revoke_before_publish
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_update_duration_validation_before_io
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_pending_node_identity_cannot_run_job_or_open_pool
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_wrong_runtime_release_operation_or_deadline_rejected
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_health_expiry_before_probe_write
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_controller_code_publication_deadline
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_plan_nonterminal_restart_child_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_shared_gate_read_restores_credentials_after_missing_or_permission_error
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_standalone_restart_waiting_without_plan_or_calcjob_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_unmask_requires_actual_masked_observation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_mask_owner_rejects_unmask
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_hash_mismatch_missing_paths_or_malformed_evidence_does_not_quiesce
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_mask_removal_preserves_blocking_marker
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_subgroup_pid_reuse_exec_invocation_and_race_refuse
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_job_process_after_terminal_queue_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_gate_rejects_stale_worker_and_queued_job_then_allows_exact_pin
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_worker_requires_controller_gate_and_does_not_publish_one
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_restart_paused_or_null_missing_state_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_finish_expiry_before_marker_unlink
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_malformed_existing_runtime_is_never_treated_as_absent
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_rejects_uninstalled_update_capability_before_gate
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_changed_or_down_never_opens
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_check_is_unknown_and_stops_pool
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_ssh_options_and_nix_environment_are_isolated
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_force_is_only_bound_daemon_after_empty_job_proof
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o03_real_owned_helper_does_not_reacquire_or_dispatch_self_ssh
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_actual_main_update_budget_routes
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_native_stop_readback_and_mask_not_argv_only
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_replaced_mask_inode_is_not_removed
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_delegated_daemon_scope_rejects_foreign_malformed_or_membership_drift
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_effective_runtime_mask_lifecycle
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_read_reservation_precedes_access_and_sentinel
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_aggregate_deadline_and_output_do_not_reset
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_all_worker_stop_barrier_precedes_first_copy
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f1_empty_daemon_foreign_member_forbids_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_orphan_active_calcjob_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r5_nested_stopped_types_are_unknown
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r1_global_classification_and_full_own_member
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_nfs_automount_effective_mount_contract
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_actual_main_update_budget_routes
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_exact_legacy_repair_then_owned_restore
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_manifest_closure_inventory_refuses_before_commands
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_stopped_identity_requires_own_marker_same_boot_config
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_uncertain_activation_receipt_blocks_retry
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_plan_nonterminal_restart_child_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_slurmd_delegated_leaf_is_bound_and_stops_without_force
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_controller_delivery_recovers_services_stopped_for_maintenance
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_wait_and_exact_idle
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_unknown_receipt_and_update_guard_precede_snapshot_and_remote
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_health_check_does_not_publish_ready_identity
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_changed_or_down_never_opens
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f1_unknown_root_member_forbids_force
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_job_appearing_after_unmask_blocks_restart
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_foreign_inactive_invocation_is_rejected
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_reason_drift_before_drain_refuses
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_pinned_solver_self_check_cannot_publish_ready
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_profile_setter_failure_or_wrong_result_cannot_publish_ready
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_standalone_restart_waiting_without_plan_or_calcjob_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_retry_repairs_only_the_damaged_profile_and_preserves_identity
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_repeated_initial_preparation_preserves_pending_and_ready_provenance
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_mask_reload_failure_preserves_owned_blocker
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_actual_nfs_body_positive_and_io_failures
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_update_duration_validation_before_io
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_pickle_and_constructor_cannot_transport_capability
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_profile_path_that_mismatches_runtime_identity
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_runtime_mask_collision_prevents_stop
+0.00s teardown components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_namespace_nested_entries_are_reachable_before_state_publication
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_keeps_operational_cache_and_closure_fields_for_controller_prefetch
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_actual_nfs_body_positive_and_io_failures
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_activation_registers_immutable_code_before_ready_and_publishes_uuid
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_manifest_without_cache_uri_verifies_local_closures_before_quiesce
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_wait_and_exact_idle
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_bounded_prefix_and_retained_descendant_pipe
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_check_is_unknown_and_stops_pool
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_closed_fd_and_replaced_runtime_revoke_before_publish
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_deadline_after_returned_mutation_retains_started_unknown
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_lock_namespace_symlink_fifo_and_hardlink_refuse
+0.00s setup    components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_initial_phase_runs_real_preparation_with_common_owner
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_native_combined_cap_nonzero_and_finite_validation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_native_environment_error_is_before_child
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_first_initial_controller_refuses_jobs_before_creating_gate_or_profiles
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_hash_mismatch_missing_paths_or_malformed_evidence_does_not_quiesce
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_repeated_initial_preparation_preserves_pending_and_ready_provenance
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_unverified_node_identity_cannot_open_admission
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_requires_complete_enrollment_before_gate_change
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o05_replaced_common_lock_inode_revokes_live_owner
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_bad_closure_or_hash_leaves_prior_identity_and_gate_unchanged
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_forged_capabilities_rejected_before_any_mutation
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o04_copy_does_not_create_authority_and_context_exit_revokes
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_ordinary_identity_still_requires_daemon
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_read_reservation_precedes_access_and_sentinel
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_worker_requires_controller_gate_and_does_not_publish_one
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_identity_is_reported_per_node
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_restart_paused_or_null_missing_state_blocks
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_iterator_slot_before_next
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_alias_cannot_bypass_update_guards
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_gate_changed_during_closure_verification_is_not_overwritten
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_prepares_closed_identity_before_worker_role_switch
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_controller_does_not_recreate_deleted_gate_for_existing_identity
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_controller_fleet_health_body_uses_own_role_units
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_invalid_cache_argument_or_absent_manifest_hashes_refuses_before_commands
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_one_failed_controller_unit_cannot_publish_ready
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_identical_controller_delivery_recovers_services_stopped_for_maintenance
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_activation_registers_immutable_code_before_ready_and_publishes_uuid
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_initial_malformed_existing_runtime_is_never_treated_as_absent
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_quiesce_failure_keeps_gate_closed_and_no_node_activates
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_all_native_cli_actions_receive_selected_command_flags
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_terminal_owned_workflows_and_calcjobs_are_clear
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_custom_gate_and_nonroot_reader_do_not_change_credentials
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_iterator_slot_before_next
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_health_check_does_not_publish_ready_identity
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_final_resume_leaves_admission_closed_with_node_report
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_manifest_closure_inventory_refuses_before_commands
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_health_executes_pinned_solver_as_scientific_user_with_finite_budget
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_keeps_operational_cache_and_closure_fields_for_controller_prefetch
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::EffectiveRuntimeMaskTests::test_four_actual_sized_scans_fit_finite_cap
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_incomplete_proc_read_is_not_empty
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_bootstrap_after_reboot_uses_selected_solver_code_instead_of_image_seed
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_cli_initial_phase_runs_real_preparation_with_common_owner
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_read_reservation_precedes_access_and_sentinel
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_shared_gate_read_restores_credentials_after_missing_or_permission_error
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_missing_or_wrong_solver_profile_before_health
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_failed_pinned_solver_self_check_cannot_publish_ready
+0.00s teardown components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_check_rejects_profile_path_that_mismatches_runtime_identity
+======================== 234 passed in 93.54s (0:01:33) ========================

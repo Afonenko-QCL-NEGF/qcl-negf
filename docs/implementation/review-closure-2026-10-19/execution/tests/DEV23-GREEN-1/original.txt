@@ -1,0 +1,32 @@
+.............................                                            [100%]
+=============================== warnings summary ===============================
+tests/test_submission_identity.py::test_slurm_script_binds_attempt_and_disables_independent_requeue
+  /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-DEV23-GREEN-1/tmp/test_slurm_script_binds_attemp0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_submission_identity.py::test_slurm_script_binds_attempt_and_disables_independent_requeue
+tests/test_submission_identity.py::test_release_pin_refuses_mutable_installed_executable
+tests/test_submission_identity.py::test_release_guard_uses_pinned_identity_before_solver
+  /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/orm/utils.py:84: SAWarning: Object of type <DbNode> not in session, add operation along 'DbUser.dbnodes' will not proceed (This warning originated from the Session 'autoflush' process, which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush`` context manager if this warning happened while initializing objects.)
+    return getattr(self._model, item)
+
+tests/test_submission_identity.py::test_slurm_script_binds_attempt_and_disables_independent_requeue
+tests/test_submission_identity.py::test_release_pin_refuses_mutable_installed_executable
+tests/test_submission_identity.py::test_release_guard_uses_pinned_identity_before_solver
+  /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/orm/nodes.py:225: SAWarning: Object of type <DbNode> not in session, add operation along 'DbComputer.dbnodes' will not proceed
+    session.commit()
+
+tests/test_submission_identity.py::test_release_pin_refuses_mutable_installed_executable
+  /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-DEV23-GREEN-1/tmp/test_release_pin_refuses_mutab0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_submission_identity.py::test_release_guard_uses_pinned_identity_before_solver
+  /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/aiida/manage/configuration/settings.py:122: UserWarning: Creating AiiDA configuration folder `/tmp/qcl-DEV23-GREEN-1/tmp/test_release_guard_uses_pinned0/.aiida`.
+    warnings.warn(f'Creating AiiDA configuration folder `{path}`.')
+
+tests/test_submission_identity.py::test_release_guard_uses_pinned_identity_before_solver
+  /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/aiida/storage/psql_dos/orm/utils.py:84: SAWarning: Object of type <DbNode> not in session, add operation along 'DbComputer.dbnodes' will not proceed (This warning originated from the Session 'autoflush' process, which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush`` context manager if this warning happened while initializing objects.)
+    return getattr(self._model, item)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+29 passed, 10 warnings in 0.99s
