@@ -1,0 +1,79 @@
+{
+  "stage": "raw input freeze, no expected answer/author diagnosis",
+  "source_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+  "cases": [
+    "T02",
+    "T03",
+    "T05",
+    "T14"
+  ],
+  "files": [
+    {
+      "path": "T02/archive-receipt.json",
+      "bytes": 664,
+      "sha256": "30bcfdc73bb6bbca43bf6ef9c41491ed221dc5c7fb63b550b87cbad8fdb513c9"
+    },
+    {
+      "path": "T02/current-checkout.json",
+      "bytes": 195,
+      "sha256": "f398e048db6961f760f50668181f43b9d840ef469b61f293fe35855c76b2372f"
+    },
+    {
+      "path": "T02/frozen-plan.json",
+      "bytes": 240,
+      "sha256": "cc502a4746c8985c9bfbe6ab9043718889533612a676d7786e38fa278c887e7d"
+    },
+    {
+      "path": "T02/request.txt",
+      "bytes": 1271,
+      "sha256": "140c6e67e7be57d6b987ff7214197dad8e66fd45e9e08b5194a347162b025bd2"
+    },
+    {
+      "path": "T03/poisson.jl",
+      "bytes": 2385,
+      "sha256": "8989ced0c4adc67e5d553b98863cd8ee3584705546ba445565cb5da0e7130645"
+    },
+    {
+      "path": "T03/request.txt",
+      "bytes": 1177,
+      "sha256": "79ff6ee1fbe362e322fbd657348c7777b4fab5dec70f36578e14561d212f8043"
+    },
+    {
+      "path": "T03/source-identity.json",
+      "bytes": 268,
+      "sha256": "605a87a9978b4b03801ff3b3ff1c429052309a8cc44f8a5ef579c45043ae6b53"
+    },
+    {
+      "path": "T05/README.md",
+      "bytes": 45,
+      "sha256": "7eecc12c920cd98bfbe3844ea2bc1046e34f6d41962880e5ffd072e1e8d10ddd"
+    },
+    {
+      "path": "T05/check.py",
+      "bytes": 589,
+      "sha256": "986ccecaa3e35a844d782d1faf550eb5fcd5ad63e643af8eaac601567e3c0305"
+    },
+    {
+      "path": "T05/request.txt",
+      "bytes": 1533,
+      "sha256": "80aafaed9169982a595159b87059abe287896e7bfa599d071f18327f03c58315"
+    },
+    {
+      "path": "T05/target.md",
+      "bytes": 46,
+      "sha256": "cbef9658527394642f452a6a082e3a1bba187ef26135d85739f0e2b0ea08ff38"
+    },
+    {
+      "path": "T14/request.txt",
+      "bytes": 1148,
+      "sha256": "88b7375b43021128f50c063ee72238e1ad38dec9cb221352dc09efcd11a1f47d"
+    },
+    {
+      "path": "T14/telemetry.json",
+      "bytes": 518,
+      "sha256": "50385c86aceb0f8e501174c6e718de5eb28dbff2ade02f271641c1696773f58d"
+    }
+  ],
+  "samples_dispatched": 0,
+  "scope": "exactly two fresh samples per case total8; same raw authorization per variant; no previous outputs"
+}

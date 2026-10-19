@@ -1,0 +1,100 @@
+{
+  "stage": "SCI05-N1 Contracts source-only frozen; independent CP-CODE and coordinator C08 pending",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "worktree": "/tmp/qcl-sci05-contracts-worktree",
+  "branch": "codex/review-closure-final-audit-contract",
+  "component_base": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+  "inputs": {
+    "/tmp/qcl-sci04-design-v2.md": {
+      "sha256": "d787ad47f409b9fffb5a1ac5503857691d0282564bae88d774f0be85b033506c"
+    },
+    "/tmp/qcl-sci04-design-v2-review.md": {
+      "sha256": "ae57a5b8986cf2d7f15a58ad13e26aa34927331ed44fcc1c584d1a5c0f27f0d1"
+    },
+    "/tmp/qcl-sci04-d2-status-clarification.md": {
+      "sha256": "a009526d44583f0198531c047b904052b6deb951c6439195b858f22063f690f8"
+    },
+    "/tmp/qcl-sci04-d2-status-review.md": {
+      "sha256": "f5a06df97644ec6d7c576f10ae6fdbbdcdb1187cbef6f4ba3d61cd3aa7f3dab3"
+    },
+    "/tmp/qcl-sci05-core-v3-identity.json": {
+      "sha256": "a76ec63745bd73b972a74f3e90bba496240bdad81429c57d716c7a063e40ca3b",
+      "bytes": 7741
+    }
+  },
+  "core_context": {
+    "commit": "1b8fda18881007f7c0c7f68758c7dbf42b44dfc6",
+    "path": "src/numerics/reference/final_audit.jl",
+    "method": "read-only git show; not fixture oracle"
+  },
+  "files": {
+    "src/qcl_negf_contracts/final_audit.py": {
+      "sha256": "1c19ba7f27912c739b349fb7c517a9030be3c4f50c4b75932c08d0c02f3219d1",
+      "bytes": 22707
+    },
+    "src/qcl_negf_contracts/schemas/final-fixed-point-audit.schema.json": {
+      "sha256": "ef25a90acfdc8445a20fb53bc40a861de355e07a8abca4dd90f7ee9a0143dc28",
+      "bytes": 21011
+    },
+    "tests/test_final_audit.py": {
+      "sha256": "23098050f2fbc1d282b0de3a84ba0d034be034a3f69f62920fee6fba64914b12",
+      "bytes": 17773
+    },
+    "README.md": {
+      "sha256": "a95dc9b6f09160f06b1197d57c83147718152b914c6c6da4e7aa3e3f6753f94c",
+      "bytes": 12876
+    }
+  },
+  "report": {
+    "path": "/tmp/qcl-sci05-contracts-report.md",
+    "sha256": "bde103220b43bc7922891dcc28472defe1b8fffadc7e902d683eabcb480852a8",
+    "bytes": 11878
+  },
+  "patch": {
+    "path": "/tmp/qcl-sci05-contracts-patch.diff",
+    "sha256": "83800d665d6acf06b7e84653d70a17458f2ded3d45583e823f6f8497b9fd4b58",
+    "bytes": 64679
+  },
+  "interface": {
+    "module": "qcl_negf_contracts.final_audit",
+    "validate": "validate_final_audit(raw: bytes, *, expected_identity: dict | None = None) -> dict",
+    "encode": "encode_final_audit(record: dict, *, expected_identity: dict | None = None) -> bytes",
+    "pair": "validate_final_audit_pair(native_raw: bytes | None, commit_record: dict | None, *, expected_identity: dict, final_state: bool = True) -> dict",
+    "pair_wrapper_keys": [
+      "record",
+      "status",
+      "reason"
+    ],
+    "final_absent": {
+      "record": null,
+      "status": "not_recorded",
+      "reason": null
+    },
+    "recovery_absent": {
+      "record": null,
+      "status": "not_applicable",
+      "reason": "not_a_final_state"
+    },
+    "present": "native decoded record with measurement record_status/reason; never pass",
+    "expected_identity": "all six exact record fields compared by type and value against actual identity; unrelated actual commit fields ignored",
+    "exceptions": "qcl_negf_contracts.messages.ContractError",
+    "native_preflight": "Results owns HDF5 scalar fixed S/UTF-8 dtype, 1..65536 itemsize, attributes, no vlen/chunks/compression/filters/external storage, right padding removal, read accounting, native point identity and owner hashes"
+  },
+  "verification": {
+    "git_diff_check": "no whitespace diagnostics; tracked diff exit0 and no-index added-file difference exit1",
+    "git_apply_reverse_check": "exit0",
+    "source_status": " M README.md\n?? src/qcl_negf_contracts/final_audit.py\n?? src/qcl_negf_contracts/schemas/final-fixed-point-audit.schema.json\n?? tests/test_final_audit.py\n",
+    "submodule_status": "",
+    "Python_invocations": 0,
+    "product_imports": 0,
+    "tests_executed": 0,
+    "C08_calls": 0,
+    "Julia_calls": 0,
+    "install_build_solver_server_network_native_calls": 0,
+    "children": 0,
+    "git_stage_commit_push": 0,
+    "tdd": "literal tests authored before production; executable RED/GREEN explicitly reserved to coordinator; not claimed"
+  },
+  "stop": "Source-only. Independent CP-CODE and coordinator's remaining shared C08 required. No autonomous correction/retry."
+}

@@ -42,7 +42,8 @@
       "DEV20": 2,
       "DEV23": 2,
       "DEV05": 2,
-      "DEV24": 2
+      "DEV24": 2,
+      "SCI05": 6
     },
     "heavy_build_attempts": 0,
     "heavy_build_wall_hours": 0,
@@ -58,13 +59,15 @@
     "local_frontend_asset_build_attempts": 1,
     "native_build_active": null,
     "tooling_selftest_calls": 1,
-    "targeted_test_total_calls": 48,
-    "targeted_test_total_wall_seconds": 696.137,
-    "SCI05_08_C08_test_calls": 0,
+    "targeted_test_total_calls": 55,
+    "targeted_test_total_wall_seconds": 843.949,
+    "SCI05_08_C08_test_calls": 6,
     "SI07_formal_max_calls": 4,
-    "SI07_forward_samples": 0,
-    "targeted_test_calls_total": 49,
-    "targeted_test_wall_seconds_total": 700.99
+    "SI07_forward_samples": 8,
+    "targeted_test_calls_total": 55,
+    "targeted_test_wall_seconds_total": 843.949,
+    "SI07_formal_calls_completed": 4,
+    "SI07_forward_static_checks": 2
   },
   "resource_observation": {
     "logical_cpus": 12,
@@ -125,7 +128,7 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "DEV02": {
-      "state": "fourboundedcontracts_accepted_with658targetedpasses_remaining_two_designs_open",
+      "state": "five_bounded_oracles_implemented_O08_05_design_open",
       "head_at_published_base": "a8d2c0de21dfdce3ed3c7c585c555656443f6d89",
       "ready_scopes": [
         "O08-01",
@@ -134,10 +137,9 @@
         "O08-06"
       ],
       "remaining_design_blocked": [
-        "O08-03coupledfinalU/G",
-        "O08-05absolutescatteringprefactors"
+        "O08-05 absolute scattering passports"
       ],
-      "limitation": "functionalfixturesnevertransferfullS1/scientificacceptance"
+      "limitation": "DEV05 sameU/G925manufactured assertions accepted; no fullS1 claim"
     },
     "DEV03": {
       "state": "published_merged",
@@ -153,14 +155,17 @@
       "scope": "manufacturedexactND/two5x5Poisson/isolatedrouting"
     },
     "DEV05": {
-      "state": "bounded_functional_source_G1_merged",
+      "state": "G1_merged_root_selected",
       "head": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
       "pr": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/10",
       "passed_assertions": 925,
       "test_calls": 2,
       "remaining_calls": 0,
       "final_review_sha256": "00c38923d3b1ac581b9d0962dcbae7e278acef036f9145c91f2af7e5ecb21182",
-      "scope": "complete same-state functional alignment; healthyglobalFAILexactr_sum; no S1/globalall-gates acceptance"
+      "scope": "complete same-state functional alignment; healthyglobalFAILexactr_sum; no S1/globalall-gates acceptance",
+      "PR": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/10",
+      "assertions": 925,
+      "calls": 2
     },
     "DEV06": {
       "state": "published_merged",
@@ -336,7 +341,7 @@
       "limitation": "native cancellation/runtime/fullCI not measured; Runner positive remaining full-loop followon separate"
     },
     "DEV24": {
-      "state": "50_plus25_cases_PASS_final_independent_receipt_review_pending",
+      "state": "G1_merged_root_selected",
       "owner": "/root/dev24_auth_impl",
       "reviewer": "/root/dev24_auth_reviewer",
       "test_calls": 2,
@@ -345,7 +350,12 @@
       "first_packet_passed": 50,
       "final_packet_passed": 25,
       "scope": "publicsyntheticrequestfacade/inventory/selector/cache; explicitauthzero-call14cells+healthycontrols; noTLS/realactor/fullsecurityclaim",
-      "publication_hold": true
+      "publication_hold": true,
+      "head": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "PR": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-portal/pull/12",
+      "calls": 2,
+      "case_executions": 75,
+      "limitation": "synthetic public facade; not native TLS/security/science"
     },
     "DEV25": {
       "state": "planned",
@@ -448,14 +458,59 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "DOC02": {
-      "state": "planned",
+      "state": "owning_G1_merged_root_docs_ready",
       "definition": "documentation-instructions.md#DOC02",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "readiness": "not yet evaluated; no resource operation authorized by status alone",
+      "journal": {
+        "CP_CODE": "50e6410845f7535a9bdfcb4d5bc3505bab87b298b6929168d11121a2c6da5dd4",
+        "components": {
+          "QCLNEGF.jl": {
+            "worktree": "/tmp/qcl-doc02-worktrees/QCLNEGF.jl",
+            "base": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+            "head": "239d76bb59c955b32888eeaec518d6e465b4178d",
+            "branch": "codex/review-closure-reader-routes",
+            "files": {
+              "docs/src/theory/09_scba.md": "a1a3c438c14ff0d967a6890df3e7d3abf7ed7fb95e422ecb81ceef6c2350b004",
+              "docs/src/theory/12_validation.md": "be55b03e7a228aebad88b24410d2633cd575ae63211a01ff4187f2c1bb95755b",
+              "docs/src/developer/traceability.md": "5b860110779f106dc0ff1b97935c612f436987b1cb3e3b62a5a7b766885c0ca1"
+            },
+            "state": "G1_merged",
+            "base_branch": "codex/review-closure-final-state-oracle",
+            "pr": 11,
+            "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/11",
+            "merge_commit": "45dddf3a99e7d9316cfff4d5f102ae087839946e",
+            "merged_at": "2026-10-19T17:21:03Z",
+            "merge_exit": 0,
+            "sole_merge_submit": true
+          },
+          "QCLNEGFRunner.jl": {
+            "worktree": "/tmp/qcl-doc02-worktrees/QCLNEGFRunner.jl",
+            "base": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+            "head": "9378396a3681c1eddf2c62f16674834fc4465583",
+            "branch": "codex/review-closure-reader-routes",
+            "files": {
+              "docs/src/user/configuration.md": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+              "docs/src/user/results.md": "a1efe47c40fee8873239ef2c8f99b9058781dcdc19d4102fbcc078a38cfeff28",
+              "docs/src/api/public.md": "e59e1231197ed92823d691353ddc21dafe0b62252d586cf4018b2f331cda05dd"
+            },
+            "state": "G1_merged",
+            "base_branch": "codex/review-closure-contribution-routing",
+            "pr": 13,
+            "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/pull/13",
+            "merge_commit": "6dc1d05bbc47982e528932ecca620ac11cbb1429",
+            "merged_at": "2026-10-19T17:21:39Z",
+            "merge_exit": 0,
+            "sole_merge_submit": true
+          }
+        }
+      }
     },
     "DOC03": {
-      "state": "planned",
-      "definition": "documentation-instructions.md#DOC03",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "CP_DESIGN_and_owning_CP_CODE_PASS_pending_rootpublication",
+      "writer": "/root/doc03_design ultra",
+      "reviewer": "/root/doc02_reviewer high",
+      "report_sha256": "a25204b1883c97b5c3be1b2a26fb228e5efe8d4aa89230c938e34b56b903afcd",
+      "review": "541340d2d3304b01d61b9763b89d453f15dcfdada9ea2dd8919e22a3b1e2a997"
     },
     "DOC04": {
       "state": "planned",
@@ -502,26 +557,30 @@
       "limitation": "docs/source only, no forward/runtime claim"
     },
     "SI04": {
-      "state": "CP_DESIGN_accepted_pending_exact_I",
+      "state": "CPP_accepted_published_root9d8cf0c",
       "designer": "/root/si03_design",
       "reviewer": "/root/si03_reviewer",
       "patch_sha256": "ebc09a7219751c09fa5eadcb007129bea19c3fdccfe63325b1bb638569f452c3",
       "review_sha256": "bb63c9116e7f3365e8d79fbdb2174e0bcb9ca6f9ab8155d6200b94e122e8fb0c",
-      "scope": "4 references only; SI05entrypoints/SI07samples separate"
+      "scope": "4 references only; SI05entrypoints/SI07samples separate",
+      "CP_CODE": "f1e706cdf6ce8ca82a3bc46bd95967223f6b6d44944d1d7cc581835bbcaca75f"
     },
     "SI05": {
-      "state": "source_CPP_accepted_formal_forward_pending",
+      "state": "CPP_and_formal_accepted_published_root9d8cf0c_forward_pending",
       "review_sha256": "12299836695a904e203a684a1c23223e3ceb8db035dfe888dc3ff3aca6e0241c",
       "source_only": true,
-      "formal_forward_claim": false
+      "formal_forward_claim": false,
+      "CP_CODE": "12299836695a904e203a684a1c23223e3ceb8db035dfe888dc3ff3aca6e0241c"
     },
     "SI06": {
-      "state": "planned",
+      "state": "existing_engineering_route_retained_independent_bounded_scenario_accepted",
       "definition": "documentation-instructions.md#SI06",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "readiness": "not yet evaluated; no resource operation authorized by status alone",
+      "review": "954a59534cca8d1e2319fac64563f2ddcf004a0969ec1619b3b53161a25a15f4",
+      "limitation": "not universal skill behavior evidence"
     },
     "SI07": {
-      "state": "formal_binding_guard_replanned_before_validator",
+      "state": "fixed8_observed_behavior_complete_resource_envelope_evidence_gap",
       "formal_owner": "/root/si07_evaluator",
       "formal_bundle_bytes": 70591,
       "initial_bundle_cap_bytes": 65536,
@@ -535,7 +594,12 @@
       "sample_count": 0,
       "sample_max_total": 8,
       "forward_wall_minutes": 40,
-      "forward_max_workers": 2
+      "forward_max_workers": 2,
+      "sample_cap": 8,
+      "completed": 8,
+      "dispatched": 8,
+      "reruns": 0,
+      "review": "a8482e2adb2dc9d2b74810cdcfa266fd0b8fdb5ce69815733987de8f82e9843b"
     },
     "SCI01": {
       "state": "done",
@@ -570,21 +634,42 @@
       "scope": "ready bounded SCI05 source/format implementation only; no scientific runtime READY"
     },
     "SCI05": {
-      "state": "Core_C1_CPP1_REQUEST_CHANGES_Icorrection_running",
+      "state": "Core_and_Contracts_G1_merged_Runner_Results_transport_in_progress",
       "owner": "/root/sci05_core_impl",
       "reviewer": "/root/sci05_core_reviewer",
       "review_sha256": "43d3aaad003e9c9afa42af1f0f144d3e9976e5e9f482c8199629f7972bb6c146",
-      "findings": "privatePoissonimport/testnamespace/independentPoissonoracle",
+      "findings": "Results present analysis native identity F1; Runner independent review active",
       "permitted_path_extension": "src/QCLNEGF.jl private import only, no export/API change",
-      "C08_calls": 0,
+      "C08_calls": 6,
       "C08_shared_max": 8,
       "corrective_code_round": 1,
-      "corrective_code_round_max": 2
+      "corrective_code_round_max": 2,
+      "core_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+      "C08_remaining": 2,
+      "corrective_rounds_used": 3,
+      "original_corrective_cap": 2,
+      "corrective_extension_state": "Core_E1_completed_no_further_Core_loop; separate_N1_E2_allocated",
+      "diagnostic_assertions": {
+        "pass_count": 275,
+        "fail_count": 1,
+        "error_count": 1
+      },
+      "draft_PR": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/12",
+      "G1": "Core_and_Contracts_merged_Runner_Results_not_ready",
+      "Core": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+      "Contracts": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "engineering_E1_extra": 1,
+      "Core_assertions": 287,
+      "compatibility_assertions": 930,
+      "Contracts_cases": 55
     },
     "SCI06": {
-      "state": "planned",
-      "definition": "science.md#SCI06",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "state": "source_audit_done_no_runtime",
+      "reviewer": "/root/sci06_reader_audit high",
+      "Results_head": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+      "report": "4c5a8160abadb2f011950a19379fd3b103354716aef8306a1f2ff163bc88e73f",
+      "ready_gap": "N1 Results active",
+      "remaining_design_gap": "SCI03§5.3 coefficient norms/absolutecurrentbound"
     },
     "SCI07": {
       "state": "planned",
@@ -1107,6 +1192,288 @@
       "merged_at": "2026-10-19T16:52:41Z",
       "merge_exit": 0,
       "sole_merge_submit": true
+    },
+    {
+      "id": "G1-DOC02-QCLNEGF.jl-239d76b",
+      "state": "G1_merged",
+      "repo": "Afonenko-QCL-NEGF/QCLNEGF.jl",
+      "head": "239d76bb59c955b32888eeaec518d6e465b4178d",
+      "base": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "CP_CODE": "50e6410845f7535a9bdfcb4d5bc3505bab87b298b6929168d11121a2c6da5dd4",
+      "merge_commit": "45dddf3a99e7d9316cfff4d5f102ae087839946e",
+      "merged_at": "2026-10-19T17:21:03Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    },
+    {
+      "id": "G1-DOC02-QCLNEGFRunner.jl-9378396",
+      "state": "G1_merged",
+      "repo": "Afonenko-QCL-NEGF/QCLNEGFRunner.jl",
+      "head": "9378396a3681c1eddf2c62f16674834fc4465583",
+      "base": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "CP_CODE": "50e6410845f7535a9bdfcb4d5bc3505bab87b298b6929168d11121a2c6da5dd4",
+      "merge_commit": "6dc1d05bbc47982e528932ecca620ac11cbb1429",
+      "merged_at": "2026-10-19T17:21:39Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    },
+    {
+      "id": "SCI05-C08-CORE-1",
+      "state": "completed_failure",
+      "kind": "bounded_local_manufactured_C08",
+      "core_head": "90f1048d290d6ec9518754e288333c694fe874de",
+      "fixture": "components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl",
+      "harness_sha256": "d454f20503108bfa7b40df921b7e4acf4fd4d049bbaf1801c4a3a05de36ad112",
+      "review_sha256": "ee0bf1f98d79ec85b1df23f08fb9282c325be163c773dcd29029ce7060ddba2e",
+      "observed_utc": "2026-10-19T17:26:48.425923+00:00",
+      "memory_available_bytes": 12631490560,
+      "tmp_available_bytes": 16158023680,
+      "CPU_affinity_count": 1,
+      "limits": "570s runtime trigger+nominal23sstop/drain;1CPU/sampled4GiBRSS/TMP16MiB/raw8MiB;not hard realtime/cgroup; no setup/newdeviceexperiment",
+      "shared_max_calls": 8,
+      "call_number": 1,
+      "receipt_sha256": "72a3d601d394a8be429022f63226eb5102785411e476f4cd9ce7bd80ebe094aa",
+      "raw_sha256": "7bf8efd9db1986388edb93f2918266e105d03bf34566574283bf455b4fb671bf",
+      "exit_code": 1,
+      "harness_exit_code": 1,
+      "wall_seconds": 2.238
+    },
+    {
+      "id": "SCI05-C08-CORE-2",
+      "state": "completed_failure",
+      "kind": "bounded_local_manufactured_C08",
+      "core_head": "e86ac74c4fe04a8999b889970c5a9f3c65575694",
+      "fixture": "components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl",
+      "harness_sha256": "d454f20503108bfa7b40df921b7e4acf4fd4d049bbaf1801c4a3a05de36ad112",
+      "review_sha256": "ee0bf1f98d79ec85b1df23f08fb9282c325be163c773dcd29029ce7060ddba2e",
+      "observed_utc": "2026-10-19T17:32:58.131542+00:00",
+      "memory_available_bytes": 12571959296,
+      "tmp_available_bytes": 16157528064,
+      "CPU_affinity_count": 1,
+      "limits": "570s runtime trigger+nominal23sstop/drain;1CPU/sampled4GiBRSS/TMP16MiB/raw8MiB;not hard realtime/cgroup; no setup/newdeviceexperiment",
+      "shared_max_calls": 8,
+      "call_number": 2,
+      "receipt_sha256": "9d5b4129c634bd6e4f1407516401ba7e4259f92eee8ad3f83788b8b8566ea7cd",
+      "raw_sha256": "55996891e3287948b43d922f6ee683000df531e9c367d29af0cae98295d17693",
+      "exit_code": 1,
+      "harness_exit_code": 1,
+      "wall_seconds": 39.041
+    },
+    {
+      "id": "SI07-FWD-T02-CANDIDATE",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t02_candidate",
+      "dispatched_at": "2026-10-19T17:19:32.952581+00:00",
+      "completed_at": "2026-10-19T17:20:48.818623+00:00",
+      "observed_interval_seconds": 75.866042,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SI07-FWD-T02-CONTROL",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t02_control",
+      "dispatched_at": "2026-10-19T17:19:32.952696+00:00",
+      "completed_at": "2026-10-19T17:20:48.818838+00:00",
+      "observed_interval_seconds": 75.866142,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SI07-FWD-T03-CANDIDATE",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t03_candidate",
+      "dispatched_at": "2026-10-19T17:21:06.199149+00:00",
+      "completed_at": "2026-10-19T17:23:08.120351+00:00",
+      "observed_interval_seconds": 121.921202,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SI07-FWD-T03-CONTROL",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t03_control",
+      "dispatched_at": "2026-10-19T17:21:06.199262+00:00",
+      "completed_at": "2026-10-19T17:23:08.120673+00:00",
+      "observed_interval_seconds": 121.921411,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SI07-FWD-T05-CANDIDATE",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t05_candidate",
+      "dispatched_at": "2026-10-19T17:23:37.517862+00:00",
+      "completed_at": "2026-10-19T17:24:15.563534+00:00",
+      "observed_interval_seconds": 38.045672,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SI07-FWD-T05-CONTROL",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t05_control",
+      "dispatched_at": "2026-10-19T17:24:29.817745+00:00",
+      "completed_at": "2026-10-19T17:25:05.741363+00:00",
+      "observed_interval_seconds": 35.923618,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SI07-FWD-T14-CANDIDATE",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t14_candidate",
+      "dispatched_at": "2026-10-19T17:25:25.638624+00:00",
+      "completed_at": "2026-10-19T17:27:09.451892+00:00",
+      "observed_interval_seconds": 103.813268,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SI07-FWD-T14-CONTROL",
+      "kind": "fresh_agent_sample",
+      "state": "completed_observed",
+      "agent_id": "/root/si07_forward_fresh/si07_t14_control",
+      "dispatched_at": "2026-10-19T17:27:19.018680+00:00",
+      "completed_at": "2026-10-19T17:28:47.534883+00:00",
+      "observed_interval_seconds": 88.516203,
+      "resource_proof": "not_measured; see SI07 coordination audit"
+    },
+    {
+      "id": "SCI05-C08-DIAGNOSTIC-3",
+      "state": "completed_failure",
+      "kind": "known_red_discriminating_all_block_C08",
+      "core_head": "e86ac74c4fe04a8999b889970c5a9f3c65575694",
+      "fixture": "components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl",
+      "harness_sha256": "949d2b5d621ac3b23196e61116334731ca3871163411b1ac2a21f277b8de60a0",
+      "review_sha256": "c302c31a809ac906ad29b047ef5ed319b91f2075e819e514cf22a9fee3844644",
+      "observed_utc": "2026-10-19T17:38:48.230307+00:00",
+      "memory_available_bytes": 12517650432,
+      "tmp_available_bytes": 16157130752,
+      "CPU_affinity_count": 1,
+      "limits": "570s runtime trigger+nominal23sstop/drain;1CPU/sampled4GiBRSS/TMP16MiB/raw8MiB;not hard realtime/cgroup; no setup/newdeviceexperiment",
+      "shared_max_calls": 8,
+      "call_number": 3,
+      "receipt_sha256": "15c50c17b266692734fc58afcb806c0613a0cd7fe67734734f1f3c543328fd93",
+      "raw_sha256": "3ea0c064402917a29df4abae74447c4d17078865469fd62ef7d6cbfd3efc0ece",
+      "exit_code": 1,
+      "harness_exit_code": 1,
+      "wall_seconds": 29.377
+    },
+    {
+      "id": "SCI05-C08-CONTRACTS-4",
+      "state": "completed_pass",
+      "kind": "bounded_format_only_C08",
+      "component_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "fixture": "components/qcl-negf-contracts/tests/test_final_audit.py",
+      "source_hashes": {
+        "src/qcl_negf_contracts/final_audit.py": {
+          "sha256": "1c19ba7f27912c739b349fb7c517a9030be3c4f50c4b75932c08d0c02f3219d1",
+          "bytes": 22707
+        },
+        "src/qcl_negf_contracts/schemas/final-fixed-point-audit.schema.json": {
+          "sha256": "ef25a90acfdc8445a20fb53bc40a861de355e07a8abca4dd90f7ee9a0143dc28",
+          "bytes": 21011
+        },
+        "tests/test_final_audit.py": {
+          "sha256": "23098050f2fbc1d282b0de3a84ba0d034be034a3f69f62920fee6fba64914b12",
+          "bytes": 17773
+        },
+        "README.md": {
+          "sha256": "a95dc9b6f09160f06b1197d57c83147718152b914c6c6da4e7aa3e3f6753f94c",
+          "bytes": 12876
+        }
+      },
+      "harness_sha256": "16e908e64bfc6fd9a4467897b9eade95cd8a353535610c52144c2ca912e41b75",
+      "review_sha256": "4a73cde4293e02322f43f32410df910c9a6ed17927da4b49ac0007ef4f844805",
+      "runtime_sha256": "dd65a07e8f535525443d63e2bd6dd10efbf22bf22e0b6d65e634266acc7ac976",
+      "editable_path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src",
+      "observed_utc": "2026-10-19T17:47:51.411337+00:00",
+      "memory_available_bytes": 12473159680,
+      "tmp_available_bytes": 16156110848,
+      "limits": "existing90s1CPU/sampled1GiBRSS16MiBTMP2MiBraw; no hardquota; withinC08max10min2CPU4GiB8MiB",
+      "shared_max_calls": 8,
+      "call_number": 4,
+      "receipt_sha256": "cd343db68cf848a7cc9b8da014f99c2de257b980fc4838d1116f0cc04b8c9760",
+      "raw_sha256": "67e0adc199c33e862806b59a22eabb376c53144e51c1d1bc637e1ff005a9441c",
+      "exit_code": 0,
+      "harness_exit_code": 0,
+      "wall_seconds": 1.12
+    },
+    {
+      "id": "G1-SCI05-CONTRACTS-qcl-negf-contracts-12fc264",
+      "state": "G1_merged",
+      "repo": "Afonenko-QCL-NEGF/qcl-negf-contracts",
+      "head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "base": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "CP_CODE": "ed04e07495d11c3bbc381fb6cd316476ba72f327fc54c3308af4af9aa403eb9b",
+      "independent_CP_SOURCE": "4a73cde4293e02322f43f32410df910c9a6ed17927da4b49ac0007ef4f844805",
+      "merge_commit": "7ca26fb0f9fc1bf80950c4c5f533df5d430f7e08",
+      "merged_at": "2026-10-19T17:51:03Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    },
+    {
+      "id": "SCI05-C08-CORE-5",
+      "state": "completed_pass",
+      "kind": "bounded_local_manufactured_C08",
+      "core_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+      "fixture": "components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl",
+      "harness_sha256": "d454f20503108bfa7b40df921b7e4acf4fd4d049bbaf1801c4a3a05de36ad112",
+      "review_sha256": "ee0bf1f98d79ec85b1df23f08fb9282c325be163c773dcd29029ce7060ddba2e",
+      "observed_utc": "2026-10-19T17:53:26.544677+00:00",
+      "memory_available_bytes": 12421373952,
+      "tmp_available_bytes": 16155840512,
+      "CPU_affinity_count": 1,
+      "limits": "570s runtime trigger+nominal23sstop/drain;1CPU/sampled4GiBRSS/TMP16MiB/raw8MiB;not hard realtime/cgroup; no setup/newdeviceexperiment",
+      "shared_max_calls": 8,
+      "call_number": 5,
+      "receipt_sha256": "faed9a3a869f52faae643452217dde768359a41990f5a534d187e38ecf41b431",
+      "raw_sha256": "8ed3eebc7a0e4709747759e53a5c56a3b231acc87289234c510cccd6374f09e3",
+      "exit_code": 0,
+      "harness_exit_code": 0,
+      "wall_seconds": 25.912
+    },
+    {
+      "id": "SCI05-C08-COMPATIBILITY-6",
+      "state": "completed_pass",
+      "kind": "bounded_local_manufactured_C08",
+      "core_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+      "fixture": "components/QCLNEGF.jl/test/numerics/fresh_candidate_residual.jl",
+      "harness_sha256": "d454f20503108bfa7b40df921b7e4acf4fd4d049bbaf1801c4a3a05de36ad112",
+      "review_sha256": "ee0bf1f98d79ec85b1df23f08fb9282c325be163c773dcd29029ce7060ddba2e",
+      "observed_utc": "2026-10-19T17:57:30.812938+00:00",
+      "memory_available_bytes": 12442402816,
+      "tmp_available_bytes": 16155627520,
+      "CPU_affinity_count": 1,
+      "limits": "570s runtime trigger+nominal23sstop/drain;1CPU/sampled4GiBRSS/TMP16MiB/raw8MiB;not hard realtime/cgroup; no setup/newdeviceexperiment",
+      "shared_max_calls": 8,
+      "call_number": 6,
+      "fixtures": [
+        "components/QCLNEGF.jl/test/numerics/fresh_candidate_residual.jl",
+        "components/QCLNEGF.jl/test/numerics/final_state_alignment_oracle.jl"
+      ],
+      "fixture_sha256": {
+        "components/QCLNEGF.jl/test/numerics/fresh_candidate_residual.jl": "8ab459b5be0c39f96839b862aad38e1dbcd6a8dc633770838fd239c8a871a6a0",
+        "components/QCLNEGF.jl/test/numerics/final_state_alignment_oracle.jl": "81fbb258f86c1760ed2ffb7964e189518fd1ec7608921e42080c969c4a55f852"
+      },
+      "receipt_sha256": "3ffb22e07a2bbd4b94c5a73faf4247c72f115fdca3f7af1584a52d2bfeab3551",
+      "raw_sha256": "a46c429ddd0f7fe9a7bf875c066fb9575c3f9856b138143c18e79f745e6bf4b6",
+      "exit_code": 0,
+      "harness_exit_code": 0,
+      "wall_seconds": 45.271
+    },
+    {
+      "id": "G1-SCI05-CORE-QCLNEGF.jl-7324d98",
+      "state": "G1_merged",
+      "repo": "Afonenko-QCL-NEGF/QCLNEGF.jl",
+      "head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+      "base": "239d76bb59c955b32888eeaec518d6e465b4178d",
+      "CP_CODE": "933886f7d8f0c2de0c2e689b9129b374686c59f15a0497ef546bf27ac751997c",
+      "merge_commit": "9c7792fa146c820c45591749116b49706e0465e2",
+      "merged_at": "2026-10-19T18:06:22Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
     }
   ],
   "unknown_outcomes": [],
@@ -1124,14 +1491,15 @@
     "DEV07 channel passports",
     "SCI06/07 source preparation"
   ],
-  "updated_at": "2026-10-19T17:17:47.573037+00:00",
+  "updated_at": "2026-10-19T18:14:52.944653+00:00",
   "source": {
-    "root_head": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+    "root_head": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
     "branch": "codex/review-closure-exec",
     "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
-    "status_short": "M .agents/skills/qcl-performance-audit/SKILL.md\n M .agents/skills/qcl-performance-audit/agents/openai.yaml\n M .agents/skills/qcl-performance-audit/references/telemetry.md\n M .agents/skills/qcl-physics-audit/SKILL.md\n M .agents/skills/qcl-physics-audit/agents/openai.yaml\n M .agents/skills/qcl-physics-audit/references/physics-checks.md\n M .agents/skills/qcl-research-framing/SKILL.md\n M .agents/skills/qcl-research-framing/agents/openai.yaml\n M .agents/skills/qcl-research-framing/references/brief.md\n M .agents/skills/qcl-results-analysis/SKILL.md\n M .agents/skills/qcl-results-analysis/agents/openai.yaml\n M .agents/skills/qcl-results-analysis/references/comparison.md\n M components/QCLNEGF.jl\n M components/qcl-negf-portal\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n M docs/single-server-deployment.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev05-d2-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev24-auth-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-checkmatrix.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV05-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV24-GREEN-2/",
+    "status_short": "MM components/QCLNEGF.jl\nM  components/QCLNEGFRunner.jl\n M components/qcl-negf-contracts\nMM docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev22-source-projection-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc02-code-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-known-red-diagnostic-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-local-bind-harness-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-syntax-correction-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-syntax-correction-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si07-coordination-audit.md\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-dev22-projection-source-summary.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc02-publication-journal.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-freeze.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-source-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-identity.json\nAM docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-core-publication-journal.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-local-admission-bind.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding-v2.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-source-commit.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-syntax-correction-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-si07-preservation-manifest.json\nMM docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/README.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/campaign.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/case-scoring-basis.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/comparison.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/protocol.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/sample-records.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/scoring-final.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/scoring-interim.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/archive-receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/current-checkout.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/frozen-plan.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/poisson.jl\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/source-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/README.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/check.py\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/target.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T14/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T14/telemetry.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/manifest.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-DIAGNOSTIC-3/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-DIAGNOSTIC-3/receipt.json\nM  docs/single-server-deployment.md\n M docs/system/physics-documentation.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-v2.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-owningdoc-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-owningdoc-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-attribute-encoding-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-attribute-encoding-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-final-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-core-final-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-diagnostic-gap-audit.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-engineering-E1-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-engineering-E1-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci06-reader-audit.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-v2-delta.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-owningdoc-body-mapping.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-owningdoc-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-core-G1-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-core-progress-readback-reconciliation.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-engineering-E1-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding-v3.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-COMPATIBILITY-6/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CONTRACTS-4/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-5/",
     "gitlinks_authority": "git ls-tree HEAD components/; no maintained parallel component SHA lock",
-    "submodules_verified_against_gitlinks": false
+    "submodules_verified_against_gitlinks": false,
+    "verification_method": "compare actual component HEAD with root HEAD tree gitlinks, independently of staging index"
   },
   "receipts": {
     "qcl-int01-python-setup-1.log": {
@@ -2075,8 +2443,8 @@
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-dev20-staged-identity.json"
     },
     "qcl-targeted-receipt-census.json": {
-      "sha256": "8ca252142045466ca6e38b4bca98f6e53b6823cf3580bb580ffe8d5c88c3a6be",
-      "bytes": 8630,
+      "sha256": "cdf8a745942f607de40f3733df361b9863dc8241d037811ea2c355f130cd385d",
+      "bytes": 9727,
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json"
     },
     "qcl-dev18-final-review.md": {
@@ -2588,36 +2956,347 @@
       "sha256": "173cde03d3f74797085805c09e69ab71b474cd26210ffd8b1dab239906c896b6",
       "bytes": 58603,
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc02-implementation-identity.json"
+    },
+    "qcl-doc02-code-review.md": {
+      "sha256": "50e6410845f7535a9bdfcb4d5bc3505bab87b298b6929168d11121a2c6da5dd4",
+      "bytes": 10245,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc02-code-review.md"
+    },
+    "qcl-dev22-source-projection-review.md": {
+      "sha256": "d79cf914d550e1cbbddb7e3eefa662a33677c457378e51ac314594a5b5778d03",
+      "bytes": 6513,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev22-source-projection-review.md"
+    },
+    "qcl-doc02-publication-journal.json": {
+      "sha256": "0a0d263c6787f27f0afa19e7b8ab9ceecf79c2cbcb712dc20e4f710de389ee23",
+      "bytes": 2020,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc02-publication-journal.json"
+    },
+    "qcl-dev22-projection-source-summary.json": {
+      "sha256": "4fe14110c770252cdd969174a6d6b2a41dcb31d0eda2e1e8c0af10590d96f913",
+      "bytes": 2966,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-dev22-projection-source-summary.json"
+    },
+    "qcl-sci05-source-commit.json": {
+      "sha256": "1be1a084018ffe8024c253ceb04d505066a5c52e6fa60cc1608dd248ff1cc868",
+      "bytes": 1204,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-source-commit.json"
+    },
+    "qcl-sci05-main-source-binding.json": {
+      "sha256": "b6324270c5f9ce0159dfdde9a8eaac9e4f1a65b9d6078e22648aca8ab764ddae",
+      "bytes": 1295,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding.json"
+    },
+    "qcl-sci05-local-bind-harness-review.md": {
+      "sha256": "ee0bf1f98d79ec85b1df23f08fb9282c325be163c773dcd29029ce7060ddba2e",
+      "bytes": 14831,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-local-bind-harness-review.md"
+    },
+    "qcl-sci05-local-admission-bind.json": {
+      "sha256": "0e275b9cd15a4be6e926bd62106fb4aa00c473eb8cc7790b6016cee121b11d62",
+      "bytes": 2159,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-local-admission-bind.json"
+    },
+    "qcl-SCI05-C08-CORE-1/receipt.json": {
+      "sha256": "72a3d601d394a8be429022f63226eb5102785411e476f4cd9ce7bd80ebe094aa",
+      "bytes": 2280,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-1/receipt.json"
+    },
+    "qcl-SCI05-C08-CORE-1/original.log": {
+      "sha256": "7bf8efd9db1986388edb93f2918266e105d03bf34566574283bf455b4fb671bf",
+      "bytes": 1253,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-1/original.txt"
+    },
+    "qcl-SCI05-C08-CORE-2/receipt.json": {
+      "sha256": "9d5b4129c634bd6e4f1407516401ba7e4259f92eee8ad3f83788b8b8566ea7cd",
+      "bytes": 2283,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-2/receipt.json"
+    },
+    "qcl-SCI05-C08-CORE-2/original.log": {
+      "sha256": "55996891e3287948b43d922f6ee683000df531e9c367d29af0cae98295d17693",
+      "bytes": 2259,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-2/original.txt"
+    },
+    "qcl-si07-preservation-manifest.json": {
+      "sha256": "21eb813de1ee83c6bcc03f94480651dc179da5eff71f956aeb04bbcc51084dde",
+      "bytes": 21194,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-si07-preservation-manifest.json"
+    },
+    "qcl-sci05-main-source-binding-v2.json": {
+      "sha256": "97aeffe7903ed4757f1ccd590ede4847b5f78d39eed428a3b032f059e9a49ea7",
+      "bytes": 1515,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding-v2.json"
+    },
+    "qcl-sci05-syntax-correction-identity.json": {
+      "sha256": "fb6d6e8bf797d26f26963b7fc10d910638db0aed714e2c23d1c32d6dc000515c",
+      "bytes": 2695,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-syntax-correction-identity.json"
+    },
+    "qcl-sci05-syntax-correction-report.md": {
+      "sha256": "6b604e1d680a3b87d4757ac746de11f032556a7eb67d61b515ef7470a92c189d",
+      "bytes": 5282,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-syntax-correction-report.md"
+    },
+    "qcl-sci05-syntax-correction-review.md": {
+      "sha256": "0e7ddf0fb822b9aaaba5d8f08bc8e41ec40a19a6386fc8624ea31693b5a600f2",
+      "bytes": 9514,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-syntax-correction-review.md"
+    },
+    "qcl-SCI05-C08-DIAGNOSTIC-3/receipt.json": {
+      "sha256": "15c50c17b266692734fc58afcb806c0613a0cd7fe67734734f1f3c543328fd93",
+      "bytes": 2368,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-DIAGNOSTIC-3/receipt.json"
+    },
+    "qcl-SCI05-C08-DIAGNOSTIC-3/original.log": {
+      "sha256": "3ea0c064402917a29df4abae74447c4d17078865469fd62ef7d6cbfd3efc0ece",
+      "bytes": 7932,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-DIAGNOSTIC-3/original.txt"
+    },
+    "qcl-sci05-known-red-diagnostic-review.md": {
+      "sha256": "c302c31a809ac906ad29b047ef5ed319b91f2075e819e514cf22a9fee3844644",
+      "bytes": 16793,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-known-red-diagnostic-review.md"
+    },
+    "qcl-sci05-core-publication-journal.json": {
+      "sha256": "d3e6a473a3fd49b1de3795f32302c508f6d9baa0cf29cb3d79385dd3f2737182",
+      "bytes": 2030,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-core-publication-journal.json"
+    },
+    "qcl-doc03-design.md": {
+      "sha256": "a25204b1883c97b5c3be1b2a26fb228e5efe8d4aa89230c938e34b56b903afcd",
+      "bytes": 50004,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design.md"
+    },
+    "qcl-doc03-source-identity.json": {
+      "sha256": "71900e472eeba5cd819207de6752e08ce2ea87bc3cb8f09c963ec9b09df1fecf",
+      "bytes": 26642,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-source-identity.json"
+    },
+    "qcl-doc03-design-freeze.json": {
+      "sha256": "a191903eca29e58092029e45ee1b6031d0dbae3b6d28e4b3ab935bdda0096f42",
+      "bytes": 997,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-freeze.json"
+    },
+    "qcl-sci05-contracts-report.md": {
+      "sha256": "bde103220b43bc7922891dcc28472defe1b8fffadc7e902d683eabcb480852a8",
+      "bytes": 11878,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-report.md"
+    },
+    "qcl-sci05-contracts-identity.json": {
+      "sha256": "a1fb1c4783dc925d45336e52e35d72a6bafbe370af85187ef5f276ed0c44fb49",
+      "bytes": 4434,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-identity.json"
+    },
+    "qcl-SCI05-C08-CONTRACTS-4/receipt.json": {
+      "sha256": "cd343db68cf848a7cc9b8da014f99c2de257b980fc4838d1116f0cc04b8c9760",
+      "bytes": 2084,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CONTRACTS-4/receipt.json"
+    },
+    "qcl-SCI05-C08-CONTRACTS-4/original.log": {
+      "sha256": "67e0adc199c33e862806b59a22eabb376c53144e51c1d1bc637e1ff005a9441c",
+      "bytes": 99,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CONTRACTS-4/original.txt"
+    },
+    "qcl-SCI05-C08-CORE-5/receipt.json": {
+      "sha256": "faed9a3a869f52faae643452217dde768359a41990f5a534d187e38ecf41b431",
+      "bytes": 2282,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-5/receipt.json"
+    },
+    "qcl-SCI05-C08-CORE-5/original.log": {
+      "sha256": "8ed3eebc7a0e4709747759e53a5c56a3b231acc87289234c510cccd6374f09e3",
+      "bytes": 1234,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-5/original.txt"
+    },
+    "qcl-SCI05-C08-COMPATIBILITY-6/receipt.json": {
+      "sha256": "3ffb22e07a2bbd4b94c5a73faf4247c72f115fdca3f7af1584a52d2bfeab3551",
+      "bytes": 2525,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-COMPATIBILITY-6/receipt.json"
+    },
+    "qcl-SCI05-C08-COMPATIBILITY-6/original.log": {
+      "sha256": "a46c429ddd0f7fe9a7bf875c066fb9575c3f9856b138143c18e79f745e6bf4b6",
+      "bytes": 284,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-COMPATIBILITY-6/original.txt"
+    },
+    "qcl-doc03-design-review.md": {
+      "sha256": "176f2b3e317bfabc4e0b7525e89738df02a64aa4006f8044cf307273ab8b1f53",
+      "bytes": 16357,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-review.md"
+    },
+    "qcl-doc03-design-v2.md": {
+      "sha256": "01bd504b382062ad896280e58dca4588e67f725e5deb72f350eae99c91aca625",
+      "bytes": 70041,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-v2.md"
+    },
+    "qcl-doc03-design-v2-review.md": {
+      "sha256": "accfdda98914e3f1ab235b82cc5849d91af6d05bfa0561e610817e46eaf2555a",
+      "bytes": 11793,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-v2-review.md"
+    },
+    "qcl-doc03-design-v2-identity.json": {
+      "sha256": "855fabbf01442e527304f4fc1a91a5ec49ccac1c6b12bdde9181fd6974818c9e",
+      "bytes": 7537,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-v2-identity.json"
+    },
+    "qcl-doc03-design-v2-delta.json": {
+      "sha256": "8dcb31ec749898ee7149efe70c57f383b8937d1955c45839ce128170dc16024e",
+      "bytes": 2375,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-v2-delta.json"
+    },
+    "qcl-sci06-reader-audit.md": {
+      "sha256": "4c5a8160abadb2f011950a19379fd3b103354716aef8306a1f2ff163bc88e73f",
+      "bytes": 26555,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci06-reader-audit.md"
+    },
+    "qcl-sci05-contracts-code-review.md": {
+      "sha256": "4a73cde4293e02322f43f32410df910c9a6ed17927da4b49ac0007ef4f844805",
+      "bytes": 12035,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-code-review.md"
+    },
+    "qcl-sci05-contracts-final-review.md": {
+      "sha256": "ed04e07495d11c3bbc381fb6cd316476ba72f327fc54c3308af4af9aa403eb9b",
+      "bytes": 2610,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-final-review.md"
+    },
+    "qcl-sci05-contracts-source-binding.json": {
+      "sha256": "db59ad83d49aa9f4bf5943ca6ac1bdc5c7e18b9049720fc8170c88b553ec8e9d",
+      "bytes": 1076,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-source-binding.json"
+    },
+    "qcl-sci05-contracts-publication-journal.json": {
+      "sha256": "326aef2fc22897f4c5b21ec2c8561b97b99f11014a0e52b74c9dfb8e27ae50a2",
+      "bytes": 1306,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-publication-journal.json"
+    },
+    "qcl-sci05-diagnostic-gap-audit.md": {
+      "sha256": "33157fef096a7945c68fe1bcaf54477304704be1b60ee9345c1dcd498659580a",
+      "bytes": 21761,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-diagnostic-gap-audit.md"
+    },
+    "qcl-sci05-engineering-E1-report.md": {
+      "sha256": "9f1796c061e61af5a6ce1a39cd4ea28442b1df728fddc018082803599878a0c7",
+      "bytes": 7813,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-engineering-E1-report.md"
+    },
+    "qcl-sci05-engineering-E1-review.md": {
+      "sha256": "5142b8450c548cb89d1df91f87b99020b8fde9aba09450f764cf799136cbe618",
+      "bytes": 13884,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-engineering-E1-review.md"
+    },
+    "qcl-sci05-engineering-E1-identity.json": {
+      "sha256": "ed3f92e5b7ebafb2e6ec2dd3a86cb6422aa9d0233ec3779f8ba353bf76c2103e",
+      "bytes": 2622,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-engineering-E1-identity.json"
+    },
+    "qcl-sci05-main-source-binding-v3.json": {
+      "sha256": "55cfadcf3e4c6e26a9872d7d36874f135e5caddabcc85e377679673b1f875c69",
+      "bytes": 1645,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding-v3.json"
+    },
+    "qcl-sci05-results-report.md": {
+      "sha256": "f0baf6232f46095199c84c3951132d272224837d29fefd471cc77c47b73661f1",
+      "bytes": 9983,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-report.md"
+    },
+    "qcl-sci05-results-identity.json": {
+      "sha256": "d252c817ccdb4997656a7845f38168c93eeaa9bc7f371e44646029fc26d3d0ac",
+      "bytes": 2218,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-identity.json"
+    },
+    "qcl-sci05-attribute-encoding-design.md": {
+      "sha256": "1b0a0e93ead396fe1b8adf37b0f50c148ac4455fd0674bc45261acba4c8ff206",
+      "bytes": 28206,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-attribute-encoding-design.md"
+    },
+    "qcl-sci05-attribute-encoding-review.md": {
+      "sha256": "95518b6b9150b27ec490f2e30e5015511b300769fc3ed9443010591c1a010916",
+      "bytes": 22111,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-attribute-encoding-review.md"
+    },
+    "qcl-sci05-core-final-review.md": {
+      "sha256": "933886f7d8f0c2de0c2e689b9129b374686c59f15a0497ef546bf27ac751997c",
+      "bytes": 17743,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-core-final-review.md"
+    },
+    "qcl-sci05-core-G1-journal.json": {
+      "sha256": "46618606394de50260cd3f54a4b3f035da6f60e135d379c8c75c2c8eaca85ef8",
+      "bytes": 1458,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-core-G1-journal.json"
+    },
+    "qcl-sci05-core-progress-readback-reconciliation.json": {
+      "sha256": "c54b4b55c61ba3f519e09033984f3011f1cc2363b8745e97a3e2a061d47c9550",
+      "bytes": 433,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-core-progress-readback-reconciliation.json"
+    },
+    "qcl-doc03-owningdoc-report.md": {
+      "sha256": "031222ab72df40b11a594fd5311ffa7f5e392d6588b19737b3a90550b739479c",
+      "bytes": 8413,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-owningdoc-report.md"
+    },
+    "qcl-doc03-owningdoc-review.md": {
+      "sha256": "541340d2d3304b01d61b9763b89d453f15dcfdada9ea2dd8919e22a3b1e2a997",
+      "bytes": 8712,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-owningdoc-review.md"
+    },
+    "qcl-doc03-owningdoc-identity.json": {
+      "sha256": "3c5bfc530e2fa2cea2ea13bd4d0545b8701ef3bcf600d2a6f539037c516f6575",
+      "bytes": 6542,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-owningdoc-identity.json"
+    },
+    "qcl-doc03-owningdoc-body-mapping.json": {
+      "sha256": "1ae35c958f952df6537a9cce38dfd78a248cece0dcceb16ac248fba86c1b383f",
+      "bytes": 5577,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-owningdoc-body-mapping.json"
+    },
+    "qcl-sci05-results-v2-report.md": {
+      "sha256": "0f121f3f3f6cd699b516e5d713d408116e7a196a13f94ec1c7ebc056f375786a",
+      "bytes": 10020,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-v2-report.md"
+    },
+    "qcl-sci05-results-v2-identity.json": {
+      "sha256": "078894c9107de84d123daa8e799cee535bd7ff3833a791f464185bff063810cc",
+      "bytes": 2217,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-v2-identity.json"
+    },
+    "qcl-sci05-results-code-review.md": {
+      "sha256": "9ae7330b6a4ba3bdf5f7ffd358a976be48b36037fa37a1319e93efce6335e6b0",
+      "bytes": 22260,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-code-review.md"
+    },
+    "qcl-sci05-runner-report.md": {
+      "sha256": "0e0c89e6ba8c641399268eb633bd78310d7f70b0134bb8626f3d61d6e319fa94",
+      "bytes": 13017,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-runner-report.md"
+    },
+    "qcl-sci05-runner-identity.json": {
+      "sha256": "7d2a44cee5c8074e6b4a1db1c421ea080e32cae57f3d1b42c14d6cfc61878857",
+      "bytes": 1745,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-runner-identity.json"
+    },
+    "qcl-dev07-absolute-design.md": {
+      "sha256": "1d74158042e305c37875ceef25589b08f6ca9256fdd7f65993ee6825c165a07e",
+      "bytes": 40239,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev07-absolute-design.md"
+    },
+    "qcl-dev07-absolute-design.identity.json": {
+      "sha256": "3ec116f268114be68de41e25360f165ea016ef00fff467930bb456b2a46f1cc5",
+      "bytes": 22345,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-dev07-absolute-design.identity.json"
     }
   },
   "resume_note": "Operator switched to auto approvals; old writer apply_patch approval interrupted. Reconcile exact paths before limited exec require_escalated apply; no duplicate mutations.",
   "test_intent": {
-    "id": "DEV24-GREEN-2",
-    "state": "completed",
-    "source_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
-    "source_Portal": "d28d076c83611278153752d94cc3729d91b32667",
-    "nodeids": [
-      "components/qcl-negf-portal/tests/test_api.py::test_rejected_bearer_never_reaches_service_facade",
-      "components/qcl-negf-portal/tests/test_exports.py::test_export_pins_inventory_plan_payload_status_and_cache",
-      "components/qcl-negf-portal/tests/test_exports.py::test_export_invalid_selectors_precede_preparation"
-    ],
-    "source_CP_CODE": "243fb8ecf2245e0c8d77463a16465777d3f0d74fd1e6daa6f9b3feea83b7e77f",
-    "fixture_sha256": {
-      "components/qcl-negf-portal/tests/test_api.py": "88d91cb17904398618bc79b92cbae956c91603075ad2cc1cbd5b27893d810c8d",
-      "components/qcl-negf-portal/tests/test_exports.py": "d5bc95bd27346030cab6f60681fd21580b8ea2d70abb3757562e4bd1ed40ac8a"
-    },
-    "limits": "last2of2calls90s1CPU1GiBsampledRSS16MiBsampledTMP2MiBlog; fake boundary only no profile/submit/fullCI/solver",
+    "id": "SCI05-C08-COMPATIBILITY-6",
+    "state": "completed_pass",
+    "fixture": "components/QCLNEGF.jl/test/numerics/fresh_candidate_residual.jl",
+    "core_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
     "exit_code": 0
   },
   "test_result": {
-    "id": "DEV24-GREEN-2",
-    "state": "completed",
+    "id": "SCI05-C08-COMPATIBILITY-6",
+    "state": "completed_pass",
     "exit_code": 0,
-    "passed_cases": 25,
-    "wall_seconds": 4.853,
-    "receipt_sha256": "2bc6444cc375c543606bba248f897503e41a51e5e09934bf73f229768b70bf52",
-    "raw_sha256": "acf37d54d2d43d454b84392b412e86651d972c9cee58e8d3bce7f35b4149bead",
-    "raw_capture_complete": true
+    "harness_exit_code": 0,
+    "receipt_sha256": "3ffb22e07a2bbd4b94c5a73faf4247c72f115fdca3f7af1584a52d2bfeab3551"
   },
   "previous_test_result": {
     "id": "DEV10-RED-2",
@@ -2740,12 +3419,12 @@
     "new_python_targeted_harness": "/tmp/qcl-python-targeted-run-v2.py SHA9726bc355f0fd762cc382c69c23940112b0bf19659045dc49214c5fa44d6df8b routesTMPDIRtoownedtemporary, perfile/harnessidentity, usesacceptedbytepreservingRawCapture anddrainonstop. Newsourceguardreviewpendingbeforeuse;90s1CPU1GiBsampled16MiBsampledtmp2MiBnominaloutput,explicitoutsidepathsunknown; no newtestexecuted."
   },
   "G1_operation_intent": {
-    "id": "G1-DEV24-qcl-negf-portal-2622de5",
+    "id": "G1-SCI05-CORE-QCLNEGF.jl-7324d98",
     "state": "G1_merged",
-    "repo": "Afonenko-QCL-NEGF/qcl-negf-portal",
+    "repo": "Afonenko-QCL-NEGF/QCLNEGF.jl",
     "pr": 12,
-    "head": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
-    "base": "d28d076c83611278153752d94cc3729d91b32667"
+    "head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+    "base": "239d76bb59c955b32888eeaec518d6e465b4178d"
   },
   "targeted_receipt_census": {
     "count": 42,
@@ -2815,15 +3494,158 @@
     "previous_evaluator_excluded_from_forward": "historical-review read-scope leak recorded; no behavior samples consumed"
   },
   "SCI05_C1": {
-    "state": "CPP2_source_approved_runtime_pending",
-    "patch_sha256": "305675ad283267034a3b3873d1cfb8ff010f7d5a7b7885c523f388e3483ac71e",
-    "review_sha256": "e317a4a23a68d510f0e4a85b9da2fd3ecc43ea2eed4563a0fa7f433e172826fa",
-    "C08_calls": 0,
-    "source_binding": "must bind exact six files in prepared runtime before call; mainCore f7 has old production"
+    "state": "G1_merged",
+    "head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+    "merge_commit": "9c7792fa146c820c45591749116b49706e0465e2",
+    "PR": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/12",
+    "new_assertions": 287,
+    "compatibility_assertions": 930,
+    "scientific_acceptance": false
   },
   "DOC02_applied": {
-    "state": "CPP_running",
-    "reviewer": "/root/doc02_reviewer",
-    "root_runbook_not_ready_to_stage": true
+    "state": "CPP_pass_publication_running",
+    "CP_CODE": "50e6410845f7535a9bdfcb4d5bc3505bab87b298b6929168d11121a2c6da5dd4"
+  },
+  "SI07_forward": {
+    "state": "fixed8_complete_resource_envelope_not_proven",
+    "evaluator": "/root/si07_forward_fresh",
+    "samples_dispatched": 8,
+    "samples_completed": 8,
+    "sample_cap": 8,
+    "unconsumed": 0,
+    "reruns": 0,
+    "static_check_calls": 2,
+    "wall_seconds": 587.240407,
+    "saved_worker_outputs_bytes": 120301,
+    "selected_analytical_subtotal_bytes": 126851,
+    "all_campaign_files_bytes": 180484,
+    "actual_tool_output_bytes": null,
+    "hard_CPU_RSS_measurement": null,
+    "scientific_acceptance": false,
+    "coordinator_report": "a8482e2adb2dc9d2b74810cdcfa266fd0b8fdb5ce69815733987de8f82e9843b"
+  },
+  "DEV22_source_projection": {
+    "state": "static_source_route_review_done_full_native_open",
+    "report_sha256": "d79cf914d550e1cbbddb7e3eefa662a33677c457378e51ac314594a5b5778d03",
+    "source_files": 8,
+    "source_read_bytes": 95849,
+    "response_read_bytes": 140239,
+    "actual_native_calls": 0
+  },
+  "publication": {
+    "root_head": "9d8cf0c",
+    "root_draft_PR": 23,
+    "fullCI": 0
+  },
+  "SCI05_local_binding": {
+    "state": "CP_SOURCE_bound_runtime_pending",
+    "base": "239d76bb59c955b32888eeaec518d6e465b4178d",
+    "original_frozen_head": "1b8fda18881007f7c0c7f68758c7dbf42b44dfc6",
+    "integrated_head": "90f1048d290d6ec9518754e288333c694fe874de",
+    "branch": "codex/review-closure-final-audit-integration",
+    "files": {
+      "src/QCLNEGF.jl": {
+        "sha256": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+        "bytes": 31400
+      },
+      "src/numerics/reference/final_audit.jl": {
+        "sha256": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+        "bytes": 30783
+      },
+      "src/numerics/reference/validation.jl": {
+        "sha256": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+        "bytes": 33446
+      },
+      "src/numerics/reference/poisson.jl": {
+        "sha256": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+        "bytes": 3329
+      },
+      "src/numerics/optimized/production_solver.jl": {
+        "sha256": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+        "bytes": 52380
+      },
+      "test/numerics/final_audit_evidence.jl": {
+        "sha256": "6a2e954230c119a92e11e70c5bc8d31376fc06e209faa907429b9f6ee13455b5",
+        "bytes": 38516
+      }
+    },
+    "old_DEV05_preserved": true,
+    "C08_calls": 0
+  },
+  "DOC03": {
+    "state": "design_running",
+    "writer": "/root/doc03_design ultra",
+    "owning_path": "docs/system/physics-documentation.md candidate only no tracked edits yet",
+    "reviewer": "pending separate high"
+  },
+  "SCI05_Contracts": {
+    "state": "G1_merged",
+    "head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+    "merge_commit": "7ca26fb0f9fc1bf80950c4c5f533df5d430f7e08",
+    "PR": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/pull/9",
+    "format_cases": 55,
+    "scientific_acceptance": false
+  },
+  "engineering_resource_extension_SCI05_E1": {
+    "authorization": "Последнее прямое поручение пользователя: «разрешаю здесь и дальше использовать все доступные ресурсы для ускорения процесса разработки и развертывания»; применяется только к дополнительному конечному engineering repair, не S1 experiment/model/strict criteria",
+    "original_corrective_round_cap": 2,
+    "original_rounds_consumed": 2,
+    "additional_corrective_rounds": 1,
+    "effective_max_rounds": 3,
+    "scope": "only Core test/numerics/final_audit_evidence.jl G1 public-domain negative expectation and G2 exact algebraic projected numerator, per independent audit33157fef; no production edits",
+    "writer": "/root/sci05_syntax_correction medium",
+    "reviewer": "/root/sci05_core_reviewer high separate",
+    "limits": "one round <=30min1CPU2GiB/read2MiB/output64KiB; C08max8 unchanged(3consumed5remaining), allocate1 targeted recheck+1compatibility only if accepted; no hidden rerun",
+    "unchanged": "all S1 experimental caps, 0mV70K/noe-e/fivechannels, physics/γ/thresholds/oldoracles/publicAPI, finalCIonce, protected native data",
+    "stop": "new product/physics/threshold/schema change or another code correction needed => concrete blocker, no fourth autonomous loop"
+  },
+  "SCI05_attrs_encoding_gap": {
+    "state": "not_ready_pending_owning_encoding_contract",
+    "question": "D2 exact dataset bounded; HDF5 constant attribute dtype unspecified, attrs.get(vlen) may allocate unbounded payload; no fixed-only normative restriction invented by Results I",
+    "independent_progress": "Results identity/equality/legacy implementation continues privately; no runtime/PASS on blocked attrs branch"
+  },
+  "SCI05_attribute_encoding": {
+    "state": "CP_DESIGN_profile_A_adopted",
+    "design_sha256": "1b0a0e93ead396fe1b8adf37b0f50c148ac4455fd0674bc45261acba4c8ff206",
+    "independent_review_sha256": "95518b6b9150b27ec490f2e30e5015511b300769fc3ed9443010591c1a010916",
+    "decision": "new4constant attrs scalar fixedSTRING ASCII/UTF8 widthL..65536; sameAttrID/type/space from preflight through same-type rawread; strict rightpadding/exactconstants; existingbudgeted immutable handle; sequentialcleanup",
+    "authority": "internal approved engineering decision completes unspecified native method; no JSONschema/status/science/oldnative change; no new scientific budget",
+    "producer": "pinnedHDF5.jl0.17.4 scalarString dispatch fixedUTF8, genericnewrecordwritercompatible; correctattributes before genericannotation canoverride",
+    "implementation": "Results initial completion resumes on frozen candidate; Runner follows same profile, separate reviewers/runtime stillpending"
+  },
+  "DEV07_resource_extension": {
+    "basis": "latest direct human engineering resource grant",
+    "original_source_read_bytes_cap": 5242880,
+    "effective_read_bytes_cap": 33554432,
+    "temporary_storage_bytes_cap": 33554432,
+    "logical_primary_PDF_downloads_max": 2,
+    "command_attempts_max": 3,
+    "reason": "first sandboxDNSfailure exit6/HTTP000/0B; one standard require_escalated fallback plus second logicalpaper",
+    "per_download": "16MiB60sTLSverified; no retries on repeatedfailure",
+    "originalfailedraw": "agent keeps intent/receipts; no science/archive/model changes"
+  },
+  "DOC03_owningdoc": {
+    "state": "CP_CODE_PASS_pending_root_publication",
+    "source_file_sha256": "4b046312d0c1f04566c3a80ca6fb8a441ca7b025003c3c3b1c4c2bab2242f6cb",
+    "independent_review_sha256": "541340d2d3304b01d61b9763b89d453f15dcfdada9ea2dd8919e22a3b1e2a997"
+  },
+  "engineering_E1_result": {
+    "state": "completed_287plus930pass",
+    "code_rounds_total": 3,
+    "original_cap": 2,
+    "explicit_extra": 1,
+    "no_further_Core_loop": true
+  },
+  "engineering_resource_extension_SCI05_N1_E2": {
+    "authorization": "Latest direct human development resource grant; distinct finite N1 Results provenance repair, not Core E1 repeat or science experiment",
+    "original_shared_cap": 2,
+    "Core_E1_extra": 1,
+    "N1_E2_extra": 1,
+    "effective_corrective_total_cap": 4,
+    "scope": "Results F1 only: present analysis native metadata identity binding and literal stale/missing controls; no schema/physics/tolerance/public API changes",
+    "limits": "one code round <=25min 1CPU 2GiB read4MiB output64KiB; independent review mandatory before single remaining Results C08 call",
+    "C08_shared_cap": 8,
+    "C08_consumed": 6,
+    "stop": "new contract gap or further correction: preserve candidate and report concrete blocker; no automatic rerun"
   }
 }

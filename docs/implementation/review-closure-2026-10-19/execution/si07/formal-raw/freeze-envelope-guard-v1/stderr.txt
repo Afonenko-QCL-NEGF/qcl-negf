@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/tmp/qcl_si07_freeze.py", line 20, in <module>
+    assert sum(len(data) for _, _, _, data in files) < 65536
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

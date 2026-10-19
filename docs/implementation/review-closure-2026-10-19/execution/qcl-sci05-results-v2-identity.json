@@ -1,0 +1,28 @@
+{
+  "task": "SCI05-N1-Results-initial-completion-v2",
+  "stage": "source_candidate_frozen_pending_independent_review",
+  "worktree": "/tmp/qcl-sci05-results-worktree",
+  "branch": "codex/review-closure-final-audit-reader",
+  "results_head": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+  "root_selected_head": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "contracts_prepared_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "d2_sha256": "d787ad47f409b9fffb5a1ac5503857691d0282564bae88d774f0be85b033506c",
+  "profile_a_design_sha256": "1b0a0e93ead396fe1b8adf37b0f50c148ac4455fd0674bc45261acba4c8ff206",
+  "profile_a_review_sha256": "95518b6b9150b27ec490f2e30e5015511b300769fc3ed9443010591c1a010916",
+  "profile_a_ready_sha256": "0806a115cb0515e4cba7f20131e32cdb44b0158ebb8a3f136197a95c4c6337fc",
+  "files": {
+    "src/qcl_negf_results/native.py": {"bytes": 16498, "sha256": "532fbedf8b1b296e0fb5bc026788a522bf92aeee94ae1192ca651e2e34a407e5"},
+    "src/qcl_negf_results/state.py": {"bytes": 29544, "sha256": "57af749bbc0c5179707871ee43e75db01da2017faa242d08bd888c2aab8ef224"},
+    "tests/test_final_fixed_point_audit.py": {"bytes": 27164, "sha256": "8d9b6b1dae1cc271494e26773be9a2c0551acfda578c7d10c8713b797208c082"}
+  },
+  "patch": {"path": "/tmp/qcl-sci05-results-v2-patch.diff", "bytes": 41146, "sha256": "fb936c596a035670426ad64c90c4c97a2e0a663dfd663c34a594e51a2853a55e"},
+  "preserved_initial": {
+    "/tmp/qcl-sci05-results-report.md": "f0baf6232f46095199c84c3951132d272224837d29fefd471cc77c47b73661f1",
+    "/tmp/qcl-sci05-results-identity.json": "d252c817ccdb4997656a7845f38168c93eeaa9bc7f371e44646029fc26d3d0ac",
+    "/tmp/qcl-sci05-results-patch.diff": "46ca0c6f56dc884bf7cf08e1d9319621fadf104fdab1d6d6384559b535790f1e"
+  },
+  "checks": {"git_diff_check": "exit_0", "python_imports": 0, "hdf5_execution": 0, "tests": 0, "solver": 0, "children": 0, "stage_commit_push": false},
+  "remaining_gates": ["independent_high_source_review", "source_bound_targeted_runtime", "actual_Julia_producer_transport_fixture"],
+  "unchanged": ["state_integration_from_initial", "public_API", "JSONschema", "status_semantics", "physics", "thresholds", "unrelated_historical_attributes"],
+  "source_mutation_stopped": true
+}

@@ -1,0 +1,26 @@
+{
+  "sample": "SI07-FWD-T14-CANDIDATE",
+  "reads": [
+    {
+      "command": "cat /tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CANDIDATE/prompt.txt",
+      "exit_code": 0,
+      "output_summary": "Dispatch: T14 candidate; whitelist, no new computations/network, output limits and destination."
+    },
+    {
+      "command": "cat /tmp/qcl-si07-cases/T14/request.txt /tmp/qcl-si07-cases/T14/telemetry.json",
+      "exit_code": 0,
+      "output_summary": "Request: saved telemetry cost/time-to-acceptance audit. Public synthetic attempt SI07-public-telemetry/1: wall120s, exit0, iterations12; CPU/RSS/read I/O/JIT/GC/residual/acceptance null; write0 limited to collector stdout."
+    },
+    {
+      "command": "cat /tmp/qcl-SI07-FORMAL-1/packages/qcl-performance-audit/SKILL.md /tmp/qcl-SI07-FORMAL-1/packages/qcl-performance-audit/references/telemetry.md",
+      "exit_code": 0,
+      "output_summary": "Frozen performance skill/reference: distinguish acceptance and process, source/archive/standalone routes, counter scope and coverage, no inferred zero or speedup, keep/change/measure and bounded proposed telemetry."
+    }
+  ],
+  "read_paths": "Exactly the file operands of the three commands above; no other inputs read.",
+  "approximate_input_bytes": "about 40 KiB; estimate, not measured",
+  "checks": "None; no tests, reruns, imports, solver, profiling, benchmarks or network.",
+  "resource_measurements": "Tool CPU/RSS not measured; no measured usage claimed.",
+  "outputs": ["answer.md", "operations.json"],
+  "write_method": "apply_patch; python3 heredoc writes answer.md only; no input reads or checks; output directory only"
+}

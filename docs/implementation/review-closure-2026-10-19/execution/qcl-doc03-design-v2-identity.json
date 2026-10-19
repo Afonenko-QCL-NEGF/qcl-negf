@@ -1,0 +1,138 @@
+{
+  "stage": "DOC03 D2 frozen for independent recheck; CP-DESIGN pending",
+  "source_root": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "observed_root": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "immutable_parent_inputs": [
+    {
+      "path": "/tmp/qcl-doc03-design.md",
+      "bytes": 50004,
+      "sha256": "a25204b1883c97b5c3be1b2a26fb228e5efe8d4aa89230c938e34b56b903afcd"
+    },
+    {
+      "path": "/tmp/qcl-doc03-source-identity.json",
+      "bytes": 26642,
+      "sha256": "71900e472eeba5cd819207de6752e08ce2ea87bc3cb8f09c963ec9b09df1fecf"
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-freeze.json",
+      "bytes": 997,
+      "sha256": "a191903eca29e58092029e45ee1b6031d0dbae3b6d28e4b3ab935bdda0096f42"
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-review.md",
+      "bytes": 16357,
+      "sha256": "176f2b3e317bfabc4e0b7525e89738df02a64aa4006f8044cf307273ab8b1f53"
+    }
+  ],
+  "primary_witnesses": [
+    {
+      "component": "components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/composition/scientific_execution.jl",
+      "bytes": 75664,
+      "sha256": "55a3737a35b21867d91992a2a3a7807729a3b9d83b0931006d99dc82addbf9cd"
+    },
+    {
+      "component": "components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/cli.jl",
+      "bytes": 6689,
+      "sha256": "aa5e129312707a7927e1bc97caf4c830c7cf9ed29cf12c648f8afbd7fbcf2cd0"
+    },
+    {
+      "component": "components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/application/scientific/planning.jl",
+      "bytes": 18116,
+      "sha256": "717ab6fed4d4ed923f0eee3096314a56fc9fded7180cc84322c5a102d02f94f0"
+    },
+    {
+      "component": "components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/application/configuration_types.jl",
+      "bytes": 8663,
+      "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0"
+    },
+    {
+      "component": "components/qcl-negf-aiida",
+      "revision": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+      "path": "src/aiida_qcl_negf/calculation.py",
+      "bytes": 9641,
+      "sha256": "677eccfcf211b24230d8cb912955d2ec80a508d2d31d4e60d81cfbd2db1a156c"
+    },
+    {
+      "component": "components/qcl-negf-aiida",
+      "revision": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+      "path": "src/aiida_qcl_negf/workflow.py",
+      "bytes": 10258,
+      "sha256": "ae5d71d06d92369a1848770fdfdabde82cdbb9dca10756ddebc47dcf8fe159fc"
+    },
+    {
+      "component": "components/qcl-negf-aiida",
+      "revision": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+      "path": "src/aiida_qcl_negf/parser.py",
+      "bytes": 7924,
+      "sha256": "6639e9dc488a256fa26268784149820fb77b1c3bf9cf6a0671b4aa80931b91f3"
+    },
+    {
+      "component": "components/qcl-negf-aiida",
+      "revision": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+      "path": "src/aiida_qcl_negf/service.py",
+      "bytes": 32672,
+      "sha256": "5f7e9b28f9007255e3de319fff43e48143d4c23a9c9487164ecda92ebac8c762"
+    },
+    {
+      "component": "components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "src/composition/operating_point.jl",
+      "bytes": 6648,
+      "sha256": "8774d30bb69f9adb87d5cc6159bc5de03adedab4d83c94b3f5a7c87d478686ca"
+    },
+    {
+      "component": "components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "src/domain/types.jl",
+      "bytes": 36507,
+      "sha256": "f428a6c7ce2c7d4796d6be2983decffcdbfc25f21ec400a600038863f673e71b"
+    },
+    {
+      "component": "components/qcl-negf-research",
+      "revision": "1eacefcd81a50e245ea9da74a0b717b33818c61e",
+      "path": "config/model/reference-2019-70k.yaml",
+      "bytes": 7010,
+      "sha256": "78444c7a358fabef315e07e028d3d65f65fec07efd119ac9ca238cc25c110829"
+    }
+  ],
+  "review_witness_hashes_matched": true,
+  "git_status_short": {
+    "encoding": "gzip+base64",
+    "bytes": 10333,
+    "sha256": "be4fa70d4ee91d5f1aab2be0092b8967ae3971e8ecd0d5cf4f46046465ee6310",
+    "data": "H4sIAAAAAAAC/71awXLiOBC95yv4AWHA8czuaYoCZoqqIalNqNqzIjdEGVvySDKE+fptAZngCclh6dYVi/dar/UkuduLRU/ZurEGTPDZP5PvN7NvX/tP1dWid+bBXWsMuPi41/nfT1UJA+uVUNYEJ1XwV4tFr7TKZ7puKqhxlAzamszBRsNWqMr61oEYDUafxHAghn9n8Ayq3Y9Rj6B+NFab0H/y1lyNe/8bCoeUYBTsIyxhMxoJb1unQDTOPoGKg8QBqF+XdExWDUYoRglM4DlOxuu1ocT1Sg+K1wxi5I11gZ7hh7HbKHopSi3XxvqgFYNMB7LKKlmJB21K8SidAe/ZqPwOAZ5RQOd+LyweBc8xkc9JDz4jg3WlNnsIIdtSXzqZVxue+O/oSN/WtXS7iz3/asCmfai0OkT/hCRGVmToLw4UKwfwCwhxj3LEXAQdaPT409ss4DiGS/FTM8uy1t5HhmhrQvha6t+LMUJrsxabES8BIfoRGI/lWgdK3De7De3qiRtN48CD2xwWTi2NXoE/zmFxGXyQbg0BDxsMHnQThALjW39x6DHs7G42ni5mF+6Je6SVdTWubSe32WAgXIv61hCVaGWVHUOniflDJh9KcK4fngM7j20DNc9hKxZgNlDZBsS6la4UmyGbgO8S8uj4ER2DnNE+Dbj9L3gtOFwA2LQ8z8Yj5LtcXCo+7rxWPoWCHSZG9f7kYVIungvSqUe8Zskaz0tW8d6Q8el3jopPwrbCO5/EyxgmzXNL2CVjlfANFaGEW9xbs/s5Xk6+/jsVS3ydmIxvpvPpeDnLpPFbrIPQnPsfEWENBAxdpj6iwgPF7RF9Ejp8/6sbzmTd3izvbr+zp+pIw5+oI1GaNB3JeJOUp3JUns5ReVpH5ckcladxVJ7KUXlKR+WJHFWkclSRzlFFWkcVyRxVpHFUkcpRRUpHFWkcNbxO5KgOEW+iOlT8qerQsScrgaNOaPgTlcxRJ2QMSVKybmTsV5JGr6THthEWpmOl/kHiOyAxPuognUZIypWE8garbEUbq5cRIFa5sWVHrMOLxCtN0c85Cx2d5HRNA44VAhHXhs/wZSaLZRa9AUFa9uhSqBZ7IwZ7C/HLhViDYOBYOfsLjGgqaTjgHfxsY8+FwvWnyHmGX3L4aCH8aoQWmC9k6hbsG4qCsHXUxd0vwX6zI4bl0rrIDg06YiGG11wRI3KACBIc+broNj4vwA0I4rP7yTzekwd/4cl+NxPDDLfa9X4Lv1CTd+CpNtiz8CPe6Eds0U/n4283t/fL+UTkbHPokHRm8tI+93jK4v0gdtnB4bcrTWV3kTMa78sXQjHxDjmeLO/FdXb1H9jFN2ldKAAA"
+  },
+  "recursive_status": "+e86ac74c4fe04a8999b889970c5a9f3c65575694 components/QCLNEGF.jl (v0.2.0-13-ge86ac74)\n 9378396a3681c1eddf2c62f16674834fc4465583 components/QCLNEGFRunner.jl (v0.2.0-26-g9378396)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n+12fc26462bbab3df76904c6deb01f8c6596de7be components/qcl-negf-contracts (v0.2.0-14-g12fc264)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n",
+  "source_gitlinks": "160000 commit f7b108bef206d2b2dc5afe0306b2dff60d27ac59\tcomponents/QCLNEGF.jl\n160000 commit 23860d9e660a3cddf6cb5203d449d1b62f3745a1\tcomponents/QCLNEGFRunner.jl\n160000 commit d8f8092ca1c76523d85384b4bac8198d8bfa736b\tcomponents/qcl-negf-aiida\n160000 commit 02a564b78dc9c5e19eacf496bc8c891361eafaab\tcomponents/qcl-negf-contracts\n160000 commit b067723c82382689bff5cc366981c56e99b926f8\tcomponents/qcl-negf-platform\n160000 commit 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d\tcomponents/qcl-negf-portal\n160000 commit 1eacefcd81a50e245ea9da74a0b717b33818c61e\tcomponents/qcl-negf-research\n160000 commit e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae\tcomponents/qcl-negf-results\n",
+  "new_witness_bytes": 219792,
+  "limits": {
+    "wall_minutes": 30,
+    "cpu": 1,
+    "ram_gib": 2,
+    "read_mib": 2,
+    "output_kib": 96,
+    "rounds": 1,
+    "children": 0
+  },
+  "not_run": [
+    "target imports",
+    "product tests",
+    "install",
+    "build",
+    "browser",
+    "network",
+    "native/server",
+    "CI",
+    "solver"
+  ],
+  "mutation_scope": "Only /tmp/qcl-doc03-design-v2.md and D2 identity/delta receipts; D1 untouched; no Git mutations"
+}

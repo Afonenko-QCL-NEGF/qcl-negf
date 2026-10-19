@@ -1,0 +1,11 @@
+{
+  "recorded_utc": "2026-10-19T18:04:02.580876+00:00",
+  "state": "reconciled",
+  "push_count": 1,
+  "push_exit_code": 0,
+  "immediate_readback": "assertion failed; returned payload not preserved, no stronger field diagnosis",
+  "fresh_graphql_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "fresh_REST_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "fresh_state": "OPEN/draft",
+  "duplicate_push_create_merge": false
+}

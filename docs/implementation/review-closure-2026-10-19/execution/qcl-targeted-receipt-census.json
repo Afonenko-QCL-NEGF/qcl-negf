@@ -292,5 +292,41 @@
     "wall_seconds": 1.624,
     "exit_code": 1,
     "receipt_sha256": "3503e916dae00613eccc7282dbdadad46a3d9a88df4d9a66f5e2ba633430d998"
+  },
+  {
+    "id": "qcl-SCI05-C08-COMPATIBILITY-6",
+    "wall_seconds": 45.271,
+    "exit_code": 0,
+    "receipt_sha256": "3ffb22e07a2bbd4b94c5a73faf4247c72f115fdca3f7af1584a52d2bfeab3551"
+  },
+  {
+    "id": "qcl-SCI05-C08-CONTRACTS-4",
+    "wall_seconds": 1.12,
+    "exit_code": 0,
+    "receipt_sha256": "cd343db68cf848a7cc9b8da014f99c2de257b980fc4838d1116f0cc04b8c9760"
+  },
+  {
+    "id": "qcl-SCI05-C08-CORE-1",
+    "wall_seconds": 2.238,
+    "exit_code": 1,
+    "receipt_sha256": "72a3d601d394a8be429022f63226eb5102785411e476f4cd9ce7bd80ebe094aa"
+  },
+  {
+    "id": "qcl-SCI05-C08-CORE-2",
+    "wall_seconds": 39.041,
+    "exit_code": 1,
+    "receipt_sha256": "9d5b4129c634bd6e4f1407516401ba7e4259f92eee8ad3f83788b8b8566ea7cd"
+  },
+  {
+    "id": "qcl-SCI05-C08-CORE-5",
+    "wall_seconds": 25.912,
+    "exit_code": 0,
+    "receipt_sha256": "faed9a3a869f52faae643452217dde768359a41990f5a534d187e38ecf41b431"
+  },
+  {
+    "id": "qcl-SCI05-C08-DIAGNOSTIC-3",
+    "wall_seconds": 29.377,
+    "exit_code": 1,
+    "receipt_sha256": "15c50c17b266692734fc58afcb806c0613a0cd7fe67734734f1f3c543328fd93"
   }
 ]

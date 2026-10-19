@@ -1,0 +1,87 @@
+{
+  "sample": "SI07-FWD-T02-CANDIDATE",
+  "operations": [
+    {
+      "command": "cat /tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CANDIDATE/prompt.txt",
+      "exit_code": 0,
+      "output_available": true,
+      "stdout_summary": "Dispatch protocol: candidate; whitelist of own T02 raw files and frozen candidate package; output only assigned directory; no tests/network/solver/subagents; budget 4 minutes, inputs <=1 MiB, read tools 1CPU/1GiB, final <=8KiB.",
+      "approx_bytes_read": 3400
+    },
+    {
+      "command": "cat /tmp/qcl-si07-cases/T02/request.txt /tmp/qcl-si07-cases/T02/archive-receipt.json /tmp/qcl-si07-cases/T02/current-checkout.json /tmp/qcl-si07-cases/T02/frozen-plan.json /tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/SKILL.md /tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/references/comparison.md",
+      "exit_code": 0,
+      "output_available": true,
+      "stdout_summary": "Read complete request, three JSON metadata files, results-analysis skill and comparison reference. Exact metadata observations are recorded below; skill requires separate process/convergence/physics/discretization/validation, archived source and compatible reader, bounded reading without new runs.",
+      "metadata_output": {
+        "archive_source": {
+          "root_commit": "9f8b08bbf8b2f941eaa6426bc07c2b436a2a81d8",
+          "Core_commit": "f5b73369a96d1225bd96fb34f5262c8dcf965f86"
+        },
+        "identity": {
+          "execution_id": "SI07-public-E",
+          "attempt": 2,
+          "state_id": "SI07-public-state",
+          "state_sequence": 3,
+          "plan_fingerprint": "cc502a4746c8985c9bfbe6ab9043718889533612a676d7786e38fa278c887e7d"
+        },
+        "process_exit_code": 0,
+        "producer_assessment": "not_measured",
+        "final_owner": {
+          "declared_path": "physics.h5",
+          "present_in_packet": false,
+          "bytes": null,
+          "sha256": null
+        },
+        "raw_payload_present": false,
+        "current_checkout": {
+          "root_commit": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+          "Core_commit": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+          "observation": "current checkout, not an archive producer receipt"
+        },
+        "plan": {
+          "fixture_kind": "public_synthetic_metadata_only_not_executable_plan",
+          "question": "equilibrium 0mV per period 70K",
+          "channels": [
+            "LO",
+            "acoustic",
+            "impurity",
+            "IFR",
+            "alloy"
+          ],
+          "electron_electron": "none"
+        }
+      },
+      "approx_bytes_read": 15500
+    },
+    {
+      "command": "cat /tmp/qcl-SI07-FORMAL-1/packages/qcl-physics-audit/SKILL.md /tmp/qcl-SI07-FORMAL-1/packages/qcl-physics-audit/references/physics-checks.md",
+      "exit_code": 0,
+      "output_available": true,
+      "stdout_summary": "Read physics-audit skill/reference in full. Relevant guidance: zero bias alone insufficient for equilibrium; require consistent chemical potential/temperatures/baths and no drive, owning FDR/current oracle and acceptance definitions; final U/G same state; do not invent thresholds or infer pass. Owning locators recorded in answer are entrypoints, not checked archived source.",
+      "approx_bytes_read": 13000
+    }
+  ],
+  "stdout_recording": "Outputs above are metadata transcription and explicitly labelled summaries of full textual outputs returned by exec_command; no independent checks were run.",
+  "read_paths": [
+    "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CANDIDATE/prompt.txt",
+    "/tmp/qcl-si07-cases/T02/request.txt",
+    "/tmp/qcl-si07-cases/T02/archive-receipt.json",
+    "/tmp/qcl-si07-cases/T02/current-checkout.json",
+    "/tmp/qcl-si07-cases/T02/frozen-plan.json",
+    "/tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/SKILL.md",
+    "/tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/references/comparison.md",
+    "/tmp/qcl-SI07-FORMAL-1/packages/qcl-physics-audit/SKILL.md",
+    "/tmp/qcl-SI07-FORMAL-1/packages/qcl-physics-audit/references/physics-checks.md"
+  ],
+  "approx_input_bytes": 31900,
+  "input_bytes_measured": false,
+  "cpu_rss_measured": false,
+  "tests_solver_network_imports_installs_builds_subagents": false,
+  "writes": [
+    "answer.md",
+    "operations.json"
+  ],
+  "write_operation": "python3 heredoc: write answer.md and operations.json from literal strings/dicts; no input reads or tests",
+  "answer_utf8_bytes": 6442
+}

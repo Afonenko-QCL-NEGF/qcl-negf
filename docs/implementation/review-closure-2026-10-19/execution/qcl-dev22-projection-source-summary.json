@@ -1,0 +1,82 @@
+{
+  "source_records": [
+    {
+      "file": "nixpkgs-sources.nix",
+      "bytes": 16831,
+      "response_bytes": 24146,
+      "git_blob": "43a374c16e73fc77156faa3e575d7500e288c0f2",
+      "sha256": "7375e9d76097838318b39a9fb804c2a309f0d0f3cd1f7931838c7fda1e8f00f1"
+    },
+    {
+      "file": "pyproject-build-renderers.nix",
+      "bytes": 4335,
+      "response_bytes": 7073,
+      "git_blob": "1d3d44a96063ee4dac7cc240ad5e152fab94a845",
+      "sha256": "6d8f53adaec8ab0c58d9a6826086d8ba4a7e6ad620d04fdf9ee1819f646818ae"
+    },
+    {
+      "file": "pyproject-project.nix",
+      "bytes": 8045,
+      "response_bytes": 12135,
+      "git_blob": "eff5f94c61a992ffbb50f3f23dff12d89161523a",
+      "sha256": "bfab475046222d694a02207ef37b8cc52325519c52a43627f1194653bae99e63"
+    },
+    {
+      "file": "pyproject-renderers.nix",
+      "bytes": 9764,
+      "response_bytes": 14517,
+      "git_blob": "1df42aa6baeaea6cc28083967a6903800964f895",
+      "sha256": "fe6080b44a0fbfa851171faa0883d9dc06c6420db90b5846569a9a3e0f7a5a2f"
+    },
+    {
+      "file": "uv2nix-build.nix",
+      "bytes": 16786,
+      "response_bytes": 24119,
+      "git_blob": "3a82330051cb9d9e91c94c8dc4c1506f3018b6b1",
+      "sha256": "637f31001ecef1ffeda692ee7ac3b65fbe832f535c9f558699e4c1d33fad4096"
+    },
+    {
+      "file": "uv2nix-lock1.nix",
+      "bytes": 18619,
+      "response_bytes": 26643,
+      "git_blob": "55715d233b8d504ea0b5e3c288813eba3730aced",
+      "sha256": "858ca420c60546c353681b6f5ca339a2041996f986f969483b92a85dcf3f7998"
+    },
+    {
+      "file": "uv2nix-overlays.nix",
+      "bytes": 7377,
+      "response_bytes": 11171,
+      "git_blob": "a0c63c7033c4c994094a4ccd48ef9af78bdba366",
+      "sha256": "b6a5a50db9ed361bf79ff2f925c19d2b2f02b6a06b7452312311aee39b9fee45"
+    },
+    {
+      "file": "uv2nix-workspace.nix",
+      "bytes": 14092,
+      "response_bytes": 20435,
+      "git_blob": "56ac314ec7ae3a8e726e7b3903cf7e8189c41d04",
+      "sha256": "19bcadb1c48265d9edb38e44c6381739b2595033ea6f5d34320947d76ebc88f1"
+    }
+  ],
+  "recorded_source_bytes": 95849,
+  "recorded_response_bytes": 140239,
+  "git_blob_recomputed": true,
+  "portal_tree": "d28d076c83611278153752d94cc3729d91b32667",
+  "tracked_frontend_regular_files": 11,
+  "current_tracked_excluded_by_reviewed_filter": [],
+  "tracked_paths": [
+    "index.html",
+    "package-lock.json",
+    "package.json",
+    "src/api.ts",
+    "src/main.tsx",
+    "src/style.css",
+    "tests/api.test.ts",
+    "tests/export-selection.test.ts",
+    "tools/asset-receipt.mjs",
+    "tsconfig.json",
+    "vite.config.ts"
+  ],
+  "scope": "static source/path inspection only; no Nix evaluation, actual store inventories, node/compiler/wheel/browser/build",
+  "local_tooling_failure": "nixpkgs helper preparation initially read nonexistent output helper; no request submitted; corrected once then exact pinned read succeeded",
+  "actual_local_renderer": "pyproject-nix.build.lib.renderers (build/lib/renderers.nix), not lib.renderers"
+}

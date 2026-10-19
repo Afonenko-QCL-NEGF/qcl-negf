@@ -1,0 +1,41 @@
+{
+  "task": "SCI05-engineering-E1",
+  "round": 3,
+  "original_cap": 2,
+  "original_rounds_consumed": 2,
+  "additional_authorized_rounds": 1,
+  "status": "STOP_FOR_INDEPENDENT_REVIEW",
+  "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+  "core_head": "e86ac74c4fe04a8999b889970c5a9f3c65575694",
+  "core_HEAD_tree": "91abe7a00b1eddd553020a68ea977888dc5f6e02",
+  "changed_source_path": "test/numerics/final_audit_evidence.jl",
+  "before_sha256": "d4ac564013d46021a84b323338635f6860f16d1aa76e4b417c4aaf64debf64c4",
+  "after_sha256": "ede25dde26d72c313fb15e8bfcc515e8d29673b41336535c760a6eb0113309e9",
+  "patch_sha256": "87d2180206e1bbb573fa5b654b3e29cbc07c29775d26b2a8a758fc2e1a184993",
+  "repair_contract_sha256": "33157fef096a7945c68fe1bcaf54477304704be1b60ee9345c1dcd498659580a",
+  "diagnostic_original_log_sha256": "3ea0c064402917a29df4abae74447c4d17078865469fd62ef7d6cbfd3efc0ece",
+  "diagnostic_receipt_sha256": "15c50c17b266692734fc58afcb806c0613a0cd7fe67734734f1f3c543328fd93",
+  "unchanged_source_sha256": {
+    "src/QCLNEGF.jl": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+    "src/numerics/optimized/production_solver.jl": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+    "src/numerics/reference/final_audit.jl": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+    "src/numerics/reference/poisson.jl": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+    "src/numerics/reference/validation.jl": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+    "src/numerics/reference/greens.jl": "25f476e3ac4f4c282433f55286ded0893994ac9bb1ce8c0ab17fe1c3b288f5b9"
+  },
+  "unchanged_source_basis": "initial Core status clean, final git diff contains only permitted test path; remaining tracked blobs inherited from authoritative HEAD tree",
+  "preserved_syntax_artifact_sha256": {
+    "/tmp/qcl-sci05-syntax-correction.patch": "fd9b32d0c90dd54188fe101cd5e234e6525373002d08e7adba958967230d0ce8",
+    "/tmp/qcl-sci05-syntax-correction-identity.json": "fb6d6e8bf797d26f26963b7fc10d910638db0aed714e2c23d1c32d6dc000515c",
+    "/tmp/qcl-sci05-syntax-correction-report.md": "6b604e1d680a3b87d4757ac746de11f032556a7eb67d61b515ef7470a92c189d"
+  },
+  "static_diff_check": "passed",
+  "new_C08_calls": 0,
+  "coordinator_C08_consumed_before_E1": 3,
+  "coordinator_C08_remaining": 5,
+  "julia_parser_import_tests_build_network_server_calls": 0,
+  "Python_processes": 0,
+  "stage_commit_push_calls": 0,
+  "new_numerical_result": "not_measured",
+  "scientific_acceptance": "not_established"
+}

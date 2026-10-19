@@ -1,0 +1,28 @@
+{
+  "task": "SCI05-N1-Results",
+  "stage": "source_candidate_frozen_encoding_blocker",
+  "cp_source": "not_ready",
+  "runtime": "not_run",
+  "root_selected_head": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "root_selected_worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "results_base": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+  "results_head": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+  "branch": "codex/review-closure-final-audit-reader",
+  "worktree": "/tmp/qcl-sci05-results-worktree",
+  "contracts_prepared_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "contracts_binding_sha256": "db59ad83d49aa9f4bf5943ca6ac1bdc5c7e18b9049720fc8170c88b553ec8e9d",
+  "contracts_helper_sha256": "1c19ba7f27912c739b349fb7c517a9030be3c4f50c4b75932c08d0c02f3219d1",
+  "d2_sha256": "d787ad47f409b9fffb5a1ac5503857691d0282564bae88d774f0be85b033506c",
+  "d2_review_sha256": "ae57a5b8986cf2d7f15a58ad13e26aa34927331ed44fcc1c584d1a5c0f27f0d1",
+  "status_clarification_sha256": "a009526d44583f0198531c047b904052b6deb951c6439195b858f22063f690f8",
+  "files": {
+    "src/qcl_negf_results/native.py": {"bytes": 15479, "sha256": "4c4faee51d55abda3532e5bfba165388690fdb6891df9bb30a82e4f9e1a14fb9"},
+    "src/qcl_negf_results/state.py": {"bytes": 29544, "sha256": "57af749bbc0c5179707871ee43e75db01da2017faa242d08bd888c2aab8ef224"},
+    "tests/test_final_fixed_point_audit.py": {"bytes": 15935, "sha256": "c4011d8df6ee6f49f6120ceb09bded4f9a92ba9bd25bbe533d698082429e0a0d"}
+  },
+  "patch": {"path": "/tmp/qcl-sci05-results-patch.diff", "bytes": 28658, "sha256": "46ca0c6f56dc884bf7cf08e1d9319621fadf104fdab1d6d6384559b535790f1e"},
+  "checks": {"git_diff_check": "exit_0", "python_imports": 0, "hdf5_execution": 0, "tests": 0, "solver": 0, "install_build": 0, "children": 0, "stage_commit_push": false},
+  "blocker": "D2 bounds record dataset but does not freeze attribute storage encoding. Candidate fixed-only attribute preflight is not approved normative policy. Coordinator requires separate exact encoding design before CP-SOURCE.",
+  "pending": ["attribute_encoding_design", "independent_source_review", "source_bound_runtime_admission", "bounded_test_execution"],
+  "source_mutation_stopped": true
+}

@@ -1,0 +1,23 @@
+{
+  "sample": "SI07-FWD-T14-CONTROL",
+  "reads": [
+    {
+      "command": "cat /tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/prompt.txt",
+      "exit_code": 0,
+      "paths": ["/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/prompt.txt"],
+      "output_summary": "Dispatch protocol: control whitelist, output paths, no new runs/network/tests, bounded budgets. Summary only; full input not duplicated."
+    },
+    {
+      "command": "cat /tmp/qcl-si07-cases/T14/request.txt /tmp/qcl-si07-cases/T14/telemetry.json",
+      "exit_code": 0,
+      "paths": ["/tmp/qcl-si07-cases/T14/request.txt", "/tmp/qcl-si07-cases/T14/telemetry.json"],
+      "output_summary": "Request: saved telemetry cost/time-to-scientific-acceptance analysis and keep/change/measure. Synthetic execution SI07-public-telemetry attempt 1: wall 120 s, exit 0, 12 iterations; CPU/RSS/read IO/JIT/GC/residual/acceptance null. Write IO 0 covers collector stdout only, excludes job storage/NFS. Summary only."
+    }
+  ],
+  "approximate_total_read_bytes": 6000,
+  "read_volume_note": "Conservative text-volume estimate including dispatch; not filesystem size measurement.",
+  "checks": [],
+  "writes": ["/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/answer.md", "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/operations.json"],
+  "write_method": "apply_patch add files",
+  "resource_note": "No CPU/RSS measurement made. No project imports, new runs, tests, profiling, benchmarks, network, repository or literature reads."
+}

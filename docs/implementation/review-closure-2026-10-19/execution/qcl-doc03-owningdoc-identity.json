@@ -1,0 +1,197 @@
+{
+  "stage": "DOC03 owning documentation frozen for independent high CP-CODE",
+  "source_root": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "observed_root": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "allowed_diff_paths": [
+    "docs/system/physics-documentation.md"
+  ],
+  "owning_status": " M docs/system/physics-documentation.md\n",
+  "gitlinks_from_source_root": "160000 commit f7b108bef206d2b2dc5afe0306b2dff60d27ac59\tcomponents/QCLNEGF.jl\n160000 commit 23860d9e660a3cddf6cb5203d449d1b62f3745a1\tcomponents/QCLNEGFRunner.jl\n160000 commit d8f8092ca1c76523d85384b4bac8198d8bfa736b\tcomponents/qcl-negf-aiida\n160000 commit 02a564b78dc9c5e19eacf496bc8c891361eafaab\tcomponents/qcl-negf-contracts\n160000 commit b067723c82382689bff5cc366981c56e99b926f8\tcomponents/qcl-negf-platform\n160000 commit 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d\tcomponents/qcl-negf-portal\n160000 commit 1eacefcd81a50e245ea9da74a0b717b33818c61e\tcomponents/qcl-negf-research\n160000 commit e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae\tcomponents/qcl-negf-results\n",
+  "file": {
+    "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/system/physics-documentation.md",
+    "before_sha256": "434ad2513188d52c915ea2de5dee92b4257711abad3e19d51be47f31f2b7da20",
+    "after_sha256": "4b046312d0c1f04566c3a80ca6fb8a441ca7b025003c3c3b1c4c2bab2242f6cb",
+    "before_bytes": 28349,
+    "after_bytes": 88916
+  },
+  "patch": {
+    "path": "/tmp/qcl-doc03-owningdoc-patch.diff",
+    "sha256": "86813476770580907c17fac00c2368404c518addab55fab4c9f8cfa1c6cddf6a",
+    "bytes": 62071
+  },
+  "mapping": {
+    "path": "/tmp/qcl-doc03-owningdoc-body-mapping.json",
+    "sha256": "1ae35c958f952df6537a9cce38dfd78a248cece0dcceb16ac248fba86c1b383f",
+    "bytes": 5577
+  },
+  "immutable_inputs": [
+    {
+      "path": "/tmp/qcl-doc03-design.md",
+      "sha256": "a25204b1883c97b5c3be1b2a26fb228e5efe8d4aa89230c938e34b56b903afcd",
+      "bytes": 50004
+    },
+    {
+      "path": "/tmp/qcl-doc03-source-identity.json",
+      "sha256": "71900e472eeba5cd819207de6752e08ce2ea87bc3cb8f09c963ec9b09df1fecf",
+      "bytes": 26642
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-freeze.json",
+      "sha256": "a191903eca29e58092029e45ee1b6031d0dbae3b6d28e4b3ab935bdda0096f42",
+      "bytes": 997
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-review.md",
+      "sha256": "176f2b3e317bfabc4e0b7525e89738df02a64aa4006f8044cf307273ab8b1f53",
+      "bytes": 16357
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-v2.md",
+      "sha256": "01bd504b382062ad896280e58dca4588e67f725e5deb72f350eae99c91aca625",
+      "bytes": 70041
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-v2-identity.json",
+      "sha256": "855fabbf01442e527304f4fc1a91a5ec49ccac1c6b12bdde9181fd6974818c9e",
+      "bytes": 7537
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-v2-delta.json",
+      "sha256": "8dcb31ec749898ee7149efe70c57f383b8937d1955c45839ce128170dc16024e",
+      "bytes": 2375
+    },
+    {
+      "path": "/tmp/qcl-doc03-design-v2-review.md",
+      "sha256": "accfdda98914e3f1ab235b82cc5849d91af6d05bfa0561e610817e46eaf2555a",
+      "bytes": 11793
+    }
+  ],
+  "checks": {
+    "old_bytes_retained": true,
+    "transplanted_body_hash_match": true,
+    "reverse_mapping_matches_exact_D2_body": true,
+    "original_headings_retained": 12,
+    "explicit_anchors_unique": 16,
+    "local_links_missing": [],
+    "no_tmp_paths_in_owningdoc": true,
+    "no_copied_D1_D2_author_logs": true,
+    "target_not_staged": true,
+    "git_diff_check": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "reverse_patch_check": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "links": [
+    {
+      "type": "local_anchor",
+      "destination": "#model-source-help-contract",
+      "exists": true
+    },
+    {
+      "type": "external_url_syntax_only",
+      "destination": "https://www.diataxis.fr/start-here/",
+      "verified_network": false
+    },
+    {
+      "type": "external_url_syntax_only",
+      "destination": "https://docs.julialang.org/en/v1/manual/documentation/",
+      "verified_network": false
+    },
+    {
+      "type": "external_url_syntax_only",
+      "destination": "https://documenter.juliadocs.org/stable/lib/public/",
+      "verified_network": false
+    },
+    {
+      "type": "local_anchor",
+      "destination": "#model-help-source-facts",
+      "exists": true
+    },
+    {
+      "type": "local_anchor",
+      "destination": "#model-help-retrieval",
+      "exists": true
+    },
+    {
+      "type": "local_anchor",
+      "destination": "#model-help-value-origin",
+      "exists": true
+    },
+    {
+      "type": "local_anchor",
+      "destination": "#model-help-value-origin",
+      "exists": true
+    },
+    {
+      "type": "local_anchor",
+      "destination": "#model-help-value-origin",
+      "exists": true
+    },
+    {
+      "type": "relative_file",
+      "destination": "../../components/QCLNEGF.jl/docs/src/theory/08_kernels.md",
+      "exists": true
+    },
+    {
+      "type": "relative_file",
+      "destination": "../../components/QCLNEGF.jl/docs/src/physics/models.md",
+      "exists": true
+    },
+    {
+      "type": "relative_file",
+      "destination": "../../components/QCLNEGF.jl/docs/src/theory/09_scba.md",
+      "exists": true
+    },
+    {
+      "type": "relative_file",
+      "destination": "../../components/QCLNEGF.jl/docs/src/theory/18_optical_response.md",
+      "exists": true
+    },
+    {
+      "type": "relative_file",
+      "destination": "../../components/QCLNEGF.jl/src/domain/presets.jl",
+      "exists": true
+    },
+    {
+      "type": "relative_file",
+      "destination": "../../components/qcl-negf-research/config/model/reference-2019-70k.yaml",
+      "exists": true
+    },
+    {
+      "type": "external_url_syntax_only",
+      "destination": "https://documenter.juliadocs.org/stable/lib/internals/writers/#Inventory",
+      "verified_network": false
+    },
+    {
+      "type": "external_url_syntax_only",
+      "destination": "https://documenter.juliadocs.org/stable/man/doctests/",
+      "verified_network": false
+    }
+  ],
+  "limits": {
+    "minutes": 30,
+    "cpu": 1,
+    "ram_gib": 2,
+    "read_mib": 2,
+    "output_kib": 96,
+    "children": 0
+  },
+  "not_run": [
+    "external network link verification",
+    "target imports",
+    "product or numerical tests",
+    "install",
+    "docs build/render",
+    "browser",
+    "native/server",
+    "CI",
+    "solver"
+  ],
+  "scope": "Only owning documentation file edited; no stage, commit, push or other Git mutation; D1/D2/reviews unchanged"
+}

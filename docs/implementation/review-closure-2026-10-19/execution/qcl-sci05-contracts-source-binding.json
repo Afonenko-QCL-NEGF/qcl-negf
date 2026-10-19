@@ -1,0 +1,26 @@
+{
+  "state": "CP_SOURCE_approved_prepared_Python_consumer_bound_runtime_pending",
+  "head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "base": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+  "files": {
+    "src/qcl_negf_contracts/final_audit.py": {
+      "sha256": "1c19ba7f27912c739b349fb7c517a9030be3c4f50c4b75932c08d0c02f3219d1",
+      "bytes": 22707
+    },
+    "src/qcl_negf_contracts/schemas/final-fixed-point-audit.schema.json": {
+      "sha256": "ef25a90acfdc8445a20fb53bc40a861de355e07a8abca4dd90f7ee9a0143dc28",
+      "bytes": 21011
+    },
+    "tests/test_final_audit.py": {
+      "sha256": "23098050f2fbc1d282b0de3a84ba0d034be034a3f69f62920fee6fba64914b12",
+      "bytes": 17773
+    },
+    "README.md": {
+      "sha256": "a95dc9b6f09160f06b1197d57c83147718152b914c6c6da4e7aa3e3f6753f94c",
+      "bytes": 12876
+    }
+  },
+  "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+  "writer_worktree": "/tmp/qcl-sci05-contracts-worktree",
+  "review": "4a73cde4293e02322f43f32410df910c9a6ed17927da4b49ac0007ef4f844805"
+}

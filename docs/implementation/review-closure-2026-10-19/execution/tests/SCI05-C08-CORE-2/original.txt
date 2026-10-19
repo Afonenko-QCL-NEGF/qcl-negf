@@ -1,0 +1,26 @@
+Test Summary:                                                 | Pass  Total  Time
+Same-pass independent Dyson witnesses and nonfinite inventory |   26     26  0.3s
+Test Summary:                                               | Pass  Total  Time
+Literal near-zero additive floor and measured-zero controls |   24     24  0.7s
+
+Frozen complex matrix, weighted number and unnormalized candidate: Error During Test at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:162
+  Test threw exception
+  Expression: abs(number_functional(wrong_transpose, grids, 2) - x.raw_number) > Bmatrix
+  DomainError with 0.2582304378268251 - 0.8300177489439131im:
+  number functional is not real
+  Stacktrace:
+   [1] number_functional(Gˡ::Array{ComplexF64, 4}, grids::QCLNEGF.QCLDomain.ModelGrids, g_s::Int64)
+     @ QCLNEGF.QCLReferenceOperators ~/.codex/worktrees/review-closure-exec/qcl-negf/.build/local-julia-int01/import-phase-1/environment/components/QCLNEGF.jl/src/numerics/reference/greens.jl:106
+   [2] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:750 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:162 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] top-level scope
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:120
+Test Summary:                                                     | Pass  Error  Total  Time
+Frozen complex matrix, weighted number and unnormalized candidate |   21      1     22  2.5s
+RNG of the outermost testset: Random.Xoshiro(0x705a93932979d056, 0xa434cb9326ec88ac, 0x715a0d2864acde09, 0xa4b1165c22b80a19, 0x1492d49b88a80736)
+ERROR: LoadError: Some tests did not pass: 21 passed, 0 failed, 1 errored, 0 broken.
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:1

@@ -1,0 +1,19 @@
+{
+  "fixture_kind": "public_synthetic_saved_telemetry",
+  "identity": {
+    "execution_id": "SI07-public-telemetry",
+    "attempt": 1
+  },
+  "wall_seconds": 120.0,
+  "process_exit_code": 0,
+  "completed_iterations": 12,
+  "cpu_seconds": null,
+  "max_rss_bytes": null,
+  "io_read_bytes": null,
+  "io_write_bytes": 0,
+  "io_write_counter_scope": "collector stdout file only; not job storage or NFS",
+  "julia_jit_seconds": null,
+  "julia_gc_seconds": null,
+  "raw_residual_latest": null,
+  "scientific_accepted": null
+}

@@ -1,0 +1,30 @@
+{
+  "cases": {
+    "T02": {
+      "candidate": "pass",
+      "control": "pass"
+    },
+    "T03": {
+      "candidate": "pass",
+      "control": "pass"
+    },
+    "T05": {
+      "candidate": "pass",
+      "control": "pass",
+      "exact_check_calls_total": 2
+    },
+    "T14": {
+      "candidate": "pass",
+      "control": "pass_with_evidence_scope_qualification",
+      "control_completed_evidence_precision": 1
+    }
+  },
+  "score_scale": "protocol2/1/0/NA",
+  "all_other_applicable_observed_properties": 2,
+  "stop_response": "NA: no trigger",
+  "universal_superiority": "not_established",
+  "extra_samples": 0,
+  "raw_answers_retained": true,
+  "hard_cpu_rss_proof": false,
+  "full_tool_transcript_byte_measurement": false
+}
