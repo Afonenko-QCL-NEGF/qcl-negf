@@ -1,0 +1,39 @@
+{
+  "operation_id": "DOC06-SYMLINK-E1",
+  "authorization": "standing direct human engineering resources grant: \u0437\u0434\u0435\u0441\u044c \u0438 \u0434\u0430\u043b\u044c\u0448\u0435 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0432\u0441\u0435 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044b \u0434\u043b\u044f \u0443\u0441\u043a\u043e\u0440\u0435\u043d\u0438\u044f \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u0438 \u0440\u0430\u0437\u0432\u0435\u0440\u0442\u044b\u0432\u0430\u043d\u0438\u044f",
+  "original_unit_cap": "2/2 exhausted, TScompileRED and54pass2fixtureNotCapable retained unchanged",
+  "diagnosis": "Deno2.8.3 symlink creation unavailable under path-scoped permissions; reviewed external seeding preserves scoped child and exact guard oracles",
+  "D": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba",
+  "D_R": "cae997412488ef7e1508a0c8920120d167f7c59b48047f387e354802506f065d",
+  "CPP": "8d6074a6ddf3bdb13436fd4a83e94254daa6abea5f37af393ad86e0c197b01e9",
+  "harness_sha256": "1222d7d0a03dd39b72fc17be7029ced9e7422273f5ab08dbf48e6bd621f3014d",
+  "max_additional_unit_calls": 1,
+  "no_automatic_following_unit_call": true,
+  "per_unit": {
+    "wall_seconds": 120,
+    "CPU": 1,
+    "sampled_RSS_bytes": 1073741824,
+    "owned_TMP_bytes": 8388608,
+    "raw_bytes": 1048576,
+    "test_count": 56,
+    "measurement_limits": "sampled not hardquota/transientpeak proof; preseed metadata separately counted57linkbytes13nodes"
+  },
+  "additional_source_checks": {
+    "formatter_calls": 1,
+    "linter_calls": 1,
+    "per_call": "20s1CPU1GiBsampledRSS32MiBTMP2MiBraw",
+    "tools": [
+      {
+        "kind": "format",
+        "sha256": "d178ee7272c1087257a319b9db45e521448e72f18f94f145d5c33318e652bfc9",
+        "delta": "only exact attempt whitelist2->3, sameguardian/runtime/path/budgets"
+      },
+      {
+        "kind": "lint",
+        "sha256": "4b9f6a3d6760911075e12fd120fb02f3f4b75b26436809ef9abbcffedd320024",
+        "delta": "only exact attempt whitelist2->3, sameguardian/runtime/path/budgets"
+      }
+    ]
+  },
+  "S1_C08_finalCI_caps_unchanged": true
+}

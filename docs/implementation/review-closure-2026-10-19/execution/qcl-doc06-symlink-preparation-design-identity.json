@@ -1,0 +1,114 @@
+{
+  "format": "qcl-negf.doc06-symlink-preparation-design-identity.v1",
+  "date": "2026-10-20",
+  "status": "FROZEN_SOURCE_DESIGN_PENDING_INDEPENDENT_HIGH_R",
+  "design": {
+    "path": "/tmp/qcl-doc06-symlink-preparation-design.md",
+    "bytes": 19886,
+    "sha256": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba"
+  },
+  "source_ledger": [
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/original.log",
+      "bytes": 5423,
+      "sha256": "3cae707b9a921a38e820cbb83ca0c7a73437048ed7b86fce27ae803b7d854b54",
+      "charged_full_file_passes": 3
+    },
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/receipt.json",
+      "bytes": 2463,
+      "sha256": "2b058e3083a35824321936074e58db5f2f328dee0954bbbc97428c3a164c4fa1",
+      "charged_full_file_passes": 3
+    },
+    {
+      "path": "/tmp/qcl-doc06-local-unit-run-v1.py",
+      "bytes": 9515,
+      "sha256": "9bf3e58d14ee135ff047f045f12beac67310567febffd18d2a5005ce5c0ba32e",
+      "charged_full_file_passes": 3
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts",
+      "bytes": 30378,
+      "sha256": "382a881675093137e5b42563d17851114e4ffbe8217ba3ead4636999e39cc8c4",
+      "charged_full_file_passes": 8
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts",
+      "bytes": 43061,
+      "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+      "charged_full_file_passes": 5
+    },
+    {
+      "path": "/tmp/qcl-owned-temp-sampler-v2.py",
+      "bytes": 1567,
+      "sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+      "charged_full_file_passes": 3
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v2.md",
+      "bytes": 17745,
+      "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70",
+      "charged_full_file_passes": 2
+    }
+  ],
+  "decision": {
+    "external_seed": "two exact fixtures within unique owned TMP before scoped Deno child",
+    "test_count": 56,
+    "adapter_unchanged_sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "exact_refusal": "symlink_or_invalid_source",
+    "script_capabilities": "exacttest+adapter+ownTMPread,ownTMPwrite,oneTMParg,noenv/run/net/ffi",
+    "new_descriptor_fields": false,
+    "new_public_schema": false
+  },
+  "seed_forecast": {
+    "regular_payload_bytes": 0,
+    "relative_link_payload_bytes": 57,
+    "directories_excluding_TMP": 10,
+    "links": 2,
+    "regular_files": 1,
+    "seed_receipt_section_max_bytes": 8192,
+    "sampler": "unchanged regular-file logical metric; direct backing traversal once; physical/node allocation not measured"
+  },
+  "writer_paths_future": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts",
+    "/tmp/qcl-doc06-local-unit-run-v2.py",
+    "future Root ops/docs_tests.ts preparation only after owning implementation assignment"
+  ],
+  "frozen_preserved": [
+    "original GREEN raw/receipt",
+    "local v1 harness",
+    "sampler v2",
+    "adapter3dde28",
+    "DOC06 original2/2 budget history",
+    "docs-routing D1/D2"
+  ],
+  "resource": {
+    "grant": {
+      "wall_minutes": 15,
+      "cpu": 1,
+      "ram_gib": 1,
+      "source_read_bytes": 2097152,
+      "report_bytes": 98304
+    },
+    "conservative_source_read_upper_bound_bytes": 558915,
+    "accounting": "conservative full-file charge for named ranged/rg/hash reads; physical IO/RSS not measured"
+  },
+  "attempt_policy": {
+    "original_DOC06": "2/2 exhausted, failed GREEN retained",
+    "E1": "one separate distinct proposed engineering attempt only after D_R+CPP+finite binding",
+    "automatic_fourth": false
+  },
+  "actions": {
+    "product_edits": false,
+    "test_or_harness_edits": false,
+    "target_execution": false,
+    "network": false,
+    "server": false,
+    "build": false,
+    "scientific_submits": 0,
+    "ci_dispatches": 0,
+    "checkpoint_edits": false,
+    "children": 0
+  },
+  "stop": "high D_R; no E1 executed or approved by this receipt"
+}

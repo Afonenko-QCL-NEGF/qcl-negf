@@ -1,0 +1,123 @@
+--- reviewed
+
++++ formatted
+
+@@ -206,20 +206,34 @@
+
+     if (completed) await Deno.remove(dir, { recursive: true });
+   }
+ }
+-async function preparedSymlinkFixture(kind: "file" | "directory", body: (f: Fixture) => Promise<void>) {
++async function preparedSymlinkFixture(
++  kind: "file" | "directory",
++  body: (f: Fixture) => Promise<void>,
++) {
+   // Fixed external seeds only. No child link creation, rename, repair or fallback.
+   equal(await Deno.realPath(TMP), TMP, "owned TMP is canonical");
+   const tmpInfo = await Deno.lstat(TMP);
+   assert(tmpInfo.isDirectory && !tmpInfo.isSymlink, "owned TMP is a real directory");
+   const dir = `${TMP}/prepared-symlink-${kind}`;
+   const directoryInfo = await Deno.lstat(dir);
+-  assert(directoryInfo.isDirectory && !directoryInfo.isSymlink, "prepared root is a real directory");
++  assert(
++    directoryInfo.isDirectory && !directoryInfo.isSymlink,
++    "prepared root is a real directory",
++  );
+   const file = kind === "file";
+-  const linkRelative = file ? "snapshot/runner/src/application/configuration_types.jl" : "snapshot/core";
++  const linkRelative = file
++    ? "snapshot/runner/src/application/configuration_types.jl"
++    : "snapshot/core";
+   const backingRelative = file ? "backing/configuration_types.jl" : "backing/core";
+   const linkText = file ? "../../../../backing/configuration_types.jl" : "../backing/core";
+   const expectedDirectories = file
+-    ? ["backing", "snapshot", "snapshot/runner", "snapshot/runner/src", "snapshot/runner/src/application"]
++    ? [
++      "backing",
++      "snapshot",
++      "snapshot/runner",
++      "snapshot/runner/src",
++      "snapshot/runner/src/application",
++    ]
+     : ["backing", "backing/core", "snapshot"];
+   const expected = new Map<string, string>(expectedDirectories.map((path) => [path, "directory"]));
+   expected.set(linkRelative, "symlink");
+@@ -229,7 +243,13 @@
+
+     for await (const entry of Deno.readDir(relative ? `${dir}/${relative}` : dir)) {
+       const path = relative ? `${relative}/${entry.name}` : entry.name;
+       const info = await Deno.lstat(`${dir}/${path}`);
+-      const type = info.isSymlink ? "symlink" : info.isDirectory ? "directory" : info.isFile ? "file" : "special";
++      const type = info.isSymlink
++        ? "symlink"
++        : info.isDirectory
++        ? "directory"
++        : info.isFile
++        ? "file"
++        : "special";
+       equal(type, expected.get(path), "unexpected or changed seed node blocks before traversal");
+       observed.set(path, type);
+       if (type === "directory") await inventory(path);
+@@ -239,7 +259,11 @@
+
+   equal([...observed].sort(), [...expected].sort(), "exact no-follow prepared inventory");
+   for (const path of expectedDirectories) {
+     const absolute = `${dir}/${path}`;
+-    equal(await Deno.realPath(absolute), absolute, "prepared ancestor stays real/canonical inside TMP");
++    equal(
++      await Deno.realPath(absolute),
++      absolute,
++      "prepared ancestor stays real/canonical inside TMP",
++    );
+   }
+   const link = `${dir}/${linkRelative}`, backing = `${dir}/${backingRelative}`;
+   async function topology() {
+@@ -247,7 +271,10 @@
+
+     equal(await Deno.readLink(link), linkText, "exact relative seed link text");
+     equal(await Deno.realPath(link), backing, "exact live backing target inside same TMP fixture");
+     const target = await Deno.lstat(backing);
+-    assert(!target.isSymlink && (file ? target.isFile : target.isDirectory), "ordinary live backing target type");
++    assert(
++      !target.isSymlink && (file ? target.isFile : target.isDirectory),
++      "ordinary live backing target type",
++    );
+   }
+   await topology();
+   if (file) equal((await Deno.lstat(backing)).size, 0, "baseline regular seed bytes are zero");
+@@ -259,7 +286,11 @@
+
+   for (const path of PATHS) {
+     const actual = await Deno.readFile(`${f.snapshot}/${path}`);
+     const entry = f.entries.find((candidate) => candidate.path === path)!;
+-    equal(new TextDecoder("utf-8", { fatal: true }).decode(actual), f.text[path], "selected literal bytes readable");
++    equal(
++      new TextDecoder("utf-8", { fatal: true }).decode(actual),
++      f.text[path],
++      "selected literal bytes readable",
++    );
+     equal(actual.length, entry.bytes, "actual selected byte length matches receipt");
+     equal(await hash(actual), entry.sha256, "actual selected SHA matches receipt");
+     if (!(file && path === PATHS[0])) {
+@@ -271,10 +302,18 @@
+
+   const directBacking = file ? backing : `${backing}/${selectedPath.slice("core/".length)}`;
+   const directBytes = await Deno.readFile(directBacking);
+   const selectedEntry = f.entries.find((entry) => entry.path === selectedPath)!;
+-  equal(new TextDecoder("utf-8", { fatal: true }).decode(directBytes), f.text[selectedPath], "direct backing has exact selected literal");
++  equal(
++    new TextDecoder("utf-8", { fatal: true }).decode(directBytes),
++    f.text[selectedPath],
++    "direct backing has exact selected literal",
++  );
+   equal(directBytes.length, selectedEntry.bytes, "backing byte length matches receipt");
+   equal(await hash(directBytes), selectedEntry.sha256, "backing SHA matches receipt");
+-  equal(await Deno.readTextFile(`${f.snapshot}/${selectedPath}`), f.text[selectedPath], "alias has exact same literal");
++  equal(
++    await Deno.readTextFile(`${f.snapshot}/${selectedPath}`),
++    f.text[selectedPath],
++    "alias has exact same literal",
++  );
+   await body(f);
+   // Both finite prepared trees are retained on success and failure for receipts.
+ }

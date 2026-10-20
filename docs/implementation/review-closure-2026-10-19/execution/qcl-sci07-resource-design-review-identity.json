@@ -1,0 +1,82 @@
+{
+  "kind": "qcl-sci07-independent-high-resource-design-source-review",
+  "verdict": "REQUEST_NARROW_D2",
+  "resource_admission_status": "needs_admission",
+  "missing_guard_status": "needs_guard",
+  "scientific_ready": false,
+  "review": {
+    "path": "/tmp/qcl-sci07-resource-design-review.md",
+    "bytes": 23357,
+    "sha256": "48f97407846b4b179de2442e1295e8cc2028ed7d4e3ca9c2f28c8079ac5d4e67"
+  },
+  "frozen_design": {
+    "path": "/tmp/qcl-sci07-resource-design.md",
+    "bytes": 42322,
+    "sha256": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635"
+  },
+  "author_ledger": {
+    "path": "/tmp/qcl-sci07-resource-source-ledger.md",
+    "sha256": "cf625aefd68f7335e34a5cb07900ee743e8e6ba45142bd79dbe99c26824fedfe"
+  },
+  "author_identity": {
+    "path": "/tmp/qcl-sci07-resource-design-identity.json",
+    "sha256": "0d652cf597008ce67957d99c22e81a3ad147e31fd1ce620ed2dbdcff2b6b2479"
+  },
+  "primary_policy": {
+    "science_md_sha256": "0f52fc7148456b9eeff6bb993b5d1e701825781c58733dc519972c5312b8c26a",
+    "operator_permissions_md_sha256": "4887a5d4ad67a84424225d5b827ba2975ec97e319c94efe59a3e67b9120054a0",
+    "scope": "0mV/period, lattice/LO70K, LO/acoustic/impurity/IFR/alloy, electron_electron=none; S1 13 attempts/936 node-hours; byte/concurrency/wall ceilings unchanged"
+  },
+  "actual_root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+  "gitlink_authority": "git ls-tree HEAD, not index or manually maintained lock",
+  "selected_immutable_owning_inputs": {
+    "Core": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+    "Runner": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "Platform": "f729e2681224d6537538179ab760fefefd575003",
+    "AiiDA": "d8f8092ca1c76523d85384b4bac8198d8bfa736b"
+  },
+  "working_state": "Root coordinator execution/evidence modifications and untracked DOC06 products, Contracts untracked state observed and preserved; no clean/final release claim",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "P2",
+      "locator": "design section6 lines233-236; downstream SCI08-R2/P1/C1",
+      "category": "resource-baseline ambiguity and conservative false-refusal, not cap bypass",
+      "claim": "Existing resident is compared with already-remaining free/quota, double debiting current bytes",
+      "minimal_correction": "Separate total resident authority/caps from incremental growth physical/quota headroom, define reservation baseline and retain exact-fit/one-byte-short paired controls"
+    },
+    {
+      "id": "R2",
+      "severity": "P3",
+      "locator": "design section1 lines28-36 and author identity published_root/metadata_snapshot_later.head/published_gitlinks",
+      "category": "provenance chronology erratum",
+      "claim": "Initial e22 overlay and later head469 with old gitlink table need distinct temporal binding; actual tree469 independently matches selected owning inputs",
+      "minimal_correction": "Preserve immutable original packet, add initial-versus-later chronology erratum and exact Git-derived current handoff graph"
+    }
+  ],
+  "ticket_disposition": "Seven tickets conditionally suitable for source I after R1 clarification; native coverage/capacity/stop proofs remain dependencies; actual Results consumer locus must be bound in owning I",
+  "read_order": "Primary D/science/P1 and owning source before author ledger/identity conclusions",
+  "skills": ["qcl-performance-audit", "qcl-physics-audit"],
+  "verification": {
+    "source_and_hash_reads": "yes, named immutable git show ranges; exact source hashes in report",
+    "target_runtime_import_parser_tests_build": 0,
+    "network_server_native_probes": 0,
+    "Git_mutations_CP_product_edits": 0,
+    "children": 0,
+    "scientific_attempts_C08_final_CI": 0,
+    "actual_capacity_NFS_durability_counters": "not measured"
+  },
+  "resource_ledger": {
+    "known_named_content_charge_bytes": 1334625,
+    "metadata_locator_small_read_reserve_bytes": 131072,
+    "conservative_review_bound_bytes": 1572864,
+    "source_read_cap_bytes": 6291456,
+    "method": "Full underlying file charged for each repeated hash/search/ranged read; partial head reads conservatively full-file charged; Git metadata separately reserved",
+    "wall_cap_minutes": 25,
+    "cpu_cap": 1,
+    "ram_cap_bytes": 2147483648,
+    "output_cap_bytes": 196608,
+    "physical_IO_CPU_RSS_wall": "not instrumented"
+  },
+  "stop": true
+}

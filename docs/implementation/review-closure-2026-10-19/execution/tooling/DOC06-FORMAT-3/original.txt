@@ -1,0 +1,2 @@
+/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts
+Checked 2 files

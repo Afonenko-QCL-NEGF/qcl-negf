@@ -1,0 +1,32 @@
+{
+  "CP_CODE": "0556aabd1ab2dfb7566660fc4229c0d34dcd28814dad2f9ca169acd10d9c0464",
+  "components": {
+    "qcl-negf-contracts": {
+      "state": "G1_merged",
+      "operation_id": "PUBLISH-DOC07-C2-1",
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+      "base": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+      "base_branch": "codex/review-closure-model-help-integration",
+      "branch": "codex/review-closure-model-help-bindings-integration",
+      "files": {
+        "src/qcl_negf_contracts/model_help.py": "47fea02cced504a8f8ff52537275f25a5dfbd652b595f70f79306e3113edf62c",
+        "tests/test_model_help_bindings.py": "647e38868ac5b71f8bf90bf03fb69a789c569cdf6ce0234bde8b4745065b1cd7"
+      },
+      "source_review": "0556aabd1ab2dfb7566660fc4229c0d34dcd28814dad2f9ca169acd10d9c0464",
+      "GREEN_receipt": "7024cea3cc88f04b4d830ad40bc88fca278076b736028a1d44e14d8f261bb9e1",
+      "tests": 132,
+      "runtime_shared_calls": 4,
+      "native_acceptance": false,
+      "fullCI": 0,
+      "head": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "pr": 11,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/pull/11",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "dd2473aebbf839209f8b11275d95457b842e19a3",
+      "merged_at": "2026-10-20T05:27:33Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

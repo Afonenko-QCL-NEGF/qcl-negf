@@ -1,0 +1,147 @@
+--- a/tests/docs_test_routing_test.ts
++++ b/tests/docs_test_routing_test.ts
+@@ -157,6 +157,30 @@
+   };
+ }
+ 
++// Test-only relocation of otherwise fixed facts. No production path algorithm,
++// hashing or ownership inference lives here. The newly manufactured admission
++// digest is rebound on all three representations of that retained reference.
++function relocatedStorage(
++  location: keyof ReturnType<typeof descriptor>["storage"],
++  value: string,
++) {
++  const d = descriptor();
++  const m = metadata();
++  const previous = d.storage[location];
++  const relocated = (path: string) => path === previous ? value :
++    path.startsWith(previous + "/") ? value + path.slice(previous.length) : path;
++  d.storage[location] = value;
++  m.directories = Object.fromEntries(Object.entries(m.directories).map(([path, fact]) => [
++    relocated(path), { ...fact, canonical: relocated(fact.canonical) },
++  ]));
++  m.absent_paths = m.absent_paths.map(relocated);
++  m.admission.exclusive_storage = m.admission.exclusive_storage.map(relocated);
++  d.admission_ref.sha256 = OTHER;
++  m.files[d.admission_ref.path].sha256 = OTHER;
++  m.admission.ref.sha256 = OTHER;
++  return { d, m };
++}
++
+ function ready() {
+   const result = preflightInputs(parseInputs(JSON.stringify(descriptor())), metadata());
+   assert(result.result === "ready_for_unit_attempt", "Healthy synthetic handoff was blocked");
+@@ -323,7 +347,13 @@
+   ["missing admission", (d) => { delete d.admission_ref; }],
+   ["bad source revision", (d) => { d.source_revision = "latest"; }],
+   ["duplicate source path", (d) => { (d.source_files as unknown[]).push({ path: SOURCES[0], sha256: HASH }); }],
+-  ["absolute source path", (d) => { d.source_files = [{ path: `${ROOT}/deno.json`, sha256: HASH }]; }],
++  ["absolute source path", (d) => {
++    const files = d.source_files as { path: string; sha256: string }[];
++    const remaining = JSON.stringify(files.slice(1));
++    files[0] = { ...files[0], path: `${ROOT}/deno.json` };
++    equal(files.length, SOURCES.length);
++    equal(JSON.stringify(files.slice(1)), remaining);
++  }],
+ ];
+ for (const [label, mutate] of descriptorMutations) {
+   Deno.test(`descriptor rejects ${label} before any executor is reachable`, () => {
+@@ -378,11 +408,13 @@
+ for (const location of ["owned_tmp_root", "attempt_dir", "deno_cache_dir"] as const) {
+   for (const value of ["relative", "/tmp", `${ROOT}/scratch`, "/tmp/a,b", "/tmp/a\nb", "/tmp/a/../b"]) {
+     Deno.test(`storage ${location} rejects unsafe ${JSON.stringify(value)}`, () => {
+-      const d = descriptor();
+-      d.storage[location] = value;
++      // Broad rejection control: some unsafe values violate multiple rules.
++      // Relocation rebinds admission, paths and child absence facts; independent
++      // lexical and healthy/unsafe paired controls below isolate the oracles.
++      const { d, m } = relocatedStorage(location, value);
+       let blocked = false;
+       try {
+-        blocked = preflightInputs(parseInputs(JSON.stringify(d)), metadata()).result !== "ready_for_unit_attempt";
++        blocked = preflightInputs(parseInputs(JSON.stringify(d)), m).result !== "ready_for_unit_attempt";
+       } catch {
+         blocked = true;
+       }
+@@ -741,3 +773,81 @@
+   rejects(() => planChecks("check", null));
+   rejects(() => planChecks("docs", null));
+ });
++
++// These parser-only controls cannot be satisfied by missing filesystem,
++// admission or source closure facts: those adapters are never consulted.
++for (const location of ["owned_tmp_root", "attempt_dir", "deno_cache_dir"] as const) {
++  for (const value of ["relative", "/tmp/a,b", "/tmp/a\nb", "/tmp/a/../b"]) {
++    Deno.test(`lexical ${location} refuses ${JSON.stringify(value)} on a complete descriptor`, () => {
++      const d = descriptor();
++      d.storage[location] = value;
++      equal(d.source_files.length, SOURCES.length);
++      rejects(() => parseInputs(JSON.stringify(d)));
++    });
++  }
++}
++const safeRelocations = {
++  owned_tmp_root: "/tmp/routing-relocated-fixture",
++  attempt_dir: "/fixture/retained/attempt-relocated",
++  deno_cache_dir: "/fixture/cache/deno-relocated",
++};
++for (const location of ["owned_tmp_root", "attempt_dir", "deno_cache_dir"] as const) {
++  Deno.test(`${location} accepts an independently rebound healthy relocation`, () => {
++    const { d, m } = relocatedStorage(location, safeRelocations[location]);
++    const result = preflightInputs(parseInputs(JSON.stringify(d)), m);
++    equal(result.result, "ready_for_unit_attempt");
++    equal(m.admission.exclusive_storage.includes(d.storage[location]), true);
++    equal(d.admission_ref.sha256, m.files[d.admission_ref.path].sha256);
++    equal(d.admission_ref.sha256, m.admission.ref.sha256);
++    if (location === "attempt_dir") {
++      assert(m.absent_paths.includes(d.storage.attempt_dir));
++    } else {
++      equal(m.directories[d.storage[location]].canonical, d.storage[location]);
++    }
++    if (location === "owned_tmp_root") {
++      equal(m.absent_paths.slice(1), [
++        `${d.storage.owned_tmp_root}/node`,
++        `${d.storage.owned_tmp_root}/python`,
++        `${d.storage.owned_tmp_root}/doc06`,
++      ]);
++    }
++  });
++  Deno.test(`${location} refuses workspace relocation despite consistent admission and facts`, () => {
++    // TMP here violates both /tmp-descendant and workspace-disjoint predicates;
++    // attempt/cache violate workspace disjointness. No single-rule TMP claim.
++    const { d, m } = relocatedStorage(location, `${ROOT}/scratch`);
++    equal(m.admission.exclusive_storage.includes(d.storage[location]), true);
++    equal(d.admission_ref.sha256, m.files[d.admission_ref.path].sha256);
++    if (location === "attempt_dir") assert(m.absent_paths.includes(`${ROOT}/scratch`));
++    else equal(m.directories[`${ROOT}/scratch`].canonical, `${ROOT}/scratch`);
++    const result = preflightInputs(parseInputs(JSON.stringify(d)), m);
++    assert(result.result !== "ready_for_unit_attempt");
++  });
++}
++Deno.test("owned TMP root refuses /tmp itself with rebound admission and children", () => {
++  const { d, m } = relocatedStorage("owned_tmp_root", "/tmp");
++  equal(m.admission.exclusive_storage[0], "/tmp");
++  equal(m.directories["/tmp"].canonical, "/tmp");
++  equal(m.absent_paths.slice(1), ["/tmp/node", "/tmp/python", "/tmp/doc06"]);
++  const result = preflightInputs(parseInputs(JSON.stringify(d)), m);
++  assert(result.result !== "ready_for_unit_attempt");
++});
++Deno.test("pre-start source mismatch retains failure with zero child submissions", async () => {
++  const r = ready();
++  const p = planChecks("check", r);
++  const executor = fakeExecutor();
++  executor.setGraph(OTHER);
++  const result = await runChecks(p, r, executor);
++  equal(executor.calls, []);
++  assert(result.result !== "passed");
++  equal(result.source_stable, false);
++  equal(result.required_steps, ["base", ...UNIT_NAMES]);
++  for (const step of result.steps) {
++    assert(step.result !== "passed_base" && step.result !== "passed_unit");
++    assert(step.capture === null || step.capture === undefined,
++      "An unsubmitted child must not have an executed capture");
++  }
++  equal(result.retained.attempt_dir, ATTEMPT);
++  equal(result.retained.owned_tmp_root, TMP);
++  equal(result.retained.cleanup_attempted, false);
++});

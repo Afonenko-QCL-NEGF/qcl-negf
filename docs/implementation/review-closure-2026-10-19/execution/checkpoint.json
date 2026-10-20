@@ -49,9 +49,9 @@
       "DOC04": 5,
       "OPS04_Root": 2,
       "OPS04_Platform": 2,
-      "DOC07_C1_C2": 3,
+      "DOC07_C1_C2": 4,
       "OPS08": 2,
-      "DOC06": 1
+      "DOC06": 3
     },
     "heavy_build_attempts": 0,
     "heavy_build_wall_hours": 0,
@@ -67,13 +67,13 @@
     "local_frontend_asset_build_attempts": 1,
     "native_build_active": null,
     "tooling_selftest_calls": 1,
-    "targeted_test_total_calls": 75,
-    "targeted_test_total_wall_seconds": 1017.942,
+    "targeted_test_total_calls": 78,
+    "targeted_test_total_wall_seconds": 1023.363,
     "SCI05_08_C08_test_calls": 8,
     "SI07_formal_max_calls": 4,
     "SI07_forward_samples": 8,
-    "targeted_test_calls_total": 75,
-    "targeted_test_wall_seconds_total": 1017.942,
+    "targeted_test_calls_total": 78,
+    "targeted_test_wall_seconds_total": 1023.363,
     "SI07_formal_calls_completed": 4,
     "SI07_forward_static_checks": 2,
     "DEV07_LJL_calls": 1,
@@ -84,11 +84,15 @@
     "OPS04_Platform_calls": 2,
     "DOC04_format_calls": 2,
     "local_lint_calls_admitted": 3,
-    "DOC07_C1_C2_calls": 3,
+    "DOC07_C1_C2_calls": 4,
     "OPS08_calls": 2,
-    "DOC06_unit_calls": 1,
-    "DOC06_format_calls": 1,
-    "DOC06_lint_calls": 1
+    "DOC06_unit_calls": 2,
+    "DOC06_format_calls": 3,
+    "DOC06_lint_calls": 3,
+    "OPS01_native_read_packets": 1,
+    "OPS01_native_transport_wall_seconds": 16.409,
+    "OPS01_native_read_raw_bytes": 41329,
+    "DOC06_symlink_E1_calls": 1
   },
   "resource_observation": {
     "logical_cpus": 12,
@@ -384,9 +388,9 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "OPS01": {
-      "state": "blocked_native_missing_fresh_trusted_inventory_access_admission",
+      "state": "partial_native_READ_hypervisor_access_and12VMconfigs_captured_guest_routes_blocked_CItrust_conflict",
       "definition": "platform-worker.md#OPS01",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone",
+      "readiness": "full admission false, all existing resources protected",
       "independent_source_work": "continues; pending async inventory/access locator question"
     },
     "OPS02": {
@@ -541,7 +545,7 @@
       "review": "541340d2d3304b01d61b9763b89d453f15dcfdada9ea2dd8919e22a3b1e2a997"
     },
     "DOC04": {
-      "state": "pure_adapters_published_profiles_owning_G1_merged_root_gitlinks_pending_root_recipe_route_assets_open",
+      "state": "pure_adapters_and_CoreRunner_profiles_published_selectedRoot469; operator_recipe_assets_native_route_open",
       "unit_calls": "5/5",
       "public_bundle": "sharedschema_OFL_nativeBUILD_pending"
     },
@@ -551,15 +555,24 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "DOC06": {
-      "state": "semantic_CPP_v2_PASS_formatPASS_lint15failed_source_only_correction_pending_GREEN_unconsumed",
+      "state": "56of56_PASS_SOFTWARE_DOC06_UNIT_E1_independent_high_review",
       "definition": "documentation-instructions.md#DOC06",
       "readiness": "not yet evaluated; no resource operation authorized by status alone",
-      "calls": "1/2"
+      "calls": "2/2",
+      "original_calls": "2/2 exhausted retained",
+      "extra_engineering_calls": "SYMLINK-E1 1/1",
+      "limitation": "synthetic9sourcefixtures only; actual selected-source reproducibility/meaning comparison still pending",
+      "review_sha256": "1e284d379a48c80e260658c89c3db2ac6ebe10231692c17567b857c0d132ee23"
     },
     "DOC07": {
-      "state": "C1_root_e22_published_C2_module_I_active_after_expected_RED",
-      "runtime_calls": 3,
-      "shared_cap": 4
+      "state": "C1schema204_C2private132_GREEN_CPP_owningG1merged_root_gitlink_pending; downstreamintegration_open",
+      "runtime_calls": 4,
+      "shared_cap": 4,
+      "full_DOC07_integration": "pending downstream owning producers/consumers",
+      "C2_state": "132of132_PASS_private_inmemory_binding_G1_merged_ContractsPR11",
+      "C2_source": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "C2_G1_merge": "dd2473aebbf839209f8b11275d95457b842e19a3",
+      "limitation": "C2 validator software only; complete producers/Portal actual modelhelp integration pending"
     },
     "SI01": {
       "state": "published_in_root_progress_PR23",
@@ -676,14 +689,15 @@
       "remaining_design_gap": "SCI03§5.3 coefficient norms/absolutecurrentbound"
     },
     "SCI07": {
-      "state": "planned",
+      "state": "D1plusD2_highPASS_source_only_7SCI08tickets_ready_needs_admission_needs_guard",
       "definition": "science.md#SCI07",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "readiness": "needs_admission, no scientific READY"
     },
     "SCI08": {
-      "state": "planned",
+      "state": "SCI07D1D2_highR_pass; sevenconditional_source_tickets_ready; R1narrowdesign_active",
       "definition": "science.md#SCI08",
-      "readiness": "not yet evaluated; no resource operation authorized by status alone"
+      "readiness": "not yet evaluated; no resource operation authorized by status alone",
+      "C08_original": "8/8EXHAUSTED_no_rerun"
     },
     "SCI09": {
       "state": "planned",
@@ -2144,6 +2158,191 @@
       "lint_wall_seconds": 0.079,
       "product_test_calls": 0,
       "reviewed_semantic_base": "adb5e2e2b410cbd6aa75d8b2610466661f36be07c4ab1bebc4b4f8b326908326"
+    },
+    {
+      "id": "DOC06-GREEN-1",
+      "state": "completed_failed_preserve_raw_no_automatic_repeat",
+      "kind": "bounded_local_DOC06_GREEN",
+      "root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+      "files": {
+        "ops/docs/static-slice.ts": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+        "tests/docs_static_slice_test.ts": "382a881675093137e5b42563d17851114e4ffbe8217ba3ead4636999e39cc8c4"
+      },
+      "harness_sha256": "9bf3e58d14ee135ff047f045f12beac67310567febffd18d2a5005ce5c0ba32e",
+      "CPP": "adb5e2e2b410cbd6aa75d8b2610466661f36be07c4ab1bebc4b4f8b326908326",
+      "lint_fix_review": "f8462e3c9ca70e043d4fe9511e322d7ebce9465d67edd622ac8f7c661774384e",
+      "expected_tests_nominal": 56,
+      "memory_available_bytes": 11037417472,
+      "TMP_available_bytes": 15981150208,
+      "utc": "2026-10-20T05:02:36.360425+00:00",
+      "limits": "120s1CPU1GiBsampledRSS8MiBTMP1MiBraw; sole final DOC06unit2/2; no extra automatic call",
+      "exit_code": 1,
+      "wall_seconds": 1.953,
+      "receipt_sha256": "2b058e3083a35824321936074e58db5f2f328dee0954bbbc97428c3a164c4fa1",
+      "raw_sha256": "3cae707b9a921a38e820cbb83ca0c7a73437048ed7b86fce27ae803b7d854b54"
+    },
+    {
+      "id": "OPS01-ACCESS-READ-1",
+      "state": "completed_partial_READ_no_mutation_full_admission_false",
+      "authorization": "activeB/PERM06+directuser2026-10-20credentials/projectcontext and environment.fish",
+      "target": "historicalQCLhypervisor/proxy only; guestVMs andforeignresources protected",
+      "existing_trust": "local known_hosts frozen; StrictHostKeyChecking=yes;UpdateHostKeys=no;IdentityAgentnone;noautoaccept",
+      "route_matches_historical_control_compute_proxy": true,
+      "environment_DEPLOY_HOST_matches_hypervisor": false,
+      "route_sha256": "3e1aefb88113c51e7aee3731bda91647ba2a7100f17bc88189cde0d034b5782f",
+      "frozen_known_hosts_sha256": "c967229938ac5220f05d99ec745f43c9fdfc3e696c1f79820e9df4e63db65e98",
+      "scope": "freshreadonlyidentity/resources+completeVMconfiguredmemoryinventory; noapply/noVMservicejobdatachanges",
+      "max_attempts": 1,
+      "wall_seconds_packet": 600,
+      "raw_bytes_cap": 2097152,
+      "first_connection_deadline_seconds": 45,
+      "not_admission": "fresh full qcl-build-admission snapshot still pending; no CP-NATIVE/BUILD/SCI READY",
+      "current_environment_SITE_proxmox_endpoint_matches_hypervisor": true,
+      "result": {
+        "id": "OPS01-ACCESS-READ-1",
+        "state": "packet_stopped_after_completed_readonly_phases_no_retry",
+        "phases": [
+          {
+            "phase": "CI_read",
+            "exit_code": 255,
+            "wall_seconds": 0.151,
+            "raw_bytes": 831,
+            "raw_sha256": "5cb6078cde2b3511497109dcab839e6dc2ae7a439a12dbcb675b5cfd3e675bbc",
+            "capture_complete": true,
+            "stop_reason": null,
+            "outcome": "failed_or_unknown"
+          },
+          {
+            "phase": "compute_read",
+            "exit_code": 255,
+            "wall_seconds": 3.412,
+            "raw_bytes": 124,
+            "raw_sha256": "846704f600c90fa52db78b9e80c3d026db73d0c00f152d359ebf09ce862836e8",
+            "capture_complete": true,
+            "stop_reason": null,
+            "outcome": "failed_or_unknown"
+          },
+          {
+            "phase": "control_read",
+            "exit_code": 255,
+            "wall_seconds": 3.463,
+            "raw_bytes": 124,
+            "raw_sha256": "846704f600c90fa52db78b9e80c3d026db73d0c00f152d359ebf09ce862836e8",
+            "capture_complete": true,
+            "stop_reason": null,
+            "outcome": "failed_or_unknown"
+          },
+          {
+            "phase": "hypervisor_read",
+            "exit_code": 0,
+            "wall_seconds": 1.004,
+            "raw_bytes": 3275,
+            "raw_sha256": "d6439bfc9b8bbc44fdbfc83fa4a111a8c9338fd92cf6297473216a7a62da5d16",
+            "capture_complete": true,
+            "stop_reason": null,
+            "outcome": "connected_fresh_readonly_host_facts"
+          },
+          {
+            "phase": "hypervisor_config_storage_read",
+            "exit_code": 0,
+            "wall_seconds": 8.379,
+            "raw_bytes": 36975,
+            "raw_sha256": "571456b963c2671e6106fc62c58923a627e7355a890f07de6eb5d65c1923c06d",
+            "capture_complete": true,
+            "stop_reason": null,
+            "outcome": "connected_fresh_readonly_host_facts"
+          }
+        ],
+        "raw_total_bytes": 41329,
+        "transport_wall_seconds": 16.409,
+        "packet_elapsed_seconds": 496.678,
+        "packet_wall_cap_seconds": 600,
+        "raw_byte_cap": 2097152,
+        "hypervisor_access": "confirmed fresh read-only",
+        "controller_compute_access": "No route to host; matching historicalID/name candidateVMs stopped; actual guest state unknown",
+        "CI_access": "host key mismatch against historical pinned key, not in currentknown_hosts; newkeyNOTaccepted; trusted reprovisioning evidence requested asynchronously",
+        "no_mutations": true,
+        "all_existing_resources_protected": true,
+        "full_admission": false,
+        "builds_solver_CI_dispatch": 0
+      }
+    },
+    {
+      "id": "DOC07-C2-GREEN-1",
+      "state": "completed_PASS_132_assertions_reviewed",
+      "kind": "bounded_local_DOC07_C2_GREEN",
+      "root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+      "component_head": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+      "files": {
+        "src/qcl_negf_contracts/model_help.py": "47fea02cced504a8f8ff52537275f25a5dfbd652b595f70f79306e3113edf62c",
+        "tests/test_model_help_bindings.py": "647e38868ac5b71f8bf90bf03fb69a789c569cdf6ce0234bde8b4745065b1cd7"
+      },
+      "source_CPP": "0556aabd1ab2dfb7566660fc4229c0d34dcd28814dad2f9ca169acd10d9c0464",
+      "prior_CPP_5findings_source_closed": "78a4046f227f4c07f72c8bd59b4b7f87c960a8314cb915b481f7e254bf5d67f5",
+      "harness_sha256": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b",
+      "memory_available_bytes": 10736881664,
+      "TMP_available_bytes": 15978860544,
+      "utc": "2026-10-20T05:23:52.875432+00:00",
+      "limits": "90s1CPU1GiBsampledRSS32MiBownedTMP2MiBraw; original sharedDOC07lastGREEN4/4; noautomaticfifth, no BUILD/fullCI/science",
+      "exit_code": 0,
+      "wall_seconds": 1.341,
+      "receipt_sha256": "7024cea3cc88f04b4d830ad40bc88fca278076b736028a1d44e14d8f261bb9e1",
+      "raw_sha256": "ac45b9f6b50b693b32c26651d46624f29e37e0e026238e27f42de755bda0b503"
+    },
+    {
+      "id": "G1-DOC07-C2-qcl-negf-contracts-f4009c9",
+      "state": "G1_merged",
+      "kind": "conditional_owning_merge",
+      "repo": "Afonenko-QCL-NEGF/qcl-negf-contracts",
+      "head": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "pr": 11,
+      "base": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+      "merge_commit": "dd2473aebbf839209f8b11275d95457b842e19a3",
+      "merged_at": "2026-10-20T05:27:33Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    },
+    {
+      "id": "DOC06-SYMLINK-E1",
+      "state": "completed_PASS_56of56",
+      "kind": "bounded_local_DOC06_distinct_symlink_E1",
+      "root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+      "files": {
+        "ops/docs/static-slice.ts": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+        "tests/docs_static_slice_test.ts": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69"
+      },
+      "harness_sha256": "1222d7d0a03dd39b72fc17be7029ced9e7422273f5ab08dbf48e6bd621f3014d",
+      "CPP": "8d6074a6ddf3bdb13436fd4a83e94254daa6abea5f37af393ad86e0c197b01e9",
+      "final_format_binding": "92296ab0940997cfc504e4f2def02d8e26bd678fce57722c550208d654fb001c",
+      "expected_tests_nominal": 56,
+      "memory_available_bytes": 9981063168,
+      "TMP_available_bytes": 15978446848,
+      "utc": "2026-10-20T05:33:58.391621+00:00",
+      "limits": {
+        "wall_seconds": 120,
+        "CPU": 1,
+        "sampled_RSS_bytes": 1073741824,
+        "owned_TMP_bytes": 8388608,
+        "raw_bytes": 1048576,
+        "test_count": 56,
+        "measurement_limits": "sampled not hardquota/transientpeak proof; preseed metadata separately counted57linkbytes13nodes"
+      },
+      "original_cap_retained": "DOC06_unit_calls2/2EXHAUSTED; E1 separate1/1",
+      "exit_code": 0,
+      "wall_seconds": 2.127,
+      "receipt_sha256": "eccf5015685c8b0ff3df87fef2672f6fe461124ce9f09c56b0cea68807b034fc",
+      "raw_sha256": "a42bb0325226b4244b6e4ed0c85e2a141b5176965021318bcc4238f378136ae8",
+      "count_ok": true
+    },
+    {
+      "id": "ROOT-PROGRESS-BATCH12-1",
+      "state": "prepare_reviewed_progress_commit",
+      "base": "469ef4ec36c1dfb967856108e5f9455429559c15",
+      "PR": 23,
+      "scope": "DOC06syntheticunit/sourceCPP, ContractsC2gitlink/G1, sanitizedreadonlynative evidence, ongoing source trace",
+      "full_source_READY": false,
+      "ci_dispatches": 0,
+      "journal": "qcl-root-batch12-publication.json"
     }
   ],
   "unknown_outcomes": [],
@@ -2160,12 +2359,12 @@
     "OPS08independent sourcefaultcoverageaudit",
     "SCI07source/resource guard preparation, nativefactsremainmissing"
   ],
-  "updated_at": "2026-10-20T04:56:32.707979+00:00",
+  "updated_at": "2026-10-20T05:39:01.812658+00:00",
   "source": {
-    "root_head": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+    "root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
     "branch": "codex/review-closure-exec",
     "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
-    "status_short": "M components/QCLNEGF.jl\n M components/QCLNEGFRunner.jl\n ? components/qcl-negf-contracts\n M components/qcl-negf-platform\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-core-profile.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-profile-path-contract-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-profile-path-contract.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-profiles-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-profiles-impl-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-runner-profile.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-impl-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-impl-test-delta.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-impl.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-local-unit-harness-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-red-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-red-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-source-ledger.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops08-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops08-impl-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops08-red-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-font-notices-all.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-ofl-markdown-source-receipt.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-profile-path-contract-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-profile-path-contract-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-profiles-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-profiles-impl-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-profiles-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-actual-source-preparation.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-impl-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-local-unit-harness-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-red-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-red-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-source-correction-plan.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-design-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-impl-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-red-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DOC06-RED-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C2-RED-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/OPS08-GREEN-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/OPS08-RED-1/\n?? ops/docs/static-slice.ts\n?? tests/docs_static_slice_test.ts",
+    "status_short": "M components/qcl-negf-contracts\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-lint-fix-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-lint-fix-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-lint-fix.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-final-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-format-delta.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-harness-delta.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-impl-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-preparation-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-preparation-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-test-delta.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-F3-E1-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-F3-E1-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-impl-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-impl-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-impl-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-harness-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-v2-delta.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-v2.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-source-ledger.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-lint-fix-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-source-tools-correction-plan.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-E1-engineering-plan.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-final-format-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-final-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-impl-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-preparation-design-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-preparation-design-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-F3-E1-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-F3-E1-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-F3-source-E1-plan.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-final-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-impl-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-impl-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-impl-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-engineering-plan-v1.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-harness-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-native-CI-trust-comparison-sanitized.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-native-access-packet-result-sanitized.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-native-access-read-plan-sanitized.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-native-private-backup-sanitized.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch11-publication.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch11-source-readback.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch11-manifest.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-v2-delta.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DOC06-GREEN-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DOC06-SYMLINK-E1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C2-GREEN-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-FORMAT-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-FORMAT-3/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-LINT-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-LINT-3/\n?? ops/docs/static-slice.ts\n?? tests/docs_static_slice_test.ts",
     "gitlinks_authority": "git ls-tree HEAD components/; no maintained parallel component SHA lock",
     "submodules_verified_against_gitlinks": false,
     "verification_method": "compare actual component HEAD with root HEAD tree gitlinks, independently of staging index"
@@ -3112,8 +3311,8 @@
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-dev20-staged-identity.json"
     },
     "qcl-targeted-receipt-census.json": {
-      "sha256": "07f7c7ad1f3ee142cc165fe39db34bf0b98c6c2fa4f9e7aede5748d62b46418a",
-      "bytes": 13313,
+      "sha256": "c8e9786c8a00409ba77b55a83d89896f8ec33a6fd53bee5dacd0bd85ec5641be",
+      "bytes": 13847,
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json"
     },
     "qcl-dev18-final-review.md": {
@@ -5605,20 +5804,415 @@
       "sha256": "dbd62c13facc85425d25919de4a089675905eb14da7f39fcf404d1c3983005b9",
       "bytes": 189,
       "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-FORMAT-1/original.txt"
+    },
+    "qcl-DOC06-LINT-2/receipt.json": {
+      "sha256": "84e9ff43e639e7ad03a9a2a847dbaf8c30863e865e0046c0983cae4ccd05b821",
+      "bytes": 2012,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-LINT-2/receipt.json"
+    },
+    "qcl-DOC06-LINT-2/original.log": {
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd",
+      "bytes": 16,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-LINT-2/original.txt"
+    },
+    "qcl-DOC06-FORMAT-2/receipt.json": {
+      "sha256": "0e0add0d6c662087ab06de687f8b654be2d700a414b6dee7f357365b49a02e8f",
+      "bytes": 2018,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-FORMAT-2/receipt.json"
+    },
+    "qcl-DOC06-FORMAT-2/original.log": {
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd",
+      "bytes": 16,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-FORMAT-2/original.txt"
+    },
+    "qcl-DOC06-GREEN-1/receipt.json": {
+      "sha256": "2b058e3083a35824321936074e58db5f2f328dee0954bbbc97428c3a164c4fa1",
+      "bytes": 2463,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC06-GREEN-1/receipt.json"
+    },
+    "qcl-DOC06-GREEN-1/original.log": {
+      "sha256": "3cae707b9a921a38e820cbb83ca0c7a73437048ed7b86fce27ae803b7d854b54",
+      "bytes": 5423,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC06-GREEN-1/original.txt"
+    },
+    "qcl-doc07-C2-impl-review.md": {
+      "sha256": "471cbdffa269970d14ff114ff9b2d66053f6b96c15f25cf9a711d7673c2f99d2",
+      "bytes": 16150,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-impl-review.md"
+    },
+    "qcl-doc07-C2-impl-review-identity.json": {
+      "sha256": "c5f1079acfe5a0a80f5173c13b205078d00827d62534e79834dd5f284a6787a6",
+      "bytes": 2351,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-impl-review-identity.json"
+    },
+    "qcl-doc06-lint-fix-report.md": {
+      "sha256": "1939043b85ea4a9bfa9756e885fc84bb51981e75ec03e37333d9be5517024271",
+      "bytes": 3643,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-lint-fix-report.md"
+    },
+    "qcl-doc06-lint-fix-identity.json": {
+      "sha256": "d331ee37facc057e393f221bd8efddcf1824ae5f3747a493ba8e3451ccdf03ce",
+      "bytes": 840,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-lint-fix-identity.json"
+    },
+    "qcl-doc06-lint-fix.patch": {
+      "sha256": "1492487af611cbba5369bc90d563d7b08ddb0dda2b1f6ee41c552850b250666c",
+      "bytes": 7397,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-lint-fix.patch"
+    },
+    "qcl-doc06-lint-fix-review.md": {
+      "sha256": "f8462e3c9ca70e043d4fe9511e322d7ebce9465d67edd622ac8f7c661774384e",
+      "bytes": 2054,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-lint-fix-review.md"
+    },
+    "qcl-doc06-source-tools-correction-plan.json": {
+      "sha256": "1c816796cb49776c35f7d5610cb63b30cef4f07c6daaa76616e5114b554eba20",
+      "bytes": 1209,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-source-tools-correction-plan.json"
+    },
+    "qcl-docs-test-routing-red-report.md": {
+      "sha256": "e0621ad8010399bb7013a35353496ecc6581193c8d0f90ea358ab00985070215",
+      "bytes": 11082,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-report.md"
+    },
+    "qcl-docs-test-routing-red-identity.json": {
+      "sha256": "889f52e7dd5b46f96b0b6c9483da587c917ce459dd18e8ad887559fe36942d20",
+      "bytes": 3625,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-identity.json"
+    },
+    "qcl-docs-test-routing-red.patch": {
+      "sha256": "ca6de855100ab7f08b58cdf445caf50518ff832ea84792b6fdaf3b422b97e799",
+      "bytes": 34294,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red.patch"
+    },
+    "qcl-root-batch11-publication.json": {
+      "sha256": "58725677ffefec7ffa730d222165e573a8180c5e61fbbee663bd740ce080129a",
+      "bytes": 1043,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch11-publication.json"
+    },
+    "qcl-root-progress-batch11-manifest.json": {
+      "sha256": "def20be11d0434b8522fa247761c0a6bf4e8f058617b59a52ceb604f949e4cc5",
+      "bytes": 20269,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch11-manifest.json"
+    },
+    "qcl-DOC07-C2-GREEN-1/receipt.json": {
+      "sha256": "7024cea3cc88f04b4d830ad40bc88fca278076b736028a1d44e14d8f261bb9e1",
+      "bytes": 2087,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C2-GREEN-1/receipt.json"
+    },
+    "qcl-DOC07-C2-GREEN-1/original.log": {
+      "sha256": "ac45b9f6b50b693b32c26651d46624f29e37e0e026238e27f42de755bda0b503",
+      "bytes": 180,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C2-GREEN-1/original.txt"
+    },
+    "qcl-doc07-C2-impl-v2-report.md": {
+      "sha256": "6a2efdf710e32bb27d57c261d27e69c254d55a8c2609a7cf8a581f8171d6dccb",
+      "bytes": 10791,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-impl-v2-report.md"
+    },
+    "qcl-doc07-C2-impl-v2-identity.json": {
+      "sha256": "a6cffe88e2f8d15b2bbfc52fc3386929d7633b50da3f036b2575899fdb1fec34",
+      "bytes": 1896,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-impl-v2-identity.json"
+    },
+    "qcl-doc07-C2-impl-v2-review.md": {
+      "sha256": "78a4046f227f4c07f72c8bd59b4b7f87c960a8314cb915b481f7e254bf5d67f5",
+      "bytes": 14913,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-impl-v2-review.md"
+    },
+    "qcl-doc07-C2-impl-v2-review-identity.json": {
+      "sha256": "2261fbbe08c04b01db35ba258f42e9641faca654ec6fbad70f3dc46e6a91dd26",
+      "bytes": 2422,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-impl-v2-review-identity.json"
+    },
+    "qcl-doc07-C2-F3-source-E1-plan.json": {
+      "sha256": "0825186875a3481647c075106ba7b1888be3e73f8168bca1e7705ca051a1588d",
+      "bytes": 1542,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-F3-source-E1-plan.json"
+    },
+    "qcl-doc07-C2-F3-E1-report.md": {
+      "sha256": "27d6895a4916d1aacfe3be3049f1cbb682cae1c3882319cec53563bee5abad33",
+      "bytes": 6524,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-F3-E1-report.md"
+    },
+    "qcl-doc07-C2-F3-E1-identity.json": {
+      "sha256": "2f9c57b9b70a634504d6eb6f3f9510c23d7ae8f782c8d9899bd73d4232b1999c",
+      "bytes": 1552,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-F3-E1-identity.json"
+    },
+    "qcl-doc07-C2-F3-E1-review.md": {
+      "sha256": "0556aabd1ab2dfb7566660fc4229c0d34dcd28814dad2f9ca169acd10d9c0464",
+      "bytes": 10921,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C2-F3-E1-review.md"
+    },
+    "qcl-doc07-C2-F3-E1-review-identity.json": {
+      "sha256": "1aaa9ad7b99c4918943e0fd59634e2145077caa35e8e0d442727aa9975bd1f36",
+      "bytes": 2229,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-F3-E1-review-identity.json"
+    },
+    "qcl-doc07-C2-final-source-binding.json": {
+      "sha256": "84c83a3aeb9f940636453872504b65e2c1514b8d53ce551d299eb70e5c0f5cb2",
+      "bytes": 1049,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-final-source-binding.json"
+    },
+    "qcl-doc07-C2-publication-journal.json": {
+      "sha256": "d271fb524b566ecc0cd220d7fcc15261e2f5e7cd0f2208db5a82aa3c6324f500",
+      "bytes": 1438,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C2-publication-journal.json"
+    },
+    "qcl-docs-test-routing-red-v2-report.md": {
+      "sha256": "a16483e62dc9a5753b7a40b2c7f1f70d3edb5b2f16088aeba42ab1f09b057364",
+      "bytes": 9578,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-v2-report.md"
+    },
+    "qcl-docs-test-routing-red-v2-identity.json": {
+      "sha256": "d082d669c44eac7da40563b0b2936210517c47844a38590c4e6ed124e3c0146e",
+      "bytes": 2548,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-v2-identity.json"
+    },
+    "qcl-docs-test-routing-red-v2-delta.patch": {
+      "sha256": "9bdfa42f1dbc3ca7e104ea7ca8bef24e11faa124368a7d54ff1b205db35fd0c9",
+      "bytes": 7284,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-v2-delta.patch"
+    },
+    "qcl-docs-test-routing-red-review.md": {
+      "sha256": "705bea4364bbaf6053fd51cb7ea7acb48a2776d19e8f6002f9dddbd7e6302eb7",
+      "bytes": 16437,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-review.md"
+    },
+    "qcl-docs-test-routing-red-review-identity.json": {
+      "sha256": "79dae0f69eaa4edc0e70ce09c98e3500ed37be780e9d5024fbf080a51b0cb570",
+      "bytes": 3268,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-review-identity.json"
+    },
+    "qcl-docs-test-routing-red-v2-review.md": {
+      "sha256": "8c0d8d06fa5b21623bf593446d1cac63ff803f682b5d72dd2663d9a772fa4b79",
+      "bytes": 9428,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-red-v2-review.md"
+    },
+    "qcl-docs-test-routing-red-v2-review-identity.json": {
+      "sha256": "9119d3ee02a54dbe6a82472e1eed6cbcd7c75aed575265319d25b45184ffd166",
+      "bytes": 2539,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-red-v2-review-identity.json"
+    },
+    "qcl-sci07-resource-design.md": {
+      "sha256": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635",
+      "bytes": 42322,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design.md"
+    },
+    "qcl-sci07-resource-design-identity.json": {
+      "sha256": "0d652cf597008ce67957d99c22e81a3ad147e31fd1ce620ed2dbdcff2b6b2479",
+      "bytes": 22478,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-identity.json"
+    },
+    "qcl-sci07-resource-source-ledger.md": {
+      "sha256": "cf625aefd68f7335e34a5cb07900ee743e8e6ba45142bd79dbe99c26824fedfe",
+      "bytes": 11040,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-source-ledger.md"
+    },
+    "qcl-sci07-resource-design-review.md": {
+      "sha256": "48f97407846b4b179de2442e1295e8cc2028ed7d4e3ca9c2f28c8079ac5d4e67",
+      "bytes": 23357,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-review.md"
+    },
+    "qcl-sci07-resource-design-review-identity.json": {
+      "sha256": "64511f2dea7e7dd2c7843fcd23630db188ef400b16bef7ab259c928150e0ae12",
+      "bytes": 4358,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-review-identity.json"
+    },
+    "qcl-sci07-resource-design-v2.md": {
+      "sha256": "fc78a0c77394f4d12a1c5633b7e4acb587429667abc106f5aa72c1dc4dd9d010",
+      "bytes": 16555,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-v2.md"
+    },
+    "qcl-sci07-resource-design-v2-identity.json": {
+      "sha256": "62d497cf6c52ac2ed0a9870a98f6d41d424673d2ab2070a5251c8a298d101a9b",
+      "bytes": 4795,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-v2-identity.json"
+    },
+    "qcl-sci07-resource-design-v2-delta.json": {
+      "sha256": "2c8974770340f32233ff825009fc9c099ddc20f9534012262d21d4ed2d896667",
+      "bytes": 970,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-v2-delta.json"
+    },
+    "qcl-sci07-resource-design-v2-review.md": {
+      "sha256": "80e2f1ca784b9c4a082d0785e6ee6bc9ceb507eeecc43c63822f65f532a1d18e",
+      "bytes": 9878,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-v2-review.md"
+    },
+    "qcl-sci07-resource-design-v2-review-identity.json": {
+      "sha256": "44bbd58dce002ec35d8371958bd60778f26f60f694d404e90b13ad1971059530",
+      "bytes": 3014,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-v2-review-identity.json"
+    },
+    "qcl-doc06-symlink-preparation-design.md": {
+      "sha256": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba",
+      "bytes": 19886,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-preparation-design.md"
+    },
+    "qcl-doc06-symlink-preparation-design-identity.json": {
+      "sha256": "149ce91707343463aac8a12155c24d53a38909dafa6c95d12231f3372e62b276",
+      "bytes": 4069,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-preparation-design-identity.json"
+    },
+    "qcl-doc06-symlink-preparation-design-review.md": {
+      "sha256": "cae997412488ef7e1508a0c8920120d167f7c59b48047f387e354802506f065d",
+      "bytes": 14463,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-preparation-design-review.md"
+    },
+    "qcl-doc06-symlink-preparation-design-review-identity.json": {
+      "sha256": "220d26d22b26809fa7e433cc87544b0d4706e52aad4fddf998eb98d2d6bf81ca",
+      "bytes": 4111,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-preparation-design-review-identity.json"
+    },
+    "qcl-doc06-symlink-impl-report.md": {
+      "sha256": "02c2909c2db67cd7f1f19a9f2c59ee2fe575e9347b76b4bfe1a91fdd3c8663e9",
+      "bytes": 10296,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-impl-report.md"
+    },
+    "qcl-doc06-symlink-impl-identity.json": {
+      "sha256": "0b4051011fbdf13cf58f0cfab953137d330a0cccffe571124540153d09a4c685",
+      "bytes": 1502,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-impl-identity.json"
+    },
+    "qcl-doc06-symlink-test-delta.patch": {
+      "sha256": "5aae29fd56abcc65f00df94c399736a09e5f4bad75a3fd74bcd98585bed1d14b",
+      "bytes": 6660,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-test-delta.patch"
+    },
+    "qcl-doc06-symlink-harness-delta.patch": {
+      "sha256": "2406643c61bf928acc027ea19f7a927d44882fefc7f4930ee27a9371be51520f",
+      "bytes": 15892,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-harness-delta.patch"
+    },
+    "qcl-doc06-symlink-impl-review.md": {
+      "sha256": "8d6074a6ddf3bdb13436fd4a83e94254daa6abea5f37af393ad86e0c197b01e9",
+      "bytes": 14987,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-impl-review.md"
+    },
+    "qcl-doc06-symlink-impl-review-identity.json": {
+      "sha256": "da2e05f52556c65febbec4b6fbc178c78579295f09324249b19a84cf67d5b6a5",
+      "bytes": 4996,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-impl-review-identity.json"
+    },
+    "qcl-native-access-read-plan-sanitized.json": {
+      "sha256": "cd8758cc7b1f7cf606bd994b987744787c2de0e7c24b644efc937a031abb6b0f",
+      "bytes": 1111,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-native-access-read-plan-sanitized.json"
+    },
+    "qcl-native-access-packet-result-sanitized.json": {
+      "sha256": "6a39c5a20704c478c4a4a628a50f1715e78a315bc1d6ba903cd4d1db74f0fb7d",
+      "bytes": 2339,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-native-access-packet-result-sanitized.json"
+    },
+    "qcl-native-CI-trust-comparison-sanitized.json": {
+      "sha256": "c35f73bb765517a37a0f1839139e75dbe85b11e140033e7f35a9f460db815397",
+      "bytes": 383,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-native-CI-trust-comparison-sanitized.json"
+    },
+    "qcl-root-batch11-source-readback.json": {
+      "sha256": "498b610b708aa77c9291787acff870f8deb480f727fd6e452601f7ffef02f97d",
+      "bytes": 2052,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch11-source-readback.json"
+    },
+    "qcl-DOC06-LINT-3/receipt.json": {
+      "sha256": "1c81055e95475386ff36b5d94ee44a0f73fb8d8864f9325082a1b16e6d131211",
+      "bytes": 2012,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-LINT-3/receipt.json"
+    },
+    "qcl-DOC06-LINT-3/original.log": {
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd",
+      "bytes": 16,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-LINT-3/original.txt"
+    },
+    "qcl-DOC06-FORMAT-3/receipt.json": {
+      "sha256": "1ecf9cd653ef3bd9653a225d9a576ecbd9dbd55ea5f7649c8a8ca5721df39756",
+      "bytes": 2018,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-FORMAT-3/receipt.json"
+    },
+    "qcl-DOC06-FORMAT-3/original.log": {
+      "sha256": "d00687f820d87674e4ab001b8dc00cf203354291bbbb9e098771f0fd28c56ac8",
+      "bytes": 106,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tooling/DOC06-FORMAT-3/original.txt"
+    },
+    "qcl-DOC06-SYMLINK-E1/receipt.json": {
+      "sha256": "eccf5015685c8b0ff3df87fef2672f6fe461124ce9f09c56b0cea68807b034fc",
+      "bytes": 6179,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC06-SYMLINK-E1/receipt.json"
+    },
+    "qcl-DOC06-SYMLINK-E1/original.log": {
+      "sha256": "a42bb0325226b4244b6e4ed0c85e2a141b5176965021318bcc4238f378136ae8",
+      "bytes": 3788,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC06-SYMLINK-E1/original.txt"
+    },
+    "qcl-doc06-symlink-E1-engineering-plan.json": {
+      "sha256": "f27af6688da180b5394cf7c7bb28fe4f93dd5006d07a281e3221505e980c0877",
+      "bytes": 2192,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-E1-engineering-plan.json"
+    },
+    "qcl-doc06-symlink-final-format-binding.json": {
+      "sha256": "92296ab0940997cfc504e4f2def02d8e26bd678fce57722c550208d654fb001c",
+      "bytes": 633,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-final-format-binding.json"
+    },
+    "qcl-doc06-symlink-format-delta.patch": {
+      "sha256": "35f73b1ffd0a9f80e0a1cb0f9f85e832cde3289594234676046de5895f6983dc",
+      "bytes": 5547,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-format-delta.patch"
+    },
+    "qcl-native-private-backup-sanitized.json": {
+      "sha256": "e49256e4829f964ce9f9eec27e6197490ee34cb23ef45282b77ca6175fcc9f7b",
+      "bytes": 244,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-native-private-backup-sanitized.json"
+    },
+    "qcl-doc06-symlink-final-review.md": {
+      "sha256": "1e284d379a48c80e260658c89c3db2ac6ebe10231692c17567b857c0d132ee23",
+      "bytes": 13458,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-symlink-final-review.md"
+    },
+    "qcl-doc06-symlink-final-review-identity.json": {
+      "sha256": "54b087240eb2220f420f3ea05cfd17d34bc7a793f41a316f5ec43d342674f940",
+      "bytes": 6413,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-symlink-final-review-identity.json"
+    },
+    "qcl-docs-routing-engineering-plan-v1.json": {
+      "sha256": "e21b6446c4a83275e0b3877c2d32271a887ce2ea48baafe3bf5d424157cb0591",
+      "bytes": 5977,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-engineering-plan-v1.json"
+    },
+    "qcl-docs-routing-harness-report.md": {
+      "sha256": "b2d266d6f5f8931bfeb1790e17e0a9aff22e404b86cdb90121bc744cb497b1d4",
+      "bytes": 8363,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-harness-report.md"
+    },
+    "qcl-docs-routing-harness-identity.json": {
+      "sha256": "25711f2bb24312600e3747663c4861f9bcfc6d6ca08d5267db10fc9e73a0e89c",
+      "bytes": 831,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-harness-identity.json"
+    },
+    "qcl-guard-cache-source-audit.json": {
+      "sha256": "5657c3201630f22b8c09ea494d4ac78998ad83d76738bda082a4c728336bda7e",
+      "bytes": 1723,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-guard-cache-source-audit.json"
+    },
+    "qcl-root-progress-batch12-manifest.json": {
+      "sha256": "deee39c18a0396cfd74a7d90fd3e56eca3a4b8099dfe0c95555d9317f4141bbd",
+      "bytes": 23393,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch12-manifest.json"
     }
   },
   "resume_note": "Operator switched to auto approvals; old writer apply_patch approval interrupted. Reconcile exact paths before limited exec require_escalated apply; no duplicate mutations.",
   "test_intent": {
-    "id": "DOC07-C2-RED-1",
-    "state": "completed_RED_pending_failure_classification",
-    "fixture": "components/qcl-negf-contracts/tests/test_model_help_bindings.py",
-    "exit_code": 2
+    "id": "DOC06-SYMLINK-E1",
+    "state": "completed_PASS_56of56",
+    "fixture": "tests/docs_static_slice_test.ts",
+    "exit_code": 0
   },
   "test_result": {
-    "id": "DOC07-C2-RED-1",
-    "state": "completed_RED_pending_failure_classification",
-    "exit_code": 2,
-    "receipt_sha256": "5f2eaddf9326bd00989f97212c56ec36df336440d732d0867380f6c59a0db34f"
+    "id": "DOC06-SYMLINK-E1",
+    "state": "completed_PASS_56of56",
+    "exit_code": 0,
+    "receipt_sha256": "eccf5015685c8b0ff3df87fef2672f6fe461124ce9f09c56b0cea68807b034fc"
   },
   "previous_test_result": {
     "id": "DEV10-RED-2",
@@ -5741,12 +6335,12 @@
     "new_python_targeted_harness": "/tmp/qcl-python-targeted-run-v2.py SHA9726bc355f0fd762cc382c69c23940112b0bf19659045dc49214c5fa44d6df8b routesTMPDIRtoownedtemporary, perfile/harnessidentity, usesacceptedbytepreservingRawCapture anddrainonstop. Newsourceguardreviewpendingbeforeuse;90s1CPU1GiBsampled16MiBsampledtmp2MiBnominaloutput,explicitoutsidepathsunknown; no newtestexecuted."
   },
   "G1_operation_intent": {
-    "id": "G1-DOC04-PROFILES-QCLNEGFRunner.jl-fefaa27",
+    "id": "G1-DOC07-C2-qcl-negf-contracts-f4009c9",
     "state": "G1_merged",
-    "repo": "Afonenko-QCL-NEGF/QCLNEGFRunner.jl",
-    "pr": 15,
-    "head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
-    "base": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae"
+    "repo": "Afonenko-QCL-NEGF/qcl-negf-contracts",
+    "pr": 11,
+    "head": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+    "base": "d791dea33f4628cf23c0b8552ebee9e51d7dd605"
   },
   "targeted_receipt_census": {
     "count": 42,
@@ -6037,14 +6631,14 @@
     }
   },
   "resource_current": {
-    "targeted_completed_calls": 75,
-    "targeted_wall_seconds": 1017.942,
+    "targeted_completed_calls": 78,
+    "targeted_wall_seconds": 1023.363,
     "SCI05_08_C08_consumed": 8,
     "SCI05_08_C08_cap": 8,
     "final_full_CI_dispatches": 0,
     "scientific_submits": 0,
     "native_builds": 0,
-    "native_admission": "missing trusted inventory/access/fresh facts; only dependent native tasks blocked"
+    "native_admission": "partialhypervisorfacts; controlcomputeNoRoute/candidateVMsstopped, CIexistingkeymismatch; no wholequeue/fullinventoryBIND"
   },
   "preserved_checkout_readback": {
     "HEAD": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
@@ -6435,13 +7029,10 @@
     "nativeBUILD": "not_admitted"
   },
   "root_PR23_body_update": {
-    "state": "completed_confirmedURL",
-    "source": "514cd9707a32cde60c630d60986973a898d35b18",
-    "body_sha256": "faf30f106788b620540921d83830d904ef79add6d0fcee27a7bccad33f6ac9c9",
-    "tool_dispatch_chunk": "4e9be7",
-    "completion_chunk": "d67d17",
-    "URL": "https://github.com/Afonenko-QCL-NEGF/qcl-negf/pull/23",
-    "merge": false
+    "head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+    "confirmed_tool_chunk": "08ee37",
+    "body_sha256": "7d0a8d94a30f778c5ab5f0579652d2ec1541339f5f60949e19abb9d7bbe04e4a",
+    "note": "snapshot75calls before subsequent DOC06GREENfailure; latercensus76 is authoritative"
   },
   "OPS08_source_audit_phases": {
     "original": {
@@ -6608,9 +7199,10 @@
   "coordination_assignments_current": {
     "DOC06": {
       "writer": "/root/doc06_impl medium",
-      "writer_state": "frozen STOP",
-      "reviewer": "/root/sci03_current_bound_review high",
-      "review_state": "active"
+      "writer_state": "lint correction done, formatter/lintPASS",
+      "reviewer": "Root high narrowlintreview; originalindependentsourceCPPv2PASS",
+      "unit_outcome": "54pass2fixtureNotCapable; original2/2exhausted",
+      "next": "queuedultraD externalpreparedsymlinks,no widening/science/CI"
     },
     "DOC04_profiles": {
       "writer": "/root/doc04_profiles_impl medium",
@@ -6620,14 +7212,20 @@
     },
     "DOC07_C2": {
       "writer": "/root/doc07_schema_impl medium",
-      "writer_state": "active source cycle7/8",
-      "reviewer": "pending frozen source"
+      "writer_state": "collated correctioncycle8/8ACTIVE",
+      "reviewer": "/root/sci05_core_reviewer high",
+      "review_state": "CPP6findings frozen, correctionrecheckpending"
     },
     "docs_test_routing": {
+      "writer": "/root/doc04_profiles_impl medium",
+      "writer_state": "REDfixturefrozen207nominal",
+      "reviewer": "/root/sci03_current_bound_review high",
+      "review_state": "fixtureRactive"
+    },
+    "SCI07": {
       "designer": "/root/doc03_design ultra",
-      "reviewer": "Root high",
-      "review": "changes_required R1/R2; review sha9e16ff7519453db4661833455450da9d83c72b5f76c9eefd4fb27370da812930",
-      "next": "D correction after agent slot frees"
+      "state": "sourceconditionalresourceDactive",
+      "native": "missingfacts"
     }
   },
   "DOC04_profiles_source_acceptance": {
@@ -6735,5 +7333,279 @@
     "designer": "/root/doc03_design ultra",
     "state": "conditional_source_design_active_needs_native_admission",
     "scientific_caps_unchanged": true
+  },
+  "root_progress_batch11": {
+    "operation_id": "ROOT-PROGRESS-BATCH11-1",
+    "state": "pushed_confirmed_existing_PR23",
+    "base": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+    "manifest_sha256": "def20be11d0434b8522fa247761c0a6bf4e8f058617b59a52ceb604f949e4cc5",
+    "PR": 23,
+    "unaccepted_source_overlays_preserved": {
+      "contracts_test": "72240eab26305f63aeeec06197a7f64802c111a83cd3ef8aae603c5e89ae71f9",
+      "DOC06_adapter": "f11c439cab0fa3ae4f33d0122f83f118ab90453bddc0e436c73f2e386114fe16",
+      "DOC06_test": "0b1cd93487767af0469b4946cd1aa2abb822916577e81ed1cae98909053f06d6",
+      "scope": "preserved uncommitted development; not selected/accepted Root source or full sourceGraph READY"
+    },
+    "full_source_READY": false,
+    "head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+    "push_exit": 0,
+    "sole_push_submit": true,
+    "reconciliation": "initial immediate gh readback stale; retained successful git push output; subsequent independent PR head readback561b50 exact469ef4e, no duplicate push",
+    "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf/pull/23"
+  },
+  "DOC07_C2_CPP": {
+    "state": "REQUEST_CHANGES_6_source_findings",
+    "review_sha256": "471cbdffa269970d14ff114ff9b2d66053f6b96c15f25cf9a711d7673c2f99d2",
+    "source_cycle_used": 7,
+    "source_cycle_cap": 8,
+    "runtime_used": 3,
+    "runtime_cap": 4,
+    "next": "one collated correction cycle8 pending medium writer slot; no GREEN before CPP",
+    "findings": [
+      "Bundle semantic bypass",
+      "known identity scalar erased by null",
+      "assigning evidence unrelated to selected leaf",
+      "extra out-of-scope causal Evidence",
+      "multi-point index narrowed to endpoint",
+      "Snapshot declared Atom contradicts frozen point"
+    ]
+  },
+  "DOC06_source_tools_correction_plan": {
+    "operation_id": "DOC06-SOURCE-TOOLS-CORRECTION-1",
+    "authorization": "user general engineering resource grant",
+    "prior_source_tool_plan": "DOC06-SOURCE-TOOLS-1 exhausted2/2, formatterPASS/lint15failure immutable",
+    "diagnosis": "11require-await, exactASCII-space regex1, inner declarations3; distinct reviewer accepted narrow mechanical correction",
+    "review_sha256": "f8462e3c9ca70e043d4fe9511e322d7ebce9465d67edd622ac8f7c661774384e",
+    "format_additional_calls": 1,
+    "lint_additional_calls": 1,
+    "no_automatic_extra_call": true,
+    "per_call_wall_seconds": 20,
+    "cpu": 1,
+    "RSS_bytes": 1073741824,
+    "TMP_bytes": 33554432,
+    "logs_bytes": 2097152,
+    "targeted_unit_cap_unchanged": "1used/2total",
+    "full_CI": 0,
+    "tools": [
+      {
+        "kind": "format",
+        "sha256": "b88ad7c2f1dfad114c8d0a8adbe0c8edd850230b0918ca20d07896ff0fbbf7c4",
+        "harness_delta": "sole exact attempt whitelist -1 to -2; guardian/capture/sampler/path/runtime unchanged"
+      },
+      {
+        "kind": "lint",
+        "sha256": "9c5af1e2ceaeffe70cae97002874f6a51e67f97adc07196bdd37dd7e1d9044cd",
+        "harness_delta": "sole exact attempt whitelist -1 to -2; guardian/capture/sampler/path/runtime unchanged"
+      }
+    ]
+  },
+  "DOC06_GREEN_failure": {
+    "id": "DOC06-SYMLINK-CAPABILITY-DIAGNOSIS-1",
+    "raw": "qcl-DOC06-GREEN-1/original.log",
+    "result": "54passed2failed setup: Deno.symlink requires unscoped read/write; two adapter branches not reached",
+    "guards": "no stop/RSS/TMP/log failure; typecheck and54controls executed",
+    "original_unit_cap": "2/2 exhausted; no retroactive reset/pass",
+    "next": "focused internal D/R for externally prepared real symlink fixtures within ownedTMP; preserveexact child scopedcapabilities and one TMP arg; one distinct finite engineering correction unit only after approved source/harness CPP, not automatic rerun",
+    "CI_science_C08_unchanged": true
+  },
+  "DOC06_source_tools_correction_result": {
+    "format2": "PASS0.078s exactcandidateunchanged",
+    "lint2": "PASS0.078s exact2files",
+    "initial_lint_failure_retained": true,
+    "extra_source_tools_plan_exhausted": "2/2",
+    "product_unit_effect": 0
+  },
+  "DOC07_C2_source_cycle8": {
+    "state": "allocated_active_final_cycle_of_explicit_cap8",
+    "writer": "/root/doc07_schema_impl medium",
+    "review": "471cbdffa269970d14ff114ff9b2d66053f6b96c15f25cf9a711d7673c2f99d2",
+    "findings": 6,
+    "changes": "private module + appendpairedregressions; C1/publicformats unchanged",
+    "runtime_calls_unchanged": "3/4",
+    "no_automatic_cycle9": true,
+    "finite_envelope": "30min1CPU2GiB4MiBread256KiBoutput,no targetexecution"
+  },
+  "user_status_report": {
+    "delivered": "commentary Russian progress at explicit user request 2026-10-20; user did not cancel active work",
+    "snapshot": "root469ef4e,75calls1017.942s before DOC06 newoutcome",
+    "execution_continues": true
+  },
+  "OPS01_access_read_intent": {
+    "id": "OPS01-ACCESS-READ-1",
+    "state": "source_bound_readonly_intent",
+    "authorization": "activeB/PERM06+directuser2026-10-20credentials/projectcontext and environment.fish",
+    "target": "historicalQCLhypervisor/proxy only; guestVMs andforeignresources protected",
+    "existing_trust": "local known_hosts frozen; StrictHostKeyChecking=yes;UpdateHostKeys=no;IdentityAgentnone;noautoaccept",
+    "route_matches_historical_control_compute_proxy": true,
+    "environment_DEPLOY_HOST_matches_hypervisor": false,
+    "route_sha256": "3e1aefb88113c51e7aee3731bda91647ba2a7100f17bc88189cde0d034b5782f",
+    "frozen_known_hosts_sha256": "c967229938ac5220f05d99ec745f43c9fdfc3e696c1f79820e9df4e63db65e98",
+    "scope": "freshreadonlyidentity/resources+completeVMconfiguredmemoryinventory; noapply/noVMservicejobdatachanges",
+    "max_attempts": 1,
+    "wall_seconds_packet": 600,
+    "raw_bytes_cap": 2097152,
+    "first_connection_deadline_seconds": 45,
+    "not_admission": "fresh full qcl-build-admission snapshot still pending; no CP-NATIVE/BUILD/SCI READY",
+    "current_environment_SITE_proxmox_endpoint_matches_hypervisor": true
+  },
+  "OPS01_access_current": {
+    "id": "OPS01-ACCESS-READ-1",
+    "state": "packet_stopped_after_completed_readonly_phases_no_retry",
+    "phases": [
+      {
+        "phase": "CI_read",
+        "exit_code": 255,
+        "wall_seconds": 0.151,
+        "raw_bytes": 831,
+        "raw_sha256": "5cb6078cde2b3511497109dcab839e6dc2ae7a439a12dbcb675b5cfd3e675bbc",
+        "capture_complete": true,
+        "stop_reason": null,
+        "outcome": "failed_or_unknown"
+      },
+      {
+        "phase": "compute_read",
+        "exit_code": 255,
+        "wall_seconds": 3.412,
+        "raw_bytes": 124,
+        "raw_sha256": "846704f600c90fa52db78b9e80c3d026db73d0c00f152d359ebf09ce862836e8",
+        "capture_complete": true,
+        "stop_reason": null,
+        "outcome": "failed_or_unknown"
+      },
+      {
+        "phase": "control_read",
+        "exit_code": 255,
+        "wall_seconds": 3.463,
+        "raw_bytes": 124,
+        "raw_sha256": "846704f600c90fa52db78b9e80c3d026db73d0c00f152d359ebf09ce862836e8",
+        "capture_complete": true,
+        "stop_reason": null,
+        "outcome": "failed_or_unknown"
+      },
+      {
+        "phase": "hypervisor_read",
+        "exit_code": 0,
+        "wall_seconds": 1.004,
+        "raw_bytes": 3275,
+        "raw_sha256": "d6439bfc9b8bbc44fdbfc83fa4a111a8c9338fd92cf6297473216a7a62da5d16",
+        "capture_complete": true,
+        "stop_reason": null,
+        "outcome": "connected_fresh_readonly_host_facts"
+      },
+      {
+        "phase": "hypervisor_config_storage_read",
+        "exit_code": 0,
+        "wall_seconds": 8.379,
+        "raw_bytes": 36975,
+        "raw_sha256": "571456b963c2671e6106fc62c58923a627e7355a890f07de6eb5d65c1923c06d",
+        "capture_complete": true,
+        "stop_reason": null,
+        "outcome": "connected_fresh_readonly_host_facts"
+      }
+    ],
+    "raw_total_bytes": 41329,
+    "transport_wall_seconds": 16.409,
+    "packet_elapsed_seconds": 496.678,
+    "packet_wall_cap_seconds": 600,
+    "raw_byte_cap": 2097152,
+    "hypervisor_access": "confirmed fresh read-only",
+    "controller_compute_access": "No route to host; matching historicalID/name candidateVMs stopped; actual guest state unknown",
+    "CI_access": "host key mismatch against historical pinned key, not in currentknown_hosts; newkeyNOTaccepted; trusted reprovisioning evidence requested asynchronously",
+    "no_mutations": true,
+    "all_existing_resources_protected": true,
+    "full_admission": false,
+    "builds_solver_CI_dispatch": 0
+  },
+  "DOC07_C2_F3_source_E1_plan": {
+    "operation_id": "DOC07-C2-F3-SOURCE-E1",
+    "authorization": "explicit direct human standing engineering resources grant: здесь и дальше использовать все доступные ресурсы для ускорения разработки и развертывания",
+    "prior_source_cap": "8/8 exhausted retained; not reset or retroactive PASS",
+    "diagnosis": "highreview78a4046f227f4c07f72c8bd59b4b7f87c960a8314cb915b481f7e254bf5d67f5 F3a staleassigning authority selected by emittedused.status; F3b validredactednonnullEvidence falselyrejected",
+    "coordinator_adjudication": "confirmed against accepted independent assigning/numeric privacy branches; existing contract correction, no new model/publicformat",
+    "additional_source_cycles": 1,
+    "scope": "only _assigning authority/status handling + append distinguishingF3a/F3b controls, existingprefix preserved",
+    "limits": "15min1CPU2GiB2MiBread128KiBoutput, no targetruntime/import/parser/tests/CI/native",
+    "independent_high_CPP_required": true,
+    "runtime_budget_unchanged": "DOC07 C1/C2 used3/4; only sole originally allocated GREEN remains",
+    "no_automatic_further_source_cycle": true,
+    "scientific_and_C08_caps_unchanged": true
+  },
+  "DOC07_C2_acceptance": {
+    "scope": "C2private retained-inmemory binder and resolver only",
+    "files": {
+      "src/qcl_negf_contracts/model_help.py": "47fea02cced504a8f8ff52537275f25a5dfbd652b595f70f79306e3113edf62c",
+      "tests/test_model_help_bindings.py": "647e38868ac5b71f8bf90bf03fb69a789c569cdf6ce0234bde8b4745065b1cd7"
+    },
+    "high_CPP": "0556aabd1ab2dfb7566660fc4229c0d34dcd28814dad2f9ca169acd10d9c0464",
+    "prior_fivefinding_CPP": "78a4046f227f4c07f72c8bd59b4b7f87c960a8314cb915b481f7e254bf5d67f5",
+    "GREEN_receipt": "7024cea3cc88f04b4d830ad40bc88fca278076b736028a1d44e14d8f261bb9e1",
+    "cases": 132,
+    "wall_seconds": 1.341,
+    "runtime_shared_cap": "4/4 exhausted; no rerun",
+    "C1_schema_tests_unchanged": true,
+    "original_source_cycles": "8/8 exhausted retained",
+    "F3_E1_source_cycle": "1/1 used accepted after independent review",
+    "limitations": [
+      "private synthetic semantic evidence, not actual producer/Portal integration",
+      "two C1invalid defensive probes not core acceptanceoracles",
+      "no native/public/fullCI/scientific acceptance"
+    ]
+  },
+  "SCI07_source_acceptance": {
+    "D1": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635",
+    "D2": "fc78a0c77394f4d12a1c5633b7e4acb587429667abc106f5aa72c1dc4dd9d010",
+    "highR": "80e2f1ca784b9c4a082d0785e6ee6bc9ceb507eeecc43c63822f65f532a1d18e",
+    "tickets": 7,
+    "state": "sourceconditionalcontractonly_needs_admission_needs_guard",
+    "S1caps_unchanged": true
+  },
+  "DOC06_symlink_E1_engineering_plan": {
+    "operation_id": "DOC06-SYMLINK-E1",
+    "authorization": "standing direct human engineering resources grant: здесь и дальше использовать все доступные ресурсы для ускорения разработки и развертывания",
+    "original_unit_cap": "2/2 exhausted, TScompileRED and54pass2fixtureNotCapable retained unchanged",
+    "diagnosis": "Deno2.8.3 symlink creation unavailable under path-scoped permissions; reviewed external seeding preserves scoped child and exact guard oracles",
+    "D": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba",
+    "D_R": "cae997412488ef7e1508a0c8920120d167f7c59b48047f387e354802506f065d",
+    "CPP": "8d6074a6ddf3bdb13436fd4a83e94254daa6abea5f37af393ad86e0c197b01e9",
+    "harness_sha256": "1222d7d0a03dd39b72fc17be7029ced9e7422273f5ab08dbf48e6bd621f3014d",
+    "max_additional_unit_calls": 1,
+    "no_automatic_following_unit_call": true,
+    "per_unit": {
+      "wall_seconds": 120,
+      "CPU": 1,
+      "sampled_RSS_bytes": 1073741824,
+      "owned_TMP_bytes": 8388608,
+      "raw_bytes": 1048576,
+      "test_count": 56,
+      "measurement_limits": "sampled not hardquota/transientpeak proof; preseed metadata separately counted57linkbytes13nodes"
+    },
+    "additional_source_checks": {
+      "formatter_calls": 1,
+      "linter_calls": 1,
+      "per_call": "20s1CPU1GiBsampledRSS32MiBTMP2MiBraw",
+      "tools": [
+        {
+          "kind": "format",
+          "sha256": "d178ee7272c1087257a319b9db45e521448e72f18f94f145d5c33318e652bfc9",
+          "delta": "only exact attempt whitelist2->3, sameguardian/runtime/path/budgets"
+        },
+        {
+          "kind": "lint",
+          "sha256": "4b9f6a3d6760911075e12fd120fb02f3f4b75b26436809ef9abbcffedd320024",
+          "delta": "only exact attempt whitelist2->3, sameguardian/runtime/path/budgets"
+        }
+      ]
+    },
+    "S1_C08_finalCI_caps_unchanged": true
+  },
+  "active_delegations": {
+    "docs_routing_harness": "medium guarded harness+finiteplan only no execution",
+    "sci08_r1_design": "ultra sourcecontract andmanufacturedfixturematrix only",
+    "doc06_symlink_review": "high finalreceipt review no execution"
+  },
+  "legacy_guard_cache_limitation": {
+    "audit": "qcl-guard-cache-source-audit.json",
+    "current_two_caches": "recursive codeobjects equal exact source compile",
+    "historical_limitation": "No historical cache SHA binding at launch; current posthoc audit cannot reconstruct earlier bytes. Software observations retained; no hard/adversarial guard claim. Newharnesswillloadexactverifiedsourcebytes."
   }
 }

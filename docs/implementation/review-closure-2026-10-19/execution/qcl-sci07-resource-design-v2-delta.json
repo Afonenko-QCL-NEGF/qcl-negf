@@ -1,0 +1,11 @@
+{
+  "format": "qcl-negf.sci07-resource-design-delta.v2",
+  "parent_design_sha256": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635",
+  "review_sha256": "48f97407846b4b179de2442e1295e8cc2028ed7d4e3ca9c2f28c8079ac5d4e67",
+  "changes": [
+    {"finding":"R1", "D1_sections":[4,6,8,9], "D2_sections":[2,3], "delta":"separate total resident T<=A from incremental G<=normalized remaining H; classify already-booked vs materialized reservations; paired exact-fit/one-byte-short controls for SCI08-R2/P1/C1"},
+    {"finding":"R2", "D1_sections":[1,10], "D2_sections":[4], "delta":"initial e22 tree distinct from later published469 tree; D1 identity published_gitlinks belongs e22; owning pins unchanged; final/native admission still absent"}
+  ],
+  "preserved":["D1/raw/identity/source ledger/review", "all7 SCI08 tickets", "all S1 scientific model/caps", "needs_admission/needs_guard", "native/test grants separate"],
+  "no_execution_or_product_edits": true
+}

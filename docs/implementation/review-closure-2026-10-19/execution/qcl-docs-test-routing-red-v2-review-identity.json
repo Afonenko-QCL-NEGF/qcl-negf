@@ -1,0 +1,61 @@
+{
+  "kind": "qcl-docs-test-routing-independent-red-v2-source-review",
+  "verdict": "PASS_SOURCE",
+  "scope": "Narrow R1/R2 correction review; not execution or actual integration acceptance",
+  "review": {
+    "path": "/tmp/qcl-docs-test-routing-red-v2-review.md",
+    "bytes": 9428,
+    "sha256": "8c0d8d06fa5b21623bf593446d1cac63ff803f682b5d72dd2663d9a772fa4b79"
+  },
+  "source": {
+    "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts",
+    "bytes": 38723,
+    "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+    "head": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+    "git_status": "?? tests/docs_test_routing_test.ts"
+  },
+  "frozen_v1": {
+    "path": "/tmp/qcl-docs-test-routing-red-v1-test.ts",
+    "bytes": 33358,
+    "sha256": "f3db415342457e3f05434f5ed5e3c49f83796f6d91eddffdd76846363b64f0c5"
+  },
+  "delta": {
+    "path": "/tmp/qcl-docs-test-routing-red-v2-delta.patch",
+    "bytes": 7284,
+    "sha256": "9bdfa42f1dbc3ca7e104ea7ca8bef24e11faa124368a7d54ff1b205db35fd0c9",
+    "actual_diff_comparison": "same changed hunks from exact v1/current textual diff"
+  },
+  "author_report_read_after_source": {
+    "path": "/tmp/qcl-docs-test-routing-red-v2-report.md",
+    "bytes": 9578,
+    "sha256": "a16483e62dc9a5753b7a40b2c7f1f70d3edb5b2f16088aeba42ab1f09b057364"
+  },
+  "prior_review_sha256": "705bea4364bbaf6053fd51cb7ea7acb48a2776d19e8f6002f9dddbd7e6302eb7",
+  "dispositions": {
+    "R1": "closed: complete source list, parse-only lexical controls, consistent relocated metadata/admission and healthy/unsafe pairs",
+    "R2": "closed: graph changed before runChecks; zero execute calls and non-pass required",
+    "existing_assertions_API": "preserved by exact delta",
+    "actual_integration_gate": "retained, not verified in this scope"
+  },
+  "source_arithmetic_registration_count": 227,
+  "count_status": "source only, not measured",
+  "blocking_findings": [],
+  "actions": {
+    "target_runtime_import_parser_typecheck_tests_build_network": 0,
+    "product_edits_CP_commits": 0,
+    "RED_GREEN_calls": 0
+  },
+  "resources": {
+    "read_cap_bytes": 2097152,
+    "source_full_read_charge_bytes": 255332,
+    "generated_report_hash_read_bytes": 9428,
+    "conservative_bound_bytes": 327680,
+    "method": "Full underlying file charge for each named hash/diff/extract/cat; Git metadata separate",
+    "wall_cap_minutes": 10,
+    "cpu_cap": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 98304,
+    "physical_IO_CPU_RSS": "not measured"
+  },
+  "stop": true
+}

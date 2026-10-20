@@ -1,0 +1,8 @@
+{
+  "operation": "OPS01-ACCESS-READ-1",
+  "ignored_private_backup": ".build/review-closure-coordination/native-access/OPS01-ACCESS-READ-1",
+  "files": 39,
+  "bytes": 206014,
+  "raw_preserved": true,
+  "credential_value_copies_excluded": true
+}

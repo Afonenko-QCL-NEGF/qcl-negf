@@ -1,0 +1,8 @@
+{
+  "kind": "Root high narrow final-format binding",
+  "reviewed_test_sha256": "ff6f0ec86be1ae7905721848998f8f7e7d22173d35534119f6102317e7fa8ec6",
+  "final_test_sha256": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69",
+  "delta_sha256": "35f73b1ffd0a9f80e0a1cb0f9f85e832cde3289594234676046de5895f6983dc",
+  "verdict": "PASS_SOURCE_FORMAT_ONLY",
+  "basis": "Complete saved unified delta inspected: wrapping and trailing commas only; no changed strings/conditions/assertions; original semantic CPP retained. Adapter byte-exact. Formatter3/linter3 receipts PASS exact final bytes. No new target execution claimed."
+}

@@ -1,0 +1,105 @@
+{
+  "format": "qcl-negf.docs-routing-engineering-plan.v1",
+  "scope": "docs-routing-pure-local-engineering-v1",
+  "status": "proposed_not_executed_requires_independent_high_review_and_Root_READY",
+  "attempts": [
+    "DOCS-ROUTING-RED-1",
+    "DOCS-ROUTING-GREEN-1"
+  ],
+  "maximum_product_calls": 2,
+  "attempt_aliases_retries_reruns": false,
+  "limits_per_attempt": {
+    "wall_seconds": 120,
+    "cpu_affinity_count": 1,
+    "RLIMIT_CPU_seconds": 120,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "sampled_owned_TMP_all_lstat_st_size_bytes": 16777216,
+    "complete_raw_output_envelope_bytes": 2097152,
+    "sample_interval_seconds": 0.05
+  },
+  "aggregate_maximums": {
+    "product_calls": 2,
+    "child_wall_seconds": 240,
+    "raw_output_bytes": 4194304,
+    "owned_TMP_sampled_bytes_across_retained_attempts": 33554432
+  },
+  "runtime": {
+    "path": "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+    "version_label": "2.8.3",
+    "version_probe_performed": false
+  },
+  "source_bindings": {
+    "/tmp/qcl-docs-test-routing-design.md": {
+      "sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270",
+      "bytes": 17703
+    },
+    "/tmp/qcl-docs-test-routing-design-v2.md": {
+      "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70",
+      "bytes": 17745
+    },
+    "/tmp/qcl-docs-test-routing-design-v2-review.md": {
+      "sha256": "939555c9291e98be1200b063bcf06e344a7597907dfbf498bf28029927728967",
+      "bytes": 3299
+    },
+    "/tmp/qcl-docs-test-routing-red-v2-report.md": {
+      "sha256": "a16483e62dc9a5753b7a40b2c7f1f70d3edb5b2f16088aeba42ab1f09b057364",
+      "bytes": 9578
+    },
+    "/tmp/qcl-docs-test-routing-red-v2-review.md": {
+      "sha256": "8c0d8d06fa5b21623bf593446d1cac63ff803f682b5d72dd2663d9a772fa4b79",
+      "bytes": 9428
+    },
+    "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts": {
+      "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+      "bytes": 38723
+    },
+    "/tmp/qcl-local-julia-guard-v2.py": {
+      "sha256": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f",
+      "bytes": 14409
+    },
+    "/tmp/qcl-owned-temp-sampler-v2.py": {
+      "sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+      "bytes": 1567
+    }
+  },
+  "fixture_nominal_registrations": 227,
+  "measured_engine_tests": null,
+  "cwd": "/tmp/qcl-docs-test-routing-worktree",
+  "child_argv": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "test",
+    "--no-config",
+    "--no-lock",
+    "--cached-only",
+    "--no-npm",
+    "--no-remote",
+    "--no-prompt",
+    "--reporter=tap",
+    "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts"
+  ],
+  "child_script_permissions": [],
+  "child_environment": "clearEnv by subprocess env exact map DENO_DIR/TMPDIR/HOME to newly created disjoint children under attempt/owned-tmp; no inherited values",
+  "RED": {
+    "attempt": "DOCS-ROUTING-RED-1",
+    "prerequisite": "Frozen fixture exact; ops/docs_tests.ts absent; high accepted harness review; fresh Root READY",
+    "expected_evidence": "One nonzero command retaining exact missing ../ops/docs_tests.ts resolution diagnostic. Loader/typecheck failure before registration is anticipated; no claim of 227 observed RED tests. Unrelated failure is inconclusive and consumes attempt.",
+    "next": "Stop and inspect original bytes/receipt. No repeat, fallback, permissions change, or product implementation from this harness."
+  },
+  "GREEN": {
+    "attempt": "DOCS-ROUTING-GREEN-1",
+    "prerequisite": "Separate authorized source I and independent high review of self-contained import-safe ops/docs_tests.ts; exact helper SHA and retained review bound by fresh Root READY. Review must establish no additional local/npm/remote/static/dynamic import closure and no import-time product/native work. Frozen fixture unchanged.",
+    "expected_evidence": "One complete TAP report with exactly227 tests, all pass, zero failure/skip/ignore/todo/cancel; no only/filter; exact source hashes before/after; guards and capture complete. Unknown report/counter is not pass.",
+    "next": "Stop for independent result and actual task/workflow/CLI source integration review. Pure GREEN alone never proves actual integration/admission/native/CI readiness."
+  },
+  "readiness": "READY schema is exact in harness; status/scopes are Root authorization consistency checks, not production native trust evidence. Review hash alone cannot establish review approval. Root provides trusted active handoff after independent high review.",
+  "original_attempt_caps": "Unchanged. These are two separate local engineering calls only, not extra DOC04/DOC06/native/build/full-CI allowances. Sole final full CI untouched.",
+  "limitations": [
+    "RSS/TMP/output are sampled stop guards with possible overshoot; sampled RSS is not hard peak. CPU affinity and RLIMIT_CPU are enforced locally; no hard RAM/cgroup/disk quota.",
+    "All-entry TMP metric includes file/directory/symlink lstat.st_size without following symlinks; not physical allocation or transient/adversarial namespace guarantee. CLI cache/HOME/TMP included.",
+    "RawCapture continuously retains merged stdout/stderr and drains on failure; crossing2MiB is recorded as failure, never falsely capped/truncated complete.",
+    "Process group kill is scoped local engineering cleanup; escaped descendants are not proven by this guard. Permissionless trusted test cannot spawn; source purity is independently reviewed.",
+    "CLI source module loading is allowed by Deno even when script permissions are empty. Source identity/import safety is a separate mandatory review.",
+    "No fixtures, helper, target units, guard modules, runtime, version probes, parsers, tests, native tools or network executed during harness preparation."
+  ]
+}

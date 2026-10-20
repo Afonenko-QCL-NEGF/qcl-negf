@@ -1,0 +1,18 @@
+{
+  "id": "OPS01-ACCESS-READ-1",
+  "state": "source_bound_readonly_intent",
+  "authorization": "activeB/PERM06+directuser2026-10-20credentials/projectcontext and environment.fish",
+  "target": "historicalQCLhypervisor/proxy only; guestVMs andforeignresources protected",
+  "existing_trust": "local known_hosts frozen; StrictHostKeyChecking=yes;UpdateHostKeys=no;IdentityAgentnone;noautoaccept",
+  "route_matches_historical_control_compute_proxy": true,
+  "environment_DEPLOY_HOST_matches_hypervisor": false,
+  "route_sha256": "3e1aefb88113c51e7aee3731bda91647ba2a7100f17bc88189cde0d034b5782f",
+  "frozen_known_hosts_sha256": "c967229938ac5220f05d99ec745f43c9fdfc3e696c1f79820e9df4e63db65e98",
+  "scope": "freshreadonlyidentity/resources+completeVMconfiguredmemoryinventory; noapply/noVMservicejobdatachanges",
+  "max_attempts": 1,
+  "wall_seconds_packet": 600,
+  "raw_bytes_cap": 2097152,
+  "first_connection_deadline_seconds": 45,
+  "not_admission": "fresh full qcl-build-admission snapshot still pending; no CP-NATIVE/BUILD/SCI READY",
+  "current_environment_SITE_proxmox_endpoint_matches_hypervisor": true
+}

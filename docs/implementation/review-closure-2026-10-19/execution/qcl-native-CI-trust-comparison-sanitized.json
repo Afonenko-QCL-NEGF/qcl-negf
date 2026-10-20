@@ -1,0 +1,10 @@
+{
+  "id": "OPS01-CI-EXISTING-TRUST-READ-1",
+  "source": "existing current user known_hosts frozen before first native SSH, no network/keyscan/update",
+  "known_entry_present": false,
+  "advertised_key_already_present_in_current_user_known_hosts": false,
+  "matching_keytypes": [],
+  "historical_context_key_mismatch": true,
+  "new_key_accepted": false,
+  "connection_rerun": false
+}

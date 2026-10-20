@@ -1,0 +1,58 @@
+{
+  "kind": "qcl-sci07-focused-D2-independent-high-source-review",
+  "verdict": "PASS_SOURCE",
+  "scope": "R1/R2 correction to D1; not native or scientific admission",
+  "admission_status": "needs_admission/needs_guard",
+  "scientific_ready": false,
+  "review": {
+    "path": "/tmp/qcl-sci07-resource-design-v2-review.md",
+    "bytes": 9878,
+    "sha256": "80e2f1ca784b9c4a082d0785e6ee6bc9ceb507eeecc43c63822f65f532a1d18e"
+  },
+  "D1_sha256": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635",
+  "prior_review_sha256": "48f97407846b4b179de2442e1295e8cc2028ed7d4e3ca9c2f28c8079ac5d4e67",
+  "D2": {
+    "path": "/tmp/qcl-sci07-resource-design-v2.md",
+    "bytes": 16555,
+    "sha256": "fc78a0c77394f4d12a1c5633b7e4acb587429667abc106f5aa72c1dc4dd9d010"
+  },
+  "D2_identity_sha256": "62d497cf6c52ac2ed0a9870a98f6d41d424673d2ab2070a5251c8a298d101a9b",
+  "D2_delta_sha256": "2c8974770340f32233ff825009fc9c099ddc20f9534012262d21d4ed2d896667",
+  "dispositions": {
+    "R1": "closed: separate T<=A and G<=H; exact reservation/epoch normalization; disjoint materialized vs future stop/current bytes; paired exact-fit/one-byte-short controls",
+    "R2": "closed: independently read immutable e22 and469 trees; initial-vs-later chronology corrected without rewriting historical packet",
+    "blocking_findings": []
+  },
+  "git_observations": {
+    "method": "git ls-tree exact immutable refs, not index",
+    "initial": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+    "later": "469ef4ec36c1dfb967856108e5f9455429559c15",
+    "later_Core": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+    "later_Runner": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "later_Platform": "f729e2681224d6537538179ab760fefefd575003",
+    "AiiDA_both": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+    "other_four_links": "unchanged; full tree comparison in tool evidence"
+  },
+  "preserved": ["seven SCI08 tickets conditional source readiness", "all S1 physics and finite caps", "D1 immutable evidence", "separate native/admission/test gates", "C08 exhausted"],
+  "native_limit": "Partial READ and coordinator-reported CI host-key mismatch/role NoRoute are not BUILD/science authority; no native raw receipts read by reviewer",
+  "actions": {
+    "target_runtime_import_parser_typecheck_tests_build": 0,
+    "network_native_server": 0,
+    "CP_product_Git_mutations": 0,
+    "science_C08_CI_calls": 0
+  },
+  "resources": {
+    "named_content_charge_bytes": 226071,
+    "generated_report_hash_read_bytes": 9878,
+    "conservative_bound_bytes": 393216,
+    "read_cap_bytes": 2097152,
+    "method": "Full-file charges for repeated named hash/ranged reads; metadata/filename lookup reserve included",
+    "filename_lookup_limit": "Initial filename-only /tmp rg returned permission errors for private directories; no contents read, subsequent reads named-only",
+    "wall_cap_minutes": 10,
+    "cpu_cap": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 98304,
+    "physical_IO_CPU_RSS": "not measured"
+  },
+  "stop": true
+}

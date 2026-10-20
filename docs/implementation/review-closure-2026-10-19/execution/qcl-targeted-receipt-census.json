@@ -448,5 +448,23 @@
     "wall_seconds": 0.822,
     "exit_code": 2,
     "receipt_sha256": "5f2eaddf9326bd00989f97212c56ec36df336440d732d0867380f6c59a0db34f"
+  },
+  {
+    "id": "qcl-DOC06-GREEN-1",
+    "wall_seconds": 1.953,
+    "exit_code": 1,
+    "receipt_sha256": "2b058e3083a35824321936074e58db5f2f328dee0954bbbc97428c3a164c4fa1"
+  },
+  {
+    "id": "qcl-DOC07-C2-GREEN-1",
+    "wall_seconds": 1.341,
+    "exit_code": 0,
+    "receipt_sha256": "7024cea3cc88f04b4d830ad40bc88fca278076b736028a1d44e14d8f261bb9e1"
+  },
+  {
+    "id": "qcl-DOC06-SYMLINK-E1",
+    "wall_seconds": 2.127,
+    "exit_code": 0,
+    "receipt_sha256": "eccf5015685c8b0ff3df87fef2672f6fe461124ce9f09c56b0cea68807b034fc"
   }
 ]

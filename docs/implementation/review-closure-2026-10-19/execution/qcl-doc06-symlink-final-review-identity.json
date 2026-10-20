@@ -1,0 +1,169 @@
+{
+  "format": "qcl-negf.doc06-symlink-final-review-identity.v1",
+  "recorded_utc": "2026-10-20T05:37:27.215855+00:00",
+  "verdict": "PASS_SOFTWARE_DOC06_UNIT_E1",
+  "blocking_findings_for_narrow_unit_scope": [],
+  "report": {
+    "path": "/tmp/qcl-doc06-symlink-final-review.md",
+    "bytes": 13458,
+    "sha256": "1e284d379a48c80e260658c89c3db2ac6ebe10231692c17567b857c0d132ee23"
+  },
+  "inputs": [
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts",
+      "bytes": 35095,
+      "sha256": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts",
+      "bytes": 43061,
+      "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b"
+    },
+    {
+      "path": "/tmp/qcl-doc06-local-unit-run-v2.py",
+      "bytes": 16565,
+      "sha256": "1222d7d0a03dd39b72fc17be7029ced9e7422273f5ab08dbf48e6bd621f3014d"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-SYMLINK-E1/receipt.json",
+      "bytes": 6179,
+      "sha256": "eccf5015685c8b0ff3df87fef2672f6fe461124ce9f09c56b0cea68807b034fc"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-SYMLINK-E1/original.log",
+      "bytes": 3788,
+      "sha256": "a42bb0325226b4244b6e4ed0c85e2a141b5176965021318bcc4238f378136ae8"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-final-format-binding.json",
+      "bytes": 633,
+      "sha256": "92296ab0940997cfc504e4f2def02d8e26bd678fce57722c550208d654fb001c"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-format-delta.patch",
+      "bytes": 5547,
+      "sha256": "35f73b1ffd0a9f80e0a1cb0f9f85e832cde3289594234676046de5895f6983dc"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design.md",
+      "bytes": 19886,
+      "sha256": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design-review.md",
+      "bytes": 14463,
+      "sha256": "cae997412488ef7e1508a0c8920120d167f7c59b48047f387e354802506f065d"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-impl-review.md",
+      "bytes": 14987,
+      "sha256": "8d6074a6ddf3bdb13436fd4a83e94254daa6abea5f37af393ad86e0c197b01e9"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-FORMAT-3/receipt.json",
+      "bytes": 2018,
+      "sha256": "1ecf9cd653ef3bd9653a225d9a576ecbd9dbd55ea5f7649c8a8ca5721df39756"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-FORMAT-3/original.log",
+      "bytes": 106,
+      "sha256": "d00687f820d87674e4ab001b8dc00cf203354291bbbb9e098771f0fd28c56ac8"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-LINT-3/receipt.json",
+      "bytes": 2012,
+      "sha256": "1c81055e95475386ff36b5d94ee44a0f73fb8d8864f9325082a1b16e6d131211"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-LINT-3/original.log",
+      "bytes": 16,
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/receipt.json",
+      "bytes": 2463,
+      "sha256": "2b058e3083a35824321936074e58db5f2f328dee0954bbbc97428c3a164c4fa1"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/original.log",
+      "bytes": 5423,
+      "sha256": "3cae707b9a921a38e820cbb83ca0c7a73437048ed7b86fce27ae803b7d854b54"
+    }
+  ],
+  "observed_root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+  "source_binding": "exact final test/adapter/harness, source-prototype overlay; not clean HEAD/full release",
+  "runtime_evidence": {
+    "attempt": "SYMLINK-E1",
+    "distinct_engineering_budget": "1/1, separate from original DOC06 exhausted2/2",
+    "passed_unique_cases": 56,
+    "failed_cases": 0,
+    "single_consistent_header_and_summary": true,
+    "ordered_names_equal_original_GREEN": true,
+    "stdout_bytes": 3788,
+    "complete_capture": true,
+    "guard_errors": false,
+    "stop_reason": null,
+    "source_bindings_start_terminal_current_equal": true,
+    "sampler_samples": 31,
+    "sampler_phases": {
+      "before_seed": 1,
+      "prelaunch": 1,
+      "loop": 28,
+      "terminal": 1
+    },
+    "wall_seconds": 2.127,
+    "sampled_peak_rss_bytes": 325976064,
+    "sampled_peak_owned_regular_tmp_bytes": 664534,
+    "terminal_owned_regular_tmp_bytes": 626708,
+    "resource_caveat": "sampled logical metrics, no hard quota/physical/transient proof"
+  },
+  "retained_fixture_readback": {
+    "trees": 2,
+    "files_checked_per_tree": 9,
+    "aggregate_literal_bytes_per_tree": 2260,
+    "input_receipt_sha256": "3f627e645bdf29aac1e530585ff703e82720ec9e69b45bec54c88d38fbb1164e",
+    "links_exact_text_and_type": true,
+    "negative_out_directories_absent": true,
+    "real_source_graph_proven": false,
+    "source_graph_field": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "accepted_scope": "exact synthetic source-only unit56/0 and external symlink preparation compatibility under scoped Deno grants",
+  "not_accepted": [
+    "actual selected nine-source commit-to-bytes binding and projection reproducibility",
+    "documentation semantic correctness",
+    "docs render/link/native or D1/D2 full aggregate",
+    "scientific convergence/physics/discretization/experimental validation",
+    "full Root CI or release readiness"
+  ],
+  "missing_actual9_evidence": [
+    "frozen owning commits and canonical source snapshot with external commit-to-bytes binding",
+    "real source graph/input receipt and nine raw SHA/length/owner/revision bindings",
+    "bounded actual-source invocation plus retained projection/receipt and determinism evidence",
+    "independent semantic review against owning sources"
+  ],
+  "review_envelope": {
+    "wall_seconds": 600,
+    "cpu": 1,
+    "ram_bytes": 1073741824,
+    "source_read_bytes": 1048576,
+    "report_bytes": 65536
+  },
+  "conservative_source_read_upper_bound_bytes": 980000,
+  "review_metrics_caveat": "conservative read bound; actual CPU/RSS/physical I/O not measured",
+  "actions": {
+    "new_target_execution": false,
+    "harness_execution": false,
+    "target_import_parser_typecheck_tests_build": false,
+    "network": false,
+    "server": false,
+    "ci": false,
+    "solver": false,
+    "source_edits": false,
+    "checkpoint_edits": false,
+    "git_writes": false,
+    "delegation": false
+  },
+  "original_failed_evidence_preserved": true,
+  "new_attempt_authorized_by_review": false,
+  "stop": "report/identity only; coordinator owns checkpoint and further scope"
+}
