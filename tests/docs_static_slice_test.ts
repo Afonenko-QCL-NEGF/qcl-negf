@@ -855,3 +855,282 @@ for (
     }, text);
   });
 }
+
+// M1/M2/M3 regressions authored before the source correction. A1/A2 are the
+// existing RED evidence; this source-only stage does not execute a new RED.
+function rootConditional(
+  json = schema(),
+  branch = '"algorithms":{"anyOf":[false,{"$ref":"https://invalid.example/inert"}]}',
+) {
+  return json.replace(
+    '{"type":"object"',
+    `{"allOf":[{"if":{"properties":{"run":{"not":false}}},"then":{"properties":{${branch}}}}],"type":"object"`,
+  );
+}
+function assertSchemaUnknown(
+  run: Run,
+  selector: string,
+  reason = "unsupported_selected_schema_context",
+) {
+  for (const context of ["schema-type", "schema-constraint", "schema-default", "units"]) {
+    unsupported(run, INPUT, context, reason);
+    equal(extraction(run, INPUT, context).selector, selector, `${context} cites offending pointer`);
+  }
+  literal(run, "root-production-required", true);
+  equal(
+    extraction(run, INPUT, "root-production-required").selector,
+    "/required",
+    "independent root membership locator",
+  );
+  literal(run, "typed-default", 79);
+  literal(run, "example-explicit", 31);
+  equal(
+    extraction(run, API, "documented-signature").mode,
+    "literal-extraction",
+    "independent API survives",
+  );
+  for (const context of ["units", "effects", "formula-origin"]) {
+    const entry = extraction(run, INPUT, context);
+    const fact = facts(run, INPUT)[entry.fact_index];
+    equal(entry.mode, "dynamic-unknown", `${context} has no authored evidence`);
+    equal(fact.status, "unknown", `${context} unknown`);
+    assert(fact.text.includes(reason), `${context} preserves failure reason`);
+    assert(!fact.text.includes("description отсутствует"), "failure is not absence");
+    assert(!fact.text.includes("приведено отдельно"), "no missing quotation promise");
+    assert(!fact.text.includes("параметр планирования"), "no unsupported scheduling claim");
+  }
+}
+Deno.test("DOC06 unrelated root condition preserves direct declarations with partial validation", async () => {
+  const text = sources(79, 31);
+  text[PATHS[6]] = text[PATHS[7]] = rootConditional();
+  await fixture(async (f) => {
+    const run = await f.run();
+    literal(run, "schema-type", "integer");
+    literal(run, "schema-constraint", { type: "integer", minimum: 1, required: true });
+    literal(run, "root-production-required", true);
+    const absent = extraction(run, INPUT, "schema-default");
+    equal(absent.mode, "literal-extraction", "own default absence is literal");
+    equal(absent.value, null, "no own default keyword");
+    equal(
+      facts(run, INPUT)[absent.fact_index].status,
+      "not_assigned",
+      "recognized direct default absence",
+    );
+    assert(
+      facts(run, INPUT)[absent.fact_index].text.includes("own default"),
+      "absence claim limited to own keyword",
+    );
+    const constraint = extraction(run, INPUT, "schema-constraint");
+    const selectors = (facts(run, INPUT)[constraint.fact_index].sources as { selector: string }[])
+      .map((s) => s.selector);
+    equal(
+      selectors,
+      ["/$defs/production/properties/energy_chunk", "/$defs/production/required"],
+      "combined direct declaration cites leaf and required",
+    );
+    const coverage = extraction(run, INPUT, "schema-validation-coverage");
+    equal(coverage.mode, "authored-context", "coverage explicitly authored");
+    equal(coverage.selector, "/allOf", "root conditional scope locator");
+    equal(
+      coverage.value,
+      [{ if: ["run"], then: ["algorithms"] }],
+      "literal property footprint without predicate evaluation",
+    );
+    equal(
+      facts(run, INPUT)[coverage.fact_index].status,
+      "partial",
+      "full validation remains partial",
+    );
+    const description = extraction(run, INPUT, "units");
+    equal(description.mode, "literal-extraction", "description literal");
+    equal(
+      description.selector,
+      "/$defs/production/properties/energy_chunk/description",
+      "exact owning description",
+    );
+    for (const context of ["effects", "formula-origin"]) {
+      const entry = extraction(run, INPUT, context);
+      equal(entry.mode, "authored-context", `${context} authored interpretation`);
+      equal(entry.selector, description.selector, `${context} grounded in extracted description`);
+      equal(
+        facts(run, INPUT)[entry.fact_index].status,
+        context === "effects" ? "partial" : "not_applicable",
+        `${context} bounded status`,
+      );
+    }
+    literal(run, "typed-default", 79);
+    literal(run, "example-explicit", 31);
+    for (const key of [API, INPUT]) {
+      equal(
+        [...new Set(facts(run, key).map((fact) => fact.name))].sort(),
+        [...CLASSES].sort(),
+        "all ten classes retained",
+      );
+    }
+    equal(
+      run.facts!.binding,
+      { status: "source-prototype", application_release: null, run: null },
+      "no runtime identity",
+    );
+    equal(run.facts!.coverage.status, "partial", "partial global coverage");
+    equal((await f.run("again")).bytes, run.bytes, "facts deterministic across fresh dirs");
+    equal(
+      await Deno.readTextFile(`${f.dir}/again/source-receipt.json`),
+      await Deno.readTextFile(`${f.dir}/out/source-receipt.json`),
+      "receipt deterministic across fresh dirs",
+    );
+  }, text);
+});
+for (const clause of ["if", "then"] as const) {
+  Deno.test(`DOC06 root conditional selected production fails closed in ${clause}`, async () => {
+    const text = sources(79, 31);
+    const positive = rootConditional();
+    text[PATHS[6]] = text[PATHS[7]] = clause === "if"
+      ? positive.replace('"run":{"not":false}', '"production":{"not":false}')
+      : positive.replace('"algorithms":{"anyOf"', '"production":{"anyOf"');
+    await fixture(
+      async (f) => assertSchemaUnknown(await f.run(), `/allOf/0/${clause}/properties/production`),
+      text,
+    );
+  });
+}
+for (
+  const [label, replacement, selector] of [
+    ["else", '"else":{},"if":', "/allOf/0/else"],
+    ["item escaped extra", '"x/y~z":{},"if":', "/allOf/0/x~1y~0z"],
+  ] as const
+) {
+  Deno.test(`DOC06 root conditional rejects unknown item key: ${label}`, async () => {
+    const text = sources(79, 31);
+    text[PATHS[6]] = text[PATHS[7]] = rootConditional().replace('"if":', replacement);
+    await fixture(async (f) => assertSchemaUnknown(await f.run(), selector), text);
+  });
+}
+for (const keyword of ["required", "additionalProperties", "not", "$ref", "x/y~z"] as const) {
+  Deno.test(`DOC06 root conditional rejects root-wide clause key: ${keyword}`, async () => {
+    const text = sources(79, 31);
+    text[PATHS[6]] = text[PATHS[7]] = rootConditional().replace(
+      '"then":{"properties":',
+      `"then":{${JSON.stringify(keyword)}:false,"properties":`,
+    );
+    const segment = keyword.replace(/~/g, "~0").replace(/\//g, "~1");
+    await fixture(
+      async (f) => assertSchemaUnknown(await f.run(), `/allOf/0/then/${segment}`),
+      text,
+    );
+  });
+}
+Deno.test("DOC06 root anyOf keeps direct required independent", async () => {
+  const text = sources(79, 31);
+  text[PATHS[6]] = text[PATHS[7]] = schema().replace('{"type":', '{"anyOf":[{}],"type":');
+  await fixture(async (f) => assertSchemaUnknown(await f.run(), "/anyOf"), text);
+});
+for (
+  const [label, json, pointer] of [
+    [
+      "production allOf",
+      schema().replace('"production":{"type":', '"production":{"allOf":[{}],"type":'),
+      "/$defs/production/allOf",
+    ],
+    [
+      "leaf anyOf",
+      schema('"type":"integer","minimum":1,"description":"Present despite failure","anyOf":[{}]'),
+      "/$defs/production/properties/energy_chunk/anyOf",
+    ],
+  ] as const
+) {
+  Deno.test(`DOC06 unsupported selected context preserves failure locators: ${label}`, async () => {
+    const text = sources(79, 31);
+    text[PATHS[6]] = text[PATHS[7]] = json;
+    await fixture(
+      async (f) => assertSchemaUnknown(await f.run(), pointer, "unsupported_schema_keyword"),
+      text,
+    );
+  });
+}
+Deno.test("DOC06 escaped resolved production required uses its source pointer", async () => {
+  const text = sources(79, 31);
+  text[PATHS[6]] = text[PATHS[7]] = rootConditional(
+    schema().replace('"production":{"type"', '"p/~q":{"type"').replace(
+      "#/$defs/production",
+      "#/$defs/p~1~0q",
+    ),
+  );
+  await fixture(async (f) => {
+    const run = await f.run();
+    const constraint = extraction(run, INPUT, "schema-constraint");
+    literal(run, "schema-constraint", { type: "integer", minimum: 1, required: true });
+    equal(
+      (facts(run, INPUT)[constraint.fact_index].sources as { selector: string }[]).map((s) =>
+        s.selector
+      ),
+      ["/$defs/p~1~0q/properties/energy_chunk", "/$defs/p~1~0q/required"],
+      "escaped source locations retained",
+    );
+  }, text);
+});
+Deno.test("DOC06 direct root membership false remains literal under unsupported context", async () => {
+  const text = sources(79, 31);
+  text[PATHS[6]] = text[PATHS[7]] = rootConditional().replace('["production"]', "[]").replace(
+    '"algorithms":{"anyOf"',
+    '"production":{"anyOf"',
+  );
+  await fixture(async (f) => {
+    const run = await f.run();
+    literal(run, "root-production-required", false);
+    equal(
+      extraction(run, INPUT, "root-production-required").selector,
+      "/required",
+      "false direct membership exact locator",
+    );
+    unsupported(run, INPUT, "schema-constraint", "unsupported_selected_schema_context");
+  }, text);
+});
+for (const absent of ["description_absent", "source_missing"] as const) {
+  Deno.test(`DOC06 description failure keeps absence and unavailable distinct: ${absent}`, async () => {
+    const text = sources(79, 31);
+    if (absent === "description_absent") {
+      text[PATHS[6]] = text[PATHS[7]] = schema('"type":"integer","minimum":1');
+    }
+    await fixture(async (f) => {
+      if (absent === "source_missing") await Deno.remove(`${f.snapshot}/${PATHS[7]}`);
+      const run = await f.run();
+      const units = extraction(run, INPUT, "units");
+      equal(units.reason, absent, "reason is not rewritten as absence");
+      const unitText = facts(run, INPUT)[units.fact_index].text;
+      assert(
+        unitText.includes(
+          absent === "description_absent"
+            ? "direct leaf description не объявлено"
+            : "не извлечено (source_missing)",
+        ),
+        "reason-aware units text",
+      );
+      for (const context of ["effects", "formula-origin"]) {
+        const entry = extraction(run, INPUT, context);
+        equal(entry.mode, "dynamic-unknown", "no fabricated authored interpretation");
+        equal(facts(run, INPUT)[entry.fact_index].status, "unknown", "failure status unknown");
+        assert(facts(run, INPUT)[entry.fact_index].text.includes(absent), "reason retained");
+        assert(
+          !facts(run, INPUT)[entry.fact_index].text.includes("приведено отдельно"),
+          "no quotation promise",
+        );
+      }
+      literal(run, "typed-default", 79);
+      literal(run, "example-explicit", 31);
+    }, text);
+  });
+}
+Deno.test("DOC06 no root composition still states partial validation coverage", () =>
+  fixture(async (f) => {
+    const run = await f.run();
+    const coverage = extraction(run, INPUT, "schema-validation-coverage");
+    equal(coverage.selector, "", "root JSON pointer without allOf");
+    equal(coverage.value, [], "no conditional footprint");
+    equal(coverage.mode, "authored-context", "explicit interpretation mode");
+    equal(
+      facts(run, INPUT)[coverage.fact_index].status,
+      "partial",
+      "direct facts never claim instance validation",
+    );
+  }));

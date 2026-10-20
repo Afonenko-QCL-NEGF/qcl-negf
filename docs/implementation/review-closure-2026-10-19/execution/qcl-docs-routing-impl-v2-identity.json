@@ -1,0 +1,192 @@
+{
+  "scope": "docs-routing-source-I2-partial-not-ready",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "branch": "codex/review-closure-docs-test-routing",
+  "changed_sources": {
+    "deno.json": {
+      "sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+      "bytes": 1829
+    },
+    "ops/ci.ts": {
+      "sha256": "b46eb8d4db89b734324a9c40698d16ce3df8aff764a6d332b9ba52ba43be94e0",
+      "bytes": 3525
+    },
+    "ops/git.ts": {
+      "sha256": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764",
+      "bytes": 3732
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "d8dc81d6684933c40e58e26dda16903cbdede5713bd686c3a1743060ac5318fe",
+      "bytes": 2582
+    },
+    ".github/workflows/release.yml": {
+      "sha256": "53f54fdc377c5eaae6d1688bcbecd85a536caa10cff8523c13b4ea07c76a5b9b",
+      "bytes": 2333
+    },
+    "ops/docs_tests.ts": {
+      "sha256": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+      "bytes": 25884
+    },
+    "ops/docs_tests_native.py": {
+      "sha256": "4f87e4abd2ab06ecc4873f7eca4f66f37cb5f524df1b55ba52ddc53b4444e77f",
+      "bytes": 34632
+    },
+    "ops/docs_tests_cli.ts": {
+      "sha256": "e4349103a43e4050c6ae4bf28d4fc7d8d5dc8e3ad7f51cc57b6c3472db9a5832",
+      "bytes": 6541
+    },
+    "tests/docs_test_routing_test.ts": {
+      "sha256": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761",
+      "bytes": 40125
+    },
+    "tests/test_docs_test_native.py": {
+      "sha256": "9543d126c8d834d8e8e45953e73de34b508ce68ad84bc023e00d642a7bfcf27e",
+      "bytes": 4189
+    },
+    "tests/docs_test_native_protocol_test.ts": {
+      "sha256": "1a12d3821e744f10c2386b42585f8fac1e773dbc52e80e1809049b945fb46442",
+      "bytes": 3510
+    }
+  },
+  "native16_source_only_closure": {
+    "deno.json": {
+      "sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+      "bytes": 1829,
+      "final_committed_blob": null
+    },
+    "ops/ci.ts": {
+      "sha256": "b46eb8d4db89b734324a9c40698d16ce3df8aff764a6d332b9ba52ba43be94e0",
+      "bytes": 3525,
+      "final_committed_blob": null
+    },
+    "ops/docs_tests.ts": {
+      "sha256": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+      "bytes": 25884,
+      "final_committed_blob": null
+    },
+    "tests/docs_test_routing_test.ts": {
+      "sha256": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761",
+      "bytes": 40125,
+      "final_committed_blob": null
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "d8dc81d6684933c40e58e26dda16903cbdede5713bd686c3a1743060ac5318fe",
+      "bytes": 2582,
+      "final_committed_blob": null
+    },
+    ".github/workflows/release.yml": {
+      "sha256": "53f54fdc377c5eaae6d1688bcbecd85a536caa10cff8523c13b4ea07c76a5b9b",
+      "bytes": 2333,
+      "final_committed_blob": null
+    },
+    "tests/test_docs_assembly.py": {
+      "sha256": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+      "bytes": 22976,
+      "final_committed_blob": null
+    },
+    "ops/docs/assemble.py": {
+      "sha256": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+      "bytes": 33127,
+      "final_committed_blob": null
+    },
+    "tests/docs_math_test.mjs": {
+      "sha256": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+      "bytes": 14430,
+      "final_committed_blob": null
+    },
+    "ops/docs/math-render.mjs": {
+      "sha256": "663c712d01db3bdc4bca66d3bb58b9aa6bbffd850c8961e1560c30292fd1aba5",
+      "bytes": 20769,
+      "final_committed_blob": null
+    },
+    "tests/docs_static_slice_test.ts": {
+      "sha256": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69",
+      "bytes": 35095,
+      "final_committed_blob": null
+    },
+    "ops/docs/static-slice.ts": {
+      "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+      "bytes": 43061,
+      "final_committed_blob": null
+    },
+    "ops/docs_tests_native.py": {
+      "sha256": "4f87e4abd2ab06ecc4873f7eca4f66f37cb5f524df1b55ba52ddc53b4444e77f",
+      "bytes": 34632,
+      "final_committed_blob": null
+    },
+    "ops/docs_tests_cli.ts": {
+      "sha256": "e4349103a43e4050c6ae4bf28d4fc7d8d5dc8e3ad7f51cc57b6c3472db9a5832",
+      "bytes": 6541,
+      "final_committed_blob": null
+    },
+    "ops/git.ts": {
+      "sha256": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764",
+      "bytes": 3732,
+      "final_committed_blob": null
+    },
+    "ops/process.ts": {
+      "sha256": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249",
+      "bytes": 1345,
+      "final_committed_blob": null
+    }
+  },
+  "historical_fixture": {
+    "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+    "bytes": 38723
+  },
+  "nominal_registrations": {
+    "historic_routing": 227,
+    "current_routing": 230,
+    "python_native_methods": 8,
+    "deno_native_protocol": 8
+  },
+  "observed_tests": null,
+  "matrix": {
+    "routing": "227unchanged+2guards+3sourceGraph-rejection-controls",
+    "python_native": [
+      "frame roundtrip",
+      "frame negativepairs",
+      "closed Git argv",
+      "phase single-use+binding",
+      "phase peer+expiry",
+      "forged grant",
+      "seed recipe13",
+      "version fullmatch"
+    ],
+    "deno_native": [
+      "bounded frame+negativepairs",
+      "Git broker NUL",
+      "Git incomplete/wrong response",
+      "driver preflight refusal",
+      "owning sourceGraph healthy8gitlinks",
+      "owning refusal at1,5,35"
+    ]
+  },
+  "artifacts": {
+    "/tmp/qcl-docs-routing-impl-v2-complete.patch": {
+      "sha256": "55da25d0b259014a57c1508b980187a7aad152a418c380b4407559fc898be729",
+      "bytes": 126884
+    },
+    "/tmp/qcl-docs-routing-impl-v2-report.md": {
+      "sha256": "16a9d55592ffd9d9f3a5bfee295c4c2234608668a665eff18ad2d5721921c769",
+      "bytes": 12408
+    }
+  },
+  "execution": {
+    "runtime": 0,
+    "compiler": 0,
+    "formatter": 0,
+    "tests": 0,
+    "network": 0,
+    "CI": 0,
+    "science": 0
+  },
+  "source_status": "incomplete-native-setup-broker-factory-and9reportedgaps",
+  "source_checks": [
+    "git diff --check tracked: no diagnostics",
+    "git diff --no-index --check new native.py+driver: no diagnostics, expected1"
+  ],
+  "I1_artifacts_modified": false,
+  "historical_RED_modified": false,
+  "stop": "Root high CPP; no automatic continuation or execution"
+}

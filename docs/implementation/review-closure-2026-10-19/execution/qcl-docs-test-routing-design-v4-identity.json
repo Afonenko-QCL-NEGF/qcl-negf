@@ -1,0 +1,78 @@
+{
+  "stage": "source-only D4 R1/R2; STOP high review",
+  "selected_root": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "selected_platform": "f729e2681224d6537538179ab760fefefd575003",
+  "created_utc": "2026-10-20T06:14:50.480625+00:00",
+  "base_design_sha256": "c586234a65a647c3896eb17af4ac0ae0b8a02f4f56d41dcbf25728d997282554",
+  "base_review_sha256": "228adacf29beb41b48f21b90d055a648b13ded0e8c5e3154f5709a023d2e40d0",
+  "design": {
+    "path": "/tmp/qcl-docs-test-routing-design-v4.md",
+    "sha256": "24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0",
+    "bytes": 35392
+  },
+  "delta_ledger": {
+    "path": "/tmp/qcl-docs-test-routing-design-v4-delta-ledger.md",
+    "sha256": "0b5a817a42afcdbdb93d1be39cedd32b3506f036901bcc368d95dc6d0f0c9c17",
+    "bytes": 3296
+  },
+  "source_inputs": [
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v3.md",
+      "bytes": 29656,
+      "sha256": "c586234a65a647c3896eb17af4ac0ae0b8a02f4f56d41dcbf25728d997282554"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v3-review.md",
+      "bytes": 10853,
+      "sha256": "228adacf29beb41b48f21b90d055a648b13ded0e8c5e3154f5709a023d2e40d0"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v3-review-identity.json",
+      "bytes": 1792,
+      "sha256": "0f709ee432baa85af285e4c8e13016d1609245475b0b05af70b4e04f6fc7265b"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/git.ts",
+      "bytes": 3580,
+      "sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/process.ts",
+      "bytes": 1345,
+      "sha256": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249"
+    }
+  ],
+  "overrides": [
+    "R1 exact registered producer/factory/startup/control/broker/task/workflow/observations",
+    "R2 injected bounded Git reader and pre-first-child supervisor/guard/retention",
+    "Separate minimal2DEVcalls plan requirement from Root steering"
+  ],
+  "preserved": [
+    "D1/D2 exact12 descriptor and unit contracts",
+    "D3 native16 source closure and8gitlinks",
+    "D3 DOC06 seed/counts/global debit/failure retention",
+    "Historic RED evidence and current narrow typing hash split",
+    "No source code or checkpoint changes"
+  ],
+  "known_runtime_prerequisites": [
+    "Trusted existing Root/operator or CI job-launch parent with explicit scoped execution grant; not established by caller JSON or source closure",
+    "Immutable admitted Python/runtime closure and expected source/tools inventory; no fresh measurement now",
+    "Live cgroup delegation/control reserve/storage allocation and current admission",
+    "Explicit separate DEV plan/slots before new protocol tests; pure227 does not cover them",
+    "Live startup/process/cgroup evidence and final CI remain separate gates"
+  ],
+  "execution_counts": {
+    "target_import": 0,
+    "parser_compiler": 0,
+    "product_unit": 0,
+    "native_probe": 0,
+    "network": 0,
+    "build": 0,
+    "solver": 0,
+    "final_ci": 0,
+    "source_patch": 0,
+    "checkpoint_write": 0,
+    "git_write": 0
+  },
+  "resource_measurement": "not_instrumented; source-only read/write three deliverables"
+}

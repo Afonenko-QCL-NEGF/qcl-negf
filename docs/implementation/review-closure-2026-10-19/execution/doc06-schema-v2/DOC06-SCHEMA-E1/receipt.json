@@ -1,0 +1,210 @@
+{
+  "task": "DOC06",
+  "attempt": "SCHEMA-E1",
+  "started_utc": "2026-10-20T06:40:13.285235+00:00",
+  "recorded_at_utc": "2026-10-20T06:40:16.030610+00:00",
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "test",
+    "--cached-only",
+    "--no-remote",
+    "--no-npm",
+    "--no-config",
+    "--allow-read=/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts,/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts,/tmp/DOC06-SCHEMA-E1/tmp",
+    "--allow-write=/tmp/DOC06-SCHEMA-E1/tmp",
+    "tests/docs_static_slice_test.ts",
+    "--",
+    "/tmp/DOC06-SCHEMA-E1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "45e2848cc3cf193c3b9533dcdb518b5daf307da1fbb99546ab619343b1278bef",
+  "fixture_sha256": {
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "exit_code": 0,
+  "wall_seconds": 2.745,
+  "sampled_peak_process_tree_RSS_bytes": 326107136,
+  "sampled_owned_temporary_bytes_peak": 814786,
+  "stdout_stderr_bytes": 5247,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": "RSS_observation_unknown_NotCapable",
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 120,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 8388608,
+    "output_bytes": 1048576,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "DOC06sourceonlyDeno; exacttrustedtest/adapter+ownTMPread, ownTMPwrite; noenv/run/net/ffi, nocustomconfig; no targetimports byreviewedsource, notclaimedbypermissionsalone",
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "original_log": "/tmp/DOC06-SCHEMA-E1/original.log",
+  "rss_samples_completed": 29,
+  "rss_samples_failed": 1,
+  "rss_sample_phases": {
+    "postspawn": 1,
+    "loop": 28,
+    "terminal": 0
+  },
+  "rss_errors": [
+    {
+      "phase": "loop",
+      "error": "Traceback (most recent call last):\n  File \"/tmp/qcl-doc06-schema-local-unit-run-v2.py\", line 310, in observe_rss\n    measured = rss_tree(process.pid)\n  File \"/tmp/qcl-doc06-schema-local-unit-run-v2.py\", line 301, in rss_tree\n    if raw is None: raise RuntimeError('RSS VmRSS not measured: '+str(member))\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: RSS VmRSS not measured: 2926112\n"
+    }
+  ],
+  "rss_status": "unknown_NotCapable",
+  "head_observations": {
+    "readiness": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+    "prelaunch": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+    "terminal": "b07974b8e46bf8afdf1740947b842669a62a5ccc"
+  },
+  "expected_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "stage_id": "DOC06-SCHEMA-E1",
+  "plan_sha256": "2206d06e2c072b5132db0a2a89048a7df5ef2602961bd03c19ef916cad5c824c",
+  "ready_sha256": "ffecd5934e5698bf6646eec6087b87d225feb056f94905587913e76099437545",
+  "accepted_cpp_sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7",
+  "final_format_only_review": {
+    "path": "/tmp/qcl-doc06-schema-format-only-review.json",
+    "sha256": "0130a35e4445fbc73feda5d5ad7e0df20b032b59cc3490abef7409535ce162e3"
+  },
+  "input_source_sha256": {
+    "ops/docs/static-slice.ts": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "output_source_sha256": {
+    "ops/docs/static-slice.ts": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "expected_tests": 74,
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 32,
+  "owned_temporary_sample_phases": {
+    "before_seed": 1,
+    "prelaunch": 1,
+    "loop": 29,
+    "terminal": 1
+  },
+  "symlink_preparation": {
+    "phase": "terminal",
+    "status": "prepared",
+    "child_started": true,
+    "before_seed_sampled_regular_bytes": 0,
+    "entries": [
+      {
+        "path": "prepared-symlink-directory",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-directory/backing",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-directory/backing/core",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-directory/snapshot",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-directory/snapshot/core",
+        "type": "symlink",
+        "lstat_checked": true,
+        "link_text": "../backing/core",
+        "backing_target": "prepared-symlink-directory/backing/core",
+        "realpath_checked": true
+      },
+      {
+        "path": "prepared-symlink-file",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-file/backing",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-file/backing/configuration_types.jl",
+        "type": "file",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-file/snapshot",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-file/snapshot/runner",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-file/snapshot/runner/src",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-file/snapshot/runner/src/application",
+        "type": "directory",
+        "lstat_checked": true
+      },
+      {
+        "path": "prepared-symlink-file/snapshot/runner/src/application/configuration_types.jl",
+        "type": "symlink",
+        "lstat_checked": true,
+        "link_text": "../../../../backing/configuration_types.jl",
+        "backing_target": "prepared-symlink-file/backing/configuration_types.jl",
+        "realpath_checked": true
+      }
+    ],
+    "counts": {
+      "directory": 10,
+      "symlink": 2,
+      "file": 1
+    },
+    "link_payload_bytes": 57,
+    "regular_payload_bytes": 0,
+    "physical_allocation": "not_measured",
+    "bindings": {
+      "test_sha256": {
+        "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+      },
+      "adapter_sha256": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+      "harness_sha256": "45e2848cc3cf193c3b9533dcdb518b5daf307da1fbb99546ab619343b1278bef",
+      "sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e"
+    },
+    "elapsed_seconds": 0.001016,
+    "prelaunch_sampled_regular_bytes": 0,
+    "terminal_sampled_regular_bytes": 678652
+  },
+  "bound_fixture_sha256": {
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "adapter_sha256": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+  "terminal_source_bindings": {
+    "test_sha256": {
+      "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+    },
+    "adapter_sha256": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "harness_sha256": "45e2848cc3cf193c3b9533dcdb518b5daf307da1fbb99546ab619343b1278bef"
+  },
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof.",
+  "raw_metadata": {
+    "status": "measured",
+    "bytes": 5247,
+    "sha256": "a9d789058b4e4bdb84eba977b1d3366f9eb714b96058426acc63e3feac98b9b6",
+    "expected_summary": true,
+    "tail": "ported: nonfinite-number ... ok (5ms)\nDOC06 schema unsupported: missing-ref ... ok (5ms)\nDOC06 schema unsupported: cyclic-ref ... ok (6ms)\nDOC06 schema unsupported: remote-ref ... ok (5ms)\nDOC06 schema unsupported: prototype-key ... ok (5ms)\nDOC06 schema unsupported: combinator ... ok (6ms)\nDOC06 local pointer escaping is decoded with own-key traversal ... ok (6ms)\nDOC06 packaged schema mismatch is explicit without replacing canonical authority ... ok (6ms)\nDOC06 schema default declaration is reported without applying it ... ok (6ms)\nDOC06 dynamic typed RHS remains unsupported: ENV[\"QCL_CHUNK\"] ... ok (5ms)\nDOC06 dynamic typed RHS remains unsupported: compute_chunk() ... ok (5ms)\nDOC06 dynamic typed RHS remains unsupported: 32 + 32 ... ok (5ms)\nDOC06 dynamic typed RHS remains unsupported: @value 64 ... ok (5ms)\nDOC06 dynamic typed RHS remains unsupported: 9007199254740993 ... ok (5ms)\nDOC06 rejects false typed field match: comment ... ok (5ms)\nDOC06 rejects false typed field match: string ... ok (5ms)\nDOC06 rejects false typed field match: duplicate ... ok (6ms)\nDOC06 macro method is not typed inventory: @generate  ... ok (5ms)\nDOC06 macro method is not typed inventory: @eval  ... ok (5ms)\nDOC06 signature inside string is not a declaration ... ok (5ms)\nDOC06 YAML target is opaque unsupported: *chunk ... ok (5ms)\nDOC06 YAML target is opaque unsupported: !!int 64 ... ok (4ms)\nDOC06 YAML target is opaque unsupported: &chunk 64 ... ok (5ms)\nDOC06 YAML target is opaque unsupported: 64 + 1 ... ok (4ms)\nDOC06 YAML duplicate selected leaf is ambiguous ... ok (5ms)\nDOC06 refuses cap overrun: file-bytes ... ok (2ms)\nDOC06 refuses cap overrun: docstring ... ok (4ms)\nDOC06 lexical cap with healthy selected schema: json-depth ... ok (10ms)\nDOC06 lexical cap with healthy selected schema: json-string ... ok (11ms)\nDOC06 lexical cap with healthy selected schema: json-tokens ... ok (40ms)\nDOC06 refuses receipt-byte and source-count caps ... ok (5ms)\nDOC06 refuses source aggregate cap without truncated success ... ok (3ms)\nDOC06 Julia and valid JavaScript sentinels remain inert bytes ... ok (10ms)\nDOC06 invalid UTF-8 is refused even with matching receipt hash ... ok (2ms)\nDOC06 duplicate receipt path is refused ... ok (1ms)\nDOC06 wrong source byte length is refused ... ok (2ms)\nDOC06 duplicate required member is not a direct complete constraint ... ok (7ms)\nDOC06 local reference hop cap refuses a long acyclic chain ... ok (4ms)\nDOC06 false field context stays unknown: Cmd literal ... ok (10ms)\nDOC06 false field context stays unknown: inner constructor local ... ok (15ms)\nDOC06 unrelated root condition preserves direct declarations with partial validation ... ok (18ms)\nDOC06 root conditional selected production fails closed in if ... ok (5ms)\nDOC06 root conditional selected production fails closed in then ... ok (5ms)\nDOC06 root conditional rejects unknown item key: else ... ok (5ms)\nDOC06 root conditional rejects unknown item key: item escaped extra ... ok (5ms)\nDOC06 root conditional rejects root-wide clause key: required ... ok (5ms)\nDOC06 root conditional rejects root-wide clause key: additionalProperties ... ok (5ms)\nDOC06 root conditional rejects root-wide clause key: not ... ok (5ms)\nDOC06 root conditional rejects root-wide clause key: $ref ... ok (4ms)\nDOC06 root conditional rejects root-wide clause key: x/y~z ... ok (5ms)\nDOC06 root anyOf keeps direct required independent ... ok (5ms)\nDOC06 unsupported selected context preserves failure locators: production allOf ... ok (5ms)\nDOC06 unsupported selected context preserves failure locators: leaf anyOf ... ok (5ms)\nDOC06 escaped resolved production required uses its source pointer ... ok (4ms)\nDOC06 direct root membership false remains literal under unsupported context ... ok (5ms)\nDOC06 description failure keeps absence and unavailable distinct: description_absent ... ok (5ms)\nDOC06 description failure keeps absence and unavailable distinct: source_missing ... ok (4ms)\nDOC06 no root composition still states partial validation coverage ... ok (5ms)\n\nok | 74 passed | 0 failed (529ms)\n\n",
+    "error": null
+  },
+  "expected_test_summary_observed": true,
+  "outcome": "failed"
+}

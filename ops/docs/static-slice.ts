@@ -493,6 +493,8 @@ type SchemaProjection = {
   declaration: Observation;
   description: Observation;
   rootRequired: Observation;
+  productionRequired: Observation;
+  validationCoverage: Observation;
 };
 function schemaProjection(input: Input): SchemaProjection {
   const pointer = "/$defs/production/properties/energy_chunk";
@@ -501,12 +503,17 @@ function schemaProjection(input: Input): SchemaProjection {
     constraint: unavailable,
     declaration: unavailable,
     description: unavailable,
-    rootRequired: unavailable,
+    rootRequired: input.text === null ? missing("/required") : failed("/required"),
+    productionRequired: unavailable,
+    validationCoverage: input.text === null ? missing("") : failed(""),
   };
   if (input.text === null) return result;
+  let failurePointer = "";
+  const segment = (key: string) => key.replace(/~/g, "~0").replace(/\//g, "~1");
   try {
     const root = object(parseData(input.text));
-    const required = function (node: Record<string, unknown>): string[] {
+    const required = function (node: Record<string, unknown>, location: string): string[] {
+      failurePointer = location + "/required";
       if (!own(node, "required")) return [];
       const list = node.required;
       if (
@@ -515,9 +522,16 @@ function schemaProjection(input: Input): SchemaProjection {
       ) unsupported("malformed_schema");
       return list as string[];
     };
-    const allowed = function (node: Record<string, unknown>, keys: string[]) {
-      if (Object.keys(node).some((key) => !keys.includes(key))) {
-        unsupported("unsupported_schema_keyword");
+    const allowed = function (
+      node: Record<string, unknown>,
+      keys: string[],
+      location: string,
+      reason = "unsupported_schema_keyword",
+    ) {
+      const extra = Object.keys(node).find((key) => !keys.includes(key));
+      if (extra !== undefined) {
+        failurePointer = location + "/" + segment(extra);
+        unsupported(reason);
       }
     };
     // Only keywords which cannot add an unprojected selected-path condition
@@ -547,22 +561,68 @@ function schemaProjection(input: Input): SchemaProjection {
       "default",
       "$ref",
     ];
-    allowed(root, objectKeys);
-    if (own(root, "$ref")) unsupported("unsupported_root_ref");
+    // Literal root membership is independent of later selected-path coverage.
+    failurePointer = "/type";
     if (own(root, "type") && root.type !== "object") unsupported("malformed_schema");
-    result.rootRequired = { value: required(root).includes("production"), selector: "/required" };
+    result.rootRequired = {
+      value: required(root, "").includes("production"),
+      selector: "/required",
+    };
+    // allOf is accepted only through this narrow scope classifier. Conditions
+    // are never evaluated; values below other immediate root properties are
+    // opaque source data, including their nested refs/combinators.
+    allowed(root, [...objectKeys, "allOf"], "", "unsupported_selected_schema_context");
+    if (own(root, "$ref")) {
+      failurePointer = "/$ref";
+      unsupported("unsupported_root_ref");
+    }
+    const footprint: { if: string[]; then: string[] }[] = [];
+    if (own(root, "allOf")) {
+      failurePointer = "/allOf";
+      if (!Array.isArray(root.allOf) || root.allOf.length === 0) unsupported("malformed_schema");
+      for (let i = 0; i < root.allOf.length; i++) {
+        const location = `/allOf/${i}`;
+        failurePointer = location;
+        const item = object(root.allOf[i]);
+        allowed(item, ["if", "then"], location, "unsupported_selected_schema_context");
+        const scopes = { if: [] as string[], then: [] as string[] };
+        for (const clause of ["if", "then"] as const) {
+          failurePointer = location + "/" + clause;
+          if (!own(item, clause)) unsupported("unsupported_selected_schema_context");
+          const node = object(item[clause]);
+          allowed(node, ["properties"], failurePointer, "unsupported_selected_schema_context");
+          failurePointer = location + "/" + clause + "/properties";
+          if (!own(node, "properties")) unsupported("unsupported_selected_schema_context");
+          const properties = object(node.properties);
+          const names = Object.keys(properties);
+          if (names.length === 0) unsupported("malformed_schema");
+          if (own(properties, "production")) {
+            failurePointer += "/production";
+            unsupported("unsupported_selected_schema_context");
+          }
+          scopes[clause] = names;
+        }
+        footprint.push(scopes);
+      }
+    }
+    result.validationCoverage = { value: footprint, selector: own(root, "allOf") ? "/allOf" : "" };
     let hops = 0;
     const seen = new Set<string>();
     const resolve = function (
       raw: unknown,
       location: string,
     ): { node: Record<string, unknown>; location: string } {
+      failurePointer = location;
       let node = object(raw);
       while (own(node, "$ref")) {
+        failurePointer = location + "/$ref";
         // Draft-specific sibling constraints are intentionally unsupported.
-        if (
-          Object.keys(node).some((k) => !["$ref", "$comment", "title", "description"].includes(k))
-        ) unsupported("unsupported_ref_siblings");
+        allowed(
+          node,
+          ["$ref", "$comment", "title", "description"],
+          location,
+          "unsupported_ref_siblings",
+        );
         const ref = node.$ref;
         if (typeof ref !== "string" || !ref.startsWith("#/")) unsupported("unsupported_local_ref");
         if (seen.has(ref)) unsupported("cyclic_local_ref");
@@ -577,27 +637,39 @@ function schemaProjection(input: Input): SchemaProjection {
           if (!own(container, key)) unsupported("missing_local_ref");
           value = container[key];
         }
-        node = object(value);
         location = ref.slice(1);
+        failurePointer = location;
+        node = object(value);
       }
       return { node, location };
     };
+    failurePointer = "/properties";
     const production = resolve(object(root.properties).production, "/properties/production");
-    allowed(production.node, objectKeys);
+    allowed(production.node, objectKeys, production.location);
+    failurePointer = production.location + "/type";
     if (production.node.type !== "object") unsupported("malformed_schema");
-    const productionRequired = required(production.node);
+    const productionRequired = required(production.node, production.location);
+    result.productionRequired = {
+      value: productionRequired.includes("energy_chunk"),
+      selector: production.location + "/required",
+    };
+    failurePointer = production.location + "/properties";
     const selected = resolve(
       object(production.node.properties).energy_chunk,
       production.location + "/properties/energy_chunk",
     );
-    allowed(selected.node, leafKeys);
-    if (
-      selected.node.type !== "integer" || typeof selected.node.minimum !== "number" ||
-      !Number.isFinite(selected.node.minimum)
-    ) unsupported("malformed_schema");
+    allowed(selected.node, leafKeys, selected.location);
+    failurePointer = selected.location + "/type";
+    if (selected.node.type !== "integer") unsupported("malformed_schema");
+    failurePointer = selected.location + "/minimum";
+    if (typeof selected.node.minimum !== "number" || !Number.isFinite(selected.node.minimum)) {
+      unsupported("malformed_schema");
+    }
+    failurePointer = selected.location + "/description";
     if (own(selected.node, "description") && typeof selected.node.description !== "string") {
       unsupported("malformed_schema");
     }
+    failurePointer = selected.location + "/default";
     if (
       own(selected.node, "default") &&
       (typeof selected.node.default !== "number" || !Number.isSafeInteger(selected.node.default))
@@ -620,9 +692,10 @@ function schemaProjection(input: Input): SchemaProjection {
   } catch (error) {
     if (!(error instanceof Unsupported)) throw error;
     // Never project a successfully read prefix as a full selected constraint.
-    result.constraint = failed(pointer, error.reason);
-    result.declaration = failed(pointer + "/default", error.reason);
-    result.description = failed(pointer + "/description", error.reason);
+    result.constraint = failed(failurePointer, error.reason);
+    result.declaration = failed(failurePointer, error.reason);
+    result.description = failed(failurePointer, error.reason);
+    result.validationCoverage = failed(failurePointer, error.reason);
   }
   return result;
 }
@@ -882,7 +955,9 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
       leaf,
       "units",
       "unknown",
-      "Owning description отсутствует; физические единицы из имени не выводятся.",
+      observedSchema.description.reason === "description_absent"
+        ? "В распознанном direct leaf description не объявлено; физические единицы из имени не выводятся."
+        : `Owning description не извлечено (${observedSchema.description.reason}); физические единицы из имени не выводятся.`,
       "units",
       observedSchema.description,
       schemaInput,
@@ -894,7 +969,9 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
     "schema-default",
     declaredDefault,
     schemaInput,
-    "Default в schema context; декларация не применяется к конфигурации",
+    !declaredDefault.reason && declaredDefault.value === null
+      ? "В распознанном direct leaf нет own default keyword; это не runtime assignment"
+      : "Default в schema context; декларация не применяется к конфигурации",
     declaredDefault.value === null ? "not_assigned" : "known",
   );
   literal(
@@ -921,6 +998,11 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
     schemaInput,
     "Прямые type/minimum/required декларации owning schema; не полный validator",
   );
+  if (!constraint.reason) {
+    leaf.facts[leaf.facts.length - 1].sources.push(
+      ...sourceRef(schemaInput, observedSchema.productionRequired.selector),
+    );
+  }
   literal(
     leaf,
     "constraint",
@@ -931,12 +1013,28 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
   );
   add(
     leaf,
+    "constraint",
+    "partial",
+    observedSchema.validationCoverage.reason
+      ? `Selected schema context не распознан (${observedSchema.validationCoverage.reason}); полная validation не выполнялась.`
+      : "Авторский контекст: извлечены прямые selected declarations и scope root properties; root conditional predicates и полный validator не вычислялись. Footprint: " +
+        JSON.stringify(observedSchema.validationCoverage.value),
+    "schema-validation-coverage",
+    observedSchema.validationCoverage,
+    schemaInput,
+    observedSchema.validationCoverage.reason ? "dynamic-unknown" : "authored-context",
+  );
+  add(
+    leaf,
     "effects",
     observedSchema.description.reason ? "unknown" : "partial",
-    "Авторский контекст: параметр планирования energy-node work; этот adapter не меняет сетку/физическую модель и не исполняет scheduling. Owning description приведено отдельно; полный effect inventory не установлен.",
+    observedSchema.description.reason
+      ? `Owning description не извлечено (${observedSchema.description.reason}); полный effect inventory неизвестен.`
+      : "Авторский контекст: параметр планирования energy-node work; этот adapter не меняет сетку/физическую модель и не исполняет scheduling. Owning description приведено отдельно; полный effect inventory не установлен.",
     "effects",
     observedSchema.description,
     schemaInput,
+    observedSchema.description.reason ? "dynamic-unknown" : "authored-context",
   );
   add(
     leaf,
@@ -950,11 +1048,14 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
   add(
     leaf,
     "formula_origin",
-    "not_applicable",
-    "Авторский контекст: scheduling count не предоставляет физическую формулу; формула NEGF или rationale допуска не генерируются.",
+    observedSchema.description.reason ? "unknown" : "not_applicable",
+    observedSchema.description.reason
+      ? `Owning description не извлечено (${observedSchema.description.reason}); formula origin неизвестен.`
+      : "Авторский контекст: scheduling count не предоставляет физическую формулу; формула NEGF или rationale допуска не генерируются.",
     "formula-origin",
     observedSchema.description,
     schemaInput,
+    observedSchema.description.reason ? "dynamic-unknown" : "authored-context",
   );
   add(
     leaf,

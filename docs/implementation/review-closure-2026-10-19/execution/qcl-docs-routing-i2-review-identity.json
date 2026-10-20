@@ -1,0 +1,76 @@
+{
+  "review": "routing-I2-independent-source-CPP-high",
+  "verdict": "changes-required-partial-native-source-not-ready",
+  "selected_worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "main_workspace_head_not_used_as_selected": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "selected_status": {
+    "tracked_modified": [".github/workflows/ci.yml", ".github/workflows/release.yml", "deno.json", "ops/ci.ts", "ops/git.ts"],
+    "untracked": ["ops/docs_tests.ts", "ops/docs_tests_cli.ts", "ops/docs_tests_native.py", "tests/docs_test_native_protocol_test.ts", "tests/docs_test_routing_test.ts", "tests/test_docs_test_native.py"],
+    "submodules": "all-eight-uninitialized-gitlinks-unchanged"
+  },
+  "inputs": {
+    "/tmp/qcl-docs-test-routing-design-v4.md": "24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0",
+    "/tmp/qcl-docs-test-routing-design-v4-review.md": "ca5a8d36b04ff6e5f52817da420b6fb3ca92e95d9e70e45c1ea6f44f74b9fb48",
+    "/tmp/qcl-docs-routing-impl-v2-report.md": "16a9d55592ffd9d9f3a5bfee295c4c2234608668a665eff18ad2d5721921c769",
+    "/tmp/qcl-docs-routing-impl-v2-identity.json": "4b55bcc45c097c7afe887db031dfdc10851759677d8dd1c8fad6fb53293dbf54",
+    "/tmp/qcl-docs-routing-impl-v2-complete.patch": "55da25d0b259014a57c1508b980187a7aad152a418c380b4407559fc898be729"
+  },
+  "selected_source_sha256": {
+    "deno.json": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+    "ops/ci.ts": "b46eb8d4db89b734324a9c40698d16ce3df8aff764a6d332b9ba52ba43be94e0",
+    "ops/docs_tests.ts": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761",
+    ".github/workflows/ci.yml": "d8dc81d6684933c40e58e26dda16903cbdede5713bd686c3a1743060ac5318fe",
+    ".github/workflows/release.yml": "53f54fdc377c5eaae6d1688bcbecd85a536caa10cff8523c13b4ea07c76a5b9b",
+    "tests/test_docs_assembly.py": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+    "ops/docs/assemble.py": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+    "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+    "ops/docs/math-render.mjs": "663c712d01db3bdc4bca66d3bb58b9aa6bbffd850c8961e1560c30292fd1aba5",
+    "tests/docs_static_slice_test.ts": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69",
+    "ops/docs/static-slice.ts": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "ops/docs_tests_native.py": "4f87e4abd2ab06ecc4873f7eca4f66f37cb5f524df1b55ba52ddc53b4444e77f",
+    "ops/docs_tests_cli.ts": "e4349103a43e4050c6ae4bf28d4fc7d8d5dc8e3ad7f51cc57b6c3472db9a5832",
+    "ops/git.ts": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764",
+    "ops/process.ts": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249",
+    "tests/test_docs_test_native.py": "9543d126c8d834d8e8e45953e73de34b508ce68ad84bc023e00d642a7bfcf27e",
+    "tests/docs_test_native_protocol_test.ts": "1a12d3821e744f10c2386b42585f8fac1e773dbc52e80e1809049b945fb46442"
+  },
+  "fixture_mapping": {
+    "ancestral_sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+    "ancestral_nominal": 227,
+    "two_narrowing_guards": true,
+    "additional_sourceGraph_cases": 3,
+    "current_nominal": 230,
+    "python_native_nominal_methods": 8,
+    "deno_protocol_nominal_registrations": 8,
+    "observed": null
+  },
+  "findings": [
+    "R1 missing active factory broker and native state machine",
+    "R2 failure capture cleanup fallback and durable raw receipt gaps",
+    "R3 plaintext phase tokens passed as durable intent",
+    "R4 incomplete protocol exact unions bounds and client challenge delta",
+    "R5 missing native closure Git budgets and section semantics mismatch",
+    "R6 late storage debit unbounded census allocation and seed checks",
+    "R7 missing trusted reader construction and guard authority gates",
+    "R8 base inherited env and native command schema translation absent",
+    "R9 native DEV paired matrix incomplete"
+  ],
+  "report": {
+    "path": "/tmp/qcl-docs-routing-i2-review.md",
+    "sha256": "5b7ec1e5f1fefad767315f539fe637c12c322902c78d542acea16639931ced60",
+    "bytes": 24241
+  },
+  "execution": {
+    "target_import": 0, "parser": 0, "compiler": 0, "lint": 0,
+    "formatter": 0, "tests": 0, "native": 0, "network": 0,
+    "server": 0, "build": 0, "solver": 0, "CI": 0
+  },
+  "product_edits": 0,
+  "checkpoint_edits": 0,
+  "historical_artifact_edits": 0,
+  "read_bytes_conservative_upper_bound": 2097152,
+  "resource_measurements": null,
+  "stop": "Return report to Root; I2B source continuation and all execution remain separately scoped"
+}

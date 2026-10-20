@@ -1,0 +1,125 @@
+{
+  "format": "qcl-negf.doc06-schema-engineering-plan.v2",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "source_paths": [
+    "ops/docs/static-slice.ts",
+    "tests/docs_static_slice_test.ts"
+  ],
+  "candidate_source_sha256": {
+    "ops/docs/static-slice.ts": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee",
+    "tests/docs_static_slice_test.ts": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04"
+  },
+  "accepted_cpp": {
+    "path": "/tmp/qcl-doc06-schema-fix-impl-review.md",
+    "sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7",
+    "verdict": "PASS_SOURCE_CPP_I1"
+  },
+  "runtime": {
+    "path": "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c"
+  },
+  "deno_config": {
+    "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/deno.json",
+    "sha256": "a4043c0ec1c976c03704253316c90a94cb8c7ca2cfe4222f7182ea05565249b7",
+    "line_width": 100
+  },
+  "stages": {
+    "DOC06-SCHEMA-FORMAT-1": {
+      "max_calls": 1,
+      "wall_seconds": 20,
+      "cpu_count": 1,
+      "rss_bytes": 1073741824,
+      "temporary_bytes": 33554432,
+      "raw_bytes": 2097152,
+      "script": "/tmp/qcl-doc06-schema-format-run-v2.py",
+      "operation": "fmt",
+      "source_mutation": "exact two paths only; input and output SHA recorded"
+    },
+    "DOC06-SCHEMA-LINT-1": {
+      "max_calls": 1,
+      "wall_seconds": 20,
+      "cpu_count": 1,
+      "rss_bytes": 1073741824,
+      "temporary_bytes": 33554432,
+      "raw_bytes": 2097152,
+      "script": "/tmp/qcl-doc06-schema-lint-run-v2.py",
+      "operation": "lint",
+      "source_mutation": "none; fresh final Root READY source hashes"
+    },
+    "DOC06-SCHEMA-E1": {
+      "max_calls": 1,
+      "wall_seconds": 120,
+      "cpu_count": 1,
+      "rss_bytes": 1073741824,
+      "temporary_bytes": 8388608,
+      "raw_bytes": 1048576,
+      "script": "/tmp/qcl-doc06-schema-local-unit-run-v2.py",
+      "operation": "unit",
+      "expected_tests": 74,
+      "source_mutation": "none; fresh final Root READY source hashes"
+    }
+  },
+  "milestone": {
+    "previous_calls": 81,
+    "maximum_calls": 87,
+    "new_calls_maximum": 6,
+    "this_plan_calls_maximum": 3,
+    "unit_calls_in_this_plan": 1,
+    "future_actual_calls": 2,
+    "future_actual_harness_in_scope": false,
+    "unallocated_coordinator_call_ceiling": 1
+  },
+  "prior_exhausted_counters": {
+    "format": "3/3",
+    "lint": "3/3",
+    "unit": "2/2",
+    "E1": "1/1",
+    "actual": "2/2"
+  },
+  "approval": "This file is a finite plan, not READY or an execution grant. Root issues fresh per-stage READY after promotion and independent source review.",
+  "ready_contract": {
+    "fixed_path_pattern": "/tmp/qcl-doc06-schema-{format,lint,e1}-ready-v2.json",
+    "created_age_max_seconds": 300,
+    "maximum_validity_seconds": 300,
+    "required_fields": [
+      "format",
+      "stage_id",
+      "root",
+      "head",
+      "scope",
+      "plan_sha256",
+      "harness_sha256",
+      "runtime_sha256",
+      "source_sha256",
+      "accepted_cpp_sha256",
+      "created_utc",
+      "valid_until_utc",
+      "coordinator_authorized",
+      "limits"
+    ],
+    "final_stages_additionally_require": [
+      "formatter_receipt_sha256",
+      "format_only_review"
+    ],
+    "format_only_review_json_fields": [
+      "verdict=PASS_FORMAT_ONLY_EQUIVALENCE",
+      "input_source_sha256",
+      "output_source_sha256",
+      "formatter_receipt_sha256",
+      "accepted_cpp_sha256"
+    ],
+    "review_ref": "format_only_review={path,sha256}; Root authors/binds fresh accepted independent review JSON, source hash mapping must equal final READY mapping."
+  },
+  "guards": "Permanent unique attempt folder before READY/child; exact verified-buffer ModuleType loading, no importlib/pyc; fixed clean child env; sampled RSS/TMP plus terminal guards; complete original raw drain with overrun failure; no automatic retry; no CI/science/C08. v2: actual readonly Git HEAD binding; nullable RSS with valid sample required; outer best-effort failed receipt after reserved folder, explicit stderr fallback if persistence impossible.",
+  "author_cpp_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "current_root_head": "Late-bound fresh READY 40hex; actual git rev-parse HEAD must match readiness/prelaunch/terminal",
+  "review_revision": {
+    "previous_source_review_sha256": "787e5728d3541584ca91b84be1b76e181863cd83e12233b399e209110d9a3fa3",
+    "corrections": [
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "not_new_calls": true
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "format": "qcl-negf.doc06-schema-harness-independent-source-review.v2",
+  "verdict": "PASS_SOURCE_CORRECTIONS_R1_R2_R3",
+  "inputs": {
+    "/tmp/qcl-doc06-schema-format-run-v2.py": {
+      "sha256": "2daef993d218ac2d4e1cabfc44018725c19a55d60187d43d3d954cef33664aa4",
+      "bytes": 24613
+    },
+    "/tmp/qcl-doc06-schema-lint-run-v2.py": {
+      "sha256": "19ed0f182a51fd5022b0c1068367f92b8019beb74d0e304ee94a744da697a8ee",
+      "bytes": 24608
+    },
+    "/tmp/qcl-doc06-schema-local-unit-run-v2.py": {
+      "sha256": "45e2848cc3cf193c3b9533dcdb518b5daf307da1fbb99546ab619343b1278bef",
+      "bytes": 31965
+    },
+    "/tmp/qcl-doc06-schema-engineering-plan-v2.json": {
+      "sha256": "2206d06e2c072b5132db0a2a89048a7df5ef2602961bd03c19ef916cad5c824c",
+      "bytes": 4632
+    },
+    "/tmp/qcl-doc06-schema-harness-report-v2.md": {
+      "sha256": "54e0a44f78729045ac914c98f425383e9647a6ff1320e7f08a691e5bde887d92",
+      "bytes": 9267
+    },
+    "/tmp/qcl-doc06-schema-harness-identity-v2.json": {
+      "sha256": "7e4d715b8cd246e1ab5bd2ac10256f776925ebeed3254434522d44f5face8fa5",
+      "bytes": 2846
+    }
+  },
+  "previous_review_sha256": "787e5728d3541584ca91b84be1b76e181863cd83e12233b399e209110d9a3fa3",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "observed_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "resolved_findings": [
+    "R1",
+    "R2",
+    "R3"
+  ],
+  "new_blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-doc06-schema-harness-v2-review.md",
+    "sha256": "bfa76f2c991066adf3731c3b9b40a2a03572161ebe1decadcbab6345ecafe268",
+    "bytes": 10295
+  },
+  "candidate_executions": 0,
+  "candidate_imports": 0,
+  "compiler_parser_typecheck_selftest_runs": 0,
+  "runtime_tests_runs": 0,
+  "read_only_git_metadata": true,
+  "writes": [
+    "/tmp/qcl-doc06-schema-harness-v2-review.md",
+    "/tmp/qcl-doc06-schema-harness-v2-review-identity.json"
+  ],
+  "limits": {
+    "logical_read_cap_bytes": 4194304,
+    "logical_read_conservative_upper_bytes": 1048576,
+    "wall_cap_seconds": 600,
+    "cpu_count": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 131072,
+    "physical_resources": "not_measured"
+  },
+  "execution_grant": false,
+  "status": "STOP_FOR_ROOT_READINESS"
+}

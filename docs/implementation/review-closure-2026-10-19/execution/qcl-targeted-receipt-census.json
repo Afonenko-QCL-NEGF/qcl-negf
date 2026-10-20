@@ -490,5 +490,24 @@
     "receipt_sha256": "6af221c17e590bc24352a016cec9da71204adf8720c76dd3a9dc1bb0710a0755",
     "raw_wall_seconds": 0.5365804620087147,
     "kind": "actual9source_projection_not_unitfixture_or_science"
+  },
+  {
+    "id": "qcl-DOC06-SCHEMA-E1",
+    "wall_seconds": 2.745,
+    "exit_code": 1,
+    "product_exit_code": 0,
+    "guard_outcome": "failed",
+    "receipt_sha256": "98f6f3d7c6b89c45009a0db1e6066d5583b9758f57e3d41a9e1888347088b313",
+    "kind": "74of74_observed_software_checks_with_unknown_resource_sample_not_guarded_pass"
+  },
+  {
+    "id": "qcl-SCI08-R1-ENG-RED-1",
+    "wall_seconds": 7.421,
+    "raw_wall_seconds": 7.421130432980135,
+    "exit_code": 1,
+    "product_exit_code": 1,
+    "receipt_sha256": "8d638a5de2c52db561ad50152194b6033536c99a1e903a2684c92348d0e653df",
+    "kind": "bootstrap_failure_before_behavioral_assertions_no_RED_established",
+    "registered_test_count": 0
   }
 ]

@@ -1,0 +1,63 @@
+{
+  "format": "qcl-negf.doc06-schema-harness-source.v2",
+  "files": {
+    "/tmp/qcl-doc06-schema-format-run-v2.py": {
+      "sha256": "2daef993d218ac2d4e1cabfc44018725c19a55d60187d43d3d954cef33664aa4",
+      "bytes": 24613
+    },
+    "/tmp/qcl-doc06-schema-lint-run-v2.py": {
+      "sha256": "19ed0f182a51fd5022b0c1068367f92b8019beb74d0e304ee94a744da697a8ee",
+      "bytes": 24608
+    },
+    "/tmp/qcl-doc06-schema-local-unit-run-v2.py": {
+      "sha256": "45e2848cc3cf193c3b9533dcdb518b5daf307da1fbb99546ab619343b1278bef",
+      "bytes": 31965
+    },
+    "/tmp/qcl-doc06-schema-engineering-plan-v2.json": {
+      "sha256": "2206d06e2c072b5132db0a2a89048a7df5ef2602961bd03c19ef916cad5c824c",
+      "bytes": 4632
+    }
+  },
+  "preserved_v1_sha256": {
+    "/tmp/qcl-doc06-schema-format-run-v1.py": "8bbd4a6ea15434188d8ab2c77075549e3a071e99aab0148ad29b005b02ba3ce2",
+    "/tmp/qcl-doc06-schema-lint-run-v1.py": "aad22de63191b5c9357c49fbc5264710dc3e190eab2505e70632162754fa4c94",
+    "/tmp/qcl-doc06-schema-local-unit-run-v1.py": "5b1c4457fc3955b8691fb9126c636458476ecbe47b7e441c9c1a32ce481fc11e",
+    "/tmp/qcl-doc06-schema-engineering-plan-v1.json": "54f05c78253f5d3037dc71ecde67e131e297c46b5299f69f2d2b0f5d9a9f0342",
+    "/tmp/qcl-doc06-schema-harness-report.md": "a979563443854d7a6e4a0137d9672a791e0665158c4d05acd4ca2b42432e1da4",
+    "/tmp/qcl-doc06-schema-harness-identity.json": "cf12fbd084b8d7c01673dee3a77ba044721726291b4fb8d4d5ec0ca83de8c300"
+  },
+  "previous_review_sha256": "787e5728d3541584ca91b84be1b76e181863cd83e12233b399e209110d9a3fa3",
+  "accepted_cpp_sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7",
+  "seed_inventory_and_preparation_v2_source_equal_after_outer_indentation": true,
+  "changes": [
+    "R1: late-bound current Root HEAD + actual readonly Git observations at readiness/prelaunch/terminal; frozen CPP author base separate",
+    "R2: nullable RSS, completed/failed counters/errors/status, immediate postspawn sample, at least one valid required, any sample error fail closed",
+    "R3: outer failure envelope after permanent exclusive reservation, nullable unmeasured fields, best-effort receipt+fallback with no unconditional durability claim, bounded streamed metadata readback"
+  ],
+  "executions": {
+    "harness": 0,
+    "helper_import": 0,
+    "selftest": 0,
+    "compile": 0,
+    "target_parser": 0,
+    "deno": 0,
+    "formatter": 0,
+    "linter": 0,
+    "unit": 0,
+    "actual": 0,
+    "git": 0,
+    "native": 0,
+    "network": 0,
+    "science": 0
+  },
+  "limits": {
+    "logical_source_read_cap_bytes": 2097152,
+    "logical_source_read_conservative_upper_bytes": 1048576,
+    "wall_max_seconds": 600,
+    "cpu_count": 1,
+    "ram_max_bytes": 1073741824,
+    "report_max_bytes": 131072,
+    "cpu_rss_io_measured": false
+  },
+  "status": "SOURCE_ONLY_STOP_FOR_SAME_HIGH_REVIEWER"
+}
