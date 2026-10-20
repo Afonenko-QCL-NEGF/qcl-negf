@@ -104,6 +104,12 @@ native/scientific inputs блокируют только dependent claims/опе
 тестовые результаты не принимаются как готовая реализация или доказательство.
 Сегодняшний handoff изменяет только перечисленные Markdown-документы.
 
+Уточнение source-status от 2026-10-20:
+[SCI06](science.md#текущий-source-status-sci06--2026-10-20) фиксирует уже
+реализованные coefficient norms/represented-current RHS и literal oracle sources
+в выбранном Results; полная absolute-current scientific acceptance остаётся
+открытой. Исторические source/даты и provenance исходного handoff сохранены.
+
 ## Уровни усилий и деление работы
 
 | Работа | Sol effort | Когда менять роль |
