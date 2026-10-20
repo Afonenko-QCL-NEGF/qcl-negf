@@ -1,0 +1,89 @@
+{
+  "schema": "qcl-docs-test-routing-design-identity-v1",
+  "date": "2026-10-20",
+  "writer": "/root/doc03_design",
+  "stage": "source-only-D-frozen-awaiting-independent-high-review",
+  "root_revision": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "initial_worktree_clean": true,
+  "all_eight_gitlinks_matched": true,
+  "decision": {
+    "preserve_test_filenames": true,
+    "generic_discovery_exceptions": [
+      "tests/docs_math_test.mjs",
+      "tests/docs_static_slice_test.ts"
+    ],
+    "default_check": "mandatory base+docs aggregate; missing inputs nonzero blocked",
+    "base_only": "explicit check:base and runner-smoke; no full/docs pass",
+    "required_aggregate_steps": [
+      "base",
+      "doc04-python",
+      "doc04-node",
+      "doc06-deno"
+    ],
+    "full_ci_root_aggregate_invocations": 1,
+    "no_generic_Deno_env_privilege": true,
+    "no_DOC06_env_run_net_ffi": true,
+    "new_framework_dependencies": 0
+  },
+  "proposed_I_paths": [
+    "deno.json",
+    "ops/ci.ts",
+    "ops/docs_tests.ts",
+    "tests/docs_test_routing_test.ts",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml"
+  ],
+  "source_witnesses": {
+    "deno_json_sha256": "a4043c0ec1c976c03704253316c90a94cb8c7ca2cfe4222f7182ea05565249b7",
+    "ci_ts_sha256": "2d6750a2703fb1ac2a9ab7d6ec2195daa92a6f5bc3e51b762273bc935fe66702",
+    "ci_workflow_sha256": "0d3be20e2a94584ea581b8e4e96ce6550a9a88a5096b8187c86050521cd72b08",
+    "release_workflow_sha256": "01777a020aecc29b27aee38584aeab6d127168242d1c44019bd019af8c2dd4db",
+    "node_unit_sha256": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+    "python_unit_sha256": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+    "math_bridge_sha256": "663c712d01db3bdc4bca66d3bb58b9aa6bbffd850c8961e1560c30292fd1aba5",
+    "assembler_sha256": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+    "pinned_Deno_help_sha256": "780289de4c03cddc3fe7a17f9e47db5171f3326c4b5be0a0924f5da76b530df0",
+    "DOC06_candidate_unit_sha256": "3714933c7f34dc6da97db1189422e9381cf6d73589215e5692845402a260eb50",
+    "DOC06_test_and_adapter_in_published_root": "absent",
+    "DOC06_candidate_adapter_at_named_path": "absent; not fabricated",
+    "DOC06_accepted_design_review_sha256": "385c2ae4358a7fb296399d6d955eb4d9ac5995c26f8baa2c27526ad11677d5ce"
+  },
+  "artifacts": {
+    "design": {
+      "path": "/tmp/qcl-docs-test-routing-design.md",
+      "sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270"
+    },
+    "source_ledger": {
+      "path": "/tmp/qcl-docs-test-routing-source-ledger.md",
+      "sha256": "1b4cbec31c9648ddaf5049bd40aebc74e5877e19f02451e166116de750fd0b7b"
+    }
+  },
+  "resource": {
+    "wall_cap_minutes": 20,
+    "cpu": 1,
+    "ram_cap_bytes": 2147483648,
+    "named_source_read_cap_bytes": 4194304,
+    "conservative_named_payload_bound": "<2MiB; named ledger retained, no physical cumulative meter",
+    "output_cap_bytes": 65536
+  },
+  "actions": {
+    "product_edits": 0,
+    "target_import_parser_eval_test_build": 0,
+    "Julia_Nix_Deno_Node_Python_runtime_calls": 0,
+    "network_server": 0,
+    "children": 0,
+    "Git_mutations": 0,
+    "checkpoint_edits": 0,
+    "workflow_dispatch": 0,
+    "final_full_CI_used": 0
+  },
+  "readiness": {
+    "implementation_pending": true,
+    "prepared_asset_tool_cache_owned_tmp_admission_missing": "blocks dependent full check/full CI",
+    "full_ci_admitted": false,
+    "DOC04_BUILD_reused": false,
+    "public_font_license_pass": false,
+    "scientific_acceptance": false
+  },
+  "stop": "high CP-DESIGN before I; preserve final CI once policy"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "DOC04-OFL-MARKDOWN-SOURCE-1",
+  "url": "https://openfontlicense.org/documents/OFL.md",
+  "purpose": "distinct official markdown source; prior plaintext403 preserved",
+  "max_attempts": 1,
+  "automatic_retry": false,
+  "wall_cap_seconds": 30,
+  "response_byte_cap": 65536,
+  "started_utc": "2026-10-20T04:50:50.998423+00:00",
+  "state": "source_candidate_pending_review",
+  "status": 200,
+  "final_url": "https://openfontlicense.org/documents/OFL.md",
+  "headers": {
+    "Date": "Tue, 20 Oct 2026 04:50:51 GMT",
+    "Content-Type": "text/markdown",
+    "Content-Length": "4771",
+    "Connection": "close",
+    "x-amz-id-2": "DaoaxuE3xCiaa5MQbbq7iwC2zc+85LS5Og9bbOO0c++kzV8sLcZAnReICDX7lkVeVQYdiCzdOksZW/XPCpMYb/1MvcivOdlS",
+    "x-amz-request-id": "K2WYT18XFX535878",
+    "Server": "cloudflare",
+    "Last-Modified": "Mon, 12 Jan 2026 21:19:44 GMT",
+    "ETag": "\"b3c0872c560536289ebeac8e37cdbcf5\"",
+    "cf-cache-status": "DYNAMIC",
+    "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=09vtpTyOVdjZGUTtRoS4rHeHdTBcbfiOcfuapymgkAKmCv26743GhZdU%2BGgma7rMi8Im7QgftB%2BBBtWoGOUEDB59%2FqqqkrH4oeuYYx%2BJsiq9KXrGmEiXL2Mi4P3cs7B%2FKyc5eA6QWBi4ZTqFC8KAZbdH\"}]}",
+    "CF-RAY": "a4d5676e48133d4a-ARN",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  },
+  "bytes_captured": 4771,
+  "complete": true,
+  "sha256": "bc456409284fe464c3a916fa3125db0f1a2accfca4e4549417cb0c2370516676",
+  "recorded_utc": "2026-10-20T04:50:51.539881+00:00"
+}

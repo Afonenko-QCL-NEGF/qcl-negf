@@ -1,0 +1,85 @@
+{
+  "operation_id": "SCI07-SOURCE-DISCOVERY-1",
+  "root_published": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "current_owning_heads": {
+    "Core": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+    "Runner": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "Platform": "f729e2681224d6537538179ab760fefefd575003",
+    "AiiDA": "d8f8092ca1c76523d85384b4bac8198d8bfa736b"
+  },
+  "scope": "source-only locator and immutable hash preparation; no new model/revision lock",
+  "files": [
+    {
+      "path": "components/QCLNEGFRunner.jl/src/application/auto_strategy.jl",
+      "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326",
+      "bytes": 19019
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/src/infrastructure/persistence/point_artifacts.jl",
+      "sha256": "9e8c1d8f624bb828134129c10226211968360950cbac9ffd82e247a8ec294cd4",
+      "bytes": 77381
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/src/composition/scratch_execution.jl",
+      "sha256": "cad52756bb47a6d1fa63cd8c86a03c4e4dcd0d9a4e12383a0671dd766697f395",
+      "bytes": 8476
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/src/composition/scientific_execution.jl",
+      "sha256": "55a3737a35b21867d91992a2a3a7807729a3b9d83b0931006d99dc82addbf9cd",
+      "bytes": 75664
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/docs/src/user/resources.md",
+      "sha256": "11cd80689f7c7bb0c92bdf1c13b8891dbda7241689bd81b1300ffd19219184f5",
+      "bytes": 1182
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "sha256": "39e1178fc88a940b69ad61298d54538f44d1e39df6b9d9c2dd8e5264f395f561",
+      "bytes": 17568
+    },
+    {
+      "path": "components/QCLNEGF.jl/src/numerics/optimized/production_cache.jl",
+      "sha256": "5c10eda35300c4c1fcbe46e23f0f95a3e9e9783b280504fc2dc4bd4575c70ee8",
+      "bytes": 32810
+    },
+    {
+      "path": "components/QCLNEGF.jl/src/numerics/optimized/production_contracts.jl",
+      "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+      "bytes": 15596
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/science.md",
+      "sha256": "0f52fc7148456b9eeff6bb993b5d1e701825781c58733dc519972c5312b8c26a",
+      "bytes": 42428
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/operator-permissions.md",
+      "sha256": "4887a5d4ad67a84424225d5b827ba2975ec97e319c94efe59a3e67b9120054a0",
+      "bytes": 32033
+    }
+  ],
+  "named_source_bytes": 322157,
+  "source_read_envelope_bytes": 2097152,
+  "locators": {
+    "memory_estimate": "Runner auto_strategy.jl149/Core production_cache.jl622",
+    "publication_budget": "Runner point_artifacts.jl536,786,1022,1034,1043",
+    "scratch_copy": "Runner scratch_execution.jl48,91",
+    "final_archive": "Runner scientific_execution.jl514",
+    "limitations": "Runner docs/results.md128-144 explicitly publication-boundary logical count, not every intermediate HDF5 write/external growth/filesystem quota/fullAC2"
+  },
+  "readiness": "needs SCI07 ultra design+independent high R; fresh native/cgroup/storage facts absent, not READY",
+  "cumulative_read_write_native_counters": "not_measured",
+  "scientific_submits": 0,
+  "targeted_tests": 0,
+  "scan_accounting": {
+    "prior_rg_whole_scope_conservative_content_upper_bound_bytes": 2376552,
+    "scope_files": 144,
+    "prior_narrow_rg_and_sed_reserve_bytes": 524288,
+    "named_hash_read_bytes": 322157,
+    "accounting": "conservative file-size charge; rg actual bytes/physicalIO/RSS unknown; no claim all discovery reads fit the later named-input2MiB cap",
+    "known_census_total_upper_bound": 3222997
+  },
+  "source_read_envelope_scope": "2MiB applies named hash packet preparation only; initial locator scan tracked separately, no retroactive pass"
+}

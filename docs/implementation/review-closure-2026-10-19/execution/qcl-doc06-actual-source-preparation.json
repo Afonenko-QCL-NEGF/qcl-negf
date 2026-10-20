@@ -1,0 +1,12 @@
+{
+  "operation_id": "DOC06-ACTUAL-PREP-1",
+  "root": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "source_mode": "exact git show root gitlinks, not dirty checkout",
+  "raw_files": 9,
+  "raw_bytes": 245338,
+  "receipt_sha256": "25f198128ae635cab0cec611da0c8b8a18a39f64bc1158a2fdfe3e98349e9459",
+  "source_graph_sha256": "4cc2eabc9a909e90a702b5cce8ed969cd4b30ec45eb7ec2e15543695ad6dbd16",
+  "source_graph_representation": "JSON pretty projection of immutable committed objects; hash binds exact retained bytes, not asserted byte equality with ops/git output",
+  "target_execution": 0,
+  "outcome": "snapshot prepared, no adapter execution, no acceptance"
+}

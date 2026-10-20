@@ -1,0 +1,271 @@
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:356:50
+    | 
+356 | Deno.test("DOC06 refuses receipt hash mismatch", async () =>
+    |                                                  ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:364:58
+    | 
+364 |   Deno.test(`DOC06 refuses nonallowlisted input ${bad}`, async () =>
+    |                                                          ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:371:51
+    | 
+371 | Deno.test("DOC06 refuses wrong owning component", async () =>
+    |                                                   ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:377:75
+    | 
+377 | Deno.test("DOC06 refuses symlink selected file even with matching bytes", async () =>
+    |                                                                           ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:385:51
+    | 
+385 | Deno.test("DOC06 refuses symlink input ancestor", async () =>
+    |                                                   ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:391:63
+    | 
+391 | Deno.test("DOC06 refuses existing output and source overlap", async () =>
+    |                                                               ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:623:63
+    | 
+623 | Deno.test("DOC06 refuses receipt-byte and source-count caps", async () =>
+    |                                                               ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:641:76
+    | 
+641 | Deno.test("DOC06 Julia and valid JavaScript sentinels remain inert bytes", async () =>
+    |                                                                            ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:671:77
+    | 
+671 | Deno.test("DOC06 invalid UTF-8 is refused even with matching receipt hash", async () =>
+    |                                                                             ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:681:54
+    | 
+681 | Deno.test("DOC06 duplicate receipt path is refused", async () =>
+    |                                                      ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[require-await]: Async arrow function has no 'await' expression or 'await using' declaration.
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:687:56
+    | 
+687 | Deno.test("DOC06 wrong source byte length is refused", async () =>
+    |                                                        ^^^^^
+    = hint: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+
+error[no-regex-spaces]: more than one consecutive spaces in RegExp is not allowed
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts:484:37
+    | 
+484 |   const leaves = [...block.matchAll(/^  energy_chunk:([^\n]*)$/gm)];
+    |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  docs: https://docs.deno.com/lint/rules/no-regex-spaces
+
+
+error[no-inner-declarations]: Move function declaration to function root
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts:509:5
+    | 
+509 |     function required(node: Record<string, unknown>): string[] {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+510 |       if (!own(node, "required")) return [];
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+511 |       const list = node.required;
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+512 |       if (
+    | ^^^^^^^^^^
+    | 
+513 |         !Array.isArray(list) || list.some((x) => typeof x !== "string") ||
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+514 |         new Set(list).size !== list.length
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+515 |       ) unsupported("malformed_schema");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+516 |       return list as string[];
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+517 |     }
+    | ^^^^^
+    = hint: Move the declaration up into the correct scope
+
+  docs: https://docs.deno.com/lint/rules/no-inner-declarations
+
+
+error[no-inner-declarations]: Move function declaration to function root
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts:518:5
+    | 
+518 |     function allowed(node: Record<string, unknown>, keys: string[]) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+519 |       if (Object.keys(node).some((key) => !keys.includes(key))) {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+520 |         unsupported("unsupported_schema_keyword");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+521 |       }
+    | ^^^^^^^
+    | 
+522 |     }
+    | ^^^^^
+    = hint: Move the declaration up into the correct scope
+
+  docs: https://docs.deno.com/lint/rules/no-inner-declarations
+
+
+error[no-inner-declarations]: Move function declaration to function root
+   --> /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts:556:5
+    | 
+556 |     function resolve(
+    |     ^^^^^^^^^^^^^^^^^
+    | 
+557 |       raw: unknown,
+    | ^^^^^^^^^^^^^^^^^^^
+    | 
+558 |       location: string,
+    | ^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+559 |     ): { node: Record<string, unknown>; location: string } {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+560 |       let node = object(raw);
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+561 |       while (own(node, "$ref")) {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+562 |         // Draft-specific sibling constraints are intentionally unsupported.
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+563 |         if (
+    | ^^^^^^^^^^^^
+    | 
+564 |           Object.keys(node).some((k) => !["$ref", "$comment", "title", "description"].includes(k))
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+565 |         ) unsupported("unsupported_ref_siblings");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+566 |         const ref = node.$ref;
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+567 |         if (typeof ref !== "string" || !ref.startsWith("#/")) unsupported("unsupported_local_ref");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+568 |         if (seen.has(ref)) unsupported("cyclic_local_ref");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+569 |         if (++hops > 8) refuse("local_ref_hop_cap");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+570 |         seen.add(ref);
+    | ^^^^^^^^^^^^^^^^^^^^^^
+    | 
+571 |         let value: unknown = root;
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+572 |         const parts = ref.slice(2).split("/");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+573 |         for (const part of parts) {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+574 |           if (/~(?![01])/.test(part)) unsupported("unsupported_local_ref");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+575 |           const key = part.replace(/~1/g, "/").replace(/~0/g, "~");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+576 |           const container = object(value);
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+577 |           if (!own(container, key)) unsupported("missing_local_ref");
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+578 |           value = container[key];
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+579 |         }
+    | ^^^^^^^^^
+    | 
+580 |         node = object(value);
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+581 |         location = ref.slice(1);
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+582 |       }
+    | ^^^^^^^
+    | 
+583 |       return { node, location };
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | 
+584 |     }
+    | ^^^^^
+    = hint: Move the declaration up into the correct scope
+
+  docs: https://docs.deno.com/lint/rules/no-inner-declarations
+
+
+Found 15 problems
+Checked 2 files

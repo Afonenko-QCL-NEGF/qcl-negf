@@ -1,0 +1,19 @@
+Check tests/docs_static_slice_test.ts
+TS2307 [ERROR]: Cannot find module 'file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts'.
+    at file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:3:37
+
+TS2345 [ERROR]: Argument of type 'Uint8Array<ArrayBufferLike>' is not assignable to parameter of type 'BufferSource'.
+  Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'ArrayBufferView<ArrayBuffer>'.
+    Types of property 'buffer' are incompatible.
+      Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+        Type 'SharedArrayBuffer' is missing the following properties from type 'ArrayBuffer': resizable, resize, detached, transfer, transferToFixedLength
+  const result = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
+                                                                      ~~~~~
+    at file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:75:71
+
+Found 2 errors.
+
+error: Type checking failed.
+
+  [33minfo:[39m The program failed type-checking, but it still might work correctly.
+  [36mhint:[39m Re-run with [4m--no-check[24m to skip type-checking.

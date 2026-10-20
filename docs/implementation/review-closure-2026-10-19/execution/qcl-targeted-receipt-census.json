@@ -366,6 +366,12 @@
     "receipt_sha256": "3dff28530a17d48d4bb28fadffa1f8692d8f06dd935fb08acaca4329688491d3"
   },
   {
+    "id": "qcl-OPS08-RED-1",
+    "wall_seconds": 6.365,
+    "exit_code": 1,
+    "receipt_sha256": "ff3740d1df91ce4c9edaae78b0a0e7d1007998527560c73b2af84b47442c3adf"
+  },
+  {
     "id": "qcl-SCI03-M1-GREEN-2",
     "wall_seconds": 11.797,
     "exit_code": 0,
@@ -424,5 +430,23 @@
     "wall_seconds": 86.627,
     "exit_code": 0,
     "receipt_sha256": "a4f36879beea61bb97f6b42f1808179578b1bf259a748566f32c273c65a9a23f"
+  },
+  {
+    "id": "qcl-OPS08-GREEN-1",
+    "wall_seconds": 6.188,
+    "exit_code": 0,
+    "receipt_sha256": "99a4faeb5e387a64837823f6367a513e5d9713de5f067ef11f7c78382369021a"
+  },
+  {
+    "id": "qcl-DOC06-RED-1",
+    "wall_seconds": 1.338,
+    "exit_code": 1,
+    "receipt_sha256": "d2029a30e2a1bddee31dce0e59e3889290ff683a7c8482f632bdd93dd25a089a"
+  },
+  {
+    "id": "qcl-DOC07-C2-RED-1",
+    "wall_seconds": 0.822,
+    "exit_code": 2,
+    "receipt_sha256": "5f2eaddf9326bd00989f97212c56ec36df336440d732d0867380f6c59a0db34f"
   }
 ]

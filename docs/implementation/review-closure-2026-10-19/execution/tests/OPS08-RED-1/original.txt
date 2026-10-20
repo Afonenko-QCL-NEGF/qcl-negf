@@ -1,0 +1,114 @@
+FFFFF.FF..F                                                              [100%]
+=================================== FAILURES ===================================
+_ MaintenanceFailureBoundaries.test_final_intent_unlink_failure_recovers_closed_gate _
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_final_intent_unlink_failure_recovers_closed_gate>
+
+>   def test_final_intent_unlink_failure_recovers_closed_gate(self): self.finalization_fault('unlink')
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:181: in finalization_fault
+    self.assertIs(result.get('requires_reconciliation'), True)
+E   AssertionError: None is not True
+_ MaintenanceFailureBoundaries.test_final_journal_after_replace_recovers_closed_gate _
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_final_journal_after_replace_recovers_closed_gate>
+
+>   def test_final_journal_after_replace_recovers_closed_gate(self): self.finalization_fault('journal_after_replace')
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:181: in finalization_fault
+    self.assertIs(result.get('requires_reconciliation'), True)
+E   AssertionError: None is not True
+_ MaintenanceFailureBoundaries.test_final_journal_oserror_recovers_closed_gate _
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_final_journal_oserror_recovers_closed_gate>
+
+>   def test_final_journal_oserror_recovers_closed_gate(self): self.finalization_fault('journal')
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:198: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:181: in finalization_fault
+    self.assertIs(result.get('requires_reconciliation'), True)
+E   AssertionError: None is not True
+_ MaintenanceFailureBoundaries.test_finalization_deadline_reports_unknown_admission _
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_finalization_deadline_reports_unknown_admission>
+
+>   def test_finalization_deadline_reports_unknown_admission(self): self.finalization_fault('deadline')
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:183: in finalization_fault
+    self.assertIs(result.get('open'), None)
+E   AssertionError: True is not None
+_ MaintenanceFailureBoundaries.test_finalization_recovery_close_failure_reports_unknown _
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_finalization_recovery_close_failure_reports_unknown>
+
+>   def test_finalization_recovery_close_failure_reports_unknown(self): self.finalization_fault('close_failure')
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:181: in finalization_fault
+    self.assertIs(result.get('requires_reconciliation'), True)
+E   AssertionError: None is not True
+______ MaintenanceFailureBoundaries.test_ready_false_stops_later_dispatch ______
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_ready_false_stops_later_dispatch>
+
+>   def test_ready_false_stops_later_dispatch(self): self.semantic_check('ready_false')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:127: in semantic_check
+    self.assertEqual(result['nodes']['second']['status'], 'not_attempted')
+E   AssertionError: 'verified' != 'not_attempted'
+E   - verified
+E   + not_attempted
+_____ MaintenanceFailureBoundaries.test_ready_missing_stops_later_dispatch _____
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_ready_missing_stops_later_dispatch>
+
+>   def test_ready_missing_stops_later_dispatch(self): self.semantic_check('ready_missing')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:127: in semantic_check
+    self.assertEqual(result['nodes']['second']['status'], 'not_attempted')
+E   AssertionError: 'verified' != 'not_attempted'
+E   - verified
+E   + not_attempted
+__ MaintenanceFailureBoundaries.test_wrong_valid_release_stops_later_dispatch __
+
+self = <test_maintenance_failure_boundaries.MaintenanceFailureBoundaries testMethod=test_wrong_valid_release_stops_later_dispatch>
+
+>   def test_wrong_valid_release_stops_later_dispatch(self): self.semantic_check('wrong_release')
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py:127: in semantic_check
+    self.assertEqual(result['nodes']['second']['status'], 'not_attempted')
+E   AssertionError: 'verified' != 'not_attempted'
+E   - verified
+E   + not_attempted
+=========================== short test summary info ============================
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_final_intent_unlink_failure_recovers_closed_gate
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_final_journal_after_replace_recovers_closed_gate
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_final_journal_oserror_recovers_closed_gate
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_finalization_deadline_reports_unknown_admission
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_finalization_recovery_close_failure_reports_unknown
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_ready_false_stops_later_dispatch
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_ready_missing_stops_later_dispatch
+FAILED components/qcl-negf-platform/tests/test_maintenance_failure_boundaries.py::MaintenanceFailureBoundaries::test_wrong_valid_release_stops_later_dispatch
+8 failed, 3 passed in 5.71s
