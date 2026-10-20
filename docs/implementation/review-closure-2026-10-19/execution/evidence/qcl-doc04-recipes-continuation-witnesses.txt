@@ -1,0 +1,1111 @@
+===== SOURCE OBSERVATION 0 =====
+user/convergence.md:1:```@meta
+user/convergence.md:2:CurrentModule = QCLNEGF
+user/convergence.md:3:```
+user/convergence.md:18:```math
+user/convergence.md:20:```
+user/convergence.md:55:```yaml
+user/convergence.md:79:```
+user/convergence.md:134:```math
+user/convergence.md:137:```
+api/operators.md:1:```@meta
+api/operators.md:2:CurrentModule = QCLNEGF
+api/operators.md:3:```
+api/operators.md:24:```@docs
+api/operators.md:25:build_grids
+api/operators.md:26:build_profiles
+api/operators.md:27:build_bdd_hamiltonian
+api/operators.md:28:build_localized_basis
+api/operators.md:29:build_basis
+api/operators.md:30:project_hamiltonians
+api/operators.md:31:```
+api/operators.md:42:```@docs
+api/operators.md:43:build_shift_matrix
+api/operators.md:44:apply_energy_shift
+api/operators.md:45:build_shift_plan
+api/operators.md:46:apply_energy_shift!
+api/operators.md:47:embedding_self_energy
+api/operators.md:48:retarded_green
+api/operators.md:49:keldysh_green
+api/operators.md:50:greater_green
+api/operators.md:51:spectral_function
+api/operators.md:52:number_functional
+api/operators.md:53:normalize_lesser
+api/operators.md:54:```
+api/operators.md:71:```@docs
+api/operators.md:72:build_kernels
+api/operators.md:73:build_kernels_production
+api/operators.md:74:ScatteringKernelBuild
+api/operators.md:75:scattering_backend_evidence_class
+api/operators.md:76:build_scattering_kernel_set
+api/operators.md:77:impurity_kernel
+api/operators.md:78:interface_roughness_kernel
+api/operators.md:79:acoustic_kernel
+api/operators.md:80:alloy_kernel
+api/operators.md:81:lo_phonon_kernel
+api/operators.md:82:direct_hilbert_transform
+api/operators.md:83:retarded_self_energy
+api/operators.md:84:production_static_contraction
+api/operators.md:85:fft_hilbert_transform
+api/operators.md:86:production_fft_hilbert_transform
+api/operators.md:87:production_fft_workspace_bytes
+api/operators.md:88:retarded_self_energy_fft
+api/operators.md:89:production_residual_suite
+api/operators.md:90:production_selfenergy_residual
+api/operators.md:91:build_poisson_matrix
+api/operators.md:92:solve_periodic_poisson
+api/operators.md:93:```
+api/operators.md:105:```@docs
+api/operators.md:106:electron_density
+api/operators.md:107:sheet_density_matrix
+api/operators.md:108:state_populations
+api/operators.md:109:effective_levels
+api/operators.md:110:boundary_flux
+api/operators.md:111:energy_resolved_current
+api/operators.md:112:bond_current
+api/operators.md:113:collision_balance
+api/operators.md:114:power_balance
+api/operators.md:115:spectral_maps
+api/operators.md:116:```
+api/public.md:1:```@meta
+api/public.md:2:CurrentModule = QCLNEGF
+api/public.md:3:```
+api/public.md:9:```@docs
+api/public.md:10:FundamentalConstants
+api/public.md:11:Layer
+api/public.md:12:PhysicalParameters
+api/public.md:13:NumericalParameters
+api/public.md:14:ModelGrids
+api/public.md:15:MaterialProfiles
+api/public.md:16:BasisData
+api/public.md:17:KernelSet
+api/public.md:18:SolverTolerances
+api/public.md:19:DiagnosticQualityPolicy
+api/public.md:20:ConvergencePolicy
+api/public.md:21:ConvergenceAssessment
+api/public.md:22:SolverOptions
+api/public.md:23:ScatteringOptions
+api/public.md:24:ScaleSystem
+api/public.md:25:NEGFProblem
+api/public.md:26:GreenState
+api/public.md:27:SelfEnergyFamily
+api/public.md:28:SCBAPhysicsMarkerPolicy
+api/public.md:29:SCBAPhysicalMarkers
+api/public.md:30:SCBAChannelMarker
+api/public.md:31:SCBACollisionMarker
+api/public.md:32:SCBAPhysicsWitness
+api/public.md:33:SCBAIteration
+api/public.md:34:SCBAResult
+api/public.md:35:OuterIteration
+api/public.md:36:NEGFSolution
+api/public.md:37:ConvergenceReport
+api/public.md:38:EnergyShiftPlan
+api/public.md:39:ProductionOptions
+api/public.md:40:ProductionMemoryEstimate
+api/public.md:41:SolverMetric
+api/public.md:42:SolverEvent
+api/public.md:43:ProductionKernelOptions
+api/public.md:44:KernelInterpolationDiagnostic
+api/public.md:45:ProductionKernelDiagnostics
+api/public.md:46:ProductionCache
+api/public.md:47:ProductionFFTHilbertPlan
+api/public.md:48:ProductionResidualWorkspace
+api/public.md:49:ProductionSweepRecord
+api/public.md:50:ProductionSweepResult
+api/public.md:51:OpticalResponse
+api/public.md:52:AlgorithmOptions
+api/public.md:53:OptimizationDescriptor
+api/public.md:54:AbstractProductionKernel
+api/public.md:55:LiteralProductionKernel
+api/public.md:56:DenseProductionKernel
+api/public.md:57:MomentumIndependentProductionKernel
+api/public.md:58:LowRankProductionKernel
+api/public.md:59:scaled_value
+api/public.md:60:physical_value
+api/public.md:61:CODATA
+api/public.md:62:reference_parameters
+api/public.md:63:baseline_numerics
+api/public.md:64:reference_production_numerics
+api/public.md:65:tutorial_numerics
+api/public.md:66:baseline_options
+api/public.md:67:reference_production_solver_options
+api/public.md:68:tutorial_options
+api/public.md:69:default_scattering
+api/public.md:70:build_problem
+api/public.md:71:build_problem_production
+api/public.md:72:solve_scba
+api/public.md:73:solve
+api/public.md:74:scba_convergence_assessment
+api/public.md:75:scba_diagnostic_quality_assessment
+api/public.md:76:poisson_convergence_assessment
+api/public.md:77:scba_convergence_stagnated
+api/public.md:78:scba_accepted
+api/public.md:79:solution_quality
+api/public.md:80:model_capabilities
+api/public.md:81:scba_approximate_acceptance
+api/public.md:82:estimate_production_memory
+api/public.md:83:build_production_cache
+api/public.md:84:solve_scba_production
+api/public.md:85:solve_production
+api/public.md:86:optimization_catalog
+api/public.md:87:algorithm_impact
+api/public.md:88:algorithm_manifest
+api/public.md:89:scattering_options
+api/public.md:90:validate
+api/public.md:91:validate_problem
+api/public.md:92:validate_solution
+api/public.md:93:inner_working_policy
+api/public.md:94:effective_seed_parameters
+api/public.md:95:solution_scientific_assessment
+api/public.md:96:bare_bubble_optical_response
+api/public.md:97:peak_gain
+api/public.md:98:current_density_A_per_cm2
+api/public.md:99:```
+api/public.md:103:```@docs
+api/public.md:104:ScatteringValidationError
+api/public.md:105:AbstractScatteringPhysicalModel
+api/public.md:106:LOPhononModel
+api/public.md:107:AcousticPhononModel
+api/public.md:108:IonizedImpurityModel
+api/public.md:109:InterfaceRoughnessModel
+api/public.md:110:AlloyDisorderModel
+api/public.md:111:scattering_id
+api/public.md:112:scattering_models
+api/public.md:113:validate_scattering_model
+api/public.md:114:scattering_selection_evidence_class
+api/public.md:115:AbstractScatteringKernelBackend
+api/public.md:116:LiteralScatteringKernelBackend
+api/public.md:117:ExactParallelScatteringKernelBackend
+api/public.md:118:TabulatedScatteringKernelBackend
+api/public.md:119:ScatteringNumericalPlan
+api/public.md:120:ScatteringAssemblyContext
+api/public.md:121:ScatteringAssemblyResult
+api/public.md:122:scattering_numerical_plan
+api/public.md:123:scattering_evidence_class
+api/public.md:124:validate_scattering_context
+api/public.md:125:validate_scattering_kernel_set
+api/public.md:126:assemble_scattering_kernels
+api/public.md:127:build_configured_scattering_problem
+api/public.md:128:```
+api/public.md:132:```@docs
+api/public.md:133:QCLNEGF.QCLDomain.SCBAMixerState
+api/public.md:134:QCLNEGF.QCLDomain.SCBAStopDecision
+api/public.md:135:QCLNEGF.QCLDomain.research_continuation_decision
+api/public.md:136:QCLNEGF.QCLDomain.ChargeConstraintDiagnostics
+api/public.md:137:QCLNEGF.QCLDomain.ElectronElectronOptions
+api/public.md:138:QCLNEGF.QCLDomain.ResearchContinuationDecision
+api/public.md:139:QCLNEGF.QCLDomain.physical_model_identity
+api/public.md:140:QCLNEGF.QCLDomain.FixedPointAuditCandidate
+api/public.md:141:QCLNEGF.QCLDomain.ResidualTrend
+api/public.md:142:QCLNEGF.QCLDomain.ResearchTrendPolicy
+api/public.md:143:QCLNEGF.QCLDomain.PhysicalModelOptions
+api/public.md:144:QCLNEGF.QCLDomain.DomainAdaptationPolicy
+api/public.md:145:QCLNEGF.QCLNumerics.fresh_fixed_point_metrics
+api/public.md:146:QCLNEGF.QCLNumerics.PSD_METRIC_VERSION
+api/public.md:147:QCLNEGF.QCLNumerics.expand_energy_window
+api/public.md:148:QCLNEGF.QCLNumerics.measured_representation_coverage
+api/public.md:149:QCLNEGF.QCLNumerics.RepresentationCoverage
+api/public.md:150:QCLNEGF.QCLNumerics.certify_solution
+api/public.md:151:QCLNEGF.QCLNumerics.lorentzian_window_weight
+api/public.md:152:QCLNEGF.QCLNumerics.solve_adaptive_production
+api/public.md:153:QCLNEGF.QCLReferenceOperators.resolve_physical_models
+api/public.md:154:QCLNEGF.QCLReferenceOperators.transverse_kinetic_energy
+api/public.md:155:QCLNEGF.QCLReferenceOperators.LOKineticState
+api/public.md:156:QCLNEGF.QCLPhysics.spatial_energy_density
+api/public.md:157:QCLNEGF.PhysicalModelExtensions.ElectronCollisionModel
+api/public.md:158:QCLNEGF.PhysicalModelExtensions.ThomasFermiScreening2D
+api/public.md:159:QCLNEGF.PhysicalModelExtensions.kane_energy_bin_weights_2d
+api/public.md:160:QCLNEGF.PhysicalModelExtensions.HotLOPhononBath
+api/public.md:161:QCLNEGF.PhysicalModelExtensions.advance_lo_population
+api/public.md:162:QCLNEGF.PhysicalModelExtensions.steady_lo_population
+api/public.md:163:QCLNEGF.PhysicalModelExtensions.kane_kinetic_operator
+api/public.md:164:QCLNEGF.PhysicalModelExtensions.kane_dos_2d
+api/public.md:165:QCLNEGF.PhysicalModelExtensions.lo_population_temperature
+api/public.md:166:QCLNEGF.PhysicalModelExtensions.AbstractScreeningModel
+api/public.md:167:QCLNEGF.PhysicalModelExtensions
+api/public.md:168:QCLNEGF.PhysicalModelExtensions.lo_energy_balance
+api/public.md:169:QCLNEGF.PhysicalModelExtensions.DebyeScreening3D
+api/public.md:170:QCLNEGF.PhysicalModelExtensions.BinaryCollisionChannel
+api/public.md:171:QCLNEGF.PhysicalModelExtensions.screened_coulomb_potential
+api/public.md:172:QCLNEGF.PhysicalModelExtensions.optical_power_density
+api/public.md:173:QCLNEGF.PhysicalModelExtensions.FixedScreening
+api/public.md:174:QCLNEGF.PhysicalModelExtensions.single_plasmon_pole
+api/public.md:175:QCLNEGF.PhysicalModelExtensions.KaneDispersion
+api/public.md:176:QCLNEGF.PhysicalModelExtensions.electron_collision_rhs
+api/public.md:177:QCLNEGF.PhysicalModelExtensions.electron_collision_moments
+api/public.md:178:QCLNEGF.PhysicalModelExtensions.kane_state_count_2d
+api/public.md:179:QCLNEGF.PhysicalModelExtensions.kane_velocity
+api/public.md:180:QCLNEGF.PhysicalModelExtensions.LOPopulation
+api/public.md:181:```
+api/public.md:185:```@docs
+api/public.md:186:retarget_problem
+api/public.md:187:retarget_production_cache
+api/public.md:188:```
+theory/01_model.md:1:```@meta
+theory/01_model.md:2:CurrentModule = QCLNEGF
+theory/01_model.md:3:```
+theory/01_model.md:29:```math
+theory/01_model.md:33:```
+theory/01_model.md:54:```math
+theory/01_model.md:56:```
+theory/01_model.md:61:```math
+theory/01_model.md:64:```
+theory/01_model.md:76:```math
+theory/01_model.md:79:```
+theory/01_model.md:86:```math
+theory/01_model.md:88:```
+theory/02_reference2019.md:1:```@meta
+theory/02_reference2019.md:2:CurrentModule = QCLNEGF
+theory/02_reference2019.md:3:```
+theory/02_reference2019.md:23:```math
+theory/02_reference2019.md:25:```
+theory/02_reference2019.md:42:```math
+theory/02_reference2019.md:46:```
+theory/02_reference2019.md:48:```math
+theory/02_reference2019.md:52:```
+theory/02_reference2019.md:57:```math
+theory/02_reference2019.md:60:```
+theory/03_arrays.md:1:```@meta
+theory/03_arrays.md:2:CurrentModule = QCLNEGF
+theory/03_arrays.md:3:```
+theory/03_arrays.md:26:```math
+theory/03_arrays.md:29:```
+theory/03_arrays.md:36:```math
+theory/03_arrays.md:38:```
+theory/04_scaling.md:1:```@meta
+theory/04_scaling.md:2:CurrentModule = QCLNEGF
+theory/04_scaling.md:3:```
+theory/04_scaling.md:25:```math
+theory/04_scaling.md:28:```
+theory/04_scaling.md:33:```math
+theory/04_scaling.md:37:```
+theory/04_scaling.md:47:```math
+theory/04_scaling.md:51:```
+theory/04_scaling.md:63:```math
+theory/04_scaling.md:66:```
+theory/04_scaling.md:70:```math
+theory/04_scaling.md:74:```
+theory/04_scaling.md:84:```math
+theory/04_scaling.md:87:```
+theory/05_basis.md:1:```@meta
+theory/05_basis.md:2:CurrentModule = QCLNEGF
+theory/05_basis.md:3:```
+theory/05_basis.md:25:```math
+theory/05_basis.md:27:```
+theory/05_basis.md:33:```math
+theory/05_basis.md:37:```
+theory/05_basis.md:52:```math
+theory/05_basis.md:55:```
+theory/05_basis.md:64:```math
+theory/05_basis.md:67:```
+theory/05_basis.md:84:```math
+theory/05_basis.md:87:```
+theory/06_periodicity.md:1:```@meta
+theory/06_periodicity.md:2:CurrentModule = QCLNEGF
+theory/06_periodicity.md:3:```
+theory/06_periodicity.md:12:```math
+theory/06_periodicity.md:14:```
+theory/06_periodicity.md:24:```math
+theory/06_periodicity.md:27:```
+theory/06_periodicity.md:51:```math
+theory/06_periodicity.md:54:```
+theory/06_periodicity.md:60:```math
+theory/06_periodicity.md:63:```
+theory/06_periodicity.md:81:```math
+theory/06_periodicity.md:83:```
+theory/06_periodicity.md:107:```math
+theory/06_periodicity.md:110:```
+theory/06_periodicity.md:120:```math
+theory/06_periodicity.md:123:```
+theory/07_greens.md:1:```@meta
+theory/07_greens.md:2:CurrentModule = QCLNEGF
+theory/07_greens.md:3:```
+theory/07_greens.md:24:```math
+theory/07_greens.md:27:```
+theory/07_greens.md:33:```math
+theory/07_greens.md:36:```
+theory/07_greens.md:46:```math
+theory/07_greens.md:48:```
+theory/07_greens.md:62:```math
+theory/07_greens.md:65:```
+theory/07_greens.md:78:```math
+theory/07_greens.md:80:```
+theory/07_greens.md:84:```math
+theory/07_greens.md:86:```
+theory/07_greens.md:104:```math
+theory/07_greens.md:107:```
+theory/08_kernels.md:1:```@meta
+theory/08_kernels.md:2:CurrentModule = QCLNEGF
+theory/08_kernels.md:3:```
+theory/08_kernels.md:34:```math
+theory/08_kernels.md:37:```
+theory/08_kernels.md:39:```math
+theory/08_kernels.md:42:```
+theory/08_kernels.md:55:```math
+theory/08_kernels.md:58:```
+theory/08_kernels.md:71:```math
+theory/08_kernels.md:74:```
+theory/08_kernels.md:87:```math
+theory/08_kernels.md:91:```
+theory/08_kernels.md:106:```math
+theory/08_kernels.md:108:```
+theory/08_kernels.md:110:```math
+theory/08_kernels.md:115:```
+theory/08_kernels.md:134:```math
+theory/08_kernels.md:138:```
+theory/08_kernels.md:142:```math
+theory/08_kernels.md:146:```
+theory/08_kernels.md:148:```math
+theory/08_kernels.md:152:```
+theory/08_kernels.md:163:```math
+theory/08_kernels.md:168:```
+theory/08_kernels.md:175:```math
+theory/08_kernels.md:180:```
+theory/08_kernels.md:205:```math
+theory/08_kernels.md:208:```
+theory/09_scba.md:1:```@meta
+theory/09_scba.md:2:CurrentModule = QCLNEGF
+theory/09_scba.md:3:```
+theory/09_scba.md:53:```math
+theory/09_scba.md:56:```
+theory/09_scba.md:75:```math
+theory/09_scba.md:79:```
+theory/10_poisson.md:1:```@meta
+theory/10_poisson.md:2:CurrentModule = QCLNEGF
+theory/10_poisson.md:3:```
+theory/10_poisson.md:27:```math
+theory/10_poisson.md:30:```
+theory/10_poisson.md:43:```math
+theory/10_poisson.md:48:```
+theory/10_poisson.md:62:```math
+theory/10_poisson.md:65:```
+theory/11_observables.md:1:```@meta
+theory/11_observables.md:2:CurrentModule = QCLNEGF
+theory/11_observables.md:3:```
+theory/11_observables.md:22:```math
+theory/11_observables.md:25:```
+theory/11_observables.md:39:```math
+theory/11_observables.md:43:```
+theory/11_observables.md:52:```math
+theory/11_observables.md:56:```
+theory/11_observables.md:62:```math
+theory/11_observables.md:64:```
+theory/11_observables.md:81:```math
+theory/11_observables.md:84:```
+theory/11_observables.md:95:```math
+theory/11_observables.md:97:```
+theory/11_observables.md:108:```math
+theory/11_observables.md:112:```
+theory/12_validation.md:1:```@meta
+theory/12_validation.md:2:CurrentModule = QCLNEGF
+theory/12_validation.md:3:```
+theory/12_validation.md:136:```math
+theory/12_validation.md:139:```
+theory/12_validation.md:141:```math
+theory/12_validation.md:143:```
+theory/12_validation.md:161:```math
+theory/12_validation.md:164:```
+theory/12_validation.md:166:```math
+theory/12_validation.md:168:```
+theory/12_validation.md:184:```math
+theory/12_validation.md:187:```
+theory/12_validation.md:264:```math
+theory/12_validation.md:268:```
+theory/13_visualization.md:1:```@meta
+theory/13_visualization.md:2:CurrentModule = QCLNEGF
+theory/13_visualization.md:3:```
+theory/14_cost.md:30:```math
+theory/14_cost.md:32:```
+theory/14_cost.md:34:```math
+theory/14_cost.md:38:```
+theory/14_cost.md:75:```math
+theory/14_cost.md:77:```
+theory/14_cost.md:81:```math
+theory/14_cost.md:84:```
+theory/14_cost.md:96:```math
+theory/14_cost.md:100:```
+theory/15_limitations.md:1:```@meta
+theory/15_limitations.md:2:CurrentModule = QCLNEGF
+theory/15_limitations.md:3:```
+theory/16_input_contract.md:1:```@meta
+theory/16_input_contract.md:2:CurrentModule = QCLNEGF
+theory/16_input_contract.md:3:```
+theory/16_input_contract.md:82:```math
+theory/16_input_contract.md:85:```
+theory/16_input_contract.md:87:```math
+theory/16_input_contract.md:90:```
+theory/16_input_contract.md:92:```math
+theory/16_input_contract.md:95:```
+theory/17_implementation_plan.md:1:```@meta
+theory/17_implementation_plan.md:2:CurrentModule = QCLNEGF
+theory/17_implementation_plan.md:3:```
+theory/17_implementation_plan.md:49:```julia
+theory/17_implementation_plan.md:60:```
+theory/18_optical_response.md:1:```@meta
+theory/18_optical_response.md:2:CurrentModule = QCLNEGF
+theory/18_optical_response.md:3:```
+theory/18_optical_response.md:36:```math
+theory/18_optical_response.md:40:```
+theory/18_optical_response.md:49:```math
+theory/18_optical_response.md:52:```
+theory/18_optical_response.md:54:```math
+theory/18_optical_response.md:58:```
+theory/18_optical_response.md:60:```math
+theory/18_optical_response.md:64:```
+theory/18_optical_response.md:71:```math
+theory/18_optical_response.md:74:```
+theory/19_production.md:1:```@meta
+theory/19_production.md:2:CurrentModule = QCLNEGF
+theory/19_production.md:3:```
+theory/19_production.md:48:```julia
+theory/19_production.md:51:```
+theory/19_production.md:143:```math
+theory/19_production.md:145:```
+theory/19_production.md:149:```math
+theory/19_production.md:155:```
+theory/19_production.md:183:```math
+theory/19_production.md:187:```
+theory/19_production.md:191:```math
+theory/19_production.md:193:```
+theory/19_production.md:214:```math
+theory/19_production.md:218:```
+theory/19_production.md:246:```math
+theory/19_production.md:249:```
+theory/19_production.md:253:```math
+theory/19_production.md:256:```
+theory/19_production.md:275:```math
+theory/19_production.md:277:```
+theory/19_production.md:295:```math
+theory/19_production.md:300:```
+theory/19_production.md:316:```text
+theory/19_production.md:337:```
+theory/20_optimization_decision_tree.md:1:```@meta
+theory/20_optimization_decision_tree.md:2:CurrentModule = QCLNEGF
+theory/20_optimization_decision_tree.md:3:```
+physics/models.md:27:```math
+physics/models.md:30:```
+physics/models.md:39:```math
+physics/models.md:42:```
+physics/models.md:56:```math
+physics/models.md:60:```
+physics/models.md:69:```math
+physics/models.md:73:```
+physics/models.md:98:```math
+physics/models.md:101:```
+physics/models.md:110:```math
+physics/models.md:114:```
+physics/models.md:132:```math
+physics/models.md:135:```
+physics/models.md:167:```math
+physics/models.md:170:```
+physics/models.md:172:```math
+physics/models.md:176:```
+physics/models.md:204:```math
+physics/models.md:206:```
+physics/models.md:222:```julia
+physics/models.md:229:```
+physics/models.md:256:```yaml
+physics/models.md:266:```
+tutorials/localization.md:1:```@meta
+tutorials/localization.md:2:CurrentModule = QCLNEGF
+tutorials/localization.md:3:```
+tutorials/localization.md:66:```math
+tutorials/localization.md:68:```
+tutorials/localization.md:125:```math
+tutorials/localization.md:129:```
+tutorials/localization.md:146:```math
+tutorials/localization.md:148:```
+tutorials/localization.md:181:```math
+tutorials/localization.md:183:```
+tutorials/localization.md:199:```math
+tutorials/localization.md:203:```
+tutorials/physical-atlas.md:1:```@meta
+tutorials/physical-atlas.md:2:CurrentModule = QCLNEGF
+tutorials/physical-atlas.md:3:```
+tutorials/physical-atlas.md:63:```math
+tutorials/physical-atlas.md:65:```
+tutorials/physical-atlas.md:75:```math
+tutorials/physical-atlas.md:79:```
+tutorials/physical-atlas.md:141:```math
+tutorials/physical-atlas.md:143:```
+tutorials/physical-atlas.md:228:```math
+tutorials/physical-atlas.md:233:```
+tutorials/physical-atlas.md:269:```math
+tutorials/physical-atlas.md:272:```
+developer/physics_operators.md:1:```@meta
+developer/physics_operators.md:2:CurrentModule = QCLNEGF
+developer/physics_operators.md:3:```
+developer/traceability.md:1:```@meta
+developer/traceability.md:2:CurrentModule = QCLNEGF
+developer/traceability.md:3:```
+glossary.md:1:```@meta
+glossary.md:2:CurrentModule = QCLNEGF
+glossary.md:3:```
+references_optimization.md:1:```@meta
+references_optimization.md:2:CurrentModule = QCLNEGF
+references_optimization.md:3:```
+development/review_oracle_contracts.md:151:```text
+development/review_oracle_contracts.md:157:```
+development/review_oracle_contracts.md:198:```julia
+development/review_oracle_contracts.md:218:```
+development/review_oracle_contracts.md:250:```text
+development/review_oracle_contracts.md:256:```
+development/review_oracle_contracts.md:288:```julia
+development/review_oracle_contracts.md:291:```
+development/review_oracle_contracts.md:306:```text
+development/review_oracle_contracts.md:310:```
+development/review_oracle_contracts.md:345:```text
+development/review_oracle_contracts.md:350:```
+development/review_oracle_contracts.md:377:```text
+development/review_oracle_contracts.md:385:```
+development/review_oracle_contracts.md:500:```text
+development/review_oracle_contracts.md:512:```
+development/review_oracle_contracts.md:551:```text
+development/review_oracle_contracts.md:564:```
+development/review_oracle_contracts.md:605:```text
+development/review_oracle_contracts.md:615:```
+development/review_oracle_contracts.md:633:```text
+development/review_oracle_contracts.md:641:```
+development/review_oracle_contracts.md:656:```text
+development/review_oracle_contracts.md:661:```
+development/review_oracle_contracts.md:676:```text
+development/review_oracle_contracts.md:681:```
+development/review_oracle_contracts.md:693:```text
+development/review_oracle_contracts.md:695:```
+development/review_oracle_contracts.md:705:```text
+development/review_oracle_contracts.md:709:```
+development/review_oracle_contracts.md:746:```text
+development/review_oracle_contracts.md:752:```
+development/review_oracle_contracts.md:759:```text
+development/review_oracle_contracts.md:762:```
+development/review_oracle_contracts.md:775:```text
+development/review_oracle_contracts.md:782:```
+development/review_oracle_contracts.md:1090:```text
+development/review_oracle_contracts.md:1094:```
+development/review_oracle_contracts.md:1121:```text
+development/review_oracle_contracts.md:1126:```
+development/review_oracle_contracts.md:1131:```text
+development/review_oracle_contracts.md:1138:```
+development/review_oracle_contracts.md:1152:```text
+development/review_oracle_contracts.md:1159:```
+development/review_oracle_contracts.md:1173:```text
+development/review_oracle_contracts.md:1179:```
+development/review_oracle_contracts.md:1270:```text
+development/review_oracle_contracts.md:1273:```
+development/review_oracle_contracts.md:1297:```text
+development/review_oracle_contracts.md:1302:```
+development/review_oracle_contracts.md:1346:```text
+development/review_oracle_contracts.md:1349:```
+development/review_oracle_contracts.md:1357:```text
+development/review_oracle_contracts.md:1361:```
+development/review_oracle_contracts.md:1372:```julia
+development/review_oracle_contracts.md:1396:```
+
+===== SOURCE OBSERVATION 1 =====
+user/configuration.md:36:```yaml
+user/configuration.md:42:```
+user/configuration.md:44:```yaml
+user/configuration.md:50:```
+user/configuration.md:52:```julia
+user/configuration.md:61:```
+user/plotting.md:6:```julia
+user/plotting.md:10:```
+user/results.md:91:```yaml
+user/results.md:107:```
+api/public.md:1:```@meta
+api/public.md:2:CurrentModule = QCLNEGFRunner
+api/public.md:3:```
+api/public.md:22:```@docs
+api/public.md:23:ExecutionConfiguration
+api/public.md:24:ProgressOutputConfiguration
+api/public.md:25:DeviceGeometryConfiguration
+api/public.md:26:OutputConfiguration
+api/public.md:27:ConvergenceStudyConfiguration
+api/public.md:28:StudyMethodConfiguration
+api/public.md:29:StudyConfiguration
+api/public.md:30:ResolvedRunConfiguration
+api/public.md:31:ConfigurationProvenance
+api/public.md:32:ConfigurationError
+api/public.md:33:ConfiguredProblem
+api/public.md:34:ConfiguredRunResult
+api/public.md:35:ConfiguredExecutionResult
+api/public.md:36:ProductionStudyResult
+api/public.md:37:ProgressMetric
+api/public.md:38:ProgressSnapshot
+api/public.md:39:ProgressReporter
+api/public.md:40:MethodDescriptor
+api/public.md:41:MethodPoint
+api/public.md:42:MethodRun
+api/public.md:43:MethodComparisonRow
+api/public.md:44:ExpertComparison
+api/public.md:45:run_production_sweep
+api/public.md:46:load_run_configuration
+api/public.md:47:configuration_source
+api/public.md:48:resolved_configuration_dict
+api/public.md:49:physical_parameters
+api/public.md:50:numerical_parameters
+api/public.md:51:solver_options
+api/public.md:52:production_options
+api/public.md:53:algorithm_options
+api/public.md:54:configuration_output_directory
+api/public.md:55:configure_execution!
+api/public.md:56:build_configured_problem
+api/public.md:57:run_from_configuration
+api/public.md:58:run_comparison_study
+api/public.md:59:run_convergence_study
+api/public.md:60:run_production_study
+api/public.md:61:save_checkpoint
+api/public.md:62:load_checkpoint
+api/public.md:63:load_production_restart
+api/public.md:64:save_production_summary
+api/public.md:65:save_optical_response
+api/public.md:66:save_kernel_diagnostics
+api/public.md:67:plot_band_profile
+api/public.md:68:plot_spectral_map
+api/public.md:69:plot_convergence
+api/public.md:70:plot_current_spectrum
+api/public.md:71:plot_conditioning
+api/public.md:72:plot_reference_figure3a
+api/public.md:73:plot_reference_iv
+api/public.md:74:plot_reference_gain
+api/public.md:75:compact_number
+api/public.md:76:latest_progress
+api/public.md:77:begin_progress_stage!
+api/public.md:78:update_progress!
+api/public.md:79:end_progress_stage!
+api/public.md:80:save_progress_snapshot
+api/public.md:81:save_progress_dashboard
+api/public.md:82:load_method_run
+api/public.md:83:load_method_catalog
+api/public.md:84:compare_method_runs
+api/public.md:85:save_expert_report
+api/public.md:86:generate_expert_report
+api/public.md:87:plot_method_comparison
+api/public.md:88:save_production_study_plots
+api/public.md:89:```
+api/public.md:93:```@docs
+api/public.md:94:AutomaticExecutionConfiguration
+api/public.md:95:DEFAULT_CONFIGURATION_SCHEMA
+api/public.md:96:default_configuration_schema
+api/public.md:97:ValidatedConfigurationDocument
+api/public.md:98:HardwareProfile
+api/public.md:99:ExecutionPlan
+api/public.md:100:ExecutionCalibrationSample
+api/public.md:101:ExecutionCalibrationReport
+api/public.md:102:validate_configuration_schema
+api/public.md:103:validate_configuration_source
+api/public.md:104:load_configuration_source
+api/public.md:105:probe_hardware
+api/public.md:106:execution_plan_candidates
+api/public.md:107:select_execution_plan
+api/public.md:108:calibrate_execution_plan
+api/public.md:109:resolve_execution_strategy
+api/public.md:110:hardware_profile_dict
+api/public.md:111:execution_plan_dict
+api/public.md:112:execution_calibration_dict
+api/public.md:113:save_execution_plan
+api/public.md:114:save_hardware_profile
+api/public.md:115:save_execution_calibration
+api/public.md:116:save_resource_diagnostics
+api/public.md:117:DEFAULT_MAXIMUM_SOLVER_RUNS
+api/public.md:118:planned_solver_runs
+api/public.md:119:execute_configured_run
+api/public.md:120:QCLApplicationRuntime
+api/public.md:121:SweepAxis
+api/public.md:122:AbstractSweepSpec
+api/public.md:123:SweepLeaf
+api/public.md:124:SweepLevel
+api/public.md:125:NestedSweepPlan
+api/public.md:126:SweepPoint
+api/public.md:127:point_count
+api/public.md:128:planned_points
+api/public.md:129:foreach_sweep_point
+api/public.md:130:RunIdentity
+api/public.md:131:RunDefinition
+api/public.md:132:derive_run_identity
+api/public.md:133:IterationRetentionPolicy
+api/public.md:134:DisplayDownsamplingPolicy
+api/public.md:135:DiskBudgetModel
+api/public.md:136:DiskEstimate
+api/public.md:137:estimate_disk
+api/public.md:138:AbstractRunRepository
+api/public.md:139:FilesystemRunRepository
+api/public.md:140:AbstractCheckpointCodec
+api/public.md:141:YamlCheckpointCodec
+api/public.md:142:CallbackCheckpointCodec
+api/public.md:143:CheckpointIntegrityError
+api/public.md:144:ArtifactIntegrityError
+api/public.md:145:verify_result_artifacts!
+api/public.md:146:RuntimeTracer
+api/public.md:147:AbstractPointRunner
+api/public.md:148:FunctionPointRunner
+api/public.md:149:PointExecutionContext
+api/public.md:150:PointExecutionResult
+api/public.md:151:SweepRunSummary
+api/public.md:152:checkpoint!
+api/public.md:153:record_iteration!
+api/public.md:154:run_sweep!
+api/public.md:155:QCLProductionPointRunner
+api/public.md:156:configured_nested_sweep_plan
+api/public.md:157:configured_nested_run_definition
+api/public.md:158:run_configured_nested_sweep
+api/public.md:159:QCLApplicationRuntime.CheckpointReference
+api/public.md:160:QCLApplicationRuntime.LoadedCheckpoint
+api/public.md:161:QCLApplicationRuntime.SpanToken
+api/public.md:162:QCLApplicationRuntime.SweepInterrupted
+api/public.md:163:QCLApplicationRuntime.append_event!
+api/public.md:164:QCLApplicationRuntime.canonical_bytes
+api/public.md:165:QCLApplicationRuntime.content_id
+api/public.md:166:QCLApplicationRuntime.emit_runtime_event!
+api/public.md:167:QCLApplicationRuntime.file_sha256
+api/public.md:168:QCLApplicationRuntime.fingerprint_sources
+api/public.md:169:QCLApplicationRuntime.flush_timing_summary!
+api/public.md:170:QCLApplicationRuntime.initialize_run!
+api/public.md:171:QCLApplicationRuntime.load_latest_checkpoint
+api/public.md:172:QCLApplicationRuntime.save_runtime_checkpoint!
+api/public.md:173:ConfiguredReportTemplate
+api/public.md:174:ConfiguredReportArtifact
+api/public.md:175:ConfiguredReportSection
+api/public.md:176:ConfiguredReportContext
+api/public.md:177:AbstractConfiguredReportRenderer
+api/public.md:178:MarkdownConfiguredReportRenderer
+api/public.md:179:CONFIGURED_REPORT_SECTIONS
+api/public.md:180:configured_report_arguments
+api/public.md:181:load_configured_report_template
+api/public.md:182:configured_report_context
+api/public.md:183:render_configured_report
+api/public.md:184:QCLNEGFRunner.QCLExecutionPolicy.ExecutionEnvelope
+api/public.md:185:QCLNEGFRunner.QCLExecutionPolicy.default_execution_envelope
+api/public.md:186:QCLNEGFRunner.QCLExecutionPolicy.default_hardware_profile
+api/public.md:187:```
+api/public.md:191:```@docs
+api/public.md:192:QCLNEGFRunner.QCLScientificWorkflow.ScientificPointResult
+api/public.md:193:QCLNEGFRunner.QCLScientificWorkflow.postprocess_series
+api/public.md:194:QCLNEGFRunner.QCLScientificWorkflow.render_saved_snapshot
+api/public.md:195:QCLNEGFRunner.QCLScientificWorkflow
+api/public.md:196:QCLNEGFRunner.QCLScientificWorkflow.load_scientific_plan
+api/public.md:197:QCLNEGFRunner.QCLScientificWorkflow.resolve_scientific_plan
+api/public.md:198:QCLNEGFRunner.QCLScientificWorkflow.VoltageContinuation
+api/public.md:199:QCLNEGFRunner.QCLScientificWorkflow.ScientificPoint
+api/public.md:200:QCLNEGFRunner.QCLScientificWorkflow.ScientificOutputs
+api/public.md:201:QCLNEGFRunner.QCLScientificWorkflow.execute_scientific_plan
+api/public.md:202:QCLNEGFRunner.QCLScientificWorkflow.write_scientific_plan
+api/public.md:203:QCLNEGFRunner.QCLScientificWorkflow.differential_conductance
+api/public.md:204:QCLNEGFRunner.QCLScientificWorkflow.write_scientific_result
+api/public.md:205:QCLNEGFRunner.QCLScientificWorkflow.is_scientific_definition
+api/public.md:206:QCLNEGFRunner.configured_resource_plan
+api/public.md:207:```
+api/public.md:214:```@docs
+api/public.md:215:QCLNEGFRunner.solve_production
+api/public.md:216:```
+api/public.md:220:```@docs
+api/public.md:221:QCLNEGFRunner.main
+api/public.md:222:QCLNEGFRunner.execute_scientific_plan_staged
+api/public.md:223:QCLNEGFRunner.stage_result_tree
+api/public.md:224:scattering_options(::ResolvedRunConfiguration)
+api/public.md:225:```
+api/public.md:229:```@docs
+api/public.md:230:QCLNEGFRunner.compare_saved_results
+api/public.md:231:```
+
+===== SOURCE OBSERVATION 2 =====
+function create_draft_result!(node::Node; blocktype = "code")
+    @assert node.element isa MarkdownAST.CodeBlock
+    codeblock = node.element
+    codeblock.info = "julia"
+    node.element = Documenter.MultiOutput(codeblock)
+    push!(node.children, Node(codeblock))
+    outputnode = Node(
+        Documenter.MultiOutputElement(
+            Dict{MIME, Any}(MIME"text/plain"() => "<< $(blocktype)-block not executed in draft mode >>")
+        )
+    )
+    push!(node.children, outputnode)
+    return
+end
+
+
+# Expander Pipeline.
+module Expanders
+    import ..Documenter # for docstring references
+    import ..Documenter.Selectors
+
+    """
+    The default node expander "pipeline", which consists of the following expanders:
+
+    - [`TrackHeaders`](@ref)
+    - [`MetaBlocks`](@ref)
+    - [`DocsBlocks`](@ref)
+    - [`AutoDocsBlocks`](@ref)
+    - [`EvalBlocks`](@ref)
+    - [`IndexBlocks`](@ref)
+    - [`ContentsBlocks`](@ref)
+    - [`ExampleBlocks`](@ref)
+    - [`SetupBlocks`](@ref)
+    - [`REPLBlocks`](@ref)
+
+    """
+    abstract type ExpanderPipeline <: Selectors.AbstractSelector end
+
+    """
+    The subset of [node expanders](@ref ExpanderPipeline) which also apply in nested contexts.
+
+    See also [`expand_recursively`](@ref Documenter.expand_recursively).
+    """
+    abstract type NestedExpanderPipeline <: ExpanderPipeline end
+
+    """
+    Tracks all `Markdown.Header` nodes found in the parsed markdown files and stores an
+    [`Anchor`](@ref Documenter.Anchor) object for each one.
+    """
+    abstract type TrackHeaders <: ExpanderPipeline end
+
+    """
+    Parses each code block where the language is `@meta` and evaluates the key/value pairs found
+    within the block, i.e.
+
+    ````markdown
+    ```@meta
+    CurrentModule = Documenter
+    DocTestSetup  = quote
+        using Documenter
+    end
+    ```
+    ````
+    """
+    abstract type MetaBlocks <: ExpanderPipeline end
+
+    """
+    Parses each code block where the language is `@docs` and evaluates the expressions found
+    within the block. Replaces the block with the docstrings associated with each expression.
+
+    ````markdown
+    ```@docs
+    Documenter
+    makedocs
+    deploydocs
+    ```
+    ````
+    """
+    abstract type DocsBlocks <: ExpanderPipeline end
+
+    """
+    Parses each code block where the language is `@autodocs` and replaces it with all the
+    docstrings that match the provided key/value pairs `Modules = ...` and `Order = ...`.
+
+    ````markdown
+    ```@autodocs
+    Modules = [Foo, Bar]
+    Order   = [:function, :type]
+    ```
+    ````
+    """
+    abstract type AutoDocsBlocks <: ExpanderPipeline end
+
+    """
+    Parses each code block where the language is `@eval` and evaluates it's content. Replaces
+    the block with the value resulting from the evaluation. This can be useful for inserting
+    generated content into a document such as plots.
+
+    ````markdown
+    ```@eval
+    using PyPlot
+    x = linspace(-π, π)
+    y = sin(x)
+    plot(x, y, color = "red")
+    savefig("plot.svg")
+    Markdown.parse("![Plot](plot.svg)")
+    ```
+    ````
+    """
+    abstract type EvalBlocks <: NestedExpanderPipeline end
+
+    abstract type RawBlocks <: NestedExpanderPipeline end
+
+    """
+    Parses each code block where the language is `@index` and replaces it with an index of all
+    docstrings spliced into the document. The pages that are included can be set using a
+    key/value pair `Pages = [...]` such as
+
+    ````markdown
+    ```@index
+    Pages = ["foo.md", "bar.md"]
+    ```
+    ````
+    """
+    abstract type IndexBlocks <: ExpanderPipeline end
+
+    """
+    Parses each code block where the language is `@contents` and replaces it with a nested list
+    of all `Header` nodes in the generated document. The pages and depth of the list can be set
+    using `Pages = [...]` and `Depth = N` where `N` is and integer.
+
+    ````markdown
+    ```@contents
+    Pages = ["foo.md", "bar.md"]
+    Depth = 1
+    ```
+    ````
+    The default `Depth` value is `2`.
+    """
+    abstract type ContentsBlocks <: ExpanderPipeline end
+
+    """
+    Parses each code block where the language is `@example` and evaluates the parsed Julia code
+    found within. The resulting value is then inserted into the final document after the source
+    code.
+
+    ````markdown
+    ```@example
+    a = 1
+    b = 2
+    a + b
+    ```
+    ````
+    """
+    abstract type ExampleBlocks <: NestedExpanderPipeline end
+
+    """
+    Similar to the [`ExampleBlocks`](@ref) expander, but inserts a Julia REPL prompt before each
+    toplevel expression in the final document.
+    """
+    abstract type REPLBlocks <: NestedExpanderPipeline end
+
+    """
+    Similar to the [`ExampleBlocks`](@ref) expander, but hides all output in the final document.
+    """
+    abstract type SetupBlocks <: NestedExpanderPipeline end
+end
+
+Selectors.order(::Type{Expanders.TrackHeaders}) = 1.0
+Selectors.order(::Type{Expanders.MetaBlocks}) = 2.0
+Selectors.order(::Type{Expanders.DocsBlocks}) = 3.0
+Selectors.order(::Type{Expanders.AutoDocsBlocks}) = 4.0
+Selectors.order(::Type{Expanders.EvalBlocks}) = 5.0
+Selectors.order(::Type{Expanders.IndexBlocks}) = 6.0
+Selectors.order(::Type{Expanders.ContentsBlocks}) = 7.0
+Selectors.order(::Type{Expanders.ExampleBlocks}) = 8.0
+Selectors.order(::Type{Expanders.REPLBlocks}) = 9.0
+Selectors.order(::Type{Expanders.SetupBlocks}) = 10.0
+Selectors.order(::Type{Expanders.RawBlocks}) = 11.0
+
+Selectors.matcher(::Type{Expanders.TrackHeaders}, node, page, doc) = isa(node.element, MarkdownAST.Heading)
+Selectors.matcher(::Type{Expanders.MetaBlocks}, node, page, doc) = iscode(node, "@meta")
+Selectors.matcher(::Type{Expanders.DocsBlocks}, node, page, doc) = iscode(node, r"^@docs")
+Selectors.matcher(::Type{Expanders.AutoDocsBlocks}, node, page, doc) = iscode(node, r"^@autodocs")
+Selectors.matcher(::Type{Expanders.EvalBlocks}, node, page, doc) = iscode(node, "@eval")
+    page_ref = replace(page_ref, r"\.md$" => "")
+    return page_ref
+end
+
+function make_object(binding, typesig, is_canonical, doc, page)
+    object = Documenter.Object(binding, typesig)
+    if !is_canonical
+        primary_anchor = string(object)
+        counter = get!(page.globals.meta, :noncanonical_docs_counter, Dict())
+        frag_extra = slugify_pagekey(pagekey(doc, page))
+        if primary_anchor in keys(counter)
+            counter[primary_anchor] += 1
+            frag_extra *= "-$(counter[primary_anchor])"
+        else
+            counter[primary_anchor] = 1
+        end
+        object = Documenter.Object(binding, typesig, frag_extra)
+    end
+    return object
+end
+
+# @docs
+# -----
+
+function Selectors.runner(::Type{Expanders.DocsBlocks}, node, page, doc)
+    @assert node.element isa MarkdownAST.CodeBlock
+    x = node.element
+    is_canonical = parse_docs_args("docs", x.info)
+    docsnodes = Node[]
+    curmod = get(page.globals.meta, :CurrentModule, Main)
+    lines = Documenter.find_block_in_file(x.code, page.source)
+    @debug "Evaluating @docs block:\n$(x.code)"
+    for (ex, str) in Documenter.parseblock(x.code, doc, page; lines)
+        adstr = """
+        !!! warning "Missing docstring."
+
+            Missing docstring for `$(strip(str))`. Check Documenter's build log for details.
+        """
+        admonition = first(Documenter.mdparse(adstr, mode = :blocks))
+        binding = try
+            Documenter.DocSystem.binding(curmod, ex)
+        catch err
+            @docerror(
+                doc, :docs_block,
+                """
+                unable to get the binding for '$(strip(str))' in `@docs` block in $(Documenter.locrepr(doc, page, lines)) from expression '$(repr(ex))' in module $(curmod)
+                ```$(x.info)
+                $(x.code)
+                ```
+                """,
+                exception = err
+            )
+            push!(docsnodes, admonition)
+            continue
+        end
+        # Undefined `Bindings` get discarded.
+        if !Documenter.DocSystem.iskeyword(binding) && !Documenter.DocSystem.defined(binding)
+            @docerror(
+                doc, :docs_block,
+                """
+                undefined binding '$(binding)' in `@docs` block in $(Documenter.locrepr(doc, page, lines))
+                ```$(x.info)
+                $(x.code)
+                ```
+                """
+            )
+            push!(docsnodes, admonition)
+            continue
+        end
+        typesig = try
+            Core.eval(curmod, Documenter.DocSystem.signature(ex, str))
+        catch err
+            @docerror(
+                doc, :docs_block,
+                """
+                failed to evaluate `$(strip(str))` in `@docs` block in $(Documenter.locrepr(doc, page, lines))
+                ```$(x.info)
+                $(x.code)
+                ```
+                """, exception = err
+            )
+            push!(docsnodes, admonition)
+            continue
+        end
+        object = make_object(binding, typesig, is_canonical, doc, page)
+        # We can't include the same object more than once in a document.
+        if haskey(doc.internal.objects, object)
+            apistatus = DocSystem.APIStatus(binding)
+            @docerror(
+                doc, :docs_block,
+                """
+                duplicate docs found for '$(strip(str))' in `@docs` block in $(Documenter.locrepr(doc, page, lines))
+                ```$(x.info)
+                $(x.code)
+                ``` $(DocSystem.public_unexported_msg(apistatus))
+                """
+            )
+            push!(docsnodes, admonition)
+            continue
+        end
+
+        # Find the docs matching `binding` and `typesig`. Only search within the provided modules.
+        docs = Documenter.DocSystem.getdocs(binding, typesig; modules = doc.blueprint.modules)
+71:and applies `NestedExpanderPipeline` instead of `ExpanderPipeline`.
+81:            Selectors.dispatch(Expanders.NestedExpanderPipeline, child, page, doc)
+143:    abstract type NestedExpanderPipeline <: ExpanderPipeline end
+158:    DocTestSetup  = quote
+209:    abstract type EvalBlocks <: NestedExpanderPipeline end
+211:    abstract type RawBlocks <: NestedExpanderPipeline end
+254:    abstract type ExampleBlocks <: NestedExpanderPipeline end
+260:    abstract type REPLBlocks <: NestedExpanderPipeline end
+265:    abstract type SetupBlocks <: NestedExpanderPipeline end
+295:Selectors.runner(::Type{Expanders.NestedExpanderPipeline}, node, page, doc) = nothing
+344:            if !(ex.args[1] in (:CurrentModule, :DocTestSetup, :DocTestTeardown, :DocTestFilters, :EditURL, :Description, :Draft, :CollapsedDocStrings, :ShareDefaultModule))
+

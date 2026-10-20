@@ -46,9 +46,10 @@
       "SCI05": 8,
       "DEV07": 1,
       "SCI03_M1": 2,
-      "DOC04": 2,
+      "DOC04": 5,
       "OPS04_Root": 2,
-      "OPS04_Platform": 2
+      "OPS04_Platform": 2,
+      "DOC07_C1_C2": 2
     },
     "heavy_build_attempts": 0,
     "heavy_build_wall_hours": 0,
@@ -64,23 +65,24 @@
     "local_frontend_asset_build_attempts": 1,
     "native_build_active": null,
     "tooling_selftest_calls": 1,
-    "targeted_test_total_calls": 66,
-    "targeted_test_total_wall_seconds": 979.615,
+    "targeted_test_total_calls": 71,
+    "targeted_test_total_wall_seconds": 1003.229,
     "SCI05_08_C08_test_calls": 8,
     "SI07_formal_max_calls": 4,
     "SI07_forward_samples": 8,
-    "targeted_test_calls_total": 66,
-    "targeted_test_wall_seconds_total": 979.615,
+    "targeted_test_calls_total": 71,
+    "targeted_test_wall_seconds_total": 1003.229,
     "SI07_formal_calls_completed": 4,
     "SI07_forward_static_checks": 2,
     "DEV07_LJL_calls": 1,
     "SCI03_M1_calls": 2,
-    "DOC04_unit_calls": 2,
+    "DOC04_unit_calls": 5,
     "OPS04_Root_calls": 2,
     "OPS04_format_calls": 1,
     "OPS04_Platform_calls": 2,
     "DOC04_format_calls": 2,
-    "local_lint_calls_admitted": 3
+    "local_lint_calls_admitted": 3,
+    "DOC07_C1_C2_calls": 2
   },
   "resource_observation": {
     "logical_cpus": 12,
@@ -126,7 +128,7 @@
       "scope": "59historicalrequirementsandclassificationreconciled; owningrootdocs,notfullclosure"
     },
     "INT02": {
-      "state": "ongoing_owning_publications_root_draft23_current_cfc38e1",
+      "state": "ongoing_owning_publications_root_draft23_current_514cd97",
       "definition": "README.md#INT02",
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
@@ -187,7 +189,7 @@
       "scope": "manufacturedsignedcurrent/basiscoherence"
     },
     "DEV07": {
-      "state": "owning_PR13_G1_merged_target824_pass_root_gitlink_pending",
+      "state": "owning_PR13_G1_merged_824_pass_root514_selected",
       "scientific_acceptance": "not_measured"
     },
     "DEV08": {
@@ -402,7 +404,7 @@
       "limitation": "cooperative Python owner only; OS/bootstrap/prepare-role/CR04 atomic/native gates open"
     },
     "OPS04": {
-      "state": "Root_CP_CODE_GREEN26_lintPASS_PlatformGREEN16_owningPR19G1merged_Rootpublicationpending",
+      "state": "Root26GREEN_lintPASS_Platform16GREEN_PR19G1merged_Root514published_native_unknown",
       "Root_unit_calls": "2/2",
       "Platform_unit_calls": "2/2",
       "native": "unknown",
@@ -425,7 +427,7 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "OPS08": {
-      "state": "planned",
+      "state": "partial_source_audit_REQUEST_CHANGES_R1_R2_R3_ready_narrow_I_initial_resource_failure_retained",
       "definition": "platform-worker.md#OPS08",
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
@@ -530,7 +532,7 @@
       "review": "541340d2d3304b01d61b9763b89d453f15dcfdada9ea2dd8919e22a3b1e2a997"
     },
     "DOC04": {
-      "state": "correctiveformattedadapter_v2_lintPASS_under_CPP2_operatorprosePASSbound_recipesDesigninprogress",
+      "state": "pure_adapters_CPP_Python20PASS_Node15PASS_5unitcalls_pendingRootpublication_recipesDreviewactive",
       "unit_calls": "2/4",
       "public_bundle": "sharedschema_OFL_nativeBUILD_pending"
     },
@@ -545,7 +547,7 @@
       "readiness": "not yet evaluated; no resource operation authorized by status alone"
     },
     "DOC07": {
-      "state": "D2canonicalPASSbound_C1REDv2source_under_narrowR",
+      "state": "C1_PR10G1_merged_204GREEN_root_gitlink_pending_C2_REDsources_authoring",
       "runtime_calls": 0
     },
     "SI01": {
@@ -1888,6 +1890,122 @@
       "merged_at": "2026-10-19T21:24:31Z",
       "merge_exit": 0,
       "sole_merge_submit": true
+    },
+    {
+      "id": "DOC04-PY-GREEN-2",
+      "state": "completed_pass_pending_assertion_review",
+      "kind": "bounded_local_DOC04_unit_GREEN",
+      "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+      "files": {
+        "tests/test_docs_assembly.py": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+        "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7"
+      },
+      "source_review": "b259f5b8c5f03055b159938e5dbba1c7f1b555e617b207fd0375eecb43809bc6",
+      "harness_sha256": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+      "harness_review": "dca5d87440947cd27ae518a2a8054d934538ecc0c7f97db7df4622ebbc19b0ab",
+      "memory_available_bytes": 11559743488,
+      "TMP_available_bytes": 16024350720,
+      "utc": "2026-10-19T21:36:22.176133+00:00",
+      "limits": "90s1CPU1GiBRSS32MiBownedTMP2MiBraw; sampled not quota; DOC04max4calls; no BUILD/fullCI/science",
+      "exit_code": 0,
+      "wall_seconds": 1.054,
+      "receipt_sha256": "4afb64293c03e616eb1fc7e22c08623a859e446025ce4f47d46699f59aeca895",
+      "raw_sha256": "04203b8ff2d2cd277cdf28af34117905d8347a5a3a88cf631d31cba832957705"
+    },
+    {
+      "id": "DOC04-NODE-GREEN-2",
+      "state": "completed_failure_requires_classification",
+      "kind": "bounded_local_DOC04_unit_GREEN",
+      "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+      "files": {
+        "tests/test_docs_assembly.py": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+        "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7"
+      },
+      "source_review": "b259f5b8c5f03055b159938e5dbba1c7f1b555e617b207fd0375eecb43809bc6",
+      "harness_sha256": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+      "harness_review": "dca5d87440947cd27ae518a2a8054d934538ecc0c7f97db7df4622ebbc19b0ab",
+      "memory_available_bytes": 11517984768,
+      "TMP_available_bytes": 16024186880,
+      "utc": "2026-10-19T21:37:11.375548+00:00",
+      "limits": "90s1CPU1GiBRSS32MiBownedTMP2MiBraw; sampled not quota; DOC04max4calls; no BUILD/fullCI/science",
+      "exit_code": 1,
+      "wall_seconds": 0.447,
+      "receipt_sha256": "cd36c8e6be39a96d566fde51e1738c8138ab5af8adadfc8e76bac942cf857572",
+      "raw_sha256": "6a76be27dbcc18af6b9d967d5a68f93e25daaf2b7dd226c09506b994be3bd9dd"
+    },
+    {
+      "id": "DOC07-C1-RED-1",
+      "state": "completed_RED_pending_failure_classification",
+      "kind": "bounded_local_DOC07_C1_RED",
+      "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+      "component_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "fixture_sha256": "6a39ee353153a4de2d313323b5c67662026721f282adec1ae44305d95d1f2ebd",
+      "source_review": "2970838606ddd482343dd10c382b19bfc656cc0637c1ae3e83b577b7367458ff",
+      "package_init_sha256": "41b5b746bbf28cd0e60bb85bc927f1c55ba0ac2695f3271b875f83c057a744d1",
+      "harness_sha256": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b",
+      "memory_available_bytes": 11360169984,
+      "TMP_available_bytes": 16024014848,
+      "utc": "2026-10-20T03:55:25.202421+00:00",
+      "limits": "90s1CPU1GiBRSS32MiBownedTMP2MiBraw; sampled not quota; DOC07C1C2max4calls; no BUILD/fullCI/science",
+      "exit_code": 1,
+      "wall_seconds": 2.239,
+      "receipt_sha256": "10894d769ef7d1c51b79f7a56028e4f682c68d17ae5fb17bb767623ee3db4f85",
+      "raw_sha256": "09eb306cfc6ae8d0ff0cb06a5795adec25be1bd0c027919cd7bdfcf502afd3ba"
+    },
+    {
+      "id": "DOC04-NODE-GREEN-E1",
+      "state": "completed_pass_pending_assertion_review",
+      "kind": "bounded_local_DOC04_unit_GREEN",
+      "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+      "files": {
+        "tests/test_docs_assembly.py": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+        "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7"
+      },
+      "source_review": "dfffa8adc003d407267ad89db5ad587a86fa2d3d6451959fc3c0d604e8b317a3",
+      "harness_sha256": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+      "harness_review": "dca5d87440947cd27ae518a2a8054d934538ecc0c7f97db7df4622ebbc19b0ab",
+      "memory_available_bytes": 11715604480,
+      "TMP_available_bytes": 16023465984,
+      "utc": "2026-10-20T03:59:10.659008+00:00",
+      "limits": "90s1CPU1GiBRSS32MiBownedTMP2MiBraw; sampled not quota; DOC04original4used+explicitNodeE1max5; no BUILD/fullCI/science",
+      "exit_code": 0,
+      "wall_seconds": 0.449,
+      "receipt_sha256": "76882ec516bbc216c5d6638661b0be3ea88bda0e749f2e17261d7b02f126f709",
+      "raw_sha256": "4e323fc5c29fcf8374f1dec306c8dbdfb1d6556f680618471ab2a5a97216ee62"
+    },
+    {
+      "id": "DOC07-C1-GREEN-1",
+      "state": "completed_PASS_pending_assertion_review",
+      "kind": "bounded_local_DOC07_C1_GREEN",
+      "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+      "component_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "files": {
+        "src/qcl_negf_contracts/schemas/model-help.schema.json": "584971b619218d56f2bdc4b04dfc1361d4850898cdabeca4594203aaf119c241",
+        "tests/test_model_help.py": "b284bd64ad2a891f2fca791c7d32b0a11389399f32c68aa913dba9da5b217177"
+      },
+      "source_review_sha256": "cc79399ff32accf90172a7c659f19cc4e667017bbfa35f8c7f2c45db32a614f3",
+      "harness_sha256": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b",
+      "memory_available_bytes": 11664146432,
+      "TMP_available_bytes": 16020750336,
+      "utc": "2026-10-20T04:07:55.614554+00:00",
+      "limits": "90s1CPU1GiBRSS32MiBownedTMP2MiBraw samplednotquota; sharedDOC07max4calls; no BUILD/fullCI/science",
+      "exit_code": 0,
+      "wall_seconds": 19.425,
+      "receipt_sha256": "32ae0596aee8f5c6526f4a7934fdac979769edd5e49407012497b14398c449a6",
+      "raw_sha256": "40ad523792143ece0482a512c88e385ca71de55b16a07eb139b454a664ae05c4"
+    },
+    {
+      "id": "G1-DOC07-C1-qcl-negf-contracts-d791dea",
+      "state": "G1_merged",
+      "kind": "conditional_owning_merge",
+      "repo": "Afonenko-QCL-NEGF/qcl-negf-contracts",
+      "head": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+      "pr": 10,
+      "base": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "merge_commit": "163ac625f9ba945c8a6df37202f40642d134c321",
+      "merged_at": "2026-10-20T04:10:50Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
     }
   ],
   "unknown_outcomes": [],
@@ -1898,18 +2016,18 @@
     }
   ],
   "next_ready": [
-    "Platformcompat_CPP_then_soleGREEN",
-    "DOC04_CPPcollatedfixes_then_solePY_NODE_GREEN",
-    "DOC07D2_R",
-    "Root_OPS04_commit_after_finalassembly",
-    "Rootpublished_M1gitlink_nextprogressbatch"
+    "DOC07C1v2 highCPP then soleC1GREEN; sharedDOC07calls1/4",
+    "DOC06source-onlyD ultrafreeze thenhighR andmediumprototype",
+    "DOC04recipesD3 narrowAPIfix queuedafterDOC06 thenhighR+mediumI owningprofiles",
+    "OPS08independent sourcefaultcoverageaudit",
+    "SCI07source/resource guard preparation, nativefactsremainmissing"
   ],
-  "updated_at": "2026-10-19T21:33:05.247259+00:00",
+  "updated_at": "2026-10-20T04:17:07.789959+00:00",
   "source": {
-    "root_head": "d4113f43cddf02d46025434eb3a9dd8e110e90d6",
+    "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
     "branch": "codex/review-closure-exec",
     "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
-    "status_short": "M components/qcl-negf-platform\n M components/qcl-negf-results\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-current-bound-doc-publication-journal.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n M docs/system/physics-documentation.md\n M nix/solver.nix\n M ops/application_cd.ts\n M ops/solver.ts\n M tests/application_cd_test.ts\n M tests/solver_test.ts\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-operator-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-red-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-red-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-red-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-red-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-contract-plan-identity.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-contract-plan-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-contract-plan-v2-identity.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-contract-plan-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-contract-plan-v2.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-contract-plan.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-cli-seam-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-cli-seam-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-platform-compat-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-platform-compat-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-platform-final-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-platform-red-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-platform-red-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-platform-red-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-platform-red-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-root-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-root-final-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-root-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-root-red-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-root-red-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-root-red-v3-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops04-root-red-v3-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-root-local-unit-harness-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-doc-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-doc-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-final-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-impl-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-pr-body.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-red-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-red-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci03-M1-red-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-operator-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-code-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-formatted-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-red-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-red-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-red-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-red-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-red-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-canonical-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-contract-plan-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-contract-plan-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-local-runtime-binary-identities.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-local-runtime-metadata-preflight-1.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-local-runtime-metadata-preflight-2.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-local-runtime-metadata-preflight-3.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-cli-seam-design-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-cli-seam-design-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-compat-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-compat-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-first-intent.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-first-result.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-green-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-red-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-red-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-red-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-red-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-platform-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-code-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-formatted-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-green-intent.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-green-result.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-green-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-intent.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-result.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-v2-delta.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-v3-delta.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-v3-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-root-red-v3-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-local-unit-harness-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-G1-preflight.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-active-G1.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-doc-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-final-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-green-intent.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-green-result.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-green-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-impl-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-red-intent.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-red-result.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-red-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-red-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-red-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci03-M1-red-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-RED-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-PY-RED-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/OPS04-PLATFORM-FIRST-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/OPS04-PLATFORM-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/OPS04-ROOT-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/OPS04-ROOT-RED-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI03-M1-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI03-M1-RED-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/DOC04-FORMAT-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/DOC04-LINT-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/OPS04-FORMAT-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tooling/OPS04-LINT-1/\n?? docs/public/\n?? tests/docs_math_test.mjs\n?? tests/test_docs_assembly.py",
+    "status_short": "M  components/qcl-negf-contracts\nM  docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-continuation-witnesses.txt\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v2-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v2.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v3-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v3.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-source-effect-ledger-v2.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-source-effect-ledger.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-style-fix-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-style-fix-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-style-fix.patch\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-canonical-pointer-erratum.patch\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-static-slice-design-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-static-slice-design.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-static-slice-source-ledger.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-red-v2-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-v2-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-v2-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops08-source-audit-phase1-partial.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops08-source-audit.md\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-font-license-metadata-one.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-node-E1-plan.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-pure-final-source-binding.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v2-review-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v3-delta.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v3-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v3-review-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-style-E1-source-binding.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-style-fix-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-style-fix-review-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-pointer-erratum-binding.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-static-slice-design-review-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-static-slice-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-final-source-binding.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-publication-journal.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-red-v2-review-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-review-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-v2-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-v2-review-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-source-audit-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-source-continuation-plan.json\nM  docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-E1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-E1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-PY-GREEN-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-PY-GREEN-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-GREEN-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-GREEN-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-RED-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-RED-1/receipt.json\nM  docs/system/physics-documentation.md\nA  ops/docs/assemble.py\nA  ops/docs/math-render.mjs\nA  ops/docs/pilot-plan.json\nA  tests/docs_math_test.mjs\nA  tests/test_docs_assembly.py",
     "gitlinks_authority": "git ls-tree HEAD components/; no maintained parallel component SHA lock",
     "submodules_verified_against_gitlinks": false,
     "verification_method": "compare actual component HEAD with root HEAD tree gitlinks, independently of staging index"
@@ -2856,8 +2974,8 @@
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-dev20-staged-identity.json"
     },
     "qcl-targeted-receipt-census.json": {
-      "sha256": "3c28b907bf1ad0e0bd474aa83843edb195f047c44e636495eab0ee36e7296438",
-      "bytes": 11713,
+      "sha256": "1003da3e7352e586c3be6d025f0803e146f85d6140a6fe8f7fdaefc8b87f42de",
+      "bytes": 12612,
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json"
     },
     "qcl-dev18-final-review.md": {
@@ -4744,26 +4862,295 @@
       "sha256": "8e53743a2267c3012c9b8d4780ef858a431648626a06915360a81cc1fcbdffe0",
       "bytes": 1987,
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-red-v2-identity.json"
+    },
+    "qcl-DOC04-PY-GREEN-2/receipt.json": {
+      "sha256": "4afb64293c03e616eb1fc7e22c08623a859e446025ce4f47d46699f59aeca895",
+      "bytes": 2158,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-PY-GREEN-2/receipt.json"
+    },
+    "qcl-DOC04-PY-GREEN-2/original.log": {
+      "sha256": "04203b8ff2d2cd277cdf28af34117905d8347a5a3a88cf631d31cba832957705",
+      "bytes": 99,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-PY-GREEN-2/original.txt"
+    },
+    "qcl-DOC04-NODE-GREEN-2/receipt.json": {
+      "sha256": "cd36c8e6be39a96d566fde51e1738c8138ab5af8adadfc8e76bac942cf857572",
+      "bytes": 2044,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-2/receipt.json"
+    },
+    "qcl-DOC04-NODE-GREEN-2/original.log": {
+      "sha256": "6a76be27dbcc18af6b9d967d5a68f93e25daaf2b7dd226c09506b994be3bd9dd",
+      "bytes": 3301,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-2/original.txt"
+    },
+    "qcl-DOC07-C1-RED-1/receipt.json": {
+      "sha256": "10894d769ef7d1c51b79f7a56028e4f682c68d17ae5fb17bb767623ee3db4f85",
+      "bytes": 2066,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-RED-1/receipt.json"
+    },
+    "qcl-DOC07-C1-RED-1/original.log": {
+      "sha256": "09eb306cfc6ae8d0ff0cb06a5795adec25be1bd0c027919cd7bdfcf502afd3ba",
+      "bytes": 198528,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-RED-1/original.txt"
+    },
+    "qcl-DOC04-NODE-GREEN-E1/receipt.json": {
+      "sha256": "76882ec516bbc216c5d6638661b0be3ea88bda0e749f2e17261d7b02f126f709",
+      "bytes": 2046,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-E1/receipt.json"
+    },
+    "qcl-DOC04-NODE-GREEN-E1/original.log": {
+      "sha256": "4e323fc5c29fcf8374f1dec306c8dbdfb1d6556f680618471ab2a5a97216ee62",
+      "bytes": 1503,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC04-NODE-GREEN-E1/original.txt"
+    },
+    "qcl-doc04-style-fix-report.md": {
+      "sha256": "abd7b3548ade867732e4db58f0f84b9c1abcba63e1fd1049ec9c63c07d8b3048",
+      "bytes": 7118,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-style-fix-report.md"
+    },
+    "qcl-doc04-style-fix-identity.json": {
+      "sha256": "76ceea158b1ffcd29aa86654d8b2840910becea32deec70dc62043d028119b84",
+      "bytes": 1361,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-style-fix-identity.json"
+    },
+    "qcl-doc04-style-fix.patch": {
+      "sha256": "e937e55b066d43b136cd5fa5320b8dfe220c9538f9f0776b5eb4d6ce15acfd9e",
+      "bytes": 635,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-style-fix.patch"
+    },
+    "qcl-doc04-style-fix-review.md": {
+      "sha256": "dfffa8adc003d407267ad89db5ad587a86fa2d3d6451959fc3c0d604e8b317a3",
+      "bytes": 9367,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-style-fix-review.md"
+    },
+    "qcl-doc04-style-fix-review-identity.json": {
+      "sha256": "80d23eb966185acac256d10005b0e834929fa1d12a891082f0e54b5c6a95e1bc",
+      "bytes": 1498,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-style-fix-review-identity.json"
+    },
+    "qcl-doc04-root-style-E1-source-binding.json": {
+      "sha256": "5257bad541da4f45a35bf537222265bc4762adbb7af40caa5e93dc0722b2112a",
+      "bytes": 1169,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-style-E1-source-binding.json"
+    },
+    "qcl-doc04-pure-final-source-binding.json": {
+      "sha256": "be8897aef97f6de1f8d2a37ec6916eecb6210748dd68f70a4ef5a93531803d62",
+      "bytes": 1640,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-pure-final-source-binding.json"
+    },
+    "qcl-doc04-node-E1-plan.json": {
+      "sha256": "f17e0843b20d8b89794b36247833da802664136458b917ddc3457bcc00a7c8cb",
+      "bytes": 686,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-node-E1-plan.json"
+    },
+    "qcl-doc04-recipes-design.md": {
+      "sha256": "008650e7c9ff98bdaf38a3450d2b3b13818409795c92738d0a9dbddaba2c2505",
+      "bytes": 19393,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design.md"
+    },
+    "qcl-doc04-recipes-source-effect-ledger.md": {
+      "sha256": "aed51dc14bbe08cdbf5414544715686ac80c807a902233b70c94a5f51886d1e3",
+      "bytes": 8432,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-source-effect-ledger.md"
+    },
+    "qcl-doc04-recipes-design-v2.md": {
+      "sha256": "ce582cc394d7dd70971c2a25929bf9362aad7d829403f1e2e0fba68a8ff65610",
+      "bytes": 6646,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v2.md"
+    },
+    "qcl-doc04-recipes-source-effect-ledger-v2.md": {
+      "sha256": "39eb90584c32d883e2db0bab32a500a31f7a6427eb0260c54b22315741fe77a4",
+      "bytes": 8431,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-source-effect-ledger-v2.md"
+    },
+    "qcl-doc04-recipes-continuation-witnesses.txt": {
+      "sha256": "38d6cc0f65c9b44eea7322a71d55bc04bff8ae2e84202726184b2f96c2a3c2c8",
+      "bytes": 42583,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-continuation-witnesses.txt"
+    },
+    "qcl-doc04-recipes-identity.json": {
+      "sha256": "5938cc4edbd0f34f8911ed73bff72ccfbe0ba697c38f862251faa43eb02b3d1e",
+      "bytes": 4331,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-identity.json"
+    },
+    "qcl-doc07-C1-red-v2-review.md": {
+      "sha256": "2970838606ddd482343dd10c382b19bfc656cc0637c1ae3e83b577b7367458ff",
+      "bytes": 6096,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-red-v2-review.md"
+    },
+    "qcl-doc07-C1-red-v2-review-identity.json": {
+      "sha256": "10f88466282a21814934e50ea656e411d14f08128880d689944818c11ddc8b84",
+      "bytes": 2765,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-red-v2-review-identity.json"
+    },
+    "qcl-doc07-C1-schema-report.md": {
+      "sha256": "bd813c5a1c9ad6c46c5b5d94d2439a689d13b20be6f90776c21ac25f9ae7b3fd",
+      "bytes": 5298,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-report.md"
+    },
+    "qcl-doc07-C1-schema-identity.json": {
+      "sha256": "ed2701ce764b58be5b7344b2983dbf69a26f9d18784f89789e26979467f371cb",
+      "bytes": 1005,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-identity.json"
+    },
+    "qcl-DOC07-C1-GREEN-1/receipt.json": {
+      "sha256": "32ae0596aee8f5c6526f4a7934fdac979769edd5e49407012497b14398c449a6",
+      "bytes": 2071,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-GREEN-1/receipt.json"
+    },
+    "qcl-DOC07-C1-GREEN-1/original.log": {
+      "sha256": "40ad523792143ece0482a512c88e385ca71de55b16a07eb139b454a664ae05c4",
+      "bytes": 261,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/tests/DOC07-C1-GREEN-1/original.txt"
+    },
+    "qcl-doc07-C1-schema-review.md": {
+      "sha256": "a323b9b88128ba3ed3caa60020726e60d336c7c16b21644394a6db303734a812",
+      "bytes": 13938,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-review.md"
+    },
+    "qcl-doc07-C1-schema-review-identity.json": {
+      "sha256": "0eb31113caea711ed9b0abbc07108fac74874424ce972f2f531c7e5372ef5dbf",
+      "bytes": 1567,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-review-identity.json"
+    },
+    "qcl-doc07-C1-schema-v2-report.md": {
+      "sha256": "53091d811cbc366586b1ec0c43fddd98cc67c6db1045c758a0ef1a919595c09c",
+      "bytes": 5197,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-v2-report.md"
+    },
+    "qcl-doc07-C1-schema-v2-identity.json": {
+      "sha256": "379be977fc7036e21a31e3013b6852a0d6af5345a601bd6bce1df8d7ee3642f8",
+      "bytes": 1159,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-v2-identity.json"
+    },
+    "qcl-doc07-C1-schema-v2-review.md": {
+      "sha256": "cc79399ff32accf90172a7c659f19cc4e667017bbfa35f8c7f2c45db32a614f3",
+      "bytes": 8635,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc07-C1-schema-v2-review.md"
+    },
+    "qcl-doc07-C1-schema-v2-review-identity.json": {
+      "sha256": "4735fe718deef8d5bca4b7059a94ab63866931da37500d163b3cb7671cb1e190",
+      "bytes": 1339,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-schema-v2-review-identity.json"
+    },
+    "qcl-doc07-C1-final-source-binding.json": {
+      "sha256": "ef409d91c227f51f9892acd892ce0597bddcdd55b23dc1841c069bf62736414e",
+      "bytes": 1002,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-final-source-binding.json"
+    },
+    "qcl-doc07-C1-publication-journal.json": {
+      "sha256": "2453216a7a736e0fe9bb313dada243649f1d5463287e87097801b1530ce72f76",
+      "bytes": 1437,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc07-C1-publication-journal.json"
+    },
+    "qcl-doc04-recipes-design-v2-review.md": {
+      "sha256": "759039e4040d54652d288b4bc100fd238b2da679127a49b73be66a873583c017",
+      "bytes": 15636,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v2-review.md"
+    },
+    "qcl-doc04-recipes-design-v2-review-identity.json": {
+      "sha256": "dfb92391dc7cfbce135aaa669a222ccfd49e8fcd443df56312f9aefb6b9c7db3",
+      "bytes": 2611,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v2-review-identity.json"
+    },
+    "qcl-doc04-recipes-design-v3.md": {
+      "sha256": "960a639dd281d7a5b99c582f2c9dc8b17e816715753557791460ebcef1159aee",
+      "bytes": 5828,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v3.md"
+    },
+    "qcl-doc04-recipes-design-v3-delta.json": {
+      "sha256": "592d72646cfea012ed399f739d990b7e95af9f5ff37cd0e6230f652cb4784ccd",
+      "bytes": 1874,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v3-delta.json"
+    },
+    "qcl-doc04-recipes-design-v3-identity.json": {
+      "sha256": "67724abb737b2004b1a6282e96916c2e8f8db38ddb46f75b441a5c1f1f4f6f39",
+      "bytes": 2086,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v3-identity.json"
+    },
+    "qcl-doc06-static-slice-design.md": {
+      "sha256": "34b80d4ae1c8b94d23657124f17c9051251cea4763af8f92007d24929aafb2e8",
+      "bytes": 18493,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-static-slice-design.md"
+    },
+    "qcl-doc06-static-slice-identity.json": {
+      "sha256": "d5662374c67a13f186628b9f07e2d2d972a478dc5d490a9a0a95c1ee12a416c7",
+      "bytes": 6497,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-static-slice-identity.json"
+    },
+    "qcl-doc06-static-slice-source-ledger.md": {
+      "sha256": "687915c43d0a8520f4ac7bdda3ce29cdde031c887a2c98dbed400eda1c0a9010",
+      "bytes": 5929,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-static-slice-source-ledger.md"
+    },
+    "qcl-doc06-canonical-pointer-erratum.patch": {
+      "sha256": "a2d28d0d743f65277623cdcb7230d9dd6baa5fbd695e5a90afe5c509f81b2475",
+      "bytes": 1258,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-canonical-pointer-erratum.patch"
+    },
+    "qcl-ops08-source-audit-phase1-partial.md": {
+      "sha256": "07c437e178984841be309cad12c61eeb8e964d9aa0cababec6584c3b1275a19a",
+      "bytes": 23507,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops08-source-audit-phase1-partial.md"
+    },
+    "qcl-ops08-source-audit.md": {
+      "sha256": "fa228b4619a26f1abf284ec675b10e7ed272e0192f17873bb9f0eb73ca90da01",
+      "bytes": 24753,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-ops08-source-audit.md"
+    },
+    "qcl-ops08-source-audit-identity.json": {
+      "sha256": "46629dec58116e6ca75b9b570dc37a86005b79d937ca4e57df37a10b435a9726",
+      "bytes": 4832,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-source-audit-identity.json"
+    },
+    "qcl-ops08-source-continuation-plan.json": {
+      "sha256": "5ea13f32642a0963407b4a7fc243b236043dd86b487794d6fd15102d059b9f14",
+      "bytes": 952,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-ops08-source-continuation-plan.json"
+    },
+    "qcl-doc04-font-license-metadata-one.json": {
+      "sha256": "9666584181efefdbc44211c1c8afe3c20b898a54d205d3ce3d18703d610540fd",
+      "bytes": 1030,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-font-license-metadata-one.json"
+    },
+    "qcl-doc04-recipes-design-v3-review.md": {
+      "sha256": "7db5ad18c7c9e197fb0430422b917228ddc0216f90c0cdfb37f78ee80e9a4211",
+      "bytes": 8289,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v3-review.md"
+    },
+    "qcl-doc04-recipes-design-v3-review-identity.json": {
+      "sha256": "42d83c2d3a7913474c18e01e2ba4b5ab23d99b6e556516d13e5797796ba8e71f",
+      "bytes": 2496,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-recipes-design-v3-review-identity.json"
+    },
+    "qcl-doc06-static-slice-design-review.md": {
+      "sha256": "385c2ae4358a7fb296399d6d955eb4d9ac5995c26f8baa2c27526ad11677d5ce",
+      "bytes": 16821,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-static-slice-design-review.md"
+    },
+    "qcl-doc06-static-slice-design-review-identity.json": {
+      "sha256": "e5a6f600a31b51439ac68821a6b3c68266da446d63fd45288ce6368ccd1b1b69",
+      "bytes": 2386,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-static-slice-design-review-identity.json"
+    },
+    "qcl-doc06-pointer-erratum-binding.json": {
+      "sha256": "5bfe68efa87c6a86c4ee211dc5881025e094ca5ebcffe343b826ac54d774aaea",
+      "bytes": 613,
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-pointer-erratum-binding.json"
     }
   },
   "resume_note": "Operator switched to auto approvals; old writer apply_patch approval interrupted. Reconcile exact paths before limited exec require_escalated apply; no duplicate mutations.",
   "test_intent": {
-    "id": "OPS04-PLATFORM-GREEN-2",
-    "state": "completed_pass",
-    "fixtures": {
-      "components/qcl-negf-platform/tests/test_node_enrollment.py::ProtectedInputBoundaryTests": "d99c003fccc308c9cffed172f38ec69eeaa744f2753c7a95c28794d07aca305d",
-      "components/qcl-negf-platform/tests/test_node_enrollment.py::EnrollmentTests::test_protected_ancestors_and_snapshot_have_independent_syscall_evidence": "d99c003fccc308c9cffed172f38ec69eeaa744f2753c7a95c28794d07aca305d",
-      "components/qcl-negf-platform/tests/test_node_enrollment.py::EnrollmentTests::test_source_trust_substitution_does_not_change_late_transport_snapshot": "d99c003fccc308c9cffed172f38ec69eeaa744f2753c7a95c28794d07aca305d",
-      "components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_invalid_cache_argument_or_absent_manifest_hashes_refuses_before_commands": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6",
-      "components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_ops04_username_only_and_local_cache_routes_preserve_literal_argv": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6"
-    },
+    "id": "DOC07-C1-GREEN-1",
+    "state": "completed_PASS_pending_assertion_review",
+    "fixture": "components/qcl-negf-contracts/tests/test_model_help.py",
     "exit_code": 0
   },
   "test_result": {
-    "id": "OPS04-PLATFORM-GREEN-2",
-    "state": "completed_pass",
+    "id": "DOC07-C1-GREEN-1",
+    "state": "completed_PASS_pending_assertion_review",
     "exit_code": 0,
-    "receipt_sha256": "a3483add4b4c805e6719a78c9e9cc5ca4657a30594954b61e5f7a86248574fc8"
+    "receipt_sha256": "32ae0596aee8f5c6526f4a7934fdac979769edd5e49407012497b14398c449a6"
   },
   "previous_test_result": {
     "id": "DEV10-RED-2",
@@ -4886,12 +5273,12 @@
     "new_python_targeted_harness": "/tmp/qcl-python-targeted-run-v2.py SHA9726bc355f0fd762cc382c69c23940112b0bf19659045dc49214c5fa44d6df8b routesTMPDIRtoownedtemporary, perfile/harnessidentity, usesacceptedbytepreservingRawCapture anddrainonstop. Newsourceguardreviewpendingbeforeuse;90s1CPU1GiBsampled16MiBsampledtmp2MiBnominaloutput,explicitoutsidepathsunknown; no newtestexecuted."
   },
   "G1_operation_intent": {
-    "id": "G1-OPS04-PLATFORM-qcl-negf-platform-f5bc368",
+    "id": "G1-DOC07-C1-qcl-negf-contracts-d791dea",
     "state": "G1_merged",
-    "repo": "Afonenko-QCL-NEGF/qcl-negf-platform",
-    "pr": 19,
-    "head": "f5bc368654414039f7368bb19ca3201fa7f29f9d",
-    "base": "b067723c82382689bff5cc366981c56e99b926f8"
+    "repo": "Afonenko-QCL-NEGF/qcl-negf-contracts",
+    "pr": 10,
+    "head": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+    "base": "12fc26462bbab3df76904c6deb01f8c6596de7be"
   },
   "targeted_receipt_census": {
     "count": 42,
@@ -5150,43 +5537,46 @@
     "runtime_calls": 0
   },
   "coordination_assignments": {
-    "DEV07": {
-      "writer": "/root/dev07_absolute_impl",
-      "effort": "medium",
-      "reviewer": "/root/dev07_absolute_review high",
-      "source": "Core7324d98",
-      "worktree": "/tmp/qcl-dev07-absolute-worktree",
-      "paths": "new test/physics/absolute_scattering_kernel_oracles.jl and exact traceability subsection only",
-      "state": "source implementation active; runtime0/2"
+    "DOC07_C1": {
+      "writer": "/root/doc07_schema_impl medium STOP",
+      "reviewer": "/root/sci05_core_reviewer high ACTIVE",
+      "worktree": "/tmp/qcl-doc07-contract-worktree",
+      "owning_paths": [
+        "src/qcl_negf_contracts/schemas/model-help.schema.json",
+        "tests/test_model_help.py append-onlyreviewregressions"
+      ],
+      "state": "v2sourceCPPpending; RootaloneGREEN,1/4sharedcalls"
     },
-    "SCI05_Runner": {
-      "writer": "/root/sci05_runner_impl medium",
-      "reviewer": "/root/sci05_core_reviewer high",
-      "source": "Runner9378396+D2/profileA",
-      "worktree": "/tmp/qcl-sci05-runner-worktree",
-      "paths": "five frozen source/test/doc files only",
-      "state": "E3 one collated source repair; runtime0; intended sharedC08call7"
+    "DOC06": {
+      "writer": "/root/doc03_design ultra ACTIVE",
+      "paths": [
+        "/tmp/qcl-doc06-static-slice-design.md andidentity"
+      ],
+      "state": "sourceDonly; noexec; DOC04D3queuedafter"
     },
-    "SCI05_Results": {
-      "writer": "/root/sci05_results_impl medium STOP",
-      "reviewer": "/root/sci05_core_reviewer high",
-      "source": "Resultse2fdeda+Contracts12fc264+D2/profileA",
-      "worktree": "/tmp/qcl-sci05-results-worktree",
-      "paths": "native.py,state.py,test_final_fixed_point_audit.py only",
-      "state": "v4 CPP active; known analysis-native identity selector mismatch, final collated report pending; runtime0; intended sharedC08call8"
+    "OPS08": {
+      "auditor": "/root/sci03_current_bound_review high ACTIVE",
+      "immutable_source": "Platformf5bc368",
+      "state": "sourceaudit no runtime/native orproductwrites"
+    },
+    "Root": {
+      "owner": "/root high",
+      "paths": [
+        "coordinationcheckpoint",
+        "Rootsourcebinding/staging/publicationintegration"
+      ],
+      "state": "DOC04pure20+15PASS; rootpublicationpending; soleoperation/counterwriter"
     }
   },
   "resource_current": {
-    "targeted_completed_calls": 58,
-    "targeted_wall_seconds": 948.603,
+    "targeted_completed_calls": 71,
+    "targeted_wall_seconds": 1003.229,
     "SCI05_08_C08_consumed": 8,
     "SCI05_08_C08_cap": 8,
-    "DEV07_LJL_consumed": 1,
-    "DEV07_LJL_cap": 2,
     "final_full_CI_dispatches": 0,
     "scientific_submits": 0,
     "native_builds": 0,
-    "native_admission": "missing trusted inventory/access and fresh facts; async missing-information question pending"
+    "native_admission": "missing trusted inventory/access/fresh facts; only dependent native tasks blocked"
   },
   "preserved_checkout_readback": {
     "HEAD": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
@@ -5348,7 +5738,7 @@
     "limits": "E1daemonrefusal/E2explicitfeatureerrorpreserved; E3readonlyfeatureenabledonlyprocess",
     "native_builds": 0
   },
-  "source_overlay_note": "Rootbatch9willselectpublishedResultsde706andPlatformf5bc; bothG1merged. All8actualcomponentcheckouts clean. RootOPS04fivepathsCPP/26GREEN/lint ready plusacceptedDOC07append; twoDOC04REDtestfiles remainunstaged untilcorrectedadapterCPP/GREEN.",
+  "source_overlay_note": "ContractsC1d791publishedPR10G1merged andactualmainclean, Root514still12fcgitlink untilbatch10. RootDOC04purefivefiles20+15GREEN unpublished. C2solewriter isolatedfromd791, no mainoverlay.",
   "OPS04_source_format_plan": {
     "id": "OPS04-FORMAT-1",
     "state": "READY_intent",
@@ -5445,11 +5835,215 @@
     "final_fullCI": 0
   },
   "root_progress_batch9": {
-    "state": "ready_for_staging",
+    "state": "committed_and_pushed_PR23",
     "source": "published/G1M1Resultsde706+Platformf5bc, reviewedRootOPSfivefiles26GREEN+lint, canonicalDOC07appendfe1+recoveryprose8f05; twoDOC04rawREDtestsheldunstaged",
     "product_test_total": 66,
     "product_wall_seconds": 979.615,
     "finalCI": 0,
-    "science": 0
+    "science": 0,
+    "head": "514cd9707a32cde60c630d60986973a898d35b18",
+    "gitlinks_all8_match_at_commit": true
+  },
+  "DOC07_C1_RED_classification": {
+    "state": "expected_absent_schema_resource_not_behavioral_GREEN",
+    "failed": 1,
+    "passed": 7,
+    "errors": 115,
+    "cause": "schema_names lacks model-help.schema.json and validator fixture ValueErrorunknownschema; JSONboundary7pass",
+    "receipt_sha256": "10894d769ef7d1c51b79f7a56028e4f682c68d17ae5fb17bb767623ee3db4f85",
+    "raw_sha256": "09eb306cfc6ae8d0ff0cb06a5795adec25be1bd0c027919cd7bdfcf502afd3ba",
+    "source_test_sha256": "6a39ee353153a4de2d313323b5c67662026721f282adec1ae44305d95d1f2ebd",
+    "next": "mediumschemaonly; independenthighCPP; soleC1GREEN_sharedDOC07cap1of4used"
+  },
+  "DOC04_Node_failure": {
+    "state": "causal_source_diagnosis_one_narrow_repair_assigned",
+    "receipt": "cd36c8e6be39a96d566fde51e1738c8138ab5af8adadfc8e76bac942cf857572",
+    "raw": "6a76be27dbcc18af6b9d967d5a68f93e25daaf2b7dd226c09506b994be3bd9dd",
+    "passed": 14,
+    "failed": 1,
+    "cause": "genericmarkupresourceguard precedes styledeclarations and reports unsupported_markup for background:url; stylecontract expects unsupported_style; inputstillrejects",
+    "original_unit_cap": 4,
+    "original_calls_used": 4,
+    "no_rerun_yet": true
+  },
+  "DOC04_recipes_source_budget": {
+    "original_read_cap_bytes": 4194304,
+    "conservative_broadscan_bytes": 5523762,
+    "state": "initial_scan_breadth_overrun_reported_not_retroPASS",
+    "continuation": {
+      "extra_read_cap_bytes": 2097152,
+      "wall_minutes": 15,
+      "CPU": 1,
+      "RAM_GiB": 2,
+      "output_KiB": 64,
+      "authority": "directhumanengineeringresourcegrant",
+      "scope": "explicitMarkdown/directive/docstring/includeedges only; no broadrescan/imports/runtime",
+      "state": "source_packet_D2_frozen_highR_requests_twoAPIcorrections",
+      "measured_named_payload_bytes": 1142390,
+      "physicalIO_RSS": "not_measured",
+      "D2": "ce582cc394d7dd70971c2a25929bf9362aad7d829403f1e2e0fba68a8ff65610",
+      "ledger": "39eb90584c32d883e2db0bab32a500a31f7a6427eb0260c54b22315741fe77a4",
+      "independent_review": "759039e4040d54652d288b4bc100fd238b2da679127a49b73be66a873583c017"
+    }
+  },
+  "DOC04_Node_E1_engineering_replan": {
+    "authority": "latest direct human allavailabledevelopmentresourcesgrant; focused causal repair after retained4thunit failure",
+    "original_cap": 4,
+    "original_used": 4,
+    "additional_Node_calls": 1,
+    "effective_total_DOC04_unit_cap": 5,
+    "source_correction": "one style-error routing conditional; independent CPPdfffa8ad; testsunchanged",
+    "per_call": "90s1CPU1GiBRSS32MiBownedTMP2MiBraw; samplednotquota",
+    "scope": "NODE tests/docs_math_test.mjs only; no Pythonreplay, public/nativeBUILD/CI/science",
+    "stop": "anynewfailure preserve raw, classify concretegap before anyfurtherfinite replan; noautomaticrerun"
+  },
+  "DOC04_pure_adapter_acceptance": {
+    "state": "CP_CODE_and_local_units_PASS_publicBUILDnot_ready",
+    "files": {
+      "tests/test_docs_assembly.py": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+      "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+      "ops/docs/assemble.py": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+      "ops/docs/math-render.mjs": "663c712d01db3bdc4bca66d3bb58b9aa6bbffd850c8961e1560c30292fd1aba5",
+      "ops/docs/pilot-plan.json": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50"
+    },
+    "CPP2": "b259f5b8c5f03055b159938e5dbba1c7f1b555e617b207fd0375eecb43809bc6",
+    "narrow_CPP": "dfffa8adc003d407267ad89db5ad587a86fa2d3d6451959fc3c0d604e8b317a3",
+    "Python_receipt": "4afb64293c03e616eb1fc7e22c08623a859e446025ce4f47d46699f59aeca895",
+    "Python_cases": 20,
+    "Node_receipt": "76882ec516bbc216c5d6638661b0be3ea88bda0e749f2e17261d7b02f126f709",
+    "Node_cases": 15,
+    "unit_calls": 5,
+    "prior_failure_preserved": "6a76be27dbcc18af6b9d967d5a68f93e25daaf2b7dd226c09506b994be3bd9dd",
+    "unchanged_Python_no_rerun": true,
+    "KaTeX_render": "exact0.16.8_private_unit_fullstylesheetcontext_metadata_tested",
+    "limits": "sampledRSS/TMP not quota or transientproof; controlled Node source no networkcall witness, not OSnetworkisolation",
+    "not_accepted": [
+      "publicOFLfontlicenseclosure",
+      "fullassetslock",
+      "finalHTMLpublicbundle",
+      "Documenterimport/nativeBUILD",
+      "browserofflineCSP/serving",
+      "science"
+    ],
+    "reviewer": "coordinatorhigh, separatefrommediumwriter+highCPP; exactsourcehashandrawassertion/captureverification"
+  },
+  "coordination_assignments_prior_snapshot": {
+    "DEV07": {
+      "writer": "/root/dev07_absolute_impl",
+      "effort": "medium",
+      "reviewer": "/root/dev07_absolute_review high",
+      "source": "Core7324d98",
+      "worktree": "/tmp/qcl-dev07-absolute-worktree",
+      "paths": "new test/physics/absolute_scattering_kernel_oracles.jl and exact traceability subsection only",
+      "state": "source implementation active; runtime0/2"
+    },
+    "SCI05_Runner": {
+      "writer": "/root/sci05_runner_impl medium",
+      "reviewer": "/root/sci05_core_reviewer high",
+      "source": "Runner9378396+D2/profileA",
+      "worktree": "/tmp/qcl-sci05-runner-worktree",
+      "paths": "five frozen source/test/doc files only",
+      "state": "E3 one collated source repair; runtime0; intended sharedC08call7"
+    },
+    "SCI05_Results": {
+      "writer": "/root/sci05_results_impl medium STOP",
+      "reviewer": "/root/sci05_core_reviewer high",
+      "source": "Resultse2fdeda+Contracts12fc264+D2/profileA",
+      "worktree": "/tmp/qcl-sci05-results-worktree",
+      "paths": "native.py,state.py,test_final_fixed_point_audit.py only",
+      "state": "v4 CPP active; known analysis-native identity selector mismatch, final collated report pending; runtime0; intended sharedC08call8"
+    }
+  },
+  "DOC04_current": {
+    "state": "pure_adapter_review_and_GREEN_complete_recipes_design_APIfixes_pending",
+    "asset_license_status": "KaTeXMITpackageandfontOFLnotice_distinct; officialrawOFLpreviousHTTP403retained; fullpublicfontlicenseclosureunaccepted",
+    "font_metadata_preparation": {
+      "source": "NPMpinnedKaTeXMainRegularTTF",
+      "sha256": "9666584181efefdbc44211c1c8afe3c20b898a54d205d3ce3d18703d610540fd",
+      "scope": "one53580Bfile read-only sfnt/name metadata; no import/render/solver",
+      "result": "copyrightRFN+OFL1.1noticewithURL, notfullOFLlicense"
+    },
+    "fullCI": 0,
+    "nativeBUILD": "not_admitted"
+  },
+  "root_PR23_body_update": {
+    "state": "completed_confirmedURL",
+    "source": "514cd9707a32cde60c630d60986973a898d35b18",
+    "body_sha256": "faf30f106788b620540921d83830d904ef79add6d0fcee27a7bccad33f6ac9c9",
+    "tool_dispatch_chunk": "4e9be7",
+    "completion_chunk": "d67d17",
+    "URL": "https://github.com/Afonenko-QCL-NEGF/qcl-negf/pull/23",
+    "merge": false
+  },
+  "OPS08_source_audit_phases": {
+    "original": {
+      "cap_bytes": 2097152,
+      "state": "FAILED_RESOURCE_CAP_reported_source_reads_stopped",
+      "observed_lower_bound_bytes": 2097153,
+      "exact_cumulative_bytes": "not_measured; repeated wholeunderlyingfile reads; no retroactivePASS"
+    },
+    "continuation": {
+      "state": "admitted_finite_separatephase_before_newreads",
+      "authorization": "latestdirecthumanallavailabledevelopmentresourcesgrant; internalengineeringreplanonly",
+      "wall_minutes": 15,
+      "CPU": 1,
+      "RAM_GiB": 2,
+      "additional_source_read_cap_bytes": 8388608,
+      "output_KiB": 96,
+      "scope": "sameimmutablePlatformf5bc sourceaudit no runtime/productmutation; cacheboundfiles/reusebuffers withnamedreadledger",
+      "stop": "newoverrun/unknown=>preservepartialreport noautocontinuation",
+      "scientific_C08_and_native_caps": "unchanged; C08exhausted8/8, noSCI/native/CIcall"
+    }
+  },
+  "DOC07_C1_acceptance": {
+    "state": "C1_shape_CP_CODE_204GREEN_owning_PR10_G1_merged",
+    "head": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+    "PR": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/pull/10",
+    "merge": "163ac625f9ba945c8a6df37202f40642d134c321",
+    "files": {
+      "src/qcl_negf_contracts/schemas/model-help.schema.json": "584971b619218d56f2bdc4b04dfc1361d4850898cdabeca4594203aaf119c241",
+      "tests/test_model_help.py": "b284bd64ad2a891f2fca791c7d32b0a11389399f32c68aa913dba9da5b217177"
+    },
+    "source_review": "cc79399ff32accf90172a7c659f19cc4e667017bbfa35f8c7f2c45db32a614f3",
+    "receipt": "32ae0596aee8f5c6526f4a7934fdac979769edd5e49407012497b14398c449a6",
+    "assertions": 204,
+    "wall_seconds": 19.425,
+    "C2_semantic_binding": "not_implemented_in_C1",
+    "shared_DOC07_calls_used": 2,
+    "shared_DOC07_cap": 4,
+    "source_worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+    "root_gitlink": "publication_pending",
+    "physical_acceptance": false
+  },
+  "root_batch10_whitespace_review": {
+    "first_check": "gitdiff--cached--check returned2, wrapperexit1; exact3EOFblankdiagnostics only",
+    "tool_chunk_id": "d2126b",
+    "original_tool_trace": "retainedinconversation; no reconstructedrawlogclaimed",
+    "byte_preservation_exceptions": [
+      {
+        "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-continuation-witnesses.txt",
+        "source": "/tmp/qcl-doc04-recipes-continuation-witnesses.txt",
+        "sha256": "38d6cc0f65c9b44eea7322a71d55bc04bff8ae2e84202726184b2f96c2a3c2c8",
+        "bytes": 42583,
+        "exception": "singleEOFblank preservedinreview-boundfrozenprovenance; no productproseexemption"
+      },
+      {
+        "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-source-effect-ledger-v2.md",
+        "source": "/tmp/qcl-doc04-recipes-source-effect-ledger-v2.md",
+        "sha256": "39eb90584c32d883e2db0bab32a500a31f7a6427eb0260c54b22315741fe77a4",
+        "bytes": 8431,
+        "exception": "singleEOFblank preservedinreview-boundfrozenprovenance; no productproseexemption"
+      },
+      {
+        "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-static-slice-source-ledger.md",
+        "source": "/tmp/qcl-doc06-static-slice-source-ledger.md",
+        "sha256": "687915c43d0a8520f4ac7bdda3ce29cdde031c887a2c98dbed400eda1c0a9010",
+        "bytes": 5929,
+        "exception": "singleEOFblank preservedinreview-boundfrozenprovenance; no productproseexemption"
+      }
+    ],
+    "product_whitespace": "no productdiagnostics infirstcheck; exactrecheckexcludesspecificfrozenprimarybytesplusbyteverifiedrawlogs",
+    "fullCI": 0,
+    "targeted_runtime_calls": 0
   }
 }

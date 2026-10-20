@@ -1,0 +1,59 @@
+{
+  "schema": "qcl-doc04-recipes-D3-author-identity-v1",
+  "date": "2026-10-20",
+  "writer": "/root/doc03_design",
+  "stage": "D3-frozen-awaiting-independent-high-recheck",
+  "correction_scope": [
+    "typed operator modules=Module[]",
+    "exact nonempty per-owner sitename"
+  ],
+  "primary": {
+    "documenter_version_expected": "1.17.0",
+    "documenter_tree_expected": "56e9c37b5e7c3b4f080ab1da18d72d5c290e184a",
+    "documents_sha256": "67ded455a9d8881b6fe3cf4a4cfbc97a992e27cd8e31ad3d28de23cbc3578e06",
+    "HTMLWriter_sha256": "72b261cbef5e06e9edc4159c038d740b5f5372134f9d75db06eeb35b894b29dd",
+    "selected_core": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+    "selected_runner": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+    "review_sha256": "759039e4040d54652d288b4bc100fd238b2da679127a49b73be66a873583c017"
+  },
+  "artifacts": {
+    "design": {
+      "path": "/tmp/qcl-doc04-recipes-design-v3.md",
+      "sha256": "960a639dd281d7a5b99c582f2c9dc8b17e816715753557791460ebcef1159aee"
+    },
+    "delta": {
+      "path": "/tmp/qcl-doc04-recipes-design-v3-delta.json",
+      "sha256": "592d72646cfea012ed399f739d990b7e95af9f5ff37cd0e6230f652cb4784ccd"
+    }
+  },
+  "resource": {
+    "separate_phase": true,
+    "wall_cap_minutes": 10,
+    "cpu": 1,
+    "ram_cap_bytes": 1073741824,
+    "source_read_cap_bytes": 524288,
+    "conservative_named_input_read_bound_bytes": 409451,
+    "output_cap_bytes": 49152,
+    "physical_IO_RSS": "not_measured"
+  },
+  "history": {
+    "D1_D2_reviews_ledgers_unchanged": true,
+    "original_broad_scan_resource_predicate": "FAILED_RESOURCE_CAP",
+    "original_scan_bytes": 5523762,
+    "original_cap_bytes": 4194304,
+    "D2_continuation_separate_grant": true,
+    "D2_continuation_named_payload_bytes": 1142390,
+    "retroactive_pass": false
+  },
+  "actions": {
+    "product_edits": 0,
+    "target_import_parser_eval_test_render_build": 0,
+    "network_server": 0,
+    "children": 0,
+    "Git_mutations": 0,
+    "checkpoint_edits": 0
+  },
+  "BUILD_admitted": false,
+  "next_gate": "independent high recheck before medium I",
+  "stop": true
+}

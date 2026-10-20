@@ -237,8 +237,9 @@ impurity/IFR/alloy, electron–electron=none. Fixed-light/offline publication,
    последнюю запись истории или `nothing`. `_deep_merge!` хранит absolute source
    filenames. Generated assignment markers и `application:auto_exact` объясняют
    назначение, не научный источник и не весь effective causal chain.
-5. Contracts `run.schema.json:/properties/production/properties/energy_chunk`
-   требует integer>=1 и явно не назначает schema default. Core
+5. Contracts `run.schema.json` ссылается из `/properties/production/$ref` на
+   `#/$defs/production`; точный leaf — `/$defs/production/properties/energy_chunk`.
+   Он требует integer>=1 и явно не назначает schema default. Core
    `src/numerics/optimized/production_contracts.jl:ProductionOptions` отдельно
    задаёт typed default 64. Равные числа не устанавливают одинаковое происхождение.
 6. Scientific plan имеет `model_revision=transport-contract-v2`, fingerprints,

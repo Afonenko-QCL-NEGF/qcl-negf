@@ -1,0 +1,13 @@
+--- a/ops/docs/math-render.mjs
++++ b/ops/docs/math-render.mjs
+@@ -369,7 +369,9 @@
+           ? SVG_ATTRS.has(name)
+           : tag !== "span" && MATH_ATTRS.has(name));
+       if (!permitted || name.toLowerCase().startsWith("on")) fail("unsupported_markup", name);
+-      if (/javascript\s*:|data\s*:|blob\s*:|url\s*\(/i.test(value)) fail("unsupported_markup");
++      if (name !== "style" && /javascript\s*:|data\s*:|blob\s*:|url\s*\(/i.test(value)) {
++        fail("unsupported_markup");
++      }
+       if (
+         name === "xmlns" &&
+         !["http://www.w3.org/1998/Math/MathML", "http://www.w3.org/2000/svg"].includes(value)

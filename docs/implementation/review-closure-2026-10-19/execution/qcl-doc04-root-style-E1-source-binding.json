@@ -1,0 +1,21 @@
+{
+  "state": "CP_CODE_style_E1_bound_GREEN_pending",
+  "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+  "files": {
+    "tests/test_docs_assembly.py": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+    "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7"
+  },
+  "test_review": "dfffa8adc003d407267ad89db5ad587a86fa2d3d6451959fc3c0d604e8b317a3",
+  "harness_review": "dca5d87440947cd27ae518a2a8054d934538ecc0c7f97db7df4622ebbc19b0ab",
+  "harness": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+  "unit_calls": 4,
+  "BUILD": "not_admitted",
+  "science_accepted": false,
+  "product_files": {
+    "ops/docs/assemble.py": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+    "ops/docs/math-render.mjs": "663c712d01db3bdc4bca66d3bb58b9aa6bbffd850c8961e1560c30292fd1aba5",
+    "ops/docs/pilot-plan.json": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50"
+  },
+  "formatted_v2_identity": "16f0eed5a1879fa65d467a3c2e46ac1ffae70be3738d6073f0df3dc4f75dd8e5",
+  "prior_CPP2_review": "b259f5b8c5f03055b159938e5dbba1c7f1b555e617b207fd0375eecb43809bc6"
+}

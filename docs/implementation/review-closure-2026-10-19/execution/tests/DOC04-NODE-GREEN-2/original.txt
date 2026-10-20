@@ -1,0 +1,56 @@
+✔ verified default ESM renders static HTML+MathML and retains exact source occurrence (45.286562ms)
+✔ module hash mismatch fails before target import and preserves original input (4.435885ms)
+✔ wrong claimed version never falls back to another installed KaTeX (5.200982ms)
+✔ definition and resource commands fail without colored unsupported fallback (56.67513ms)
+✔ lexer respects comments and escaped backslashes while preserving original TeX (11.58921ms)
+✔ unknown TeX, authored sizing and cross-expression macro state are not repaired (12.852413ms)
+✔ UTF-8 bytes and macro expansions are bounded without clamping geometry (21.63928ms)
+✔ record shape/hash/mapping errors cannot select arbitrary HTML or dollar text (6.091536ms)
+✔ style extraction retains ordered duplicates, units and semantic MathML/SVG (0.476856ms)
+✖ important conflicts and unsafe dynamic style grammars fail closed (0.87162ms)
+✔ unknown active/resource markup cannot become static math (0.809465ms)
+✔ important shorthands and all cannot change extracted longhand geometry (0.901656ms)
+✔ render bridge binds a complete supplied stylesheet context beyond pinned KaTeX (31.336342ms)
+✔ all eleven pinned KaTeX authored size primitives are unsupported without rewriting (22.712494ms)
+✔ all sixteen pinned manual delimiter sizes fail while automatic stretch remains supported (30.71299ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 14
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 330.95391
+
+✖ failing tests:
+
+test at tests/docs_math_test.mjs:217:1
+✖ important conflicts and unsafe dynamic style grammars fail closed (0.87162ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  Error: unsupported_markup
+      at TestContext.<anonymous> (file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_math_test.mjs:232:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: unsupported_markup
+        at fail (file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/math-render.mjs:25:17)
+        at externalizeStyles (file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/math-render.mjs:372:69)
+        at file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_math_test.mjs:233:13
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_math_test.mjs:232:12)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+        at Test.postRun (node:internal/test_runner/test:1542:19),
+    operator: 'throws',
+    diff: 'simple'
+  }

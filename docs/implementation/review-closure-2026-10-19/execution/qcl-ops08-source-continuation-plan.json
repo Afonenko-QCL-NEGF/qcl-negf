@@ -1,0 +1,22 @@
+{
+  "OPS08_source_audit_phases": {
+    "original": {
+      "cap_bytes": 2097152,
+      "state": "FAILED_RESOURCE_CAP_reported_source_reads_stopped",
+      "observed_lower_bound_bytes": 2097153,
+      "exact_cumulative_bytes": "not_measured; repeated wholeunderlyingfile reads; no retroactivePASS"
+    },
+    "continuation": {
+      "state": "admitted_finite_separatephase_before_newreads",
+      "authorization": "latestdirecthumanallavailabledevelopmentresourcesgrant; internalengineeringreplanonly",
+      "wall_minutes": 15,
+      "CPU": 1,
+      "RAM_GiB": 2,
+      "additional_source_read_cap_bytes": 8388608,
+      "output_KiB": 96,
+      "scope": "sameimmutablePlatformf5bc sourceaudit no runtime/productmutation; cacheboundfiles/reusebuffers withnamedreadledger",
+      "stop": "newoverrun/unknown=>preservepartialreport noautocontinuation",
+      "scientific_C08_and_native_caps": "unchanged; C08exhausted8/8, noSCI/native/CIcall"
+    }
+  }
+}

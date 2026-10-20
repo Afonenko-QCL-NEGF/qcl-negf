@@ -1,0 +1,28 @@
+{
+  "schema": "qcl-doc07-C1-red-v2-narrow-review-v1",
+  "date": "2026-10-20",
+  "verdict": "approved_source_only",
+  "stage": "R1 corrective review; STOP before Root one RED",
+  "test_sha256": "6a39ee353153a4de2d313323b5c67662026721f282adec1ae44305d95d1f2ebd",
+  "prior_full_review_sha256": "412d4bdaef6aed837faad9748f77b04b7215f00d2cf7b5a389fa69b8df4ca0d2",
+  "base_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "R1": {"resolved": true, "fragment_cap_plus_one_unique": "pilot.256", "input_cap_plus_one_unique": "physical.public_leaf_32", "index_cap_plus_one_unique": "P-10000 and matching path", "conditions_control_unchanged": true, "duplicate_rejection_cannot_mask_missing_caps": true},
+  "Fact_status_followup": {"positive_statuses": ["known", "partial", "unknown", "not_assigned", "not_applicable"], "collections": ["inputs", "api"], "paired_invalid": "pass", "new_semantic_restrictions": false},
+  "sole_changes": "three unique cap+1 substitutions and one Fact.status parameterized test; no other source delta",
+  "sha256": {
+    "author_report": "b2508701cfacc40933cb6ac541c852989af9c1d10cdd7a5765cd93b62b78787c",
+    "author_identity": "8e53743a2267c3012c9b8d4780ef858a431648626a06915360a81cc1fcbdffe0",
+    "full_patch": "40e169b6b54f65439b8a77bd0639dcdbf13a54d04a71b1e5b3c931410e1e6389",
+    "delta": "9d085d04d81bb0392ed35a151ef3711d19f0b50599cf11bad6960066bb1f20dd",
+    "v1_source": "c2fdf66a51a5b772e270cd520e1c560794c11a39c191bfe2ed8abc61e33bf684",
+    "canonical_DOC03": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+    "D2": "20e712a051b3ba9e326bf4dccc3598513b43beefbcab0862d57e287d676dcb8b",
+    "D2_review": "f62bbe6998b178ea746a3a28ae73e4e910c751742e0e7887ac4d77b63786b231"
+  },
+  "unchanged_checks": {"five_factory_semantics": true, "production": true, "tracked_tests_diff_exit": 0, "sole_untracked_test_file": true, "new_patch_payload_cmp_exit": 0, "schema_absent_check_exit": 0, "C2_helper_absent_check_exit": 0, "no_budget_mask_skips_xfails_or_raised_caps": true},
+  "budget": {"wall_minutes_max": 10, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 1048576, "output_bytes_max": 49152, "logical_text_conservative_upper_bytes": 716800, "physical_io_telemetry": "not instrumented"},
+  "actions": {"imports": 0, "parsers": 0, "tests": 0, "schemaValidate": 0, "Python": 0, "network": 0, "children": 0, "source_edits": 0, "git_mutations": 0, "build": 0, "solver": 0, "fullCI": 0, "runtime_calls_consumed": 0},
+  "runtime_or_scientific_acceptance": false,
+  "outputs": {"report": "/tmp/qcl-doc07-C1-red-v2-review.md", "report_sha256": "2970838606ddd482343dd10c382b19bfc656cc0637c1ae3e83b577b7367458ff", "report_bytes": 6096, "identity": "/tmp/qcl-doc07-C1-red-v2-review-identity.json"},
+  "stop": true
+}
