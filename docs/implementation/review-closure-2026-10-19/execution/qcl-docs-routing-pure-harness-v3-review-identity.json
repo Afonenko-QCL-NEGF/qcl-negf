@@ -1,0 +1,112 @@
+{
+  "format": "qcl-negf.docs-routing-pure-harness-independent-source-review.v3",
+  "verdict": "STOP_SOURCE_CHANGES_REQUIRED",
+  "inputs": {
+    "/tmp/qcl-docs-routing-pure-guard-v3.py": {
+      "sha256": "750fc342884b2f47372912c538d7cfd47d60c8aa6f2ac9ee37aee02373976c0a",
+      "bytes": 26935
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v3.json": {
+      "sha256": "9863ffb52c44f9d3ab95ff1165233132ebbca965338883a7c2724e8b9cbde742",
+      "bytes": 8181
+    },
+    "/tmp/qcl-docs-routing-pure-report-v3.md": {
+      "sha256": "f45d28da3cc4aae41e5094301f354b1fff967954305ed36e1170e97b4e05eb0d",
+      "bytes": 7665
+    },
+    "/tmp/qcl-docs-routing-pure-identity-v3.json": {
+      "sha256": "3ee980db931a3ce1ba6777921e8e639531117aae8e95a7cfd8a162bcfe4e9a00",
+      "bytes": 2497
+    }
+  },
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v3-review.md",
+    "sha256": "85a8f8930b94824b07e9d46dc66240fc30e98a0e8499fac45cf95a9f928319ec",
+    "bytes": 15044
+  },
+  "blocking_findings": [
+    {
+      "id": "R1",
+      "path": "/tmp/qcl-docs-routing-pure-guard-v3.py",
+      "line": 510,
+      "summary": "Unconditional alarm cancellation can leave non-daemon RawCapture reader alive after incomplete finish; Python shutdown wait bypasses120s deadline"
+    }
+  ],
+  "registration_audit": {
+    "source_sha256": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761",
+    "manual_group_counts": [
+      6,
+      8,
+      27,
+      1,
+      3,
+      18,
+      8,
+      20,
+      1,
+      21,
+      9,
+      5,
+      6,
+      14,
+      4,
+      1,
+      24,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      8,
+      3,
+      8,
+      1,
+      3,
+      1,
+      12,
+      6,
+      1,
+      1,
+      3
+    ],
+    "static_registered_tests": 230,
+    "prior_static_registered_tests": 227,
+    "added_sourceGraph_tests": 3,
+    "observed_engine_tests": null,
+    "parser_runtime_used": false
+  },
+  "historical_diagnostic": {
+    "raw_bytes": 765,
+    "normalized_bytes": 604,
+    "source_full_literal_byte_equal": true,
+    "historical_classification_preserved": true
+  },
+  "isolated_product_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "observed_coordinator_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "prospective_source_tools_ready": false,
+  "late_Root_requirements": [
+    "corrected_guard_source_re_review",
+    "bounded_source_fmt_lint_check_guards_and_authority",
+    "three_exact_accepted_source_tool_receipts",
+    "independent_format_only_baseline_final_binding",
+    "accepted_CPP_exact_final_twofile_closure",
+    "fresh_actual_global_Root_git_status_gitlinks_CP87to88_handoff"
+  ],
+  "execution_grant": false,
+  "prepared_code_parser_compiler_runtime_tests_network_executions": 0,
+  "Root_CP_product_writes": 0,
+  "writes": [
+    "/tmp/qcl-docs-routing-pure-harness-v3-review.md",
+    "/tmp/qcl-docs-routing-pure-harness-v3-review-identity.json"
+  ],
+  "limits": {
+    "read_cap_bytes": 6291456,
+    "read_conservative_upper_bytes": 2097152,
+    "wall_cap_seconds": 720,
+    "cpu_count": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 131072,
+    "physical_measurements": "not_measured"
+  }
+}

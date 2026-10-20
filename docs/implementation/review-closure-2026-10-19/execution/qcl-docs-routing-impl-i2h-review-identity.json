@@ -1,0 +1,17 @@
+{
+"stage":"independent-high-I2H-partial-B3a-source-CPP",
+"verdict":"PASS_SOURCE_PARTIAL_B3a",
+"whole_B3_pass":false,"native_ready":false,
+"review":{"path":"/tmp/qcl-docs-routing-impl-i2h-review.md","bytes":9968,"sha256":"c5ceb1df3d7ac2c99352b7bf67dde0c1f8a928485cfd430a5a43d456cb01ee7c"},
+"head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+"packet":{"report":"857e84b0cf629dbadce2b6b47eb5c639d3a2e0bf39cc201a9803d52ecd6de58b","identity":"6b6d9a0cef13442c2cbe460d596269907e17516dbabd79cd182fe27ddbea82fc","delta":"35bd0a7cd6859c6e7124a0e88fea3f674fca4439405ec61975c8ef5dce81ed3b","delta_bytes":35774},
+"files":{"ops/docs_tests_native.py":"46cadd60536140b696607c0003d159b1aae7e3f98483490584726d2d0a8b8eda","ops/docs_tests_cli.ts":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7","tests/test_docs_test_native.py":"c44a21b3bb014e25b0ff47470bddd8e7bc6f580455aea37608684da088f2e67b","tests/docs_test_native_protocol_test.ts":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2"},
+"accepted":["normal-native-owned-exact-C-G-markers","graph-facts-read-semantics","failed-raw-time-call-snapshot-finally-debits","stdout-physical-path-domain","completed-G-fact-independent-of-unit-outcome"],
+"normal_reads":{"preflight":100,"check":444,"docs_actual":376,"docs_conservative":444,"padding":0},
+"new_blocking_findings":[],
+"remaining":["explicit-partial-abort-to-failed-terminal-transition","B3b-whole-physical-trace-and-full-source-immutable-BIND","B4-full-C8","native-unit-parser-Deno-header-and-inline-SKIP","finite-DEV-compiler-native"],
+"root_supplied_authority":{"product":90,"source":8,"MathGREEN90":"consumed-97PASS","author_initial89_Mathunused":"stale-not-authority"},
+"execution_increment":0,"children":0,"source_CP_index_edits":0,
+"budget":{"start":"2026-10-20T09:45:22Z","minutes":8,"CPU":1,"RAM":1073741824,"read_cap":2097152,"read_upper":1572864,"output_cap":65536,"transcript_exact_bytes":null,"cap_compliance_measured":false,"truncation_observed":false,"author_cap_unknown_preserved":true,"CPU_RSS_IO":null},
+"no_runtime_retry_authorized":true
+}

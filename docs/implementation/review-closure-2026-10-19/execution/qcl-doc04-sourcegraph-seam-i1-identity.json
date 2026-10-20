@@ -1,0 +1,29 @@
+{
+  "status": "IMPLEMENTED_SOURCE_ONLY_PENDING_FRESH_HIGH_REVIEW",
+  "workspace": "/tmp/qcl-doc04-root-recipe-worktree",
+  "branch": "codex/review-closure-doc04-root-recipes",
+  "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "target_root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "owning_blobs_equal_between_refs": true,
+  "design_sha256": "6c747fdd3b029143ae0047320d7a2f089cbabb3d70f21b5bb24de9c6cf87236c",
+  "review_sha256": "74030c0c5ce06f2e91b495fa900d21bc31c12c29fea3248e0292d3e4824ca527",
+  "before": {
+    "ops/git.ts": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7",
+    "tests/git_test.ts": "705ae50649d88fed7cf53475fe49f3450177d213ed0815ab358ba405814a7b40"
+  },
+  "after": {
+    "ops/git.ts": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764",
+    "tests/git_test.ts": "927cbd5efc64536ffece01668eb8ee28d502e6fd1ab7a204aaeb807f0371e968"
+  },
+  "baseline": "/tmp/qcl-doc04-seam-i1-baseline",
+  "patch_sha256": "f066ecfb83b806df268c801d83e2c9049a7f6c89578a2d5b241ec0ee4e59a05b",
+  "native_ops_git_byte_equal": true,
+  "protected_sources_sha256_unchanged": true,
+  "whitespace_diff_check": "pass",
+  "runtime_tests": "not_run",
+  "compiler": "not_run",
+  "default_transport_runtime_equivalence": "not_measured",
+  "cp_ready": false,
+  "caps_strictly_measured": false,
+  "remaining": ["fresh_high_source_review", "I2", "new_finite_execution_grant"]
+}

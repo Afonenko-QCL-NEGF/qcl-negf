@@ -1,0 +1,18 @@
+# SCI12 MATH-I1 — initial observations, frozen before author report
+
+Этап: независимый source-only аудит восьми helpers; 2026-10-20. Отчёт автора и его patch/identity до этой записи не читались. Solver, import, tests, parser/compiler, numerical scripts и network не запускались; дочерние агенты не создавались.
+
+Фактический candidate HEAD `de70638a982f91b7e125ab1cfc70a2daef2a656d`; status: только untracked `src/qcl_negf_results/_equilibrium_map_math.py` и `tests/test_equilibrium_map_math.py`; submodule status пуст. Candidate SHA256 `0750ac7b1f74588278a4a6fd468ecf0a8ce739342383d717d719bc4126cfcdaa`; tests SHA256 `995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d`. MAP D2 и OPS hashes совпали с заданием. Прочитаны AGENTS, architecture, qcl-physics-audit и памятка; отдельного AGENTS в candidate не найдено.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Density и bond используют нужные нормировки | `_density_from_integrated`: chi M conj(chi)/L0³, lines324–334; `_bond_from_integrated`: Phi(row+1) M conj(Phi(row)), h=−cbar·2/(mz+mr)/dx², −2J0 h Im, lines337–356 | Это supplied-array formulas; binding масштаба/кинетики и actual arrays здесь отсутствуют | сохранить |
+| Литеральный unequal-dx контроль отличает обе подмены | tests lines227–243: chi=2I, Phi=I, dx1/4, cbar3/8; независимые expected n[8,4], J−3, wrong n[2,1], J−12 | Source-inspection, не выполненный GREEN | сохранить |
+| MAC/Gram сохраняют frozen graph и conjugation | `_mac` lines234–240; matmul i,j,k lines256–262; Gram z,i,j lines281–287 | Нет runtime/primitive-error enclosure proof | сохранить |
+| Размеры/типы/layout/counts/finite inputs и alias проверяются перед contraction/scratch | lines28–130,243–255,265–277,290–303,324–351; tuple real/imag C-contiguous float64; exact ndarray и exact integer counts, Bool scalar refusal | Output может быть частично записан при арифметическом отказе; atomic-error contract не заявлен | сохранить |
+| Restriction имеет монотонный sweep и ограниченный output list | lines194–231; uniform/coincident domains, signed sum, <=192 output floats/slots, <=Ns+Nt−1 overlap bound | Проверка nt*8 явно numeric payload; Python list/object memory отдельно не измерялась, но конечный item cap объявлен | сохранить |
+| Underflow-to-zero primitive прекращает вычисление | `_mul` lines63–67 и `_div`70–76: existing ContractError invalid_data с `arithmetic_events.underflow_or_zero_rounding=true` | В OPS разрешено finite OR ContractError; сохранение flag в сообщении narrow error branch не вводит новый API | сохранить |
+| Общий измеренный нуль не является exact-zero theorem | Annulus lines155–158 subtracts rounded squares; например два близких положительных subnormal squared centres могут совпасть без primitive zero-result. MAC также может округлить ненулевую exact expression до0 | Это статический контрпример к *обобщённому* zero-proof, не выполненная numerical проверка и не доказательство нарушения frozen narrow mul/div detection. Уточнить авторские claims | данных недостаточно |
+| Frozen tests охватывают dyadic geometry, coherent complex contractions и negative inputs | tests1–421, включая cap-before-payload `_ReadForbiddenSequence` | Не проверены исполнением; нет generic enclosure, projector, chi/Phi relation helper, HDF reader или physical acceptance | данных недостаточно |
+
+Первичный вывод: явной ошибки физической нормировки, знака, scalar order или source type/count/alias graph в восьми helpers не обнаружено. Перед verdict сопоставить отчёт автора с узкой областью underflow detection и отделить finite measurement от exact-zero claim. Полный primitive/error proof и N0 pair adapter остаются вне готовности.

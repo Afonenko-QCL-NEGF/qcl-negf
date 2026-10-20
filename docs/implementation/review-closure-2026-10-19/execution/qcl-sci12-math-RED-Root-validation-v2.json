@@ -1,0 +1,68 @@
+{
+  "status": "ROOT_VALIDATED_FOR_SINGLE_CALL",
+  "issuer": "Root",
+  "scope": "SCI12-MATH-local-v2",
+  "attempt": "SCI12-MATH-RED-1",
+  "harness_sha256": "d5b46ac8eaf1a9b9456b47d90bf5e04ec42ff6859363cf53847c6c1884ef858a",
+  "plan_sha256": "968c537b5b3bacf23f288d28254b50670930d27d8ae7e7afeceaba7ba463bf77",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "candidate_base_head": "de70638a982f91b7e125ab1cfc70a2daef2a656d",
+  "source_files": {
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/__init__.py": "41b5b746bbf28cd0e60bb85bc927f1c55ba0ac2695f3271b875f83c057a744d1",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/agent_reports.py": "62cf47cace57a59b9051a6c08634c89a8884fb7fa934be4654496c1a769fe3cc",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/artifacts.py": "639ebd85f0a1612d2c036d11d8926f7c4bdd04778d5690a8778eb03e8cb6ccaa",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/final_audit.py": "1c19ba7f27912c739b349fb7c517a9030be3c4f50c4b75932c08d0c02f3219d1",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/messages.py": "fd82f76a005519962b1edbfd5b9971f6e8d50c0806ca1f4070359e908fa205fa",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/model_help.py": "47fea02cced504a8f8ff52537275f25a5dfbd652b595f70f79306e3113edf62c",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/research_cards.py": "bf5ade3d8e5d21e928f9160d1609c7c5ce1c1f46bedbc375fa234c920b6c4679",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/telemetry.py": "4c9391cc5fc59195afb93202fd22c6ebe8e5f1d8f30f4fbad56f56db291b6971",
+    "/tmp/qcl-sci12-math-results-worktree/pyproject.toml": "4a7aa63bc89222a31970103e08af554f1e478febc9828fafce3145f8b3d3b773",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/__init__.py": "abf1d7bc9de460fcbf5cbc887470178ded90b80bb2532047a15d7e84a4b45fb6",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/_atomic_io.py": "40db3cc534e79dd66aeff5c1ef7b884fa111b451516b6bf589e0b7389e69f707",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/archive.py": "f278f113af4683392a810a0e0edc3c8354a058eb630def20b1ae73e19cded7a9",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/catalog.py": "7b4cf6cd99a311777481a8ce2330bd0efbb34b1351a608e063e978c4a12ba032",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/cli.py": "56eb8619e23f6af39694e0c2f9eefdc187197b97d9d063cbadb85176cd60d4cd",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/commits.py": "5332e5ac0d1912c37710f349007b9399f0d7a8d4cec77ddfe509eff7c4858a77",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/compaction.py": "bfa544d58c69c7d5c029c3d25c7094f470762b81ef09584d82617380e4a6af95",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/diagnostic_archive.py": "ea8bd9180315c21fe44c999b6f6639fb8b0c09f268a2c758984c37edea2fe187",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/diagnostic_page.py": "f6bb23c59d15dd72695f6151b0018c6b2fb42ce68d4b25455cabc4366cb41ff3",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/equilibrium.py": "bb3d204378fd7d95691cfd9b58360afc6f48ede1b37fe7a0f6d2a6ff06944915",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/export.py": "a2bc36318b88775a80085aeca89ad17b0c8495c590367439826c91e8ed35c7dc",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/export_budget.py": "00105b3dc78403b1aa853486d0db620d754bcd55c857788b0a66b06f7f43294f",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/history.py": "ef5e0dadca81e5040fd7d94146802ccdbd472cc92f9df08bdce04c76eda3fa9a",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/model.py": "61f1f8e55d95645d7808df09bb317d5f660dbb45c3f8fc70280cdcb2ea6dd9bf",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/multipart.py": "075fe7d2acc56c3060c7da494a862769e9dc4b8e365b1f4b55d159f1a1db6b23",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/native.py": "532fbedf8b1b296e0fb5bc026788a522bf92aeee94ae1192ca651e2e34a407e5",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/presentation.py": "83ae24dc4b8ef4e64fae2a4a9ef8df7811989fbabe496b7dd6ab7582974b5e22",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/progress.py": "f04bf9d84046c40cd73966d5b9a28ea2821730bdb972a3aa384c5b65c9fcc90c",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/provenance.py": "50835460bcd1210f19c5f71b093215eb59c20538c7c1ce036b29299ad893f832",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/render.py": "196e887453aa97f2c12b0ca222cb003f4eec31a914fb4b5c6b6cb051f3d69df6",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/state.py": "335e67678120fd0c8e222fcb5e937b277ccadac35303fca2250c9f345983b477",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/telemetry.py": "c46d620b4e731c9c5c6fe046a79630310dff2b8ed9e2d1c9895d7cb016ca4c58",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/witness_selection.py": "4acfe2a8546a9c9336cb192bf06646f818dfdd2d3f9f376d0f08b84b9512905a",
+    "/tmp/qcl-sci12-math-results-worktree/src/qcl_negf_results/witnesses.py": "d1393ccc073bafb3afca992d66509ff13634bf4dcf91af1d113662805957dec8",
+    "/tmp/qcl-sci12-math-results-worktree/tests/test_equilibrium_map_math.py": "995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d"
+  },
+  "product_sha256": null,
+  "budget": {
+    "calls_before": 88,
+    "calls_reserved": 1,
+    "calls_after": 89,
+    "global_ceiling": 90,
+    "source_C08": "8/8 unchanged",
+    "no_rerun": true
+  },
+  "accepted_guard_review": {
+    "path": "/tmp/qcl-sci12-math-local-guard-v2-review.md",
+    "sha256": "2227d19cce9c1169bf637234b15d583453f28cadae7e2682d89b6474365b1fa0"
+  },
+  "accepted_source_review": {
+    "path": "/tmp/qcl-sci12-math-fixture-v2-review.md",
+    "sha256": "c855f328402a217225b13fda3821000a8a6e55ed6894235e42b57802f3e69ec9"
+  },
+  "predecessor_ref": {
+    "path": "/tmp/qcl-DOCS-ROUTING-GREEN-1/receipt.json",
+    "sha256": "ea7d990e99e87834148d10b8c7ec7c3e0ac0c701c152de967b6bbacb45d66cf3"
+  },
+  "meaningful_reviews_predecessor_counter_and_aggregate_budget_validated": true
+}

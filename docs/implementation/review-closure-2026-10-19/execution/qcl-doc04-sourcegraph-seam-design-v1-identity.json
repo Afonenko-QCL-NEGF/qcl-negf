@@ -1,0 +1,52 @@
+{
+  "phase": "DOC04-SourceGraph-seam-bounded-source-design-v1",
+  "result": "DESIGN_FOR_INDEPENDENT_REVIEW_I_NOT_EXECUTED",
+  "overall_ready": false,
+  "overall_pass": false,
+  "actual_root": {
+    "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+    "head": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "status": [
+      " M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
+      "?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-impl-i2b-review.md",
+      "?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-impl-i2b-review-identity.json",
+      "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch15-publication.json",
+      "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch15-manifest.json"
+    ],
+    "selected_gitlinks_observed_not_a_maintained_lock": {
+      "core": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "runner": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+      "results": "de70638a982f91b7e125ab1cfc70a2daef2a656d"
+    }
+  },
+  "recipe_overlay": {
+    "path": "/tmp/qcl-doc04-root-recipe-worktree",
+    "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+    "untracked_paths": ["docs/public/make.jl", "ops/docs.ts", "tests/docs_recipe_orchestration_test.ts"],
+    "runner_gitlink": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "submodules_initialized": false,
+    "sources": [
+      {"path": "ops/docs.ts", "bytes": 16757, "sha256": "0837ceda6be4fbfbd90e411fe6e4fe665f8bc8979e63ac1fbfe6bacedd8b178a"},
+      {"path": "docs/public/make.jl", "bytes": 4134, "sha256": "b673bf4e2ba53179bccd7dcff631c8c1fe03893944cf2add868155e133705c8b"},
+      {"path": "tests/docs_recipe_orchestration_test.ts", "bytes": 11328, "sha256": "697b1774ee0573acfc6ec5e5c6ebf4b3c922fb6588cc9d291deab2f10f3408c3"}
+    ]
+  },
+  "owning_source_inputs": [
+    {"path": "ops/git.ts", "bytes": 3580, "sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7", "same_in_both_roots": true},
+    {"path": "ops/process.ts", "bytes": 1345, "sha256": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249", "same_in_both_roots": true},
+    {"path": "tests/git_test.ts", "bytes": 1349, "sha256": "705ae50649d88fed7cf53475fe49f3450177d213ed0815ab358ba405814a7b40"}
+  ],
+  "handoff_inputs": [
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-review.md", "sha256": "97f01e8b463a2554c32c28ac05b388ddcc8b43a9acc936a41f42bcf6131a9a83"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-review-identity.json", "sha256": "9a63edd91a34982e341d88d7deebd5c79240d886a4d63608c734f62fa4b154fa"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-report.md", "sha256": "12f05352105dc6c86b53de6cc66d83ec4199c1c0a09bd324d0628398b08c526b"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-identity.json", "sha256": "17479b52402cd8a2a57c394af559abc1a6a5dcf101f15e580d4f907f1de3cbe0"}
+  ],
+  "adjacent_source_observation": {"path": "ops/docs/assemble.py:94", "symbol": "validate_source_binding", "observed_gap": "URL_regex_rejects_selected_gitmodules_dot_git_suffix", "not_fixed_in_this_scope": true},
+  "proposed_implementation_paths": ["ops/git.ts", "ops/docs.ts", "tests/git_test.ts", "tests/docs_recipe_orchestration_test.ts"],
+  "preserved": ["SourceGraph_v1_shape", "clean_gitlink_URL_nested_checks", "R1_R2_source_closure", "blocked_BUILD", "original_failed_history", "DOC04_runtime_5_of_5_exhausted"],
+  "checks": {"source_inspection": "completed_bounded_design", "tests": "not_measured", "typecheck_parser_compiler": "not_measured", "imports_render_build": "not_measured", "browser_offline_light": "not_measured", "native_science": "not_measured"},
+  "actions": {"source_edits": 0, "git_mutations": 0, "CP_writes": 0, "target_runtime": 0, "tests": 0, "imports": 0, "native_network_science": 0, "subagents": 0},
+  "artifacts": {"design": "/tmp/qcl-doc04-sourcegraph-seam-design-v1.md", "read_ledger": "/tmp/qcl-doc04-sourcegraph-seam-design-v1-read-ledger.json"},
+  "next": "STOP_FOR_INDEPENDENT_HIGH_SOURCE_REVIEW"
+}

@@ -1,0 +1,76 @@
+--- a/ops/docs_tests_native.py
++++ b/ops/docs_tests_native.py
+@@ -2093,26 +2093,30 @@
+         match = re.fullmatch(r"\.*\n-{70}\nRan (\d+) tests? in \d+(?:\.\d+)?s\n\nOK\n",err)
+         ensure(match and int(match.group(1)) == count,"native unittest report")
+         summary["errors"] = 0; return summary
+-    ensure(not err.strip(),"native TAP stderr")
++    # ECMAScript trim whitespace/line terminators; Python's default strip also
++    # removes NEL/control characters that the reviewed TAP reader rejects.
++    js_trim = "\t\n\v\f\r \u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000\ufeff"
++    ensure(not err.strip(js_trim),"native TAP stderr")
+     ensure(unit["report_format"] in ("node-test-tap-v1","deno-test-tap-v1"),"known native TAP format")
++    ensure(not re.search(r"Bail out!|not ok",out,re.MULTILINE|re.IGNORECASE|re.ASCII),"native TAP failure token")
+     # Result directives are forbidden; aggregate '# skipped 0'/'# todo 0'
+     # counters and ordinary test names are not directives. ASCII matches the
+     # reviewed JS standalone-word boundary, including SKIP followed by Unicode.
+     ensure(not re.search(r"^ok [^\n]*#[ \t]*(?:SKIP|TODO)\b",out,re.MULTILINE|re.IGNORECASE|re.ASCII),"native TAP result directive")
+-    lines = out.rstrip().split("\n"); version = "TAP version 13" if unit["report_format"] == "node-test-tap-v1" else "TAP version 14"
++    lines = out.rstrip(js_trim).split("\n"); version = "TAP version 13" if unit["report_format"] == "node-test-tap-v1" else "TAP version 14"
+     ensure(lines.pop(0) == version,"native TAP version")
+     if version.endswith("14"):
+         # Fixed reviewed DOC06 route; no caller-provided header/path authority.
+         ensure(lines and lines.pop(0) == "# ./tests/docs_static_slice_test.ts","native Deno selected header")
+-    plans = [line for line in lines if re.fullmatch(r"1\.\.\d+",line)]
++    plans = [line for line in lines if re.fullmatch(r"1\.\.[0-9]+",line)]
+     ensure(plans == ["1.."+str(count)],"native TAP plan")
+     cases = [line for line in lines if line.startswith("ok ")]
+-    ensure(len(cases) == count and all(re.fullmatch("ok "+str(i+1)+r" - .+",line) for i,line in enumerate(cases)),"native TAP cases")
+-    pattern = r"ok \d+ - .+|1\.\.\d+"
++    ensure(len(cases) == count and all(re.fullmatch("ok "+str(i+1)+r" - [^\r\n\u2028\u2029]+",line) for i,line in enumerate(cases)),"native TAP cases")
++    pattern = r"ok [0-9]+ - [^\r\n\u2028\u2029]+|1\.\.[0-9]+"
+     if version.endswith("13"):
+         counters = {"tests":count,"suites":0,"pass":count,"fail":0,"cancelled":0,"skipped":0,"todo":0}
+         for key,value in counters.items(): ensure(sum(line.startswith("# "+key+" ") for line in lines) == 1 and "# "+key+" "+str(value) in lines,"native TAP counters")
+-        pattern += r"|# Subtest: .+|# (?:tests|suites|pass|fail|cancelled|skipped|todo) \d+|# duration_ms \d+(?:\.\d+)?"
++        pattern += r"|# Subtest: [^\r\n\u2028\u2029]+|# (?:tests|suites|pass|fail|cancelled|skipped|todo) [0-9]+|# duration_ms [0-9]+(?:\.[0-9]+)?"
+     ensure(all(re.fullmatch(pattern,line) for line in lines),"native TAP full grammar")
+     summary["todo"] = 0
+     if version.endswith("13"): summary["cancelled"] = 0
+--- a/tests/test_docs_test_native.py
++++ b/tests/test_docs_test_native.py
+@@ -610,6 +610,34 @@
+         for report,format_,expected in ((node,"node-test-tap-v1",expected_node),(deno,"deno-test-tap-v1",expected_deno)):
+             tap_unit = {"report_format":format_,"expected_tests":1}
+             self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report,"stderr":""}),expected)
++            # I2J: hand-written JS lexical boundary pairs, independent of the
++            # pure reader and the native implementation's trim/regex helpers.
++            for name in ("nearby bail out","nearby not_ok","naïve Ω","alpha\u0085beta","case not oK"):
++                self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report.replace("ok 1 - case 1","ok 1 - "+name),"stderr":""}),expected)
++            for name in ("Bail out! fixture","not ok fixture","prefix NOT OK trailing","prefix bAiL OuT! trailing"):
++                self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report,"stderr":""}),expected)
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("ok 1 - case 1","ok 1 - "+name),"stderr":""})
++            for separator in ("\r","\u2028","\u2029"):
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("ok 1 - case 1","ok 1 - alpha"+separator+"beta"),"stderr":""})
++                # These terminators are internal to the whole report, even
++                # when last on a split line. Non-multiline JS $ is literal end.
++                self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report,"stderr":""}),expected)
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("ok 1 - case 1\n","ok 1 - case 1"+separator+"\n"),"stderr":""})
++                if format_ == "node-test-tap-v1":
++                    with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("# Subtest: case 1","# Subtest: alpha"+separator+"beta"),"stderr":""})
++                    with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("# Subtest: case 1\n","# Subtest: case 1"+separator+"\n"),"stderr":""})
++                    before_counter = report.replace("# duration_ms 1\n","").replace("# tests 1\n","# duration_ms 1\n# tests 1\n")
++                    self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":before_counter,"stderr":""}),expected)
++                    with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":before_counter.replace("# duration_ms 1\n","# duration_ms 1"+separator+"\n"),"stderr":""})
++            for stderr in ("\u0085","\u001c","\u180e"):
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report,"stderr":stderr})
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report+stderr,"stderr":""})
++            js_trim = "\t\n\v\f\r \u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000\ufeff"
++            self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report+js_trim,"stderr":js_trim}),expected)
++            if format_ == "node-test-tap-v1":
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("# duration_ms 1","# duration_ms ١"),"stderr":""})
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("# duration_ms 1","# duration_ms 1.٢"),"stderr":""})
++                self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report.replace("# duration_ms 1","# duration_ms 1.2"),"stderr":""}),expected)
+             for name in ("case skipped todo","case # skipped reason","case # todolist","case # TODO_","case # SKIP2"):
+                 positive = report.replace("ok 1 - case 1\n","ok 1 - "+name+"\n")
+                 self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":positive,"stderr":""}),expected)

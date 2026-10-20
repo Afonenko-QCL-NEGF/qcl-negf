@@ -1,0 +1,95 @@
+{
+  "scope": "docs-routing-pure-local-engineering-v8",
+  "stage": "CHECK3",
+  "attempt": "DOCS-ROUTING-SOURCE-CHECK-3",
+  "attempt_consumed": true,
+  "verdict": "STOP_RECONCILE_NO_RERUN",
+  "target_calls": 1,
+  "stop_reason": "attempted_live_RSS_unknown",
+  "wrapper_sha256": "362a1744f4c7e7b216085fa8c4751b0cd4af8e8a9051d7268f6a29dffdfd495c",
+  "guard_sha256": "5cecec92f20bed186ab51b08b4b98585dde5452af5e4eef31ad27adbf386763b",
+  "plan_sha256": "813afe65ddf7245eaf2562472398baf8f541463bba0d7022256ebc75f4cdaaa5",
+  "ready_sha256": "d8c79e5f3be348cca386507d7e2270149aaedad31d61e53a192aa4678301cb18",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "isolated_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "source_before": {
+    "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164",
+    "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab"
+  },
+  "source_after": {
+    "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab",
+    "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"
+  },
+  "config_sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "shared_source_budget": {
+    "maximum_calls": 11,
+    "calls_before": 10,
+    "calls_reserved": 1,
+    "calls_after": 11,
+    "no_rerun": true
+  },
+  "pure_only_slice": true,
+  "observed_engine_tests": null,
+  "test_registration_performed": false,
+  "recorded_utc": "2026-10-20T09:56:49.554033+00:00",
+  "child_pid": 3069395,
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "check",
+    "--config",
+    "/tmp/qcl-docs-test-routing-worktree/deno.json",
+    "--no-lock",
+    "--no-npm",
+    "--no-remote",
+    "ops/docs_tests.ts",
+    "tests/docs_test_routing_test.ts"
+  ],
+  "cwd": "/tmp/qcl-docs-test-routing-worktree",
+  "environment_clear": true,
+  "environment": {
+    "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-3/owned-tmp/deno-cache",
+    "TMPDIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-3/owned-tmp/tmp",
+    "HOME": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-3/owned-tmp/home"
+  },
+  "exit_code": 0,
+  "wall_seconds": 1.5861271530156955,
+  "RSS_attempted_samples": 33,
+  "RSS_valid_samples": 32,
+  "RSS_unknown_samples": 1,
+  "RSS_NA_after_reap_count": 1,
+  "RSS_NA_after_reap_proofs": [
+    {
+      "proof": "Popen.poll_returncode_before_RSS_attempt",
+      "pid": 3069395,
+      "returncode": 0,
+      "elapsed_seconds": 1.580621037981473
+    }
+  ],
+  "sampled_peak_process_tree_RSS_bytes": 273313792,
+  "RSS_status": "sampled_with_gaps",
+  "TMP_sample_count": 35,
+  "sampled_peak_owned_tmp_all_entry_st_size_bytes": 3011380,
+  "sampled_regular_payload_peak_bytes": 3010800,
+  "initial_TMP_bytes": 220,
+  "final_TMP_bytes": 3011380,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "raw_bytes": 88,
+  "raw_sha256": "04d40e18cad60bff4992e517b0a3b5e8bdab983c1944034cd919f20f827b8f91",
+  "raw_output_overrun": false,
+  "guard_error": null,
+  "collector_construction_attempted": true,
+  "collector_terminal": true,
+  "RawCapture_sha256": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f",
+  "sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "limits": {
+    "wall_seconds": 120,
+    "cpu_affinity_count": 1,
+    "RLIMIT_CPU_seconds": 120,
+    "sampled_RSS_stop_bytes": 1073741824,
+    "sampled_owned_TMP_stop_bytes": 16777216,
+    "raw_bytes_envelope": 2097152
+  },
+  "limitations": "Source tools only, no tests/registration/module execution by check. No native/CI/science acceptance. Sampled env-only guards permit gaps/overshoot; independent source/format review required."
+}

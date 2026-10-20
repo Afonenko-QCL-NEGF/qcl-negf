@@ -1,0 +1,827 @@
+--- a/ops/docs_tests_native.py
++++ b/ops/docs_tests_native.py
+@@ -57,6 +57,7 @@
+ def utc_seconds(value):
+     ensure(isinstance(value, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}Z", value), "UTC spelling")
+     parsed = time.strptime(value[:19], "%Y-%m-%dT%H:%M:%S")
++    ensure(0 <= parsed.tm_sec <= 59,"UTC seconds range")
+     ensure(time.strftime("%Y-%m-%dT%H:%M:%S", parsed) == value[:19], "UTC calendar")
+     # TZ-independent UTC conversion, without reading ambient timezone settings.
+     year, month, day = parsed[:3]
+@@ -90,7 +91,8 @@
+ 
+ def validate_binding(binding):
+     exact(binding,("version","producer","setup_id","phase","attempt","input_sha256","source_head","source_graph_digest","native_source_digest","runtime_inventory_digest","scope","not_after_utc","setup_nonce_digest","token_sha256"))
+-    ensure(binding["version"] == 1 and binding["producer"] == PRODUCER, "binding producer")
++    integer(binding["version"],1,1)
++    ensure(binding["producer"] == PRODUCER, "binding producer")
+     ensure(re.fullmatch(r"[a-f0-9]{32}",binding["setup_id"]) and re.fullmatch(r"[a-f0-9]{40}",binding["source_head"]), "binding identity")
+     ensure(re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,127}",binding["attempt"]), "attempt literal")
+     for key in ("input_sha256","source_graph_digest","native_source_digest","runtime_inventory_digest","setup_nonce_digest","token_sha256"):
+@@ -137,10 +139,76 @@
+         "allocation_ref":request["parent_registration"]["allocation"]["ref"],"storage_binding_digest":digest(canonical(request["storage"])),"wall_deadline_utc":request["wall_deadline_utc"],"created_at_utc":utc_now()}
+ 
+ 
++def validate_intent(record):
++    exact(record,("format","producer","version","setup_id","authorization_ref","scope","input_ref","source_head","source_graph_digest","native_source_digest","runtime_inventory_digest","request_digest","setup_nonce_digest","phase_bindings","allocation_ref","storage_binding_digest","wall_deadline_utc","created_at_utc"))
++    enum(record["format"],("root-docs-bootstrap-intent.v1","root-docs-phase-intent.v1"))
++    ensure(record["producer"] == PRODUCER,"intent producer"); integer(record["version"],1,1); hash_scalar(record["setup_id"],32)
++    enum(record["scope"],("prerequisites-only","docs-units-only","full-root-check"))
++    for key in ("authorization_ref","input_ref","allocation_ref"): validate_ref(record[key])
++    hash_scalar(record["source_head"],40)
++    for key in ("source_graph_digest","native_source_digest","runtime_inventory_digest","request_digest","setup_nonce_digest","storage_binding_digest"): hash_scalar(record[key])
++    utc_seconds(record["wall_deadline_utc"]); utc_seconds(record["created_at_utc"])
++    ensure(type(record["phase_bindings"]) is list and 1 <= len(record["phase_bindings"]) <= 2,"intent finite phases")
++    for phase in record["phase_bindings"]:
++        exact(phase,("phase","attempt","binding_digest","token_sha256")); enum(phase["phase"],("preflight","check","docs"))
++        ensure(type(phase["attempt"]) is str and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,127}",phase["attempt"]),"intent attempt")
++        for key in ("binding_digest","token_sha256"):
++            if record["format"] == "root-docs-bootstrap-intent.v1": ensure(phase[key] is None,"bootstrap unresolved hashes")
++            else: hash_scalar(phase[key])
++    ensure(len(canonical(record)) <= 16384,"intent encoded cap")
++    return record
++
++
+ def exact(value, names):
+     ensure(isinstance(value, dict) and set(value) == set(names), "missing/extra protocol keys")
+ 
+ 
++def integer(value,minimum=0,maximum=9007199254740991):
++    ensure(type(value) is int and minimum <= value <= maximum,"finite integer scalar/range")
++    return value
++
++
++def finite_number(value,minimum=0,maximum=9007199254740991):
++    ensure(type(value) in (int,float) and minimum <= value <= maximum and value == value,"finite numeric scalar/range")
++    return value
++
++
++def boolean(value):
++    ensure(type(value) is bool,"boolean scalar")
++    return value
++
++
++def enum(value,choices):
++    ensure(type(value) is str and value in choices,"closed string enum")
++    return value
++
++
++def hash_scalar(value,length=64):
++    ensure(type(value) is str and re.fullmatch(r"[a-f0-9]{"+str(length)+r"}",value),"hash scalar")
++    return value
++
++
++def validate_identity(identity):
++    exact(identity,("pid","birth","uid"))
++    integer(identity["pid"],1,2147483647); integer(identity["birth"]); integer(identity["uid"],0,4294967295)
++
++
++SIGNALS = ("SIGABRT","SIGALRM","SIGBUS","SIGCHLD","SIGCONT","SIGFPE","SIGHUP","SIGILL","SIGINT","SIGIO","SIGIOT","SIGKILL","SIGPIPE","SIGPOLL","SIGPROF","SIGPWR","SIGQUIT","SIGSEGV","SIGSTKFLT","SIGSTOP","SIGSYS","SIGTERM","SIGTRAP","SIGTSTP","SIGTTIN","SIGTTOU","SIGURG","SIGUSR1","SIGUSR2","SIGVTALRM","SIGWINCH","SIGXCPU","SIGXFSZ","SIGRTMIN","SIGRTMAX")
++REFUSAL_CODES = ("source_unavailable","invalid_request","binding_refused","admission_expired","cancelled","deadline","storage_failure","protocol_failure","retention_unknown","execution_failed")
++
++
++def refusal_frame(request_id,sequence,code,retained_ref=None,cleanup_status="unknown"):
++    hash_scalar(request_id,32); integer(sequence,1,4096); enum(code,REFUSAL_CODES); enum(cleanup_status,("complete","unknown"))
++    if retained_ref is not None: validate_ref(retained_ref)
++    return {"version":1,"request_id":request_id,"sequence":sequence,"kind":"refused","code":code,"retained_ref":retained_ref,"cleanup_status":cleanup_status}
++
++
++def validate_exit(exit_code,sig):
++    if exit_code is not None: integer(exit_code,0,255)
++    if sig is not None: enum(sig,SIGNALS)
++    ensure(exit_code is None or sig is None,"exclusive exit/signal union")
++
++
+ def _pairs(pairs):
+     result = {}
+     for key, value in pairs:
+@@ -227,7 +295,7 @@
+ 
+ 
+ def read_bound_regular(ref, maximum, expected_owner, expected_parent=None):
+-    exact(ref, ("path", "sha256"))
++    validate_ref(ref); integer(maximum,0); integer(expected_owner,0,4294967295)
+     path = ref["path"]
+     path_safe(path)
+     if expected_parent is not None:
+@@ -275,7 +343,8 @@
+ 
+     def reserve(self, hello, setup_id, peer):
+         exact(hello, ("version", "setup_id", "phase", "attempt", "input_sha256", "source_head", "token", "client_pid", "client_startticks"))
+-        ensure(hello["version"] == 1 and hello["setup_id"] == setup_id, "setup identity")
++        integer(hello["version"],1,1); integer(hello["client_pid"],1,2147483647); integer(hello["client_startticks"])
++        ensure(hello["setup_id"] == setup_id, "setup identity")
+         matches = [(i, p) for i, (p, token) in enumerate(self.records)
+                    if secrets.compare_digest(token, str(hello["token"]))]
+         ensure(len(matches) == 1, "unknown phase token")
+@@ -369,6 +438,8 @@
+ class StorageLedger:
+     def __init__(self, roots, limits, total, deadline, accepted_sampled_stop=False):
+         ensure(accepted_sampled_stop is True, "sampled TMP stop policy not explicitly accepted")
++        integer(total,1); finite_number(deadline,0.000001)
++        for amount in limits.values(): integer(amount,1)
+         ensure(set(roots) == set(limits) and total > 0, "all storage domains require caps")
+         for root in roots.values():
+             real_directory(root,os.getuid())
+@@ -381,12 +452,12 @@
+         self.sample_bytes = 0
+ 
+     def debit(self, domain, amount):
+-        ensure(isinstance(amount,int) and amount >= 0 and domain in self.written, "storage debit")
++        integer(amount); ensure(domain in self.written, "storage debit")
+         ensure(self.written[domain]+self.held[domain]+amount <= self.limits[domain] and sum(self.written.values())+sum(self.held.values())+amount <= self.total, "storage prewrite reserve exhausted")
+         self.written[domain] += amount  # Failed writes are never refunded.
+ 
+     def reserve(self,domain,maximum):
+-        ensure(domain in self.held and isinstance(maximum,int) and maximum >= 0,"reservation shape")
++        integer(maximum); ensure(domain in self.held,"reservation shape")
+         ensure(self.written[domain]+self.held[domain]+maximum <= self.limits[domain] and sum(self.written.values())+sum(self.held.values())+maximum <= self.total,"outstanding reserve exhausted")
+         token = secrets.token_hex(16); self.held[domain] += maximum
+         self.reservations[token] = [domain,maximum]
+@@ -394,7 +465,7 @@
+ 
+     def commit(self,token,actual):
+         domain,remaining = self.reservations[token]
+-        ensure(isinstance(actual,int) and 0 <= actual <= remaining,"actual reservation debit")
++        integer(actual,0,remaining)
+         self.held[domain] -= actual; self.written[domain] += actual
+         self.reservations[token][1] -= actual
+ 
+@@ -446,6 +517,8 @@
+ 
+ class CgroupGuard:
+     def __init__(self, path, limits, pids_max, owner_uid):
++        integer(pids_max,1,256); integer(owner_uid,0,4294967295)
++        exact(limits,("cpu","ram_bytes")); integer(limits["cpu"],1,1); integer(limits["ram_bytes"],1,1073741824)
+         real_directory(path, owner_uid)
+         ensure(str(path).startswith("/sys/fs/cgroup/") and 0 < pids_max <= 256, "delegated cgroup path/pids")
+         self.path = Path(path)
+@@ -498,6 +571,8 @@
+     exact(record, fields)
+     ensure(record["format"] == "root-docs-tool-observation.v1" and record["producer"] == PRODUCER, "unknown observation producer")
+     expected = active.expected_tools[tool]
++    enum(record["tool"],("deno","node","python","git")); ensure(record["tool"] == tool,"observed tool identity")
++    integer(record["duration_ns"])
+     key = (record["producer_source_sha256"], tool, ref["sha256"], active.native_receipt_sha[tool], record["runtime_closure_ref"]["sha256"], active.setup_inventory_id)
+     ensure(key in active.observation_registration, "observation not independently parent-registered")
+     ensure(record["setup_id"] == active.setup_id and record["source_head"] == active.source_head and record["parent_execution_ref"] == active.authorization_ref, "observation execution binding")
+@@ -528,13 +603,16 @@
+     ensure(record["command"] == command, "observation probe command")
+     capture = record["capture"]
+     exact(capture, ("stdout_ref", "stderr_ref", "stdout_bytes", "stderr_bytes", "exit_code", "signal", "complete", "stop_reason"))
++    validate_exit(capture["exit_code"],capture["signal"]); boolean(capture["complete"])
++    integer(capture["stdout_bytes"],0,4096); integer(capture["stderr_bytes"],0,4096)
+     out = read_bound_regular(capture["stdout_ref"], 4096, active.uid)["bytes"]
+     err = read_bound_regular(capture["stderr_ref"], 4096, active.uid)["bytes"]
+     ensure(len(out)+len(err) <= 4096 and len(out) == capture["stdout_bytes"] and not err and capture["stderr_bytes"] == 0, "observation raw sizes")
+     ensure(capture["exit_code"] == 0 and capture["signal"] is None and capture["complete"] is True and capture["stop_reason"] is None, "observation capture status")
+     ensure(active.accepted_native_captures[tool] == capture, "capture lacks parent registration")
+     ensure(parse_version(tool, out) == record["version"] == expected["version"], "tool version mismatch")
+-    ensure(record["measured_at_utc"] <= active.now_utc() < record["expires_at_utc"] <= active.wall_deadline_utc, "stale/future observation")
++    measured = utc_seconds(record["measured_at_utc"]); expires = utc_seconds(record["expires_at_utc"])
++    ensure(measured <= utc_seconds(active.now_utc()) < expires <= utc_seconds(active.wall_deadline_utc), "stale/future observation")
+     ensure(record["binding_digest"] == digest(canonical({k:v for k,v in record.items() if k != "binding_digest"})), "observation digest")
+     return record
+ 
+@@ -883,7 +961,7 @@
+     """
+     def __init__(self,startup,channel):
+         ensure(channel is not None and channel.fileno() >= 3,"live inherited parent required")
+-        ensure(startup["producer"] == PRODUCER and startup["version"] == 1,"registered producer")
++        integer(startup["version"],1,1); ensure(startup["producer"] == PRODUCER,"registered producer")
+         exact(startup,(*REQUEST_KEYS,"producer","version","nonce","parent_registration"))
+         validate_request(public_request(startup))
+         self.channel = channel; self.request = startup
+@@ -899,6 +977,8 @@
+                     "native_receipt_sha","accepted_native_captures","runtime_closures",
+                     "katex","reviewed_units","admission","initial_empty","allocation","control_reserve","base_environment")
+         exact(self.registration,required)
++        integer(self.registration["uid"],0,4294967295); integer(self.registration["runtime_uid"],0,4294967295)
++        integer(self.registration["binary_cap"],1,1073741824)
+         ensure(self.registration["uid"] == self.uid,"registered owner")
+         for key in ("runtime_uid","binary_cap","setup_inventory_id","native_receipt_sha","accepted_native_captures"):
+             setattr(self,key,self.registration[key])
+@@ -925,6 +1005,8 @@
+         ensure(actual_allocation["path"] == resource["path"] and actual_allocation["uid"] == self.uid and actual_allocation["limits"] == resource["limits"] and actual_allocation["pids_max"] == resource["pids_max"] and time.monotonic() < self.deadline <= actual_allocation["monotonic_expires"],"live allocation delegation and expiry")
+         read_bound_regular(actual_allocation["authority_ref"],16384,self.uid)
+         reserve = self.registration["control_reserve"]
++        exact(reserve,("memory_bytes","metadata_bytes","log_bytes"))
++        integer(reserve["memory_bytes"],1,134217728); integer(reserve["metadata_bytes"],884736,2097152); integer(reserve["log_bytes"],32768,262144)
+         ensure(0 < reserve["memory_bytes"] <= 134217728 and reserve["metadata_bytes"] >= 884736 and reserve["log_bytes"] >= 32768,"lifecycle/fallback control reserve")
+         ensure(utc_seconds(self.now_utc()) < utc_seconds(self.wall_deadline_utc) and time.monotonic()+4 < self.deadline,"active allocation deadline")
+         roots = startup["storage"]["roots"]
+@@ -933,6 +1015,10 @@
+         self.raw_root = roots["raw"]; self.metadata_root = roots["metadata"]
+         self.sequence = 0; self.git_calls = 0; self.git_raw = 0; self.git_seconds = 0
+         self.command_ledger = []; self.snapshot = None
++        # P1-C publication owner is a separate boundary. File fsync/readback
++        # alone does not certify durable directory publication. Only that
++        # future owning publisher may populate this in-memory proof set.
++        self.durable_publications = set()
+         self.tickets = {}; self.captures = []; self.command_index = 0
+         self.leaders = {}; self.phases = []; self.closed = False; self.wire_bytes = 0
+         self.components = {startup["expected_source"]["workspace"]+"/"+item["path"]:item["section"] for item in startup["expected_source"]["components"]}
+@@ -969,7 +1055,7 @@
+         pending_record = {"format":"root-docs-command-pending.v1","binding_digest":digest(canonical(self.binding)),"command_sha256":digest(canonical(command)),"id":ident}
+         self.storage.debit("metadata",len(canonical(pending_record)))
+         pending_ref = retain_record(Path(self.metadata_root)/(ident+".pending.json"),pending_record,384)
+-        entry = {"id":ident,"pending_ref":pending_ref,"terminal_ref":None,"streams":None,"outcome":"unknown"}
++        entry = {"id":ident,"binding_digest":digest(canonical(self.binding)),"pending_ref":pending_ref,"terminal_ref":None,"streams":None,"outcome":"unknown"}
+         self.command_ledger.append(entry)
+         try:
+             result = execute_bounded(command,guard=self.guard,storage=self.storage,
+@@ -1072,35 +1158,49 @@
+     for component in source["components"]:
+         exact(component,("path","section","revision","url"))
+         ensure(re.fullmatch(r"components/[A-Za-z0-9][A-Za-z0-9.-]*",component["path"]) and re.fullmatch(r"submodule\.[A-Za-z0-9_.-]+",component["section"]),"owning component section/path")
++        hash_scalar(component["revision"],40)
++        ensure(type(component["url"]) is str and len(component["url"]) <= 512 and re.fullmatch(r"https://github\.com/[A-Za-z0-9-]+/[A-Za-z0-9_.-]+(?:\.git)?",component["url"]),"owning public component URL")
+     ensure(len(source["git_families"]) <= 128,"finite Git family inventory")
+     for item in source["git_families"]:
+         exact(item,("root","args","stdout_bytes","stderr_bytes","sha256"))
+-        ensure(type(item["stdout_bytes"]) is int and type(item["stderr_bytes"]) is int and 0 <= item["stdout_bytes"]+item["stderr_bytes"] <= 262144,"Git family byte bound")
++        integer(item["stdout_bytes"],0,262144); integer(item["stderr_bytes"],0,262144)
++        ensure(item["stdout_bytes"]+item["stderr_bytes"] <= 262144,"Git family byte bound")
++        path_safe(item["root"])
++        ensure(type(item["args"]) is list and 1 <= len(item["args"]) <= 8 and all(type(a) is str and 0 < len(a.encode()) <= 512 and "\x00" not in a for a in item["args"]),"finite Git argv literals")
+         if item["sha256"] is not None: ensure(re.fullmatch(r"[a-f0-9]{64}",item["sha256"]),"Git frozen object SHA")
+     bootstrap = request["bootstrap"]
+     exact(bootstrap,("python","python_sha256","native","native_sha256","runtime_closure_ref"))
++    path_safe(bootstrap["python"]); path_safe(bootstrap["native"]); hash_scalar(bootstrap["python_sha256"]); hash_scalar(bootstrap["native_sha256"])
+     validate_ref(bootstrap["runtime_closure_ref"])
+     exact(request["expected_tools"],("python","node","deno","git"))
+     for tool in request["expected_tools"].values():
+         exact(tool,("path","sha256","version","runtime_closure_ref")); path_safe(tool["path"]); validate_ref(tool["runtime_closure_ref"])
++        hash_scalar(tool["sha256"])
++        ensure(type(tool["version"]) is str and re.fullmatch(r"\d+\.\d+\.\d+",tool["version"]) and len(tool["version"]) <= 32,"tool version scalar")
+     exact(request["existing_observations"],("python","node","deno","git"))
+     for ref in request["existing_observations"].values(): validate_ref(ref)
+     exact(request["resources"],("path","limits","pids_max","allocation_ref"))
+     validate_ref(request["resources"]["allocation_ref"])
++    path_safe(request["resources"]["path"]); integer(request["resources"]["pids_max"],1,256)
++    exact(request["resources"]["limits"],("cpu","ram_bytes")); integer(request["resources"]["limits"]["cpu"],1,1); integer(request["resources"]["limits"]["ram_bytes"],1,1073741824)
+     storage = request["storage"]
+     exact(storage,("control_dir","roots","limits","total","accepted_sampled_stop"))
++    path_safe(storage["control_dir"])
++    ensure(type(storage["roots"]) is dict and type(storage["limits"]) is dict and 2 <= len(storage["roots"]) <= 16 and {"raw","metadata"}.issubset(storage["roots"]) and set(storage["roots"]) == set(storage["limits"]) and all(type(name) is str and re.fullmatch(r"[a-z][a-z0-9_]{0,31}",name) for name in storage["roots"]),"finite named storage-domain map")
++    for amount in storage["limits"].values(): integer(amount,1)
+     ensure(storage["accepted_sampled_stop"] is True and set(storage["roots"]) == set(storage["limits"]),"storage explicit policy")
+     for root in storage["roots"].values(): path_safe(root)
+     ensure(all(len(root.encode()) <= 128 for root in storage["roots"].values()),"finite retained root spelling")
+-    ensure(type(storage["total"]) is int and storage["total"] > 0,"storage total")
++    integer(storage["total"],1)
+     ensure(0 < len(request["allowed_phases"]) <= 2,"finite phase list")
+     attempts = set()
+     for phase in request["allowed_phases"]:
+         exact(phase,("phase","attempt","input_sha256","source_head","not_after_utc"))
++        ensure(type(phase["attempt"]) is str and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,127}",phase["attempt"]),"phase attempt literal")
+         ensure(phase["phase"] in ("preflight","check","docs") and phase["source_head"] == source["head"] and phase["input_sha256"] == request["input_ref"]["sha256"] and phase["attempt"] not in attempts,"phase exact input/source/attempt")
+         attempts.add(phase["attempt"])
+         ensure(utc_seconds(phase["not_after_utc"]) <= utc_seconds(request["wall_deadline_utc"]),"phase within allocation")
+-    ensure(type(request["monotonic_deadline"]) in (int,float) and 0 < request["monotonic_deadline"] < float("inf"),"finite monotonic deadline")
++    finite_number(request["monotonic_deadline"],0.000001)
+ 
+ 
+ def admit_source_schedule(active):
+@@ -1195,6 +1295,47 @@
+     return active.retain("evidence-index",{"format":"root-docs-command-index.v1","metadata_root":active.metadata_root,"commands":entries})
+ 
+ 
++def validate_phase_retention(active,index_ref,terminal,required_refs):
++    # This is a proof over actual retained objects, not a projection of driver
++    # exit/ACK status. Unknown/missing artifacts never become a positive label.
++    if terminal is None or index_ref is None: return "partial"
++    try:
++        validate_terminal(terminal,terminal["identity"]["pid"],terminal["identity"]["birth"],terminal["identity"]["uid"])
++        all_refs = [index_ref,terminal["closure_ref"]]
++        for ref in required_refs:
++            if ref is None: return "partial"
++            validate_ref(ref); read_bound_regular(ref,131072,active.uid)
++            all_refs.append(ref)
++        index = decode(read_bound_regular(index_ref,131072,active.uid)["bytes"],131072)
++        exact(index,("format","metadata_root","commands"))
++        ensure(index["format"] == "root-docs-command-index.v1" and index["metadata_root"] == active.metadata_root and len(index["commands"]) == len(active.command_ledger),"published native index ledger binding")
++        expected = []
++        for entry in active.command_ledger:
++            if entry["outcome"] != "complete" or entry["terminal_ref"] is None: return "partial"
++            pending = decode(read_bound_regular(entry["pending_ref"],384,active.uid)["bytes"],384)
++            all_refs.extend((entry["pending_ref"],entry["terminal_ref"]))
++            exact(pending,("format","binding_digest","command_sha256","id"))
++            ensure(pending["format"] == "root-docs-command-pending.v1" and pending["id"] == entry["id"] and pending["binding_digest"] == entry["binding_digest"],"retained pending command binding")
++            record = decode(read_bound_regular(entry["terminal_ref"],1408,active.uid)["bytes"],1408)
++            exact(record,("format","command_sha256","capture","streams","guard_sha256","supervisor"))
++            ensure(record["format"] == "root-docs-command-receipt.v1" and record["command_sha256"] == pending["command_sha256"] and record["streams"] == entry["streams"],"retained command receipt/index")
++            exact(record["supervisor"],("pid","birth","reaped"))
++            integer(record["supervisor"]["pid"],1,2147483647); integer(record["supervisor"]["birth"])
++            ensure(record["supervisor"]["reaped"] is True,"retained command supervisor reap")
++            exact(entry["streams"],("stdout","stderr"))
++            for stream in entry["streams"].values():
++                exact(stream,("ref","bytes","sha256")); validate_ref(stream["ref"]); integer(stream["bytes"],0,1048576)
++                ensure(stream["sha256"] == stream["ref"]["sha256"],"retained stream identity")
++                raw = read_bound_regular(stream["ref"],1048576,active.uid)
++                all_refs.append(stream["ref"])
++                ensure(len(raw["bytes"]) == stream["bytes"],"retained actual raw length")
++            expected.append([entry["id"],entry["pending_ref"]["sha256"],entry["terminal_ref"]["sha256"],"json","complete"])
++        ensure(index["commands"] == expected,"exact native durable command manifest")
++        if not all((ref["path"],ref["sha256"]) in getattr(active,"durable_publications",set()) for ref in all_refs): return "unknown"
++        return "complete"
++    except (OSError,Refusal,KeyError,TypeError,ValueError): return "unknown"
++
++
+ def bind_native_context(parsed,active,now=None,monotonic=None):
+     active.poll_parent()
+     request = active.request; expected = request["expected_source"]
+@@ -1301,6 +1442,9 @@
+             except BlockingIOError: time.sleep(0.01)
+ 
+     def receive(self):
++        limits = {"preflight":65536,"git-read":4096,"prepare":32768,"execute":16384,"stream-read":512,"finish":131072}
++        allowed = getattr(self,"allowed_ops",set(limits))
++        maximum = max(limits[op] for op in allowed)
+         end = min(self.active.deadline-3,time.monotonic()+10)
+         while time.monotonic() < end:
+             self.active.poll_parent()
+@@ -1308,13 +1452,12 @@
+             self.drain_stderr()
+             if b"\n" in self.pending:
+                 data,tail = self.pending.split(b"\n",1); self.pending = bytearray(tail)
+-                frame = decode(data,131071)
+-                limits = {"preflight":65536,"git-read":4096,"prepare":32768,"execute":16384,"stream-read":512,"finish":131072}
+-                ensure(frame.get("op") in limits and len(data)+1 <= limits[frame["op"]],"closed per-op request bound")
++                frame = decode(data,maximum-1)
++                ensure(type(frame.get("op")) is str and frame["op"] in allowed and len(data)+1 <= limits[frame["op"]],"closed per-op request bound")
+                 return frame
+-            ensure(len(self.pending) < 131072,"driver frame overrun")
++            ensure(len(self.pending) < maximum,"driver frame overrun")
+             try:
+-                data = os.read(self.out_read,min(16384,131072-len(self.pending)))
++                data = os.read(self.out_read,min(16384,maximum-len(self.pending)))
+                 ensure(data,"driver EOF"); self.active.wire_bytes += len(data)
+                 ensure(self.active.wire_bytes <= 24*1048576,"partial frame wire debit")
+                 self.pending.extend(data)
+@@ -1473,17 +1616,22 @@
+     active.tickets = {}; active.snapshot = None
+     active.plan = None; active.captures = []; driver = None; validation_ref = None; summary_ref = None; index_ref = None; aggregate_sha = None; terminal = None
+     result = "failed"; command_closure = "unknown"
++    source_bound = False; observations_valid = False; source_validated = False
+     try:
+         admit_source_schedule(active)
+         for root in (active.workspace,*active.components): noexec_git_metadata(root,active.deadline-3)
+         active.input_bytes = read_bound_regular(active.request["input_ref"],32768,active.uid)["bytes"]
+         inputs = decode(active.input_bytes,32768)
+         bind_native_context(inputs,active)
++        source_bound = True
+         metadata = native_metadata(inputs,active)
++        observations_valid = True
+         driver = object.__new__(DriverPipe); driver.__init__(active)
+         sequence = 0; prepared = False; graph_reads = 0
+         while True:
++            driver.allowed_ops = {"preflight"} if sequence == 0 else {"git-read","prepare","execute","stream-read","finish"}
+             frame = driver.receive(); sequence += 1
++            integer(frame.get("version"),1,1); integer(frame.get("sequence"),1,4096)
+             ensure(frame.get("version") == 1 and frame.get("request_id") == active.request_id and frame.get("sequence") == sequence <= 4096,"driver request sequence")
+             op = frame.get("op"); common = {"version":1,"request_id":active.request_id,"sequence":sequence}
+             fields = {"preflight":("input",),"git-read":("root","args"),"prepare":("input_sha256","plan"),"execute":("index","step"),"stream-read":("ticket_id","stream","offset"),"finish":("aggregate_summary","aggregate_sha256")}
+@@ -1501,6 +1649,7 @@
+                 if graph_reads % 36 == 0: active.snapshot = None
+                 reply = dict(kind="git-capture",ticket_id=ticket,streams=streams,exit_code=capture["exit_code"],signal=capture["signal"],complete=capture["capture_complete"],stop_reason=capture["stop_reason"])
+             elif op == "stream-read":
++                integer(frame["offset"],0,1048576)
+                 ticket = active.tickets[frame["ticket_id"]]; name = frame["stream"]
+                 ensure(ticket["binding_digest"] == digest(canonical(active.binding)) and name in ("stdout","stderr") and name not in ticket["closed"] and frame["offset"] == ticket["offsets"][name],"stream ticket offset")
+                 stream = ticket["streams"][name]; raw = read_bound_regular(stream["ref"],1048576,active.uid)["bytes"]
+@@ -1516,8 +1665,10 @@
+                 prepared = True
+                 reply = dict(kind="prepared",binding_digest=digest(canonical(active.binding)),seed_ref=active.retain("seed",seed))
+             elif op == "execute":
++                integer(frame["index"],0,3)
+                 ensure(prepared and frame["index"] == len(active.captures) and frame["step"] == active.plan["steps"][frame["index"]],"ordered exact executor step")
+-                bind_native_context(inputs,active)
++                source_bound = False
++                bind_native_context(inputs,active); source_bound = True
+                 step = frame["step"]; env = step["env"] if step["clearEnv"] else active.base_environment
+                 ticket,capture,streams = active.command({"argv":[step["executable"],*step["args"]],"cwd":step["cwd"],"env":env},step["limits"]["log_bytes"],step["limits"]["wall_seconds"])
+                 active.captures.append((ticket,capture,streams))
+@@ -1525,9 +1676,10 @@
+             else:
+                 accepted = False
+                 try:
+-                    bind_native_context(inputs,active)
++                    source_bound = False
++                    bind_native_context(inputs,active); source_bound = True
+                     result = validate_driver_finish(frame["aggregate_summary"],frame["aggregate_sha256"],active,inputs)
+-                    aggregate_sha = frame["aggregate_sha256"]; accepted = True
++                    aggregate_sha = frame["aggregate_sha256"]; accepted = True; source_validated = True
+                 except (Refusal,OSError,KeyError,TypeError,ValueError): result = "failed"
+                 summary_ref = active.retain("summary",frame["aggregate_summary"])
+                 index_ref = retain_evidence_index(active)
+@@ -1539,21 +1691,33 @@
+             driver.send(dict(common,**reply))
+     except BaseException:
+         result = "failed"
++        if driver is not None and "sequence" in locals() and sequence > 0:
++            try: driver.send(refusal_frame(active.request_id,sequence,"source_unavailable" if not source_bound else "protocol_failure",index_ref,"unknown"))
++            except BaseException: pass
+     finally:
+         if driver is not None:
+             try: terminal = driver.close()
+             except BaseException: result = "failed"
+         if terminal is None or terminal["exit_code"] != 0: result = "failed"
++        driver_closed = False
++        if terminal is not None:
++            try:
++                validate_terminal(terminal,terminal["identity"]["pid"],terminal["identity"]["birth"],terminal["identity"]["uid"])
++                driver_closed = True
++            except (OSError,Refusal,KeyError,TypeError,ValueError): result = "failed"
+         if index_ref is None:
+             try: index_ref = retain_evidence_index(active)
+             except (OSError,Refusal): pass
+-        ref = active.retain("phase",{"format":"root-docs-phase-receipt.v2","binding":active.binding,"request_id":active.request_id,"finish_validation_ref":validation_ref,"aggregate_sha256":aggregate_sha,"summary_ref":summary_ref,"evidence_index_ref":index_ref,"driver":terminal,"command_closure":command_closure,"phase_driver_closure":"closed" if terminal else "unknown","result":result,"source_observation":"measured" if validation_ref else "not_measured","retention_status":"complete" if terminal else "partial","setup_state":"active" if result in ("passed","ready_for_unit_attempt") else "closing","whole_workload_empty":"not_claimed","closed_at_utc":utc_now()},32768)
++        retention = validate_phase_retention(active,index_ref,terminal,[validation_ref,summary_ref,index_ref])
++        measured = source_bound and observations_valid and source_validated
++        if retention != "complete" or not measured or command_closure != "closed" or not driver_closed: result = "failed"
++        ref = active.retain("phase",{"format":"root-docs-phase-receipt.v2","binding":active.binding,"request_id":active.request_id,"finish_validation_ref":validation_ref,"aggregate_sha256":aggregate_sha,"summary_ref":summary_ref,"evidence_index_ref":index_ref,"driver":terminal,"command_closure":command_closure,"phase_driver_closure":"closed" if driver_closed else "unknown","result":result,"source_observation":"measured" if measured else "not_measured","retention_status":retention,"setup_state":"active" if result in ("passed","ready_for_unit_attempt") else "closing","whole_workload_empty":"not_claimed","closed_at_utc":utc_now()},32768)
+         active.phases.append({"phase":phase["phase"],"attempt":phase["attempt"],"binding_digest":digest(canonical(active.binding)),"ref":ref})
+     return ref,result
+ 
+ 
+ class RunningDocsSetup:
+-    def __init__(self, process, control, request, ack, lease):
++    def __init__(self, process, control, request, ack, lease, startup):
+         self.process,self.control,self.request,self.ack,self.lease = process,control,request,ack,lease
+         self.setup_id = request["setup_id"]; self.phase_refs = []; self.leaders = {}; self.final_ref = None
+         self.phase_outcomes = {}; self.leader_acks = {}; self.closing = None
+@@ -1563,6 +1727,7 @@
+         self.storage = lease.storage_ledger
+         self.registration = lease.export_registered_observations()
+         self.producer_birth = ack["birth"]
++        self.startup = startup
+ 
+     def _dispatch_control(self,frame):
+         kind = frame.get("kind")
+@@ -1573,6 +1738,11 @@
+             ensure(frame["phase"] not in self.phase_outcomes and frame["binding_digest"] == expected["binding_digest"] and frame["attempt"] == expected["binding"]["attempt"],"once bound phase-ready")
+             receipt = decode(read_bound_regular(frame["phase_ref"],32768,os.getuid())["bytes"],32768)
+             ensure(receipt["binding"] == expected["binding"],"parent actual phase binding")
++            enum(receipt["result"],("passed","ready_for_unit_attempt","failed","blocked"))
++            enum(receipt["source_observation"],("measured","not_measured")); enum(receipt["retention_status"],("complete","partial","unknown"))
++            enum(receipt["command_closure"],("closed","unknown")); enum(receipt["phase_driver_closure"],("closed","unknown"))
++            if receipt["result"] in ("passed","ready_for_unit_attempt"):
++                ensure(receipt["source_observation"] == "measured" and receipt["retention_status"] == "complete" and receipt["command_closure"] == "closed" and receipt["phase_driver_closure"] == "closed","positive parent phase requires full evidence")
+             self.phase_outcomes[frame["phase"]] = receipt
+             self.phase_refs.append(frame["phase_ref"])
+         elif kind == "leader-bound":
+@@ -1644,9 +1814,11 @@
+         record = next(p for p in self.ack["phases"] if p["phase"] == phase)
+         environment = {"QCL_DOCS_PYTHON":self.request["bootstrap"]["python"],"QCL_DOCS_BROKER":self.ack["endpoint"],"QCL_DOCS_SETUP_ID":self.setup_id,"QCL_DOCS_PHASE_TOKEN":record["capsule"]}
+         task = {"preflight":"docs:preflight","check":"check","docs":"docs:check"}[phase]
++        bindings = [decode_capsule(p["capsule"])["binding"] for p in self.ack["phases"]]
++        intent = validate_intent(audit_intent(self.startup,bindings))
+         # Existing trusted lease owns the stub/pidfd/cgroup and calls this hook
+         # while its exec gate is closed. Capsule env is never durable intent.
+-        return self.lease.spawn_gated(argv=[self.request["expected_tools"]["deno"]["path"],"task",task,"--inputs",self.request["input_ref"]["path"]],cwd=self.request["expected_source"]["workspace"],env=environment,close_fds=True,pass_fds=(),durable_intent={"phase":phase,"binding_digest":record["binding_digest"]},deadline=self.request["monotonic_deadline"],before_exec=lambda identity:self.bind_phase_leader(phase,identity["pid"],identity["birth"],identity["uid"]))
++        return self.lease.spawn_gated(argv=[self.request["expected_tools"]["deno"]["path"],"task",task,"--inputs",self.request["input_ref"]["path"]],cwd=self.request["expected_source"]["workspace"],env=environment,close_fds=True,pass_fds=(),durable_intent=intent,deadline=self.request["monotonic_deadline"],before_exec=lambda identity:self.bind_phase_leader(phase,identity["pid"],identity["birth"],identity["uid"]))
+ 
+     def await_terminal(self):
+         try: return self._await_terminal()
+@@ -1689,6 +1861,7 @@
+         # returned refs are independently read/checked here, never caller JSON.
+         evidence = self.lease.collect_docs_terminal(process=self.process,identity={"pid":self.process.pid,"birth":self.producer_birth,"uid":os.getuid()},participants=dict(self.leaders),deadline=self.request["monotonic_deadline"])
+         exact(evidence,("producer_terminal","streams","participants","retention_status"))
++        enum(evidence["retention_status"],("complete","partial","unknown"))
+         producer_terminal = evidence["producer_terminal"]
+         validate_terminal(producer_terminal,self.process.pid,self.producer_birth,os.getuid())
+         exact(evidence["streams"],("stdout","stderr"))
+@@ -1722,9 +1895,15 @@
+ 
+ def validate_terminal(terminal,pid,birth,uid):
+     exact(terminal,("identity","exit_code","signal","stdout_eof","stderr_eof","reaped","closure_ref"))
+-    exact(terminal["identity"],("pid","birth","uid"))
++    validate_identity(terminal["identity"])
++    validate_exit(terminal["exit_code"],terminal["signal"])
++    validate_ref(terminal["closure_ref"])
++    for key in ("stdout_eof","stderr_eof","reaped"): boolean(terminal[key])
+     ensure(terminal["identity"] == {"pid":pid,"birth":birth,"uid":uid} and terminal["stdout_eof"] is True and terminal["stderr_eof"] is True and terminal["reaped"] is True,"actual parent terminal identity/EOF/reap")
+     closure = decode(read_bound_regular(terminal["closure_ref"],16384,os.getuid())["bytes"],16384)
++    exact(closure,("identity","stdout_eof","stderr_eof","reaped","exit_code","signal"))
++    validate_identity(closure["identity"]); validate_exit(closure["exit_code"],closure["signal"])
++    for key in ("stdout_eof","stderr_eof","reaped"): boolean(closure[key])
+     ensure(closure["identity"] == terminal["identity"] and closure["stdout_eof"] is True and closure["stderr_eof"] is True and closure["reaped"] is True and closure["exit_code"] == terminal["exit_code"] and closure["signal"] == terminal["signal"],"retained terminal evidence")
+     return True
+ 
+@@ -1737,8 +1916,8 @@
+            callable(getattr(execute_grant, "authorize_docs_setup", None)), "active trusted parent execute capability required")
+     required = ("scope", "setup_id", "authorization_ref", "input_ref", "expected_source", "bootstrap", "expected_tools", "existing_observations", "resources", "storage", "allowed_phases", "wall_deadline_utc", "monotonic_deadline")
+     exact(request, required)
+-    active = execute_grant.authorize_docs_setup(request)
+     validate_request(request)
++    active = execute_grant.authorize_docs_setup(request)
+     ensure(callable(getattr(active,"collect_docs_terminal",None)) and callable(getattr(active,"spawn_gated",None)) and getattr(active,"guard",None) is not None and getattr(active,"storage_ledger",None) is not None,"complete trusted parent lifecycle adapter required before bootstrap")
+     ensure(re.fullmatch(r"[a-f0-9]{32}", request["setup_id"]), "fresh setup id")
+     ensure(request["scope"] in ("prerequisites-only", "docs-units-only", "full-root-check"), "setup scope")
+@@ -1757,7 +1936,7 @@
+     process = active.spawn_gated(
+         argv=[bootstrap["python"], "-I", "-S", "-B", bootstrap["native"], "setup", "--control-fd", str(child.fileno())],
+         cwd=request["storage"]["control_dir"], env={}, close_fds=True, pass_fds=(child.fileno(),),
+-        durable_intent=audit_intent(frame), deadline=request["monotonic_deadline"],
++        durable_intent=validate_intent(audit_intent(frame)), deadline=request["monotonic_deadline"],
+     )
+     child.close()
+     parent.settimeout(max(0.001, request["monotonic_deadline"]-time.monotonic()))
+@@ -1782,7 +1961,7 @@
+     except BaseException:
+         parent.sendall(b"C\n"); parent.close(); raise
+     # Keep the duplex parent channel alive after constructor returns.
+-    return RunningDocsSetup(process,parent,request,ack,active)
++    return RunningDocsSetup(process,parent,request,ack,active,frame)
+ 
+ 
+ def client_main(mode, input_path):
+@@ -1845,7 +2024,7 @@
+     for phase,token in zip(phases,tokens):
+         binding = phase_binding(startup,phase,startup["nonce"],token)
+         records.append(dict(phase,binding=binding))
+-    active.retain("phase-intent",audit_intent(startup,[p["binding"] for p in records]),16384)
++    active.retain("phase-intent",validate_intent(audit_intent(startup,[p["binding"] for p in records])),16384)
+     ledger = PhaseLedger(records,tokens)
+     advertised = [{"phase":p["phase"],"binding_digest":digest(canonical(p["binding"])),"capsule":encode_capsule(t,p["binding"])} for p,t in zip(records,tokens)]
+     source = startup["expected_source"]
+--- a/ops/docs_tests_cli.ts
++++ b/ops/docs_tests_cli.ts
+@@ -18,9 +18,74 @@
+   return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", data)), (v) => v.toString(16).padStart(2,"0")).join("");
+ }
+ type Stream = { ref: {path:string;sha256:string}; bytes:number; sha256:string };
++function integer(value: unknown,minimum=0,maximum=Number.MAX_SAFE_INTEGER): asserts value is number {
++  if (!Number.isSafeInteger(value) || Number(value) < minimum || Number(value) > maximum) throw new Error("Integer range");
++}
++function flag(value: unknown) { if (typeof value !== "boolean") throw new Error("Boolean required"); }
++function hash(value: unknown,length=64) { if (typeof value !== "string" || !new RegExp(`^[a-f0-9]{${length}}$`).test(value)) throw new Error("Hash required"); }
++function ref(value: unknown) {
++  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Ref object");
++  const r = value as Frame; exact(r,["path","sha256"]); hash(r.sha256);
++  if (typeof r.path !== "string" || r.path.length > 512 || !r.path.startsWith("/") || r.path === "/" || /[\x00-\x20\x7f,\\]/.test(r.path) || r.path.split("/").slice(1).some((part) => !part || part === "." || part === "..")) throw new Error("Canonical ref path");
++}
++function utc(value: unknown) {
++  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}Z$/.test(value)) throw new Error("UTC required");
++  const parsed = new Date(value); if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0,19) !== value.slice(0,19)) throw new Error("UTC calendar");
++}
++function captureMeta(value: unknown) {
++  const c = value as Frame; exact(c,["exit_code","signal","started_at","ended_at","capture_complete","drains_complete","stop_reason","supervision"]);
++  if (c.exit_code !== null) integer(c.exit_code,0,255);
++  if (c.signal !== null && (typeof c.signal !== "string" || !/^SIG(?:ABRT|ALRM|BUS|CHLD|CONT|FPE|HUP|ILL|INT|IO|IOT|KILL|PIPE|POLL|PROF|PWR|QUIT|SEGV|STKFLT|STOP|SYS|TERM|TRAP|TSTP|TTIN|TTOU|URG|USR1|USR2|VTALRM|WINCH|XCPU|XFSZ|RTMIN|RTMAX)$/.test(c.signal))) throw new Error("Signal enum");
++  if (c.exit_code !== null && c.signal !== null) throw new Error("Exit/signal union");
++  utc(c.started_at); utc(c.ended_at); flag(c.capture_complete); flag(c.drains_complete);
++  if (c.stop_reason !== null && (typeof c.stop_reason !== "string" || encoder.encode(c.stop_reason).length > 1024)) throw new Error("Stop reason");
++  const s = c.supervision as Frame; exact(s,["process_tree_owned","limits_enforced","evidence_ref"]); flag(s.process_tree_owned); flag(s.limits_enforced); ref(s.evidence_ref);
++}
++function metadataShape(value: unknown) {
++  const m = value as Frame;
++  exact(m,["workspace","source_graph","source_files","base_task","files","directories","absent_paths","retained_tools","reviewed_units","retained_katex","admission"]);
++  if (typeof m.workspace !== "string" || typeof m.base_task !== "string") throw new Error("Metadata strings");
++  const graph = m.source_graph as Frame; exact(graph,["revision","digest","clean"]); hash(graph.revision,40); hash(graph.digest); flag(graph.clean);
++  for (const digest of Object.values(m.source_files as Frame)) hash(digest);
++  for (const entry of Object.values(m.files as Frame)) { const f = entry as Frame; exact(f,["kind","canonical","sha256"]); if (f.kind !== "regular" || typeof f.canonical !== "string") throw new Error("File fact"); hash(f.sha256); }
++  for (const entry of Object.values(m.directories as Frame)) { const d = entry as Frame; exact(d,["kind","canonical","symlink_ancestors"]); if (d.kind !== "directory" || typeof d.canonical !== "string" || !Array.isArray(d.symlink_ancestors) || d.symlink_ancestors.some((s) => typeof s !== "string")) throw new Error("Directory fact"); }
++  if (!Array.isArray(m.absent_paths) || m.absent_paths.some((s) => typeof s !== "string")) throw new Error("Absent paths");
++  const tools = m.retained_tools as Frame; exact(tools,["deno","node","python"]);
++  for (const entry of Object.values(tools)) { const t = entry as Frame; exact(t,["ref","path","version","sha256","schema","externally_measured"]); ref(t.ref); hash(t.sha256); flag(t.externally_measured); if (typeof t.path !== "string" || typeof t.version !== "string" || t.schema !== "normalized-tool-identity") throw new Error("Tool fact"); }
++  const units = m.reviewed_units as Frame; exact(units,["doc04-python","doc04-node","doc06-deno"]);
++  for (const entry of Object.values(units)) { const u = entry as Frame; exact(u,["test_path","test_sha256","expected_tests","report_format"]); hash(u.test_sha256); integer(u.expected_tests,1); if (typeof u.test_path !== "string" || !["python-unittest-summary-v1","node-test-tap-v1","deno-test-tap-v1"].includes(String(u.report_format))) throw new Error("Unit fact"); }
++  const k = m.retained_katex as Frame; exact(k,["ref","root","version","module_sha256","css_sha256"]); ref(k.ref); hash(k.module_sha256); hash(k.css_sha256); if (typeof k.root !== "string" || k.version !== "0.16.8") throw new Error("KaTeX fact");
++  const a = m.admission as Frame; exact(a,["ref","source_revision","source_graph_digest","fresh","exclusive_storage","tools","limits","process_tree_supervision"]); ref(a.ref); hash(a.source_revision,40); hash(a.source_graph_digest); flag(a.fresh); flag(a.process_tree_supervision);
++  if (!Array.isArray(a.exclusive_storage) || a.exclusive_storage.some((p) => typeof p !== "string") || !Array.isArray(a.tools)) throw new Error("Admission lists"); a.tools.forEach(ref);
++  const limits = a.limits as Frame; exact(limits,["per_step_wall_seconds","per_step_log_bytes","total_log_bytes","cpu","ram_bytes","node_tmp_bytes","python_tmp_bytes","doc06_tmp_bytes"]); Object.values(limits).forEach((v) => integer(v,1));
++}
++export function responseFor(op: string,reply: Frame): Frame {
++  integer(reply.version,1,1); hash(reply.request_id,32); integer(reply.sequence,1,4096);
++  if (reply.kind === "refused") {
++    exact(reply,["version","request_id","sequence","kind","code","retained_ref","cleanup_status"]);
++    if (!["source_unavailable","invalid_request","binding_refused","admission_expired","cancelled","deadline","storage_failure","protocol_failure","retention_unknown","execution_failed"].includes(String(reply.code)) || !["complete","unknown"].includes(String(reply.cleanup_status))) throw new Error("Refusal enum");
++    if (reply.retained_ref !== null) ref(reply.retained_ref); return reply;
++  }
++  const common = ["version","request_id","sequence","kind"];
++  if (op === "preflight") { exact(reply,[...common,"metadata","binding_digest"]); if (reply.kind !== "metadata") throw new Error("Metadata reply"); hash(reply.binding_digest); metadataShape(reply.metadata); }
++  else if (op === "git-read") { exact(reply,[...common,"ticket_id","streams","exit_code","signal","complete","stop_reason"]); if (reply.kind !== "git-capture") throw new Error("Git reply"); hash(reply.ticket_id,32); flag(reply.complete); if (reply.exit_code !== null) integer(reply.exit_code,0,255); if (reply.signal !== null || (reply.stop_reason !== null && typeof reply.stop_reason !== "string")) throw new Error("Git status"); }
++  else if (op === "prepare") { exact(reply,[...common,"binding_digest","seed_ref"]); if (reply.kind !== "prepared") throw new Error("Prepare reply"); hash(reply.binding_digest); ref(reply.seed_ref); }
++  else if (op === "execute") { exact(reply,[...common,"index","ticket_id","capture_meta","streams"]); if (reply.kind !== "capture") throw new Error("Capture reply"); integer(reply.index,0,3); hash(reply.ticket_id,32); captureMeta(reply.capture_meta); }
++  else if (op === "stream-read") { exact(reply,[...common,"ticket_id","stream","offset","data","eof","chunk_sha256"]); if (reply.kind !== "stream-chunk" || !["stdout","stderr"].includes(String(reply.stream)) || typeof reply.data !== "string" || reply.data.length > 43691 || !/^[A-Za-z0-9_-]*$/.test(reply.data)) throw new Error("Chunk reply"); hash(reply.ticket_id,32); integer(reply.offset,0,1048576); flag(reply.eof); hash(reply.chunk_sha256); }
++  else if (op === "finish") { exact(reply,[...common,"validation","validation_ref","aggregate_sha256","summary_sha256","terminal","phase_closure","setup_closure"]); if (reply.kind !== "finish-validated" || !["accepted","rejected"].includes(String(reply.validation)) || reply.terminal !== false || reply.phase_closure !== "pending" || reply.setup_closure !== "pending") throw new Error("Finish reply"); if (reply.validation_ref !== null) ref(reply.validation_ref); for (const key of ["aggregate_sha256","summary_sha256"]) if (reply[key] !== null) hash(reply[key]); }
++  else throw new Error("Unknown response operation");
++  if (op === "git-read" || op === "execute") { const streams = reply.streams as Record<string,Stream>; exact(streams,["stdout","stderr"]); streamShape(streams.stdout); streamShape(streams.stderr); }
++  return reply;
++}
++class ProtocolRefusal extends Error {
++  constructor(readonly evidence: Frame) { super(String(evidence.code)); }
++}
++function checked(transport: Transport): Transport {
++  return async (q) => { const reply = responseFor(String(q.op),await transport(q)); if (reply.kind === "refused") throw new ProtocolRefusal(reply); return reply; };
++}
+ function streamShape(s: Stream) {
+-  exact(s as unknown as Frame,["ref","bytes","sha256"]); exact(s.ref,["path","sha256"]);
+-  if (!Number.isSafeInteger(s.bytes) || s.bytes < 0 || !/^[a-f0-9]{64}$/.test(s.sha256) || s.ref.sha256 !== s.sha256 || typeof s.ref.path !== "string" || !s.ref.path.startsWith("/")) throw new Error("Stream identity");
++  exact(s as unknown as Frame,["ref","bytes","sha256"]); ref(s.ref); integer(s.bytes,0,1048576); hash(s.sha256);
++  if (s.ref.sha256 !== s.sha256) throw new Error("Stream identity");
+ }
+ export async function hydrateChunks(frames: Frame[], channel: string, requestId: string, sequence: number) {
+   // Fixture seam uses the exact stream-chunk response grammar.
+@@ -79,6 +144,7 @@
+   return result as Frame;
+ }
+ export function brokerReadGit(transport: Transport, requestId: string) {
++  transport = checked(transport);
+   let sequence = 0;
+   return async (root: string, args: readonly string[]): Promise<string> => {
+     const current = ++sequence;
+@@ -95,6 +161,7 @@
+   };
+ }
+ export async function runDriver(start: Start, transport: Transport) {
++  transport = checked(transport);
+   try {
+     const first = await transport({ op: "preflight", input: start.input });
+     if (first.kind !== "metadata") return { result: "failed", source_status: "not_measured", reason: first };
+@@ -134,7 +201,7 @@
+       },
+     });
+   } catch (error) {
+-    return { result: "failed", source_status: "not_measured", reason: error instanceof Error ? error.message : "Driver failure" };
++    return { result: "failed", source_status: "not_measured", reason: error instanceof ProtocolRefusal ? {code:error.evidence.code,retained_ref:error.evidence.retained_ref,cleanup_status:error.evidence.cleanup_status} : error instanceof Error ? error.message : "Driver failure" };
+   }
+ }
+ const captures = new Map<number,Record<string,Stream>>();
+@@ -184,10 +251,13 @@
+     let timer: ReturnType<typeof setTimeout> | undefined;
+     try {
+       const caps: Record<string,number> = {preflight:131072,"git-read":4096,prepare:16384,execute:16384,"stream-read":49152,finish:16384};
+-      const reply = await Promise.race([readFrame(caps[String(q.op)]-1),new Promise<never>((_,reject) => {timer=setTimeout(() => reject(new Error("Protocol inactivity")),Math.min(10000,deadline-performance.now()));})]);
++      const reply = await Promise.race([readFrame(Math.max(caps[String(q.op)],16384)-1),new Promise<never>((_,reject) => {timer=setTimeout(() => reject(new Error("Protocol inactivity")),Math.min(10000,deadline-performance.now()));})]);
+       wire += encoder.encode(canonical(reply)).length+1;
+-      if (wire > 24*1048576 || reply.version !== 1 || reply.request_id !== start.request_id || reply.sequence !== sequence || reply.kind === "refused") throw new Error("Protocol response binding/refusal");
+-      return reply;
++      if (wire > 24*1048576 || reply.version !== 1 || reply.request_id !== start.request_id || reply.sequence !== sequence) throw new Error("Protocol response binding");
++      const validated = responseFor(String(q.op),reply);
++      if (validated.kind === "refused") throw new ProtocolRefusal(validated);
++      if (encoder.encode(canonical(validated)).length+1 > caps[String(q.op)]) throw new Error("Per-operation response cap");
++      return validated;
+     } finally { clearTimeout(timer); }
+   };
+   const result = await runDriver(start as unknown as Start, transport);
+--- a/tests/test_docs_test_native.py
++++ b/tests/test_docs_test_native.py
+@@ -55,6 +55,23 @@
+         sections = {"/fixture/source/components/core": "submodule.nonbasename"}
+         self.assertEqual(native.validate_git(root, ["config", "-f", ".gitmodules", "--get",
+             "submodule.nonbasename.url"], root, sections)[-1], "submodule.nonbasename.url")
++        ref = {"path":"/owned/record","sha256":"a"*64}
++        request = {"scope":"docs-units-only","setup_id":"a"*32,"authorization_ref":ref,"input_ref":ref,
++            "expected_source":{"head":"b"*40,"workspace":"/fixture","graph_digest":"c"*64,"native_digest":"d"*64,
++                "native":[{"path":p,"blob":"e"*40,"sha256":"f"*64,"bytes":1} for p in native.NATIVE_PATHS],
++                "components":[{"path":"components/c"+str(i),"section":"submodule.c"+str(i),"revision":"b"*40,"url":"https://github.com/example/c"+str(i)} for i in range(8)],
++                "git_families":[{"root":"/fixture","args":["rev-parse","HEAD"],"stdout_bytes":41,"stderr_bytes":0,"sha256":None}]},
++            "bootstrap":{"python":"/nix/store/runtime/bin/python","python_sha256":"a"*64,"native":"/fixture/ops/docs_tests_native.py","native_sha256":"b"*64,"runtime_closure_ref":ref},
++            "expected_tools":{name:{"path":"/nix/store/runtime/bin/"+name,"sha256":"c"*64,"version":"1.2.3","runtime_closure_ref":ref} for name in ("deno","node","python","git")},
++            "existing_observations":{name:ref for name in ("deno","node","python","git")},
++            "resources":{"path":"/sys/fs/cgroup/docs","limits":{"cpu":1,"ram_bytes":1073741824},"pids_max":256,"allocation_ref":ref},
++            "storage":{"control_dir":"/owned/control","roots":{"raw":"/owned/raw","metadata":"/owned/metadata"},"limits":{"raw":8388608,"metadata":2097152},"total":10485760,"accepted_sampled_stop":True},
++            "allowed_phases":[{"phase":"docs","attempt":"once","input_sha256":"a"*64,"source_head":"b"*40,"not_after_utc":"2026-10-20T12:00:00.000000Z"}],"wall_deadline_utc":"2026-10-20T12:00:00.000000Z","monotonic_deadline":1000}
++        native.validate_request(request)
++        for out,err in ((-1,2),(True,0),(0,-1)):
++            request["expected_source"]["git_families"][0].update(stdout_bytes=out,stderr_bytes=err)
++            grant = type("Grant",(),{"authorize_docs_setup":lambda *_:self.fail("invalid request reached authorization")})()
++            with self.assertRaises(native.Refusal): native.start_docs_setup(execute_grant=grant,**request)
+ 
+     def test_phase_token_is_once_and_bound(self):
+         phase = {"phase": "check", "attempt": "a", "input_sha256": "b" * 64, "source_head": "c" * 40, "not_after_utc": 20}
+@@ -78,7 +95,7 @@
+         binding = {"phase":"preflight","attempt":"first"}
+         phase_ref = {"path":"/owned/first.json","sha256":"a"*64}
+         parent.expected_phases = {"preflight":{"binding":binding,"binding_digest":"b"*64}}
+-        receipt = {"binding":binding,"result":"ready_for_unit_attempt","request_id":"c"*32}
++        receipt = {"binding":binding,"result":"ready_for_unit_attempt","request_id":"c"*32,"source_observation":"measured","retention_status":"complete","command_closure":"closed","phase_driver_closure":"closed"}
+         with patch.object(native,"read_bound_regular",return_value={"bytes":native.canonical(receipt)}):
+             parent._dispatch_control({"kind":"phase-ready","setup_id":parent.setup_id,"phase":"preflight","attempt":"first","binding_digest":"b"*64,"phase_ref":phase_ref})
+             self.assertEqual(parent.phase_outcomes["preflight"]["result"],"ready_for_unit_attempt")
+@@ -101,6 +118,12 @@
+             for field in ("stdout_eof","stderr_eof","reaped"):
+                 with self.subTest(field=field), self.assertRaises(native.Refusal):
+                     native.validate_terminal(dict(terminal,**{field:False}),12,34,0)
++            for bad_identity in ({"pid":True,"birth":34,"uid":0},{"pid":12,"birth":-1,"uid":0}):
++                with self.assertRaises(native.Refusal):
++                    native.validate_terminal(dict(terminal,identity=bad_identity),12,34,0)
++            for bad_exit in (False,1.5,-1):
++                with self.assertRaises(native.Refusal):
++                    native.validate_terminal(dict(terminal,exit_code=bad_exit),12,34,0)
+ 
+     def test_forged_grant_cannot_bootstrap(self):
+         with self.assertRaises(native.Refusal):
+@@ -113,9 +136,17 @@
+             expected_source={"head":"b"*40,"graph_digest":"c"*64,"native_digest":"d"*64},
+             parent_registration={"runtime_closures":{},"allocation":{"ref":{"path":"/allocation","sha256":"e"*64}}},
+             allowed_phases=[{"phase":"preflight","attempt":"first"}],wall_deadline_utc="2026-10-20T12:00:00.000000Z")
++        spy["authorization_ref"] = {"path":"/owned/auth","sha256":"f"*64}
++        spy["input_ref"] = {"path":"/owned/input","sha256":"e"*64}
+         projected = native.audit_intent(spy)
+         self.assertNotIn("01"*32, str(projected))
+         self.assertNotIn("raw-token", str(projected))
++        self.assertEqual(native.validate_intent(projected),projected)
++        phase_intent = native.audit_intent(spy,[{"token_sha256":"d"*64}])
++        self.assertEqual(native.validate_intent(phase_intent)["format"],"root-docs-phase-intent.v1")
++        self.assertEqual(set(phase_intent),set(projected))
++        for invalid in (dict(projected,version=True),dict(projected,tokens=["raw-token"]),dict(phase_intent,phase_bindings=[{"phase":"preflight","attempt":"first","binding_digest":None,"token_sha256":"d"*64}])):
++            with self.assertRaises(native.Refusal): native.validate_intent(invalid)
+         # Reserved capacity is distinct from actual bytes; failed bytes remain
+         # charged, unused reservations may be released without a fictitious refund.
+         ledger = object.__new__(native.StorageLedger)
+@@ -155,6 +186,40 @@
+         self.assertEqual(summary["observed_tests"],20)
+         for bad in (dict(capture,stderr=capture["stderr"]+"extra"),dict(capture,stderr=capture["stderr"].replace("Ran 20","Ran 19"))):
+             with self.assertRaises(native.Refusal): native.validate_unit_report(unit,bad)
++        # Exercise owning run_phase finalization after completed native work.
++        # A written rejected validation must never turn the failed final source
++        # read into measured evidence; a missing native index cannot be complete.
++        class Active:
++            uid = 0; workspace = "/fixture"; components = {}; deadline = 1000
++            request = {"input_ref":{"path":"/owned/input","sha256":"a"*64}}
++            def __init__(self):
++                self.phases = []; self.command_ledger = []; self.saved = []; self.dispatches = 0
++            def retain(self,kind,record,maximum=131072):
++                self.saved.append((kind,record)); return {"path":"/owned/"+kind,"sha256":"b"*64}
++        terminal = {"identity":{"pid":12,"birth":34,"uid":0},"exit_code":0,"signal":None,"stdout_eof":True,"stderr_eof":True,"reaped":True,"closure_ref":{"path":"/owned/closure","sha256":"f"*64}}
++        class Driver:
++            def __init__(self,active): self.active = active
++            def receive(self): return {"version":1,"request_id":self.active.request_id,"sequence":1,"op":"finish","aggregate_summary":{},"aggregate_sha256":"c"*64}
++            def send(self,frame): self.active.saved.append(("wire",frame))
++            def close(self): return terminal
++        phase = {"phase":"docs","attempt":"once","binding":{"phase":"docs"}}
++        for source_failure,index_failure in ((False,False),(True,False),(False,True)):
++            active = Active()
++            outcomes = [None,native.Refusal("final source read failed")] if source_failure else [None,None]
++            with patch.object(native,"admit_source_schedule"), patch.object(native,"noexec_git_metadata"), patch.object(native,"read_bound_regular",return_value={"bytes":b'{}'}), patch.object(native,"bind_native_context",side_effect=outcomes), patch.object(native,"native_metadata",return_value={}), patch.object(native,"DriverPipe",Driver), patch.object(native,"validate_driver_finish",return_value="passed"), patch.object(native,"validate_terminal",return_value=True), patch.object(native,"validate_phase_retention",return_value="partial" if index_failure else "complete"), patch.object(native,"retain_evidence_index",side_effect=native.Refusal("missing index") if index_failure else lambda a:{"path":"/owned/index","sha256":"d"*64}):
++                native.run_phase(active,phase)
++            receipt = next(record for kind,record in active.saved if kind == "phase")
++            self.assertEqual(active.dispatches,0)
++            if source_failure:
++                self.assertEqual(receipt["source_observation"],"not_measured")
++                self.assertEqual(receipt["result"],"failed")
++                self.assertIsNotNone(receipt["finish_validation_ref"])
++            if index_failure:
++                self.assertNotEqual(receipt["retention_status"],"complete")
++                self.assertEqual(receipt["result"],"failed")
++            if not source_failure and not index_failure:
++                self.assertEqual(receipt["source_observation"],"measured")
++                self.assertEqual(receipt["retention_status"],"complete")
+ 
+ 
+ if __name__ == "__main__":
+--- a/tests/docs_test_native_protocol_test.ts
++++ b/tests/docs_test_native_protocol_test.ts
+@@ -1,5 +1,5 @@
+ // Manufactured permissionless transport tests; no process/FS/environment APIs.
+-import { boundedJson, brokerReadGit, hydrateChunks, runDriver } from "../ops/docs_tests_cli.ts";
++import { boundedJson, brokerReadGit, hydrateChunks, responseFor, runDriver } from "../ops/docs_tests_cli.ts";
+ function assert(v: unknown): asserts v { if (!v) throw new Error("Assertion failed"); }
+ Deno.test("bounded protocol accepts exact object and rejects malformed pairs", () => {
+   assert(boundedJson('{"kind":"prepared"}', 100).kind === "prepared");
+@@ -11,17 +11,18 @@
+ });
+ Deno.test("Git reader uses injected transport and preserves NUL framing", async () => {
+   const calls: unknown[] = [];
++  const requestId = "a".repeat(32), ticket = "c".repeat(32);
+   const data = new TextEncoder().encode("tree\u0000\n");
+   const sha = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",data)),(v) => v.toString(16).padStart(2,"0")).join("");
+   const emptySha = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+   let sequence = 0;
+   const read = brokerReadGit(async (request) => {
+     calls.push(request); sequence++;
+-    const common = {version:1,request_id:"r",sequence};
+-    if (request.op === "git-read") return {...common,kind:"git-capture",ticket_id:"t",exit_code:0,signal:null,complete:true,stop_reason:null,
++    const common = {version:1,request_id:requestId,sequence};
++    if (request.op === "git-read") return {...common,kind:"git-capture",ticket_id:ticket,exit_code:0,signal:null,complete:true,stop_reason:null,
+       streams:{stdout:{ref:{path:"/retained/out",sha256:sha},bytes:data.length,sha256:sha},stderr:{ref:{path:"/retained/err",sha256:emptySha},bytes:0,sha256:emptySha}}};
+-    return {...common,kind:"stream-chunk",ticket_id:"t",stream:request.stream,offset:0,data:request.stream === "stdout" ? "dHJlZQAK" : "",eof:true,chunk_sha256:request.stream === "stdout" ? sha : emptySha};
+-  }, "r");
++    return {...common,kind:"stream-chunk",ticket_id:ticket,stream:request.stream,offset:0,data:request.stream === "stdout" ? "dHJlZQAK" : "",eof:true,chunk_sha256:request.stream === "stdout" ? sha : emptySha};
++  }, requestId);
+   assert(await read("/fixture", ["ls-tree", "-rz", "HEAD"]) === "tree\u0000");
+   assert(calls.length === 3);
+   // Encoded one-byte-over-cap is rejected before atob allocation even when
+@@ -52,6 +53,18 @@
+   });
+   assert(result.result !== "passed");
+   assert(calls.join(",") === "preflight");
++  const refusal = {version:1,request_id:"a".repeat(32),sequence:1,kind:"refused",code:"source_unavailable",retained_ref:{path:"/owned/"+"x".repeat(450),sha256:"b".repeat(64)},cleanup_status:"unknown"};
++  // The legal refusal union has16KiB allowance even on git-read/stream-read.
++  assert(responseFor("git-read",refusal).kind === "refused");
++  for (const bad of [ {...refusal,cleanup_status:"pass"}, {...refusal,sequence:true}, {...refusal,retained_ref:{path:"relative",sha256:"b".repeat(64)}}, {...refusal,unexpected:true} ]) {
++    let rejected = false;
++    try { responseFor("git-read",bad); } catch { rejected = true; }
++    assert(rejected);
++  }
++  let rejected = false;
++  try { responseFor("preflight",{version:1,request_id:"a".repeat(32),sequence:1,kind:"metadata",metadata:{},binding_digest:"b".repeat(64),extra:true}); }
++  catch { rejected = true; }
++  assert(rejected);
+ });
+ 
+ // Exercise owning sourceGraph itself through the injected seam, never default git.

@@ -1,0 +1,15 @@
+{
+"stage":"independent-high-I2G-I2F-R1-only",
+"verdict":"PASS_SOURCE_NARROW",
+"native_ready":false,
+"review":{"path":"/tmp/qcl-docs-routing-impl-i2g-review.md","bytes":8245,"sha256":"497f6d9840040d1d5e4eef4b9c0bcf1579b33af4440a0848f32f83c45506b0cd"},
+"head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+"packet":{"report":"3d40ed592213e6b5850484e7cbae7868353d16949485f7d11c10ef88f5386e8e","identity":"a54ab3f72489fc53675c5065eaefc8c25ceb1b1e1f7f19ba72630476c7c30900","delta":"6d35679f6c0b06242b8f876c72769968b2adfb73f5ce3d097bd691c18c39558f","delta_bytes":11988},
+"owning_files":{"ops/docs_tests_native.py":"57c5b88a05a9af8f307669f84e7694bb507ba4f9229cb72308831687238f86db","ops/docs_tests_cli.ts":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7","tests/test_docs_test_native.py":"c68d1ee3570bf9aaa1d6558b1f81fefb4b7844ad1d9ee27d0e99d9d700521fff","tests/docs_test_native_protocol_test.ts":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2"},
+"closed":"I2F-R1 owner cleanup propagation; preserved original raw/receipt; failure-ref ledger/index; paired actual caller fixtures",
+"next":"B3 exact schedule, failed debits, path/domain/global trace, independent source measurement; B4/provider/DEV separate",
+"execution":{"scripts":0,"imports":0,"parser":0,"compiler":0,"tests":0,"runtime":0,"native":0,"network":0,"CI":0,"science":0,"children":0},
+"source_CP_index_edits":0,
+"budget":{"start":"2026-10-20T09:22:18Z","minutes":5,"CPU":1,"RAM":1073741824,"read_cap":1048576,"read_upper":786432,"output_cap":49152,"transcript_exact_bytes":null,"aggregate_cap_measured":false,"truncation_observed":false,"author_transcript_bytes":null,"CPU_RSS_IO":null},
+"no_runtime_retry_authorized":true
+}

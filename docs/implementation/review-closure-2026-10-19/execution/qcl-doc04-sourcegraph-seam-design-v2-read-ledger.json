@@ -1,0 +1,15 @@
+{
+  "phase": "D2_two_narrow_repairs_only",
+  "grant": {"wall_minutes": 6, "cpu": 1, "ram_bytes": 1073741824, "read_bytes": 1048576, "total_output_bytes": 49152},
+  "conservative_named_read_reserve_bytes": 524288,
+  "read_paths": ["/tmp/qcl-doc04-sourcegraph-seam-design-v1-review.md", "/tmp/qcl-doc04-sourcegraph-seam-design-v1-review-identity.json", "/tmp/qcl-doc04-sourcegraph-seam-design-v1.md", "actualRoot/ops/git.ts", "nativeOverlay/ops/git.ts:27-93", "nativeOverlay/ops/docs_tests_cli.ts:152-188", "superpowers/receiving-code-review/SKILL.md:1-95"],
+  "metadata": ["actualRoot git rev-parse HEAD", "actualRoot git status --short", "actualRoot git submodule status --recursive", "frozen review/identity SHA256", "final named artifact hashes/sizes"],
+  "discovery": "none_no_broad_tmp_search",
+  "physical_io_rss_exact_transport_output_metered": false,
+  "strict_resource_enforcement_pass": false,
+  "writes": ["/tmp/qcl-doc04-sourcegraph-seam-design-v2.md", "/tmp/qcl-doc04-sourcegraph-seam-design-v2-identity.json", "/tmp/qcl-doc04-sourcegraph-seam-design-v2-read-ledger.json"],
+  "v1_source_cp_index_preserved": true,
+  "runtime_scripts_imports_regex_execution_parser_compiler_tests_render_network_native": 0,
+  "subagents": 0,
+  "stop": "fresh_high_review_only_no_implementation_or_runtime_grant"
+}

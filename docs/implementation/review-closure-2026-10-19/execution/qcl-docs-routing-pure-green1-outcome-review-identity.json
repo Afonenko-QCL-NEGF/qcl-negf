@@ -1,0 +1,300 @@
+{
+  "format": "qcl-negf.docs-routing-pure-green1-independent-outcome.v1",
+  "status": "FAILED_COMPLETE_EVIDENCE_NO_RERUN_NO_NEW_GRANT",
+  "verdict": "UNIT_FAILED_COMPLETE_EVIDENCE",
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-green1-outcome-review.md",
+    "sha256": "d38a9157b58ca26f92de00097a03750723c4e11d61b1f5c788e27eeea5c93d21",
+    "bytes": 13085
+  },
+  "input_hash_map": {
+    "/tmp/qcl-DOCS-ROUTING-GREEN-1/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-GREEN-1/receipt.json",
+      "sha256": "ea7d990e99e87834148d10b8c7ec7c3e0ac0c701c152de967b6bbacb45d66cf3",
+      "bytes": 6247
+    },
+    "/tmp/qcl-DOCS-ROUTING-GREEN-1/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-GREEN-1/original.log",
+      "sha256": "f86a8761f4aac28e7798d14c76c2e8a9fe27c85f61daa4d093a21b4f4ac19b30",
+      "bytes": 24575
+    },
+    "/tmp/qcl-docs-routing-unit-Root-control-v7.py": {
+      "path": "/tmp/qcl-docs-routing-unit-Root-control-v7.py",
+      "sha256": "51bf1d51fedbd47be3bc62c789ddc5ee4d12377d5070b431a7b9eeb7fa871fbb",
+      "bytes": 8873
+    },
+    "/tmp/qcl-docs-routing-pure-Root-ready-v7.json": {
+      "path": "/tmp/qcl-docs-routing-pure-Root-ready-v7.json",
+      "sha256": "c028ebc952889939007ce5057311afe9962fdbac33e879c85220682def5c95ca",
+      "bytes": 4857
+    },
+    "/tmp/qcl-docs-routing-pure-Root-handoff-v7.json": {
+      "path": "/tmp/qcl-docs-routing-pure-Root-handoff-v7.json",
+      "sha256": "0832b5a99fcbd61da057de8e09a5584dd88da48b700f51f9584e0a6fa841dbdd",
+      "bytes": 667
+    },
+    "/tmp/qcl-docs-routing-pure-Root-outer-v7.json": {
+      "path": "/tmp/qcl-docs-routing-pure-Root-outer-v7.json",
+      "sha256": "a5ae0ec646bc25e6c8fdb4a05719d7c0285e02ca0dca4e7605c26f9e24352a0a",
+      "bytes": 166
+    },
+    "/tmp/qcl-docs-routing-pure-guard-v7.py": {
+      "path": "/tmp/qcl-docs-routing-pure-guard-v7.py",
+      "sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+      "bytes": 61821
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v7.json": {
+      "path": "/tmp/qcl-docs-routing-pure-plan-v7.json",
+      "sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+      "bytes": 19379
+    }
+  },
+  "source_hash_map": {
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+  },
+  "attempt": "DOCS-ROUTING-GREEN-1",
+  "receipt_classification_preserved": {
+    "verdict": "STOP_RECONCILE_NO_RERUN",
+    "stop_reason": "child_nonzero_or_unknown",
+    "exit_code": 1,
+    "target_calls": 1,
+    "attempt_consumed": true,
+    "observed_engine_tests_in_original_receipt": null
+  },
+  "independent_TAP_census": {
+    "header": "TAP version 14",
+    "observed_engine_tests": 230,
+    "result_rows": 230,
+    "passed": 221,
+    "failed": 9,
+    "skipped": 0,
+    "todo": 0,
+    "result_ids_exact_1_to_230": true,
+    "unique_names": 230,
+    "plan": "1..230",
+    "plan_count": 1,
+    "plan_raw_line": 260,
+    "diagnostic_blocks": 9,
+    "diagnostic_blocks_closed": 9,
+    "terminal_test_failed": true,
+    "cancel_or_only_or_filter_directives_observed": false,
+    "failures": [
+      {
+        "id": 4,
+        "status": "failed",
+        "name": "healthy fake aggregate requires four typed receipts and retained-only versions",
+        "raw_line": 6
+      },
+      {
+        "id": 92,
+        "status": "failed",
+        "name": "healthy report readers bind independent expected counts and typed counters",
+        "raw_line": 97
+      },
+      {
+        "id": 171,
+        "status": "failed",
+        "name": "doc06-deno nonzero exit retains original capture and cannot pass or retry",
+        "raw_line": 179
+      },
+      {
+        "id": 172,
+        "status": "failed",
+        "name": "doc06-deno timeout retains original capture and cannot pass or retry",
+        "raw_line": 183
+      },
+      {
+        "id": 173,
+        "status": "failed",
+        "name": "doc06-deno log overrun retains original capture and cannot pass or retry",
+        "raw_line": 187
+      },
+      {
+        "id": 174,
+        "status": "failed",
+        "name": "doc06-deno capture incomplete retains original capture and cannot pass or retry",
+        "raw_line": 191
+      },
+      {
+        "id": 175,
+        "status": "failed",
+        "name": "doc06-deno drain incomplete retains original capture and cannot pass or retry",
+        "raw_line": 195
+      },
+      {
+        "id": 176,
+        "status": "failed",
+        "name": "doc06-deno missing process-tree evidence retains original capture and cannot pass or retry",
+        "raw_line": 199
+      },
+      {
+        "id": 230,
+        "status": "failed",
+        "name": "sourceGraph rejection at observation 6 retains terminal aggregate",
+        "raw_line": 256
+      }
+    ],
+    "method": "Full original raw read plus inert anchored line census; no product TAP parser executed"
+  },
+  "source_diagnosis": [
+    {
+      "id": "GREEN1-R1",
+      "severity": "blocking_code_correctness",
+      "classification": "Observed primary product TAP-reader defect",
+      "locator": "ops/docs_tests.ts:718-720 versus734-749; tests/docs_test_routing_test.ts:252-259,649; rawcase92line97",
+      "finding": "Unanchored case-insensitive SKIP/TODO predicate rejects mandatory healthy Node #skipped0/#todo0 counters before typed counters validate.",
+      "observed_direct_failure": [
+        92
+      ],
+      "explained_cascade_failure_ids": [
+        4,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        230
+      ],
+      "fixture_or_guard_defect_established": false
+    },
+    {
+      "id": "GREEN1-R2",
+      "severity": "source_compatibility_gap",
+      "classification": "Source-proven adjacent Deno report-shape incompatibility; not cause of9observed failures",
+      "locator": "original.log:2; ops/docs_tests.ts:759-762; tests/docs_test_routing_test.ts:261-263",
+      "finding": "Observed Deno reporter file-header comment is excluded by strict Deno layout; healthy fake fixture omits it.",
+      "observed_native_DOC06_failure": false
+    }
+  ],
+  "minimal_next_source_ticket": {
+    "title": "Correct format-specific TAP control/counter handling and narrowly bind actual Deno file-header layout",
+    "required_primary_change": "Distinguish real case directives/failure/bailout from mandatory zero-valued aggregate Node counters; preserve exact plan/count/numbering/layout and all failure/skip/todo/cancel rejections.",
+    "separate_explicit_subpoint": "Realistic positive/negative Deno fixture with reviewed file-header contract; no arbitrary comments/layout relaxation.",
+    "downstream_DOC06_or_sourceGraph_assertion_changes_justified": false,
+    "new_plan_or_budget_created": false,
+    "execution_authorized_by_this_ticket": false
+  },
+  "guard_resource_outcome": {
+    "classification": "COMPLETE_GUARDED_OBSERVATION_SAMPLED_RESOURCE_PREDICATES_SATISFIED_SOFTWARE_FAILED",
+    "original_guard_STOP_preserved": true,
+    "overall_guard_PASS_claim": false,
+    "wall_seconds": 2.040166628023144,
+    "raw_bytes": 24575,
+    "raw_capture_complete": true,
+    "raw_capture_error": null,
+    "guard_error": null,
+    "raw_output_overrun": false,
+    "collector_construction_attempted": true,
+    "collector_terminal": true,
+    "RSS_attempted_samples": 41,
+    "RSS_valid_samples": 41,
+    "RSS_unknown_samples": 0,
+    "RSS_NA_after_reap_count": 1,
+    "RSS_NA_after_reap_proofs": [
+      {
+        "proof": "Popen.poll_returncode_before_RSS_attempt",
+        "pid": 3011027,
+        "returncode": 1,
+        "elapsed_seconds": 2.0339964459999464
+      }
+    ],
+    "sampled_peak_process_tree_RSS_bytes": 344154112,
+    "TMP_sample_count": 43,
+    "initial_TMP_bytes": 220,
+    "final_TMP_bytes": 601096,
+    "sampled_peak_owned_tmp_all_entry_st_size_bytes": 601096,
+    "sampled_regular_payload_peak_bytes": 600176,
+    "limits": {
+      "wall_seconds": 120,
+      "cpu_affinity_count": 1,
+      "RLIMIT_CPU_seconds": 120,
+      "sampled_RSS_stop_bytes": 1073741824,
+      "sampled_owned_TMP_stop_bytes": 16777216,
+      "raw_bytes_envelope": 2097152
+    },
+    "retrospective_unknown_waiver": false,
+    "hard_peak_or_OS_isolation_proof": false
+  },
+  "provenance": {
+    "command": [
+      "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+      "test",
+      "--no-config",
+      "--no-lock",
+      "--cached-only",
+      "--no-npm",
+      "--no-remote",
+      "--no-prompt",
+      "--reporter=tap",
+      "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts"
+    ],
+    "cwd": "/tmp/qcl-docs-test-routing-worktree",
+    "environment_clear": true,
+    "environment": {
+      "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-GREEN-1/owned-tmp/deno-cache",
+      "TMPDIR": "/tmp/qcl-DOCS-ROUTING-GREEN-1/owned-tmp/tmp",
+      "HOME": "/tmp/qcl-DOCS-ROUTING-GREEN-1/owned-tmp/home"
+    },
+    "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "isolated_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+    "source_before_after_current_equal": true,
+    "READY_H_P_source_heads_counters_bindings_match": true,
+    "accepted_comment656d_format23a4_guard364e_refs_unchanged": true,
+    "three_source_results_refs_retained": true
+  },
+  "budgets": {
+    "product_calls_used": 88,
+    "product_ceiling": 88,
+    "source_calls_used": 8,
+    "source_ceiling": 8,
+    "C08_group_calls_used": 8,
+    "C08_group_ceiling": 8,
+    "remaining_original_product_calls": 0,
+    "remaining_original_source_calls": 0,
+    "new_correction_plan_defined": false
+  },
+  "historical_protection": {
+    "original_two_diagnostic_RED_original_inconclusive_unchanged": true,
+    "DOC06_unknown_FAILED_not_reclassified": true,
+    "full_failed_GREEN_raw_and_receipt_unmodified": true
+  },
+  "execution_counts": {
+    "prepared_scripts": 0,
+    "product_parser": 0,
+    "compiler": 0,
+    "tests": 0,
+    "guard_import_exec": 0,
+    "runtime": 0,
+    "native": 0,
+    "network": 0,
+    "subagents": 0,
+    "fullCI": 0,
+    "science": 0
+  },
+  "mutations": {
+    "Root": 0,
+    "CP": 0,
+    "index": 0,
+    "source": 0,
+    "history": 0,
+    "review_deliverables": 2
+  },
+  "review_budget": {
+    "wall_ceiling_seconds": 480,
+    "CPU_ceiling": 1,
+    "RAM_ceiling_bytes": 1073741824,
+    "read_ceiling_bytes": 2097152,
+    "all_output_ceiling_bytes": 98304,
+    "physical_reviewer_CPU_RSS_IO_measured": false
+  },
+  "limitations": [
+    "221passed includes potentially vacuous negative Node predicates; intended branches not all established",
+    "No correction implemented or rerun; static cascade inference not repaired runtime evidence",
+    "PrimarysourceCPP/typecheck/source-tools acceptance cannot override observed failed behavior",
+    "No native/fullCI/science acceptance",
+    "Fresh explicit finite correction plan required for any new calls; original88cap andsource8cap exhausted"
+  ]
+}

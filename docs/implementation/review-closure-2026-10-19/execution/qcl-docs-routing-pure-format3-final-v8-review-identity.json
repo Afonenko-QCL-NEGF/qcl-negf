@@ -1,0 +1,279 @@
+{
+  "format": "qcl-negf.docs-routing-pure-format3-final-v8-independent-review.v1",
+  "status": "SOURCE_AND_FORMAT3_OUTCOME_ACCEPTED_STOP_NOT_READY_NOT_RUNTIME_GRANT",
+  "verdicts": [
+    "PASS_FORMAT_ONLY",
+    "PASS_SOURCE_PURE_CLOSURE"
+  ],
+  "blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-format3-final-v8-review.md",
+    "sha256": "8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3",
+    "bytes": 10151
+  },
+  "accepted_cpp": {
+    "status": "PASS_SOURCE_PURE_CLOSURE",
+    "source_files": {
+      "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab",
+      "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format3-final-v8-review.md",
+      "sha256": "8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3"
+    },
+    "pure_only_slice": true,
+    "baseline_cpp_ref": {
+      "path": "/tmp/qcl-docs-routing-tap-correction-i1-review.md",
+      "sha256": "3842d4b5acf76a41d54b1fe3ac079969bb744526955ef6613ce01938f754ee9e"
+    }
+  },
+  "format_binding": {
+    "status": "PASS_FORMAT_ONLY",
+    "unformatted_sources": {
+      "tests/docs_test_routing_test.ts": "3f3a0184d8076ca16e8b11ebe380a1c4175d2faeb6e79ae08be6ea0dbad4255f",
+      "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab"
+    },
+    "formatted_sources": {
+      "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab",
+      "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"
+    },
+    "review_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format3-final-v8-review.md",
+      "sha256": "8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3"
+    },
+    "receipt_refs": [
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/receipt.json",
+        "sha256": "26228b8059235d0c6f37ac32a08a4a65a3af5976058c34913f9ba83f0629b714"
+      }
+    ]
+  },
+  "input_source_sha256": {
+    "tests/docs_test_routing_test.ts": "3f3a0184d8076ca16e8b11ebe380a1c4175d2faeb6e79ae08be6ea0dbad4255f",
+    "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab"
+  },
+  "output_source_sha256": {
+    "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab",
+    "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"
+  },
+  "formatter_receipt_ref": {
+    "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/receipt.json",
+    "sha256": "26228b8059235d0c6f37ac32a08a4a65a3af5976058c34913f9ba83f0629b714"
+  },
+  "artifact_hash_map": {
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/receipt.json",
+      "sha256": "26228b8059235d0c6f37ac32a08a4a65a3af5976058c34913f9ba83f0629b714",
+      "bytes": 3771
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/original.log",
+      "sha256": "16730458a0bb58d3ac5d7f9b94f775368ede6566c55f85dc0ccde4316bddd4d6",
+      "bytes": 84
+    },
+    "/tmp/qcl-docs-routing-source-baseline-v8/manifest.json": {
+      "path": "/tmp/qcl-docs-routing-source-baseline-v8/manifest.json",
+      "sha256": "a77861aa5602d31d2107eb8050709779ec3797d9652680c28a90e741a72f4919",
+      "bytes": 776
+    },
+    "/tmp/qcl-docs-routing-correction-Root-engineering-plan-v8.json": {
+      "path": "/tmp/qcl-docs-routing-correction-Root-engineering-plan-v8.json",
+      "sha256": "844eb28e0034e4634eeb7d916fbe6325142248fa692c3030d44b7500820e1ba4",
+      "bytes": 2879
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT3-Root-ready-v8.json": {
+      "path": "/tmp/qcl-docs-routing-source-FORMAT3-Root-ready-v8.json",
+      "sha256": "f923e6498727125a10c7beb2cc0f88cb62a9733b6627f28aada38ccae782f378",
+      "bytes": 2846
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT3-Root-handoff-v8.json": {
+      "path": "/tmp/qcl-docs-routing-source-FORMAT3-Root-handoff-v8.json",
+      "sha256": "c6435ded731b54b4bd15326c343d60428d92e47fa38532460a260d0c4c221f33",
+      "bytes": 716
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT3-Root-outer-v8.json": {
+      "path": "/tmp/qcl-docs-routing-source-FORMAT3-Root-outer-v8.json",
+      "sha256": "5e59dbb917bc370ba9065cb4eba82e8c81efbcd933ff2db6f970ba4e1ad6fe9f",
+      "bytes": 176
+    },
+    "/tmp/qcl-docs-routing-pure-guard-v8.py": {
+      "path": "/tmp/qcl-docs-routing-pure-guard-v8.py",
+      "sha256": "5cecec92f20bed186ab51b08b4b98585dde5452af5e4eef31ad27adbf386763b",
+      "bytes": 61984
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v8.json": {
+      "path": "/tmp/qcl-docs-routing-pure-plan-v8.json",
+      "sha256": "813afe65ddf7245eaf2562472398baf8f541463bba0d7022256ebc75f4cdaaa5",
+      "bytes": 10236
+    },
+    "/tmp/qcl-docs-routing-pure-format-v8.py": {
+      "path": "/tmp/qcl-docs-routing-pure-format-v8.py",
+      "sha256": "878571e3142b392a9fc3c5107db393cbd1c730e3136c19a776c978003e6fa838",
+      "bytes": 1368
+    },
+    "/tmp/qcl-docs-routing-pure-harness-v8-review.md": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v8-review.md",
+      "sha256": "e86dda23d6b98d9b03431c19a9b281f4ea87001feaf57431976a4cd7388347cf",
+      "bytes": 11787
+    },
+    "/tmp/qcl-docs-routing-tap-correction-i1-review.md": {
+      "path": "/tmp/qcl-docs-routing-tap-correction-i1-review.md",
+      "sha256": "3842d4b5acf76a41d54b1fe3ac079969bb744526955ef6613ce01938f754ee9e",
+      "bytes": 10264
+    },
+    "/tmp/qcl-docs-test-routing-worktree/deno.json": {
+      "path": "/tmp/qcl-docs-test-routing-worktree/deno.json",
+      "sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+      "bytes": 1829
+    }
+  },
+  "source_proof": {
+    "full_actual_formatter_diff_reviewed": true,
+    "helper_byte_identical": true,
+    "fixture_delta_only_two_forof_wraps_and_literal_assignment_line": true,
+    "literal_regex_template_comment_ASI_semantics_preserved": true,
+    "full_pure_import_closure": {
+      "fixture_imports": [
+        "../ops/docs_tests.ts"
+      ],
+      "helper_imports": [],
+      "nine_named_imports_match_actual_exports": true,
+      "Deno_platform_filesystem_env_process_API_calls": 0,
+      "fixture_Deno_test_registration_API_only": true,
+      "real_Git_subprocess_network_eval_dynamic_imports": false,
+      "executor": "Manufactured fake Graph/Promise<Capture>; localcalls only"
+    },
+    "source_type_contracts_reviewed": [
+      "Graph",
+      "Step",
+      "Capture",
+      "Executor",
+      "fourargparseUnitReport",
+      "nineimportexportbindings"
+    ],
+    "source_type_signatures_unchanged": true,
+    "compiler_typecheck_observed_by_this_review": false,
+    "registration_callsites_before_after": [
+      44,
+      44
+    ],
+    "registration_callsite_lines_identical": true,
+    "finite_registration_loops_names_unchanged": true,
+    "nominal_registered_tests": 232,
+    "observed_engine_tests": null,
+    "native_selected_Deno_header_is_inference": true
+  },
+  "formatter_outcome": {
+    "target_calls": 1,
+    "exit_code": 0,
+    "wall_seconds": 0.10863949899794534,
+    "raw_bytes": 84,
+    "raw_capture_complete": true,
+    "raw_capture_error": null,
+    "guard_error": null,
+    "stop_reason": null,
+    "collector_construction_attempted": true,
+    "collector_terminal": true,
+    "raw_output_overrun": false,
+    "RSS_attempted_samples": 3,
+    "RSS_valid_samples": 3,
+    "RSS_unknown_samples": 0,
+    "RSS_NA_after_reap_count": 1,
+    "RSS_NA_after_reap_proofs": [
+      {
+        "proof": "Popen.poll_returncode_before_RSS_attempt",
+        "pid": 3062617,
+        "returncode": 0,
+        "elapsed_seconds": 0.10415700799785554
+      }
+    ],
+    "sampled_peak_process_tree_RSS_bytes": 50036736,
+    "TMP_sample_count": 5,
+    "sampled_peak_owned_tmp_all_entry_st_size_bytes": 86616,
+    "sampled_regular_payload_peak_bytes": 86336,
+    "initial_TMP_bytes": 220,
+    "final_TMP_bytes": 86616,
+    "shared_source_budget": {
+      "maximum_calls": 11,
+      "calls_before": 8,
+      "calls_reserved": 1,
+      "calls_after": 9,
+      "no_rerun": true
+    },
+    "command": [
+      "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+      "fmt",
+      "--config",
+      "/tmp/qcl-docs-test-routing-worktree/deno.json",
+      "ops/docs_tests.ts",
+      "tests/docs_test_routing_test.ts"
+    ],
+    "cwd": "/tmp/qcl-docs-test-routing-worktree",
+    "environment_clear": true,
+    "environment": {
+      "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/owned-tmp/deno-cache",
+      "TMPDIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/owned-tmp/tmp",
+      "HOME": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/owned-tmp/home"
+    },
+    "limits": {
+      "wall_seconds": 120,
+      "cpu_affinity_count": 1,
+      "RLIMIT_CPU_seconds": 120,
+      "sampled_RSS_stop_bytes": 1073741824,
+      "sampled_owned_TMP_stop_bytes": 16777216,
+      "raw_bytes_envelope": 2097152
+    }
+  },
+  "metadata": {
+    "root_head_in_actual_provenance": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "isolated_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "source_calls_after_actual_FORMAT3": 9,
+    "product_calls_unchanged_from_task": 90,
+    "other_stages_executed_by_reviewer": false
+  },
+  "runtime": {
+    "sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+    "binary_full_rehash_in_this_review": false,
+    "basis": "Exact reviewed fullhashguard gates and matching H/P/READY/receipt pins; no probe"
+  },
+  "required_remaining": [
+    "Fresh Root LINT3/CHECK3 records/admission with actualformattedbindings",
+    "Independent all3source result acceptance",
+    "Separate CORRECTION-E1 lateREADY/admission and completeTAP232 outcome/resource review"
+  ],
+  "execution_counts": {
+    "prepared_scripts": 0,
+    "parser": 0,
+    "compiler": 0,
+    "regex": 0,
+    "imports": 0,
+    "tests": 0,
+    "runtime": 0,
+    "network": 0,
+    "native": 0,
+    "subagents": 0
+  },
+  "mutations": {
+    "source": 0,
+    "Root": 0,
+    "CP": 0,
+    "index": 0,
+    "history": 0,
+    "review_deliverables": 2
+  },
+  "review_limits": {
+    "wall_seconds": 300,
+    "CPU": 1,
+    "RAM_bytes": 1073741824,
+    "payload_read_bytes": 1048576,
+    "total_output_bytes": 65536,
+    "physical_reviewer_CPU_RSS_IO_measured": false
+  },
+  "limitations": [
+    "FreshsourceCPP not runtime232PASS/READY/launchgrant",
+    "Sourceleveltypecompatibility reviewed; compiler CHECK3 stillrequired",
+    "Sampled guardmetrics not hardpeak/quota/OSnative isolation",
+    "OldGREEN230/221/9 retained; no native/fullCI/science claim",
+    "Root controls futureadmission and aggregatefinitebudget"
+  ]
+}

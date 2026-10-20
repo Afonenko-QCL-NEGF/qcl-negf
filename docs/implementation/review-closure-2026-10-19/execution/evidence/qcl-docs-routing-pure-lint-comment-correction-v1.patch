@@ -1,0 +1,20 @@
+--- a/ops/docs_tests.ts
++++ b/ops/docs_tests.ts
+@@ -197,6 +197,7 @@
+ function absolute(value: unknown): asserts value is string {
+   requireThat(
+     typeof value === "string" && value.startsWith("/") && value !== "/" &&
++      // deno-lint-ignore no-control-regex -- Reject NUL..space/DEL, comma and backslash.
+       !/[\x00-\x20\x7f,\\]/.test(value) && !value.endsWith("/") &&
+       !value.split("/").slice(1).some((s) => !s || s === "." || s === ".."),
+     "Invalid canonical path spelling",
+--- a/tests/docs_test_routing_test.ts
++++ b/tests/docs_test_routing_test.ts
+@@ -317,6 +317,7 @@
+     sourceGraph() {
+       return { revision: REVISION, digest: graph, clean: true };
+     },
++    // deno-lint-ignore require-await -- Keep fake Promise returns and thrown errors as rejections.
+     async execute(step: Step) {
+       calls.push(structuredClone(step));
+       const capture = healthyCapture(step.name);

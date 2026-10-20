@@ -1,0 +1,29 @@
+{
+  "format":"qcl-negf.docs-routing-pure-source-identity.v7",
+  "status":"SOURCE_ONLY_STOP_FOR_NEW_HIGH_CPP_AND_ROOT_CHECK2_ADMISSION",
+  "artifacts":{
+    "/tmp/qcl-docs-routing-pure-guard-v7.py":{"sha256":"33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6","bytes":61821},
+    "/tmp/qcl-docs-routing-pure-plan-v7.json":{"sha256":"690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3","bytes":19379},
+    "/tmp/qcl-docs-routing-pure-check-v7.py":{"sha256":"f0fee486f3708905a1f240667eb1839f889f3bde9be1e11799a875179d7adbb4","bytes":1366},
+    "/tmp/qcl-docs-routing-pure-report-v7.md":{"sha256":"254b8da51e13acf805017bfc385b9fc97db6dca47e4535c9a822d937ec3126f8","bytes":7900}
+  },
+  "owned_outputs_bytes_excluding_identity":90466,
+  "only_executable_source_stage":{"stage":"CHECK2","attempt":"DOCS-ROUTING-SOURCE-CHECK-2","calls_before":7,"calls_after":8,"ceiling":8,"formatter_lint_v7_entries":false,"source_main_rejects_other_stages":true},
+  "exact_command_delta":"CHECK2 compiler argv removes only --cached-only; retains no-lock/no-npm/no-remote/config/twofiles/order. Unit test argv still retains --cached-only.",
+  "static_CLI_evidence":{"packet":"/tmp/qcl-docs-routing-check-cli-source-evidence.json","sha256":"866ba52fbf3d993ddce7790f935425104ef5805a9ce9052cd98f67ad19a4f879","installed_completion_sha256":"6455a2ca4b1edf47e14a99c0fe22735af92aa7270c7626f4b494cc403e825177","section_read":"deno__check lines1767-1768","runtime_probe":false},
+  "retained_v6_stage_maps":{
+    "common":{"scope":"docs-routing-pure-local-engineering-v6","guard_sha256":"c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6","plan_sha256":"3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9","source_before_after":"unchanged68f0/2639","raw_sha256":"0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd","raw_bytes":16,"env":"exact existing stage private DENO_DIR/TMPDIR/HOME clear map"},
+    "FORMAT2":{"receipt_sha256":"1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32","wrapper_sha256":"8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85","calls":[4,5]},
+    "LINT2":{"receipt_sha256":"a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4","wrapper_sha256":"d27fd04195f76459dc80ee132cb85be6751358908493e95a628ced1d16cc9368","calls":[5,6]}
+  },
+  "failed_CHECK1":{"receipt_sha256":"277a3287b57bd7e121ddcee2854a038765f4471c491d73cf5748c0a584fe7531","raw_sha256":"3676ae80e731a183977f2a96b7b6d613d332c148bf755a0321c8a76e5d05b98f","raw_bytes":181,"classification":"Consumed FAILED CLI argument rejection before typecheck; not passed, not230tests, not reused as good predecessor"},
+  "accepted_preserved_refs":{"comment_only_CPP":"656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d","FORMAT2_final_CPP":"23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c","baseline4903":"pure_only_slice; whole native CPP not PASS"},
+  "unchanged_sources":{"ops/docs_tests.ts":"68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5","tests/docs_test_routing_test.ts":"2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99","deno.json":"a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce"},
+  "unit":"Same sole DOCS-ROUTING-GREEN-1/global87to88; static230/observednull. Ordered source refs FORMAT2(v6)/LINT2(v6)/CHECK2(v7); current v7 H/P for CHECK2, exact old H/P for accepted predecessors, no old==new requirement.",
+  "safety":"R1b/R2/supervisor/caps unchanged; no grants/seed/source/config/env/native drift. Exact-buffer helpers, nullable RSS unknown fail, separate pre-proven terminal N/A, full raw and watchdog preserved.",
+  "history":"All fixed v2/v5/v6 artifacts and failures retained unchanged via CONTINUATION/ANCESTORS; original two-error RED/inconclusive and DOC06 unknownFAILED not reclassified. No FORMAT2/LINT2 rerun.",
+  "execution_counts":{"scripts":0,"parser":0,"compiler":0,"guard_import_exec":0,"formatter":0,"linter":0,"tests":0,"runtime":0,"Deno":0,"Julia":0,"native":0,"network":0,"CI":0,"science":0},
+  "mutations":{"owning_pure_files":0,"config":0,"Root_control_CP":0,"git_index":0,"old_artifacts":0,"native_paths":0,"READY":0,"approval_records":0},
+  "verification":"Textual source/selected shipped completion/retained receipt+raw reads and SHA/size checks only. No prepared code/parser execution. Source budget12min/4MiB/1CPU/1GiB/160KiB output; physical CPU/RSS/IO not measured. Combined output truncation followed by named-section rereads.",
+  "stop":"Independent high v7 source CPP, then fresh trusted Root CHECK2 admission; actual CHECK2 result approval then separate unit admission. No autorun."
+}

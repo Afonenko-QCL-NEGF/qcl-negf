@@ -1,0 +1,234 @@
+diff --git a/ops/git.ts b/ops/git.ts
+index d006375..6b7ccdc 100644
+--- a/ops/git.ts
++++ b/ops/git.ts
+@@ -30,7 +30,7 @@ export function githubRepository(url: string): string {
+   return match[1];
+ }
+ 
+-export function git(root: string, args: string[]): Promise<string> {
++export function git(root: string, args: readonly string[]): Promise<string> {
+   return run({
+     executable: "git",
+     args: ["--no-optional-locks", "-C", root, ...args],
+@@ -39,13 +39,15 @@ export function git(root: string, args: string[]): Promise<string> {
+   }, true);
+ }
+ 
+-export async function sourceGraph(root = workspace, requireClean = true): Promise<SourceGraph> {
+-  const revision = await git(root, ["rev-parse", "HEAD"]);
++export type GitReader = (root: string, args: readonly string[]) => Promise<string>;
++
++export async function sourceGraph(root = workspace, requireClean = true, readGit: GitReader = git): Promise<SourceGraph> {
++  const revision = await readGit(root, ["rev-parse", "HEAD"]);
+   if (!/^[a-f0-9]{40}$/.test(revision)) throw new Error("Commit the superproject first");
+-  if (requireClean && await git(root, ["status", "--porcelain"])) {
++  if (requireClean && await readGit(root, ["status", "--porcelain"])) {
+     throw new Error("Commit the superproject and component changes before building a release");
+   }
+-  const configured = await git(root, [
++  const configured = await readGit(root, [
+     "config",
+     "-f",
+     ".gitmodules",
+@@ -59,21 +61,21 @@ export async function sourceGraph(root = workspace, requireClean = true): Promis
+     sections.set(match[2], match[1]);
+   }
+   const components: Component[] = [];
+-  for (const item of gitlinks(await git(root, ["ls-tree", "-rz", "HEAD"]))) {
++  for (const item of gitlinks(await readGit(root, ["ls-tree", "-rz", "HEAD"]))) {
+     const section = sections.get(item.path);
+     if (!section) throw new Error(`Missing .gitmodules entry: ${item.path}`);
+-    const url = await git(root, ["config", "-f", ".gitmodules", "--get", `${section}.url`]);
++    const url = await readGit(root, ["config", "-f", ".gitmodules", "--get", `${section}.url`]);
+     githubRepository(url);
+     const local = `${root}/${item.path}`;
+-    const childTree = await git(local, ["ls-tree", "-rz", "HEAD"]);
++    const childTree = await readGit(local, ["ls-tree", "-rz", "HEAD"]);
+     if (childTree.split("\0").some((record) => record.startsWith("160000 "))) {
+       throw new Error(`Nested submodules are not supported in the flat source graph: ${item.path}`);
+     }
+-    const checkedOut = await git(local, ["rev-parse", "HEAD"]);
++    const checkedOut = await readGit(local, ["rev-parse", "HEAD"]);
+     if (checkedOut !== item.revision) {
+       throw new Error(`Submodule differs from committed gitlink: ${item.path}`);
+     }
+-    if (requireClean && await git(local, ["status", "--porcelain"])) {
++    if (requireClean && await readGit(local, ["status", "--porcelain"])) {
+       throw new Error(`Submodule has local changes: ${item.path}`);
+     }
+     components.push({ ...item, url });
+diff --git a/tests/git_test.ts b/tests/git_test.ts
+index 41e8ba3..a428933 100644
+--- a/tests/git_test.ts
++++ b/tests/git_test.ts
+@@ -1,4 +1,4 @@
+-import { githubRepository, gitlinks } from "../ops/git.ts";
++import { git, type GitReader, githubRepository, gitlinks, sourceGraph } from "../ops/git.ts";
+ 
+ function assert(value: boolean): void {
+   if (!value) throw new Error("Assertion failed");
+@@ -35,3 +35,163 @@ Deno.test("publication resolves exact HTTPS repositories", () => {
+   rejects(() => githubRepository("https://example.org/owner/repo"));
+   rejects(() => githubRepository("https://github.com/owner/repo?token=secret"));
+ });
++
++// Handwritten Git protocol; unexpected roots/argv fail rather than dispatching Git.
++type Reply = readonly [root: string, args: readonly string[], output: string];
++function fakeGitReader(replies: readonly Reply[]): { readGit: GitReader; done: () => void } {
++  let next = 0;
++  const readGit: GitReader = async (root, args) => {
++    const reply = replies[next++];
++    if (!reply || root !== reply[0] || JSON.stringify(args) !== JSON.stringify(reply[1])) {
++      throw new Error(`Unexpected Git read: ${root} ${JSON.stringify(args)}`);
++    }
++    return reply[2];
++  };
++  return { readGit, done: () => assert(next === replies.length) };
++}
++const fixtureRoot = "/fixture/root";
++const rootRevision = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
++const childRevision = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
++const configuredArgs = ["config", "-f", ".gitmodules", "--get-regexp", "^submodule\\..*\\.path$"] as const;
++const configuredPath = "submodule.a.path components/a";
++const committedTree = `160000 commit ${childRevision}\tcomponents/a\0`;
++const urlArgs = ["config", "-f", ".gitmodules", "--get", "submodule.a.url"] as const;
++const childRoot = "/fixture/root/components/a";
++
++function repliesFor(options: {
++  clean?: boolean;
++  rootRevision?: string;
++  rootStatus?: string;
++  configured?: string;
++  tree?: string;
++  url?: string;
++  childTree?: string;
++  childRevision?: string;
++  childStatus?: string;
++} = {}): Reply[] {
++  const replies: Reply[] = [[fixtureRoot, ["rev-parse", "HEAD"], options.rootRevision ?? rootRevision]];
++  if (options.clean !== false) replies.push([fixtureRoot, ["status", "--porcelain"], options.rootStatus ?? ""]);
++  replies.push(
++    [fixtureRoot, configuredArgs, options.configured ?? configuredPath],
++    [fixtureRoot, ["ls-tree", "-rz", "HEAD"], options.tree ?? committedTree],
++    [fixtureRoot, urlArgs, options.url ?? "https://github.com/owner/a.git"],
++    [childRoot, ["ls-tree", "-rz", "HEAD"], options.childTree ?? ""],
++    [childRoot, ["rev-parse", "HEAD"], options.childRevision ?? childRevision],
++  );
++  if (options.clean !== false) replies.push([childRoot, ["status", "--porcelain"], options.childStatus ?? ""]);
++  return replies;
++}
++
++async function graphRejects(replies: readonly Reply[], expected: string): Promise<void> {
++  const fixture = fakeGitReader(replies);
++  let error: unknown;
++  try {
++    await sourceGraph(fixtureRoot, true, fixture.readGit);
++  } catch (caught) {
++    error = caught;
++  }
++  assert(error instanceof Error && error.message === expected);
++  fixture.done();
++}
++
++Deno.test("injected reader preserves graph JSON and raw digest including original URL", async () => {
++  const fixture = fakeGitReader(repliesFor());
++  const graph = await sourceGraph(fixtureRoot, true, fixture.readGit);
++  fixture.done();
++  const json = JSON.stringify(graph);
++  assert(json === '{"format":"qcl-negf.git-graph.v1","revision":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","components":[{"revision":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","path":"components/a","url":"https://github.com/owner/a.git"}]}');
++  const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(json)));
++  assert(Array.from(digest, (byte) => byte.toString(16).padStart(2, "0")).join("") ===
++    "95a1af7b7d1bd04187ffa64d8b94dbd4eb0345bdd5edac06d7cceee87ada3958");
++});
++
++Deno.test("injected reader skips both status reads only when requireClean is false", async () => {
++  const fixture = fakeGitReader(repliesFor({ clean: false }));
++  const graph = await sourceGraph(fixtureRoot, false, fixture.readGit);
++  assert(graph.components.length === 1 && graph.components[0].revision === childRevision);
++  fixture.done();
++});
++
++Deno.test("gitlinks retains legacy locale order for case and punctuation", () => {
++  const items = gitlinks(
++    `160000 commit ${childRevision}\tcomponents/a.\0` +
++      `160000 commit ${childRevision}\tcomponents/a-\0` +
++      `160000 commit ${childRevision}\tcomponents/A\0` +
++      `160000 commit ${childRevision}\tcomponents/a\0`,
++  );
++  assert(JSON.stringify(items.map((item) => item.path)) ===
++    '["components/a","components/A","components/a-","components/a."]');
++});
++
++Deno.test("mixed-case graph retains legacy component order and raw digest", async () => {
++  const replies: Reply[] = [
++    [fixtureRoot, ["rev-parse", "HEAD"], rootRevision],
++    [fixtureRoot, ["status", "--porcelain"], ""],
++    [fixtureRoot, configuredArgs,
++      "submodule.dot.path components/a.\nsubmodule.dash.path components/a-\nsubmodule.upper.path components/A\nsubmodule.lower.path components/a"],
++    [fixtureRoot, ["ls-tree", "-rz", "HEAD"],
++      `160000 commit ${childRevision}\tcomponents/a.\0` +
++      `160000 commit ${childRevision}\tcomponents/a-\0` +
++      `160000 commit ${childRevision}\tcomponents/A\0` +
++      `160000 commit ${childRevision}\tcomponents/a\0`],
++  ];
++  // Literal legacy traversal, deliberately different from recorded tree order.
++  for (const [path, section, url] of [
++    ["components/a", "submodule.lower", "https://github.com/owner/a.git"],
++    ["components/A", "submodule.upper", "https://github.com/owner/A"],
++    ["components/a-", "submodule.dash", "https://github.com/owner/a-"],
++    ["components/a.", "submodule.dot", "https://github.com/owner/a."],
++  ]) {
++    replies.push(
++      [fixtureRoot, ["config", "-f", ".gitmodules", "--get", `${section}.url`], url],
++      [`${fixtureRoot}/${path}`, ["ls-tree", "-rz", "HEAD"], ""],
++      [`${fixtureRoot}/${path}`, ["rev-parse", "HEAD"], childRevision],
++      [`${fixtureRoot}/${path}`, ["status", "--porcelain"], ""],
++    );
++  }
++  const fixture = fakeGitReader(replies);
++  const json = JSON.stringify(await sourceGraph(fixtureRoot, true, fixture.readGit));
++  fixture.done();
++  assert(json === '{"format":"qcl-negf.git-graph.v1","revision":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","components":[{"revision":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","path":"components/a","url":"https://github.com/owner/a.git"},{"revision":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","path":"components/A","url":"https://github.com/owner/A"},{"revision":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","path":"components/a-","url":"https://github.com/owner/a-"},{"revision":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","path":"components/a.","url":"https://github.com/owner/a."}]}');
++  const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(json)));
++  assert(Array.from(digest, (byte) => byte.toString(16).padStart(2, "0")).join("") ===
++    "842a16f0d2d2323eee605ccbe1f03e2c8ef7f1ec464c6ddf9d025371afcf9304");
++});
++
++Deno.test("reader injection preserves revision and cleanliness guards", async () => {
++  await graphRejects(repliesFor({ rootRevision: "uncommitted" }).slice(0, 1), "Commit the superproject first");
++  await graphRejects(repliesFor({ rootStatus: " M README.md" }).slice(0, 2),
++    "Commit the superproject and component changes before building a release");
++  await graphRejects(repliesFor({ childStatus: " M child.jl" }),
++    "Submodule has local changes: components/a");
++});
++
++Deno.test("reader injection preserves missing gitlink and configuration guards", async () => {
++  await graphRejects(repliesFor({ tree: "" }).slice(0, 4),
++    "The superproject has no committed component gitlinks");
++  await graphRejects(repliesFor({ tree: `160000 commit ${childRevision}\tcomponents/../outside\0` }).slice(0, 4),
++    "Invalid component gitlink path");
++  await graphRejects(repliesFor({ configured: "submodule.b.path components/b" }).slice(0, 4),
++    "Missing .gitmodules entry: components/a");
++  await graphRejects(repliesFor({ configured: `${configuredPath}\nsubmodule.duplicate.path components/a` }).slice(0, 3),
++    "Invalid or duplicate submodule path");
++  await graphRejects(repliesFor({ configured: "not a submodule record" }).slice(0, 3),
++    "Invalid or duplicate submodule path");
++  await graphRejects(repliesFor({ configured: `${configuredPath}\nsubmodule.b.path components/b` }),
++    "Uncommitted or orphan .gitmodules entry");
++});
++
++Deno.test("reader injection preserves URL, nested and mismatched child guards", async () => {
++  await graphRejects(repliesFor({ url: "https://example.org/owner/a" }).slice(0, 5),
++    "Expected a public HTTPS GitHub repository URL: https://example.org/owner/a");
++  await graphRejects(repliesFor({ childTree: `160000 commit ${childRevision}\tnested\0` }).slice(0, 6),
++    "Nested submodules are not supported in the flat source graph: components/a");
++  await graphRejects(repliesFor({ childRevision: rootRevision }).slice(0, 7),
++    "Submodule differs from committed gitlink: components/a");
++});
++
++// Compile-time compatibility witnesses only; neither reference dispatches Git.
++const legacySourceGraph: (root?: string, requireClean?: boolean) => ReturnType<typeof sourceGraph> = sourceGraph;
++const defaultGitReader: GitReader = git;
++void legacySourceGraph;
++void defaultGitReader;

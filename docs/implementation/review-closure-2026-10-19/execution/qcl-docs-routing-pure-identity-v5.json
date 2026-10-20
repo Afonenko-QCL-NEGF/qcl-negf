@@ -1,0 +1,39 @@
+{
+  "format":"qcl-negf.docs-routing-pure-source-identity.v5",
+  "status":"SOURCE_ONLY_STOP_FOR_FRESH_INDEPENDENT_HIGH_REVIEW",
+  "artifacts":{
+    "/tmp/qcl-docs-routing-pure-guard-v5.py":{"sha256":"e49cda399947c9ce9a60352c9def75076d8f5bab29d054f16a8d6874837e1372","bytes":53270},
+    "/tmp/qcl-docs-routing-pure-plan-v5.json":{"sha256":"73b79ab73cf2b0702ace55de6f6c0cca6f48106bf0eaa7556221bad4804f9b06","bytes":13320},
+    "/tmp/qcl-docs-routing-pure-format-v5.py":{"sha256":"ddb56177a58077e502a1b647b034b590a01ee07d9ccc5de2634a5594c8c1060b","bytes":1363},
+    "/tmp/qcl-docs-routing-pure-lint-v5.py":{"sha256":"9c2e13e7f288d2705e12a3dc1378413deb5a045cdfc4b04f67a061a9c893112e","bytes":1357},
+    "/tmp/qcl-docs-routing-pure-check-v5.py":{"sha256":"e2847a0f69cb470613946be8a9437fe930c1999bb66cca9388c2381d0d003cc9","bytes":1366},
+    "/tmp/qcl-docs-routing-pure-report-v5.md":{"sha256":"d3845f06f29720d5ed74c97aa81720884406eca901a666d733d1a07aef90c633","bytes":6833}
+  },
+  "owned_artifact_bytes_excluding_identity":77509,
+  "correction_review_ref":{"path":"/tmp/qcl-docs-routing-pure-harness-v4-review.md","sha256":"206731b357638ae735a0b33019108725f4cbe8d329b2009c2f35dce6633791bb"},
+  "correction_review_identity_sha256":"6adb662dbab01c2cd976fa53ffb8c0589c4dcc62f9614f45738a2d18645dd4e1",
+  "preserved_v4":{
+    "/tmp/qcl-docs-routing-pure-guard-v4.py":"c6534b6f1cf129877cd80482ebaddce7664dc179ff7f03760acef37f0f7a820c",
+    "/tmp/qcl-docs-routing-pure-plan-v4.json":"4a8966be6c6bc5a3e4dfc1765b31b16be66355427af2b971e3d1c3bfd42646b6",
+    "/tmp/qcl-docs-routing-pure-format-v4.py":"4805b0be5aaf9e46c787f2ad43edaf0a57a35c522b52e24a91352fd947b9da70",
+    "/tmp/qcl-docs-routing-pure-lint-v4.py":"5c80d3c4d11c00809ae6e29316ce0d320373a1d9f85fd27851b4e19d1d90bb3c",
+    "/tmp/qcl-docs-routing-pure-check-v4.py":"61be9d6f59b49856a1d4a0b3d85c194b4c00646efbf1a7f2bb32c4e91ca00463",
+    "/tmp/qcl-docs-routing-pure-report-v4.md":"d0d3d51adb47082c5b7fe95bb778c8f20029406542d714e7b58a6f9a305dbabd",
+    "/tmp/qcl-docs-routing-pure-identity-v4.json":"7403734acba6a513e7d5521dded926bf0e54d47af8fad244159e492c113e8240"
+  },
+  "preserved_v3_guard_sha256":"750fc342884b2f47372912c538d7cfd47d60c8aa6f2ac9ee37aee02373976c0a",
+  "preserved_v3_plan_sha256":"9863ffb52c44f9d3ab95ff1165233132ebbca965338883a7c2724e8b9cbde742",
+  "source_bindings":{
+    "isolated_base_head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "coordinator_head_at_read":"107bac5697b37cf0e47c3feb44883a907837645c",
+    "deno.json":"a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+    "ops/docs_tests.ts":"676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts":"f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+  },
+  "minimal_delta":"R1b attempted collector construction before side effect and unknown-owner force-exit; R2 immediate/final attempted-live-unknown failure, separately proven pre-reap N/A, predecessor RSS gate including all3 unit source refs; versioned paths/scope and wrapper exact hashes only otherwise.",
+  "unchanged_scope":"Pure-only CPP4903 slice, whole I2B CHANGES_REQUIRED; static230/observednull; unit same ID87to88; source same IDs2to5of8; config100; grant-free two-file closure/no seed; same Deno2.8.3/caps/ancestral two-error RED and original inconclusive classification. No historical unknownFAILED reclassification.",
+  "execution_counts":{"scripts":0,"parser":0,"compiler":0,"guard_import_exec":0,"runtime":0,"formatter":0,"linter":0,"tests":0,"Deno":0,"Julia":0,"native":0,"network":0,"CI":0,"science":0},
+  "mutations":{"owning_product":0,"fixture":0,"Root_CP":0,"git_index":0,"gitlinks":0,"historical_artifacts":0,"READY":0,"predecessor_record":0},
+  "verification":"Source text readback and SHA/size checks only. No prepared code/parser/compiler/runtime execution. Source grant12min/4MiB reads/1CPU/1GiB/128KiB output; physical CPU/RSS/IO not measured. Initial output truncation followed by named-section rereads.",
+  "stop":"Fresh independent high review of exact v5 bundle, then separate trusted Root admission. No automatic execution/continuation."
+}

@@ -1,0 +1,24 @@
+{
+  "result": "D2_TWO_REPAIRS_ACCEPTED_SOURCE_DESIGN",
+  "recommendation": "Root_may_mark_two_narrow_source_tickets_I_ready_no_execution_grant",
+  "i_ready_authority": "Root_only_not_issued_by_reviewer",
+  "overall_ready": false,
+  "overall_pass": false,
+  "root": {"path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf", "head": "107bac5697b37cf0e47c3feb44883a907837645c", "ops_git_sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7", "ops_docs": "absent", "agents_sha256": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330", "architecture_sha256": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7"},
+  "native_overlay": {"path": "/tmp/qcl-docs-test-routing-worktree", "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec", "ops_git_sha256": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764", "ops_docs_tests_cli_sha256": "268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7", "published": false},
+  "recipe_overlay": {"path": "/tmp/qcl-doc04-root-recipe-worktree", "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc", "ops_docs_sha256": "0837ceda6be4fbfbd90e411fe6e4fe665f8bc8979e63ac1fbfe6bacedd8b178a", "ops_git_sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7"},
+  "frozen_artifacts": [
+    {"path": "/tmp/qcl-doc04-sourcegraph-seam-design-v2.md", "sha256": "6c747fdd3b029143ae0047320d7a2f089cbabb3d70f21b5bb24de9c6cf87236c", "locators": "19-65;67-209;211-255;258-282"},
+    {"path": "/tmp/qcl-doc04-sourcegraph-seam-design-v2-identity.json", "sha256": "f8224b54103dc9c8cbcfafd4e9c9961e19e3e856c9014550b6acc106307f238f"},
+    {"path": "/tmp/qcl-doc04-sourcegraph-seam-design-v2-read-ledger.json", "sha256": "ec3419fd91f6f0a23ec325ea94e3ab429d94d657e675ca6b678182859c556004"},
+    {"path": "/tmp/qcl-doc04-sourcegraph-seam-design-v1.md", "sha256": "0842a7f6b826d4f69b90b556029bbed5d43dcfbdd6950bb8bb7553d2d847de0c", "locators": "48-67;76-153;173-205;248-255;260-294;315-316"},
+    {"path": "/tmp/qcl-doc04-sourcegraph-seam-design-v1-review.md", "sha256": "852f66eac8efca500d34a9d5116074931a1b444ec6fdd57e5e443b361b13272b", "locators": "15-33"}
+  ],
+  "R1": "closed_source_design_only",
+  "R2": "closed_source_design_only",
+  "checks": {"named_hashes": "verified", "source_trace": "completed", "typecheck_tests_runtime_native_science": "not_measured"},
+  "budget": {"grant_wall_minutes": 6, "grant_cpu": 1, "grant_ram_bytes": 1073741824, "grant_read_bytes": 2097152, "grant_output_bytes": 65536, "logical_named_reads_under_2MiB": true, "physical_io_rss_metered": false, "output_cap": "not_attested_possible_exceedance_from_verbose_initial_reads", "strict_resource_pass": false},
+  "actions": {"source_edits": 0, "CP_index_mutations": 0, "scripts_imports_parser_tests": 0, "network_solver_native": 0, "subagents": 0},
+  "review": "/tmp/qcl-doc04-sourcegraph-seam-design-v2-review.md",
+  "stop": "review_only_no_new_runtime_grant_old_DOC04_unit5of5_exhausted"
+}

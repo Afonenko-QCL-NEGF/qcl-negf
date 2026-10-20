@@ -1,0 +1,23 @@
+{
+  "phase": "DOC04-SourceGraph-seam-D2-two-targeted-design-repairs",
+  "result": "D2_FOR_FRESH_HIGH_REVIEW",
+  "i_ready": false,
+  "overall_ready": false,
+  "overall_pass": false,
+  "frozen_review": {"path": "/tmp/qcl-doc04-sourcegraph-seam-design-v1-review.md", "sha256": "852f66eac8efca500d34a9d5116074931a1b444ec6fdd57e5e443b361b13272b", "identity_sha256": "3363088f94300969f404b77d7ac366d76ee9a924aa21019b354bab6226121b48"},
+  "v1_preserved": {"path": "/tmp/qcl-doc04-sourcegraph-seam-design-v1.md", "sha256": "0842a7f6b826d4f69b90b556029bbed5d43dcfbdd6950bb8bb7553d2d847de0c"},
+  "actual_root": {
+    "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+    "head": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "status": [" M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json", "?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-impl-i2b-review.md", "?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-impl-i2b-review-identity.json", "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch15-publication.json", "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch15-manifest.json"],
+    "gitlink_observation_not_maintained_lock": {"core": "9f4a96d032ad868ec010ce92d915bb81087c8d92", "runner": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f", "results": "de70638a982f91b7e125ab1cfc70a2daef2a656d"}
+  },
+  "native_overlay_review_frozen_identity": {"path": "/tmp/qcl-docs-test-routing-worktree", "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec", "ops_git_sha256": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764", "driver_sha256": "268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7", "published": false},
+  "repairs": {"R1": "separate_actual_observation_from_frozen_comparison_positive_change_precedes_unknown", "R2": "reuse_readonly_GitReader_third_readGit_arg_preserve_global_localeCompare_SourceGraph_v1_and_Native_raw_digest"},
+  "source_implementation": "not_performed",
+  "checks": {"review_hash_verification": "completed", "named_source_excerpts": "completed", "typecheck_compiler_tests": "not_measured", "runtime_build_native": "not_measured"},
+  "counter_authority": "Root_ledger_only_product90_source11_CHECK3_compiler0_guardUNKNOWN1_failed_unit_not_ready_are_coordinator_context_not_measurements_here",
+  "actions": {"source_edits": 0, "scripts_imports_parser_compiler_tests": 0, "git_cp_index_mutations": 0, "runtime_attempts": 0, "network_native": 0, "subagents": 0},
+  "artifacts": {"design": "/tmp/qcl-doc04-sourcegraph-seam-design-v2.md", "read_ledger": "/tmp/qcl-doc04-sourcegraph-seam-design-v2-read-ledger.json"},
+  "next": "STOP_FRESH_INDEPENDENT_HIGH_REVIEW_THEN_I_READY_DECISION"
+}

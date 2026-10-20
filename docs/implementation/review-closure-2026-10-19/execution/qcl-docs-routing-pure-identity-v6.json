@@ -1,0 +1,40 @@
+{
+  "format":"qcl-negf.docs-routing-pure-source-identity.v6",
+  "status":"SOURCE_ONLY_STOP_FOR_FRESH_HIGH_COMMENT_CPP_AND_GUARD_REVIEW",
+  "artifacts":{
+    "/tmp/qcl-docs-routing-pure-guard-v6.py":{"sha256":"c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6","bytes":56906},
+    "/tmp/qcl-docs-routing-pure-plan-v6.json":{"sha256":"3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9","bytes":16109},
+    "/tmp/qcl-docs-routing-pure-format-v6.py":{"sha256":"8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85","bytes":1363},
+    "/tmp/qcl-docs-routing-pure-lint-v6.py":{"sha256":"d27fd04195f76459dc80ee132cb85be6751358908493e95a628ced1d16cc9368","bytes":1357},
+    "/tmp/qcl-docs-routing-pure-check-v6.py":{"sha256":"02a0f86dcd35552798f1748b93335d84a0379db18dd19e65cec1e36dcb36f24f","bytes":1366},
+    "/tmp/qcl-docs-routing-pure-report-v6.md":{"sha256":"3568aa4155907f28d5b9fdb8c51c10cb1f97f3b92e9b3760e2a3cbbf5cf7015d","bytes":7856},
+    "/tmp/qcl-docs-routing-pure-lint-comment-correction-v1.patch":{"sha256":"0ba7a8cdd4b18f7207acbd8f49c86e29b7012d8f25f19dfe8a0a14b6e60628e3","bytes":916}
+  },
+  "owned_outputs_bytes_excluding_identity":85873,
+  "owning_product_edits":{
+    "ops/docs_tests.ts":{"before_sha256":"38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b","after_sha256":"68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5","after_bytes":28622,"delta":"one local no-control-regex lint-ignore comment with reason above unchanged regexp"},
+    "tests/docs_test_routing_test.ts":{"before_sha256":"8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b","after_sha256":"2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99","after_bytes":41560,"delta":"one local require-await lint-ignore comment with reason above unchanged async fake execute"}
+  },
+  "preserved_ancestry":{
+    "original_unformatted_helper":"676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "original_unformatted_fixture":"f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761",
+    "v5_guard":"e49cda399947c9ce9a60352c9def75076d8f5bab29d054f16a8d6874837e1372",
+    "v5_plan":"73b79ab73cf2b0702ace55de6f6c0cca6f48106bf0eaa7556221bad4804f9b06",
+    "accepted_v5_guard_review":"140472debae1d9a47c8c694b964ed36213003fd3dbffe172001928b141bfb084",
+    "accepted_FORMAT1_final_review":"50b8d8d5c83d509df3928750a6ad947f8b779dcacaa2baa3b690c65f18b81ba2",
+    "frozen_postFORMAT1_manifest":"ed50c4ec8c8ba1b88ce93fdc8778c317446d08d716a799aa688771ed7c94846a",
+    "FORMAT1_receipt":"d33fe2a43835ae48af6ff9a92d8abda2351bdac5e6ddff30c2590a216dba73a6",
+    "FORMAT1_raw":"b9f584e863bc07b513e9c6808e9e1eb0f6bdba3dc88377b983560b1316fa6919",
+    "failed_LINT1_receipt":"c14d85854326c2bd8bd6ac4fcd009fc57dc346e538dcd015b1f70a3b0bdadf10",
+    "failed_LINT1_raw":"c480b2473669fb26ad2b45494a09443e195eee25c4361ddda1399bb017e3f787"
+  },
+  "LINT1_classification":"FAILED consumed; exact two intentional findings, exit1, complete1279B raw,3valid RSS/0unknown. Retained ancestry only; not passed/reused as v6 prerequisite.",
+  "new_comment_only_CPP":"Required fresh independent PASS_COMMENT_ONLY_PURE_CORRECTION record/ref; not created by writer. Unit also needs new FORMAT2 final pure closure/format-only CPP and3new good source receipts.",
+  "stages":{"FORMAT2":[4,5],"LINT2":[5,6],"CHECK1":[6,7],"source_ceiling":8,"unit":"same DOCS-ROUTING-GREEN-1 global87to88, static230/observednull"},
+  "metadata":{"isolated_base_head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec","coordinator_head_at_read":"107bac5697b37cf0e47c3feb44883a907837645c","future_global_head":"fresh Root handoff independently required"},
+  "safety":"R1b/R2 lifecycle/resource predicates unchanged; same exact-buffer/no-pyc wrappers, caps/config100/runtime/grant-free pure2closure/no seed/pure-only4903slice. Historical two-error RED/original inconclusive and DOC06 unknownFAILED unchanged. No native4 edits.",
+  "execution_counts":{"scripts":0,"parser":0,"compiler":0,"guard_import_exec":0,"formatter":0,"linter":0,"tests":0,"runtime":0,"Deno":0,"Julia":0,"native":0,"network":0,"CI":0,"science":0},
+  "mutations":{"owning_pure_files":2,"inserted_comment_lines":2,"regex_async_body_assertion_registration_changes":0,"Root_CP_control":0,"native4":0,"git_index":0,"historical_receipts_raw":0,"READY":0,"approval_records":0},
+  "verification":"Exact immutable postFORMAT1-to-current unified diff only2comment insertions; SHA/size/text readback. No prepared code executed or parsed. Grant15min/5MiB reads/1CPU/1GiB/192KiB output; physical CPU/RSS/IO not measured.",
+  "stop":"Fresh independent high comment-only/v6 source review, then Root owns actual FORMAT2/control/admission. No automatic execution."
+}

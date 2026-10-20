@@ -1,0 +1,34 @@
+{
+  "stage":"independent-high-I2F-narrow-source-CPP",
+  "verdict":"CHANGES_REQUIRED",
+  "native_ready":false,
+  "review":{"path":"/tmp/qcl-docs-routing-impl-i2f-review.md","bytes":12003,"sha256":"c74872ae57d8da9a3b6c0384a131f84d65a71102da57f3606da901ac4d79cab0"},
+  "worktree":"/tmp/qcl-docs-test-routing-worktree",
+  "head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "source_kind":"four-path-overlay-not-committed-native16-freeze",
+  "owning_files":{
+    "ops/docs_tests_native.py":"9ac8407583293567e05eb0217e77d83c58faa91c1ab59c96f22d8cce190d35fa",
+    "ops/docs_tests_cli.ts":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7",
+    "tests/test_docs_test_native.py":"36a52d7bb9b42fa27eab821f711d1d9b1eb8e624cbd350d464a7c5d330220b36",
+    "tests/docs_test_native_protocol_test.ts":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2"
+  },
+  "packet":{
+    "report_sha256":"f980611a22f90ecf82b224c827f17e26922f6a42015ca464011444111f2c28cf",
+    "identity_sha256":"bdd181224b3963226b35699d1076056e820e511fe1dd6a6077021b2ad8b36205",
+    "delta_sha256":"1ac2e0b556153a05905542c01ce606d10bb5b10bb20cbdb225293a34e2ade464",
+    "delta_bytes":60319,
+    "previous_review_sha256":"c8224246cc32b3327680841a292a9b232fa82b87834ad52067577b1805827e62",
+    "frozen_before_manifest":"/tmp/qcl-docs-routing-i2e-frozen-before-i2f/manifest.sha256",
+    "frozen_before_manifest_sha256":"5a900b91914f1c544e315a3bb714507cf885b3bcba54a3812ec0ef0da2c0f2c7",
+    "all_four_frozen_before_file_hashes_match_I2E":true
+  },
+  "closed_narrow_source":["B1r-typed-actual-records-and-canonical-comparison","B2b-private-worker-FD-census-before-worker","B2c-same-producer-and-participant-stream-read-and-proof-manifest"],
+  "B2a":"failure-path-independent-stages-improved-but-healthy-return-propagation-open",
+  "finding":{"id":"I2F-R1","priority":"P1","file":"ops/docs_tests_native.py","locators":["1067","1071-1098","1331-1338","1365-1372"],"defect":"owner-cleanup-failures-stored-in-launch_state-but-not-imported-on-healthy-caller-settlement","next_ticket":"I2G-only-secondary-cleanup-after-healthy-capture-propagation-and-paired-fixture","preserve_positive_raw_observations":true,"overall_attempt_requires_failed_or_unknown":true},
+  "separate_gates":["B3-exact-ordinals-debits-physical-domain-ledger-source-truthfulness","B4-full-C8","finite-DEV8plus8-and-compiler","actual-external-trusted-provider-BIND"],
+  "nominal_fixtures":{"Python":8,"Deno":8,"observed":null},
+  "execution":{"scripts":0,"target_import":0,"parser":0,"compiler":0,"tests":0,"runtime":0,"network":0,"native":0,"CI":0,"science":0,"product_calls":0,"children":0},
+  "mutations":{"source":0,"fixtures":0,"CP":0,"index":0,"historical_artifacts":0,"created_only_review_and_identity":true},
+  "budget":{"started_utc":"2026-10-20T09:12:46Z","minutes_cap":10,"CPU_cap":1,"RAM_cap_bytes":1073741824,"read_cap_bytes":4194304,"conservative_read_upper_bytes":3145728,"output_cap_bytes":98304,"aggregate_transcript_exact_bytes":null,"aggregate_output_cap_compliance":"not-claimed-exact-counter-not-recorded","author_output_cap_compliance":"separately-unknown-per-author-report-and-identity-not-interpreted-as-within-cap","CPU_measured":null,"RSS_measured":null,"physical_IO_measured":null},
+  "next_gate":"single-medium-I2G-source-only-minimal-propagation-correction-no-runtime-retry-authorized"
+}

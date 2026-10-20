@@ -1,0 +1,53 @@
+{
+  "phase": "DOC04-SourceGraph-seam-independent-source-design-review-v1",
+  "verdict": "DESIGN_CHANGES_REQUIRED",
+  "i_ready": false,
+  "overall_ready": false,
+  "overall_pass": false,
+  "design": {
+    "path": "/tmp/qcl-doc04-sourcegraph-seam-design-v1.md",
+    "sha256": "0842a7f6b826d4f69b90b556029bbed5d43dcfbdd6950bb8bb7553d2d847de0c",
+    "identity_sha256": "5b08d70701de70d269898ad4ceba8e8b2c9a281a6c4bd4d7702494f73e47faae",
+    "read_ledger_sha256": "c8f7d7c7a8f0288e2b97e288473d3e761f93aee458c35d1d851cd1581eec5c0a"
+  },
+  "actual_root": {
+    "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+    "head": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "status": [" M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json", "?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-impl-i2b-review.md", "?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-impl-i2b-review-identity.json", "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch15-publication.json", "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch15-manifest.json"],
+    "gitlinks_observation_not_lock": {
+      "components/QCLNEGF.jl": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "components/QCLNEGFRunner.jl": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+      "components/qcl-negf-aiida": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+      "components/qcl-negf-contracts": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "components/qcl-negf-platform": "f729e2681224d6537538179ab760fefefd575003",
+      "components/qcl-negf-portal": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "components/qcl-negf-research": "3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731",
+      "components/qcl-negf-results": "de70638a982f91b7e125ab1cfc70a2daef2a656d"
+    },
+    "ops_git_sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7"
+  },
+  "recipe_overlay": {
+    "path": "/tmp/qcl-doc04-root-recipe-worktree",
+    "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+    "ops_docs_sha256": "0837ceda6be4fbfbd90e411fe6e4fe665f8bc8979e63ac1fbfe6bacedd8b178a",
+    "recipe_sha256": "b673bf4e2ba53179bccd7dcff631c8c1fe03893944cf2add868155e133705c8b",
+    "tests_sha256": "697b1774ee0573acfc6ec5e5c6ebf4b3c922fb6588cc9d291deab2f10f3408c3",
+    "previous_review_sha256": "97f01e8b463a2554c32c28ac05b388ddcc8b43a9acc936a41f42bcf6131a9a83"
+  },
+  "native_overlay": {
+    "path": "/tmp/qcl-docs-test-routing-worktree",
+    "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "published": false,
+    "ops_git_sha256": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764",
+    "driver_sha256": "268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7",
+    "fixture_sha256": "a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2"
+  },
+  "findings": [
+    {"id": "R1", "status": "OPEN_DESIGN", "locator": "design lines188-205,248-256; section6 control5", "issue": "frozen input mismatch rejects after identity but control requires failed_source_changed with observed mismatch"},
+    {"id": "R2", "status": "OPEN_DESIGN", "locator": "design lines48-67; actual ops/git.ts24,42; native ops/git.ts42-44 and ops/docs_tests_cli.ts184-186", "issue": "global graph order/digest change and competing mutable GitRunner versus unpublished readonly GitReader lack one merge contract"}
+  ],
+  "checks": {"source_inspection": "completed", "typecheck": "not_measured", "tests": "not_measured", "runtime": "not_measured", "render_native_science": "not_measured"},
+  "actions": {"source_edits": 0, "git_mutations": 0, "cp_index_writes": 0, "scripts_imports_parser_compiler_tests": 0, "runtime_attempts": 0, "network_native_science": 0, "subagents": 0},
+  "budget": {"wall_minutes": 8, "cpu": 1, "ram_bytes": 1073741824, "read_bytes": 2097152, "output_bytes": 65536, "physical_io_rss_exact_transport_output_metered": false, "strict_resource_enforcement_pass": false},
+  "next": "STOP_FOR_TWO_NARROW_DESIGN_CORRECTIONS_NO_RUNTIME_GRANT"
+}

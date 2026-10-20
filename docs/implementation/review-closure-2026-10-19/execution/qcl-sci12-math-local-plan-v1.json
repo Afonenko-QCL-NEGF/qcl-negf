@@ -1,0 +1,17 @@
+{
+  "scope": "SCI12-MATH-local-v1",
+  "status": "SOURCE_ONLY_PROPOSAL_NOT_READY",
+  "attempts": ["SCI12-MATH-RED-1", "SCI12-MATH-GREEN-1"],
+  "target_argv": ["/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python", "-m", "pytest", "-q", "--tb=short", "-p", "no:cacheprovider", "tests/test_equilibrium_map_math.py"],
+  "candidate_base_head": "de70638a982f91b7e125ab1cfc70a2daef2a656d",
+  "candidate_branch": "codex/review-closure-equilibrium-map-math",
+  "frozen_fixture_sha256": "995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d",
+  "runtime_sha256": "dd65a07e8f535525443d63e2bd6dd10efbf22bf22e0b6d65e634266acc7ac976",
+  "ordering": "Only after Root reconciles consumed pureGREEN87-to88 receipt; pure PASS is not required and the failed attempt is retained without rerun. Root alone verifies global counter, predecessor, meaningful CPP and fresh READY per call. RED88-to89; GREEN89-to90; no reruns, global ceiling90. Historical engineering milestone81-to88 remains history. C08source8/8 unchanged.",
+  "per_call": {"wall_seconds":90,"CPU":1,"sampled_RSS_bytes":1073741824,"sampled_owned_TMP_regular_logical_bytes":33554432,"raw_log_envelope_bytes":2097152,"early_wall_stop_seconds":78},
+  "aggregate": {"wall_seconds":180,"raw_log_envelope_bytes":4194304,"calls":2,"enforcement":"Root validates predecessor retained receipts and global consumed ledger before fresh READY; not an independent ledger in this harness"},
+  "RED": {"product":"MUST_ABSENT", "nominal_cases":97,"expected_pass":2,"expected_call_phase_assertion_fail":95,"expected_setup_error":0,"expected_exit_code":1,"interpretation":"New API structural absence only; no preexisting physics bug claim. Count/error/stage/name/skip require independent complete raw review."},
+  "GREEN": {"product_sha256":null,"meaning":"No invented product hash. Requires future exact source CPP, different new READY binding and independently reconciled RED; expected97PASS0FAIL0ERROR0SKIP to be reviewed, not inferred from exit0."},
+  "limitations": "No native/admission/solver/scientific acceptance. Env-only selected import routing; child fixture must prove actual ownership before related claims. No target -I because PYTHONPATH required. No installations/import probes, filters/maxfail, plugin autoload or implicit environment. Source/config/helpers/runtime before and after; helper executed from hashed buffer. Sampled guards are not OS quotas or hard transient peak proof. No hard filesystem jail or total process-group proof after descendant escape. Unknown live RSS fails immediately and finally; at least one valid sample mandatory; post-poll reaped N/A explicit, never0.",
+  "source_only_preparation": {"target_executions":0,"compiler_parser_import_test_probes":0,"product_index_CP_READY_writes":0,"requires_fresh_independent_high_review":true}
+}
