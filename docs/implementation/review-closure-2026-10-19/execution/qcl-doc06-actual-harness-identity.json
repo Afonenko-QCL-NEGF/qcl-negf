@@ -1,0 +1,27 @@
+{
+  "status": "proposed_not_executed_requires_independent_high_review_and_Root_READY",
+  "root_revision": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "files": {
+    "/tmp/qcl-doc06-actual-source-prep-v1.py": {
+      "sha256": "d4b824dd2d2f5781a5853e6db35f53ad37b560fa2a9d94bab9272f85887b2cec",
+      "bytes": 5674
+    },
+    "/tmp/qcl-doc06-actual-local-run-v1.py": {
+      "sha256": "dd12fd9383130fd77039049114a02ff513ff6eb7d1caac6bfb34d96a94ee0e61",
+      "bytes": 12255
+    },
+    "/tmp/qcl-doc06-actual-engineering-plan-v1.json": {
+      "sha256": "1916f0b4aa51d2a835525aa159e5411fb80f23c97233f8bba92bd1b8b223f18c",
+      "bytes": 6397
+    },
+    "/tmp/qcl-doc06-actual-harness-report.md": {
+      "sha256": "493a1d731af11d341bd768bbc5f9e56bc4141e2968524608e5123a27790dea19",
+      "bytes": 9869
+    }
+  },
+  "target_calls_executed": 0,
+  "source_export_executed": false,
+  "fresh_namespace_created": false,
+  "product_CP_Git_writes": false,
+  "independent_high_verdict": null
+}

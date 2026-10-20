@@ -1,0 +1,198 @@
+{
+  "format": "qcl.docs-routing.source-design-identity.private.v3",
+  "date_utc": "2026-10-20T06:01:34.844422+00:00",
+  "stage": "source-only design; STOP for independent high review",
+  "selected_root": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "selected_platform": "f729e2681224d6537538179ab760fefefd575003",
+  "root_workspace_observed_head": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "source_helper_sha256": "bdc1684faffa4e6606b1667675f335768e3eb6216ae64b5842d2431460063356",
+  "historic_red_fixture_sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+  "typing_patch_sha256": "7d65aba44b29dcccdcbd079fc0f804c5afee29646cdc195e39b9e55ae42f9a5b",
+  "design": {
+    "path": "/tmp/qcl-docs-test-routing-design-v3.md",
+    "sha256": "c586234a65a647c3896eb17af4ac0ae0b8a02f4f56d41dcbf25728d997282554",
+    "bytes": 29656
+  },
+  "read_ledger": {
+    "path": "/tmp/qcl-docs-test-routing-design-v3-read-ledger.md",
+    "sha256": "0d26e68bad4d54440ba5a3b8425c463b3645813b642fc22b0601f456f4f93b74",
+    "bytes": 5034
+  },
+  "input_hashes": [
+    {
+      "path": "/tmp/qcl-docs-test-routing-design.md",
+      "bytes": 17703,
+      "sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-review.md",
+      "bytes": 3614,
+      "sha256": "9e16ff7519453db4661833455450da9d83c72b5f76c9eefd4fb27370da812930",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v2.md",
+      "bytes": 17745,
+      "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v2-review.md",
+      "bytes": 3299,
+      "sha256": "939555c9291e98be1200b063bcf06e344a7597907dfbf498bf28029927728967",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-impl-report.md",
+      "bytes": 9606,
+      "sha256": "be0c36f0dd250cd8d1525bdb6e5ab7b2404a2e6e5b79da1ee4ce1aed890dda7c",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-impl-identity.json",
+      "bytes": 2400,
+      "sha256": "07ddebfb85ac7cfc3677108e98e767ebded43d3c9d3d20a0d669e9375c162b2c",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design.md",
+      "bytes": 19886,
+      "sha256": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design-review.md",
+      "bytes": 14463,
+      "sha256": "cae997412488ef7e1508a0c8920120d167f7c59b48047f387e354802506f065d",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-engineering-plan-v2.json",
+      "bytes": 9979,
+      "sha256": "5147cab0a8df1d50fb908b3c247e8c7b0e11852ee01a990f8a35228b3e70157a",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-local-unit-run-v2.py",
+      "bytes": 21924,
+      "sha256": "0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-doc06-local-unit-run-v2.py",
+      "bytes": 16565,
+      "sha256": "1222d7d0a03dd39b72fc17be7029ced9e7422273f5ab08dbf48e6bd621f3014d",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-fixture-typing-proposed.patch",
+      "bytes": 951,
+      "sha256": "7d65aba44b29dcccdcbd079fc0f804c5afee29646cdc195e39b9e55ae42f9a5b",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-RED-diagnostic-erratum.md",
+      "bytes": 15954,
+      "sha256": "6dfb097abf97aeabd9114354c987b5846fd19f449c4d0bfc2168299a1e03383b",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-ops04-cli-seam-design.md",
+      "bytes": 18429,
+      "sha256": "93ffbbcdd50770295f2f21e1a9befc47acc63231279b1ff79aebf48e7cc69a7f",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs_tests.ts",
+      "bytes": 26301,
+      "sha256": "bdc1684faffa4e6606b1667675f335768e3eb6216ae64b5842d2431460063356",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts",
+      "bytes": 38723,
+      "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/deno.json",
+      "bytes": 1845,
+      "sha256": "6fe2793e686ed0f373a3d44be50d3016b53280c4d879baeb726cac5d4e20086e",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/ci.ts",
+      "bytes": 3525,
+      "sha256": "b46eb8d4db89b734324a9c40698d16ce3df8aff764a6d332b9ba52ba43be94e0",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/git.ts",
+      "bytes": 3580,
+      "sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/process.ts",
+      "bytes": 1345,
+      "sha256": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/.github/workflows/ci.yml",
+      "bytes": 2582,
+      "sha256": "d8dc81d6684933c40e58e26dda16903cbdede5713bd686c3a1743060ac5318fe",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/.github/workflows/release.yml",
+      "bytes": 2333,
+      "sha256": "53f54fdc377c5eaae6d1688bcbecd85a536caa10cff8523c13b4ea07c76a5b9b",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform/ops/bootstrap_build.py",
+      "bytes": 29061,
+      "sha256": "87eebbbfa1b13ffadd15b4e8fc880774e70b26ddd59de3034ccf29ecfd980479",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform/ops/build_admission.py",
+      "bytes": 8549,
+      "sha256": "2a2404592f42edaa8b3791e9b7cdce672eaad4fbaf325ec6b8e567ebeade0b65",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform/docs/build-admission.md",
+      "bytes": 6359,
+      "sha256": "de7ce303b29107a91cc8e0491c2200542ea299f73c64943f61341e574bebcce5",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform/ops/bootstrap_ownership.py",
+      "bytes": 1182,
+      "sha256": "7fa896e2cebc1661782534756c2859d9c3014a2d849580cb54c479295a5d3f4a",
+      "inspection": "named byte hash; some content ranged/rg-only, not all entire content displayed"
+    }
+  ],
+  "execution_counts": {
+    "target_import": 0,
+    "parser_compiler": 0,
+    "product_unit": 0,
+    "native_probe": 0,
+    "network": 0,
+    "build": 0,
+    "solver": 0,
+    "final_ci": 0,
+    "checkpoint_write": 0,
+    "source_patch": 0
+  },
+  "known_limits": [
+    "No fresh native evidence or accepted CI producer/tool observations created",
+    "Existing OPS04 API lacks docs env/raw/resource/storage contract",
+    "Opaque active context/control-pipe factory and delegated cgroup backend specified for I2; not implemented",
+    "Sole GREEN remains Root-owned; no extra product calls authorized",
+    "No measured CPU/RSS/physical I/O/transcript cap compliance assertion"
+  ]
+}

@@ -466,5 +466,29 @@
     "wall_seconds": 2.127,
     "exit_code": 0,
     "receipt_sha256": "eccf5015685c8b0ff3df87fef2672f6fe461124ce9f09c56b0cea68807b034fc"
+  },
+  {
+    "id": "qcl-DOCS-ROUTING-RED-1",
+    "wall_seconds": 1.366,
+    "exit_code": 1,
+    "receipt_sha256": "e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0",
+    "raw_wall_seconds": 1.3661311600008048,
+    "charge_rounding": "nearest0.001s consistent historical census"
+  },
+  {
+    "id": "qcl-DOC06-ACTUAL-A1",
+    "wall_seconds": 0.521,
+    "exit_code": 0,
+    "receipt_sha256": "d525dd33a202c17436e85280187d692ff4297da7ab3c11ff96ed96a854fbd19f",
+    "raw_wall_seconds": 0.5207283620256931,
+    "kind": "actual9source_projection_not_unitfixture_or_science"
+  },
+  {
+    "id": "qcl-DOC06-ACTUAL-A2",
+    "wall_seconds": 0.537,
+    "exit_code": 0,
+    "receipt_sha256": "6af221c17e590bc24352a016cec9da71204adf8720c76dd3a9dc1bb0710a0755",
+    "raw_wall_seconds": 0.5365804620087147,
+    "kind": "actual9source_projection_not_unitfixture_or_science"
   }
 ]

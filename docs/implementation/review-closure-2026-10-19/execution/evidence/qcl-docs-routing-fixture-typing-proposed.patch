@@ -1,0 +1,18 @@
+--- a/tests/docs_test_routing_test.ts
++++ b/tests/docs_test_routing_test.ts
+@@ -628,6 +628,7 @@
+       assert(executor.calls.length <= 4);
+       const failed = result.steps.find((step: { name: string }) => step.name === name);
+       assert(failed);
++      assert(failed.capture !== null && failed.capture !== undefined);
+       equal(failed.capture.stdout, changed.stdout);
+       equal(failed.capture.stderr, changed.stderr);
+       equal(failed.capture.exit_code, changed.exit_code);
+@@ -757,6 +758,7 @@
+   const result = await runChecks(planChecks("check", r), r, executor);
+   assert(result.result !== "passed");
+   equal(executor.calls.filter((s) => s.name === "doc04-python").length, 1);
++  assert(result.steps[0].capture !== null && result.steps[0].capture !== undefined);
+   equal(result.steps[0].capture.stdout, "composite base output\n");
+   equal(result.retained.cleanup_attempted, false);
+   equal(result.retained.attempt_dir, ATTEMPT);

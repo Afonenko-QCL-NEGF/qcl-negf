@@ -1,0 +1,115 @@
+{
+  "namespace": "DOC06-ACTUAL-2bb05d3-v1",
+  "root_revision": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "files": [
+    {
+      "relative_path": "committed-source-graph.json",
+      "bytes": 1080,
+      "sha256": "b7244ee91167b688e598efea33ba9620772c974264920d7e368ec87de4d939e1"
+    },
+    {
+      "relative_path": "input-receipt.json",
+      "bytes": 2756,
+      "sha256": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a"
+    },
+    {
+      "relative_path": "preparation.json",
+      "bytes": 4619,
+      "sha256": "03db672d25120747f86469e37a1685f6dfff8bed64199b6a619b5296b8adf5b8"
+    },
+    {
+      "relative_path": "preparation-original.log",
+      "bytes": 220,
+      "sha256": "8bf0b30fe49f4db49963f561f23b9eb3e8f4082f27306321e6a12e47463d43fa"
+    },
+    {
+      "relative_path": "snapshot/runner/schema/run.schema.json",
+      "bytes": 54815,
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b"
+    },
+    {
+      "relative_path": "snapshot/runner/src/application/auto_strategy.jl",
+      "bytes": 19019,
+      "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326"
+    },
+    {
+      "relative_path": "snapshot/runner/src/application/configuration_types.jl",
+      "bytes": 8663,
+      "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0"
+    },
+    {
+      "relative_path": "snapshot/runner/src/infrastructure/config/configuration_sources.jl",
+      "bytes": 3381,
+      "sha256": "bb08a718dd765a15db2a4fba7de0ff2ea79753f29dc516900f67485331dafbb1"
+    },
+    {
+      "relative_path": "snapshot/runner/src/infrastructure/config/configuration.jl",
+      "bytes": 71428,
+      "sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb"
+    },
+    {
+      "relative_path": "snapshot/runner/docs/src/user/configuration.md",
+      "bytes": 10648,
+      "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf"
+    },
+    {
+      "relative_path": "snapshot/runner/test/fixtures/configurations/base.yaml",
+      "bytes": 6973,
+      "sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2"
+    },
+    {
+      "relative_path": "snapshot/contracts/src/qcl_negf_contracts/schemas/run.schema.json",
+      "bytes": 54815,
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b"
+    },
+    {
+      "relative_path": "snapshot/core/src/numerics/optimized/production_contracts.jl",
+      "bytes": 15596,
+      "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A1/receipt.json",
+      "bytes": 5854,
+      "sha256": "d525dd33a202c17436e85280187d692ff4297da7ab3c11ff96ed96a854fbd19f"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A1/original.log",
+      "bytes": 26,
+      "sha256": "ff602a8401c76f68f448a0ae58b37281211b6ed20427e1cdbf0603207c92b301"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A1/owned-tmp/out/facts.json",
+      "bytes": 19556,
+      "sha256": "ead7c19658478682d9da3b966f5aaec2e0ec9a180a27b7c62442f5796b63e041"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A1/owned-tmp/out/source-receipt.json",
+      "bytes": 15444,
+      "sha256": "7bd0d68220ec0d37972b2cb25ad20b5f3b99078f95e06f64327727b446f7bd92"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A2/receipt.json",
+      "bytes": 5854,
+      "sha256": "6af221c17e590bc24352a016cec9da71204adf8720c76dd3a9dc1bb0710a0755"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A2/original.log",
+      "bytes": 26,
+      "sha256": "ff602a8401c76f68f448a0ae58b37281211b6ed20427e1cdbf0603207c92b301"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A2/owned-tmp/out/facts.json",
+      "bytes": 19556,
+      "sha256": "ead7c19658478682d9da3b966f5aaec2e0ec9a180a27b7c62442f5796b63e041"
+    },
+    {
+      "relative_path": "DOC06-ACTUAL-A2/owned-tmp/out/source-receipt.json",
+      "bytes": 15444,
+      "sha256": "7bd0d68220ec0d37972b2cb25ad20b5f3b99078f95e06f64327727b446f7bd92"
+    }
+  ],
+  "bytes": 335773,
+  "durable_ignored_backup": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.build/review-closure-coordination/doc06-actual/DOC06-ACTUAL-2bb05d3-v1",
+  "excluded": "runtime caches/home/scratch; original source/inputs/outputs/raw/receipts all retained; source9blobs not duplicated in Git",
+  "semantic_acceptance": "pendingindependentreview"
+}

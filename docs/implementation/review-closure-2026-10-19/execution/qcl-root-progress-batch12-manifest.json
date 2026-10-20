@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
-      "bytes": 396299,
-      "sha256": "0ff6889f4b0e2b619b7f531ba9a26aa304129453ca182d7175ed6562df510d29"
+      "bytes": 398172,
+      "sha256": "fd978f38814a2239bf4afbf1892fccf509ad90e29c500c914a4403862b3b1e81"
     },
     {
       "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-lint-fix-report.md",
@@ -263,6 +263,11 @@
       "sha256": "9119d3ee02a54dbe6a82472e1eed6cbcd7c75aed575265319d25b45184ffd166"
     },
     {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-guard-cache-source-audit.json",
+      "bytes": 1723,
+      "sha256": "5657c3201630f22b8c09ea494d4ac78998ad83d76738bda082a4c728336bda7e"
+    },
+    {
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-native-CI-trust-comparison-sanitized.json",
       "bytes": 383,
       "sha256": "c35f73bb765517a37a0f1839139e75dbe85b11e140033e7f35a9f460db815397"
@@ -296,6 +301,11 @@
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch11-manifest.json",
       "bytes": 20269,
       "sha256": "def20be11d0434b8522fa247761c0a6bf4e8f058617b59a52ceb604f949e4cc5"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch12-manifest.json",
+      "bytes": 23393,
+      "sha256": "deee39c18a0396cfd74a7d90fd3e56eca3a4b8099dfe0c95555d9317f4141bbd"
     },
     {
       "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci07-resource-design-identity.json",

@@ -1,0 +1,69 @@
+{
+  "format": "qcl-negf.doc06-source-input.v1",
+  "source_graph_sha256": "b7244ee91167b688e598efea33ba9620772c974264920d7e368ec87de4d939e1",
+  "files": [
+    {
+      "path": "runner/src/application/configuration_types.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+      "bytes": 8663
+    },
+    {
+      "path": "runner/src/infrastructure/config/configuration.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb",
+      "bytes": 71428
+    },
+    {
+      "path": "runner/src/infrastructure/config/configuration_sources.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "bb08a718dd765a15db2a4fba7de0ff2ea79753f29dc516900f67485331dafbb1",
+      "bytes": 3381
+    },
+    {
+      "path": "runner/src/application/auto_strategy.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326",
+      "bytes": 19019
+    },
+    {
+      "path": "runner/docs/src/user/configuration.md",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+      "bytes": 10648
+    },
+    {
+      "path": "runner/test/fixtures/configurations/base.yaml",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2",
+      "bytes": 6973
+    },
+    {
+      "path": "runner/schema/run.schema.json",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "bytes": 54815
+    },
+    {
+      "path": "contracts/src/qcl_negf_contracts/schemas/run.schema.json",
+      "owner": "components/qcl-negf-contracts",
+      "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "bytes": 54815
+    },
+    {
+      "path": "core/src/numerics/optimized/production_contracts.jl",
+      "owner": "components/QCLNEGF.jl",
+      "revision": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+      "bytes": 15596
+    }
+  ]
+}

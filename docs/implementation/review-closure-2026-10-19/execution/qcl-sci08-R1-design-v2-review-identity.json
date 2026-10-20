@@ -1,0 +1,43 @@
+{
+  "task": "SCI08-R1-D2-focused-independent-high-source-review",
+  "verdict": "PASS_SOURCE",
+  "finding_closed": "R1 P2 default /proc read in selected existing fixture; closed at design level by explicit fake roots plus actual source trace obligation",
+  "runner_commit": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "runner_status_short": "",
+  "inputs": {
+    "D1": "16b07bbafce8235e0e103205e90c5b6e6b0db6c13c5bd4c883074f32888fe3c7",
+    "prior_review": "a68ecf63af984355148b46d4a943cc5ca35adbe9da80102c512858d2b4847d69",
+    "D2": "5a50afe3ca4014991dcb61d6dfb2879b2fef99e10f18347b5aa5d4eefe54d642",
+    "D2_identity": "56a018f3eb0b09d6904e2137709619f8afafda2e2b725cd4554783fd409d516f",
+    "D2_delta_readledger": "8284573df9b482e38fa09317d63fe70c0702384b9b41732dd1cf8f5aa7239533"
+  },
+  "source_sha256": {
+    "src/infrastructure/resources/linux_resources.jl": "eed7dc41e655fa94d3b29db514b5e5682e3023b862b91e53f58dbc18f3f363b8",
+    "src/composition/native_phase_telemetry.jl": "9605f1a4852f5edbe8ca83652500c2e0a2352feec7a04cf9d0e85bd0e712f173",
+    "test/application/execution_resource_contract.jl": "c6eabaad77f868bb3413b54f0f2b8069d315491353195793bc65a6fe72c34760"
+  },
+  "independence": "Same independent reviewer as D1; focused additive correction rereview; immutable primary source re-read; no child agents",
+  "scope": {
+    "read_limit_bytes": 1048576,
+    "conservative_read_upper_bound_bytes": 262144,
+    "wall_limit_seconds": 300,
+    "cpus": 1,
+    "ram_bytes": 1073741824,
+    "report_limit_bytes": 65536,
+    "target_runtime": 0,
+    "imports": 0,
+    "target_parser": 0,
+    "tests": 0,
+    "build": 0,
+    "solver": 0,
+    "native": 0,
+    "network": 0,
+    "product_edits": 0,
+    "CP_edits": 0,
+    "git_mutations": 0
+  },
+  "preserved": ["D1 immutable", "31 groups", "five includes", "standalone semantics", "S1 model/criteria/all caps", "C08 exhausted8/8", "campaign closed needs_guard/needs_admission"],
+  "ENG": "No grant; tentative single GREEN and alternative RED/GREEN proposals remain separate Root decision with exact candidates and finite shared envelope",
+  "outputs": ["/tmp/qcl-sci08-R1-design-v2-review.md", "/tmp/qcl-sci08-R1-design-v2-review-identity.json"],
+  "stop": "Hash outputs and return; no target execution or product/CP mutation"
+}

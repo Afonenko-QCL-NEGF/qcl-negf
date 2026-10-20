@@ -1,0 +1,38 @@
+{
+  "format": "qcl-negf.doc06-derived-gitlinks.v1",
+  "revision": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "components": [
+    {
+      "path": "components/QCLNEGF.jl",
+      "revision": "9f4a96d032ad868ec010ce92d915bb81087c8d92"
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d"
+    },
+    {
+      "path": "components/qcl-negf-aiida",
+      "revision": "d8f8092ca1c76523d85384b4bac8198d8bfa736b"
+    },
+    {
+      "path": "components/qcl-negf-contracts",
+      "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5"
+    },
+    {
+      "path": "components/qcl-negf-platform",
+      "revision": "f729e2681224d6537538179ab760fefefd575003"
+    },
+    {
+      "path": "components/qcl-negf-portal",
+      "revision": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d"
+    },
+    {
+      "path": "components/qcl-negf-research",
+      "revision": "3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731"
+    },
+    {
+      "path": "components/qcl-negf-results",
+      "revision": "de70638a982f91b7e125ab1cfc70a2daef2a656d"
+    }
+  ]
+}

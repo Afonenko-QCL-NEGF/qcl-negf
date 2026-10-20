@@ -1,0 +1,57 @@
+{
+  "id": "DOC06-ACTUAL-COMPARE-1",
+  "utc": "2026-10-20T05:56:14.131504+00:00",
+  "root_revision": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "A1_receipt_sha256": "d525dd33a202c17436e85280187d692ff4297da7ab3c11ff96ed96a854fbd19f",
+  "A2_receipt_sha256": "6af221c17e590bc24352a016cec9da71204adf8720c76dd3a9dc1bb0710a0755",
+  "same_bound_inputs_A1before_A1after_A2before_A2after": true,
+  "outputs": [
+    {
+      "path": "facts.json",
+      "bytes": 19556,
+      "sha256": "ead7c19658478682d9da3b966f5aaec2e0ec9a180a27b7c62442f5796b63e041",
+      "byte_equal_A1_A2": true
+    },
+    {
+      "path": "source-receipt.json",
+      "bytes": 15444,
+      "sha256": "7bd0d68220ec0d37972b2cb25ad20b5f3b99078f95e06f64327727b446f7bd92",
+      "byte_equal_A1_A2": true
+    }
+  ],
+  "subjects": [
+    {
+      "kind": "api",
+      "key": "configuration_source",
+      "fact_count": 11,
+      "all_10_classes_present": true,
+      "statuses": {
+        "known": 2,
+        "partial": 4,
+        "not_applicable": 3,
+        "not_assigned": 1,
+        "unknown": 1
+      }
+    },
+    {
+      "kind": "input",
+      "key": "production.energy_chunk",
+      "fact_count": 16,
+      "all_10_classes_present": true,
+      "statuses": {
+        "partial": 10,
+        "unknown": 3,
+        "known": 2,
+        "not_applicable": 1
+      }
+    }
+  ],
+  "source_refs_checked_against_exact_export": 21,
+  "public_private_path_credential_shape_check": "none observed in facts",
+  "actual_generation_calls": 2,
+  "unit_fixture_calls": 0,
+  "scientific_calls": 0,
+  "verdict": "reproducible_partial_source_projection_not_semantic_or_bundle_acceptance",
+  "limits": "read<128KiB; no targetimports/renderer/solver; basic metadata/string checks only, not scientific criteria",
+  "next": "independent authored meaning and primary-source coverage review"
+}
