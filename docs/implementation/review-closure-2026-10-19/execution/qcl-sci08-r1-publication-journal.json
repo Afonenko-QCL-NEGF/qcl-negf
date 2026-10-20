@@ -1,0 +1,42 @@
+{
+  "operation_id": "SCI08-R1-OWNING-PUBLISH-1",
+  "state": "draft_PR_created",
+  "repo": "Afonenko-QCL-NEGF/QCLNEGFRunner.jl",
+  "worktree": "/tmp/qcl-sci08-r1-runner-worktree",
+  "branch": "codex/review-closure-sci08-r1-checked-resources",
+  "base": "d3585f2bad8170ec9a420a4630fca9b99925ff6b",
+  "base_branch": "codex/review-closure-final-audit-writer-integration",
+  "source_base": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "files": {
+    "src/composition/native_phase_telemetry.jl": "aba27f8c873b28f4b3f99d7736c9bedf40368ca4154e7c0af0ab592fc7ece216",
+    "src/composition/scientific_execution.jl": "52aded550f1362b67f7c3781e2d45daac0e001a6dd0248a730f29299d443645f",
+    "src/composition/scientific_workflow.jl": "b391a455247208a4293ea1aa000b4a288c097a70c23abd45f59e9f1b29a01337",
+    "src/infrastructure/persistence/point_artifacts.jl": "18bcd0fe2c6ff42050c500b57f17678b06a38f14871a9a3de437841cb5f8d1ad",
+    "src/infrastructure/resources/linux_resources.jl": "c6cceec4f6c8706485dbfa2902531f3c76d95b7c47dcffb773d9934de267f39f",
+    "test/contracts/checked_storage_forecast.jl": "f3f263ad0b1b13dcc8a20b5668bfdccb7bb7fa5d30937bd72d7793a0013d2cc4",
+    "test/infrastructure/strict_campaign_resource_admission.jl": "b6470f1d8e3b89b5ad71b9a8cb6cbcc9873221c85a2515cb8e3188306831b8c2",
+    "test/application/execution_resource_contract.jl": "42fb1de375ee1c6e3e0b4710dc045a8b308b3507790468eb6a112bd01e836aa9",
+    "test/infrastructure/linux_process_resource_probe.jl": "fb36182464c643c42951bcd89a0ad59f6f0118f0524050c3dbe0c0a80c3a581c",
+    "test/integration/native_phase_resource_contract.jl": "63d83e77025c74140cd67af9d9efb2b1bb7df735bebf7ac9c06c4c16e3476a6a"
+  },
+  "manifest_sha256": "fdd2fc704c86580630b905a4f5aa71f588c078ee34c09a54f5c5962cd391aa75",
+  "source_CPP": "00c798cf1fdfe0cd14b245cbab997567a7e7628c25957789fded840fb9bdf6d1",
+  "CP_CODE": "0d653bf10dd03efbed8b9e773b0663ee9195020e21158d7673d76826a90cf862",
+  "GREEN_receipt_sha256": "5d54f61aca6db32adef3cd6dda2da94cede325dbecf4320548d1f8d1954896a6",
+  "full_scientific_ready": false,
+  "public_release": false,
+  "head": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+  "push_exit": 0,
+  "sole_push_submit": true,
+  "pr": 16,
+  "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/pull/16",
+  "sole_PR_submit": true,
+  "G1": {
+    "operation_id": "G1-SCI08-R1-RUNNER-4f60f16",
+    "state": "G1_merged",
+    "merge_commit": "24539b3dbc0ec9a9bc0742c7808d605cfc660003",
+    "merged_at": "2026-10-20T07:25:41Z",
+    "merge_exit": 0,
+    "sole_merge_submit": true
+  }
+}

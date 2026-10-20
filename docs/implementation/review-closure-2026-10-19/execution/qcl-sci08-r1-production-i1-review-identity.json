@@ -1,0 +1,72 @@
+{
+  "status": "PASS_SOURCE",
+  "review": "independent high C/P/P SCI08-R1 production I1",
+  "runner": "/tmp/qcl-sci08-r1-runner-worktree",
+  "runner_head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "managed_root_head_observed": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "core_gitlink": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+  "runner_recursive_submodules": "",
+  "source_sha256": {
+    "src/composition/native_phase_telemetry.jl": "aba27f8c873b28f4b3f99d7736c9bedf40368ca4154e7c0af0ab592fc7ece216",
+    "src/composition/scientific_execution.jl": "52aded550f1362b67f7c3781e2d45daac0e001a6dd0248a730f29299d443645f",
+    "src/composition/scientific_workflow.jl": "b391a455247208a4293ea1aa000b4a288c097a70c23abd45f59e9f1b29a01337",
+    "src/infrastructure/persistence/point_artifacts.jl": "18bcd0fe2c6ff42050c500b57f17678b06a38f14871a9a3de437841cb5f8d1ad",
+    "src/infrastructure/resources/linux_resources.jl": "c6cceec4f6c8706485dbfa2902531f3c76d95b7c47dcffb773d9934de267f39f"
+  },
+  "fixture_sha256": {
+    "test/contracts/checked_storage_forecast.jl": "f3f263ad0b1b13dcc8a20b5668bfdccb7bb7fa5d30937bd72d7793a0013d2cc4",
+    "test/infrastructure/strict_campaign_resource_admission.jl": "b6470f1d8e3b89b5ad71b9a8cb6cbcc9873221c85a2515cb8e3188306831b8c2",
+    "test/application/execution_resource_contract.jl": "42fb1de375ee1c6e3e0b4710dc045a8b308b3507790468eb6a112bd01e836aa9",
+    "test/infrastructure/linux_process_resource_probe.jl": "fb36182464c643c42951bcd89a0ad59f6f0118f0524050c3dbe0c0a80c3a581c",
+    "test/integration/native_phase_resource_contract.jl": "63d83e77025c74140cd67af9d9efb2b1bb7df735bebf7ac9c06c4c16e3476a6a"
+  },
+  "inputs_sha256": {
+    "/tmp/qcl-sci08-r1-production-i1-identity.json": "5c04472b3dda7325d99a4e1eebbc732db869bccde46a3b6f2fd9ffc8dafa82ad",
+    "/tmp/qcl-sci08-r1-production-i1-complete.patch": "7c5d0a56dfc56081aa3a3e78e91adae936130482167614dec4867779b520c9e6",
+    "/tmp/qcl-sci08-r1-production-i1-report.md": "4ac96ee72aeb54eec76cf31e8b236d7cbc9d686464d5efddfbf00ce9ecf1fb4e",
+    "/tmp/qcl-sci08-r1-production-i1-caller-traces.md": "2c5913c00123b3556070f322b53f5795381dc6b4c3d06323944e974676512699",
+    "/tmp/qcl-sci08-R1-design.md": "16b07bbafce8235e0e103205e90c5b6e6b0db6c13c5bd4c883074f32888fe3c7",
+    "/tmp/qcl-sci08-R1-design-v2.md": "5a50afe3ca4014991dcb61d6dfb2879b2fef99e10f18347b5aa5d4eefe54d642",
+    "/tmp/qcl-sci08-R1-design-v3.md": "373a5da4ca765561e4a3ee46fa9c0bd06959a067ebf9f56c415e33666ad507c7",
+    "/tmp/qcl-sci08-R1-design-review.md": "a68ecf63af984355148b46d4a943cc5ca35adbe9da80102c512858d2b4847d69",
+    "/tmp/qcl-sci08-R1-design-v2-review.md": "23e50f07964c441f16b1e121f9d7952cf1bafd737544b81000a56a9da28e32fa",
+    "/tmp/qcl-sci08-R1-design-v3-review.md": "7b8108df1708f103a988ca567feb0e50c8b8c8f455ac657217033ed692c0ff46",
+    "/tmp/qcl-sci08-R1-engineering-plan-v3.json": "c48d28709fb75a66652d8ca7d884e55a1158c7e9e950b5e8aa0861525db3c13e",
+    "/tmp/qcl-sci08-R1-fixtures-v2-identity.json": "87981037d559a9461b835a3a4d1c5d99b86c1cce78c3594197010948397bb254",
+    "/tmp/qcl-SCI08-R1-ENG-RED-2/receipt.json": "1ae6c4cd1ac24f82dbc43558f9f145654468347e4a9b91ef81563ff2ed59714c"
+  },
+  "artifacts": {
+    "review": {
+      "path": "/tmp/qcl-sci08-r1-production-i1-review.md",
+      "sha256": "00c798cf1fdfe0cd14b245cbab997567a7e7628c25957789fded840fb9bdf6d1",
+      "status": "PASS_SOURCE"
+    },
+    "actual_O1_O2_caller_traces": {
+      "path": "/tmp/qcl-sci08-r1-production-i1-approved-o1-o2-traces.md",
+      "sha256": "3cbf2efa4de706f7b4bae9b9fc1a27445881c760fb413a656a8f7fb5f1f7dea7",
+      "status": "PASS_SOURCE"
+    }
+  },
+  "blocking_findings": [],
+  "source_hashes_unchanged_on_final_readback": true,
+  "frozen_fixtures_unchanged": true,
+  "nominal_assertions": 349,
+  "assertions_by_file": [118, 131, 55, 26, 19],
+  "logical_groups": 31,
+  "selected_testsets": 33,
+  "runtime_passes": null,
+  "runtime_parser_compiler_format_lint_tests_Julia_Pkg_build_solver_native_network_calls": 0,
+  "production_CP_Git_mutations": 0,
+  "strict_campaign_entry": "unconditionally closed needs_guard/needs_admission pending R2/R3/P1/P2/A1/C1",
+  "GREEN_READY": false,
+  "RED1_preserved_consumed": true,
+  "C08": "exhausted 8/8 unchanged",
+  "limits": "15min, 6MiB logical reads, 1CPU, 1GiB, 192KiB output; logical source accounting only, no physical OS measurements",
+  "limitations": [
+    "Source approval only; fresh Root GREEN1 READY and untouched finite GREEN call remain separate.",
+    "No full storage-growth, native identity/freshness/leases/admission or scientific acceptance claim.",
+    "Known early commit root mkdir is outside payload-writer refusal guarantee.",
+    "Forecast remains existing heuristic, not proven HDF5 capacity.",
+    "Fake-only source traces are not syscall isolation or dependency initialization measurement."
+  ]
+}

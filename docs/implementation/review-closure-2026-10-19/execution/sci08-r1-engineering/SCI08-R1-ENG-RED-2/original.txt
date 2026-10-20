@@ -1,0 +1,20 @@
+QCL_IMPORT_IDENTITY	/tmp/qcl-SCI08-R1-ENG-RED-2/tmp/environment/components/QCLNEGFRunner.jl	/tmp/qcl-SCI08-R1-ENG-RED-2/tmp/environment/components/QCLNEGFRunner.jl/src/QCLNEGFRunner.jl	/tmp/qcl-SCI08-R1-ENG-RED-2/tmp/environment/components/QCLNEGF.jl	/tmp/qcl-SCI08-R1-ENG-RED-2/tmp/environment/components/QCLNEGF.jl/src/QCLNEGF.jl
+
+SCI08-R1 existing forecast behavioral RED: Test Failed at /tmp/qcl-sci08-R1-behavioral-red.jl:14
+  Expression: QCLNEGFRunner._checkpoint_storage_forecast(tiny_solution(true, 1, 1))
+    Expected: ArgumentError
+  No exception thrown
+  Stacktrace:
+   [1] do_test_throws(result::Test.ExecutionResult, orig_expr::Any, extype::Any)
+     @ Test /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:910
+   [2] top-level scope
+     @ /tmp/qcl-sci08-R1-behavioral-red.jl:12
+   [3] macro expansion
+     @ /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [4] macro expansion
+     @ /tmp/qcl-sci08-R1-behavioral-red.jl:14 [inlined]
+QCL_COUNTS	1	1	0	0	1
+Test Summary:                               | Pass  Fail  Total  Time
+SCI08-R1 bounded selection                  |    1     1      2  2.2s
+  SCI08-R1 existing forecast behavioral RED |    1     1      2  1.7s
+ERROR: Some tests did not pass: 1 passed, 1 failed, 0 errored, 0 broken.

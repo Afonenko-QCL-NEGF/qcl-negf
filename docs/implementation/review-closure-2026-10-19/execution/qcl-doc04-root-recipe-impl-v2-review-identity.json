@@ -1,0 +1,39 @@
+{
+  "phase": "DOC04-I-Root-v2-focused-independent-high-source-review",
+  "result": "R1_R2_CLOSED_SOURCE_OVERALL_PARTIAL_NOT_READY",
+  "overall_pass": false,
+  "overall_ready": false,
+  "worktree": "/tmp/qcl-doc04-root-recipe-worktree",
+  "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "status_paths": ["docs/public/make.jl", "ops/docs.ts", "tests/docs_recipe_orchestration_test.ts"],
+  "source_files": [
+    {"path": "ops/docs.ts", "bytes": 16757, "sha256": "0837ceda6be4fbfbd90e411fe6e4fe665f8bc8979e63ac1fbfe6bacedd8b178a"},
+    {"path": "tests/docs_recipe_orchestration_test.ts", "bytes": 11328, "sha256": "697b1774ee0573acfc6ec5e5c6ebf4b3c922fb6588cc9d291deab2f10f3408c3"},
+    {"path": "docs/public/make.jl", "unchanged_from_I1": true, "sha256": "b673bf4e2ba53179bccd7dcff631c8c1fe03893944cf2add868155e133705c8b"}
+  ],
+  "inputs": [
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-complete.patch", "bytes": 33380, "sha256": "aef4548dbd662d201057dbe5c92b71767d9fdd55df3893c1b788adeff5f06585"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-report.md", "bytes": 8406, "sha256": "12f05352105dc6c86b53de6cc66d83ec4199c1c0a09bd324d0628398b08c526b"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-identity.json", "bytes": 2127, "sha256": "17479b52402cd8a2a57c394af559abc1a6a5dcf101f15e580d4f907f1de3cbe0"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-review.md", "sha256": "6c405424aad14554e579f31c9675969ba0510e43abd4b17326c22ff10f9e1f3b"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-review-identity.json", "sha256": "4fd0d4ff100f56e4257d52f7bc16025f31206b62438689a5fef74b2dca9f8bdd"}
+  ],
+  "gitlinks": {
+    "core": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+    "runner": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "initialized": false,
+    "changed": false
+  },
+  "finding_disposition": {
+    "R1": {"result": "CLOSED_SOURCE", "locators": ["ops/docs.ts:261", "ops/docs.ts:281", "ops/docs.ts:243", "ops/docs.ts:307", "tests/docs_recipe_orchestration_test.ts:114"], "limit": "cap_plus_one_bytes_not_IO_deadline_or_TOCTOU_proof"},
+    "R2": {"result": "CLOSED_SOURCE", "locators": ["ops/docs.ts:125", "ops/docs.ts:175", "ops/docs.ts:202", "ops/docs.ts:214", "tests/docs_recipe_orchestration_test.ts:70", "tests/docs_recipe_orchestration_test.ts:85", "tests/docs_recipe_orchestration_test.ts:97"], "limit": "acknowledged_prefix_not_durable_storage_or_effective_cancellation_proof"},
+    "new_blocking_findings_in_focused_scope": []
+  },
+  "remaining_source_gaps": ["bounded_sourceGraph_runner_binding", "accepted_complete_assembly_transport_API", "shared_schema_validation_binding", "plan_effect_manifest_validation", "actual_owner_staging_readback", "production_runner_spawn_sink_and_terminal_receipt_wiring", "recipe_dispatch", "full_source_input_recheck", "actual_julia_guard_sentinels", "before_after_source_change_control"],
+  "external_evidence_separate_from_source_gaps": ["nested_dynamic_docstrings_import_cache", "installed_toolchain_documenter_identity", "assets_licenses_CSS", "fresh_inventory_admission", "namespace_ownership_exclusivity", "process_tree_network_CPU_RAM_wall_log_output_scratch_budget"],
+  "next_source_contract": "bounded_SourceGraph_runner_seam_and_before_after_identity_control_while_BUILD_remains_blocked",
+  "review_report": {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-review.md", "bytes": 13858, "sha256": "97f01e8b463a2554c32c28ac05b388ddcc8b43a9acc936a41f42bcf6131a9a83"},
+  "limits": {"read_grant_bytes": 4194304, "conservative_named_source_read_reserve_bytes": 524288, "output_cap_bytes": 131072, "physical_io_rss_measured": false, "transport_output_metered": false, "formal_enforcement_pass_claimed": false},
+  "checks": {"source_inspection": "completed_focused_R1_R2", "runtime_red_green": "not_measured", "typecheck": "not_measured", "parser_compiler_format_lint": "not_measured", "tests": "not_measured", "build_native_science": "not_measured"},
+  "actions": {"source_edits": 0, "git_mutations": 0, "CP_writes": 0, "target_runtime": 0, "parser_compiler": 0, "format_lint_tests": 0, "Julia_import_render": 0, "build_native": 0, "network_server_science": 0, "subagents": 0}
+}

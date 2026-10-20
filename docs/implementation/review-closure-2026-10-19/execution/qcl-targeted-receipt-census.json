@@ -509,5 +509,56 @@
     "receipt_sha256": "8d638a5de2c52db561ad50152194b6033536c99a1e903a2684c92348d0e653df",
     "kind": "bootstrap_failure_before_behavioral_assertions_no_RED_established",
     "registered_test_count": 0
+  },
+  {
+    "id": "qcl-SCI08-R1-ENG-RED-2",
+    "wall_seconds": 7.574,
+    "raw_wall_seconds": 7.573678180982824,
+    "exit_code": 0,
+    "product_exit_code": 1,
+    "receipt_sha256": "1ae6c4cd1ac24f82dbc43558f9f145654468347e4a9b91ef81563ff2ed59714c",
+    "kind": "expected_behavioral_RED_1pass1fail0errors_not_science",
+    "counts": [
+      "1",
+      "1",
+      "0",
+      "0",
+      "1"
+    ]
+  },
+  {
+    "id": "qcl-DOC06-SCHEMA-ACTUAL-A1",
+    "wall_seconds": 0.972,
+    "raw_wall_seconds": 0.9719644370488822,
+    "exit_code": 0,
+    "receipt_sha256": "db39aa0e9fd46211ace51ab39ed7c8bbd6e8653fc9b9a89fc85d7b41ef9cf063",
+    "kind": "actual9_source_projection_not_unit_or_science",
+    "guarded_pass": true,
+    "meaning_review_pending": true
+  },
+  {
+    "id": "qcl-DOC06-SCHEMA-ACTUAL-A2",
+    "wall_seconds": 0.94,
+    "raw_wall_seconds": 0.9395445749978535,
+    "exit_code": 0,
+    "receipt_sha256": "bba0bb2a4cec0d52710125b38fccfa765767cfc88e8fb90123718576d5791940",
+    "kind": "actual9_source_projection_not_unit_or_science",
+    "guarded_pass": true,
+    "meaning_review_pending": true
+  },
+  {
+    "id": "qcl-SCI08-R1-ENG-GREEN-1",
+    "wall_seconds": 27.972,
+    "raw_wall_seconds": 27.972184391051996,
+    "exit_code": 0,
+    "receipt_sha256": "5d54f61aca6db32adef3cd6dda2da94cede325dbecf4320548d1f8d1954896a6",
+    "kind": "349_manufactured_assertions_not_C08_native_or_science",
+    "counts": [
+      "349",
+      "0",
+      "0",
+      "0",
+      "33"
+    ]
   }
 ]

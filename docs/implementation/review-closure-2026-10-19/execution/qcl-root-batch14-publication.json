@@ -1,0 +1,17 @@
+{
+  "operation_id": "ROOT-PROGRESS-BATCH14-1",
+  "state": "pushed_confirmed_existing_PR23",
+  "base": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "manifest_sha256": "5ce808326cf401de6a9005222dbc00928c6826ea4b9e7ed0fcf3e9f777919816",
+  "PR": 23,
+  "source_files": {
+    "ops/docs/static-slice.ts": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "full_source_READY": false,
+  "head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "push_exit": 0,
+  "sole_push_submit": true,
+  "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf/pull/23",
+  "observed_remote_head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0"
+}

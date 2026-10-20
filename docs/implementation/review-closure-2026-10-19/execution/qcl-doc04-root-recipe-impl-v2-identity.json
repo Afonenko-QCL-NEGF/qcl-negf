@@ -1,0 +1,25 @@
+{
+  "phase": "DOC04-I-Root-finite-source-correction-v2",
+  "result": "partial_stop_for_separate_high_review",
+  "overall_ready": false,
+  "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "worktree": "/tmp/qcl-doc04-root-recipe-worktree",
+  "branch": "codex/review-closure-doc04-root-recipes",
+  "review": {"path": "/tmp/qcl-doc04-root-recipe-impl-review.md", "sha256": "6c405424aad14554e579f31c9675969ba0510e43abd4b17326c22ff10f9e1f3b", "identity_sha256": "4fd0d4ff100f56e4257d52f7bc16025f31206b62438689a5fef74b2dca9f8bdd"},
+  "source_files": [
+    {"path": "ops/docs.ts", "bytes": 16757, "sha256": "0837ceda6be4fbfbd90e411fe6e4fe665f8bc8979e63ac1fbfe6bacedd8b178a"},
+    {"path": "tests/docs_recipe_orchestration_test.ts", "bytes": 11328, "sha256": "697b1774ee0573acfc6ec5e5c6ebf4b3c922fb6588cc9d291deab2f10f3408c3"}
+  ],
+  "unchanged_operator_recipe_sha256": "b673bf4e2ba53179bccd7dcff631c8c1fe03893944cf2add868155e133705c8b",
+  "complete_patch": {"path": "/tmp/qcl-doc04-root-recipe-impl-v2-complete.patch", "bytes": 33380, "sha256": "aef4548dbd662d201057dbe5c92b71767d9fdd55df3893c1b788adeff5f06585"},
+  "I1_artifacts_preserved": true,
+  "R1_primary_locators": ["I1 ops/docs.ts:223-228", "I1 ops/docs.ts:207-214"],
+  "R2_primary_locators": ["I1 tests/docs_recipe_orchestration_test.ts:69-79", "I1 ops/docs.ts:160-163", "I1 ops/docs.ts:176-188"],
+  "limits": {"minutes": 10, "cpu": 1, "ram_bytes": 1073741824, "read_grant_bytes": 2097152, "conservative_read_reserve_bytes": 1048576, "output_cap_bytes": 131072, "physical_io_rss_measured": false},
+  "checks": {"text_whitespace": "no_diagnostics", "runtime_red_green": "not_measured", "typecheck_format_lint": "not_measured", "build_native_science": "not_measured"},
+  "target_execution": 0,
+  "network": 0,
+  "commits_cp": 0,
+  "known_limits": ["metadata_not_TOCTOU_or_exclusivity_proof", "byte_cap_not_filesystem_IO_deadline", "sink_cancellation_cooperative_not_proven", "late_physical_sink_writes_unknown_partial", "descendant_termination_not_measured", "I1_assembly_schema_sourceGraph_staging_dispatch_and_evidence_gaps_remain"],
+  "independent_review": "pending"
+}

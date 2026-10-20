@@ -1,0 +1,103 @@
+{
+  "format": "qcl-negf.doc06-independent-semantic-review.v1",
+  "reviewer": "doc06_actual_semantic_r2",
+  "reviewed_root": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "evidence_namespace": "/tmp/qcl-DOC06-ACTUAL-c5ef91f-schemafix-v2",
+  "facts_sha256": "577f43c0653e7394355dda4df58a6e9d299589941c59d7ccbb2395824df2550e",
+  "source_receipt_sha256": "30e3824f61194d24918fbaea6f8c9802fb40c2bf7cd4f57f4f6d7b690b6ac60e",
+  "source_files": [
+    {
+      "path": "runner/src/application/configuration_types.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+      "bytes": 8663
+    },
+    {
+      "path": "runner/src/infrastructure/config/configuration.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb",
+      "bytes": 71428
+    },
+    {
+      "path": "runner/src/infrastructure/config/configuration_sources.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "bb08a718dd765a15db2a4fba7de0ff2ea79753f29dc516900f67485331dafbb1",
+      "bytes": 3381
+    },
+    {
+      "path": "runner/src/application/auto_strategy.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326",
+      "bytes": 19019
+    },
+    {
+      "path": "runner/docs/src/user/configuration.md",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+      "bytes": 10648
+    },
+    {
+      "path": "runner/test/fixtures/configurations/base.yaml",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2",
+      "bytes": 6973
+    },
+    {
+      "path": "runner/schema/run.schema.json",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "bytes": 54815
+    },
+    {
+      "path": "contracts/src/qcl_negf_contracts/schemas/run.schema.json",
+      "owner": "components/qcl-negf-contracts",
+      "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "bytes": 54815
+    },
+    {
+      "path": "core/src/numerics/optimized/production_contracts.jl",
+      "owner": "components/QCLNEGF.jl",
+      "revision": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+      "bytes": 15596
+    }
+  ],
+  "source_count": 9,
+  "source_bytes": 245338,
+  "a1_a2_bytes_equal": true,
+  "independently_verified_source_hashes": true,
+  "commit_to_bytes_binding_reverified": false,
+  "review_report": "/tmp/qcl-doc06-schema-actual-meaning-v2-review.md",
+  "review_report_sha256": "f4a6f055d14c54026a48845d8975b6bbe538af6bd612e36dedc7750642031224",
+  "verdict": "adequate_fixed_slice_partial_with_nonblocking_comments",
+  "blocking_findings": 0,
+  "comments": [
+    {
+      "id": "C1",
+      "severity": "nonblocking",
+      "facts_pointer": "/subjects/1/facts/3",
+      "receipt_pointer": "/extractions/14",
+      "issue": "Absence is correct, but selector names nonexistent default key and literal-extraction/null should be distinguished from literal null."
+    },
+    {
+      "id": "C2",
+      "severity": "nonblocking",
+      "facts_pointers": [
+        "/subjects/0/facts/9",
+        "/subjects/1/facts/13"
+      ],
+      "issue": "Actual history unavailable in input is not evidence of empty/absent run history."
+    }
+  ],
+  "runtime_executed": false,
+  "scientific_acceptance_claimed": false,
+  "read_budget_observation": "All evidence/source/author-code metadata reads comfortably below 6 MiB; no archive arrays, runtime, network, target module import, parser/compiler, tests or guard rerun."
+}

@@ -1,0 +1,96 @@
+{
+  "task": "SCI09-SCI12-CATALOG-R1",
+  "stage": "independent_source_design_review_only",
+  "verdict": "APPROVED_SOURCE_CATALOG_AND_CONDITIONAL_PREDICATES",
+  "blocking_findings": 0,
+  "clarifications": [
+    {
+      "id": "R1-C1",
+      "locator": "D1:102; D1:139",
+      "meaning": "SCI12-MAP requires exact operator/current/literal-oracle freeze before I; only precursor D ticket ready"
+    }
+  ],
+  "observed_root_head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "gitlinks_authority": "Root Git tree; 8 direct submodules; no parallel maintained lock",
+  "gitlinks_observation_sha256": "39529e5f6ecf26b57e005b0d8712ccef96a191099be182785e3b43b525fa1b0f",
+  "frozen_inputs": {
+    "qcl-sci09-12-catalog-design.md": {
+      "path": "/tmp/qcl-sci09-12-catalog-design.md",
+      "bytes": 39546,
+      "sha256": "b80c5e354a0453a7151fc243f7a98d97f14c722baef733d7a53e0166fb7d998d"
+    },
+    "qcl-sci09-12-catalog-design-identity.json": {
+      "path": "/tmp/qcl-sci09-12-catalog-design-identity.json",
+      "bytes": 6293,
+      "sha256": "5a10537ac3f7fd1b966a102d4def872e2f1a36d0081543f8a87dd7e7ba0817f1"
+    },
+    "qcl-sci09-12-catalog-design-read-ledger.json": {
+      "path": "/tmp/qcl-sci09-12-catalog-design-read-ledger.json",
+      "bytes": 7133,
+      "sha256": "9ea2d0eb79f4f3fceb695be6dff60d492e2fbbc774df494fa7f6e4269b8a1ef0"
+    }
+  },
+  "outputs": {
+    "report": {
+      "path": "/tmp/qcl-sci09-12-catalog-design-review.md",
+      "bytes": 15019,
+      "sha256": "cb8b0b90562707b125969d4dc15da0c0fb0f7cf1ed9cffefd516b7aba91ff921"
+    }
+  },
+  "limits": {
+    "wall_minutes": 15,
+    "CPU": 1,
+    "RAM_bytes": 2147483648,
+    "read_limit_bytes": 8388608,
+    "conservative_content_read_upper_bytes": 4194304,
+    "output_limit_bytes": 131072,
+    "resource_measurements": null
+  },
+  "performed": [
+    "read-only Git",
+    "named text/source/SHA reads",
+    "stdlib report/identity serialization"
+  ],
+  "not_performed": [
+    "product parser/resolver/compiler/imports/tests",
+    "Julia/Pkg/solver/SCBA/Poisson",
+    "network/server/native probes",
+    "scientific arrays read/write",
+    "source/CP writes"
+  ],
+  "scientific_submits": 0,
+  "test_calls": 0,
+  "scientific_payload_read_bytes": 0,
+  "scientific_payload_write_bytes": 0,
+  "product_source_writes": [],
+  "CP_writes": [],
+  "scientific_identity": {
+    "run": "not_created",
+    "actual_model_fingerprint": null,
+    "actual_plan_sha256": null,
+    "P0_sha256": null,
+    "A1_sha256": null,
+    "execution_id": null,
+    "attempt": null,
+    "state_id": null,
+    "fresh_native_admission": null,
+    "null_reason": "No resolver/runtime/scientific submit in independent source-only review"
+  },
+  "not_claimed": [
+    "CP-CODE",
+    "CP-SCI READY/BIND",
+    "runtime correctness",
+    "scientific physical/discretization acceptance",
+    "experimental validation"
+  ],
+  "next_source_ready": [
+    "SCI09-CAT-SOURCE",
+    "SCI12-MAP-D precursor only"
+  ],
+  "protected": [
+    "old S01",
+    "foreign resources/jobs",
+    "original failed raw/logs/receipts",
+    "historical48/56 sources"
+  ]
+}

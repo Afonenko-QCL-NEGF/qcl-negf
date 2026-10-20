@@ -1,0 +1,673 @@
+diff --git a/docs/public/make.jl b/docs/public/make.jl
+new file mode 100644
+index 0000000..310e5ae
+--- /dev/null
++++ b/docs/public/make.jl
+@@ -0,0 +1,89 @@
++# Root's externally admitted preflight is mandatory. These Base-only path guards
++# do not prove payload/effect/cache closure, ownership or process-tree isolation.
++get(ENV, "QCL_DOCS_PROFILE", "") == "pilot-v1" ||
++    error("Operator recipe requires explicit pilot-v1")
++
++# Staging reads this versioned literal without executing Julia. Keep the exact LF
++# bytes and final newline; this is generated index source, not a second chapter.
++const QCL_DOCS_OPERATOR_INDEX = "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n"
++
++function _qcl_docs_path(name)
++    value = get(ENV, name, "")
++    isempty(value) && error("Missing required pilot path: " * name)
++    startswith(value, "/") && isabspath(value) || error("Pilot path must be Linux absolute")
++    (endswith(value, "/") || occursin("//", value) ||
++     any(part -> part == "." || part == "..", split(value, '/'))) &&
++        error("Pilot path has noncanonical components")
++    value == normpath(value) || error("Pilot path must be normalized")
++    cursor = value
++    while true
++        islink(cursor) && error("Pilot path has a symlink ancestor")
++        parent = dirname(cursor)
++        parent == cursor && break
++        cursor = parent
++    end
++    return value
++end
++function _qcl_docs_directory(path)
++    isdir(path) || error("Required pilot directory is missing")
++    realpath(path) == path || error("Pilot directory is not canonical")
++end
++function _qcl_docs_contains(parent, child)
++    a, b = splitpath(parent), splitpath(child)
++    return length(b) >= length(a) && b[1:length(a)] == a
++end
++_qcl_docs_root = _qcl_docs_path("QCL_DOCS_ROOT")
++_qcl_docs_attempt = _qcl_docs_path("QCL_DOCS_ATTEMPT")
++_qcl_docs_source = _qcl_docs_path("QCL_DOCS_SOURCE")
++_qcl_docs_build = _qcl_docs_path("QCL_DOCS_BUILD")
++for path in (_qcl_docs_root, _qcl_docs_attempt, _qcl_docs_source, dirname(_qcl_docs_build))
++    _qcl_docs_directory(path)
++end
++(_qcl_docs_contains(_qcl_docs_root, _qcl_docs_attempt) ||
++ _qcl_docs_contains(_qcl_docs_attempt, _qcl_docs_root)) && error("ROOT and ATTEMPT overlap")
++(_qcl_docs_contains(_qcl_docs_source, _qcl_docs_build) ||
++ _qcl_docs_contains(_qcl_docs_build, _qcl_docs_source)) && error("SOURCE and BUILD overlap")
++_qcl_docs_source == joinpath(_qcl_docs_attempt, "stage", "operator", "src") ||
++    error("SOURCE does not match operator layout")
++_qcl_docs_build == joinpath(_qcl_docs_attempt, "raw", "operator") ||
++    error("BUILD does not match operator layout")
++(ispath(_qcl_docs_build) || islink(_qcl_docs_build)) && error("BUILD already exists")
++joinpath(realpath(dirname(_qcl_docs_build)), "operator") == _qcl_docs_build ||
++    error("BUILD candidate is not canonical")
++VERSION == v"1.13.0" || error("Pilot requires Julia 1.13.0")
++_qcl_docs_project = joinpath(_qcl_docs_root, "julia", "Project.toml")
++for name in ("Project.toml", "Manifest.toml")
++    expected = joinpath(_qcl_docs_root, "julia", name)
++    cursor = expected
++    while true
++        islink(cursor) && error("Pilot project has a symlink ancestor")
++        parent = dirname(cursor)
++        parent == cursor && break
++        cursor = parent
++    end
++    isfile(expected) || error("Missing regular pilot project input")
++    realpath(expected) == expected || error("Pilot project input is not canonical")
++end
++Base.active_project() == _qcl_docs_project || error("Wrong active pilot project")
++
++using Documenter
++makedocs(
++    root = _qcl_docs_root,
++    source = _qcl_docs_source,
++    build = _qcl_docs_build,
++    modules = Module[],
++    remotes = nothing,
++    sitename = "Документация оператора",
++    format = Documenter.HTML(prettyurls = false, edit_link = nothing,
++        disable_git = true, analytics = "", warn_outdated = false,
++        prerender = false, mathengine = nothing,
++        assets = ["assets/qcl-fixed-light.css"],
++        repolink = "https://github.com/Afonenko-QCL-NEGF/qcl-negf"),
++    pages = ["Home" => "index.md", "Recovery" => "recovery.md"],
++    pagesonly = false,
++    doctest = false,
++    linkcheck = false,
++    checkdocs = :none,
++    warnonly = false,
++    draft = false,
++)
+diff --git a/ops/docs.ts b/ops/docs.ts
+new file mode 100644
+index 0000000..e21eedc
+--- /dev/null
++++ b/ops/docs.ts
+@@ -0,0 +1,348 @@
++// DOC04 source integration. No BUILD dispatch until owning admission/effect/
++// assembly bindings exist. Paths and marker files never confer that authority.
++import { workspace } from "./process.ts";
++
++export type Owner = "core" | "runner" | "operator";
++export interface Layout {
++  root: string;
++  attempt: string;
++  owner: Owner;
++  source: string;
++  build: string;
++}
++function canonical(path: string): void {
++  if (!path.startsWith("/") || path.endsWith("/") || path.includes("\\") ||
++    path.split("/").slice(1).some((p) => !p || p === "." || p === "..") ||
++    /[\x00-\x1f\x7f]/.test(path)) throw new Error("noncanonical_absolute_path");
++}
++function contains(parent: string, child: string): boolean {
++  return child === parent || child.startsWith(parent + "/");
++}
++export function checkLayout(value: Layout): void {
++  for (const p of [value.root, value.attempt, value.source, value.build]) canonical(p);
++  if (!["core", "runner", "operator"].includes(value.owner)) throw new Error("unknown_owner");
++  if (contains(value.root, value.attempt) || contains(value.attempt, value.root) ||
++    contains(value.source, value.build) || contains(value.build, value.source) ||
++    value.source !== `${value.attempt}/stage/${value.owner}/src` ||
++    value.build !== `${value.attempt}/raw/${value.owner}`) throw new Error("invalid_owner_layout");
++}
++async function absent(path: string): Promise<void> {
++  try { await Deno.lstat(path); } catch (error) {
++    if (error instanceof Deno.errors.NotFound) return;
++    throw error;
++  }
++  throw new Error("existing_output_or_attempt");
++}
++async function ancestors(path: string, directory: boolean): Promise<void> {
++  canonical(path);
++  let cursor = path;
++  while (cursor !== "/") {
++    const info = await Deno.lstat(cursor);
++    if (info.isSymlink || (cursor !== path && !info.isDirectory)) {
++      throw new Error("symlink_or_invalid_ancestor");
++    }
++    cursor = cursor.slice(0, cursor.lastIndexOf("/")) || "/";
++  }
++  const info = await Deno.lstat(path);
++  if (directory ? !info.isDirectory : !info.isFile) throw new Error("wrong_file_kind");
++  if (await Deno.realPath(path) !== path) throw new Error("noncanonical_realpath");
++}
++export async function checkLayoutFiles(value: Layout): Promise<void> {
++  checkLayout(value);
++  for (const path of [value.root, value.attempt, value.source, `${value.attempt}/raw`]) {
++    await ancestors(path, true);
++  }
++  await absent(value.build); // lstat rejects even dangling symlinks
++  await ancestors(`${value.root}/julia/Project.toml`, false);
++  await ancestors(`${value.root}/julia/Manifest.toml`, false);
++}
++export async function sha256(bytes: Uint8Array): Promise<string> {
++  const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
++  return Array.from(digest, (v) => v.toString(16).padStart(2, "0")).join("");
++}
++const OPERATOR_SHA = "8f05ff4cced8579b09cccd4b4315101e861e1896b87321b42e597374da79de49";
++export async function operatorSources(recovery: Uint8Array, recipe: string) {
++  if (await sha256(recovery) !== OPERATOR_SHA) throw new Error("operator_source_hash_mismatch");
++  // Read only the exact, single-line recipe-owned quoted literal. This neither
++  // evaluates Julia nor permits interpolation or arbitrary template expressions.
++  const matches = [...recipe.matchAll(/^const QCL_DOCS_OPERATOR_INDEX = ("(?:[^"\\\n]|\\[n"\\])*")$/gm)];
++  if (matches.length !== 1) throw new Error("operator_index_literal_unbound");
++  const text: unknown = JSON.parse(matches[0][1]);
++  if (typeof text !== "string" || text.includes("$") || !text.endsWith("\n")) {
++    throw new Error("operator_index_literal_invalid");
++  }
++  const index = new TextEncoder().encode(text);
++  return { recovery, index, recovery_sha256: OPERATOR_SHA, index_sha256: await sha256(index) };
++}
++
++export function parseDocsArgs(args: string[]) {
++  const mode = args[0];
++  if (mode !== "preflight" && mode !== "build") throw new Error("expected_preflight_or_build");
++  const options = new Map<string, string>();
++  const allowed = mode === "build" ? ["--plan", "--attempt-directory", "--admission"] :
++    ["--plan", "--attempt-directory"];
++  for (let i = 1; i < args.length; i += 2) {
++    const key = args[i], value = args[i + 1];
++    if (!allowed.includes(key) || options.has(key) || !value || value.startsWith("--")) {
++      throw new Error("unknown_duplicate_or_missing_option");
++    }
++    canonical(value);
++    options.set(key, value);
++  }
++  if (allowed.some((key) => !options.has(key))) throw new Error("missing_required_option");
++  return { mode, plan: options.get("--plan")!, attempt: options.get("--attempt-directory")!,
++    admission: options.get("--admission") ?? null };
++}
++
++// These are concrete unclosed source integrations, not caller-provided statuses.
++// No marker/admission JSON can erase them. Replacing them needs owning APIs and
++// reviewed technical bindings, not a --ready flag or receipt existence test.
++export function buildBlockers(): string[] {
++  return [
++    "missing_admitted_assembly_entrypoint",
++    "missing_bounded_source_graph_runner_binding",
++    "missing_shared_schema_validation_binding",
++    "unknown_nested_docstring_import_cache_edges",
++    "missing_installed_documenter_toolchain_cache_binding",
++    "missing_full_assets_license_runtime_css_binding",
++    "missing_external_fresh_inventory_admission_binding",
++    "missing_process_tree_resource_and_exclusivity_binding",
++  ];
++}
++
++export interface Child {
++  stdout: ReadableStream<Uint8Array>;
++  stderr: ReadableStream<Uint8Array>;
++  status: Promise<{ code: number; success: boolean }>;
++  kill(): void;
++}
++interface Limits { wallMs: number; drainMs: number; streamBytes: number; totalBytes: number }
++export interface FiniteResult {
++  reason: string | null;
++  exit: { code: number; success: boolean } | null;
++  drain: "complete" | "incomplete";
++  errors: string[];
++  stdout_received_bytes: number;
++  stderr_received_bytes: number;
++  stdout_attempted_bytes: number;
++  stderr_attempted_bytes: number;
++  stdout_acknowledged_bytes: number;
++  stderr_acknowledged_bytes: number;
++  retention: "acknowledged" | "failed_unknown_partial" | "incomplete_unknown_partial";
++  process_tree_terminated: null;
++  resource_measurements: null;
++}
++// An injectable primitive for separately admitted fake-process controls. It is
++// intentionally not a CPU/RAM/descendant sandbox and is not wired to BUILD.
++export async function runFinite(
++  spawn: () => Child,
++  save: (stream: "stdout" | "stderr", bytes: Uint8Array, signal: AbortSignal) => Promise<void>,
++  limits: Limits,
++): Promise<FiniteResult> {
++  for (const n of Object.values(limits)) {
++    if (!Number.isSafeInteger(n) || n <= 0) throw new Error("invalid_finite_limit");
++  }
++  let reason: string | null = null;
++  let total = 0;
++  let exit: { code: number; success: boolean } | null = null;
++  const errors: string[] = [];
++  let terminal = false;
++  let sinkFailed = false;
++  const cancellation = new AbortController();
++  const child = spawn();
++  const readers = [child.stdout.getReader(), child.stderr.getReader()];
++  let signal!: () => void;
++  const stopped = new Promise<void>((resolve) => { signal = resolve; });
++  function stop(why: string) {
++    if (terminal) return;
++    if (!reason) { reason = why; signal(); }
++    try { child.kill(); } catch { errors.push("kill_failed"); }
++  }
++  const timer = setTimeout(() => stop("deadline"), limits.wallMs);
++  const reserved = [0, 0], received = [0, 0], acknowledged = [0, 0];
++  const drains = readers.map(async (reader, i) => {
++    try {
++      while (true) {
++        const chunk = await reader.read();
++        if (terminal) break;
++        if (chunk.done) break;
++        const size = chunk.value.byteLength;
++        received[i] += size;
++        const keep = Math.min(size, limits.streamBytes - reserved[i], limits.totalBytes - total);
++        reserved[i] += keep; total += keep; // reservation is not retained-byte evidence
++        if (keep < size) stop("log_cap");
++        if (keep) {
++          await save(i === 0 ? "stdout" : "stderr", chunk.value.subarray(0, keep), cancellation.signal);
++          if (terminal) break;
++          acknowledged[i] += keep; // only a successful sink acknowledgement counts
++        }
++        if (keep < size) break;
++      }
++    } catch {
++      if (!terminal) {
++        sinkFailed = true;
++        errors.push("drain_or_log_write_failed_unknown_partial");
++        stop("drain_or_log_write_failed");
++      }
++    }
++  });
++  const status = child.status.then((value) => { if (!terminal) exit = { ...value }; }, () => {
++    if (!terminal) { errors.push("status_failed"); stop("status_failed"); }
++  });
++  const complete = Promise.all([...drains, status]);
++  await Promise.race([complete, stopped]);
++  let drain: "complete" | "incomplete" = "complete";
++  let drainTimer: ReturnType<typeof setTimeout> | undefined;
++  try {
++    await Promise.race([complete, new Promise<void>((resolve) => {
++      drainTimer = setTimeout(() => { drain = "incomplete"; resolve(); }, limits.drainMs);
++    })]);
++  } finally {
++    clearTimeout(timer); clearTimeout(drainTimer);
++    terminal = true;
++    // Cancellation may itself hang; do not await it beyond the finite drain.
++    if (drain === "incomplete") {
++      // Cooperative cancellation is requested, never assumed effective. A sink
++      // may write later; the result records unknown partial retention and is a
++      // detached snapshot, not a claim of immutable terminal log bytes.
++      cancellation.abort();
++      for (const reader of readers) reader.cancel().catch(() => {});
++    }
++  }
++  const observedExit = exit as FiniteResult["exit"];
++  if (!reason && observedExit && !observedExit.success) reason = "exit_failure";
++  return { reason, exit: observedExit ? { ...observedExit } : null, drain, errors: [...errors],
++    stdout_received_bytes: received[0], stderr_received_bytes: received[1],
++    stdout_attempted_bytes: reserved[0], stderr_attempted_bytes: reserved[1],
++    stdout_acknowledged_bytes: acknowledged[0], stderr_acknowledged_bytes: acknowledged[1],
++    retention: drain === "incomplete" ? "incomplete_unknown_partial" :
++      sinkFailed ? "failed_unknown_partial" : "acknowledged",
++    process_tree_terminated: null, resource_measurements: null };
++}
++
++// Bounded read-only inventory, rejecting internal symlinks and special files.
++// This binds bytes only; effect/admission approval is deliberately separate.
++export async function inventoryTree(root: string, maxFiles: number, maxBytes: number) {
++  if (![maxFiles, maxBytes].every((n) => Number.isSafeInteger(n) && n > 0)) {
++    throw new Error("invalid_inventory_limit");
++  }
++  let entries = 0;
++  await ancestors(root, true);
++  const files: { path: string; bytes: number; sha256: string }[] = [];
++  let total = 0;
++  async function walk(path: string, depth: number): Promise<void> {
++    if (depth > 64) throw new Error("staging_depth_limit");
++    for await (const entry of Deno.readDir(path)) {
++      if (++entries > maxFiles) throw new Error("staging_entry_limit");
++      const full = `${path}/${entry.name}`;
++      const info = await Deno.lstat(full);
++      if (info.isSymlink || (!info.isFile && !info.isDirectory)) throw new Error("staging_special_entry");
++      if (info.isDirectory) await walk(full, depth + 1);
++      else {
++        if (files.length >= maxFiles || info.size > maxBytes - total) throw new Error("staging_byte_limit");
++        const data = await readRegularBounded(full, maxBytes - total);
++        if (data.length !== info.size) throw new Error("source_changed_during_read");
++        total += data.length;
++        files.push({ path: full.slice(root.length + 1), bytes: data.length, sha256: await sha256(data) });
++      }
++    }
++  }
++  await walk(root, 0);
++  return files.sort((a, b) => a.path.localeCompare(b.path));
++}
++
++export interface BoundedReader {
++  read(buffer: Uint8Array): Promise<number | null>;
++  close(): void;
++}
++// Actual bytes consumed are at most cap+1; one extra byte is an explicit overflow
++// sentinel. Reuse one bounded buffer even for short reads. Every exit closes the
++// owned reader. This is a byte bound, not an I/O deadline or race-proof snapshot.
++export async function readBounded(reader: BoundedReader, cap: number, expectedSize: number) {
++  try {
++    if (!Number.isSafeInteger(cap) || cap < 0 || cap >= Number.MAX_SAFE_INTEGER ||
++      !Number.isSafeInteger(expectedSize) || expectedSize < 0 || expectedSize > cap) {
++      throw new Error("invalid_read_limit_or_metadata");
++    }
++    const buffer = new Uint8Array(cap + 1);
++    let actual = 0;
++    while (actual <= cap) {
++      const target = buffer.subarray(actual, Math.min(cap + 1, actual + 65536));
++      const n = await reader.read(target);
++      if (n === null) break;
++      if (!Number.isSafeInteger(n) || n <= 0 || n > target.length) throw new Error("invalid_reader_progress");
++      actual += n;
++      if (actual > cap) throw new Error("input_byte_limit");
++    }
++    if (actual !== expectedSize) throw new Error("source_changed_during_read");
++    return buffer.slice(0, actual);
++  } finally { reader.close(); }
++}
++async function readRegularBounded(path: string, cap: number) {
++  await ancestors(path, false);
++  const before = await Deno.lstat(path);
++  if (!before.isFile || before.isSymlink) throw new Error("invalid_read_file_kind");
++  const file = await Deno.open(path, { read: true });
++  let owned = true;
++  try {
++    const opened = await file.stat(), current = await Deno.lstat(path);
++    if (!opened.isFile || !current.isFile || current.isSymlink ||
++      opened.dev !== before.dev || opened.ino !== before.ino ||
++      current.dev !== before.dev || current.ino !== before.ino || opened.size !== before.size) {
++      throw new Error("source_metadata_changed");
++    }
++    // Metadata checks reject observed changes; they do not establish exclusivity
++    // or eliminate filesystem races. The actual byte cap does not depend on stat.
++    owned = false;
++    const data = await readBounded(file, cap, opened.size);
++    const after = await Deno.lstat(path);
++    if (!after.isFile || after.isSymlink || after.dev !== before.dev || after.ino !== before.ino ||
++      after.size !== before.size || after.mtime?.getTime() !== before.mtime?.getTime()) {
++      throw new Error("source_metadata_changed");
++    }
++    return data;
++  } finally { if (owned) file.close(); }
++}
++async function boundedFile(path: string, cap: number) {
++  const data = await readRegularBounded(path, cap);
++  return { path, bytes: data.length, sha256: await sha256(data) };
++}
++export async function preflight(args: ReturnType<typeof parseDocsArgs>, root = workspace) {
++  canonical(root); canonical(args.attempt);
++  if (contains(root, args.attempt) || contains(args.attempt, root)) throw new Error("attempt_source_overlap");
++  await ancestors(args.attempt.slice(0, args.attempt.lastIndexOf("/")) || "/", true);
++  await absent(args.attempt);
++  // mkdir is exclusive. Never remove, truncate, reuse or repair an attempt.
++  await Deno.mkdir(args.attempt, { mode: 0o700 });
++  const blockers = buildBlockers();
++  const inputs: unknown[] = [];
++  // Existing sourceGraph uses an unbounded buffered Git runner. Do not invoke
++  // it from this finite orchestrator until an admitted bounded binding exists.
++  const sources = null;
++  for (const path of [args.plan, `${root}/julia/Project.toml`, `${root}/julia/Manifest.toml`,
++    `${root}/docs/public/make.jl`, `${root}/docs/public/operator-recovery.md`,
++    `${root}/ops/docs/assemble.py`, `${root}/ops/docs/math-render.mjs`,
++    `${root}/ops/docs/assets.lock.json`]) {
++    try { inputs.push(await boundedFile(path, 2097152)); }
++    catch (error) { blockers.push(`input_unavailable: ${path}: ${String(error)}`); }
++  }
++  // Plan parsing and final adapter calls deliberately remain blocked. The
++  // published assembler has pure functions, no admitted complete pipeline API;
++  // prepare_catalog explicitly cannot serialize an accepted bundle. Merely
++  // hashing these files is not API, plan, assets, import or schema acceptance.
++  if (args.admission) blockers.push("supplied_admission_not_validated_no_dispatch");
++  const receipt = { sources, plan: args.plan, inputs, admission: null,
++    imports: { status: "not_measured", unknown_edges: ["nested_docstrings", "transitive_imports", "cache"] },
++    assets: { status: "not_measured" }, toolchain: null, steps: [], measurements: null,
++    transforms: [], checks: blockers.map((reason) => ({ status: "blocked", reason })),
++    result: "blocked", parent_attempt: null };
++  await Deno.writeTextFile(`${args.attempt}/receipt.json`, JSON.stringify(receipt, null, 2) + "\n", { createNew: true, mode: 0o600 });
++  return receipt;
++}
++if (import.meta.main) {
++  try {
++    const receipt = await preflight(parseDocsArgs(Deno.args));
++    console.log(JSON.stringify(receipt, null, 2));
++    Deno.exitCode = 2;
++  } catch (error) { console.error(String(error)); Deno.exitCode = 1; }
++}
+diff --git a/tests/docs_recipe_orchestration_test.ts b/tests/docs_recipe_orchestration_test.ts
+new file mode 100644
+index 0000000..b827dc7
+--- /dev/null
++++ b/tests/docs_recipe_orchestration_test.ts
+@@ -0,0 +1,218 @@
++// Source-first controls. Execution requires the separately admitted fixture phase.
++// Removing path/layout rejection, byte binding, deadline/caps or fail-closed BUILD
++// must make these assertions fail. No real Julia, target import, network or solver.
++import {
++  buildBlockers,
++  checkLayout,
++  operatorSources,
++  parseDocsArgs,
++  runFinite,
++  readBounded,
++  type Child,
++} from "../ops/docs.ts";
++
++function assert(value: unknown, message = "assertion failed"): asserts value {
++  if (!value) throw new Error(message);
++}
++function rejects(action: () => unknown) {
++  try { action(); } catch { return; }
++  throw new Error("expected refusal");
++}
++const tuple = {
++  root: "/sources/root", attempt: "/attempts/a", owner: "operator" as const,
++  source: "/attempts/a/stage/operator/src", build: "/attempts/a/raw/operator",
++};
++Deno.test("strict CLI refuses duplicates, unknown options and missing admission", () => {
++  assert(parseDocsArgs(["preflight", "--plan", "/p", "--attempt-directory", "/a"]).mode === "preflight");
++  rejects(() => parseDocsArgs(["build", "--plan", "/p", "--attempt-directory", "/a"]));
++  rejects(() => parseDocsArgs(["preflight", "--plan", "/p", "--plan", "/q", "--attempt-directory", "/a"]));
++  rejects(() => parseDocsArgs(["preflight", "--plan", "/p", "--attempt-directory", "/a", "--ready", "true"]));
++});
++Deno.test("layout rejects aliases and overlaps before fake importer", () => {
++  let imports = 0;
++  const invalid = [
++    { ...tuple, attempt: "" }, { ...tuple, root: "relative" },
++    { ...tuple, source: "/attempts/a/stage/core/src" },
++    { ...tuple, attempt: "/sources/root/a" },
++    { ...tuple, root: "/attempts/a/root" },
++    { ...tuple, root: "/sources//root" },
++    { ...tuple, build: tuple.source },
++  ];
++  for (const value of invalid) {
++    rejects(() => { checkLayout(value); imports++; });
++  }
++  assert(imports === 0);
++  checkLayout({ ...tuple, root: "/attempts/ab" }); // component prefix, not string prefix
++});
++Deno.test("operator staging preserves frozen chapter bytes and recipe-owned index", async () => {
++  const recovery = await Deno.readFile(new URL("../docs/public/operator-recovery.md", import.meta.url));
++  const recipe = await Deno.readTextFile(new URL("../docs/public/make.jl", import.meta.url));
++  const staged = await operatorSources(recovery, recipe);
++  assert(staged.recovery === recovery, "exact recovery bytes must be retained");
++  assert(new TextDecoder().decode(staged.index) ===
++    "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n");
++  const changed = recovery.slice(); changed[0] ^= 1;
++  let refused = false;
++  try { await operatorSources(changed, recipe); } catch { refused = true; }
++  assert(refused, "changed canonical input must refuse before staging");
++});
++Deno.test("caller status/marker cannot manufacture BUILD readiness", () => {
++  assert(buildBlockers().includes("missing_admitted_assembly_entrypoint"));
++  assert(buildBlockers().includes("unknown_nested_docstring_import_cache_edges"));
++});
++function fake(data: Uint8Array, status: Promise<{ code: number; success: boolean }>): Child {
++  return {
++    stdout: new ReadableStream({ start(c) { c.enqueue(data); c.close(); } }),
++    stderr: new ReadableStream({ start(c) { c.enqueue(new Uint8Array([21,22,23,24,25,26,27,28])); c.close(); } }),
++    status, kill() {},
++  };
++}
++Deno.test("finite drains preserve partial logs on combined cap and failed exit", async () => {
++  const saved: Record<string, number[]> = { stdout: [], stderr: [] };
++  const result = await runFinite(
++    () => fake(new Uint8Array([11,12,13,14,15,16,17,18]), Promise.resolve({ code: 7, success: false })),
++    async (stream, bytes) => { saved[stream].push(...bytes); },
++    { wallMs: 100, drainMs: 20, streamBytes: 6, totalBytes: 9 },
++  );
++  assert(result.reason === "log_cap");
++  assert(JSON.stringify(saved) === '{"stdout":[11,12,13,14,15,16],"stderr":[21,22,23]}');
++  assert(result.stdout_acknowledged_bytes === 6 && result.stderr_acknowledged_bytes === 3);
++  assert(result.stdout_received_bytes === 8 && result.stderr_received_bytes === 8);
++  assert(result.retention === "acknowledged");
++  assert(result.exit?.code === 7);
++  assert(result.process_tree_terminated === null);
++});
++Deno.test("rejecting sink distinguishes received bytes from acknowledged retention", async () => {
++  const saved: number[] = [];
++  const result = await runFinite(() => fake(new Uint8Array([31,32,33]),
++    Promise.resolve({ code: 0, success: true })), async (stream, bytes) => {
++      if (stream === "stderr") throw new Error("sink rejected; partial write unknown");
++      saved.push(...bytes);
++    }, { wallMs: 100, drainMs: 20, streamBytes: 16, totalBytes: 32 });
++  assert(JSON.stringify(saved) === '[31,32,33]');
++  assert(result.stdout_acknowledged_bytes === 3 && result.stderr_acknowledged_bytes === 0);
++  assert(result.stderr_received_bytes === 8 && result.stderr_attempted_bytes === 8);
++  assert(result.retention === "failed_unknown_partial");
++});
++Deno.test("deadline retains exact nonzero prefix and snapshots a hanging sink", async () => {
++  let release!: () => void;
++  const saved: number[] = [];
++  const result = await runFinite(() => fake(new Uint8Array([41,42]), new Promise(() => {})),
++    async (stream, bytes) => {
++      if (stream === "stdout") saved.push(...bytes);
++      else await new Promise<void>((resolve) => { release = resolve; });
++    }, { wallMs: 5, drainMs: 5, streamBytes: 16, totalBytes: 32 });
++  assert(JSON.stringify(saved) === '[41,42]');
++  assert(result.reason === "deadline" && result.drain === "incomplete");
++  assert(result.stdout_acknowledged_bytes === 2 && result.stderr_acknowledged_bytes === 0);
++  assert(result.stderr_received_bytes === 8 && result.retention === "incomplete_unknown_partial");
++  const snapshot = JSON.stringify(result);
++  release();
++  await Promise.resolve(); await Promise.resolve();
++  assert(JSON.stringify(result) === snapshot, "late sink completion must not mutate receipt");
++});
++Deno.test("incremental reader enforces cap plus one sentinel despite small metadata", async () => {
++  let received = 0, closed = false;
++  const requests: number[] = [];
++  let refused = false;
++  try {
++    await readBounded({
++      async read(buffer) {
++        requests.push(buffer.length);
++        buffer.fill(71); received += buffer.length;
++        return buffer.length;
++      }, close() { closed = true; },
++    }, 4, 1); // observed metadata is small, actual stream grew
++  } catch { refused = true; }
++  assert(refused && closed && received === 5);
++  assert(requests.every((n) => n <= 5), "no read beyond cap plus sentinel");
++  let offset = 0;
++  const bytes = new Uint8Array([81,82,83]);
++  const retained = await readBounded({ async read(buffer) {
++    if (offset === bytes.length) return null;
++    const n = Math.min(buffer.length, bytes.length - offset);
++    buffer.set(bytes.subarray(offset, offset + n)); offset += n; return n;
++  }, close() {} }, 4, 3);
++  assert(JSON.stringify([...retained]) === '[81,82,83]');
++  let changedClosed = false, sent = false, changedRefused = false;
++  try {
++    await readBounded({ async read(buffer) {
++      if (sent) return null;
++      sent = true; buffer.set([91,92]); return 2;
++    }, close() { changedClosed = true; } }, 4, 1);
++  } catch { changedRefused = true; }
++  assert(changedRefused && changedClosed, "growth within cap still invalidates metadata binding");
++});
++Deno.test("deadline plus unclosed pipes return finite drain failure", async () => {
++  let killed = false;
++  const result = await runFinite(() => ({
++    stdout: new ReadableStream(), stderr: new ReadableStream(),
++    status: new Promise(() => {}), kill() { killed = true; },
++  }), async () => {}, { wallMs: 5, drainMs: 5, streamBytes: 6, totalBytes: 9 });
++  assert(killed && result.reason === "deadline");
++  assert(result.drain === "incomplete");
++  assert(result.exit === null);
++});
++
++// Filesystem controls are inert until an explicitly permitted fixture execution.
++import { checkLayoutFiles, inventoryTree } from "../ops/docs.ts";
++Deno.test("filesystem gate rejects existing outputs, ancestor links and payload links", async () => {
++  const base = await Deno.makeTempDir({ prefix: "qcl-doc04-fixture-" });
++  const root = `${base}/root`, attempt = `${base}/attempt`;
++  const value = { root, attempt, owner: "operator" as const,
++    source: `${attempt}/stage/operator/src`, build: `${attempt}/raw/operator` };
++  async function refuse(action: () => Promise<unknown>) {
++    let refused = false;
++    try { await action(); } catch { refused = true; }
++    assert(refused, "fixture must refuse");
++  }
++  try {
++    await Deno.mkdir(`${root}/julia`, { recursive: true });
++    await Deno.writeTextFile(`${root}/julia/Project.toml`, "[deps]\n");
++    await Deno.writeTextFile(`${root}/julia/Manifest.toml`, "# fixture\n");
++    await Deno.mkdir(value.source, { recursive: true });
++    await Deno.mkdir(`${attempt}/raw`);
++    await checkLayoutFiles(value);
++    await Deno.mkdir(value.build);
++    await refuse(() => checkLayoutFiles(value));
++    await Deno.remove(value.build);
++    await Deno.writeTextFile(value.build, "existing output");
++    await refuse(() => checkLayoutFiles(value));
++    await Deno.remove(value.build);
++    await Deno.symlink(`${base}/missing`, value.build);
++    await refuse(() => checkLayoutFiles(value));
++    await Deno.remove(value.build);
++    await Deno.symlink(root, `${base}/linked-root`);
++    await refuse(() => checkLayoutFiles({ ...value, root: `${base}/linked-root` }));
++    await Deno.symlink(`${base}/missing`, `${value.source}/payload-link`);
++    await refuse(() => inventoryTree(value.source, 20, 4096));
++    await Deno.remove(`${value.source}/payload-link`);
++    await Deno.writeTextFile(`${value.source}/index.md`, "# fixture\n");
++    assert((await inventoryTree(value.source, 20, 4096)).length === 1);
++    await refuse(() => inventoryTree(value.source, 20, 1));
++  } finally { await Deno.remove(base, { recursive: true }); }
++});
++
++import { preflight } from "../ops/docs.ts";
++Deno.test("BUILD preflight with a self-authored admission stays blocked and preserves attempt", async () => {
++  const base = await Deno.makeTempDir({ prefix: "qcl-doc04-preflight-" });
++  const root = `${base}/root`, attempt = `${base}/attempt`;
++  try {
++    await Deno.mkdir(root);
++    const admission = `${base}/admission.json`, plan = `${base}/plan.json`;
++    await Deno.writeTextFile(admission, '{"status":"ready","approved":true}');
++    await Deno.writeTextFile(plan, '{}');
++    const args = parseDocsArgs(["build", "--plan", plan, "--attempt-directory", attempt,
++      "--admission", admission]);
++    const result = await preflight(args, root);
++    assert(result.result === "blocked");
++    assert(result.steps.length === 0 && result.admission === null);
++    assert(result.checks.some((c) => c.reason === "supplied_admission_not_validated_no_dispatch"));
++    const original = await Deno.readFile(`${attempt}/receipt.json`);
++    let reused = false;
++    try { await preflight(args, root); reused = true; } catch { /* required refusal */ }
++    assert(!reused, "attempt must never be reused");
++    const retained = await Deno.readFile(`${attempt}/receipt.json`);
++    assert(original.every((v, i) => retained[i] === v) && original.length === retained.length);
++  } finally { await Deno.remove(base, { recursive: true }); }
++});

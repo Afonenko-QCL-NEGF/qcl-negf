@@ -1,0 +1,126 @@
+{
+  "task": "SCI09-SCI12-CATALOG-D1",
+  "stage": "source_design_only",
+  "author_role": "D",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "ultra",
+  "status": "candidate_for_separate_independent_high_review",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "observed_root_head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "source_composition": {
+    "authority": "Git gitlinks of observed Root HEAD",
+    "observation_command": "git ls-tree HEAD:components | sha256sum",
+    "observation_sha256": "39529e5f6ecf26b57e005b0d8712ccef96a191099be182785e3b43b525fa1b0f",
+    "direct_gitlinks": 8,
+    "submodule_status_observed": true,
+    "parallel_component_sha_lock_created": false,
+    "is_final_ready_release_binding": false
+  },
+  "observed_dirty_scope": {
+    "tracked": [
+      "docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
+      "docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json"
+    ],
+    "untracked": "Concurrent execution evidence and identities observed by git status; untouched; not treated as scientific input or final release",
+    "source_writes_by_this_task": []
+  },
+  "artifacts": {
+    "design": {
+      "path": "/tmp/qcl-sci09-12-catalog-design.md",
+      "bytes": 39546,
+      "sha256": "b80c5e354a0453a7151fc243f7a98d97f14c722baef733d7a53e0166fb7d998d"
+    },
+    "read_ledger": "/tmp/qcl-sci09-12-catalog-design-read-ledger.json"
+  },
+  "retained_contracts": {
+    "SCI03_reviewed_D2_body_sha256": "788ab058f1c52520d79aa621dcecd0d525f2562b7fcf2ea10da2c664989c8018",
+    "SCI03_R2_sha256": "351b58065dfd4dd45bbacf95a451a6daa22adaeacaee09149457f8e0ba295442",
+    "Research_measurement_contract_file_sha256": "61058d7b33b21e8b43232239569012567e764035dd15900b80d742bd9d6ed38c",
+    "SCI04_D2_sha256": "d787ad47f409b9fffb5a1ac5503857691d0282564bae88d774f0be85b033506c",
+    "SCI04_R2_sha256": "ae57a5b8986cf2d7f15a58ad13e26aa34927331ed44fcc1c584d1a5c0f27f0d1",
+    "SCI07_D1_sha256": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635",
+    "SCI07_D2_sha256": "fc78a0c77394f4d12a1c5633b7e4acb587429667abc106f5aa72c1dc4dd9d010",
+    "SCI07_R2_sha256": "80e2f1ca784b9c4a082d0785e6ee6bc9ceb507eeecc43c63822f65f532a1d18e"
+  },
+  "scientific_identity": {
+    "target_voltage_mV_per_period": 0,
+    "lattice_temperature_K": 70,
+    "lo_temperature_K": 70,
+    "active_scattering": ["LO", "acoustic", "impurity", "IFR", "alloy"],
+    "electron_electron_mode": "none",
+    "run": "not_created",
+    "actual_plan_bytes_sha256": null,
+    "plan_fingerprint": null,
+    "scientific_fingerprint": null,
+    "runtime_configuration_fingerprint": null,
+    "runtime_problem_fingerprint": null,
+    "runtime_physics_fingerprint": null,
+    "P0_criteria_sha256": null,
+    "A1_criteria_sha256": null,
+    "actual_membership": null,
+    "final_candidate": null,
+    "release_id": null,
+    "Code_UUID": null,
+    "WorkChain_UUID": null,
+    "CalcJob_UUID": null,
+    "execution_id": null,
+    "point_id": null,
+    "attempt": null,
+    "state_id": null,
+    "state_sequence": null,
+    "runtime_imported_source": null,
+    "null_reason": "Source/design only; no new owning catalog files, resolver, runtime, scientific attempt or complete technical binding created"
+  },
+  "catalog_policy": {
+    "finite_row_order": ["B0", "E1", "P1", "K1", "W", "Z", "B", "A", "Q", "C", "R1", "R2", "H"],
+    "static_rows": 10,
+    "conditional_cause_slots": 2,
+    "conditional_held_out_slots": 1,
+    "actual_static_plan_count": null,
+    "actual_static_plan_count_reason": "C01 not executed; administrative rows not actual resolver membership",
+    "held_out_phase_fraction": "positive one-quarter of frozen candidate energy step",
+    "held_out_comparison_kind": "discretization",
+    "held_out_controlled_paths": ["numerical.energy_min", "numerical.energy_max"],
+    "held_out_selection": "First eligible already-authorized single row in frozen catalog order; corrected source requires independent causal lineage and proof invalidation/reuse; no combined configuration",
+    "held_out_raw_embargo": "No raw access for threshold, coefficient or candidate selection before exact A1/candidate/H plan freeze"
+  },
+  "preserved_S1_caps": {
+    "attempts": 13,
+    "execution_node_hours": 936,
+    "per_attempt_wall_seconds": 259200,
+    "maximum_concurrent_executions": 2,
+    "W1_attempts": 4,
+    "W1_execution_node_hours": 288,
+    "later_attempts": 9,
+    "later_execution_node_hours": 648,
+    "W1_per_attempt": {"resident_disk_bytes": 137438953472, "writes_bytes": 2199023255552, "reads_bytes": 4398046511104, "logs_bytes": 1073741824},
+    "later_per_attempt": {"resident_disk_bytes": 274877906944, "writes_bytes": 4398046511104, "reads_bytes": 8796093022208, "logs_bytes": 1073741824},
+    "shared": {"current_resident_disk_bytes": 2199023255552, "writes_bytes": 48378511622144, "reads_bytes": 96757023244288, "logs_bytes": 13958643712},
+    "C08_used": 8,
+    "C08_maximum": 8,
+    "new_scientific_submits_observed_in_checkpoint": 0,
+    "new_scientific_submits_by_this_task": 0
+  },
+  "readiness": {
+    "local_source_design": "prepared_candidate",
+    "owning_catalog_implementation": "not_performed",
+    "scientific_runtime": "not_READY",
+    "resource_status": ["needs_admission", "needs_guard"],
+    "scientific_acceptance": "not_measured",
+    "complete_server_admission": null,
+    "native_access_constraints": ["CI trusted key pending", "control and compute NoRoute", "protected inventory and ownership incomplete"],
+    "new_scientific_criteria_or_bounds_invented": false,
+    "final_source_binding_fabricated": false
+  },
+  "execution_accounting": {
+    "product_parsers_resolvers_imports_tests": 0,
+    "Julia_Pkg_solver_benchmark_build_install_calls": 0,
+    "network_server_native_archive_execution_calls": 0,
+    "scientific_arrays_read_or_changed": 0,
+    "source_cpu_seconds": null,
+    "source_peak_RSS_bytes": null,
+    "physical_read_syscall_bytes": null,
+    "measurement_caveat": "Source CPU/RSS/physical I/O not instrumented; named read ledger is a conservative content charge, not runtime or hard resource telemetry"
+  },
+  "next_action": "STOP; separate independent high source/design review of exact packet; no implementation or numerical execution by author"
+}

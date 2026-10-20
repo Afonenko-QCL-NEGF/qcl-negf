@@ -1,0 +1,38 @@
+QCL_IMPORT_IDENTITY	/tmp/qcl-SCI08-R1-ENG-GREEN-1/tmp/environment/components/QCLNEGFRunner.jl	/tmp/qcl-SCI08-R1-ENG-GREEN-1/tmp/environment/components/QCLNEGFRunner.jl/src/QCLNEGFRunner.jl	/tmp/qcl-SCI08-R1-ENG-GREEN-1/tmp/environment/components/QCLNEGF.jl	/tmp/qcl-SCI08-R1-ENG-GREEN-1/tmp/environment/components/QCLNEGF.jl/src/QCLNEGF.jl
+QCL_COUNTS	349	0	0	0	33
+Test Summary:                                       | Pass  Total   Time
+SCI08-R1 bounded selection                          |  349    349  22.9s
+  F1 literal nontrivial forecast                    |    1      1   0.2s
+  F2 empty and known zero kernels                   |    2      2   0.0s
+  F3 dimensions reject independently                |   18     18   0.4s
+  F4 kernel and F sizes reject independently        |   10     10   0.1s
+  F5 six isolated checked arithmetic boundaries     |   14     14   0.0s
+  F6 adjacent representable boundary                |    4      4   0.1s
+  B1 exact budget fit                               |    1      1   0.0s
+  B2 budget one byte short                          |    1      1   0.0s
+  B3 known zero and already exhausted               |    2      2   0.0s
+  B4 malformed budget inputs before reader          |   40     40   0.2s
+  B5 first and second addition overflow             |    2      2   0.0s
+  D1 exact free capacity                            |    1      1   0.0s
+  D2 one byte free capacity short                   |    1      1   0.0s
+  D3 known zero and malformed free inputs           |   11     11   0.0s
+  D4 unavailable disk and validation before reader  |   10     10   0.0s
+  S1 strict exact fit and fixed pool                |    2      2   0.9s
+  S2 strict memory one byte short                   |    2      2   0.2s
+  S3 each ancestor malformed or missing bound       |   15     15   0.2s
+  S4 no finite bound or valid membership            |    7      7   0.2s
+  S5 each ancestor current unknown is not zero      |   18     18   0.2s
+  S6 unknown burst or directory refuses             |    7      7   0.3s
+  S7 zero burst still requires measurement          |    2      2   0.1s
+  S8 width validation and required byte overflow    |    8      8   0.2s
+  S9 strict CPU input and raw status distinctions   |   55     55   2.4s
+  O1 actual entry preflight seam remains closed     |    4      4   0.1s
+  O2 actual checkpoint preflight seam before writer |    3      3   0.1s
+  O3 actual phase callback before continuation      |    4      4   0.2s
+  O4 healthy finite gate fires real continuation    |    4      4   0.1s
+  Managed execution resource authority              |   28     28  13.1s
+  Execution envelope rejects malformed grants       |   19     19   0.2s
+  Phase width respects the fixed Julia pool         |    8      8   0.1s
+  Linux process resource probe                      |   26     26   0.5s
+  Producer clocks and immutable worker phase budget |   19     19   1.6s
+QCL_SELECTION_FINISHED
