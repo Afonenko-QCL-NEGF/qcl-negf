@@ -153,6 +153,11 @@ def load_pilot_plan(path):
         if isinstance(error, DocsError):
             raise
         _fail("plan_shape")
+    return _validate_pilot_plan(plan)
+
+
+def _validate_pilot_plan(plan):
+    """Shared in-memory plan contract; the file loader alone owns IO."""
     _object(plan, {"format", "profile", "slices", "support_policy", "source_inputs", "assets_lock",
                    "transform_policy", "public_prefix", "limits", "expected_primary_anchors"}, "plan_shape")
     if (plan["format"], plan["profile"], plan["support_policy"], plan["transform_policy"],
@@ -687,3 +692,188 @@ def prepare_catalog(*, fragments, coverage, shared_schema):
     return {"fragments": copy.deepcopy(fragments), "coverage": copy.deepcopy(coverage),
             "status": "blocked", "reason": "missing_shared_schema" if shared_schema is None
             else "shared_schema_validation_required", "bundle_bytes": None}
+
+
+_MEDIA_TYPES = {
+    ".html": "text/html", ".css": "text/css", ".js": "application/javascript",
+    ".json": "application/json", ".woff": "font/woff", ".woff2": "font/woff2",
+    ".ttf": "font/ttf", ".png": "image/png", ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg", ".gif": "image/gif", ".webp": "image/webp",
+    ".svg": "image/svg+xml", ".ico": "image/vnd.microsoft.icon", ".txt": "text/plain",
+}
+
+
+def _bundle_coverage(plan, graph, coverage, payload):
+    """Bind PRIMARY refs to their exact output paths/ids, not global id presence.
+
+    Retained source bytes/reviews are checked by the trusted owning C2 adapter;
+    this pure projection cannot create those proofs from a source status flag.
+    """
+    if not isinstance(coverage, list) or len(coverage) != len(PRIMARY):
+        _fail("coverage_mismatch")
+    revisions = {item["path"]: item["revision"] for item in graph["components"]}
+    revisions["root"] = graph["revision"]
+    seen, available, locations = set(), set(), {}
+    for row in coverage:
+        _object(row, {"id", "sources", "pages"}, "coverage_mismatch")
+        identity = row["id"]
+        if identity not in PRIMARY or identity in seen:
+            _fail("coverage_mismatch")
+        seen.add(identity)
+        if (not isinstance(row["sources"], list)
+                or len(row["sources"]) != len(PRIMARY[identity][2])
+                or not isinstance(row["pages"], list) or len(row["pages"]) > len(payload)):
+            _fail("coverage_mismatch")
+        source_paths = []
+        for reference in row["sources"]:
+            _object(reference, {"component", "revision", "path", "selector", "sha256"},
+                    "coverage_source_mismatch")
+            component, path = reference["component"], _relative(reference["path"])
+            if (component not in revisions or reference["revision"] != revisions[component]
+                    or reference["selector"] != {"kind": "file", "value": ""}
+                    or not isinstance(reference["sha256"], str)
+                    or not re.fullmatch(r"[a-f0-9]{64}", reference["sha256"])):
+                _fail("coverage_source_mismatch")
+            source_paths.append(path if component == "root" else component + "/" + path)
+        if source_paths != PRIMARY[identity][2]:
+            _fail("coverage_source_mismatch", identity)
+        available.update(source_paths)
+        routes = set()
+        for page in row["pages"]:
+            _object(page, {"path", "anchors"}, "coverage_mismatch")
+            path = _relative(page["path"])
+            if (path not in payload or not path.endswith(".html")
+                    or not isinstance(page["anchors"], list)
+                    or len(page["anchors"]) > 10000):
+                _fail("coverage_mismatch", path)
+            parser = _PayloadHTML(path)
+            parser.feed(_decode(payload[path]))
+            parser.close()
+            for anchor in page["anchors"]:
+                if not isinstance(anchor, str) or not anchor or anchor not in parser.ids:
+                    _fail("missing_anchor", path)
+                route = path + "#" + anchor
+                if route in routes:
+                    _fail("coverage_mismatch", "duplicate route")
+                routes.add(route)
+                if anchor in ANCHORS:
+                    if anchor in locations:
+                        _fail("coverage_mismatch", "ambiguous primary anchor")
+                    locations[anchor] = path
+        if not set(PRIMARY[identity][3]).issubset(routes):
+            _fail("primary_mapping_mismatch", identity)
+    validate_primary_sources(plan, available)
+    if set(locations) != set(plan["expected_primary_anchors"]):
+        _fail("missing_anchor", "primary coverage")
+
+
+def finalize_bundle(*, plan, before, after, generator, schema_ref, coverage,
+                    fragments, aliases, payload, asset_lock, asset_inputs,
+                    validate_shape, validate_bindings, validate_assets):
+    """Pure, fail-closed completion seam; candidate is not publication acceptance.
+
+    Root supplies trusted adapters over detached retained bytes: shape(document)
+    calls owning Contracts C1; bindings(document, coverage=...) calls owning C2
+    and validates every coverage source against the same retained source layout.
+    Missing owning proof must be translated to FileNotFoundError by the adapter;
+    contradictory evidence must raise. No target imports/fetch/IO occur here.
+
+    assets(lock_bytes, inputs, payload=...) verifies whole lock, distributions,
+    licenses and dependency closure using independently retained Root evidence,
+    then returns the exact verified non-HTML/non-fragment destination->bytes map.
+    None means unavailable proof; a boolean/status flag is never byte evidence.
+    An explicit empty closure is valid only when there are no such payloads.
+    This private callback seam does not add a public manifest/receipt format.
+    """
+    def blocked(reason):
+        return {"status": "blocked", "reason": reason, "manifest": None,
+                "bundle_bytes": None, "bundle_sha256": None}
+
+    validate_source_binding(before, after)
+    if any(not callable(adapter) for adapter in
+           (validate_shape, validate_bindings, validate_assets)):
+        return blocked("missing_validation_adapter")
+    if any(value is None for value in (schema_ref, generator, coverage, payload,
+                                        asset_lock, asset_inputs)):
+        return blocked("missing_validation_evidence")
+    plan = _validate_pilot_plan(copy.deepcopy(plan))
+    if (not isinstance(payload, dict) or not isinstance(asset_lock, bytes)
+            or not asset_lock or len(asset_lock) > PLAN_LIMITS["manifest_bytes"]
+            or not isinstance(asset_inputs, dict)):
+        _fail("bundle_shape")
+    if "bundle.json" in payload:
+        _fail("manifest_self_hash")
+    limits = plan["limits"]
+    if (len(payload) > limits["files"]
+            or any(not isinstance(data, bytes) or len(data) > limits["file_bytes"]
+                   for data in payload.values())
+            or sum(len(data) for data in payload.values()) > limits["total_bytes"]):
+        _fail("payload_limit")
+    if (len(asset_inputs) > PLAN_LIMITS["files"]
+            or any(not isinstance(data, bytes) or len(data) > PLAN_LIMITS["file_bytes"]
+                   for data in asset_inputs.values())
+            or sum(len(data) for data in asset_inputs.values()) > PLAN_LIMITS["total_bytes"]):
+        _fail("asset_limit")
+    # Detach containers; bytes themselves are immutable and need not be copied.
+    payload, asset_inputs = dict(payload), dict(asset_inputs)
+    coverage = copy.deepcopy(coverage)
+    validate_payload(payload)
+    _bundle_coverage(plan, before, coverage, payload)
+    if not isinstance(fragments, list) or len(fragments) > 256 or not isinstance(aliases, list):
+        _fail("catalog_shape")
+    fragment_paths, fragment_documents = set(), []
+    for descriptor in fragments:
+        _object(descriptor, {"id", "file", "sha256"}, "catalog_shape")
+        path = descriptor["file"]
+        if (not isinstance(descriptor["id"], str)
+                or path != "help/fragments/" + descriptor["id"] + ".json"
+                or path in fragment_paths or path not in payload):
+            _fail("fragment_payload_mismatch")
+        fragment_paths.add(path)
+        if (len(payload[path]) > limits["fragment_bytes"]
+                or _sha(payload[path]) != descriptor["sha256"]):
+            _fail("fragment_payload_mismatch")
+        try:
+            fragment_documents.append(json.loads(_decode(payload[path]), object_pairs_hook=_json_pairs,
+                parse_constant=lambda value: _fail("invalid_json", value)))
+        except (ValueError, TypeError):
+            _fail("invalid_json", path)
+    if {path for path in payload if path.startswith("help/fragments/")} != fragment_paths:
+        _fail("fragment_payload_mismatch", "unregistered fragment")
+    files = [{"path": path, "media_type": _MEDIA_TYPES[PurePosixPath(path).suffix.lower()],
+              "bytes": len(data), "sha256": _sha(data)}
+             for path, data in sorted(payload.items())]
+    manifest = {"format": "qcl-negf.docs-bundle.v1", "sources": copy.deepcopy(before),
+                "schema": copy.deepcopy(schema_ref), "generator": copy.deepcopy(generator),
+                "fragments": copy.deepcopy(fragments), "files": files,
+                "aliases": copy.deepcopy(aliases)}
+    try:
+        bundle_bytes = json.dumps(manifest, sort_keys=True, separators=(",", ":"),
+                                  ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (ValueError, TypeError, UnicodeError):
+        _fail("bundle_shape")
+    if len(bundle_bytes) > limits["manifest_bytes"]:
+        _fail("manifest_limit")
+    try:
+        validate_shape(copy.deepcopy(manifest))
+        for document in fragment_documents:
+            validate_shape(copy.deepcopy(document))
+        validate_bindings(copy.deepcopy(manifest), coverage=copy.deepcopy(coverage))
+        verified_assets = validate_assets(asset_lock, dict(asset_inputs), payload=dict(payload))
+    except FileNotFoundError:
+        return blocked("missing_validation_evidence")
+    if verified_assets is None:
+        return blocked("missing_asset_evidence")
+    if not isinstance(verified_assets, dict) or any(
+            not isinstance(data, bytes) for data in verified_assets.values()):
+        _fail("asset_validation_evidence", "exact verified bytes required")
+    expected_assets = {path: data for path, data in payload.items()
+                       if not path.endswith(".html") and path not in fragment_paths}
+    if verified_assets != expected_assets:
+        _fail("asset_payload_mismatch")
+    # Recheck against the detached manifest as well as each other: mutating both
+    # caller graphs identically during validation must not reset the source epoch.
+    validate_source_binding(manifest["sources"], before)
+    validate_source_binding(manifest["sources"], after)
+    return {"status": "candidate", "manifest": manifest,
+            "bundle_bytes": bundle_bytes, "bundle_sha256": _sha(bundle_bytes)}
