@@ -1,0 +1,1228 @@
+// Source-first controls. Execution requires the separately admitted fixture phase.
+// Removing path/layout rejection, byte binding, deadline/caps or fail-closed BUILD
+// must make these assertions fail. No real Julia, target import, network or solver.
+import {
+  buildBlockers,
+  checkLayout,
+  type Child,
+  compareDocsObservation,
+  type DocsIdentity,
+  docsIdentityDigest,
+  docsIdentityProjection,
+  type DocsObservation,
+  type GitLimits,
+  GitObservationError,
+  type GitReply,
+  type InputObservation,
+  makeDocsGitReader,
+  observeDocsSources,
+  type Operation,
+  operatorSources,
+  parseDocsArgs,
+  prepareDocsExpected,
+  readBounded,
+  runFinite,
+  withDocsSourceIdentity,
+} from "../ops/docs.ts";
+
+function assert(value: unknown, message = "assertion failed"): asserts value {
+  if (!value) throw new Error(message);
+}
+function immediatePromise<T>(work: () => T | PromiseLike<T>): Promise<T> {
+  return new Promise<T>((resolve) => resolve(work()));
+}
+function rejects(action: () => unknown) {
+  try {
+    action();
+  } catch {
+    return;
+  }
+  throw new Error("expected refusal");
+}
+
+// Source-first I2: removing actual after observation, prioritizing unknown over
+// a known change, or accepting a failed Git stdout must break these controls.
+const identityRoot = "/frozen/root";
+const planPath = "/external/plan";
+const recipePath = "/frozen/root/docs/public/make.jl";
+const identityRevision = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+const componentRevision = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+const oldHash = "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"; // A
+const newHash = "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c"; // B
+function present(path: string, hash = oldHash): InputObservation {
+  return { kind: "present", actual: { path, bytes: 1, sha256: hash }, evidence: [] };
+}
+function unreadable(path: string): InputObservation {
+  return {
+    kind: "unreadable",
+    path,
+    error: { code: "permission_denied", path, detail: "fixture EACCES", evidence: [] },
+  };
+}
+function identityFixture(maxCommands = 100) {
+  const state = {
+    plan: present(planPath),
+    recipe: present(recipePath),
+    dirty: false,
+    truncated: false,
+    calls: 0,
+    inputCalls: 0,
+    execute: 0,
+    rootRevision: identityRevision,
+  };
+  const raw = new Uint8Array([7, 0, 255]);
+  const readGit = makeDocsGitReader({
+    root: identityRoot,
+    attempt: "/attempts/i2",
+    gitExecutable: "/admitted/git",
+    limits: {
+      wallMs: 100,
+      drainMs: 10,
+      streamBytes: 4096,
+      totalBytes: 8192,
+      maxCommands,
+      maxTotalBytes: 100000,
+      totalWallMs: 60000,
+    },
+    invoke: (call) =>
+      immediatePromise<GitReply>(() => {
+        state.calls++;
+        const args = call.args.slice(8);
+        let stdout: string;
+        if (JSON.stringify(args) === '["rev-parse","HEAD"]') {
+          stdout = call.cwd === identityRoot ? state.rootRevision : componentRevision;
+        } else if (JSON.stringify(args) === '["status","--porcelain"]') {
+          stdout = state.dirty ? " M recipe.jl" : "";
+        } else if (JSON.stringify(args) === '["ls-tree","-rz","HEAD"]') {
+          stdout = call.cwd === identityRoot
+            ? `160000 commit ${componentRevision}\tcomponents/a\0`
+            : "";
+        } else if (
+          JSON.stringify(args) ===
+            JSON.stringify([
+              "config",
+              "-f",
+              ".gitmodules",
+              "--get-regexp",
+              "^submodule\\..*\\.path$",
+            ])
+        ) {
+          stdout = "submodule.a.path components/a";
+        } else if (
+          JSON.stringify(args) === '["config","-f",".gitmodules","--get","submodule.a.url"]'
+        ) {
+          stdout = "https://github.com/owner/a.git";
+        } else throw new Error(`unexpected fixture argv ${JSON.stringify(args)}`);
+        const bytes = new TextEncoder().encode(stdout);
+        return {
+          stdout: bytes,
+          receipt: { path: `/attempts/i2/git/${state.calls}/result.json`, sha256: null },
+          result: {
+            reason: state.truncated ? "log_cap" : null,
+            exit: { code: 0, success: true },
+            drain: "complete",
+            retention: "acknowledged",
+            errors: [],
+            stdout_received_bytes: bytes.length,
+            stdout_attempted_bytes: bytes.length,
+            stdout_acknowledged_bytes: bytes.length,
+            stderr_received_bytes: 0,
+            stderr_attempted_bytes: 0,
+            stderr_acknowledged_bytes: 0,
+            process_tree_terminated: null,
+            resource_measurements: null,
+          },
+        };
+      }),
+  });
+  const observe = () =>
+    observeDocsSources(identityRoot, [planPath, recipePath], {
+      readGit,
+      readInput: (path, cap) =>
+        immediatePromise<InputObservation>(() => {
+          assert(cap >= 1);
+          state.inputCalls++;
+          return path === planPath ? state.plan : state.recipe;
+        }),
+      limits: { maxFiles: 2, maxFileBytes: 8, maxTotalBytes: 16 },
+    });
+  const prepare = async () => {
+    const result = prepareDocsExpected({
+      inputs: [
+        { path: planPath, bytes: 1, sha256: oldHash },
+        { path: recipePath, bytes: 1, sha256: oldHash },
+      ],
+    }, await observe());
+    assert(result.kind === "expected_ready");
+    return result.expected;
+  };
+  return { state, observe, prepare, raw, readGit };
+}
+Deno.test("I2 expected/before/after uses six graph observations and preserves raw failure", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  const result = await withDocsSourceIdentity({
+    expected,
+    observe: f.observe,
+    execute: () =>
+      immediatePromise<Operation<unknown>>(() => {
+        f.state.execute++;
+        return { kind: "failed", error: JSON.stringify({ exit: 7, raw: Array.from(f.raw) }) };
+      }),
+  });
+  assert(result.state === "failed_bound" && result.candidate === null);
+  assert(f.state.calls === 48 && f.state.inputCalls === 6 && f.state.execute === 1);
+  assert(
+    result.operation.kind === "failed" && result.operation.error === '{"exit":7,"raw":[7,0,255]}',
+  );
+});
+for (const changed of ["plan", "recipe"] as const) {
+  Deno.test(`I2 same-size ${changed} mutation is changed, not unknown`, async () => {
+    const f = identityFixture(), expected = await f.prepare();
+    const result = await withDocsSourceIdentity({
+      expected,
+      observe: f.observe,
+      execute: () =>
+        immediatePromise<Operation<{ exit: number; raw: number[] }>>(() => {
+          f.state.execute++;
+          f.state[changed] = present(changed === "plan" ? planPath : recipePath, newHash);
+          return { kind: "completed", value: { exit: 7, raw: Array.from(f.raw) } };
+        }),
+    });
+    assert(result.state === "failed_source_changed" && result.candidate === null);
+    assert(result.before.actual.inputs.every((item) => item.sha256 === oldHash));
+    const change = result.after.changes.find((item) => item.kind === "file_changed");
+    assert(
+      change?.kind === "file_changed" && change.actual.sha256 === newHash &&
+        change.actual.bytes === 1 && change.expected.sha256 === oldHash,
+    );
+    assert(f.state.execute === 1 && result.operation.kind === "completed");
+    assert(
+      result.operation.value.exit === 7 &&
+        JSON.stringify(result.operation.value.raw) === "[7,0,255]",
+    );
+  });
+}
+Deno.test("I2 pre-execute mismatch blocks and absence retains no invented bytes/hash", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  f.state.plan = { kind: "absent", path: planPath, evidence: [] };
+  const result = await withDocsSourceIdentity({
+    expected,
+    observe: f.observe,
+    execute: () =>
+      immediatePromise<Operation<number>>(() => {
+        f.state.execute++;
+        return { kind: "completed", value: 1 };
+      }),
+  });
+  assert(result.state === "blocked_before" && result.before.kind === "observed_changed");
+  assert(result.before.changes[0].kind === "file_absent" && f.state.execute === 0);
+  assert(!("bytes" in f.state.plan) && !("sha256" in f.state.plan));
+});
+Deno.test("I2 known change wins over unreadable input while retaining unknown evidence", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  const result = await withDocsSourceIdentity({
+    expected,
+    observe: f.observe,
+    execute: () =>
+      immediatePromise<Operation<unknown>>(() => {
+        f.state.plan = present(planPath, newHash);
+        f.state.recipe = unreadable(recipePath);
+        return { kind: "failed", error: "original exit 7" };
+      }),
+  });
+  assert(result.state === "failed_source_changed" && result.after.unknowns.length === 1);
+  assert(result.after.unknowns[0].code === "permission_denied");
+});
+Deno.test("I2 permission error and truncated Git are unknown, successful dirty is changed", async () => {
+  for (const mode of ["permission", "truncated", "dirty"] as const) {
+    const f = identityFixture(), expected = await f.prepare();
+    const result = await withDocsSourceIdentity({
+      expected,
+      observe: f.observe,
+      execute: () =>
+        immediatePromise<never>(() => {
+          if (mode === "permission") f.state.plan = unreadable(planPath);
+          if (mode === "truncated") f.state.truncated = true;
+          if (mode === "dirty") f.state.dirty = true;
+          throw new Error("original callback throw");
+        }),
+    });
+    assert(
+      result.operation?.kind === "unknown_partial" &&
+        result.operation.error.includes("original callback throw"),
+    );
+    if (mode === "dirty") {
+      assert(result.state === "failed_source_changed");
+      assert(
+        result.after.changes.some((c) =>
+          c.kind === "git_dirty" && c.actual_status === " M recipe.jl"
+        ),
+      );
+    } else assert(result.state === "failed_identity_unknown");
+    assert(result.after !== null && result.candidate === null);
+  }
+});
+Deno.test("I2 forged preparation and contradictory observation cannot be matched", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  const observed = await f.observe();
+  const contradictory = { ...observed, inputs: [present(planPath), present(planPath)] };
+  assert(compareDocsObservation(expected, contradictory).kind === "unreadable_unknown");
+  let executed = false, rejected = false;
+  try {
+    await withDocsSourceIdentity({
+      expected: JSON.parse(JSON.stringify(expected)),
+      observe: f.observe,
+      execute: () =>
+        immediatePromise<Operation<number>>(() => {
+          executed = true;
+          return { kind: "completed", value: 1 };
+        }),
+    });
+  } catch {
+    rejected = true;
+  }
+  assert(rejected && !executed);
+});
+Deno.test("I2 private projection detaches and sorts without mutating raw graph", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  const reversed: DocsIdentity = { graph: expected.graph, inputs: [...expected.inputs].reverse() };
+  const raw = JSON.stringify(reversed);
+  const copy = docsIdentityProjection(reversed);
+  assert(copy !== reversed && copy.graph !== reversed.graph && copy.inputs !== reversed.inputs);
+  assert(JSON.stringify(reversed) === raw && copy.inputs[0].path === planPath);
+  assert(await docsIdentityDigest(expected) === await docsIdentityDigest(reversed));
+});
+Deno.test("I2 late expected rejects frozen mismatch and graph changes stay reachable", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  f.state.plan = present(planPath, newHash);
+  const preparation = prepareDocsExpected({ inputs: expected.inputs }, await f.observe());
+  assert(
+    preparation.kind === "expected_invalid" &&
+      preparation.changes.some((c) => c.kind === "file_changed"),
+  );
+  f.state.plan = present(planPath);
+  const result = await withDocsSourceIdentity({
+    expected,
+    observe: f.observe,
+    execute: () =>
+      immediatePromise<Operation<number>>(() => {
+        f.state.rootRevision = "cccccccccccccccccccccccccccccccccccccccc";
+        return { kind: "completed", value: 1 };
+      }),
+  });
+  assert(
+    result.state === "failed_source_changed" &&
+      result.after.changes.some((c) => c.kind === "graph_changed"),
+  );
+});
+Deno.test("I2 completed operation still needs a matched after; observer throw preserves unknown", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  let observations = 0;
+  const result = await withDocsSourceIdentity({
+    expected,
+    observe: () =>
+      immediatePromise<DocsObservation>(() => {
+        observations++;
+        if (observations === 2) throw new Error("after unavailable");
+        return f.observe();
+      }),
+    execute: () => immediatePromise<Operation<number>>(() => ({ kind: "completed", value: 7 })),
+  });
+  assert(
+    result.state === "failed_identity_unknown" &&
+      result.after.unknowns[0].detail.includes("after unavailable"),
+  );
+  assert(
+    result.after.observation.start.kind === "rejected" &&
+      result.after.observation.inputs.length === 2,
+  );
+  const stable = identityFixture(), stableExpected = await stable.prepare();
+  const completed = await withDocsSourceIdentity({
+    expected: stableExpected,
+    observe: stable.observe,
+    execute: () => immediatePromise<Operation<number>>(() => ({ kind: "completed", value: 7 })),
+  });
+  assert(
+    completed.state === "completed_bound" && completed.operation.value === 7 &&
+      completed.candidate === null,
+  );
+});
+Deno.test("I2 aggregate command budget admits no transport after exhaustion", async () => {
+  const f = identityFixture(1);
+  const first = await f.observe();
+  assert(first.start.kind === "rejected" && first.end.kind === "rejected" && f.state.calls === 1);
+  await f.observe();
+  assert(f.state.calls === 1);
+});
+Deno.test("I2 input observation is detached and missing/additional paths remain unknown", async () => {
+  const f = identityFixture(), expected = await f.prepare();
+  const observation = await f.observe();
+  const original = JSON.stringify(observation);
+  if (f.state.plan.kind === "present") f.state.plan.actual.sha256 = newHash;
+  assert(JSON.stringify(observation) === original);
+  assert(
+    compareDocsObservation(expected, { ...observation, inputs: observation.inputs.slice(0, 1) })
+      .kind === "unreadable_unknown",
+  );
+  assert(
+    compareDocsObservation(expected, {
+      ...observation,
+      inputs: [...observation.inputs, present("/additional/input")],
+    }).kind === "unreadable_unknown",
+  );
+});
+
+const strictGitLimits: GitLimits = {
+  wallMs: 100,
+  drainMs: 10,
+  streamBytes: 8,
+  totalBytes: 8,
+  maxCommands: 8,
+  maxTotalBytes: 16,
+  totalWallMs: 60000,
+};
+const requiredGitLimits = [
+  "wallMs",
+  "drainMs",
+  "streamBytes",
+  "totalBytes",
+  "maxCommands",
+  "maxTotalBytes",
+  "totalWallMs",
+] as const;
+const requiredInputLimits = ["maxFiles", "maxFileBytes", "maxTotalBytes"] as const;
+function factoryForReply(reply: unknown, limits: GitLimits = strictGitLimits) {
+  let calls = 0;
+  const readGit = makeDocsGitReader({
+    root: identityRoot,
+    attempt: "/attempts/i3",
+    gitExecutable: "/admitted/git",
+    limits,
+    invoke: () =>
+      immediatePromise<GitReply>(() => {
+        calls++;
+        return reply as GitReply;
+      }),
+  });
+  return { readGit, calls: () => calls };
+}
+async function caught(action: () => Promise<unknown>): Promise<unknown> {
+  try {
+    await action();
+  } catch (error) {
+    return error;
+  }
+  throw new Error("expected rejection");
+}
+function oneByteReply(): GitReply {
+  return {
+    stdout: new Uint8Array([65]),
+    receipt: { path: "/attempts/i3/git/1/result.json", sha256: null },
+    result: {
+      reason: null,
+      exit: { code: 0, success: true },
+      drain: "complete",
+      errors: [],
+      retention: "acknowledged",
+      stdout_received_bytes: 1,
+      stdout_attempted_bytes: 1,
+      stdout_acknowledged_bytes: 1,
+      stderr_received_bytes: 0,
+      stderr_attempted_bytes: 0,
+      stderr_acknowledged_bytes: 0,
+      process_tree_terminated: null,
+      resource_measurements: null,
+    },
+  };
+}
+Deno.test("I3 every required Git limit and exact envelope are validated before transport", () => {
+  const invalid: unknown[] = [null, [], { ...strictGitLimits, extra: 1 }];
+  for (const key of requiredGitLimits) {
+    const missing = { ...strictGitLimits };
+    delete (missing as Partial<GitLimits>)[key];
+    invalid.push(missing);
+    for (
+      const value of [
+        undefined,
+        true,
+        "1",
+        NaN,
+        Infinity,
+        -Infinity,
+        0,
+        -1,
+        1.5,
+        Number.MAX_SAFE_INTEGER + 1,
+      ]
+    ) {
+      invalid.push({ ...strictGitLimits, [key]: value });
+    }
+  }
+  let invokes = 0;
+  for (const limits of invalid) {
+    rejects(() =>
+      makeDocsGitReader({
+        root: identityRoot,
+        attempt: "/attempts/i3",
+        gitExecutable: "/admitted/git",
+        limits: limits as GitLimits,
+        invoke: () =>
+          immediatePromise<GitReply>(() => {
+            invokes++;
+            return oneByteReply();
+          }),
+      })
+    );
+  }
+  assert(invokes === 0);
+});
+Deno.test("I3 every required input limit is validated before Git or input reads", async () => {
+  const valid = { maxFiles: 2, maxFileBytes: 8, maxTotalBytes: 16 };
+  const invalid: unknown[] = [null, [], { ...valid, extra: 1 }];
+  for (const key of requiredInputLimits) {
+    const missing = { ...valid };
+    delete (missing as Partial<typeof valid>)[key];
+    invalid.push(missing);
+    for (const value of [undefined, true, "1", NaN, Infinity, 0, -1, 1.5]) {
+      invalid.push({ ...valid, [key]: value });
+    }
+  }
+  let git = 0, inputs = 0;
+  for (const limits of invalid) {
+    await caught(() =>
+      observeDocsSources(identityRoot, [planPath], {
+        limits: limits as typeof valid,
+        readGit: () =>
+          immediatePromise<string>(() => {
+            git++;
+            return "";
+          }),
+        readInput: () =>
+          immediatePromise<InputObservation>(() => {
+            inputs++;
+            return present(planPath);
+          }),
+      })
+    );
+  }
+  assert(git === 0 && inputs === 0);
+});
+Deno.test("I3 malformed or contradictory reply closes admission before the next invoke", async () => {
+  const valid = oneByteReply();
+  const cases: unknown[] = [
+    null,
+    {},
+    { ...valid, result: null },
+    { ...valid, result: {} },
+    { ...valid, result: { ...valid.result, errors: null } },
+    { ...valid, stdout: "A" },
+    { ...valid, result: { ...valid.result, stdout_received_bytes: -1 } },
+    { ...valid, result: { ...valid.result, stdout_attempted_bytes: 2 } },
+    { ...valid, receipt: { path: "relative", sha256: null } },
+    {
+      ...valid,
+      stdout: new Uint8Array([65, 66]),
+      result: {
+        ...valid.result,
+        stdout_received_bytes: 0,
+        stdout_attempted_bytes: 0,
+        stdout_acknowledged_bytes: 0,
+      },
+    },
+  ];
+  for (
+    const key of [
+      "reason",
+      "exit",
+      "drain",
+      "errors",
+      "retention",
+      "stdout_received_bytes",
+      "stdout_attempted_bytes",
+      "stdout_acknowledged_bytes",
+      "stderr_received_bytes",
+      "stderr_attempted_bytes",
+      "stderr_acknowledged_bytes",
+      "process_tree_terminated",
+      "resource_measurements",
+    ]
+  ) {
+    const result: Record<string, unknown> = { ...valid.result };
+    delete result[key];
+    cases.push({ ...valid, result });
+  }
+  for (const reply of cases) {
+    const f = factoryForReply(reply);
+    const error = await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+    assert(error instanceof GitObservationError && error.code === "invalid_reply");
+    assert(
+      error.accounting?.kind === "unknown" && error.accounting.admission === "closed" &&
+        error.accounting.retention === "unknown" && error.accounting.received_bytes === null,
+    );
+    if (
+      reply && typeof reply === "object" && "stdout" in reply && reply.stdout instanceof Uint8Array
+    ) {
+      assert(error.accounting.observed_stdout_bytes === reply.stdout.length);
+    } else assert(error.accounting.observed_stdout_bytes === null);
+    if (
+      reply && typeof reply === "object" && "receipt" in reply && reply.receipt === valid.receipt
+    ) {
+      assert(error.receipt?.path === "/attempts/i3/git/1/result.json");
+    }
+    const next = await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+    assert(
+      next instanceof GitObservationError && next.code === "budget_exhausted" && f.calls() === 1,
+    );
+  }
+});
+Deno.test("I3 partial retained reply debits known received bytes without pretending success", async () => {
+  const partial = oneByteReply();
+  partial.result.reason = "log_cap";
+  partial.result.retention = "incomplete_unknown_partial";
+  const f = factoryForReply(partial, {
+    ...strictGitLimits,
+    streamBytes: 1,
+    totalBytes: 1,
+    maxTotalBytes: 1,
+  });
+  const first = await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+  assert(first instanceof GitObservationError && first.code === "log_cap");
+  assert(first.accounting?.kind === "known" && first.accounting.received_bytes === 1);
+  assert(first.accounting.retention === "incomplete_unknown_partial");
+  assert(first.receipt?.path === "/attempts/i3/git/1/result.json");
+  await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+  assert(f.calls() === 1);
+});
+Deno.test("I4 every hidden required limit is rejected before normalization or I/O", async () => {
+  let invokes = 0, inputs = 0;
+  for (const key of requiredGitLimits) {
+    const limits = { ...strictGitLimits };
+    Object.defineProperty(limits, key, { value: limits[key], enumerable: false });
+    rejects(() =>
+      makeDocsGitReader({
+        root: identityRoot,
+        attempt: "/attempts/i4",
+        gitExecutable: "/admitted/git",
+        limits,
+        invoke: () =>
+          immediatePromise<GitReply>(() => {
+            invokes++;
+            return oneByteReply();
+          }),
+      })
+    );
+  }
+  for (const key of requiredInputLimits) {
+    for (const maxTotalBytes of [16, 32]) {
+      const limits = { maxFiles: 2, maxFileBytes: 8, maxTotalBytes };
+      Object.defineProperty(limits, key, { value: limits[key], enumerable: false });
+      await caught(() =>
+        observeDocsSources(identityRoot, [planPath], {
+          limits,
+          readGit: () =>
+            immediatePromise<string>(() => {
+              invokes++;
+              return "";
+            }),
+          readInput: () =>
+            immediatePromise<InputObservation>(() => {
+              inputs++;
+              return present(planPath);
+            }),
+        })
+      );
+    }
+  }
+  assert(invokes === 0 && inputs === 0);
+});
+Deno.test("I4 accessor and introspection failures close admission without running getters", async () => {
+  for (
+    const field of [
+      "result",
+      "receipt",
+      "stdout",
+      "counter",
+      "exit",
+      "errors",
+      "errorEntry",
+      "receiptPath",
+    ] as const
+  ) {
+    let getters = 0;
+    const reply = oneByteReply();
+    const getter = {
+      enumerable: true,
+      get: () => {
+        getters++;
+        throw new Error("getter must not execute");
+      },
+    };
+    if (field === "counter") Object.defineProperty(reply.result, "stdout_received_bytes", getter);
+    else if (field === "exit") Object.defineProperty(reply.result.exit!, "code", getter);
+    else if (field === "errors") Object.defineProperty(reply.result, "errors", getter);
+    else if (field === "errorEntry") {
+      reply.result.errors = ["failure"];
+      Object.defineProperty(reply.result.errors, "0", getter);
+    } else if (field === "receiptPath") Object.defineProperty(reply.receipt, "path", getter);
+    else Object.defineProperty(reply, field, getter);
+    const f = factoryForReply(reply);
+    const first = await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+    assert(
+      first instanceof GitObservationError && first.code === "invalid_reply" &&
+        first.accounting?.kind === "unknown",
+    );
+    const next = await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+    assert(
+      next instanceof GitObservationError && next.code === "budget_exhausted" && f.calls() === 1 &&
+        getters === 0,
+    );
+  }
+  const proxy = new Proxy(oneByteReply(), {
+    getOwnPropertyDescriptor: () => {
+      throw new Error("introspection failed");
+    },
+  });
+  const f = factoryForReply(proxy);
+  const first = await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+  assert(first instanceof GitObservationError && first.code === "invalid_reply");
+  await caught(() => f.readGit(identityRoot, ["rev-parse", "HEAD"]));
+  assert(f.calls() === 1);
+});
+Deno.test("I4 nearby healthy data reply and serialized input policy remain usable", async () => {
+  const f = factoryForReply(oneByteReply());
+  assert(await f.readGit(identityRoot, ["rev-parse", "HEAD"]) === "A");
+  assert(await f.readGit(identityRoot, ["rev-parse", "HEAD"]) === "A" && f.calls() === 2);
+  const observer = identityFixture();
+  const expected = await observer.prepare();
+  assert(compareDocsObservation(expected, await observer.observe()).kind === "matched");
+  let extraReads = 0;
+  const changed = await caught(() =>
+    observeDocsSources(identityRoot, [planPath, recipePath], {
+      readGit: observer.readGit,
+      limits: { maxFiles: 2, maxFileBytes: 8, maxTotalBytes: 32 },
+      readInput: (path) =>
+        immediatePromise<InputObservation>(() => {
+          extraReads++;
+          return present(path);
+        }),
+    })
+  );
+  assert(changed instanceof Error && changed.message === "input_limits_changed");
+  assert(observer.state.calls === 32 && extraReads === 0);
+});
+const tuple = {
+  root: "/sources/root",
+  attempt: "/attempts/a",
+  owner: "operator" as const,
+  source: "/attempts/a/stage/operator/src",
+  build: "/attempts/a/raw/operator",
+};
+Deno.test("strict CLI refuses duplicates, unknown options and missing admission", () => {
+  assert(
+    parseDocsArgs(["preflight", "--plan", "/p", "--attempt-directory", "/a"]).mode === "preflight",
+  );
+  rejects(() => parseDocsArgs(["build", "--plan", "/p", "--attempt-directory", "/a"]));
+  rejects(() =>
+    parseDocsArgs(["preflight", "--plan", "/p", "--plan", "/q", "--attempt-directory", "/a"])
+  );
+  rejects(() =>
+    parseDocsArgs(["preflight", "--plan", "/p", "--attempt-directory", "/a", "--ready", "true"])
+  );
+});
+Deno.test("layout rejects aliases and overlaps before fake importer", () => {
+  let imports = 0;
+  const invalid = [
+    { ...tuple, attempt: "" },
+    { ...tuple, root: "relative" },
+    { ...tuple, source: "/attempts/a/stage/core/src" },
+    { ...tuple, attempt: "/sources/root/a" },
+    { ...tuple, root: "/attempts/a/root" },
+    { ...tuple, root: "/sources//root" },
+    { ...tuple, build: tuple.source },
+  ];
+  for (const value of invalid) {
+    rejects(() => {
+      checkLayout(value);
+      imports++;
+    });
+  }
+  assert(imports === 0);
+  checkLayout({ ...tuple, root: "/attempts/ab" }); // component prefix, not string prefix
+});
+Deno.test("operator staging preserves frozen chapter bytes and recipe-owned index", async () => {
+  const recovery = await Deno.readFile(
+    new URL("../docs/public/operator-recovery.md", import.meta.url),
+  );
+  const recipe = await Deno.readTextFile(new URL("../docs/public/make.jl", import.meta.url));
+  const staged = await operatorSources(recovery, recipe);
+  assert(staged.recovery === recovery, "exact recovery bytes must be retained");
+  assert(
+    new TextDecoder().decode(staged.index) ===
+      "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n",
+  );
+  const changed = recovery.slice();
+  changed[0] ^= 1;
+  let refused = false;
+  try {
+    await operatorSources(changed, recipe);
+  } catch {
+    refused = true;
+  }
+  assert(refused, "changed canonical input must refuse before staging");
+});
+Deno.test("caller status/marker cannot manufacture BUILD readiness", () => {
+  assert(buildBlockers().includes("missing_admitted_assembly_entrypoint"));
+  assert(buildBlockers().includes("unknown_nested_docstring_import_cache_edges"));
+});
+function fake(data: Uint8Array, status: Promise<{ code: number; success: boolean }>): Child {
+  return {
+    stdout: new ReadableStream({
+      start(c) {
+        c.enqueue(data);
+        c.close();
+      },
+    }),
+    stderr: new ReadableStream({
+      start(c) {
+        c.enqueue(new Uint8Array([21, 22, 23, 24, 25, 26, 27, 28]));
+        c.close();
+      },
+    }),
+    status,
+    kill() {},
+  };
+}
+Deno.test("finite drains preserve partial logs on combined cap and failed exit", async () => {
+  const saved: Record<string, number[]> = { stdout: [], stderr: [] };
+  const result = await runFinite(
+    () =>
+      fake(
+        new Uint8Array([11, 12, 13, 14, 15, 16, 17, 18]),
+        Promise.resolve({ code: 7, success: false }),
+      ),
+    (stream, bytes) =>
+      immediatePromise<void>(() => {
+        saved[stream].push(...bytes);
+      }),
+    { wallMs: 100, drainMs: 20, streamBytes: 6, totalBytes: 9 },
+  );
+  assert(result.reason === "log_cap");
+  assert(JSON.stringify(saved) === '{"stdout":[11,12,13,14,15,16],"stderr":[21,22,23]}');
+  assert(result.stdout_acknowledged_bytes === 6 && result.stderr_acknowledged_bytes === 3);
+  assert(result.stdout_received_bytes === 8 && result.stderr_received_bytes === 8);
+  assert(result.retention === "acknowledged");
+  assert(result.exit?.code === 7);
+  assert(result.process_tree_terminated === null);
+});
+Deno.test("rejecting sink distinguishes received bytes from acknowledged retention", async () => {
+  const saved: number[] = [];
+  const result = await runFinite(
+    () => fake(new Uint8Array([31, 32, 33]), Promise.resolve({ code: 0, success: true })),
+    (stream, bytes) =>
+      immediatePromise<void>(() => {
+        if (stream === "stderr") throw new Error("sink rejected; partial write unknown");
+        saved.push(...bytes);
+      }),
+    { wallMs: 100, drainMs: 20, streamBytes: 16, totalBytes: 32 },
+  );
+  assert(JSON.stringify(saved) === "[31,32,33]");
+  assert(result.stdout_acknowledged_bytes === 3 && result.stderr_acknowledged_bytes === 0);
+  assert(result.stderr_received_bytes === 8 && result.stderr_attempted_bytes === 8);
+  assert(result.retention === "failed_unknown_partial");
+});
+Deno.test("deadline retains exact nonzero prefix and snapshots a hanging sink", async () => {
+  let release!: () => void;
+  const saved: number[] = [];
+  const result = await runFinite(
+    () => fake(new Uint8Array([41, 42]), new Promise(() => {})),
+    async (stream, bytes) => {
+      if (stream === "stdout") saved.push(...bytes);
+      else {await new Promise<void>((resolve) => {
+          release = resolve;
+        });}
+    },
+    { wallMs: 5, drainMs: 5, streamBytes: 16, totalBytes: 32 },
+  );
+  assert(JSON.stringify(saved) === "[41,42]");
+  assert(result.reason === "deadline" && result.drain === "incomplete");
+  assert(result.stdout_acknowledged_bytes === 2 && result.stderr_acknowledged_bytes === 0);
+  assert(result.stderr_received_bytes === 8 && result.retention === "incomplete_unknown_partial");
+  const snapshot = JSON.stringify(result);
+  release();
+  await Promise.resolve();
+  await Promise.resolve();
+  assert(JSON.stringify(result) === snapshot, "late sink completion must not mutate receipt");
+});
+Deno.test("incremental reader enforces cap plus one sentinel despite small metadata", async () => {
+  let received = 0, closed = false;
+  const requests: number[] = [];
+  let refused = false;
+  try {
+    await readBounded(
+      {
+        read(buffer) {
+          return immediatePromise<number | null>(() => {
+            requests.push(buffer.length);
+            buffer.fill(71);
+            received += buffer.length;
+            return buffer.length;
+          });
+        },
+        close() {
+          closed = true;
+        },
+      },
+      4,
+      1,
+    ); // observed metadata is small, actual stream grew
+  } catch {
+    refused = true;
+  }
+  assert(refused && closed && received === 5);
+  assert(requests.every((n) => n <= 5), "no read beyond cap plus sentinel");
+  let offset = 0;
+  const bytes = new Uint8Array([81, 82, 83]);
+  const retained = await readBounded(
+    {
+      read(buffer) {
+        return immediatePromise<number | null>(() => {
+          if (offset === bytes.length) return null;
+          const n = Math.min(buffer.length, bytes.length - offset);
+          buffer.set(bytes.subarray(offset, offset + n));
+          offset += n;
+          return n;
+        });
+      },
+      close() {},
+    },
+    4,
+    3,
+  );
+  assert(JSON.stringify([...retained]) === "[81,82,83]");
+  let changedClosed = false, sent = false, changedRefused = false;
+  try {
+    await readBounded(
+      {
+        read(buffer) {
+          return immediatePromise<number | null>(() => {
+            if (sent) return null;
+            sent = true;
+            buffer.set([91, 92]);
+            return 2;
+          });
+        },
+        close() {
+          changedClosed = true;
+        },
+      },
+      4,
+      1,
+    );
+  } catch {
+    changedRefused = true;
+  }
+  assert(changedRefused && changedClosed, "growth within cap still invalidates metadata binding");
+});
+Deno.test("deadline plus unclosed pipes return finite drain failure", async () => {
+  let killed = false;
+  const result = await runFinite(
+    () => ({
+      stdout: new ReadableStream(),
+      stderr: new ReadableStream(),
+      status: new Promise(() => {}),
+      kill() {
+        killed = true;
+      },
+    }),
+    async () => {},
+    { wallMs: 5, drainMs: 5, streamBytes: 6, totalBytes: 9 },
+  );
+  assert(killed && result.reason === "deadline");
+  assert(result.drain === "incomplete");
+  assert(result.exit === null);
+});
+
+// Filesystem controls are inert until an explicitly permitted fixture execution.
+import { checkLayoutFiles, inventoryTree } from "../ops/docs.ts";
+Deno.test("filesystem gate rejects existing outputs, ancestor links and payload links", async () => {
+  const base = await Deno.makeTempDir({ prefix: "qcl-doc04-fixture-" });
+  const root = `${base}/root`, attempt = `${base}/attempt`;
+  const value = {
+    root,
+    attempt,
+    owner: "operator" as const,
+    source: `${attempt}/stage/operator/src`,
+    build: `${attempt}/raw/operator`,
+  };
+  async function refuse(action: () => Promise<unknown>) {
+    let refused = false;
+    try {
+      await action();
+    } catch {
+      refused = true;
+    }
+    assert(refused, "fixture must refuse");
+  }
+  try {
+    await Deno.mkdir(`${root}/julia`, { recursive: true });
+    await Deno.writeTextFile(`${root}/julia/Project.toml`, "[deps]\n");
+    await Deno.writeTextFile(`${root}/julia/Manifest.toml`, "# fixture\n");
+    await Deno.mkdir(value.source, { recursive: true });
+    await Deno.mkdir(`${attempt}/raw`);
+    await checkLayoutFiles(value);
+    await Deno.mkdir(value.build);
+    await refuse(() => checkLayoutFiles(value));
+    await Deno.remove(value.build);
+    await Deno.writeTextFile(value.build, "existing output");
+    await refuse(() => checkLayoutFiles(value));
+    await Deno.remove(value.build);
+    await Deno.symlink(`${base}/missing`, value.build);
+    await refuse(() => checkLayoutFiles(value));
+    await Deno.remove(value.build);
+    await Deno.symlink(root, `${base}/linked-root`);
+    await refuse(() => checkLayoutFiles({ ...value, root: `${base}/linked-root` }));
+    await Deno.symlink(`${base}/missing`, `${value.source}/payload-link`);
+    await refuse(() => inventoryTree(value.source, 20, 4096));
+    await Deno.remove(`${value.source}/payload-link`);
+    await Deno.writeTextFile(`${value.source}/index.md`, "# fixture\n");
+    assert((await inventoryTree(value.source, 20, 4096)).length === 1);
+    await refuse(() => inventoryTree(value.source, 20, 1));
+  } finally {
+    await Deno.remove(base, { recursive: true });
+  }
+});
+
+import { preflight } from "../ops/docs.ts";
+Deno.test("BUILD preflight with a self-authored admission stays blocked and preserves attempt", async () => {
+  const base = await Deno.makeTempDir({ prefix: "qcl-doc04-preflight-" });
+  const root = `${base}/root`, attempt = `${base}/attempt`;
+  try {
+    await Deno.mkdir(root);
+    const admission = `${base}/admission.json`, plan = `${base}/plan.json`;
+    await Deno.writeTextFile(admission, '{"status":"ready","approved":true}');
+    await Deno.writeTextFile(plan, "{}");
+    const args = parseDocsArgs([
+      "build",
+      "--plan",
+      plan,
+      "--attempt-directory",
+      attempt,
+      "--admission",
+      admission,
+    ]);
+    const result = await preflight(args, root);
+    assert(result.result === "blocked");
+    assert(result.steps.length === 0 && result.admission === null);
+    assert(result.checks.some((c) => c.reason === "supplied_admission_not_validated_no_dispatch"));
+    const original = await Deno.readFile(`${attempt}/receipt.json`);
+    let reused = false;
+    try {
+      await preflight(args, root);
+      reused = true;
+    } catch { /* required refusal */ }
+    assert(!reused, "attempt must never be reused");
+    const retained = await Deno.readFile(`${attempt}/receipt.json`);
+    assert(original.every((v, i) => retained[i] === v) && original.length === retained.length);
+  } finally {
+    await Deno.remove(base, { recursive: true });
+  }
+});
+
+// TS6 compatibility controls: additive source fixtures; execution is separately admitted.
+import { sha256 } from "../ops/docs.ts";
+Deno.test("TS6 SHA literal vectors preserve exact visible byte views", async () => {
+  const helperState = { called: false, threwSynchronously: false };
+  const helperError = new Error("immediate helper sentinel");
+  let helperRejected = Promise.resolve(0);
+  try {
+    helperRejected = immediatePromise<number>(() => {
+      helperState.called = true;
+      throw helperError;
+    });
+  } catch {
+    helperState.threwSynchronously = true;
+  }
+  assert(helperState.called && !helperState.threwSynchronously);
+  assert(await caught(() => helperRejected) === helperError);
+
+  const immediateState = { called: false };
+  const immediate = immediatePromise<number>(() => {
+    immediateState.called = true;
+    return 7;
+  });
+  assert(immediateState.called, "work runs before caller return");
+  assert(await immediate === 7);
+  let releaseInner: (value: number) => void = () => {
+    throw new Error("inner resolver not initialized");
+  };
+  const inner = new Promise<number>((resolve) => {
+    releaseInner = resolve;
+  });
+  const outer = immediatePromise<number>(() => inner);
+  assert(outer !== inner, "adoption preserves a fresh outer Promise");
+  const adoption = { fulfilled: false };
+  outer.then(() => {
+    adoption.fulfilled = true;
+  });
+  await Promise.resolve();
+  assert(!adoption.fulfilled, "outer stays pending until the inner settles");
+  releaseInner(7);
+  assert(await outer === 7);
+
+  const valid = await identityFixture().prepare();
+  const digestError = new Error("identity graph getter sentinel");
+  const digestState = { getterCalled: false, threwSynchronously: false };
+  const poisoned: DocsIdentity = {
+    inputs: valid.inputs,
+    get graph(): never {
+      digestState.getterCalled = true;
+      throw digestError;
+    },
+  };
+  let digestRejected = Promise.resolve("");
+  try {
+    digestRejected = docsIdentityDigest(poisoned);
+  } catch {
+    digestState.threwSynchronously = true;
+  }
+  assert(digestState.getterCalled && !digestState.threwSynchronously);
+  assert(await caught(() => digestRejected) === digestError);
+
+  const empty = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const abc = "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
+  const all256 = "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880";
+  assert(await sha256(new Uint8Array()) === empty);
+  assert(await sha256(new TextEncoder().encode("abc")) === abc);
+  const guarded = new Uint8Array([17, 97, 98, 99, 231]);
+  assert(await sha256(new Uint8Array(guarded.buffer, 1, 3)) === abc);
+  assert(await sha256(guarded.subarray(1, 4)) === abc);
+  assert(await sha256(guarded.subarray(guarded.length)) === empty);
+  const payload = Uint8Array.from({ length: 256 }, (_, i) => i);
+  assert(await sha256(payload) === all256);
+  for (let offset = 0; offset <= 256; offset++) {
+    const backing = new Uint8Array(offset + payload.length + 3);
+    backing.fill(19);
+    backing.set(payload, offset);
+    backing.fill(237, offset + payload.length);
+    assert(await sha256(new Uint8Array(backing.buffer, offset, payload.length)) === all256);
+    assert(await sha256(backing.subarray(offset, offset + payload.length)) === all256);
+    // Change only bytes outside the view; the literal expected digest stays fixed.
+    backing.fill(83, 0, offset);
+    backing.fill(149, offset + payload.length);
+    assert(await sha256(new Uint8Array(backing.buffer, offset, payload.length)) === all256);
+    assert(await sha256(backing.subarray(offset, offset + payload.length)) === all256);
+  }
+});
+for (const size of [0, 1, 3, 4, 5]) {
+  Deno.test(`TS6 single stdout cap4 boundary size${size}`, async () => {
+    const payload = Uint8Array.from({ length: size }, (_, i) => 71 + i);
+    const saved: number[] = [];
+    const signals: AbortSignal[] = [];
+    const result = await runFinite(() => ({
+      stdout: new ReadableStream<Uint8Array>({
+        start(c) {
+          c.enqueue(payload);
+          c.close();
+        },
+      }),
+      stderr: new ReadableStream<Uint8Array>({
+        start(c) {
+          c.close();
+        },
+      }),
+      status: Promise.resolve({ code: 0, success: true }),
+      kill() {},
+    }), (stream, bytes, signal) =>
+      immediatePromise<void>(() => {
+        assert(stream === "stdout");
+        signals.push(signal);
+        saved.push(...bytes);
+      }), { wallMs: 100, drainMs: 20, streamBytes: 4, totalBytes: 4 });
+    const kept = Math.min(size, 4);
+    assert(result.stdout_received_bytes === size);
+    assert(result.stdout_attempted_bytes === kept && result.stdout_acknowledged_bytes === kept);
+    assert(
+      result.stderr_received_bytes === 0 && result.stderr_attempted_bytes === 0 &&
+        result.stderr_acknowledged_bytes === 0,
+    );
+    assert(JSON.stringify(saved) === JSON.stringify(Array.from(payload.subarray(0, kept))));
+    assert(result.reason === (size === 5 ? "log_cap" : null));
+    assert(result.drain === "complete" && result.retention === "acknowledged");
+    assert(result.exit?.code === 0 && result.exit.success && result.errors.length === 0);
+    assert(signals.every((signal) => !signal.aborted));
+    assert(result.process_tree_terminated === null && result.resource_measurements === null);
+  });
+}
+Deno.test("TS6 incomplete drain requests abort and hanging reader cancellation; late writes detach", async () => {
+  const saved: number[] = [];
+  const state = { cancelRequests: 0, sinkStarted: false, abortObserved: false };
+  let releaseSink: () => void = () => {
+    throw new Error("sink not started");
+  };
+  let releaseStatus: () => void = () => {
+    throw new Error("status not created");
+  };
+  let finishSink: () => void = () => {
+    throw new Error("sink completion not created");
+  };
+  const sinkFinished = new Promise<void>((resolve) => {
+    finishSink = resolve;
+  });
+  const status = new Promise<{ code: number; success: boolean }>((resolve) => {
+    releaseStatus = () => resolve({ code: 0, success: true });
+  });
+  const result = await runFinite(() => ({
+    stdout: new ReadableStream<Uint8Array>({
+      start(c) {
+        c.enqueue(new Uint8Array([61, 62, 63, 64]));
+      },
+      cancel() {
+        state.cancelRequests++;
+        return new Promise<void>(() => {});
+      },
+    }),
+    stderr: new ReadableStream<Uint8Array>({
+      cancel() {
+        state.cancelRequests++;
+        return new Promise<void>(() => {});
+      },
+    }),
+    status,
+    kill() {},
+  }), async (stream, bytes, signal) => {
+    assert(stream === "stdout");
+    state.sinkStarted = true;
+    signal.addEventListener("abort", () => {
+      state.abortObserved = signal.aborted;
+    }, { once: true });
+    saved.push(...bytes.subarray(0, 2));
+    await new Promise<void>((resolve) => {
+      releaseSink = resolve;
+    });
+    // A cooperative abort request does not prevent an external sink from writing.
+    saved.push(...bytes.subarray(2));
+    finishSink();
+  }, { wallMs: 5, drainMs: 5, streamBytes: 16, totalBytes: 32 });
+  assert(state.sinkStarted && state.abortObserved && state.cancelRequests === 2);
+  assert(JSON.stringify(saved) === "[61,62]");
+  assert(result.reason === "deadline" && result.drain === "incomplete" && result.exit === null);
+  assert(
+    result.stdout_received_bytes === 4 && result.stdout_attempted_bytes === 4 &&
+      result.stdout_acknowledged_bytes === 0,
+  );
+  assert(
+    result.stderr_received_bytes === 0 && result.stderr_attempted_bytes === 0 &&
+      result.stderr_acknowledged_bytes === 0,
+  );
+  assert(result.retention === "incomplete_unknown_partial" && result.errors.length === 0);
+  assert(result.process_tree_terminated === null && result.resource_measurements === null);
+  const snapshot = JSON.stringify(result);
+  releaseSink();
+  releaseStatus();
+  await sinkFinished;
+  await Promise.resolve();
+  await Promise.resolve();
+  assert(JSON.stringify(saved) === "[61,62,63,64]", "late external writes remain possible");
+  assert(JSON.stringify(result) === snapshot, "late sink/status must not promote detached receipt");
+  assert(result.stdout_acknowledged_bytes === 0 && result.exit === null);
+});

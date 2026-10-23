@@ -1,0 +1,89 @@
+# Root's externally admitted preflight is mandatory. These Base-only path guards
+# do not prove payload/effect/cache closure, ownership or process-tree isolation.
+get(ENV, "QCL_DOCS_PROFILE", "") == "pilot-v1" ||
+    error("Operator recipe requires explicit pilot-v1")
+
+# Staging reads this versioned literal without executing Julia. Keep the exact LF
+# bytes and final newline; this is generated index source, not a second chapter.
+const QCL_DOCS_OPERATOR_INDEX = "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n"
+
+function _qcl_docs_path(name)
+    value = get(ENV, name, "")
+    isempty(value) && error("Missing required pilot path: " * name)
+    startswith(value, "/") && isabspath(value) || error("Pilot path must be Linux absolute")
+    (endswith(value, "/") || occursin("//", value) ||
+     any(part -> part == "." || part == "..", split(value, '/'))) &&
+        error("Pilot path has noncanonical components")
+    value == normpath(value) || error("Pilot path must be normalized")
+    cursor = value
+    while true
+        islink(cursor) && error("Pilot path has a symlink ancestor")
+        parent = dirname(cursor)
+        parent == cursor && break
+        cursor = parent
+    end
+    return value
+end
+function _qcl_docs_directory(path)
+    isdir(path) || error("Required pilot directory is missing")
+    realpath(path) == path || error("Pilot directory is not canonical")
+end
+function _qcl_docs_contains(parent, child)
+    a, b = splitpath(parent), splitpath(child)
+    return length(b) >= length(a) && b[1:length(a)] == a
+end
+_qcl_docs_root = _qcl_docs_path("QCL_DOCS_ROOT")
+_qcl_docs_attempt = _qcl_docs_path("QCL_DOCS_ATTEMPT")
+_qcl_docs_source = _qcl_docs_path("QCL_DOCS_SOURCE")
+_qcl_docs_build = _qcl_docs_path("QCL_DOCS_BUILD")
+for path in (_qcl_docs_root, _qcl_docs_attempt, _qcl_docs_source, dirname(_qcl_docs_build))
+    _qcl_docs_directory(path)
+end
+(_qcl_docs_contains(_qcl_docs_root, _qcl_docs_attempt) ||
+ _qcl_docs_contains(_qcl_docs_attempt, _qcl_docs_root)) && error("ROOT and ATTEMPT overlap")
+(_qcl_docs_contains(_qcl_docs_source, _qcl_docs_build) ||
+ _qcl_docs_contains(_qcl_docs_build, _qcl_docs_source)) && error("SOURCE and BUILD overlap")
+_qcl_docs_source == joinpath(_qcl_docs_attempt, "stage", "operator", "src") ||
+    error("SOURCE does not match operator layout")
+_qcl_docs_build == joinpath(_qcl_docs_attempt, "raw", "operator") ||
+    error("BUILD does not match operator layout")
+(ispath(_qcl_docs_build) || islink(_qcl_docs_build)) && error("BUILD already exists")
+joinpath(realpath(dirname(_qcl_docs_build)), "operator") == _qcl_docs_build ||
+    error("BUILD candidate is not canonical")
+VERSION == v"1.13.0" || error("Pilot requires Julia 1.13.0")
+_qcl_docs_project = joinpath(_qcl_docs_root, "julia", "Project.toml")
+for name in ("Project.toml", "Manifest.toml")
+    expected = joinpath(_qcl_docs_root, "julia", name)
+    cursor = expected
+    while true
+        islink(cursor) && error("Pilot project has a symlink ancestor")
+        parent = dirname(cursor)
+        parent == cursor && break
+        cursor = parent
+    end
+    isfile(expected) || error("Missing regular pilot project input")
+    realpath(expected) == expected || error("Pilot project input is not canonical")
+end
+Base.active_project() == _qcl_docs_project || error("Wrong active pilot project")
+
+using Documenter
+makedocs(
+    root = _qcl_docs_root,
+    source = _qcl_docs_source,
+    build = _qcl_docs_build,
+    modules = Module[],
+    remotes = nothing,
+    sitename = "Документация оператора",
+    format = Documenter.HTML(prettyurls = false, edit_link = nothing,
+        disable_git = true, analytics = "", warn_outdated = false,
+        prerender = false, mathengine = nothing,
+        assets = ["assets/qcl-fixed-light.css"],
+        repolink = "https://github.com/Afonenko-QCL-NEGF/qcl-negf"),
+    pages = ["Home" => "index.md", "Recovery" => "recovery.md"],
+    pagesonly = false,
+    doctest = false,
+    linkcheck = false,
+    checkdocs = :none,
+    warnonly = false,
+    draft = false,
+)
