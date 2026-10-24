@@ -243,56 +243,194 @@ function propertyAtoms(property) {
   return null;
 }
 
+// This adapter is for the exact published Documenter 1.17 light theme only.
+const DOCUMENTER_LIGHT_SHA256 = "706b5379af688761c9f0168af88e1eaa05495e1cdc7c4a0debbf03621d8923a7";
+// Exact ancillary CSS retains the global-important refusal; this only admits
+// its reviewed comment/quoted numeric-content grammar, with no selector proof.
+const ANCILLARY_CSS_SHA256 = new Set([
+  "f8bd27657d5373067aa3e9d8885497855c6284d495706dfb1ccdf0cdc0bc3391", // fontawesome
+  "4de6067d6c116b81dd1a4fcd252e3c3e2297ae01c576b63fabac8f8655b4787a", // solid
+  "f4ab507a816906136d0ea985f089ee666acd8a10850ec718e67cd98ca23a8081", // brands
+  "0ca8befae6dc6607ebb252e15fb00f6482d094b6a0d1771b2e0ee327eacadebe", // Lato3.0.0
+]);
+const DISJOINT_IMPORTANT = new Set([
+  "-ms-high-contrast-adjust",
+  "opacity",
+  "display",
+  "visibility",
+  "z-index",
+  "text-align",
+  "overflow",
+  "overflow-x",
+  "overflow-y",
+]);
+
+function pinnedCSSRules(text) {
+  // Consume comments and strings before braces. Escapes are admitted only as
+  // numeric glyphs in an entire quoted content value; never selectors or URLs.
+  let clean = "", i = 0;
+  while (i < text.length) {
+    if (text.startsWith("/*", i)) {
+      const end = text.indexOf("*/", i + 2);
+      if (end < 0) fail("unsupported_style_context");
+      clean += " ";
+      i = end + 2;
+    } else if (text[i] === '"' || text[i] === "'") {
+      const quote = text[i++];
+      let value = "";
+      while (i < text.length && text[i] !== quote) value += text[i++];
+      if (i === text.length) fail("unsupported_style_context");
+      i++;
+      if (value.includes("\\")) {
+        if (
+          !/(?:^|[;{])\s*content\s*:\s*$/i.test(clean) ||
+          !/^(?:\\[a-fA-F0-9]{1,6}\s?)+$/.test(value)
+        ) {
+          fail("unsupported_style_context", "non-glyph escape");
+        }
+      }
+      // Quoted values contain no declaration/rule delimiters in the lexer view.
+      clean += '"quoted"';
+    } else {
+      if (text[i] === "\\") fail("unsupported_style_context", "escaped identifier");
+      clean += text[i++];
+    }
+  }
+  const rules = [];
+  const stack = [];
+  let start = 0;
+  for (let j = 0; j < clean.length; j++) {
+    if (clean[j] === "{") {
+      stack.push(clean.slice(start, j).trim());
+      start = j + 1;
+    } else if (clean[j] === "}") {
+      if (!stack.length) fail("unsupported_style_context");
+      const selector = stack.pop();
+      const body = clean.slice(start, j);
+      for (const field of body.split(";")) {
+        if (!/!\s*important\b/i.test(field)) continue;
+        const m = /^\s*([-a-zA-Z]+)\s*:[^{};]*!\s*important\s*$/i.exec(field);
+        if (!m) fail("unsupported_style_context", "important grammar");
+        rules.push({ selector, property: m[1].toLowerCase() });
+      }
+      start = j + 1;
+    }
+  }
+  if (stack.length || rules.length !== [...clean.matchAll(/!\s*important\b/gi)].length) {
+    fail("unsupported_style_context", "rule grammar");
+  }
+  return rules;
+}
+
+export function selectorMayMatch(selector, tag, classes) {
+  // Split only outside functional/attribute selectors. No negative pseudo class
+  // supplies a required class. Unsupported syntax always remains may-match.
+  let depth = 0, square = 0, quote = "", part = "";
+  const alternatives = [];
+  for (const c of selector) {
+    if (quote) {
+      if (c === quote) quote = "";
+      part += c;
+      continue;
+    }
+    if (c === '"' || c === "'") {
+      quote = c;
+      part += c;
+      continue;
+    }
+    if (c === "(") depth++;
+    if (c === ")") depth--;
+    if (c === "[") square++;
+    if (c === "]") square--;
+    if (depth < 0 || square < 0) return true;
+    if (c === "," && !depth && !square) {
+      alternatives.push(part);
+      part = "";
+    } else part += c;
+  }
+  if (depth || square || quote) return true;
+  alternatives.push(part);
+  return alternatives.some((alternative) => {
+    let right = "", nesting = 0, brackets = 0;
+    for (const c of alternative.trim()) {
+      if (c === "(") nesting++;
+      if (c === ")") nesting--;
+      if (c === "[") brackets++;
+      if (c === "]") brackets--;
+      if (!nesting && !brackets && /[\s>+~]/.test(c)) right = "";
+      else right += c;
+    }
+    // Only the positive simple prefix can prove disjointness. Everything after
+    // a pseudo/attribute is ignored, including classes inside :not/:is/:has.
+    const prefix = right.split(/[:\[]/, 1)[0];
+    if (!/^(?:[a-zA-Z][a-zA-Z0-9-]*|\*)?(?:[.#][a-zA-Z_][a-zA-Z0-9_-]*)*$/.test(prefix)) {
+      return true;
+    }
+    const type = /^[a-zA-Z][a-zA-Z0-9-]*/.exec(prefix)?.[0];
+    if (type && type.toLowerCase() !== tag.toLowerCase()) return false;
+    for (const m of prefix.matchAll(/\.([a-zA-Z_][a-zA-Z0-9_-]*)/g)) {
+      if (!classes.has(m[1])) return false;
+    }
+    return true;
+  });
+}
+
 function stylesheetsContext(stylesheets) {
   if (!Array.isArray(stylesheets)) fail("unsupported_style_context");
-  const important = new Set();
+  const rules = [];
   let total = 0;
   for (const sheet of stylesheets) {
     if (!plain(sheet) || typeof sheet.text !== "string") fail("unsupported_style_context");
     total += bytes(sheet.text);
-    if (total > 4 * LIMIT.css || /@import|expression\s*\(|javascript\s*:|\/\*/i.test(sheet.text)) {
+    if (total > 4 * LIMIT.css || /@import|expression\s*\(|javascript\s*:/i.test(sheet.text)) {
       fail("unsupported_style_context", "unknown cascade input");
     }
-    if (sheet.sha256 !== undefined && sha(sheet.text) !== sheet.sha256) {
-      fail("stylesheet_hash_mismatch");
+    const actual = sha(sheet.text);
+    if (sheet.sha256 !== undefined && actual !== sheet.sha256) fail("stylesheet_hash_mismatch");
+    if (actual === DOCUMENTER_LIGHT_SHA256 && sheet.sha256 === actual) {
+      rules.push(...pinnedCSSRules(sheet.text));
+      continue;
     }
-    if (sheet.sha256 !== CSS_SHA256 && /\\/.test(sheet.text)) {
-      fail("unsupported_style_context", "unreviewed CSS escape grammar");
+    if (ANCILLARY_CSS_SHA256.has(actual) && sheet.sha256 === actual) {
+      rules.push(...pinnedCSSRules(sheet.text).map((rule) => ({ ...rule, selector: null })));
+      continue;
     }
-    // Conservative sufficient proof: no !important declaration anywhere in the
-    // supplied closed stylesheet context may compete for an extracted property.
-    // This can reject a harmless nonmatching selector; it never guesses cascade.
-    const declarations = /(?:^|[;{])\s*([-a-zA-Z]+)\s*:[^;{}]*!\s*important\b/gi;
+    if (/\/\*/.test(sheet.text) || (sheet.sha256 !== CSS_SHA256 && /\\/.test(sheet.text))) {
+      fail("unsupported_style_context", "unreviewed CSS grammar");
+    }
     let matched = 0;
-    for (const match of sheet.text.matchAll(declarations)) {
+    for (
+      const match of sheet.text.matchAll(/(?:^|[;{])\s*([-a-zA-Z]+)\s*:[^;{}]*!\s*important\b/gi)
+    ) {
       matched++;
-      const property = match[1].toLowerCase();
+      rules.push({ selector: null, property: match[1].toLowerCase() });
+    }
+    if (matched !== [...sheet.text.matchAll(/!\s*important\b/gi)].length) {
+      fail("unsupported_style_context");
+    }
+  }
+  // Preserve the former eager global-grammar refusal for every stylesheet
+  // outside the exact Documenter selector adapter, even an empty math batch.
+  for (const { selector, property } of rules) {
+    if (
+      selector === null && propertyAtoms(property) === null && !DISJOINT_IMPORTANT.has(property)
+    ) {
+      fail("unsupported_style_context", "unknown important property");
+    }
+  }
+  return (tag, classText) => {
+    const important = new Set(), classes = new Set((classText ?? "").split(/\s+/));
+    for (const { selector, property } of rules) {
+      if (selector !== null && !selectorMayMatch(selector, tag, classes)) continue;
       const atoms = propertyAtoms(property);
       if (atoms === null) {
-        // Only reviewed, disjoint properties may be ignored. Unknown shorthand
-        // semantics are not guessed from an unfamiliar property spelling.
-        if (
-          ![
-            "-ms-high-contrast-adjust",
-            "opacity",
-            "display",
-            "visibility",
-            "z-index",
-            "text-align",
-            "overflow",
-            "overflow-x",
-            "overflow-y",
-          ].includes(property)
-        ) {
+        if (!DISJOINT_IMPORTANT.has(property)) {
           fail("unsupported_style_context", "unknown important property");
         }
       } else for (const atom of atoms) important.add(atom);
     }
-    if (matched !== [...sheet.text.matchAll(/!\s*important\b/gi)].length) {
-      fail("unsupported_style_context", "unknown important declaration grammar");
-    }
-  }
-  return important;
+    return important;
+  };
 }
 function declarations(text, important) {
   if (!text || /[\\&<>!]|url\s*\(|expression\s*\(|var\s*\(/i.test(text)) fail("unsupported_style");
@@ -386,7 +524,7 @@ export function externalizeStyles(markup, { stylesheets } = {}) {
     }
     if (attrs.has("style")) {
       const original = attrs.get("style");
-      const values = declarations(original, important);
+      const values = declarations(original, important(tag, attrs.get("class")));
       const className = `qcl-math-${sha(original)}`;
       groups.set(
         className,
