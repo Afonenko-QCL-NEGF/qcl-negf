@@ -371,6 +371,53 @@ receipt, zero denominator, missing context/channel. Их literal sums/inverse2
 не должны импортировать проверяемый reducer. Выход: independence/property/assertion matrix и report source binding; discovered
 code gap уходит owning I medium с готовым контрактом, не исправляется под видом audit.
 
+#### Текущий source-status SCI06 — 2026-10-20
+
+Это уточнение относится к gitlinks root
+`2c33d30a78ef2f99c2ae68ec1ff3aa9ecfbad2ea`; исходная карточка выше и
+исторические review сохраняют свои source/даты. Принятый S1 остаётся
+**0 mV/period, 70 K, LO/acoustic/impurity/IFR/alloy, e–e none**.
+
+В Results `c00bc60790a3d50bf2eac7e999ab45a60ace9047` уже реализованы
+coefficient/defect norms и четыре RHS для raw/normalized × plus/minus:
+[`equilibrium.py`](../../../components/qcl-negf-results/src/qcl_negf_results/equilibrium.py)
+`::_Norm`, `::_represented_current_bound`, `::diagnose_stored_equilibrium`.
+Мера, единицы A/m², outward signs, missing/null и near-zero semantics заданы
+в Research `3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731`,
+[`equilibrium-measurement-contract.md`](../../../components/qcl-negf-research/docs/equilibrium-measurement-contract.md)
+§§A.1–A.3. RHS соответствует algebraic upper bound **представленного complex
+current в exact arithmetic при фиксированных stored matrices и fitted μ**.
+Формулировка «coefficient reducer ещё отсутствует» описывает исторический срез
+и не является текущим source verdict.
+
+В том же Results commit
+[`test_equilibrium_diagnostics.py`](../../../components/qcl-negf-results/tests/test_equilibrium_diagnostics.py)
+`::m1_expected`, `::m1_check_literal_report`, `::test_M1_01_literal_noncommuting_norms_terms_signs_and_weights`,
+`::test_M1_02_full_complex_current_bound`, `::test_M1_09_literal_f0_table_from_scalar_entries`
+содержат независимые literal manufactured oracle sources для norms/terms,
+complex current и весов; expected table не вызывает проверяемые norm/FD/RHS
+builders. Это source property, а не новый runtime pass или измерение S1.
+
+Полная absolute-current acceptance остаётся открытой: Float64 RHS не является
+сертифицированным outward-rounded arithmetic enclosure
+(`arithmetic_error_status='not_measured'`, `arithmetic_error_bound=null`).
+Spectral sum-rule deficit `r_sum` не даёт spectral-error enclosure либо
+автоматического current-error bound: Core
+`9f4a96d032ad868ec010ce92d915bb81087c8d92`,
+[`acceptance_metadata.jl`](../../../components/QCLNEGF.jl/src/numerics/reference/acceptance_metadata.jl)
+ветвь `:r_sum` и поля `estimated_bound`/`bound_status`.
+Конечный независимо обоснованный εJ_abs[A/m²], spectral/domain/tail/quadrature
+и nonlinear/fresh-map error bounds остаются не установлены по Research §§5.4,6.
+Фактические immutable final U/G/run-attempt, четыре измеренных RHS, sensitivities
+и held-out H этим source-only уточнением не предъявлены. Новые критерии,
+tolerances и numerical/runtime/solver checks здесь не вводятся.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Coefficient reducer и represented-current RHS реализованы | Results c00bc60, `equilibrium.py::_represented_current_bound` и вызов из `diagnose_stored_equilibrium`; Research 3ed8a9f §§A.1–A.3 | Exact-arithmetic represented domain; source-only | сохранить |
+| Independent manufactured coefficient/current oracle source существует | Results c00bc60, literal M1 helpers и M1_01/02/09 выше | Runtime/assertion mutations здесь не выполнялись | сохранить |
+| Полная absolute-current scientific acceptance закрыта | Research 3ed8a9f §§5.4,6,A.1; Core 9f4a96d `acceptance_metadata.jl` | Arithmetic/spectral/domain/nonlinear bounds, εJ_abs и actual final/H evidence отсутствуют | данных недостаточно |
+
 ### SCI07 — измеримый resource/storage admission contract
 
 **D Sol ultra; owners Runner/Platform/AiiDA, R high.** P, SCI04, resource section,
