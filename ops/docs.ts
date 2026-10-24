@@ -1,5 +1,5 @@
-// DOC04 source integration. No BUILD dispatch until owning admission/effect/
-// assembly bindings exist. Paths and marker files never confer that authority.
+// DOC04 ordinary producer: observe selected sources and actual native guards,
+// then one capped local Nix candidate. A marker never confers BUILD authority.
 import { workspace } from "./process.ts";
 import { githubRepository, type GitReader, type SourceGraph, sourceGraph } from "./git.ts";
 
@@ -110,20 +110,486 @@ export function parseDocsArgs(args: string[]) {
   };
 }
 
-// These are concrete unclosed source integrations, not caller-provided statuses.
-// No marker/admission JSON can erase them. Replacing them needs owning APIs and
-// reviewed technical bindings, not a --ready flag or receipt existence test.
-export function buildBlockers(): string[] {
-  return [
-    "missing_admitted_assembly_entrypoint",
-    "missing_bounded_source_graph_runner_binding",
-    "missing_shared_schema_validation_binding",
-    "unknown_nested_docstring_import_cache_edges",
-    "missing_installed_documenter_toolchain_cache_binding",
-    "missing_full_assets_license_runtime_css_binding",
-    "missing_external_fresh_inventory_admission_binding",
-    "missing_process_tree_resource_and_exclusivity_binding",
+export interface DocsPlan {
+  format: "qcl-negf.docs-pilot-plan.v1";
+  profile: "pilot-v1";
+  slices: {
+    id: string;
+    owner: string;
+    primary_sources: string[];
+    section: string;
+    primary_urls: string[];
+  }[];
+  source_inputs: string[];
+  assets_lock: string;
+  support_policy: "existing_owning_page_graphs";
+  transform_policy: "documenter-1.17-light-self-v1";
+  public_prefix: "/docs";
+  limits: Record<string, number>;
+  expected_primary_anchors: string[];
+}
+const docsLimits: Record<string, number> = {
+  files: 10000,
+  total_bytes: 268435456,
+  file_bytes: 16777216,
+  manifest_bytes: 2097152,
+  fragment_bytes: 32768,
+  help_view_bytes: 65536,
+  tex_bytes: 16384,
+  math_batch_bytes: 4194304,
+  math_records: 10000,
+  math_markup_bytes: 262144,
+  math_total_markup_bytes: 33554432,
+  math_css_bytes: 1048576,
+  math_style_groups: 20000,
+  math_batch_wall_seconds: 60,
+};
+function relativeDocsPath(value: unknown): value is string {
+  return typeof value === "string" && /^[A-Za-z0-9_./#-]+$/.test(value) &&
+    !value.startsWith("/") && value.split("/").every((v) => v && v !== "." && v !== "..");
+}
+export function parseDocsPlan(value: unknown): DocsPlan {
+  if (
+    !record(value) || value.format !== "qcl-negf.docs-pilot-plan.v1" ||
+    value.profile !== "pilot-v1" || value.support_policy !== "existing_owning_page_graphs" ||
+    value.transform_policy !== "documenter-1.17-light-self-v1" || value.public_prefix !== "/docs" ||
+    value.assets_lock !== "ops/docs/assets.lock.json" || !record(value.limits)
+  ) {
+    throw new Error("invalid_docs_plan_policy");
+  }
+  if (
+    Object.keys(value.limits).length !== Object.keys(docsLimits).length ||
+    Object.entries(docsLimits).some(([key, cap]) => {
+      const actual = (value.limits as Record<string, unknown>)[key];
+      return !Number.isSafeInteger(actual) || (actual as number) <= 0 || (actual as number) > cap;
+    })
+  ) throw new Error("invalid_docs_plan_limits");
+  const requiredInputs = [
+    "julia/Project.toml",
+    "julia/Manifest.toml",
+    "components/QCLNEGF.jl/docs/make.jl",
+    "components/QCLNEGFRunner.jl/docs/make.jl",
+    "docs/public/make.jl",
+    "docs/public/operator-recovery.md",
+    "components/qcl-negf-contracts/src/qcl_negf_contracts/schemas/model-help.schema.json",
   ];
+  if (
+    !Array.isArray(value.source_inputs) || value.source_inputs.length !== requiredInputs.length ||
+    !requiredInputs.every((path) => (value.source_inputs as unknown[]).includes(path))
+  ) {
+    throw new Error("invalid_docs_plan_source_inputs");
+  }
+  const anchors = [
+    "researcher-scba-route",
+    "researcher-final-route",
+    "reader-api-routes",
+    "developer-configuration-route",
+    "operator-recovery-route",
+    "operator-recovery",
+  ];
+  if (
+    !Array.isArray(value.expected_primary_anchors) ||
+    value.expected_primary_anchors.length !== anchors.length ||
+    !anchors.every((anchor) => (value.expected_primary_anchors as unknown[]).includes(anchor))
+  ) {
+    throw new Error("invalid_docs_plan_coverage");
+  }
+  const owners = [["researcher", "core", "core"], ["developer", "runner", "runner"], [
+    "operator",
+    "root",
+    "operator",
+  ]];
+  if (
+    !Array.isArray(value.slices) || value.slices.length !== owners.length ||
+    owners.some(([id, owner, section], index) => {
+      const slice: unknown = (value.slices as unknown[])[index];
+      return !record(slice) || slice.id !== id || slice.owner !== owner ||
+        slice.section !== section ||
+        !Array.isArray(slice.primary_sources) || !slice.primary_sources.length ||
+        !slice.primary_sources.every(relativeDocsPath) ||
+        !Array.isArray(slice.primary_urls) || !slice.primary_urls.length ||
+        !slice.primary_urls.every((url) => relativeDocsPath(url) && url.startsWith(section + "/"));
+    })
+  ) throw new Error("invalid_docs_plan_journeys");
+  return structuredClone(value) as unknown as DocsPlan;
+}
+// Selected public Markdown only; this is not an arbitrary Julia effect proof.
+export async function scanDocsSources(roots: readonly string[]) {
+  const files: FileBinding[] = [];
+  let total = 0;
+  for (const root of roots) {
+    const entries = await inventoryTree(root, 5000 - files.length, 16777216 - total);
+    for (const entry of entries) {
+      const path = `${root}/${entry.path}`;
+      if (/\.md$/i.test(entry.path)) {
+        const data = await readRegularBounded(path, Math.min(2097152, 16777216 - total));
+        if (await sha256(data) !== entry.sha256) throw new Error("docs_source_changed_during_scan");
+        const text = new TextDecoder("utf-8", { fatal: true }).decode(data);
+        if (/^[ \t]*(?:`{3,}|~{3,})[ \t]*@(example|eval|setup|repl)\b/m.test(text)) {
+          throw new Error(`executable_docs_block: ${path}`);
+        }
+      }
+      total += entry.bytes;
+      files.push({ path, bytes: entry.bytes, sha256: entry.sha256 });
+    }
+  }
+  return { files, executable_blocks: 0 as const, bytes: total };
+}
+
+export function docsBuildCommand(nixExecutable: string, sourceRoot: string, attempt: string) {
+  for (const path of [nixExecutable, sourceRoot, attempt]) canonical(path);
+  return {
+    executable: nixExecutable,
+    cwd: sourceRoot,
+    clearEnv: true as const,
+    env: {
+      PATH: nixExecutable.slice(0, nixExecutable.lastIndexOf("/")),
+      HOME: `${attempt}/home`,
+      TMPDIR: `${attempt}/tmp`,
+      XDG_CACHE_HOME: `${attempt}/cache`,
+      LC_ALL: "C",
+    },
+    args: [
+      "--store",
+      "local",
+      "build",
+      "--offline",
+      "--no-link",
+      "--json",
+      "--keep-failed",
+      "--max-jobs",
+      "1",
+      "--cores",
+      "4",
+      "--timeout",
+      "1800",
+      "--option",
+      "sandbox",
+      "true",
+      "--option",
+      "builders",
+      "",
+      "--option",
+      "substitute",
+      "false",
+      "--option",
+      "use-cgroups",
+      "false",
+      "--file",
+      `${sourceRoot}/nix/docs.nix`,
+      "--argstr",
+      "inputsFile",
+      `${attempt}/producer-inputs.json`,
+    ],
+  };
+}
+
+export interface PathRecord {
+  path: string;
+  sha256: string;
+}
+export interface DocsTool {
+  store_path: string;
+  executable: string;
+  deriver: string;
+  version: string;
+}
+export interface ProducerInputs {
+  source_root: string;
+  source_graph: PathRecord;
+  plan: PathRecord;
+  project: PathRecord;
+  manifest: PathRecord;
+  prepared_depot: { store_path: string; metadata: PathRecord };
+  assets_lock: PathRecord;
+  asset_inputs: PathRecord;
+  review_inputs: PathRecord;
+  tools: Record<"python" | "node" | "julia" | "git", DocsTool>;
+}
+export interface DocsAdmission {
+  format: "qcl-negf.docs-admission.v1";
+  created_epoch: number;
+  attempt_directory: string;
+  repository_root: string;
+  plan_sha256: string;
+  unit: { name: string; uid: 0; boot_id: string; control_group: string };
+  resource_readback: PathRecord;
+  tools: Record<"nix" | "git" | "deno" | "python" | "node" | "julia", DocsTool>;
+  inputs: ProducerInputs;
+}
+function exactKeys(
+  value: unknown,
+  keys: readonly string[],
+): asserts value is Record<string, unknown> {
+  if (
+    !record(value) || Object.keys(value).length !== keys.length ||
+    keys.some((key) => !Object.hasOwn(value, key))
+  ) throw new Error("invalid_private_input_fields");
+}
+function storePath(path: unknown): asserts path is string {
+  if (typeof path !== "string") throw new Error("invalid_store_path");
+  canonical(path);
+  if (!/^\/nix\/store\/[a-z0-9]{32}-[^/]+(?:\/.*)?$/.test(path)) {
+    throw new Error("immutable_store_path_required");
+  }
+}
+function pathRecord(value: unknown): asserts value is PathRecord {
+  exactKeys(value, ["path", "sha256"]);
+  storePath(value.path);
+  if (typeof value.sha256 !== "string" || !hex.test(value.sha256)) {
+    throw new Error("invalid_input_sha256");
+  }
+}
+function docsTool(value: unknown): asserts value is DocsTool {
+  exactKeys(value, ["store_path", "executable", "deriver", "version"]);
+  storePath(value.store_path);
+  storePath(value.executable);
+  storePath(value.deriver);
+  if (
+    value.store_path.slice(11).includes("/") || !value.deriver.endsWith(".drv") ||
+    !contains(value.store_path, value.executable) || value.store_path === value.executable ||
+    typeof value.version !== "string" || !value.version.trim() || value.version.length > 256
+  ) {
+    throw new Error("invalid_tool_binding");
+  }
+}
+// JSON.parse alone silently accepts duplicate authority fields. Scan the same
+// finite JSON grammar first; decoded keys share one set per object, depth capped.
+export function parseDocsJson(text: string): unknown {
+  const result: unknown = JSON.parse(text);
+  let i = 0;
+  const ws = () => {
+    while (/\s/.test(text[i] ?? "") && i < text.length) i++;
+  };
+  const string = () => {
+    const start = i++;
+    while (i < text.length) {
+      if (text[i] === "\\") {
+        i += 2;
+        continue;
+      }
+      if (text[i++] === '"') return JSON.parse(text.slice(start, i)) as string;
+    }
+    throw new Error("unterminated_json_string");
+  };
+  const value = (depth: number): void => {
+    if (depth > 64) throw new Error("json_depth_limit");
+    ws();
+    if (text[i] === '"') {
+      string();
+      return;
+    }
+    if (text[i] === "{") {
+      i++;
+      ws();
+      const keys = new Set<string>();
+      if (text[i] === "}") {
+        i++;
+        return;
+      }
+      for (;;) {
+        ws();
+        if (text[i] !== '"') throw new Error("invalid_json_key");
+        const key = string();
+        if (keys.has(key)) throw new Error("duplicate_json_key");
+        keys.add(key);
+        ws();
+        i++;
+        value(depth + 1);
+        ws();
+        if (text[i++] === "}") break;
+      }
+    } else if (text[i] === "[") {
+      i++;
+      ws();
+      if (text[i] === "]") {
+        i++;
+        return;
+      }
+      for (;;) {
+        value(depth + 1);
+        ws();
+        if (text[i++] === "]") break;
+      }
+    } else {
+      while (i < text.length && !/[\s,}\]]/.test(text[i])) i++;
+    }
+  };
+  value(0);
+  ws();
+  if (i !== text.length) throw new Error("invalid_json_tail");
+  return result;
+}
+export function parseDocsAdmission(value: unknown): DocsAdmission {
+  exactKeys(value, [
+    "format",
+    "created_epoch",
+    "attempt_directory",
+    "repository_root",
+    "plan_sha256",
+    "unit",
+    "resource_readback",
+    "tools",
+    "inputs",
+  ]);
+  if (
+    value.format !== "qcl-negf.docs-admission.v1" || typeof value.created_epoch !== "number" ||
+    !Number.isFinite(value.created_epoch) ||
+    typeof value.plan_sha256 !== "string" || !hex.test(value.plan_sha256)
+  ) throw new Error("invalid_admission");
+  for (const key of ["attempt_directory", "repository_root"] as const) {
+    if (typeof value[key] !== "string") throw new Error("invalid_admission_path");
+    canonical(value[key]);
+  }
+  exactKeys(value.unit, ["name", "uid", "boot_id", "control_group"]);
+  if (
+    value.unit.uid !== 0 || typeof value.unit.name !== "string" ||
+    !/^[A-Za-z0-9][A-Za-z0-9_-]{1,127}\.service$/.test(value.unit.name) ||
+    typeof value.unit.boot_id !== "string" || !/^[a-f0-9-]{36}$/.test(value.unit.boot_id) ||
+    typeof value.unit.control_group !== "string"
+  ) throw new Error("invalid_unit_binding");
+  canonical(value.unit.control_group);
+  if (!value.unit.control_group.endsWith("/" + value.unit.name)) {
+    throw new Error("unit_cgroup_mismatch");
+  }
+  exactKeys(value.resource_readback, ["path", "sha256"]);
+  if (
+    typeof value.resource_readback.path !== "string" ||
+    typeof value.resource_readback.sha256 !== "string" ||
+    !hex.test(value.resource_readback.sha256)
+  ) throw new Error("invalid_resource_readback");
+  canonical(value.resource_readback.path);
+  exactKeys(value.tools, ["nix", "git", "deno", "python", "node", "julia"]);
+  const tools = value.tools;
+  for (const tool of Object.values(tools)) docsTool(tool);
+  const inputs = value.inputs;
+  exactKeys(inputs, [
+    "source_root",
+    "source_graph",
+    "plan",
+    "project",
+    "manifest",
+    "prepared_depot",
+    "assets_lock",
+    "asset_inputs",
+    "review_inputs",
+    "tools",
+  ]);
+  storePath(inputs.source_root);
+  for (
+    const key of [
+      "source_graph",
+      "plan",
+      "project",
+      "manifest",
+      "assets_lock",
+      "asset_inputs",
+      "review_inputs",
+    ] as const
+  ) {
+    pathRecord(inputs[key]);
+  }
+  exactKeys(inputs.prepared_depot, ["store_path", "metadata"]);
+  storePath(inputs.prepared_depot.store_path);
+  pathRecord(inputs.prepared_depot.metadata);
+  exactKeys(inputs.tools, ["python", "node", "julia", "git"]);
+  for (const [key, tool] of Object.entries(inputs.tools)) {
+    docsTool(tool);
+    if (
+      ["store_path", "executable", "deriver", "version"].some((field) =>
+        tool[field as keyof DocsTool] !== (tools[key] as DocsTool)[field as keyof DocsTool]
+      )
+    ) {
+      throw new Error("producer_tool_mismatch");
+    }
+  }
+  if (
+    (inputs.project as PathRecord).path !== `${inputs.source_root}/julia/Project.toml` ||
+    (inputs.manifest as PathRecord).path !== `${inputs.source_root}/julia/Manifest.toml` ||
+    (inputs.assets_lock as PathRecord).path !== `${inputs.source_root}/ops/docs/assets.lock.json`
+  ) {
+    throw new Error("producer_source_path_mismatch");
+  }
+  return structuredClone(value) as unknown as DocsAdmission;
+}
+export function checkDocsAdmissionFreshness(
+  createdEpoch: number,
+  nowEpoch = Date.now() / 1000,
+): void {
+  if (
+    typeof createdEpoch !== "number" || !Number.isFinite(createdEpoch) ||
+    typeof nowEpoch !== "number" || !Number.isFinite(nowEpoch)
+  ) throw new Error("invalid_admission_epoch");
+  const age = nowEpoch - createdEpoch;
+  if (age < 0 || age > 300) throw new Error("stale_or_future_admission");
+}
+export interface CgroupReadback {
+  uid: number;
+  pid: number;
+  boot_id: string;
+  control_group: string;
+  unit: Record<string, string>;
+  controls: Record<string, string>;
+}
+export function checkDocsCgroup(admission: DocsAdmission, actual: CgroupReadback) {
+  const unit = actual.unit, controls = actual.controls;
+  if (
+    actual.uid !== 0 || actual.boot_id.trim() !== admission.unit.boot_id ||
+    actual.control_group !== admission.unit.control_group || unit.Id !== admission.unit.name ||
+    unit.ActiveState !== "active" || unit.SubState !== "running" ||
+    unit.MainPID !== String(actual.pid) || !["", "root", "0"].includes(unit.User) ||
+    unit.ControlGroup !== actual.control_group || unit.KillMode !== "control-group" ||
+    !["30min", "1800000000"].includes(unit.RuntimeMaxUSec)
+  ) throw new Error("native_unit_mismatch");
+  const bounded = (text: string, cap: number) =>
+    /^\d+$/.test(text) && Number(text) > 0 && Number(text) <= cap;
+  const cpu = /^(\d+)\s+(\d+)$/.exec(controls["cpu.max"]?.trim());
+  if (
+    !cpu || Number(cpu[1]) <= 0 || Number(cpu[2]) <= 0 || Number(cpu[1]) / Number(cpu[2]) > 4 ||
+    !bounded(controls["memory.max"]?.trim(), 4294967296) ||
+    controls["memory.swap.max"]?.trim() !== "0" || !bounded(controls["pids.max"]?.trim(), 128) ||
+    !/^\d+\s*$/.test(controls["memory.current"] ?? "") ||
+    !controls["memory.events"]?.trim() || !controls["cpu.stat"]?.trim()
+  ) throw new Error("native_cgroup_cap_mismatch");
+  return structuredClone(actual);
+}
+async function kernelText(path: string, cap = 65536): Promise<string> {
+  const file = await Deno.open(path, { read: true });
+  try {
+    const data = new Uint8Array(cap + 1);
+    let count = 0;
+    while (count <= cap) {
+      const n = await file.read(data.subarray(count));
+      if (n === null) break;
+      count += n;
+      if (count > cap) throw new Error("kernel_read_cap");
+    }
+    return new TextDecoder("utf-8", { fatal: true }).decode(data.subarray(0, count));
+  } finally {
+    file.close();
+  }
+}
+async function resolveDocsExecutable(name: string): Promise<string> {
+  for (const directory of (Deno.env.get("PATH") ?? "").split(":")) {
+    if (!directory.startsWith("/")) continue;
+    try {
+      const path = await Deno.realPath(`${directory}/${name}`);
+      canonical(path);
+      const info = await Deno.stat(path);
+      if (info.isFile && info.mode !== null && (info.mode & 0o111)) return path;
+    } catch (error) {
+      if (error instanceof Deno.errors.NotFound) continue;
+      throw error;
+    }
+  }
+  throw new Error(`executable_unavailable: ${name}`);
+}
+async function protectedFile(path: string, cap = 2097152) {
+  const data = await readRegularBounded(path, cap), info = await Deno.lstat(path);
+  if (info.uid !== 0 || info.mode === null || (info.mode & 0o022) !== 0) {
+    throw new Error("root_protected_authority_required");
+  }
+  return data;
 }
 
 export interface Child {
@@ -154,7 +620,7 @@ export interface FiniteResult {
   resource_measurements: null;
 }
 // An injectable primitive for separately admitted fake-process controls. It is
-// intentionally not a CPU/RAM/descendant sandbox and is not wired to BUILD.
+// intentionally not a CPU/RAM/descendant sandbox; BUILD additionally verifies its owning unit.
 export async function runFinite(
   spawn: () => Child,
   save: (stream: "stdout" | "stderr", bytes: Uint8Array, signal: AbortSignal) => Promise<void>,
@@ -607,6 +1073,18 @@ export interface GitLimits {
   maxTotalBytes: number;
   totalWallMs: number;
 }
+// Root e5fc selected trees total 314113 bytes per graph; the complete CLI
+// lifecycle observes seven graphs (2198791 tree bytes plus config/revisions).
+// The finite 4 MiB allowance leaves headroom inside the shared 8 MiB log budget.
+export const productionDocsGitLimits: Readonly<GitLimits> = Object.freeze({
+  wallMs: 3000,
+  drainMs: 1000,
+  streamBytes: 524288,
+  totalBytes: 1048576,
+  maxCommands: 1024,
+  maxTotalBytes: 4194304,
+  totalWallMs: 1800000,
+});
 export interface GitCall {
   executable: string;
   args: string[];
@@ -622,7 +1100,104 @@ export interface GitReply {
   receipt: EvidenceRef;
 }
 export type GitTransport = (call: GitCall) => Promise<GitReply>;
-// Code dependencies only. No production spawn, filesystem writer or CLI binding.
+// The child has piped streams only: no Command.output()/unbounded stdout path.
+export function makeDocsGitTransport(
+  spawn: (call: GitCall) => Child = (call) => {
+    const child = new Deno.Command(call.executable, {
+      args: call.args,
+      cwd: call.cwd,
+      env: call.env,
+      clearEnv: call.clearEnv,
+      stdin: "null",
+      stdout: "piped",
+      stderr: "piped",
+    }).spawn();
+    return {
+      stdout: child.stdout,
+      stderr: child.stderr,
+      status: child.status,
+      kill: () => child.kill("SIGKILL"),
+    };
+  },
+): GitTransport {
+  return async (call) => {
+    canonical(call.tag.attempt);
+    if (!Number.isSafeInteger(call.tag.ordinal) || call.tag.ordinal < 1) {
+      throw new Error("invalid_git_ordinal");
+    }
+    await ancestors(call.tag.attempt, true);
+    const parent = `${call.tag.attempt}/git`;
+    try {
+      await Deno.mkdir(parent, { mode: 0o700 });
+    } catch (error) {
+      if (!(error instanceof Deno.errors.AlreadyExists)) throw error;
+    }
+    await ancestors(parent, true);
+    const directory = `${parent}/${call.tag.ordinal}`;
+    await Deno.mkdir(directory, { mode: 0o700 }); // exclusive before any child
+    const stdout = await Deno.open(`${directory}/stdout.log`, {
+      write: true,
+      createNew: true,
+      mode: 0o600,
+    });
+    let stderr: Deno.FsFile | null = null;
+    const chunks: Uint8Array[] = [];
+    let result: FiniteResult;
+    try {
+      stderr = await Deno.open(`${directory}/stderr.log`, {
+        write: true,
+        createNew: true,
+        mode: 0o600,
+      });
+      result = await runFinite(() => spawn(call), async (stream, bytes, signal) => {
+        const file = stream === "stdout" ? stdout : stderr!;
+        let offset = 0;
+        while (offset < bytes.length) {
+          if (signal.aborted) throw new Error("git_log_write_aborted");
+          const written = await file.write(bytes.subarray(offset));
+          if (written <= 0) throw new Error("git_log_short_write");
+          offset += written;
+        }
+        if (stream === "stdout") chunks.push(bytes.slice());
+      }, call.limits);
+    } catch (error) {
+      const bytes = new TextEncoder().encode(
+        JSON.stringify(
+          {
+            call,
+            result: null,
+            error: safeFailureDetail(error),
+            accounting: "unknown",
+          },
+          null,
+          2,
+        ) + "\n",
+      );
+      const path = `${directory}/result.json`;
+      await Deno.writeFile(path, bytes, { createNew: true, mode: 0o600 });
+      throw Object.assign(new Error(safeFailureDetail(error)), {
+        receipt: { path, sha256: await sha256(bytes) },
+      });
+    } finally {
+      stdout.close();
+      stderr?.close();
+    }
+    const data = new Uint8Array(result.stdout_acknowledged_bytes);
+    let offset = 0;
+    for (const chunk of chunks) {
+      const retained = chunk.subarray(0, data.length - offset);
+      data.set(retained, offset);
+      offset += retained.length;
+      if (offset === data.length) break;
+    }
+    const bytes = new TextEncoder().encode(JSON.stringify({ call, result }, null, 2) + "\n");
+    const path = `${directory}/result.json`;
+    await Deno.writeFile(path, bytes, { createNew: true, mode: 0o600 });
+    return { stdout: data, result, receipt: { path, sha256: await sha256(bytes) } };
+  };
+}
+
+// The reader validates finite retained transport evidence before exposing Git stdout.
 export type GitAccounting =
   | {
     kind: "unknown";
@@ -1328,11 +1903,87 @@ export async function withDocsSourceIdentity<T>(options: {
   return { state: "failed_bound", expected, candidate: null, before, after, operation };
 }
 
+export async function dispatchDocsBuild(options: {
+  admission: DocsAdmission;
+  attempt: string;
+  wallMs: number;
+  invoke: GitTransport;
+}) {
+  canonical(options.attempt);
+  if (!Number.isSafeInteger(options.wallMs) || options.wallMs <= 0) {
+    throw new Error("candidate_deadline");
+  }
+  await Deno.writeTextFile(
+    `${options.attempt}/producer-inputs.json`,
+    JSON.stringify(options.admission.inputs, null, 2) + "\n",
+    { createNew: true, mode: 0o600 },
+  );
+  const command = docsBuildCommand(
+    options.admission.tools.nix.executable,
+    options.admission.inputs.source_root,
+    options.attempt,
+  );
+  return options.invoke({
+    ...command,
+    tag: { attempt: options.attempt, ordinal: 20000 },
+    limits: { wallMs: options.wallMs, drainMs: 1000, streamBytes: 7340032, totalBytes: 7340032 },
+  });
+}
+export function parseDocsNixOutput(stdout: Uint8Array): string {
+  const result = parseDocsJson(new TextDecoder("utf-8", { fatal: true }).decode(stdout));
+  if (
+    !Array.isArray(result) || result.length !== 1 || !record(result[0]) ||
+    !record(result[0].outputs) ||
+    Object.keys(result[0].outputs).length !== 1 || typeof result[0].outputs.out !== "string"
+  ) throw new Error("one_nix_output_required");
+  const output = result[0].outputs.out;
+  storePath(output);
+  return output;
+}
+
+export interface DocsCheck {
+  name: string;
+  status: "observed" | "blocked";
+  reason: string;
+}
+export function buildBlockers(checks: readonly DocsCheck[] = []): string[] {
+  return checks.length
+    ? checks.filter((check) => check.status === "blocked").map((check) => check.reason)
+    : ["preflight_not_observed"];
+}
+interface PreflightReceipt {
+  sources: SourceGraph | null;
+  plan: string;
+  inputs: FileBinding[];
+  admission: FileBinding | null;
+  imports: unknown;
+  assets: unknown;
+  toolchain: unknown;
+  steps: unknown[];
+  measurements: unknown;
+  checks: DocsCheck[];
+  result: "blocked" | "prerequisites_observed";
+  parent_attempt: null;
+}
+interface BuildContext {
+  args: ReturnType<typeof parseDocsArgs>;
+  root: string;
+  started: number;
+  admission: DocsAdmission;
+  inputs: FileBinding[];
+  readGit: GitReader;
+  invoke: GitTransport;
+  command: (executable: string, args: string[], cap?: number, wall?: number) => Promise<GitReply>;
+  native: unknown;
+  remaining: () => number;
+}
+const preflightContexts = new WeakMap<PreflightReceipt, BuildContext>();
 export async function preflight(
   args: ReturnType<typeof parseDocsArgs>,
   root = workspace,
   deps?: { readGit: GitReader },
-) {
+): Promise<PreflightReceipt> {
+  const started = performance.now();
   canonical(root);
   canonical(args.attempt);
   if (contains(root, args.attempt) || contains(args.attempt, root)) {
@@ -1340,59 +1991,355 @@ export async function preflight(
   }
   await ancestors(args.attempt.slice(0, args.attempt.lastIndexOf("/")) || "/", true);
   await absent(args.attempt);
-  // mkdir is exclusive. Never remove, truncate, reuse or repair an attempt.
   await Deno.mkdir(args.attempt, { mode: 0o700 });
-  const blockers = buildBlockers();
-  const inputs: unknown[] = [];
-  // Optional trusted code dependency never confers BUILD/admission authority.
-  // Production CLI supplies none and never falls back to buffered Git.
-  let sources: SourceGraph | null = null;
-  if (deps) {
+  const checks: DocsCheck[] = [], inputs: FileBinding[] = [];
+  async function observe<T>(name: string, work: () => Promise<T>): Promise<T | null> {
     try {
-      sources = await sourceGraph(root, true, deps.readGit);
+      const value = await work();
+      checks.push({ name, status: "observed", reason: name });
+      return value;
     } catch (error) {
-      blockers.push(`source_graph_unavailable: ${String(error)}`);
+      checks.push({ name, status: "blocked", reason: `${name}: ${safeFailureDetail(error)}` });
+      return null;
     }
   }
-  for (
-    const path of [
-      args.plan,
-      `${root}/julia/Project.toml`,
-      `${root}/julia/Manifest.toml`,
-      `${root}/docs/public/make.jl`,
-      `${root}/docs/public/operator-recovery.md`,
-      `${root}/ops/docs/assemble.py`,
-      `${root}/ops/docs/math-render.mjs`,
-      `${root}/ops/docs/assets.lock.json`,
-    ]
-  ) {
+  const addInput = async (path: string, cap = 2097152) => {
+    const data = await readRegularBounded(path, cap);
+    const binding = { path, bytes: data.length, sha256: await sha256(data) };
+    if (!inputs.some((item) => item.path === path)) inputs.push(binding);
+    return { data, binding };
+  };
+  const planInput = await observe("pilot_plan", () => addInput(args.plan));
+  const plan = planInput &&
+    await observe(
+      "pilot_policy",
+      () =>
+        Promise.resolve(parseDocsPlan(
+          parseDocsJson(new TextDecoder("utf-8", { fatal: true }).decode(planInput.data)),
+        )),
+    );
+  let admissionBinding: FileBinding | null = null;
+  const admission = args.admission
+    ? await observe("native_admission", async () => {
+      const data = await protectedFile(args.admission!);
+      const value = parseDocsAdmission(
+        parseDocsJson(new TextDecoder("utf-8", { fatal: true }).decode(data)),
+      );
+      checkDocsAdmissionFreshness(value.created_epoch);
+      if (
+        value.repository_root !== root ||
+        value.attempt_directory !== args.attempt ||
+        value.plan_sha256 !== planInput?.binding.sha256
+      ) throw new Error("stale_or_mismatched_admission");
+      admissionBinding = { path: args.admission!, bytes: data.length, sha256: await sha256(data) };
+      return value;
+    })
+    : null;
+  if (!args.admission) {
+    checks.push({
+      name: "native_admission",
+      status: "blocked",
+      reason: "native_admission_not_supplied",
+    });
+  }
+  let usedLogBytes = 0, consumptionUnknown = false, ordinal = 10000;
+  const physical = makeDocsGitTransport();
+  const invoke: GitTransport = async (call) => {
+    if (consumptionUnknown || usedLogBytes >= 8388608) {
+      throw new Error("combined_log_budget_exhausted_or_unknown");
+    }
+    const available = 8388608 - usedLogBytes;
     try {
-      inputs.push(await boundedFile(path, 2097152));
+      const reply = await physical({
+        ...call,
+        limits: {
+          ...call.limits,
+          totalBytes: Math.min(call.limits.totalBytes, available),
+          streamBytes: Math.min(call.limits.streamBytes, available),
+        },
+      });
+      usedLogBytes += reply.result.stdout_received_bytes + reply.result.stderr_received_bytes;
+      if (reply.result.drain !== "complete") consumptionUnknown = true;
+      return reply;
     } catch (error) {
-      blockers.push(`input_unavailable: ${path}: ${String(error)}`);
+      consumptionUnknown = true;
+      throw error;
+    }
+  };
+  const remaining = () => Math.max(0, Math.floor(1800000 - (performance.now() - started)));
+  const command = async (executable: string, argv: string[], cap = 65536, wall = 10000) => {
+    const available = remaining();
+    if (available <= 0) throw new Error("candidate_deadline");
+    const reply = await invoke({
+      executable,
+      args: argv,
+      cwd: root,
+      clearEnv: true,
+      env: { LC_ALL: "C", HOME: `${args.attempt}/home`, TMPDIR: `${args.attempt}/tmp` },
+      tag: { attempt: args.attempt, ordinal: ++ordinal },
+      limits: {
+        wallMs: Math.min(wall, available),
+        drainMs: 1000,
+        streamBytes: cap,
+        totalBytes: cap,
+      },
+    });
+    return reply;
+  };
+  const output = (reply: GitReply) => {
+    const r = reply.result;
+    if (
+      r.reason !== null || !r.exit?.success || r.exit.code !== 0 || r.drain !== "complete" ||
+      r.retention !== "acknowledged" || r.errors.length
+    ) throw new Error(`command_failed: ${JSON.stringify(reply.receipt)}`);
+    return new TextDecoder("utf-8", { fatal: true }).decode(reply.stdout).trim();
+  };
+  const gitExecutable = deps ? null : await observe("git_executable", async () => {
+    const path = await resolveDocsExecutable("git");
+    if (admission && path !== admission.tools.git.executable) {
+      throw new Error("admitted_git_path_mismatch");
+    }
+    return path;
+  });
+  const readGit = deps?.readGit ??
+    (gitExecutable
+      ? makeDocsGitReader({
+        root,
+        attempt: args.attempt,
+        gitExecutable,
+        invoke,
+        limits: productionDocsGitLimits,
+      })
+      : null);
+  const sources = readGit
+    ? await observe("clean_source_graph", () => sourceGraph(root, true, readGit))
+    : null;
+  if (!readGit) {
+    checks.push({
+      name: "clean_source_graph",
+      status: "blocked",
+      reason: "bounded_git_transport_unavailable",
+    });
+  }
+  if (plan) {
+    for (
+      const path of [
+        ...plan.source_inputs,
+        "ops/docs.ts",
+        "nix/docs.nix",
+        "ops/docs/produce.py",
+        "ops/docs/assemble.py",
+        "ops/docs/math-render.mjs",
+        "ops/docs/runtime-assets.py",
+      ]
+    ) {
+      await observe(`source_input:${path}`, () => addInput(`${root}/${path}`));
     }
   }
-  // Plan parsing and final adapter calls deliberately remain blocked. The
-  // published assembler has pure functions, no admitted complete pipeline API;
-  // prepare_catalog explicitly cannot serialize an accepted bundle. Merely
-  // hashing these files is not API, plan, assets, import or schema acceptance.
-  if (args.admission) blockers.push("supplied_admission_not_validated_no_dispatch");
-  const receipt = {
+  const selected = await observe("selected_docs_no_executable_blocks", () =>
+    scanDocsSources([
+      `${root}/components/QCLNEGF.jl/docs/src`,
+      `${root}/components/QCLNEGFRunner.jl/docs/src`,
+      `${root}/docs/public`,
+    ]));
+  if (selected) {
+    for (const file of selected.files) {
+      if (!inputs.some((item) => item.path === file.path)) inputs.push(file);
+    }
+  }
+  const assets = await observe("asset_lock_inputs", async () => {
+    const file = await addInput(`${root}/ops/docs/assets.lock.json`);
+    const lock = parseDocsJson(new TextDecoder("utf-8", { fatal: true }).decode(file.data));
+    if (
+      !record(lock) || lock.format !== "qcl-docs-assets-v1" || lock.closure_status !== "complete" ||
+      !Array.isArray(lock.missing_inputs) || lock.missing_inputs.length
+    ) {
+      throw new Error(
+        `asset_closure_incomplete: ${JSON.stringify(record(lock) ? lock.missing_inputs : null)}`,
+      );
+    }
+    return { path: file.binding, status: "declared_complete_requires_producer_verification" };
+  });
+  let native: unknown = null;
+  if (admission && sources) {
+    native = await observe("fresh_native_inputs_and_own_unit", async () => {
+      for (const path of ["home", "tmp", "cache"]) {
+        await Deno.mkdir(`${args.attempt}/${path}`, { mode: 0o700 });
+      }
+      const authority = await protectedFile(admission.resource_readback.path);
+      if (await sha256(authority) !== admission.resource_readback.sha256) {
+        throw new Error("resource_authority_hash_mismatch");
+      }
+      await Deno.writeFile(`${args.attempt}/resource-readback.json`, authority, {
+        createNew: true,
+        mode: 0o600,
+      });
+      const bound = async (item: PathRecord, cap = 2097152) => {
+        const data = await readRegularBounded(item.path, cap);
+        if (await sha256(data) !== item.sha256) {
+          throw new Error(`immutable_input_hash_mismatch: ${item.path}`);
+        }
+        return data;
+      };
+      await ancestors(admission.inputs.source_root, true);
+      await ancestors(admission.inputs.prepared_depot.store_path, true);
+      const records = [
+        admission.inputs.source_graph,
+        admission.inputs.plan,
+        admission.inputs.project,
+        admission.inputs.manifest,
+        admission.inputs.prepared_depot.metadata,
+        admission.inputs.assets_lock,
+        admission.inputs.asset_inputs,
+        admission.inputs.review_inputs,
+      ];
+      for (const item of records) await bound(item);
+      const expectedGraph = parseDocsJson(
+        new TextDecoder().decode(await bound(admission.inputs.source_graph)),
+      );
+      if (
+        JSON.stringify(privateGraph(expectedGraph as SourceGraph)) !==
+          JSON.stringify(privateGraph(sources))
+      ) {
+        throw new Error("export_graph_mismatch");
+      }
+      if (admission.inputs.plan.sha256 !== planInput?.binding.sha256) {
+        throw new Error("export_plan_mismatch");
+      }
+      const assetInputs = parseDocsJson(
+        new TextDecoder().decode(await bound(admission.inputs.asset_inputs)),
+      );
+      if (
+        !record(assetInputs) || !Object.keys(assetInputs).length ||
+        Object.keys(assetInputs).length > 10000
+      ) throw new Error("invalid_asset_input_map");
+      for (const [key, path] of Object.entries(assetInputs)) {
+        if (!relativeDocsPath(key)) throw new Error("invalid_asset_input_key");
+        storePath(path);
+        await ancestors(path, false);
+      }
+      // Source export must bind the same selected recipes and public input bytes.
+      for (const file of inputs.filter((file) => file.path.startsWith(root + "/"))) {
+        const exported = await boundedFile(
+          admission.inputs.source_root + file.path.slice(root.length),
+          2097152,
+        );
+        if (exported.bytes !== file.bytes || exported.sha256 !== file.sha256) {
+          throw new Error(`export_source_mismatch: ${file.path}`);
+        }
+      }
+      const systemctl = await resolveDocsExecutable("systemctl");
+      const unitText = output(
+        await command(systemctl, [
+          "show",
+          admission.unit.name,
+          "--no-pager",
+          ...[
+            "Id",
+            "ActiveState",
+            "SubState",
+            "MainPID",
+            "User",
+            "ControlGroup",
+            "RuntimeMaxUSec",
+            "KillMode",
+            "MemoryMax",
+            "MemorySwapMax",
+            "TasksMax",
+            "CPUQuotaPerSecUSec",
+          ].map((key) => "--property=" + key),
+        ]),
+      );
+      const unit: Record<string, string> = {};
+      for (const line of unitText.split("\n")) {
+        const index = line.indexOf("=");
+        if (index > 0) unit[line.slice(0, index)] = line.slice(index + 1);
+      }
+      const membership = await kernelText("/proc/self/cgroup");
+      const match = /^0::([^\n]+)\n?$/.exec(membership);
+      if (!match) throw new Error("unified_own_cgroup_required");
+      const controlGroup = match[1];
+      canonical(controlGroup);
+      const controls: Record<string, string> = {};
+      for (
+        const key of [
+          "cpu.max",
+          "memory.max",
+          "memory.swap.max",
+          "pids.max",
+          "memory.current",
+          "memory.events",
+          "cpu.stat",
+        ]
+      ) {
+        controls[key] = await kernelText(`/sys/fs/cgroup${controlGroup}/${key}`);
+      }
+      const uid = Deno.uid();
+      if (uid === null) throw new Error("native_uid_unavailable");
+      const actual = checkDocsCgroup(admission, {
+        uid,
+        pid: Deno.pid,
+        boot_id: await kernelText("/proc/sys/kernel/random/boot_id"),
+        control_group: controlGroup,
+        unit,
+        controls,
+      });
+      const toolReadbacks: Record<string, unknown> = {};
+      const nixStore = await Deno.realPath(`${admission.tools.nix.store_path}/bin/nix-store`);
+      if (!contains(admission.tools.nix.store_path, nixStore)) {
+        throw new Error("nix_store_tool_path_mismatch");
+      }
+      for (const [name, tool] of Object.entries(admission.tools)) {
+        await ancestors(tool.store_path, true);
+        await ancestors(tool.deriver, false);
+        const actual = await Deno.realPath(tool.executable);
+        if (actual !== tool.executable || !contains(tool.store_path, actual)) {
+          throw new Error(`tool_path_mismatch: ${name}`);
+        }
+        const info = await Deno.stat(actual);
+        if (!info.isFile || info.mode === null || !(info.mode & 0o111)) {
+          throw new Error(`tool_not_executable: ${name}`);
+        }
+        const version = output(await command(actual, ["--version"]));
+        if (!version.includes(tool.version)) throw new Error(`tool_version_mismatch: ${name}`);
+        const deriver = output(
+          await command(nixStore, ["--store", "local", "--query", "--deriver", tool.store_path]),
+        );
+        if (deriver !== tool.deriver) throw new Error(`tool_deriver_mismatch: ${name}`);
+        toolReadbacks[name] = { executable: actual, version, deriver };
+      }
+      if (
+        await Deno.realPath(Deno.execPath()) !== admission.tools.deno.executable
+      ) throw new Error("running_deno_mismatch");
+      const readbacks = {
+        actual,
+        tools: toolReadbacks,
+        systemctl,
+        resource_readback: admission.resource_readback,
+        source_graph: admission.inputs.source_graph,
+        prepared_depot: admission.inputs.prepared_depot,
+      };
+      await Deno.writeTextFile(
+        `${args.attempt}/native-readbacks.json`,
+        JSON.stringify(readbacks, null, 2) + "\n",
+        { createNew: true, mode: 0o600 },
+      );
+      return readbacks;
+    });
+  }
+  const blockers = buildBlockers(checks);
+  const receipt: PreflightReceipt = {
     sources,
     plan: args.plan,
     inputs,
-    admission: null,
-    imports: {
-      status: "not_measured",
-      unknown_edges: ["nested_docstrings", "transitive_imports", "cache"],
-    },
-    assets: { status: "not_measured" },
-    toolchain: null,
+    admission: admissionBinding,
+    imports: { selected_docs: selected, actual_imports: "producer_once_pending" },
+    assets,
+    toolchain: native,
     steps: [],
     measurements: null,
-    transforms: [],
-    checks: blockers.map((reason) => ({ status: "blocked", reason })),
-    result: "blocked",
+    checks,
+    result: blockers.length ? "blocked" : "prerequisites_observed",
     parent_attempt: null,
   };
   await Deno.writeTextFile(
@@ -1400,13 +2347,133 @@ export async function preflight(
     JSON.stringify(receipt, null, 2) + "\n",
     { createNew: true, mode: 0o600 },
   );
+  if (!blockers.length && admission && readGit) {
+    preflightContexts.set(receipt, {
+      args,
+      root,
+      started,
+      admission,
+      inputs,
+      readGit,
+      invoke,
+      command,
+      native,
+      remaining,
+    });
+  }
   return receipt;
+}
+export async function runDocs(
+  args: ReturnType<typeof parseDocsArgs>,
+  root = workspace,
+  deps?: { readGit: GitReader },
+) {
+  const receipt = await preflight(args, root, deps);
+  if (args.mode !== "build" || receipt.result !== "prerequisites_observed") return receipt;
+  const context = preflightContexts.get(receipt);
+  if (!context) throw new Error("build_context_not_prepared");
+  const { admission, inputs, readGit } = context;
+  const observe = () =>
+    observeDocsSources(root, inputs.map((file) => file.path), {
+      readGit,
+      readInput: observeDocsInput,
+      limits: { maxFiles: 10000, maxFileBytes: 2097152, maxTotalBytes: 67108864 },
+    });
+  const initial = await observe();
+  const prepared = prepareDocsExpected({ inputs }, initial);
+  let buildResult: unknown = null;
+  const sourceResult = prepared.kind === "expected_ready"
+    ? await withDocsSourceIdentity({
+      expected: prepared.expected,
+      observe,
+      execute: async (): Promise<
+        Operation<
+          { output: string; bundle_sha256: string; producer_receipt_sha256: string; files: unknown }
+        >
+      > => {
+        const reply = await dispatchDocsBuild({
+          admission,
+          attempt: args.attempt,
+          wallMs: context.remaining(),
+          invoke: context.invoke,
+        });
+        buildResult = { result: reply.result, receipt: reply.receipt };
+        const directory = reply.receipt.path.slice(0, reply.receipt.path.lastIndexOf("/"));
+        await Deno.copyFile(`${directory}/stdout.log`, `${args.attempt}/nix.stdout`);
+        await Deno.copyFile(`${directory}/stderr.log`, `${args.attempt}/nix.stderr`);
+        await Deno.writeTextFile(
+          `${args.attempt}/nix-result.json`,
+          JSON.stringify(reply.result, null, 2) + "\n",
+          { createNew: true, mode: 0o600 },
+        );
+        if (
+          reply.result.reason !== null || !reply.result.exit?.success ||
+          reply.result.exit.code !== 0 ||
+          reply.result.drain !== "complete" || reply.result.retention !== "acknowledged" ||
+          reply.result.errors.length
+        ) {
+          return { kind: "failed", error: `nix_failed: ${reply.receipt.path}` };
+        }
+        const output = parseDocsNixOutput(reply.stdout);
+        await ancestors(output, true);
+        const files = await inventoryTree(`${output}/public`, 10000, 67108864);
+        if (files.some((file) => file.bytes > 16777216)) throw new Error("public_file_byte_limit");
+        const bundle = await boundedFile(`${output}/public/bundle.json`, 2097152);
+        const producer = await boundedFile(`${output}/producer-receipt.json`, 2097152);
+        parseDocsJson(new TextDecoder().decode(await readRegularBounded(bundle.path, 2097152)));
+        parseDocsJson(new TextDecoder().decode(await readRegularBounded(producer.path, 2097152)));
+        return {
+          kind: "completed",
+          value: {
+            output,
+            bundle_sha256: bundle.sha256,
+            producer_receipt_sha256: producer.sha256,
+            files,
+          },
+        };
+      },
+    })
+    : null;
+  await Deno.writeTextFile(
+    `${args.attempt}/git-before.json`,
+    JSON.stringify(sourceResult?.before ?? initial, null, 2) + "\n",
+    { createNew: true, mode: 0o600 },
+  );
+  await Deno.writeTextFile(
+    `${args.attempt}/git-after.json`,
+    JSON.stringify(sourceResult?.after ?? null, null, 2) + "\n",
+    { createNew: true, mode: 0o600 },
+  );
+  const terminal = {
+    result: sourceResult?.state ?? "blocked_expected_identity",
+    source: sourceResult ?? prepared,
+    nix: buildResult,
+    admission: receipt.admission,
+    native_readbacks: `${args.attempt}/native-readbacks.json`,
+    elapsed_ms: performance.now() - context.started,
+    scientific_acceptance: "not_measured",
+    browser_acceptance: "not_measured",
+  };
+  await Deno.writeTextFile(
+    `${args.attempt}/terminal-receipt.json`,
+    JSON.stringify(terminal, null, 2) + "\n",
+    { createNew: true, mode: 0o600 },
+  );
+  return terminal;
 }
 if (import.meta.main) {
   try {
-    const receipt = await preflight(parseDocsArgs(Deno.args));
-    console.log(JSON.stringify(receipt, null, 2));
-    Deno.exitCode = 2;
+    const args = parseDocsArgs(Deno.args);
+    const receipt = await runDocs(args);
+    console.log(
+      JSON.stringify({
+        result: receipt.result,
+        receipt: `${args.attempt}/${
+          "source" in receipt ? "terminal-receipt.json" : "receipt.json"
+        }`,
+      }),
+    );
+    Deno.exitCode = receipt.result === "completed_bound" ? 0 : 2;
   } catch (error) {
     console.error(String(error));
     Deno.exitCode = 1;

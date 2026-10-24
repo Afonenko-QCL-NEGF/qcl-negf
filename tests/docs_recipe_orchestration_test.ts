@@ -3,9 +3,13 @@
 // must make these assertions fail. No real Julia, target import, network or solver.
 import {
   buildBlockers,
+  checkDocsAdmissionFreshness,
+  checkDocsCgroup,
   checkLayout,
   type Child,
   compareDocsObservation,
+  dispatchDocsBuild,
+  docsBuildCommand,
   type DocsIdentity,
   docsIdentityDigest,
   docsIdentityProjection,
@@ -15,13 +19,20 @@ import {
   type GitReply,
   type InputObservation,
   makeDocsGitReader,
+  makeDocsGitTransport,
   observeDocsSources,
   type Operation,
   operatorSources,
+  parseDocsAdmission,
   parseDocsArgs,
+  parseDocsJson,
+  parseDocsNixOutput,
+  parseDocsPlan,
   prepareDocsExpected,
+  productionDocsGitLimits,
   readBounded,
   runFinite,
+  scanDocsSources,
   withDocsSourceIdentity,
 } from "../ops/docs.ts";
 
@@ -771,8 +782,14 @@ Deno.test("operator staging preserves frozen chapter bytes and recipe-owned inde
   assert(refused, "changed canonical input must refuse before staging");
 });
 Deno.test("caller status/marker cannot manufacture BUILD readiness", () => {
-  assert(buildBlockers().includes("missing_admitted_assembly_entrypoint"));
-  assert(buildBlockers().includes("unknown_nested_docstring_import_cache_edges"));
+  assert(buildBlockers().includes("preflight_not_observed"));
+  assert(
+    buildBlockers([{
+      name: "asset_bytes",
+      status: "blocked",
+      reason: "missing actual asset",
+    }])[0] === "missing actual asset",
+  );
 });
 function fake(data: Uint8Array, status: Promise<{ code: number; success: boolean }>): Child {
   return {
@@ -1010,14 +1027,15 @@ Deno.test("BUILD preflight with a self-authored admission stays blocked and pres
       "--admission",
       admission,
     ]);
-    const result = await preflight(args, root);
+    const fixtureGit = () => Promise.reject(new Error("fixture source unavailable"));
+    const result = await preflight(args, root, { readGit: fixtureGit });
     assert(result.result === "blocked");
     assert(result.steps.length === 0 && result.admission === null);
-    assert(result.checks.some((c) => c.reason === "supplied_admission_not_validated_no_dispatch"));
+    assert(result.checks.some((c) => c.name === "native_admission" && c.status === "blocked"));
     const original = await Deno.readFile(`${attempt}/receipt.json`);
     let reused = false;
     try {
-      await preflight(args, root);
+      await preflight(args, root, { readGit: fixtureGit });
       reused = true;
     } catch { /* required refusal */ }
     assert(!reused, "attempt must never be reused");
@@ -1225,4 +1243,457 @@ Deno.test("TS6 incomplete drain requests abort and hanging reader cancellation; 
   assert(JSON.stringify(saved) === "[61,62,63,64]", "late external writes remain possible");
   assert(JSON.stringify(result) === snapshot, "late sink/status must not promote detached receipt");
   assert(result.stdout_acknowledged_bytes === 0 && result.exit === null);
+});
+
+// Ordinary producer regressions: execute only within the separately booked packet.
+function quietGitChild(data: Uint8Array): Child {
+  return {
+    ...fake(data, Promise.resolve({ code: 0, success: true })),
+    stderr: new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.close();
+      },
+    }),
+  };
+}
+
+Deno.test("DOC04 production Git transport retains exact bounded bytes and refuses reused ordinal", async () => {
+  const attempt = await Deno.makeTempDir({ prefix: "qcl-doc04-git-" });
+  let spawned = 0;
+  try {
+    const transport = makeDocsGitTransport(() => {
+      spawned++;
+      return quietGitChild(new Uint8Array([65, 0, 255, 66]));
+    });
+    const call = {
+      executable: "/admitted/git",
+      cwd: "/frozen/root",
+      args: ["rev-parse", "HEAD"],
+      env: { GIT_OPTIONAL_LOCKS: "0" },
+      clearEnv: true as const,
+      tag: { attempt, ordinal: 1 },
+      limits: { wallMs: 100, drainMs: 20, streamBytes: 4, totalBytes: 4 },
+    };
+    const reply = await transport(call);
+    assert(JSON.stringify(Array.from(reply.stdout)) === "[65,0,255,66]");
+    assert(reply.result.retention === "acknowledged" && reply.result.reason === null);
+    assert(reply.receipt.sha256 === await sha256(await Deno.readFile(reply.receipt.path)));
+    assert(
+      JSON.stringify(Array.from(await Deno.readFile(`${attempt}/git/1/stdout.log`))) ===
+        "[65,0,255,66]",
+    );
+    await caught(() => transport(call));
+    assert(spawned === 1, "fresh receipt directory must be exclusive before spawn");
+  } finally {
+    await Deno.remove(attempt, { recursive: true });
+  }
+});
+Deno.test("DOC04 production Git transport preserves original overflow receipt without buffered fallback", async () => {
+  const attempt = await Deno.makeTempDir({ prefix: "qcl-doc04-git-cap-" });
+  try {
+    const transport = makeDocsGitTransport(() => quietGitChild(new Uint8Array([1, 2, 3, 4, 5])));
+    const reply = await transport({
+      executable: "/admitted/git",
+      cwd: "/frozen/root",
+      args: ["rev-parse", "HEAD"],
+      env: {},
+      clearEnv: true,
+      tag: { attempt, ordinal: 1 },
+      limits: { wallMs: 100, drainMs: 20, streamBytes: 4, totalBytes: 4 },
+    });
+    assert(reply.result.reason === "log_cap" && reply.result.stdout_received_bytes === 5);
+    assert(reply.stdout.length === 4 && reply.result.stdout_acknowledged_bytes === 4);
+    const retained = JSON.parse(await Deno.readTextFile(reply.receipt.path));
+    assert(retained.result.reason === "log_cap" && retained.result.stdout_received_bytes === 5);
+  } finally {
+    await Deno.remove(attempt, { recursive: true });
+  }
+});
+
+Deno.test("DOC04 pilot plan rejects executable policy changes and partial journeys", async () => {
+  const plan = JSON.parse(
+    await Deno.readTextFile(new URL("../ops/docs/pilot-plan.json", import.meta.url)),
+  );
+  assert(parseDocsPlan(plan).slices.length === 3);
+  for (
+    const mutation of [
+      { ...plan, profile: "default" },
+      { ...plan, support_policy: "primary_pages_only" },
+      { ...plan, source_inputs: ["../outside"] },
+      { ...plan, slices: plan.slices.slice(0, 2) },
+      { ...plan, limits: { ...plan.limits, total_bytes: 268435457 } },
+      { ...plan, expected_primary_anchors: [] },
+    ]
+  ) rejects(() => parseDocsPlan(mutation));
+});
+Deno.test("DOC04 selected source scan rejects executable blocks and retains file hashes", async () => {
+  const root = await Deno.makeTempDir({ prefix: "qcl-doc04-source-" });
+  try {
+    await Deno.writeTextFile(`${root}/index.md`, "# Theory\n```julia\nx = 1\n```\n");
+    const initial = await scanDocsSources([root]);
+    assert(initial.files.length === 1 && initial.executable_blocks === 0);
+    assert(initial.files[0].sha256 === await sha256(await Deno.readFile(`${root}/index.md`)));
+    for (const block of ["@example", "@eval", "@setup", "@repl"]) {
+      await Deno.writeTextFile(
+        `${root}/index.md`,
+        `# Theory\n\`\`\`${block} named\nx = 1\n\`\`\`\n`,
+      );
+      await caught(() => scanDocsSources([root]));
+    }
+  } finally {
+    await Deno.remove(root, { recursive: true });
+  }
+});
+
+Deno.test("DOC04 build dispatch is one offline sandboxed local Nix builder with fixed producer input", () => {
+  const command = docsBuildCommand(
+    "/nix/store/pinned/bin/nix",
+    "/nix/store/source",
+    "/attempts/fresh",
+  );
+  assert(command.executable === "/nix/store/pinned/bin/nix");
+  assert(
+    JSON.stringify(command.args) === JSON.stringify([
+      "--store",
+      "local",
+      "build",
+      "--offline",
+      "--no-link",
+      "--json",
+      "--keep-failed",
+      "--max-jobs",
+      "1",
+      "--cores",
+      "4",
+      "--timeout",
+      "1800",
+      "--option",
+      "sandbox",
+      "true",
+      "--option",
+      "builders",
+      "",
+      "--option",
+      "substitute",
+      "false",
+      "--option",
+      "use-cgroups",
+      "false",
+      "--file",
+      "/nix/store/source/nix/docs.nix",
+      "--argstr",
+      "inputsFile",
+      "/attempts/fresh/producer-inputs.json",
+    ]),
+  );
+  assert(command.clearEnv && command.cwd === "/nix/store/source");
+  rejects(() => docsBuildCommand("julia", "/nix/store/source", "/attempts/fresh"));
+  rejects(() =>
+    docsBuildCommand("/nix/store/pinned/bin/nix", "/source/../escape", "/attempts/fresh")
+  );
+});
+
+Deno.test("DOC04 production Git spawn failure retains original error and unknown consumption", async () => {
+  const attempt = await Deno.makeTempDir({ prefix: "qcl-doc04-git-spawn-" });
+  try {
+    const transport = makeDocsGitTransport(() => {
+      throw new Error("original spawn denied");
+    });
+    const error = await caught(() =>
+      transport({
+        executable: "/admitted/git",
+        cwd: "/frozen/root",
+        args: ["rev-parse", "HEAD"],
+        env: {},
+        clearEnv: true,
+        tag: { attempt, ordinal: 1 },
+        limits: { wallMs: 100, drainMs: 20, streamBytes: 4, totalBytes: 4 },
+      })
+    );
+    assert(String(error).includes("original spawn denied"));
+    const retained = JSON.parse(await Deno.readTextFile(`${attempt}/git/1/result.json`));
+    assert(retained.result === null && retained.accounting === "unknown");
+    assert(retained.error.includes("original spawn denied"));
+  } finally {
+    await Deno.remove(attempt, { recursive: true });
+  }
+});
+
+Deno.test("DOC04 private JSON refuses duplicate authority keys and unsupported native markers", () => {
+  rejects(() => parseDocsJson('{"unit":{"uid":0,"u\\u0069d":1000}}'));
+  rejects(() => parseDocsAdmission({ format: "qcl-negf.docs-admission.v1", status: "ready" }));
+  assert(
+    JSON.stringify(parseDocsJson('{"one":{"uid":0},"two":{"uid":1}}')) ===
+      '{"one":{"uid":0},"two":{"uid":1}}',
+  );
+});
+Deno.test("DOC04 own unit and actual cgroup caps are required before build", () => {
+  const admission = {
+    unit: {
+      name: "qcl-docs-fixture.service",
+      boot_id: "boot",
+      control_group: "/system.slice/qcl-docs-fixture.service",
+    },
+  } as Parameters<typeof checkDocsCgroup>[0];
+  const actual = {
+    uid: 0,
+    pid: 42,
+    boot_id: "boot\n",
+    control_group: admission.unit.control_group,
+    unit: {
+      Id: admission.unit.name,
+      ActiveState: "active",
+      SubState: "running",
+      MainPID: "42",
+      User: "root",
+      ControlGroup: admission.unit.control_group,
+      KillMode: "control-group",
+      RuntimeMaxUSec: "30min",
+    },
+    controls: {
+      "cpu.max": "400000 100000",
+      "memory.max": "4294967296",
+      "memory.swap.max": "0",
+      "pids.max": "128",
+      "memory.current": "123",
+      "memory.events": "oom 0",
+      "cpu.stat": "usage_usec 12",
+    },
+  };
+  assert(checkDocsCgroup(admission, actual).uid === 0);
+  for (
+    const change of [
+      { uid: 1000 },
+      { control_group: "/system.slice/other.service" },
+      { unit: { ...actual.unit, MainPID: "77" } },
+      { unit: { ...actual.unit, KillMode: "process" } },
+      { controls: { ...actual.controls, "cpu.max": "max 100000" } },
+      { controls: { ...actual.controls, "memory.max": "4294967297" } },
+      { controls: { ...actual.controls, "memory.swap.max": "1" } },
+      { controls: { ...actual.controls, "pids.max": "max" } },
+    ]
+  ) rejects(() => checkDocsCgroup(admission, { ...actual, ...change }));
+});
+
+Deno.test("DOC04 dispatch fake captures one fixed command and excludes private admission bytes", async () => {
+  const attempt = await Deno.makeTempDir({ prefix: "qcl-doc04-dispatch-" });
+  try {
+    const admission = {
+      inputs: { selected_public: "kept" },
+      tools: { nix: { executable: "/nix/store/pinned/bin/nix" } },
+      unit: { private_unit: "not-published" },
+      resource_readback: { private_host: "not-published" },
+    } as unknown as Parameters<typeof dispatchDocsBuild>[0]["admission"];
+    Object.assign(admission.inputs, { source_root: "/nix/store/source" });
+    let calls = 0;
+    await dispatchDocsBuild({
+      admission,
+      attempt,
+      wallMs: 100,
+      invoke: (call) =>
+        immediatePromise(() => {
+          calls++;
+          assert(
+            JSON.stringify(call.args) ===
+              JSON.stringify(
+                docsBuildCommand(
+                  admission.tools.nix.executable,
+                  admission.inputs.source_root,
+                  attempt,
+                ).args,
+              ),
+          );
+          return oneByteReply();
+        }),
+    });
+    const projected = await Deno.readTextFile(`${attempt}/producer-inputs.json`);
+    assert(
+      projected.includes("selected_public") && !projected.includes("not-published") &&
+        !projected.includes("resource_readback"),
+    );
+    await caught(() =>
+      dispatchDocsBuild({
+        admission,
+        attempt,
+        wallMs: 100,
+        invoke: () => {
+          calls++;
+          return Promise.resolve(oneByteReply());
+        },
+      })
+    );
+    assert(calls === 1, "reused sanitized input must refuse before another command");
+  } finally {
+    await Deno.remove(attempt, { recursive: true });
+  }
+});
+Deno.test("DOC04 Nix output permits one immutable output only", () => {
+  const path = "/nix/store/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-docs";
+  assert(
+    parseDocsNixOutput(new TextEncoder().encode(JSON.stringify([{ outputs: { out: path } }]))) ===
+      path,
+  );
+  for (
+    const value of [[], [{ outputs: { out: path } }, { outputs: { out: path } }], [{
+      outputs: { out: path, other: path },
+    }], [{ outputs: { out: "/mutable/output" } }]]
+  ) {
+    rejects(() => parseDocsNixOutput(new TextEncoder().encode(JSON.stringify(value))));
+  }
+});
+
+// HIGH regression: production tree volumes, not the tiny binary transport fixture.
+import { sourceGraph } from "../ops/git.ts";
+Deno.test("DOC04 production Git limits admit actual root tree and full seven graph lifecycle", async () => {
+  const root = "/frozen/production-graph";
+  const components = [
+    ["QCLNEGF.jl", 20711],
+    ["QCLNEGFRunner.jl", 27420],
+    ["qcl-negf-aiida", 2765],
+    ["qcl-negf-contracts", 4273],
+    ["qcl-negf-platform", 16035],
+    ["qcl-negf-portal", 3016],
+    ["qcl-negf-research", 3056],
+    ["qcl-negf-results", 5542],
+  ] as const;
+  const revision = "a".repeat(40), blob = "b".repeat(40);
+  const paddedTree = (initial: string, size: number) => {
+    const prefix = `100644 blob ${blob}\t`;
+    let result = initial, index = 0;
+    while (size - result.length >= prefix.length + 256) {
+      result += `${prefix}file-${String(index++).padStart(6, "0")}.md\0`;
+    }
+    result += prefix + "q".repeat(size - result.length - prefix.length - 1) + "\0";
+    assert(result.length === size);
+    return result;
+  };
+  const rootTree = paddedTree(
+    components.map(([name]) => `160000 commit ${revision}\tcomponents/${name}\0`).join(""),
+    231295,
+  );
+  const trees = new Map(
+    components.map(([name, size]) => [root + "/components/" + name, paddedTree("", size)]),
+  );
+  let rootTrees = 0, commands = 0, received = 0;
+  const readGit = makeDocsGitReader({
+    root,
+    attempt: "/attempts/production-graph",
+    gitExecutable: "/admitted/git",
+    limits: productionDocsGitLimits,
+    invoke: (call) =>
+      immediatePromise(() => {
+        commands++;
+        const args = call.args.slice(8);
+        let text: string;
+        if (args[0] === "rev-parse") text = revision;
+        else if (args[0] === "status") text = "";
+        else if (args[0] === "ls-tree") {
+          if (call.cwd === root) {
+            rootTrees++;
+            text = rootTree;
+          } else {
+            text = trees.get(call.cwd)!;
+            assert(typeof text === "string");
+          }
+        } else if (args[0] === "config" && args[3] === "--get-regexp") {
+          text = components.map(([name], index) => `submodule.c${index}.path components/${name}`)
+            .join("\n");
+        } else if (args[0] === "config" && args[3] === "--get") {
+          const match = /^submodule.c(\d+).url$/.exec(args[4]);
+          assert(match);
+          text = `https://github.com/owner/${components[Number(match[1])][0]}.git`;
+        } else throw new Error(`unexpected production graph fixture argv ${JSON.stringify(args)}`);
+        const stdout = new TextEncoder().encode(text), reply = oneByteReply();
+        received += stdout.length;
+        return {
+          ...reply,
+          stdout,
+          result: {
+            ...reply.result,
+            stdout_received_bytes: stdout.length,
+            stdout_attempted_bytes: stdout.length,
+            stdout_acknowledged_bytes: stdout.length,
+          },
+        };
+      }),
+  });
+  for (let observation = 0; observation < 7; observation++) {
+    const graph = await sourceGraph(root, true, readGit);
+    assert(graph.components.length === 8 && graph.revision === revision);
+  }
+  assert(rootTrees === 7 && commands === 252);
+  assert(received >= 2198791 && received < productionDocsGitLimits.maxTotalBytes);
+});
+Deno.test("DOC04 production Git tree overflow retains failure under finite production caps", async () => {
+  const attempt = await Deno.makeTempDir({ prefix: "qcl-doc04-production-overflow-" });
+  try {
+    let spawns = 0;
+    const transport = makeDocsGitTransport(() => {
+      spawns++;
+      return quietGitChild(new Uint8Array(productionDocsGitLimits.streamBytes + 1).fill(65));
+    });
+    const reader = makeDocsGitReader({
+      root: identityRoot,
+      attempt,
+      gitExecutable: "/admitted/git",
+      limits: productionDocsGitLimits,
+      invoke: transport,
+    });
+    const error = await caught(() => reader(identityRoot, ["ls-tree", "-rz", "HEAD"]));
+    assert(error instanceof GitObservationError && error.code === "log_cap" && spawns === 1);
+    const retained = JSON.parse(await Deno.readTextFile(`${attempt}/git/1/result.json`));
+    assert(retained.result.stdout_received_bytes === productionDocsGitLimits.streamBytes + 1);
+    assert(retained.result.stdout_acknowledged_bytes === productionDocsGitLimits.streamBytes);
+  } finally {
+    await Deno.remove(attempt, { recursive: true });
+  }
+});
+function completeAdmissionFixture(created_epoch: unknown) {
+  const store = "/nix/store/" + "a".repeat(32) + "-fixture";
+  const tool = {
+    store_path: store,
+    executable: store + "/bin/tool",
+    deriver: store + ".drv",
+    version: "1.0",
+  };
+  const file = (path: string) => ({ path, sha256: "b".repeat(64) });
+  return {
+    format: "qcl-negf.docs-admission.v1",
+    created_epoch,
+    attempt_directory: "/attempts/fresh",
+    repository_root: "/frozen/root",
+    plan_sha256: "b".repeat(64),
+    unit: {
+      name: "qcl-docs-fresh.service",
+      uid: 0,
+      boot_id: "a".repeat(36),
+      control_group: "/system.slice/qcl-docs-fresh.service",
+    },
+    resource_readback: file("/protected/resource.json"),
+    tools: { nix: tool, git: tool, deno: tool, python: tool, node: tool, julia: tool },
+    inputs: {
+      source_root: store,
+      source_graph: file(store + "/graph.json"),
+      plan: file(store + "/plan.json"),
+      project: file(store + "/julia/Project.toml"),
+      manifest: file(store + "/julia/Manifest.toml"),
+      prepared_depot: { store_path: store, metadata: file(store + "/depot.json") },
+      assets_lock: file(store + "/ops/docs/assets.lock.json"),
+      asset_inputs: file(store + "/assets.json"),
+      review_inputs: file(store + "/reviews.json"),
+      tools: { python: tool, node: tool, julia: tool, git: tool },
+    },
+  };
+}
+Deno.test("DOC04 fractional admission epoch matches numeric contract and retains freshness refusal", () => {
+  const epoch = 1792862662.9105856;
+  const admission = parseDocsAdmission(completeAdmissionFixture(epoch));
+  assert(admission.created_epoch === epoch);
+  checkDocsAdmissionFreshness(admission.created_epoch, epoch + 0.125);
+  checkDocsAdmissionFreshness(admission.created_epoch, epoch + 300);
+  for (const invalid of [true, false, "1792862662.9105856", NaN, Infinity, -Infinity]) {
+    rejects(() => parseDocsAdmission(completeAdmissionFixture(invalid)));
+  }
+  rejects(() => checkDocsAdmissionFreshness(admission.created_epoch, epoch - 0.125));
+  rejects(() => checkDocsAdmissionFreshness(admission.created_epoch, epoch + 300.125));
 });

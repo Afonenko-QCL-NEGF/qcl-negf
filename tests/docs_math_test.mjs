@@ -11,6 +11,7 @@ import test from "node:test";
 import {
   externalizeStyles,
   renderMathBatch,
+  selectorMayMatch,
   validateMathMapping,
 } from "../ops/docs/math-render.mjs";
 
@@ -399,4 +400,145 @@ test("all sixteen pinned manual delimiter sizes fail while automatic stretch rem
   }
   const tex = String.raw`\left(\frac{x}{2}\right)`;
   assert.equal((await renderMathBatch([record(tex)], inputs)).records[0].tex, tex);
+});
+
+// Actual Documenter light CSS is mandatory for this compatibility fixture.
+test("pinned complete Documenter context supports fraction layout without CSS rewriting", async () => {
+  const inputs = await exactInputs();
+  assert.ok(process.env.DOC04_DOCUMENTER_ROOT);
+  const text = await readFile(
+    join(process.env.DOC04_DOCUMENTER_ROOT, "assets/html/themes/documenter-light.css"),
+    "utf8",
+  );
+  assert.equal(sha(text), "706b5379af688761c9f0168af88e1eaa05495e1cdc7c4a0debbf03621d8923a7");
+  assert.ok(
+    process.env.DOC04_COMPLETE_CSS_JSON,
+    "actual admitted ordered CSS context is mandatory",
+  );
+  const supplied = JSON.parse(await readFile(process.env.DOC04_COMPLETE_CSS_JSON, "utf8"));
+  const assetLock = JSON.parse(
+    await readFile(new URL("../ops/docs/assets.lock.json", import.meta.url), "utf8"),
+  );
+  assert.equal(
+    assetLock.closure_status,
+    "complete",
+    "partial inventory cannot stand in for full actual CSS context",
+  );
+  assert.deepEqual(assetLock.missing_inputs, []);
+  const requiredCSS = assetLock.files.filter((x) => x.destination?.endsWith(".css")).map((x) =>
+    x.destination
+  );
+  for (const path of [...requiredCSS, "assets/qcl-runtime.css"]) {
+    assert.ok(supplied.some((x) => x.path === path), path);
+  }
+  const completeStylesheets = [];
+  for (const item of supplied) {
+    const css = await readFile(item.input, "utf8");
+    assert.equal(sha(css), item.sha256);
+    completeStylesheets.push({ path: item.path, text: css, sha256: item.sha256 });
+  }
+  assert.ok(completeStylesheets.some((s) => s.sha256 === sha(text)));
+  assert.ok(completeStylesheets.some((s) => /qcl-fixed-light\.css$/.test(s.path)));
+  const tex = String.raw`\left(\frac{x_i^2}{2}+\sqrt{y}\right)`;
+  const result = await renderMathBatch([record(tex, true)], { ...inputs, completeStylesheets });
+  assert.equal(result.records[0].tex, tex);
+  assert.equal(result.records[0].tex_sha256, sha(tex));
+  assert.doesNotMatch(result.records[0].html, /\sstyle=/);
+  assert.equal(result.stylesheet_context.complete, true);
+  assert.deepEqual(
+    result.stylesheet_context.files,
+    supplied.map(({ path, sha256 }) => ({ path, sha256 })),
+  );
+  await assert.rejects(
+    renderMathBatch([record(tex)], {
+      ...inputs,
+      completeStylesheets: completeStylesheets.map((s) =>
+        s.sha256 === sha(text) ? { ...s, text: s.text + " ", sha256: sha(s.text + " ") } : s
+      ),
+    }),
+    codeIs("unsupported_style_context"),
+  );
+});
+
+test("nonpinned selectors cannot suppress applicable important conflicts", () => {
+  for (
+    const selector of [
+      ".elsewhere",
+      ".absent:not(.katex)",
+      ":not(.absent)",
+      ".absent,.katex",
+      "span",
+      "*",
+    ]
+  ) {
+    for (
+      const property of ["all:initial", "margin:0", "margin-inline:0", "unknown-shorthand:1em"]
+    ) {
+      assert.throws(
+        () =>
+          externalizeStyles('<span class="katex" style="margin-right:1em">x</span>', {
+            stylesheets: [{ text: `${selector}{${property}!important}` }],
+          }),
+        codeIs("unsupported_style_context"),
+      );
+    }
+  }
+  for (
+    const text of [
+      String.raw`a{content:"\0002f"}`,
+      "/* unknown */a{color:red}",
+      String.raw`a{background:u\72l(x)}`,
+    ]
+  ) {
+    assert.throws(
+      () => externalizeStyles('<span style="height:1em">x</span>', { stylesheets: [{ text }] }),
+      codeIs("unsupported_style_context"),
+    );
+  }
+});
+
+test("pinned selector projection only proves explicit positive target disjointness", () => {
+  const classes = new Set(["katex", "mspace"]);
+  for (const selector of [".absent", "div", ".parent > span.absent", ".absent:not(.katex)"]) {
+    assert.equal(selectorMayMatch(selector, "span", classes), false, selector);
+  }
+  for (
+    const selector of [
+      "*",
+      "span",
+      ".katex",
+      ":not(.absent)",
+      ":is(.absent,.katex)",
+      ".absent,.katex",
+      "span:not(.katex)",
+      "[class=absent]",
+      "weird|div",
+      ".katex:has(.absent)",
+    ]
+  ) {
+    assert.equal(selectorMayMatch(selector, "span", classes), true, selector);
+  }
+});
+
+test("exact Documenter rule is still refused when the extracted property matches its target", async () => {
+  assert.ok(process.env.DOC04_DOCUMENTER_ROOT);
+  const text = await readFile(
+    join(process.env.DOC04_DOCUMENTER_ROOT, "assets/html/themes/documenter-light.css"),
+    "utf8",
+  );
+  const sheet = { text, sha256: sha(text) };
+  assert.equal(sheet.sha256, "706b5379af688761c9f0168af88e1eaa05495e1cdc7c4a0debbf03621d8923a7");
+  assert.throws(
+    () =>
+      externalizeStyles('<span class="katex-display" style="margin-right:1em">x</span>', {
+        stylesheets: [sheet],
+      }),
+    codeIs("unsupported_style_context"),
+  );
+  assert.match(
+    externalizeStyles('<span class="mspace" style="margin-right:1em">x</span>', {
+      stylesheets: [sheet],
+    }).css,
+    /margin-right:1em!important/,
+  );
 });

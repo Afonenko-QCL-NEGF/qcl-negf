@@ -438,7 +438,9 @@ class _PayloadHTML(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.page, self.ids, self.edges, self.scripts = page, set(), [], []
         self.in_script = False
+        self.data_main = []
         self.svg_depth = 0
+        self.svg_scopes = []
         self.nodes = 0
 
     def handle_starttag(self, tag, pairs):
@@ -450,18 +452,56 @@ class _PayloadHTML(HTMLParser):
         attrs = dict(pairs)
         if tag == "svg":
             self.svg_depth += 1
+            self.svg_scopes.append({"markers": set(), "references": set()})
         if self.svg_depth and tag not in {"svg", "g", "path", "line", "rect", "circle", "ellipse",
-                                          "polyline", "polygon", "title", "desc", "defs"}:
+                                          "polyline", "polygon", "title", "desc", "defs", "marker", "text"}:
             _fail("unsupported_generated_shape", "unreviewed SVG vocabulary")
+        if self.svg_depth and tag in {"marker", "text"}:
+            common = {"id", "class", "x", "y", "fill", "stroke", "stroke-width", "stroke-linecap",
+                      "stroke-linejoin", "font-family", "font-size", "font-weight", "text-anchor",
+                      "transform", "role", "aria-label", "aria-hidden"}
+            allowed = common | ({"markerwidth", "markerheight", "refx", "refy", "orient"}
+                                if tag == "marker" else set())
+            if not set(attrs).issubset(allowed):
+                _fail("unsupported_generated_shape", "unreviewed SVG marker/text attribute")
+            if tag == "marker":
+                identity = attrs.get("id", "")
+                if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_.:-]*", identity) or identity in self.svg_scopes[-1]["markers"]:
+                    _fail("unsupported_generated_shape", "SVG marker identity")
+                self.svg_scopes[-1]["markers"].add(identity)
         if any(PRIVATE.search(value) for value in attrs.values() if value is not None):
             _fail("private_content", self.page)
-        if any(re.search(r"url\s*\(", value, re.I) for value in attrs.values() if value is not None):
-            _fail("external_resource", "unreviewed attribute URL")
+        for key, value in attrs.items():
+            if value is None:
+                continue
+            marker = self.svg_depth and key in {"marker-start", "marker-mid", "marker-end"}
+            if marker and value != "none":
+                match = re.fullmatch(r"url\(#([A-Za-z][A-Za-z0-9_.:-]*)\)", value)
+                if match is None:
+                    _fail("external_resource", "SVG marker requires literal local fragment")
+                self.svg_scopes[-1]["references"].add(match.group(1))
+            elif re.search(r"url\s*\(", value, re.I):
+                _fail("external_resource", "unreviewed attribute URL")
         if tag == "script":
             if not attrs.get("src"):
                 _fail("inline_script")
             self.in_script = True
-            self.scripts.append(_resolve(self.page, attrs["src"])[0])
+            source, fragment = _resolve(self.page, attrs["src"])
+            self.scripts.append(source)
+            if re.fullmatch(r"assets/runtime-depth-[0-9]+\.js", source):
+                _fail("unsupported_generated_shape", "runtime requires pinned RequireJS data-main")
+            requirejs = "assets/vendor/requirejs/2.3.6/require.min.js"
+            if "data-main" in attrs or source == requirejs:
+                if source != requirejs or fragment or not attrs.get("data-main"):
+                    _fail("unsupported_generated_shape", "RequireJS data-main loader")
+                main, anchor = _resolve(self.page, attrs["data-main"])
+                depth = len(PurePosixPath(self.page).parts) - 1
+                if (anchor or main != "assets/runtime-depth-" + str(depth) + ".js"
+                        or attrs["data-main"] != "../" * depth + main):
+                    _fail("unsupported_generated_shape", "RequireJS data-main context")
+                self.data_main.append((main, source))
+        elif "data-main" in attrs:
+            _fail("unsupported_generated_shape", "data-main outside script")
         if tag == "style" or "style" in attrs:
             _fail("inline_style")
         if any(k.startswith("on") for k in attrs):
@@ -485,7 +525,20 @@ class _PayloadHTML(HTMLParser):
         if tag == "script":
             self.in_script = False
         if tag == "svg":
-            self.svg_depth -= 1
+            self._close_svg()
+
+    def _close_svg(self):
+        if not self.svg_scopes:
+            _fail("unsupported_generated_shape", "unbalanced SVG")
+        scope = self.svg_scopes.pop()
+        if not scope["references"].issubset(scope["markers"]):
+            _fail("missing_anchor", "SVG marker outside local scope")
+        self.svg_depth -= 1
+
+    def close(self):
+        super().close()
+        if self.svg_scopes:
+            _fail("unsupported_generated_shape", "unclosed SVG")
 
     def handle_data(self, data):
         if PRIVATE.search(data):
@@ -498,14 +551,25 @@ class _PayloadHTML(HTMLParser):
             _fail("unsupported_generated_shape", "self-closing script")
         self.handle_starttag(tag, pairs)
         if tag == "svg":
-            self.svg_depth -= 1
+            self._close_svg()
 
 
-def _css_edges(path, text):
+def _css_edges(path, text, *, verified_bytes=None):
     if re.search(r"expression\s*\(|javascript\s*:|behavior\s*:|-moz-binding", text, re.I):
         _fail("unsafe_css")
     # Escaped resource identifiers/URLs require a separately reviewed grammar;
     # they must not evade a scanner for literal url()/@import tokens.
+    if verified_bytes is not None:
+        if not isinstance(verified_bytes, bytes) or verified_bytes != text.encode():
+            _fail("asset_payload_mismatch", path)
+        # Exact retained stylesheet bytes may contain upstream comments and
+        # quoted numeric icon/content glyphs. Never decode selectors, properties,
+        # url/import identifiers or resource values as an escape shortcut.
+        text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+        def glyph(match):
+            value = match.group(0)
+            return re.sub(r"\\[0-9a-fA-F]{1,6}(?:[ \t\r\n\f])?", "G", value)
+        text = re.sub(r"\bcontent\s*:\s*(?:\"(?:[^\"\\]|\\[0-9a-fA-F]{1,6}[ \t\r\n\f]?)*\"|'(?:[^'\\]|\\[0-9a-fA-F]{1,6}[ \t\r\n\f]?)*')", glyph, text, flags=re.I)
     if "\\" in text:
         _fail("dynamic_loader", "unreviewed CSS escape grammar")
     edges = []
@@ -571,12 +635,54 @@ def _js_edges(path, text, document):
     return edges
 
 
-def validate_payload(files, *, symlinks=()):
+def _private_scan_text(path, data, verified_data=None):
+    """Mask one public selector literal only for its independently verified pin.
+
+    jQuery3.7 declares supported input types in an object whose boolean property
+    `password:!0` is public code, not a credential assignment. Never alter the
+    payload or relax path/key/credential detection for any changed/unverified
+    asset. Whole-lock byte authority is obtained by AS1 before this scanner.
+    """
+    text = _decode(data)
+    if (path == "assets/vendor/jquery/3.7.0/jquery.min.js"
+            and isinstance(verified_data, bytes) and verified_data == data
+            and _sha(data) == "d8f9afbf492e4c139e9d2bcb9ba6ef7c14921eb509fb703bc7a3f911b774eff8"):
+        literal = "{radio:!0,checkbox:!0,file:!0,password:!0,image:!0}"
+        if text.count(literal) != 1:
+            _fail("asset_payload_mismatch", "pinned jQuery input-type literal")
+        text = text.replace(literal, literal.replace("password:!0", "public_input_type:!0"), 1)
+    return text
+
+
+def _theme_scan_text(path, data, verified_data=None):
+    """One inert CSS grammar keyword in exact verified Highlight.js11.8 code.
+
+    The media-feature name is grammar data later passed to the syntax keyword
+    classifier, not a matchMedia call or a stylesheet/theme selector. Preserve
+    public bytes and all other theme matches, including every changed asset.
+    """
+    text = _decode(data)
+    if (path == "assets/vendor/highlight/11.8.0/highlight.min.js"
+            and isinstance(verified_data, bytes) and verified_data == data
+            and _sha(data) == "4499ff936d4fd562adca5a5cbe512dc19eb80942eee8618dafbcebc4f7974bdb"):
+        literal = '"pointer","prefers-color-scheme","prefers-contrast"'
+        if text.count(literal) != 1:
+            _fail("asset_payload_mismatch", "pinned Highlight CSS grammar literal")
+        text = text.replace(literal, literal.replace("prefers-color-scheme", "public_media_feature"), 1)
+    return text
+
+
+def validate_payload(files, *, symlinks=(), verified_assets=None):
     """Static intermediate closure only; never a browser, license, or build verdict."""
     if symlinks:
         _fail("public_allowlist", "symlinks")
     if not isinstance(files, dict) or len(files) > 10000:
         _fail("payload_limit")
+    verified_assets = {} if verified_assets is None else verified_assets
+    if (not isinstance(verified_assets, dict) or any(
+            not isinstance(data, bytes) or files.get(path) != data
+            for path, data in verified_assets.items())):
+        _fail("asset_payload_mismatch")
     total = 0
     html, texts, edges, script_documents = {}, {}, [], defaultdict(set)
     allowed = {".html", ".css", ".js", ".json", ".woff", ".woff2", ".ttf", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".ico", ".txt"}
@@ -600,9 +706,13 @@ def validate_payload(files, *, symlinks=()):
         if suffix in {".html", ".css", ".js", ".json", ".svg", ".txt"}:
             text = _decode(data)
             texts[path] = text
-            if PRIVATE.search(text):
+            if PRIVATE.search(_private_scan_text(path, data, verified_assets.get(path))):
                 _fail("private_content", path)
-            if THEME.search(text):
+            # The selected complete light CSS includes inert settings/theme
+            # selectors. The exact locked sheet is admitted by the owning asset
+            # verifier; HTML controls and unverified styles remain strict.
+            if (THEME.search(_theme_scan_text(path, data, verified_assets.get(path)))
+                    and not (suffix == ".css" and path in verified_assets)):
                 _fail("theme_alternative", path)
             if suffix in {".html", ".svg"}:
                 parser = _PayloadHTML(path)
@@ -612,8 +722,12 @@ def validate_payload(files, *, symlinks=()):
                 edges.extend(parser.edges)
                 for script in parser.scripts:
                     script_documents[script].add(path)
+                for main, loader in parser.data_main:
+                    if loader not in verified_assets or main not in verified_assets:
+                        _fail("asset_validation_evidence", "unverified RequireJS data-main dependency")
+                    script_documents[main].add(path)
             elif suffix == ".css":
-                edges.extend(_css_edges(path, text))
+                edges.extend(_css_edges(path, text, verified_bytes=verified_assets.get(path)))
             elif suffix == ".json":
                 cap = 32768 if path.startswith("help/fragments/") else 2097152
                 if len(data) > cap:
@@ -626,6 +740,46 @@ def validate_payload(files, *, symlinks=()):
     for path, text in texts.items():
         if path.endswith(".js"):
             contexts = script_documents.get(path) or {None}
+            reviewed = path in verified_assets
+            if reviewed and path.startswith("assets/vendor/"):
+                # Immutable distribution code: runtime adapter checked complete
+                # named AMD dependencies and license/distribution bytes first.
+                continue
+            if reviewed and re.fullmatch(r"assets/runtime-depth-[0-9]+\.js", path):
+                workers = re.findall(r'new\s+Worker\(\s*("[^"\n]+")\s*\)', text)
+                if len(workers) != 1 or None in contexts:
+                    _fail("dynamic_loader", "reviewed runtime worker shape")
+                for document in contexts:
+                    depth = len(PurePosixPath(document).parts) - 1
+                    expected_script = 'assets/runtime-depth-' + str(depth) + '.js'
+                    if path != expected_script or json.loads(workers[0]) != '../' * depth + 'assets/search-worker.js':
+                        _fail("dynamic_loader", "runtime/page depth mismatch")
+                    target = _resolve(document, json.loads(workers[0]))
+                    if target != ("assets/search-worker.js", ""):
+                        _fail("dynamic_loader", "runtime/page depth mismatch")
+                    edges.append(target)
+                continue
+            if reviewed and path == "assets/search-worker.js":
+                imports = re.findall(r'importScripts\(\s*("[^"\n]+")\s*\)', text)
+                if len(imports) != 1:
+                    _fail("dynamic_loader", "reviewed worker import shape")
+                target = _resolve(path, json.loads(imports[0]))
+                if target != ("assets/vendor/minisearch/6.1.0/index.min.js", ""):
+                    _fail("dynamic_loader", "reviewed worker dependency")
+                edges.append(target)
+                continue
+            if reviewed and path.endswith("/search_index.js"):
+                match = re.fullmatch(r"\s*(?:var|const)\s+documenterSearchIndex\s*=\s*(\{.*\})\s*;?\s*", text, re.S)
+                if match is None:
+                    _fail("dynamic_loader", "Documenter search data shape")
+                try:
+                    value = json.loads(match.group(1), object_pairs_hook=_json_pairs,
+                        parse_constant=lambda value: _fail("invalid_json", value))
+                except (ValueError, TypeError):
+                    _fail("invalid_json", path)
+                if not isinstance(value, dict) or not isinstance(value.get("docs"), list):
+                    _fail("dynamic_loader", "Documenter search data shape")
+                continue
             for document in contexts:
                 edges.extend(_js_edges(path, text, document))
     for path, anchor in edges:
@@ -817,7 +971,18 @@ def finalize_bundle(*, plan, before, after, generator, schema_ref, coverage,
     # Detach containers; bytes themselves are immutable and need not be copied.
     payload, asset_inputs = dict(payload), dict(asset_inputs)
     coverage = copy.deepcopy(coverage)
-    validate_payload(payload)
+    # Obtain exact whole-lock evidence before selecting the narrowly admitted
+    # runtime path. No caller boolean changes CSS/JS validation.
+    try:
+        verified_assets = validate_assets(asset_lock, dict(asset_inputs), payload=dict(payload))
+    except FileNotFoundError:
+        return blocked("missing_validation_evidence")
+    if verified_assets is None:
+        return blocked("missing_asset_evidence")
+    if not isinstance(verified_assets, dict) or any(
+            not isinstance(data, bytes) for data in verified_assets.values()):
+        _fail("asset_validation_evidence", "exact verified bytes required")
+    validate_payload(payload, verified_assets=verified_assets)
     _bundle_coverage(plan, before, coverage, payload)
     if not isinstance(fragments, list) or len(fragments) > 256 or not isinstance(aliases, list):
         _fail("catalog_shape")
@@ -859,14 +1024,8 @@ def finalize_bundle(*, plan, before, after, generator, schema_ref, coverage,
         for document in fragment_documents:
             validate_shape(copy.deepcopy(document))
         validate_bindings(copy.deepcopy(manifest), coverage=copy.deepcopy(coverage))
-        verified_assets = validate_assets(asset_lock, dict(asset_inputs), payload=dict(payload))
     except FileNotFoundError:
         return blocked("missing_validation_evidence")
-    if verified_assets is None:
-        return blocked("missing_asset_evidence")
-    if not isinstance(verified_assets, dict) or any(
-            not isinstance(data, bytes) for data in verified_assets.values()):
-        _fail("asset_validation_evidence", "exact verified bytes required")
     expected_assets = {path: data for path, data in payload.items()
                        if not path.endswith(".html") and path not in fragment_paths}
     if verified_assets != expected_assets:
