@@ -1,0 +1,86 @@
+{
+  "operation_id": "ENG-REPLAN-DOCS-ROUTING-DIAGNOSTIC-CHECK4-1",
+  "authority": "Direct human standing engineering resource grant: разрешаю здесь и дальше использовать все доступные ресурсы для ускорения процесса разработки и развертывания",
+  "purpose": "One discriminating CHECK4 with bounded already-read /proc failure diagnostics; cause remains UNKNOWN; no acceptance/N-A/lifecycle relaxation and no retry-until-pass",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "source_append": {
+    "attempt": "DOCS-ROUTING-SOURCE-CHECK-4",
+    "calls_before": 11,
+    "calls_after": 12,
+    "maximum_new_calls": 1,
+    "new_call_cap": 12
+  },
+  "unit_unchanged": {
+    "attempt": "DOCS-ROUTING-CORRECTION-E1",
+    "calls_before": 90,
+    "calls_after": 91,
+    "unused": true,
+    "ready": false,
+    "expected_tests": 232
+  },
+  "limits": {
+    "each_wall_seconds": 120,
+    "each_CPU": 1,
+    "each_sampled_RSS_bytes": 1073741824,
+    "each_sampled_TMP_bytes": 16777216,
+    "each_raw_bytes": 2097152,
+    "original_aggregate_calls": 4,
+    "original_aggregate_wall_seconds": 480,
+    "original_aggregate_raw_bytes": 8388608,
+    "append_calls": 1,
+    "aggregate_calls": 5,
+    "aggregate_wall_seconds": 600,
+    "aggregate_raw_bytes": 10485760,
+    "concurrent_calls_all_agents": 1,
+    "no_automatic_rerun": true
+  },
+  "guard": {
+    "path": "/tmp/qcl-docs-routing-pure-guard-v9.py",
+    "sha256": "e02576c6b421b158a00a570ca729b076737d47c1e79111606d15fb60a2cba01e",
+    "bytes": 68918
+  },
+  "guard_plan": {
+    "path": "/tmp/qcl-docs-routing-pure-plan-v9.json",
+    "sha256": "e32f4b534b928cef44cc8e9f35f242e979752b12b70e9eea687c5cca3cc3b2af",
+    "bytes": 8983
+  },
+  "wrapper": {
+    "path": "/tmp/qcl-docs-routing-pure-check-v9.py",
+    "sha256": "1dd84dcdf977f458b960e6dd78dbb100e4d3c3c83a60e29430d630a455f91f1a",
+    "bytes": 1369
+  },
+  "review": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v9-review.md",
+    "sha256": "33a3902a914e8f270999eb6b9bd169c300776b95288577e5f2085ccf524ef009",
+    "bytes": 9597
+  },
+  "review_identity": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v9-review-identity.json",
+    "sha256": "d12595a7a38544161835b627c218772eaefb5273645d26555340aa0b677e8744",
+    "bytes": 2443
+  },
+  "retained_prefix": {
+    "FORMAT": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/receipt.json",
+      "sha256": "26228b8059235d0c6f37ac32a08a4a65a3af5976058c34913f9ba83f0629b714",
+      "bytes": 3771
+    },
+    "LINT": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-3/receipt.json",
+      "sha256": "fc42be7624a2af8238a5bcc5059ef1b7469c4e79cad7fd661b38131433ebe5a8",
+      "bytes": 3766
+    },
+    "CHECK": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-3/receipt.json",
+      "sha256": "a399281f3159ffd88cc014a5fd8504110fb8c272e21472cab5404e3ff67eb05a",
+      "bytes": 3843
+    }
+  },
+  "format_CPP": {
+    "path": "/tmp/qcl-docs-routing-pure-format3-final-v8-review.md",
+    "sha256": "8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3",
+    "bytes": 10151
+  },
+  "history": "All consumed failures/raw preserved, source11of11 exhausted prefix retained; product90cap91 E1 unchanged; SCI05/08C088of8 unchanged, finalCI/science/heavybuild0",
+  "resource_limitations": "Sampled stops do not prove hard quotas or peak/native isolation. Independent source reviewer aggregate output ceiling64KiB not established; retained explicitly, no budget-compliance PASS."
+}

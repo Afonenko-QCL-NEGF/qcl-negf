@@ -1,0 +1,17 @@
+{
+  "started_at": "2026-10-19T17:19:00.295932+00:00",
+  "deadline_seconds": 2400,
+  "samples_planned": 8,
+  "samples_dispatched": 8,
+  "samples_completed": 8,
+  "unconsumed_samples": 0,
+  "ended_at": "2026-10-19T17:28:47.536339+00:00",
+  "state": "completed-fixed8",
+  "saved_worker_answer_operations_bytes": 120301,
+  "saved_worker_answer_operations_cap_bytes": 131072,
+  "actual_tool_transcript_bytes": "not fully measured; worker ops contains full outputs or labelled summaries",
+  "actual_CPU_RSS": "not measured",
+  "targeted_check_calls": 2,
+  "reruns": 0,
+  "elapsed_seconds": 587.240407
+}

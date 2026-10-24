@@ -1,0 +1,33 @@
+{
+  "format": "qcl-negf.docs-routing-harness-review-identity.v2",
+  "verdict": "PASS_SOURCE_R1_R2",
+  "scope": "Independent high source-only re-review of exact R1/R2 correction delta",
+  "execution_authorized_by_review": false,
+  "execution_count": 0,
+  "product_mutations": 0,
+  "checkpoint_mutations": 0,
+  "root_head": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "fixture_worktree_head": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "source_bindings": {
+    "/tmp/qcl-docs-routing-local-unit-run-v2.py": "0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7",
+    "/tmp/qcl-docs-routing-engineering-plan-v2.json": "5147cab0a8df1d50fb908b3c247e8c7b0e11852ee01a990f8a35228b3e70157a",
+    "/tmp/qcl-docs-routing-harness-v2-report.md": "adbe4ed2aa3f96246ea68a5d49972eff10a4aa3a2007b3fe5e0fc7a473e4378d",
+    "/tmp/qcl-docs-routing-harness-v2-identity.json": "910d1f6550f9c329144e694d66615d6ce2f026a8426e2a0f934a7f3146576c3f",
+    "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+    "/tmp/qcl-docs-routing-harness-review.md": "cf055fe95961e674834565bf13080de67ce640edb7fd66136b3dc31fef5bb995"
+  },
+  "report": {
+    "path": "/tmp/qcl-docs-routing-harness-v2-review.md",
+    "sha256": "e4766f8a2e93a5fed9eb0ecf4400b337c5324536c622d8d78f3c8f6641a6d0c4",
+    "bytes": 8446
+  },
+  "findings": [],
+  "closed_findings": [
+    {"id": "R1", "locator": "/tmp/qcl-docs-routing-local-unit-run-v2.py:61", "evidence": "Exact source buffer SHA checked then compile/exec same buffer in fresh ModuleType; no SourceFileLoader/pyc"},
+    {"id": "R2", "locator": "/tmp/qcl-docs-routing-local-unit-run-v2.py:87", "evidence": "Accepted same-v2 RED acceptance/receipt/raw validated before GREEN reservation; direct guarded nonzero expected diagnostic checks"}
+  ],
+  "observed_engine_tests": null,
+  "source_reads_conservative_reserve_bytes": 262144,
+  "physical_io_cpu_rss_instrumented": false,
+  "stop": "Source acceptance only; no READY, runtime approval, execution, target tests, native/build/solver/network or full CI"
+}

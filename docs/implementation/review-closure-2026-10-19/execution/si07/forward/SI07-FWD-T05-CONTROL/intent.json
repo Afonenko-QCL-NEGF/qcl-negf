@@ -1,0 +1,20 @@
+{
+  "intent_id": "SI07-FWD-T05-CONTROL",
+  "case": "T05",
+  "variant": "control",
+  "intent_at": "2026-10-19T17:20:18.214571+00:00",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "fork_turns": "none",
+  "state": "completed",
+  "pre_dispatch_budget_refinement": {
+    "at": "2026-10-19T17:23:27.552075+00:00",
+    "answer_max_bytes": 5120,
+    "operations_max_bytes": 2048,
+    "combined_max_bytes": 7168,
+    "basis": "aggregate artifact output cap128KiB; no scientific/task change"
+  },
+  "agent_id": "/root/si07_forward_fresh/si07_t05_control",
+  "dispatched_at": "2026-10-19T17:24:29.817745+00:00",
+  "completed_at": "2026-10-19T17:25:05.741363+00:00"
+}

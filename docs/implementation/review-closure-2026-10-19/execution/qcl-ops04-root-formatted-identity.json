@@ -1,0 +1,39 @@
+{
+  "stage": "formatted_full_candidate_CPP_pending",
+  "root_base": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "actual_root_d4113_note": "ops/nix baseline unchanged vs cfc; component/evidence delta independent",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "files": {
+    "ops/solver.ts": {
+      "sha256": "63c26b64d981d5436172a676dd309a6f74cee1184b3e1b392a9c8a99d5193912",
+      "bytes": 13642
+    },
+    "ops/application_cd.ts": {
+      "sha256": "5e79f0ac36f922cc77805d68ca8122bd8b9fc34267109362d5fc4a6299b5bf71",
+      "bytes": 5149
+    },
+    "tests/solver_test.ts": {
+      "sha256": "d17eaf24461d702f202209a086f3f819b287690c9ebbd14fce20ef7cb949a025",
+      "bytes": 27879
+    },
+    "tests/application_cd_test.ts": {
+      "sha256": "da25777fc58752236b3e8b812bbbbc11fa63b328bb7e8aaf0c3fcf987d1bfcc2",
+      "bytes": 23405
+    },
+    "nix/solver.nix": {
+      "sha256": "dacc900b41f3e9866e3b164243385ce81fdf9df3925061573bc8731f26e71e8b",
+      "bytes": 658
+    }
+  },
+  "format_receipt_sha256": "162c0f0a7494b76be4a853f9523ad9e5399577d9619a165854e58250c5bb14c5",
+  "format_delta_sha256": "5e8503bd2ef7303799d1a118a7ca2f837366ddb88110562ba778bae04de95b4f",
+  "full_patch_sha256": "841e8b236bbcc84b9d04b2c18f03fbce8260e1854af86f41443909d9146bccf4",
+  "functional_identity_sha256": "7b34d5d36b8396246c0d2dc580f9542ae408be9b4c850d17ae164d2d5b084826",
+  "prior_test_CPP_sha256": "ad3e2da9ffd6b84d4faec7a3e536df46c61d6365f1cd2342ec1bd1a740f22ceb",
+  "unit_calls": 1,
+  "max_unit_calls": 2,
+  "formatter_calls": 1,
+  "product_imports_in_format": 0,
+  "no_native_evaluation": true,
+  "stop": "independentCPP before actual source binding/soleGREEN; no further formatcall or tests authorized by receipt"
+}

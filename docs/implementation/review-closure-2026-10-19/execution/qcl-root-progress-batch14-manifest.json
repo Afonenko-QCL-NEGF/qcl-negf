@@ -1,0 +1,381 @@
+{
+  "batch": 14,
+  "base": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "files": [
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
+      "bytes": 454415,
+      "sha256": "50c92712ecf1c2b842a37a4789fbd0ae631e07b4d71dab6493a7dd3a1b5ac5a2"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-actual/DOC06-ACTUAL-A1/original.txt",
+      "bytes": 26,
+      "sha256": "ff602a8401c76f68f448a0ae58b37281211b6ed20427e1cdbf0603207c92b301"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-actual/DOC06-ACTUAL-A2/original.txt",
+      "bytes": 26,
+      "sha256": "ff602a8401c76f68f448a0ae58b37281211b6ed20427e1cdbf0603207c92b301"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-actual/preparation-original.txt",
+      "bytes": 220,
+      "sha256": "8bf0b30fe49f4db49963f561f23b9eb3e8f4082f27306321e6a12e47463d43fa"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-E1/original.txt",
+      "bytes": 5247,
+      "sha256": "a9d789058b4e4bdb84eba977b1d3366f9eb714b96058426acc63e3feac98b9b6"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-E1/receipt.json",
+      "bytes": 12577,
+      "sha256": "98f6f3d7c6b89c45009a0db1e6066d5583b9758f57e3d41a9e1888347088b313"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-FORMAT-1/original.txt",
+      "bytes": 189,
+      "sha256": "dbd62c13facc85425d25919de4a089675905eb14da7f39fcf404d1c3983005b9"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-FORMAT-1/receipt.json",
+      "bytes": 4120,
+      "sha256": "aaaf0be83c834ba83736959d37025113dc067c306ed0dc9ed4b46736d3be3dcc"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-LINT-1/original.txt",
+      "bytes": 16,
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-LINT-1/receipt.json",
+      "bytes": 4079,
+      "sha256": "fcab1a950805ae753bf614c18df2c9a39cc9e1112dcc7d79ebfea64a11b8669a"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-recipe-impl-complete.patch",
+      "bytes": 25872,
+      "sha256": "6f2e25ab81a25223f957d92edee7fab6ea34400bd22eb46ec92bda16156a0b81"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-recipe-impl-report.md",
+      "bytes": 8684,
+      "sha256": "dbcb6dbb7463839d95bda76b70b989ba90c6787444cf025d4d7bfaa7c34c3f1f"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-fix-impl-complete.patch",
+      "bytes": 24954,
+      "sha256": "31f2192473c1ee7c1a0ca5c837545cb2222e4fbd0709fdbf0a685cddd45d4174"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-fix-impl-report.md",
+      "bytes": 8492,
+      "sha256": "a79587069a6d68f452472b69ae77b447bfcda611dd33aa13ee2b8e4388947556"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-fix-impl-review.md",
+      "bytes": 12622,
+      "sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-format-only-review.md",
+      "bytes": 6402,
+      "sha256": "77c888f4b3dda1f0ffa31ca9d180c93d84693875b6353d6d650e615369098bd1"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-format-only-v2.diff",
+      "bytes": 17792,
+      "sha256": "a645fe4317d061ba713aa084cc0686c9b8df62dde3b7728bd3b8a11e47cfd700"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-harness-report-v2.md",
+      "bytes": 9267,
+      "sha256": "54e0a44f78729045ac914c98f425383e9647a6ff1320e7f08a691e5bde887d92"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-harness-review.md",
+      "bytes": 11654,
+      "sha256": "787e5728d3541584ca91b84be1b76e181863cd83e12233b399e209110d9a3fa3"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-harness-v2-review.md",
+      "bytes": 10295,
+      "sha256": "bfa76f2c991066adf3731c3b9b40a2a03572161ebe1decadcbab6345ecafe268"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-v2-outcome-review.md",
+      "bytes": 12249,
+      "sha256": "ee8620ebbb06fdcddae5f742717e8ba6c32b97d60c12a17fe3c2f3447e37269b"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-historical-RED-fixture.ts.txt",
+      "bytes": 38723,
+      "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-i2-review.md",
+      "bytes": 24241,
+      "sha256": "5b7ec1e5f1fefad767315f539fe637c12c322902c78d542acea16639931ced60"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-impl-v2-report.md",
+      "bytes": 12408,
+      "sha256": "16a9d55592ffd9d9f3a5bfee295c4c2234608668a665eff18ad2d5721921c769"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design-v4-delta-ledger.md",
+      "bytes": 3296,
+      "sha256": "0b5a817a42afcdbdb93d1be39cedd32b3506f036901bcc368d95dc6d0f0c9c17"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design-v4-review.md",
+      "bytes": 8854,
+      "sha256": "ca5a8d36b04ff6e5f52817da420b6fb3ca92e95d9e70e45c1ea6f44f74b9fb48"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design-v4.md",
+      "bytes": 35392,
+      "sha256": "24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-fixtures-v2-patch.diff",
+      "bytes": 21703,
+      "sha256": "e989e733d13a4b96f870358a599c494177703185978aa19d81f4f5568d7819ae"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-fixtures-v2-report.md",
+      "bytes": 12489,
+      "sha256": "fd85b55862a57177d59954196d23871182cf1c0cc9b45559f599bfef602a8928"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-fixtures-v2-review.md",
+      "bytes": 8182,
+      "sha256": "0eb166121233cd45855687d648df921aca8a5eaf06dd306babef23c43fa0de7e"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-harness-report-v2.md",
+      "bytes": 10543,
+      "sha256": "30610e3bf1caee3c782ff2c0512db5c14762da37bd64d301364d36a820e57bd0"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-harness-review.md",
+      "bytes": 14886,
+      "sha256": "0436f8fc877b63ff0921a758593b9353be9300027f664c913d93bd5ee32163d5"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-harness-v2-review.md",
+      "bytes": 11508,
+      "sha256": "df73bbe011b41ebd0036ef4171b4584d14f0b0d6369f9fa67ba9edf8f2e09601"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-root-recipe-impl-identity.json",
+      "bytes": 1838,
+      "sha256": "4320cfcaa0a7f5962c046b2ef81ea517e43ecf2a4d91d1afe54a13911135a006"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-engineering-plan-v2.json",
+      "bytes": 4632,
+      "sha256": "2206d06e2c072b5132db0a2a89048a7df5ef2602961bd03c19ef916cad5c824c"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-fix-impl-identity.json",
+      "bytes": 3811,
+      "sha256": "9cef061f6f6e4268dba89689382deed7a8bf8ecde1ac07a428c47f58a2b78bcd"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-fix-impl-review-identity.json",
+      "bytes": 3450,
+      "sha256": "cfdc095e9582e4a0d9e7a2b5bec11a0967d4ecf49234ad6ecd855ace20c08dcb"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-fix-promotion.json",
+      "bytes": 768,
+      "sha256": "fa2c848848554f7a24c64b6815ee37045bff1e52bdae593dce67457203bfb64b"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-format-only-review-identity.json",
+      "bytes": 1969,
+      "sha256": "a043013e1b6dcb6174bdca2e90546d9083568f3352b54a12fe7ebb31441a4fb4"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-format-only-review.json",
+      "bytes": 716,
+      "sha256": "0130a35e4445fbc73feda5d5ad7e0df20b032b59cc3490abef7409535ce162e3"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-harness-identity-v2.json",
+      "bytes": 2846,
+      "sha256": "7e4d715b8cd246e1ab5bd2ac10256f776925ebeed3254434522d44f5face8fa5"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-harness-review-identity.json",
+      "bytes": 2297,
+      "sha256": "1b02763484fe34fa08772d14cf0fc959af28851cdc759243aaca29c64b39b60e"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-harness-v2-review-identity.json",
+      "bytes": 2248,
+      "sha256": "f77de46567f4b6b1825ff8db111bb596c2a626b1d61c713156d358c25bb7c1ef"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-v2-outcome-review-identity.json",
+      "bytes": 3389,
+      "sha256": "6124d175878cc31980b0ece8f808c7eed971cbb9b7761c0d366769adaa39649c"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-v2-outcome-summary.json",
+      "bytes": 7570,
+      "sha256": "bfd763c78c6dd09ea9b0be798f10f86e3e6b8210abd230132a61600539b301c7"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-i2-review-identity.json",
+      "bytes": 4791,
+      "sha256": "8e29186dc03947b6c9500264a48e4db73846ae312797bc33315ac01ff3884dc0"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-impl-v2-identity.json",
+      "bytes": 6412,
+      "sha256": "4b55bcc45c097c7afe887db031dfdc10851759677d8dd1c8fad6fb53293dbf54"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-design-v4-identity.json",
+      "bytes": 3201,
+      "sha256": "f1b21f21cc54958c62eed33ac518683d928d3e09a4667c619fc3682b78ea2107"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-design-v4-review-identity.json",
+      "bytes": 1793,
+      "sha256": "e4604bb1e8e7e0a7006332a917d4b8ffe6fc9e82545699d4c30a9345167a8f77"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch13-publication.json",
+      "bytes": 598,
+      "sha256": "033e7889b87addb3396ae480916316f5221e04429e2e3846753414c599638d57"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch13-manifest.json",
+      "bytes": 18958,
+      "sha256": "519ab3f0676e98f8af49a9740170e6e636a7fbd3dfe61e664c9b88c9f1b33514"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-engineering-plan-v2.json",
+      "bytes": 9764,
+      "sha256": "02161eae76701faf9d469b1021470321dae4c55efc048bd53b7e9f6f88c9a58c"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-fixtures-v2-identity.json",
+      "bytes": 3173,
+      "sha256": "87981037d559a9461b835a3a4d1c5d99b86c1cce78c3594197010948397bb254"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-fixtures-v2-review-identity.json",
+      "bytes": 2870,
+      "sha256": "e3f38122f9b1b59e8bd10f96830ea89a051dba7df412c246f156ef535b26d13d"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-harness-identity-v2.json",
+      "bytes": 8157,
+      "sha256": "d14e76bca535695a460676e0af2e2d669043d90297a3943b58ab99c20dfc84b2"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-harness-review-identity.json",
+      "bytes": 2409,
+      "sha256": "a742f7d6cfd395b4c484165e743fda32781f23214027f3557830ea9c89d9a8c0"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-harness-v2-review-identity.json",
+      "bytes": 2524,
+      "sha256": "5b90fb2d9ce1cae5288fc18f5213bd89422d83f81653b350e792a2071bf8e5d3"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json",
+      "bytes": 15414,
+      "sha256": "0eee95e782326926042067c00356023f2b12215c99d0c60b65cbc86d669acf04"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/sci08-r1-engineering/SCI08-R1-ENG-RED-1/original.txt",
+      "bytes": 725,
+      "sha256": "cd29bae7df710592bb53eb10085abe42277de704e0699f2475a1cf455e1c16ba"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/execution/sci08-r1-engineering/SCI08-R1-ENG-RED-1/receipt.json",
+      "bytes": 67896,
+      "sha256": "8d638a5de2c52db561ad50152194b6033536c99a1e903a2684c92348d0e653df"
+    },
+    {
+      "path": "ops/docs/static-slice.ts",
+      "bytes": 48345,
+      "sha256": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72"
+    },
+    {
+      "path": "tests/docs_static_slice_test.ts",
+      "bytes": 46697,
+      "sha256": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+    }
+  ],
+  "gitlinks": {},
+  "source_files": {
+    "ops/docs/static-slice.ts": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "credential_shapes": 0,
+  "exact_source_verified_raw_whitespace_exceptions": {
+    "docs/implementation/review-closure-2026-10-19/execution/doc06-actual/DOC06-ACTUAL-A1/original.txt": {
+      "sha256": "ff602a8401c76f68f448a0ae58b37281211b6ed20427e1cdbf0603207c92b301",
+      "source": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/DOC06-ACTUAL-A1/original.log",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/doc06-actual/DOC06-ACTUAL-A2/original.txt": {
+      "sha256": "ff602a8401c76f68f448a0ae58b37281211b6ed20427e1cdbf0603207c92b301",
+      "source": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/DOC06-ACTUAL-A2/original.log",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/doc06-actual/preparation-original.txt": {
+      "sha256": "8bf0b30fe49f4db49963f561f23b9eb3e8f4082f27306321e6a12e47463d43fa",
+      "source": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/preparation-original.log",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-E1/original.txt": {
+      "sha256": "a9d789058b4e4bdb84eba977b1d3366f9eb714b96058426acc63e3feac98b9b6",
+      "source": "/tmp/DOC06-SCHEMA-E1/original.log",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-FORMAT-1/original.txt": {
+      "sha256": "dbd62c13facc85425d25919de4a089675905eb14da7f39fcf404d1c3983005b9",
+      "source": "/tmp/DOC06-SCHEMA-FORMAT-1/original.log",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/DOC06-SCHEMA-LINT-1/original.txt": {
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd",
+      "source": "/tmp/DOC06-SCHEMA-LINT-1/original.log",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-root-recipe-impl-complete.patch": {
+      "sha256": "6f2e25ab81a25223f957d92edee7fab6ea34400bd22eb46ec92bda16156a0b81",
+      "source": "/tmp/qcl-doc04-root-recipe-impl-complete.patch",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-fix-impl-complete.patch": {
+      "sha256": "31f2192473c1ee7c1a0ca5c837545cb2222e4fbd0709fdbf0a685cddd45d4174",
+      "source": "/tmp/qcl-doc06-schema-fix-impl-complete.patch",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-format-only-v2.diff": {
+      "sha256": "a645fe4317d061ba713aa084cc0686c9b8df62dde3b7728bd3b8a11e47cfd700",
+      "source": "/tmp/qcl-doc06-schema-format-only-v2.diff",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-fixtures-v2-patch.diff": {
+      "sha256": "e989e733d13a4b96f870358a599c494177703185978aa19d81f4f5568d7819ae",
+      "source": "/tmp/qcl-sci08-R1-fixtures-v2-patch.diff",
+      "kind": "byteexact retained raw or source patch"
+    },
+    "docs/implementation/review-closure-2026-10-19/execution/sci08-r1-engineering/SCI08-R1-ENG-RED-1/original.txt": {
+      "sha256": "cd29bae7df710592bb53eb10085abe42277de704e0699f2475a1cf455e1c16ba",
+      "source": "/tmp/qcl-SCI08-R1-ENG-RED-1/original.log",
+      "kind": "byteexact retained raw or source patch"
+    }
+  },
+  "gates": "83calls1035.953s; DOC06FMTLINTpass74assertionsPASS_resourceguardFAILED; SCI08RED1bootstrapfailedbeforeassertions; routingI2andDoc04sourcepartial; C088of8exhausted; finalCI0science0nativebuild0",
+  "full_source_READY": false
+}

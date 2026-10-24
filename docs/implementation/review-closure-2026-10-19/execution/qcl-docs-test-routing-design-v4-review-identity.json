@@ -1,0 +1,31 @@
+{
+  "scope": "D4-focused-high-source-R1-R2-review",
+  "selected_root": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "selected_platform": "f729e2681224d6537538179ab760fefefd575003",
+  "design_sha256": "24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0",
+  "design_identity_sha256": "f1b21f21cc54958c62eed33ac518683d928d3e09a4667c619fc3682b78ea2107",
+  "design_delta_ledger_sha256": "0b5a817a42afcdbdb93d1be39cedd32b3506f036901bcc368d95dc6d0f0c9c17",
+  "prior_review_sha256": "228adacf29beb41b48f21b90d055a648b13ded0e8c5e3154f5709a023d2e40d0",
+  "report": "/tmp/qcl-docs-test-routing-design-v4-review.md",
+  "report_sha256": "ca5a8d36b04ff6e5f52817da420b6fb3ca92e95d9e70e45c1ea6f44f74b9fb48",
+  "verdict": "source_pass_R1_R2_for_I2_implementation_not_execution_or_native_ready",
+  "blocking_design_findings": [],
+  "I2_CPP_obligations": [
+    "Explicit bounded git-read response/state machine with encoded-frame limits",
+    "Actual graph/closure call and byte schedule within shared source budgets",
+    "No native route default git/run/output bypass or executable config/filter helper path",
+    "Final committed source16/imports/tool/runtime binding and failure retention"
+  ],
+  "new_DEV_calls": "tentative_two_require_separate_Root_plan_and_slots_not_authorized_by_review",
+  "pure_GREEN": "separate_227_contract_no_native_protocol_coverage",
+  "runtime_prerequisites": "trusted_parent_wrapper_inventory_live_guard_storage_watchdog_not_established",
+  "execution_counts": {
+    "parser_compiler": 0, "imports": 0, "tests": 0,
+    "native": 0, "network": 0, "build": 0,
+    "solver": 0, "final_ci": 0,
+    "product_writes": 0, "checkpoint_writes": 0, "git_writes": 0
+  },
+  "source_read_conservative_bound_bytes": 524288,
+  "cpu_ram_io": "not_instrumented",
+  "stop": true
+}

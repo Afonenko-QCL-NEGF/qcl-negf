@@ -1,0 +1,30 @@
+{
+  "operation_id": "INT01-FRONTEND-ASSETS-1",
+  "status": "completed",
+  "portal_head": "6ff9f6100623c578028506d43a39972dbfbc00dc",
+  "wall_seconds": 3.60336971282959,
+  "html_asset_references": [
+    {
+      "reference": "/assets/index-BpCX6toH.js",
+      "bytes": 212361,
+      "sha256": "1fc1cf1a743088240b5de9a87000efe6a3dad09163b75d8b7d7454d9921fd7b8"
+    },
+    {
+      "reference": "/assets/index-d9-7Ycn6.css",
+      "bytes": 5577,
+      "sha256": "a652300a98c5e463c8ec4d692c5d5f09db1f59b6c9f4c3ba37c7f784e0ba790d"
+    }
+  ],
+  "html_check": "allreferencedassets localconfinedexistingregularfiles; noexternalnetworkrefs",
+  "raw_receipt_sha256": "f31782929e9ca5edbab10d93c3d3db91bd918d18d391e59351bd387628869a3d",
+  "raw_log_sha256": "552988d3c443415ce3b07d4efee263132f45a94162e4080148228fcf2351472e",
+  "limits": "cgroup1GiB2CPU90s AF_UNIX; monitored64MiBoutput/2MiBlog",
+  "scope": "localnativeconfigloader route, notcanonicalreleasebuild",
+  "unmeasured": [
+    "hardmemory.peak",
+    "actualCPUtime",
+    "browserrender/light-darkOS",
+    "wheel/native/server/fullCI/science"
+  ],
+  "next": "existingASGIpackagedbrowserassertion"
+}

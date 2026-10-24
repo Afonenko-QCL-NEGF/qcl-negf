@@ -1,0 +1,13 @@
+{
+  "verdict": "PASS_FORMAT_ONLY_EQUIVALENCE",
+  "input_source_sha256": {
+    "ops/docs/static-slice.ts": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee",
+    "tests/docs_static_slice_test.ts": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04"
+  },
+  "output_source_sha256": {
+    "ops/docs/static-slice.ts": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "formatter_receipt_sha256": "aaaf0be83c834ba83736959d37025113dc067c306ed0dc9ed4b46736d3be3dcc",
+  "accepted_cpp_sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7"
+}

@@ -1,0 +1,16 @@
+{
+  "state": "compatibility_CPP_bound_last_GREEN_pending",
+  "base": "b067723c82382689bff5cc366981c56e99b926f8",
+  "head": "f5bc368654414039f7368bb19ca3201fa7f29f9d",
+  "branch": "codex/review-closure-protected-reader-boundaries-integration",
+  "files": {
+    "tests/test_node_enrollment.py": "d99c003fccc308c9cffed172f38ec69eeaa744f2753c7a95c28794d07aca305d",
+    "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6"
+  },
+  "production": {
+    "ops/application_release.py": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0"
+  },
+  "review": "3613d1e651ad9b0147993f2616a9bd70c654e3ebe83ac391750de027f4b39326",
+  "tests_only": true,
+  "harness": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b"
+}

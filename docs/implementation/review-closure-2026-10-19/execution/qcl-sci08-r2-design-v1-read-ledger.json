@@ -1,0 +1,56 @@
+{
+  "scope": "SCI08-R2 finite source D",
+  "readers": ["sed", "rg", "wc", "sha256sum", "read-only git"],
+  "write_tool": "apply_patch; exactly three requested /tmp outputs",
+  "limitations": [
+    "Selected source ranges and symbol searches only; no whole-function or whole-callgraph audit is claimed",
+    "Several batched outputs exceeded requested token bounds and were truncated; missing portions are not claimed read",
+    "One broad /tmp filename discovery was unnecessarily broad; it read names, not archived payloads",
+    "Reader output bytes and CPU/RAM were not independently metered; no measured budget-compliance claim is made",
+    "sha256sum freezes full file contents for review; hashing is not a claim of semantic reading",
+    "Failed guessed source paths are recorded below and provide no evidence"
+  ],
+  "budget": {
+    "assigned_wall_minutes": 12,
+    "assigned_cpu": 1,
+    "assigned_ram_gib": 2,
+    "assigned_source_read_bytes_max": 4194304,
+    "assigned_total_output_bytes_max": 98304,
+    "runtime_product_prior_used": 90,
+    "source_prior_notation": "source8 as delegated; no grant inferred",
+    "C08_SCI05_SCI08": "8/8 EXHAUSTED",
+    "full_ci": 0,
+    "science": 0,
+    "heavy_build": 0,
+    "new_runtime_grant": 0
+  },
+  "reads": [
+    {"path": "/home/tolya/.codex/plugins/cache/openai-curated-remote/superpowers/6.4.2/skills/using-superpowers/SKILL.md", "selection": "1-180", "result": "subagent-stop says ignore this skill for dispatched specific task"},
+    {"path": "AGENTS.md", "selection": "1-150; user supplied full rules also available", "result": "source-only ownership and budget rules"},
+    {"path": "docs/architecture.md", "selection": "1-180", "result": "Runner persistence/resource owner; flat gitlinks; no extra service"},
+    {"path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-performance-audit/SKILL.md", "selection": "1-220", "result": "applied source audit only; no measurement or equivalence claim"},
+    {"path": "docs/implementation/review-closure-2026-10-19/science.md", "selection": "SCI07/08/admission symbol search; 150-176 and 374-405", "result": "S1 caps, pre-growth guards and separate native gates"},
+    {"path": "/tmp/qcl-sci07-resource-design.md", "selection": "targeted resource/review/growth/source locator search; 1-18, 200-242, 288-298; some batch portions truncated", "result": "source contract, tickets and inventory baseline; not full semantic read"},
+    {"path": "/tmp/qcl-sci07-resource-design-v2.md", "selection": "1-230 requested with truncated batch; independently 95-145 and targeted R1/SCI08 search", "result": "D2 baseline inequalities and literal oracles read; no full-file read claim"},
+    {"path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-review.md", "selection": "1-65 requested; truncated after initial verdict/binding and limited finding text", "result": "REQUEST_NARROW_D2, source-only, not native"},
+    {"path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-v2-review.md", "selection": "1-14", "result": "PASS_SOURCE focused correction; needs_admission/needs_guard remain"},
+    {"path": "components/QCLNEGFRunner.jl/src/application/resource_contract.jl", "selection": "function/type search and 1-80", "result": "ExecutionEnvelope and _grant_integer typed integer validation"},
+    {"path": "components/QCLNEGFRunner.jl/src/infrastructure/resources/linux_resources.jl", "selection": "resource/strict/refusal symbol searches; 1-34", "result": "raw strict cgroup integer statuses and ancestor binding; no native observation"},
+    {"path": "components/QCLNEGFRunner.jl/src/infrastructure/persistence/point_artifacts.jl", "selection": "targeted function/growth/writer/publication search; 500-572; 1061-1097 requested with tail truncation", "result": "heuristic forecast note, checked arithmetic, archive/recovery conditional, ordering loci; full function not read"},
+    {"path": "components/QCLNEGFRunner.jl/src/infrastructure/persistence/hdf5.jl", "selection": "function search and 77-103", "result": "slab dataset create/chunk/shuffle/deflate source; full serializer not read"},
+    {"path": "components/QCLNEGFRunner.jl/src/infrastructure/persistence/scientific_history.jl", "selection": "function search and 243-258", "result": "history/consolidation source coexistence boundary; full history not read"},
+    {"path": "components/QCLNEGFRunner.jl/src/composition/scientific_execution.jl", "selection": "targeted durable_state/commit/resource search; 1084-1116 and 1256-1286 requested, middle portions truncated", "result": "recovery and final caller locators; exact full kwargs not claimed"},
+    {"path": "components/QCLNEGFRunner.jl/src/composition/scratch_execution.jl", "selection": "function search; 34-83 requested with truncation; 36-50 separately", "result": "staging source/destination, byte budget and preflight source baseline"},
+    {"path": "components/qcl-negf-results/src/qcl_negf_results/export.py and export_budget.py", "selection": "filename discovery only", "result": "A1 owning filenames, no API semantic audit"},
+    {"path": "all inputs in identity.inputs_sha256", "selection": "whole-file SHA256 hash snapshot", "result": "frozen source bytes, not additional semantic reading"}
+  ],
+  "failed_paths_no_evidence": [
+    "components/QCLNEGFRunner.jl/src/application/scientific/resources.jl",
+    "components/QCLNEGFRunner.jl/src/application/scientific_execution.jl",
+    "components/QCLNEGFRunner.jl/src/infrastructure/staging/scratch_execution.jl",
+    "components/qcl-negf-aiida/src/aiida_qcl_negf/calculations/calculation.py"
+  ],
+  "git_observations": ["root rev-parse HEAD", "root status --short", "submodule status --recursive", "Runner status --short at input hash snapshot"],
+  "nonexecuted": ["Julia", "Python imports", "repository/archive scripts", "parsers", "compiler", "solver", "benchmarks", "tests", "runtime", "install", "network", "native", "server", "CI"],
+  "next": "independent high review; STOP"
+}

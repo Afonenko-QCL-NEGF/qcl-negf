@@ -1,0 +1,21 @@
+{
+  "scope": "C2private retained-inmemory binder and resolver only",
+  "files": {
+    "src/qcl_negf_contracts/model_help.py": "47fea02cced504a8f8ff52537275f25a5dfbd652b595f70f79306e3113edf62c",
+    "tests/test_model_help_bindings.py": "647e38868ac5b71f8bf90bf03fb69a789c569cdf6ce0234bde8b4745065b1cd7"
+  },
+  "high_CPP": "0556aabd1ab2dfb7566660fc4229c0d34dcd28814dad2f9ca169acd10d9c0464",
+  "prior_fivefinding_CPP": "78a4046f227f4c07f72c8bd59b4b7f87c960a8314cb915b481f7e254bf5d67f5",
+  "GREEN_receipt": "7024cea3cc88f04b4d830ad40bc88fca278076b736028a1d44e14d8f261bb9e1",
+  "cases": 132,
+  "wall_seconds": 1.341,
+  "runtime_shared_cap": "4/4 exhausted; no rerun",
+  "C1_schema_tests_unchanged": true,
+  "original_source_cycles": "8/8 exhausted retained",
+  "F3_E1_source_cycle": "1/1 used accepted after independent review",
+  "limitations": [
+    "private synthetic semantic evidence, not actual producer/Portal integration",
+    "two C1invalid defensive probes not core acceptanceoracles",
+    "no native/public/fullCI/scientific acceptance"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "stage": "DOC07-C1-source-repair-F1-F2",
+  "base_commit": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "worktree": "/tmp/qcl-doc07-contract-worktree",
+  "canonical_sha256": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+  "review_sha256": "a323b9b88128ba3ed3caa60020726e60d336c7c16b21644394a6db303734a812",
+  "schema_sha256": "584971b619218d56f2bdc4b04dfc1361d4850898cdabeca4594203aaf119c241",
+  "schema_bytes": 29608,
+  "tests_sha256": "b284bd64ad2a891f2fca791c7d32b0a11389399f32c68aa913dba9da5b217177",
+  "tests_bytes": 34439,
+  "preserved_tests_prefix_bytes": 31628,
+  "preserved_tests_prefix_sha256": "6a39ee353153a4de2d313323b5c67662026721f282adec1ae44305d95d1f2ebd",
+  "schema_full_patch_sha256": "858e22de3b3cb7db5b556a7f013372ade44c6445b0b3aeb383f8e532b885d0fb",
+  "schema_delta_patch_sha256": "1168aa87664b1e8c8a5bef6b01c9bb3559bfef4d931e1fe58faff69b50e7e4c7",
+  "tests_full_patch_sha256": "182a97de7b42c6fa217ce04b61b47c36a3983fa76022b2d539bb4b5217f1781c",
+  "tests_delta_patch_sha256": "60e13945d9dc8786fb552cc19591cf7fab564780e19ddda417bd4cf6a466aa70",
+  "runtime_invocations": 0,
+  "commits": 0,
+  "C2_changed": false
+}

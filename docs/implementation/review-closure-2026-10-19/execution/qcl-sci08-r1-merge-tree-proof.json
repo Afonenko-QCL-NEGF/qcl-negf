@@ -1,0 +1,8 @@
+{
+  "source_commit": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+  "merge_commit": "24539b3dbc0ec9a9bc0742c7808d605cfc660003",
+  "source_tree": "c9367954da493b89cbe051c6106131a27ee34a26",
+  "merge_tree": "c9367954da493b89cbe051c6106131a27ee34a26",
+  "tree_equal": true,
+  "PR": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/pull/16"
+}

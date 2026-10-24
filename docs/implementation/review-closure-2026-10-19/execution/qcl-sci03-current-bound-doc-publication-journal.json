@@ -1,0 +1,27 @@
+{
+  "CP_CODE": "67318b33b5f76f584a8ee62f305ec21c6ce631c785741f690db7c62a7dcff0e4",
+  "components": {
+    "qcl-negf-research": {
+      "state": "G1_merged",
+      "operation_id": "PUBLISH-SCI03-CURRENTBOUND-3ed8a9f",
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-research",
+      "base": "1eacefcd81a50e245ea9da74a0b717b33818c61e",
+      "base_branch": "codex/review-closure-contribution-routing",
+      "head": "3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731",
+      "branch": "codex/review-closure-current-bound-contract-integration",
+      "files": {
+        "docs/equilibrium-measurement-contract.md": "61058d7b33b21e8b43232239569012567e764035dd15900b80d742bd9d6ed38c"
+      },
+      "docs_only": true,
+      "runtime_calls": 0,
+      "pr": 8,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-research/pull/8",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "f8bd6f956681121cdd8ee85f0d0fdc5914cedc20",
+      "merged_at": "2026-10-19T20:59:08Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

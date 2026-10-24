@@ -1,0 +1,17 @@
+{
+  "stage": "DOC07-C1-source-only",
+  "worktree": "/tmp/qcl-doc07-contract-worktree",
+  "branch": "codex/review-closure-model-help-contract",
+  "base_commit": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "canonical_sha256": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+  "plan_sha256": "20e712a051b3ba9e326bf4dccc3598513b43beefbcab0862d57e287d676dcb8b",
+  "schema_path": "src/qcl_negf_contracts/schemas/model-help.schema.json",
+  "schema_sha256": "cbca63eac4ce22ece53e5275b5ce458508edf9ab1d467aad28d9a8348534a3a0",
+  "schema_bytes": 28857,
+  "patch": "/tmp/qcl-doc07-C1-schema-full.patch",
+  "patch_sha256": "ede3357bdbbf265aadb06064b0cc38d69f01c48c286094777ed3de1f4d8e1987",
+  "unchanged_test_sha256": "6a39ee353153a4de2d313323b5c67662026721f282adec1ae44305d95d1f2ebd",
+  "runtime_invocations": 0,
+  "commits": 0,
+  "limitations": ["JSON parsing and schema validation not executed", "Independent CPP review and Root-only GREEN pending", "C2 semantic bindings not implemented"]
+}

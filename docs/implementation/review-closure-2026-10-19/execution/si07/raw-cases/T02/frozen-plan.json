@@ -1,0 +1,12 @@
+{
+  "fixture_kind": "public_synthetic_metadata_only_not_executable_plan",
+  "question": "equilibrium 0mV per period 70K",
+  "channels": [
+    "LO",
+    "acoustic",
+    "impurity",
+    "IFR",
+    "alloy"
+  ],
+  "electron_electron": "none"
+}

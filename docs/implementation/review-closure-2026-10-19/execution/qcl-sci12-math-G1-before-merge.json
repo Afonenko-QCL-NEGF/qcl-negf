@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "{\"headRefOid\":\"c00bc60790a3d50bf2eac7e999ab45a60ace9047\",\"isDraft\":false,\"mergeStateStatus\":\"CLEAN\",\"mergeable\":\"MERGEABLE\",\"state\":\"OPEN\",\"statusCheckRollup\":[]}\n",
+  "stderr": ""
+}

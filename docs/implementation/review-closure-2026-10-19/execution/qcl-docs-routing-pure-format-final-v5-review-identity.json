@@ -1,0 +1,109 @@
+{
+  "format": "qcl-negf.docs-routing-pure-format-final-independent-review.v5",
+  "verdicts": [
+    "PASS_FORMAT_ONLY",
+    "PASS_SOURCE_PURE_CLOSURE"
+  ],
+  "pure_only_slice": true,
+  "baseline_cpp_ref": {
+    "path": "/tmp/qcl-docs-routing-impl-i2b-review.md",
+    "sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea"
+  },
+  "whole_native_I2B_verdict": "CHANGES_REQUIRED_preserved",
+  "unformatted_sources": {
+    "ops/docs_tests.ts": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+  },
+  "formatted_sources": {
+    "ops/docs_tests.ts": "38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b",
+    "tests/docs_test_routing_test.ts": "8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b"
+  },
+  "source_files": {
+    "ops/docs_tests.ts": "38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b",
+    "tests/docs_test_routing_test.ts": "8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b"
+  },
+  "formatter_receipt_ref": {
+    "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-1/receipt.json",
+    "sha256": "d33fe2a43835ae48af6ff9a92d8abda2351bdac5e6ddff30c2590a216dba73a6"
+  },
+  "inputs": {
+    "/tmp/qcl-docs-routing-source-baseline-v5/manifest.json": {
+      "sha256": "a32abe802009a24ae5ccc4732b02fd859eaccf55adb9d2ef831e4c0acd720fdc",
+      "bytes": 601
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-1/receipt.json": {
+      "sha256": "d33fe2a43835ae48af6ff9a92d8abda2351bdac5e6ddff30c2590a216dba73a6",
+      "bytes": 3771
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-1/original.log": {
+      "sha256": "b9f584e863bc07b513e9c6808e9e1eb0f6bdba3dc88377b983560b1316fa6919",
+      "bytes": 138
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT1-Root-ready-v5.json": {
+      "sha256": "5b4ce388abc24b39ee75ad3b8cba60fa7b1eefc6d7a3b2b66b6c53a0841d415b",
+      "bytes": 2149
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT1-Root-handoff-v5.json": {
+      "sha256": "01ae3f818baa39f22437d9d9248fea51eaa291536715478e829b60b358cfd085",
+      "bytes": 715
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT1-Root-outer-v5.json": {
+      "sha256": "96bb3ab30a544e73e7e5739fe218919e66aa8bdd7e0700244767418e11975339",
+      "bytes": 175
+    },
+    "/tmp/qcl-docs-routing-source-Root-admission-1-failure.json": {
+      "sha256": "fa98ca62417b3f1e4567be0c35b1e27f59f1c86889fa9b5473667bd7d5634043",
+      "bytes": 1158
+    },
+    "/tmp/qcl-docs-routing-source-Root-admission-1-raw.txt": {
+      "sha256": "48f8f081a3d60f94524feaf6325002e1a719d2d238fddeb142450f04785e6524",
+      "bytes": 449
+    }
+  },
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-format-final-v5-review.md",
+    "sha256": "50b8d8d5c83d509df3928750a6ad947f8b779dcacaa2baa3b690c65f18b81ba2",
+    "bytes": 12211
+  },
+  "canonical_combined_diff_sha256": "19154b2f0712472bc299fca961d0c77acdf1f915325f6e2e35e4a6cc1fdeeb45",
+  "GNU_diff_lines_reviewed": 1868,
+  "Deno_test_callsite_prefix_lines_equal": 42,
+  "static_registered_tests": 230,
+  "observed_engine_tests": null,
+  "FORMAT1": {
+    "target_calls": 1,
+    "wrapper_exit": 0,
+    "captured_receipt_accepted_with_limits": true,
+    "RSS_valid": 4,
+    "RSS_live_unknown": 0,
+    "preproven_reaped_NA": 1
+  },
+  "earlier_Root_admission_failure_preserved": true,
+  "source_counter_observed": 3,
+  "product_counter_observed": 87,
+  "new_blocking_findings": [],
+  "remaining_gates": [
+    "separately_admitted_LINT1_CHECK1",
+    "all3accepted_source_receipts",
+    "fresh_unit_Root_admission_READY",
+    "single_GREEN_and_independent_TAP230_review",
+    "native_CI_science_separate"
+  ],
+  "READY": false,
+  "execution_grant": false,
+  "reviewer_prepared_code_parser_compiler_runtime_tests_network_executions": 0,
+  "Root_CP_source_writes": 0,
+  "writes": [
+    "/tmp/qcl-docs-routing-pure-format-final-v5-review.md",
+    "/tmp/qcl-docs-routing-pure-format-final-v5-review-identity.json"
+  ],
+  "limits": {
+    "read_cap_bytes": 4194304,
+    "read_conservative_upper_bytes": 3145728,
+    "wall_cap_seconds": 600,
+    "cpu_count": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 131072,
+    "physical_measurements": "not_measured"
+  }
+}

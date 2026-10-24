@@ -1,0 +1,2 @@
+Test Summary:                                        | Pass  Total  Time
+Absolute raw scattering covariance amplitudes (Nb=1) |  824    824  5.3s

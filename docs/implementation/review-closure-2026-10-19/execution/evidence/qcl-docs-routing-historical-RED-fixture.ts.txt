@@ -1,0 +1,853 @@
+// RED contract fixture. No filesystem, env, process, network or target-unit imports.
+// Synthetic metadata is an injected trusted-reader double, never native evidence.
+import {
+  genericCheckPlan,
+  parseCiArgs,
+  parseInputs,
+  parseUnitReport,
+  planChecks,
+  preflightInputs,
+  runChecks,
+  validatePlan,
+  workflowRoute,
+} from "../ops/docs_tests.ts";
+
+function assert(value: unknown, message = "Assertion failed"): asserts value {
+  if (!value) throw new Error(message);
+}
+function equal(actual: unknown, expected: unknown): void {
+  assert(JSON.stringify(actual) === JSON.stringify(expected),
+    `Expected ${JSON.stringify(expected).slice(0, 300)}, got ${JSON.stringify(actual).slice(0, 300)}`);
+}
+function rejects(action: () => unknown): void {
+  let rejected = false;
+  try {
+    action();
+  } catch {
+    rejected = true;
+  }
+  assert(rejected, "Invalid input was accepted");
+}
+const HASH = "a".repeat(64);
+const OTHER = "b".repeat(64);
+const REVISION = "c".repeat(40);
+const ROOT = "/fixture/source";
+const TMP = "/tmp/routing-owned-fixture";
+const ATTEMPT = "/fixture/retained/attempt-1";
+const CACHE = "/fixture/cache/deno";
+const KATEX = "/fixture/katex/0.16.8";
+const MODULE_HASH = "cd4b290a4ecf5068161d6a87745655aa74eb18a6e939fa2872d26520ce261b88";
+const CSS_HASH = "df9ef84e97d38557de02183e238f8ddfd10988b37741492e12c3157bc856011e";
+const SOURCES = [
+  "deno.json",
+  "ops/ci.ts",
+  "ops/docs_tests.ts",
+  "tests/docs_test_routing_test.ts",
+  ".github/workflows/ci.yml",
+  ".github/workflows/release.yml",
+  "tests/test_docs_assembly.py",
+  "ops/docs/assemble.py",
+  "tests/docs_math_test.mjs",
+  "ops/docs/math-render.mjs",
+  "tests/docs_static_slice_test.ts",
+  "ops/docs/static-slice.ts",
+];
+const BASE_COMMAND = "deno fmt --check ops tests deno.json && deno lint ops tests && " +
+  "deno check ops/*.ts && deno test --allow-read --allow-write --allow-run=git " +
+  "--ignore=tests/docs_math_test.mjs --ignore=tests/docs_static_slice_test.ts tests && " +
+  "deno task transfer:check && deno task restore:check";
+const UNIT_NAMES = ["doc04-python", "doc04-node", "doc06-deno"] as const;
+type UnitName = typeof UNIT_NAMES[number];
+
+function ref(name: string) {
+  return { path: `/fixture/receipts/${name}.json`, sha256: HASH };
+}
+function descriptor() {
+  const tool = (name: string, version: string) => ({
+    path: `/fixture/bin/${name}`,
+    version,
+    sha256: HASH,
+    receipt_ref: ref(name),
+  });
+  // These counts bind only manufactured test bytes. They are not a descriptor
+  // for selected e22 or a guessed final DOC06 count (unpublished at design time).
+  return {
+    format: "qcl-negf.docs-test-inputs.v1",
+    source_revision: REVISION,
+    source_files: SOURCES.map((path) => ({ path, sha256: HASH })),
+    tools: {
+      deno: tool("deno", "2.8.3"),
+      node: tool("node", "24.0.0"),
+      python: tool("python", "3.14.0"),
+    },
+    loader_env: {},
+    units: {
+      "doc04-python": {
+        test_path: "tests/test_docs_assembly.py", test_sha256: HASH,
+        expected_tests: 20, report_format: "python-unittest-summary-v1",
+      },
+      "doc04-node": {
+        test_path: "tests/docs_math_test.mjs", test_sha256: HASH,
+        expected_tests: 15, report_format: "node-test-tap-v1",
+      },
+      "doc06-deno": {
+        test_path: "tests/docs_static_slice_test.ts", test_sha256: HASH,
+        expected_tests: 7, report_format: "deno-test-tap-v1",
+      },
+    },
+    katex: {
+      root: KATEX, version: "0.16.8", module_sha256: MODULE_HASH,
+      css_sha256: CSS_HASH, source_receipt_ref: ref("katex"),
+    },
+    storage: { owned_tmp_root: TMP, attempt_dir: ATTEMPT, deno_cache_dir: CACHE },
+    admission_ref: ref("admission"),
+    limits: {
+      per_step_wall_seconds: 120, per_step_log_bytes: 1048576,
+      total_log_bytes: 4194304, cpu: 1, ram_bytes: 1073741824,
+      node_tmp_bytes: 33554432, python_tmp_bytes: 33554432, doc06_tmp_bytes: 8388608,
+    },
+  };
+}
+
+function metadata() {
+  const d = descriptor();
+  // Adapter protocol: all facts supplied by the trusted active harness reader.
+  // Changing a descriptor cannot change these independent observed facts.
+  return {
+    workspace: ROOT,
+    source_graph: { revision: REVISION, digest: HASH, clean: true },
+    source_files: Object.fromEntries(SOURCES.map((path) => [path, HASH])),
+    base_task: BASE_COMMAND,
+    files: Object.fromEntries([
+      ...Object.values(d.tools).map((tool) => [tool.path, {
+        kind: "regular", canonical: tool.path, sha256: HASH,
+      }]),
+      ...["deno", "node", "python", "katex", "admission"].map((name) => [ref(name).path, {
+        kind: "regular", canonical: ref(name).path, sha256: HASH,
+      }]),
+      [`${KATEX}/dist/katex.mjs`, {
+        kind: "regular", canonical: `${KATEX}/dist/katex.mjs`, sha256: MODULE_HASH,
+      }],
+      [`${KATEX}/dist/katex.min.css`, {
+        kind: "regular", canonical: `${KATEX}/dist/katex.min.css`, sha256: CSS_HASH,
+      }],
+    ]),
+    directories: Object.fromEntries([TMP, CACHE, KATEX, ROOT, "/fixture/retained",
+      "/fixture/bin", "/fixture/receipts", "/fixture/cache", "/fixture", "/tmp"].map((path) => [path, {
+      kind: "directory", canonical: path, symlink_ancestors: [] as string[],
+    }])),
+    absent_paths: [ATTEMPT, `${TMP}/node`, `${TMP}/python`, `${TMP}/doc06`],
+    retained_tools: Object.fromEntries(Object.entries(d.tools).map(([name, tool]) => [name, {
+      ref: tool.receipt_ref, path: tool.path, version: tool.version,
+      sha256: tool.sha256, schema: "normalized-tool-identity", externally_measured: true,
+    }])),
+    reviewed_units: structuredClone(d.units),
+    retained_katex: {
+      ref: d.katex.source_receipt_ref, root: KATEX, version: "0.16.8",
+      module_sha256: MODULE_HASH, css_sha256: CSS_HASH,
+    },
+    // This is a fake result of the external admission adapter. Production must
+    // establish every predicate from retained bytes and its active trust context.
+    admission: {
+      ref: d.admission_ref, source_revision: REVISION, source_graph_digest: HASH,
+      fresh: true, exclusive_storage: [TMP, ATTEMPT, CACHE],
+      tools: Object.values(d.tools).map(({ path, sha256 }) => ({ path, sha256 })),
+      limits: structuredClone(d.limits), process_tree_supervision: true,
+    },
+  };
+}
+
+// Test-only relocation of otherwise fixed facts. No production path algorithm,
+// hashing or ownership inference lives here. The newly manufactured admission
+// digest is rebound on all three representations of that retained reference.
+function relocatedStorage(
+  location: keyof ReturnType<typeof descriptor>["storage"],
+  value: string,
+) {
+  const d = descriptor();
+  const m = metadata();
+  const previous = d.storage[location];
+  const relocated = (path: string) => path === previous ? value :
+    path.startsWith(previous + "/") ? value + path.slice(previous.length) : path;
+  d.storage[location] = value;
+  m.directories = Object.fromEntries(Object.entries(m.directories).map(([path, fact]) => [
+    relocated(path), { ...fact, canonical: relocated(fact.canonical) },
+  ]));
+  m.absent_paths = m.absent_paths.map(relocated);
+  m.admission.exclusive_storage = m.admission.exclusive_storage.map(relocated);
+  d.admission_ref.sha256 = OTHER;
+  m.files[d.admission_ref.path].sha256 = OTHER;
+  m.admission.ref.sha256 = OTHER;
+  return { d, m };
+}
+
+function ready() {
+  const result = preflightInputs(parseInputs(JSON.stringify(descriptor())), metadata());
+  assert(result.result === "ready_for_unit_attempt", "Healthy synthetic handoff was blocked");
+  return result;
+}
+function plan(mode: "check" | "docs" = "check") {
+  return planChecks(mode, ready());
+}
+function nodeTap(count: number): string {
+  return "TAP version 13\n" + Array.from({ length: count }, (_, i) =>
+    `# Subtest: case ${i + 1}\nok ${i + 1} - case ${i + 1}\n`).join("") +
+    `1..${count}\n# tests ${count}\n# suites 0\n# pass ${count}\n` +
+    "# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1\n";
+}
+function denoTap(count: number): string {
+  return "TAP version 14\n1.." + count + "\n" +
+    Array.from({ length: count }, (_, i) => `ok ${i + 1} - case ${i + 1}\n`).join("");
+}
+function pythonSummary(count: number): string {
+  return ".".repeat(count) + `\n----------------------------------------------------------------------\n` +
+    `Ran ${count} tests in 0.001s\n\nOK\n`;
+}
+type Capture = {
+  stdout: string;
+  stderr: string;
+  exit_code: number | null;
+  signal: string | null;
+  started_at: string;
+  ended_at: string;
+  capture_complete: boolean;
+  drains_complete: boolean;
+  stop_reason: string | null;
+  supervision: {
+    process_tree_owned: boolean;
+    limits_enforced: boolean;
+    evidence_ref: ReturnType<typeof ref>;
+  };
+};
+function healthyCapture(name: string): Capture {
+  return {
+    stdout: name === "doc04-node" ? nodeTap(15) : name === "doc06-deno" ? denoTap(7) :
+      "composite base output\n",
+    stderr: name === "doc04-python" ? pythonSummary(20) : "",
+    exit_code: 0, signal: null,
+    started_at: "2026-10-20T00:00:00.000Z", ended_at: "2026-10-20T00:00:01.000Z",
+    capture_complete: true, drains_complete: true, stop_reason: null,
+    supervision: {
+      process_tree_owned: true, limits_enforced: true, evidence_ref: ref("supervision"),
+    },
+  };
+}
+type Step = ReturnType<typeof planChecks>["steps"][number];
+function fakeExecutor(change?: (step: Step, capture: Capture) => Capture) {
+  const calls: Step[] = [];
+  let graph = HASH;
+  return {
+    calls,
+    setGraph(value: string) { graph = value; },
+    sourceGraph() { return { revision: REVISION, digest: graph, clean: true }; },
+    async execute(step: Step) {
+      calls.push(structuredClone(step));
+      const capture = healthyCapture(step.name);
+      return change ? change(step, capture) : capture;
+    },
+  };
+}
+
+Deno.test("generic discovery preserves exact two exceptions and the whole old base chain", () => {
+  const base = genericCheckPlan();
+  equal(base.command, BASE_COMMAND);
+  equal(base.excluded, ["tests/docs_math_test.mjs", "tests/docs_static_slice_test.ts"]);
+  assert(!base.excluded.includes("tests/future_test.mjs"));
+  assert(!base.command.includes("--allow-env") && !base.command.includes("-A"));
+  assert(!base.command.includes("--ignore=tests/") ||
+    base.excluded.every((path: string) => !path.endsWith("/")));
+});
+
+Deno.test("full plan executes exactly base Python Node DOC06 once with finite caps", () => {
+  const p = plan();
+  equal(p.scope, "full-root-check");
+  equal(p.steps.map((step: Step) => step.name), ["base", ...UNIT_NAMES]);
+  equal(new Set(p.steps.map((step: Step) => step.name)).size, 4);
+  for (const step of p.steps) {
+    equal(step.cwd, ROOT);
+    equal(step.limits.wall_seconds, 120);
+    equal(step.limits.log_bytes, 1048576);
+    equal(step.input_sha256, p.input_sha256);
+    equal(step.source_graph_digest, HASH);
+  }
+  equal(p.steps[0].executable, "/fixture/bin/deno");
+  equal(p.steps[0].args, ["task", "check:base"]);
+  equal(p.steps[0].clearEnv, false);
+  equal(p.steps[0].env, {});
+});
+
+Deno.test("dedicated argv and env are exact, scoped and independent", () => {
+  const p = plan();
+  const [, py, node, deno] = p.steps;
+  equal(py.executable, "/fixture/bin/python");
+  equal(py.args, ["-m", "unittest", "discover", "-s", "tests", "-p", "test_docs_assembly.py"]);
+  equal(py.env, { TMPDIR: `${TMP}/python`, PYTHONNOUSERSITE: "1", PYTHONDONTWRITEBYTECODE: "1" });
+  equal(node.executable, "/fixture/bin/node");
+  equal(node.args, ["--test", "--test-reporter=tap", "tests/docs_math_test.mjs"]);
+  equal(node.env, { DOC04_KATEX_ROOT: KATEX, TMPDIR: `${TMP}/node` });
+  equal(deno.executable, "/fixture/bin/deno");
+  equal(deno.args, [
+    "test", "--no-config", "--no-lock", "--cached-only", "--no-npm", "--no-remote",
+    "--reporter=tap",
+    `--allow-read=${ROOT}/tests/docs_static_slice_test.ts,${ROOT}/ops/docs/static-slice.ts,${TMP}/doc06`,
+    `--allow-write=${TMP}/doc06`, `${ROOT}/tests/docs_static_slice_test.ts`, "--", `${TMP}/doc06`,
+  ]);
+  equal(deno.env, { DENO_DIR: CACHE });
+  for (const step of [py, node, deno]) equal(step.clearEnv, true);
+  equal(deno.args.slice(deno.args.indexOf("--") + 1), [`${TMP}/doc06`]);
+});
+
+Deno.test("healthy fake aggregate requires four typed receipts and retained-only versions", async () => {
+  const r = ready();
+  const executor = fakeExecutor();
+  const result = await runChecks(planChecks("check", r), r, executor);
+  equal(executor.calls.map((step) => step.name), ["base", ...UNIT_NAMES]);
+  equal(result.result, "passed");
+  equal(result.scope, "full-root-check");
+  equal(result.steps.map((step: { result: string }) => step.result),
+    ["passed_base", "passed_unit", "passed_unit", "passed_unit"]);
+  equal(result.steps[0].summary, { status: "not_applicable", reason: "composite-task" });
+  assert(!("expected_tests" in result.steps[0].summary));
+  equal(result.steps.slice(1).map((step) => {
+    assert("observed_tests" in step.summary);
+    return step.summary.observed_tests;
+  }), [20, 15, 7]);
+  equal(r.versions.node.evidence, "retained_receipt_bound");
+  equal(r.versions.node.measurement, null);
+  equal(r.license_status, "not_evaluated");
+});
+
+Deno.test("preflight and parsing are pure and do not execute probes or units", () => {
+  const executor = fakeExecutor();
+  const r = preflightInputs(parseInputs(JSON.stringify(descriptor())), metadata());
+  equal(r.result, "ready_for_unit_attempt");
+  equal(executor.calls, []);
+  assert(!String(r.result).startsWith("passed"));
+  for (const version of Object.values(r.versions) as { evidence: string; measurement: unknown }[]) {
+    equal(version.evidence, "retained_receipt_bound");
+    equal(version.measurement, null);
+  }
+});
+
+Deno.test("docs-only plans cannot claim full base coverage", async () => {
+  const r = ready();
+  const p = planChecks("docs", r);
+  equal(p.scope, "docs-units-only");
+  equal(p.steps.map((step: Step) => step.name), [...UNIT_NAMES]);
+  const result = await runChecks(p, r, fakeExecutor());
+  equal(result.scope, "docs-units-only");
+  equal(result.base, "not_requested");
+});
+
+const descriptorMutations: [string, (d: Record<string, unknown>) => void][] = [
+  ["extra root key", (d) => { d.env = {}; }],
+  ["loader injection", (d) => { d.loader_env = { LD_PRELOAD: "/tmp/inject.so" }; }],
+  ["missing units", (d) => { delete d.units; }],
+  ["extra unit", (d) => { (d.units as Record<string, unknown>).extra = {}; }],
+  ["missing admission", (d) => { delete d.admission_ref; }],
+  ["bad source revision", (d) => { d.source_revision = "latest"; }],
+  ["duplicate source path", (d) => { (d.source_files as unknown[]).push({ path: SOURCES[0], sha256: HASH }); }],
+  ["absolute source path", (d) => {
+    const files = d.source_files as { path: string; sha256: string }[];
+    const remaining = JSON.stringify(files.slice(1));
+    files[0] = { ...files[0], path: `${ROOT}/deno.json` };
+    equal(files.length, SOURCES.length);
+    equal(JSON.stringify(files.slice(1)), remaining);
+  }],
+];
+for (const [label, mutate] of descriptorMutations) {
+  Deno.test(`descriptor rejects ${label} before any executor is reachable`, () => {
+    const d = descriptor();
+    mutate(d);
+    rejects(() => parseInputs(JSON.stringify(d)));
+  });
+}
+for (const name of UNIT_NAMES) {
+  for (const bad of [undefined, 0, -1, 1.5, "7", Number.MAX_SAFE_INTEGER + 1]) {
+    Deno.test(`${name} rejects missing or invalid count ${String(bad)}`, () => {
+      const d = descriptor();
+      const changed: Record<string, unknown> = d.units[name];
+      if (bad === undefined) delete changed.expected_tests;
+      else changed.expected_tests = bad;
+      rejects(() => parseInputs(JSON.stringify(d)));
+    });
+  }
+  for (const field of ["test_path", "test_sha256", "report_format"]) {
+    Deno.test(`${name} rejects changed ${field} binding`, () => {
+      const d = descriptor();
+      const changed: Record<string, unknown> = d.units[name];
+      changed[field] = field === "test_sha256" ? OTHER : "unreviewed";
+      if (field === "test_sha256") {
+        const parsed = parseInputs(JSON.stringify(d));
+        assert(preflightInputs(parsed, metadata()).result !== "ready_for_unit_attempt");
+      } else rejects(() => parseInputs(JSON.stringify(d)));
+    });
+  }
+}
+Deno.test("strict JSON refuses nested duplicate members and size overflow", () => {
+  const text = JSON.stringify(descriptor());
+  rejects(() => parseInputs(text.replace('"loader_env":{}', '"loader_env":{},"loader_env":{}')));
+  rejects(() => parseInputs(text.replace('"expected_tests":15', '"expected_tests":15,"expected_tests":15')));
+  rejects(() => parseInputs(text.replace('"format":',
+    '"\\u0066ormat":"qcl-negf.docs-test-inputs.v1","format":')));
+  rejects(() => parseInputs(text + " ".repeat(32769)));
+  rejects(() => parseInputs("null"));
+  rejects(() => parseInputs(text.slice(0, -1)));
+});
+for (const tool of ["deno", "node", "python"] as const) {
+  Deno.test(`${tool} rejects descriptor env fields and wrong version`, () => {
+    const d = descriptor();
+    const t: Record<string, unknown> = d.tools[tool];
+    t.env = { PATH: "/ambient" };
+    rejects(() => parseInputs(JSON.stringify(d)));
+    delete t.env;
+    t.version = "0.0.0";
+    assert(preflightInputs(parseInputs(JSON.stringify(d)), metadata()).result !== "ready_for_unit_attempt");
+  });
+}
+for (const location of ["owned_tmp_root", "attempt_dir", "deno_cache_dir"] as const) {
+  for (const value of ["relative", "/tmp", `${ROOT}/scratch`, "/tmp/a,b", "/tmp/a\nb", "/tmp/a/../b"]) {
+    Deno.test(`storage ${location} rejects unsafe ${JSON.stringify(value)}`, () => {
+      // Broad rejection control: some unsafe values violate multiple rules.
+      // Relocation rebinds admission, paths and child absence facts; independent
+      // lexical and healthy/unsafe paired controls below isolate the oracles.
+      const { d, m } = relocatedStorage(location, value);
+      let blocked = false;
+      try {
+        blocked = preflightInputs(parseInputs(JSON.stringify(d)), m).result !== "ready_for_unit_attempt";
+      } catch {
+        blocked = true;
+      }
+      assert(blocked);
+    });
+  }
+}
+for (const field of ["per_step_wall_seconds", "per_step_log_bytes", "total_log_bytes", "cpu",
+  "ram_bytes", "node_tmp_bytes", "python_tmp_bytes", "doc06_tmp_bytes"] as const) {
+  Deno.test(`limits reject zero and excessive ${field}`, () => {
+    for (const value of [0, Number.MAX_SAFE_INTEGER]) {
+      const d = descriptor();
+      d.limits[field] = value;
+      rejects(() => parseInputs(JSON.stringify(d)));
+    }
+  });
+}
+
+const metadataMutations: [string, (m: ReturnType<typeof metadata>) => void][] = [
+  ["missing selected DOC06 adapter", (m) => { delete m.source_files["ops/docs/static-slice.ts"]; }],
+  ["changed selected Node test", (m) => { m.source_files["tests/docs_math_test.mjs"] = OTHER; }],
+  ["dirty source graph", (m) => { m.source_graph.clean = false; }],
+  ["changed revision", (m) => { m.source_graph.revision = "d".repeat(40); }],
+  ["KaTeX module mismatch", (m) => { m.files[`${KATEX}/dist/katex.mjs`].sha256 = OTHER; }],
+  ["KaTeX CSS missing", (m) => { delete m.files[`${KATEX}/dist/katex.min.css`]; }],
+  ["actual binary mismatch", (m) => { m.files["/fixture/bin/node"].sha256 = OTHER; }],
+  ["missing retained tool receipt", (m) => { delete m.files[ref("node").path]; }],
+  ["receipt bytes mismatch", (m) => { m.files[ref("deno").path].sha256 = OTHER; }],
+  ["retained version mismatch", (m) => { m.retained_tools.python.version = "3.13.0"; }],
+  ["unknown retained schema", (m) => { m.retained_tools.node.schema = "unknown"; }],
+  ["stale admission", (m) => { m.admission.fresh = false; }],
+  ["missing process-tree supervision", (m) => { m.admission.process_tree_supervision = false; }],
+  ["unowned storage", (m) => { m.admission.exclusive_storage = [CACHE]; }],
+  ["tool outside admission", (m) => { m.admission.tools = []; }],
+  ["oversubscribed admission", (m) => { m.admission.limits.cpu = 0; }],
+  ["existing attempt", (m) => { m.absent_paths = m.absent_paths.filter((p) => p !== ATTEMPT); }],
+  ["symlink directory", (m) => { m.directories[TMP].symlink_ancestors = ["/tmp/link"]; }],
+  ["noncanonical cache", (m) => { m.directories[CACHE].canonical = "/other/cache"; }],
+  ["base chain widened", (m) => { m.base_task = BASE_COMMAND.replace("--allow-run=git", "-A"); }],
+];
+for (const [label, mutate] of metadataMutations) {
+  Deno.test(`preflight blocks ${label} without spawn, fallback or measurement`, () => {
+    const m = metadata();
+    mutate(m);
+    const result = preflightInputs(parseInputs(JSON.stringify(descriptor())), m);
+    assert(result.result !== "ready_for_unit_attempt");
+    assert(!String(result.result).startsWith("passed"));
+    assert(result.reasons.length > 0);
+    rejects(() => planChecks("check", result));
+  });
+}
+
+function unitPass(format: string, stdout: string, stderr: string, expected: number): boolean {
+  try {
+    return parseUnitReport(format, stdout, stderr, expected).result === "passed_unit";
+  } catch {
+    return false;
+  }
+}
+Deno.test("healthy report readers bind independent expected counts and typed counters", () => {
+  assert(!unitPass("unreviewed-report-v99", nodeTap(15), "", 15));
+  const node = parseUnitReport("node-test-tap-v1", nodeTap(15), "", 15);
+  const deno = parseUnitReport("deno-test-tap-v1", denoTap(7), "", 7);
+  const python = parseUnitReport("python-unittest-summary-v1", "", pythonSummary(20), 20);
+  for (const [summary, count] of [[node, 15], [deno, 7], [python, 20]] as const) {
+    equal(summary.result, "passed_unit");
+    equal(summary.expected_tests, count);
+    equal(summary.observed_tests, count);
+    equal(summary.passed, count);
+    equal(summary.failed, 0);
+  }
+  equal(node.skipped, 0);
+  equal(node.todo, 0);
+  equal(node.cancelled, 0);
+  equal(node.errors, { status: "not_applicable" });
+  equal(deno.skipped, 0);
+  equal(deno.todo, 0);
+  equal(python.errors, 0);
+  equal(python.skipped, 0);
+  equal(python.todo, { status: "not_applicable" });
+  equal(python.cancelled, { status: "not_applicable" });
+});
+for (const [format, count, report, stream] of [
+  ["node-test-tap-v1", 15, nodeTap(15), "stdout"],
+  ["deno-test-tap-v1", 7, denoTap(7), "stdout"],
+  ["python-unittest-summary-v1", 20, pythonSummary(20), "stderr"],
+] as const) {
+  for (const expected of [0, count - 1, count + 1]) {
+    Deno.test(`${format} refuses independently expected ${expected}`, () => {
+      assert(!unitPass(format, stream === "stdout" ? report : "",
+        stream === "stderr" ? report : "", expected));
+    });
+  }
+  for (const [label, changed] of [
+    ["empty report", ""],
+    ["duplicated report", report + report],
+    ["unknown report", "exit0: all tests successful"],
+    ["truncated report", report.slice(0, Math.floor(report.length / 2))],
+  ]) {
+    Deno.test(`${format} rejects ${label}`, () => {
+      assert(!unitPass(format, stream === "stdout" ? changed : "",
+        stream === "stderr" ? changed : "", count));
+    });
+  }
+}
+for (const [label, text] of [
+  ["failed", nodeTap(15).replace("# fail 0", "# fail 1")],
+  ["skipped", nodeTap(15).replace("# skipped 0", "# skipped 1")],
+  ["todo", nodeTap(15).replace("# todo 0", "# todo 1")],
+  ["cancelled", nodeTap(15).replace("# cancelled 0", "# cancelled 1")],
+  ["bailout", nodeTap(15) + "Bail out! fixture failure\n"],
+  ["only/filter coverage", nodeTap(15).replace("1..15", "1..1")],
+  ["contradictory result", nodeTap(15).replace("ok 1 -", "not ok 1 -")],
+  ["missing counter", nodeTap(15).replace("# skipped 0\n", "")],
+  ["extra plan", nodeTap(15) + "1..15\n"],
+]) {
+  Deno.test(`Node report rejects ${label} despite nominal count and exit`, () => {
+    assert(!unitPass("node-test-tap-v1", text, "", 15));
+  });
+}
+for (const [label, text] of [
+  ["skip", denoTap(7).replace("ok 1 - case 1", "ok 1 - case 1 # SKIP ignored")],
+  ["todo", denoTap(7).replace("ok 1 - case 1", "not ok 1 - case 1 # TODO later")],
+  ["failed", denoTap(7).replace("ok 1 -", "not ok 1 -")],
+  ["duplicate test number", denoTap(7).replace("ok 2 -", "ok 1 -")],
+  ["zero plan", "TAP version 14\n1..0\n"],
+]) {
+  Deno.test(`Deno report rejects ${label}`, () => {
+    assert(!unitPass("deno-test-tap-v1", text, "", 7));
+  });
+}
+for (const [label, text] of [
+  ["skipped", pythonSummary(20).replace("OK\n", "OK (skipped=1)\n")],
+  ["errors", pythonSummary(20).replace("OK\n", "FAILED (errors=1)\n")],
+  ["failures", pythonSummary(20).replace("OK\n", "FAILED (failures=1)\n")],
+  ["zero", pythonSummary(0)],
+  ["unexpected success", pythonSummary(20).replace("OK\n", "FAILED (unexpected successes=1)\n")],
+  ["expected failure", pythonSummary(20).replace("OK\n", "OK (expected failures=1)\n")],
+]) {
+  Deno.test(`Python report rejects ${label}`, () => {
+    assert(!unitPass("python-unittest-summary-v1", "", text, 20));
+  });
+}
+
+for (const mutation of ["extra-argument", "missing-argument", "allow-env", "allow-run", "allow-net",
+  "allow-ffi", "workspace-read", "workspace-write", "no-check", "permit-no-files", "filter",
+  "clearEnv", "ambient-env", "wrong-tool"] as const) {
+  Deno.test(`plan rejects DOC06 ${mutation} before executor`, () => {
+    const r = ready();
+    const p = planChecks("check", r);
+    const step = p.steps[3];
+    if (mutation === "extra-argument") step.args.push("extra");
+    else if (mutation === "missing-argument") step.args.pop();
+    else if (mutation.startsWith("allow-")) step.args.unshift(`--${mutation}`);
+    else if (mutation === "workspace-read") step.args[7] = `--allow-read=${ROOT}`;
+    else if (mutation === "workspace-write") step.args[8] = `--allow-write=${ROOT}`;
+    else if (mutation === "no-check") step.args.unshift("--no-check");
+    else if (mutation === "permit-no-files") step.args.unshift("--permit-no-files");
+    else if (mutation === "filter") step.args.unshift("--filter=case 1");
+    else if (mutation === "clearEnv") step.clearEnv = false;
+    else if (mutation === "ambient-env") step.env.HOME = "/ambient/private";
+    else step.executable = "/usr/bin/deno";
+    rejects(() => validatePlan(p, r));
+  });
+}
+for (const removed of ["base", ...UNIT_NAMES]) {
+  Deno.test(`full plan refuses missing ${removed} even when all remaining commands exit0`, async () => {
+    const r = ready();
+    const p = planChecks("check", r);
+    p.steps = p.steps.filter((step: Step) => step.name !== removed);
+    const executor = fakeExecutor();
+    let failed = false;
+    try {
+      failed = (await runChecks(p, r, executor)).result !== "passed";
+    } catch {
+      failed = true;
+    }
+    assert(failed);
+    equal(executor.calls, []);
+  });
+}
+Deno.test("duplicate dedicated execution and base-only promotion are rejected", () => {
+  const r = ready();
+  const duplicate = planChecks("check", r);
+  duplicate.steps.push(structuredClone(duplicate.steps[2]));
+  rejects(() => validatePlan(duplicate, r));
+  const baseOnly = planChecks("check", r);
+  baseOnly.steps = [baseOnly.steps[0]];
+  rejects(() => validatePlan(baseOnly, r));
+});
+
+const captureFailures: [string, (capture: Capture) => Capture][] = [
+  ["nonzero exit", (c) => ({ ...c, exit_code: 1 })],
+  ["timeout", (c) => ({ ...c, exit_code: null, signal: "SIGTERM", stop_reason: "deadline" })],
+  ["log overrun", (c) => ({ ...c, stdout: "x".repeat(1048577), stop_reason: "log_cap" })],
+  ["capture incomplete", (c) => ({ ...c, capture_complete: false })],
+  ["drain incomplete", (c) => ({ ...c, drains_complete: false })],
+  ["missing process-tree evidence", (c) => ({
+    ...c, supervision: { ...c.supervision, limits_enforced: false },
+  })],
+];
+for (const name of ["base", ...UNIT_NAMES]) {
+  for (const [label, mutate] of captureFailures) {
+    Deno.test(`${name} ${label} retains original capture and cannot pass or retry`, async () => {
+      const r = ready();
+      const changed = mutate(healthyCapture(name));
+      const executor = fakeExecutor((step, capture) => step.name === name ? changed : capture);
+      const result = await runChecks(planChecks("check", r), r, executor);
+      assert(result.result !== "passed");
+      equal(executor.calls.filter((step) => step.name === name).length, 1);
+      assert(executor.calls.length <= 4);
+      const failed = result.steps.find((step: { name: string }) => step.name === name);
+      assert(failed);
+      equal(failed.capture.stdout, changed.stdout);
+      equal(failed.capture.stderr, changed.stderr);
+      equal(failed.capture.exit_code, changed.exit_code);
+      equal(result.required_steps, ["base", ...UNIT_NAMES]);
+      equal(result.steps.map((step: { name: string }) => step.name), ["base", ...UNIT_NAMES]);
+      equal(result.retained.attempt_dir, ATTEMPT);
+      equal(result.retained.owned_tmp_root, TMP);
+      equal(result.retained.cleanup_attempted, false);
+    });
+  }
+}
+Deno.test("source change after a healthy child fails binding and retains available evidence", async () => {
+  const r = ready();
+  const executor = fakeExecutor((_, capture) => {
+    executor.setGraph(OTHER);
+    return capture;
+  });
+  const result = await runChecks(planChecks("check", r), r, executor);
+  assert(result.result !== "passed");
+  equal(result.source_stable, false);
+  assert(result.steps.length > 0);
+  equal(result.retained.cleanup_attempted, false);
+});
+Deno.test("zero or skipped unit output fails even when base emitted convincing TAP", async () => {
+  for (const bad of ["TAP version 13\n1..0\n", nodeTap(15).replace("# skipped 0", "# skipped 1")]) {
+    const r = ready();
+    const executor = fakeExecutor((step, capture) => ({
+      ...capture,
+      stdout: step.name === "base" ? nodeTap(100) : step.name === "doc04-node" ? bad : capture.stdout,
+    }));
+    assert((await runChecks(planChecks("check", r), r, executor)).result !== "passed");
+  }
+});
+Deno.test("aggregate total log budget is enforced across otherwise healthy children", async () => {
+  const d = descriptor();
+  d.limits.total_log_bytes = 100;
+  const m = metadata();
+  m.admission.limits.total_log_bytes = 100;
+  const r = preflightInputs(parseInputs(JSON.stringify(d)), m);
+  equal(r.result, "ready_for_unit_attempt");
+  const result = await runChecks(planChecks("check", r), r, fakeExecutor());
+  assert(result.result !== "passed");
+  equal(result.retained.cleanup_attempted, false);
+});
+
+Deno.test("CI input-only invocation remains full and targeted invocations remain targeted", () => {
+  equal(parseCiArgs(["--docs-inputs", "/fixture/inputs.json"]), {
+    all: true, scopes: [], docsInputs: "/fixture/inputs.json",
+  });
+  for (const scope of ["python", "julia", "infra"]) {
+    equal(parseCiArgs([`--${scope}`]), { all: false, scopes: [scope], docsInputs: null });
+    rejects(() => parseCiArgs([`--${scope}`, "--docs-inputs", "/fixture/inputs.json"]));
+  }
+  rejects(() => parseCiArgs([]));
+  rejects(() => parseCiArgs(["--docs-inputs"]));
+  rejects(() => parseCiArgs(["--docs-inputs", "a", "--docs-inputs", "b"]));
+  rejects(() => parseCiArgs(["--python", "--python"]));
+  rejects(() => parseCiArgs(["--unknown"]));
+});
+for (const mode of ["full", "application-release"] as const) {
+  Deno.test(`${mode} workflow preflights before preparation and has one full aggregate`, () => {
+    const route = workflowRoute(mode, "/fixture/inputs with spaces.json");
+    equal(route.cancelInProgress, false);
+    equal(route.preflight, ["deno", "task", "docs:preflight", "--inputs", "/fixture/inputs with spaces.json"]);
+    equal(route.aggregate, ["deno", "task", "test", "--docs-inputs", "/fixture/inputs with spaces.json"]);
+    equal(route.aggregateExecutions, 1);
+    equal(route.standaloneCheckExecutions, 0);
+    equal(route.order, ["source-graph", "docs-preflight", "prepare", "full-aggregate"]);
+    rejects(() => workflowRoute(mode, null));
+  });
+}
+Deno.test("runner smoke is explicitly base-only without dedicated inputs or coverage", () => {
+  const route = workflowRoute("runner-smoke", null);
+  equal(route.scope, "base-only");
+  equal(route.base, ["deno", "task", "check:base"]);
+  equal(route.aggregateExecutions, 0);
+  equal(route.dedicatedUnits, "not_requested");
+  equal(route.preflight, null);
+  equal(route.cancelInProgress, false);
+});
+
+for (const nested of ["tools", "deno", "unit", "katex", "storage", "limits", "ref", "source-file"]) {
+  Deno.test(`strict descriptor rejects extra key at ${nested} level`, () => {
+    const d = descriptor();
+    const objects: Record<string, Record<string, unknown>> = {
+      tools: d.tools, deno: d.tools.deno, unit: d.units["doc06-deno"],
+      katex: d.katex, storage: d.storage, limits: d.limits,
+      ref: d.admission_ref, "source-file": d.source_files[0],
+    };
+    objects[nested].injected = "not admitted";
+    rejects(() => parseInputs(JSON.stringify(d)));
+  });
+}
+for (const name of UNIT_NAMES) {
+  Deno.test(`descriptor refuses absent ${name} rather than skipping it`, () => {
+    const d = descriptor();
+    delete (d.units as Record<string, unknown>)[name];
+    rejects(() => parseInputs(JSON.stringify(d)));
+  });
+}
+for (const name of ["doc04-python", "doc04-node"] as const) {
+  for (const mutation of ["inherited", "preload", "changed-input", "unbounded"] as const) {
+    Deno.test(`${name} plan rejects ${mutation} propagation`, () => {
+      const r = ready();
+      const p = planChecks("check", r);
+      const step = p.steps.find((s: Step) => s.name === name);
+      assert(step);
+      if (mutation === "inherited") step.clearEnv = false;
+      else if (mutation === "preload") step.env.NODE_OPTIONS = "--import=/tmp/preload.mjs";
+      else if (mutation === "changed-input") step.input_sha256 = OTHER;
+      else step.limits.wall_seconds = 0;
+      rejects(() => validatePlan(p, r));
+    });
+  }
+}
+Deno.test("executor rejection retains completed base and terminal failed attempt without retry", async () => {
+  const r = ready();
+  const executor = fakeExecutor();
+  const execute = executor.execute.bind(executor);
+  executor.execute = async (step: Step) => {
+    if (step.name === "doc04-python") {
+      executor.calls.push(structuredClone(step));
+      throw new Error("manufactured launch failure");
+    }
+    return await execute(step);
+  };
+  const result = await runChecks(planChecks("check", r), r, executor);
+  assert(result.result !== "passed");
+  equal(executor.calls.filter((s) => s.name === "doc04-python").length, 1);
+  equal(result.steps[0].capture.stdout, "composite base output\n");
+  equal(result.retained.cleanup_attempted, false);
+  equal(result.retained.attempt_dir, ATTEMPT);
+});
+for (const name of UNIT_NAMES) {
+  Deno.test(`${name} expected count must match independent reviewed source contract`, () => {
+    const d = descriptor();
+    d.units[name].expected_tests += 1;
+    const result = preflightInputs(parseInputs(JSON.stringify(d)), metadata());
+    assert(result.result !== "ready_for_unit_attempt");
+  });
+}
+Deno.test("default full route rejects missing input and does not silently run base", () => {
+  rejects(() => planChecks("check", null));
+  rejects(() => planChecks("docs", null));
+});
+
+// These parser-only controls cannot be satisfied by missing filesystem,
+// admission or source closure facts: those adapters are never consulted.
+for (const location of ["owned_tmp_root", "attempt_dir", "deno_cache_dir"] as const) {
+  for (const value of ["relative", "/tmp/a,b", "/tmp/a\nb", "/tmp/a/../b"]) {
+    Deno.test(`lexical ${location} refuses ${JSON.stringify(value)} on a complete descriptor`, () => {
+      const d = descriptor();
+      d.storage[location] = value;
+      equal(d.source_files.length, SOURCES.length);
+      rejects(() => parseInputs(JSON.stringify(d)));
+    });
+  }
+}
+const safeRelocations = {
+  owned_tmp_root: "/tmp/routing-relocated-fixture",
+  attempt_dir: "/fixture/retained/attempt-relocated",
+  deno_cache_dir: "/fixture/cache/deno-relocated",
+};
+for (const location of ["owned_tmp_root", "attempt_dir", "deno_cache_dir"] as const) {
+  Deno.test(`${location} accepts an independently rebound healthy relocation`, () => {
+    const { d, m } = relocatedStorage(location, safeRelocations[location]);
+    const result = preflightInputs(parseInputs(JSON.stringify(d)), m);
+    equal(result.result, "ready_for_unit_attempt");
+    equal(m.admission.exclusive_storage.includes(d.storage[location]), true);
+    equal(d.admission_ref.sha256, m.files[d.admission_ref.path].sha256);
+    equal(d.admission_ref.sha256, m.admission.ref.sha256);
+    if (location === "attempt_dir") {
+      assert(m.absent_paths.includes(d.storage.attempt_dir));
+    } else {
+      equal(m.directories[d.storage[location]].canonical, d.storage[location]);
+    }
+    if (location === "owned_tmp_root") {
+      equal(m.absent_paths.slice(1), [
+        `${d.storage.owned_tmp_root}/node`,
+        `${d.storage.owned_tmp_root}/python`,
+        `${d.storage.owned_tmp_root}/doc06`,
+      ]);
+    }
+  });
+  Deno.test(`${location} refuses workspace relocation despite consistent admission and facts`, () => {
+    // TMP here violates both /tmp-descendant and workspace-disjoint predicates;
+    // attempt/cache violate workspace disjointness. No single-rule TMP claim.
+    const { d, m } = relocatedStorage(location, `${ROOT}/scratch`);
+    equal(m.admission.exclusive_storage.includes(d.storage[location]), true);
+    equal(d.admission_ref.sha256, m.files[d.admission_ref.path].sha256);
+    if (location === "attempt_dir") assert(m.absent_paths.includes(`${ROOT}/scratch`));
+    else equal(m.directories[`${ROOT}/scratch`].canonical, `${ROOT}/scratch`);
+    const result = preflightInputs(parseInputs(JSON.stringify(d)), m);
+    assert(result.result !== "ready_for_unit_attempt");
+  });
+}
+Deno.test("owned TMP root refuses /tmp itself with rebound admission and children", () => {
+  const { d, m } = relocatedStorage("owned_tmp_root", "/tmp");
+  equal(m.admission.exclusive_storage[0], "/tmp");
+  equal(m.directories["/tmp"].canonical, "/tmp");
+  equal(m.absent_paths.slice(1), ["/tmp/node", "/tmp/python", "/tmp/doc06"]);
+  const result = preflightInputs(parseInputs(JSON.stringify(d)), m);
+  assert(result.result !== "ready_for_unit_attempt");
+});
+Deno.test("pre-start source mismatch retains failure with zero child submissions", async () => {
+  const r = ready();
+  const p = planChecks("check", r);
+  const executor = fakeExecutor();
+  executor.setGraph(OTHER);
+  const result = await runChecks(p, r, executor);
+  equal(executor.calls, []);
+  assert(result.result !== "passed");
+  equal(result.source_stable, false);
+  equal(result.required_steps, ["base", ...UNIT_NAMES]);
+  for (const step of result.steps) {
+    assert(step.result !== "passed_base" && step.result !== "passed_unit");
+    assert(step.capture === null || step.capture === undefined,
+      "An unsubmitted child must not have an executed capture");
+  }
+  equal(result.retained.attempt_dir, ATTEMPT);
+  equal(result.retained.owned_tmp_root, TMP);
+  equal(result.retained.cleanup_attempted, false);
+});

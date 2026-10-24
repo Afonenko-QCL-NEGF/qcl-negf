@@ -1,0 +1,78 @@
+--- a/ops/docs_tests_native.py
++++ b/ops/docs_tests_native.py
+@@ -2086,6 +2086,7 @@
+ 
+ def validate_unit_report(unit,capture):
+     count = unit["expected_tests"]; out = capture["stdout"]; err = capture["stderr"]
++    integer(count,1)
+     na = {"status":"not_applicable"}
+     summary = {"result":"passed_unit","expected_tests":count,"observed_tests":count,"passed":count,"failed":0,"skipped":0,"todo":na,"cancelled":na,"errors":na}
+     if unit["report_format"] == "python-unittest-summary-v1":
+@@ -2094,8 +2095,17 @@
+         summary["errors"] = 0; return summary
+     ensure(not err.strip(),"native TAP stderr")
+     ensure(unit["report_format"] in ("node-test-tap-v1","deno-test-tap-v1"),"known native TAP format")
++    # Result directives are forbidden; aggregate '# skipped 0'/'# todo 0'
++    # counters and ordinary test names are not directives. ASCII matches the
++    # reviewed JS standalone-word boundary, including SKIP followed by Unicode.
++    ensure(not re.search(r"^ok [^\n]*#[ \t]*(?:SKIP|TODO)\b",out,re.MULTILINE|re.IGNORECASE|re.ASCII),"native TAP result directive")
+     lines = out.rstrip().split("\n"); version = "TAP version 13" if unit["report_format"] == "node-test-tap-v1" else "TAP version 14"
+-    ensure(lines.pop(0) == version and lines.count("1.."+str(count)) == 1,"native TAP plan")
++    ensure(lines.pop(0) == version,"native TAP version")
++    if version.endswith("14"):
++        # Fixed reviewed DOC06 route; no caller-provided header/path authority.
++        ensure(lines and lines.pop(0) == "# ./tests/docs_static_slice_test.ts","native Deno selected header")
++    plans = [line for line in lines if re.fullmatch(r"1\.\.\d+",line)]
++    ensure(plans == ["1.."+str(count)],"native TAP plan")
+     cases = [line for line in lines if line.startswith("ok ")]
+     ensure(len(cases) == count and all(re.fullmatch("ok "+str(i+1)+r" - .+",line) for i,line in enumerate(cases)),"native TAP cases")
+     pattern = r"ok \d+ - .+|1\.\.\d+"
+--- a/tests/test_docs_test_native.py
++++ b/tests/test_docs_test_native.py
+@@ -602,6 +602,46 @@
+         self.assertEqual(summary["observed_tests"],20)
+         for bad in (dict(capture,stderr=capture["stderr"]+"extra"),dict(capture,stderr=capture["stderr"].replace("Ran 20","Ran 19"))):
+             with self.assertRaises(native.Refusal): native.validate_unit_report(unit,bad)
++        # Independent literal TAP contracts; no pure parser/shared oracle.
++        node = "TAP version 13\n# Subtest: case 1\nok 1 - case 1\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1\n"
++        deno = "TAP version 14\n# ./tests/docs_static_slice_test.ts\nok 1 - case 1\n1..1\n"
++        expected_node = {"result":"passed_unit","expected_tests":1,"observed_tests":1,"passed":1,"failed":0,"skipped":0,"todo":0,"cancelled":0,"errors":{"status":"not_applicable"}}
++        expected_deno = {"result":"passed_unit","expected_tests":1,"observed_tests":1,"passed":1,"failed":0,"skipped":0,"todo":0,"cancelled":{"status":"not_applicable"},"errors":{"status":"not_applicable"}}
++        for report,format_,expected in ((node,"node-test-tap-v1",expected_node),(deno,"deno-test-tap-v1",expected_deno)):
++            tap_unit = {"report_format":format_,"expected_tests":1}
++            self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report,"stderr":""}),expected)
++            for name in ("case skipped todo","case # skipped reason","case # todolist","case # TODO_","case # SKIP2"):
++                positive = report.replace("ok 1 - case 1\n","ok 1 - "+name+"\n")
++                self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":positive,"stderr":""}),expected)
++            for line in ("ok 1 - case 1 # SKIP","ok 1 - case 1 # TODO later","ok 1 - case 1 # sKiP ignored","ok 1 - case 1 #\tToDo later","ok 1 - case 1 #SKIPé"):
++                with self.subTest(format=format_,line=line):
++                    # Positive pairing prevents a broken common gate from
++                    # satisfying every directive refusal accidentally.
++                    self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report,"stderr":""}),expected)
++                    with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report.replace("ok 1 - case 1",line),"stderr":""})
++            for negative in (report.replace("ok 1 - case 1","not ok 1 - case 1"),report+"Bail out! fixture\n",report+"# unknown comment\n",report+"1..1\n",report+"1..2\n",report.replace("ok 1 - case 1","ok 2 - case 1"),report.replace("ok 1 - case 1\n","ok 1 - case 1\nok 1 - duplicate\n"),report.replace("1..1\n","")):
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":negative,"stderr":""})
++            with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":report,"stderr":"unexpected\n"})
++            for count in (0,True,1.0,9007199254740992):
++                with self.assertRaises(native.Refusal): native.validate_unit_report(dict(tap_unit,expected_tests=count),{"stdout":report,"stderr":""})
++        for counter,value in (("tests",1),("suites",0),("pass",1),("fail",0),("cancelled",0),("skipped",0),("todo",0)):
++            line = "# "+counter+" "+str(value)+"\n"
++            for negative in (node.replace(line,""),node+line,node.replace(line,"# "+counter+" "+str(value+1)+"\n")):
++                self.assertEqual(native.validate_unit_report({"report_format":"node-test-tap-v1","expected_tests":1},{"stdout":node,"stderr":""}),expected_node)
++                with self.assertRaises(native.Refusal): native.validate_unit_report({"report_format":"node-test-tap-v1","expected_tests":1},{"stdout":negative,"stderr":""})
++        header = "# ./tests/docs_static_slice_test.ts\n"
++        for negative in (deno.replace(header,""),deno.replace(header,"# ./tests/foreign.ts\n"),deno.replace(header,"# /tests/docs_static_slice_test.ts\n"),deno.replace(header,"# file:///tests/docs_static_slice_test.ts\n"),deno.replace(header,header+header),deno.replace(header,"")+header,"# unknown comment\n"+deno,deno.replace(header,"# unknown comment\n"+header),deno.replace(header,"# ./tests/docs_test_routing_test.ts\n")):
++            self.assertEqual(native.validate_unit_report({"report_format":"deno-test-tap-v1","expected_tests":1},{"stdout":deno,"stderr":""}),expected_deno)
++            with self.assertRaises(native.Refusal): native.validate_unit_report({"report_format":"deno-test-tap-v1","expected_tests":1},{"stdout":negative,"stderr":""})
++        deno_early_plan = "TAP version 14\n# ./tests/docs_static_slice_test.ts\n1..1\nok 1 - case 1\n"
++        self.assertEqual(native.validate_unit_report({"report_format":"deno-test-tap-v1","expected_tests":1},{"stdout":deno_early_plan,"stderr":""}),expected_deno)
++        node_two = "TAP version 13\nok 1 - alpha\nok 2 - beta\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n"
++        deno_two = "TAP version 14\n# ./tests/docs_static_slice_test.ts\nok 1 - alpha\nok 2 - beta\n1..2\n"
++        for report,format_ in ((node_two,"node-test-tap-v1"),(deno_two,"deno-test-tap-v1")):
++            tap_unit = {"report_format":format_,"expected_tests":2}
++            self.assertEqual(native.validate_unit_report(tap_unit,{"stdout":report,"stderr":""})["observed_tests"],2)
++            for negative in (report.replace("ok 2 - beta","ok 1 - beta"),report.replace("ok 2 - beta","ok 3 - beta"),report.replace("ok 1 - alpha\nok 2 - beta","ok 2 - beta\nok 1 - alpha")):
++                with self.assertRaises(native.Refusal): native.validate_unit_report(tap_unit,{"stdout":negative,"stderr":""})
+         class Artifacts:
+             def __init__(self): self.ops = MemoryPublishOps(); self.bytes = self.ops.files; self.proofs = set()
+             def put(self,name,value):

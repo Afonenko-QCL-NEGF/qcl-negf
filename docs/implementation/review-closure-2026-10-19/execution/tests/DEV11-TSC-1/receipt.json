@@ -1,0 +1,28 @@
+{
+  "task": "DEV11",
+  "attempt": "TSC-1",
+  "started_utc": "2026-10-19T13:03:49.949049+00:00",
+  "recorded_at_utc": "2026-10-19T13:03:52.183259+00:00",
+  "command": [
+    "/nix/store/frlyjd2wya3rk8xmdc98yq3x0rhpkh9n-nodejs-24.21.0/bin/node",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/frontend/node_modules/typescript/bin/tsc",
+    "--noEmit"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/frontend",
+  "exit_code": 0,
+  "wall_seconds": 2.234,
+  "sampled_peak_process_tree_RSS_bytes": 323313664,
+  "stdout_stderr_bytes": 0,
+  "temporary_bytes": 0,
+  "stop_reason": null,
+  "limits": {
+    "wall_seconds": 90,
+    "aggregate_RSS_bytes": 1073741824,
+    "CPU_affinity_count": 1,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "RSS_guard": "50ms sampled process-tree RSS, not a cgroup hard limit"
+  },
+  "original_log": "/tmp/qcl-DEV11-TSC-1/original.log",
+  "environment": "selected Node24 and locked TypeScript5.9.3; no build/install"
+}

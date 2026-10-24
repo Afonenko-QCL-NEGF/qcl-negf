@@ -1,0 +1,73 @@
+{
+  "status": "SOURCE_ONLY_STOP_FOR_SEPARATE_HIGH_REVIEW",
+  "created_utc": "2026-10-20T06:49:15.048027+00:00",
+  "artifacts": {
+    "/tmp/qcl-sci08-R1-local-unit-run-v3.py": "f239938d9fe83e60f1623ee501f4cd32e5d77fa071f931d237cd13973a123528",
+    "/tmp/qcl-sci08-R1-engineering-plan-v3.json": "c48d28709fb75a66652d8ca7d884e55a1158c7e9e950b5e8aa0861525db3c13e",
+    "/tmp/qcl-sci08-R1-harness-report-v3.md": "30ffdbc25af2deef560153b87710ca26188f26368c012b32b19554b643cd06ec"
+  },
+  "preserved_artifact_hashes": {
+    "/tmp/qcl-sci08-R1-local-unit-run-v1.py": "e198d49c81ecded2ca4e5cecf0d2a40776ae56358a973e53d536ec24980c8930",
+    "/tmp/qcl-sci08-R1-engineering-plan-v1.json": "0cb62f99bd8439bf5f6b33aaabdda1000d7b17520894b99d9c062e9005a0ec48",
+    "/tmp/qcl-sci08-R1-harness-report.md": "37da39acdda0280179b5b8050cd617338ba317c3cdbee93a3f357edb1c14d86a",
+    "/tmp/qcl-sci08-R1-harness-identity.json": "d4c7f0445ecb057fdf05bcd9f8010177c194efd1ea496fa6811242c43aa6fb6a",
+    "/tmp/qcl-sci08-R1-local-unit-run-v2.py": "9338b60324f1e14da6641fcd06661da50c51f02b36547e958b2c72ad25566fb7",
+    "/tmp/qcl-sci08-R1-engineering-plan-v2.json": "02161eae76701faf9d469b1021470321dae4c55efc048bd53b7e9f6f88c9a58c",
+    "/tmp/qcl-sci08-R1-harness-report-v2.md": "30610e3bf1caee3c782ff2c0512db5c14762da37bd64d301364d36a820e57bd0",
+    "/tmp/qcl-sci08-R1-harness-identity-v2.json": "d14e76bca535695a460676e0af2e2d669043d90297a3943b58ab99c20dfc84b2",
+    "/tmp/qcl-sci08-R1-harness-v2-review.md": "df73bbe011b41ebd0036ef4171b4584d14f0b0d6369f9fa67ba9edf8f2e09601"
+  },
+  "metadata": {
+    "root": {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+      "status_short": "",
+      "recursive_submodules": " 9f4a96d032ad868ec010ce92d915bb81087c8d92 components/QCLNEGF.jl (v0.2.0-16-g9f4a96d)\n fefaa27f194bfddf85dd51a0e255beef2218c06d components/QCLNEGFRunner.jl (v0.2.0-28-gfefaa27)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n f4009c933183d8537e289d2fa5fa898defd2d9b5 components/qcl-negf-contracts (v0.2.0-16-gf4009c9)\n f729e2681224d6537538179ab760fefefd575003 components/qcl-negf-platform (v0.2.0-93-gf729e26)\n 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731 components/qcl-negf-research (v0.2.0-9-g3ed8a9f)\n de70638a982f91b7e125ab1cfc70a2daef2a656d components/qcl-negf-results (v0.2.0-23-gde70638)\n"
+    },
+    "runner": {
+      "path": "/tmp/qcl-sci08-r1-runner-worktree",
+      "head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "status_short": " M test/application/execution_resource_contract.jl\n M test/infrastructure/linux_process_resource_probe.jl\n M test/integration/native_phase_resource_contract.jl\n?? test/contracts/checked_storage_forecast.jl\n?? test/infrastructure/strict_campaign_resource_admission.jl\n",
+      "recursive_submodules": ""
+    },
+    "core": {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "head": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "status_short": "",
+      "recursive_submodules": ""
+    }
+  },
+  "pinned_Test_sha256": "36bf481a76fd9aa3166cc69af165a10052893935da63e7456174f8e06f7a1d7e",
+  "prior_failed_RED1": {
+    "attempt_id": "SCI08-R1-ENG-RED-1",
+    "receipt_path": "/tmp/qcl-SCI08-R1-ENG-RED-1/receipt.json",
+    "receipt_sha256": "8d638a5de2c52db561ad50152194b6033536c99a1e903a2684c92348d0e653df",
+    "original_raw_path": "/tmp/qcl-SCI08-R1-ENG-RED-1/original.log",
+    "original_raw_sha256": "cd29bae7df710592bb53eb10085abe42277de704e0699f2475a1cf455e1c16ba",
+    "raw_bytes": 725,
+    "consumed": true,
+    "verdict": "STOP_RECONCILE_NO_RERUN",
+    "wall_seconds": 7.421130432980135,
+    "diagnosis": "Pinned Test.push_testset undefined after correct imports before assertions; no behavioral RED observed; original attempt remains consumed."
+  },
+  "fixture_actual_hashes": {
+    "test/contracts/checked_storage_forecast.jl": "f3f263ad0b1b13dcc8a20b5668bfdccb7bb7fa5d30937bd72d7793a0013d2cc4",
+    "test/infrastructure/strict_campaign_resource_admission.jl": "b6470f1d8e3b89b5ad71b9a8cb6cbcc9873221c85a2515cb8e3188306831b8c2",
+    "test/application/execution_resource_contract.jl": "42fb1de375ee1c6e3e0b4710dc045a8b308b3507790468eb6a112bd01e836aa9",
+    "test/infrastructure/linux_process_resource_probe.jl": "fb36182464c643c42951bcd89a0ad59f6f0118f0524050c3dbe0c0a80c3a581c",
+    "test/integration/native_phase_resource_contract.jl": "63d83e77025c74140cd67af9d9efb2b1bb7df735bebf7ac9c06c4c16e3476a6a"
+  },
+  "runner_src_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "target_calls_this_preparation": 0,
+  "candidate_helper_import_compile_parser_formatter_lint_tests_Julia_Pkg_network_calls": 0,
+  "production_fixture_root_checkpoint_git_writes": 0,
+  "source_budget": {
+    "wall_seconds_ceiling": 600,
+    "read_bytes_ceiling": 2097152,
+    "CPU_count": 1,
+    "RSS_bytes_ceiling": 1073741824,
+    "output_bytes_ceiling": 131072,
+    "physical_peaks_measured": false
+  },
+  "review_note": "Sequential author source-only readback; separate independent high review and fresh Root READY required."
+}

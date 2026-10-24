@@ -1,0 +1,53 @@
+{
+  "kind": "qcl-docs-test-routing-independent-red-source-review",
+  "verdict": "REQUEST_CHANGES",
+  "review": {
+    "path": "/tmp/qcl-docs-test-routing-red-review.md",
+    "bytes": 16437,
+    "sha256": "705bea4364bbaf6053fd51cb7ea7acb48a2776d19e8f6002f9dddbd7e6302eb7"
+  },
+  "source": {
+    "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts",
+    "bytes": 33358,
+    "sha256": "f3db415342457e3f05434f5ed5e3c49f83796f6d91eddffdd76846363b64f0c5",
+    "worktree_head": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+    "git_status": "?? tests/docs_test_routing_test.ts",
+    "submodules": "8 uninitialized selected gitlinks; no mutation"
+  },
+  "primaries": [
+    { "path": "/tmp/qcl-docs-test-routing-design.md", "sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270" },
+    { "path": "/tmp/qcl-docs-test-routing-design-v2.md", "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70" },
+    { "path": "/tmp/qcl-docs-test-routing-design-v2-review.md", "sha256": "939555c9291e98be1200b063bcf06e344a7597907dfbf498bf28029927728967" }
+  ],
+  "author_packet_read_after_primaries": [
+    { "path": "/tmp/qcl-docs-test-routing-red-report.md", "sha256": "e0621ad8010399bb7013a35353496ecc6581193c8d0f90ea358ab00985070215" },
+    { "path": "/tmp/qcl-docs-test-routing-red-identity.json", "sha256": "889f52e7dd5b46f96b0b6c9483da587c917ce459dd18e8ad887559fe36942d20" }
+  ],
+  "findings": [
+    { "id": "R1", "severity": "P2", "locators": "fixture:112-157,318-332,378-389", "summary": "Unsafe path negatives can reject because of unchanged admission/missing metadata; absolute source row also destroys required closure", "minimal_correction": "Isolate lexical parse predicates and rebind independent metadata for semantic path pairs; retain full source list; add safe relocation positives" },
+    { "id": "R2", "severity": "P2", "locators": "fixture:160-163,212-223,610-620", "summary": "No pre-start source graph mutation control; after-only binding can satisfy current fixtures", "minimal_correction": "Mutate fake source graph before runChecks and require non-pass plus zero execute calls, retaining existing after-child control" }
+  ],
+  "declared_registrations": 207,
+  "registration_status": "independent source arithmetic only, not measured",
+  "integration_gate": "Separate actual deno.json/ops-ci/workflow/CLI call-site source review, exact checklist in report; pure function results are insufficient",
+  "verification": {
+    "target_runtime_import_parser_typecheck_tests_format_build_network": 0,
+    "git_mutations_product_edits_checkpoint": 0,
+    "RED_GREEN_calls": 0,
+    "real_tools_units_full_CI_native_scientific_acceptance": "not measured, not granted"
+  },
+  "resources": {
+    "read_cap_bytes": 4194304,
+    "named_source_read_charge_bytes": 444668,
+    "generated_report_hash_read_bytes": 16437,
+    "total_charged_before_identity_bytes": 461105,
+    "conservative_read_bound_bytes": 524288,
+    "method": "Full underlying file charge on repeated extracts/search/hash reads; named paths only; Git metadata separate",
+    "wall_cap_minutes": 20,
+    "cpu_cap": 1,
+    "ram_cap_bytes": 2147483648,
+    "output_cap_bytes": 131072,
+    "physical_IO_CPU_RSS": "not measured"
+  },
+  "stop": true
+}

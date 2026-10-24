@@ -1,0 +1,91 @@
+{
+  "status": "PASS_BOUNDED_RUNTIME_EVIDENCE",
+  "CP_CODE": "PASS_NARROW_SCI08_R1",
+  "owning_draft_eligible": true,
+  "G1": "CONDITIONAL_SOURCE_GATE_ONLY_NOT_COMPLETED",
+  "runtime_review": {
+    "path": "/tmp/qcl-sci08-r1-production-i1-runtime-review.md",
+    "sha256": "0d653bf10dd03efbed8b9e773b0663ee9195020e21158d7673d76826a90cf862"
+  },
+  "inputs": {
+    "GREEN1_receipt": {
+      "path": "/tmp/qcl-SCI08-R1-ENG-GREEN-1/receipt.json",
+      "bytes": 69829,
+      "sha256": "5d54f61aca6db32adef3cd6dda2da94cede325dbecf4320548d1f8d1954896a6"
+    },
+    "GREEN1_raw": {
+      "path": "/tmp/qcl-SCI08-R1-ENG-GREEN-1/original.log",
+      "bytes": 2942,
+      "sha256": "351970830a9fc01123a5e91759565d411bed58a4ac85516d27ab7b23f1035a02"
+    },
+    "Root_GREEN1_READY": {
+      "path": "/tmp/qcl-sci08-R1-GREEN1-ready-v3.json",
+      "sha256": "6fbbac46c8431d53df02e23e0e35346ee04a73da6e5175285330df36a972be80"
+    },
+    "prior_CPP_identity_sha256": "b10f208967bcef20bb9cee78454bef5921a3092fb83a88bed6b704025d5be479",
+    "prior_CPP_review_sha256": "00c798cf1fdfe0cd14b245cbab997567a7e7628c25957789fded840fb9bdf6d1",
+    "actual_O1_O2_approval_sha256": "3cbf2efa4de706f7b4bae9b9fc1a27445881c760fb413a656a8f7fb5f1f7dea7",
+    "production_patch_sha256": "7c5d0a56dfc56081aa3a3e78e91adae936130482167614dec4867779b520c9e6",
+    "plan_sha256": "c48d28709fb75a66652d8ca7d884e55a1158c7e9e950b5e8aa0861525db3c13e",
+    "recorded_harness_sha256": "f239938d9fe83e60f1623ee501f4cd32e5d77fa071f931d237cd13973a123528",
+    "RED2_receipt_sha256": "1ae6c4cd1ac24f82dbc43558f9f145654468347e4a9b91ef81563ff2ed59714c",
+    "original_failed_RED1_receipt_sha256": "8d638a5de2c52db561ad50152194b6033536c99a1e903a2684c92348d0e653df"
+  },
+  "recorded_identities": {
+    "root_head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+    "runner_head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "core_head": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+    "runtime_sha256": "02618fb870c4b0f35976837605b39026b55ed998fc51dfe1edb95ae928c85d4f",
+    "package_identity_observed": true,
+    "source_before_after_unchanged": true,
+    "environment_before_after_unchanged": true
+  },
+  "ten_source_fixture_sha256": {
+    "src/composition/native_phase_telemetry.jl": "aba27f8c873b28f4b3f99d7736c9bedf40368ca4154e7c0af0ab592fc7ece216",
+    "src/composition/scientific_execution.jl": "52aded550f1362b67f7c3781e2d45daac0e001a6dd0248a730f29299d443645f",
+    "src/composition/scientific_workflow.jl": "b391a455247208a4293ea1aa000b4a288c097a70c23abd45f59e9f1b29a01337",
+    "src/infrastructure/persistence/point_artifacts.jl": "18bcd0fe2c6ff42050c500b57f17678b06a38f14871a9a3de437841cb5f8d1ad",
+    "src/infrastructure/resources/linux_resources.jl": "c6cceec4f6c8706485dbfa2902531f3c76d95b7c47dcffb773d9934de267f39f",
+    "test/contracts/checked_storage_forecast.jl": "f3f263ad0b1b13dcc8a20b5668bfdccb7bb7fa5d30937bd72d7793a0013d2cc4",
+    "test/infrastructure/strict_campaign_resource_admission.jl": "b6470f1d8e3b89b5ad71b9a8cb6cbcc9873221c85a2515cb8e3188306831b8c2",
+    "test/application/execution_resource_contract.jl": "42fb1de375ee1c6e3e0b4710dc045a8b308b3507790468eb6a112bd01e836aa9",
+    "test/infrastructure/linux_process_resource_probe.jl": "fb36182464c643c42951bcd89a0ad59f6f0118f0524050c3dbe0c0a80c3a581c",
+    "test/integration/native_phase_resource_contract.jl": "63d83e77025c74140cd67af9d9efb2b1bb7df735bebf7ac9c06c4c16e3476a6a"
+  },
+  "observed_GREEN1": {
+    "attempt_id": "SCI08-R1-ENG-GREEN-1",
+    "verdict": "BOUNDED_GREEN",
+    "attempt_consumed": true,
+    "target_calls": 1,
+    "pass": 349,
+    "fail": 0,
+    "errors": 0,
+    "broken": 0,
+    "named_nested_testsets": 33,
+    "logical_groups": 31,
+    "assertions_by_file": [118, 131, 55, 26, 19],
+    "exit_code": 0,
+    "capture_complete": true,
+    "terminal_marker_present": true,
+    "wall_seconds": 27.972184391051996,
+    "sampled_RSS_peak_bytes": 622735360,
+    "RSS_valid_observations": 550,
+    "RSS_unknown_observations": 0,
+    "sampled_owned_TMP_peak_bytes": 32791,
+    "CPU_seconds": null
+  },
+  "G1_conditions": [
+    "Exact owning Runner commit and PR preserve the same ten reviewed blobs and exclude logs/depots/schema/Root/unrelated changes.",
+    "Root binds published exact commit/tree, accepted CPP/O1O2 and original RED1/RED2/GREEN1 evidence.",
+    "Fresh live PR head/base/checks/protection/mergeability and repository G1 obligations remain Root publication-stage gates; none were checked by this read-only audit.",
+    "Keep campaign_strict needs_guard/needs_admission; R2/R3/P1/P2/A1/C1 and native/full-CI/scientific acceptance remain open.",
+    "Retain all consumed attempts and no-rerun accounting; C08 exhausted8/8 unchanged."
+  ],
+  "blocking_findings": [],
+  "scope": "fake-only bounded unit runtime evidence; source publication gate only",
+  "review_runtime_parser_compiler_import_tests_Julia_Pkg_network_native_calls": 0,
+  "source_index_RootCP_Git_writes": 0,
+  "reruns": 0,
+  "budget": "10min,4MiB logical content reads,1CPU,1GiB,128KiB output; no reviewer physical resource measurement",
+  "limits": "Sampled RSS/TMP are not hard transient quotas; no CPU-seconds evidence; fake-only source trace is not syscall sandbox or native admission proof."
+}

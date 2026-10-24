@@ -1,0 +1,65 @@
+{
+  "stage": "Independent high source CPP actual I2C candidate",
+  "verdict": "CHANGES_REQUIRED",
+  "native_READY": false,
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "git_observations": {"tracked_modified":5,"untracked_source":6,"submodules":"eight uninitialized, unchanged gitlinks"},
+  "packet_sha256": {
+    "report": "56a4dc2179353ad20a4a40879a4e5f9aabd74871d0b82c6081156fc92d632bac",
+    "identity": "398e5004484dd86b93f5f2cc701b8f1cd77b96d120ae43a05c86d180bd00b9e9",
+    "complete_patch": "7fd92c7f21bcc63e16872fc7ea0f25b6267324e1277f2fa5a3c221a2ab61c13e"
+  },
+  "prior_I2B_review_preserved": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea",
+  "prior_I2B_packet_rechecked_unchanged": true,
+  "source_sha256": {
+    "ops/docs_tests_native.py": "5b43a26b416d127cfb606898bd617145af8df7e50ee7001c4228aa3d61ca4adb",
+    "ops/docs_tests_cli.ts": "b89aa1da8cdebf3544212f19ac2454671478819d382082f2be5b8444b6889d3f",
+    "tests/test_docs_test_native.py": "29fd56b6882b81e915cd46464614245b3b6a2bf1361441aa9f0d2467e3a6ba2b",
+    "tests/docs_test_native_protocol_test.ts": "48628f79ef3b4ffde506f90be81577834c3a422543fd26e19405b2523326721b",
+    "ops/docs_tests.ts": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+  },
+  "concrete_subdefects_fixed_at_source_level": [
+    "queued phase-ready versus next leader-bound conflict",
+    "KaTeX persisted self-SHA fixed point",
+    "always failed final setup predicate",
+    "full per-command cap incorrectly committed irreversibly as actual bytes",
+    "cumulative 512 Git counter across two phases",
+    "source depth and overflow exponent checks",
+    "chunk pre-atob encoded cap and rejected finish ACK branch"
+  ],
+  "remaining_groups": {
+    "C1": "structural source improvements; full group depends on C3 C4 C8 acceptance",
+    "C2": "concrete self-ref and runtime content readers fixed; full provenance requires C3 and accepted records",
+    "C3": "blocking nested exact schema scalar authority ref validation",
+    "C4": "blocking first FD high FD drain exception durable publication and truthful source retention outcomes",
+    "C5": "reserve actual separation fixed; complete shared write failure and handoff trace still required",
+    "C6": "blocking exact ordinal state source failure accounting metadata stability and measured status",
+    "C7": "blocking full response refusal terminal union and state coverage",
+    "C8": "blocking full manufactured healthy fake process lifecycle and paired failure coverage"
+  },
+  "primary_new_concrete_findings": [
+    "native.py1528-1550 rejected finish after failed source bind sets measured merely because validation_ref exists",
+    "native.py1550 retention complete inferred from driver terminal despite missing evidence index or partial native ledger",
+    "native.py1256 inherited descriptor close only covers3 through4095 without bounding bootstrap control FD",
+    "native.py824-835 final-name file publication lacks parent directory fsync and atomic complete publication",
+    "driver git response normal4096 cap rejects permitted typed refusal up to16384"
+  ],
+  "fixture_inventory": {"python_methods_nominal":8,"deno_registrations_nominal":8,"pure_nominal":230,"observed":null,"full_fake_route_source_coverage":false},
+  "pure_source_contract": {"unchanged":true,"import_safe":true,"independent_later_gate":true,"executed":false},
+  "next_scope": "Same four owning code and fixture files; truthful evidence, total cleanup and publication, exact schedule schemas and full manufactured route; no new broad design-only cycle",
+  "report": {
+    "path":"/tmp/qcl-docs-routing-impl-i2c-review.md",
+    "sha256":"caeb6ee6f85b19ba0fa2d748c1256aaac60c5497b829e70a1285cbe2f1f19a5f",
+    "bytes":23083
+  },
+  "execution": {"target_import":0,"parser":0,"compiler":0,"tests":0,"lint":0,"format":0,"runtime":0,"native":0,"network":0,"server":0,"build":0,"solver":0,"CI":0},
+  "source_fixture_checkpoint_index_edits":0,
+  "read_bytes_conservative_upper_bound":3145728,
+  "output_bytes_upper_bound":49152,
+  "wall_minutes_upper_bound":15,
+  "CPU_RSS_physical_IO_measured":false,
+  "subagents":0,
+  "stop":"Return to Root, no automatic code or execution continuation"
+}

@@ -1,0 +1,32 @@
+{
+  "components": {
+    "qcl-negf-contracts": {
+      "state": "G1_merged",
+      "operation_id": "PUBLISH-DOC07-C1-1",
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+      "base": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "base_branch": "codex/review-closure-final-audit-contract",
+      "branch": "codex/review-closure-model-help-integration",
+      "files": {
+        "src/qcl_negf_contracts/schemas/model-help.schema.json": "584971b619218d56f2bdc4b04dfc1361d4850898cdabeca4594203aaf119c241",
+        "tests/test_model_help.py": "b284bd64ad2a891f2fca791c7d32b0a11389399f32c68aa913dba9da5b217177"
+      },
+      "source_review": "cc79399ff32accf90172a7c659f19cc4e667017bbfa35f8c7f2c45db32a614f3",
+      "GREEN_receipt": "32ae0596aee8f5c6526f4a7934fdac979769edd5e49407012497b14398c449a6",
+      "tests": 204,
+      "C2": "not_implemented",
+      "fullCI": 0,
+      "scientific_acceptance": false,
+      "head": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+      "pr": 10,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/pull/10",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "163ac625f9ba945c8a6df37202f40642d134c321",
+      "merged_at": "2026-10-20T04:10:50Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  },
+  "CP_CODE": "cc79399ff32accf90172a7c659f19cc4e667017bbfa35f8c7f2c45db32a614f3"
+}

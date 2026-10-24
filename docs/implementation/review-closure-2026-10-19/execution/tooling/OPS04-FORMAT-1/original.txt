@@ -1,0 +1,5 @@
+/tmp/qcl-ops04-root-worktree/ops/application_cd.ts
+/tmp/qcl-ops04-root-worktree/ops/solver.ts
+/tmp/qcl-ops04-root-worktree/tests/solver_test.ts
+/tmp/qcl-ops04-root-worktree/tests/application_cd_test.ts
+Checked 4 files

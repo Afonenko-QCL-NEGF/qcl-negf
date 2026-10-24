@@ -1,0 +1,66 @@
+{
+  "format": "qcl-negf.doc06-actual-harness-review.v1",
+  "verdict": "PASS_SOURCE_HARNESS_WITH_ROOT_BINDING_PREREQUISITES",
+  "scope": "Independent static source review of actual selected nine-source exporter, finite A1/A2 launcher and engineering plan; no execution authorization",
+  "root_revision": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "root_path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "default_cwd_head_not_selected_authority": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "report": {
+    "path": "/tmp/qcl-doc06-actual-harness-review.md",
+    "sha256": "97efc49edccf2ae54fb67189c09792971e796d1991e6659c3fa2e6bad17403b0",
+    "bytes": 14377
+  },
+  "reviewed_inputs": {
+    "/tmp/qcl-doc06-actual-local-run-v1.py": "dd12fd9383130fd77039049114a02ff513ff6eb7d1caac6bfb34d96a94ee0e61",
+    "/tmp/qcl-doc06-actual-source-prep-v1.py": "d4b824dd2d2f5781a5853e6db35f53ad37b560fa2a9d94bab9272f85887b2cec",
+    "/tmp/qcl-doc06-actual-engineering-plan-v1.json": "1916f0b4aa51d2a835525aa159e5411fb80f23c97233f8bba92bd1b8b223f18c",
+    "Root/ops/docs/static-slice.ts": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "/tmp/qcl-local-julia-guard-v2.py": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f",
+    "/tmp/qcl-owned-temp-sampler-v2.py": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+    "/tmp/qcl-doc06-static-slice-design.md": "34b80d4ae1c8b94d23657124f17c9051251cea4763af8f92007d24929aafb2e8",
+    "/tmp/qcl-doc06-canonical-pointer-erratum.patch": "a2d28d0d743f65277623cdcb7230d9dd6baa5fbd695e5a90afe5c509f81b2475"
+  },
+  "selected_owner_commits": {
+    "runner": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "contracts": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+    "core": "9f4a96d032ad868ec010ce92d915bb81087c8d92"
+  },
+  "selected_gitlinks_count": 8,
+  "selected_regular_blob_metadata_checked": 9,
+  "namespace_absent_on_review": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1",
+  "old_namespace_preserved": true,
+  "root_binding_prerequisites": [
+    "R1: before READY A1/A2 compare preparation root/graph/input receipt/files/aggregate/script identity to actual exported snapshot and reviewed exporter; no failed preparation",
+    "R2: before READY A2 and after A2 require complete source binding equality with A1.before=A1.after; later compare complete facts bytes separately",
+    "Root alone writes readiness/count evidence; fresh preparation READY then distinct A1/A2 READY; no automatic acceptance or retries"
+  ],
+  "recommended_guard_hardening": [
+    "Bounded preparation.json parse and explicit comparison to bind_inputs()",
+    "A2 prelaunch require before==prior.before==prior.after"
+  ],
+  "blocking_findings_with_required_trusted_Root_checks": [],
+  "acceptance_not_established": [
+    "actual-source export or CLI execution",
+    "actual output reproducibility",
+    "authored meaning/public reference correctness",
+    "native/render/scientific/full release readiness"
+  ],
+  "review_actions": {
+    "target_export_harness_helper_execution": false,
+    "Python_parser_Deno_tests_native_network_execution": false,
+    "source_export_created": false,
+    "product_checkpoint_git_writes": false,
+    "delegation": false,
+    "own_report_identity_only": true
+  },
+  "budget": {
+    "maximum_source_read_bytes": 2097152,
+    "conservative_source_read_upper_bound_bytes": 1048576,
+    "maximum_wall_seconds": 600,
+    "maximum_cpu": 1,
+    "maximum_ram_bytes": 1073741824,
+    "maximum_report_bytes": 98304,
+    "actual_CPU_RSS_physical_IO": "not_measured"
+  },
+  "state": "STOP"
+}

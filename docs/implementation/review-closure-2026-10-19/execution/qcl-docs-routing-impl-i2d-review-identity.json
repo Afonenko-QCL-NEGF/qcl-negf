@@ -1,0 +1,79 @@
+{
+  "stage": "Independent narrow high CPP I2D boundary1",
+  "verdict": "CHANGES_REQUIRED",
+  "scope": "Truthful source/retention and typed normative schema intent response refusal guards only",
+  "whole_source_PASS": false,
+  "native_READY": false,
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "git_observations": {"tracked_modified":5,"untracked_source":6,"submodules":"eight uninitialized, unchanged gitlinks"},
+  "packet": {
+    "report_sha256":"acafce8a10efd7c411f30508c046f67d328df2121234040ec089cb9a370551de",
+    "identity_sha256":"051f0779058c59a34eb810fac49e3a7741d67a9cb9e1a515f06fa84fdfc32505",
+    "four_file_delta_sha256":"0ed917aaefeab58b04a661c6b2406f62a08846c669576d11576029794aee1c9b",
+    "four_file_delta_bytes":67002,
+    "I2C_review_preserved_sha256":"caeb6ee6f85b19ba0fa2d748c1256aaac60c5497b829e70a1285cbe2f1f19a5f"
+  },
+  "frozen_owning_source_sha256": {
+    "ops/docs_tests_native.py":"547fb2149a40e1e768434813f114dff0b3c03f4e263d1b58e04c55e7979acccc",
+    "ops/docs_tests_cli.ts":"dc9cf494e4be657e4722094ee823a1856494d7f5276149eb3a09f7940d76c9ca",
+    "tests/test_docs_test_native.py":"4357a8d7f08d2ac45cfd376522b27b00d6424e716cba1292f99d843d4229caea",
+    "tests/docs_test_native_protocol_test.ts":"813e75cc27141373741880e775bc5a89ee6be42b39918dc045cc250ada7cd8b4"
+  },
+  "external_pure_dependency_observations": {
+    "inside_native_delta":false,
+    "reviewer_edited":false,
+    "initial_FORMAT1_helper":"38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b",
+    "initial_FORMAT1_fixture":"8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b",
+    "after_authorized_Root_targeted_comments_observed_UTC":"2026-10-20T08:21:28Z",
+    "later_helper":"68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "later_fixture":"2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "behavior_format_lint_review_not_repeated":true,
+    "whole_native16_closure_or_prior_execution_acceptance_inherited":false
+  },
+  "confirmed_source_fixes": [
+    "rejected validation ref alone cannot create measured source label",
+    "driver terminal alone cannot create complete retention label",
+    "actual index pending receipt raw identities are read and checked before retention label",
+    "empty native-owned durability proof set blocks production positive until boundary2 publisher",
+    "strict integer bool enum hash identity exit helpers and several actual callers added",
+    "tool identity duration raw-size UTC guards added",
+    "D5 exact redacted intent now used at bootstrap producer phase and task gated spawn",
+    "actual TS transport uses responseFor with union-aware refusal read cap"
+  ],
+  "remaining_boundary1_findings": [
+    "TS String(enum) coercions accept one-element arrays as legal refusal cleanup and other enum values",
+    "native nested registration initial empty allocation and full phase receipt schemas incomplete",
+    "new finalizer control bypasses mandatory first preflight receive state",
+    "new retention validator fully mocked in paired control; actual artifact proof-set reader cases absent",
+    "source measured criterion remains conservative coupled to full finish/report validation"
+  ],
+  "publication_dependency": {
+    "publisher_implemented":false,
+    "unknown_status_is_expected":true,
+    "simply_populating_proof_set_is_forbidden":true,
+    "boundary2_must_include_driver_raw_identity_and_final_phase_setup_publication":true
+  },
+  "next_boundaries": [
+    "finish boundary1 typed enums nested normative readers and actual retention predicate fixture pairs",
+    "boundary2 first FD complete cleanup raw fallback atomic no-replace durable publication proof",
+    "boundary3 exact ordinal source slots independent source observation and complete global debit schedule",
+    "boundary4 full manufactured healthy parent kernel broker driver executor D6 terminal route and failure pairs"
+  ],
+  "fixture_inventory": {"python_methods_nominal":8,"deno_registrations_nominal":8,"observed":null,"full_C8_claim":false},
+  "report": {
+    "path":"/tmp/qcl-docs-routing-impl-i2d-review.md",
+    "sha256":"8a666cf1d9771aab53ce9fecc156faae2b139ce60cc4a9875ec9056f6f1f1916",
+    "bytes":19102
+  },
+  "execution": {"scripts":0,"target_import":0,"parser":0,"compiler":0,"tests":0,"Deno":0,"runtime":0,"native":0,"network":0,"server":0,"build":0,"CI":0,"science":0},
+  "source_fixture_checkpoint_index_edits":0,
+  "unchanged_closed_queue_selfSHA_counter_loops_not_rereviewed":true,
+  "read_bytes_conservative_upper_bound":2097152,
+  "output_bytes_upper_bound":40960,
+  "wall_minutes_upper_bound":12,
+  "CPU_RSS_physical_IO_measured":false,
+  "subagents":0,
+  "new_calls_authorized":0,
+  "stop":"Return narrow review to Root without source or execution continuation"
+}

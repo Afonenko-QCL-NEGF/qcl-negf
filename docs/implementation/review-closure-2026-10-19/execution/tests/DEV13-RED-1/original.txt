@@ -1,0 +1,300 @@
+FFFFFFFFFFF...............................................               [100%]
+=================================== FAILURES ===================================
+__________ test_blocked_call_returns_unknown_without_duplicate_submit __________
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7fe1b6847480>, submit_plan=<function test_blocked_call_returns_unknown_without_duplicate_submit.<locals>.submit at 0x7fe1b68473d0>), [])
+
+    def test_blocked_call_returns_unknown_without_duplicate_submit(backend):
+        plugin, events = backend
+        started, release, returned = threading.Event(), threading.Event(), threading.Event()
+        calls = []
+        def submit(*args, **kwargs):
+            calls.append(RUN)
+            started.set()
+            assert release.wait(3)
+            returned.set()
+            return {"uuid": RUN}
+        plugin.submit_plan = submit
+>       actor = actor_module.AiidaService("example", settings=policy())
+                                                              ^^^^^^^^
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {}
+
+    def policy(**kwargs):
+>       return Settings(TOKEN, (CODE,), actor_call_timeout_seconds=0.08,
+                        actor_io_timeout_seconds=0.08, actor_close_timeout_seconds=0.08,
+                        **kwargs)
+E       TypeError: Settings.__init__() got an unexpected keyword argument 'actor_call_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:21: TypeError
+_____ test_started_mutation_exception_latches_original_receipt[error0-422] _____
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7fe1b6696e50>, save_agent_report=<function test_started_mutation_exception_latches_original_receipt.<locals>.save at 0x7fe1b66a78a0>), [])
+error = ValueError('invalid'), status = 422
+
+    @pytest.mark.parametrize("error,status", [(ValueError("invalid"), 422), (RuntimeError("lost receipt"), 503)])
+    def test_started_mutation_exception_latches_original_receipt(backend, error, status):
+        plugin, _ = backend
+        calls = []
+        def save(*args):
+            calls.append("stored")
+            raise error
+        plugin.save_agent_report = save
+>       actor = actor_module.AiidaService("example", settings=policy())
+                                                              ^^^^^^^^
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {}
+
+    def policy(**kwargs):
+>       return Settings(TOKEN, (CODE,), actor_call_timeout_seconds=0.08,
+                        actor_io_timeout_seconds=0.08, actor_close_timeout_seconds=0.08,
+                        **kwargs)
+E       TypeError: Settings.__init__() got an unexpected keyword argument 'actor_call_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:21: TypeError
+_____ test_started_mutation_exception_latches_original_receipt[error1-503] _____
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7fe1b66975e0>, save_agent_report=<function test_started_mutation_exception_latches_original_receipt.<locals>.save at 0x7fe1b6697530>), [])
+error = RuntimeError('lost receipt'), status = 503
+
+    @pytest.mark.parametrize("error,status", [(ValueError("invalid"), 422), (RuntimeError("lost receipt"), 503)])
+    def test_started_mutation_exception_latches_original_receipt(backend, error, status):
+        plugin, _ = backend
+        calls = []
+        def save(*args):
+            calls.append("stored")
+            raise error
+        plugin.save_agent_report = save
+>       actor = actor_module.AiidaService("example", settings=policy())
+                                                              ^^^^^^^^
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {}
+
+    def policy(**kwargs):
+>       return Settings(TOKEN, (CODE,), actor_call_timeout_seconds=0.08,
+                        actor_io_timeout_seconds=0.08, actor_close_timeout_seconds=0.08,
+                        **kwargs)
+E       TypeError: Settings.__init__() got an unexpected keyword argument 'actor_call_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:21: TypeError
+_________________ test_close_does_not_claim_backend_completion _________________
+
+backend = (namespace(list_runs=<function backend.<locals>.<lambda> at 0x7fe1b66977f0>, open_artifact=<function test_close_does_not_claim_backend_completion.<locals>.opened at 0x7fe1b6697c10>), [])
+
+    def test_close_does_not_claim_backend_completion(backend):
+        plugin, events = backend
+        started, release = threading.Event(), threading.Event()
+        entered, exited = [], []
+        class Stream(BytesIO):
+            def read(self, size):
+                started.set()
+                assert release.wait(3)
+                return super().read(size)
+        @contextmanager
+        def opened(*args, **kwargs):
+            entered.append(threading.get_ident())
+            try:
+                yield Stream(b"late bytes")
+            finally:
+                exited.append(threading.get_ident())
+        plugin.open_artifact = opened
+>       actor = actor_module.AiidaService("example", settings=policy())
+                                                              ^^^^^^^^
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {}
+
+    def policy(**kwargs):
+>       return Settings(TOKEN, (CODE,), actor_call_timeout_seconds=0.08,
+                        actor_io_timeout_seconds=0.08, actor_close_timeout_seconds=0.08,
+                        **kwargs)
+E       TypeError: Settings.__init__() got an unexpected keyword argument 'actor_call_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:21: TypeError
+_ test_actor_operational_settings_reject_invalid_values[actor_call_timeout_seconds-0] _
+
+field = 'actor_call_timeout_seconds', value = 0
+
+    @pytest.mark.parametrize("field,value", [
+        ("actor_call_timeout_seconds", 0), ("actor_io_timeout_seconds", float("nan")),
+        ("actor_close_timeout_seconds", True), ("actor_initialize_timeout_seconds", 301),
+        ("actor_max_pending_calls", True), ("actor_max_open_artifacts", 65),
+    ])
+    def test_actor_operational_settings_reject_invalid_values(field, value):
+        with pytest.raises(ValueError):
+>           Settings(TOKEN, (CODE,), **{field: value})
+E           TypeError: Settings.__init__() got an unexpected keyword argument 'actor_call_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:146: TypeError
+_ test_actor_operational_settings_reject_invalid_values[actor_io_timeout_seconds-nan] _
+
+field = 'actor_io_timeout_seconds', value = nan
+
+    @pytest.mark.parametrize("field,value", [
+        ("actor_call_timeout_seconds", 0), ("actor_io_timeout_seconds", float("nan")),
+        ("actor_close_timeout_seconds", True), ("actor_initialize_timeout_seconds", 301),
+        ("actor_max_pending_calls", True), ("actor_max_open_artifacts", 65),
+    ])
+    def test_actor_operational_settings_reject_invalid_values(field, value):
+        with pytest.raises(ValueError):
+>           Settings(TOKEN, (CODE,), **{field: value})
+E           TypeError: Settings.__init__() got an unexpected keyword argument 'actor_io_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:146: TypeError
+_ test_actor_operational_settings_reject_invalid_values[actor_close_timeout_seconds-True] _
+
+field = 'actor_close_timeout_seconds', value = True
+
+    @pytest.mark.parametrize("field,value", [
+        ("actor_call_timeout_seconds", 0), ("actor_io_timeout_seconds", float("nan")),
+        ("actor_close_timeout_seconds", True), ("actor_initialize_timeout_seconds", 301),
+        ("actor_max_pending_calls", True), ("actor_max_open_artifacts", 65),
+    ])
+    def test_actor_operational_settings_reject_invalid_values(field, value):
+        with pytest.raises(ValueError):
+>           Settings(TOKEN, (CODE,), **{field: value})
+E           TypeError: Settings.__init__() got an unexpected keyword argument 'actor_close_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:146: TypeError
+_ test_actor_operational_settings_reject_invalid_values[actor_initialize_timeout_seconds-301] _
+
+field = 'actor_initialize_timeout_seconds', value = 301
+
+    @pytest.mark.parametrize("field,value", [
+        ("actor_call_timeout_seconds", 0), ("actor_io_timeout_seconds", float("nan")),
+        ("actor_close_timeout_seconds", True), ("actor_initialize_timeout_seconds", 301),
+        ("actor_max_pending_calls", True), ("actor_max_open_artifacts", 65),
+    ])
+    def test_actor_operational_settings_reject_invalid_values(field, value):
+        with pytest.raises(ValueError):
+>           Settings(TOKEN, (CODE,), **{field: value})
+E           TypeError: Settings.__init__() got an unexpected keyword argument 'actor_initialize_timeout_seconds'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:146: TypeError
+_ test_actor_operational_settings_reject_invalid_values[actor_max_pending_calls-True] _
+
+field = 'actor_max_pending_calls', value = True
+
+    @pytest.mark.parametrize("field,value", [
+        ("actor_call_timeout_seconds", 0), ("actor_io_timeout_seconds", float("nan")),
+        ("actor_close_timeout_seconds", True), ("actor_initialize_timeout_seconds", 301),
+        ("actor_max_pending_calls", True), ("actor_max_open_artifacts", 65),
+    ])
+    def test_actor_operational_settings_reject_invalid_values(field, value):
+        with pytest.raises(ValueError):
+>           Settings(TOKEN, (CODE,), **{field: value})
+E           TypeError: Settings.__init__() got an unexpected keyword argument 'actor_max_pending_calls'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:146: TypeError
+_ test_actor_operational_settings_reject_invalid_values[actor_max_open_artifacts-65] _
+
+field = 'actor_max_open_artifacts', value = 65
+
+    @pytest.mark.parametrize("field,value", [
+        ("actor_call_timeout_seconds", 0), ("actor_io_timeout_seconds", float("nan")),
+        ("actor_close_timeout_seconds", True), ("actor_initialize_timeout_seconds", 301),
+        ("actor_max_pending_calls", True), ("actor_max_open_artifacts", 65),
+    ])
+    def test_actor_operational_settings_reject_invalid_values(field, value):
+        with pytest.raises(ValueError):
+>           Settings(TOKEN, (CODE,), **{field: value})
+E           TypeError: Settings.__init__() got an unexpected keyword argument 'actor_max_open_artifacts'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:146: TypeError
+___________ test_store_close_bypasses_stalled_storage_metadata_lock ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe1b66129c0>
+
+    def test_store_close_bypasses_stalled_storage_metadata_lock(monkeypatch):
+        from qcl_negf_api import exports
+        started, release = threading.Event(), threading.Event()
+        store = ExportStore(SimpleNamespace(), Settings(TOKEN, (CODE,)))
+        store._entries["synthetic"] = {"reserved": 123, "readers": 0}
+        failures = []
+        def disk_usage(path):
+            started.set()
+            assert release.wait(3)
+            return SimpleNamespace(free=10**12)
+        monkeypatch.setattr(exports.shutil, "disk_usage", disk_usage)
+        def storage():
+            try:
+                store._storage("synthetic", 0)
+            except BaseException as exc:
+                failures.append(exc)
+        thread = threading.Thread(target=storage)
+        thread.start()
+        try:
+            assert started.wait(1)
+            assert not store._lock.acquire(blocking=False), "storage stall must own the old store lock"
+            before = time.monotonic()
+>           result = store.close(deadline=before + 0.08)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: ExportStore.close() got an unexpected keyword argument 'deadline'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:171: TypeError
+
+During handling of the above exception, another exception occurred:
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe1b66129c0>
+
+    def test_store_close_bypasses_stalled_storage_metadata_lock(monkeypatch):
+        from qcl_negf_api import exports
+        started, release = threading.Event(), threading.Event()
+        store = ExportStore(SimpleNamespace(), Settings(TOKEN, (CODE,)))
+        store._entries["synthetic"] = {"reserved": 123, "readers": 0}
+        failures = []
+        def disk_usage(path):
+            started.set()
+            assert release.wait(3)
+            return SimpleNamespace(free=10**12)
+        monkeypatch.setattr(exports.shutil, "disk_usage", disk_usage)
+        def storage():
+            try:
+                store._storage("synthetic", 0)
+            except BaseException as exc:
+                failures.append(exc)
+        thread = threading.Thread(target=storage)
+        thread.start()
+        try:
+            assert started.wait(1)
+            assert not store._lock.acquire(blocking=False), "storage stall must own the old store lock"
+            before = time.monotonic()
+            result = store.close(deadline=before + 0.08)
+            assert time.monotonic() - before < 0.8
+            assert result.state == "stopping"
+            assert result.pending_operations is None and result.pending_leases is None
+            assert result.error_code == "store_metadata_pending"
+            assert store._root.exists() and store._cancelled.is_set()
+            assert not release.is_set()
+        finally:
+            release.set()
+            thread.join(1)
+            assert not thread.is_alive() and not failures
+>           store.close(deadline=time.monotonic() + 1)
+E           TypeError: ExportStore.close() got an unexpected keyword argument 'deadline'
+
+components/qcl-negf-portal/tests/test_actor_deadlines.py:182: TypeError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_blocked_call_returns_unknown_without_duplicate_submit
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_started_mutation_exception_latches_original_receipt[error0-422]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_started_mutation_exception_latches_original_receipt[error1-503]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_close_does_not_claim_backend_completion
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_actor_operational_settings_reject_invalid_values[actor_call_timeout_seconds-0]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_actor_operational_settings_reject_invalid_values[actor_io_timeout_seconds-nan]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_actor_operational_settings_reject_invalid_values[actor_close_timeout_seconds-True]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_actor_operational_settings_reject_invalid_values[actor_initialize_timeout_seconds-301]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_actor_operational_settings_reject_invalid_values[actor_max_pending_calls-True]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_actor_operational_settings_reject_invalid_values[actor_max_open_artifacts-65]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_store_close_bypasses_stalled_storage_metadata_lock
+11 failed, 47 passed in 3.79s

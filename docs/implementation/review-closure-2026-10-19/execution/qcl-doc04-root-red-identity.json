@@ -1,0 +1,62 @@
+{
+  "task": "DOC04 root pure adapters phase 1 RED test source only",
+  "stage": "frozen_test_sources_not_executed",
+  "source_root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "isolated_root": "/tmp/qcl-doc04-root-worktree",
+  "root_revision": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "branch": "codex/review-closure-docs-presentation",
+  "clone": "local --no-hardlinks --no-checkout; exact revision checkout; no network; no submodule init",
+  "initial_status": "clean; all eight gitlinks uninitialized",
+  "final_status": ["?? tests/docs_math_test.mjs", "?? tests/test_docs_assembly.py"],
+  "authoritative_composition": "git ls-tree cfc38e1761f24caf436d938f378dbcdbf71a28f0 components/; no revision lock created",
+  "inputs": [
+    {"path":"/tmp/qcl-doc04-design.md","sha256":"77ee8593655f98b2e66d762620279ba6ac7ec7da126c62a2ccbd56a0262bf12b"},
+    {"path":"/tmp/qcl-doc04-design-review.md","sha256":"6caa4f15035e6a9f564d1ec86f14ecd64bbd31d73457556327e090e9d6628164"},
+    {"path":"/tmp/qcl-doc04-katex-binding-design.md","sha256":"c65c38f74b5fd8168c9ed5ee2fc79649e2d7bafa5655a9248aee4aa81dca25a2"},
+    {"path":"/tmp/qcl-doc04-katex-binding-design-review.md","sha256":"b599846a0bf40f45a9834a84b61d280d64500a625c6fc3fda0cce4e3feee5e28"},
+    {"path":"/tmp/qcl-doc04-katex-binding-identity.json","sha256":"fad374dfd6cf69772cc1bdf7e6816e6d409f18faba361def15e0bb1618af9e9e"},
+    {"path":"AGENTS.md","sha256":"ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330"},
+    {"path":"docs/architecture.md","sha256":"8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7"},
+    {"path":"ops/git.ts","sha256":"1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7"},
+    {"path":"flake.nix","sha256":"4eeae196e7f561e3a61a4c073a13f88578f0ee306745ca0c1d0cff0e4f43771f"},
+    {"path":"flake.lock","sha256":"9f6d261f1a705a4f1b46497107d0cb0a59d0dcfa240cb81255ba103aba3fcd36"}
+  ],
+  "test_sources": [
+    {"path":"tests/test_docs_assembly.py","bytes":13960,"sha256":"4c0f3f10d952be0e38c3c3c3caa098af14e0e126720428dd16ae574dc3106422"},
+    {"path":"tests/docs_math_test.mjs","bytes":9405,"sha256":"7ae60b15740e7e9790318f8724d364f2a9ce567b2a0480cf13c988172966aef3"}
+  ],
+  "patch": {"path":"/tmp/qcl-doc04-root-red-patch.diff","bytes":24131,"sha256":"7ccff023590d62ff8e8959015cb44d1b24fded2276c6074b965e0f8949f0d440"},
+  "math_runtime_inputs": {
+    "environment_variable":"DOC04_KATEX_ROOT",
+    "provided_distribution":"/tmp/qcl-doc04-katex-0.16.8/source/package",
+    "module":"dist/katex.mjs",
+    "module_sha256":"cd4b290a4ecf5068161d6a87745655aa74eb18a6e939fa2872d26520ce261b88",
+    "version":"0.16.8",
+    "css":"dist/katex.min.css",
+    "css_sha256":"df9ef84e97d38557de02183e238f8ddfd10988b37741492e12c3157bc856011e",
+    "font_publication_license_status":"blocked_missing_full_OFL_artifact"
+  },
+  "required_unit_runtime_identities": {
+    "python":"selected root Python 3.14; absolute executable, version, file SHA256 must be recorded by coordinator before authorized run",
+    "node":"selected root Node 24; absolute executable, version, file SHA256 must be recorded by coordinator before authorized run",
+    "deno":"not required for these two pure unit files",
+    "julia_documenter":"not imported or required for these unit files",
+    "build":"separate fresh admission/toolchain/import-manifest gates remain mandatory"
+  },
+  "checks": {
+    "source_hashes":"verified by sha256sum",
+    "patch_whitespace":"git diff --no-index --check on each untracked file produced no findings",
+    "python_parse":"not_measured",
+    "node_parse":"not_measured",
+    "unit_red":"not_measured; execution forbidden in phase 1",
+    "unit_green":"not_measured",
+    "build":"not_measured",
+    "browser":"not_measured",
+    "scientific":"not_measured"
+  },
+  "protected_original_written":false,
+  "production_files_written":false,
+  "stage_commit_push":false,
+  "children_spawned":false,
+  "stop":"immutable tests; independent review and explicit finite local unit DEV plan before any execution or product implementation"
+}

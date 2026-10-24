@@ -1,0 +1,263 @@
+{
+  "format": "qcl-negf.docs-routing-pure-harness-v6-independent-review.v1",
+  "status": "SOURCE_REVIEW_COMPLETE_NOT_READY_NOT_EXECUTION_GRANT",
+  "verdicts": {
+    "guard": "PASS_SOURCE",
+    "comment_only": "PASS_COMMENT_ONLY_PURE_CORRECTION",
+    "current_pure_closure": "PASS_SOURCE_PURE_CLOSURE"
+  },
+  "blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+    "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d",
+    "bytes": 13693
+  },
+  "packet_hash_map": {
+    "/tmp/qcl-docs-routing-pure-guard-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-guard-v6.py",
+      "sha256": "c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6",
+      "bytes": 56906
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v6.json": {
+      "path": "/tmp/qcl-docs-routing-pure-plan-v6.json",
+      "sha256": "3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9",
+      "bytes": 16109
+    },
+    "/tmp/qcl-docs-routing-pure-format-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-format-v6.py",
+      "sha256": "8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85",
+      "bytes": 1363
+    },
+    "/tmp/qcl-docs-routing-pure-lint-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-lint-v6.py",
+      "sha256": "d27fd04195f76459dc80ee132cb85be6751358908493e95a628ced1d16cc9368",
+      "bytes": 1357
+    },
+    "/tmp/qcl-docs-routing-pure-check-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-check-v6.py",
+      "sha256": "02a0f86dcd35552798f1748b93335d84a0379db18dd19e65cec1e36dcb36f24f",
+      "bytes": 1366
+    },
+    "/tmp/qcl-docs-routing-pure-report-v6.md": {
+      "path": "/tmp/qcl-docs-routing-pure-report-v6.md",
+      "sha256": "3568aa4155907f28d5b9fdb8c51c10cb1f97f3b92e9b3760e2a3cbbf5cf7015d",
+      "bytes": 7856
+    },
+    "/tmp/qcl-docs-routing-pure-identity-v6.json": {
+      "path": "/tmp/qcl-docs-routing-pure-identity-v6.json",
+      "sha256": "595fbd4fb60a9c622555e3b0f03a80e0eb8cc883b14c2ae51e38c1414b5ae397",
+      "bytes": 4749
+    },
+    "/tmp/qcl-docs-routing-pure-lint-comment-correction-v1.patch": {
+      "path": "/tmp/qcl-docs-routing-pure-lint-comment-correction-v1.patch",
+      "sha256": "0ba7a8cdd4b18f7207acbd8f49c86e29b7012d8f25f19dfe8a0a14b6e60628e3",
+      "bytes": 916
+    }
+  },
+  "source_hash_map": {
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+  },
+  "before_post_FORMAT1_source_hash_map": {
+    "ops/docs_tests.ts": "38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b",
+    "tests/docs_test_routing_test.ts": "8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b"
+  },
+  "comment_only_cpp": {
+    "status": "PASS_COMMENT_ONLY_PURE_CORRECTION",
+    "pure_only_slice": true,
+    "before_sources": {
+      "ops/docs_tests.ts": "38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b",
+      "tests/docs_test_routing_test.ts": "8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b"
+    },
+    "after_sources": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "patch_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-lint-comment-correction-v1.patch",
+      "sha256": "0ba7a8cdd4b18f7207acbd8f49c86e29b7012d8f25f19dfe8a0a14b6e60628e3"
+    },
+    "prior_format_review_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v5-review.md",
+      "sha256": "50b8d8d5c83d509df3928750a6ad947f8b779dcacaa2baa3b690c65f18b81ba2"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+      "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d"
+    }
+  },
+  "current_pure_closure": {
+    "status": "PASS_SOURCE_PURE_CLOSURE",
+    "source_files": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "pure_only_slice": true,
+    "baseline_cpp_ref": {
+      "path": "/tmp/qcl-docs-routing-impl-i2b-review.md",
+      "sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+      "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d"
+    },
+    "scope": "Current pre-FORMAT2 comment baseline only; final FORMAT2 closure must bind actual final hashes separately."
+  },
+  "ancestry_hash_map": {
+    "/tmp/qcl-docs-routing-pure-guard-v5.py": {
+      "path": "/tmp/qcl-docs-routing-pure-guard-v5.py",
+      "sha256": "e49cda399947c9ce9a60352c9def75076d8f5bab29d054f16a8d6874837e1372",
+      "bytes": 53270
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v5.json": {
+      "path": "/tmp/qcl-docs-routing-pure-plan-v5.json",
+      "sha256": "73b79ab73cf2b0702ace55de6f6c0cca6f48106bf0eaa7556221bad4804f9b06",
+      "bytes": 13320
+    },
+    "/tmp/qcl-docs-routing-pure-harness-v5-review.md": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v5-review.md",
+      "sha256": "140472debae1d9a47c8c694b964ed36213003fd3dbffe172001928b141bfb084",
+      "bytes": 11023
+    },
+    "/tmp/qcl-docs-routing-pure-format-final-v5-review.md": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v5-review.md",
+      "sha256": "50b8d8d5c83d509df3928750a6ad947f8b779dcacaa2baa3b690c65f18b81ba2",
+      "bytes": 12211
+    },
+    "/tmp/qcl-docs-routing-pure-format1-frozen-v5/manifest.json": {
+      "path": "/tmp/qcl-docs-routing-pure-format1-frozen-v5/manifest.json",
+      "sha256": "ed50c4ec8c8ba1b88ce93fdc8778c317446d08d716a799aa688771ed7c94846a",
+      "bytes": 384
+    },
+    "/tmp/qcl-docs-routing-pure-format1-frozen-v5/ops/docs_tests.ts": {
+      "path": "/tmp/qcl-docs-routing-pure-format1-frozen-v5/ops/docs_tests.ts",
+      "sha256": "38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b",
+      "bytes": 28532
+    },
+    "/tmp/qcl-docs-routing-pure-format1-frozen-v5/tests/docs_test_routing_test.ts": {
+      "path": "/tmp/qcl-docs-routing-pure-format1-frozen-v5/tests/docs_test_routing_test.ts",
+      "sha256": "8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b",
+      "bytes": 41460
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-1/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-1/receipt.json",
+      "sha256": "d33fe2a43835ae48af6ff9a92d8abda2351bdac5e6ddff30c2590a216dba73a6",
+      "bytes": 3771
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-1/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-1/original.log",
+      "sha256": "b9f584e863bc07b513e9c6808e9e1eb0f6bdba3dc88377b983560b1316fa6919",
+      "bytes": 138
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-1/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-1/receipt.json",
+      "sha256": "c14d85854326c2bd8bd6ac4fcd009fc57dc346e538dcd015b1f70a3b0bdadf10",
+      "bytes": 3775
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-1/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-1/original.log",
+      "sha256": "c480b2473669fb26ad2b45494a09443e195eee25c4361ddda1399bb017e3f787",
+      "bytes": 1279
+    }
+  },
+  "evidence": {
+    "patch_reconstructed_from_frozen_equals_pinned_patch": true,
+    "exact_inserted_lines": 2,
+    "remove_each_inserted_line_restores_frozen_bytes": true,
+    "unit_lifecycle_byte_equal_v5": true,
+    "rss_limits_receipt_helpers_byte_equal_v5": true,
+    "source_reservation_watchdog_setup_byte_equal_v5": true,
+    "actual_full_guard_plan_wrapper_diff_reviewed": true,
+    "static_registered_tests": 230,
+    "static_count_basis": "Unchanged finite registration loops and names; prior detailed227+3 audit,42text callsites; not assertion count.",
+    "observed_engine_tests": null,
+    "old_LINT1_exit_code": 1,
+    "old_LINT1_remains_failed_consumed": true,
+    "old_DOC06_E1_unknown_remains_failed": true
+  },
+  "metadata": {
+    "root_head_at_read": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "isolated_head_at_read": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "git_status_and_submodule_status_read": true,
+    "root_worktree_dirty": true,
+    "isolated_worktree_dirty": true,
+    "isolated_submodules_uninitialized": 8,
+    "CP_product_calls_snapshot": 87,
+    "CP_source_tools_calls_snapshot": 4,
+    "CP_is_authority_marker": false
+  },
+  "prospective_stages": {
+    "FORMAT2": [
+      4,
+      5
+    ],
+    "LINT2": [
+      5,
+      6
+    ],
+    "CHECK1": [
+      6,
+      7
+    ],
+    "source_ceiling": 8,
+    "sole_unit": "DOCS-ROUTING-GREEN-1",
+    "product_counter": [
+      87,
+      88
+    ],
+    "no_retry_or_autorun": true,
+    "future_FORMAT2_source_hashes": null,
+    "new_good_receipts_reviewed": false
+  },
+  "safety": {
+    "R1b": "attempted-before-constructor; unknown ownership failed nullable incomplete receipt and force exit under watchdog; known collector must terminate before alarm cancellation",
+    "R2": "pre-proven-reaped N/A only; attempted-live unknown hard failure; final/predecessor unknown0 and valid>=1",
+    "durability": "best effort only; no guarantee on disk failure/SIGKILL/host loss",
+    "resource_limits_unchanged": true,
+    "permissions_runtime_config_unchanged": true
+  },
+  "required_remaining": [
+    "Root fresh actual HEAD/status/gitlinks/counters and reviewed new control/admission/SourceRefs",
+    "FORMAT2 exactly once, then independent exact-format-only/final-pure-closure review",
+    "LINT2 and CHECK1 each once with accepted predecessor chain and fresh Root admission",
+    "Sole GREEN separate Root late READY and independent completeTAP230 outcome review; no automatic submission"
+  ],
+  "execution_counts": {
+    "prepared_scripts": 0,
+    "prepared_guard_import_compile_exec": 0,
+    "target": 0,
+    "parser": 0,
+    "compiler": 0,
+    "formatter": 0,
+    "linter": 0,
+    "tests": 0,
+    "Deno": 0,
+    "Julia": 0,
+    "native": 0,
+    "network": 0
+  },
+  "mutations": {
+    "Root": 0,
+    "CP": 0,
+    "source": 0,
+    "history": 0,
+    "git_index": 0,
+    "review_deliverables": 2
+  },
+  "budget": {
+    "read_ceiling_bytes": 5242880,
+    "conservative_reads_below_ceiling": true,
+    "wall_ceiling_seconds": 600,
+    "CPU_ceiling": 1,
+    "RAM_ceiling_bytes": 1073741824,
+    "output_ceiling_bytes": 196608,
+    "physical_CPU_RSS_IO_measured": false
+  },
+  "limitations": [
+    "Source acceptance only; not READY/run grant/runtime observation",
+    "Current pure-only closure does not approve native wholeI2B; whole verdict CHANGES_REQUIRED retained",
+    "Directive applicability and futureFORMAT2/LINT2/CHECK1 results unknown",
+    "Sampled guards are not hardpeak/cgroup/diskquota guarantees",
+    "TrustedRoot validates substantive approval; JSON/hash checks not authentication"
+  ]
+}

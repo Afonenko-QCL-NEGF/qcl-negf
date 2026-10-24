@@ -1,0 +1,51 @@
+{
+  "kind": "ops04-platform-phase1-test-source-correction-v2",
+  "status": "awaiting_independent_high_review",
+  "runtime_status": "not_measured",
+  "base_commit": "b067723c82382689bff5cc366981c56e99b926f8",
+  "head_commit": "b067723c82382689bff5cc366981c56e99b926f8",
+  "worktree": "/tmp/qcl-ops04-platform-worktree",
+  "review": {
+    "path": "/tmp/qcl-ops04-platform-red-review.md",
+    "sha256": "1f2da5b3154c7a9958a8332a048e113423e3878fccc60ca23b4be60bcf9be791"
+  },
+  "patch": {
+    "path": "/tmp/qcl-ops04-platform-red-v2-patch.diff",
+    "bytes": 17249,
+    "sha256": "ebb800e1cdd95366548f91bcbc86562ecf5ab18e8716e7ec22b47a283a1d610c"
+  },
+  "delta": {
+    "path": "/tmp/qcl-ops04-platform-red-v2-delta.diff",
+    "bytes": 4949,
+    "sha256": "aec8116650eca89efd626c10cc177d4d0598bb998b7c40306845e37787b61e3b"
+  },
+  "test_sources": {
+    "tests/test_node_enrollment.py": "27b733487737501880023dc55607b21c357654821da5a65f53940873c0f0cfe5",
+    "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6"
+  },
+  "unchanged_production_sha256": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0",
+  "previous_frozen_artifacts": {
+    "report_sha256": "c103de9ae30afb15d38eece1f60d423c5b4821d9f66b96514ab3bdade5d4d252",
+    "identity_sha256": "ad764c8dc849e046205536936783992fca26d06537ff018704351599b5f3fd31",
+    "patch_sha256": "b5aa36236fa373c709b6428198afbbf40c54895e2fa2c06fd8dbd365ea3bddef"
+  },
+  "correction_scope": ["F1-readonly-open-flags", "F2-independent-long-tail-read-bound"],
+  "verification": {
+    "git_diff_check": "pass",
+    "target_imports_parsers_tests": 0,
+    "python_runtime_calls": 0,
+    "platform_red_green_calls_used": 0,
+    "platform_red_green_calls_total": 2,
+    "git_mutations": 0,
+    "network_native_server_build_science_full_ci": 0,
+    "child_agents": 0
+  },
+  "proposed_inventory": {
+    "t3_methods": 12,
+    "t3_input_combinations": 52,
+    "t2_shared_rejected_literals": 19,
+    "t2_retained_extra_rejected_literals": 7,
+    "t2_accepted_literals": 7,
+    "measured_coverage": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "CP_CODE": "ed04e07495d11c3bbc381fb6cd316476ba72f327fc54c3308af4af9aa403eb9b",
+  "components": {
+    "qcl-negf-contracts": {
+      "worktree": "/tmp/qcl-sci05-contracts-worktree",
+      "base": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+      "branch": "codex/review-closure-final-audit-contract",
+      "base_branch": "codex/review-closure-contribution-routing",
+      "files": {
+        "src/qcl_negf_contracts/final_audit.py": "1c19ba7f27912c739b349fb7c517a9030be3c4f50c4b75932c08d0c02f3219d1",
+        "src/qcl_negf_contracts/schemas/final-fixed-point-audit.schema.json": "ef25a90acfdc8445a20fb53bc40a861de355e07a8abca4dd90f7ee9a0143dc28",
+        "tests/test_final_audit.py": "23098050f2fbc1d282b0de3a84ba0d034be034a3f69f62920fee6fba64914b12",
+        "README.md": "a95dc9b6f09160f06b1197d57c83147718152b914c6c6da4e7aa3e3f6753f94c"
+      },
+      "state": "G1_merged",
+      "independent_CP_SOURCE": "4a73cde4293e02322f43f32410df910c9a6ed17927da4b49ac0007ef4f844805",
+      "pr": 9,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/pull/9",
+      "merge_commit": "7ca26fb0f9fc1bf80950c4c5f533df5d430f7e08",
+      "merged_at": "2026-10-19T17:51:03Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "LOCAL-DOC04-OPS04-RUNTIME-PREFLIGHT-2",
+  "engineering_replan": "latest human resource grant, exactly one changed-method read-only metadata call after retained daemon refusal; cap90s1CPU2GiBAS1MiBraw; no third automatic",
+  "registered_nixpkgs_source": {
+    "row": [
+      "/nix/store/q6zfrswar6d0fkihnxc198vmkdxrmvq5-source",
+      "sha256:711ad69488d5449e811c3afd71a51d5ec677a30cd620a607a4d9863c70489c85",
+      null,
+      206622144
+    ],
+    "nar_sri": "sha256-cRrWlIjVRJ6BHDr9caUdXsZ3owzWIKYHpNmGPHBInIU=",
+    "locked": {
+      "lastModified": 1790340521,
+      "narHash": "sha256-cRrWlIjVRJ6BHDr9caUdXsZ3owzWIKYHpNmGPHBInIU=",
+      "owner": "NixOS",
+      "repo": "nixpkgs",
+      "rev": "f5c082a40f7571c266e74e80ae2e68aadd8a9fc7",
+      "type": "github"
+    },
+    "proof_limit": "trusted local read-only store registration, not fresh NAR content verification"
+  },
+  "rows": [
+    {
+      "command": [
+        "nix",
+        "--extra-experimental-features",
+        "nix-command",
+        "--store",
+        "local?read-only=true",
+        "eval",
+        "--offline",
+        "--raw",
+        "--impure",
+        "--expr",
+        "let p=import /nix/store/q6zfrswar6d0fkihnxc198vmkdxrmvq5-source {system=\"x86_64-linux\";}; in builtins.toJSON { deno=p.deno.outPath; node=p.nodejs_24.outPath; }"
+      ],
+      "exit": 1,
+      "raw_utf8": "error: experimental Nix feature 'read-only-local-store' is disabled; add '--extra-experimental-features read-only-local-store' to enable it\n",
+      "bytes": 140,
+      "sha256": "e45e38006c1f2d8dd51a07cf0ca9fa36f414e23391c8a0e4fd33082906a0d07d"
+    }
+  ],
+  "wall_seconds": 0.020585756050422788,
+  "utc": "2026-10-19T20:55:14.617775+00:00"
+}

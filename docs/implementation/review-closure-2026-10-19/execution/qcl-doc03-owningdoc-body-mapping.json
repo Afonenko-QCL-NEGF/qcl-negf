@@ -1,0 +1,127 @@
+{
+  "source_file": "/tmp/qcl-doc03-design-v2.md",
+  "source_sha256": "01bd504b382062ad896280e58dca4588e67f725e5deb72f350eae99c91aca625",
+  "source_range": {
+    "start_heading": "## 2. Что установлено по source",
+    "end_exclusive_heading": "## 9. Handoff"
+  },
+  "source_body_sha256": "18ca8e0f6303ea6047977abd809ca1dd34c0d37cec71318a779c24a8fd47f9ae",
+  "transplanted_body_sha256": "6356341fd7f21256f6fa69034dc073ef3f86dde09d5ca26b8d291cc1c16a3ba4",
+  "heading_map": [
+    {
+      "source": "## 2. Что установлено по source",
+      "anchor": "model-help-source-facts",
+      "destination": "### Source facts выбранной композиции"
+    },
+    {
+      "source": "## 3. Варианты и выбранный минимальный путь",
+      "anchor": "model-help-publication-route",
+      "destination": "### Минимальный путь публикации"
+    },
+    {
+      "source": "## 4. Один canonical source на каждый факт",
+      "anchor": "model-help-canonical-sources",
+      "destination": "### Canonical source для каждого факта"
+    },
+    {
+      "source": "## 5. Exact proposed contract",
+      "anchor": "model-help-formats",
+      "destination": "### Формат bundle, fragment и run view"
+    },
+    {
+      "source": "### 5.1 `bundle.json`: output build, input static server/help resolver",
+      "anchor": "model-help-bundle",
+      "destination": "#### `bundle.json`: output build, input static server/help resolver"
+    },
+    {
+      "source": "### 5.2 Static fragment: output Core/Research + bounded extraction",
+      "anchor": "model-help-fragment",
+      "destination": "#### Static fragment: output Core/Research + bounded extraction"
+    },
+    {
+      "source": "### 5.2a D2: reference origin и источник конкретного значения",
+      "anchor": "model-help-value-origin",
+      "destination": "#### Reference origin и источник конкретного значения"
+    },
+    {
+      "source": "### 5.3 Run view: output read adapter, input человек/агент/Portal",
+      "anchor": "model-help-run-view",
+      "destination": "#### Run view: output read adapter, input человек/агент/Portal"
+    },
+    {
+      "source": "### 5.3a D2: Runner-local snapshot, placement и capture",
+      "anchor": "model-help-local-snapshot",
+      "destination": "#### Runner-local snapshot, placement и capture"
+    },
+    {
+      "source": "### 5.3b D2: retrieval, parser inventory, selected-child enrichment",
+      "anchor": "model-help-retrieval",
+      "destination": "#### Retrieval, parser inventory и selected-child enrichment"
+    },
+    {
+      "source": "### 5.4 Unknown example и совместимость",
+      "anchor": "model-help-compatibility",
+      "destination": "#### Unknown example и совместимость"
+    },
+    {
+      "source": "## 6. Allowlist, пределы и сборка",
+      "anchor": "model-help-build",
+      "destination": "### Allowlist, пределы и сборка"
+    },
+    {
+      "source": "## 7. Serving, anchors, offline и UI",
+      "anchor": "model-help-serving",
+      "destination": "### Serving, anchors, offline и UI"
+    },
+    {
+      "source": "## 8. Acceptance — пять обязательных отрицательных случаев",
+      "anchor": "model-help-negative-controls",
+      "destination": "### Приёмка: пять обязательных отрицательных случаев"
+    },
+    {
+      "source": "### D2 controls — future targeted checks, сегодня не исполнялись",
+      "anchor": "model-help-point-retry-controls",
+      "destination": "#### Запланированные controls: origins, точки и retry"
+    }
+  ],
+  "body_rewrites": [
+    {
+      "source": "Это proposed format после CP-DESIGN, а не существующий Contracts API.",
+      "destination": "Это принятый implementation contract; существующим Contracts API он не объявляется."
+    },
+    {
+      "source": "атрибуции. Новый capture ingress/CLI/API не придумывается этим D2.",
+      "destination": "атрибуции. Новый capture ingress/CLI/API этим контрактом не вводится."
+    },
+    {
+      "source": "  Остальные type/status/unknown invariants D1 сохранены;",
+      "destination": "  Применяются общие type/status/unknown invariants этого контракта;"
+    },
+    {
+      "source": "   Project/Manifest hashes входят в receipt. Root 9d8cf0c сейчас dirty/mismatched\n   для реального `sourceGraph()` release build и не является ready build input.",
+      "destination": "   Project/Manifest hashes входят в receipt."
+    }
+  ],
+  "link_rewrites": [
+    {
+      "source": "§5.2a",
+      "destination": "[контракте value origin](#model-help-value-origin)",
+      "count": 3
+    },
+    {
+      "source": "§5.3b",
+      "destination": "[контракте retrieval](#model-help-retrieval)",
+      "count": 1
+    },
+    {
+      "source": "§2",
+      "destination": "[source facts](#model-help-source-facts)",
+      "count": 1
+    }
+  ],
+  "status_additions": [
+    "Dated accepted implementation-contract qualification after original status",
+    "Implementation scope introduction before byte-transplanted technical body"
+  ],
+  "original_bytes_retained": true
+}

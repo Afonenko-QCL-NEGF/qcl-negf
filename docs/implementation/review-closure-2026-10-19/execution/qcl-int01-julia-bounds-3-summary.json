@@ -1,0 +1,14 @@
+{
+  "operation_id": "INT01-JULIA-BOUNDS-3",
+  "state": "completed",
+  "wall_seconds": 110.8440330028534,
+  "guard_receipt_sha256": "f529b69958f5f95db68296efd0a05a8f7e991a2fae0dbf87e117c88ae12e53b9",
+  "raw_sha256": "cd82f597b95bf8613be717fa092a9eb310f74d7dd4c2cd7ceea265882f3c2e46",
+  "raw_bytes": 18957,
+  "raw_complete": true,
+  "immutable_unchanged": true,
+  "copied_locks_unchanged": true,
+  "scoped": "Exact --check-bounds=yes/compilerimages/selectedowningimports only; no unitassertions/solver/fullCI",
+  "attempts_total": 3,
+  "cumulative_setup_wall_seconds": 424.0946424007416
+}

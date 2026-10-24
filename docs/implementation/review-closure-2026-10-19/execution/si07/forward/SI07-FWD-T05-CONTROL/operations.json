@@ -1,0 +1,35 @@
+{
+  "sample": "SI07-FWD-T05-CONTROL",
+  "operations": [
+    {
+      "kind": "read",
+      "command": "cat /tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CONTROL/prompt.txt",
+      "paths": ["/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CONTROL/prompt.txt"],
+      "exit_code": null,
+      "output_summary": "Dispatch protocol read: control whitelist, one authorized T05 check, artifact and resource budgets. Exit code was not retained in displayed output."
+    },
+    {
+      "kind": "read",
+      "command": "cat /tmp/qcl-si07-cases/T05/request.txt /tmp/qcl-si07-cases/T05/README.md /tmp/qcl-si07-cases/T05/target.md /tmp/qcl-si07-cases/T05/check.py",
+      "paths": ["/tmp/qcl-si07-cases/T05/request.txt", "/tmp/qcl-si07-cases/T05/README.md", "/tmp/qcl-si07-cases/T05/target.md", "/tmp/qcl-si07-cases/T05/check.py"],
+      "exit_code": null,
+      "output_summary": "Request authorizes exact check once. README links target.md. Target is source-only fixture. Script sets limits, checks exact link list and file existence, prints JSON; no project imports. Exit code was not retained in displayed output."
+    },
+    {
+      "kind": "check",
+      "command": "/usr/bin/python3 -I -S /tmp/qcl-si07-cases/T05/check.py /tmp/qcl-si07-cases/T05",
+      "exit_code": 0,
+      "output": "{\"static_links\": \"pass\", \"links_checked\": 1, \"solver_executed\": false}\n"
+    },
+    {
+      "kind": "write",
+      "tool": "apply_patch",
+      "paths": ["answer.md", "operations.json"],
+      "summary": "Saved answer and this audit in designated output directory."
+    }
+  ],
+  "approx_input_bytes": 10000,
+  "input_bytes_note": "Conservative approximation including dispatch and raw text; no additional contexts read.",
+  "check_calls": 1,
+  "cpu_rss_measured": false
+}

@@ -1,0 +1,57 @@
+{
+  "format": "qcl-source-review-identity-v1",
+  "task": "OPS08 literal RED fixture CPP",
+  "reviewer": "/root/sci03_current_bound_review",
+  "verdict": "PASS_SOURCE",
+  "report": "/tmp/qcl-ops08-red-review.md",
+  "report_sha256": "308b4e6910c6d9f16b412a601e0d295e0b3842a23efc7179ede064f655427402",
+  "report_bytes": 13985,
+  "owning_base": "f5bc368654414039f7368bb19ca3201fa7f29f9d",
+  "worktree": "/tmp/qcl-ops08-worktree",
+  "fixture_sha256": "4cf04db2e0884afd5c0ec24171df29374c363569209b2fd0c181f3a23b7c73ad",
+  "patch_sha256": "7d9f5d4ee2008a1ce57d464d88328b3ae201bdcd6662c8a7d0b860cf1708bc8d",
+  "author_report_sha256": "3377447aeea86bdd289bc7381d65e7d556cfbb48960882b3e5eb0dac35413a44",
+  "author_identity_sha256": "01f90bc6af5b39d39b639fb10412ba1d375179dbdafbb2c47132765d2f519b9b",
+  "production_sha256": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0",
+  "existing_application_fixture_sha256": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6",
+  "existing_enrollment_fixture_sha256": "d99c003fccc308c9cffed172f38ec69eeaa744f2753c7a95c28794d07aca305d",
+  "blocking_findings": [],
+  "method_count": 11,
+  "source_disposition": {
+    "healthy_control": "Whole production route, actual gate and intent cleanup; not measured",
+    "R1": "Three known release negatives distinct from two existing uncertain-envelope controls",
+    "R2": "Five post-open local-journal/unlink/deadline/recovery-close faults with reached preconditions",
+    "authority": "Real preflight/load/freeze/validators/owner/high-level deliver retained; host/syscall/commands synthetic",
+    "oracle_limit": "Shared Commands/NativeUpdateModel is not independent native oracle"
+  },
+  "resource": {
+    "source_read_cap_bytes": 4194304,
+    "source_read_charged_upper_bound_bytes": 1184947,
+    "named_ledger": [
+      {"group": "new fixture/report/identity text and SHA", "bytes": 42160},
+      {"group": "existing application fixture extract full charge", "bytes": 264761},
+      {"group": "enrollment definitions rg full charge", "bytes": 58668},
+      {"group": "production/docs/helper/patch SHA", "bytes": 234321},
+      {"group": "enrollment source extract full charge", "bytes": 58668},
+      {"group": "production boundary extract full charge", "bytes": 190991},
+      {"group": "full patch text", "bytes": 11949},
+      {"group": "existing fixtures SHA", "bytes": 323429}
+    ],
+    "physical_io_RSS_measured": false,
+    "original_audit_cap_failure_reclassified": false
+  },
+  "observed_RED": false,
+  "observed_GREEN": false,
+  "native_acceptance": false,
+  "reviewer_actions": {
+    "target_import_parser_test_build": 0,
+    "network_server": 0,
+    "children": 0,
+    "product_edits": 0,
+    "git_mutations": 0,
+    "checkpoint_writes": 0,
+    "C08_science": 0
+  },
+  "next": "Root separately binds exact source and sole first finite RED; no runtime grant created by review",
+  "stop": true
+}

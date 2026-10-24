@@ -1,0 +1,1697 @@
+{
+  "format": "qcl-docs-assets-v1",
+  "documenter": {
+    "version": "1.17.0",
+    "git_tree_sha1": "56e9c37b5e7c3b4f080ab1da18d72d5c290e184a"
+  },
+  "katex": {
+    "version": "0.16.8",
+    "distribution_sha256": "7547e6a4088c2bbf0edb82510aa88822396fb39bf14b4e35ed491182b0e89c73"
+  },
+  "files": [
+    {
+      "source_path": "documenter/assets/html/js/collapse.js",
+      "destination": null,
+      "bytes": 1605,
+      "sha256": "f9847e1db75d40b4fba70c8c86324c14d749899d325b0ed55250440756bafe10",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/js/copy.js",
+      "destination": null,
+      "bytes": 1720,
+      "sha256": "807f4ab6b1c8c369f26facbe8dca465e0f297a1dc6a0cf9d18a6448df37f27d3",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/js/footnote.js",
+      "destination": null,
+      "bytes": 1413,
+      "sha256": "433209a70f27bc26f2bc2329b49facadff7ad69058f511882c043fc1aa22e8dc",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/js/headroom.js",
+      "destination": null,
+      "bytes": 361,
+      "sha256": "356ffe5b5c6b277e6469fe197ca818fddd93d73a020278c58cfba79b4f48a424",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/js/metadata.js",
+      "destination": null,
+      "bytes": 252,
+      "sha256": "4736a2a303b77711fe6e003f18b4ae76c9041f5f3053a1ef3cf8a744052cf081",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/js/search.js",
+      "destination": null,
+      "bytes": 20550,
+      "sha256": "fcea60b31e7942cfa6bfec61a4a7e7b32837c451f94dae22be0e8950938f5b03",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/js/shortcut.js",
+      "destination": null,
+      "bytes": 5610,
+      "sha256": "b4c9528ef9e67ed8f93e10f00dbe170447047ae157cf319d86a4d6174bc254f6",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/js/sidebar.js",
+      "destination": null,
+      "bytes": 1638,
+      "sha256": "e5e02b3c3c4f71a4af56db35999f82dcacd3dbd8fb5fcbe50686c98f6af514e8",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/themes/documenter-light.css",
+      "destination": "assets/documenter-light.css",
+      "bytes": 268407,
+      "sha256": "706b5379af688761c9f0168af88e1eaa05495e1cdc7c4a0debbf03621d8923a7",
+      "license": "documenter-theme"
+    },
+    {
+      "source_path": "documenter/LICENSE.md",
+      "destination": "assets/licenses/documenter.txt",
+      "bytes": 1143,
+      "sha256": "a926ae85847aae6a14a6ac5719371a5c8f16892fffcde92b9ad726beb99d720e",
+      "license": "documenter-mit"
+    },
+    {
+      "source_path": "documenter/assets/html/scss/bulma/LICENSE",
+      "destination": "assets/licenses/bulma.txt",
+      "bytes": 1080,
+      "sha256": "10ecf152e6235bd8d3fdeb88918272b9b6bab957750069db9af3012cc3383f7e",
+      "license": "bulma-mit"
+    },
+    {
+      "source_path": "katex/LICENSE",
+      "destination": "assets/licenses/katex-code.txt",
+      "bytes": 1107,
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
+      "license": "katex-mit",
+      "distribution": "katex",
+      "member": "package/LICENSE"
+    },
+    {
+      "source_path": "katex/dist/katex.mjs",
+      "destination": null,
+      "bytes": 604462,
+      "sha256": "cd4b290a4ecf5068161d6a87745655aa74eb18a6e939fa2872d26520ce261b88",
+      "license": "katex-mit",
+      "distribution": "katex",
+      "member": "package/dist/katex.mjs"
+    },
+    {
+      "source_path": "katex/dist/katex.min.css",
+      "destination": "assets/vendor/katex/0.16.8/katex.min.css",
+      "bytes": 23112,
+      "sha256": "df9ef84e97d38557de02183e238f8ddfd10988b37741492e12c3157bc856011e",
+      "license": "katex-mit",
+      "distribution": "katex",
+      "member": "package/dist/katex.min.css"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_AMS-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_AMS-Regular.ttf",
+      "bytes": 63632,
+      "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_AMS-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_AMS-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_AMS-Regular.woff",
+      "bytes": 33516,
+      "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_AMS-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_AMS-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_AMS-Regular.woff2",
+      "bytes": 28076,
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_AMS-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Caligraphic-Bold.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Bold.ttf",
+      "bytes": 12368,
+      "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Caligraphic-Bold.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Caligraphic-Bold.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Bold.woff",
+      "bytes": 7716,
+      "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Caligraphic-Bold.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Caligraphic-Bold.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Bold.woff2",
+      "bytes": 6912,
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Caligraphic-Bold.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Caligraphic-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Regular.ttf",
+      "bytes": 12344,
+      "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Caligraphic-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Caligraphic-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Regular.woff",
+      "bytes": 7656,
+      "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Caligraphic-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Caligraphic-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Regular.woff2",
+      "bytes": 6908,
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Caligraphic-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Fraktur-Bold.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Bold.ttf",
+      "bytes": 19584,
+      "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Fraktur-Bold.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Fraktur-Bold.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Bold.woff",
+      "bytes": 13296,
+      "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Fraktur-Bold.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Fraktur-Bold.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Bold.woff2",
+      "bytes": 11348,
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Fraktur-Bold.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Fraktur-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Regular.ttf",
+      "bytes": 19572,
+      "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Fraktur-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Fraktur-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Regular.woff",
+      "bytes": 13208,
+      "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Fraktur-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Fraktur-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Regular.woff2",
+      "bytes": 11316,
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Fraktur-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Bold.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Bold.ttf",
+      "bytes": 51336,
+      "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Bold.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Bold.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Bold.woff",
+      "bytes": 29912,
+      "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Bold.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Bold.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Bold.woff2",
+      "bytes": 25324,
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Bold.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-BoldItalic.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-BoldItalic.ttf",
+      "bytes": 32968,
+      "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-BoldItalic.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-BoldItalic.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-BoldItalic.woff",
+      "bytes": 19412,
+      "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-BoldItalic.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-BoldItalic.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-BoldItalic.woff2",
+      "bytes": 16780,
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-BoldItalic.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Italic.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Italic.ttf",
+      "bytes": 33580,
+      "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Italic.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Italic.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Italic.woff",
+      "bytes": 19676,
+      "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Italic.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Italic.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Italic.woff2",
+      "bytes": 16988,
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Italic.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Regular.ttf",
+      "bytes": 53580,
+      "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Regular.woff",
+      "bytes": 30772,
+      "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Main-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Regular.woff2",
+      "bytes": 26272,
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Main-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Math-BoldItalic.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-BoldItalic.ttf",
+      "bytes": 31196,
+      "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Math-BoldItalic.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Math-BoldItalic.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-BoldItalic.woff",
+      "bytes": 18668,
+      "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Math-BoldItalic.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Math-BoldItalic.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-BoldItalic.woff2",
+      "bytes": 16400,
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Math-BoldItalic.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Math-Italic.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-Italic.ttf",
+      "bytes": 31308,
+      "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Math-Italic.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Math-Italic.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-Italic.woff",
+      "bytes": 18748,
+      "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Math-Italic.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Math-Italic.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-Italic.woff2",
+      "bytes": 16440,
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Math-Italic.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Bold.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Bold.ttf",
+      "bytes": 24504,
+      "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Bold.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Bold.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Bold.woff",
+      "bytes": 14408,
+      "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Bold.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Bold.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Bold.woff2",
+      "bytes": 12216,
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Bold.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Italic.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Italic.ttf",
+      "bytes": 22364,
+      "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Italic.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Italic.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Italic.woff",
+      "bytes": 14112,
+      "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Italic.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Italic.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Italic.woff2",
+      "bytes": 12028,
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Italic.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Regular.ttf",
+      "bytes": 19436,
+      "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Regular.woff",
+      "bytes": 12316,
+      "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_SansSerif-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Regular.woff2",
+      "bytes": 10344,
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_SansSerif-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Script-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Script-Regular.ttf",
+      "bytes": 16648,
+      "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Script-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Script-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Script-Regular.woff",
+      "bytes": 10588,
+      "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Script-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Script-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Script-Regular.woff2",
+      "bytes": 9644,
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Script-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size1-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size1-Regular.ttf",
+      "bytes": 12228,
+      "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size1-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size1-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size1-Regular.woff",
+      "bytes": 6496,
+      "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size1-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size1-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size1-Regular.woff2",
+      "bytes": 5468,
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size1-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size2-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size2-Regular.ttf",
+      "bytes": 11508,
+      "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size2-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size2-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size2-Regular.woff",
+      "bytes": 6188,
+      "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size2-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size2-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size2-Regular.woff2",
+      "bytes": 5208,
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size2-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size3-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size3-Regular.ttf",
+      "bytes": 7588,
+      "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size3-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size3-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size3-Regular.woff",
+      "bytes": 4420,
+      "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size3-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size3-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size3-Regular.woff2",
+      "bytes": 3624,
+      "sha256": "73d591271b1604960cb10bb90fee021670af7297017e0e98480b332d11f51995",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size3-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size4-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size4-Regular.ttf",
+      "bytes": 10364,
+      "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size4-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size4-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size4-Regular.woff",
+      "bytes": 5980,
+      "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size4-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Size4-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size4-Regular.woff2",
+      "bytes": 4928,
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Size4-Regular.woff2"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Typewriter-Regular.ttf",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Typewriter-Regular.ttf",
+      "bytes": 27556,
+      "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Typewriter-Regular.ttf"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Typewriter-Regular.woff",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Typewriter-Regular.woff",
+      "bytes": 16028,
+      "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Typewriter-Regular.woff"
+    },
+    {
+      "source_path": "katex/dist/fonts/KaTeX_Typewriter-Regular.woff2",
+      "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Typewriter-Regular.woff2",
+      "bytes": 13568,
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b",
+      "license": "katex-ofl",
+      "distribution": "katex",
+      "member": "package/dist/fonts/KaTeX_Typewriter-Regular.woff2"
+    },
+    {
+      "source_path": "vendor/jquery/package/dist/jquery.min.js",
+      "destination": "assets/vendor/jquery/3.7.0/jquery.min.js",
+      "bytes": 87462,
+      "sha256": "d8f9afbf492e4c139e9d2bcb9ba6ef7c14921eb509fb703bc7a3f911b774eff8",
+      "license": "jquery-mit",
+      "distribution": "jquery",
+      "member": "package/dist/jquery.min.js"
+    },
+    {
+      "source_path": "vendor/jquery/package/LICENSE.txt",
+      "destination": "assets/licenses/jquery.txt",
+      "bytes": 1117,
+      "sha256": "ca9fad8cfd8c84afbb1926357132b99184ab42a077000aa7817b33b242c13053",
+      "license": "jquery-mit",
+      "distribution": "jquery",
+      "member": "package/LICENSE.txt"
+    },
+    {
+      "source_path": "vendor/jquery-ui-dist/package/jquery-ui.min.js",
+      "destination": "assets/vendor/jqueryui/1.13.2/jquery-ui.min.js",
+      "bytes": 255084,
+      "sha256": "9528ca634fecad433d044ddd3e6f9ce1f068d5d932dafdbb19d8e6daea1968bd",
+      "license": "jqueryui-mit",
+      "distribution": "jquery-ui-dist",
+      "member": "package/jquery-ui.min.js"
+    },
+    {
+      "source_path": "vendor/jquery-ui-dist/package/LICENSE.txt",
+      "destination": "assets/licenses/jqueryui.txt",
+      "bytes": 1817,
+      "sha256": "de33fb695880d0b07615d4b86f78cd43796906959ade5fdfef70968827a0db78",
+      "license": "jqueryui-mit",
+      "distribution": "jquery-ui-dist",
+      "member": "package/LICENSE.txt"
+    },
+    {
+      "source_path": "vendor/headroom.js/package/dist/headroom.min.js",
+      "destination": "assets/vendor/headroom/0.12.0/headroom.min.js",
+      "bytes": 4569,
+      "sha256": "228f6ed3762377fd6238c8c25d5e295088fdc3fe01a26b1b9d5ecb4ab31bc33c",
+      "license": "headroom-mit",
+      "distribution": "headroom.js",
+      "member": "package/dist/headroom.min.js"
+    },
+    {
+      "source_path": "vendor/headroom.js/package/dist/jQuery.headroom.min.js",
+      "destination": "assets/vendor/headroom/0.12.0/jQuery.headroom.min.js",
+      "bytes": 589,
+      "sha256": "657ff235285b8eab28847d64f79962a98f4677cb8e884d52e2f65cfbd290d4ae",
+      "license": "headroom-mit",
+      "distribution": "headroom.js",
+      "member": "package/dist/jQuery.headroom.min.js"
+    },
+    {
+      "source_path": "vendor/headroom.js/package/LICENSE",
+      "destination": "assets/licenses/headroom.txt",
+      "bytes": 1079,
+      "sha256": "acaab926214cf714b8c74718151734a4f4e71f4ba7ebb1fca497a446caa13881",
+      "license": "headroom-mit",
+      "distribution": "headroom.js",
+      "member": "package/LICENSE"
+    },
+    {
+      "source_path": "vendor/highlight.js/package/LICENSE",
+      "destination": "assets/licenses/highlight-js.txt",
+      "bytes": 1514,
+      "sha256": "6c081431591d9df696c82dc598fe1423765b8a299b200ed00b281afd0f64c490",
+      "license": "highlight-js-bsd",
+      "distribution": "highlight.js",
+      "member": "package/LICENSE"
+    },
+    {
+      "source_path": "vendor/minisearch/package/LICENSE.txt",
+      "destination": "assets/licenses/minisearch.txt",
+      "bytes": 1051,
+      "sha256": "70d37354d6395629fb99edb28cb37a5d356ffa24a48cd02a5def5b83a300a899",
+      "license": "minisearch-mit",
+      "distribution": "minisearch",
+      "member": "package/LICENSE.txt"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/css/fontawesome.min.css",
+      "destination": "assets/vendor/fontawesome/6.4.2/css/fontawesome.min.css",
+      "bytes": 80823,
+      "sha256": "f8bd27657d5373067aa3e9d8885497855c6284d495706dfb1ccdf0cdc0bc3391",
+      "license": "fontawesome-code-mit",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/css/fontawesome.min.css"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/css/solid.min.css",
+      "destination": "assets/vendor/fontawesome/6.4.2/css/solid.min.css",
+      "bytes": 572,
+      "sha256": "4de6067d6c116b81dd1a4fcd252e3c3e2297ae01c576b63fabac8f8655b4787a",
+      "license": "fontawesome-code-mit",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/css/solid.min.css"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/css/brands.min.css",
+      "destination": "assets/vendor/fontawesome/6.4.2/css/brands.min.css",
+      "bytes": 18855,
+      "sha256": "f4ab507a816906136d0ea985f089ee666acd8a10850ec718e67cd98ca23a8081",
+      "license": "fontawesome-code-mit",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/css/brands.min.css"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/webfonts/fa-solid-900.woff2",
+      "destination": "assets/vendor/fontawesome/6.4.2/webfonts/fa-solid-900.woff2",
+      "bytes": 150020,
+      "sha256": "886c86112a804ef1ddd1cb206af4c8c40e34b73c26652ca231404aa35a6b30d9",
+      "license": "fontawesome-fonts-ofl",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/webfonts/fa-solid-900.woff2"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/webfonts/fa-solid-900.ttf",
+      "destination": "assets/vendor/fontawesome/6.4.2/webfonts/fa-solid-900.ttf",
+      "bytes": 394668,
+      "sha256": "cea79b345caf49d6223098b8a2b04d70273e8d7c6b9e3d03cf7f7a267793e9aa",
+      "license": "fontawesome-fonts-ofl",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/webfonts/fa-solid-900.ttf"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/webfonts/fa-brands-400.woff2",
+      "destination": "assets/vendor/fontawesome/6.4.2/webfonts/fa-brands-400.woff2",
+      "bytes": 109808,
+      "sha256": "faae6fc0aa94cc5bde5076647c817a23206096a1cbeda10d1c6f3d89d6163ed1",
+      "license": "fontawesome-fonts-ofl",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/webfonts/fa-brands-400.woff2"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/webfonts/fa-brands-400.ttf",
+      "destination": "assets/vendor/fontawesome/6.4.2/webfonts/fa-brands-400.ttf",
+      "bytes": 189684,
+      "sha256": "003f11541856a649a6c8235c6266c8936224c5d609e51442da24dc5556d14fbf",
+      "license": "fontawesome-fonts-ofl",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/webfonts/fa-brands-400.ttf"
+    },
+    {
+      "source_path": "vendor/fortawesome_fontawesome-free/package/LICENSE.txt",
+      "destination": "assets/licenses/fontawesome.txt",
+      "bytes": 7427,
+      "sha256": "0aa8f86525273b2efa4f40f4272a188e187704252170e979dc06879adf68d43c",
+      "license": "fontawesome-notices",
+      "distribution": "@fortawesome/fontawesome-free",
+      "member": "package/LICENSE.txt"
+    },
+    {
+      "source_path": "responses/lato-css",
+      "destination": "assets/vendor/lato/3.0.0/css/lato-font.min.css",
+      "bytes": 4188,
+      "sha256": "0ca8befae6dc6607ebb252e15fb00f6482d094b6a0d1771b2e0ee327eacadebe",
+      "license": "lato-code-mit",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "css/lato-font.min.css",
+      "upstream_blob_sha1": "7ab95a9a3ffec6bc69995b27a7afe739e36440e5"
+    },
+    {
+      "source_path": "responses/juliamono-css",
+      "destination": "assets/vendor/juliamono/0.050/juliamono.min.css",
+      "bytes": 1045,
+      "sha256": "0365354f465b887823255d4560538958ea6bbbf53ffc46bde222b5ba02dd3515",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css",
+      "version": "0.050"
+    },
+    {
+      "source_path": "responses/highlight-browser",
+      "destination": "assets/vendor/highlight/11.8.0/highlight.min.js",
+      "bytes": 121107,
+      "sha256": "4499ff936d4fd562adca5a5cbe512dc19eb80942eee8618dafbcebc4f7974bdb",
+      "license": "highlight-js-bsd",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js",
+      "version": "11.8.0"
+    },
+    {
+      "source_path": "responses/highlight-julia",
+      "destination": "assets/vendor/highlight/11.8.0/julia.min.js",
+      "bytes": 4080,
+      "sha256": "305492825211c4e92a45ff4a95c3f623e98fd7394175b9282e6fa5bf9082c729",
+      "license": "highlight-js-bsd",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/julia.min.js",
+      "version": "11.8.0"
+    },
+    {
+      "source_path": "responses/highlight-julia-repl",
+      "destination": "assets/vendor/highlight/11.8.0/julia-repl.min.js",
+      "bytes": 308,
+      "sha256": "1383c8018069c3802f898593ee4c79ac0d9d20a2e8545f5e89a0ff8df4f53b26",
+      "license": "highlight-js-bsd",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/julia-repl.min.js",
+      "version": "11.8.0"
+    },
+    {
+      "source_path": "responses/highlight-css-license",
+      "destination": "assets/licenses/highlight-css.txt",
+      "bytes": 1514,
+      "sha256": "6c081431591d9df696c82dc598fe1423765b8a299b200ed00b281afd0f64c490",
+      "license": "highlight-css-bsd",
+      "source_uri": "https://raw.githubusercontent.com/highlightjs/highlight.js/11.7.0/LICENSE",
+      "version": "11.7.0"
+    },
+    {
+      "source_path": "responses/lato-css-lato-hairline.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-hairline/lato-hairline.woff2",
+      "bytes": 161672,
+      "sha256": "d9d9b406b5ddaad1ab4f9a5657bf42c84502bec768df78091924da824481757f",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-hairline/lato-hairline.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-hairline/lato-hairline.woff2",
+      "upstream_blob_sha1": "34ca2fad2618dd2ad331aabf88f1753620e104a5"
+    },
+    {
+      "source_path": "responses/lato-css-lato-hairline.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-hairline/lato-hairline.woff",
+      "bytes": 274692,
+      "sha256": "25c2209919f4fa2dae760ed0f10ef18d1879ee0eb6d80b1cf2405296f1e25c31",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-hairline/lato-hairline.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-hairline/lato-hairline.woff",
+      "upstream_blob_sha1": "2297f4369c2a1eb5556d375764c5199a925baf47"
+    },
+    {
+      "source_path": "responses/lato-css-lato-hairline-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-hairline-italic/lato-hairline-italic.woff2",
+      "bytes": 173948,
+      "sha256": "a484035048d45975f63b8352e5466920507602aad54b1e67315973329639c5a5",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-hairline-italic/lato-hairline-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-hairline-italic/lato-hairline-italic.woff2",
+      "upstream_blob_sha1": "b5fceba0dd1c05ecbc04243f7a11b796d754c68b"
+    },
+    {
+      "source_path": "responses/lato-css-lato-hairline-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-hairline-italic/lato-hairline-italic.woff",
+      "bytes": 293900,
+      "sha256": "ebc40e3f37d4c90e0a1727c0a2a52994aa9f291acc89c76e02a01505d4eb8943",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-hairline-italic/lato-hairline-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-hairline-italic/lato-hairline-italic.woff",
+      "upstream_blob_sha1": "7ac0a1465694c0d46ae6c65d44cd71f32254ab6b"
+    },
+    {
+      "source_path": "responses/lato-css-lato-thin.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-thin/lato-thin.woff2",
+      "bytes": 180576,
+      "sha256": "46a8722d9bf3c2441ddc81898e2b29f5fa7685765edf43b1003d50eb272076ef",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-thin/lato-thin.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-thin/lato-thin.woff2",
+      "upstream_blob_sha1": "2c4f52f2bb8152680d68ca6c15997bb34c327f71"
+    },
+    {
+      "source_path": "responses/lato-css-lato-thin.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-thin/lato-thin.woff",
+      "bytes": 306060,
+      "sha256": "7fe9ba7263f40532afd42783ecc674d2f1eee586e0cc4f99bfcc40568b0b3e29",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-thin/lato-thin.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-thin/lato-thin.woff",
+      "upstream_blob_sha1": "760b12479c59e5bd7a2096512ab5146012066740"
+    },
+    {
+      "source_path": "responses/lato-css-lato-thin-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-thin-italic/lato-thin-italic.woff2",
+      "bytes": 191804,
+      "sha256": "747f88b0cfeb061172fb4da48c3fd59e6ee45a0b9ca6ee556fc79c7e9bc8d683",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-thin-italic/lato-thin-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-thin-italic/lato-thin-italic.woff2",
+      "upstream_blob_sha1": "e15214fdf9f885efdb0c308a4879734f28eb4054"
+    },
+    {
+      "source_path": "responses/lato-css-lato-thin-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-thin-italic/lato-thin-italic.woff",
+      "bytes": 323532,
+      "sha256": "08fc588069bbab6843b66c785acdbe8b5ebd5f938d2e3bb1f409c4b443fa2b47",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-thin-italic/lato-thin-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-thin-italic/lato-thin-italic.woff",
+      "upstream_blob_sha1": "ef8de9a0dacbaa813f46ba0ce6ead24b62042641"
+    },
+    {
+      "source_path": "responses/lato-css-lato-light.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-light/lato-light.woff2",
+      "bytes": 181500,
+      "sha256": "f308e8c0de302ee57cd35b5365a028466300cebdc805c3a0b80c92fff3adbf44",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-light/lato-light.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-light/lato-light.woff2",
+      "upstream_blob_sha1": "ce49f82217ea5a4820e828eeabf3e3c714864758"
+    },
+    {
+      "source_path": "responses/lato-css-lato-light.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-light/lato-light.woff",
+      "bytes": 310884,
+      "sha256": "e74cf550f9ba8f374e026115e0f4298c242e0d79d214f4e27ba765251139bdb8",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-light/lato-light.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-light/lato-light.woff",
+      "upstream_blob_sha1": "77b4e148f7f48e9b2df6bdbe6d082c8ab8244eb8"
+    },
+    {
+      "source_path": "responses/lato-css-lato-light-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-light-italic/lato-light-italic.woff2",
+      "bytes": 192916,
+      "sha256": "4ecc8765454b071973cb44437e4d94b76f0842457175e0d443493c3ab38befd8",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-light-italic/lato-light-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-light-italic/lato-light-italic.woff2",
+      "upstream_blob_sha1": "0c897ce40ca1dc8c905f0404466138f69d6ba86d"
+    },
+    {
+      "source_path": "responses/lato-css-lato-light-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-light-italic/lato-light-italic.woff",
+      "bytes": 325296,
+      "sha256": "0da5efc933a90ae9b8ec9f44e1e95dcf51f869ba6695de1b9202b3c7081e698c",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-light-italic/lato-light-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-light-italic/lato-light-italic.woff",
+      "upstream_blob_sha1": "da3dfa30a456ca0a5971e7b6661082697dd55c7a"
+    },
+    {
+      "source_path": "responses/lato-css-lato-normal.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-normal/lato-normal.woff2",
+      "bytes": 182708,
+      "sha256": "983b0caf336e8542214fc17019a4fc5e0360864b92806ca14d55c1fc1c2c5a0f",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-normal/lato-normal.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-normal/lato-normal.woff2",
+      "upstream_blob_sha1": "3bf9843328a6359b6bd06e50010319c63da0d717"
+    },
+    {
+      "source_path": "responses/lato-css-lato-normal.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-normal/lato-normal.woff",
+      "bytes": 309192,
+      "sha256": "5b9025dda4d7688e3311b0c17eddc501133b807def33effaef6593843cf5416e",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-normal/lato-normal.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-normal/lato-normal.woff",
+      "upstream_blob_sha1": "ae1307ff5f4c48678621c240f8972d5a6e20b22c"
+    },
+    {
+      "source_path": "responses/lato-css-lato-normal-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-normal-italic/lato-normal-italic.woff2",
+      "bytes": 195704,
+      "sha256": "4465765f2f6eddcdad34ffd7cab559e56bc0e75e45e192f85e9562b0771481dc",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-normal-italic/lato-normal-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-normal-italic/lato-normal-italic.woff2",
+      "upstream_blob_sha1": "3404f37e2e312757841abe20343588a7740768ca"
+    },
+    {
+      "source_path": "responses/lato-css-lato-normal-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-normal-italic/lato-normal-italic.woff",
+      "bytes": 328412,
+      "sha256": "26318a1467a5e5caf10b04cfa942d079632560cd7a29cec565fd1dc9f7ec5081",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-normal-italic/lato-normal-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-normal-italic/lato-normal-italic.woff",
+      "upstream_blob_sha1": "76114bc03362242c3325ecda6ce6d02bb737880f"
+    },
+    {
+      "source_path": "responses/lato-css-lato-medium.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-medium/lato-medium.woff2",
+      "bytes": 182144,
+      "sha256": "537a85fb47f6a43a7654bb015c2109d579e098c635a8f713711185abdc7f8f4c",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-medium/lato-medium.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-medium/lato-medium.woff2",
+      "upstream_blob_sha1": "01792cbd13451c1ac83300a7fd30e82dd897e80b"
+    },
+    {
+      "source_path": "responses/lato-css-lato-medium.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-medium/lato-medium.woff",
+      "bytes": 305920,
+      "sha256": "2f6aff50fadac80607e8051511d9a97497d70a80d9bc5b942763d079c0f783eb",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-medium/lato-medium.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-medium/lato-medium.woff",
+      "upstream_blob_sha1": "39d53fdeacb5f43e1db44c5af0f3211840684fb6"
+    },
+    {
+      "source_path": "responses/lato-css-lato-medium-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-medium-italic/lato-medium-italic.woff2",
+      "bytes": 194608,
+      "sha256": "e4494fc9b671272a1debd1ec0aa41a5edeba26c536ec041b686efef073e92a52",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-medium-italic/lato-medium-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-medium-italic/lato-medium-italic.woff2",
+      "upstream_blob_sha1": "1cc79653a631b76013c15b7304cb5ec75204eabc"
+    },
+    {
+      "source_path": "responses/lato-css-lato-medium-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-medium-italic/lato-medium-italic.woff",
+      "bytes": 325936,
+      "sha256": "eeb354e308de937a41962a9a1655e4303cee7ba3316bf20bc5be46924ec2300b",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-medium-italic/lato-medium-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-medium-italic/lato-medium-italic.woff",
+      "upstream_blob_sha1": "724962beee28dd7b828eddc501809718704f69f0"
+    },
+    {
+      "source_path": "responses/lato-css-lato-semibold.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-semibold/lato-semibold.woff2",
+      "bytes": 184076,
+      "sha256": "30f77a5ff0bcba46d4e760b0c939a5ff112da0d3ddd13a261834134e00cc21c7",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-semibold/lato-semibold.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-semibold/lato-semibold.woff2",
+      "upstream_blob_sha1": "5916925412420a12f766e921f01a1ba075aab5b2"
+    },
+    {
+      "source_path": "responses/lato-css-lato-semibold.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-semibold/lato-semibold.woff",
+      "bytes": 312952,
+      "sha256": "d7e887f5ff038daf96c38a10a671409836af9511895da989931aaaa3c18e274f",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-semibold/lato-semibold.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-semibold/lato-semibold.woff",
+      "upstream_blob_sha1": "794417f6af35de21abc0bb8748e7ae969e2dfe3a"
+    },
+    {
+      "source_path": "responses/lato-css-lato-semibold-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-semibold-italic/lato-semibold-italic.woff2",
+      "bytes": 195128,
+      "sha256": "207963887e9b2f49261fcf675fe2ba261a2968079e7fe83dbc9ae24dce647e03",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-semibold-italic/lato-semibold-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-semibold-italic/lato-semibold-italic.woff2",
+      "upstream_blob_sha1": "5e6ac271926780eb6e643524c597f7a539834789"
+    },
+    {
+      "source_path": "responses/lato-css-lato-semibold-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-semibold-italic/lato-semibold-italic.woff",
+      "bytes": 327188,
+      "sha256": "bc34499490a6bab78a8d4af6580a4493403f6b741043ab7321743294dfb7bce6",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-semibold-italic/lato-semibold-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-semibold-italic/lato-semibold-italic.woff",
+      "upstream_blob_sha1": "d1df7676e867c245731b6edb000e3f0784f803c9"
+    },
+    {
+      "source_path": "responses/lato-css-lato-bold.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-bold/lato-bold.woff2",
+      "bytes": 184912,
+      "sha256": "ae88fc0d7a961832f809527d30bd3983a6866d42f66a56ade23f543681594db6",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-bold/lato-bold.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-bold/lato-bold.woff2",
+      "upstream_blob_sha1": "bb195043cfc07fa52741c6144d7378b5ba8be4c5"
+    },
+    {
+      "source_path": "responses/lato-css-lato-bold.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-bold/lato-bold.woff",
+      "bytes": 309728,
+      "sha256": "0e56b17d142eb366c8007031d14e34da48c70b4a9d9a0ca492e696a7bae45e1e",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-bold/lato-bold.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-bold/lato-bold.woff",
+      "upstream_blob_sha1": "c6dff51f063cc732fdb5fe786a8966de85f4ebec"
+    },
+    {
+      "source_path": "responses/lato-css-lato-bold-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-bold-italic/lato-bold-italic.woff2",
+      "bytes": 193308,
+      "sha256": "c0916a33340d063f7b05679e08031e729d1888444706f04804705da5966d895d",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-bold-italic/lato-bold-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-bold-italic/lato-bold-italic.woff2",
+      "upstream_blob_sha1": "c4e3d804b57b625b16a36d767bfca6bbf63d414e"
+    },
+    {
+      "source_path": "responses/lato-css-lato-bold-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-bold-italic/lato-bold-italic.woff",
+      "bytes": 323344,
+      "sha256": "980c8592e5488df256192c999e92db8fd302db8cd8909b7fa266a684e37e45f8",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-bold-italic/lato-bold-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-bold-italic/lato-bold-italic.woff",
+      "upstream_blob_sha1": "88ad05b9ff413055b4d4e89dd3eec1c193fa20c6"
+    },
+    {
+      "source_path": "responses/lato-css-lato-heavy.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-heavy/lato-heavy.woff2",
+      "bytes": 184520,
+      "sha256": "ceec41468f0cc73c37dcb60899bc324965bd9bedb9bab20685507c21b6262d67",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-heavy/lato-heavy.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-heavy/lato-heavy.woff2",
+      "upstream_blob_sha1": "8a2436573b7f46c306b1f35536754dbbd33afc66"
+    },
+    {
+      "source_path": "responses/lato-css-lato-heavy.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-heavy/lato-heavy.woff",
+      "bytes": 309924,
+      "sha256": "2753314e9f8fd6148d39b568c12ea9ea9d6a765107b5635136a90d01157c03fd",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-heavy/lato-heavy.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-heavy/lato-heavy.woff",
+      "upstream_blob_sha1": "43a3c80fbac8d2f6072698bb6ad5110fb9a411c1"
+    },
+    {
+      "source_path": "responses/lato-css-lato-heavy-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-heavy-italic/lato-heavy-italic.woff2",
+      "bytes": 194272,
+      "sha256": "f778270145fd838bd2cea5b9a3718bb4efba91e521d12761db6a453cc8b4f9b3",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-heavy-italic/lato-heavy-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-heavy-italic/lato-heavy-italic.woff2",
+      "upstream_blob_sha1": "61989ae09a991fc4fcfecb00835ee2b8318a8801"
+    },
+    {
+      "source_path": "responses/lato-css-lato-heavy-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-heavy-italic/lato-heavy-italic.woff",
+      "bytes": 322780,
+      "sha256": "7ceedf68e6ae79d2cada5fbc27d9a14fc0482a7b9351c49a5dc75538bb10f311",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-heavy-italic/lato-heavy-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-heavy-italic/lato-heavy-italic.woff",
+      "upstream_blob_sha1": "dbac8a9f0c305a0051cac442bf28ea94b7e64932"
+    },
+    {
+      "source_path": "responses/lato-css-lato-black.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-black/lato-black.woff2",
+      "bytes": 176748,
+      "sha256": "34bb46634d07ac579411823eb39fac1376b012257460066a98b95075d086ccdd",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-black/lato-black.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-black/lato-black.woff2",
+      "upstream_blob_sha1": "3ee7cd441e47372f956e43128696e300208eca9f"
+    },
+    {
+      "source_path": "responses/lato-css-lato-black.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-black/lato-black.woff",
+      "bytes": 297272,
+      "sha256": "659bd5ede5d3ef9c2373704ddaab613313a6c323e631bb9c536f592f4a5092ce",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-black/lato-black.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-black/lato-black.woff",
+      "upstream_blob_sha1": "a0ab25e9afc5300e204cfff09f30dfc498bc9dba"
+    },
+    {
+      "source_path": "responses/lato-css-lato-black-italic.woff2",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-black-italic/lato-black-italic.woff2",
+      "bytes": 185544,
+      "sha256": "4b470f4680bcdea48db9e2e3df6a948ce7f4d96b8944c2de7ad97521899ddf19",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-black-italic/lato-black-italic.woff2",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-black-italic/lato-black-italic.woff2",
+      "upstream_blob_sha1": "6a59bdbef51d850d3540054d6150d346b09a3d3d"
+    },
+    {
+      "source_path": "responses/lato-css-lato-black-italic.woff",
+      "destination": "assets/vendor/lato/3.0.0/fonts/lato-black-italic/lato-black-italic.woff",
+      "bytes": 310776,
+      "sha256": "30fadf92363fd11db1e1c52cc982ff2e9f67be4a0f68c715dd7dd325d1f9c286",
+      "license": "lato-fonts-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/fonts/lato-black-italic/lato-black-italic.woff",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "fonts/lato-black-italic/lato-black-italic.woff",
+      "upstream_blob_sha1": "30f2c71ca39e0ff51f3faf5573fb8a9be1d37c0b"
+    },
+    {
+      "source_path": "responses/juliamono-css-JuliaMono-Light.woff2",
+      "destination": "assets/vendor/juliamono/0.050/JuliaMono-Light.woff2",
+      "bytes": 938224,
+      "sha256": "5081e983468e5e54fda9240cb8f8ff7a4d79f942a079d5fc1f836355c06f83f2",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/JuliaMono-Light.woff2",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "webfonts/JuliaMono-Light.woff2",
+      "upstream_blob_sha1": "d2bbc6e4f8cc0d79219a885182b699f1609f11c7"
+    },
+    {
+      "source_path": "responses/juliamono-css-JuliaMono-Regular.woff2",
+      "destination": "assets/vendor/juliamono/0.050/JuliaMono-Regular.woff2",
+      "bytes": 935044,
+      "sha256": "dcd93076367d285af4591cc7c3d1b5ae333f14d5d46b7b533bae2096c3d9d2ad",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/JuliaMono-Regular.woff2",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "webfonts/JuliaMono-Regular.woff2",
+      "upstream_blob_sha1": "d952e23b0715a87e272e7f7604d4ddd5b69098f1"
+    },
+    {
+      "source_path": "responses/juliamono-css-JuliaMono-Medium.woff2",
+      "destination": "assets/vendor/juliamono/0.050/JuliaMono-Medium.woff2",
+      "bytes": 947128,
+      "sha256": "e454c320030a3b7171fe35cbfaa7cc23fceec714a4684e24bb32ecf84750b531",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/JuliaMono-Medium.woff2",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "webfonts/JuliaMono-Medium.woff2",
+      "upstream_blob_sha1": "73979914564c24cb7d50c5c1854ba81dd2bc6d32"
+    },
+    {
+      "source_path": "responses/juliamono-css-JuliaMono-SemiBold.woff2",
+      "destination": "assets/vendor/juliamono/0.050/JuliaMono-SemiBold.woff2",
+      "bytes": 953636,
+      "sha256": "ac6d1006edeac963572134d8aed9385c94dc17ab15856e6cc2e7f71913a3da33",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/JuliaMono-SemiBold.woff2",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "webfonts/JuliaMono-SemiBold.woff2",
+      "upstream_blob_sha1": "a174e20076fcf42ce36e37c5ee65e35ab012acaa"
+    },
+    {
+      "source_path": "responses/juliamono-css-JuliaMono-Bold.woff2",
+      "destination": "assets/vendor/juliamono/0.050/JuliaMono-Bold.woff2",
+      "bytes": 939056,
+      "sha256": "4ae8a7c64e77fcff4e65a8995048b6e1d044a27bd109a1b57d872edf7f334c79",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/JuliaMono-Bold.woff2",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "webfonts/JuliaMono-Bold.woff2",
+      "upstream_blob_sha1": "e5ca676c336c1e9ae030ee44715f599554b4553a"
+    },
+    {
+      "source_path": "responses/juliamono-css-JuliaMono-ExtraBold.woff2",
+      "destination": "assets/vendor/juliamono/0.050/JuliaMono-ExtraBold.woff2",
+      "bytes": 947632,
+      "sha256": "049ec97ebd666691bcc2feafb6b2f95daab0faf8eb1e7c6c78f3551d4d7cd8c6",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/JuliaMono-ExtraBold.woff2",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "webfonts/JuliaMono-ExtraBold.woff2",
+      "upstream_blob_sha1": "a5e4e51e9bfdb606a21fd5eeb41fe0bfee663d15"
+    },
+    {
+      "source_path": "responses/juliamono-css-JuliaMono-Black.woff2",
+      "destination": "assets/vendor/juliamono/0.050/JuliaMono-Black.woff2",
+      "bytes": 953684,
+      "sha256": "6805d2cdf3efba7d934025993b33f71b63abe48d2bc6879462ae238404e1c917",
+      "license": "juliamono-ofl",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/JuliaMono-Black.woff2",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "webfonts/JuliaMono-Black.woff2",
+      "upstream_blob_sha1": "b9664283411239f743b865a8142547c18bded6b5"
+    },
+    {
+      "source_path": "responses/requirejs-min",
+      "destination": "assets/vendor/requirejs/2.3.6/require.min.js",
+      "bytes": 17493,
+      "sha256": "d5f10f852b112a514a19f2b778eef5d2d1307878757f0a24539c051831cefaf8",
+      "license": "requirejs-mit",
+      "source_uri": "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js",
+      "version": "2.3.6"
+    },
+    {
+      "source_path": "responses/requirejs-license",
+      "destination": "assets/licenses/requirejs.txt",
+      "bytes": 1904,
+      "sha256": "4e51314366fce8914fde48ccd4d52255d37f5fcb72e00fe0dccbc6cbb6682bc9",
+      "license": "requirejs-mit",
+      "source_uri": "https://raw.githubusercontent.com/requirejs/requirejs/2.3.6/LICENSE",
+      "version": "2.3.6"
+    },
+    {
+      "source_path": "responses/minisearch-min",
+      "destination": "assets/vendor/minisearch/6.1.0/index.min.js",
+      "bytes": 29089,
+      "sha256": "a7160ee13e37937875ccdfaf594e9368781ac2fb27c7cf8b5ca3fcd9f1590862",
+      "license": "minisearch-mit",
+      "source_uri": "https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js",
+      "version": "6.1.0"
+    },
+    {
+      "source_path": "responses/lato-upstream-readme",
+      "destination": null,
+      "bytes": 9147,
+      "sha256": "a42cbf704157bfc6772a942d67a1138a65ebefb20e047b91700dc23d148b630b",
+      "license": "lato-code-mit",
+      "source_uri": "https://raw.githubusercontent.com/betsol/lato-font/b25aa8693f5ce250f45f665d0b77116722fceddb/README.md",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "README.md",
+      "upstream_blob_sha1": "18eb24f3fbacfc2ec5e95ffc4b0a7a24362ef3e8"
+    },
+    {
+      "source_path": "responses/lato-upstream-package",
+      "destination": null,
+      "bytes": 526,
+      "sha256": "2683d5eadde6e121e02d64c4cfd425a267a7119f8029c18aacbd2b2262f9b3d0",
+      "license": "lato-code-mit",
+      "source_uri": "https://raw.githubusercontent.com/betsol/lato-font/b25aa8693f5ce250f45f665d0b77116722fceddb/package.json",
+      "version": "3.0.0",
+      "upstream_tree_input": "responses/lato-upstream-root",
+      "upstream_tree_path": "package.json",
+      "upstream_blob_sha1": "209d51d30485cd33d1ae71825437677544b0c5c6"
+    },
+    {
+      "source_path": "responses/juliamono-upstream-license",
+      "destination": "assets/licenses/juliamono.txt",
+      "bytes": 4467,
+      "sha256": "bae3beff9e15f1a680c2764c4bbdb25b995b9bf539aeaf8467482a495c75ad0c",
+      "license": "juliamono-ofl",
+      "source_uri": "https://raw.githubusercontent.com/cormullion/juliamono/c3dfdf5a5fa7582f8ab5584c4636a2ba598e1aef/LICENSE",
+      "version": "0.050",
+      "upstream_tree_input": "responses/juliamono-upstream-root",
+      "upstream_tree_path": "LICENSE",
+      "upstream_blob_sha1": "83be7537f37611b7d80b6f62333ba99372c89c73"
+    }
+  ],
+  "generated_licenses": [
+    {
+      "destination": "assets/licenses/katex-fonts.txt",
+      "spdx": "OFL-1.1",
+      "text": "KaTeX 0.16.8 font notices, transcribed from pinned font sfnt name IDs 0/13/14.\n\nKaTeX_AMS-Regular.ttf (TTF SHA256 68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_AMS.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Caligraphic-Bold.ttf (TTF SHA256 07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Caligraphic.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Caligraphic-Regular.ttf (TTF SHA256 ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Caligraphic.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Fraktur-Bold.ttf (TTF SHA256 9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Fraktur.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Fraktur-Regular.ttf (TTF SHA256 1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Fraktur.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Main-Bold.ttf (TTF SHA256 138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Main.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Main-BoldItalic.ttf (TTF SHA256 70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Main.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Main-Italic.ttf (TTF SHA256 0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Main.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Main-Regular.ttf (TTF SHA256 d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Main.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Math-BoldItalic.ttf (TTF SHA256 f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Math.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Math-Italic.ttf (TTF SHA256 08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Math.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_SansSerif-Bold.ttf (TTF SHA256 1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_SansSerif.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_SansSerif-Italic.ttf (TTF SHA256 3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_SansSerif.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_SansSerif-Regular.ttf (TTF SHA256 f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_SansSerif.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Script-Regular.ttf (TTF SHA256 1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Script.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Size1-Regular.ttf (TTF SHA256 95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Size1.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Size2-Regular.ttf (TTF SHA256 a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Size2.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Size3-Regular.ttf (TTF SHA256 500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Size3.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Size4-Regular.ttf (TTF SHA256 c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Size4.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nKaTeX_Typewriter-Regular.ttf (TTF SHA256 f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa)\nCopyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy\nCopyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Typewriter.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL\nhttp://scripts.sil.org/OFL\n\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font\ncreation efforts of academic and linguistic communities, and to\nprovide a free and open framework in which fonts may be shared and\nimproved in partnership with others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply to\nany document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software\ncomponents as distributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to,\ndeleting, or substituting -- in part or in whole -- any of the\ncomponents of the Original Version, by changing formats or by porting\nthe Font Software to a new environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed,\nmodify, redistribute, and sell modified and unmodified copies of the\nFont Software, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components, in\nOriginal or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the\ncorresponding Copyright Holder. This restriction only applies to the\nprimary font name as presented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created using\nthe Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n",
+      "sha256": "8b7fa9db317913be9b24059c6d9be1b9ea707efd762971bb41f01697672d8cd4",
+      "standard_body_sha256": "b0a140a7ad9326baada9825c2ae5f784335659f54acc8c2152f0c13dfc2626ee",
+      "primary_font_evidence_sha256": "3d16bd24a951ab4ac0d5d67b5f496c0495bffb154b007e2b30e25ad67e1e3575"
+    },
+    {
+      "destination": "assets/licenses/lato-fonts.txt",
+      "spdx": "OFL-1.1",
+      "text": "Lato font notices from pinned 3.0.0 distribution WOFF sfnt name IDs 0/5/13/14 (font version is independent of distribution version).\n\nlato-hairline.woff (WOFF SHA256 25c2209919f4fa2dae760ed0f10ef18d1879ee0eb6d80b1cf2405296f1e25c31)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-hairline-italic.woff (WOFF SHA256 ebc40e3f37d4c90e0a1727c0a2a52994aa9f291acc89c76e02a01505d4eb8943)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-thin.woff (WOFF SHA256 7fe9ba7263f40532afd42783ecc674d2f1eee586e0cc4f99bfcc40568b0b3e29)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-thin-italic.woff (WOFF SHA256 08fc588069bbab6843b66c785acdbe8b5ebd5f938d2e3bb1f409c4b443fa2b47)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-light.woff (WOFF SHA256 e74cf550f9ba8f374e026115e0f4298c242e0d79d214f4e27ba765251139bdb8)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-light-italic.woff (WOFF SHA256 0da5efc933a90ae9b8ec9f44e1e95dcf51f869ba6695de1b9202b3c7081e698c)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-normal.woff (WOFF SHA256 5b9025dda4d7688e3311b0c17eddc501133b807def33effaef6593843cf5416e)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-normal-italic.woff (WOFF SHA256 26318a1467a5e5caf10b04cfa942d079632560cd7a29cec565fd1dc9f7ec5081)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-medium.woff (WOFF SHA256 2f6aff50fadac80607e8051511d9a97497d70a80d9bc5b942763d079c0f783eb)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-medium-italic.woff (WOFF SHA256 eeb354e308de937a41962a9a1655e4303cee7ba3316bf20bc5be46924ec2300b)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-semibold.woff (WOFF SHA256 d7e887f5ff038daf96c38a10a671409836af9511895da989931aaaa3c18e274f)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-semibold-italic.woff (WOFF SHA256 bc34499490a6bab78a8d4af6580a4493403f6b741043ab7321743294dfb7bce6)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-bold.woff (WOFF SHA256 0e56b17d142eb366c8007031d14e34da48c70b4a9d9a0ca492e696a7bae45e1e)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-bold-italic.woff (WOFF SHA256 980c8592e5488df256192c999e92db8fd302db8cd8909b7fa266a684e37e45f8)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-heavy.woff (WOFF SHA256 2753314e9f8fd6148d39b568c12ea9ea9d6a765107b5635136a90d01157c03fd)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-heavy-italic.woff (WOFF SHA256 7ceedf68e6ae79d2cada5fbc27d9a14fc0482a7b9351c49a5dc75538bb10f311)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-black.woff (WOFF SHA256 659bd5ede5d3ef9c2373704ddaab613313a6c323e631bb9c536f592f4a5092ce)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nlato-black-italic.woff (WOFF SHA256 30fadf92363fd11db1e1c52cc982ff2e9f67be4a0f68c715dd7dd325d1f9c286)\n0: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n5: Version 2.015; 2015-08-06; http://www.latofonts.com/\n13: Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). \n14: http://scripts.sil.org/OFL\n\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font\ncreation efforts of academic and linguistic communities, and to\nprovide a free and open framework in which fonts may be shared and\nimproved in partnership with others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply to\nany document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software\ncomponents as distributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to,\ndeleting, or substituting -- in part or in whole -- any of the\ncomponents of the Original Version, by changing formats or by porting\nthe Font Software to a new environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed,\nmodify, redistribute, and sell modified and unmodified copies of the\nFont Software, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components, in\nOriginal or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the\ncorresponding Copyright Holder. This restriction only applies to the\nprimary font name as presented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created using\nthe Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n",
+      "sha256": "1f3b198133ac8b7f0eaaa2d7853904fec331c3a50f97d0aa3b26727eda7575dd",
+      "standard_body_sha256": "b0a140a7ad9326baada9825c2ae5f784335659f54acc8c2152f0c13dfc2626ee",
+      "primary_font_evidence_sha256": "eb57c6d6aff7979ba0469c58a42f9d23035531091f2fbbde21ee9a0cc3263e75"
+    },
+    {
+      "destination": "assets/licenses/lato-code.txt",
+      "spdx": "MIT",
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Slava Fomin II\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "sha256": "15455c9caffdf867147011414889e2a63d2978f2456e82c92c7fb979c053188e",
+      "primary_source_sha256": "a42cbf704157bfc6772a942d67a1138a65ebefb20e047b91700dc23d148b630b"
+    }
+  ],
+  "missing_inputs": [],
+  "runtime_dependencies": {
+    "jquery": "assets/vendor/jquery/3.7.0/jquery.min.js",
+    "jqueryui": "assets/vendor/jqueryui/1.13.2/jquery-ui.min.js",
+    "headroom": "assets/vendor/headroom/0.12.0/headroom.min.js",
+    "headroom-jquery": "assets/vendor/headroom/0.12.0/jQuery.headroom.min.js",
+    "highlight": "assets/vendor/highlight/11.8.0/highlight.min.js",
+    "highlight-julia": "assets/vendor/highlight/11.8.0/julia.min.js",
+    "highlight-julia-repl": "assets/vendor/highlight/11.8.0/julia-repl.min.js",
+    "requirejs": "assets/vendor/requirejs/2.3.6/require.min.js",
+    "minisearch": "assets/vendor/minisearch/6.1.0/index.min.js"
+  },
+  "closure_status": "complete",
+  "distributions": [
+    {
+      "id": "katex",
+      "input": "distributions/katex-0.16.8.tgz",
+      "bytes": 1474803,
+      "sha256": "7547e6a4088c2bbf0edb82510aa88822396fb39bf14b4e35ed491182b0e89c73",
+      "source_uri": "https://registry.npmjs.org/katex/-/katex-0.16.8.tgz",
+      "version": "0.16.8"
+    },
+    {
+      "id": "requirejs",
+      "input": "distributions/00-requirejs.tgz",
+      "bytes": 254418,
+      "sha256": "1d1a8a5ea21b941f5c80f7caf3ac7f3e1cb8cf2903a706d5c0d15434eaedd326",
+      "source_uri": "https://registry.npmjs.org/requirejs/-/requirejs-2.3.6.tgz",
+      "version": "2.3.6"
+    },
+    {
+      "id": "jquery",
+      "input": "distributions/01-jquery.tgz",
+      "bytes": 403704,
+      "sha256": "8394ac1b3c1bf73e984335e862be99c23fdd45702fa3b67b12e0a48f339c4a02",
+      "source_uri": "https://registry.npmjs.org/jquery/-/jquery-3.7.0.tgz",
+      "version": "3.7.0"
+    },
+    {
+      "id": "jquery-ui-dist",
+      "input": "distributions/02-jquery-ui-dist.tgz",
+      "bytes": 349925,
+      "sha256": "6b5f3c69cd4ffe3acdc7e1ea6fbee1550988779d91c9bdfa5c34942fbe2e8b9e",
+      "source_uri": "https://registry.npmjs.org/jquery-ui-dist/-/jquery-ui-dist-1.13.2.tgz",
+      "version": "1.13.2"
+    },
+    {
+      "id": "headroom.js",
+      "input": "distributions/03-headroom.js.tgz",
+      "bytes": 7288,
+      "sha256": "398ba12a7a9c4252962e7180b63b979d72390374d2947a560d1eae5ac4703ebc",
+      "source_uri": "https://registry.npmjs.org/headroom.js/-/headroom.js-0.12.0.tgz",
+      "version": "0.12.0"
+    },
+    {
+      "id": "highlight.js",
+      "input": "distributions/04-highlight.js.tgz",
+      "bytes": 728427,
+      "sha256": "d82fa4b731f6565c2e7925582e9bd581eb7d039a0ad625f38d8a7ce8d9e97a4e",
+      "source_uri": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.8.0.tgz",
+      "version": "11.8.0"
+    },
+    {
+      "id": "minisearch",
+      "input": "distributions/05-minisearch.tgz",
+      "bytes": 277683,
+      "sha256": "225de779eaa9445e6c6363393256b8b3db41a94738dda532ba27971986026313",
+      "source_uri": "https://registry.npmjs.org/minisearch/-/minisearch-6.1.0.tgz",
+      "version": "6.1.0"
+    },
+    {
+      "id": "@fortawesome/fontawesome-free",
+      "input": "distributions/06-fortawesome_fontawesome-free.tgz",
+      "bytes": 4864384,
+      "sha256": "a41c66ad259947764abd3aff8fcd4d49fbed5561601ad6744703ce7a9eeb90af",
+      "source_uri": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.4.2.tgz",
+      "version": "6.4.2"
+    }
+  ],
+  "licenses": {
+    "documenter-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/documenter.txt"
+    },
+    "bulma-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/bulma.txt"
+    },
+    "documenter-theme": {
+      "spdx": "MIT AND BSD-3-Clause",
+      "text_files": [
+        "assets/licenses/documenter.txt",
+        "assets/licenses/bulma.txt",
+        "assets/licenses/highlight-css.txt"
+      ]
+    },
+    "katex-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/katex-code.txt"
+    },
+    "katex-ofl": {
+      "spdx": "OFL-1.1",
+      "text_file": "assets/licenses/katex-fonts.txt"
+    },
+    "jquery-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/jquery.txt"
+    },
+    "jqueryui-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/jqueryui.txt"
+    },
+    "headroom-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/headroom.txt"
+    },
+    "highlight-js-bsd": {
+      "spdx": "BSD-3-Clause",
+      "text_file": "assets/licenses/highlight-js.txt"
+    },
+    "highlight-css-bsd": {
+      "spdx": "BSD-3-Clause",
+      "text_file": "assets/licenses/highlight-css.txt"
+    },
+    "minisearch-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/minisearch.txt"
+    },
+    "fontawesome-code-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/fontawesome.txt"
+    },
+    "fontawesome-fonts-ofl": {
+      "spdx": "OFL-1.1",
+      "text_file": "assets/licenses/fontawesome.txt"
+    },
+    "fontawesome-notices": {
+      "spdx": "MIT AND OFL-1.1 AND CC-BY-4.0",
+      "text_file": "assets/licenses/fontawesome.txt"
+    },
+    "juliamono-ofl": {
+      "spdx": "OFL-1.1",
+      "text_file": "assets/licenses/juliamono.txt"
+    },
+    "requirejs-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/requirejs.txt"
+    },
+    "lato-fonts-ofl": {
+      "spdx": "OFL-1.1",
+      "text_file": "assets/licenses/lato-fonts.txt"
+    },
+    "lato-code-mit": {
+      "spdx": "MIT",
+      "text_file": "assets/licenses/lato-code.txt"
+    }
+  },
+  "retained_metadata": [
+    {
+      "input": "responses/lato-metadata",
+      "sha256": "849544218ef69dbddbe87abf21507091c6d18336e9c428ac43066752e0af54a1",
+      "bytes": 4055,
+      "source_uri": "https://api.cdnjs.com/libraries/lato-font?fields=repository,license,version,assets"
+    },
+    {
+      "input": "responses/juliamono-metadata",
+      "sha256": "37a7242f0012e863607e24b4e005afbeee6729013af541be703d7d07b4344936",
+      "bytes": 1753,
+      "source_uri": "https://api.cdnjs.com/libraries/juliamono?fields=repository,license,version,assets"
+    },
+    {
+      "input": "licenses/katex-font-primary-evidence.json",
+      "sha256": "3d16bd24a951ab4ac0d5d67b5f496c0495bffb154b007e2b30e25ad67e1e3575",
+      "bytes": 17828,
+      "provenance": "pinned KaTeX TTF sfnt name IDs 0/13/14; retained independent extraction"
+    },
+    {
+      "input": "licenses/ofl-standard-body.txt",
+      "sha256": "b0a140a7ad9326baada9825c2ae5f784335659f54acc8c2152f0c13dfc2626ee",
+      "bytes": 4068,
+      "provenance": "standard OFL1.1 body only; font attribution from KaTeX sfnt records, not Open Sans"
+    },
+    {
+      "input": "licenses/lato-font-primary-evidence.json",
+      "sha256": "eb57c6d6aff7979ba0469c58a42f9d23035531091f2fbbde21ee9a0cc3263e75",
+      "bytes": 19947,
+      "provenance": "pinned Lato 3.0.0 WOFF sfnt name IDs0/5/13/14; underlying font version2.015 distinct"
+    },
+    {
+      "input": "responses/lato-upstream-tags",
+      "sha256": "3ff637aaf1332e89228d16bb1ac4afaff041604098ee377bd0e5e484c48f6395",
+      "bytes": 2061,
+      "source_uri": "https://api.github.com/repos/betsol/lato-font/tags?per_page=100"
+    },
+    {
+      "input": "responses/juliamono-upstream-tags",
+      "sha256": "56b5e5bd6abe2f0c14ecd4eff32588012aea5d1a11f16367f2e6d64232e39ba6",
+      "bytes": 25871,
+      "source_uri": "https://api.github.com/repos/cormullion/juliamono/tags?per_page=100"
+    },
+    {
+      "input": "responses/lato-upstream-root",
+      "sha256": "bd0cf4a161204ae5b67e5026fdf8471c46fbb38cc5c01cc2ca073bcc53f3f5b0",
+      "bytes": 19002,
+      "source_uri": "https://api.github.com/repos/betsol/lato-font/git/trees/b25aa8693f5ce250f45f665d0b77116722fceddb?recursive=1"
+    },
+    {
+      "input": "responses/juliamono-upstream-root",
+      "sha256": "6ecd57a2acee02af358b1652690ee407185be515b816b4fbbd5e91c21e5283a1",
+      "bytes": 11808,
+      "source_uri": "https://api.github.com/repos/cormullion/juliamono/git/trees/c3dfdf5a5fa7582f8ab5584c4636a2ba598e1aef?recursive=1"
+    }
+  ],
+  "resource_map": {
+    "https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css": "assets/vendor/lato/3.0.0/css/lato-font.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css": "assets/vendor/juliamono/0.050/juliamono.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js": "assets/vendor/highlight/11.8.0/highlight.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/julia.min.js": "assets/vendor/highlight/11.8.0/julia.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/julia-repl.min.js": "assets/vendor/highlight/11.8.0/julia-repl.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js": "assets/vendor/requirejs/2.3.6/require.min.js",
+    "https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js": "assets/vendor/minisearch/6.1.0/index.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css": "assets/vendor/fontawesome/6.4.2/css/fontawesome.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css": "assets/vendor/fontawesome/6.4.2/css/solid.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css": "assets/vendor/fontawesome/6.4.2/css/brands.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css": "assets/vendor/katex/0.16.8/katex.min.css"
+  }
+}

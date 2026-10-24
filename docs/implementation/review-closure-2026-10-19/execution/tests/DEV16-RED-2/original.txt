@@ -1,0 +1,17 @@
+
+Packaged schema provenance rejects drift before resolution: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/contracts/schema_copy_provenance.jl:36
+  Expression: available
+  Stacktrace:
+   [1] top-level scope
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/contracts/schema_copy_provenance.jl:35
+   [2] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/contracts/schema_copy_provenance.jl:36 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+Test Summary:                                              | Fail  Total  Time
+Packaged schema provenance rejects drift before resolution |    1      1  1.8s
+RNG of the outermost testset: Random.Xoshiro(0xb4883db137e59579, 0xe4fe4c739224d126, 0x2bb96811fe0a971f, 0xda6e0592a324fa2e, 0x372452685a8bd3c8)
+ERROR: LoadError: Some tests did not pass: 0 passed, 1 failed, 0 errored, 0 broken.
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/contracts/schema_copy_provenance.jl:1

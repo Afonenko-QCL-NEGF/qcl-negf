@@ -1,0 +1,29 @@
+{
+  "task":"SCI08-R1-design-D3",
+  "delta":[
+    "Private fake proc-root keyword through native recorder to actual lazy journal boot-file reader",
+    "Default /proc path, strip/read catch fallback, provenance fields, lazy initialization and String directory cache key preserved",
+    "Exact existing integration fixture receives fake boot file A; all15 previous assertions retained plus4 positive/cache assertions using changed fake file B",
+    "Nominal count345 to proposed349;31 logical groups and five selected includes unchanged",
+    "Separate RED remains2 existing-API assertions and never includes integration; no production edit before required observed RED"
+  ],
+  "unchanged":["D1/D2/accepted high D2 bytes","standalone and strict policy","native admission authority","O1/O2 actual caller traces","S1 physics/caps","C08 exhausted8/8","engineering grant absent"],
+  "read_budget_bytes":1048576,
+  "conservative_underlying_content_upper_bound_bytes":524288,
+  "charge_method":"Each named ranged/hash source read charged full file; both selected-file rg traversals charged full selected files; reserve covers Git metadata and generated output hashes. No broad recursive source scan.",
+  "read_inputs":[
+    "complete fixture high review",
+    "native_phase_telemetry.jl1-145 plus SHA256",
+    "complete existing integration native_phase_resource_contract.jl plus SHA256",
+    "five exact selected fixture files via bounded rg for call/read locators; initial assertion-heavy rg output truncated and focused read-locator rg repeated",
+    "complete separate2-assertion behavioral RED source plus SHA256",
+    "D1/D2 and accepted high D2 hashes; prior semantic context retained",
+    "Runner HEAD/status/recursive submodule metadata and targeted empty production/integration diff",
+    "three final D3 artifact hashes"
+  ],
+  "physical_io_cpu_rss_measured":false,
+  "source_review_limit":"Focused boot-id reader/caller/default/cache question; matrix counts other than explicit +4 delta inherited as review evidence, not independently re-audited here",
+  "writes_only":["/tmp/qcl-sci08-R1-design-v3.md","/tmp/qcl-sci08-R1-design-v3-identity.json","/tmp/qcl-sci08-R1-design-v3-delta-readledger.json"],
+  "target_calls":0,
+  "stop":"Hash outputs; return for focused high D3 source review. No runtime/parser/tests/native/network/product/CP execution."
+}

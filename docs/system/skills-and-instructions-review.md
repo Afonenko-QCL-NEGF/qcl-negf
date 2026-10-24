@@ -1,11 +1,13 @@
 # Пересмотр навыков и инструкций QCL-NEGF
 
-Статус: самостоятельный результат read-only аудита и предложения изменений,
-2026-10-14. Формализация, документация, ревью кода/архитектуры и научная приёмка
+Исторический статус: самостоятельный результат read-only аудита и предложений
+изменений от 2026-10-14. Уточнение authority/epoch SI01 — 2026-10-19.
+Формализация, документация, ревью кода/архитектуры и научная приёмка
 имеют равный приоритет. Исследователь, оператор и разработчик — равноправные
 читатели и исполнители. Цель пересмотра — задания, которые агент доводит до
 проверяемого результата конечным циклом, без постоянного пересогласования.
-Реализация кода, solver и изменение самих навыков этим документом не поручены.
+Сам документ не поручает реализацию кода, solver или изменение навыков и не
+отменяет уже выданные пользователем полномочия активного задания.
 
 Корпус содержит решения и историю затянувшейся сессии; нормативные утверждения
 требуют повторной проверки по запросу пользователя, коду и владельцам контрактов.
@@ -14,14 +16,18 @@
 
 ## Основание и воспроизводимость
 
-Корневой HEAD: `e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1`.
-Стартовый status: изменены AGENTS, README, TODO, architecture, deployment
+Исторический audit HEAD: `e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1`.
+Стартовый status того чтения: изменены AGENTS, README, TODO, architecture, deployment
 runbook; добавлены `docs/system/`, `docs/implementation/`. HEAD не удостоверяет
 все тексты. Номера строк зафиксированы по неизменяемому audit snapshot;
-публичные маршруты и content hashes приведены ниже. Snapshot из temporary
-directory — вспомогательная страховка, недоступная читателю опубликованного
-отчёта; его содержимое не публикуется и не становится lock-файлом.
-Все восемь component checkouts чисты и совпадают с gitlinks:
+публичные маршруты и content hashes приведены ниже. Прежний temporary
+snapshot не является обязательным входом после Git sync: опубликованные
+original reports и mapping frozen root texts описаны в
+[PORTABILITY](../implementation/comprehensive-review/2026-10-14-e48e5b2-01/PORTABILITY.md).
+Unavailable original `docs/system/README.md`, private/native inputs и raw arrays
+этот mapping не восстанавливает. Snapshot не становится lock-файлом.
+На момент того чтения все восемь component checkouts были чисты и совпадали
+с gitlinks; таблица сохраняет именно этот исторический состав:
 
 | Компонент | Commit |
 | --- | --- |
@@ -34,11 +40,42 @@ directory — вспомогательная страховка, недосту�
 | Research | `5458212063a41051328ef8b5d14d63d5ac7dc781` |
 | Results | `fe27a2a9ed065f9afacecc84113311f30d0c68d6` |
 
-Публичные source routes: двенадцать skill файлов и workflow byte-identical
+### Authority/epoch: C01–C07
+
+Этот ledger фиксирует чтение источников, а не current requirements или
+полномочия. Последнее применимое прямое поручение пользователя имеет приоритет
+перед historical С/Н/П и PLAN prose. Implemented baseline устанавливается по
+выбранному owning source; target corpus и proposal не доказывают implementation.
+Public branch/PR, local HEAD, dirty overlay и runtime различаются.
+
+Матрица SI01 проверена чтением root
+`9f8b08bbf8b2f941eaa6426bc07c2b436a2a81d8` от 2026-10-19. Это source locator
+данного сравнения, не дополнительный maintained registry ревизий.
+Original C01–C07 и их review-epoch находятся в
+[RV17, SI01](../implementation/comprehensive-review/2026-10-14-e48e5b2-01/RV17.md#si01--revalidation-claims-77-dispositions).
+Current applicability 59 requirements ведётся в existing
+[dispositions](requirement-dispositions-2026-10-19.md); этот ledger её не дублирует.
+
+| Claim | Authority / status и epoch | Owner | Primary locator в выбранном source | Ограничение / решение |
+| --- | --- | --- | --- | --- |
+| C01 Состав задают Git gitlinks | `current` invariant; historical receipt фиксирует состав своего чтения | Root / owning repositories | [AGENTS, «Начало задачи», п.2](../../AGENTS.md#начало-задачи); [architecture, Source composition](../architecture.md#source-composition); `git ls-tree <selected-root-ref> components/` | Hash/receipt не второй lock и не доказательство runtime; сохранить |
+| C02 Implementation, target, history и publication различаются | `implemented` требует commit + path/symbol + установленное свойство; `target/historical` не заменяют его | Owning source; Root для documentary epoch | [architecture, introduction](../architecture.md); [dispositions, «Источники и epoch» / «Семантика ledger»](requirement-dispositions-2026-10-19.md#источники-и-epoch); [PORTABILITY, «Карта путей»](../implementation/comprehensive-review/2026-10-14-e48e5b2-01/PORTABILITY.md#карта-путей) | Public-byte match ниже — historical claim. `unpublished` только при установленном отсутствии публикации конкретного output; иначе `unknown`. Archive hash не scientific truth; уточнить epoch |
+| C03 Role effort не меняет model или compute scope | `current` policy: docs/design `ultra`, implementation `medium`, coordination/independent review `high` | Coordinator и назначенный owner/reviewer | [release-roadmap, «Политика ролей и координации»](release-roadmap.md#политика-ролей-и-координации) | Policy не доказывает actual harness settings и не задаёт CPU/RAM; сохранить |
+| C04 Assignment, invocation и READY не создают новый этап | `current` scope — последнее прямое поручение; active EXEC сильнее historical PLAN. B/G1/S1 без e–e сохраняют predicates и technical BIND/READY | Operator задаёт scope; coordinator/reviewer проверяют готовность | [P1, «Как устроено условное разрешение», PERM01–18](../implementation/review-closure-2026-10-19/operator-permissions.md#как-устроено-условное-разрешение); [canonical task contract и «Полномочия, стоимость и маршрутизация»](agent-review-workflow.md#полномочия-стоимость-и-маршрутизация); [current source index](README.md) | EXEC checkpoint — secondary sanitized запись, не primary transcript или admission. Уже разрешённое действие не пересогласовывается; missing input блокирует dependents, CP-EXCEPTION сохраняется |
+| C05 Ownership разделён по предмету | `current` boundary: physics Core; plan/files Runner; formats Contracts; reads Results; studies Research; provenance AiiDA; resources Platform; view Portal | Соответствующий owning repository | [AGENTS, «Владение компонентами»](../../AGENTS.md#владение-компонентами); [architecture, Package review / Scientific execution](../architecture.md#package-review) | Boundary не подтверждает каждое API/поведение; owning change и опубликованный gitlink принимаются отдельно; сохранить |
+| C06 Пять измерений приёмки независимы | `current` invariant: process, convergence, physics, discretization, experimental validation | Core/Research для критериев; Runner/Results/AiiDA для своих свидетельств | [AGENTS, «Физическая и численная добросовестность»](../../AGENTS.md#физическая-и-численная-добросовестность); [architecture, Verification boundaries](../architecture.md#verification-boundaries) | Source/static, metadata, runtime и science evidence раздельны; exit/schema/render/hash не scientific pass. Unknown остаётся unknown; сохранить |
+| C07 Fixed light и CI-once имеют разные области | `current`: светлая тема всего web; один final full CI — для названного bootstrap/current B scope | Portal / web owners; Platform/coordinator для bootstrap и CI | [AGENTS, «Светлая тема…» / «Полномочия и стоимость»](../../AGENTS.md#светлая-тема-веб-интерфейса); [P1, PERM18](../implementation/review-closure-2026-10-19/operator-permissions.md#полный-список-решений); [workflow, «Состояния и независимые раунды»](agent-review-workflow.md#состояния-и-независимые-раунды) | Нет auto-dark/альтернативы без нового решения. Общий review loop не разрешает повтор final full CI; relevant targeted rerun допустим по изменению/failure/unresolved property внутри бюджета. Rendering/CI здесь не выполнялись; сохранить |
+
+### Историческая запись public source routes
+
+При аудите 2026-10-14 было записано: двенадцать skill файлов и workflow byte-identical
 выбранному e48 HEAD; AGENTS/architecture byte-identical
 [корпусу PR9](https://github.com/Afonenko-QCL-NEGF/qcl-negf/pull/9)
 на `ff50bc2f24c0774eb7de874a60e6d0d96a47197e`, хотя отличаются от local HEAD.
-Ни публикация текста, ни совпадение bytes не утверждают его актуальность.
+Свежая внешняя проверка публикации в SI01 не выполнялась; прежний public-byte
+match остаётся историческим claim, а отсутствие новой проверки не означает
+`unpublished`. Ни публикация текста, ни совпадение bytes не утверждают его
+актуальность, полноту result bundle или scientific correctness.
 SHA256 ledger ниже фиксирует только прочитанные тексты, не release pins.
 S=`SKILL.md`, R=reference из audit matrix, U=`agents/openai.yaml`:
 
@@ -56,9 +93,9 @@ S=`SKILL.md`, R=reference из audit matrix, U=`agents/openai.yaml`:
 постепенное раскрытие, formal≠behavioral validation. Его installed version
 не является публичным source проекта. Внешние плагины и `~/.codex` не изменяются.
 
-## Фактический аудит
+## Исторический фактический аудит 2026-10-14
 
-Прочитаны четыре `SKILL.md`, references и `agents/openai.yaml`. Есть
+В исходном аудите прочитаны четыре `SKILL.md`, references и `agents/openai.yaml`. Есть
 `name`/`description`, UI name/description/prompt с правильным `$skill-name`;
 scaffold, scripts и assets отсутствуют. Validator не запускался.
 
@@ -71,13 +108,13 @@ scaffold, scripts и assets отсутствуют. Validator не запуск�
 | [AGENTS](../../AGENTS.md):9–30, 59–94, 98–117 | Gitlinks, запрет скрытой смены задачи, общий бюджет, независимая проверка, явное продолжение разрешённой работы | Routing имеет только четыре научные задачи; engineering review и docs не имеют входа. Bootstrap детали занимают 66–89 и включают scoped «на этом bootstrap CI один раз». Вынести детали в Platform/runbook, сохранив указатель и границу полномочий; не обобщать конкретный bootstrap на каждую разработку. |
 | [research-workflow](../research-workflow.md):10–19, 30–64, 81–121; [architecture](../architecture.md):3–5, 29–38, 42–50 | Узкие skills, владельцы, отсутствие второго solver/scheduler, фиксированный набор для review | Workflow заканчивается преимущественно научным маршрутом; «ближайший шаг» 118–121 — датированное предложение. Architecture называет system corpus normative, но user требует revalidation. В текущем индексе различать принятые решения, proposals и исторические receipts; не наследовать приоритеты старой сессии. |
 
-Возраст snapshot не доказывает ошибку. Поиск подтвердил `_acceptance_metric_metadata`,
+Возраст snapshot не доказывает ошибку. Исторический поиск подтвердил `_acceptance_metric_metadata`,
 `_production_counter_sample`, `TelemetryWriter` и `_record_native_phase!`
 на выбранных gitlinks; последний уже находится на строке 40 вместо указанной
 43. Symbol locator полезен; прежняя семантика, отсутствие sampler и скорость
 нового состава этим не проверены.
 
-Инструкции компонентов прочитаны на commits из таблицы. Ниже локаторы
+Инструкции компонентов в исходном аудите прочитаны на commits из таблицы. Ниже локаторы
 относительно соответствующего `components/<repo>/`:
 
 | Public source | Инструкция и граница пересмотра | SHA256 |
@@ -135,11 +172,15 @@ closure либо точный unresolved outcome. Максимальные ци�
 разрешает дорогой этап. Публичная проверка версии плагина здесь не выполнена;
 правка плагина не поручена.
 
-## Задания изменения после повторной проверки архитектуры
+## Исторические предложения заданий 2026-10-14
 
 Очереди Ф/Д/Р/Н означают формализацию, документацию, engineering review и
 научную приёмку. Они равны; порядок ниже задают зависимости, не превосходство
-одной цели. Стоимость — оценка будущей docs работы, не разрешение на запуск.
+одной цели. Стоимость — историческая оценка docs работы, не действующий envelope.
+Готовность и границы активных SI01–07 определяет
+[handoff task](../implementation/review-closure-2026-10-19/documentation-instructions.md#si01--authorityepoch-claims),
+а девять полей задания сохраняет единственный
+[canonical контракт](agent-review-workflow.md#разбиение-до-ready).
 
 | Ticket / очередь | Owner; зависимость | Изменение, приёмка и миграция prompts | Цена |
 | --- | --- | --- | --- |
@@ -151,9 +192,9 @@ closure либо точный unresolved outcome. Максимальные ци�
 | SI06 / Р=Д=Ф | Root + engineering owners; SI02 + revalidated API/architecture | Проверить необходимость одного engineering skill на реальных задачах. Приёмка: tickets по owner и failure contract; docs style ссылается на методику, научный verdict не подменён architecture verdict. Старый «полный аудит» prompt мигрирует в конечные задачи. | Один design ticket, ≤45 мин; создание условно. |
 | SI07 / Ф=Д=Р=Н | Независимый evaluator + Root; изменённые instructions | Формальный validator и bounded forward testing. Приёмка: наблюдаемое поведение и артефакты, исходные промахи/control сохранены, claims не сильнее проверки. Existing prompts входят как regression inputs. | Отдельный общий budget: максимум 4 cases × 2 fresh samples, ≤40 мин; без solver/build/server. |
 
-## Tabletop cases для проверки маршрута
+## Исторические tabletop cases для проверки маршрута
 
-Сейчас это аналитическое чтение инструкций, не исполненные agent tests.
+Это аналитическое чтение инструкций 2026-10-14, не исполненные agent tests.
 Каждый case имеет реалистичный вход и различающий результат:
 
 | Case | Минимальный вход | Требуемое поведение |
@@ -182,9 +223,9 @@ Future pass получает realistic request, инструкции и мини
 no-guidance control и finite общий budget дают поведенческое свидетельство.
 Дорогие/внешние действия требуют отдельного поручения.
 
-## Итог
+## Итог исторического аудита
 
-Выполнены чтение, Git/metadata inventory и ограниченный поиск символов.
+В исходном аудите выполнены чтение, Git/metadata inventory и ограниченный поиск символов.
 SCBA/Poisson, benchmarks, сборки, тестовые suites, CI, установки и серверные
 операции не выполнялись. Skills, root AGENTS и component instructions не изменены.
 

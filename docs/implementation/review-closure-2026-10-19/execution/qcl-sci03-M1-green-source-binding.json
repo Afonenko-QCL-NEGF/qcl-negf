@@ -1,0 +1,12 @@
+{
+  "state": "CP_CODE_source_bound_GREEN_pending",
+  "base": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "head": "a4e720797c0e0a35744b83da6fe067adc0ed8e08",
+  "branch": "codex/review-closure-current-bound-measurements-integration",
+  "test_sha256": "d4bb720fff951df9ed402709a4f11422f07680925e0dddf6e91dcc2dcef87f79",
+  "production_sha256": "bb3d204378fd7d95691cfd9b58360afc6f48ede1b37fe7a0f6d2a6ff06944915",
+  "review_sha256": "c529835dfdb9ac374b3933af4403bab26ea2fb0b89494a56918f7960f8be7e8c",
+  "harness_sha256": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b",
+  "published": false,
+  "science_accepted": false
+}

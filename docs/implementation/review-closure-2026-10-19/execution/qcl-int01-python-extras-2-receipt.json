@@ -1,0 +1,50 @@
+{
+  "started_unix": 1792414642.716341,
+  "locks_before": {
+    "uv.lock": "db19ba9ace32c03d2b0a9da9b11b90f9f16de23c9539aa2276cd3dafd4f56336",
+    "julia/Manifest.toml": "a6cb226a2d6fe990e9a067658c16b44acdbaf984e68c3474232a22f72d8d8b47",
+    "components/qcl-negf-portal/frontend/package-lock.json": "da6d6342c88de0c602a6157b07d7f83fd442ac35b6f63485910b6f2a2478af21"
+  },
+  "venv_bytes_before": 349230459,
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "completed_unix": 1792414768.031627,
+  "elapsed_total_seconds": 125.3152859210968,
+  "exit_code": 0,
+  "locks_after": {
+    "uv.lock": "db19ba9ace32c03d2b0a9da9b11b90f9f16de23c9539aa2276cd3dafd4f56336",
+    "julia/Manifest.toml": "a6cb226a2d6fe990e9a067658c16b44acdbaf984e68c3474232a22f72d8d8b47",
+    "components/qcl-negf-portal/frontend/package-lock.json": "da6d6342c88de0c602a6157b07d7f83fd442ac35b6f63485910b6f2a2478af21"
+  },
+  "locks_unchanged": true,
+  "venv_bytes_after": 378938686,
+  "install_bytes_delta": 29708227,
+  "actual_command": "UV_CACHE_DIR=/tmp/qcl-review-closure-uv-cache UV_PYTHON_DOWNLOADS=never timeout --signal=TERM --kill-after=5s 900s /nix/store/zvdbpcaqqjmnzs2dpmgsszg3hh229cbp-uv-0.11.21/bin/uv sync --locked --python /usr/bin/python3.14 --all-packages --all-extras --all-groups",
+  "setup_log": "/tmp/qcl-int01-python-extras-2.log",
+  "sandbox_failed_log": "/tmp/qcl-int01-python-extras-2-sandbox.log",
+  "imports": {
+    "python": "3.14.7 (main, Aug 14 2026, 06:38:32) [GCC 16.2.1 20260810]",
+    "executable": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "httpx2": "2.13.1",
+    "TestClient_import": "pass",
+    "routes": {
+      "httpx2": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/httpx2/__init__.py",
+      "fastapi": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/fastapi/__init__.py",
+      "qcl_negf_api.api": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/api.py",
+      "aiida_qcl_negf.service": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-aiida/src/aiida_qcl_negf/service.py",
+      "qcl_negf_contracts": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts/src/qcl_negf_contracts/__init__.py",
+      "qcl_negf_results": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-results/src/qcl_negf_results/__init__.py"
+    }
+  },
+  "synthetic_testclient": {
+    "status": 200,
+    "json": {
+      "ok": true
+    }
+  },
+  "limitations": [
+    "Sandbox setup failed DNS/write access; same exact locked setup succeeded escalated.",
+    "Sandbox synthetic TestClient hung, own process terminated; bounded escalated synthetic request passed.",
+    "No pytest or native AiiDA profile invoked.",
+    "Earlier incorrect probe used nonexistent module name qcl_negf_aiida; corrected to owning aiida_qcl_negf.service."
+  ]
+}

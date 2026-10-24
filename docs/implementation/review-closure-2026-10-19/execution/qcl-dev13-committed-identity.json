@@ -1,0 +1,8 @@
+{
+  "root_cause": "git-diff ordering: frozen appends new untracked fixture last; staged diff sorts it among paths; per-file patches byte-identical",
+  "frozen_diff_sha256": "c0675261cee2db5328bf1d95b7849d917c7643e0b22eb2b674bd390e18676336",
+  "committed_diff_sha256": "9a94e0c77f2d9fb1746a54d5af224f93ed23c4fb21213a387134a088575263a0",
+  "per_file_patch_bytes_identical": true,
+  "all_eight_paths_identical": true,
+  "head": "b9a876aa22d84dc13435bf970728b033d1345ba8"
+}

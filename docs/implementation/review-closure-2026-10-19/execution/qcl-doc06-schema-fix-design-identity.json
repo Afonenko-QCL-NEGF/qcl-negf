@@ -1,0 +1,24 @@
+{
+  "format": "qcl-negf.doc06-schema-fix-design-identity.v1",
+  "status": "READY_FOR_INDEPENDENT_HIGH_D_REVIEW_NOT_EXECUTION_GRANT",
+  "report": {
+    "path": "/tmp/qcl-doc06-schema-fix-design.md",
+    "bytes": 16698,
+    "sha256": "3a655b213799ce5ead32a1acec7aa0f05cd1effb8d2750e76fb10d271fac818b"
+  },
+  "readledger": {
+    "path": "/tmp/qcl-doc06-schema-fix-design-readledger.json",
+    "bytes": 5822,
+    "sha256": "4240320979b74a770f8c25cfb36624dcbcd786741d17decc95d4d6e3fffca254"
+  },
+  "selected_root": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "adapter_sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+  "test_sha256": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69",
+  "source_rounds_maximum": 2,
+  "proposed_root_product_milestone": {
+    "unit_GREEN_calls": 1,
+    "actual_projection_calls": 2,
+    "activated_by_this_D": false
+  },
+  "writes": "Only /tmp/qcl-doc06-schema-fix-design.md, -identity.json, -readledger.json"
+}

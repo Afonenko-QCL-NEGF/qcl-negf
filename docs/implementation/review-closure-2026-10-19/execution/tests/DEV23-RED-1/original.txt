@@ -1,0 +1,63 @@
+...F.F...                                                                [100%]
+=================================== FAILURES ===================================
+__________ test_kill_run_exception_has_redacted_public_error[daemon] ___________
+
+cancellation = namespace(initial=namespace(uuid='00000000-0000-0000-0000-000000000023', pk=23, label='synthetic cancellation', is_ter... 0, 0, 1, tzinfo=datetime.timezone.utc)), daemon_running=True, fault='daemon', events=['node', 'daemon'], forbidden=[])
+site = 'daemon'
+
+    @pytest.mark.parametrize("site", ["daemon", "dispatch", "refresh"])
+    def test_kill_run_exception_has_redacted_public_error(cancellation, site):
+        """Backend failure stays unknown and must not expose a private broker URL."""
+        cancellation.fault = site
+        with pytest.raises(RuntimeError) as caught:
+>           service.kill_run(RUN)
+
+components/qcl-negf-aiida/tests/test_cancellation_contract.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-aiida/src/aiida_qcl_negf/service.py:556: in kill_run
+    if not get_daemon_client().is_daemon_running:
+           ^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def daemon_client():
+        boundary.events.append("daemon")
+        if boundary.fault == "daemon":
+>           raise OSError(PRIVATE)
+E           OSError: amqp://fake-user:fake-secret@private-broker.invalid:5672/private-vhost
+
+components/qcl-negf-aiida/tests/test_cancellation_contract.py:47: OSError
+__________ test_kill_run_exception_has_redacted_public_error[refresh] __________
+
+cancellation = namespace(initial=namespace(uuid='00000000-0000-0000-0000-000000000023', pk=23, label='synthetic cancellation', is_ter...datetime.timezone.utc)), daemon_running=True, fault='refresh', events=['node', 'daemon', 'kill', 'node'], forbidden=[])
+site = 'refresh'
+
+    @pytest.mark.parametrize("site", ["daemon", "dispatch", "refresh"])
+    def test_kill_run_exception_has_redacted_public_error(cancellation, site):
+        """Backend failure stays unknown and must not expose a private broker URL."""
+        cancellation.fault = site
+        with pytest.raises(RuntimeError) as caught:
+>           service.kill_run(RUN)
+
+components/qcl-negf-aiida/tests/test_cancellation_contract.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-aiida/src/aiida_qcl_negf/service.py:562: in kill_run
+    refreshed = _node(identifier)
+                ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+identifier = '00000000-0000-0000-0000-000000000023'
+
+    def node(identifier):
+        assert identifier == RUN
+        boundary.events.append("node")
+        if boundary.events.count("node") == 1:
+            return boundary.initial
+        if boundary.fault == "refresh":
+>           raise OSError(PRIVATE)
+E           OSError: amqp://fake-user:fake-secret@private-broker.invalid:5672/private-vhost
+
+components/qcl-negf-aiida/tests/test_cancellation_contract.py:41: OSError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-aiida/tests/test_cancellation_contract.py::test_kill_run_exception_has_redacted_public_error[daemon]
+FAILED components/qcl-negf-aiida/tests/test_cancellation_contract.py::test_kill_run_exception_has_redacted_public_error[refresh]
+2 failed, 7 passed in 0.18s

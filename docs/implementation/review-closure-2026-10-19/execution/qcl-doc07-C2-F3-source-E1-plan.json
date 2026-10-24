@@ -1,0 +1,14 @@
+{
+  "operation_id": "DOC07-C2-F3-SOURCE-E1",
+  "authorization": "explicit direct human standing engineering resources grant: \u0437\u0434\u0435\u0441\u044c \u0438 \u0434\u0430\u043b\u044c\u0448\u0435 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0432\u0441\u0435 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044b \u0434\u043b\u044f \u0443\u0441\u043a\u043e\u0440\u0435\u043d\u0438\u044f \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u0438 \u0440\u0430\u0437\u0432\u0435\u0440\u0442\u044b\u0432\u0430\u043d\u0438\u044f",
+  "prior_source_cap": "8/8 exhausted retained; not reset or retroactive PASS",
+  "diagnosis": "highreview78a4046f227f4c07f72c8bd59b4b7f87c960a8314cb915b481f7e254bf5d67f5 F3a staleassigning authority selected by emittedused.status; F3b validredactednonnullEvidence falselyrejected",
+  "coordinator_adjudication": "confirmed against accepted independent assigning/numeric privacy branches; existing contract correction, no new model/publicformat",
+  "additional_source_cycles": 1,
+  "scope": "only _assigning authority/status handling + append distinguishingF3a/F3b controls, existingprefix preserved",
+  "limits": "15min1CPU2GiB2MiBread128KiBoutput, no targetruntime/import/parser/tests/CI/native",
+  "independent_high_CPP_required": true,
+  "runtime_budget_unchanged": "DOC07 C1/C2 used3/4; only sole originally allocated GREEN remains",
+  "no_automatic_further_source_cycle": true,
+  "scientific_and_C08_caps_unchanged": true
+}

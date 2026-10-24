@@ -1,0 +1,29 @@
+{
+  "operation_id": "DOC06-SOURCE-TOOLS-CORRECTION-1",
+  "authorization": "user general engineering resource grant",
+  "prior_source_tool_plan": "DOC06-SOURCE-TOOLS-1 exhausted2/2, formatterPASS/lint15failure immutable",
+  "diagnosis": "11require-await, exactASCII-space regex1, inner declarations3; distinct reviewer accepted narrow mechanical correction",
+  "review_sha256": "f8462e3c9ca70e043d4fe9511e322d7ebce9465d67edd622ac8f7c661774384e",
+  "format_additional_calls": 1,
+  "lint_additional_calls": 1,
+  "no_automatic_extra_call": true,
+  "per_call_wall_seconds": 20,
+  "cpu": 1,
+  "RSS_bytes": 1073741824,
+  "TMP_bytes": 33554432,
+  "logs_bytes": 2097152,
+  "targeted_unit_cap_unchanged": "1used/2total",
+  "full_CI": 0,
+  "tools": [
+    {
+      "kind": "format",
+      "sha256": "b88ad7c2f1dfad114c8d0a8adbe0c8edd850230b0918ca20d07896ff0fbbf7c4",
+      "harness_delta": "sole exact attempt whitelist -1 to -2; guardian/capture/sampler/path/runtime unchanged"
+    },
+    {
+      "kind": "lint",
+      "sha256": "9c5af1e2ceaeffe70cae97002874f6a51e67f97adc07196bdd37dd7e1d9044cd",
+      "harness_delta": "sole exact attempt whitelist -1 to -2; guardian/capture/sampler/path/runtime unchanged"
+    }
+  ]
+}

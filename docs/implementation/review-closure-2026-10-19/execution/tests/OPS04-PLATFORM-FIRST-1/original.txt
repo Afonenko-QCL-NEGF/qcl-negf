@@ -1,0 +1,81 @@
+.............F..                                                         [100%]
+=================================== FAILURES ===================================
+_ EnrollmentTests.test_source_trust_substitution_does_not_change_late_transport_snapshot _
+
+self = <test_node_enrollment.EnrollmentTests testMethod=test_source_trust_substitution_does_not_change_late_transport_snapshot>
+
+    def test_source_trust_substitution_does_not_change_late_transport_snapshot(self):
+        fs = FakeProtectedFS()
+        original = b"independent synthetic key bytes"
+        with fs.patches():
+            verified = ops.read_protected_file("/protected/known_hosts")
+            frozen = ops.freeze_ssh_trust(verified, snapshot_root="/protected/snapshots")
+        opened_source = sum(path == "/protected/known_hosts" for path, _, _ in fs.opens)
+        run = SyntheticCommands()
+        def transport(args, **kwargs):
+            fs.nodes["/protected/known_hosts"]["bytes"] = b"late source substitution"
+            if args[0] == "ssh":
+                self.assertIn("-oUserKnownHostsFile=" + frozen["path"], args)
+            if args[:2] == ["nix", "copy"]:
+                self.assertIn(frozen["path"], kwargs["env"]["NIX_SSHOPTS"])
+            self.assertEqual(fs.nodes[frozen["path"]]["bytes"], original)
+            self.assertEqual(frozen["sha256"], hashlib.sha256(original).hexdigest())
+            return run(args, **kwargs)
+        with tempfile.TemporaryDirectory() as temporary, \
+             patch.object(ops, "load_enrollment", lambda _: {"registry": registry(), "registry_sha256": "e" * 64, "known_hosts_bytes": original}), \
+             patch.object(ops, "observe_node_identity", lambda **_: CONTROLLER), \
+             patch.object(ops, "freeze_ssh_trust", lambda *a, **k: frozen), patch.object(ops, "command", transport):
+            runtime, gate = Path(temporary) / "runtime", Path(temporary) / "gate"
+            gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+>           result = ops.deliver_cli(manifest_fixture(), pool(), run=transport, enrollment="/protected/registry.json", runtime=runtime, gate=gate)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-platform/tests/test_node_enrollment.py:714: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/ops/application_release.py:2506: in deliver_cli
+    return _deliver_cli_locked(expected, pool, run, runtime=runtime, gate=gate, authority=authority,
+components/qcl-negf-platform/ops/application_release.py:2669: in _deliver_cli_locked
+    value=unique_json(ssh(selected[name]['target'],['sudo','-n','qcl-negf-release','update-capabilities'],run,trust_snapshot=authority['trust_snapshot']),16384)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+components/qcl-negf-platform/ops/application_release.py:1671: in ssh
+    return run(["ssh", *SSH_OPTIONS, *trust_options(trust_snapshot), target, shlex.join(args)])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+components/qcl-negf-platform/ops/application_release.py:2596: in dispatch
+    output = (original_run(args, timeout_seconds=command_timeout_seconds, output_bytes=available,
+components/qcl-negf-platform/tests/test_node_enrollment.py:707: in transport
+    return run(args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_node_enrollment.SyntheticCommands object at 0x7efe60e92e40>
+args = ['ssh', '-oBatchMode=yes', '-oConnectionAttempts=1', '-oConnectTimeout=10', '-oServerAliveInterval=15', '-oServerAliveCountMax=2', ...]
+kwargs = {'deadline': 293608.111773189, 'env': None, 'output_bytes': 1048576, 'timeout_seconds': 360.0}
+actual = {'boot_id': 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'hostname': 'controller.invalid', 'machine_id': '11111111111111111111111111111111', 'machine_uuid': '11111111-1111-1111-1111-111111111111', ...}
+remote = ['sudo', '-n', 'qcl-negf-release', 'update-capabilities']
+
+    def __call__(self, args, **kwargs):
+        self.calls.append(args)
+        self.kwargs.append(kwargs)
+        if args[0] == "ssh":
+            actual = dict(self.observations[args[-2]])
+            remote = shlex.split(args[-1])
+            if remote[-1] == "identity":
+                if self.mismatch == "boot_after_copy" and self.copy_started and actual["role"] == "worker":
+                    actual["boot_id"] = CONTROLLER["boot_id"]
+                return json.dumps(actual)
+            if "activate" in remote:
+                return ""
+            if "check" in remote:
+                if self.mismatch == "legacy":
+                    return json.dumps({**manifest_fixture(), "ready": True})
+                if self.mismatch == "partial":
+                    return '{"schema":'
+                return json.dumps({"schema": "qcl-negf-node-release-check-v1", "node_identity": actual,
+                                   "release": {**manifest_fixture(), "ready": True, "code_uuid": "synthetic-code"}})
+>           raise AssertionError("Unexpected synthetic SSH action")
+E           AssertionError: Unexpected synthetic SSH action
+
+components/qcl-negf-platform/tests/test_node_enrollment.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-platform/tests/test_node_enrollment.py::EnrollmentTests::test_source_trust_substitution_does_not_change_late_transport_snapshot
+1 failed, 15 passed in 0.50s

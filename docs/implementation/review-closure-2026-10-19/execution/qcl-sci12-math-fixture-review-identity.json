@@ -1,0 +1,33 @@
+{
+  "task": "SCI12-MATH-I1-F-INDEPENDENT-REVIEW",
+  "stage": "source_fixture_review_before_RED",
+  "verdict": "NARROW_F2_REQUIRED_BEFORE_ROOT_RED",
+  "literal_oracle_verdict": "No blocking errors found in reviewed literal expectations or eight-helper scope",
+  "worktree": "/tmp/qcl-sci12-math-results-worktree",
+  "results_head": "de70638a982f91b7e125ab1cfc70a2daef2a656d",
+  "status_observed": "Only untracked tests/test_equilibrium_map_math.py",
+  "inputs": {
+    "fixture": {"path": "tests/test_equilibrium_map_math.py", "bytes": 16161, "sha256": "5e30ef6337374f281681e80e9dc94512043d7f4ee87890f2107d8973f003e1ce"},
+    "report_sha256": "076d761054386ebbd223f89b79032144237f245d36bc7f362416b6d37dd64efa",
+    "identity_sha256": "b0a96b213fff49b7514ee1267ab6a1ce10feafd11225b5e92f446eb1c4f29699",
+    "patch_sha256": "3f69757c5187913c636c35e601004fe4b2ffa9b32d4e2ab7cbc6512f6ef84e36",
+    "MAP_D2_sha256": "5473c96d80ad44c1b045008c7fa1aa6055502b05681700d4191c54b46f42db17",
+    "OPS_D1_sha256": "82a2fbc34cbfc2c6d879a160122362e54dc48586dca4153ae5229ff60ce93a3e",
+    "OPS_review_sha256": "3f0d7aa11fbc66cb3dbc5e66a0604d22eacb2e6705de165a4e1cc89198bd68d3"
+  },
+  "current_nominal_count": {"test_functions": 26, "cases": 96, "literal_controls": 2, "API_dependent": 94, "method": "Manual source/decorator count; not collected"},
+  "current_missing_API_classification": {"locator": "fixture:23-37", "prospective": "94 per-case setup ERROR with NEW_API_MISSING plus2 literal controls, conditional on prepared runtime; no actual test result", "not": "Collection crash, pre-existing behavioral failure or physics regression"},
+  "minimal_F2_ticket": [
+    {"id": "F2-COUNT", "existing_API": "_restrict_cells", "input": "Legitimate len-only Sequence source edges194 / values193, target edges2; __getitem__/iteration sentinel forbids reads", "expected": "ContractError before element read, no large array/new validator API"},
+    {"id": "F2-CALL-RED", "change": "Move explicit new-module/helper presence/callable assertion to test-call body of every API-dependent test; setup retains strict package/module/dependency/context guards", "constraints": "No product stub, skip, xfail, broad catch, weaker literals/guards or new API", "expected": "Absent new API yields per-case assertion FAIL; wrong package/dependency/import/context remains ERROR/blocked"}
+  ],
+  "future_source_predicate": "Actual dimensions from real shapes/Sequence lengths, Python-int products checked against owning caps and min(sys.maxsize,limit) before allocation/range/element read; no int64 wrap or implicit copy",
+  "uncovered": ["Actual arbitrary shape-product overflow executable branch", "Negative quadrature weights absent from eight-helper API", "Future implementation import graph and source ownership", "Non-dyadic enclosure, generic relation norm/projector and PAIR-I2/N0"],
+  "primary_assertion_locators": ["60-70", "73-101", "104-155", "158-193", "196-228", "231-338", "341-383"],
+  "source_ownership": "Selected Results __init__/future module exact origin guards present; no broad exception masking",
+  "outputs": {"review": {"path": "/tmp/qcl-sci12-math-fixture-review.md", "bytes": 13187, "sha256": "5e59fd2f62500da9de877c601127c9262f310381ff883985300445150d34f0ce"}, "identity": "/tmp/qcl-sci12-math-fixture-review-identity.json"},
+  "budget": {"wall_minutes": 8, "CPU": 1, "RAM_bytes": 1073741824, "read_cap_bytes": 3145728, "conservative_content_upper_bytes": 1048576, "output_cap_bytes": 98304, "CPU_RSS_syscall_measurements": null},
+  "execution": {"subagents": 0, "scripts_parser_compiler_imports_math_numerics_HDF5_tests_solver_network": 0, "source_CP_edits": 0, "scientific_calls": 0, "new_product_calls": 0},
+  "preserved": {"product_calls_total": "87 unchanged by this review", "C08": "8/8 unchanged", "physics": "S1 unchanged0mV70K all5 no-e-e finite_chain4; caps13/936 retained"},
+  "stop": "Frozen review; Root may assign narrow F2 source-only, then fresh fixture source recheck and separately bounded RED. No implementation yet"
+}

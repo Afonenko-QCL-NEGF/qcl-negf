@@ -1,0 +1,28 @@
+{
+  "schema": "qcl-sci03-M1-red-v2-narrow-review-v1",
+  "date": "2026-10-19",
+  "verdict": "approved_source_only",
+  "scope": "single-line R1 correction only; prior full review retained",
+  "test_sha256": "d4bb720fff951df9ed402709a4f11422f07680925e0dddf6e91dcc2dcef87f79",
+  "v1_reconstructed_sha256_verified": "7d2a9d69a0d4cb02334b9b4617a09a9cb3746247eba17f7ebff364eb62ab8921",
+  "base_head": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "prior_full_review_sha256": "ba228b23c4d9e17f0c1b35fb171b38cad0d6e75feba2efd9903cedce306299fc",
+  "R1": {"status": "resolved", "line": 716, "old": "assert bound['state_defects']['raw']['sum_norm'] == 0", "new": "m1_close(bound['state_defects']['raw']['sum_norm'], 0)", "other_source_changes": 0, "roundoff_policy_changed": false, "literal_dyadic_and_boundary_zero_controls_preserved": true},
+  "baseline_prefix_bytes_compared": 29322,
+  "baseline_prefix_equal": true,
+  "diff": "+324/-0 one tests file; diff --check no output",
+  "sha256": {
+    "v2_report": "139a0e3a0fd3234db1a65b39db3b31aad14c8e27cf8d19db6a6d201748e6fd2e",
+    "v2_identity": "ab7a1359b7f5a0148a43501a0060a0b8d05051bf630249af2d15e72011edb0c8",
+    "v2_delta": "5ed2c20740d13b4c35c6b545337d59c669985f7463f8c248c68a03072d343ec1",
+    "v2_patch": "c599065fd8e38d5e165693b091a075cee1ac9f128601f3a1b748ac47dcc45acc",
+    "production": "3f8ee56390741e15bc2c709de67d4b0c80260733c99752d8fbbb4f538e3042e6",
+    "readme": "39c5c06b1335e6820b980ba3967a42ac25f8fad4b80a771e7297a5982d1363e9",
+    "harness_approval_retained": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b"
+  },
+  "budget": {"wall_minutes_max": 10, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 1048576, "output_bytes_max": 32768, "logical_text_conservative_upper_bytes": 716800, "physical_io_telemetry": "not instrumented"},
+  "execution": {"imports": 0, "parsers": 0, "tests": 0, "collection": 0, "hdf": 0, "julia": 0, "solver": 0, "build": 0, "network": 0, "server": 0, "source_writes": 0, "git_mutations": 0, "children": 0, "M1_calls_consumed": 0, "C08_calls_consumed": 0},
+  "runtime_or_scientific_acceptance": false,
+  "outputs": {"report": "/tmp/qcl-sci03-M1-red-v2-review.md", "report_sha256": "4df1f319e5abc1918fddbbad464bec5b0eeaf5b5a45a09a063b3b6a150c633cc", "report_bytes": 4816, "identity": "/tmp/qcl-sci03-M1-red-v2-review-identity.json"},
+  "stop": true
+}

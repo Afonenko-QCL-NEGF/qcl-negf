@@ -1,0 +1,52 @@
+{
+  "id": "DOC06-ACTUAL-PREP-2",
+  "state": "completed_exact_Git_export_R1_verified",
+  "binding": {
+    "graph_sha256": "b7244ee91167b688e598efea33ba9620772c974264920d7e368ec87de4d939e1",
+    "input_receipt_sha256": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a",
+    "files": {
+      "runner/src/application/configuration_types.jl": {
+        "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+        "bytes": 8663
+      },
+      "runner/src/infrastructure/config/configuration.jl": {
+        "sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb",
+        "bytes": 71428
+      },
+      "runner/src/infrastructure/config/configuration_sources.jl": {
+        "sha256": "bb08a718dd765a15db2a4fba7de0ff2ea79753f29dc516900f67485331dafbb1",
+        "bytes": 3381
+      },
+      "runner/src/application/auto_strategy.jl": {
+        "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326",
+        "bytes": 19019
+      },
+      "runner/docs/src/user/configuration.md": {
+        "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+        "bytes": 10648
+      },
+      "runner/test/fixtures/configurations/base.yaml": {
+        "sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2",
+        "bytes": 6973
+      },
+      "runner/schema/run.schema.json": {
+        "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+        "bytes": 54815
+      },
+      "contracts/src/qcl_negf_contracts/schemas/run.schema.json": {
+        "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+        "bytes": 54815
+      },
+      "core/src/numerics/optimized/production_contracts.jl": {
+        "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+        "bytes": 15596
+      }
+    },
+    "aggregate_source_bytes": 245338
+  },
+  "preparation_sha256": "03db672d25120747f86469e37a1685f6dfff8bed64199b6a619b5296b8adf5b8",
+  "wall_seconds": 0.1306329250219278,
+  "original_stdout_sha256": "8bf0b30fe49f4db49963f561f23b9eb3e8f4082f27306321e6a12e47463d43fa",
+  "original_stdout": "{\"status\": \"prepared_not_executed\", \"namespace\": \"/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1\", \"source_files\": 9, \"source_bytes\": 245338, \"input_receipt_sha256\": \"971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a\"}\n",
+  "product_executions": 0
+}

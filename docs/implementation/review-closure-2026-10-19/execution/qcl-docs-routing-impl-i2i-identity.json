@@ -1,0 +1,22 @@
+{
+  "stage":"I2I-native-focused-TAP-parser-source-candidate",
+  "verdict":"awaiting-fresh-independent-high-CPP",
+  "worktree":"/tmp/qcl-docs-test-routing-worktree",
+  "head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "accepted_I2H_review_sha256":"c5ceb1df3d7ac2c99352b7bf67dde0c1f8a928485cfd430a5a43d456cb01ee7c",
+  "frozen_before":"/tmp/qcl-docs-routing-i2h-before-i2i/manifest.sha256",
+  "patch":{"path":"/tmp/qcl-docs-routing-impl-i2i-complete.patch","kind":"complete-four-file-I2H-to-I2I-delta-two-TS-files-unchanged","bytes":7885,"sha256":"6e5c13053e11044f2c9f46b1d7788ec2fc8239d6643983d6877c6d95de4f8c85"},
+  "files":{
+    "ops/docs_tests_native.py":{"before":"46cadd60536140b696607c0003d159b1aae7e3f98483490584726d2d0a8b8eda","after":"71827cae802566e37087e4390a1040fe1dee57e284dc1a2a58542c0e2c659bbc"},
+    "ops/docs_tests_cli.ts":{"before":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7","after":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7"},
+    "tests/test_docs_test_native.py":{"before":"c44a21b3bb014e25b0ff47470bddd8e7bc6f580455aea37608684da088f2e67b","after":"153a78a78008f4a656abf780b28f0937cb50c0a613e82294c6246c045a914688","nominal_methods":8,"observed":null},
+    "tests/docs_test_native_protocol_test.ts":{"before":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2","after":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2","nominal_registrations":8,"observed":null}
+  },
+  "owning_scope":["ops/docs_tests_native.py::validate_unit_report","tests/test_docs_test_native.py::literal-focused-TAP-controls"],
+  "execution":{"scripts":0,"parser":0,"import":0,"compiler":0,"formatter":0,"linter":0,"tests":0,"solver":0,"native":0,"network":0,"CI":0,"science":0,"children":0},
+  "historical_context":{"product":90,"source":11,"increment":0,"E1_used":false,"Math97PASS_PR10G1":"Root-provided-not-revalidated"},
+  "claims":{"native_READY":false,"cause_RSS_fixed":false,"S1":false,"whole_B3_B4":false},
+  "resource_cap":{"minutes":12,"CPU":1,"RAM_bytes":1073741824,"read_bytes":2097152,"output_bytes":65536},
+  "resource_ledger":{"aggregate_read_bytes":null,"read_cap_compliance":"not-certified-repeated-full-file-diff-check-hash-reads-may-exceed","aggregate_output_bytes":null,"truncation_observed":true,"CPU":null,"RSS":null,"physical_IO":null},
+  "next_gate":"fresh-independent-high-CPP-on-exact-four-file-manifest"
+}

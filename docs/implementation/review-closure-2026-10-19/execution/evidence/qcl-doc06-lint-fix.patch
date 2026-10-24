@@ -1,0 +1,152 @@
+diff --git a/ops/docs/static-slice.ts b/ops/docs/static-slice.ts
+index 3eee997..bdee76b 100644
+--- a/ops/docs/static-slice.ts
++++ b/ops/docs/static-slice.ts
+@@ -481,7 +481,7 @@ function exampleValue(input: Input): Observation {
+   const rest = text.slice(start).replace(/^\n/, "");
+   const block = rest.split(/^(?=[^\s#])/m)[0];
+   if (/^\s*(?:<<:|[!&*])/m.test(block)) return failed(selector);
+-  const leaves = [...block.matchAll(/^  energy_chunk:([^\n]*)$/gm)];
++  const leaves = [...block.matchAll(/^[ ]{2}energy_chunk:([^\n]*)$/gm)];
+   if (leaves.length !== 1) return failed(selector);
+   const literal = /^\s*(\d+)\s*(?:#[^\n]*)?$/.exec(leaves[0][1]);
+   if (!literal || !Number.isSafeInteger(Number(literal[1]))) return failed(selector);
+@@ -506,7 +506,7 @@ function schemaProjection(input: Input): SchemaProjection {
+   if (input.text === null) return result;
+   try {
+     const root = object(parseData(input.text));
+-    function required(node: Record<string, unknown>): string[] {
++    const required = function (node: Record<string, unknown>): string[] {
+       if (!own(node, "required")) return [];
+       const list = node.required;
+       if (
+@@ -514,12 +514,12 @@ function schemaProjection(input: Input): SchemaProjection {
+         new Set(list).size !== list.length
+       ) unsupported("malformed_schema");
+       return list as string[];
+-    }
+-    function allowed(node: Record<string, unknown>, keys: string[]) {
++    };
++    const allowed = function (node: Record<string, unknown>, keys: string[]) {
+       if (Object.keys(node).some((key) => !keys.includes(key))) {
+         unsupported("unsupported_schema_keyword");
+       }
+-    }
++    };
+     // Only keywords which cannot add an unprojected selected-path condition
+     // are permitted here. Unselected properties/$defs are opaque data.
+     const objectKeys = [
+@@ -553,7 +553,7 @@ function schemaProjection(input: Input): SchemaProjection {
+     result.rootRequired = { value: required(root).includes("production"), selector: "/required" };
+     let hops = 0;
+     const seen = new Set<string>();
+-    function resolve(
++    const resolve = function (
+       raw: unknown,
+       location: string,
+     ): { node: Record<string, unknown>; location: string } {
+@@ -581,7 +581,7 @@ function schemaProjection(input: Input): SchemaProjection {
+         location = ref.slice(1);
+       }
+       return { node, location };
+-    }
++    };
+     const production = resolve(object(root.properties).production, "/properties/production");
+     allowed(production.node, objectKeys);
+     if (production.node.type !== "object") unsupported("malformed_schema");
+diff --git a/tests/docs_static_slice_test.ts b/tests/docs_static_slice_test.ts
+index efbe699..0de3cf3 100644
+--- a/tests/docs_static_slice_test.ts
++++ b/tests/docs_static_slice_test.ts
+@@ -353,7 +353,7 @@ for (
+ }
+ 
+ // Catches accepting changed bytes under stale source identities.
+-Deno.test("DOC06 refuses receipt hash mismatch", async () =>
++Deno.test("DOC06 refuses receipt hash mismatch", () =>
+   fixture(async (f) => {
+     await write(`${f.snapshot}/${PATHS[8]}`, f.text[PATHS[8]].replace("= 64", "= 83"));
+     equal((await f.run()).status, "refused", "mismatch must refuse");
+@@ -361,20 +361,20 @@ Deno.test("DOC06 refuses receipt hash mismatch", async () =>
+ 
+ // Catches permissive namespace/owner parsing and private path projection.
+ for (const bad of ["../private/secret.jl", "/private/secret.jl", "runner/not-allowlisted.jl"]) {
+-  Deno.test(`DOC06 refuses nonallowlisted input ${bad}`, async () =>
++  Deno.test(`DOC06 refuses nonallowlisted input ${bad}`, () =>
+     fixture(async (f) => {
+       f.entries[0].path = bad;
+       await f.receipt();
+       equal((await f.run()).status, "refused", "input namespace refusal");
+     }));
+ }
+-Deno.test("DOC06 refuses wrong owning component", async () =>
++Deno.test("DOC06 refuses wrong owning component", () =>
+   fixture(async (f) => {
+     f.entries[0].owner = OWNER.core;
+     await f.receipt();
+     equal((await f.run()).status, "refused", "wrong owner refusal");
+   }));
+-Deno.test("DOC06 refuses symlink selected file even with matching bytes", async () =>
++Deno.test("DOC06 refuses symlink selected file even with matching bytes", () =>
+   fixture(async (f) => {
+     const destination = `${f.dir}/outside-selected-file.jl`;
+     await write(destination, f.text[PATHS[0]]);
+@@ -382,13 +382,13 @@ Deno.test("DOC06 refuses symlink selected file even with matching bytes", async
+     await Deno.symlink(destination, `${f.snapshot}/${PATHS[0]}`);
+     equal((await f.run()).status, "refused", "no symlink input");
+   }));
+-Deno.test("DOC06 refuses symlink input ancestor", async () =>
++Deno.test("DOC06 refuses symlink input ancestor", () =>
+   fixture(async (f) => {
+     await Deno.rename(`${f.snapshot}/core`, `${f.dir}/core-elsewhere`);
+     await Deno.symlink(`${f.dir}/core-elsewhere`, `${f.snapshot}/core`);
+     equal((await f.run()).status, "refused", "no symlink ancestor");
+   }));
+-Deno.test("DOC06 refuses existing output and source overlap", async () =>
++Deno.test("DOC06 refuses existing output and source overlap", () =>
+   fixture(async (f) => {
+     const occupied = `${f.dir}/occupied`;
+     await write(`${occupied}/keep`, "preserve");
+@@ -620,7 +620,7 @@ for (
+     );
+   });
+ }
+-Deno.test("DOC06 refuses receipt-byte and source-count caps", async () =>
++Deno.test("DOC06 refuses receipt-byte and source-count caps", () =>
+   fixture(async (f) => {
+     await write(f.sourceReceipt, " ".repeat(16385));
+     equal((await f.run()).status, "refused", "receipt cap before parser");
+@@ -638,7 +638,7 @@ Deno.test("DOC06 refuses source aggregate cap without truncated success", async
+ 
+ // Catches eval/module execution. Marker is first created/read/deleted in the very
+ // same writable subtree; absence cannot be explained by a denied write capability.
+-Deno.test("DOC06 Julia and valid JavaScript sentinels remain inert bytes", async () =>
++Deno.test("DOC06 Julia and valid JavaScript sentinels remain inert bytes", () =>
+   fixture(async (f) => {
+     const marker = `${f.dir}/sentinel-marker`;
+     await write(marker, "capability-proven");
+@@ -668,7 +668,7 @@ Deno.test("DOC06 Julia and valid JavaScript sentinels remain inert bytes", async
+   }));
+ 
+ // Catches permissive UTF-8 decoding and source receipt identity ambiguity.
+-Deno.test("DOC06 invalid UTF-8 is refused even with matching receipt hash", async () =>
++Deno.test("DOC06 invalid UTF-8 is refused even with matching receipt hash", () =>
+   fixture(async (f) => {
+     const bytes = new Uint8Array([0x23, 0x20, 0xc3, 0x28]);
+     await write(`${f.snapshot}/${PATHS[1]}`, bytes);
+@@ -678,13 +678,13 @@ Deno.test("DOC06 invalid UTF-8 is refused even with matching receipt hash", asyn
+     await f.receipt();
+     equal((await f.run()).status, "refused", "strict UTF-8 decoding");
+   }));
+-Deno.test("DOC06 duplicate receipt path is refused", async () =>
++Deno.test("DOC06 duplicate receipt path is refused", () =>
+   fixture(async (f) => {
+     f.entries[1] = { ...f.entries[0] };
+     await f.receipt();
+     equal((await f.run()).status, "refused", "receipt cannot collapse duplicate paths");
+   }));
+-Deno.test("DOC06 wrong source byte length is refused", async () =>
++Deno.test("DOC06 wrong source byte length is refused", () =>
+   fixture(async (f) => {
+     f.entries[0].bytes += 1;
+     await f.receipt();

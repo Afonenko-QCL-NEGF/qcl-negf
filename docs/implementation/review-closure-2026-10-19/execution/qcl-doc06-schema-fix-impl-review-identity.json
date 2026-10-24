@@ -1,0 +1,75 @@
+{
+  "format": "qcl-negf.doc06-schema-fix-impl-review.v1",
+  "verdict": "PASS_SOURCE_CPP_I1",
+  "blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-doc06-schema-fix-impl-review.md",
+    "bytes": 12622,
+    "sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7"
+  },
+  "worktree": "/tmp/qcl-doc06-schema-fix-worktree",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "candidate": {
+    "adapter_sha256": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee",
+    "adapter_bytes": 48269,
+    "tests_sha256": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04",
+    "tests_bytes": 45959,
+    "complete_patch_sha256": "31f2192473c1ee7c1a0ca5c837545cb2222e4fbd0709fdbf0a685cddd45d4174",
+    "complete_patch_matches_actual_git_diff": true,
+    "author_identity_sha256": "9cef061f6f6e4268dba89689382deed7a8bf8ecde1ac07a428c47f58a2b78bcd",
+    "author_report_sha256": "a79587069a6d68f452472b69ae77b447bfcda611dd33aa13ee2b8e4388947556"
+  },
+  "governing": {
+    "design_sha256": "3a655b213799ce5ead32a1acec7aa0f05cd1effb8d2750e76fb10d271fac818b",
+    "D_review_sha256": "e224495073190f73277fefb7189d3c40f814e7c846dab1a7d14470cfaa2605ce",
+    "actual_meaning_review_sha256": "4c35b2517718e3b9a137047a45652c4924de7e21ae3ad9041cd8d1e90df56861"
+  },
+  "source_checks": {
+    "changed_paths_only": ["ops/docs/static-slice.ts", "tests/docs_static_slice_test.ts"],
+    "baseline_adapter_sha256_from_git_object": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "baseline_tests_sha256_from_git_object": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69",
+    "old_tests_prefix_bytes_compared": 35095,
+    "old_tests_exact_prefix_cmp_exit": 0,
+    "git_diff_whitespace_check_exit": 0,
+    "submodule_gitlinks": "all8 selected HEAD links present, uninitialized in isolated worktree",
+    "actual5_schema_footprints_rechecked": true,
+    "rootRequired_independent": true,
+    "resolved_required_and_escaped_failure_selectors": true,
+    "direct_declarations_distinct_from_partial_full_validation": true,
+    "M2_M3_reason_status_mode_source_consistency": true,
+    "caps_permissions_target_no_evaluation_preserved": true
+  },
+  "registration_review": {
+    "baseline_reviewed_expansion": 56,
+    "new_manual_static_expansion": 18,
+    "total_static_expansion": 74,
+    "runtime_discovery": false,
+    "unit_results_accepted": false,
+    "remaining_scope_limit": "Not exhaustive arbitrary-schema classifier shape coverage; source guards reviewed, no execution evidence"
+  },
+  "not_established": [
+    "compiler/type correctness or formatter status",
+    "unit GREEN for all74",
+    "new actual-source outputs/determinism/meaning acceptance",
+    "DOC03 shared format compatibility",
+    "render/native/scientific/full release readiness"
+  ],
+  "actions": {
+    "target_parser_compiler_formatter_harness_tests_Deno_native_network_science_execution": 0,
+    "source_product_checkpoint_git_original_artifact_writes": false,
+    "own_report_identity_only": true,
+    "delegation": false,
+    "new_execution_grant": false,
+    "new_source_round_grant": false
+  },
+  "review_budget": {
+    "logical_read_cap_bytes": 3145728,
+    "conservative_logical_read_upper_bound_bytes": 1572864,
+    "wall_cap_seconds": 900,
+    "CPU_cap": 1,
+    "RAM_cap_bytes": 1073741824,
+    "output_cap_bytes": 131072,
+    "actual_CPU_RSS_physical_IO": "not_measured"
+  },
+  "state": "STOP"
+}

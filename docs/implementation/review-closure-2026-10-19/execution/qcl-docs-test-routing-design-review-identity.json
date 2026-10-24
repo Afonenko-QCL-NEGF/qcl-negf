@@ -1,0 +1,11 @@
+{
+  "review_sha256": "9e16ff7519453db4661833455450da9d83c72b5f76c9eefd4fb27370da812930",
+  "design_sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270",
+  "verdict": "changes_required",
+  "findings": [
+    "R1 expected count input absent from exact descriptor",
+    "R2 admitted child environment undefined"
+  ],
+  "target_executions": 0,
+  "full_ci_dispatches": 0
+}

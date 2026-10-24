@@ -1,0 +1,12 @@
+{
+  "baseline": "6c5b11f3c74d44fed8b2c159f890b83e0b5456b9",
+  "files": {
+    "ops/application_release.py": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0",
+    "ops/worker_lifecycle.py": "b81c722ce9cbca8a5adfed24063de268e39ea0d012ae120bb11d9491ba2a0678",
+    "tests/test_application_release.py": "f56062eef912a7c63ab9743a24f1db8a5043c2e24620db0732ab516485c0ce21",
+    "tests/test_worker_shutdown_intent.py": "53017ecb166b5624dab6fe3d2b57498bdbf37882a83a9be0c9c7668fdc95bfa3"
+  },
+  "independent_review_sha256": "a4c903e579cb216f52929d4a01bd9ace855647dc02cafa0d5164281f1781f52d",
+  "staged_diff_sha256": "db537a222ef74b72b49d6521c340445b00465bf2199f38377d29f5865c275498",
+  "targeted_receipt_sha256": "b2411039050e39b38b8a95fc02e1a77f867d6933fc83836ffa049b33540ba7c7"
+}

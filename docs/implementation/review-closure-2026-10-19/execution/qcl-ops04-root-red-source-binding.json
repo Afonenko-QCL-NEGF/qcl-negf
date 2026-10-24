@@ -1,0 +1,18 @@
+{
+  "state": "source_only_RED_fixtures_bound_not_executed",
+  "root_head": "d4113f43cddf02d46025434eb3a9dd8e110e90d6",
+  "files": {
+    "tests/solver_test.ts": "d2c5da7ad9783bbc65e5e76baef8cb43282eb4388393f8dc130172be74c8b1d5",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85"
+  },
+  "production_files": {
+    "ops/solver.ts": "bc513f610cce976d108e17902ebd423c434992ba0edb91e2bdc3da2e5f3c247f",
+    "ops/application_cd.ts": "91989d0171e011f4518e178e247d4f7a466d08bd02b7931308a202c4354ee9ce",
+    "nix/solver.nix": "16c99da166ee2d9afc7d238fa317e43f0bcc71e2eccb8de3ff11e97b70aa858f"
+  },
+  "test_review": "ad3e2da9ffd6b84d4faec7a3e536df46c61d6365f1cd2342ec1bd1a740f22ceb",
+  "harness_review": "dca5d87440947cd27ae518a2a8054d934538ecc0c7f97db7df4622ebbc19b0ab",
+  "harness": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+  "unit_calls": 0,
+  "native": "unknown"
+}

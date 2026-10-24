@@ -1,0 +1,36 @@
+{
+  "task": "DEV10",
+  "attempt": "GREEN-3",
+  "started_utc": "2026-10-19T12:39:01.737431+00:00",
+  "recorded_at_utc": "2026-10-19T12:39:05.857391+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "components/qcl-negf-aiida/tests/test_export_selection.py",
+    "components/qcl-negf-aiida/tests/test_artifact_locator.py",
+    "components/qcl-negf-aiida/tests/test_export_plan.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-DEV10-GREEN-3/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "exit_code": 0,
+  "wall_seconds": 4.12,
+  "sampled_peak_process_tree_RSS_bytes": 145096704,
+  "stdout_stderr_bytes": 180,
+  "temporary_bytes": 0,
+  "stop_reason": null,
+  "limits": {
+    "wall_seconds": 90,
+    "aggregate_RSS_bytes": 1073741824,
+    "CPU_affinity_count": 1,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "RSS_guard": "50ms sampled process-tree RSS, not a cgroup hard limit"
+  },
+  "original_log": "/tmp/qcl-DEV10-GREEN-3/original.log",
+  "environment": "selected .venv Python3.14 locked setup, no sync/download"
+}

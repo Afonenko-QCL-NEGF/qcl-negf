@@ -1,0 +1,30 @@
+{
+  "stage":"SCI12-MATH-local-guard-v2-B1-source-only-correction",
+  "date":"2026-10-20",
+  "status":"PREPARED_REQUIRES_FRESH_INDEPENDENT_HIGH_REVIEW_NOT_READY",
+  "scope":"SCI12-MATH-local-v2",
+  "only_behavior_change":"Popen then collector_attempted=True then successful RawCapture assignment then first live observe",
+  "identity_changes_only":["guard PLAN path v1-to-v2", "guard and plan scope v1-to-v2"],
+  "guard":{"path":"/tmp/qcl-sci12-math-local-guard-v2.py","sha256":"d5b46ac8eaf1a9b9456b47d90bf5e04ec42ff6859363cf53847c6c1884ef858a","bytes":21274},
+  "plan":{"path":"/tmp/qcl-sci12-math-local-plan-v2.json","sha256":"968c537b5b3bacf23f288d28254b50670930d27d8ae7e7afeceaba7ba463bf77","bytes":2837},
+  "report":{"path":"/tmp/qcl-sci12-math-local-report-v2.md","sha256":"7db537449fa2fbfbda448caad1551be2a6ed3dd7a0a282dcda7efdb574aa5161","bytes":4760},
+  "complete_guard_plan_diff":{"path":"/tmp/qcl-sci12-math-local-v1-to-v2.diff","sha256":"32cb2bcd43d245d53091dc1766964e9fe7fec3c5e3e8649d5b34dfa3b04db7e0","bytes":2180},
+  "frozen_review":{"path":"/tmp/qcl-sci12-math-local-guard-v1-review.md","sha256":"f85ca6895125a4780ec6eb050a793691a4bb6f216ee1c0e5b7b16b5907944dec"},
+  "frozen_review_identity_sha256":"20260a676ac16fa71a70ee0d8c25003ce86fcece6acdeceb2326b5457801da7f",
+  "preserved_v1_sha256":{
+    "guard":"5aa294ebcd86969d1bef07f1d108fd607e250978170641e4609d9d5ebb9a09e4",
+    "plan":"2260d9cb6dfe5e7695968a3287cad7dc87a109e0e16447221dc9534484b39da5",
+    "report":"c86aa27e369ad5b0b6137667476de22f622a3aa7cea593c2e6051dcbfd5c0471",
+    "identity":"0b335c27ead7ff0146a0cd5e08f6c738712e7b293e9932778b0ccc227972480f"
+  },
+  "Root_plan":{"path":"/tmp/qcl-sci12-math-engineering-plan-Root-v1.json","sha256":"ad4ee176fac13463a701bf97d35275c4bcb3e9f7501a64a69ca64413bf482e62"},
+  "prospective_calls":{"RED":[88,89],"GREEN":[89,90],"global_ceiling":90,"source":"8/8 unchanged","no_rerun":true,"concurrency":1},
+  "executions_compiler_parser_import_scripts_tests_runtime_network":0,
+  "product_CP_READY_index_component_writes":0,
+  "subagents":0,
+  "read_content_conservative_upper_bound_bytes":262144,
+  "total_output_bound_bytes":65536,
+  "deliverables_bound_bytes":40960,
+  "CPU_RSS_physical_IO":"not_measured",
+  "stop":"Fresh independent high review; no execution or automatic rerun"
+}

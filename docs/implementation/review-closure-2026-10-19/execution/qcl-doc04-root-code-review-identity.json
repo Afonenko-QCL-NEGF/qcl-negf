@@ -1,0 +1,33 @@
+{
+  "task": "Independent high DOC04 formatted adapter CP-CODE source review",
+  "verdict": "REQUEST_CHANGES",
+  "report": "/tmp/qcl-doc04-root-code-review.md",
+  "report_sha256": "5d196aa49b46ab3f9e8984095df053c99b4c61403584f4bffc2111b429d90a74",
+  "root_head": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "formatted_identity_sha256": "9c74aed0ee5a8d47f11ccb20bb5e76fbe16bc9b555a4c4a13dfaecbd16110393",
+  "formatted_patch_sha256": "e7dd232373d3d08c2f3df4bae98cb3b037c4cefee380f1dc290f5a64a5c56f7d",
+  "source_hashes": {
+    "ops/docs/assemble.py": "4c665bc22c1375e51815f6b229bfc9b9030204e7c9bd7284fee49dcec9437270",
+    "ops/docs/math-render.mjs": "cc44314b063213a8d9bb478f9d53e165c562169121ffdde22b5e89834964309b",
+    "ops/docs/pilot-plan.json": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50",
+    "tests/test_docs_assembly.py": "ecacc18239241c45ac1ed9c4e7c4935cfd20919cc88ac236a69ffa435bdf038e",
+    "tests/docs_math_test.mjs": "ca055653d7946bd077db69447455aa74e476ce8d37543baaa40b75e082dc11d4"
+  },
+  "findings": [
+    {"id":"F1","priority":"P1","issue":"untraced CSS media import and static ESM imports","locator":"assemble.py:497"},
+    {"id":"F2","priority":"P2","issue":"incomplete shorthand/all important conflict proof and full stylesheet context","locator":"math-render.mjs:188"},
+    {"id":"F3","priority":"P2","issue":"self-closing HTML bypasses node cap and duplicate attrs","locator":"assemble.py:232"},
+    {"id":"F4","priority":"P2","issue":"pinned public sizing commands bypass declared unsupported-sizing source gate","locator":"math-render.mjs:100"},
+    {"id":"F5","priority":"P2/nonfunctional","issue":"retained coordinator lint two unused variables","locators":["math-render.mjs:169","math-render.mjs:400"]}
+  ],
+  "retained_format_receipt_sha256": "54a2fad4ae10bf982998780105b0006e4e6aef1a6de42669e070bec197af239a",
+  "retained_lint_receipt_sha256": "7a473ea2d38a5772f48c378a9335cbc53c6c1b8ea6e8f23b4fec35c0b2aee871",
+  "retained_lint_raw_sha256": "3c314a42fb584b69e473183745401f1d1dd41b20b4087c9b4d542911e38ab82e",
+  "reviewer_execution_calls": 0,
+  "imports_parsers_tests_render_network": false,
+  "git_mutations_product_source_edits": false,
+  "children": 0,
+  "unit_calls_consumed_by_reviewer": 0,
+  "public_license_schema_native_build_browser_science_acceptance": "not_established",
+  "state": "STOP"
+}

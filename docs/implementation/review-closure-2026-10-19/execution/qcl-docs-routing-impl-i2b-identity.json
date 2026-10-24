@@ -1,0 +1,36 @@
+{
+  "stage": "source-only-I2B-partial",
+  "verdict": "changes-required-not-ready",
+  "worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "patch": {"path": "/tmp/qcl-docs-routing-impl-i2b-complete.patch", "bytes": 191274, "sha256": "c09188ee67b41ffa3df20135b058e0798a49fb2812b8c3f478228f50d94dd3f5"},
+  "source_closure": {
+    "deno.json": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+    "ops/ci.ts": "b46eb8d4db89b734324a9c40698d16ce3df8aff764a6d332b9ba52ba43be94e0",
+    "ops/docs_tests.ts": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761",
+    ".github/workflows/ci.yml": "d8dc81d6684933c40e58e26dda16903cbdede5713bd686c3a1743060ac5318fe",
+    ".github/workflows/release.yml": "53f54fdc377c5eaae6d1688bcbecd85a536caa10cff8523c13b4ea07c76a5b9b",
+    "tests/test_docs_assembly.py": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+    "ops/docs/assemble.py": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+    "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+    "ops/docs/math-render.mjs": "663c712d01db3bdc4bca66d3bb58b9aa6bbffd850c8961e1560c30292fd1aba5",
+    "tests/docs_static_slice_test.ts": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69",
+    "ops/docs/static-slice.ts": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "ops/docs_tests_native.py": "0e7616ffc39fe209d7c47d469562bac09d9246bb09908504e8b9162d95e82669",
+    "ops/docs_tests_cli.ts": "4276c0222c627100a8fbc0ebb8bd8c5aaeff85de91a4918020a66be8457bdfc6",
+    "ops/git.ts": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764",
+    "ops/process.ts": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249"
+  },
+  "dev_fixtures": {
+    "tests/test_docs_test_native.py": {"sha256":"6e279b7ec70f805bba9eef06ee7bc3f6f6d65ce4dade46449134a71d0440275f","nominal_methods":8,"observed":null},
+    "tests/docs_test_native_protocol_test.ts": {"sha256":"07c6d2510a8903a409be4cc96c40e99ed0f1f03d0bd1d9933335f6b9a6adedbe","nominal_registrations":8,"observed":null}
+  },
+  "pure_fixture": {"nominal":230,"ancestral":227,"additional_retention":3,"observed":null,"historical_sha256":"04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3"},
+  "coverage": {"R1":"partial","R2":"partial","R3":"partial","R4":"partial","R5":"partial","R6":"partial","R7":"partial","R8":"source-candidate-unverified","R9":"partial"},
+  "execution": {"product":0,"tests":0,"imports":0,"parser":0,"compiler":0,"format":0,"lint":0,"native":0,"network":0,"CI":0,"science":0},
+  "limits": {"wall_minutes":25,"logical_read_bytes_max":8388608,"cpu_max":1,"ram_bytes_max":1073741824,"patch_report_bytes_max":262144},
+  "measured_resources": {"cpu":null,"rss":null,"physical_io":null},
+  "submodules_initialized":false,
+  "next_gate":"separate-independent-high-CPP"
+}

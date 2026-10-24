@@ -1,0 +1,231 @@
+{
+  "format": "qcl-negf.docs-routing-pure-format-final-v6-independent-review.v1",
+  "status": "SOURCE_AND_RETAINED_FORMAT2_OUTCOME_REVIEW_NOT_READY_NOT_EXECUTION_GRANT",
+  "verdicts": [
+    "PASS_FORMAT_ONLY",
+    "PASS_SOURCE_PURE_CLOSURE"
+  ],
+  "blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+    "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c",
+    "bytes": 9619
+  },
+  "input_source_sha256": {
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+  },
+  "output_source_sha256": {
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+  },
+  "byte_identical": true,
+  "source_hash_map": {
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+  },
+  "formatter_receipt_ref": {
+    "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+    "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32"
+  },
+  "formatter_receipt_sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32",
+  "accepted_cpp_sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea",
+  "accepted_cpp_pure_only_slice": true,
+  "accepted_cpp": {
+    "status": "PASS_SOURCE_PURE_CLOSURE",
+    "source_files": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+    },
+    "pure_only_slice": true,
+    "baseline_cpp_ref": {
+      "path": "/tmp/qcl-docs-routing-impl-i2b-review.md",
+      "sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea"
+    }
+  },
+  "source_format_binding": {
+    "status": "PASS_FORMAT_ONLY",
+    "unformatted_sources": {
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+    },
+    "formatted_sources": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "review_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+    },
+    "receipt_ref": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+      "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32"
+    }
+  },
+  "artifact_hash_map": {
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+      "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32",
+      "bytes": 3768
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/original.log",
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd",
+      "bytes": 16
+    },
+    "/tmp/qcl-docs-routing-source-baseline-v6/manifest.json": {
+      "path": "/tmp/qcl-docs-routing-source-baseline-v6/manifest.json",
+      "sha256": "4ee56d89cf3104c9a460e71b50d45fb84c860b0b2ba5842a833f0a3b87c64c0a",
+      "bytes": 623
+    },
+    "/tmp/qcl-docs-routing-source-Root-control-v6.py": {
+      "path": "/tmp/qcl-docs-routing-source-Root-control-v6.py",
+      "sha256": "a88ab71e0d2821c6ec0eb77fdd093bac83b3d7a7bfe80f208bbe2b4f4d7d657e",
+      "bytes": 9958
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT2-Root-ready-v6.json": {
+      "path": "/tmp/qcl-docs-routing-source-FORMAT2-Root-ready-v6.json",
+      "sha256": "37e405463037e549d749cba80cdfcbcd6e7cab523945d3789cc5a93446fc4377",
+      "bytes": 3278
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT2-Root-handoff-v6.json": {
+      "path": "/tmp/qcl-docs-routing-source-FORMAT2-Root-handoff-v6.json",
+      "sha256": "bb50417e24c2607a7e846ef9ee8f3b63fb55ef1748ed9b14aca285854bbe896b",
+      "bytes": 715
+    },
+    "/tmp/qcl-docs-routing-source-FORMAT2-Root-outer-v6.json": {
+      "path": "/tmp/qcl-docs-routing-source-FORMAT2-Root-outer-v6.json",
+      "sha256": "623c988ae1f8428e9ec819e5838bb14e21180963ae90fdd54abf4c506ccd36bb",
+      "bytes": 175
+    },
+    "/tmp/qcl-docs-routing-pure-harness-v6-review.md": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+      "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d",
+      "bytes": 13693
+    },
+    "/tmp/qcl-docs-routing-pure-harness-v6-review-identity.json": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v6-review-identity.json",
+      "sha256": "f4bfbc61b08264170be673863a98ba395b3e7011d06746cf052726213e8b4bf0",
+      "bytes": 11014
+    },
+    "/tmp/qcl-docs-routing-pure-guard-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-guard-v6.py",
+      "sha256": "c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6",
+      "bytes": 56906
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v6.json": {
+      "path": "/tmp/qcl-docs-routing-pure-plan-v6.json",
+      "sha256": "3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9",
+      "bytes": 16109
+    },
+    "/tmp/qcl-docs-routing-pure-format-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-format-v6.py",
+      "sha256": "8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85",
+      "bytes": 1363
+    },
+    "/tmp/qcl-docs-test-routing-worktree/deno.json": {
+      "path": "/tmp/qcl-docs-test-routing-worktree/deno.json",
+      "sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+      "bytes": 1829
+    },
+    "/tmp/qcl-local-julia-guard-v2.py": {
+      "path": "/tmp/qcl-local-julia-guard-v2.py",
+      "sha256": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f",
+      "bytes": 14409
+    },
+    "/tmp/qcl-owned-temp-sampler-v2.py": {
+      "path": "/tmp/qcl-owned-temp-sampler-v2.py",
+      "sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+      "bytes": 1567
+    }
+  },
+  "observations": {
+    "target_calls": 1,
+    "exit_code": 0,
+    "guard_wall_seconds": 0.05678660102421418,
+    "raw_capture_complete": true,
+    "raw_bytes": 16,
+    "collector_terminal": true,
+    "RSS_attempted_samples": 2,
+    "RSS_valid_samples": 2,
+    "RSS_unknown_samples": 0,
+    "RSS_NA_after_reap_count": 1,
+    "RSS_NA_after_reap_proofs": [
+      {
+        "proof": "Popen.poll_returncode_before_RSS_attempt",
+        "pid": 2988208,
+        "returncode": 0,
+        "elapsed_seconds": 0.05430484999669716
+      }
+    ],
+    "sampled_peak_process_tree_RSS_bytes": 446464,
+    "TMP_sample_count": 4,
+    "sampled_peak_owned_tmp_all_entry_st_size_bytes": 20720,
+    "static_registered_tests": 230,
+    "observed_engine_tests": null,
+    "test_registration_performed": false
+  },
+  "metadata": {
+    "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "isolated_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "CP_source_tools_calls_snapshot": 5,
+    "CP_product_calls_snapshot": 87,
+    "CP_source_active": null,
+    "CP_target_active": null,
+    "CP_authority_marker": false
+  },
+  "preserved_history": {
+    "high_v6_comment_only_cpp_exact_match": true,
+    "all_high_v6_ancestry_refs_rehashed_unchanged": true,
+    "FORMAT1_LINT1_ancestry_only": true,
+    "LINT1_failed_consumed": true,
+    "DOC06_E1_unknown_failed_unchanged": true,
+    "historical_two_diagnostic_RED_unchanged": true
+  },
+  "runtime": {
+    "sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+    "full_binary_independent_rehash_in_this_review": false,
+    "provenance_basis": "Exact retained control/guard fullhash gates and matching H/P/READY/receipt pin; no runtime probe."
+  },
+  "limits": {
+    "review_wall_ceiling_seconds": 300,
+    "review_read_ceiling_bytes": 2097152,
+    "conservative_reads_below_ceiling": true,
+    "review_CPU_ceiling": 1,
+    "review_RAM_ceiling_bytes": 1073741824,
+    "deliverables_ceiling_bytes": 65536,
+    "physical_reviewer_resources_measured": false
+  },
+  "review_execution_counts": {
+    "prepared_scripts": 0,
+    "target": 0,
+    "parser": 0,
+    "compiler": 0,
+    "formatter": 0,
+    "linter": 0,
+    "tests": 0,
+    "runtime": 0,
+    "native": 0,
+    "network": 0,
+    "subagents": 0
+  },
+  "mutations": {
+    "source": 0,
+    "Root": 0,
+    "CP": 0,
+    "history": 0,
+    "review_deliverables": 2
+  },
+  "limitations": [
+    "Narrow pure-only source/retained formatter outcome acceptance; not READY/run grant",
+    "LINT2/CHECK1/soleGREEN not run or accepted by this review",
+    "230static registrations not230observedpasses or assertioncount",
+    "Sampled metrics not full transientpeak/hardquota/cgroupisolation",
+    "WholeI2B/native CPP remainsCHANGES_REQUIRED",
+    "Root requires fresh control/admission/SourceRefs for each further call"
+  ]
+}

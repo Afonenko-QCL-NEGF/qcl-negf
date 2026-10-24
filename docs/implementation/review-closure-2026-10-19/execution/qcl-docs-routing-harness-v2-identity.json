@@ -1,0 +1,23 @@
+{
+  "format": "qcl-negf.docs-routing-harness-identity.v2",
+  "correction_scope": "R1/R2 only",
+  "execution_count": 0,
+  "product_mutations": 0,
+  "checkpoint_mutations": 0,
+  "artifacts": {
+    "/tmp/qcl-docs-routing-local-unit-run-v2.py": {
+      "sha256": "0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7",
+      "bytes": 21924
+    },
+    "/tmp/qcl-docs-routing-engineering-plan-v2.json": {
+      "sha256": "5147cab0a8df1d50fb908b3c247e8c7b0e11852ee01a990f8a35228b3e70157a",
+      "bytes": 9979
+    },
+    "/tmp/qcl-docs-routing-harness-v2-report.md": {
+      "sha256": "adbe4ed2aa3f96246ea68a5d49972eff10a4aa3a2007b3fe5e0fc7a473e4378d",
+      "bytes": 6298
+    }
+  },
+  "owned_outputs_bytes_excluding_identity": 38201,
+  "verification": "Textual source preparation only. No target/harness/guard compile/exec/import/parser/typecheck/selftest/runtime/native executed."
+}

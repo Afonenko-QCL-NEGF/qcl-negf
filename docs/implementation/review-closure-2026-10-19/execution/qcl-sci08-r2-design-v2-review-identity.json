@@ -1,0 +1,38 @@
+{
+  "artifact": "SCI08-R2 D2 independent high source review",
+  "date": "2026-10-20",
+  "verdict": "PASS_SOURCE_qualified_finite_I_no_campaign_admission",
+  "workspace": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "runner_gitlink": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+  "git_authority": "gitlinks; forensic review record, not maintained revision lock",
+  "inputs_sha256": {
+    "/tmp/qcl-sci08-r2-design-v2.md": "664fce6abccd4517a2bb8e2bd87caefff77cfbc5ee6d5991afed66d731fceeae",
+    "/tmp/qcl-sci08-r2-design-v2-identity.json": "2cd42cc5d2aaa95767a098a036be440baef8ca632560321cf9c6089e7d8756dc",
+    "/tmp/qcl-sci08-r2-design-v2-read-ledger.json": "cd20acc15cfb8ee579ba71a80ac57623b66415c1825ea5e41e3a53ba8a7135a2",
+    "/tmp/qcl-sci08-r2-design-v1.md": "69313bd117c140cf28b68d62ebb85b09bbc078a0ad305b3199c65ee55636e08c",
+    "/tmp/qcl-sci08-r2-design-v1-review.md": "0b720a06e1b0386be753ae00814da4d0db5df5933fa1d000d14c97af523d76f9",
+    "point_artifacts.jl": "18bcd0fe2c6ff42050c500b57f17678b06a38f14871a9a3de437841cb5f8d1ad",
+    "scratch_execution.jl": "cad52756bb47a6d1fa63cd8c86a03c4e4dcd0d9a4e12383a0671dd766697f395",
+    "scientific_history.jl": "afecbfb4ad3716af06c0ee0d7fc49563387b69948061a0102f1240e1ab6189a1",
+    "progress.jl": "17ad29c7085dff0880d6ee20e9890f3fa43b614b33e896a9b675611aef783d2f",
+    "scientific_execution.jl": "52aded550f1362b67f7c3781e2d45daac0e001a6dd0248a730f29299d443645f"
+  },
+  "reviewed_locators": {
+    "point_artifacts.jl": ["751-786", "816-838", "1064-1105", "1256-1280", "1293-1327"],
+    "scratch_execution.jl": ["50-114", "130-167"],
+    "scientific_history.jl": ["117-146", "185-227", "97/112 caller search"],
+    "progress.jl": ["597-627"],
+    "scientific_execution.jl": ["392-427", "1108-1122", "1328-1352", "1480-1494", "635/1090/1093/1264/1267 caller search"]
+  },
+  "binding_additional_I_edges": ["scratch_execution.jl:156 workspace cleanup", "scientific_execution.jl:423 import cleanup", "scientific_execution.jl:1117 imported generation cleanup", "scientific_execution.jl:1347 optical cleanup"],
+  "semantic_read_limit": "selected ranges; D1/skill long output truncations; hashes do not imply full semantic read; no whole-callgraph claim",
+  "root_status": "same existing checkpoint modification and four untracked docs artifacts as D2 identity; no dirty components shown",
+  "executed": {"scripts": 0, "parsers": 0, "imports": 0, "compiler": 0, "tests": 0, "runtime": 0, "native": 0, "network": 0, "solver": 0, "CI": 0, "children": 0},
+  "mutations": {"source": 0, "git_index": 0, "checkpoint": 0, "READY": 0, "outputs_tmp": 2},
+  "budget": "6 minutes, 1 CPU, 1 GiB, reads <=2 MiB, total tool output <=64 KiB assigned; exact aggregate output/RSS not independently metered; measured compliance not claimed",
+  "new_grant": false,
+  "C08": "8/8 EXHAUSTED received context, not reset",
+  "open_gates": ["R3", "P1", "P2", "A1", "C1", "native", "science", "campaign READY"],
+  "stop": "review only"
+}

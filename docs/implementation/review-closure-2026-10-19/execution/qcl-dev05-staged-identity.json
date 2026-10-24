@@ -1,0 +1,12 @@
+{
+  "runtime_source_Core": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+  "owning_parent": "fe21f9439e8fa2b934544bbc05ca669e6df9f46c",
+  "parent_delta": "CONTRIBUTING.md only; production src and Project.toml byte-identical",
+  "files": {
+    "test/numerics/final_state_alignment_oracle.jl": "81fbb258f86c1760ed2ffb7964e189518fd1ec7608921e42080c969c4a55f852",
+    "docs/src/development/review_oracle_contracts.md": "eccde503314822277122d49afbf2d5ec7a708b828b2ca7901a7919d5c6b4e847"
+  },
+  "review_sha256": "00c38923d3b1ac581b9d0962dcbae7e278acef036f9145c91f2af7e5ecb21182",
+  "targeted_receipt_sha256": "74b4c571b0d6cd9239cb26e3ef697a4b0a2d3164dd51f6db120d115dd250e49c",
+  "staged_diff_sha256": "fe7236540a7e4817a6335ac1e7adee61776aa8ca6f2836bd0ae5ae1178c9a3ee"
+}

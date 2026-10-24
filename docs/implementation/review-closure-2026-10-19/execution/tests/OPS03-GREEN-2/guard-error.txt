@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/tmp/qcl-python-targeted-run-v4.py", line 59, in <module>
+    temp_peak = max(temp_peak, sum(p.stat().st_size for p in temporary.rglob('*') if p.is_file()))
+                               ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/qcl-python-targeted-run-v4.py", line 59, in <genexpr>
+    temp_peak = max(temp_peak, sum(p.stat().st_size for p in temporary.rglob('*') if p.is_file()))
+                                   ~~~~~~^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 654, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/qcl-OPS03-GREEN-2/tmp/tmpsqel7hrx/runtime/tmpkq4m7r3c'

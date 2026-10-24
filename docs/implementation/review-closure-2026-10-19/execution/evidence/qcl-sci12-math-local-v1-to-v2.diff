@@ -1,0 +1,39 @@
+--- /tmp/qcl-sci12-math-local-guard-v1.py	2026-10-20 12:05:26.889429031 +0300
++++ /tmp/qcl-sci12-math-local-guard-v2.py	2026-10-20 12:12:40.500887913 +0300
+@@ -28,14 +28,14 @@
+ FIXTURE = CANDIDATE/'tests/test_equilibrium_map_math.py'
+ FIXTURE_SHA = '995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d'
+ PRODUCT = CANDIDATE/'src/qcl_negf_results/_equilibrium_map_math.py'
+-PLAN = pathlib.Path('/tmp/qcl-sci12-math-local-plan-v1.json')
++PLAN = pathlib.Path('/tmp/qcl-sci12-math-local-plan-v2.json')
+ RAW_HELPER = pathlib.Path('/tmp/qcl-local-julia-guard-v2.py')
+ RAW_SHA = 'e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f'
+ SAMPLER = pathlib.Path('/tmp/qcl-owned-temp-sampler-v2.py')
+ SAMPLER_SHA = '16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e'
+ F2_REVIEW = pathlib.Path('/tmp/qcl-sci12-math-fixture-v2-review.md')
+ F2_SHA = 'c855f328402a217225b13fda3821000a8a6e55ed6894235e42b57802f3e69ec9'
+-SCOPE = 'SCI12-MATH-local-v1'
++SCOPE = 'SCI12-MATH-local-v2'
+ WALL, RAM, TEMP, LOG = 90, 1024**3, 32*1024**2, 2*1024**2
+ STAGES = {'SCI12-MATH-RED-1': (88,89), 'SCI12-MATH-GREEN-1': (89,90)}
+ 
+@@ -308,9 +308,9 @@
+         require(reason is None,'prelaunch bounds')
+         process = subprocess.Popen(command(),cwd=CANDIDATE,env=env,stdin=subprocess.DEVNULL,
+             stdout=subprocess.PIPE,stderr=subprocess.STDOUT,preexec_fn=child_limits)
+-        observe()
+         collector_attempted = True
+         capture = raw.RawCapture(process.stdout,stream)
++        observe()
+         while process.poll() is None and reason is None:
+             observe()
+             time.sleep(.05)
+--- /tmp/qcl-sci12-math-local-plan-v1.json	2026-10-20 12:06:20.446586476 +0300
++++ /tmp/qcl-sci12-math-local-plan-v2.json	2026-10-20 12:12:40.502887886 +0300
+@@ -1,5 +1,5 @@
+ {
+-  "scope": "SCI12-MATH-local-v1",
++  "scope": "SCI12-MATH-local-v2",
+   "status": "SOURCE_ONLY_PROPOSAL_NOT_READY",
+   "attempts": ["SCI12-MATH-RED-1", "SCI12-MATH-GREEN-1"],
+   "target_argv": ["/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python", "-m", "pytest", "-q", "--tb=short", "-p", "no:cacheprovider", "tests/test_equilibrium_map_math.py"],

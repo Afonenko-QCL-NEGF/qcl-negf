@@ -1,0 +1,43 @@
+{
+  "CP_CODE": "50e6410845f7535a9bdfcb4d5bc3505bab87b298b6929168d11121a2c6da5dd4",
+  "components": {
+    "QCLNEGF.jl": {
+      "worktree": "/tmp/qcl-doc02-worktrees/QCLNEGF.jl",
+      "base": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "head": "239d76bb59c955b32888eeaec518d6e465b4178d",
+      "branch": "codex/review-closure-reader-routes",
+      "files": {
+        "docs/src/theory/09_scba.md": "a1a3c438c14ff0d967a6890df3e7d3abf7ed7fb95e422ecb81ceef6c2350b004",
+        "docs/src/theory/12_validation.md": "be55b03e7a228aebad88b24410d2633cd575ae63211a01ff4187f2c1bb95755b",
+        "docs/src/developer/traceability.md": "5b860110779f106dc0ff1b97935c612f436987b1cb3e3b62a5a7b766885c0ca1"
+      },
+      "state": "G1_merged",
+      "base_branch": "codex/review-closure-final-state-oracle",
+      "pr": 11,
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/11",
+      "merge_commit": "45dddf3a99e7d9316cfff4d5f102ae087839946e",
+      "merged_at": "2026-10-19T17:21:03Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    },
+    "QCLNEGFRunner.jl": {
+      "worktree": "/tmp/qcl-doc02-worktrees/QCLNEGFRunner.jl",
+      "base": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "head": "9378396a3681c1eddf2c62f16674834fc4465583",
+      "branch": "codex/review-closure-reader-routes",
+      "files": {
+        "docs/src/user/configuration.md": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+        "docs/src/user/results.md": "a1efe47c40fee8873239ef2c8f99b9058781dcdc19d4102fbcc078a38cfeff28",
+        "docs/src/api/public.md": "e59e1231197ed92823d691353ddc21dafe0b62252d586cf4018b2f331cda05dd"
+      },
+      "state": "G1_merged",
+      "base_branch": "codex/review-closure-contribution-routing",
+      "pr": 13,
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/pull/13",
+      "merge_commit": "6dc1d05bbc47982e528932ecca620ac11cbb1429",
+      "merged_at": "2026-10-19T17:21:39Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

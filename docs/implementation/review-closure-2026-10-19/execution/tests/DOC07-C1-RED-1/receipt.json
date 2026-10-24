@@ -1,0 +1,45 @@
+{
+  "task": "DOC07",
+  "attempt": "C1-RED-1",
+  "started_utc": "2026-10-20T03:55:25.568529+00:00",
+  "recorded_at_utc": "2026-10-20T03:55:27.807285+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "components/qcl-negf-contracts/tests/test_model_help.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-DOC07-C1-RED-1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b",
+  "fixture_sha256": {
+    "components/qcl-negf-contracts/tests/test_model_help.py": "6a39ee353153a4de2d313323b5c67662026721f282adec1ae44305d95d1f2ebd"
+  },
+  "exit_code": 1,
+  "wall_seconds": 2.239,
+  "sampled_peak_process_tree_RSS_bytes": 55541760,
+  "sampled_owned_temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 198528,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "selected locked .venv Python3.14.7, owning editable imports; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-DOC07-C1-RED-1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 30,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

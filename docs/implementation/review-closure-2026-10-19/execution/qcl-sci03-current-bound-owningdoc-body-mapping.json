@@ -1,0 +1,31 @@
+{
+  "schema": "qcl-sci03-owningdoc-body-mapping-v1",
+  "kind": "accepted design technical transfer; no mathematical redesign",
+  "accepted_design": {"path": "/tmp/qcl-sci03-current-bound-design.md", "bytes": 39159, "sha256": "ca84b1cc763aa7bc017364ece4f7e95aff5bd0107c0c7277fb87eed250f215f7"},
+  "accepted_review": {"path": "/tmp/qcl-sci03-current-bound-design-review.md", "sha256": "fa1311a4bf16f08f6e417590b77b7e6179aa9320907934fbd4496ebc059ca4a9", "verdict": "CP-DESIGN APPROVED; no implementation or scientific acceptance"},
+  "owning_target": {"repository": "qcl-negf-research", "base": "1eacefcd81a50e245ea9da74a0b717b33818c61e", "path": "docs/equilibrium-measurement-contract.md", "sha256": "61058d7b33b21e8b43232239569012567e764035dd15900b80d742bd9d6ed38c", "bytes": 78562},
+  "preserved_prefix": {"bytes": 45385, "sha256": "758ac11c19317aba27ee6275d0ce3fdd9f40b639205d89228f4b08405872ad5f", "proof": "head -c 45385 target | sha256sum equals full baseline file SHA; original text and all anchors unchanged", "reviewed_d2_markers": {"begin_line": 17, "end_line": 428}},
+  "new_section": {"heading": "Дополнение к §5.3: контракт измерения represented-current bound", "start_line": 456, "end_line": 894, "added_lines": 439, "deleted_lines": 0},
+  "mapping": [
+    {"public_lines": [458, 470], "origin": "D title/section1 and accepted R verdict", "transfer": "status, immutable S1 model/criteria and unknown epsilon/H; public receipt hashes; no operational grant"},
+    {"public_section": "A.1", "public_lines": [474, 557], "design_lines": [33, 116], "transfer": "byte-exact 84-line technical fragment", "mechanical_comparison": "diff -u of these sed ranges returned no differences", "properties": ["full complex W norm", "same-mu definitions", "outward signs", "matrix identity without commutation/PSD", "weighted Cauchy proof", "J0 units", "exact arithmetic versus Float64/physical error boundary"]},
+    {"public_lines": [559, 567], "origin": "D section2 primary-source attribution and section3 source locator rows", "transfer": "condensed attribution to already-published primary equations and canonical owner symbols; historical current-root observations omitted"},
+    {"public_section": "A.2", "public_lines": [571, 592], "origin": "D section4", "design_table_lines": [185, 200], "public_table_lines": [577, 592], "transfer": "full-six caller identity precondition and exact native dataset/unit/axes inventory; pending-task prose omitted"},
+    {"public_section": "A.3", "public_lines": [596, 671], "design_lines": [204, 279], "transfer": "byte-exact 76-line technical fragment", "mechanical_comparison": "diff -u of these sed ranges returned no differences", "properties": ["one additive namespace", "unchanged public signature", "12 new norm fields and reused A/corrections", "finite rows and null gating", "four side/variant bounds and three terms", "arithmetic_error unknown", "no acceptance/tolerance registry", "defined-mu zero factors", "unavailable-mu inheritance before zero shortcut"]},
+    {"public_lines": [673, 676], "origin": "accepted R section5 clarification1", "transfer": "old field semantics preserved; no promise of bitwise old-value/budget identity after tile adaptation"},
+    {"public_section": "A.4", "public_lines": [680, 733], "design_lines": [283, 336], "transfer": "byte-exact 54-line technical fragment", "mechanical_comparison": "diff -u of these sed ranges returned no differences", "properties": ["12 streaming accumulators", "same stored datasets/two passes", "no new matrix products", "liveness/census precondition", "bounded tile/fixed scratch", "physical total I/O guard", "report cap", "CPU loop cost not assumed negligible"]},
+    {"public_lines": [735, 739], "origin": "accepted R section5 resource clarification and D sections6/8 preconditions", "transfer": "smaller tile can change read-call overhead; mandatory admitted finite execution budget; no byte-identical I/O or launch grant"},
+    {"public_section": "A.5 preface", "public_lines": [743, 749], "design_lines": [340, 346], "transfer": "literal expected arithmetic independence and shared encoding limitation"},
+    {"public_section": "A.5.1", "public_lines": [753, 844], "design_lines": [350, 441], "transfer": "complete literal fixture values, matrices, rational current/norm table, finite-t formulas and engineering-roundoff limitations", "format_only_differences": ["escaped vertical norm bars in two Markdown table cells; mathematics unchanged"]},
+    {"public_lines": [846, 851], "origin": "accepted R section5 clarifications2/3", "transfer": "known-mu status/stop_reason/bracket width and operation-chain/libm checks; no new tolerance"},
+    {"public_section": "A.5.2", "public_lines": [855, 870], "design_lines": [445, 460], "transfer": "complete required negative/control matrix including off-centered target=M, mu=-kBT ln3 and imaginary-current mutation", "format_only_differences": ["escaped literal current modulus bars in two Markdown table cells"]},
+    {"public_lines": [872, 878], "origin": "D section7 final paragraph", "transfer": "retain existing assertions, no historical pass inheritance, independent review and separately assigned finite budget; transient current C08 accounting omitted"},
+    {"public_section": "A.6", "public_lines": [882, 894], "origin": "D section8 and accepted R section6", "transfer": "implementation review obligations and claim/evidence/limitation/decision table; implementation/native/science acceptance remains unknown"}
+  ],
+  "intentionally_omitted": ["D temporary output paths", "historical root dirty-state and per-component source snapshot table", "local PDF SHA-read operational facts", "author/reviewer timing and byte-cap receipts", "transient C08 consumed count", "execution grants or claims of product implementation"],
+  "new_design_choices": false,
+  "new_api_signatures": false,
+  "new_scientific_values_or_tolerances": false,
+  "new_fixture_values": false,
+  "notes": "All fixture values/resource allowances already exist in accepted D. R nonblocking clarifications transferred without redesign. This mapping is audit evidence, not a maintained component revision lock. Separate high owning CPP is pending."
+}

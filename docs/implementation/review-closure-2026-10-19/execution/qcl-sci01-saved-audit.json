@@ -1,0 +1,90 @@
+{
+  "task": "SCI01",
+  "role": "audit high; independent review pending",
+  "source_root": "e0f244d075dd49874ba4f3847f4efa693f3b3622",
+  "observed_date": "2026-10-19",
+  "read_scope": "five named saved originals only; no remote probe, arrays, archive extraction, submit or mutation",
+  "artifacts": [
+    {
+      "historical_locator": "canonical-update-ROOT-recovery-attempt4/ROOT-result.original.json",
+      "sha256": "4c8e87704377cd8693ed6e79ada4c338d973e6192fd065e4b197506c1bbdd3e3",
+      "bytes": 51840,
+      "match": true
+    },
+    {
+      "historical_locator": "freeze600-ROOT-recovery-attempt1/owning-plan.native-original.json",
+      "sha256": "4d69332f0770734102c77089ad6cbe4cb2a35b1dde71380cfb59fa13680929f9",
+      "bytes": 46353,
+      "match": true
+    },
+    {
+      "historical_locator": "S01-memory-status60-ROOT-attempt2/early-status-derived.json",
+      "sha256": "d6a022f9c11fdb3c5191f796aa795ad9fb383779d67ac5ac036b1bcb6a989a90",
+      "bytes": 7978,
+      "match": true
+    },
+    {
+      "historical_locator": "S01-submit-ROOT-recovery-attempt1/installed-submit-stdout.original.bin",
+      "sha256": "bd40aaae80a2a5e9816555fa1a340a8253014428e8ddf99040b0cea50ed4b976",
+      "bytes": 1444,
+      "match": true
+    },
+    {
+      "historical_locator": "S01-memory-status60-ROOT-attempt2/control.transport.native-original.json",
+      "sha256": "1f8762528996ce904f181a721f0f463d3b33f2c4d66fb7ebf2634aae41b848cb",
+      "bytes": 43521,
+      "match": true
+    }
+  ],
+  "metadata_bytes_read": 151136,
+  "decoded_stdout": {
+    "sha256": "51c8eafb765c69ee2a2a01c2eb22c82333c212f451aa1617d4e405c6b09555e5",
+    "bytes": 22339,
+    "hash_matches_historical": true
+  },
+  "receipt_selection": {
+    "scientific_accepted": false,
+    "full_release_CI_accepted": false,
+    "release_id": "qcl-5d779b52-s01-20261012",
+    "ready": true,
+    "gate_open": true,
+    "delivery_status": "completed"
+  },
+  "saved_selection": {
+    "run_uuid": "dfb75b38-6019-4861-b868-f51648c71f02",
+    "calcjob": {
+      "uuid": "bb7b9d59-863f-440e-b687-b83ac596f9bb",
+      "attempt": 1,
+      "process_state": "waiting",
+      "exit_status": null,
+      "JobID": "1",
+      "execution_id": "execution-1",
+      "exit_status_reason": "saved process waiting; no terminal status in selected record"
+    },
+    "final_HDF5_assumed": false
+  },
+  "original_selection": {
+    "calcjob": {
+      "uuid": "bb7b9d59-863f-440e-b687-b83ac596f9bb",
+      "attempt": 1,
+      "process_state": "waiting",
+      "exit_status": null
+    },
+    "plan_sha256": "4d69332f0770734102c77089ad6cbe4cb2a35b1dde71380cfb59fa13680929f9"
+  },
+  "evidence_levels": {
+    "saved_execution": "submit and waiting state in immutable saved evidence; not current live state",
+    "terminal": "unknown; not supplied in five selected originals",
+    "convergence": "not_measured",
+    "physics": "not_measured",
+    "discretization": "not_measured",
+    "experimental_validation": "not_measured"
+  },
+  "limitations": [
+    "hash match proves saved identity, not truth of producer claims",
+    "imported solver source not recovered from selected metadata",
+    "no complete archive/part inventory or final U/G data for exact run in selected set",
+    "old S01 protected; no cancellation/resubmit"
+  ],
+  "next": "Independent review of same named originals and sanitized receipt; obtain exact terminal/archive inventory only from available protected inputs, without probing unavailable server"
+}

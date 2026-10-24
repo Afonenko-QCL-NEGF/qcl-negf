@@ -1,0 +1,28 @@
+{
+  "CP_CODE": "888a6982271aad0772c9587fcf1b1a292fac959aac6b4282b3d37ed5331268c7",
+  "components": {
+    "qcl-negf-results": {
+      "state": "G1_merged",
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-results",
+      "base": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+      "base_branch": "codex/review-closure-contribution-routing",
+      "head": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+      "branch": "codex/review-closure-final-audit-reader-integration",
+      "files": {
+        "src/qcl_negf_results/native.py": "532fbedf8b1b296e0fb5bc026788a522bf92aeee94ae1192ca651e2e34a407e5",
+        "src/qcl_negf_results/state.py": "335e67678120fd0c8e222fcb5e937b277ccadac35303fca2250c9f345983b477",
+        "tests/test_final_fixed_point_audit.py": "45111262df9b7744ca9f7397a887af4133ee602d9b6e325af2d3ee4a5e12f95a"
+      },
+      "source_review": "8ee82896aed717e9908f0305c1cfb551ab0beeacede786eb40b1caa19b002e8c",
+      "operation_id": "PUBLISH-SCI05-N1-qcl-negf-results-33b1a39",
+      "pr": 8,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results/pull/8",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "4e6df2c28bb3ffde79ae6099be18dd2eadc59fc7",
+      "merged_at": "2026-10-19T18:54:22Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

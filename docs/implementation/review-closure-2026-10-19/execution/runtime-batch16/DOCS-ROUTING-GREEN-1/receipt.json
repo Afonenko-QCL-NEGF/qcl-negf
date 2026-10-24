@@ -1,0 +1,141 @@
+{
+  "scope": "docs-routing-pure-local-engineering-v7",
+  "attempt": "DOCS-ROUTING-GREEN-1",
+  "attempt_consumed": true,
+  "target_calls": 1,
+  "verdict": "STOP_RECONCILE_NO_RERUN",
+  "stop_reason": "child_nonzero_or_unknown",
+  "ready_sha256": "c028ebc952889939007ce5057311afe9962fdbac33e879c85220682def5c95ca",
+  "harness_sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+  "plan_sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+  "source_before": {
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+  },
+  "source_after": {
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+  },
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "isolated_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "shared_budget": {
+    "milestone_start": 81,
+    "milestone_ceiling": 88,
+    "calls_before": 87,
+    "calls_reserved": 1,
+    "calls_after": 88,
+    "no_rerun": true
+  },
+  "red_predecessor": {
+    "status": "SOURCE_REVIEWED_INCONCLUSIVE_PREDECESSOR_FOR_SINGLE_GREEN",
+    "scope": "docs-routing-pure-local-engineering-v7",
+    "attempt": "DOCS-ROUTING-RED-1",
+    "original_classification": "completed_inconclusive_or_guardfailure_preserve_no_rerun",
+    "ancestor_refs": {
+      "/tmp/qcl-docs-routing-local-unit-run-v2.py": {
+        "path": "/tmp/qcl-docs-routing-local-unit-run-v2.py",
+        "sha256": "0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7"
+      },
+      "/tmp/qcl-docs-routing-engineering-plan-v2.json": {
+        "path": "/tmp/qcl-docs-routing-engineering-plan-v2.json",
+        "sha256": "5147cab0a8df1d50fb908b3c247e8c7b0e11852ee01a990f8a35228b3e70157a"
+      },
+      "/tmp/qcl-docs-routing-historical-RED-fixture.ts": {
+        "path": "/tmp/qcl-docs-routing-historical-RED-fixture.ts",
+        "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3"
+      },
+      "/tmp/qcl-DOCS-ROUTING-RED-1/receipt.json": {
+        "path": "/tmp/qcl-DOCS-ROUTING-RED-1/receipt.json",
+        "sha256": "e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0"
+      },
+      "/tmp/qcl-DOCS-ROUTING-RED-1/original.log": {
+        "path": "/tmp/qcl-DOCS-ROUTING-RED-1/original.log",
+        "sha256": "6b044ed571751341f215353d5dafd384dcf009a70c4b471595ebdcb53b8589ad"
+      },
+      "/tmp/qcl-docs-routing-RED-diagnostic-erratum.md": {
+        "path": "/tmp/qcl-docs-routing-RED-diagnostic-erratum.md",
+        "sha256": "6dfb097abf97aeabd9114354c987b5846fd19f449c4d0bfc2168299a1e03383b"
+      },
+      "/tmp/qcl-docs-routing-RED-diagnostic-erratum-review.md": {
+        "path": "/tmp/qcl-docs-routing-RED-diagnostic-erratum-review.md",
+        "sha256": "9537f35088687da532bd44f551ed637e320b40481ee6c76628621ba712d426f1"
+      },
+      "/tmp/qcl-docs-test-routing-design-v2.md": {
+        "path": "/tmp/qcl-docs-test-routing-design-v2.md",
+        "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70"
+      },
+      "/tmp/qcl-docs-test-routing-design-v2-review.md": {
+        "path": "/tmp/qcl-docs-test-routing-design-v2-review.md",
+        "sha256": "939555c9291e98be1200b063bcf06e344a7597907dfbf498bf28029927728967"
+      }
+    },
+    "historical_fixture_sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+    "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+    "observed_engine_tests": null
+  },
+  "nominal_source_registration_count": 230,
+  "observed_engine_tests": null,
+  "unit_result": "requires_independent_complete_TAP_review",
+  "recorded_utc": "2026-10-20T09:04:33.643448+00:00",
+  "child_pid": 3011027,
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "test",
+    "--no-config",
+    "--no-lock",
+    "--cached-only",
+    "--no-npm",
+    "--no-remote",
+    "--no-prompt",
+    "--reporter=tap",
+    "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts"
+  ],
+  "cwd": "/tmp/qcl-docs-test-routing-worktree",
+  "environment_clear": true,
+  "environment": {
+    "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-GREEN-1/owned-tmp/deno-cache",
+    "TMPDIR": "/tmp/qcl-DOCS-ROUTING-GREEN-1/owned-tmp/tmp",
+    "HOME": "/tmp/qcl-DOCS-ROUTING-GREEN-1/owned-tmp/home"
+  },
+  "exit_code": 1,
+  "wall_seconds": 2.040166628023144,
+  "RSS_attempted_samples": 41,
+  "RSS_valid_samples": 41,
+  "RSS_unknown_samples": 0,
+  "RSS_NA_after_reap_count": 1,
+  "RSS_NA_after_reap_proofs": [
+    {
+      "proof": "Popen.poll_returncode_before_RSS_attempt",
+      "pid": 3011027,
+      "returncode": 1,
+      "elapsed_seconds": 2.0339964459999464
+    }
+  ],
+  "sampled_peak_process_tree_RSS_bytes": 344154112,
+  "RSS_status": "sampled",
+  "TMP_sample_count": 43,
+  "sampled_peak_owned_tmp_all_entry_st_size_bytes": 601096,
+  "sampled_regular_payload_peak_bytes": 600176,
+  "initial_TMP_bytes": 220,
+  "final_TMP_bytes": 601096,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "raw_bytes": 24575,
+  "raw_sha256": "f86a8761f4aac28e7798d14c76c2e8a9fe27c85f61daa4d093a21b4f4ac19b30",
+  "raw_output_overrun": false,
+  "guard_error": null,
+  "collector_construction_attempted": true,
+  "collector_terminal": true,
+  "RawCapture_sha256": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f",
+  "sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "limits": {
+    "wall_seconds": 120,
+    "cpu_affinity_count": 1,
+    "RLIMIT_CPU_seconds": 120,
+    "sampled_RSS_stop_bytes": 1073741824,
+    "sampled_owned_TMP_stop_bytes": 16777216,
+    "raw_bytes_envelope": 2097152
+  },
+  "limitations": "Explicit env only; no OS filesystem/cgroup/native isolation. Sampled RSS/TMP permit overshoot; unknown samples remain explicit. Process-group cleanup is local engineering only. TAP230/name/count/skip/fail/only acceptance is independent; guard return0 is not test pass."
+}

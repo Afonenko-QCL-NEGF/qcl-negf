@@ -1,0 +1,18 @@
+{
+  "id": "INT01-H1-SELFTEST-1",
+  "started_utc": "2026-10-19T15:45:04.446454+00:00",
+  "command": [
+    "/usr/bin/python3",
+    "/tmp/qcl-temp-sampler-selftest-v2.py"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "wall_seconds": 0.115,
+  "stdout_stderr_bytes": 1196,
+  "raw_sha256": "9b2661e2975bd529756b4c6746ca31d76dcb7b67da0007ac2dd7454d90adac09",
+  "helper_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "selftest_sha256": "b2394500d74441aad5e1539aeecc620fbc1214c7b44fcc9b537f8d458c2624b3",
+  "limits": "30swall/1CPU/256MiBaddressspace/256KiBfilemax; source-verified tiny fixtures below1MiBTMP, notmeasuredpeak",
+  "runtime": "3.14.7 (main, Aug 14 2026, 06:38:32) [GCC 16.2.1 20260810]",
+  "scope": "8stdlibsamplerunitmethods; no application/harness imports, no pytest/Julia/build/native/science"
+}

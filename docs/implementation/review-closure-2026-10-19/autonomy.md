@@ -1,5 +1,11 @@
 # Автономность, разрешения и checkpoints
 
+**Дополнение 2026-10-24: принято упрощение контроля ресурсов.** Действует
+[ресурсная поправка](resource-policy-2026-10-24.md) для initial/production S1.
+Исторические PLAN/standby ниже не отменяют позднейшие активированные grants;
+их повторное утверждение не требуется. Scientific criteria и technical BIND
+с fresh admission сохраняются; поправка сама по себе не является runtime READY.
+
 **Статус: согласованные условные полномочия; текущий режим PLAN.** Разрешены чтение и редактирование
 документов handoff. Разработка, tests продукта, установка среды, build,
 сервер и научные запуски сейчас не выполняются. Отдельным последующим запросом
@@ -100,7 +106,7 @@ rewrite, merge вне G1, новое trust/credential scope и смена нау
 | CP-NATIVE | Координатор + reviewer | Active READ_NATIVE/BUILD, reviewed source candidate/refs/locks, fresh host/storage admission, результаты four-role/nginx preflight, trusted builder/targets | Тяжёлый immutable build или разрешённый isolated rehearsal |
 | CP-OPS | Human policy — approved B; coordinator + reviewer закрывают BIND | Конкретное воздействие в пределах B, candidate/hash/targets/disks, preflight, backup/rollback/window; restore proof до production replacement | После EXEC один lifecycle owner исполняет named phase; новый human approval только вне B predicates |
 | CP-RELEASE | Координатор + reviewer | Final published commits/gitlinks/locks, build/import binding, required native/restore/backend receipts и единственная final CI | Итоговый release dossier для OPS17/INT03; не разрешение BUILD/deploy |
-| CP-SCI | Human policy — approved S1 без e–e; scientific author + reviewer закрывают READY | Frozen model/question/variants/criteria basis, S1 caps/guards/admission и finite attempts/stops | После EXEC автономные conditional waves без нового human approval каждой точки/criteria hash |
+| CP-SCI | Human policy — approved S1 без e–e; scientific author + reviewer закрывают READY | Frozen model/question/variants/criteria basis, S1 space budgets/platform controls/admission и finite attempts/stops по [поправке](resource-policy-2026-10-24.md) | После EXEC автономные conditional waves без нового human approval каждой точки/criteria hash |
 | CP-SCI-RESULT | Scientific reviewer `high` | Raw/fresh-map/FDR/gates/sensitivity/uncertainty | Verdict и разрешённая next wave |
 | CP-EXCEPTION | Оператор | Concrete действие вне grant, последствия, evidence, альтернатива | Только названное расширение |
 | CP-END | Координатор + reviewer | Coverage, deliverables, required receipts, открытые ограничения | Честный итог по каждому результату |
@@ -231,8 +237,13 @@ fresh CPU/RAM/storage и protected reserves гипервизора/foreign VM. U
   и declared skips не ослабляются, CPU topology не подменяется фиктивной.
 - SCI имеет заранее объявленные waves/recovery slots. Allocation CPU-hours
   и actual CPU/RSS/I/O разделены; неудачи и простои allocation учтены.
-- Retained storage, cumulative writes, logs/output ограничены отдельно.
-  Неожиданный расход ведёт к stop/re-admission, а не потере raw или урезанию physics.
+- Retained storage/logs — finite space budgets с allocation/quota/reserves.
+  Cumulative writes/reads — monitored planning/early-stop budgets; recorded technical
+  overshoot возможен. Missing counter coverage = unknown+gap, не pass. Обычный
+  Runner `:standalone` под actual Slurm/cgroup controls допустим по
+  [поправке](resource-policy-2026-10-24.md); legacy VFD/NBD/exhaustive per-effect
+  source proofs не обязательны. Неожиданный расход ведёт к early stop/re-admission,
+  а не потере raw или урезанию physics. OOM/ENOSPC — failed technical attempt.
 
 Долгие jobs исполняются существующими AiiDA/Slurm или owned runtime units,
 переживая завершение tool call/клиента. Checkpoint хранит IDs и safe status path.

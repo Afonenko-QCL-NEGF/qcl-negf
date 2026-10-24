@@ -1,0 +1,20 @@
+{
+  "command_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-S",
+    "/tmp/qcl_si07_freeze.py"
+  ],
+  "exit_code": 1,
+  "tool_wall_time_seconds": 9.939e-06,
+  "state_at_failure": {
+    "attempt_directory_created": false,
+    "validator_calls": 0,
+    "forward_samples": 0
+  },
+  "original_aggregate_cap_bytes": 65536,
+  "actual_source_bytes": 70591,
+  "helper_v1_path": "/tmp/qcl_si07_freeze-v1.py",
+  "helper_v1_sha256": "511fc166919627a179bc46b9acc246a8058e0b8dc4047da5c94bde29e4da2499",
+  "capture_method": "Companion transcript copied from observed exec tool failure; original failed tool result remains in conversation, not a directly redirected native log."
+}

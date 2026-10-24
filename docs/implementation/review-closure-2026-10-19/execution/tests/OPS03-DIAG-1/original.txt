@@ -1,0 +1,63 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_ OPS03WholeRoutingTests.test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire _
+
+self = <test_application_release.OPS03WholeRoutingTests testMethod=test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire>
+
+    def test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire(self):
+        helper=self.ops._activate_owned;flock=self.ops.fcntl.flock
+        held=[];calls=[];pending=[]
+        def acquired(fd,operation):
+            if operation & fcntl.LOCK_EX:held.append(os.fstat(fd).st_ino)
+            return flock(fd,operation)
+        def local(value,**kwargs):
+            owner=kwargs['owner'];state=self.ops._owner_before(owner)
+            self.assertEqual(len(held),2)
+            self.assertEqual(state['operation'],'whole_update')
+            receipt_files=[p for p in (self.runtime/'delivery-attempts').glob('*.json')
+                           if not p.name.endswith('.lifecycle-intent.json')]
+            pending.extend(json.loads(p.read_text()).get('pending_local_mutation') for p in receipt_files)
+            calls.append(owner)
+            result=helper(value,**kwargs)
+            self.assertEqual(len(held),2)
+            return result
+        with patch.object(self.ops.fcntl,'flock',acquired),patch.object(self.ops,'_activate_owned',local):
+            result=self.deliver()
+>       self.assertEqual(result['status'],'completed',delivery_diagnostic(result,self.runtime,self.calls))
+E       AssertionError: 'failed' != 'completed'
+E       - failed
+E       + completed
+E        : {"last_command_names": [["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["nix", "copy", "--to"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["nix", "copy", "--to"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"]], "node": "second", "nodes": {"controller": {"reason": "Expected observed node identity", "status": "failed"}, "second": {"status": "verified"}, "worker": {"status": "verified"}}, "open": false, "phase": "finished", "receipt": {"node": "second", "phase": "finished", "status": "failed"}, "receipt_commands": [{"executable": "ssh", "node": "worker", "phase": "stopped_identity", "status": "completed"}, {"executable": "nix", "node": "worker", "phase": "copy", "status": "completed"}, {"executable": "ssh", "node": "worker", "phase": "activate", "status": "completed"}, {"executable": "ssh", "node": "worker", "phase": "check", "status": "completed"}, {"executable": "ssh", "node": "second", "phase": "stopped_identity", "status": "completed"}, {"executable": "nix", "node": "second", "phase": "copy", "status": "completed"}, {"executable": "ssh", "node": "second", "phase": "activate", "status": "completed"}, {"executable": "ssh", "node": "second", "phase": "check", "status": "completed"}], "requires_reconciliation": false, "status": "failed"}
+
+components/qcl-negf-platform/tests/test_application_release.py:3687: AssertionError
+_ ApplicationReleaseTests.test_controller_fetches_and_checks_both_hashes_before_closing_admission _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_controller_fetches_and_checks_both_hashes_before_closing_admission>
+
+    def test_controller_fetches_and_checks_both_hashes_before_closing_admission(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            gate = Path(temporary) / "admission.json"
+            gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+            original = gate.read_bytes()
+            run = DeliveryCommands(gate)
+            runtime=Path(temporary)/'runtime'
+            report = self.ops.deliver_cli(delivery_manifest(), POOL, runtime=runtime, gate=gate, run=run)
+>           self.assertTrue(report["open"],delivery_diagnostic(report,runtime,run.calls))
+E           AssertionError: False is not true : {"last_command_names": [["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["runuser", "-u", "qcl-negf"], ["squeue", "--all", "--noheader"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["nix", "copy", "--to"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"]], "node": "worker", "nodes": {"controller": {"reason": "Expected observed node identity", "status": "failed"}, "worker": {"status": "verified"}}, "open": false, "phase": "finished", "receipt": {"node": "worker", "phase": "finished", "status": "failed"}, "receipt_commands": [{"executable": "ssh", "node": "worker", "phase": "worker_stop", "status": "completed"}, {"executable": "runuser", "node": null, "phase": "cancellation_check", "status": "completed"}, {"executable": "squeue", "node": null, "phase": "cancellation_check", "status": "completed"}, {"executable": "ssh", "node": "controller", "phase": "node_identity", "status": "completed"}, {"executable": "ssh", "node": "worker", "phase": "stopped_identity", "status": "completed"}, {"executable": "nix", "node": "worker", "phase": "copy", "status": "completed"}, {"executable": "ssh", "node": "worker", "phase": "activate", "status": "completed"}, {"executable": "ssh", "node": "worker", "phase": "check", "status": "completed"}], "requires_reconciliation": false, "status": "failed"}
+
+components/qcl-negf-platform/tests/test_application_release.py:1046: AssertionError
+______ I14WholeRepairTests.test_f6_positive_factory_full_body_transition _______
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_f6_positive_factory_full_body_transition>
+
+    def test_f6_positive_factory_full_body_transition(self):
+>       result=self.deliver();self.assertTrue(result['open'],delivery_diagnostic(result,self.runtime,self.calls));self.assertFalse(result['requires_reconciliation'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true : {"last_command_names": [["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["nix", "copy", "--to"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["nix", "copy", "--to"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"], ["ssh", "-oBatchMode=yes", "-oConnectionAttempts=1"]], "node": "second", "nodes": {"controller": {"reason": "Expected observed node identity", "status": "failed"}, "second": {"status": "verified"}, "worker": {"status": "verified"}}, "open": false, "phase": "finished", "receipt": {"node": "second", "phase": "finished", "status": "failed"}, "receipt_commands": [{"executable": "ssh", "node": "worker", "phase": "stopped_identity", "status": "completed"}, {"executable": "nix", "node": "worker", "phase": "copy", "status": "completed"}, {"executable": "ssh", "node": "worker", "phase": "activate", "status": "completed"}, {"executable": "ssh", "node": "worker", "phase": "check", "status": "completed"}, {"executable": "ssh", "node": "second", "phase": "stopped_identity", "status": "completed"}, {"executable": "nix", "node": "second", "phase": "copy", "status": "completed"}, {"executable": "ssh", "node": "second", "phase": "activate", "status": "completed"}, {"executable": "ssh", "node": "second", "phase": "check", "status": "completed"}], "requires_reconciliation": false, "status": "failed"}
+
+components/qcl-negf-platform/tests/test_application_release.py:2455: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition
+3 failed in 1.35s

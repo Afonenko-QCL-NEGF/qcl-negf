@@ -1,0 +1,20 @@
+{
+  "intent_id": "SI07-FWD-T05-CANDIDATE",
+  "case": "T05",
+  "variant": "candidate",
+  "intent_at": "2026-10-19T17:20:18.214387+00:00",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "fork_turns": "none",
+  "state": "completed",
+  "pre_dispatch_budget_refinement": {
+    "at": "2026-10-19T17:23:27.551867+00:00",
+    "answer_max_bytes": 5120,
+    "operations_max_bytes": 2048,
+    "combined_max_bytes": 7168,
+    "basis": "aggregate artifact output cap128KiB; no scientific/task change"
+  },
+  "agent_id": "/root/si07_forward_fresh/si07_t05_candidate",
+  "dispatched_at": "2026-10-19T17:23:37.517862+00:00",
+  "completed_at": "2026-10-19T17:24:15.563534+00:00"
+}

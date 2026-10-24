@@ -1,0 +1,34 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__________ WheelReceiptTests.test_wheel_rejects_stale_frontend_inputs __________
+
+self = <test_build_assets.WheelReceiptTests testMethod=test_wheel_rejects_stale_frontend_inputs>
+
+    def test_wheel_rejects_stale_frontend_inputs(self):
+        put(self.frontend / "src/main.tsx", "// changed source; old index and JS remain\n")
+>       self.refuses("inputs")
+
+components/qcl-negf-portal/tests/test_build_assets.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-portal/tests/test_build_assets.py:127: in refuses
+    with self.assertRaisesRegex(RuntimeError, f"QCL_FRONTEND_RECEIPT_INVALID:{reason};"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: RuntimeError not raised
+___________ WheelReceiptTests.test_wheel_rejects_changed_asset_bytes ___________
+
+self = <test_build_assets.WheelReceiptTests testMethod=test_wheel_rejects_changed_asset_bytes>
+
+    def test_wheel_rejects_changed_asset_bytes(self):
+        put(self.output / "assets/app.js", "// changed emitted bytes\n")
+>       self.refuses("outputs")
+
+components/qcl-negf-portal/tests/test_build_assets.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-portal/tests/test_build_assets.py:127: in refuses
+    with self.assertRaisesRegex(RuntimeError, f"QCL_FRONTEND_RECEIPT_INVALID:{reason};"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: RuntimeError not raised
+=========================== short test summary info ============================
+FAILED components/qcl-negf-portal/tests/test_build_assets.py::WheelReceiptTests::test_wheel_rejects_stale_frontend_inputs
+FAILED components/qcl-negf-portal/tests/test_build_assets.py::WheelReceiptTests::test_wheel_rejects_changed_asset_bytes
+2 failed in 0.08s

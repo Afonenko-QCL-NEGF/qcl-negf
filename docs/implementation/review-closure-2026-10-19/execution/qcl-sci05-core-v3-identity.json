@@ -1,0 +1,114 @@
+{
+  "stage": "SCI05-C1 v3 source-only frozen after CPP1 F1-F3 correction; independent CPP2 pending",
+  "worktree": "/tmp/qcl-sci05-core-worktree",
+  "branch": "codex/review-closure-final-audit-evidence",
+  "core_base": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+  "inputs": {
+    "/tmp/qcl-sci04-design-v2.md": {
+      "sha256": "d787ad47f409b9fffb5a1ac5503857691d0282564bae88d774f0be85b033506c",
+      "bytes": 61527
+    },
+    "/tmp/qcl-sci04-design-v2-review.md": {
+      "sha256": "ae57a5b8986cf2d7f15a58ad13e26aa34927331ed44fcc1c584d1a5c0f27f0d1",
+      "bytes": 18233
+    },
+    "/tmp/qcl-sci04-d2-status-clarification.md": {
+      "sha256": "a009526d44583f0198531c047b904052b6deb951c6439195b858f22063f690f8",
+      "bytes": 13262
+    },
+    "/tmp/qcl-sci04-d2-status-review.md": {
+      "sha256": "f5a06df97644ec6d7c576f10ae6fdbbdcdb1187cbef6f4ba3d61cd3aa7f3dab3",
+      "bytes": 12159
+    },
+    "/tmp/qcl-sci05-core-code-review.md": {
+      "sha256": "43d3aaad003e9c9afa42af1f0f144d3e9976e5e9f482c8199629f7972bb6c146",
+      "bytes": 19539
+    },
+    "/tmp/qcl-final-ug-design-v2.md": {
+      "sha256": "eb9e1a8c39ad08bafa480970392d844c2c9fffdef02d847397ef87c52111bfc9",
+      "bytes": 28860
+    },
+    "/tmp/qcl-final-ug-design-v2-review.md": {
+      "sha256": "53c3e9b4061a6cdb42239d6d42f5b3f7a09b94eb36315b1ec22bfea103c4f55f",
+      "bytes": 15793
+    },
+    "/tmp/qcl-dev02-accepted-technical-body.md": {
+      "sha256": "ca3c12e84ee41bee3f13d1e1294c030197d0f35adca0f2ef61ebb9cd92b1707b",
+      "bytes": 27175
+    }
+  },
+  "files": {
+    "src/QCLNEGF.jl": {
+      "sha256": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+      "bytes": 31400
+    },
+    "src/numerics/reference/final_audit.jl": {
+      "sha256": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+      "bytes": 30783
+    },
+    "src/numerics/reference/validation.jl": {
+      "sha256": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+      "bytes": 33446
+    },
+    "src/numerics/reference/poisson.jl": {
+      "sha256": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+      "bytes": 3329
+    },
+    "src/numerics/optimized/production_solver.jl": {
+      "sha256": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+      "bytes": 52380
+    },
+    "test/numerics/final_audit_evidence.jl": {
+      "sha256": "6a2e954230c119a92e11e70c5bc8d31376fc06e209faa907429b9f6ee13455b5",
+      "bytes": 38516
+    }
+  },
+  "preserved_CPP1_originals": {
+    "/tmp/qcl-sci05-core-v2.patch": {
+      "sha256": "0125cecfb023f28d1d8d15fe950eed9852cc21b66f5e090ceebf4ce3209b5080",
+      "copy": "/tmp/qcl-sci05-preserved-CPP1-qcl-sci05-core-v2.patch"
+    },
+    "/tmp/qcl-sci05-core-v2-report.md": {
+      "sha256": "58ba4f3dcc478fc4a9ae347a9214ef4ac8443169fd226bafdc93cf8065b59b1d",
+      "copy": "/tmp/qcl-sci05-preserved-CPP1-qcl-sci05-core-v2-report.md"
+    },
+    "/tmp/qcl-sci05-core-v2-identity.json": {
+      "sha256": "b8f28b72e43adfdc08ae54b15b2445e530b9ff8ead74a9ffef92a6ceed7f1b24",
+      "copy": "/tmp/qcl-sci05-preserved-CPP1-qcl-sci05-core-v2-identity.json"
+    },
+    "/tmp/qcl-sci05-core-code-review.md": {
+      "sha256": "43d3aaad003e9c9afa42af1f0f144d3e9976e5e9f482c8199629f7972bb6c146",
+      "copy": "/tmp/qcl-sci05-preserved-CPP1-qcl-sci05-core-code-review.md"
+    }
+  },
+  "patch": {
+    "path": "/tmp/qcl-sci05-core-v3.patch",
+    "sha256": "305675ad283267034a3b3873d1cfb8ff010f7d5a7b7885c523f388e3483ac71e",
+    "bytes": 66818
+  },
+  "source_status_proof": {
+    "worktree_status": " M src/QCLNEGF.jl\n M src/numerics/optimized/production_solver.jl\n M src/numerics/reference/final_audit.jl\n M src/numerics/reference/poisson.jl\n M src/numerics/reference/validation.jl\n?? test/numerics/final_audit_evidence.jl\n",
+    "root_status_snapshot": " M .agents/skills/qcl-performance-audit/SKILL.md\n M .agents/skills/qcl-performance-audit/agents/openai.yaml\n M .agents/skills/qcl-performance-audit/references/telemetry.md\n M .agents/skills/qcl-physics-audit/SKILL.md\n M .agents/skills/qcl-physics-audit/agents/openai.yaml\n M .agents/skills/qcl-physics-audit/references/physics-checks.md\n M .agents/skills/qcl-research-framing/SKILL.md\n M .agents/skills/qcl-research-framing/agents/openai.yaml\n M .agents/skills/qcl-research-framing/references/brief.md\n M .agents/skills/qcl-results-analysis/SKILL.md\n M .agents/skills/qcl-results-analysis/agents/openai.yaml\n M .agents/skills/qcl-results-analysis/references/comparison.md\n M components/QCLNEGF.jl\n M components/qcl-negf-portal\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev05-d2-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev24-auth-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-checkmatrix.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV05-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV24-GREEN-2/\n",
+    "root_submodule_status": "+f7b108bef206d2b2dc5afe0306b2dff60d27ac59 components/QCLNEGF.jl (v0.2.0-10-gf7b108b)\n 23860d9e660a3cddf6cb5203d449d1b62f3745a1 components/QCLNEGFRunner.jl (v0.2.0-25-g23860d9)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n 02a564b78dc9c5e19eacf496bc8c891361eafaab components/qcl-negf-contracts (v0.2.0-13-g02a564b)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n+2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n",
+    "protected_core_head": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+    "protected_core_status_snapshot": "",
+    "protected_src_and_test_diff_HEAD": "",
+    "protected_production_diff_f5_to_HEAD": "",
+    "existing_tracked_tests_diff_in_worktree": "",
+    "protected_DEV05_sha256": "81fbb258f86c1760ed2ffb7964e189518fd1ec7608921e42080c969c4a55f852",
+    "v2_four_numerics_files_unchanged": true,
+    "private_module_delta": "diff --git a/src/QCLNEGF.jl b/src/QCLNEGF.jl\nindex 748ed02..f2c2c32 100644\n--- a/src/QCLNEGF.jl\n+++ b/src/QCLNEGF.jl\n@@ -591,6 +591,7 @@ import ..QCLReferenceOperators:\n     _mix,\n     _mix_mechanisms,\n     _scattering_candidate,\n+    _solve_periodic_poisson_with_diagnostics,\n     _static_contraction,\n     _sum_selfenergies,\n     _thermal_lo_occupation,\n"
+  },
+  "verification": {
+    "git_diff_check": "passed",
+    "runtime_calls": 0,
+    "Julia_imports": 0,
+    "tests_executed": 0,
+    "build_setup_solver_server_native_calls": 0,
+    "git_commits_pushes": 0
+  },
+  "bounds_reuse": "O08-03 accepted D2 §5: literal qL*M/Q4 inverse norm4/3, gamma3 b formation and gamma32 row/norm; measured enclosures must fit retained short gamma32 cap",
+  "next_gate": "independent CPP2; coordinator-only bounded C08 after source approval"
+}

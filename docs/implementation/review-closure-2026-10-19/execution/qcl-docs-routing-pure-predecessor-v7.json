@@ -1,0 +1,47 @@
+{
+  "status": "SOURCE_REVIEWED_INCONCLUSIVE_PREDECESSOR_FOR_SINGLE_GREEN",
+  "scope": "docs-routing-pure-local-engineering-v7",
+  "attempt": "DOCS-ROUTING-RED-1",
+  "original_classification": "completed_inconclusive_or_guardfailure_preserve_no_rerun",
+  "ancestor_refs": {
+    "/tmp/qcl-docs-routing-local-unit-run-v2.py": {
+      "path": "/tmp/qcl-docs-routing-local-unit-run-v2.py",
+      "sha256": "0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7"
+    },
+    "/tmp/qcl-docs-routing-engineering-plan-v2.json": {
+      "path": "/tmp/qcl-docs-routing-engineering-plan-v2.json",
+      "sha256": "5147cab0a8df1d50fb908b3c247e8c7b0e11852ee01a990f8a35228b3e70157a"
+    },
+    "/tmp/qcl-docs-routing-historical-RED-fixture.ts": {
+      "path": "/tmp/qcl-docs-routing-historical-RED-fixture.ts",
+      "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3"
+    },
+    "/tmp/qcl-DOCS-ROUTING-RED-1/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-RED-1/receipt.json",
+      "sha256": "e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0"
+    },
+    "/tmp/qcl-DOCS-ROUTING-RED-1/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-RED-1/original.log",
+      "sha256": "6b044ed571751341f215353d5dafd384dcf009a70c4b471595ebdcb53b8589ad"
+    },
+    "/tmp/qcl-docs-routing-RED-diagnostic-erratum.md": {
+      "path": "/tmp/qcl-docs-routing-RED-diagnostic-erratum.md",
+      "sha256": "6dfb097abf97aeabd9114354c987b5846fd19f449c4d0bfc2168299a1e03383b"
+    },
+    "/tmp/qcl-docs-routing-RED-diagnostic-erratum-review.md": {
+      "path": "/tmp/qcl-docs-routing-RED-diagnostic-erratum-review.md",
+      "sha256": "9537f35088687da532bd44f551ed637e320b40481ee6c76628621ba712d426f1"
+    },
+    "/tmp/qcl-docs-test-routing-design-v2.md": {
+      "path": "/tmp/qcl-docs-test-routing-design-v2.md",
+      "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70"
+    },
+    "/tmp/qcl-docs-test-routing-design-v2-review.md": {
+      "path": "/tmp/qcl-docs-test-routing-design-v2-review.md",
+      "sha256": "939555c9291e98be1200b063bcf06e344a7597907dfbf498bf28029927728967"
+    }
+  },
+  "historical_fixture_sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "observed_engine_tests": null
+}

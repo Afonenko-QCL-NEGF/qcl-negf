@@ -1,0 +1,1517 @@
+{
+  "stage": "frozen_for_CP_CODE",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "head": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+  "root_status_before": " M .agents/skills/qcl-performance-audit/SKILL.md\n M .agents/skills/qcl-performance-audit/agents/openai.yaml\n M .agents/skills/qcl-performance-audit/references/telemetry.md\n M .agents/skills/qcl-physics-audit/SKILL.md\n M .agents/skills/qcl-physics-audit/agents/openai.yaml\n M .agents/skills/qcl-physics-audit/references/physics-checks.md\n M .agents/skills/qcl-research-framing/SKILL.md\n M .agents/skills/qcl-research-framing/agents/openai.yaml\n M .agents/skills/qcl-research-framing/references/brief.md\n M .agents/skills/qcl-results-analysis/SKILL.md\n M .agents/skills/qcl-results-analysis/agents/openai.yaml\n M .agents/skills/qcl-results-analysis/references/comparison.md\n M components/QCLNEGF.jl\n M components/qcl-negf-portal\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev05-d2-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev24-auth-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-checkmatrix.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV05-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV24-GREEN-2/\n",
+  "recursive_before": "+f7b108bef206d2b2dc5afe0306b2dff60d27ac59 components/QCLNEGF.jl (v0.2.0-10-gf7b108b)\n 23860d9e660a3cddf6cb5203d449d1b62f3745a1 components/QCLNEGFRunner.jl (v0.2.0-25-g23860d9)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n 02a564b78dc9c5e19eacf496bc8c891361eafaab components/qcl-negf-contracts (v0.2.0-13-g02a564b)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n+2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n",
+  "branch": "codex/review-closure-reader-routes",
+  "components": {
+    "QCLNEGF.jl": {
+      "base": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "source_head_before": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "source_status_before": "",
+      "source_diff_before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGF.jl",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGF.jl",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-doc02-worktrees/QCLNEGF.jl"
+    },
+    "QCLNEGFRunner.jl": {
+      "base": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "source_head_before": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "source_status_before": "",
+      "source_diff_before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGFRunner.jl",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGFRunner.jl",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-doc02-worktrees/QCLNEGFRunner.jl"
+    }
+  },
+  "files": [
+    {
+      "path": "components/QCLNEGF.jl/docs/src/theory/09_scba.md",
+      "baseline_sha256": "bebcc84f6fa12a92429fea005083cb6729477f1beb089e21cf42df187f75449f",
+      "candidate_sha256": "a1a3c438c14ff0d967a6890df3e7d3abf7ed7fb95e422ecb81ceef6c2350b004"
+    },
+    {
+      "path": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "baseline_sha256": "f170915f4b3d9af9557dd4ab6cc63c14b01159fb659e29e1f1be814860746cb0",
+      "candidate_sha256": "be55b03e7a228aebad88b24410d2633cd575ae63211a01ff4187f2c1bb95755b"
+    },
+    {
+      "path": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "baseline_sha256": "3b8e5a006f60c599ae2568fd67fbf98abe6579682b962be0ed86446448c3811f",
+      "candidate_sha256": "5b860110779f106dc0ff1b97935c612f436987b1cb3e3b62a5a7b766885c0ca1"
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "baseline_sha256": "f45dfd4d8f47b516d4b17a55ad8c62ffd4da89025fa465d8825a984091ddd042",
+      "candidate_sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf"
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "baseline_sha256": "65890eae23d10cd46cfa7fc596aba1828d6bebd6d635756a69a886847c3d2f2a",
+      "candidate_sha256": "a1efe47c40fee8873239ef2c8f99b9058781dcdc19d4102fbcc078a38cfeff28"
+    },
+    {
+      "path": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "baseline_sha256": "70dce87e93adebcad66ab9696ba82571f53b44b7c0fc9968dce4ed91053c7d14",
+      "candidate_sha256": "e59e1231197ed92823d691353ddc21dafe0b62252d586cf4018b2f331cda05dd"
+    },
+    {
+      "path": "docs/single-server-deployment.md",
+      "baseline_sha256": "6c13cf7c8a912b8d9ad03adc6333d30d78da9a75b64f1ab20e34c4061bbbdd20",
+      "candidate_sha256": "8f659f7ee6dc3a5ff89acba052b1eadbcbeb2436fa6429d47d8dd400948da242"
+    }
+  ],
+  "checks": [
+    {
+      "check": "root assigned HEAD",
+      "pass": true
+    },
+    {
+      "check": "/tmp/qcl-doc02-candidate/full.patch input identity",
+      "pass": true
+    },
+    {
+      "check": "/tmp/qcl-doc02-candidate/manifest.json input identity",
+      "pass": true
+    },
+    {
+      "check": "/tmp/qcl-doc02-design-review.md input identity",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl existing HEAD matches requested base",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl existing HEAD matches requested base",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md baseline actual bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md new worktree base bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md baseline actual bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md new worktree base bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md baseline actual bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md new worktree base bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md baseline actual bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md new worktree base bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md baseline actual bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md new worktree base bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md baseline actual bytes",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md new worktree base bytes",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md baseline actual bytes",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/final_audit.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/final_audit.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/acceptance_metadata.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/acceptance_metadata.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/validation.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/validation.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/solver.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/reference/solver.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/optimized/production_solver.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/src/numerics/optimized/production_solver.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/theory/05_basis.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/theory/05_basis.md new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/theory/11_observables.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/theory/11_observables.md new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/theory/19_production.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/theory/19_production.md new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/api/public.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Core/docs/src/api/public.md new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/application/configuration_types.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/application/configuration_types.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/application/auto_strategy.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/application/auto_strategy.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/infrastructure/resources/resource_reports.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/infrastructure/resources/resource_reports.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/infrastructure/persistence/point_artifacts.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/infrastructure/persistence/point_artifacts.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/composition/scientific_execution.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/composition/scientific_execution.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/cli.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/src/cli.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/schema/run.schema.json frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/schema/run.schema.json new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/test/application/configuration_merge_order_and_fail_closed_validation.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/test/application/configuration_merge_order_and_fail_closed_validation.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runner/test/infrastructure/bounded_portable_recovery.jl frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Runner/test/infrastructure/bounded_portable_recovery.jl new base witness unchanged",
+      "pass": true
+    },
+    {
+      "check": "Contracts/src/qcl_negf_contracts/artifacts.py frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Contracts/src/qcl_negf_contracts/schemas/run.schema.json frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Contracts/src/qcl_negf_contracts/schemas/output-policy.schema.json frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Contracts/src/qcl_negf_contracts/schemas/validation-diagnostics.schema.json frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Root/AGENTS.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Root/docs/architecture.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Root/docs/system/requirement-dispositions-2026-10-19.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Root/docs/implementation/review-closure-2026-10-19/documentation-instructions.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Root/docs/implementation/review-closure-2026-10-19/development.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "Root/docs/implementation/review-closure-2026-10-19/science.md frozen source witness",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md candidate exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md applied hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md newline/whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md fence parity",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md old @docs blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md old @meta blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md old explicit IDs retained",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md no new executable docs blocks",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md Documenter ref eq-outer-map",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/09_scba.md Documenter ref researcher-final-route",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md candidate exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md applied hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md newline/whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md fence parity",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md old @docs blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md old @meta blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md old explicit IDs retained",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md no new executable docs blocks",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/docs/src/user/results.md",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md Documenter ref validate_solution",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md Documenter ref solution_scientific_assessment",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md immutable source link https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/schemas/validation-diagnostics.schema.json",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md Documenter ref acceptance-metadata-registry",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md Documenter ref theory-scaling",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md Documenter ref theory-observables",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/theory/12_validation.md Documenter ref researcher-scba-route",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md candidate exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md applied hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md newline/whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md fence parity",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md old @docs blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md old @meta blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md old explicit IDs retained",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md no new executable docs blocks",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref researcher-final-route",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref eq-scba-map",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref convergence-policy",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref production_selfenergy_residual",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref researcher-final-route",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref eq-outer-map",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref validate_solution",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref acceptance-metadata-registry",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref solution_scientific_assessment",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref theory-validation",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md Documenter ref theory-limitations",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/docs/src/developer/traceability.md relative link ../api/public.md",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md candidate exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md applied hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md newline/whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md fence parity",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md old @docs blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md old @meta blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md old explicit IDs retained",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md no new executable docs blocks",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/application/configuration_merge_order_and_fail_closed_validation.jl",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md immutable source link https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/schemas/run.schema.json",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/f5b73369a96d1225bd96fb34f5262c8dcf965f86/docs/src/developer/traceability.md",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md Documenter ref configuration_source",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md Documenter ref ExecutionPlan",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md Documenter ref resolve_execution_strategy",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/src/application/auto_strategy.jl",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md Documenter ref resource-planning",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/contracts/generated_scientific_configuration_provenance.jl",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/docs/schema-provenance.md",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md candidate exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md applied hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md newline/whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md fence parity",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md old @docs blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md old @meta blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md old explicit IDs retained",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md no new executable docs blocks",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md Documenter ref QCLNEGFRunner.main",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md Documenter ref load_production_restart",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/src/infrastructure/persistence/point_artifacts.jl#L682",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md source line bound https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/src/infrastructure/persistence/point_artifacts.jl#L682",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md immutable source link https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/artifacts.py",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md immutable source link https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/schemas/output-policy.schema.json",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/infrastructure/bounded_portable_recovery.jl",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/user/results.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/f5b73369a96d1225bd96fb34f5262c8dcf965f86/docs/src/theory/12_validation.md",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md candidate exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md applied hash",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md newline/whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md fence parity",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md old @docs blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md old @meta blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md old explicit IDs retained",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md no new executable docs blocks",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref developer-configuration-route",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref load_run_configuration",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref configuration_source",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref resolve_execution_strategy",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref solver-quality-contract",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md immutable source link https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/f5b73369a96d1225bd96fb34f5262c8dcf965f86/docs/src/theory/12_validation.md",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref operator-recovery-route",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref load_production_restart",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/docs/src/api/public.md Documenter ref QCLNEGFRunner.main",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md candidate exact",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md applied hash",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md newline/whitespace",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md fence parity",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md old @docs blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md old @meta blocks preserved",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md old explicit IDs retained",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md no new executable docs blocks",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md relative link ../components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md relative link ../components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md relative link ../components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "pass": true
+    },
+    {
+      "check": "docs/single-server-deployment.md relative link ../components/qcl-negf-contracts/README.md",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl worktree base",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl worktree branch",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl only permitted paths",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl/docs/src/theory/12_validation.md original docs unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl/docs/src/theory/09_scba.md original docs unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl/docs/src/developer/traceability.md original docs unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl diff --check",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl worktree base",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl worktree branch",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl only permitted paths",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl/docs/src/user/configuration.md original docs unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl/docs/src/user/results.md original docs unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl/docs/src/api/public.md original docs unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl diff --check",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/references/comparison.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/references/brief.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/references/physics-checks.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/references/telemetry.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "root diff --check",
+      "pass": true
+    },
+    {
+      "check": "E1 fresh no-index actual expected exit/no diagnostics",
+      "pass": true
+    },
+    {
+      "check": "frozen patch dry check actual expected exit/no diagnostics",
+      "pass": true
+    },
+    {
+      "check": "synthetic arithmetic step/raw residual",
+      "pass": true
+    },
+    {
+      "check": "configuration source fixture retains17/23",
+      "pass": true
+    }
+  ],
+  "source_witnesses": [
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "src/numerics/reference/final_audit.jl",
+      "sha256": "8384e2022de0c3c912384c15f6e5b3697879dac984d554f38f0d5bc2d916a673",
+      "bytes": 17312
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "src/numerics/reference/acceptance_metadata.jl",
+      "sha256": "4d1880b7d6e475534d0bbfa229ced25dd40b062f674ec8a2ea86b45e0db1dd86",
+      "bytes": 30629
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "src/numerics/reference/validation.jl",
+      "sha256": "29e1b92daaed51f35d676bab8f70d60836fd0b5dc65c25c38a58646e0395005a",
+      "bytes": 30956
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "src/numerics/reference/solver.jl",
+      "sha256": "3a0f68b0a7774bbe363f2aeaef2288b20a5f7b26fa02a1f7a13e5853a5919636",
+      "bytes": 10736
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "src/numerics/optimized/production_solver.jl",
+      "sha256": "ae776c29b611a84553116d9b25be8e04e2c16b7ff258c5ca5b11e03f555d8eaa",
+      "bytes": 52279
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "docs/src/theory/05_basis.md",
+      "sha256": "734732a222242c2fe5a27aa818f45647089c89df30ae23a46e88fae9e063b81f",
+      "bytes": 8584
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "docs/src/theory/11_observables.md",
+      "sha256": "ecb823dcd685f79945fe07a769c2e9d02e37271e9e1bead55780c0920d18d24b",
+      "bytes": 8180
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "docs/src/theory/19_production.md",
+      "sha256": "7ecf7e7738ef4a945368cfbac5e9a996539d2fbff1b90f376586d09e86be00de",
+      "bytes": 24632
+    },
+    {
+      "owner": "Core",
+      "source_ref": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "path": "docs/src/api/public.md",
+      "sha256": "614f72b6775d5533813c9816010bf4bf8cec2c8b77c65ab2f0782ca082c64975",
+      "bytes": 4900
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/application/configuration_types.jl",
+      "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+      "bytes": 8663
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/application/auto_strategy.jl",
+      "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326",
+      "bytes": 19019
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/infrastructure/resources/resource_reports.jl",
+      "sha256": "7ad85f0550b2a42925cf1c3fcaa6ea8adebf99a6c911e2271aa11ff3ef953f50",
+      "bytes": 5991
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/infrastructure/persistence/point_artifacts.jl",
+      "sha256": "81e3886870643a0a096bcfa8f439a95cce57a4bbce12aca4062675121bbb754a",
+      "bytes": 76808
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/composition/scientific_execution.jl",
+      "sha256": "55a3737a35b21867d91992a2a3a7807729a3b9d83b0931006d99dc82addbf9cd",
+      "bytes": 75664
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/cli.jl",
+      "sha256": "aa5e129312707a7927e1bc97caf4c830c7cf9ed29cf12c648f8afbd7fbcf2cd0",
+      "bytes": 6689
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "schema/run.schema.json",
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "bytes": 54815
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "test/application/configuration_merge_order_and_fail_closed_validation.jl",
+      "sha256": "09fa7cccc6ec8c701cf86135ce6d50c5ca1881323d8b91e9729846b75f8e9cbb",
+      "bytes": 3139
+    },
+    {
+      "owner": "Runner",
+      "source_ref": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "test/infrastructure/bounded_portable_recovery.jl",
+      "sha256": "eb83e6b22e9eaa8f2e8bb8ca342555357ad1271e0f55e8e04795292907c56988",
+      "bytes": 6714
+    },
+    {
+      "owner": "Contracts",
+      "source_ref": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "src/qcl_negf_contracts/artifacts.py",
+      "sha256": "639ebd85f0a1612d2c036d11d8926f7c4bdd04778d5690a8778eb03e8cb6ccaa",
+      "bytes": 13757
+    },
+    {
+      "owner": "Contracts",
+      "source_ref": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "bytes": 54815
+    },
+    {
+      "owner": "Contracts",
+      "source_ref": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "src/qcl_negf_contracts/schemas/output-policy.schema.json",
+      "sha256": "989948a051accdc43faefb1b43a07a3ff445d1d24b04688ec393d1c878da0ff0",
+      "bytes": 1410
+    },
+    {
+      "owner": "Contracts",
+      "source_ref": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "src/qcl_negf_contracts/schemas/validation-diagnostics.schema.json",
+      "sha256": "241154f02850064419be6433a293d7c4e2b8df027bbdcd7a45bfb52838aab6cd",
+      "bytes": 1955
+    },
+    {
+      "owner": "Root",
+      "source_ref": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "path": "AGENTS.md",
+      "sha256": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330",
+      "bytes": 17383
+    },
+    {
+      "owner": "Root",
+      "source_ref": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "path": "docs/architecture.md",
+      "sha256": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7",
+      "bytes": 5501
+    },
+    {
+      "owner": "Root",
+      "source_ref": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "path": "docs/system/requirement-dispositions-2026-10-19.md",
+      "sha256": "feb8457cdedabee3e68743bea7d2739040758b6af79e9ff11ff289165952433a",
+      "bytes": 29126
+    },
+    {
+      "owner": "Root",
+      "source_ref": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "path": "docs/implementation/review-closure-2026-10-19/documentation-instructions.md",
+      "sha256": "17fc16b7808ae0e2b29732c65033a5f544bca79577788cbade386870e0246254",
+      "bytes": 24800
+    },
+    {
+      "owner": "Root",
+      "source_ref": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "path": "docs/implementation/review-closure-2026-10-19/development.md",
+      "sha256": "494b1c487183ca02e6d19f8c571e3aeba77e0e49e467aa7655dc68eff711ad13",
+      "bytes": 78956
+    },
+    {
+      "owner": "Root",
+      "source_ref": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "path": "docs/implementation/review-closure-2026-10-19/science.md",
+      "sha256": "0f52fc7148456b9eeff6bb993b5d1e701825781c58733dc519972c5312b8c26a",
+      "bytes": 42428
+    }
+  ],
+  "guards": [
+    {
+      "path": ".agents/skills/qcl-performance-audit/SKILL.md",
+      "sha256": "597043c2c3a660ae18c84c17ba96729ba393b2e4f53491574af3d156c408ea3b"
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/SKILL.md",
+      "sha256": "b9a4265d90964efeacfff6eac997f22e9fa9214c3d713ed704191a7dd46127fe"
+    },
+    {
+      "path": ".agents/skills/qcl-research-framing/SKILL.md",
+      "sha256": "5c3833087f43e9e639e2b3f3022b1df00682473b8aa2c200b72a0ac53d54e500"
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/SKILL.md",
+      "sha256": "89bdd7be7b91cb46da1663777a639fab0f6ce738a989c0e0cfa633c92d3da4bc"
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/agents/openai.yaml",
+      "sha256": "b4974c1c32d462d7d1128a6a058980f1a1b712a3460d83d6925fa0ad78985423"
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/references/comparison.md",
+      "sha256": "ae11f2a66bbc43289f64ef850180d5bf165ca77b1a24e95fed8c2df008a9860f"
+    },
+    {
+      "path": ".agents/skills/qcl-research-framing/agents/openai.yaml",
+      "sha256": "e1ad31b68e4749ffb1bf88de23fd465f27b91e7c94786cef943db25f304c60ae"
+    },
+    {
+      "path": ".agents/skills/qcl-research-framing/references/brief.md",
+      "sha256": "5acf06b37185d31f25b8b52a08bd62d6dfe2d5e8d5244afc9da1eedf272a9f0e"
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/agents/openai.yaml",
+      "sha256": "f51b508e3ad0a1103c851c0c1ef5aef79e0c63064f9ee02321e7db8a225ae318"
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/references/physics-checks.md",
+      "sha256": "a2b41df68de6ced8921e43a8f46bb123b84381fe9cc30441211cc8d306d5fb29"
+    },
+    {
+      "path": ".agents/skills/qcl-performance-audit/agents/openai.yaml",
+      "sha256": "2a8721c4ee8de5fae982cad3f112ff5df1ae2aef6dca633b14ea980733f25836"
+    },
+    {
+      "path": ".agents/skills/qcl-performance-audit/references/telemetry.md",
+      "sha256": "c7a463d9e5397f331b1b4ab5a73c2c19daf02c42c4c0ae70e1193d3efc1fe7d5"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330"
+    }
+  ],
+  "patches": {
+    "QCLNEGF.jl": {
+      "path": "/tmp/qcl-doc02-implementation-patches/QCLNEGF.jl.patch",
+      "sha256": "fc2fe0353c15f0a52fcfb2c50e4b85fcf51decfbc429be198b2c17c6d0ddb1ae",
+      "bytes": 13988
+    },
+    "QCLNEGFRunner.jl": {
+      "path": "/tmp/qcl-doc02-implementation-patches/QCLNEGFRunner.jl.patch",
+      "sha256": "960331cc77967759882b4767b99be576e0c83bbcb5f6164681f3d8ce60c5af62",
+      "bytes": 12925
+    },
+    "root": {
+      "path": "/tmp/qcl-doc02-implementation-patches/root.patch",
+      "sha256": "0431f95b7b37db8c5789bd35e51247401a79457d56193c7b6932c0d956c34358",
+      "bytes": 3827
+    }
+  },
+  "links": [
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/docs/src/user/results.md",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/schemas/validation-diagnostics.schema.json",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "../api/public.md",
+      "type": "local relative"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/application/configuration_merge_order_and_fail_closed_validation.jl",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/schemas/run.schema.json",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/f5b73369a96d1225bd96fb34f5262c8dcf965f86/docs/src/developer/traceability.md",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/src/application/auto_strategy.jl",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/contracts/generated_scientific_configuration_provenance.jl",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/docs/schema-provenance.md",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/src/infrastructure/persistence/point_artifacts.jl#L682",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/artifacts.py",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/02a564b78dc9c5e19eacf496bc8c891361eafaab/src/qcl_negf_contracts/schemas/output-policy.schema.json",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/infrastructure/bounded_portable_recovery.jl",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/f5b73369a96d1225bd96fb34f5262c8dcf965f86/docs/src/theory/12_validation.md",
+      "type": "local Git object"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/f5b73369a96d1225bd96fb34f5262c8dcf965f86/docs/src/theory/12_validation.md",
+      "type": "local Git object"
+    },
+    {
+      "source": "docs/single-server-deployment.md",
+      "target": "../components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "type": "local relative"
+    },
+    {
+      "source": "docs/single-server-deployment.md",
+      "target": "../components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "type": "local relative"
+    },
+    {
+      "source": "docs/single-server-deployment.md",
+      "target": "../components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "type": "local relative"
+    },
+    {
+      "source": "docs/single-server-deployment.md",
+      "target": "../components/qcl-negf-contracts/README.md",
+      "type": "local relative"
+    }
+  ],
+  "documenter_refs": [
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/09_scba.md",
+      "target": "eq-outer-map"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/09_scba.md",
+      "target": "researcher-final-route"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "validate_solution"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "solution_scientific_assessment"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "acceptance-metadata-registry"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "theory-scaling"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "theory-observables"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/theory/12_validation.md",
+      "target": "researcher-scba-route"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "researcher-final-route"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "eq-scba-map"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "convergence-policy"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "production_selfenergy_residual"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "researcher-final-route"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "eq-outer-map"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "validate_solution"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "acceptance-metadata-registry"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "solution_scientific_assessment"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "theory-validation"
+    },
+    {
+      "source": "components/QCLNEGF.jl/docs/src/developer/traceability.md",
+      "target": "theory-limitations"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "configuration_source"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "ExecutionPlan"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "resolve_execution_strategy"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/configuration.md",
+      "target": "resource-planning"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "target": "QCLNEGFRunner.main"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/user/results.md",
+      "target": "load_production_restart"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "developer-configuration-route"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "load_run_configuration"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "configuration_source"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "resolve_execution_strategy"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "solver-quality-contract"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "operator-recovery-route"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "load_production_restart"
+    },
+    {
+      "source": "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+      "target": "QCLNEGFRunner.main"
+    }
+  ],
+  "raw_static_receipts": [
+    {
+      "command": "git -C /tmp/qcl-doc02-worktrees/QCLNEGF.jl diff --check",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git -C /tmp/qcl-doc02-worktrees/QCLNEGFRunner.jl diff --check",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "root git diff --check -- docs/single-server-deployment.md",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git diff --no-index --check /tmp/qcl-doc02-candidate/baseline /tmp/qcl-doc02-candidate/candidate",
+      "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "exit": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git apply --whitespace=error --check /tmp/qcl-doc02-candidate/full.patch",
+      "cwd": "/tmp/qcl-doc02-candidate/baseline",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "synthetic_arithmetic": {
+    "mixed_step": "0.001",
+    "raw_residual": "0.49999999999999750000000000001249999999999993750000",
+    "scope": "synthetic Decimal only, no Julia/product execution"
+  },
+  "root_status_after": " M .agents/skills/qcl-performance-audit/SKILL.md\n M .agents/skills/qcl-performance-audit/agents/openai.yaml\n M .agents/skills/qcl-performance-audit/references/telemetry.md\n M .agents/skills/qcl-physics-audit/SKILL.md\n M .agents/skills/qcl-physics-audit/agents/openai.yaml\n M .agents/skills/qcl-physics-audit/references/physics-checks.md\n M .agents/skills/qcl-research-framing/SKILL.md\n M .agents/skills/qcl-research-framing/agents/openai.yaml\n M .agents/skills/qcl-research-framing/references/brief.md\n M .agents/skills/qcl-results-analysis/SKILL.md\n M .agents/skills/qcl-results-analysis/agents/openai.yaml\n M .agents/skills/qcl-results-analysis/references/comparison.md\n M components/QCLNEGF.jl\n M components/qcl-negf-portal\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n M docs/single-server-deployment.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev05-d2-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev24-auth-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-checkmatrix.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV05-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV24-GREEN-2/\n",
+  "recursive_after": "+f7b108bef206d2b2dc5afe0306b2dff60d27ac59 components/QCLNEGF.jl (v0.2.0-10-gf7b108b)\n 23860d9e660a3cddf6cb5203d449d1b62f3745a1 components/QCLNEGFRunner.jl (v0.2.0-25-g23860d9)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n 02a564b78dc9c5e19eacf496bc8c891361eafaab components/qcl-negf-contracts (v0.2.0-13-g02a564b)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n+2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n",
+  "runtime": "not_run",
+  "publication": "not_performed",
+  "final_root_head_check": "965ebed95d2b627423805d10c46d0ae8dd425e9d"
+}

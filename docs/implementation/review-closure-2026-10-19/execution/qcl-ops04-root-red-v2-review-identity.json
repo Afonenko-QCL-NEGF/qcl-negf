@@ -1,0 +1,49 @@
+{
+  "scope": "OPS04.S independent high Root v2 frozen test-source review",
+  "date": "2026-10-19",
+  "reviewer_task": "/root/ops04_cli_seam_review",
+  "verdict": "REQUEST CHANGES",
+  "blocking_findings": [{
+    "id": "F1",
+    "path": "tests/solver_test.ts",
+    "line": 171,
+    "reason": "Duplicate raw hash/url properties retain first-occurrence insertion positions under JSON.parse; JSON.stringify(spec) has a different key order than required JSON.stringify(JSON.parse(raw))",
+    "correction": "Correct test oracle; do not introduce new production canonical sorting"
+  }],
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "root_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "git_status_short_before_and_after": " M tests/application_cd_test.ts\n M tests/solver_test.ts\n",
+  "submodule_observation": "eight uninitialized selected gitlinks, no update",
+  "source_authority": "Git tree, not this receipt",
+  "inputs_sha256": {
+    "tests/solver_test.ts": "d26512392d63eaccf44ab7711ea07b1b6c8a15a3fb3108afd47c1ccacbf9d542",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85",
+    "ops/solver.ts": "bc513f610cce976d108e17902ebd423c434992ba0edb91e2bdc3da2e5f3c247f",
+    "ops/application_cd.ts": "91989d0171e011f4518e178e247d4f7a466d08bd02b7931308a202c4354ee9ce",
+    "nix/solver.nix": "16c99da166ee2d9afc7d238fa317e43f0bcc71e2eccb8de3ff11e97b70aa858f",
+    "/tmp/qcl-ops04-source-design-v2.md": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+    "/tmp/qcl-ops04-cli-seam-design.md": "93ffbbcdd50770295f2f21e1a9befc47acc63231279b1ff79aebf48e7cc69a7f",
+    "/tmp/qcl-ops04-root-red-v2-report.md": "4f60d3d684f7bb4246a58ca0713ec0d4451e5a1c6f0624ccbce903ae6bf39e34",
+    "/tmp/qcl-ops04-root-red-v2-identity.json": "4e8c943c6574c887815b2c7d37715401f97f2f0e62472d5fe634dc57dbf953f3",
+    "/tmp/qcl-ops04-root-red-v2-patch.diff": "c3a5fded8313ad9949873b6b43167f2c096d211d50157e669d0d695645356cc8",
+    "/tmp/qcl-ops04-root-red-v2-delta.json": "696d452b20eaf505ad034087cfaa3cf3a6adece60d0acd93f787309092d7ade4"
+  },
+  "patch_matches_actual_git_diff": true,
+  "product_diff_to_head": "empty, exit 0",
+  "read_order": "accepted primary design and actual production sources before candidate tests; author packet afterwards",
+  "output": {
+    "path": "/tmp/qcl-ops04-root-red-v2-review.md",
+    "sha256": "e5b0802310206241992194308e7ac5962483b25c0d7c73cf4e496107c8f17d74",
+    "bytes": 12174
+  },
+  "source_writes": 0,
+  "imports_parsers_typecheck_tests": 0,
+  "deno_nix_build_network_server": 0,
+  "children": 0,
+  "checkpoint_writes": 0,
+  "observed_red": false,
+  "runtime_slots_consumed": 0,
+  "resource_envelope": { "wall_minutes": 20, "cpu": 1, "ram_gib": 2, "read_mib": 4, "report_kib": 96 },
+  "resource_measurement": "Cumulative CPU/RAM/read/tool-output telemetry not instrumented",
+  "stop": "Coordinator correction/freeze decision; no runtime or phase2 work authorized"
+}

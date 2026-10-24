@@ -1,0 +1,83 @@
+{
+  "task": "SCI09-SCI12-CATALOG-D1",
+  "scope": "Named source/text/metadata and read-only Git; no scientific payload",
+  "budget": {"wall_minutes": 25, "CPU_limit": 1, "RSS_limit_bytes": 2147483648, "named_read_limit_bytes": 8388608, "output_limit_bytes": 524288},
+  "accounting_method": "Conservative full-file content charge for ranged/repeated named reads, grouped with explicit headroom; metadata enumeration counted in reserve. Not actual disk/syscall bytes. Shell rg/jq/sed/cat/sha256sum reads only; no project parser/resolver/import/test execution.",
+  "conservative_total_content_charge_upper_bytes": 8126464,
+  "unallocated_read_headroom_bytes": 262144,
+  "groups": [
+    {
+      "name": "Root coordination metadata",
+      "charged_upper_bytes": 2097152,
+      "paths": ["docs/implementation/review-closure-2026-10-19/execution/checkpoint.json"],
+      "reads": "Four content queries: named-key rg, top-level jq keys, selected tasks/source/model/contracts/counters/blockers, selected SCI02/03/04/07 receipt paths. File observed475011bytes; 4x full-file charge1900044bytes. No giant JSON dump and no install identities read.",
+      "immutable_snapshot_claim": false
+    },
+    {
+      "name": "Root instructions and scientific policy corpus",
+      "charged_upper_bytes": 2097152,
+      "paths": [
+        "AGENTS.md", "docs/architecture.md", ".agents/skills/qcl-physics-audit/SKILL.md", ".agents/skills/qcl-physics-audit/references/physics-checks.md",
+        "docs/implementation/review-closure-2026-10-19/science.md", "docs/implementation/review-closure-2026-10-19/operator-permissions.md", "docs/implementation/review-closure-2026-10-19/autonomy.md",
+        "docs/system/agent-review-workflow.md", "docs/system/implementation-entrypoint.md", "docs/system/release-roadmap.md",
+        "/home/tolya/.codex/plugins/cache/openai-curated-remote/superpowers/6.4.2/skills/using-superpowers/SKILL.md"
+      ],
+      "reads": "Full initial instructions and three policy docs; named rg and repeated bounded sections for scientific cards/caps/workflow. Full-file repeat charge covered; using-superpowers contains explicit subagent skip."
+    },
+    {
+      "name": "Accepted SCI evidence",
+      "charged_upper_bytes": 524288,
+      "path_prefix": "docs/implementation/review-closure-2026-10-19/execution/evidence/",
+      "paths": ["qcl-sci02-report.md", "qcl-sci03-design-v2-report.md", "qcl-sci03-design-v2-review.md", "qcl-sci03-current-bound-design-review.md", "qcl-sci04-design-v2-report.md", "qcl-sci04-design-v2-review.md", "qcl-sci04-d2-status-clarification.md", "qcl-sci07-resource-design.md", "qcl-sci07-resource-design-v2.md", "qcl-sci07-resource-design-v2-review.md"],
+      "reads": "Selected full/ranged accepted reports/reviews and source contracts, repeated headings/sections and hash reads. Earlier multi-file tool output truncation was resolved with named narrower re-reads for relevant verdict/H/admission sections; not every historical proof re-audited."
+    },
+    {
+      "name": "Research owning data and documents",
+      "charged_upper_bytes": 786432,
+      "path_prefix": "components/qcl-negf-research/",
+      "paths": ["config/equilibrium.yaml", "config/studies/equilibrium-0-70.yaml", "config/model/reference-2019-70k.yaml", "config/policies/analytical-diagnostic.yaml", "config/convergence.yaml", "config/studies/reference-48.yaml", "config/studies/grid-refinement-48.yaml", "docs/equilibrium-measurement-contract.md", "docs/equilibrium-s01.md", "docs/reference-2019-model-passport.md", "docs/scientific-inputs.md", "tests/test_catalog.py", "tools/validate.py"],
+      "reads": "Current merge order/leaves and historical source pattern; accepted measurement §§1-9 plus reducer supplement sections, headers/repeats/hash. validate.py/test_catalog.py read as source only, never executed."
+    },
+    {
+      "name": "Runner owning source",
+      "charged_upper_bytes": 786432,
+      "path_prefix": "components/QCLNEGFRunner.jl/",
+      "paths": ["src/cli.jl", "src/application/scientific/", "src/infrastructure/scientific/definitions.jl", "src/infrastructure/config/configuration.jl", "src/infrastructure/persistence/hdf5.jl", "src/infrastructure/persistence/physics_diagnostics.jl", "docs/src/user/configuration.md"],
+      "reads": "Named rg + relevant sections: controlled paths/fingerprints/dedup/axes/CLI/config defaults/serialized datasets. application/scientific source subtree observed46817bytes including filesystem directory overhead; repeated planning full-file18116bytes covered. configuration71428/definitions21636/hdf531055/diagnostics31201 bytes observed."
+    },
+    {
+      "name": "Core source search and e-e defaults",
+      "charged_upper_bytes": 1048576,
+      "path_prefix": "components/QCLNEGF.jl/",
+      "paths": ["src/"],
+      "reads": "One recursive rg for electron_electron/seed/normalization/embedding symbols; full source subtree metadata size779582bytes including directory overhead. Additional named electron_electron.jl range read. No core execution."
+    },
+    {
+      "name": "Results owning source",
+      "charged_upper_bytes": 524288,
+      "path_prefix": "components/qcl-negf-results/",
+      "paths": ["src/qcl_negf_results/equilibrium.py", "src/qcl_negf_results/state.py"],
+      "reads": "Named rg and small read-limit source excerpt. equilibrium36563/state29863bytes observed, repeated full-file charge covered. No StateReader instantiated, no native arrays opened."
+    },
+    {
+      "name": "Git, metadata, output hashing and unused reserve",
+      "charged_upper_bytes": 262144,
+      "paths": ["Git metadata of selected Root and eight direct submodules", "/tmp/qcl-sci09-12-catalog-design.md", "/tmp/qcl-sci09-12-catalog-design-identity.json", "/tmp/qcl-sci09-12-catalog-design-read-ledger.json"],
+      "reads": "pwd/rev-parse/status/submodule status/ls-tree graph hash/diff names; file inventories, wc/du metadata; output whitespace search/hash/size. No Git mutations."
+    }
+  ],
+  "absent_paths_observed": [
+    "Research AGENTS.md (no component-local instructions)", "Research top-level studies and meta directories (actual catalog is config/studies and top-level config/*.yaml)",
+    "Runner src/domain", "Runner src/application/scientific/identity.jl", "Core src/config*", "Results docs/equilibrium-measurement-contract.md (owning document is Research)"
+  ],
+  "failed_lookup_interpretation": "Source path misses, not runtime/test failures; corrected with exact owning paths. No content of nonexistent paths read.",
+  "physical_IO_bytes": null,
+  "source_CPU_seconds": null,
+  "source_peak_RSS_bytes": null,
+  "caveat": "No syscall/RSS/CPU instrumentation or enforced cgroup. Content charge upper bound is bookkeeping for this source task, not measured scientific/native I/O. No archive scripts, package installs, tests or solver calls.",
+  "new_scientific_submits": 0,
+  "scientific_payload_read_bytes": 0,
+  "scientific_payload_write_bytes": 0,
+  "product_source_writes": [],
+  "outputs_only": ["/tmp/qcl-sci09-12-catalog-design.md", "/tmp/qcl-sci09-12-catalog-design-identity.json", "/tmp/qcl-sci09-12-catalog-design-read-ledger.json"]
+}

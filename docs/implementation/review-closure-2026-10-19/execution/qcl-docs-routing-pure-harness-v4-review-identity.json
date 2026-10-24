@@ -1,0 +1,124 @@
+{
+  "format": "qcl-negf.docs-routing-pure-harness-independent-source-review.v4",
+  "verdict": "STOP_SOURCE_CHANGES_REQUIRED",
+  "inputs": {
+    "/tmp/qcl-docs-routing-pure-guard-v4.py": {
+      "sha256": "c6534b6f1cf129877cd80482ebaddce7664dc179ff7f03760acef37f0f7a820c",
+      "bytes": 47309
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v4.json": {
+      "sha256": "4a8966be6c6bc5a3e4dfc1765b31b16be66355427af2b971e3d1c3bfd42646b6",
+      "bytes": 11825
+    },
+    "/tmp/qcl-docs-routing-pure-format-v4.py": {
+      "sha256": "4805b0be5aaf9e46c787f2ad43edaf0a57a35c522b52e24a91352fd947b9da70",
+      "bytes": 1363
+    },
+    "/tmp/qcl-docs-routing-pure-lint-v4.py": {
+      "sha256": "5c80d3c4d11c00809ae6e29316ce0d320373a1d9f85fd27851b4e19d1d90bb3c",
+      "bytes": 1357
+    },
+    "/tmp/qcl-docs-routing-pure-check-v4.py": {
+      "sha256": "61be9d6f59b49856a1d4a0b3d85c194b4c00646efbf1a7f2bb32c4e91ca00463",
+      "bytes": 1366
+    },
+    "/tmp/qcl-docs-routing-pure-report-v4.md": {
+      "sha256": "d0d3d51adb47082c5b7fe95bb778c8f20029406542d714e7b58a6f9a305dbabd",
+      "bytes": 9731
+    },
+    "/tmp/qcl-docs-routing-pure-identity-v4.json": {
+      "sha256": "7403734acba6a513e7d5521dded926bf0e54d47af8fad244159e492c113e8240",
+      "bytes": 3871
+    }
+  },
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v4-review.md",
+    "sha256": "206731b357638ae735a0b33019108725f4cbe8d329b2009c2f35dce6633791bb",
+    "bytes": 16668
+  },
+  "previous_review_preserved_sha256": "85a8f8930b94824b07e9d46dc66240fc30e98a0e8499fac45cf95a9f928319ec",
+  "resolved": [
+    "R1a_known_collector_is_alive_before_alarm_cancel"
+  ],
+  "blocking_findings": [
+    {
+      "id": "R1b",
+      "path": "/tmp/qcl-docs-routing-pure-guard-v4.py",
+      "lines": [
+        409,
+        705,
+        514,
+        520,
+        529,
+        805,
+        811,
+        817
+      ],
+      "summary": "Collector constructor can start non-daemon reader then throw before capture assignment; captureNone bypasses lifecycle proof/alarm retention"
+    },
+    {
+      "id": "R2",
+      "path": "/tmp/qcl-docs-routing-pure-guard-v4.py",
+      "lines": [
+        384,
+        391,
+        671,
+        678,
+        490,
+        502,
+        781,
+        794,
+        562,
+        565
+      ],
+      "summary": "Attempted live RSS unknown only increments counter; source/unit and predecessor can advance with prior valid sample"
+    }
+  ],
+  "required_RSS_predicate": "At least1valid; any attempted-live unknown fails; only proven reaped-before-sample is separateN_A, never zero or retroactive waived failure",
+  "static_registered_tests": 230,
+  "observed_engine_tests": null,
+  "baseline_pure_cpp": {
+    "sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea",
+    "whole_verdict": "CHANGES_REQUIRED",
+    "pure_slice_only": true
+  },
+  "historical_raw_layout_preserved": true,
+  "historical_DOC06_E1_failed_unchanged": true,
+  "source_counters": {
+    "FORMAT1": [
+      2,
+      3
+    ],
+    "LINT1": [
+      3,
+      4
+    ],
+    "CHECK1": [
+      4,
+      5
+    ],
+    "ceiling": 8
+  },
+  "unit_budget": [
+    87,
+    88
+  ],
+  "source_supervisors_implemented": true,
+  "READY": false,
+  "execution_grant": false,
+  "prepared_code_parser_compiler_runtime_tests_network_executions": 0,
+  "Root_CP_product_writes": 0,
+  "writes": [
+    "/tmp/qcl-docs-routing-pure-harness-v4-review.md",
+    "/tmp/qcl-docs-routing-pure-harness-v4-review-identity.json"
+  ],
+  "limits": {
+    "read_cap_bytes": 8388608,
+    "read_conservative_upper_bytes": 3145728,
+    "wall_cap_seconds": 900,
+    "cpu_count": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 196608,
+    "physical_measurements": "not_measured"
+  }
+}

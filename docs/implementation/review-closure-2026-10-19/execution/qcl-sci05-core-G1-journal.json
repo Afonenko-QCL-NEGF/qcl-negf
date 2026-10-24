@@ -1,0 +1,27 @@
+{
+  "CP_CODE": "933886f7d8f0c2de0c2e689b9129b374686c59f15a0497ef546bf27ac751997c",
+  "components": {
+    "QCLNEGF.jl": {
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "base": "239d76bb59c955b32888eeaec518d6e465b4178d",
+      "head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+      "branch": "codex/review-closure-final-audit-integration",
+      "base_branch": "codex/review-closure-reader-routes",
+      "files": {
+        "src/QCLNEGF.jl": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+        "src/numerics/reference/final_audit.jl": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+        "src/numerics/reference/validation.jl": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+        "src/numerics/reference/poisson.jl": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+        "src/numerics/optimized/production_solver.jl": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+        "test/numerics/final_audit_evidence.jl": "ede25dde26d72c313fb15e8bfcc515e8d29673b41336535c760a6eb0113309e9"
+      },
+      "state": "G1_merged",
+      "pr": 12,
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/12",
+      "merge_commit": "9c7792fa146c820c45591749116b49706e0465e2",
+      "merged_at": "2026-10-19T18:06:22Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

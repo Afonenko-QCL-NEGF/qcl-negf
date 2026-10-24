@@ -1,0 +1,132 @@
+{
+  "format": "qcl-negf.docs-test-routing-design-identity.v2",
+  "date": "2026-10-20",
+  "status": "FROZEN_SOURCE_ONLY_PENDING_INDEPENDENT_HIGH_R",
+  "selected_source_revision": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "outputs": [
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v2.md",
+      "bytes": 17745,
+      "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v2-delta.json",
+      "bytes": 1032,
+      "sha256": "703392d9a7c573a406bcc5ec502cc4f9761fa94b7a231d47f33e130cc5f0b7f9"
+    }
+  ],
+  "source_read_ledger": [
+    {
+      "path": "/tmp/qcl-docs-test-routing-design.md",
+      "bytes": 17703,
+      "sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270",
+      "charged_passes": 4,
+      "claim": "source read/hash"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-review.md",
+      "bytes": 3614,
+      "sha256": "9e16ff7519453db4661833455450da9d83c72b5f76c9eefd4fb27370da812930",
+      "charged_passes": 4,
+      "claim": "source read/hash"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-source-ledger.md",
+      "bytes": 6204,
+      "sha256": "1b4cbec31c9648ddaf5049bd40aebc74e5877e19f02451e166116de750fd0b7b",
+      "charged_passes": 3,
+      "claim": "source read/hash"
+    },
+    {
+      "path": "/home/tolya/.codex/plugins/cache/openai-curated-remote/superpowers/6.4.2/skills/receiving-code-review/SKILL.md",
+      "bytes": 6203,
+      "sha256": "091df1629510af1b92fc4abd6f96732ebedb4cb2c0f3457e8f2740b0504a2438",
+      "charged_passes": 3,
+      "claim": "source read/hash"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_math_test.mjs",
+      "bytes": 14430,
+      "sha256": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+      "charged_passes": 6,
+      "claim": "source read/hash"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/test_docs_assembly.py",
+      "bytes": 22976,
+      "sha256": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+      "charged_passes": 5,
+      "claim": "source read/hash"
+    },
+    {
+      "path": "/tmp/qcl-doc06-worktree/tests/docs_static_slice_test.ts",
+      "bytes": 27631,
+      "sha256": "2957b182f531bf08895ca705d8ad4d81d5d736a79ebef8b1ae7541989cb0dfa2",
+      "charged_passes": 6,
+      "claim": "source read/hash; candidate is not selected binding"
+    },
+    {
+      "revision": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+      "path": "deno.json",
+      "bytes": 1480,
+      "sha256": "a4043c0ec1c976c03704253316c90a94cb8c7ca2cfe4222f7182ea05565249b7",
+      "charged_passes": 3,
+      "claim": "immutable Git source metadata/read; no target execution"
+    },
+    {
+      "revision": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+      "path": "ops/ci.ts",
+      "bytes": 3479,
+      "sha256": "2d6750a2703fb1ac2a9ab7d6ec2195daa92a6f5bc3e51b762273bc935fe66702",
+      "charged_passes": 3,
+      "claim": "immutable Git source metadata/read; no target execution"
+    },
+    {
+      "revision": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+      "path": "ops/process.ts",
+      "bytes": 1345,
+      "sha256": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249",
+      "charged_passes": 3,
+      "claim": "immutable Git source metadata/read; no target execution"
+    },
+    {
+      "revision": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+      "path": "tests/docs_math_test.mjs",
+      "bytes": 14430,
+      "sha256": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+      "charged_passes": 3,
+      "claim": "immutable Git source metadata/read; no target execution"
+    }
+  ],
+  "resource": {
+    "grant": {
+      "wall_minutes": 15,
+      "cpu": 1,
+      "ram_gib": 2,
+      "read_bytes": 2097152,
+      "output_bytes": 98304
+    },
+    "accounting": "conservative full-file charges for named content/hash passes; primary immutable bytes hashed again here; physical I/O/RSS not measured",
+    "conservative_logical_source_read_bytes": 551937,
+    "truncation": "one batched tool source output truncated; targeted named reads supplied relevant declarations; no complete-render/output claim",
+    "metadata_reserve_bytes": 8192,
+    "conservative_total_read_upper_bound": 560129
+  },
+  "findings": {
+    "R1": "confirmed; exact units/count/source binding plus base-only status separated",
+    "R2": "confirmed; exact empty loader env and dedicated maps plus retained-only preflight",
+    "candidate_caveat": "DOC06 worktree candidate changed from historical ledger hash; not promoted to immutable selected source; final expected count remains a binding prerequisite"
+  },
+  "actions": {
+    "product_edits": false,
+    "target_imports": false,
+    "target_parsers": false,
+    "test_execution": false,
+    "build": false,
+    "network": false,
+    "git_mutations": false,
+    "checkpoint_edits": false,
+    "full_ci_dispatches": 0
+  },
+  "stop": "high independent D_R before implementation"
+}

@@ -1,0 +1,45 @@
+# Независимая приёмка трёх source results: FORMAT2/LINT2/CHECK2
+
+**PASS_SOURCE_TOOLS_RESULTS** для exact retained FORMAT2(v6), LINT2(v6), CHECK2(v7) и неизменной pure pair68f/2639/configa637. Блокирующих замечаний в этих результатах нет. Это substantive source prerequisite acceptance для prospective sole DOCS-ROUTING-GREEN-1, не unit PASS, не full READY и не execution grant. Source budget **8/8 EXHAUSTED**, никаких source retries/launches не остаётся; product counter87 сохранён.
+
+| Result | Receipt SHA256 | Original raw SHA256 | Scope/counter |
+| --- | --- | --- | --- |
+| FORMAT2 | 1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32 | 0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd | v6,4→5 |
+| LINT2 | a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4 | 0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd | v6,5→6 |
+| CHECK2 | cd9f980eef98391d92aa0a3901686c25f7afc5ef167ee1b532fe8eeed8b0371b | 04d40e18cad60bff4992e517b0a3b5e8bdab983c1944034cd919f20f827b8f91 | v7,7→8 |
+
+Все три receipt/raw независимо прочитаны и перехешированы, длины совпали с полными retained bytes. FORMAT2/LINT2 raw по16B `Checked 2 files\n`. CHECK2 raw88B содержит только два ANSI-decorated `Check ops/docs_tests.ts` / `Check tests/docs_test_routing_test.ts`. Childexit0, target_calls1 и attempt_consumed=true у каждого; captured verdict не принят по одному exit code: проверены exact source/provenance/command/env/config/counters, полный capture, null errors/stop reason, terminal collector и sampled resource predicates.
+
+| Stage | Guard wall,s | RSS valid/unknown | Pre-proven reaped N/A | Sampled RSS peak,B | TMP samples/peak,B |
+| --- | --- | --- | --- | --- | --- |
+| FORMAT2 | 0.05678660102421418 | 2/0 | 1 | 446464 | 4/20720 |
+| LINT2 | 0.10741273802705109 | 3/0 | 1 | 45441024 | 5/242988 |
+| CHECK2 | 1.580418098019436 | 32/0 | 1 | 273604608 | 34/3011380 |
+
+RSS attempted=valid+unknown, valid≥1/unknown0 у каждого. Все N/A имеют отдельный proof Popen.poll_returncode_before_RSS_attempt с соответствующим child_pid, returncode0 и finite elapsed≤wall120; они не считаются valid RSS или нулём. Initial/final TMP определены, caps120s/1CPU/1GiB sampledRSS/32MiB sourceTMP/2MiB raw соблюдены по сохранённым observations; capture complete, no overrun, collector attempted/terminal=true, errors=null. Sampled peaks не устанавливают hard transient peak/cgroup/diskquota и не заменяют OS/native isolation proof.
+
+Identity mixing отсутствует. FORMAT2/LINT2 точно равны retained v6 per-stage maps high v7 source review **364e912a1c12adc2dc6103ce807dcdb6ad0d0d29520d3b02422f050095f9dce1**: guardc05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6, plan3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9, format wrapper8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85 и lint wrapperd27fd04195f76459dc80ee132cb85be6751358908493e95a628ced1d16cc9368. CHECK2 использует собственные current v7 guard33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6, plan690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3 и wrapperf0fee486f3708905a1f240667eb1839f889f3bde9be1e11799a875179d7adbb4. Current v7 source packet независимо перехеширован без drift. Требовать всем старым results v7 H/P было бы ошибкой.
+
+Command/cwd/env каждого stage соответствуют exact admitted stage и v7 predecessor gates. Formatter/linter: pinned Deno fmt/lint --config exact isolated deno.json +только ops/docs_tests.ts и tests/docs_test_routing_test.ts. CHECK2: тот же pinned executable `check --config ... --no-lock --no-npm --no-remote` +те же2files; unsupported cached-only удалён только из compiler argv. Нет aliases/task launches/extra grants. Env каждого — полный clear replacement ровно DENO_DIR/TMPDIR/HOME в собственном fixed stage folder/owned-tmp/{deno-cache,tmp,home}, no seed. Guard helpers e88ca…/16a… и runtime cdd88… pins согласованы. Runtime141648992B не перечитывался reviewer в1MiB budget; exact retained guard/control fullhash gates и matching provenance служат основанием pin, без нового runtime probe.
+
+CHECK2 Root controller /tmp/qcl-docs-routing-source-Root-control-v7.py SHA256 **297182f8b23a4af975820c091d65407a9c92a59c7f7c7e5f9e2326c118991810** прочитан: only CHECK2 wrapper, fresh actual Root107/isolated2bb/gitlinks/status/counters preflight, exact guard/plan/high review, inherited comment CPP, retained actual FORMAT2+LINT2 refs и format binding, exclusive stage records, одна wrapper submission, preserved outer/receipt accounting. Actual READY SHA256 **1dbaa980bd1d98e0401a013b31a670df08733c673b76e688bcf88b285ecd12e3**, handoff **0edb6284a9bcc773b8a11735bfa39e430cf04dc6c73ff184a1ce414803e91b06**, outer **c48bad37c6cf21d7811c7c97d40bf467e1eed2f06bfb24a60a38eab95b12a8b7** согласованы с receipt/approved refs. Outer return0/failure=null/stdout+stderr empty/wall1.9638912249938585s. Это readback actual source submission, не blanket approval будущего unit controller.
+
+Независимо перехешированные final sources: helper **68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5**, fixture **2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99**; config **a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce**. У всех трёх source_before=source_after=эта пара. Comment-only CPP **656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d** и FORMAT2 format-only/final pure CPP **23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c** перехешированы/сохранены; format2 baseline→final byte identity и pure-only closure не изменены. Helper не получает realprocess/Git/DenoAPI/env/filesystem/network/imports; fixture onlyhelper+fakeexecutor остаётся exact accepted source. No native/wholeCPP acceptance: baseline4903 — только explicit pure slice.
+
+CHECK2 наблюдён как успешный compiler/source typecheck exact двух файлов и config, без module evaluation/test registration. У всех receipts registration=false и observed_engine_tests=null. Static230 Deno registrations/names/finite loops сохраняются по unchanged accepted bytes, но230 observed tests/passes этим результатом не установлены. Unit test argv/permissions и R1b/R2 приняты source review364e… отдельно, здесь не исполнялись и не fault-tested.
+
+CHECK1 остаётся consumed failed CLI rejection до typecheck: receipt277a3287b57bd7e121ddcee2854a038765f4471c491d73cf5748c0a584fe7531/raw181B3676ae80e731a183977f2a96b7b6d613d332c148bf755a0321c8a76e5d05b98f unchanged. Пропуск source6→7 в good-result chain осознанно сохраняет этот failed call, не сбрасывает counter и не выдаёт его за passed. Historical original RED receipt **e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0**, raw765B **6b044ed571751341f215353d5dafd384dcf009a70c4b471595ebdcb53b8589ad** также unchanged: полный TS2307+dependent TS7006/source227nominal/observednull/original inconclusive retained. DOC06 unknownFAILED не переоценивался.
+
+Companion identity содержит exact unit-format-binding: PASS_FORMAT_ONLY, same baseline/final maps, **review_ref остаётся23a4** как требует guardv7, receipt_refs в порядке FORMAT2(v6),LINT2(v6),CHECK2(v7). Отдельный all_source_results_binding ссылается на настоящий новый report и отмечает принятие всех трёх results; новый outcome report не подставлен вместо immutable format review. Existing accepted_cpp/ref23a4 и comment656d сохраняются.
+
+CP read-only snapshot: source8/product87, active source/target=null. Source budget exhausted без retries. Prospective soleGREEN87→88 требует отдельно fresh Root actual metadata/counters/SourceRefs, unit controller/admission/late READY и последующего полного independent TAP230 outcome review. CP/сохранённый source READY не являются полномочием запуска unit. Эти gates здесь не пройдены; native/fullCI/science не установлены.
+
+Метод: source/log/metadata reads и inert JSON/hash comparisons, без prepared-script/import/parser/compiler/test/runtime/native/network execution или subagents. Root/CP/index/source/history не менялись. Только эти2review artifacts; reads ограничены≤1MiB payload, общий output≤64KiB,5min/1CPU/1GiB envelope; physical CPU/RSS/I/O reviewer не измерялись. Повторного запуска CHECK2 либо иной source команды не было.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Все3source results приняты как prerequisites | Exact stage identities/receipts/raw, source/config/env, complete capture/metrics | Только formatter/lint/compiler source scope | сохранить |
+| CHECK2 compiler check успешно завершён | cd9f receipt,88B04d4 raw, exit0,32valid0unknown и terminal collector | Не230observedtests или behavioral correctness | сохранить |
+| Pure source/format/comment approvals сохраняются | Exact68f/263/a637,656d/23a4, mixed v6/v7 bindings | Whole native CPP не PASS | сохранить |
+| Новый source call допустим | Source8/8EXHAUSTED, все failures сохранены | Retry/launch не разрешён этим review | сохранить |
+| Unit/fullREADY/native/CI/science приняты | Таких новых evidence нет | Fresh Root unit gates и TAP230 review отдельно | данных недостаточно |

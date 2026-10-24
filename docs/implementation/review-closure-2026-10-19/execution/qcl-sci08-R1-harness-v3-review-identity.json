@@ -1,0 +1,72 @@
+{
+  "status": "PASS_SOURCE_HARNESS_BOOTSTRAP_REPLAN_ONLY",
+  "scope": "Independent focused static high source review of pinned Test bootstrap, finite RED2/GREEN1 replan and late Root READY binding; no execution grant",
+  "report": {
+    "path": "/tmp/qcl-sci08-R1-harness-v3-review.md",
+    "sha256": "c744b0025b1b1d2d6a987043ae53adf4f90d2f74e3b79ee8f0def7f8b1025a7d",
+    "bytes": 13413
+  },
+  "reviewed_inputs": {
+    "/tmp/qcl-sci08-R1-local-unit-run-v3.py": "f239938d9fe83e60f1623ee501f4cd32e5d77fa071f931d237cd13973a123528",
+    "/tmp/qcl-sci08-R1-engineering-plan-v3.json": "c48d28709fb75a66652d8ca7d884e55a1158c7e9e950b5e8aa0861525db3c13e",
+    "/tmp/qcl-sci08-R1-harness-report-v3.md": "30ffdbc25af2deef560153b87710ca26188f26368c012b32b19554b643cd06ec",
+    "/tmp/qcl-sci08-R1-harness-identity-v3.json": "a31304d9b69b4ac8030ac650f6c3957cabb0f16c282971e37e5c054cdd3362ef"
+  },
+  "pinned_Test_sha256": "36bf481a76fd9aa3166cc69af165a10052893935da63e7456174f8e06f7a1d7e",
+  "bootstrap_API_checked": [
+    "DefaultTestSet ctor/verbose/fields/failfast default",
+    "@with_testset scoped current set and depth restoration, no automatic finish",
+    "Error constructor with ExceptionStack/LineNumberNode/context",
+    "record Error and nested AbstractTestSet attachment",
+    "get_test_counts direct and recursive cumulative fields",
+    "results nested-set recursion and count before time_end assignment",
+    "single outer finish at depth0 and expected TestSetException on nonpass"
+  ],
+  "prior_RED1": {
+    "receipt_sha256": "8d638a5de2c52db561ad50152194b6033536c99a1e903a2684c92348d0e653df",
+    "raw_sha256": "cd29bae7df710592bb53eb10085abe42277de704e0699f2475a1cf455e1c16ba",
+    "raw_bytes": 725,
+    "target_calls": 1,
+    "consumed": true,
+    "behavioral_RED_established": false,
+    "diagnosis": "Correct imports then removed Test.push_testset UndefVarError before assertions/counts"
+  },
+  "review_gap_acknowledged": "Prior focused B1/B2 source review missed removed push/pop API; pinned actual API comparison now completed without execution",
+  "replan": {
+    "id": "SCI08-R1-BOOTSTRAPFIX-v3",
+    "max_future_calls": 2,
+    "attempt_ids": ["SCI08-R1-ENG-RED-2", "SCI08-R1-ENG-GREEN-1"],
+    "shared_milestone_start": 81,
+    "shared_milestone_ceiling": 88,
+    "execution_authority": "Root fresh READY and shared reservation only, separately from source review",
+    "no_C08_science_CI_reopen": true
+  },
+  "runner_head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "core_head": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+  "root_head_observed": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "root_binding": "Exact fresh READY.root_head with before/prelaunch/after equality; observed publication metadata may change before READY",
+  "owning_src_diff": "empty",
+  "owning_diff_check": "no errors",
+  "selected_fixture_and_red_hashes": "independently rehashed and unchanged",
+  "new_blocking_source_findings": [],
+  "current_review_calls": {
+    "candidate_helper_parser_compiler_selftest_tests_import_Julia_Pkg_network_solver": 0
+  },
+  "writes": {
+    "Root_CP_production_fixture_Git": 0,
+    "only": [
+      "/tmp/qcl-sci08-R1-harness-v3-review.md",
+      "/tmp/qcl-sci08-R1-harness-v3-review-identity.json"
+    ]
+  },
+  "budget": {
+    "read_cap_bytes": 4194304,
+    "conservative_logical_read_charge_upper_bound_bytes": 1048576,
+    "wall_cap_seconds": 600,
+    "CPU_count": 1,
+    "RAM_cap_bytes": 1073741824,
+    "report_cap_bytes": 131072,
+    "physical_IO_CPU_RSS": "not_measured"
+  },
+  "stop": "Source approval only; no runtime grant, autonomous retry, native isolation or scientific acceptance"
+}

@@ -1,0 +1,13 @@
+test_directory_disappears_before_traversal_live_count_retained (__main__.SamplerTests.test_directory_disappears_before_traversal_live_count_retained) ... ok
+test_entry_disappears_before_lstat_live_count_retained (__main__.SamplerTests.test_entry_disappears_before_lstat_live_count_retained) ... ok
+test_entry_permission_and_unexpected_io_propagate (__main__.SamplerTests.test_entry_permission_and_unexpected_io_propagate) ... ok
+test_iteration_disappearance_retains_observed_live_count (__main__.SamplerTests.test_iteration_disappearance_retains_observed_live_count) ... ok
+test_iteration_permission_and_unexpected_io_propagate (__main__.SamplerTests.test_iteration_permission_and_unexpected_io_propagate) ... ok
+test_malformed_regular_size_rejected (__main__.SamplerTests.test_malformed_regular_size_rejected) ... ok
+test_real_files_nested_directory_and_external_symlinks (__main__.SamplerTests.test_real_files_nested_directory_and_external_symlinks) ... ok
+test_traversal_permission_and_unexpected_io_propagate (__main__.SamplerTests.test_traversal_permission_and_unexpected_io_propagate) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.003s
+
+OK

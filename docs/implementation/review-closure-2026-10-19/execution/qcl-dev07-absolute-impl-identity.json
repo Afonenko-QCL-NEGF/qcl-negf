@@ -1,0 +1,41 @@
+{
+  "task": "DEV07 O08-05 absolute raw scattering amplitudes",
+  "phase": "source-only implementation frozen for independent review",
+  "frozen_at_utc": "2026-10-19T18:20:02Z",
+  "root_checkout": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head_observed": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "root_status": "unrelated staged/unstaged/untracked EXEC work observed; not modified by this author",
+  "protected_original": "/home/tolya/Загрузки/qcl-negf",
+  "protected_original_written": false,
+  "core_source_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "core_source_status_before": "clean",
+  "core_worktree": "/tmp/qcl-dev07-absolute-worktree",
+  "core_branch": "codex/review-closure-absolute-kernel-oracles",
+  "core_worktree_status": [
+    " M docs/src/development/review_oracle_contracts.md",
+    "?? test/physics/absolute_scattering_kernel_oracles.jl"
+  ],
+  "design_sha256": "1d74158042e305c37875ceef25589b08f6ca9256fdd7f65993ee6825c165a07e",
+  "design_review_sha256": "caea42e27026e6bee60d1f59988a4f1a927820c503f50b2c07f8a0803ba52687",
+  "files": [
+    {"path":"test/physics/absolute_scattering_kernel_oracles.jl","bytes":17656,"sha256":"b85514cab4c32cb22acef0b0ecd66d070beb0ec6d44949d64a0ca20a171e96af"},
+    {"path":"docs/src/development/review_oracle_contracts.md","bytes":97997,"sha256":"4921ce15200998c6af15caf3a606664363bbcc50adc58fe9c37486c028e6cc24"}
+  ],
+  "patch": {"path":"/tmp/qcl-dev07-absolute-impl-patch.diff","bytes":24385,"sha256":"561d2a3643ad95be37e50bb76dd9a86e388386e419ced4744427d387c67f7316"},
+  "checks": {
+    "tracked_diff_check":"passed",
+    "new_file_no_index_diff_check":"passed",
+    "source_readback":"performed manually; not a parser or runtime check",
+    "test_discovery":"source inspection: physics/*.jl auto-discovery",
+    "julia_imports_parser_tests":"not_run",
+    "runtime_library_certificates":"not_measured",
+    "numerical_assertions":"not_measured",
+    "production_kernel_changes":false,
+    "git_stage_commit_push":false,
+    "children":0
+  },
+  "operation_inventory_real_upper_bounds":{"LO":584,"IFR":422,"acoustic":216,"alloy":224,"universal_gamma_n":1024},
+  "arithmetic_assumptions":["IEEE Float64 finite normal operations with u=2^-53","sqrt correctly rounded on positive normal arguments","sin/cos/exp must pass explicit MPFR point certificates at represented Float64 arguments","256-bit outward intervals per primitive; no whole-expression global-rounding shortcut","basis must pass literal norm/residual/gap certificate; LAPACK accuracy not assumed"],
+  "budget":{"wall_minutes_cap":45,"cpu_cap":1,"ram_gib_cap":2,"read_mib_cap":6,"output_kib_cap":96,"cpu_ram_io_output_measurement":"not instrumented; repeated bounded source reads were performed, exact OS I/O/output totals unknown","runtime_calls_consumed":0,"runtime_grant_owner":"coordinator; separate DEV07 L-JL cap2 calls120s"},
+  "stop":"frozen source only; await independent CP-CODE before coordinator runtime"
+}

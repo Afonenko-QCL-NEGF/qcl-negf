@@ -1,0 +1,50 @@
+{
+  "schema": "qcl-doc04-recipes-D3-delta-v1",
+  "date": "2026-10-20",
+  "review_sha256": "759039e4040d54652d288b4bc100fd238b2da679127a49b73be66a873583c017",
+  "base_design_sha256": "008650e7c9ff98bdaf38a3450d2b3b13818409795c92738d0a9dbddaba2c2505",
+  "base_D2_sha256": "ce582cc394d7dd70971c2a25929bf9362aad7d829403f1e2e0fba68a8ff65610",
+  "original_failed_ledger_sha256": "aed51dc14bbe08cdbf5414544715686ac80c807a902233b70c94a5f51886d1e3",
+  "D2_ledger_sha256": "39eb90584c32d883e2db0bab32a500a31f7a6427eb0260c54b22315741fe77a4",
+  "prior_identity_sha256": "5938cc4edbd0f34f8911ed73bff72ccfbe0ba697c38f862251faa43eb02b3d1e",
+  "changes": [
+    {
+      "finding": "R1",
+      "locations": [
+        "D1§3 operator modules prose and exact kwargs",
+        "D2§Exact fail-closed executable profile contract operator modules"
+      ],
+      "before": "operator modules=[]",
+      "after": "operator modules=Module[]",
+      "witness": "Documenter AXNMp src/documents.jl:420",
+      "semantics_changed": false
+    },
+    {
+      "finding": "R2",
+      "locations": [
+        "D1§3 exact makedocs kwargs",
+        "D2 executable profile contract"
+      ],
+      "before": "sitename omitted from exact pilot kwargs",
+      "after": {
+        "core": "QCLNEGF",
+        "runner": "QCLNEGFRunner",
+        "operator": "Документация оператора"
+      },
+      "witnesses": [
+        "Documenter src/documents.jl:427",
+        "Documenter src/html/HTMLWriter.jl:825",
+        "selected Core/Runner docs/make.jl:6"
+      ],
+      "semantics_changed": false
+    }
+  ],
+  "all_other_D1_D2_contracts_unchanged": true,
+  "original_resource_failure_preserved": true,
+  "product_edits": [],
+  "runtime_calls": 0,
+  "D3_design": {
+    "path": "/tmp/qcl-doc04-recipes-design-v3.md",
+    "sha256": "960a639dd281d7a5b99c582f2c9dc8b17e816715753557791460ebcef1159aee"
+  }
+}

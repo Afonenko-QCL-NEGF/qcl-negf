@@ -1,0 +1,1271 @@
+--- a/ops/docs_tests_native.py
++++ b/ops/docs_tests_native.py
+@@ -209,6 +209,88 @@
+     ensure(exit_code is None or sig is None,"exclusive exit/signal union")
+ 
+ 
++def validate_streams(streams,maximum=1048576):
++    exact(streams,("stdout","stderr"))
++    for item in streams.values():
++        exact(item,("ref","bytes","sha256")); validate_ref(item["ref"]); hash_scalar(item["sha256"]); integer(item["bytes"],0,maximum)
++        ensure(item["sha256"] == item["ref"]["sha256"],"stream/ref SHA identity")
++    ensure(sum(item["bytes"] for item in streams.values()) <= maximum,"combined stream bytes")
++
++
++def validate_capture_meta(capture):
++    exact(capture,("exit_code","signal","started_at","ended_at","capture_complete","drains_complete","stop_reason"))
++    validate_exit(capture["exit_code"],capture["signal"]); boolean(capture["capture_complete"]); boolean(capture["drains_complete"])
++    ensure(utc_seconds(capture["started_at"]) <= utc_seconds(capture["ended_at"]),"capture UTC order")
++    ensure(capture["stop_reason"] is None or type(capture["stop_reason"]) is str and len(capture["stop_reason"].encode()) <= 1024,"capture stop reason")
++
++
++def validate_observation_capture(capture):
++    exact(capture,("stdout_ref","stderr_ref","stdout_bytes","stderr_bytes","exit_code","signal","complete","stop_reason"))
++    for name in ("stdout_ref","stderr_ref"): validate_ref(capture[name])
++    integer(capture["stdout_bytes"],0,4096); integer(capture["stderr_bytes"],0,4096)
++    ensure(capture["stdout_bytes"]+capture["stderr_bytes"] <= 4096,"observation combined raw")
++    validate_exit(capture["exit_code"],capture["signal"]); boolean(capture["complete"])
++    ensure(capture["stop_reason"] is None or type(capture["stop_reason"]) is str and len(capture["stop_reason"]) <= 64,"observation stop reason")
++
++
++def validate_registration(registration):
++    exact(registration,("uid","runtime_uid","binary_cap","setup_inventory_id","observation_registration","native_receipt_sha","accepted_native_captures","runtime_closures","katex","reviewed_units","admission","initial_empty","allocation","control_reserve","base_environment"))
++    integer(registration["uid"],0,4294967295); integer(registration["runtime_uid"],0,4294967295); integer(registration["binary_cap"],1,1073741824)
++    ensure(type(registration["setup_inventory_id"]) is str and re.fullmatch(r"[A-Za-z0-9_-]{1,128}",registration["setup_inventory_id"]),"setup inventory literal")
++    rows = registration["observation_registration"]
++    ensure(type(rows) is list and 4 <= len(rows) <= 16,"finite observation registrations")
++    seen = set()
++    for row in rows:
++        ensure(type(row) is list and len(row) == 6,"observation registration tuple")
++        for i in (0,2,3,4): hash_scalar(row[i])
++        enum(row[1],("python","node","deno","git")); ensure(row[5] == registration["setup_inventory_id"],"registration inventory identity")
++        ensure(tuple(row) not in seen,"duplicate observation registration"); seen.add(tuple(row))
++    for key in ("native_receipt_sha","accepted_native_captures","runtime_closures"): exact(registration[key],("python","node","deno","git"))
++    for value in registration["native_receipt_sha"].values(): hash_scalar(value)
++    for capture in registration["accepted_native_captures"].values(): validate_observation_capture(capture)
++    for tool,bound in registration["runtime_closures"].items():
++        exact(bound,("ref","record")); validate_ref(bound["ref"]); record = bound["record"]
++        exact(record,("format","tool","executable","files","total_bytes")); ensure(record["format"] == "root-docs-runtime-closure.v1" and record["tool"] == tool,"runtime producer/tool")
++        validate_ref(record["executable"]); integer(record["total_bytes"],0,registration["binary_cap"]*1024)
++        ensure(type(record["files"]) is list and 1 <= len(record["files"]) <= 1024,"runtime files bound")
++        seen_files = set(); total = 0
++        for item in record["files"]:
++            exact(item,("path","sha256","bytes")); validate_ref({"path":item["path"],"sha256":item["sha256"]}); integer(item["bytes"],0,registration["binary_cap"])
++            ensure(item["path"].startswith("/nix/store/") and item["path"] not in seen_files,"immutable unique runtime files"); seen_files.add(item["path"]); total += item["bytes"]
++        ensure(total == record["total_bytes"],"runtime manifest total")
++    for name in ("katex","admission","allocation"):
++        exact(registration[name],("ref","record")); validate_ref(registration[name]["ref"])
++    katex = registration["katex"]["record"]; exact(katex,("root","version","module_sha256","css_sha256")); path_safe(katex["root"])
++    ensure(katex["version"] == "0.16.8","KaTeX registered version"); hash_scalar(katex["module_sha256"]); hash_scalar(katex["css_sha256"])
++    exact(registration["reviewed_units"],("doc04-python","doc04-node","doc06-deno"))
++    for bound in registration["reviewed_units"].values():
++        exact(bound,("ref","record")); validate_ref(bound["ref"]); item = bound["record"]
++        exact(item,("test_path","test_sha256","expected_tests","report_format")); hash_scalar(item["test_sha256"]); integer(item["expected_tests"],1)
++        ensure(type(item["test_path"]) is str and len(item["test_path"]) <= 128,"reviewed test path"); enum(item["report_format"],("python-unittest-summary-v1","node-test-tap-v1","deno-test-tap-v1"))
++    initial = registration["initial_empty"]
++    exact(initial,("ref","populated","allocation_ref","monotonic","producer_birth","memory_events")); validate_ref(initial["ref"]); validate_ref(initial["allocation_ref"])
++    integer(initial["populated"],0,0); finite_number(initial["monotonic"]); integer(initial["producer_birth"])
++    ensure(type(initial["memory_events"]) is dict and 1 <= len(initial["memory_events"]) <= 16,"memory event map")
++    for key,value in initial["memory_events"].items():
++        ensure(type(key) is str and re.fullmatch(r"[a-z_]{1,32}",key) and type(value) is str and re.fullmatch(r"[0-9]{1,20}",value),"typed memory event"); integer(int(value))
++    allocation = registration["allocation"]["record"]
++    exact(allocation,("path","uid","monotonic_expires","limits","pids_max","authority_ref")); path_safe(allocation["path"]); integer(allocation["uid"],0,4294967295); finite_number(allocation["monotonic_expires"]); integer(allocation["pids_max"],1,256); validate_ref(allocation["authority_ref"])
++    exact(allocation["limits"],("cpu","ram_bytes")); integer(allocation["limits"]["cpu"],1,1); integer(allocation["limits"]["ram_bytes"],1,1073741824)
++    reserve = registration["control_reserve"]; exact(reserve,("memory_bytes","metadata_bytes","log_bytes"))
++    integer(reserve["memory_bytes"],1,134217728); integer(reserve["metadata_bytes"],884736,2097152); integer(reserve["log_bytes"],32768,262144)
++    admission = registration["admission"]["record"]
++    exact(admission,("monotonic_expires","measured_at_utc","exclusive_storage","tools","limits")); finite_number(admission["monotonic_expires"]); utc_seconds(admission["measured_at_utc"])
++    ensure(type(admission["exclusive_storage"]) is list and 1 <= len(admission["exclusive_storage"]) <= 16,"admitted storage list")
++    for path in admission["exclusive_storage"]: path_safe(path)
++    ensure(type(admission["tools"]) is list and len(admission["tools"]) == 3,"admitted public tools")
++    for ref in admission["tools"]: validate_ref(ref)
++    exact(admission["limits"],("per_step_wall_seconds","per_step_log_bytes","total_log_bytes","cpu","ram_bytes","node_tmp_bytes","python_tmp_bytes","doc06_tmp_bytes"))
++    for amount in admission["limits"].values(): integer(amount,1)
++    env = registration["base_environment"]
++    ensure(type(env) is dict and len(env) <= 256 and len(canonical(env)) <= 32768 and all(type(k) is str and type(v) is str and len(k) <= 256 and len(v.encode()) <= 4096 and not k.startswith("QCL_DOCS_") for k,v in env.items()),"base environment registered map")
++    return registration
++
++
+ def _pairs(pairs):
+     result = {}
+     for key, value in pairs:
+@@ -706,15 +788,19 @@
+                 pass
+ 
+     def close(self):
++        first = None
+         for fd in self.fds.values():
+-            os.close(fd)
++            try: os.close(fd)
++            except OSError as exc:
++                if first is None: first = exc
++        self.fds.clear()
++        if first is not None: raise first
+ 
+ 
+ 
+ def _capture_worker(channel, gate, command, deadline, cap, paths, storage):
+     # This fork is a fresh private owner, never the long-lived parent/setup.
+-    ensure(ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) == 0, "subreaper unavailable")
+-    owner = _CommandOwner(deadline)
++    owner = None
+     process = None
+     streams = {}
+     handles = {}
+@@ -725,10 +811,12 @@
+     stopping = [False]
+     signal.signal(signal.SIGTERM, lambda *_: stopping.__setitem__(0, True))
+     try:
++        ensure(ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) == 0, "subreaper unavailable")
++        owner = _CommandOwner(deadline)
+         ensure(os.read(gate, 1) == b"G" and time.monotonic() < deadline, "closed dispatch gate")
+         for name in ("stdout", "stderr"):
+-            handles[name] = open(paths[name], "xb", buffering=0)
+-            os.chmod(paths[name], 0o600)
++            handles[name] = open(paths[name]+".partial", "xb", buffering=0)
++            os.chmod(paths[name]+".partial", 0o600)
+             streams[name] = bytearray()
+         process = subprocess.Popen(command["argv"], cwd=command["cwd"], env=command["env"], close_fds=True,
+                                    stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+@@ -790,12 +878,17 @@
+             result["capture_complete"] = False
+             result["stop_reason"] = result["stop_reason"] or "command_cleanup_unknown"
+         for handle in handles.values():
+-            handle.close()
+-        selector.close()
+-        owner.close()
++            try: handle.close()
++            except BaseException:
++                result["capture_complete"] = False; result["stop_reason"] = result["stop_reason"] or "raw_close_failed"
++        try: selector.close()
++        except BaseException: result["capture_complete"] = False
++        if owner is not None:
++            try: owner.close()
++            except BaseException: result["capture_complete"] = False
+         for name in streams:
+             try:
+-                with open(paths[name],"rb",buffering=0) as retained:
++                with open(paths[name]+".partial","rb",buffering=0) as retained:
+                     data = retained.read(cap+1)
+                 ensure(len(data) <= cap,"raw retained cap")
+                 result[name] = "" if command.get("binary_stdout") and name == "stdout" else data.decode("utf-8", "strict")
+@@ -808,32 +901,35 @@
+         ensure(channel.read(1) == b"A", "parent terminal ACK missing")
+ 
+ 
+-def execute_bounded(command, *, guard, storage, deadline, cap, paths, cancel_fd, debit):
++def execute_bounded(command, *, guard, storage, deadline, cap, paths, cancel_fd, debit,launch_state=None):
+     ensure(time.monotonic() + 2 < deadline and cap > 0, "capture allocation/cleanup reserve")
+     guard.inspect_binding()
+     storage.observe("prelaunch")
+     # Caller holds one outstanding raw/metadata reservation before this fork.
+-    parent, child = socket.socketpair()
+-    read_gate, write_gate = os.pipe2(os.O_CLOEXEC)
+-    pid = os.fork()
+-    if pid == 0:
+-        parent.close()
+-        os.close(write_gate)
+-        try:
+-            with child.makefile("rwb", buffering=0) as channel:
+-                _capture_worker(channel, read_gate, command, deadline, cap, paths, storage)
+-        except BaseException:
+-            os._exit(125)
+-        os._exit(0)
+-    child.close()
+-    os.close(read_gate)
++    parent = None; child = None; read_gate = None; write_gate = None; pid = None
+     pidfd = None; birth = None; lease = None; result = None; reaped = False
++    if launch_state is None: launch_state = {}
++    launch_state.update(forked=False,gate_opened=False,reaped=False)
+     try:
++        parent,child = socket.socketpair()
++        read_gate,write_gate = os.pipe2(os.O_CLOEXEC)
++        pid = os.fork()
++        if pid == 0:
++            try:
++                parent.close(); os.close(write_gate)
++                with child.makefile("rwb",buffering=0) as channel:
++                    _capture_worker(channel,read_gate,command,deadline,cap,paths,storage)
++            except BaseException: os._exit(125)
++            os._exit(0)
++        launch_state["forked"] = True
++        child.close(); child = None
++        os.close(read_gate); read_gate = None
+         birth = proc_birth(pid)
+         pidfd = os.pidfd_open(pid)
+         lease = guard.attach_private_supervisor(pidfd, (pid, birth), command.get("limits"))
+         ensure(time.monotonic() < deadline and not cancelled(cancel_fd), "cancel before gate")
+         os.write(write_gate, b"G")
++        launch_state["gate_opened"] = True
+         os.close(write_gate)
+         write_gate = -1
+         parent.setblocking(False)
+@@ -860,7 +956,7 @@
+         while time.monotonic() < deadline:
+             done, status = os.waitpid(pid, os.WNOHANG)
+             if done:
+-                reaped = True
++                reaped = True; launch_state["reaped"] = True
+                 ensure(os.waitstatus_to_exitcode(status) == 0, "private supervisor failed")
+                 break
+             ensure(not cancelled(cancel_fd), "parent cancelled")
+@@ -868,22 +964,27 @@
+         else:
+             raise Refusal("supervisor terminal deadline")
+         observation = guard.observe(lease, "terminal")
++        ensure(result["capture_complete"] is True and result["drains_complete"] is True and result["stop_reason"] is None,"supervisor did not prove raw producer/drain closure")
++        for name in ("stdout","stderr"):
++            publish_closed_raw(paths[name]+".partial",paths[name],cap,proofs=storage.durable_publications)
+         evidence = {"format":"root-docs-command-receipt.v1","command_sha256":digest(canonical(command)),
+                     "capture":{k:v for k,v in result.items() if k not in ("stdout","stderr")},
+                     "streams":raw_streams(paths,cap),"guard_sha256":digest(canonical(observation)),"supervisor":{"pid":pid,"birth":birth,"reaped":reaped}}
+-        reference = retain_record(paths["receipt"],evidence,1408)
++        reference = retain_record(paths["receipt"],evidence,1408,proofs=storage.durable_publications)
+         result["supervision"] = {"process_tree_owned": True, "limits_enforced": True,"evidence_ref": reference}
+         storage.observe("terminal")
+         return result
+     finally:
+-        if write_gate >= 0:
+-            os.close(write_gate)
++        for fd in (write_gate,read_gate):
++            if fd is not None and fd >= 0:
++                try: os.close(fd)
++                except OSError: pass
+         if pidfd is not None and not reaped:
+             try:
+                 signal.pidfd_send_signal(pidfd,signal.SIGTERM)
+                 while time.monotonic() < deadline:
+                     done, _ = os.waitpid(pid,os.WNOHANG)
+-                    if done: reaped = True; break
++                    if done: reaped = True; launch_state["reaped"] = True; break
+                     time.sleep(0.01)
+             except ProcessLookupError:
+                 pass
+@@ -892,25 +993,85 @@
+         if result is None or not reaped or "supervision" not in result:
+             try:
+                 retain_record(paths["fallback"],{"format":"root-docs-command-failure.v1","pid":pid,"birth":birth,
+-                    "cleanup":"unknown","streams":partial_streams(paths,cap),"observed_bytes":None,"discarded_bytes":None},1408)
++                    "cleanup":"unknown","streams":partial_streams(paths,cap),"observed_bytes":None,"discarded_bytes":None},1408,proofs=storage.durable_publications)
+             except (OSError,Refusal):
+                 pass
+-        if pidfd is not None: os.close(pidfd)
+-        parent.close()
++        if pidfd is not None:
++            try: os.close(pidfd)
++            except OSError: pass
++        for channel in (parent,child):
++            if channel is not None:
++                try: channel.close()
++                except OSError: pass
+ 
+ 
+-def retain_record(path, record, maximum):
+-    data = canonical(record)
+-    ensure(len(data) <= maximum,"retained metadata cap")
+-    fd = os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600)
++def publish_bytes(path,data,maximum,*,proofs=None,ops=os):
++    path = str(path); path_safe(path); integer(maximum)
++    ensure(type(data) is bytes and len(data) <= maximum,"publication byte cap")
++    pending = path+".pending-"+secrets.token_hex(16)
++    fd = None; directory = None
+     try:
++        fd = ops.open(pending,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600)
+         offset = 0
+         while offset < len(data):
+-            n = os.write(fd,data[offset:]); ensure(n > 0,"retained short write"); offset += n
++            n = ops.write(fd,data[offset:]); integer(n,1,len(data)-offset); offset += n
++        ensure(ops.fstat(fd).st_size == len(data),"publication actual byte length")
++        ops.fsync(fd)
++        directory = ops.open(str(Path(path).parent),os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC)
++        # Hard-link is atomic and refuses an existing destination; no overwrite
++        # or own-SHA field is involved. A failure retains pending/original data.
++        ops.link(pending,path,follow_symlinks=False)
++        ops.fsync(directory)
++        ops.unlink(pending)
++        ops.fsync(directory)
++        ops.close(fd); fd = None
++        ops.close(directory); directory = None
++    finally:
++        if fd is not None:
++            try: ops.close(fd)
++            except OSError: pass
++        if directory is not None:
++            try: ops.close(directory)
++            except OSError: pass
++    ref = {"path":path,"sha256":digest(data)}
++    if proofs is not None: proofs.add((path,ref["sha256"]))
++    return ref
++
++
++def retain_record(path,record,maximum,*,proofs=None):
++    return publish_bytes(str(path),canonical(record),maximum,proofs=proofs)
++
++
++def publish_closed_raw(pending,path,maximum,*,proofs=None):
++    """Only the owner, after producer EOF/reap, may finalize these raw bytes."""
++    path = str(path); pending = str(pending); path_safe(path); path_safe(pending)
++    ensure(Path(path).parent == Path(pending).parent,"same-directory raw publication")
++    fd = None; directory = None
++    try:
++        fd = os.open(pending,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
++        info = os.fstat(fd); ensure(stat.S_ISREG(info.st_mode) and info.st_size <= maximum,"closed raw identity/cap")
++        hashed = hashlib.sha256(); size = 0
++        while True:
++            part = os.read(fd,65536)
++            if not part: break
++            size += len(part); ensure(size <= maximum,"closed raw read bound"); hashed.update(part)
++        after = os.fstat(fd)
++        ensure(size == info.st_size and (info.st_dev,info.st_ino,info.st_size,info.st_mtime_ns) == (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns),"closed raw drift")
+         os.fsync(fd)
++        directory = os.open(str(Path(path).parent),os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC)
++        os.link(pending,path,follow_symlinks=False); os.fsync(directory)
++        os.unlink(pending); os.fsync(directory)
++        os.close(fd); fd = None; os.close(directory); directory = None
+     finally:
+-        os.close(fd)
+-    return {"path":str(path),"sha256":digest(data)}
++        if fd is not None:
++            try: os.close(fd)
++            except OSError: pass
++        if directory is not None:
++            try: os.close(directory)
++            except OSError: pass
++    ref = {"path":path,"sha256":hashed.hexdigest()}
++    if proofs is not None: proofs.add((path,ref["sha256"]))
++    return {"ref":ref,"bytes":size,"sha256":ref["sha256"]}
+ 
+ 
+ def raw_streams(paths,cap):
+@@ -935,7 +1096,9 @@
+ def partial_streams(paths,cap):
+     result = {}
+     for name in ("stdout","stderr"):
+-        try: result[name] = raw_streams({"stdout":paths[name],"stderr":paths[name]},cap)["stdout"]
++        try:
++            path = paths[name] if os.path.exists(paths[name]) else paths[name]+".partial"
++            result[name] = raw_streams({"stdout":path,"stderr":path},cap)["stdout"]
+         except (OSError,Refusal): result[name] = None
+     return result
+ 
+@@ -953,6 +1116,18 @@
+         selector.close()
+ 
+ 
++def close_inherited_fds(keep=(0,1,2)):
++    inherited = []
++    with os.scandir("/proc/self/fd") as entries:
++        for item in entries:
++            ensure(len(inherited) < 65536,"inherited FD census bound")
++            if item.name.isdecimal(): inherited.append(int(item.name))
++    for fd in inherited:
++        if fd not in keep:
++            try: os.close(fd)
++            except OSError: pass  # The census FD itself has already closed.
++
++
+ class ActiveDocsAttempt:
+     """Only constructed on the directly inherited, continuously live parent FD.
+ 
+@@ -971,6 +1146,7 @@
+         self.source_head = startup["expected_source"]["head"]
+         self.authorization_ref = startup["authorization_ref"]
+         self.registration = startup["parent_registration"]
++        validate_registration(self.registration)
+         # These are independently registered by the trusted parent, not supplied
+         # by descriptor true fields. Unknown attachment shape fails closed.
+         required = ("uid","runtime_uid","binary_cap","setup_inventory_id","observation_registration",
+@@ -1015,10 +1191,8 @@
+         self.raw_root = roots["raw"]; self.metadata_root = roots["metadata"]
+         self.sequence = 0; self.git_calls = 0; self.git_raw = 0; self.git_seconds = 0
+         self.command_ledger = []; self.snapshot = None
+-        # P1-C publication owner is a separate boundary. File fsync/readback
+-        # alone does not certify durable directory publication. Only that
+-        # future owning publisher may populate this in-memory proof set.
+         self.durable_publications = set()
++        self.storage.durable_publications = self.durable_publications
+         self.tickets = {}; self.captures = []; self.command_index = 0
+         self.leaders = {}; self.phases = []; self.closed = False; self.wire_bytes = 0
+         self.components = {startup["expected_source"]["workspace"]+"/"+item["path"]:item["section"] for item in startup["expected_source"]["components"]}
+@@ -1042,33 +1216,33 @@
+ 
+     def retain(self,kind,record,maximum=131072):
+         data = canonical(record); self.storage.debit("metadata",len(data))
+-        return retain_record(Path(self.metadata_root)/(kind+"-"+secrets.token_hex(16)+".json"),record,maximum)
++        return retain_record(Path(self.metadata_root)/(kind+"-"+secrets.token_hex(16)+".json"),record,maximum,proofs=self.durable_publications)
+ 
+     def command(self,command,cap,wall):
+         self.poll_parent()
+         ident = secrets.token_hex(16)
+         paths = {name:str(Path(self.raw_root)/(ident+"."+name)) for name in ("stdout","stderr")}
+         paths.update(receipt=str(Path(self.metadata_root)/(ident+".json")),fallback=str(Path(self.metadata_root)/(ident+".failure.json")))
+-        raw_reserve = self.storage.reserve("raw",cap)
+-        metadata_reserve = self.storage.reserve("metadata",8192)
+-        # Pre-child authoritative index survives missing result/driver aggregate.
+-        pending_record = {"format":"root-docs-command-pending.v1","binding_digest":digest(canonical(self.binding)),"command_sha256":digest(canonical(command)),"id":ident}
+-        self.storage.debit("metadata",len(canonical(pending_record)))
+-        pending_ref = retain_record(Path(self.metadata_root)/(ident+".pending.json"),pending_record,384)
+-        entry = {"id":ident,"binding_digest":digest(canonical(self.binding)),"pending_ref":pending_ref,"terminal_ref":None,"streams":None,"outcome":"unknown"}
++        raw_reserve = None; metadata_reserve = None; launch_state = {"gate_opened":False}
++        entry = {"id":ident,"binding_digest":digest(canonical(self.binding)),"pending_ref":None,"terminal_ref":None,"streams":None,"outcome":"unknown"}
+         self.command_ledger.append(entry)
+         try:
++            raw_reserve = self.storage.reserve("raw",cap)
++            metadata_reserve = self.storage.reserve("metadata",8192)
++            pending_record = {"format":"root-docs-command-pending.v1","binding_digest":entry["binding_digest"],"command_sha256":digest(canonical(command)),"id":ident}
++            self.storage.debit("metadata",len(canonical(pending_record)))
++            entry["pending_ref"] = retain_record(Path(self.metadata_root)/(ident+".pending.json"),pending_record,384,proofs=self.durable_publications)
+             result = execute_bounded(command,guard=self.guard,storage=self.storage,
+                 deadline=min(self.deadline-2,time.monotonic()+wall+2),cap=cap,paths=paths,
+-                cancel_fd=self.channel.fileno(),debit=lambda _:None)
++                cancel_fd=self.channel.fileno(),debit=lambda _:None,launch_state=launch_state)
+             streams = raw_streams(paths,cap)
+             entry.update(terminal_ref=result["supervision"]["evidence_ref"],streams=streams,outcome="complete" if result["capture_complete"] else "partial")
+         finally:
+             if entry["streams"] is None: entry["streams"] = partial_streams(paths,cap)
+             actual_raw = sum(item["bytes"] for item in entry["streams"].values() if item is not None)
+-            self.storage.commit(raw_reserve,actual_raw)
++            if raw_reserve is not None: self.storage.commit(raw_reserve,actual_raw)
+             # Unused capacity is released only after actual nofollow reads.
+-            if all(item is not None for item in entry["streams"].values()): self.storage.release(raw_reserve)
++            if raw_reserve is not None and (not launch_state["gate_opened"] or all(item is not None for item in entry["streams"].values())): self.storage.release(raw_reserve)
+             metadata_actual = 0
+             for name in ("receipt","fallback"):
+                 try:
+@@ -1080,7 +1254,8 @@
+                         finally: os.close(fd)
+                         entry["terminal_ref"] = {"path":paths[name],"sha256":digest(data)}
+                 except FileNotFoundError: pass
+-            self.storage.commit(metadata_reserve,metadata_actual); self.storage.release(metadata_reserve)
++            if metadata_reserve is not None:
++                self.storage.commit(metadata_reserve,metadata_actual); self.storage.release(metadata_reserve)
+         ticket = secrets.token_hex(16)
+         self.tickets[ticket] = {"streams":streams,"offsets":{"stdout":0,"stderr":0},"capture":result,"binding_digest":digest(canonical(self.binding)),"closed":set()}
+         return ticket,result,streams
+@@ -1149,6 +1324,7 @@
+     for key in ("authorization_ref","input_ref"): validate_ref(request[key])
+     source = request["expected_source"]
+     exact(source,("head","workspace","graph_digest","native_digest","components","native","git_families"))
++    ensure(type(source["native"]) is list and type(source["components"]) is list and type(source["git_families"]) is list,"source attachment containers")
+     path_safe(source["workspace"])
+     ensure(re.fullmatch(r"[a-f0-9]{40}",source["head"]) and len(source["native"]) == 16 and len(source["components"]) == 8,"source closure cardinality")
+     for key in ("graph_digest","native_digest"): ensure(re.fullmatch(r"[a-f0-9]{64}",source[key]),"source digest")
+@@ -1192,7 +1368,10 @@
+     for root in storage["roots"].values(): path_safe(root)
+     ensure(all(len(root.encode()) <= 128 for root in storage["roots"].values()),"finite retained root spelling")
+     integer(storage["total"],1)
+-    ensure(0 < len(request["allowed_phases"]) <= 2,"finite phase list")
++    ensure(type(request["allowed_phases"]) is list and 0 < len(request["allowed_phases"]) <= 2,"finite phase list")
++    ordered = [phase.get("phase") if type(phase) is dict else None for phase in request["allowed_phases"]]
++    target = {"prerequisites-only":"preflight","docs-units-only":"docs","full-root-check":"check"}[request["scope"]]
++    ensure(ordered == [target] or target != "preflight" and ordered == ["preflight",target],"ordered phase/scope mapping")
+     attempts = set()
+     for phase in request["allowed_phases"]:
+         exact(phase,("phase","attempt","input_sha256","source_head","not_after_utc"))
+@@ -1291,7 +1470,7 @@
+     for item in active.command_ledger:
+         terminal = item["terminal_ref"]
+         suffix = None if terminal is None else ("failure.json" if terminal["path"].endswith(".failure.json") else "json")
+-        entries.append([item["id"],item["pending_ref"]["sha256"],None if terminal is None else terminal["sha256"],suffix,item["outcome"]])
++        entries.append([item["id"],None if item["pending_ref"] is None else item["pending_ref"]["sha256"],None if terminal is None else terminal["sha256"],suffix,item["outcome"]])
+     return active.retain("evidence-index",{"format":"root-docs-command-index.v1","metadata_root":active.metadata_root,"commands":entries})
+ 
+ 
+@@ -1301,7 +1480,14 @@
+     if terminal is None or index_ref is None: return "partial"
+     try:
+         validate_terminal(terminal,terminal["identity"]["pid"],terminal["identity"]["birth"],terminal["identity"]["uid"])
++        closure = decode(read_bound_regular(terminal["closure_ref"],16384,active.uid)["bytes"],16384)
++        if closure["raw_complete"] is not True: return "partial"
+         all_refs = [index_ref,terminal["closure_ref"]]
++        for name,stream in closure["streams"].items():
++            limit = 24*1048576 if name == "stdout" else 262144
++            raw = read_bound_regular(stream["ref"],limit,active.uid)
++            ensure(len(raw["bytes"]) == stream["bytes"],"driver actual raw length")
++            all_refs.append(stream["ref"])
+         for ref in required_refs:
+             if ref is None: return "partial"
+             validate_ref(ref); read_bound_regular(ref,131072,active.uid)
+@@ -1318,6 +1504,7 @@
+             ensure(pending["format"] == "root-docs-command-pending.v1" and pending["id"] == entry["id"] and pending["binding_digest"] == entry["binding_digest"],"retained pending command binding")
+             record = decode(read_bound_regular(entry["terminal_ref"],1408,active.uid)["bytes"],1408)
+             exact(record,("format","command_sha256","capture","streams","guard_sha256","supervisor"))
++            validate_capture_meta(record["capture"]); validate_streams(record["streams"])
+             ensure(record["format"] == "root-docs-command-receipt.v1" and record["command_sha256"] == pending["command_sha256"] and record["streams"] == entry["streams"],"retained command receipt/index")
+             exact(record["supervisor"],("pid","birth","reaped"))
+             integer(record["supervisor"]["pid"],1,2147483647); integer(record["supervisor"]["birth"])
+@@ -1373,18 +1560,35 @@
+ 
+ class DriverPipe:
+     def __init__(self,active):
++        self.active = active; self.owner = None; self.pid = None; self.pidfd = None
++        self.birth = None; self.reaped = False; self.status = None; self.failure = None; self.terminal = None; self.closed = False
++        self.stderr_reserve = None; self.stdout_reserve = None; self.stderr_eof = False; self.stdout_eof = False
++        for name in ("stderr_fd","stdout_fd","err_read","err_write","out_read","out_write","in_read","in_write","gate_read","gate_write"): setattr(self,name,None)
++        try: self._initialize(active)
++        except BaseException as exc:
++            self.failure = exc
++            self.close()
++            raise
++
++    def _initialize(self,active):
+         self.active = active; self.pending = bytearray(); self.owner = _CommandOwner(active.deadline)
+         self.pid = None; self.pidfd = None; self.reaped = False; self.status = None
+         self.stderr_eof = False; self.stderr_bytes = 0
+         self.stderr_path = str(Path(active.raw_root)/("driver-"+active.request_id+".stderr"))
+         self.stderr_reserve = active.storage.reserve("raw",262144)
+-        self.stderr_fd = os.open(self.stderr_path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
++        self.stderr_fd = os.open(self.stderr_path+".partial",os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
++        self.stdout_path = str(Path(active.raw_root)/("driver-"+active.request_id+".stdout"))
++        self.stdout_domain = "protocol" if "protocol" in active.storage.roots else "raw"
++        self.stdout_reserve = active.storage.reserve(self.stdout_domain,24*1048576)
++        self.stdout_fd = os.open(self.stdout_path+".partial",os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
++        self.stdout_bytes = 0
+         self.err_read,self.err_write = os.pipe2(os.O_CLOEXEC)
+         os.set_blocking(self.err_read,False)
+         self.out_read,self.out_write = os.pipe2(os.O_CLOEXEC)
+         self.in_read,self.in_write = os.pipe2(os.O_CLOEXEC)
+         os.set_blocking(self.out_read,False); os.set_blocking(self.in_write,False)
+         gate_read,gate_write = os.pipe2(os.O_CLOEXEC)
++        self.gate_read,self.gate_write = gate_read,gate_write
+         try:
+             self.pid = os.fork()
+             if self.pid == 0:
+@@ -1394,9 +1598,7 @@
+                     os.dup2(self.in_read,0); os.dup2(self.out_write,1)
+                     os.dup2(self.err_write,2)
+                     # Explicit close of inherited parent/broker/other raw FDs.
+-                    for fd in range(3,4096):
+-                        try: os.close(fd)
+-                        except OSError: pass
++                    close_inherited_fds()
+                     deno = active.expected_tools["deno"]["path"]
+                     os.execve(deno,[deno,"run","--no-config","--no-lock","--cached-only","--no-npm","--no-remote",active.workspace+"/ops/docs_tests_cli.ts"],{})
+                 except BaseException: os._exit(125)
+@@ -1404,9 +1606,12 @@
+             active.guard.attach_private_supervisor(self.pidfd,(self.pid,self.birth))
+             active.poll_parent(); os.write(gate_write,b"G")
+         finally:
+-            os.close(gate_read); os.close(gate_write)
+-            os.close(self.in_read); os.close(self.out_write)
+-            os.close(self.err_write)
++            for name in ("gate_read","gate_write","in_read","out_write","err_write"):
++                fd = getattr(self,name,None)
++                if fd is not None:
++                    try: os.close(fd)
++                    except OSError: pass
++                    setattr(self,name,None)
+         os.set_blocking(self.out_read,False)
+         os.set_blocking(self.in_write,False)
+         os.set_blocking(self.err_read,False)
+@@ -1427,6 +1632,14 @@
+             self.stderr_bytes += len(part)
+             ensure(self.stderr_bytes <= 262144,"driver stderr cap")
+ 
++    def retain_stdout(self,data):
++        room = max(0,24*1048576-self.stdout_bytes)
++        offset = 0; retained = data[:room]
++        while offset < len(retained):
++            n = os.write(self.stdout_fd,retained[offset:]); ensure(n > 0,"driver stdout short write"); offset += n
++        self.stdout_bytes += len(data)
++        ensure(self.stdout_bytes <= 24*1048576,"driver protocol raw cap")
++
+     def send(self,frame):
+         limits = {"start":65536,"metadata":131072,"git-capture":4096,"prepared":16384,"capture":16384,"stream-chunk":49152,"finish-validated":16384,"refused":16384}
+         ensure(frame.get("kind") in limits,"closed driver response kind")
+@@ -1458,6 +1671,7 @@
+             ensure(len(self.pending) < maximum,"driver frame overrun")
+             try:
+                 data = os.read(self.out_read,min(16384,maximum-len(self.pending)))
++                self.retain_stdout(data)
+                 ensure(data,"driver EOF"); self.active.wire_bytes += len(data)
+                 ensure(self.active.wire_bytes <= 24*1048576,"partial frame wire debit")
+                 self.pending.extend(data)
+@@ -1465,57 +1679,99 @@
+         raise Refusal("driver inactivity/deadline")
+ 
+     def close(self):
+-        if self.pid is None:
+-            for name in ("in_write","out_read","err_read","stderr_fd"):
+-                fd = getattr(self,name,None)
+-                if fd is not None:
+-                    try: os.close(fd)
+-                    except OSError: pass
+-            self.owner.close()
+-            return None
+-        try: os.close(self.in_write)
+-        except OSError: pass
+-        eof = False
+-        try:
+-            while time.monotonic() < self.active.deadline-1:
+-                if not self.reaped:
+-                    done,status = os.waitpid(self.pid,os.WNOHANG)
+-                    if done: self.reaped = True; self.status = os.waitstatus_to_exitcode(status)
+-                self.drain_stderr()
++        if self.closed: return self.terminal
++        def failed(exc):
++            if self.failure is None: self.failure = exc
++        def close_fd(name):
++            fd = getattr(self,name,None)
++            if fd is not None:
++                try: os.close(fd)
++                except OSError as exc: failed(exc)
++                setattr(self,name,None)
++        def drain():
++            if self.err_read is not None and not self.stderr_eof:
++                try: self.drain_stderr()
++                except BaseException as exc: failed(exc)
++            if self.out_read is not None and not self.stdout_eof:
+                 try:
+                     data = os.read(self.out_read,16384)
+-                    if not data: eof = True
+-                    elif data or self.pending: raise Refusal("extra driver output after finish")
++                    if not data: self.stdout_eof = True
++                    else:
++                        try: self.retain_stdout(data)
++                        except BaseException as exc: failed(exc)
++                        failed(Refusal("extra driver output after protocol closure"))
+                 except BlockingIOError: pass
+-                if self.reaped and eof and self.stderr_eof: break
+-                time.sleep(0.01)
+-            self.owner.signal(signal.SIGTERM)
+-            while time.monotonic() < self.active.deadline-0.5 and self.owner.observe():
+-                self.drain_stderr()
+-                try: os.waitpid(-1,os.WNOHANG)
+-                except ChildProcessError: pass
+-                time.sleep(0.01)
+-            self.owner.signal(signal.SIGKILL)
+-            while time.monotonic() < self.active.deadline and self.owner.observe():
+-                if not self.reaped:
++                except BaseException as exc: failed(exc)
++        def reap():
++            if self.pid is not None and not self.reaped:
++                try:
+                     done,status = os.waitpid(self.pid,os.WNOHANG)
+                     if done: self.reaped = True; self.status = os.waitstatus_to_exitcode(status)
+-                self.drain_stderr()
+-                try: os.waitpid(-1,os.WNOHANG)
+-                except ChildProcessError: pass
+-                time.sleep(0.01)
+-            ensure(self.reaped and eof and self.stderr_eof and not self.owner.observe(),"driver descendant/EOF/reap unknown")
+-            ref = self.active.retain("driver-closure",{"identity":{"pid":self.pid,"birth":self.birth,"uid":self.active.uid},"stdout_eof":eof,"stderr_eof":self.stderr_eof,"reaped":self.reaped,"exit_code":self.status if self.status >= 0 else None,"signal":None if self.status >= 0 else signal.Signals(-self.status).name},16384)
+-            return {"identity":{"pid":self.pid,"birth":self.birth,"uid":self.active.uid},"exit_code":self.status if self.status >= 0 else None,
+-                "signal":None if self.status >= 0 else signal.Signals(-self.status).name,"stdout_eof":eof,"stderr_eof":self.stderr_eof,"reaped":self.reaped,"closure_ref":ref}
++                except BaseException as exc: failed(exc)
++        def remaining():
++            if self.owner is None: return {}
++            try: return self.owner.observe()
++            except BaseException as exc: failed(exc); return {"unknown":True}
++        try:
++            close_fd("in_write")
++            if getattr(self,"pending",None): failed(Refusal("buffered extra frame after finish"))
++            # On failed construction every gate is closed before waiting.
++            for name in ("gate_read","gate_write","in_read","out_write","err_write"): close_fd(name)
++            if self.pid is not None:
++                for sig,end in ((None,self.active.deadline-1),(signal.SIGTERM,self.active.deadline-0.5),(signal.SIGKILL,self.active.deadline)):
++                    if sig is not None and self.owner is not None:
++                        try: self.owner.signal(sig)
++                        except BaseException as exc: failed(exc)
++                    while time.monotonic() < end:
++                        reap(); drain()
++                        rows = remaining()
++                        if self.reaped and self.stdout_eof and self.stderr_eof and not rows: break
++                        # Reap adopted owned children only after UID/birth checks.
++                        if self.owner is not None:
++                            for pid,row in list(rows.items()):
++                                if type(pid) is int and pid != self.pid and row[2] == b"Z" and row[1] == os.getpid():
++                                    try: os.waitpid(pid,os.WNOHANG)
++                                    except ChildProcessError: pass
++                        time.sleep(0.01)
++                    if self.reaped and self.stdout_eof and self.stderr_eof and not remaining(): break
++            closed = self.pid is not None and self.reaped and self.stdout_eof and self.stderr_eof and not remaining()
++            if closed:
++                for name in ("stdout_fd","stderr_fd"):
++                    fd = getattr(self,name,None)
++                    if fd is not None:
++                        try: os.fsync(fd)
++                        except BaseException as exc: failed(exc)
++                        close_fd(name)
++                streams = {
++                    "stdout":publish_closed_raw(self.stdout_path+".partial",self.stdout_path,24*1048576,proofs=self.active.durable_publications),
++                    "stderr":publish_closed_raw(self.stderr_path+".partial",self.stderr_path,262144,proofs=self.active.durable_publications)}
++                body = {"identity":{"pid":self.pid,"birth":self.birth,"uid":self.active.uid},"stdout_eof":True,"stderr_eof":True,"reaped":True,"exit_code":self.status if self.status >= 0 else None,"signal":None if self.status >= 0 else signal.Signals(-self.status).name,"streams":streams,"raw_complete":self.failure is None}
++                ref = self.active.retain("driver-closure",body,16384)
++                self.terminal = {k:v for k,v in body.items() if k not in ("streams","raw_complete")}; self.terminal["closure_ref"] = ref
++            else: failed(Refusal("driver ownership/drain/reap unknown"))
++        except BaseException as exc: failed(exc)
+         finally:
+-            os.fsync(self.stderr_fd); os.close(self.stderr_fd)
+-            actual = os.stat(self.stderr_path,follow_symlinks=False).st_size
+-            self.active.storage.commit(self.stderr_reserve,actual); self.active.storage.release(self.stderr_reserve)
+-            os.close(self.err_read)
+-            os.close(self.out_read)
+-            if self.pidfd is not None: os.close(self.pidfd)
+-            self.owner.close()
++            for name in ("stderr_fd","stdout_fd","err_read","err_write","out_read","out_write","in_read","in_write","gate_read","gate_write","pidfd"): close_fd(name)
++            for stream,token in (("stderr",self.stderr_reserve),("stdout",self.stdout_reserve)):
++                if token is not None:
++                    try:
++                        path = getattr(self,stream+"_path",None)
++                        actual = 0
++                        if path is not None:
++                            candidate = path if os.path.exists(path) else path+".partial"
++                            try: actual = os.stat(candidate,follow_symlinks=False).st_size
++                            except FileNotFoundError: pass
++                        self.active.storage.commit(token,actual)
++                        if self.pid is None or self.reaped: self.active.storage.release(token)
++                    except BaseException as exc: failed(exc)
++            if self.owner is not None:
++                try: self.owner.close()
++                except BaseException as exc: failed(exc)
++            if self.failure is not None:
++                try: self.active.retain("driver-failure",{"format":"root-docs-driver-failure.v1","identity":None if self.pid is None or self.birth is None else {"pid":self.pid,"birth":self.birth,"uid":self.active.uid},"terminal_ref":None if self.terminal is None else self.terminal["closure_ref"],"cleanup":"unknown" if self.terminal is None else "closed","streams":partial_streams({"stdout":getattr(self,"stdout_path","/missing/stdout"),"stderr":getattr(self,"stderr_path","/missing/stderr")},24*1048576)},16384)
++                except BaseException: pass
++            self.closed = True
++        return self.terminal
+ 
+ 
+ def native_metadata(inputs,active):
+@@ -1698,6 +1954,7 @@
+         if driver is not None:
+             try: terminal = driver.close()
+             except BaseException: result = "failed"
++            if getattr(driver,"failure",None) is not None: result = "failed"
+         if terminal is None or terminal["exit_code"] != 0: result = "failed"
+         driver_closed = False
+         if terminal is not None:
+@@ -1725,6 +1982,8 @@
+         self.expected_phases = {p["phase"]:{"binding":decode_capsule(p["capsule"])["binding"],"binding_digest":p["binding_digest"]} for p in ack["phases"]}
+         self.guard = lease.guard
+         self.storage = lease.storage_ledger
++        self.durable_publications = getattr(self.storage,"durable_publications",set())
++        self.storage.durable_publications = self.durable_publications
+         self.registration = lease.export_registered_observations()
+         self.producer_birth = ack["birth"]
+         self.startup = startup
+@@ -1736,7 +1995,7 @@
+             exact(frame,("kind","setup_id","phase","attempt","binding_digest","phase_ref"))
+             expected = self.expected_phases[frame["phase"]]
+             ensure(frame["phase"] not in self.phase_outcomes and frame["binding_digest"] == expected["binding_digest"] and frame["attempt"] == expected["binding"]["attempt"],"once bound phase-ready")
+-            receipt = decode(read_bound_regular(frame["phase_ref"],32768,os.getuid())["bytes"],32768)
++            receipt = read_phase_receipt(frame["phase_ref"],expected["binding"],os.getuid())
+             ensure(receipt["binding"] == expected["binding"],"parent actual phase binding")
+             enum(receipt["result"],("passed","ready_for_unit_attempt","failed","blocked"))
+             enum(receipt["source_observation"],("measured","not_measured")); enum(receipt["retention_status"],("complete","partial","unknown"))
+@@ -1758,8 +2017,15 @@
+             for item in frame["phase_receipts"]:
+                 exact(item,("phase","attempt","binding_digest","ref")); expected = self.expected_phases[item["phase"]]
+                 ensure(item["phase"] not in seen and item["attempt"] == expected["binding"]["attempt"] and item["binding_digest"] == expected["binding_digest"],"closing phase identity")
+-                actual = decode(read_bound_regular(item["ref"],32768,os.getuid())["bytes"],32768)
+-                ensure(actual == self.phase_outcomes.get(item["phase"]) and actual["binding"] == expected["binding"],"closing actual phase ledger")
++                actual = read_phase_receipt(item["ref"],expected["binding"],os.getuid())
++                prior = self.phase_outcomes.get(item["phase"])
++                ensure((prior is None or actual == prior) and actual["binding"] == expected["binding"],"closing actual phase ledger")
++                if prior is None:
++                    # Final phase publication may succeed before client delivery
++                    # or phase-ready transport fails. Preserve that immutable
++                    # record; closing/failure still forbids a next phase.
++                    ensure(item["phase"] in self.leaders,"closing phase was parent launched")
++                    self.phase_outcomes[item["phase"]] = actual; self.phase_refs.append(item["ref"])
+                 seen.append(item["phase"])
+             for item in frame["unstarted_phases"]:
+                 exact(item,("phase","attempt","binding_digest","reason")); expected = self.expected_phases[item["phase"]]
+@@ -1843,7 +2109,7 @@
+             try:
+                 self.storage.adopt_existing("fallback-owner-handoff")
+                 self.storage.debit("metadata",len(canonical(receipt)))
+-                self.final_ref = retain_record(Path(self.request["storage"]["roots"]["metadata"])/("setup-fallback-"+self.setup_id+".json"),receipt,32768)
++                self.final_ref = retain_record(Path(self.request["storage"]["roots"]["metadata"])/("setup-fallback-"+self.setup_id+".json"),receipt,32768,proofs=self.durable_publications)
+             except BaseException: self.final_ref = None
+             return self.final_ref
+ 
+@@ -1864,6 +2130,7 @@
+         enum(evidence["retention_status"],("complete","partial","unknown"))
+         producer_terminal = evidence["producer_terminal"]
+         validate_terminal(producer_terminal,self.process.pid,self.producer_birth,os.getuid())
++        producer_closure = decode(read_bound_regular(producer_terminal["closure_ref"],16384,os.getuid())["bytes"],16384)
+         exact(evidence["streams"],("stdout","stderr"))
+         for stream in evidence["streams"].values():
+             exact(stream,("ref","bytes","sha256")); validate_ref(stream["ref"])
+@@ -1878,14 +2145,17 @@
+         try: empty = self.guard.close_and_verify_empty(self.request["resources"])
+         except (OSError,Refusal): pass
+         self.storage.debit("metadata",len(canonical(empty or {"closure":"unknown"})))
+-        terminal_ref = retain_record(Path(self.request["storage"]["roots"]["metadata"])/("setup-empty-"+self.setup_id+".json"),empty or {"closure":"unknown"},16384)
++        terminal_ref = retain_record(Path(self.request["storage"]["roots"]["metadata"])/("setup-empty-"+self.setup_id+".json"),empty or {"closure":"unknown"},16384,proofs=self.durable_publications)
+         receipt = dict(format="root-docs-setup-receipt.v1",version=1,producer=PRODUCER,setup_id=self.setup_id,authorization_ref=self.request["authorization_ref"],request_digest=self.ack["request_digest"],scope=self.request["scope"],source_head=self.ack["source_head"],native_source_digest=self.ack["native_source_digest"],runtime_inventory_digest=self.ack["runtime_inventory_digest"],phase_set_digest=frame["phase_set_digest"],phase_receipts=frame["phase_receipts"],unstarted_phases=frame["unstarted_phases"],close_reason=frame["close_reason"],producer_terminal=None,participants_closed=participants_closed,workload={"allocation_ref":self.lease.export_registered_observations()["allocation"]["ref"],"initial_empty_ref":self.lease.export_registered_observations()["initial_empty"]["ref"],"terminal_ref":terminal_ref,"populated":0 if empty else None,"events_ref":terminal_ref,"closure":"closed" if empty else "unknown"},result="failed",retention_status="partial",closed_at_utc=utc_now())
+         receipt["producer_terminal"] = producer_terminal
+         positive = frame["close_reason"] == "completed" and not frame["unstarted_phases"] and status == 0 and producer_terminal["exit_code"] == 0 and participants_closed and all(item["terminal"]["exit_code"] == 0 for item in evidence["participants"]) and empty is not None and evidence["retention_status"] == "complete" and all(outcome["result"] == ("ready_for_unit_attempt" if phase == "preflight" else "passed") for phase,outcome in self.phase_outcomes.items())
+-        receipt["result"] = "complete" if positive else "failed"
+-        receipt["retention_status"] = evidence["retention_status"] if empty else "partial"
++        producer_refs = [producer_terminal["closure_ref"],*[stream["ref"] for stream in evidence["streams"].values()]]
++        producer_durable = producer_closure["raw_complete"] is True and all((ref["path"],ref["sha256"]) in self.durable_publications for ref in producer_refs)
++        receipt["result"] = "complete" if positive and producer_durable else "failed"
++        receipt["retention_status"] = evidence["retention_status"] if empty and producer_durable else "unknown"
++        validate_setup_record(receipt,self.request,self.ack,os.getuid())
+         self.storage.debit("metadata",len(canonical(receipt)))
+-        self.final_ref = retain_record(Path(self.request["storage"]["roots"]["metadata"])/("setup-final-"+self.setup_id+".json"),receipt,32768)
++        self.final_ref = retain_record(Path(self.request["storage"]["roots"]["metadata"])/("setup-final-"+self.setup_id+".json"),receipt,32768,proofs=self.durable_publications)
+         return self.final_ref
+ 
+     def close(self):
+@@ -1901,13 +2171,76 @@
+     for key in ("stdout_eof","stderr_eof","reaped"): boolean(terminal[key])
+     ensure(terminal["identity"] == {"pid":pid,"birth":birth,"uid":uid} and terminal["stdout_eof"] is True and terminal["stderr_eof"] is True and terminal["reaped"] is True,"actual parent terminal identity/EOF/reap")
+     closure = decode(read_bound_regular(terminal["closure_ref"],16384,os.getuid())["bytes"],16384)
+-    exact(closure,("identity","stdout_eof","stderr_eof","reaped","exit_code","signal"))
++    exact(closure,("identity","stdout_eof","stderr_eof","reaped","exit_code","signal","streams","raw_complete"))
++    boolean(closure["raw_complete"])
++    validate_streams(closure["streams"],24*1048576+262144)
++    integer(closure["streams"]["stdout"]["bytes"],0,24*1048576); integer(closure["streams"]["stderr"]["bytes"],0,262144)
+     validate_identity(closure["identity"]); validate_exit(closure["exit_code"],closure["signal"])
+     for key in ("stdout_eof","stderr_eof","reaped"): boolean(closure[key])
+     ensure(closure["identity"] == terminal["identity"] and closure["stdout_eof"] is True and closure["stderr_eof"] is True and closure["reaped"] is True and closure["exit_code"] == terminal["exit_code"] and closure["signal"] == terminal["signal"],"retained terminal evidence")
+     return True
+ 
+ 
++def read_phase_receipt(ref,expected_binding,uid):
++    validate_ref(ref); validate_binding(expected_binding); integer(uid,0,4294967295)
++    record = decode(read_bound_regular(ref,32768,uid)["bytes"],32768)
++    exact(record,("format","binding","request_id","finish_validation_ref","aggregate_sha256","summary_ref","evidence_index_ref","driver","command_closure","phase_driver_closure","result","source_observation","retention_status","setup_state","whole_workload_empty","closed_at_utc"))
++    ensure(record["format"] == "root-docs-phase-receipt.v2" and record["binding"] == expected_binding,"phase exact format/binding")
++    validate_binding(record["binding"]); hash_scalar(record["request_id"],32); utc_seconds(record["closed_at_utc"])
++    for name in ("finish_validation_ref","summary_ref","evidence_index_ref"):
++        if record[name] is not None: validate_ref(record[name]); read_bound_regular(record[name],131072,uid)
++    if record["aggregate_sha256"] is not None: hash_scalar(record["aggregate_sha256"])
++    enum(record["command_closure"],("closed","unknown")); enum(record["phase_driver_closure"],("closed","unknown"))
++    enum(record["result"],("passed","ready_for_unit_attempt","failed","blocked")); enum(record["source_observation"],("measured","not_measured")); enum(record["retention_status"],("complete","partial","unknown"))
++    enum(record["setup_state"],("active","closing")); ensure(record["whole_workload_empty"] == "not_claimed","phase cannot claim setup empty")
++    if record["driver"] is not None:
++        identity = record["driver"]["identity"]; validate_identity(identity)
++        validate_terminal(record["driver"],identity["pid"],identity["birth"],identity["uid"])
++    if record["result"] in ("passed","ready_for_unit_attempt"):
++        expected = "ready_for_unit_attempt" if expected_binding["phase"] == "preflight" else "passed"
++        ensure(record["result"] == expected and record["source_observation"] == "measured" and record["retention_status"] == "complete" and record["command_closure"] == "closed" and record["phase_driver_closure"] == "closed" and record["driver"] is not None and record["driver"]["exit_code"] == 0,"positive phase evidence conjunction")
++        closure = decode(read_bound_regular(record["driver"]["closure_ref"],16384,uid)["bytes"],16384)
++        ensure(closure["raw_complete"] is True,"positive phase driver raw completion")
++        ensure(all(record[name] is not None for name in ("finish_validation_ref","summary_ref","evidence_index_ref","aggregate_sha256")),"positive phase missing refs")
++        validation = decode(read_bound_regular(record["finish_validation_ref"],16384,uid)["bytes"],16384)
++        exact(validation,("format","binding","request_id","finish_sequence","validation","aggregate_sha256","summary_ref","summary_sha256","evidence_index_ref","validated_at_utc","terminal","phase_closure","setup_closure"))
++        integer(validation["finish_sequence"],1,4096); utc_seconds(validation["validated_at_utc"])
++        ensure(validation["format"] == "root-docs-finish-validation.v1" and validation["binding"] == expected_binding and validation["request_id"] == record["request_id"] and validation["validation"] == "accepted" and validation["aggregate_sha256"] == record["aggregate_sha256"] and validation["summary_ref"] == record["summary_ref"] and validation["summary_sha256"] == record["summary_ref"]["sha256"] and validation["evidence_index_ref"] == record["evidence_index_ref"] and validation["terminal"] is False and validation["phase_closure"] == "pending" and validation["setup_closure"] == "pending","actual accepted finish validation binding")
++    return record
++
++
++def validate_setup_record(record,request,ack,uid):
++    exact(record,("format","version","producer","setup_id","authorization_ref","request_digest","scope","source_head","native_source_digest","runtime_inventory_digest","phase_set_digest","phase_receipts","unstarted_phases","close_reason","producer_terminal","participants_closed","workload","result","retention_status","closed_at_utc"))
++    integer(record["version"],1,1); boolean(record["participants_closed"]); utc_seconds(record["closed_at_utc"])
++    ensure(record["format"] == "root-docs-setup-receipt.v1" and record["producer"] == PRODUCER and record["setup_id"] == request["setup_id"] and record["authorization_ref"] == request["authorization_ref"] and record["scope"] == request["scope"],"setup exact request identity")
++    for key in ("request_digest","source_head","native_source_digest","runtime_inventory_digest"): ensure(record[key] == ack[key],"setup bound "+key)
++    enum(record["close_reason"],("completed","phase_failed","cancelled","parent_lost","deadline","protocol_failure")); enum(record["result"],("complete","failed","blocked")); enum(record["retention_status"],("complete","partial","unknown"))
++    ensure(type(record["phase_receipts"]) is list and type(record["unstarted_phases"]) is list and len(record["phase_receipts"])+len(record["unstarted_phases"]) == len(ack["phases"]),"setup phase partition bound")
++    bindings = {p["phase"]:decode_capsule(p["capsule"])["binding"] for p in ack["phases"]}; seen = []; outcomes = []
++    for item in record["phase_receipts"]:
++        exact(item,("phase","attempt","binding_digest","ref")); binding = bindings[item["phase"]]
++        ensure(item["phase"] not in seen and item["attempt"] == binding["attempt"] and item["binding_digest"] == digest(canonical(binding)),"setup phase receipt identity")
++        outcomes.append(read_phase_receipt(item["ref"],binding,uid)); seen.append(item["phase"])
++    for item in record["unstarted_phases"]:
++        exact(item,("phase","attempt","binding_digest","reason")); binding = bindings[item["phase"]]
++        ensure(item["phase"] not in seen and item["attempt"] == binding["attempt"] and item["binding_digest"] == digest(canonical(binding)) and type(item["reason"]) is str and re.fullmatch(r"[a-z_]{1,64}",item["reason"]),"setup unstarted identity/reason"); seen.append(item["phase"])
++    ensure(seen == list(bindings),"setup ordered phase partition")
++    ensure(record["phase_set_digest"] == digest(canonical({k:record[k] for k in ("phase_receipts","unstarted_phases","close_reason")})),"setup phase-set digest")
++    workload = record["workload"]
++    exact(workload,("allocation_ref","initial_empty_ref","terminal_ref","populated","events_ref","closure"))
++    for key in ("allocation_ref","initial_empty_ref"): validate_ref(workload[key])
++    for key in ("terminal_ref","events_ref"):
++        if workload[key] is not None: validate_ref(workload[key]); read_bound_regular(workload[key],16384,uid)
++    if workload["populated"] is not None: integer(workload["populated"],0,1)
++    enum(workload["closure"],("closed","unknown"))
++    if workload["closure"] == "closed": ensure(workload["populated"] == 0 and workload["terminal_ref"] is not None and workload["events_ref"] is not None,"setup closed workload observations")
++    if record["producer_terminal"] is not None:
++        terminal = record["producer_terminal"]; identity = terminal["identity"]; validate_terminal(terminal,identity["pid"],identity["birth"],identity["uid"])
++    if record["result"] == "complete":
++        ensure(record["close_reason"] == "completed" and not record["unstarted_phases"] and record["retention_status"] == "complete" and record["participants_closed"] is True and workload["closure"] == "closed" and record["producer_terminal"] is not None and record["producer_terminal"]["exit_code"] == 0 and all(outcome["result"] in ("passed","ready_for_unit_attempt") for outcome in outcomes),"complete setup evidence conjunction")
++    return record
++
++
+ def start_docs_setup(*, execute_grant, **request):
+     # A trusted parent supplies an opaque capability with pre-exec ownership,
+     # runtime verification, watchdog and durable bootstrap capture. A bool/JSON
+@@ -1927,21 +2260,28 @@
+     read_bound_regular({"path": bootstrap["python"], "sha256": bootstrap["python_sha256"]}, active.binary_cap, active.runtime_uid)
+     read_bound_regular({"path": bootstrap["native"], "sha256": bootstrap["native_sha256"]}, 262144, active.uid)
+     ensure(active.runtime_closure_verified(bootstrap), "runtime closure unverified before repo exec")
+-    parent, child = socket.socketpair()
+     nonce = secrets.token_hex(32)
+     frame = dict(request, producer=PRODUCER, version=1, nonce=nonce,
+                  parent_registration=active.export_registered_observations())
++    validate_registration(frame["parent_registration"])
++    parent,child = socket.socketpair()
+     # This method belongs to the pre-existing trusted outer harness, not caller
+     # descriptor data; it pins/attaches the gated stub before first Python exec.
+-    process = active.spawn_gated(
+-        argv=[bootstrap["python"], "-I", "-S", "-B", bootstrap["native"], "setup", "--control-fd", str(child.fileno())],
+-        cwd=request["storage"]["control_dir"], env={}, close_fds=True, pass_fds=(child.fileno(),),
+-        durable_intent=validate_intent(audit_intent(frame)), deadline=request["monotonic_deadline"],
+-    )
+-    child.close()
+-    parent.settimeout(max(0.001, request["monotonic_deadline"]-time.monotonic()))
+-    stream = parent.makefile("rwb", buffering=0)
+     try:
++        process = active.spawn_gated(
++            argv=[bootstrap["python"], "-I", "-S", "-B", bootstrap["native"], "setup", "--control-fd", str(child.fileno())],
++            cwd=request["storage"]["control_dir"], env={}, close_fds=True, pass_fds=(child.fileno(),),
++            durable_intent=validate_intent(audit_intent(frame)), deadline=request["monotonic_deadline"],
++        )
++    except BaseException:
++        for channel in (parent,child):
++            try: channel.close()
++            except OSError: pass
++        raise
++    try:
++        child.close()
++        parent.settimeout(max(0.001, request["monotonic_deadline"]-time.monotonic()))
++        stream = parent.makefile("rwb", buffering=0)
+         write_frame(stream, frame, 131071)
+         ack = read_frame(stream, 131071)
+         exact(ack,("kind","producer","version","setup_id","nonce_digest","request_digest","scope","input_sha256","source_head","source_graph_digest","native_source_digest","runtime_inventory_digest","monotonic_deadline","pid","birth","uid","endpoint","phases"))
+@@ -1959,7 +2299,12 @@
+             ensure(capsule["binding"] == phase_binding(expected_request,expected,nonce,capsule["token"]),"complete parent expected PhaseBinding")
+         ensure(len(ack["phases"]) == len(request["allowed_phases"]),"full phase set")
+     except BaseException:
+-        parent.sendall(b"C\n"); parent.close(); raise
++        try: parent.sendall(b"C\n")
++        except OSError: pass
++        for channel in (parent,child):
++            try: channel.close()
++            except OSError: pass
++        raise
+     # Keep the duplex parent channel alive after constructor returns.
+     return RunningDocsSetup(process,parent,request,ack,active,frame)
+ 
+@@ -1997,14 +2342,16 @@
+         terminal = read_frame(stream, 131072)
+         exact(terminal,("kind","request_id","binding_digest","phase_ref","result","setup_state","setup_final_ref"))
+         ensure(terminal["kind"] == "phase-complete" and terminal["request_id"] == accepted["request_id"] and terminal["binding_digest"] == capsule["binding_digest"] and terminal["setup_final_ref"] is None,"phase terminal binding")
+-        receipt = decode(read_bound_regular(terminal["phase_ref"],32768,os.getuid())["bytes"],32768)
++        receipt = read_phase_receipt(terminal["phase_ref"],binding,os.getuid())
+         ensure(receipt["binding"] == binding and receipt["result"] == terminal["result"],"actual phase terminal")
++        ensure(terminal["setup_state"] == receipt["setup_state"],"phase terminal setup-state identity")
+         print(json.dumps(terminal))
+         return 0 if terminal.get("result") in ("passed", "ready_for_unit_attempt") else 1
+ 
+ 
+ def setup_main(control_fd):
+     ensure(control_fd >= 3, "inherited active parent FD required")
++    os.set_inheritable(control_fd,False)
+     control = socket.socket(fileno=control_fd)
+     ensure(ctypes.CDLL(None,use_errno=True).prctl(36,1,0,0,0) == 0,"setup private subreaper required")
+     ensure(control.family == socket.AF_UNIX and control.type & socket.SOCK_STREAM, "private parent transport required")
+--- a/ops/docs_tests_cli.ts
++++ b/ops/docs_tests_cli.ts
+@@ -22,6 +22,8 @@
+   if (!Number.isSafeInteger(value) || Number(value) < minimum || Number(value) > maximum) throw new Error("Integer range");
+ }
+ function flag(value: unknown) { if (typeof value !== "boolean") throw new Error("Boolean required"); }
++function isEnum(value: unknown,choices: readonly string[]): value is string { return typeof value === "string" && choices.includes(value); }
++function operation(value: unknown): string { if (!isEnum(value,["preflight","git-read","prepare","execute","stream-read","finish"])) throw new Error("Operation enum"); return value; }
+ function hash(value: unknown,length=64) { if (typeof value !== "string" || !new RegExp(`^[a-f0-9]{${length}}$`).test(value)) throw new Error("Hash required"); }
+ function ref(value: unknown) {
+   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Ref object");
+@@ -53,7 +55,7 @@
+   const tools = m.retained_tools as Frame; exact(tools,["deno","node","python"]);
+   for (const entry of Object.values(tools)) { const t = entry as Frame; exact(t,["ref","path","version","sha256","schema","externally_measured"]); ref(t.ref); hash(t.sha256); flag(t.externally_measured); if (typeof t.path !== "string" || typeof t.version !== "string" || t.schema !== "normalized-tool-identity") throw new Error("Tool fact"); }
+   const units = m.reviewed_units as Frame; exact(units,["doc04-python","doc04-node","doc06-deno"]);
+-  for (const entry of Object.values(units)) { const u = entry as Frame; exact(u,["test_path","test_sha256","expected_tests","report_format"]); hash(u.test_sha256); integer(u.expected_tests,1); if (typeof u.test_path !== "string" || !["python-unittest-summary-v1","node-test-tap-v1","deno-test-tap-v1"].includes(String(u.report_format))) throw new Error("Unit fact"); }
++  for (const entry of Object.values(units)) { const u = entry as Frame; exact(u,["test_path","test_sha256","expected_tests","report_format"]); hash(u.test_sha256); integer(u.expected_tests,1); if (typeof u.test_path !== "string" || !isEnum(u.report_format,["python-unittest-summary-v1","node-test-tap-v1","deno-test-tap-v1"])) throw new Error("Unit fact"); }
+   const k = m.retained_katex as Frame; exact(k,["ref","root","version","module_sha256","css_sha256"]); ref(k.ref); hash(k.module_sha256); hash(k.css_sha256); if (typeof k.root !== "string" || k.version !== "0.16.8") throw new Error("KaTeX fact");
+   const a = m.admission as Frame; exact(a,["ref","source_revision","source_graph_digest","fresh","exclusive_storage","tools","limits","process_tree_supervision"]); ref(a.ref); hash(a.source_revision,40); hash(a.source_graph_digest); flag(a.fresh); flag(a.process_tree_supervision);
+   if (!Array.isArray(a.exclusive_storage) || a.exclusive_storage.some((p) => typeof p !== "string") || !Array.isArray(a.tools)) throw new Error("Admission lists"); a.tools.forEach(ref);
+@@ -63,7 +65,7 @@
+   integer(reply.version,1,1); hash(reply.request_id,32); integer(reply.sequence,1,4096);
+   if (reply.kind === "refused") {
+     exact(reply,["version","request_id","sequence","kind","code","retained_ref","cleanup_status"]);
+-    if (!["source_unavailable","invalid_request","binding_refused","admission_expired","cancelled","deadline","storage_failure","protocol_failure","retention_unknown","execution_failed"].includes(String(reply.code)) || !["complete","unknown"].includes(String(reply.cleanup_status))) throw new Error("Refusal enum");
++    if (!isEnum(reply.code,["source_unavailable","invalid_request","binding_refused","admission_expired","cancelled","deadline","storage_failure","protocol_failure","retention_unknown","execution_failed"]) || !isEnum(reply.cleanup_status,["complete","unknown"])) throw new Error("Refusal enum");
+     if (reply.retained_ref !== null) ref(reply.retained_ref); return reply;
+   }
+   const common = ["version","request_id","sequence","kind"];
+@@ -71,8 +73,8 @@
+   else if (op === "git-read") { exact(reply,[...common,"ticket_id","streams","exit_code","signal","complete","stop_reason"]); if (reply.kind !== "git-capture") throw new Error("Git reply"); hash(reply.ticket_id,32); flag(reply.complete); if (reply.exit_code !== null) integer(reply.exit_code,0,255); if (reply.signal !== null || (reply.stop_reason !== null && typeof reply.stop_reason !== "string")) throw new Error("Git status"); }
+   else if (op === "prepare") { exact(reply,[...common,"binding_digest","seed_ref"]); if (reply.kind !== "prepared") throw new Error("Prepare reply"); hash(reply.binding_digest); ref(reply.seed_ref); }
+   else if (op === "execute") { exact(reply,[...common,"index","ticket_id","capture_meta","streams"]); if (reply.kind !== "capture") throw new Error("Capture reply"); integer(reply.index,0,3); hash(reply.ticket_id,32); captureMeta(reply.capture_meta); }
+-  else if (op === "stream-read") { exact(reply,[...common,"ticket_id","stream","offset","data","eof","chunk_sha256"]); if (reply.kind !== "stream-chunk" || !["stdout","stderr"].includes(String(reply.stream)) || typeof reply.data !== "string" || reply.data.length > 43691 || !/^[A-Za-z0-9_-]*$/.test(reply.data)) throw new Error("Chunk reply"); hash(reply.ticket_id,32); integer(reply.offset,0,1048576); flag(reply.eof); hash(reply.chunk_sha256); }
+-  else if (op === "finish") { exact(reply,[...common,"validation","validation_ref","aggregate_sha256","summary_sha256","terminal","phase_closure","setup_closure"]); if (reply.kind !== "finish-validated" || !["accepted","rejected"].includes(String(reply.validation)) || reply.terminal !== false || reply.phase_closure !== "pending" || reply.setup_closure !== "pending") throw new Error("Finish reply"); if (reply.validation_ref !== null) ref(reply.validation_ref); for (const key of ["aggregate_sha256","summary_sha256"]) if (reply[key] !== null) hash(reply[key]); }
++  else if (op === "stream-read") { exact(reply,[...common,"ticket_id","stream","offset","data","eof","chunk_sha256"]); if (reply.kind !== "stream-chunk" || !isEnum(reply.stream,["stdout","stderr"]) || typeof reply.data !== "string" || reply.data.length > 43691 || !/^[A-Za-z0-9_-]*$/.test(reply.data)) throw new Error("Chunk reply"); hash(reply.ticket_id,32); integer(reply.offset,0,1048576); flag(reply.eof); hash(reply.chunk_sha256); }
++  else if (op === "finish") { exact(reply,[...common,"validation","validation_ref","aggregate_sha256","summary_sha256","terminal","phase_closure","setup_closure"]); if (reply.kind !== "finish-validated" || !isEnum(reply.validation,["accepted","rejected"]) || reply.terminal !== false || reply.phase_closure !== "pending" || reply.setup_closure !== "pending") throw new Error("Finish reply"); if (reply.validation_ref !== null) ref(reply.validation_ref); for (const key of ["aggregate_sha256","summary_sha256"]) if (reply[key] !== null) hash(reply[key]); }
+   else throw new Error("Unknown response operation");
+   if (op === "git-read" || op === "execute") { const streams = reply.streams as Record<string,Stream>; exact(streams,["stdout","stderr"]); streamShape(streams.stdout); streamShape(streams.stderr); }
+   return reply;
+@@ -81,7 +83,7 @@
+   constructor(readonly evidence: Frame) { super(String(evidence.code)); }
+ }
+ function checked(transport: Transport): Transport {
+-  return async (q) => { const reply = responseFor(String(q.op),await transport(q)); if (reply.kind === "refused") throw new ProtocolRefusal(reply); return reply; };
++  return async (q) => { const reply = responseFor(operation(q.op),await transport(q)); if (reply.kind === "refused") throw new ProtocolRefusal(reply); return reply; };
+ }
+ function streamShape(s: Stream) {
+   exact(s as unknown as Frame,["ref","bytes","sha256"]); ref(s.ref); integer(s.bytes,0,1048576); hash(s.sha256);
+@@ -236,12 +238,13 @@
+   const writeFrame = async (frame: Frame) => {
+     const bytes = new TextEncoder().encode(JSON.stringify(frame)+"\n");
+     const caps: Record<string,number> = {preflight:65536,"git-read":4096,prepare:32768,execute:16384,"stream-read":512,finish:131072};
+-    if (!(String(frame.op) in caps) || bytes.length > caps[String(frame.op)]) throw new Error("Request cap");
++    if (bytes.length > caps[operation(frame.op)]) throw new Error("Request cap");
+     let offset=0; while (offset<bytes.length) { const n=await Deno.stdout.write(bytes.subarray(offset)); if (n<=0) throw new Error("Short protocol write"); offset+=n; }
+   };
+   const start = await readFrame(65535);
+   exact(start,["kind","version","request_id","sequence","mode","input","workspace","binding_digest","remaining_ms"]);
+-  if (start.kind !== "start" || start.version !== 1 || start.sequence !== 0 || !/^[a-f0-9]{32}$/.test(String(start.request_id)) || !["check","docs","preflight"].includes(String(start.mode)) || typeof start.input !== "string" || typeof start.workspace !== "string" || !Number.isSafeInteger(start.remaining_ms) || Number(start.remaining_ms) <= 0) throw new Error("Invalid start frame");
++  hash(start.request_id,32);
++  if (start.kind !== "start" || start.version !== 1 || start.sequence !== 0 || !isEnum(start.mode,["check","docs","preflight"]) || typeof start.input !== "string" || typeof start.workspace !== "string" || !Number.isSafeInteger(start.remaining_ms) || Number(start.remaining_ms) <= 0) throw new Error("Invalid start frame");
+   const deadline = performance.now()+Number(start.remaining_ms); let sequence = 0, wire = 0;
+   const transport: Transport = async (q) => {
+     if (++sequence > 4096 || performance.now() >= deadline) throw new Error("Protocol deadline/sequence");
+@@ -251,12 +254,12 @@
+     let timer: ReturnType<typeof setTimeout> | undefined;
+     try {
+       const caps: Record<string,number> = {preflight:131072,"git-read":4096,prepare:16384,execute:16384,"stream-read":49152,finish:16384};
+-      const reply = await Promise.race([readFrame(Math.max(caps[String(q.op)],16384)-1),new Promise<never>((_,reject) => {timer=setTimeout(() => reject(new Error("Protocol inactivity")),Math.min(10000,deadline-performance.now()));})]);
++      const reply = await Promise.race([readFrame(Math.max(caps[operation(q.op)],16384)-1),new Promise<never>((_,reject) => {timer=setTimeout(() => reject(new Error("Protocol inactivity")),Math.min(10000,deadline-performance.now()));})]);
+       wire += encoder.encode(canonical(reply)).length+1;
+       if (wire > 24*1048576 || reply.version !== 1 || reply.request_id !== start.request_id || reply.sequence !== sequence) throw new Error("Protocol response binding");
+-      const validated = responseFor(String(q.op),reply);
++      const validated = responseFor(operation(q.op),reply);
+       if (validated.kind === "refused") throw new ProtocolRefusal(validated);
+-      if (encoder.encode(canonical(validated)).length+1 > caps[String(q.op)]) throw new Error("Per-operation response cap");
++      if (encoder.encode(canonical(validated)).length+1 > caps[operation(q.op)]) throw new Error("Per-operation response cap");
+       return validated;
+     } finally { clearTimeout(timer); }
+   };
+@@ -265,11 +268,10 @@
+   const summary = projectAggregate(result); const summarySha = await sha(encoder.encode(canonical(summary)));
+   const reply = await transport({op:"finish",aggregate_summary:summary,aggregate_sha256:aggregateSha});
+   exact(reply,["version","request_id","sequence","kind","validation","validation_ref","aggregate_sha256","summary_sha256","terminal","phase_closure","setup_closure"]);
+-  if (reply.kind !== "finish-validated" || !["accepted","rejected"].includes(String(reply.validation)) || reply.terminal !== false || reply.phase_closure !== "pending" || reply.setup_closure !== "pending") throw new Error("Finish validation ACK");
++  if (reply.kind !== "finish-validated" || !isEnum(reply.validation,["accepted","rejected"]) || reply.terminal !== false || reply.phase_closure !== "pending" || reply.setup_closure !== "pending") throw new Error("Finish validation ACK");
+   if (reply.validation === "accepted" && (reply.aggregate_sha256 !== aggregateSha || reply.summary_sha256 !== summarySha)) throw new Error("Finish digest binding");
+   if (reply.validation_ref !== null) {
+-    exact(reply.validation_ref as Frame,["path","sha256"]);
+-    if (!String((reply.validation_ref as Frame).path).startsWith("/") || !/^[a-f0-9]{64}$/.test(String((reply.validation_ref as Frame).sha256))) throw new Error("Validation ref");
++    ref(reply.validation_ref);
+   } else if (reply.validation === "accepted") throw new Error("Missing validation receipt");
+   Deno.exitCode = reply.validation === "accepted" ? 0 : 1;
+ }
+--- a/tests/test_docs_test_native.py
++++ b/tests/test_docs_test_native.py
+@@ -12,6 +12,26 @@
+ _spec.loader.exec_module(native)
+ 
+ 
++class MemoryPublishOps:
++    """Only low-level fake handles; actual native publisher creates proof entries."""
++    def __init__(self): self.files = {}; self.fds = {}; self.events = []
++    def open(self,path,flags,mode=0o600):
++        path = str(path); fd = len(self.fds)+10
++        if flags & native.os.O_DIRECTORY: self.fds[fd] = (path,"dir")
++        else:
++            if flags & native.os.O_EXCL and path in self.files: raise FileExistsError(path)
++            self.files.setdefault(path,bytearray()); self.fds[fd] = (path,"file")
++        return fd
++    def write(self,fd,data): self.files[self.fds[fd][0]].extend(data); return len(data)
++    def fsync(self,fd): self.events.append("sync-"+self.fds[fd][1])
++    def fstat(self,fd): return type("Stat",(),{"st_size":len(self.files.get(self.fds[fd][0],b""))})()
++    def close(self,fd): self.events.append("close")
++    def link(self,source,target,**kwargs):
++        if str(target) in self.files: raise FileExistsError(target)
++        self.files[str(target)] = bytearray(self.files[str(source)]); self.events.append("link")
++    def unlink(self,path): del self.files[str(path)]; self.events.append("unlink")
++
++
+ class ProtocolTests(unittest.TestCase):
+     def test_frame_round_trip(self):
+         sink = io.BytesIO()
+@@ -43,6 +63,26 @@
+         for wire in (b'{"n":1e999}', ('{"x":'*17+'{}'+'}'*17).encode()):
+             with self.assertRaises(native.Refusal):
+                 native.decode(wire,4096)
++        class Channel:
++            def __init__(self): self.closed = False
++            def close(self): self.closed = True
++        guard = type("Guard",(),{"inspect_binding":lambda s:None})()
++        storage = type("Storage",(),{"observe":lambda *a:None,"durable_publications":set()})()
++        for fault in ("socket","pipe","fork"):
++            parent,child = Channel(),Channel(); closed = []; state = {}
++            with patch.object(native.time,"monotonic",return_value=0), patch.object(native.socket,"socketpair",side_effect=OSError("socket") if fault == "socket" else lambda:(parent,child)), patch.object(native.os,"pipe2",side_effect=OSError("pipe") if fault == "pipe" else lambda flags:(701,702)), patch.object(native.os,"fork",side_effect=OSError("fork")) as fork, patch.object(native.os,"close",side_effect=closed.append), patch.object(native,"partial_streams",return_value={"stdout":None,"stderr":None}), patch.object(native,"retain_record") as retain:
++                with self.assertRaises(OSError): native.execute_bounded({},guard=guard,storage=storage,deadline=10,cap=10,paths={"stdout":"/owned/out","stderr":"/owned/err","fallback":"/owned/failure"},cancel_fd=None,debit=lambda n:None,launch_state=state)
++            self.assertFalse(state["gate_opened"])
++            if fault != "socket": self.assertTrue(parent.closed and child.closed)
++            if fault == "fork": self.assertEqual(set(closed),{701,702})
++            else: fork.assert_not_called()
++            self.assertEqual(retain.call_args.args[1]["cleanup"],"unknown")
++        class Census:
++            def __enter__(self): return iter(type("FD",(),{"name":str(n)})() for n in (0,1,2,65537))
++            def __exit__(self,*args): pass
++        closed = []
++        with patch.object(native.os,"scandir",return_value=Census()), patch.object(native.os,"close",side_effect=closed.append): native.close_inherited_fds()
++        self.assertEqual(closed,[65537])
+ 
+     def test_source_git_closed_argv(self):
+         root = "/fixture/source"
+@@ -96,7 +136,7 @@
+         phase_ref = {"path":"/owned/first.json","sha256":"a"*64}
+         parent.expected_phases = {"preflight":{"binding":binding,"binding_digest":"b"*64}}
+         receipt = {"binding":binding,"result":"ready_for_unit_attempt","request_id":"c"*32,"source_observation":"measured","retention_status":"complete","command_closure":"closed","phase_driver_closure":"closed"}
+-        with patch.object(native,"read_bound_regular",return_value={"bytes":native.canonical(receipt)}):
++        with patch.object(native,"read_phase_receipt",return_value=receipt):
+             parent._dispatch_control({"kind":"phase-ready","setup_id":parent.setup_id,"phase":"preflight","attempt":"first","binding_digest":"b"*64,"phase_ref":phase_ref})
+             self.assertEqual(parent.phase_outcomes["preflight"]["result"],"ready_for_unit_attempt")
+             with self.assertRaises(native.Refusal):
+@@ -112,7 +152,10 @@
+         identity = {"pid":12,"birth":34,"uid":0}
+         ref = {"path":"/owned/closure.json","sha256":"f"*64}
+         terminal = {"identity":identity,"exit_code":0,"signal":None,"stdout_eof":True,"stderr_eof":True,"reaped":True,"closure_ref":ref}
++        empty = {"ref":{"path":"/owned/empty","sha256":native.digest(b"")},"bytes":0,"sha256":native.digest(b"")}
+         proof = {k:v for k,v in terminal.items() if k != "closure_ref"}
++        proof["streams"] = {"stdout":empty,"stderr":empty}
++        proof["raw_complete"] = True
+         with patch.object(native,"read_bound_regular",return_value={"bytes":native.canonical(proof)}):
+             self.assertTrue(native.validate_terminal(terminal,12,34,0))
+             for field in ("stdout_eof","stderr_eof","reaped"):
+@@ -174,6 +217,44 @@
+             normalized = native.read_katex_observation(ref,active)
+             self.assertEqual(normalized,{"ref":ref,**payload})
+             self.assertNotIn("ref",payload)
++        class Ops:
++            def __init__(self,fault=None): self.files = {}; self.fds = {}; self.events = []; self.fault = fault
++            def open(self,path,flags,mode=0o600):
++                path = str(path); fd = len(self.fds)+10
++                if flags & native.os.O_DIRECTORY: self.fds[fd] = (path,"dir")
++                else:
++                    if flags & native.os.O_EXCL and path in self.files: raise FileExistsError(path)
++                    self.files.setdefault(path,bytearray()); self.fds[fd] = (path,"file")
++                return fd
++            def write(self,fd,data):
++                path,_ = self.fds[fd]
++                if self.fault == "write": self.files[path].extend(data[:1]); raise OSError("partial write")
++                self.files[path].extend(data); return len(data)
++            def fsync(self,fd):
++                kind = self.fds[fd][1]; self.events.append("sync-"+kind)
++                if self.fault == "sync-"+kind: raise OSError("sync failed")
++            def fstat(self,fd): return type("Stat",(),{"st_size":len(self.files.get(self.fds[fd][0],b""))})()
++            def close(self,fd): self.events.append("close")
++            def link(self,source,target,**kwargs):
++                if self.fault == "link" or str(target) in self.files: raise FileExistsError(target)
++                self.files[str(target)] = bytearray(self.files[str(source)]); self.events.append("link")
++            def unlink(self,path): del self.files[str(path)]; self.events.append("unlink")
++        for fault in (None,"write","sync-file","link","sync-dir"):
++            ops = Ops(fault); proofs = set()
++            if fault:
++                with self.assertRaises((OSError,native.Refusal)):
++                    native.publish_bytes("/owned/final",b"abc",3,proofs=proofs,ops=ops)
++                self.assertEqual(proofs,set())
++                self.assertTrue(ops.files)  # Original/partial bytes remain retained.
++            else:
++                ref = native.publish_bytes("/owned/final",b"abc",3,proofs=proofs,ops=ops)
++                self.assertEqual(ops.files["/owned/final"],b"abc")
++                self.assertIn((ref["path"],ref["sha256"]),proofs)
++                self.assertLess(ops.events.index("sync-file"),ops.events.index("link"))
++                self.assertLess(ops.events.index("link"),ops.events.index("sync-dir"))
++                other_proofs = set()
++                with self.assertRaises(FileExistsError): native.publish_bytes("/owned/final",b"bad",3,proofs=other_proofs,ops=ops)
++                self.assertEqual(ops.files["/owned/final"],b"abc"); self.assertEqual(other_proofs,set())
+ 
+     def test_version_parsers_have_full_match(self):
+         self.assertEqual(native.parse_version("node", b"v24.1.2\n"), "24.1.2")
+@@ -186,6 +267,46 @@
+         self.assertEqual(summary["observed_tests"],20)
+         for bad in (dict(capture,stderr=capture["stderr"]+"extra"),dict(capture,stderr=capture["stderr"].replace("Ran 20","Ran 19"))):
+             with self.assertRaises(native.Refusal): native.validate_unit_report(unit,bad)
++        class Artifacts:
++            def __init__(self): self.ops = MemoryPublishOps(); self.bytes = self.ops.files; self.proofs = set()
++            def put(self,name,value):
++                data = value if isinstance(value,bytes) else native.canonical(value)
++                return native.publish_bytes("/owned/"+name,data,131072,proofs=self.proofs,ops=self.ops)
++            def read(self,ref,cap,*args,**kwargs):
++                native.validate_ref(ref)
++                data = self.bytes[ref["path"]]
++                native.ensure(len(data) <= cap and native.digest(data) == ref["sha256"],"artifact SHA/size")
++                return {"bytes":data,"sha256":ref["sha256"],"stat":[1,1,len(data),1]}
++        for fault in (None,"index","pending-binding","raw-sha","raw-size","reap","durability"):
++            store = Artifacts(); raw = store.put("command.stdout",b"ok\n"); empty_ref = store.put("command.stderr",b"")
++            streams = {"stdout":{"ref":raw,"bytes":3,"sha256":raw["sha256"]},"stderr":{"ref":empty_ref,"bytes":0,"sha256":empty_ref["sha256"]}}
++            pending = store.put("command.pending.json",{"format":"root-docs-command-pending.v1","binding_digest":"b"*64 if fault != "pending-binding" else "c"*64,"command_sha256":"d"*64,"id":"e"*32})
++            command_capture = {"exit_code":0,"signal":None,"started_at":"2026-10-20T08:00:00.000000Z","ended_at":"2026-10-20T08:00:00.000001Z","capture_complete":True,"drains_complete":True,"stop_reason":None}
++            command_ref = store.put("command.json",{"format":"root-docs-command-receipt.v1","command_sha256":"d"*64,"capture":command_capture,"streams":streams,"guard_sha256":"f"*64,"supervisor":{"pid":12,"birth":34,"reaped":fault != "reap"}})
++            index = store.put("index",{"format":"root-docs-command-index.v1","metadata_root":"/owned","commands":[["e"*32,pending["sha256"],command_ref["sha256"],"json","complete"]]})
++            closure_body = {"identity":{"pid":12,"birth":34,"uid":0},"exit_code":0,"signal":None,"stdout_eof":True,"stderr_eof":True,"reaped":True,"streams":streams,"raw_complete":True}
++            closure = store.put("closure",closure_body)
++            terminal = {k:v for k,v in closure_body.items() if k not in ("streams","raw_complete")}; terminal["closure_ref"] = closure
++            active = type("Evidence",(),{"uid":0,"metadata_root":"/owned","durable_publications":store.proofs,"command_ledger":[{"id":"e"*32,"binding_digest":"b"*64,"pending_ref":pending,"terminal_ref":command_ref,"streams":streams,"outcome":"complete"}]})()
++            if fault == "raw-sha": store.bytes[raw["path"]] = b"bad"
++            if fault == "raw-size": streams["stdout"]["bytes"] = 4
++            if fault == "durability": store.proofs.clear()
++            with patch.object(native,"read_bound_regular",side_effect=store.read):
++                status = native.validate_phase_retention(active,None if fault == "index" else index,terminal,[index])
++            self.assertEqual(status,"complete" if fault is None else "partial" if fault == "index" else "unknown")
++            if fault is None:
++                healthy_store,healthy_evidence,healthy_terminal = store,active,terminal
++                binding = native.phase_binding({"setup_id":"a"*32,"expected_source":{"head":"b"*40,"graph_digest":"c"*64,"native_digest":"d"*64},"runtime_inventory_digest":"e"*64},
++                    {"phase":"docs","attempt":"once","input_sha256":"f"*64,"not_after_utc":"2026-10-20T12:00:00.000000Z"},"01"*32,"02"*32)
++                summary = store.put("summary",{})
++                validation = store.put("validation",{"format":"root-docs-finish-validation.v1","binding":binding,"request_id":"a"*32,"finish_sequence":2,"validation":"accepted","aggregate_sha256":"b"*64,"summary_ref":summary,"summary_sha256":summary["sha256"],"evidence_index_ref":index,"validated_at_utc":"2026-10-20T08:00:00.000001Z","terminal":False,"phase_closure":"pending","setup_closure":"pending"})
++                phase = {"format":"root-docs-phase-receipt.v2","binding":binding,"request_id":"a"*32,"finish_validation_ref":validation,"aggregate_sha256":"b"*64,"summary_ref":summary,"evidence_index_ref":index,"driver":terminal,"command_closure":"closed","phase_driver_closure":"closed","result":"passed","source_observation":"measured","retention_status":"complete","setup_state":"active","whole_workload_empty":"not_claimed","closed_at_utc":"2026-10-20T08:00:00.000002Z"}
++                phase_ref = store.put("phase",phase)
++                with patch.object(native,"read_bound_regular",side_effect=store.read): self.assertEqual(native.read_phase_receipt(phase_ref,binding,0),phase)
++                for status in ("unknown","partial"):
++                    invalid = dict(phase,retention_status=status)
++                    invalid_ref = store.put("phase-"+status,invalid)
++                    with patch.object(native,"read_bound_regular",side_effect=store.read), self.assertRaises(native.Refusal): native.read_phase_receipt(invalid_ref,binding,0)
+         # Exercise owning run_phase finalization after completed native work.
+         # A written rejected validation must never turn the failed final source
+         # read into measured evidence; a missing native index cannot be complete.
+@@ -193,20 +314,29 @@
+             uid = 0; workspace = "/fixture"; components = {}; deadline = 1000
+             request = {"input_ref":{"path":"/owned/input","sha256":"a"*64}}
+             def __init__(self):
+-                self.phases = []; self.command_ledger = []; self.saved = []; self.dispatches = 0
++                self.store = Artifacts()
++                for path,data in healthy_store.bytes.items():
++                    if path.split("/")[-1] in ("command.stdout","command.stderr","command.pending.json","command.json","index","closure"): self.store.put(path.split("/")[-1],bytes(data))
++                self.metadata_root = "/owned"; self.durable_publications = self.store.proofs
++                self.phases = []; self.command_ledger = healthy_evidence.command_ledger; self.saved = []; self.dispatches = 0
+             def retain(self,kind,record,maximum=131072):
+-                self.saved.append((kind,record)); return {"path":"/owned/"+kind,"sha256":"b"*64}
+-        terminal = {"identity":{"pid":12,"birth":34,"uid":0},"exit_code":0,"signal":None,"stdout_eof":True,"stderr_eof":True,"reaped":True,"closure_ref":{"path":"/owned/closure","sha256":"f"*64}}
++                self.saved.append((kind,record)); return self.store.put(kind,record)
++        terminal = healthy_terminal
+         class Driver:
+-            def __init__(self,active): self.active = active
+-            def receive(self): return {"version":1,"request_id":self.active.request_id,"sequence":1,"op":"finish","aggregate_summary":{},"aggregate_sha256":"c"*64}
++            def __init__(self,active): self.active = active; self.sequence = 0
++            def receive(self):
++                self.sequence += 1; op = "preflight" if self.sequence == 1 else "finish"
++                native.ensure(op in self.allowed_ops,"fixture obeys actual reader state")
++                return {"version":1,"request_id":self.active.request_id,"sequence":self.sequence,"op":op,**({"input":self.active.input_bytes.decode()} if op == "preflight" else {"aggregate_summary":{},"aggregate_sha256":"c"*64})}
+             def send(self,frame): self.active.saved.append(("wire",frame))
+             def close(self): return terminal
+         phase = {"phase":"docs","attempt":"once","binding":{"phase":"docs"}}
+         for source_failure,index_failure in ((False,False),(True,False),(False,True)):
+             active = Active()
+             outcomes = [None,native.Refusal("final source read failed")] if source_failure else [None,None]
+-            with patch.object(native,"admit_source_schedule"), patch.object(native,"noexec_git_metadata"), patch.object(native,"read_bound_regular",return_value={"bytes":b'{}'}), patch.object(native,"bind_native_context",side_effect=outcomes), patch.object(native,"native_metadata",return_value={}), patch.object(native,"DriverPipe",Driver), patch.object(native,"validate_driver_finish",return_value="passed"), patch.object(native,"validate_terminal",return_value=True), patch.object(native,"validate_phase_retention",return_value="partial" if index_failure else "complete"), patch.object(native,"retain_evidence_index",side_effect=native.Refusal("missing index") if index_failure else lambda a:{"path":"/owned/index","sha256":"d"*64}):
++            input_ref = active.store.put("input",b"{}")
++            active.request = {"input_ref":input_ref}
++            with patch.object(native,"admit_source_schedule"), patch.object(native,"noexec_git_metadata"), patch.object(native,"read_bound_regular",side_effect=active.store.read), patch.object(native,"bind_native_context",side_effect=outcomes), patch.object(native,"native_metadata",return_value={}), patch.object(native,"DriverPipe",Driver), patch.object(native,"validate_driver_finish",return_value="passed"), patch.object(native,"retain_evidence_index",side_effect=native.Refusal("missing index") if index_failure else lambda a:index):
+                 native.run_phase(active,phase)
+             receipt = next(record for kind,record in active.saved if kind == "phase")
+             self.assertEqual(active.dispatches,0)
+--- a/tests/docs_test_native_protocol_test.ts
++++ b/tests/docs_test_native_protocol_test.ts
+@@ -56,7 +56,9 @@
+   const refusal = {version:1,request_id:"a".repeat(32),sequence:1,kind:"refused",code:"source_unavailable",retained_ref:{path:"/owned/"+"x".repeat(450),sha256:"b".repeat(64)},cleanup_status:"unknown"};
+   // The legal refusal union has16KiB allowance even on git-read/stream-read.
+   assert(responseFor("git-read",refusal).kind === "refused");
+-  for (const bad of [ {...refusal,cleanup_status:"pass"}, {...refusal,sequence:true}, {...refusal,retained_ref:{path:"relative",sha256:"b".repeat(64)}}, {...refusal,unexpected:true} ]) {
++  for (const bad of [ {...refusal,cleanup_status:"pass"}, {...refusal,sequence:true}, {...refusal,retained_ref:{path:"relative",sha256:"b".repeat(64)}}, {...refusal,unexpected:true},
++    ...[["source_unavailable"],{toString:"source_unavailable"},0,null].map((code) => ({...refusal,code})),
++    ...[["unknown"],{},false,null].map((cleanup_status) => ({...refusal,cleanup_status})) ]) {
+     let rejected = false;
+     try { responseFor("git-read",bad); } catch { rejected = true; }
+     assert(rejected);

@@ -1,0 +1,25 @@
+{
+  "task": "DOC04 Phase1 RED independent test-source review",
+  "stage": "CP-CODE source-only",
+  "verdict": "REQUEST_CHANGES",
+  "report_path": "/tmp/qcl-doc04-root-red-review.md",
+  "report_sha256": "4c7b969ce90fef61e427780edbc84d5b8700189b8a9e4ecc6da4b51698907863",
+  "root_head": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "inputs": {
+    "tests/test_docs_assembly.py": "4c0f3f10d952be0e38c3c3c3caa098af14e0e126720428dd16ae574dc3106422",
+    "tests/docs_math_test.mjs": "7ae60b15740e7e9790318f8724d364f2a9ce567b2a0480cf13c988172966aef3",
+    "/tmp/qcl-doc04-root-red-patch.diff": "7ccff023590d62ff8e8959015cb44d1b24fded2276c6074b965e0f8949f0d440",
+    "/tmp/qcl-doc04-root-red-identity.json": "fda4daaf0b35e8851a437d382ddfafc5e3a4e526b7ee9dda6e7451fc53d5f108",
+    "/tmp/qcl-doc04-root-red-report.md": "e60d76437fcd1a5070908de22f4db8a5e911cd50d56be8fc05ed124c2f95b87a",
+    "/tmp/qcl-doc04-design.md": "77ee8593655f98b2e66d762620279ba6ac7ec7da126c62a2ccbd56a0262bf12b",
+    "/tmp/qcl-doc04-design-review.md": "6caa4f15035e6a9f564d1ec86f14ecd64bbd31d73457556327e090e9d6628164",
+    "/tmp/qcl-doc04-katex-binding-design.md": "c65c38f74b5fd8168c9ed5ee2fc79649e2d7bafa5655a9248aee4aa81dca25a2",
+    "/tmp/qcl-doc04-katex-binding-design-review.md": "b599846a0bf40f45a9834a84b61d280d64500a625c6fc3fda0cce4e3feee5e28"
+  },
+  "findings": ["F1 worker fixture URL resolution", "F2 independently literal slice sources and URLs", "F3 healthy font control before MIT rejection", "F4 configuration value preservation and script reference"],
+  "target_executions": 0,
+  "runtime_calls": 0,
+  "children": 0,
+  "product_source_edits": 0,
+  "state": "STOP"
+}

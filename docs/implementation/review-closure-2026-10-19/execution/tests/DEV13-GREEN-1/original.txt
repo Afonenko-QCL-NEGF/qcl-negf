@@ -1,0 +1,174 @@
+......................FF................................................ [ 45%]
+........................................................................ [ 91%]
+..............                                                           [100%]
+=================================== FAILURES ===================================
+___ test_disconnect_releases_handle_exactly_once_after_backend_returns[2.3] ____
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 670, in test_disconnect_releases_handle_exactly_once_after_backend_returns
+  |     anyio.run(scenario)
+  |     ~~~~~~~~~^^^^^^^^^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_core/_eventloop.py", line 83, in run
+  |     return async_backend.run(func, args, {}, backend_options)
+  |            ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2548, in run
+  |     return runner.run(wrapper())
+  |            ~~~~~~~~~~^^^^^^^^^^^
+  |   File "/usr/lib/python3.14/asyncio/runners.py", line 128, in run
+  |     return self._loop.run_until_complete(task)
+  |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  |   File "/usr/lib/python3.14/asyncio/base_events.py", line 720, in run_until_complete
+  |     return future.result()
+  |            ~~~~~~~~~~~~~^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2531, in wrapper
+  |     return await func(*args)
+  |            ^^^^^^^^^^^^^^^^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 660, in scenario
+  |     async with anyio.create_task_group() as group:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_core/_tasks.py", line 327, in _run_coro
+    |     retval = await self._coro
+    |              ^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 653, in serving
+    |     await response(
+    |         {"type": "http", "asgi": {"spec_version": spec_version}}, receive, send
+    |     )
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/api.py", line 40, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/responses.py", line 275, in __call__
+    |     async with create_collapsing_task_group() as task_group:
+    |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+    |   File "/usr/lib/python3.14/contextlib.py", line 221, in __aexit__
+    |     await anext(self.gen)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/_utils.py", line 115, in create_collapsing_task_group
+    |     raise exc from exc.__cause__ or context
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_core/_tasks.py", line 327, in _run_coro
+    |     retval = await self._coro
+    |              ^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/responses.py", line 278, in wrap
+    |     await func()
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/responses.py", line 252, in stream_response
+    |     async for chunk in self.body_iterator:
+    |     ...<2 lines>...
+    |         await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 57, in iterate_in_threadpool
+    |     yield await anyio.to_thread.run_sync(_next, as_iterator)
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    |     return await get_async_backend().run_sync_in_worker_thread(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     )
+    |     ^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    |     return await future
+    |            ^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    |     result = context.run(func, *args)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 46, in _next
+    |     return next(iterator)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 637, in chunks
+    |     yield reader.read(65536)
+    |           ~~~~~~~~~~~^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 143, in read
+    |     return self._actor._reader_call(self._lease, "read", size)
+    |            ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 370, in _reader_call
+    |     return self._admit("reader_" + name, (value,), {}, lease=lease)
+    |            ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 324, in _admit
+    |     return self._wait(message)
+    |            ~~~~~~~~~~^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 356, in _wait
+    |     raise error
+    | qcl_negf_api.service.ActorDeadline: operation_deadline
+    +------------------------------------
+___ test_disconnect_releases_handle_exactly_once_after_backend_returns[2.4] ____
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 670, in test_disconnect_releases_handle_exactly_once_after_backend_returns
+  |     anyio.run(scenario)
+  |     ~~~~~~~~~^^^^^^^^^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_core/_eventloop.py", line 83, in run
+  |     return async_backend.run(func, args, {}, backend_options)
+  |            ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2548, in run
+  |     return runner.run(wrapper())
+  |            ~~~~~~~~~~^^^^^^^^^^^
+  |   File "/usr/lib/python3.14/asyncio/runners.py", line 128, in run
+  |     return self._loop.run_until_complete(task)
+  |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  |   File "/usr/lib/python3.14/asyncio/base_events.py", line 720, in run_until_complete
+  |     return future.result()
+  |            ~~~~~~~~~~~~~^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2531, in wrapper
+  |     return await func(*args)
+  |            ^^^^^^^^^^^^^^^^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 660, in scenario
+  |     async with anyio.create_task_group() as group:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_core/_tasks.py", line 327, in _run_coro
+    |     retval = await self._coro
+    |              ^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 653, in serving
+    |     await response(
+    |         {"type": "http", "asgi": {"spec_version": spec_version}}, receive, send
+    |     )
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/api.py", line 40, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/responses.py", line 271, in __call__
+    |     await self.stream_response(send)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/responses.py", line 252, in stream_response
+    |     async for chunk in self.body_iterator:
+    |     ...<2 lines>...
+    |         await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 57, in iterate_in_threadpool
+    |     yield await anyio.to_thread.run_sync(_next, as_iterator)
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    |     return await get_async_backend().run_sync_in_worker_thread(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |         func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     )
+    |     ^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    |     return await future
+    |            ^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    |     result = context.run(func, *args)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 46, in _next
+    |     return next(iterator)
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/tests/test_actor_deadlines.py", line 637, in chunks
+    |     yield reader.read(65536)
+    |           ~~~~~~~~~~~^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 143, in read
+    |     return self._actor._reader_call(self._lease, "read", size)
+    |            ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 370, in _reader_call
+    |     return self._admit("reader_" + name, (value,), {}, lease=lease)
+    |            ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 324, in _admit
+    |     return self._wait(message)
+    |            ~~~~~~~~~~^^^^^^^^^
+    |   File "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/src/qcl_negf_api/service.py", line 356, in _wait
+    |     raise error
+    | qcl_negf_api.service.ActorDeadline: operation_deadline
+    +------------------------------------
+=========================== short test summary info ============================
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_disconnect_releases_handle_exactly_once_after_backend_returns[2.3]
+FAILED components/qcl-negf-portal/tests/test_actor_deadlines.py::test_disconnect_releases_handle_exactly_once_after_backend_returns[2.4]
+2 failed, 156 passed in 7.58s

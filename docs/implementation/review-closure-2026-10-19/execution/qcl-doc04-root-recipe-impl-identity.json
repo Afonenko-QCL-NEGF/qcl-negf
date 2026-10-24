@@ -1,0 +1,20 @@
+{
+  "phase": "I-Root-source-only-partial",
+  "result": "partial_stop_for_independent_high_review",
+  "worktree": "/tmp/qcl-doc04-root-recipe-worktree",
+  "branch": "codex/review-closure-doc04-root-recipes",
+  "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "source_files": [
+    {"path": "docs/public/make.jl", "sha256": "b673bf4e2ba53179bccd7dcff631c8c1fe03893944cf2add868155e133705c8b"},
+    {"path": "ops/docs.ts", "sha256": "1ab9df1f6b43df745500e176a7125f482105131e1581be5c9205282b99406db0"},
+    {"path": "tests/docs_recipe_orchestration_test.ts", "sha256": "c3f10ffeeb3149c4439a8c2d786da4393a44d76d792e9104c40b31586b0d6ae5"}
+  ],
+  "complete_patch": {"path": "/tmp/qcl-doc04-root-recipe-impl-complete.patch", "sha256": "6f2e25ab81a25223f957d92edee7fab6ea34400bd22eb46ec92bda16156a0b81"},
+  "read_ledger": {"named_inventory_bytes": 282640, "conservative_total_upper_bound_bytes": 2080880, "grant_bytes": 3145728, "physical_io_rss_measured": false},
+  "checks": {"text_whitespace": "no_diagnostics_for_three_new_files", "runtime_red": "not_measured", "runtime_green": "not_measured", "typecheck": "not_measured", "format_lint": "not_measured", "build": "not_measured", "native": "not_measured", "science": "not_measured"},
+  "remaining_gaps": ["bounded_source_graph_binding", "accepted_full_assembly_entrypoint", "shared_schema_validation_binding", "plan_and_effect_manifest_validation", "actual_owner_staging_and_readback", "nested_docstring_import_cache_proof", "full_assets_license_runtime_css_binding", "external_fresh_admission_and_process_tree_binding", "render_and_assembly_dispatch", "source_recheck_and_immutable_candidate", "source_change_control", "actual_julia_guard_sentinel_controls", "finite_runner_production_wiring"],
+  "commits": 0,
+  "target_execution": 0,
+  "network": 0,
+  "independent_review": "pending"
+}

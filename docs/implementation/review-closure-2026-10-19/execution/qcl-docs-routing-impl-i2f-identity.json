@@ -1,0 +1,25 @@
+{
+  "stage":"I2F-boundary2-source-candidate",
+  "verdict":"awaiting-fresh-independent-high-CPP-not-native-ready",
+  "worktree":"/tmp/qcl-docs-test-routing-worktree",
+  "head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "inputs":{"I2E_review":"c8224246cc32b3327680841a292a9b232fa82b87834ad52067577b1805827e62","I2E_review_identity":"3aa4e19f53e445c95c73bba9b5f53c17d491e6e37b5e05f10108fc1ea2122d36","I2E_author_identity":"569fd093509c4d388b51c4be40bd82b502b3e212ee43a63b924892b6232a194a"},
+  "frozen_before":"/tmp/qcl-docs-routing-i2e-frozen-before-i2f/manifest.sha256",
+  "patch":{"path":"/tmp/qcl-docs-routing-impl-i2f-complete.patch","kind":"complete-four-file-I2E-to-I2F-delta","bytes":60319,"sha256":"1ac2e0b556153a05905542c01ce606d10bb5b10bb20cbdb225293a34e2ade464"},
+  "files":{
+    "ops/docs_tests_native.py":{"before":"86d041a368ef6eb1607c2a92dfa58cb9d17e7f605e53d22505e43465a49d3d97","after":"9ac8407583293567e05eb0217e77d83c58faa91c1ab59c96f22d8cce190d35fa"},
+    "ops/docs_tests_cli.ts":{"before":"70a28e1922352732e1484820df81eb0420021ff7c119aea05e37252c2843d798","after":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7"},
+    "tests/test_docs_test_native.py":{"before":"25e6e9dfc6838238c892d65b4a221d2a18cb8a6a2e90fd6d6aa6eb6094667eb4","after":"36a52d7bb9b42fa27eab821f711d1d9b1eb8e624cbd350d464a7c5d330220b36","nominal_methods":8,"observed":null},
+    "tests/docs_test_native_protocol_test.ts":{"before":"eea4109924d857edeb5a12c4e5751c89759a007070cebc06d7d175e2af097110","after":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2","nominal_registrations":8,"observed":null}
+  },
+  "external_pure":{"edited":false,"helper_sha256":"68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5","fixture_sha256":"2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"},
+  "scope":["B1r-actual-typed-records","B2a-independent-settlement","B2b-private-fork-FD-closure","B2c-exact-terminal-stream-proofs"],
+  "remaining":["fresh-independent-high-CPP","B3-exact-schedule-and-complete-physical-domain-ledger","B4-full-C8","finite-DEV8plus8-and-compiler-admission","actual-trusted-external-provider-BIND"],
+  "execution":{"parser":0,"compiler":0,"import":0,"scripts":0,"tests":0,"Deno":0,"Julia":0,"runtime":0,"native":0,"network":0,"server":0,"CI":0,"science":0},
+  "historical_calls":{"product":87,"source":7,"increment":0},
+  "resource_cap":{"minutes":25,"CPU":1,"RAM_bytes":2147483648,"read_bytes":8388608,"output_bytes":262144},
+  "read_ledger":{"conservative_upper_bytes":4194304},
+  "output_ledger":{"aggregate_bytes":null,"cap_compliance":"not-confirmed-batched-tool-output-truncated"},
+  "measured_resources":{"CPU":null,"RSS":null,"physical_IO":null},
+  "next_gate":"fresh-independent-high-CPP-on-this-exact-four-file-manifest"
+}

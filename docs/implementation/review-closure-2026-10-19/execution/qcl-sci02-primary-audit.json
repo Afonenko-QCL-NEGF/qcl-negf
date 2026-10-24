@@ -1,0 +1,22 @@
+{
+  "task": "SCI02.primary_source_audit",
+  "role": "audit high; input collection only, not scientific design acceptance",
+  "source_root": "e0f244d075dd49874ba4f3847f4efa693f3b3622",
+  "url": "https://arxiv.org/pdf/1911.06582v1",
+  "retrieved_date": "2026-10-19",
+  "bytes": 2760444,
+  "sha256": "b103b3da9fa977d1dc682d1e2caf96d74b5f081731e4db0da944af675a58dc70",
+  "declared_hash_match": "components/qcl-negf-research/literature/reference-2019/source.yaml source_artifacts[1911.06582.pdf]",
+  "metadata": {"arxiv": "1911.06582v1", "doi": "10.1063/1.5110305", "journal": "Applied Physics Letters 115, 010601 (2019)", "source": "https://arxiv.org/abs/1911.06582", "publisher_direct_access": "DOI URL unavailable via web tool"},
+  "visual_observations": [
+    {"page_printed": 3, "locator": "left column first paragraph", "quantity": "4.5e10 cm^-2", "layer_sequence_A": [32.6,79.9,19.0,84.0,29.0,51.6], "doped_underlined_layer_A": 29.0},
+    {"page_printed": 4, "locator": "Figure 3(a) caption first two lines", "quantity": "4.5e10 cm^-3", "doped_underlined_layer_A": 29.0},
+    {"page_printed": 3, "locator": "right column first paragraph", "scope": "paper discusses an electron-electron extension at 200 K; does not authorize adding it to current S1"}
+  ],
+  "methods": ["bounded curl primary download 45 s / 10 MiB ceiling", "sha256sum", "pdfinfo", "pdftoppm printed pages 3 and 4, scale-to1600", "visual inspection of both full pages"],
+  "download_attempts": {"sandbox": "DNS resolution failed; retained tool result", "escalated": "completed exit0, 2760444 bytes"},
+  "conclusion": "Primary bytes and visual inspection confirm an internal unit discrepancy. Preserve declared sheet 4.5e14 m^-2 with caveat. No physical parameter change; SCI02 design and independent review still required.",
+  "scientific_submits": 0,
+  "local_pdf": "/tmp/qcl-1911.06582v1.pdf",
+  "renders": ["/tmp/qcl-paper-page-3.png", "/tmp/qcl-paper-page-4.png"]
+}

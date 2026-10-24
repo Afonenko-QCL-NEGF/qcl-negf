@@ -1,0 +1,48 @@
+{
+  "task": "OPS04",
+  "attempt": "ROOT-RED-1",
+  "started_utc": "2026-10-19T21:02:16.749369+00:00",
+  "recorded_at_utc": "2026-10-19T21:02:18.388271+00:00",
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "test",
+    "--cached-only",
+    "--no-remote",
+    "--no-npm",
+    "--allow-read=/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf,/tmp/qcl-OPS04-ROOT-RED-1/tmp",
+    "--allow-write=/tmp/qcl-OPS04-ROOT-RED-1/tmp",
+    "--allow-env=TMPDIR",
+    "tests/solver_test.ts",
+    "tests/application_cd_test.ts"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+  "fixture_sha256": {
+    "tests/solver_test.ts": "d2c5da7ad9783bbc65e5e76baef8cb43282eb4388393f8dc130172be74c8b1d5",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85"
+  },
+  "exit_code": 1,
+  "wall_seconds": 1.639,
+  "sampled_peak_process_tree_RSS_bytes": 350892032,
+  "sampled_owned_temporary_bytes_peak": 621725,
+  "stdout_stderr_bytes": 12460,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "source-bound local root units: DENO; offline no setup/solver/fullCI; Node no network-call witness is source-based, Deno no net/run permission",
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "original_log": "/tmp/qcl-OPS04-ROOT-RED-1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 22,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

@@ -1,0 +1,136 @@
+{
+  "format": "qcl-negf.doc06-symlink-impl-review-identity.v1",
+  "recorded_utc": "2026-10-20T05:23:59.464068+00:00",
+  "verdict": "PASS_SOURCE_CPP",
+  "blocking_source_findings": [],
+  "reviewed_root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+  "source_authority": "frozen isolated overlay bytes; managed Root still has old test until coordinator promotion",
+  "report": {
+    "path": "/tmp/qcl-doc06-symlink-impl-review.md",
+    "bytes": 14987,
+    "sha256": "8d6074a6ddf3bdb13436fd4a83e94254daa6abea5f37af393ad86e0c197b01e9"
+  },
+  "inputs": [
+    {
+      "path": "/tmp/qcl-doc06-worktree/tests/docs_static_slice_test.ts",
+      "bytes": 34879,
+      "sha256": "ff6f0ec86be1ae7905721848998f8f7e7d22173d35534119f6102317e7fa8ec6"
+    },
+    {
+      "path": "/tmp/qcl-doc06-local-unit-run-v2.py",
+      "bytes": 16565,
+      "sha256": "1222d7d0a03dd39b72fc17be7029ced9e7422273f5ab08dbf48e6bd621f3014d"
+    },
+    {
+      "path": "/tmp/qcl-doc06-worktree/ops/docs/static-slice.ts",
+      "bytes": 43061,
+      "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-base-docs_static_slice_test.ts",
+      "bytes": 30378,
+      "sha256": "382a881675093137e5b42563d17851114e4ffbe8217ba3ead4636999e39cc8c4"
+    },
+    {
+      "path": "/tmp/qcl-doc06-local-unit-run-v1.py",
+      "bytes": 9515,
+      "sha256": "9bf3e58d14ee135ff047f045f12beac67310567febffd18d2a5005ce5c0ba32e"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-test-delta.patch",
+      "bytes": 6660,
+      "sha256": "5aae29fd56abcc65f00df94c399736a09e5f4bad75a3fd74bcd98585bed1d14b"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-harness-delta.patch",
+      "bytes": 15892,
+      "sha256": "2406643c61bf928acc027ea19f7a927d44882fefc7f4930ee27a9371be51520f"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design.md",
+      "bytes": 19886,
+      "sha256": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design-review.md",
+      "bytes": 14463,
+      "sha256": "cae997412488ef7e1508a0c8920120d167f7c59b48047f387e354802506f065d"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-impl-report.md",
+      "bytes": 10296,
+      "sha256": "02c2909c2db67cd7f1f19a9f2c59ee2fe575e9347b76b4bfe1a91fdd3c8663e9"
+    },
+    {
+      "path": "/tmp/qcl-owned-temp-sampler-v2.py",
+      "bytes": 1567,
+      "sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e"
+    },
+    {
+      "path": "/tmp/qcl-local-julia-guard-v2.py",
+      "bytes": 14409,
+      "sha256": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/original.log",
+      "bytes": 5423,
+      "sha256": "3cae707b9a921a38e820cbb83ca0c7a73437048ed7b86fce27ae803b7d854b54"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/receipt.json",
+      "bytes": 2463,
+      "sha256": "2b058e3083a35824321936074e58db5f2f328dee0954bbbc97428c3a164c4fa1"
+    }
+  ],
+  "independent_source_checks": {
+    "exact_declared_seed_nodes": 13,
+    "directories": 10,
+    "symlinks": 2,
+    "empty_regular_files": 1,
+    "link_payload_bytes": 57,
+    "child_metadata_stays_in_TMP": true,
+    "actual_all9_alias_and_direct_backing_hash_witnesses": true,
+    "precise_negative_reason_both_cases": "symlink_or_invalid_source",
+    "other54_source_exact_text_remainder_unchanged": true,
+    "literal_registration_sites_unchanged": 29,
+    "source_expected_engine_tests": 56,
+    "fresh_engine_count_measured": false,
+    "prelaunch_and_terminal_actual_guard_thresholds": true,
+    "start_terminal_test_adapter_harness_stability_checks": true,
+    "existing_SYMLINK_E1_attempt_observation": "ENOENT; not reservation"
+  },
+  "E1_prerequisites": [
+    "separate Root finite attempt allocation and binding",
+    "promote reviewed test exact ff6f0e... bytes to harness managed Root",
+    "fresh final source/runtime/helper/attempt identity checks",
+    "retain original failed evidence and stop after this distinct attempt"
+  ],
+  "stage_limits": {
+    "wall_seconds": 900,
+    "cpu": 1,
+    "ram_bytes": 1073741824,
+    "source_read_bytes": 2097152,
+    "report_bytes": 98304
+  },
+  "conservative_source_read_upper_bound_bytes": 1048576,
+  "metrics_caveat": "source read conservative bound, CPU/RSS/physical I/O not measured or claimed hard caps",
+  "actions": {
+    "target_execution": false,
+    "harness_execution": false,
+    "target_import_or_parser": false,
+    "typecheck_tests_build": false,
+    "network": false,
+    "server": false,
+    "scientific_runs": 0,
+    "ci_dispatches": 0,
+    "source_changes": false,
+    "checkpoint_changes": false,
+    "git_writes": false,
+    "delegation": false
+  },
+  "original_DOC06_attempts": "2/2 exhausted; failed GREEN retained",
+  "E1_executed": false,
+  "E1_approved_by_this_review": false,
+  "S1_caps": "unchanged",
+  "stop": "report/identity only; coordinator sole promotion/checkpoint owner"
+}

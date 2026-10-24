@@ -1,0 +1,63 @@
+{
+  "stage": "INDEPENDENT_SOURCE_ONLY_FIXTURE_REVIEW",
+  "verdict": "CHANGES_REQUIRED_SOURCE",
+  "runner_worktree": "/tmp/qcl-sci08-r1-runner-worktree",
+  "runner_head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "report": "/tmp/qcl-sci08-R1-fixtures-review.md",
+  "report_sha256": "7c7d9d3faff2d8b167eb401433be534cd3bdad59af04f2beee12a974d24575e9",
+  "input_sha256": {
+    "design": "16b07bbafce8235e0e103205e90c5b6e6b0db6c13c5bd4c883074f32888fe3c7",
+    "design_v2": "5a50afe3ca4014991dcb61d6dfb2879b2fef99e10f18347b5aa5d4eefe54d642",
+    "high_final_review": "23e50f07964c441f16b1e121f9d7952cf1bafd737544b81000a56a9da28e32fa",
+    "candidate_identity": "35684ed22b678cd1b74229aa29642a69d854da6a72b07f89b3987f47d97b0e27",
+    "candidate_patch": "869d11d7f7c59c24313dda77650bf96a90903a66062dc27048782c4543d3a5d6",
+    "candidate_report": "9557a176d31c78c261846809c3945a555dad39c18363fcbf61a63a110a889b03",
+    "behavioral_red": "c519b715f645de58a27dea3e19cda5ad9142b393347a07dd8e4265edad914028"
+  },
+  "fixture_sha256": {
+    "test/contracts/checked_storage_forecast.jl": "f3f263ad0b1b13dcc8a20b5668bfdccb7bb7fa5d30937bd72d7793a0013d2cc4",
+    "test/infrastructure/strict_campaign_resource_admission.jl": "b6470f1d8e3b89b5ad71b9a8cb6cbcc9873221c85a2515cb8e3188306831b8c2",
+    "test/application/execution_resource_contract.jl": "42fb1de375ee1c6e3e0b4710dc045a8b308b3507790468eb6a112bd01e836aa9",
+    "test/infrastructure/linux_process_resource_probe.jl": "fb36182464c643c42951bcd89a0ad59f6f0118f0524050c3dbe0c0a80c3a581c",
+    "test/integration/native_phase_resource_contract.jl": "30c511c1b8a811855934d719b500192ff9be8efa301eb477651114143d37b5e0"
+  },
+  "source_sha256": {
+    "src/infrastructure/persistence/point_artifacts.jl": "9e8c1d8f624bb828134129c10226211968360950cbac9ffd82e247a8ec294cd4",
+    "src/infrastructure/resources/linux_resources.jl": "eed7dc41e655fa94d3b29db514b5e5682e3023b862b91e53f58dbc18f3f363b8",
+    "src/composition/native_phase_telemetry.jl": "9605f1a4852f5edbe8ca83652500c2e0a2352feec7a04cf9d0e85bd0e712f173",
+    "src/composition/scientific_execution.jl": "55a3737a35b21867d91992a2a3a7807729a3b9d83b0931006d99dc82addbf9cd",
+    "src/application/resource_contract.jl": "6be67c1ca1ded92b57063cec6e493a589c1520ccc282e569ca131b5f65effb8c"
+  },
+  "production_src_diff_empty": true,
+  "diff_check_exit_code": 0,
+  "property_groups": 31,
+  "nominal_assertions": 345,
+  "assertions_observed": false,
+  "red_assertions": 2,
+  "red_observed": false,
+  "red_source_prediction": "healthy_literal_pass_and_Bool_ArgumentError_expectation_behaviorally_fails_on_existing_baseline_API",
+  "blocking_findings": [
+    {
+      "id": "P2_HOST_BOOT_ID_READ",
+      "severity": "P2",
+      "caller": "test/integration/native_phase_resource_contract.jl:22",
+      "callee": "src/composition/native_phase_telemetry.jl:44",
+      "read": "src/composition/native_phase_telemetry.jl:24",
+      "path": "/proc/sys/kernel/random/boot_id",
+      "reason": "hardcoded_host_read_not_covered_by_callback_fake_roots"
+    }
+  ],
+  "actual_O1_O2_trace_required_before_ENG_READY": true,
+  "target_calls": 0,
+  "runtime_parser_import_tests_native_network_calls": 0,
+  "product_CP_git_writes": 0,
+  "C08_exhausted_8_of_8_unchanged": true,
+  "read_budget_bytes": 3145728,
+  "conservative_read_charge_upper_bound_bytes": 2097152,
+  "physical_IO_CPU_RSS_measured": false,
+  "writes": [
+    "/tmp/qcl-sci08-R1-fixtures-review.md",
+    "/tmp/qcl-sci08-R1-fixtures-review-identity.json"
+  ],
+  "stop": true
+}

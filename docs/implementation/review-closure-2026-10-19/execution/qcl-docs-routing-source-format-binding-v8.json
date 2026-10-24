@@ -1,0 +1,39 @@
+{
+  "accepted_cpp": {
+    "status": "PASS_SOURCE_PURE_CLOSURE",
+    "source_files": {
+      "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab",
+      "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format3-final-v8-review.md",
+      "sha256": "8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3"
+    },
+    "pure_only_slice": true,
+    "baseline_cpp_ref": {
+      "path": "/tmp/qcl-docs-routing-tap-correction-i1-review.md",
+      "sha256": "3842d4b5acf76a41d54b1fe3ac079969bb744526955ef6613ce01938f754ee9e"
+    }
+  },
+  "format_binding": {
+    "status": "PASS_FORMAT_ONLY",
+    "unformatted_sources": {
+      "tests/docs_test_routing_test.ts": "3f3a0184d8076ca16e8b11ebe380a1c4175d2faeb6e79ae08be6ea0dbad4255f",
+      "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab"
+    },
+    "formatted_sources": {
+      "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab",
+      "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"
+    },
+    "review_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format3-final-v8-review.md",
+      "sha256": "8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3"
+    },
+    "receipt_refs": [
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/receipt.json",
+        "sha256": "26228b8059235d0c6f37ac32a08a4a65a3af5976058c34913f9ba83f0629b714"
+      }
+    ]
+  }
+}

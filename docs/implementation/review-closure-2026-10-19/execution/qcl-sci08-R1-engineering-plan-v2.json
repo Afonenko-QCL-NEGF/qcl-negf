@@ -1,0 +1,151 @@
+{
+  "status": "SOURCE_ONLY_REQUIRES_INDEPENDENT_HIGH_REVIEW_AND_FRESH_ROOT_READY",
+  "plan_id": "SCI08-R1-RED-GREEN-v2",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "runner": "/tmp/qcl-sci08-r1-runner-worktree",
+  "runner_base": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "prepared_depot": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.build/local-julia-int01/depot-1",
+  "root_project_sha256": "859c6e7b2aedf4b58cd48731ea9a3970d70a43e018796472ec99550d186fdafe",
+  "root_manifest_sha256": "a6cb226a2d6fe990e9a067658c16b44acdbaf984e68c3474232a22f72d8d8b47",
+  "frozen_inputs": {
+    "/tmp/qcl-sci08-R1-design.md": "16b07bbafce8235e0e103205e90c5b6e6b0db6c13c5bd4c883074f32888fe3c7",
+    "/tmp/qcl-sci08-R1-design-v2.md": "5a50afe3ca4014991dcb61d6dfb2879b2fef99e10f18347b5aa5d4eefe54d642",
+    "/tmp/qcl-sci08-R1-design-v3.md": "373a5da4ca765561e4a3ee46fa9c0bd06959a067ebf9f56c415e33666ad507c7",
+    "/tmp/qcl-sci08-R1-design-review.md": "a68ecf63af984355148b46d4a943cc5ca35adbe9da80102c512858d2b4847d69",
+    "/tmp/qcl-sci08-R1-design-v2-review.md": "23e50f07964c441f16b1e121f9d7952cf1bafd737544b81000a56a9da28e32fa",
+    "/tmp/qcl-sci08-R1-design-v3-review.md": "7b8108df1708f103a988ca567feb0e50c8b8c8f455ac657217033ed692c0ff46",
+    "/tmp/qcl-sci08-R1-fixtures-v2-identity.json": "87981037d559a9461b835a3a4d1c5d99b86c1cce78c3594197010948397bb254",
+    "/tmp/qcl-sci08-R1-fixtures-v2-review.md": "0eb166121233cd45855687d648df921aca8a5eaf06dd306babef23c43fa0de7e",
+    "/tmp/qcl-sci08-R1-behavioral-red.jl": "c519b715f645de58a27dea3e19cda5ad9142b393347a07dd8e4265edad914028",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl": "36bf481a76fd9aa3166cc69af165a10052893935da63e7456174f8e06f7a1d7e",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/doc/julia/html/en/manual/command-line-interface.html": "6212541ceb60d62a48fb48cdbecdabfce1de0b4097e645da5856258992382454",
+    "/tmp/qcl-sci08-R1-harness-review.md": "0436f8fc877b63ff0921a758593b9353be9300027f664c913d93bd5ee32163d5"
+  },
+  "fixture_hashes": {
+    "test/contracts/checked_storage_forecast.jl": "f3f263ad0b1b13dcc8a20b5668bfdccb7bb7fa5d30937bd72d7793a0013d2cc4",
+    "test/infrastructure/strict_campaign_resource_admission.jl": "b6470f1d8e3b89b5ad71b9a8cb6cbcc9873221c85a2515cb8e3188306831b8c2",
+    "test/application/execution_resource_contract.jl": "42fb1de375ee1c6e3e0b4710dc045a8b308b3507790468eb6a112bd01e836aa9",
+    "test/infrastructure/linux_process_resource_probe.jl": "fb36182464c643c42951bcd89a0ad59f6f0118f0524050c3dbe0c0a80c3a581c",
+    "test/integration/native_phase_resource_contract.jl": "63d83e77025c74140cd67af9d9efb2b1bb7df735bebf7ac9c06c4c16e3476a6a"
+  },
+  "red_file": "/tmp/qcl-sci08-R1-behavioral-red.jl",
+  "green_files": [
+    "test/contracts/checked_storage_forecast.jl",
+    "test/infrastructure/strict_campaign_resource_admission.jl",
+    "test/application/execution_resource_contract.jl",
+    "test/infrastructure/linux_process_resource_probe.jl",
+    "test/integration/native_phase_resource_contract.jl"
+  ],
+  "max_calls": 2,
+  "per_phase_max_attempts": 1,
+  "attempt_ids": [
+    "SCI08-R1-ENG-RED-1",
+    "SCI08-R1-ENG-GREEN-1"
+  ],
+  "wall_total_seconds": 1200,
+  "per_call": {
+    "wall_seconds": 600,
+    "wall_stop_seconds": 580,
+    "CPU_affinity_count": 1,
+    "CPU_seconds_soft": 570,
+    "CPU_seconds_hard": 575,
+    "sampled_RSS_bytes": 2147483648,
+    "sampled_owned_TMP_bytes": 16777216,
+    "complete_raw_output_bytes": 1048576,
+    "output_stop_bytes": 917504,
+    "sampling_period_seconds": 0.05,
+    "terminal_guard_seconds": 595
+  },
+  "expected_red": {
+    "passes": 1,
+    "fails": 1,
+    "errors": 0,
+    "broken": 0,
+    "assertions": 2,
+    "behavior": "healthy forecast literal passes; prohibited Bool forecast assertion fails on exact baseline existing API",
+    "exit_code": 1
+  },
+  "expected_green": {
+    "passes": 349,
+    "fails": 0,
+    "errors": 0,
+    "broken": 0,
+    "logical_groups": 31,
+    "nested_testsets": 33,
+    "includes": 5,
+    "exit_code": 0
+  },
+  "sequence": [
+    "independent high harness review",
+    "fresh Root RED READY and shared counter reservation",
+    "one RED existing baseline call",
+    "Root observes exact behavioral RED",
+    "one medium owning production I within existing SCI08 two-round cap",
+    "independent high I CPP with actual O1/O2, policy propagation, reserve and fake boot reader traces",
+    "fresh Root GREEN READY binds final exact source",
+    "one GREEN call",
+    "Root records both original receipts and reconciles shared milestone; no autonomous rerun"
+  ],
+  "shared_budget": {
+    "milestone_start": 81,
+    "milestone_ceiling": 87,
+    "calls_reserved": 2,
+    "owner": "Root",
+    "no_CP_or_counter_writes_by_harness": true,
+    "C08": "EXHAUSTED 8/8; unrelated and never reused"
+  },
+  "root_READY_required": {
+    "status": "READY",
+    "issuer": "Root",
+    "created_unix": "fresh <=300 seconds, not future",
+    "phase": "RED or GREEN",
+    "attempt_id": "exact corresponding id",
+    "operation_identity": "Root-issued unique operation identity",
+    "plan_sha256": "exact reviewed plan",
+    "harness_sha256": "exact reviewed harness",
+    "source_before": "snapshot() exact dictionary, including content hashes for harness/plan and selected repository input closure; HEAD/status only forensic metadata",
+    "shared_budget": {
+      "milestone_start": 81,
+      "milestone_ceiling": 87,
+      "calls_reserved": 2,
+      "call_ordinal": "1 RED or 2 GREEN",
+      "no_rerun": true
+    },
+    "explicit_environment_only_sampled_storage_acknowledged": true,
+    "GREEN_only": [
+      "red_receipt_sha256",
+      "accepted_medium_I {path,sha256,status:PASS_SOURCE}",
+      "accepted_high_CPP {path,sha256,status:PASS_SOURCE}",
+      "actual_O1_O2_caller_traces {path,sha256,status:PASS_SOURCE}",
+      "source_after_I_fixture_count:349",
+      "logical_groups:31"
+    ]
+  },
+  "command_form": [
+    "/usr/bin/python3",
+    "/tmp/qcl-sci08-R1-local-unit-run-v2.py",
+    "RED|GREEN",
+    "/absolute/fresh-root-READY.json"
+  ],
+  "limitations": [
+    "Engineering only: no scientific convergence, discretization, experiment, S1 admission, release or native acceptance claim.",
+    "RSS and all regular-file logical bytes under owned TMP are sampled, not hard memory/disk quotas or proof of transient peaks. Source/overlay symlinks are not traversed by TMP sampler.",
+    "Clear fixed environment, owned HOME/XDG/TMP and first depot, --compiled-modules=existing and --pkgimages=existing avoid intended writes outside owned TMP. Secondary prepared depot and source paths are logically read-only, not OS-enforced read-only mounts. Explicit writes from arbitrary package code are not physically prevented or measured; ROOT must acknowledge this limitation before READY.",
+    "No network syscall sandbox: offline Julia package settings plus exact reviewed fake-only call graph; absence of network access is a source contract, not kernel-enforced proof.",
+    "No package install/instantiate/precompile commands, solver, benchmark, native campaign, full suites, C08 wrapper, CP mutation, server action, process-name kill or foreign-job census.",
+    "Any failed/unknown import, exception, sampled cap, output overflow/incomplete drain or identity change consumes the reserved attempt; no rerun or alias. RED needs exact counts and baseline identity, not merely exit 1."
+  ],
+  "flag_source_evidence": "Exact local Julia1.13.0 bundled command-line-interface manual lists --compiled-modules=existing (no new precompile files) and --pkgimages=existing (no new package images); no runtime --help executed.",
+  "root_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "runtime_input_hashes": {
+    "tools/verify_schema_provenance.jl": "8bdb801a6e9b5419735c1248b3efc9a01900e2f6335c359693cf2e4dee7fcf09",
+    "test/fixtures/configurations/exact_cpu.yaml": "7d308b39c3ccb75f394993c5f21d36bf3527bf8fac42ab9e4af789a75186682c",
+    "schema/PROVENANCE.json": "01070e44102d66c0497d0b9d92729b1a335b276c051eae7bde7dee0273631fd8",
+    "schema/results-contract-set.json": "bd14c6a62d35543b29e9473c8e388a3790524364c52b4d64922a74278c6fb2c1",
+    "schema/run.schema.json": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b"
+  },
+  "source_closure_boundary": "All files in Runner/Core src/ext and Runner test/support; exact selected fixtures, imported verifier tool, exact_cpu.yaml and entire Runner schema inventory incl PROVENANCE; frozen review/source docs/helpers; Root Project/Manifest; exact harness/plan bytes; runtime binary. Installed Julia stdlib/dependency/native/cache closure is trusted prepared environment, not rehashed or OS-isolated. Runner overlay auto schema mode is standalone.",
+  "RSS_evidence": "Immediate postspawn attempt before first poll; null/unknown for vanished proc or missing VmRSS, attempt/valid/unknown counts; >=1 complete tree observation required for any PASS; no terminal RSS0 substitution.",
+  "terminal_failure_policy": "Reservation failure receipt is written before setup. 595s SIGALRM kills own group, best-effort failed receipts, os._exit; independent cleanup/readback handlers; incomplete collector exits after receipt. Filesystem hangs, external guardian kill or kernel scheduling are not guaranteed bounded. Capture-construction fallback stores bounded original prefix and always STOP; original file never truncated/deleted.",
+  "environment_integrity": "Byte hashes of copied Project/Manifest and literal/resolved symlink destinations compared prelaunch and after child; snapshot equality includes harness and plan. No physical TOCTOU lock."
+}

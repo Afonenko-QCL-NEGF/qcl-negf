@@ -1,0 +1,17 @@
+
+Literal noncommuting Keldysh product: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/keldysh_literal_matrix_oracle.jl:21
+  Expression: B[1, 1] == 7 && (det(B) == 10 && tr(B) == 12)
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/keldysh_literal_matrix_oracle.jl:21 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [4] top-level scope
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/keldysh_literal_matrix_oracle.jl:7
+Test Summary:                        | Pass  Fail  Total  Time
+Literal noncommuting Keldysh product |   15     1     16  2.6s
+RNG of the outermost testset: Random.Xoshiro(0xd4e01a3e09961636, 0x37fdfcd49d84ac79, 0xe4cbb08ed2d98d18, 0xc5b9d792cba1d0b5, 0x5ce9688991d0920c)
+ERROR: LoadError: Some tests did not pass: 15 passed, 1 failed, 0 errored, 0 broken.
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/keldysh_literal_matrix_oracle.jl:1

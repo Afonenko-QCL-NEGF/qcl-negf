@@ -1,0 +1,38 @@
+{
+  "scope": "OPS04.S Root v3 independent narrow F1 source review",
+  "date": "2026-10-20",
+  "reviewer_task": "/root/ops04_cli_seam_review",
+  "verdict": "APPROVE test source v3; F1 closed at source level",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "root_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "git_status_short": " M tests/application_cd_test.ts\n M tests/solver_test.ts\n",
+  "source_authority": "Git tree, not this identity receipt",
+  "inputs_sha256": {
+    "tests/solver_test.ts": "d2c5da7ad9783bbc65e5e76baef8cb43282eb4388393f8dc130172be74c8b1d5",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85",
+    "/tmp/qcl-ops04-root-red-v2-review.md": "e5b0802310206241992194308e7ac5962483b25c0d7c73cf4e496107c8f17d74",
+    "/tmp/qcl-ops04-root-red-v3-report.md": "b22a0f1b690c3f4443a16e1965f2df528cd594c13fabcb68a79ceaa6b411057c",
+    "/tmp/qcl-ops04-root-red-v3-identity.json": "1b3e92192fcbff17a55a2fcd7278b64dcee9c84a87f5ef78ceb190a9515977ae",
+    "/tmp/qcl-ops04-root-red-v3-patch.diff": "f5b8cd3efe2f3e8708cbdfe5b88f979f1f502b85a19daab707635288a64fb7e2",
+    "/tmp/qcl-ops04-root-red-v3-delta.json": "26c598cf000c80d7653463fbca4b97f4b647f2c39728aceeaca838e1bbbb7845"
+  },
+  "sole_delta_proof": "Replacing only v3 solver lines 171-188 with prior assertion in an unwritten sed stream yielded v2 frozen SHA d26512392d63eaccf44ab7711ea07b1b6c8a15a3fb3108afd47c1ccacbf9d542",
+  "actual_git_diff_matches_v3_patch": true,
+  "production_diff_to_head": "empty exit 0",
+  "f1_resolution": "Independent literal expected object preserves first-insertion hash,url positions and exact archive/graph/lock values; actual outgoing SHA and other assertions retained",
+  "output": {
+    "path": "/tmp/qcl-ops04-root-red-v3-review.md",
+    "sha256": "ad3e2da9ffd6b84d4faec7a3e536df46c61d6365f1cd2342ec1bd1a740f22ceb",
+    "bytes": 5302
+  },
+  "imports_parsers_typecheck_tests": 0,
+  "deno_nix_build_network": 0,
+  "source_writes": 0,
+  "children": 0,
+  "checkpoint_writes": 0,
+  "runtime_slots_consumed": 0,
+  "observed_red_green": false,
+  "resource_envelope": { "wall_minutes": 10, "cpu": 1, "ram_gib": 2, "read_mib": 1, "report_kib": 32 },
+  "telemetry": "Cumulative read/CPU/RAM/tool-output not instrumented",
+  "stop": "Coordinator separately decides finite RED; no implementation or execution activated"
+}

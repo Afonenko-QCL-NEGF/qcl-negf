@@ -1,0 +1,22 @@
+{
+  "scope": "bounded_source_design_only",
+  "grant": {"wall_minutes": 10, "cpu": 1, "ram_bytes": 1073741824, "read_bytes": 3145728, "output_bytes_including_tools": 81920},
+  "conservative_named_read_reserve_bytes": 2097152,
+  "physical_io_rss_wall_enforcement_measured": false,
+  "transport_output_exactly_metered": false,
+  "formal_budget_enforcement_pass_claimed": false,
+  "read_groups": [
+    {"kind": "instructions", "paths": ["actualRoot/AGENTS.md", "actualRoot/docs/architecture.md", "superpowers/using-superpowers/SKILL.md", "superpowers/brainstorming/SKILL.md"], "mode": "named_text_reads"},
+    {"kind": "handoff", "paths": ["/tmp/qcl-doc04-root-recipe-impl-v2-review.md", "/tmp/qcl-doc04-root-recipe-impl-v2-review-identity.json", "/tmp/qcl-doc04-root-recipe-impl-v2-report.md", "/tmp/qcl-doc04-root-recipe-impl-v2-identity.json"], "mode": "named_reads_excerpts_search_and_hash"},
+    {"kind": "owning_source", "paths": ["actualRoot/ops/git.ts", "actualRoot/ops/process.ts", "actualRoot/tests/git_test.ts", "actualRoot/.gitmodules", "actualRoot/ops/docs/assemble.py", "recipeOverlay/ops/docs.ts", "recipeOverlay/ops/git.ts", "recipeOverlay/ops/process.ts", "recipeOverlay/docs/public/make.jl", "recipeOverlay/tests/docs_recipe_orchestration_test.ts"], "mode": "named_reads_excerpts_search_and_hash"},
+    {"kind": "routing", "paths": ["actualRoot/docs/system/implementation-entrypoint.md", "actualRoot/docs/system/release-roadmap.md", "actualRoot/docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc04-recipes-design-v3.md"], "mode": "narrow_excerpts_and_text_search"},
+    {"kind": "git_metadata", "paths": ["actualRoot", "recipeOverlay"], "mode": "rev_parse_status_submodule_status_read_only"}
+  ],
+  "discovery_limit": "Initial rg --files -g DOC04 patterns over /tmp was broader than the intended named discovery, returned truncated filename output and permission errors; no discovered scripts were executed. Later reads stayed on named paths. Exact physical enumeration I/O was not measured; no claim of strict discovery enforcement.",
+  "not_read_or_executed": ["complete_patch_contents", "prepared_scripts", "component_native_sources_or_imports", "parser_compiler_tests_render", "server_network_native_CP_index"],
+  "writes": ["/tmp/qcl-doc04-sourcegraph-seam-design-v1.md", "/tmp/qcl-doc04-sourcegraph-seam-design-v1-identity.json", "/tmp/qcl-doc04-sourcegraph-seam-design-v1-read-ledger.json"],
+  "source_git_cp_mutations": 0,
+  "runtime_attempts": 0,
+  "children": 0,
+  "stop": "first_specific_contract_then_independent_review"
+}

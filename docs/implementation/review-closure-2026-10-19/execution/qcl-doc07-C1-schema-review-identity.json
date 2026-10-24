@@ -1,0 +1,25 @@
+{
+  "task": "Independent high DOC07 C1 schema source review",
+  "verdict": "REQUEST_CHANGES",
+  "report": "/tmp/qcl-doc07-C1-schema-review.md",
+  "report_sha256": "a323b9b88128ba3ed3caa60020726e60d336c7c16b21644394a6db303734a812",
+  "head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "schema_sha256": "cbca63eac4ce22ece53e5275b5ce458508edf9ab1d467aad28d9a8348534a3a0",
+  "frozen_test_sha256": "6a39ee353153a4de2d313323b5c67662026721f282adec1ae44305d95d1f2ebd",
+  "canonical_sha256": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+  "plan_sha256": "20e712a051b3ba9e326bf4dccc3598513b43beefbcab0862d57e287d676dcb8b",
+  "design_review_sha256": "f62bbe6998b178ea746a3a28ae73e4e910c751742e0e7887ac4d77b63786b231",
+  "patch_sha256": "ede3357bdbbf265aadb06064b0cc38d69f01c48c286094777ed3de1f4d8e1987",
+  "author_identity_sha256": "ed2701ce764b58be5b7344b2983dbf69a26f9d18784f89789e26979467f371cb",
+  "author_report_sha256": "bd813c5a1c9ad6c46c5b5d94d2439a689d13b20be6f90776c21ac25f9ae7b3fd",
+  "findings": [
+    {"id":"F1","priority":"P1","locator":"model-help.schema.json:324","issue":"invalid/unavailable input_status does not force used unknown/null"},
+    {"id":"F2","priority":"P2","locator":"model-help.schema.json:13","issue":"dollar end anchor permits terminal LF in exact digest/identity token patterns"}
+  ],
+  "semantic_C2_not_reclassified_as_schema_proof": true,
+  "reviewer_runtime_or_parser_or_import_calls": 0,
+  "network_build_product_checkpoint_git_mutations": false,
+  "children": 0,
+  "unit_calls_consumed": 0,
+  "state": "STOP"
+}

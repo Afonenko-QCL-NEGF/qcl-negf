@@ -1,0 +1,2 @@
+Test Summary:                                                                   | Pass  Total   Time
+Constant incompatible periodic source: direct diagnostics and synthetic routing |  183    183  13.8s

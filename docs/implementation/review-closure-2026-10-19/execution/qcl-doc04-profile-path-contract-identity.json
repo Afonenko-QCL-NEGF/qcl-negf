@@ -1,0 +1,109 @@
+{
+  "schema": "qcl-doc04-internal-source-design-receipt-v1",
+  "date": "2026-10-20",
+  "scope": "focused pilot path clarification; no product edits or execution",
+  "selected_root": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "status": "FROZEN_SOURCE_DESIGN_PENDING_INDEPENDENT_HIGH_REVIEW",
+  "contract": {
+    "path": "/tmp/qcl-doc04-profile-path-contract.md",
+    "bytes": 15261,
+    "sha256": "ec7717494878fbec813fe89c1ded0c5c43dcbeb6942271d0ef8d113445f5a935"
+  },
+  "immutable_inputs": [
+    {
+      "path": "/tmp/qcl-doc04-recipes-design.md",
+      "bytes": 19393,
+      "sha256": "008650e7c9ff98bdaf38a3450d2b3b13818409795c92738d0a9dbddaba2c2505"
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-design-v2.md",
+      "bytes": 6646,
+      "sha256": "ce582cc394d7dd70971c2a25929bf9362aad7d829403f1e2e0fba68a8ff65610"
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-design-v3.md",
+      "bytes": 5828,
+      "sha256": "960a639dd281d7a5b99c582f2c9dc8b17e816715753557791460ebcef1159aee"
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-design-v3-review.md",
+      "bytes": 8289,
+      "sha256": "7db5ad18c7c9e197fb0430422b917228ddc0216f90c0cdfb37f78ee80e9a4211"
+    }
+  ],
+  "delta": {
+    "mandatory_pilot_input": "QCL_DOCS_ATTEMPT",
+    "attempt_cli_binding": "--attempt-directory DIR",
+    "source": "ATTEMPT/stage/<literal-owner>/src",
+    "build": "ATTEMPT/raw/<literal-owner>",
+    "owners": [
+      "core",
+      "runner",
+      "operator"
+    ],
+    "guard_effects": "read-only Base path/project metadata before imports",
+    "output": "current owner BUILD must be absent; preserve failed/partial attempts",
+    "authority": "path containment is not external ownership/admission BIND"
+  },
+  "unchanged": [
+    "D3 Module[] and exact sitenames",
+    "Core/Runner default profile and doctests",
+    "full selected source scope",
+    "source-effects/import/assets/toolchain/BUILD prerequisites",
+    "DOC03 shared public schema",
+    "failed original 4MiB resource predicate"
+  ],
+  "execution": {
+    "target_imports": false,
+    "parsers": false,
+    "tests": false,
+    "build": false,
+    "network": false,
+    "git_mutations": false,
+    "product_edits": false
+  },
+  "resource": {
+    "envelope": {
+      "wall_minutes": 10,
+      "cpu": 1,
+      "ram_gib": 1,
+      "read_bytes": 1048576,
+      "output_bytes": 32768
+    },
+    "logical_source_read_accounting": "conservative full-file charge for each named content/hash pass, rather than claiming physical IO/RSS measurement",
+    "read_ledger": [
+      {
+        "path": "/tmp/qcl-doc04-recipes-design.md",
+        "file_bytes": 19393,
+        "charged_passes": 3
+      },
+      {
+        "path": "/tmp/qcl-doc04-recipes-design-v2.md",
+        "file_bytes": 6646,
+        "charged_passes": 2
+      },
+      {
+        "path": "/tmp/qcl-doc04-recipes-design-v3.md",
+        "file_bytes": 5828,
+        "charged_passes": 4
+      },
+      {
+        "path": "/tmp/qcl-doc04-recipes-design-v3-review.md",
+        "file_bytes": 8289,
+        "charged_passes": 2
+      }
+    ],
+    "unresolved_locator_probe": "/tmp/qcl-doc04-profiles-worktree absent; zero payload read, no source-code claim",
+    "measurements": "physical IO/RSS not measured; no target runtime",
+    "conservative_logical_source_bytes": 111361,
+    "metadata_read_reserve_bytes": 4096,
+    "conservative_total_read_upper_bound": 115457
+  },
+  "limitations": [
+    "No runtime guard or BUILD proof",
+    "No ownership/admission from caller paths/markers",
+    "Payload closure belongs to mandatory Root staging preflight",
+    "No adversarial filesystem or atomic TOCTOU claim"
+  ],
+  "stop": "independent high R before product implementation"
+}

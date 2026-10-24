@@ -1,0 +1,20 @@
+Test Summary:                                              | Pass  Total  Time
+Independent literal omitted-diagonal direct and FFT PV map |   13     13  1.8s
+
+Center-only continuum PV separates omitted cell and finite support: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/principal_value_independent_oracle.jl:79
+  Expression: ≈(errors[2] / errors[3], 65 / 33, atol = ATOL, rtol = RTOL)
+   Evaluated: 1.969696969698286 ≈ 1.9696969696969697 (atol=2.0e-13, rtol=2.0e-13)
+  Stacktrace:
+   [1] top-level scope
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/principal_value_independent_oracle.jl:42
+   [2] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/principal_value_independent_oracle.jl:79 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+Test Summary:                                                      | Pass  Fail  Total  Time
+Center-only continuum PV separates omitted cell and finite support |  107     1    108  1.7s
+RNG of the outermost testset: Random.Xoshiro(0x3db5617cc354599e, 0xc8085a1f17a6d21d, 0xa285878e703c12f1, 0x47af85215d12d6a9, 0xb836b98bc6f90d49)
+ERROR: LoadError: Some tests did not pass: 107 passed, 1 failed, 0 errored, 0 broken.
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/principal_value_independent_oracle.jl:1

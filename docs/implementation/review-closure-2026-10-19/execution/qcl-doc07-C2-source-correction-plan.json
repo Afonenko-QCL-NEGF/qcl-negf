@@ -1,0 +1,15 @@
+{
+  "DOC07_C1_C2_engineering_source_replan": {
+    "authority": "latestdirecthumanallavailabledevelopmentresourcesgrant; finiteengineeringreplanforcollatedcausalfixturegaps, notscience",
+    "historical_shared_source_cycles_conservative": 5,
+    "new_effective_source_cycle_cap": 8,
+    "allocation": "C2fixturev2 onecollatedrepair +C2implementationfirstcandidate +atmostoneindependentreviewrepair; no automaticfurthercycle",
+    "reason": "independentC2R0c18812 F1-F5 identifies maskednegatives andmissingexactassociation/chain/precedence/declaredcontrols; preserveoldtest/report andcorrectbeforefirstRED",
+    "test_call_cap": 4,
+    "test_calls_used": 2,
+    "C08": "8/8exhaustedunchanged",
+    "physical_model_criteria_native_and_finalCI_gates": "unchanged",
+    "C2_fixture_repair_envelope": "20min1CPU2GiB/read4MiB/output192KiB sourceonly; independentR beforeRootsoleRED",
+    "stop": "newcausalsemantics=>ultraDesign; exhaustedcap=>preservepartialandfocusedreplan, nohiddenreset"
+  }
+}

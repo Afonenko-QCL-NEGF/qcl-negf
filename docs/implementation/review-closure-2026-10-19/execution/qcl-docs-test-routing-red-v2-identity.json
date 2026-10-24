@@ -1,0 +1,70 @@
+{
+  "kind": "qcl-docs-routing-red-fixture-correction-v2",
+  "stage": "source-correction-awaiting-same-high-R",
+  "root_base": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "permitted_product_paths": [
+    "tests/docs_test_routing_test.ts"
+  ],
+  "frozen_review": {
+    "path": "/tmp/qcl-docs-test-routing-red-review.md",
+    "sha256": "705bea4364bbaf6053fd51cb7ea7acb48a2776d19e8f6002f9dddbd7e6302eb7"
+  },
+  "v1_snapshot": {
+    "path": "/tmp/qcl-docs-test-routing-red-v1-test.ts",
+    "bytes": 33358,
+    "sha256": "f3db415342457e3f05434f5ed5e3c49f83796f6d91eddffdd76846363b64f0c5"
+  },
+  "v2_source": {
+    "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts",
+    "bytes": 38723,
+    "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3"
+  },
+  "delta_patch": {
+    "path": "/tmp/qcl-docs-test-routing-red-v2-delta.patch",
+    "bytes": 7284,
+    "sha256": "9bdfa42f1dbc3ca7e104ea7ca8bef24e11faa124368a7d54ff1b205db35fd0c9"
+  },
+  "source_declared_count": {
+    "v1": 207,
+    "lexical_path_controls_added": 12,
+    "healthy_relocation_controls_added": 3,
+    "workspace_relocation_controls_added": 3,
+    "tmp_root_control_added": 1,
+    "pre_start_control_added": 1,
+    "v2": 227,
+    "status": "source_arithmetic_only_not_measured"
+  },
+  "preservation": {
+    "existing_after_child_source_mutation_control_byte_exact": true,
+    "existing_test_registrations_removed": 0,
+    "two_existing_regions_corrected": [
+      "absolute source path row: mutate one entry; preserve remaining11 and total12",
+      "storage rows: use otherwise rebound metadata/admission; assertions retained"
+    ],
+    "public_pure_API_changed": false,
+    "D1_D2_or_previous_reports_identity_patches_overwritten": false
+  },
+  "actions": {
+    "runtime_import_parser_typecheck_format_test_build_network": 0,
+    "production_or_config_edits": 0,
+    "commits_pushes_CP": 0,
+    "submodule_initialization": 0
+  },
+  "checks": {
+    "scope": "only requested new fixture in git status",
+    "whitespace": "no diagnostics from git diff --no-index --check; new-file diff exit1",
+    "runtime_RED_GREEN": "not_run"
+  },
+  "resources": {
+    "wall_cap_minutes": 15,
+    "cpu_cap": 1,
+    "ram_cap_bytes": 2147483648,
+    "read_cap_bytes": 2097152,
+    "conservative_named_read_bound_bytes": 786432,
+    "output_cap_bytes": 131072,
+    "physical_IO_RSS": "not_measured"
+  },
+  "next_gate": "same independent high fixture R, then Root separately bound RED",
+  "stop": true
+}

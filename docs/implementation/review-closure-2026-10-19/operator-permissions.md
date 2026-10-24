@@ -1,5 +1,11 @@
 # Согласованные разрешения оператора: пакет P1
 
+**Дополнение 2026-10-24: принято упрощение контроля ресурсов.** Действует
+[ресурсная поправка](resource-policy-2026-10-24.md) для initial/production S1.
+Исторические PLAN/standby ниже не отменяют позднейшие активированные grants;
+их повторное утверждение не требуется. Scientific criteria и technical BIND
+с fresh admission сохраняются; поправка сама по себе не является runtime READY.
+
 Подготовлен и согласован **2026-10-19**. Статус: **approved_standby**.
 Оператор явно утвердил B, выбрал G1 и S1 с уточнением «без электрон-электронного
 рассеяния»; точные ответы приведены в decision table ниже. Сейчас действует
@@ -221,24 +227,27 @@ coordinator численно фиксирует до submit и считает ac
 ≤936 h, независимо от parallelism; ожидание недоступного сервера не расходует
 compute и не разрешает бессрочный polling. Каждый активный job имеет deadline.
 
-**Утверждённые byte ceilings для всего S1** — ресурсные guards, не
-научные tolerances и не утверждение о наличии такого storage:
+**Ресурсные бюджеты всего S1, редакция 2026-10-24:** resident/log — конечные
+space budgets; cumulative I/O — monitored planning/early-stop budgets с возможным
+зафиксированным техническим overshoot. Это не scientific tolerances и не measured capacity.
 
-| Подмножество | Resident disk peak /attempt | Cumulative writes /attempt | Cumulative reads /attempt | Logs /attempt |
+| Подмножество | Resident disk space /attempt | Monitored writes /attempt | Monitored reads /attempt | Log space /attempt |
 | --- | --- | --- | --- | --- |
 | W1: 4 attempts | 128 GiB | 2 TiB | 4 TiB | 1 GiB |
 | W2/W3/R/H: 9 attempts | 256 GiB | 4 TiB | 8 TiB | 1 GiB |
-| Вся кампания, shared ceilings | **2 TiB current resident disk** | **44 TiB writes** | **88 TiB reads** | **13 GiB logs** |
+| Вся кампания, shared budgets | **2 TiB current resident disk** | **44 TiB writes** | **88 TiB reads** | **13 GiB logs** |
 
-Resident включает retained/pending/final/temp/retrieval/export copies на каждом
-filesystem и их суммарный peak; logs входят в storage. Byte accounting shared
-для агентов/producer/readers; protocol+hash reads учитываются. Final/failed raw
-и receipts сохраняются. Достаточность guards для native/NFS/cumulative writes
-и memory/audit headroom проверяет SCI07/08; без enforceable guard READY нет.
-Это generous ceilings, фактический reserve/quota/capacity могут быть ниже;
-resource shortage не разрешает уменьшить physics/grid/basis/window/channels.
-Ресурсный estimator должен до запуска доказать, что attempt укладывается в
-**все** соответствующие caps. Неизвестный W2/H payload не наследует W1 budget.
+Resident включает retained/pending/final/temp/retrieval/export copies, filesystem
+overhead и суммарный peak; logs входят в storage. Final/failed raw и receipts сохраняются.
+До запуска SCI07 проверяет консервативные оценки attempt/audit/checkpoint, actual
+allocation/quota/reserves и RAM/CPU/tasks/time controls обычного рабочего пути.
+SCI08 закрывает его конкретные recovery/containment defects, а не exhaustive native
+proof. Shared telemetry учитывает producer/readers, protocol/hash reads по фактическому
+coverage; missing coverage = unknown+gap, не pass и не требование custom VFD/NBD.
+Точная atomic cumulative per-byte гарантия больше не требуется; порядок preflight,
+early stop и kernel backstops — в [принятой поправке](resource-policy-2026-10-24.md).
+Actual reserve/quota/capacity могут быть ниже budgets. Нельзя уменьшать physics/grid/
+basis/window/channels ради ресурсов; неизвестный W2/H payload не наследует W1 budget.
 
 После двух одинаковых последовательных failure fingerprints affected wave
 останавливается. Дальше возможны независимые source/design/oracle tasks;

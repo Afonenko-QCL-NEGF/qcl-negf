@@ -1,0 +1,24 @@
+{
+  "stage":"I2E-boundary1-and-boundary2-source-candidate",
+  "verdict":"partial-changes-required-not-ready",
+  "worktree":"/tmp/qcl-docs-test-routing-worktree",
+  "head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "review_sha256":"8a666cf1d9771aab53ce9fecc156faae2b139ce60cc4a9875ec9056f6f1f1916",
+  "ancestral_I2D":{"report":"acafce8a10efd7c411f30508c046f67d328df2121234040ec089cb9a370551de","identity":"051f0779058c59a34eb810fac49e3a7741d67a9cb9e1a515f06fa84fdfc32505","delta":"0ed917aaefeab58b04a661c6b2406f62a08846c669576d11576029794aee1c9b"},
+  "patch":{"kind":"complete-four-file-I2D-to-I2E-delta","bytes":98658,"sha256":"1ce20122993d7868189332ff3f4dd8252937c1f8f62c5fc860dc7a0a8c46ac4a","applied":false},
+  "files":{
+    "ops/docs_tests_native.py":{"before":"547fb2149a40e1e768434813f114dff0b3c03f4e263d1b58e04c55e7979acccc","after":"86d041a368ef6eb1607c2a92dfa58cb9d17e7f605e53d22505e43465a49d3d97"},
+    "ops/docs_tests_cli.ts":{"before":"dc9cf494e4be657e4722094ee823a1856494d7f5276149eb3a09f7940d76c9ca","after":"70a28e1922352732e1484820df81eb0420021ff7c119aea05e37252c2843d798"},
+    "tests/test_docs_test_native.py":{"before":"4357a8d7f08d2ac45cfd376522b27b00d6424e716cba1292f99d843d4229caea","after":"25e6e9dfc6838238c892d65b4a221d2a18cb8a6a2e90fd6d6aa6eb6094667eb4","nominal_methods":8,"observed":null},
+    "tests/docs_test_native_protocol_test.ts":{"before":"813e75cc27141373741880e775bc5a89ee6be42b39918dc045cc250ada7cd8b4","after":"eea4109924d857edeb5a12c4e5751c89759a007070cebc06d7d175e2af097110","nominal_registrations":8,"observed":null}
+  },
+  "external_pure":{"edited":false,"helper_sha256":"68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5","fixture_sha256":"2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99","included_in_delta":false},
+  "publisher":{"proof_entries_only_after_file_and_directory_operations":true,"exclusive_pending_no_replace_final":true,"own_SHA_fixedpoint":false,"actual_runtime_observed":false},
+  "source_controls":{"retention_predicate_mocked":false,"terminal_predicate_mocked":false,"low_level_memory_handles":true,"legal_preflight_first":true,"full_C8":false},
+  "remaining":["total-worker-settlement-and-primary-failure-retention-matrix","external-trusted-bootstrap-provider-partial-spawn-and-publication","all-close-unlink-dir-sync-and-storage-failure-permutations","boundary3-exact-slots-and-complete-raw-protocol-ledger","full-native-manufactured-route-and-later-DEV"],
+  "read_ledger":{"conservative_upper_bytes":4194304,"cap_bytes":8388608},
+  "execution":{"parser":0,"compiler":0,"import":0,"scripts":0,"tests":0,"Deno":0,"Julia":0,"runtime":0,"native":0,"network":0,"CI":0,"science":0},
+  "resource_cap":{"minutes":25,"CPU":1,"RAM_bytes":2147483648,"output_bytes":262144},
+  "measured_resources":{"CPU":null,"RSS":null,"physical_IO":null},
+  "next_gate":"fresh-independent-high-CPP"
+}

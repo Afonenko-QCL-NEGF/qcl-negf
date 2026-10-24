@@ -1,0 +1,46 @@
+{
+  "task": "OPS03",
+  "attempt": "GREEN-1",
+  "started_utc": "2026-10-19T15:16:15.495311+00:00",
+  "recorded_at_utc": "2026-10-19T15:17:08.587508+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "components/qcl-negf-platform/tests/test_application_release.py",
+    "components/qcl-negf-platform/tests/test_worker_lifecycle.py",
+    "components/qcl-negf-platform/tests/test_worker_shutdown_intent.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-OPS03-GREEN-1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "60f1e75cad84047e6a9322dab4d2531ca50713bac4893956bd6d9c68a654c38d",
+  "fixture_sha256": {
+    "components/qcl-negf-platform/tests/test_application_release.py": "1ad1908d49a396299739819a3d8c25da5272626be0fe19702906b459e5c06025",
+    "components/qcl-negf-platform/tests/test_worker_lifecycle.py": "7d8fd49aac1b3eb4527ef185e9bf3a2cfcd7a3265e92a447954ae4e2bef15a2b",
+    "components/qcl-negf-platform/tests/test_worker_shutdown_intent.py": "53017ecb166b5624dab6fe3d2b57498bdbf37882a83a9be0c9c7668fdc95bfa3"
+  },
+  "exit_code": 1,
+  "wall_seconds": 53.093,
+  "sampled_peak_process_tree_RSS_bytes": 102707200,
+  "sampled_owned_temporary_bytes_peak": 1040813,
+  "stdout_stderr_bytes": 69551,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "selected locked .venv Python3.14.7, owning editable imports; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-OPS03-GREEN-1/original.log"
+}

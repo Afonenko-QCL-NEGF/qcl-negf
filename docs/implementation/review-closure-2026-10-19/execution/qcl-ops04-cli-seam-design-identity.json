@@ -1,0 +1,55 @@
+{
+  "scope": "OPS04.S source-only narrow CLI seam design addendum",
+  "status": "frozen_pending_independent_high_review",
+  "date": "2026-10-19",
+  "source_authority": "root Git tree; this receipt is not a revision lock",
+  "root_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "git_status_short_before_and_after": " M tests/application_cd_test.ts\n M tests/solver_test.ts\n",
+  "git_submodule_status_recursive_before_and_after": "-7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c components/QCLNEGF.jl\n-9378396a3681c1eddf2c62f16674834fc4465583 components/QCLNEGFRunner.jl\n-d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida\n-12fc26462bbab3df76904c6deb01f8c6596de7be components/qcl-negf-contracts\n-b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform\n-2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal\n-1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research\n-e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results\n",
+  "inputs_sha256": {
+    "/tmp/qcl-ops04-source-design-v2.md": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+    "/tmp/qcl-ops04-source-design-v2-review.md": "12e811ec56093734fdeb7fd6aac370f312ef880c2b7a64edd9689c8bca26ec42",
+    "/tmp/qcl-ops04-root-red-report.md": "48726ade53b5db9455091ea7b4e7b184e73159b7f5c4401536d54eef358ab49d",
+    "/tmp/qcl-ops04-root-red-identity.json": "0092c82c07daae602495c07036b317c78af173016c7c3807eec8d8690223bacd",
+    "/tmp/qcl-ops04-root-red-patch.diff": "bcdc55a82f9a47d23f9d72deba1e9f4b986f3889eb30531aa6e1e60ae97587d3",
+    "AGENTS.md": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330",
+    "docs/architecture.md": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7",
+    "ops/solver.ts": "bc513f610cce976d108e17902ebd423c434992ba0edb91e2bdc3da2e5f3c247f",
+    "ops/application_cd.ts": "91989d0171e011f4518e178e247d4f7a466d08bd02b7931308a202c4354ee9ce",
+    "nix/solver.nix": "16c99da166ee2d9afc7d238fa317e43f0bcc71e2eccb8de3ff11e97b70aa858f",
+    "ops/process.ts": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249",
+    "ops/git.ts": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7",
+    "tests/solver_test.ts": "7cd0aa5695564c4dd177e910b16051a44fb852f3f60d9ae7533df03f1405888b",
+    "tests/application_cd_test.ts": "3ba120cba93cc91bf369ec273a13da30bdfd6291f6487fbfa7e8101dbb4ffe3a",
+    "deno.json": "a4043c0ec1c976c03704253316c90a94cb8c7ca2cfe4222f7182ea05565249b7"
+  },
+  "outputs": {
+    "/tmp/qcl-ops04-cli-seam-design.md": {
+      "sha256": "93ffbbcdd50770295f2f21e1a9befc47acc63231279b1ff79aebf48e7cc69a7f",
+      "bytes": 18429
+    }
+  },
+  "proposed_internal_exports": ["captureDepotMetadata", "runSolverBuildCli", "runApplicationCdCli"],
+  "production_changed": false,
+  "test_source_changed": false,
+  "checkpoint_writer": "root only; no checkpoint writes by this task",
+  "counters": {
+    "target_imports": 0,
+    "tests": 0,
+    "deno_invocations": 0,
+    "nix_evaluations": 0,
+    "builds": 0,
+    "julia": 0,
+    "installs": 0,
+    "network": 0,
+    "server": 0,
+    "native": 0,
+    "science": 0,
+    "children": 0,
+    "checkpoint_writes": 0
+  },
+  "resource_envelope": {"wall_minutes": 20, "cpu": 1, "ram_gib": 2, "source_reads_mib": 3, "report_kib": 64},
+  "resource_measurement": "CPU/RAM/cumulative read telemetry not instrumented; limits are assigned envelope, not measured claims",
+  "stop": "Independent high review and coordinator decision required; no implementation or execution authorized by this addendum"
+}

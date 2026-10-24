@@ -1,0 +1,9 @@
+{
+  "baseline": "b1a3be2b0f4b3adf423cc2a611bcca2b5e0a5ff3",
+  "files": {
+    "docs/equilibrium-measurement-contract.md": "758ac11c19317aba27ee6275d0ce3fdd9f40b639205d89228f4b08405872ad5f"
+  },
+  "independent_review_sha256": "856fb09acfb5581eee3a9f8e6f0c1a940fd1d39e22756c07a424e770ab81e827",
+  "staged_diff_sha256": "4cc975effe985c1073df5497dfb44d540015a366f8ada28710afad5953c73d2d",
+  "targeted_receipt_sha256": null
+}

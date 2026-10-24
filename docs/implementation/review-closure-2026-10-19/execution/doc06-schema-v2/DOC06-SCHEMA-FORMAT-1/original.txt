@@ -1,0 +1,3 @@
+/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts
+/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts
+Checked 2 files

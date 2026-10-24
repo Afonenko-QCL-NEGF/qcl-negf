@@ -1,0 +1,27 @@
+{
+  "state": "source_reviewed_bound_runtime_pending",
+  "head": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "base": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+  "branch": "codex/review-closure-final-audit-reader-integration",
+  "files": {
+    "src/qcl_negf_results/native.py": {
+      "bytes": 16498,
+      "sha256": "532fbedf8b1b296e0fb5bc026788a522bf92aeee94ae1192ca651e2e34a407e5",
+      "unchanged": true
+    },
+    "src/qcl_negf_results/state.py": {
+      "bytes": 29863,
+      "sha256": "335e67678120fd0c8e222fcb5e937b277ccadac35303fca2250c9f345983b477"
+    },
+    "tests/test_final_fixed_point_audit.py": {
+      "bytes": 33890,
+      "sha256": "45111262df9b7744ca9f7397a887af4133ee602d9b6e325af2d3ee4a5e12f95a"
+    }
+  },
+  "review": "8ee82896aed717e9908f0305c1cfb551ab0beeacede786eb40b1caa19b002e8c",
+  "candidate_identity": "4d9eb0f0e6a533023d5d0a52a7e4574f0e63c4560142d9b29d090f29926f6daf",
+  "compatibility_fixture": "ce35954b2503d7a910048d6e95bcc6b6b0c88eea40f8a018dc13bdf8ca4bbad0",
+  "runtime_calls": 0,
+  "published": false,
+  "science_accepted": false
+}

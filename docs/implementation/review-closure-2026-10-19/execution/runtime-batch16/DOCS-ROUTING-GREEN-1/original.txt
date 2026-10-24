@@ -1,0 +1,261 @@
+TAP version 14
+# ./tests/docs_test_routing_test.ts
+ok 1 - generic discovery preserves exact two exceptions and the whole old base chain
+ok 2 - full plan executes exactly base Python Node DOC06 once with finite caps
+ok 3 - dedicated argv and env are exact, scoped and independent
+not ok 4 - healthy fake aggregate requires four typed receipts and retained-only versions
+  ---
+  {"message":"Error: Expected [\"base\",\"doc04-python\",\"doc04-node\",\"doc06-deno\"], got [\"base\",\"doc04-python\",\"doc04-node\"]\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m392\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":388}}
+  ...
+ok 5 - preflight and parsing are pure and do not execute probes or units
+ok 6 - docs-only plans cannot claim full base coverage
+ok 7 - descriptor rejects extra root key before any executor is reachable
+ok 8 - descriptor rejects loader injection before any executor is reachable
+ok 9 - descriptor rejects missing units before any executor is reachable
+ok 10 - descriptor rejects extra unit before any executor is reachable
+ok 11 - descriptor rejects missing admission before any executor is reachable
+ok 12 - descriptor rejects bad source revision before any executor is reachable
+ok 13 - descriptor rejects duplicate source path before any executor is reachable
+ok 14 - descriptor rejects absolute source path before any executor is reachable
+ok 15 - doc04-python rejects missing or invalid count undefined
+ok 16 - doc04-python rejects missing or invalid count 0
+ok 17 - doc04-python rejects missing or invalid count -1
+ok 18 - doc04-python rejects missing or invalid count 1.5
+ok 19 - doc04-python rejects missing or invalid count 7
+ok 20 - doc04-python rejects missing or invalid count 9007199254740992
+ok 21 - doc04-python rejects changed test_path binding
+ok 22 - doc04-python rejects changed test_sha256 binding
+ok 23 - doc04-python rejects changed report_format binding
+ok 24 - doc04-node rejects missing or invalid count undefined
+ok 25 - doc04-node rejects missing or invalid count 0
+ok 26 - doc04-node rejects missing or invalid count -1
+ok 27 - doc04-node rejects missing or invalid count 1.5
+ok 28 - doc04-node rejects missing or invalid count 7
+ok 29 - doc04-node rejects missing or invalid count 9007199254740992
+ok 30 - doc04-node rejects changed test_path binding
+ok 31 - doc04-node rejects changed test_sha256 binding
+ok 32 - doc04-node rejects changed report_format binding
+ok 33 - doc06-deno rejects missing or invalid count undefined
+ok 34 - doc06-deno rejects missing or invalid count 0
+ok 35 - doc06-deno rejects missing or invalid count -1
+ok 36 - doc06-deno rejects missing or invalid count 1.5
+ok 37 - doc06-deno rejects missing or invalid count 7
+ok 38 - doc06-deno rejects missing or invalid count 9007199254740992
+ok 39 - doc06-deno rejects changed test_path binding
+ok 40 - doc06-deno rejects changed test_sha256 binding
+ok 41 - doc06-deno rejects changed report_format binding
+ok 42 - strict JSON refuses nested duplicate members and size overflow
+ok 43 - deno rejects descriptor env fields and wrong version
+ok 44 - node rejects descriptor env fields and wrong version
+ok 45 - python rejects descriptor env fields and wrong version
+ok 46 - storage owned_tmp_root rejects unsafe "relative"
+ok 47 - storage owned_tmp_root rejects unsafe "/tmp"
+ok 48 - storage owned_tmp_root rejects unsafe "/fixture/source/scratch"
+ok 49 - storage owned_tmp_root rejects unsafe "/tmp/a,b"
+ok 50 - storage owned_tmp_root rejects unsafe "/tmp/a\\nb"
+ok 51 - storage owned_tmp_root rejects unsafe "/tmp/a/../b"
+ok 52 - storage attempt_dir rejects unsafe "relative"
+ok 53 - storage attempt_dir rejects unsafe "/tmp"
+ok 54 - storage attempt_dir rejects unsafe "/fixture/source/scratch"
+ok 55 - storage attempt_dir rejects unsafe "/tmp/a,b"
+ok 56 - storage attempt_dir rejects unsafe "/tmp/a\\nb"
+ok 57 - storage attempt_dir rejects unsafe "/tmp/a/../b"
+ok 58 - storage deno_cache_dir rejects unsafe "relative"
+ok 59 - storage deno_cache_dir rejects unsafe "/tmp"
+ok 60 - storage deno_cache_dir rejects unsafe "/fixture/source/scratch"
+ok 61 - storage deno_cache_dir rejects unsafe "/tmp/a,b"
+ok 62 - storage deno_cache_dir rejects unsafe "/tmp/a\\nb"
+ok 63 - storage deno_cache_dir rejects unsafe "/tmp/a/../b"
+ok 64 - limits reject zero and excessive per_step_wall_seconds
+ok 65 - limits reject zero and excessive per_step_log_bytes
+ok 66 - limits reject zero and excessive total_log_bytes
+ok 67 - limits reject zero and excessive cpu
+ok 68 - limits reject zero and excessive ram_bytes
+ok 69 - limits reject zero and excessive node_tmp_bytes
+ok 70 - limits reject zero and excessive python_tmp_bytes
+ok 71 - limits reject zero and excessive doc06_tmp_bytes
+ok 72 - preflight blocks missing selected DOC06 adapter without spawn, fallback or measurement
+ok 73 - preflight blocks changed selected Node test without spawn, fallback or measurement
+ok 74 - preflight blocks dirty source graph without spawn, fallback or measurement
+ok 75 - preflight blocks changed revision without spawn, fallback or measurement
+ok 76 - preflight blocks KaTeX module mismatch without spawn, fallback or measurement
+ok 77 - preflight blocks KaTeX CSS missing without spawn, fallback or measurement
+ok 78 - preflight blocks actual binary mismatch without spawn, fallback or measurement
+ok 79 - preflight blocks missing retained tool receipt without spawn, fallback or measurement
+ok 80 - preflight blocks receipt bytes mismatch without spawn, fallback or measurement
+ok 81 - preflight blocks retained version mismatch without spawn, fallback or measurement
+ok 82 - preflight blocks unknown retained schema without spawn, fallback or measurement
+ok 83 - preflight blocks stale admission without spawn, fallback or measurement
+ok 84 - preflight blocks missing process-tree supervision without spawn, fallback or measurement
+ok 85 - preflight blocks unowned storage without spawn, fallback or measurement
+ok 86 - preflight blocks tool outside admission without spawn, fallback or measurement
+ok 87 - preflight blocks oversubscribed admission without spawn, fallback or measurement
+ok 88 - preflight blocks existing attempt without spawn, fallback or measurement
+ok 89 - preflight blocks symlink directory without spawn, fallback or measurement
+ok 90 - preflight blocks noncanonical cache without spawn, fallback or measurement
+ok 91 - preflight blocks base chain widened without spawn, fallback or measurement
+not ok 92 - healthy report readers bind independent expected counts and typed counters
+  ---
+  {"message":"Error: Unsuccessful TAP\n  if (!value) throw new Error(reason);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3mrequireThat\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mops/docs_tests.ts\u001b[0m:\u001b[0m\u001b[33m182\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mparseUnitReport\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mops/docs_tests.ts\u001b[0m:\u001b[0m\u001b[33m718\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m649\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":647}}
+  ...
+ok 93 - node-test-tap-v1 refuses independently expected 0
+ok 94 - node-test-tap-v1 refuses independently expected 14
+ok 95 - node-test-tap-v1 refuses independently expected 16
+ok 96 - node-test-tap-v1 rejects empty report
+ok 97 - node-test-tap-v1 rejects duplicated report
+ok 98 - node-test-tap-v1 rejects unknown report
+ok 99 - node-test-tap-v1 rejects truncated report
+ok 100 - deno-test-tap-v1 refuses independently expected 0
+ok 101 - deno-test-tap-v1 refuses independently expected 6
+ok 102 - deno-test-tap-v1 refuses independently expected 8
+ok 103 - deno-test-tap-v1 rejects empty report
+ok 104 - deno-test-tap-v1 rejects duplicated report
+ok 105 - deno-test-tap-v1 rejects unknown report
+ok 106 - deno-test-tap-v1 rejects truncated report
+ok 107 - python-unittest-summary-v1 refuses independently expected 0
+ok 108 - python-unittest-summary-v1 refuses independently expected 19
+ok 109 - python-unittest-summary-v1 refuses independently expected 21
+ok 110 - python-unittest-summary-v1 rejects empty report
+ok 111 - python-unittest-summary-v1 rejects duplicated report
+ok 112 - python-unittest-summary-v1 rejects unknown report
+ok 113 - python-unittest-summary-v1 rejects truncated report
+ok 114 - Node report rejects failed despite nominal count and exit
+ok 115 - Node report rejects skipped despite nominal count and exit
+ok 116 - Node report rejects todo despite nominal count and exit
+ok 117 - Node report rejects cancelled despite nominal count and exit
+ok 118 - Node report rejects bailout despite nominal count and exit
+ok 119 - Node report rejects only/filter coverage despite nominal count and exit
+ok 120 - Node report rejects contradictory result despite nominal count and exit
+ok 121 - Node report rejects missing counter despite nominal count and exit
+ok 122 - Node report rejects extra plan despite nominal count and exit
+ok 123 - Deno report rejects skip
+ok 124 - Deno report rejects todo
+ok 125 - Deno report rejects failed
+ok 126 - Deno report rejects duplicate test number
+ok 127 - Deno report rejects zero plan
+ok 128 - Python report rejects skipped
+ok 129 - Python report rejects errors
+ok 130 - Python report rejects failures
+ok 131 - Python report rejects zero
+ok 132 - Python report rejects unexpected success
+ok 133 - Python report rejects expected failure
+ok 134 - plan rejects DOC06 extra-argument before executor
+ok 135 - plan rejects DOC06 missing-argument before executor
+ok 136 - plan rejects DOC06 allow-env before executor
+ok 137 - plan rejects DOC06 allow-run before executor
+ok 138 - plan rejects DOC06 allow-net before executor
+ok 139 - plan rejects DOC06 allow-ffi before executor
+ok 140 - plan rejects DOC06 workspace-read before executor
+ok 141 - plan rejects DOC06 workspace-write before executor
+ok 142 - plan rejects DOC06 no-check before executor
+ok 143 - plan rejects DOC06 permit-no-files before executor
+ok 144 - plan rejects DOC06 filter before executor
+ok 145 - plan rejects DOC06 clearEnv before executor
+ok 146 - plan rejects DOC06 ambient-env before executor
+ok 147 - plan rejects DOC06 wrong-tool before executor
+ok 148 - full plan refuses missing base even when all remaining commands exit0
+ok 149 - full plan refuses missing doc04-python even when all remaining commands exit0
+ok 150 - full plan refuses missing doc04-node even when all remaining commands exit0
+ok 151 - full plan refuses missing doc06-deno even when all remaining commands exit0
+ok 152 - duplicate dedicated execution and base-only promotion are rejected
+ok 153 - base nonzero exit retains original capture and cannot pass or retry
+ok 154 - base timeout retains original capture and cannot pass or retry
+ok 155 - base log overrun retains original capture and cannot pass or retry
+ok 156 - base capture incomplete retains original capture and cannot pass or retry
+ok 157 - base drain incomplete retains original capture and cannot pass or retry
+ok 158 - base missing process-tree evidence retains original capture and cannot pass or retry
+ok 159 - doc04-python nonzero exit retains original capture and cannot pass or retry
+ok 160 - doc04-python timeout retains original capture and cannot pass or retry
+ok 161 - doc04-python log overrun retains original capture and cannot pass or retry
+ok 162 - doc04-python capture incomplete retains original capture and cannot pass or retry
+ok 163 - doc04-python drain incomplete retains original capture and cannot pass or retry
+ok 164 - doc04-python missing process-tree evidence retains original capture and cannot pass or retry
+ok 165 - doc04-node nonzero exit retains original capture and cannot pass or retry
+ok 166 - doc04-node timeout retains original capture and cannot pass or retry
+ok 167 - doc04-node log overrun retains original capture and cannot pass or retry
+ok 168 - doc04-node capture incomplete retains original capture and cannot pass or retry
+ok 169 - doc04-node drain incomplete retains original capture and cannot pass or retry
+ok 170 - doc04-node missing process-tree evidence retains original capture and cannot pass or retry
+not ok 171 - doc06-deno nonzero exit retains original capture and cannot pass or retry
+  ---
+  {"message":"Error: Expected 1, got 0\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m835\u001b[0m:\u001b[0m\u001b[33m7\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":829}}
+  ...
+not ok 172 - doc06-deno timeout retains original capture and cannot pass or retry
+  ---
+  {"message":"Error: Expected 1, got 0\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m835\u001b[0m:\u001b[0m\u001b[33m7\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":829}}
+  ...
+not ok 173 - doc06-deno log overrun retains original capture and cannot pass or retry
+  ---
+  {"message":"Error: Expected 1, got 0\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m835\u001b[0m:\u001b[0m\u001b[33m7\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":829}}
+  ...
+not ok 174 - doc06-deno capture incomplete retains original capture and cannot pass or retry
+  ---
+  {"message":"Error: Expected 1, got 0\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m835\u001b[0m:\u001b[0m\u001b[33m7\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":829}}
+  ...
+not ok 175 - doc06-deno drain incomplete retains original capture and cannot pass or retry
+  ---
+  {"message":"Error: Expected 1, got 0\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m835\u001b[0m:\u001b[0m\u001b[33m7\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":829}}
+  ...
+not ok 176 - doc06-deno missing process-tree evidence retains original capture and cannot pass or retry
+  ---
+  {"message":"Error: Expected 1, got 0\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m835\u001b[0m:\u001b[0m\u001b[33m7\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":829}}
+  ...
+ok 177 - source change after a healthy child fails binding and retains available evidence
+ok 178 - zero or skipped unit output fails even when base emitted convincing TAP
+ok 179 - aggregate total log budget is enforced across otherwise healthy children
+ok 180 - CI input-only invocation remains full and targeted invocations remain targeted
+ok 181 - full workflow preflights before preparation and has one full aggregate
+ok 182 - application-release workflow preflights before preparation and has one full aggregate
+ok 183 - runner smoke is explicitly base-only without dedicated inputs or coverage
+ok 184 - strict descriptor rejects extra key at tools level
+ok 185 - strict descriptor rejects extra key at deno level
+ok 186 - strict descriptor rejects extra key at unit level
+ok 187 - strict descriptor rejects extra key at katex level
+ok 188 - strict descriptor rejects extra key at storage level
+ok 189 - strict descriptor rejects extra key at limits level
+ok 190 - strict descriptor rejects extra key at ref level
+ok 191 - strict descriptor rejects extra key at source-file level
+ok 192 - descriptor refuses absent doc04-python rather than skipping it
+ok 193 - descriptor refuses absent doc04-node rather than skipping it
+ok 194 - descriptor refuses absent doc06-deno rather than skipping it
+ok 195 - doc04-python plan rejects inherited propagation
+ok 196 - doc04-python plan rejects preload propagation
+ok 197 - doc04-python plan rejects changed-input propagation
+ok 198 - doc04-python plan rejects unbounded propagation
+ok 199 - doc04-node plan rejects inherited propagation
+ok 200 - doc04-node plan rejects preload propagation
+ok 201 - doc04-node plan rejects changed-input propagation
+ok 202 - doc04-node plan rejects unbounded propagation
+ok 203 - executor rejection retains completed base and terminal failed attempt without retry
+ok 204 - doc04-python expected count must match independent reviewed source contract
+ok 205 - doc04-node expected count must match independent reviewed source contract
+ok 206 - doc06-deno expected count must match independent reviewed source contract
+ok 207 - default full route rejects missing input and does not silently run base
+ok 208 - lexical owned_tmp_root refuses "relative" on a complete descriptor
+ok 209 - lexical owned_tmp_root refuses "/tmp/a,b" on a complete descriptor
+ok 210 - lexical owned_tmp_root refuses "/tmp/a\\nb" on a complete descriptor
+ok 211 - lexical owned_tmp_root refuses "/tmp/a/../b" on a complete descriptor
+ok 212 - lexical attempt_dir refuses "relative" on a complete descriptor
+ok 213 - lexical attempt_dir refuses "/tmp/a,b" on a complete descriptor
+ok 214 - lexical attempt_dir refuses "/tmp/a\\nb" on a complete descriptor
+ok 215 - lexical attempt_dir refuses "/tmp/a/../b" on a complete descriptor
+ok 216 - lexical deno_cache_dir refuses "relative" on a complete descriptor
+ok 217 - lexical deno_cache_dir refuses "/tmp/a,b" on a complete descriptor
+ok 218 - lexical deno_cache_dir refuses "/tmp/a\\nb" on a complete descriptor
+ok 219 - lexical deno_cache_dir refuses "/tmp/a/../b" on a complete descriptor
+ok 220 - owned_tmp_root accepts an independently rebound healthy relocation
+ok 221 - owned_tmp_root refuses workspace relocation despite consistent admission and facts
+ok 222 - attempt_dir accepts an independently rebound healthy relocation
+ok 223 - attempt_dir refuses workspace relocation despite consistent admission and facts
+ok 224 - deno_cache_dir accepts an independently rebound healthy relocation
+ok 225 - deno_cache_dir refuses workspace relocation despite consistent admission and facts
+ok 226 - owned TMP root refuses /tmp itself with rebound admission and children
+ok 227 - pre-start source mismatch retains failure with zero child submissions
+ok 228 - sourceGraph rejection at observation 1 retains terminal aggregate
+ok 229 - sourceGraph rejection at observation 2 retains terminal aggregate
+not ok 230 - sourceGraph rejection at observation 6 retains terminal aggregate
+  ---
+  {"message":"Error: Expected \"not_measured\", got \"measured\"\n  if (!value) throw new Error(message);\n\u001b[0m\u001b[31m                    ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3massert\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m16\u001b[0m:\u001b[0m\u001b[33m21\u001b[0m)\n    at \u001b[0m\u001b[1m\u001b[3mequal\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m19\u001b[0m:\u001b[0m\u001b[33m3\u001b[0m)\n    at \u001b[0m\u001b[2m\u001b[38;5;245mfile:///tmp/qcl-docs-test-routing-worktree/\u001b[0m\u001b[0m\u001b[36mtests/docs_test_routing_test.ts\u001b[0m:\u001b[0m\u001b[33m1107\u001b[0m:\u001b[0m\u001b[33m5\u001b[0m","severity":"fail","at":{"file":"./tests/docs_test_routing_test.ts","line":1093}}
+  ...
+1..230
+[0m[1m[31merror[0m: Test failed

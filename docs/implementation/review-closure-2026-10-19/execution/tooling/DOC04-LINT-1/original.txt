@@ -1,0 +1,22 @@
+error[no-unused-vars]: `whole` is never used
+   --> /tmp/qcl-doc04-root-worktree/ops/docs/math-render.mjs:169:66
+    | 
+169 |   return text.replace(/&(#(?:x[0-9a-f]+|[0-9]+)|[A-Za-z]+);/gi, (whole, name) => {
+    |                                                                  ^^^^^
+    = hint: If this is intentional, prefix it with an underscore like `_whole`
+
+  docs: https://docs.deno.com/lint/rules/no-unused-vars
+
+
+error[no-unused-vars]: `html` is never used
+   --> /tmp/qcl-doc04-root-worktree/ops/docs/math-render.mjs:400:46
+    | 
+400 |   validateMathMapping(records, output.map(({ html, ...record }) => record));
+    |                                              ^^^^
+    = hint: If this is intentional, prefix it with an underscore like `_html`
+
+  docs: https://docs.deno.com/lint/rules/no-unused-vars
+
+
+Found 2 problems
+Checked 2 files

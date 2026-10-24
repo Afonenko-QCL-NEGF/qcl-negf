@@ -1,9 +1,18 @@
 # Предлагаемая архитектура
 
-Статус: предложение из [требований](requirements.md), 2026-10-09.
+Статус: целевая архитектура из [требований](requirements.md), исходная
+редакция 2026-10-09, authority актуализирована **2026-10-19** по
+[dispositions](requirement-dispositions-2026-10-19.md) и
+[P1](../implementation/review-closure-2026-10-19/operator-permissions.md).
+Actual baseline описан отдельно в [docs/architecture.md](../architecture.md).
 Решения о масштабе, локальном управлении, независимом Julia API, отдельных
 builder/compute VM и первом научном рубеже согласованы. Точные новые форматы
 и выбор панели ниже ещё не являются принятыми API или реализованным кодом.
+Включение truthful model/source help DOC07 принято PERM14; exact contracts
+проходят DOC03/CP-DESIGN, без повторного approval включения R11. C06/R10/D10
+сохраняют historical П для конкретных механизмов, а ownership и запрет hidden
+physics changes действуют независимо. S01 выбран PERM15: 0 mV/period, 70 K,
+e–e none и LO/acoustic/impurity/IFR/alloy. S1 не включает finite-bias/optics.
 
 ## Система от исследовательского вопроса до результата
 
@@ -188,7 +197,11 @@ GET результата и открытие карты читают готов�
 одну серверную привязку. `NoDecay` — флаг QOS, не account. Associations
 разрешают только принятую QOS привязку; неявный reset/смена grant при retry
 запрещены. Точные настройки проверяются на выбранной версии Slurm.
-Общий календарный deadline пользователь пока не применяет. Каждый job
+Общий календарный deadline как продуктовая функция ранее отложен. Для
+текущей кампании действуют finite S1 caps PERM17: до 13 attempts / 936 execution
+node-hours, ≤72 h/attempt, concurrency ≤2, общие byte guards P1; allocated
+core-hours и actual CPU учитываются отдельно. Эти caps не критерии физики.
+Каждый job
 имеет конечный wall-time/resource limit, согласованный с CPU grant и
 поставленной задачей; это не обещание получить сходимость за сутки.
 Согласованная единица CPU-бюджета — выделенные ядра × время выполнения
@@ -234,16 +247,24 @@ stateDiagram-v2
 и не обновление кода. Для неё admission/scheduling закрывается только на
 затрагиваемом ресурсе; running jobs завершаются, pending jobs ждут.
 
-Порядок обновления пользователь уточнил отдельно:
+Исторический интерфейс I14 сохраняется: отдельная operator cancellation,
+затем сигнал доставки. Уточнение P1/PERM10 от 2026-10-19 позволяет агенту
+исполнить operator-step только для jobs текущей кампании после verified
+durable checkpoint/terminal raw и documented resume semantics. Старый S01,
+чужие и unknown-owned jobs требуют отдельного решения; updater не получает
+автоматический cancel. Порядок применяется к доказанно разрешённому набору:
 
-1. Оператор вручную отменяет верхние QCL AiiDA workflows, включая waiting/
-   paused/retry, и все оставшиеся Slurm jobs/queue, затем даёт сигнал доставки.
+1. Оператор отдельным шагом отменяет campaign-owned верхние AiiDA workflows,
+   включая waiting/paused/retry, и соответствующие Slurm jobs/queue, затем
+   даёт сигнал доставки. Агент может исполнить этот шаг в пределах PERM10.
    Постановки и доступные результаты сохраняются. Одна отмена Slurm jobs
    недостаточна: активный parent WorkChain может создать следующий batch.
 2. Доставка закрывает новые submission/scheduling и проверяет, что отмена
    закончена: активные QCL workflows и running/pending jobs отсутствуют.
    Если за это время появился
-   новый job, операция остаётся закрытой с объяснением; его отменяет оператор.
+   новый job, операция остаётся закрытой с объяснением; operator-step
+   сначала устанавливает ownership и durable proof, unknown outcome сверяется
+   по persisted IDs. Старые/foreign jobs не отменяются по этому grant.
    Не требуется автоматический cancellation или перенос очереди между версиями.
    Existing `service.kill_run:275` уже запрашивает отмену workflow/children;
    cancellation асинхронен, подтверждение проверяется на обоих слоях.
@@ -257,8 +278,11 @@ stateDiagram-v2
 
 Rolling updates, многоверсионная совместимость jobs и автоматическая migration
 старой очереди не нужны. Ошибка обновления сохраняет общий admission закрытым.
-Hard stop не гарантирует последний checkpoint/upload: для анализа остаётся
-последнее уже опубликованное состояние; потерянные/неполные данные явно отмечены.
+Hard stop не гарантирует последний in-memory progress/checkpoint/upload.
+Текущий maintenance B требует нулевой потери confirmed persistent данных,
+verified capture/backup/isolated restore до production replacement и сохранения
+raw/failed receipts; отсутствие durable proof останавливает зависимую отмену.
+RTO измеряется; числовой SLA не принят. Historical D04 wipe не входит в B.
 
 Политика и лимиты — NixOS/systemd, Proxmox CPU weights/VM RAM и Slurm cgroups.
 Нужен последовательный переход: desired state сам не гарантирует порядок
@@ -311,7 +335,10 @@ checksum — отдельные границы; дополнительная с�
 ### Установка и представление
 
 Общая NixOS Linux роль плюс установочные варианты BIOS/UEFI/storage/network
-для Proxmox, libvirt и Hyper-V. ISO уменьшает различия гостевых services,
+для Proxmox, Linux/libvirt и Windows/Hyper-V. Все три backend сохраняются
+required; Windows gates проходят **обе required machines** (OPS13/14).
+Missing hardware оставляет backend blocked/not_measured и release partial;
+оно не исключает backend из scope. ISO уменьшает различия гостевых services,
 но не устраняет Secure Boot, виртуальные диски, NIC/bridge и host lifecycle.
 
 Доступа к конфигурации LAN DNS нет, поэтому базовый вариант — явный адрес
@@ -384,7 +411,8 @@ template не заменяет общий guard между разными инф
 Отмена перед update выполняется оператором через research/service/AiiDA
 путь. GUI показывает «запрошено / подтверждено / остались workflows или
 Slurm jobs». Кнопка остановки task в Semaphore не означает отмену научной
-очереди. После подтверждения оператор подаёт отдельный сигнал доставки по I14.
+очереди. После durable proof и подтверждённой campaign-only отмены оператор
+(или агент в operator-step PERM10) подаёт отдельный сигнал доставки по I14.
 
 Все используемые web страницы принимаются в фиксированной светлой теме,
 включая login/dialog/loading/error и сторонние панели. Их defaults могут
@@ -403,4 +431,7 @@ Open OnDemand/WorkGraph/AWX/Cockpit не входят в обязательны�
 private inputs. Секреты не попадают в stdout, Git, Nix store/derivation или
 общедоступные receipts. Сначала проверка формы inputs/возможностей хоста,
 потом cheap preflight, затем builds/VM и runtime gates. Исходный приоритет —
-работающий локальный научный цикл S01; детали чистого старта в [rebuild](rebuild.md).
+работающий локальный научный цикл S01. [Rebuild](rebuild.md) сохраняет
+исторический clean-install маршрут; D04/D06/D07 не разрешают повторный wipe
+existing persistent state. Текущий replacement использует P1 backup/restore,
+доверенный inventory и named disposable targets; физический wipe отдельно.

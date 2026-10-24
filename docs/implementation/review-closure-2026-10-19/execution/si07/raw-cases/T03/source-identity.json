@@ -1,0 +1,7 @@
+{
+  "commit": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+  "owner": "QCLNEGF.jl",
+  "path": "src/numerics/reference/poisson.jl",
+  "sha256": "8989ced0c4adc67e5d553b98863cd8ee3584705546ba445565cb5da0e7130645",
+  "stage": "source only; no numerical state or archive"
+}

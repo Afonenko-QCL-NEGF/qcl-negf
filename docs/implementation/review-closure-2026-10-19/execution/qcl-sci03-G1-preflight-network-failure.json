@@ -1,0 +1,8 @@
+{
+  "operation": "G1-SCI03-CURRENTBOUND-qcl-negf-research-3ed8a9f",
+  "phase": "gh pr view read only",
+  "failure": "GitHub GraphQL EOF",
+  "tool_chunk": "9fbe43",
+  "external_mutations_submitted": 0,
+  "action": "resume same unique operation preflight, no duplicate ready/merge"
+}

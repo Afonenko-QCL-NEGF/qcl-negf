@@ -1,0 +1,48 @@
+{
+  "status": "PASS_SOURCE_HARNESS_ONLY",
+  "scope": "Independent focused static high source re-review B1/B2; no execution grant",
+  "report": {
+    "path": "/tmp/qcl-sci08-R1-harness-v2-review.md",
+    "sha256": "df73bbe011b41ebd0036ef4171b4584d14f0b0d6369f9fa67ba9edf8f2e09601",
+    "bytes": 11508
+  },
+  "inputs": {
+    "/tmp/qcl-sci08-R1-local-unit-run-v2.py": "9338b60324f1e14da6641fcd06661da50c51f02b36547e958b2c72ad25566fb7",
+    "/tmp/qcl-sci08-R1-engineering-plan-v2.json": "02161eae76701faf9d469b1021470321dae4c55efc048bd53b7e9f6f88c9a58c",
+    "/tmp/qcl-sci08-R1-harness-report-v2.md": "30610e3bf1caee3c782ff2c0512db5c14762da37bd64d301364d36a820e57bd0",
+    "/tmp/qcl-sci08-R1-harness-identity-v2.json": "d14e76bca535695a460676e0af2e2d669043d90297a3943b58ab99c20dfc84b2"
+  },
+  "B1": "CLOSED_SOURCE: unknown is null; attempts/valid/unknown tracked; no PASS with zero valid RSS observations",
+  "B1_policy_boundary": "Plan requires valid>=1, not unknown==0. Prior valid then missing VmRSS can pass sampled predicate with nonzero unknown counter; this is not a fully fail-closed per-sample policy or transient-peak proof.",
+  "B2": "CLOSED_SOURCE: imported verifier, actual exact_cpu YAML, complete current schema inventory, harness/plan and copied environment before/after bindings present",
+  "new_blocking_findings": [],
+  "runner_head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "root_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "core_head": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+  "owning_diff_check": "no errors",
+  "owning_src_diff": "empty",
+  "selected_fixture_and_red_hashes": "unchanged, independently rehashed",
+  "environment_only_assumption": "Explicit trusted engineering boundary; no OS filesystem/network isolation or native/scientific acceptance claim",
+  "calls": {
+    "candidate_helper_import_compile_parser_selftest": 0,
+    "Julia_tests_Pkg_native_network_solver": 0,
+    "C08": 0
+  },
+  "writes": {
+    "Root_CP_production_test_Git": 0,
+    "only": [
+      "/tmp/qcl-sci08-R1-harness-v2-review.md",
+      "/tmp/qcl-sci08-R1-harness-v2-review-identity.json"
+    ]
+  },
+  "budget": {
+    "read_cap_bytes": 4194304,
+    "conservative_logical_read_charge_upper_bound_bytes": 1048576,
+    "wall_cap_seconds": 600,
+    "CPU_count": 1,
+    "RAM_cap_bytes": 1073741824,
+    "report_cap_bytes": 131072,
+    "physical_IO_CPU_RSS": "not_measured"
+  },
+  "stop": "Fresh exact Root READY and finite shared reservation required separately; no runtime or retry granted by source PASS"
+}

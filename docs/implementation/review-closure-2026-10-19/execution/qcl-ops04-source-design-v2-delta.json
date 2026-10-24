@@ -1,0 +1,28 @@
+{
+  "artifact_kind": "qcl-ops04-source-design-D2-delta",
+  "scope": "Only collated F1/F2 corrections; original evidence/trust/carryforward/native policy retained",
+  "design_sha256": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+  "changes": [
+    {
+      "finding": "F1",
+      "section": "5/T1 plus evidence fields in 2/3.1",
+      "before": "Pure spec validator did not bind independent target pathname bytes later read by Nix",
+      "after": "Single metadataJson string build API; no spec/path overload. CLI bounded capture once; validate complete graph/Manifest; deterministic JSON.parse to JSON.stringify normalization; SHA/count of raw capture and produced bytes distinct. Prefetch URL/hash from same normalized object. Nix accepts --argstr depotManifestJson and depotManifestSha256, asserts hashString then fromJSON; no metadata readFile fallback",
+      "owning_paths": ["ops/solver.ts", "ops/application_cd.ts", "nix/solver.nix", "tests/solver_test.ts", "tests/application_cd_test.ts (relevant assembly order control)"],
+      "positive_controls": ["actual generated-shaped temp JSON", "prefetch/build bound same JSON/hash", "path replacement after capture retains A", "different valid B archive metadata consistently consumed as B", "exact raw/normalized evidence fields"],
+      "negative_controls": ["legacy object/path input rejected", "captured B wrong graph rejected before callback", "bad required metadata/types/encoding/size rejected", "actual outgoing JSON/hash consistency asserted", "prefetch failure prevents build"],
+      "limits": "Native hashString/fromJSON execution not measured; same-source archive production proof remains separate; local-lab-packages path unchanged; malicious capture-path race/hard blocked I/O not claimed"
+    },
+    {
+      "finding": "F2",
+      "section": "5/T3",
+      "before": "partial/no-progress wording could reject valid positive short writes",
+      "after": "Positive progressing short writes completing all verified bytes must succeed with exact bytes/hash/mode/fsync/closed descriptors. Negative zero/no-progress, exception after incomplete prefix and file/dir/parent fsync failure must not return trusted snapshot. Existing write-all source unchanged",
+      "owning_paths": ["components/qcl-negf-platform/tests/test_node_enrollment.py"],
+      "limits": "Partial failed artifacts retained by existing policy; no cleanup/retry/trust-root changes"
+    }
+  ],
+  "test_envelope_unchanged": "T1+T2 one remaining admitted Root Deno slot <=120s/2CPU/4GiB/2MiB output, owned fixture TMPDIR<=1MiB; Platform T2+T3 one remaining Python slot <=60s/1CPU/2GiB/1MiB output; no execution by D2",
+  "preserved_limits": ["source HEAD gitlinks authority", "OPS04.N unknown", "OPS03 cooperative owner/provisioning/prepare-role residuals", "CR04 atomic effective admission residual", "public release separate under G1", "no new source lock/trust root/secret scanner", "fresh named admission and finite stage required for native"],
+  "stop": "frozen D2 for second independent high review; no product edits/tests/native performed"
+}

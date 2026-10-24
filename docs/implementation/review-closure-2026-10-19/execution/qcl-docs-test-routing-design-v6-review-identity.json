@@ -1,0 +1,69 @@
+{
+  "stage": "Focused high D6 lifecycle source recheck",
+  "verdict": "PASS_SOURCE",
+  "scope": "D6 lifecycle amendment and implementable source-only I2B contract; not implementation acceptance",
+  "D5_R1": "closed at design level by exact D6 amendment",
+  "blocking_design_findings": [],
+  "previous_review_preserved": {
+    "path": "/tmp/qcl-docs-test-routing-design-v5-review.md",
+    "sha256": "bb0319a40211616d36316c0adf04b8b0ac1f9bdefb8c71d274a96aecb3fd5d7d",
+    "historical_verdict": "CHANGES_REQUIRED",
+    "modified": false
+  },
+  "inputs_sha256": {
+    "/tmp/qcl-docs-test-routing-design-v6.md": "80509e2b9fc8725a6309733c6857a75657a640addcc7047e5199d21002ddbcc6",
+    "/tmp/qcl-docs-test-routing-design-v6-delta-ledger.md": "9f1269f782a9534ff30b50f44e72a3cc836630eb7c663efbb1e5052a3c6d6932",
+    "/tmp/qcl-docs-test-routing-design-v6-identity.json": "8f4d8cee0262fa81fedefad33f8d805c83ffdb87b07f12b634e29e85e0a6c666",
+    "/tmp/qcl-docs-test-routing-design-v5.md": "6049f427a10c769b69c2beaaa1374e583d217d6eb68926337204e560b824ed48"
+  },
+  "selected_worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "git_observations": {
+    "tracked_modified": 5,
+    "untracked_source": 6,
+    "submodules": "eight uninitialized, unchanged gitlinks"
+  },
+  "selected_source_sha256_rechecked": {
+    "ops/docs_tests_native.py": "4f87e4abd2ab06ecc4873f7eca4f66f37cb5f524df1b55ba52ddc53b4444e77f",
+    "ops/docs_tests_cli.ts": "e4349103a43e4050c6ae4bf28d4fc7d8d5dc8e3ad7f51cc57b6c3472db9a5832",
+    "ops/docs_tests.ts": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+  },
+  "accepted_lifecycle": [
+    "command descendant closure never claims whole-workload empty",
+    "driver receives durable preclosure finish-validation ACK/ref then exits without final phase ref",
+    "producer publishes final phase receipt only after driver subtree closure EOF and reap",
+    "setup broker client and task/job participants remain pinned accounted live identities",
+    "completion-ack(exit) permits producer shutdown without future final setup ref",
+    "outer trusted parent publishes final setup receipt after producer and all workload participants exit and actual whole-empty",
+    "initial empty belongs to outer pre-bootstrap observation",
+    "consumer overall success requires correct phase receipts underlying task/job exit and final setup complete"
+  ],
+  "implementation_conditions": [
+    "all I2 R1-R9 remain open until corrected source CPP",
+    "preserve immutable phase receipts on later delivery failure; fail setup and no next phase",
+    "complete schedule and all failure/fallback reserves fit original deadline allocation and storage caps",
+    "D6 scope-specific closure must not omit unknown identities or signal foreign processes",
+    "all D4 D5 unchanged capsule chunk full Capture secret and source closure contracts remain binding",
+    "one medium source-only I2B writer then independent CPP; no automatic tests or runtime"
+  ],
+  "report": {
+    "path": "/tmp/qcl-docs-test-routing-design-v6-review.md",
+    "sha256": "ba96c60cab8f6fef074f3e41767128ea64f3a643fda89da8e9b6282a1b62551e",
+    "bytes": 13520
+  },
+  "execution": {
+    "scripts": 0, "target_import": 0, "parser": 0, "compiler": 0,
+    "lint": 0, "formatter": 0, "tests": 0, "runtime": 0,
+    "native": 0, "network": 0, "server": 0, "build": 0,
+    "solver": 0, "CI": 0
+  },
+  "source_fixture_checkpoint_git_writes": 0,
+  "native_READY": false,
+  "new_read_bytes_conservative_bound": 1048576,
+  "new_output_bytes_bound": 24576,
+  "wall_minutes_upper_bound": 10,
+  "CPU_RSS_physical_IO_measured": false,
+  "subagents": 0,
+  "stop": "Return to Root for one medium source-only I2B writer; separate later compiler DEV GREEN native and CI gates"
+}

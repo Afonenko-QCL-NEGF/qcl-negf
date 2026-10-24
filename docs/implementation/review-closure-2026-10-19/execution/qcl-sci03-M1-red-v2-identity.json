@@ -1,0 +1,33 @@
+{
+  "schema": "qcl-sci03-M1-red-source-correction-v2",
+  "date": "2026-10-19",
+  "stage": "phase1 corrective source-only cycle1; STOP independent R then sole coordinator RED",
+  "root_head_at_read": "d4113f43cddf02d46025434eb3a9dd8e110e90d6",
+  "worktree": "/tmp/qcl-sci03-M1-results-worktree",
+  "branch": "codex/review-closure-current-bound-measurements",
+  "base_and_head": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "review_sha256": "ba228b23c4d9e17f0c1b35fb171b38cad0d6e75feba2efd9903cedce306299fc",
+  "delta": {"file": "tests/test_equilibrium_diagnostics.py", "line": 716, "old": "    assert bound['state_defects']['raw']['sum_norm'] == 0", "new": "    m1_close(bound['state_defects']['raw']['sum_norm'], 0)", "other_changes": 0, "existing_roundoff_policy_unchanged": true, "literal_exact_dyadic_controls_unchanged": true, "production_and_readme_unchanged": true},
+  "sha256": {
+    "test_v1_reconstructed": "7d2a9d69a0d4cb02334b9b4617a09a9cb3746247eba17f7ebff364eb62ab8921",
+    "test_v2": "d4bb720fff951df9ed402709a4f11422f07680925e0dddf6e91dcc2dcef87f79",
+    "v2_patch": "c599065fd8e38d5e165693b091a075cee1ac9f128601f3a1b748ac47dcc45acc",
+    "v2_delta": "5ed2c20740d13b4c35c6b545337d59c669985f7463f8c248c68a03072d343ec1",
+    "v2_report": "139a0e3a0fd3234db1a65b39db3b31aad14c8e27cf8d19db6a6d201748e6fd2e",
+    "unchanged_production": "3f8ee56390741e15bc2c709de67d4b0c80260733c99752d8fbbb4f538e3042e6",
+    "unchanged_readme": "39c5c06b1335e6820b980ba3967a42ac25f8fad4b80a771e7297a5982d1363e9"
+  },
+  "preserved_v1_sha256": {
+    "report": "dd95cd8eabc86f7978c11a0e0af457a449b02f1b721ef1779acb507b98848d7e",
+    "identity": "c501b2e6f762fc77ba5d84d467bb793ca3d2912de8e91b50fdfb897ad1e0a8ab",
+    "patch": "8c7aa6f21518e86534135c99fec4d354a1162b546f03f8dd85598c9dcc7575b1"
+  },
+  "source_checks": {"single_line_v1_delta": true, "base_prefix_all_29322_bytes_equal": true, "diff_check_passed": true, "base_diff": "+324/-0 one test file"},
+  "execution": {"imports": 0, "parsers": 0, "tests": 0, "pytest": 0, "hdf": 0, "julia": 0, "solver": 0, "build": 0, "install": 0, "network": 0, "server": 0, "stage": 0, "commit": 0, "push": 0, "children": 0, "protected_original_writes": 0, "root_writes": 0},
+  "M1_runtime_calls": {"consumed": 0, "cap": 2},
+  "SCI05_08_C08": {"consumed": 8, "cap": 8, "unchanged": true},
+  "corrective_budget": {"wall_minutes_max": 10, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 1048576, "output_bytes_max": 32768, "telemetry": "not instrumented; targeted source text/hash reads only"},
+  "science_contract": "unchanged; no new theorem/model/tolerance; H epsilon_J_abs final arrays/native admission unknown",
+  "expected_not_executed": {"total_cases": 51, "RED_failed": 13, "RED_passed": 38},
+  "next": "independent source review v2 then coordinator bounded RED; production remains frozen"
+}

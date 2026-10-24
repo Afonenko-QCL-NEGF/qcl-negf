@@ -1,0 +1,335 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+_ OPS03LifecycleOwnerTests.test_o01_actual_update_process_blocks_public_activate_and_prepare _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o01_actual_update_process_blocks_public_activate_and_prepare>
+
+    def test_o01_actual_update_process_blocks_public_activate_and_prepare(self):
+        process, pipe = self.child(self.hold_delivery)
+        before = self.gate.read_bytes()
+        for action in ('activate', 'prepare_initial'):
+            with self.subTest(action=action):
+                self.commands.calls.clear()
+                with self.assertRaises((BlockingIOError, RuntimeError)):
+                    if action == 'activate':
+>                       self.activate()
+
+components/qcl-negf-platform/tests/test_application_release.py:2941: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_application_release.py:2881: in activate
+    return self.ops.activate(release(), profile=self.profile, runtime=self.runtime,
+components/qcl-negf-platform/ops/application_release.py:1065: in activate
+    solver_self_check(expected, run)
+components/qcl-negf-platform/ops/application_release.py:879: in solver_self_check
+    output = run(["timeout", "--kill-after=10s", "300s", "runuser", "-u", "qcl-negf", "--",
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def boundary(self, argv):
+        permitted = {'nix-store', 'nix-env', 'systemctl', 'runuser'}
+        if argv[0] not in permitted:
+>           raise AssertionError('Unapproved fake command: ' + repr(argv))
+E           AssertionError: Unapproved fake command: ['timeout', '--kill-after=10s', '300s', 'runuser', '-u', 'qcl-negf', '--', 'env', 'JULIA_NUM_THREADS=1', 'OPENBLAS_NUM_THREADS=1', '/nix/store/solver/bin/qcl-negf', 'self-check']
+
+components/qcl-negf-platform/tests/test_application_release.py:2877: AssertionError
+_ OPS03LifecycleOwnerTests.test_o01_reverse_public_activate_process_blocks_actual_update _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o01_reverse_public_activate_process_blocks_actual_update>
+
+    def test_o01_reverse_public_activate_process_blocks_actual_update(self):
+        def child(pipe):
+            def command(argv):
+                if argv[0] == 'nix-store':
+                    pipe.send('held')
+                    if not pipe.poll(5):
+                        raise AssertionError('parent handshake deadline')
+                    pipe.recv()
+                return self.boundary(argv)
+            try:
+                self.activate(run=command)
+            except BaseException as error:
+                pipe.send(('child-error', type(error).__name__, str(error)))
+                raise
+        process, pipe = self.child(child)
+        ledger = []
+        with patch.object(self.ops, '_deliver_cli_locked', lambda *a, **k: ledger.append('mutation')):
+>           with self.assertRaises((BlockingIOError, RuntimeError)):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: (<class 'BlockingIOError'>, <class 'RuntimeError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:2969: AssertionError
+_ OPS03LifecycleOwnerTests.test_o07_expiry_after_command_stops_next_persistent_mutation _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o07_expiry_after_command_stops_next_persistent_mutation>
+
+    def test_o07_expiry_after_command_stops_next_persistent_mutation(self):
+        clock = [100.0]
+        def boundary(argv):
+            output = self.boundary(argv)
+            if argv[0] == 'nix-store':
+                clock[0] = 111.0
+            return output
+        with patch.object(self.ops.time, 'monotonic', lambda: clock[0]):
+            with self.assertRaises((ValueError, RuntimeError, TimeoutError)):
+>               self.activate(deadline=110.0, run=boundary)
+
+components/qcl-negf-platform/tests/test_application_release.py:3085: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_application_release.py:2881: in activate
+    return self.ops.activate(release(), profile=self.profile, runtime=self.runtime,
+components/qcl-negf-platform/ops/application_release.py:1065: in activate
+    solver_self_check(expected, run)
+components/qcl-negf-platform/ops/application_release.py:879: in solver_self_check
+    output = run(["timeout", "--kill-after=10s", "300s", "runuser", "-u", "qcl-negf", "--",
+components/qcl-negf-platform/tests/test_application_release.py:3079: in boundary
+    output = self.boundary(argv)
+             ^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def boundary(self, argv):
+        permitted = {'nix-store', 'nix-env', 'systemctl', 'runuser'}
+        if argv[0] not in permitted:
+>           raise AssertionError('Unapproved fake command: ' + repr(argv))
+E           AssertionError: Unapproved fake command: ['timeout', '--kill-after=10s', '300s', 'runuser', '-u', 'qcl-negf', '--', 'env', 'JULIA_NUM_THREADS=1', 'OPENBLAS_NUM_THREADS=1', '/nix/store/solver/bin/qcl-negf', 'self-check']
+
+components/qcl-negf-platform/tests/test_application_release.py:2877: AssertionError
+_ OPS03LifecycleOwnerTests.test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation>
+
+    def test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation(self):
+        attempts = self.runtime / 'delivery-attempts'
+        attempts.mkdir()
+        for name, value in (
+            ('orphan.lifecycle-intent.json', {'schema': 'qcl-negf-lifecycle-intent-v1'}),
+            ('old.admission-intent.json', {'schema': 'qcl-negf-admission-intent-v1'}),
+            ('local.json', {'schema': 'qcl-negf-delivery-attempt-v1', 'status': 'running',
+                            'pending_local_mutation': {'node': 'controller'}}),
+        ):
+            with self.subTest(marker=name):
+                path = attempts / name
+                raw = json.dumps(value).encode()
+                path.write_bytes(raw)
+                self.commands.calls.clear()
+                with self.assertRaises((ValueError, RuntimeError)):
+>                   self.activate()
+
+components/qcl-negf-platform/tests/test_application_release.py:3107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_application_release.py:2881: in activate
+    return self.ops.activate(release(), profile=self.profile, runtime=self.runtime,
+components/qcl-negf-platform/ops/application_release.py:1065: in activate
+    solver_self_check(expected, run)
+components/qcl-negf-platform/ops/application_release.py:879: in solver_self_check
+    output = run(["timeout", "--kill-after=10s", "300s", "runuser", "-u", "qcl-negf", "--",
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def boundary(self, argv):
+        permitted = {'nix-store', 'nix-env', 'systemctl', 'runuser'}
+        if argv[0] not in permitted:
+>           raise AssertionError('Unapproved fake command: ' + repr(argv))
+E           AssertionError: Unapproved fake command: ['timeout', '--kill-after=10s', '300s', 'runuser', '-u', 'qcl-negf', '--', 'env', 'JULIA_NUM_THREADS=1', 'OPENBLAS_NUM_THREADS=1', '/nix/store/solver/bin/qcl-negf', 'self-check']
+
+components/qcl-negf-platform/tests/test_application_release.py:2877: AssertionError
+_ OPS03LifecycleOwnerTests.test_o11_legacy_activation_fence_blocks_update_without_truncation _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o11_legacy_activation_fence_blocks_update_without_truncation>
+
+    def test_o11_legacy_activation_fence_blocks_update_without_truncation(self):
+        legacy = self.runtime / 'activation.lock'
+        legacy.write_bytes(b'legacy bytes must remain')
+        with legacy.open('r+') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            ledger = []
+            with patch.object(self.ops, '_deliver_cli_locked', lambda *a, **k: ledger.append('entered')):
+>               with self.assertRaises((BlockingIOError, RuntimeError)):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: (<class 'BlockingIOError'>, <class 'RuntimeError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:3209: AssertionError
+_ OPS03LifecycleOwnerTests.test_o14_public_activate_requires_matching_closed_selected_gate _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o14_public_activate_requires_matching_closed_selected_gate>
+
+    def test_o14_public_activate_requires_matching_closed_selected_gate(self):
+        for gate in ({'open': True, 'release_id': 'release-a'},
+                     {'open': False, 'release_id': 'foreign'}):
+            with self.subTest(gate=gate):
+                self.gate.write_text(json.dumps(gate))
+                with self.assertRaises((ValueError, RuntimeError)):
+>                   self.activate()
+
+components/qcl-negf-platform/tests/test_application_release.py:3238: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_application_release.py:2881: in activate
+    return self.ops.activate(release(), profile=self.profile, runtime=self.runtime,
+components/qcl-negf-platform/ops/application_release.py:1065: in activate
+    solver_self_check(expected, run)
+components/qcl-negf-platform/ops/application_release.py:879: in solver_self_check
+    output = run(["timeout", "--kill-after=10s", "300s", "runuser", "-u", "qcl-negf", "--",
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def boundary(self, argv):
+        permitted = {'nix-store', 'nix-env', 'systemctl', 'runuser'}
+        if argv[0] not in permitted:
+>           raise AssertionError('Unapproved fake command: ' + repr(argv))
+E           AssertionError: Unapproved fake command: ['timeout', '--kill-after=10s', '300s', 'runuser', '-u', 'qcl-negf', '--', 'env', 'JULIA_NUM_THREADS=1', 'OPENBLAS_NUM_THREADS=1', '/nix/store/solver/bin/qcl-negf', 'self-check']
+
+components/qcl-negf-platform/tests/test_application_release.py:2877: AssertionError
+___ OPS03LifecycleOwnerTests.test_o18_service_environment_uses_selected_gate ___
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o18_service_environment_uses_selected_gate>
+
+    def test_o18_service_environment_uses_selected_gate(self):
+>       self.activate()
+
+components/qcl-negf-platform/tests/test_application_release.py:3242: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_application_release.py:2881: in activate
+    return self.ops.activate(release(), profile=self.profile, runtime=self.runtime,
+components/qcl-negf-platform/ops/application_release.py:1065: in activate
+    solver_self_check(expected, run)
+components/qcl-negf-platform/ops/application_release.py:879: in solver_self_check
+    output = run(["timeout", "--kill-after=10s", "300s", "runuser", "-u", "qcl-negf", "--",
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o18_service_environment_uses_selected_gate>
+argv = ['timeout', '--kill-after=10s', '300s', 'runuser', '-u', 'qcl-negf', ...]
+
+    def boundary(self, argv):
+        permitted = {'nix-store', 'nix-env', 'systemctl', 'runuser'}
+        if argv[0] not in permitted:
+>           raise AssertionError('Unapproved fake command: ' + repr(argv))
+E           AssertionError: Unapproved fake command: ['timeout', '--kill-after=10s', '300s', 'runuser', '-u', 'qcl-negf', '--', 'env', 'JULIA_NUM_THREADS=1', 'OPENBLAS_NUM_THREADS=1', '/nix/store/solver/bin/qcl-negf', 'self-check']
+
+components/qcl-negf-platform/tests/test_application_release.py:2877: AssertionError
+_ ShutdownIntentTests.test_ops03_o15_same_node_startup_contends_during_runner_wait _
+
+self = <test_worker_shutdown_intent.ShutdownIntentTests testMethod=test_ops03_o15_same_node_startup_contends_during_runner_wait>
+
+    def test_ops03_o15_same_node_startup_contends_during_runner_wait(self):
+        from test_worker_lifecycle import job
+        self.run.lines = [job('101', 'alice')]
+        context = multiprocessing.get_context('fork')
+        ready = context.Event()
+        finish = context.Event()
+        def on_call(args):
+            if 'pause' in args:
+                ready.set()
+                if not finish.wait(5):
+                    raise AssertionError('finite Runner wait watchdog')
+        def client():
+            self.run.on_call = on_call
+            self.shutdown()
+        process = context.Process(target=client)
+        process.start()
+        try:
+            self.assertTrue(ready.wait(5), 'shutdown did not enter Runner boundary')
+            before = (self.state / 'worker.json').read_bytes()
+            self.run.identity = {**WORKER, 'boot_id': NEW_BOOT}
+            # Contention must be the reason; pending intent alone is not a
+            # substitute for holding the node lock across the Runner wait.
+            with self.assertRaises(BlockingIOError):
+>               self.startup()
+
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py:151: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py:83: in startup
+    return worker.startup("worker", target, enrollment=self.enrollment,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def startup(node, target, *, enrollment, runtime=RUNTIME, gate=GATE, run=command,
+                delivery_timeout_seconds=1800.0, command_timeout_seconds=360.0,
+                command_output_bytes=1048576, delivery_output_bytes=8388608):
+        """Same enrolled machine/boot and controller authority, no recovery submission."""
+        if not IDENTIFIER.fullmatch(node) or not TARGET.fullmatch(target):
+            raise ValueError("Use a valid Slurm node and explicit SSH target")
+        for value in (delivery_timeout_seconds, command_timeout_seconds):
+            if release.duration(value, "Startup timeout") <= 2:
+                raise ValueError("Startup timeout must exceed cleanup reserve")
+        release.output_bound(command_output_bytes)
+        release.output_bound(delivery_output_bytes)
+        deadline = time.monotonic() + delivery_timeout_seconds
+        authority = release.preflight_controller_authority(enrollment, run=run, deadline=deadline,
+            command_timeout_seconds=command_timeout_seconds, command_output_bytes=command_output_bytes,
+            delivery_output_bytes=delivery_output_bytes, before_remote=lambda: release.lifecycle_guard(runtime, normal_intents=False))
+        records = release.enrollment_records(authority["registry"])
+        matches = [record for record in records if record["name"] == node and record["role"] == "worker" and target in record["targets"]]
+        if len(matches) != 1:
+            raise ValueError("Returning worker target/NodeName is not enrolled")
+        binding = {**matches[0], "target": target}
+        used = authority["used_output_bytes"]
+        mutation_started = False
+        def bounded(args):
+            nonlocal used
+            release.deadline_check(deadline)
+            available = min(command_output_bytes, delivery_output_bytes - used)
+            if available <= 0:
+                raise ValueError("Startup output budget exhausted")
+            env = None
+            if run is command and args[:2] == ["nix", "copy"]:
+                env = dict(os.environ)
+                env["NIX_SSHOPTS"] = shlex.join(release.SSH_OPTIONS + release.trust_options(authority["trust_snapshot"]) + shlex.split(env.get("NIX_SSHOPTS", "")))
+            output = (run(args, timeout_seconds=command_timeout_seconds, output_bytes=available, deadline=deadline, env=env)
+                      if run is command else run(args))
+            count = getattr(output, "output_bytes", len(output.encode()))
+            used += count
+            if count > available or used > delivery_output_bytes:
+                error = ValueError("Startup output budget exceeded")
+                error.uncertain = mutation_started
+                raise error
+            release.deadline_check(deadline)
+            return output
+        def probe(prior_boot=None):
+            actual = release.identity_probe(target, trust_snapshot=authority["trust_snapshot"], run=bounded)
+            return release.bind_node_observation(binding, actual, prior_boot=prior_boot)
+        runtime = Path(runtime)
+        runtime.mkdir(parents=True, exist_ok=True)
+        with (runtime / "delivery.lock").open("w") as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            release.recheck_controller_authority(authority, run=bounded)
+            release.lifecycle_guard(runtime, normal_intents=False)
+            bound = probe()
+            expected = manifest(load(runtime / "release.json"))
+            guard(expected["release_id"], expected["solver_executable"], runtime / "release.json", gate)
+            state_path = runtime / "shutdown" / (node + ".json")
+            value = release.read_shutdown_intent(state_path, node) if state_path.exists() else None
+            if value is not None:
+                _pending_jobs(value["jobs"])
+                _intent_binding(value, binding, authority)
+                if value.get("requires_reconciliation") or value.get("pending_action"):
+                    raise RuntimeError("Normal startup cannot clear uncertain/pending intent")
+                if value["phase"] == "resumed":
+                    if bound["identity"]["boot_id"] != value["return_boot_id"]:
+                        raise ValueError("Already resumed intent belongs to another admitted generation")
+                elif value["phase"] != "safe_to_power_off" or value.get("capture_complete") is not True or value["jobs"]:
+>                   raise RuntimeError("Normal startup lacks complete safe-stop scope")
+E                   RuntimeError: Normal startup lacks complete safe-stop scope
+
+components/qcl-negf-platform/ops/worker_lifecycle.py:438: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Waiting for job 101 (execution-101 attempt 1): synthetic scoped stop proof unavailable
+_ ShutdownIntentTests.test_ops03_o16_startup_node_lock_released_after_failed_preflight _
+
+self = <test_worker_shutdown_intent.ShutdownIntentTests testMethod=test_ops03_o16_startup_node_lock_released_after_failed_preflight>
+
+    def test_ops03_o16_startup_node_lock_released_after_failed_preflight(self):
+        path = self.runtime / 'shutdown-worker.lock'
+        path.write_bytes(b'original lock bytes')
+        with path.open('r+') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+>           with self.assertRaises(BlockingIOError):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: BlockingIOError not raised
+
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py:168: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_actual_update_process_blocks_public_activate_and_prepare
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_reverse_public_activate_process_blocks_actual_update
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_expiry_after_command_stops_next_persistent_mutation
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o11_legacy_activation_fence_blocks_update_without_truncation
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o14_public_activate_requires_matching_closed_selected_gate
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_service_environment_uses_selected_gate
+FAILED components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_same_node_startup_contends_during_runner_wait
+FAILED components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o16_startup_node_lock_released_after_failed_preflight
+9 failed in 1.78s

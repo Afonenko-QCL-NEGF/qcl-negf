@@ -1,0 +1,25 @@
+{
+  "task": "SCI05-N1-Results-E2-F1-v3",
+  "stage": "frozen_corrective_source_pending_independent_review",
+  "worktree": "/tmp/qcl-sci05-results-worktree",
+  "branch": "codex/review-closure-final-audit-reader",
+  "head": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+  "scope": "Only F1 present analysis native point identity binding",
+  "review_sha256": "9ae7330b6a4ba3bdf5f7ffd358a976be48b36037fa37a1319e93efce6335e6b0",
+  "E2_checkpoint_sha256": "ba3de6c1986595ff9c45d47e8189ff68ad954c83dc0c4ff8d620a5a13c816469",
+  "files": {
+    "src/qcl_negf_results/native.py": {"bytes": 16498, "sha256": "532fbedf8b1b296e0fb5bc026788a522bf92aeee94ae1192ca651e2e34a407e5", "unchanged_from_v2": true},
+    "src/qcl_negf_results/state.py": {"bytes": 29877, "sha256": "4de0129ca7a5d0a85d9e33b06bf9c5e48858c1c1c73c56e2949e1f9376c93823"},
+    "tests/test_final_fixed_point_audit.py": {"bytes": 30703, "sha256": "b43074d234422cc577f84f06519d86b2e5b2e9eb3b2bfd38dee71bc34bdebc70"}
+  },
+  "patch": {"path": "/tmp/qcl-sci05-results-v3-patch.diff", "bytes": 45087, "sha256": "c6b9a9cf45ae0cfbc284de64ddc82cb1eae32567ddec5f30406a3594636a67e3"},
+  "v2_preserved": {
+    "report_sha256": "0f121f3f3f6cd699b516e5d713d408116e7a196a13f94ec1c7ebc056f375786a",
+    "identity_sha256": "078894c9107de84d123daa8e799cee535bd7ff3833a791f464185bff063810cc",
+    "patch_sha256": "fb936c596a035670426ad64c90c4c97a2e0a663dfd663c34a594e51a2853a55e"
+  },
+  "checks": {"git_diff_check": "exit_0", "imports": 0, "tests": 0, "parser_or_target_execution": 0, "HDF5_or_Julia": 0, "build_network": 0, "stage_commit_push": false, "children": 0},
+  "budget": {"owning_N1_E2_corrective_round_used": 1, "shared_C08_consumed": 6, "shared_C08_cap": 8, "new_C08_calls": 0},
+  "remaining_gates": ["independent_source_review", "actual_Runner_fixture", "source_bound_targeted_Results_call"],
+  "source_mutation_stopped": true
+}

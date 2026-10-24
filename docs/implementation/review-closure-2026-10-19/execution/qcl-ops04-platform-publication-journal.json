@@ -1,0 +1,28 @@
+{
+  "CP_CODE": "76ebdd93f7c5f941fa9adf39b49720df925e7c83fa598203d603d702b4b96469",
+  "components": {
+    "qcl-negf-platform": {
+      "state": "G1_merged",
+      "operation_id": "PUBLISH-OPS04-PLATFORM-f5bc368",
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform",
+      "base": "b067723c82382689bff5cc366981c56e99b926f8",
+      "base_branch": "codex/review-closure-contribution-routing",
+      "head": "f5bc368654414039f7368bb19ca3201fa7f29f9d",
+      "branch": "codex/review-closure-protected-reader-boundaries-integration",
+      "files": {
+        "tests/test_node_enrollment.py": "d99c003fccc308c9cffed172f38ec69eeaa744f2753c7a95c28794d07aca305d",
+        "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6"
+      },
+      "source_review": "3613d1e651ad9b0147993f2616a9bd70c654e3ebe83ac391750de027f4b39326",
+      "tests_only": true,
+      "pr": 19,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-platform/pull/19",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "d3e366b92082f3a5c5115d910adcbc892f09a63d",
+      "merged_at": "2026-10-19T21:24:31Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

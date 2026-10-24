@@ -1,0 +1,43 @@
+{
+  "format": "qcl-source-design-review-identity-v1",
+  "task": "DOC04 private attempt/path focused CP-DESIGN",
+  "reviewer": "/root/sci03_current_bound_review",
+  "verdict": "PASS_SOURCE",
+  "report": "/tmp/qcl-doc04-profile-path-contract-review.md",
+  "report_sha256": "45d21330010644038db3b215a76f04d026e329dc0cf2844eb42ce00b99cac12a",
+  "report_bytes": 11181,
+  "contract_sha256": "ec7717494878fbec813fe89c1ded0c5c43dcbeb6942271d0ef8d113445f5a935",
+  "author_identity_sha256": "d95de918d51e282662dfa1359f678ccb292692143bae71dc582a0530a230d376",
+  "D3_sha256": "960a639dd281d7a5b99c582f2c9dc8b17e816715753557791460ebcef1159aee",
+  "D3_review_sha256": "7db5ad18c7c9e197fb0430422b917228ddc0216f90c0cdfb37f78ee80e9a4211",
+  "observed_root_head": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "prepared_Base_root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/base",
+  "prepared_Base_source_hashes": {
+    "path.jl": "5841d139f073104fa289aa02bb945d57dfb4f811917ba113902a331219a5159e",
+    "stat.jl": "3811d5d926879a5727ae0ad1f189045b7ab9d03cb758f2693d5246b3f2d30e46",
+    "initdefs.jl": "e3ae82d7cbe446a0ef763fda526e91dd851306803398cbb7d6937990b54892ba"
+  },
+  "binary_archive_identity_independently_reverified": false,
+  "blocking_findings": [],
+  "medium_profiles_guard_ready": true,
+  "ownership_BIND_payload_admission_proven_by_guard": false,
+  "Root_preflight_required": [
+    "exclusive namespace ownership and permissions",
+    "full staged payload no symlinks or special files",
+    "source graph recipe and staged bytes/hashes",
+    "actual toolchain/cache/import/source-effect identity",
+    "assets/license closure",
+    "fresh admission and finite resource envelope"
+  ],
+  "BUILD_admitted": false,
+  "resource": {
+    "source_read_cap_bytes": 2097152,
+    "source_read_charged_upper_bound_bytes": 519759,
+    "ledger_groups_bytes": [52003,6790,276892,61358,122716],
+    "unbound_usr_source_probe_included_but_not_primary_evidence": true,
+    "physical_io_RSS_measured": false,
+    "original_failed_scan_reclassified": false
+  },
+  "reviewer_execution_import_parser_test_build_network_product_Git_checkpoint_children_C08_science_counts": 0,
+  "stop": true
+}

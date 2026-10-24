@@ -1,0 +1,68 @@
+{
+  "id": "OPS01-ACCESS-READ-1",
+  "state": "packet_stopped_after_completed_readonly_phases_no_retry",
+  "phases": [
+    {
+      "phase": "CI_read",
+      "exit_code": 255,
+      "wall_seconds": 0.151,
+      "raw_bytes": 831,
+      "raw_sha256": "5cb6078cde2b3511497109dcab839e6dc2ae7a439a12dbcb675b5cfd3e675bbc",
+      "capture_complete": true,
+      "stop_reason": null,
+      "outcome": "failed_or_unknown"
+    },
+    {
+      "phase": "compute_read",
+      "exit_code": 255,
+      "wall_seconds": 3.412,
+      "raw_bytes": 124,
+      "raw_sha256": "846704f600c90fa52db78b9e80c3d026db73d0c00f152d359ebf09ce862836e8",
+      "capture_complete": true,
+      "stop_reason": null,
+      "outcome": "failed_or_unknown"
+    },
+    {
+      "phase": "control_read",
+      "exit_code": 255,
+      "wall_seconds": 3.463,
+      "raw_bytes": 124,
+      "raw_sha256": "846704f600c90fa52db78b9e80c3d026db73d0c00f152d359ebf09ce862836e8",
+      "capture_complete": true,
+      "stop_reason": null,
+      "outcome": "failed_or_unknown"
+    },
+    {
+      "phase": "hypervisor_read",
+      "exit_code": 0,
+      "wall_seconds": 1.004,
+      "raw_bytes": 3275,
+      "raw_sha256": "d6439bfc9b8bbc44fdbfc83fa4a111a8c9338fd92cf6297473216a7a62da5d16",
+      "capture_complete": true,
+      "stop_reason": null,
+      "outcome": "connected_fresh_readonly_host_facts"
+    },
+    {
+      "phase": "hypervisor_config_storage_read",
+      "exit_code": 0,
+      "wall_seconds": 8.379,
+      "raw_bytes": 36975,
+      "raw_sha256": "571456b963c2671e6106fc62c58923a627e7355a890f07de6eb5d65c1923c06d",
+      "capture_complete": true,
+      "stop_reason": null,
+      "outcome": "connected_fresh_readonly_host_facts"
+    }
+  ],
+  "raw_total_bytes": 41329,
+  "transport_wall_seconds": 16.409,
+  "packet_elapsed_seconds": 496.678,
+  "packet_wall_cap_seconds": 600,
+  "raw_byte_cap": 2097152,
+  "hypervisor_access": "confirmed fresh read-only",
+  "controller_compute_access": "No route to host; matching historicalID/name candidateVMs stopped; actual guest state unknown",
+  "CI_access": "host key mismatch against historical pinned key, not in currentknown_hosts; newkeyNOTaccepted; trusted reprovisioning evidence requested asynchronously",
+  "no_mutations": true,
+  "all_existing_resources_protected": true,
+  "full_admission": false,
+  "builds_solver_CI_dispatch": 0
+}

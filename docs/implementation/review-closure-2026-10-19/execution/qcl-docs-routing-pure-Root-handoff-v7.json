@@ -1,0 +1,20 @@
+{
+  "status": "PURE_HANDOFF",
+  "issuer": "Root",
+  "scope": "docs-routing-pure-local-engineering-v7",
+  "attempt": "DOCS-ROUTING-GREEN-1",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "isolated_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "source_files": {
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+  },
+  "shared_budget": {
+    "milestone_start": 81,
+    "milestone_ceiling": 88,
+    "calls_before": 87,
+    "calls_reserved": 1,
+    "calls_after": 88,
+    "no_rerun": true
+  }
+}

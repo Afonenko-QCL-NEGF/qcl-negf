@@ -1,0 +1,65 @@
+{
+  "stage": "Independent high CPP of actual I2B source packet",
+  "verdict": "CHANGES_REQUIRED",
+  "native_source_ready": false,
+  "worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "git_status": {"tracked_modified": 5, "untracked_source": 6, "submodules": "eight uninitialized, unchanged gitlinks"},
+  "method": "Primary actual source inspected before author failure list; author report compared afterwards. No target execution or parser/compiler.",
+  "inputs": {
+    "/tmp/qcl-docs-routing-impl-i2b-report.md": "611ce7f52ca694418a68153cbeb41fda0354762c08a6809336a3b564f0bd8e78",
+    "/tmp/qcl-docs-routing-impl-i2b-identity.json": "5dce8bf047b9ca7a19e4ef39615b393254a6a8c21a10ee1883c3896026e7cbb0",
+    "/tmp/qcl-docs-routing-impl-i2b-complete.patch": "c09188ee67b41ffa3df20135b058e0798a49fb2812b8c3f478228f50d94dd3f5"
+  },
+  "governing_contracts_previously_reviewed": {
+    "D4": "24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0",
+    "D5": "6049f427a10c769b69c2beaaa1374e583d217d6eb68926337204e560b824ed48",
+    "D6": "80509e2b9fc8725a6309733c6857a75657a640addcc7047e5199d21002ddbcc6",
+    "D6_review": "ba96c60cab8f6fef074f3e41767128ea64f3a643fda89da8e9b6282a1b62551e"
+  },
+  "changed_owning_sources": {
+    "ops/docs_tests_native.py": "0e7616ffc39fe209d7c47d469562bac09d9246bb09908504e8b9162d95e82669",
+    "ops/docs_tests_cli.ts": "4276c0222c627100a8fbc0ebb8bd8c5aaeff85de91a4918020a66be8457bdfc6",
+    "tests/test_docs_test_native.py": "6e279b7ec70f805bba9eef06ee7bc3f6f6d65ce4dade46449134a71d0440275f",
+    "tests/docs_test_native_protocol_test.ts": "07c6d2510a8903a409be4cc96c40e99ed0f1f03d0bd1d9933335f6b9a6adedbe"
+  },
+  "pure_separate_contract": {
+    "helper_sha256": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "fixture_sha256": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761",
+    "unchanged": true,
+    "nominal": 230,
+    "observed": null,
+    "source_import_safe": true,
+    "native_gaps_do_not_block_independent_pure_source_contract": true,
+    "future_execution_requires_separate_Root_finite_plan": true
+  },
+  "manifest_verification": "All 16 production plus 2 DEV file SHA256 values checked against I2B identity; only four I2B owning files changed from I2.",
+  "findings": [
+    {"id": "C1", "priority": "P1", "summary": "Healthy final setup always failed; queued phase-ready conflicts with next leader-bound; producer proof, gated launch and full parent dispatcher absent"},
+    {"id": "C2", "priority": "P1", "summary": "KaTeX persisted record requires its own SHA inside itself; retained reader exact provenance incomplete"},
+    {"id": "C3", "priority": "P1", "summary": "AuditIntent and startup attachment ACK bindings differ from exact normative unions"},
+    {"id": "C4", "priority": "P1", "summary": "Constructor and reaped-supervisor exceptions strand raw evidence; driver stderr EOF synthetic; incomplete first-fork cleanup"},
+    {"id": "C5", "priority": "P1", "summary": "Full cap nonrefundable reservations require 111MiB raw and 62.4375MiB metadata for 444 Git reads; shared actual ledger incomplete"},
+    {"id": "C6", "priority": "P1", "summary": "Per-phase counters never reset, 100+444 exceeds512; snapshot source gates ticket lifecycle and byte blobs incomplete"},
+    {"id": "C7", "priority": "P1", "summary": "Per-op exact finite readers and rejected finish path incomplete"},
+    {"id": "C8", "priority": "P1-to-native-ready", "summary": "DEV8+8 lack complete healthy lifecycle and paired failure retention matrix"}
+  ],
+  "I2_R1_to_R9": "Still open as implementation acceptance requirements; source improvements partial",
+  "I2C": "One finite source-only writer, same four owning paths, no new design-only cycle; exact ready contract in report, followed by high CPP",
+  "report": {
+    "path": "/tmp/qcl-docs-routing-impl-i2b-review.md",
+    "sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea",
+    "bytes": 24515
+  },
+  "execution": {
+    "target_import": 0, "parser": 0, "compiler": 0, "lint": 0,
+    "formatter": 0, "tests": 0, "runtime": 0, "native": 0,
+    "network": 0, "server": 0, "build": 0, "solver": 0, "CI": 0
+  },
+  "source_fixture_checkpoint_index_edits": 0,
+  "new_read_bytes_conservative_upper_bound": 3145728,
+  "output_bytes_upper_bound": 40000,
+  "CPU_RSS_physical_IO_measured": false,
+  "subagents": 0,
+  "stop": "Return source CPP to Root; no tests or automatic continuation"
+}

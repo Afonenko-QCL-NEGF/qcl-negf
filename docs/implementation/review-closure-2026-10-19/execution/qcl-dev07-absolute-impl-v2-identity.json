@@ -1,0 +1,42 @@
+{
+  "task":"DEV07 E1/E2 errata",
+  "phase":"source/comment-only frozen v2",
+  "review_sha256":"169a8563adb1693d0f93f8626187349f0f21596a79d46a3d9309c6f284af3e11",
+  "checkpoint":"/tmp/qcl-checkpoint-SCI05-N1-E5-DEV07-errata.json",
+  "worktree":"/tmp/qcl-dev07-absolute-worktree",
+  "branch":"codex/review-closure-absolute-kernel-oracles",
+  "core_head":"7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "root_identity_erratum":{
+    "historical_D1_context":"9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+    "original_author_root_observation_time":"unknown",
+    "I1_freeze_timestamp_is_not_root_observation_timestamp":true,
+    "fresh_readback_root_head":"cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+    "fresh_readback_command_utc":"2026-10-19T18:26:51Z",
+    "root_HEAD_core_gitlink":"7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+    "original_identity_rewritten":false
+  },
+  "files":[
+    {"path":"test/physics/absolute_scattering_kernel_oracles.jl","bytes":17498,"sha256":"d3651d095d81a1c02dd02ffc660c906998e8486a4634302ee3e7722bc62678ad"},
+    {"path":"docs/src/development/review_oracle_contracts.md","bytes":98738,"sha256":"42d747275644df419ea1b1e0749821e96e9d82a843d9ac93366ad0caf11f3e62"}
+  ],
+  "patch":{"path":"/tmp/qcl-dev07-absolute-impl-v2-patch.diff","bytes":24979,"sha256":"0db5883171bf964ecfd82e62eebdf59ca6690f8715f57fc0744038a4617ac0d1"},
+  "narrow_errata_diff_sha256":"8871389eca0668381239554eb5c025acf3637a9c0105dadafce756b9d3439717",
+  "functional_byteproof":{
+    "method":"sed removes only entire lines matching ^[[:space:]]*#; cmp before/after; manual exact diff confirms one full comment block",
+    "before_path":"/tmp/qcl-dev07-absolute-functional-before.txt",
+    "after_path":"/tmp/qcl-dev07-absolute-functional-after.txt",
+    "both_sha256":"e0aa8a0358102fa89bf2ede8acd38584b3297c565c47dc524366ec166049e9c2",
+    "cmp_exit":0,
+    "Julia_parser_used":false
+  },
+  "preserved_I1":{
+    "report_sha256":"db33af90259a022ffa89a5f1832800463e7497d86a07c848f650b8ee23ae5a64",
+    "identity_sha256":"e4ddbb67f1a6202a0e142abe0012ab1f1182ca2952f0ae1f6fc52999a4a0f499",
+    "patch_sha256":"561d2a3643ad95be37e50bb76dd9a86e388386e419ced4744427d387c67f7316",
+    "byte_exact_hash_readback":true
+  },
+  "independent_operation_ceilings":{"LO":744,"IFR":544,"acoustic":268,"alloy":280,"universal_D1_ceiling":992,"gamma_n":1024},
+  "checks":{"whitespace":"passed","manual_exact_diff":"comments and appended doc inventory only","runtime":"not_run","runtime_consumed":0,"runtime_cap":2,"children":0,"git_stage_commit_push":false,"SCI05_written":false,"protected_original_written":false},
+  "resource_cap":{"wall_minutes":10,"cpu":1,"ram_gib":1,"read_mib":1,"output_kib":32,"exact_OS_IO_measurement":"not_measured"},
+  "stop":"frozen pending coordinator exactdiff review and independent reviewer functional-byte acceptance before local BIND"
+}

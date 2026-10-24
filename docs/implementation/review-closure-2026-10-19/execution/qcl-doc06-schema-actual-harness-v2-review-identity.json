@@ -1,0 +1,69 @@
+{
+  "format": "qcl-negf.doc06-schema-actual-independent-source-review.v2",
+  "verdict": "PASS_SOURCE_ACTUAL_PACKET_V2",
+  "status": "STOP_FOR_ROOT_FRESH_READY_R1_R2",
+  "inputs": {
+    "/tmp/qcl-doc06-schema-actual-plan-v2.json": {
+      "sha256": "1f0f73b9216aa097a1b86ba455192820b6ebb872a8d7d9d57e1b5b682ccecceb",
+      "bytes": 3962
+    },
+    "/tmp/qcl-doc06-schema-actual-local-run-v2.py": {
+      "sha256": "322c38d71f67c037e780e0f811b8ea67cd863d61f9a1bf7690391ffdaf3976f8",
+      "bytes": 21737
+    },
+    "/tmp/qcl-doc06-schema-actual-preparation-v2.py": {
+      "sha256": "55dba3288b2c1e8fbf84f6f03d2cda171d0466107d60db26fbd4746e175bd9b0",
+      "bytes": 11134
+    },
+    "/tmp/qcl-doc06-schema-actual-harness-report-v2.md": {
+      "sha256": "36b120e4da5497f5201a0a6a835c26da55c514492c26bbc64bb210d5ea588fc5",
+      "bytes": 11082
+    },
+    "/tmp/qcl-doc06-schema-actual-harness-identity-v2.json": {
+      "sha256": "4e797dc2c21279f616b5681d2fa269d36377cdba8cfcdbf45f4ea79d340971fb",
+      "bytes": 2953
+    }
+  },
+  "report": {
+    "path": "/tmp/qcl-doc06-schema-actual-harness-v2-review.md",
+    "sha256": "8ed8a847feb7950d5f478af45cb747259805b7d8e7b09c94aabc637fdb25134a",
+    "bytes": 13839
+  },
+  "observed_root_head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "gitlinks_count": 8,
+  "selected_inert_sources": 9,
+  "independent_old_payload_continuity": {
+    "all9current_git_blobs_equal_old_frozen_bytes": true,
+    "old_manifest_hashes_sizes_equal": true,
+    "aggregate_bytes": 245338,
+    "new_snapshot_export_performed": false
+  },
+  "mandatory_prerequisites": [
+    "fresh_Root_READY_per_phase",
+    "independent_Root_R1_new_preparation_graph_manifest9Git_bytes_readback",
+    "Root_R2_A1_exit_receipts_before_after_reconciliation",
+    "A2_prior_A1_binding_and_terminal_continuity",
+    "Root_global_ceiling88_admission_no_CP_writer"
+  ],
+  "old_E1_guard_outcome": "failed_unknown_NotCapable_preserved",
+  "unit74_software_evidence": "accepted_with_limits_no_rerun",
+  "new_blocking_findings": [],
+  "execution_grant": false,
+  "prepared_script_helper_runtime_executions": 0,
+  "target_parser_compiler_tests_native_network_executions": 0,
+  "snapshot_exports": 0,
+  "Root_CP_writes": 0,
+  "writes": [
+    "/tmp/qcl-doc06-schema-actual-harness-v2-review.md",
+    "/tmp/qcl-doc06-schema-actual-harness-v2-review-identity.json"
+  ],
+  "limits": {
+    "read_cap_bytes": 4194304,
+    "read_conservative_upper_bytes": 2097152,
+    "wall_cap_seconds": 720,
+    "cpu_count": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 131072,
+    "physical_measurements": "not_measured"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "task": "SCI05",
+  "attempt": "C08-RESULTS-8",
+  "started_utc": "2026-10-19T18:40:15.504089+00:00",
+  "recorded_at_utc": "2026-10-19T18:40:26.115405+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "components/qcl-negf-results/tests/test_final_fixed_point_audit.py",
+    "components/qcl-negf-results/tests/test_equilibrium_diagnostics.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-SCI05-C08-RESULTS-8/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "16e908e64bfc6fd9a4467897b9eade95cd8a353535610c52144c2ca912e41b75",
+  "fixture_sha256": {
+    "components/qcl-negf-results/tests/test_final_fixed_point_audit.py": "45111262df9b7744ca9f7397a887af4133ee602d9b6e325af2d3ee4a5e12f95a",
+    "components/qcl-negf-results/tests/test_equilibrium_diagnostics.py": "ce35954b2503d7a910048d6e95bcc6b6b0c88eea40f8a018dc13bdf8ca4bbad0"
+  },
+  "exit_code": 0,
+  "wall_seconds": 10.612,
+  "sampled_peak_process_tree_RSS_bytes": 92844032,
+  "sampled_owned_temporary_bytes_peak": 15874127,
+  "stdout_stderr_bytes": 260,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "selected locked .venv Python3.14.7, owning editable imports; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-SCI05-C08-RESULTS-8/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 139,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

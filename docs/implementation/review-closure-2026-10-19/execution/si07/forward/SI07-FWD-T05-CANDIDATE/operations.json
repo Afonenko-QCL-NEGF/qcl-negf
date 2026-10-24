@@ -1,0 +1,13 @@
+{
+  "reads": [
+    {"command":"cat /tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CANDIDATE/prompt.txt","exit_code":0,"output_summary":"Dispatch: whitelist, candidate skill package, one exact T05 check, output and resource budgets."},
+    {"command":"cat /tmp/qcl-si07-cases/T05/request.txt /tmp/qcl-si07-cases/T05/README.md /tmp/qcl-si07-cases/T05/check.py /tmp/qcl-si07-cases/T05/target.md","exit_code":0,"output_summary":"Explicit authorization; README links target.md; script restricts resources, asserts exact link and target existence, prints JSON; target is source-only fixture. Request supplies script SHA256; not independently recomputed."},
+    {"command":"cat /tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/SKILL.md /tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/references/comparison.md","exit_code":0,"output_summary":"Source-only evidence allowed; preserve scope and existing authorization; separate process completion from scientific acceptance; missing data remain unknown."}
+  ],
+  "read_paths":"Exactly the paths in the three read commands above; no other source inputs read.",
+  "approximate_input_bytes":22000,
+  "input_size_method":"Conservative text-length estimate, not measured filesystem sizes.",
+  "check":{"command":"/usr/bin/python3 -I -S /tmp/qcl-si07-cases/T05/check.py /tmp/qcl-si07-cases/T05","calls":1,"exit_code":0,"output":"{\"static_links\": \"pass\", \"links_checked\": 1, \"solver_executed\": false}\n"},
+  "writes":{"tool":"apply_patch","paths":["answer.md","operations.json"],"directory":"/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CANDIDATE/"},
+  "limits":"No additional checks, imports, solver, network, repo edits or subagents. CPU/RSS not measured."
+}

@@ -1,0 +1,333 @@
+{
+  "tool": "qcl-negf.doc06-static-slice.v1",
+  "profile": "configuration-source-energy-chunk-v1",
+  "source_graph_sha256": "b7244ee91167b688e598efea33ba9620772c974264920d7e368ec87de4d939e1",
+  "source_manifest_sha256": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a",
+  "external_binding": "Receipt hashes verify supplied bytes only; external source preparation must prove commit-to-bytes binding.",
+  "lexical_normalization": "UTF-8 strict; CRLF/CR normalized to LF for extraction; hashes use raw bytes",
+  "inputs": [
+    {
+      "path": "runner/src/application/configuration_types.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "actual_sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+      "actual_bytes": 8663,
+      "status": "verified",
+      "expected_sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+      "expected_bytes": 8663
+    },
+    {
+      "path": "runner/src/infrastructure/config/configuration.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "actual_sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb",
+      "actual_bytes": 71428,
+      "status": "verified",
+      "expected_sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb",
+      "expected_bytes": 71428
+    },
+    {
+      "path": "runner/src/infrastructure/config/configuration_sources.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "actual_sha256": "bb08a718dd765a15db2a4fba7de0ff2ea79753f29dc516900f67485331dafbb1",
+      "actual_bytes": 3381,
+      "status": "verified",
+      "expected_sha256": "bb08a718dd765a15db2a4fba7de0ff2ea79753f29dc516900f67485331dafbb1",
+      "expected_bytes": 3381
+    },
+    {
+      "path": "runner/src/application/auto_strategy.jl",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "actual_sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326",
+      "actual_bytes": 19019,
+      "status": "verified",
+      "expected_sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326",
+      "expected_bytes": 19019
+    },
+    {
+      "path": "runner/docs/src/user/configuration.md",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "actual_sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+      "actual_bytes": 10648,
+      "status": "verified",
+      "expected_sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+      "expected_bytes": 10648
+    },
+    {
+      "path": "runner/test/fixtures/configurations/base.yaml",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "actual_sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2",
+      "actual_bytes": 6973,
+      "status": "verified",
+      "expected_sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2",
+      "expected_bytes": 6973
+    },
+    {
+      "path": "runner/schema/run.schema.json",
+      "owner": "components/QCLNEGFRunner.jl",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "actual_sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "actual_bytes": 54815,
+      "status": "verified",
+      "expected_sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "expected_bytes": 54815
+    },
+    {
+      "path": "contracts/src/qcl_negf_contracts/schemas/run.schema.json",
+      "owner": "components/qcl-negf-contracts",
+      "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "actual_sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "actual_bytes": 54815,
+      "status": "verified",
+      "expected_sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+      "expected_bytes": 54815
+    },
+    {
+      "path": "core/src/numerics/optimized/production_contracts.jl",
+      "owner": "components/QCLNEGF.jl",
+      "revision": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "actual_sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+      "actual_bytes": 15596,
+      "status": "verified",
+      "expected_sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+      "expected_bytes": 15596
+    }
+  ],
+  "extractions": [
+    {
+      "subject": "configuration_source",
+      "fact_index": 0,
+      "mode": "literal-extraction",
+      "context": "documented-signature",
+      "value": "configuration_source(configuration, dotted_path)",
+      "selector": "configuration_source:docstring:L208"
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 1,
+      "mode": "literal-extraction",
+      "context": "typed-signature",
+      "value": "configuration_source(configuration::ResolvedRunConfiguration, dotted_path::AbstractString)",
+      "selector": "configuration_source:typed-header:L224"
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 2,
+      "mode": "authored-context",
+      "context": "units",
+      "value": null,
+      "selector": null
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 3,
+      "mode": "authored-context",
+      "context": "argument-defaults",
+      "value": "configuration_source(configuration::ResolvedRunConfiguration, dotted_path::AbstractString)",
+      "selector": "configuration_source:typed-header:L224"
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 4,
+      "mode": "authored-context",
+      "context": "typed-constraints",
+      "value": "configuration_source(configuration::ResolvedRunConfiguration, dotted_path::AbstractString)",
+      "selector": "configuration_source:typed-header:L224"
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 5,
+      "mode": "literal-extraction",
+      "context": "documented-effects",
+      "value": "configuration_source(configuration, dotted_path)\n\nReturn the last assigning-source identifier recorded in the provenance\nhistory for `dotted_path`, or `nothing` when that history is absent or empty.\nExplicit configuration leaves record source filenames; generated overrides\nmay record identifiers containing a `#generated:` marker. Later recorded\nassignments override earlier assignments.\n\nThis lookup reports an assigning source. It does not infer a schema default,\na typed-constructor default, or the complete origin of an effective value.\nIt reads provenance only; source loading and validation are performed by\n`validate_configuration_source` and `load_configuration_source`.\n\nSee [YAML run configurations](@ref yaml-run-configurations).",
+      "selector": "configuration_source:docstring:L208"
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 6,
+      "mode": "authored-context",
+      "context": "errors",
+      "value": "configuration_source(configuration, dotted_path)\n\nReturn the last assigning-source identifier recorded in the provenance\nhistory for `dotted_path`, or `nothing` when that history is absent or empty.\nExplicit configuration leaves record source filenames; generated overrides\nmay record identifiers containing a `#generated:` marker. Later recorded\nassignments override earlier assignments.\n\nThis lookup reports an assigning source. It does not infer a schema default,\na typed-constructor default, or the complete origin of an effective value.\nIt reads provenance only; source loading and validation are performed by\n`validate_configuration_source` and `load_configuration_source`.\n\nSee [YAML run configurations](@ref yaml-run-configurations).",
+      "selector": "configuration_source:docstring:L208"
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 7,
+      "mode": "authored-context",
+      "context": "formula-origin",
+      "value": null,
+      "selector": null
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 8,
+      "mode": "authored-context",
+      "context": "value-origin",
+      "value": null,
+      "selector": null
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 9,
+      "mode": "authored-context",
+      "context": "assigning-origin",
+      "value": "configuration_source(configuration, dotted_path)\n\nReturn the last assigning-source identifier recorded in the provenance\nhistory for `dotted_path`, or `nothing` when that history is absent or empty.\nExplicit configuration leaves record source filenames; generated overrides\nmay record identifiers containing a `#generated:` marker. Later recorded\nassignments override earlier assignments.\n\nThis lookup reports an assigning source. It does not infer a schema default,\na typed-constructor default, or the complete origin of an effective value.\nIt reads provenance only; source loading and validation are performed by\n`validate_configuration_source` and `load_configuration_source`.\n\nSee [YAML run configurations](@ref yaml-run-configurations).",
+      "selector": "configuration_source:docstring:L208"
+    },
+    {
+      "subject": "configuration_source",
+      "fact_index": 10,
+      "mode": "authored-context",
+      "context": "effective-origin",
+      "value": null,
+      "selector": null
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 0,
+      "mode": "dynamic-unknown",
+      "context": "schema-type",
+      "value": null,
+      "selector": "/$defs/production/properties/energy_chunk",
+      "reason": "unsupported_schema_keyword"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 1,
+      "mode": "literal-extraction",
+      "context": "typed-field",
+      "value": "energy_chunk::Int",
+      "selector": "ProductionOptions.energy_chunk:L92"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 2,
+      "mode": "dynamic-unknown",
+      "context": "units",
+      "value": null,
+      "selector": "/$defs/production/properties/energy_chunk/description",
+      "reason": "unsupported_schema_keyword"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 3,
+      "mode": "dynamic-unknown",
+      "context": "schema-default",
+      "value": null,
+      "selector": "/$defs/production/properties/energy_chunk/default",
+      "reason": "unsupported_schema_keyword"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 4,
+      "mode": "literal-extraction",
+      "context": "typed-default",
+      "value": 64,
+      "selector": "ProductionOptions.energy_chunk:L92"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 5,
+      "mode": "literal-extraction",
+      "context": "example-explicit",
+      "value": 64,
+      "selector": "production.energy_chunk:L163"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 6,
+      "mode": "dynamic-unknown",
+      "context": "schema-constraint",
+      "value": null,
+      "selector": "/$defs/production/properties/energy_chunk",
+      "reason": "unsupported_schema_keyword"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 7,
+      "mode": "dynamic-unknown",
+      "context": "root-production-required",
+      "value": null,
+      "selector": "/$defs/production/properties/energy_chunk",
+      "reason": "unsupported_syntax"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 8,
+      "mode": "dynamic-unknown",
+      "context": "effects",
+      "value": null,
+      "selector": "/$defs/production/properties/energy_chunk/description",
+      "reason": "unsupported_schema_keyword"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 9,
+      "mode": "authored-context",
+      "context": "errors",
+      "value": null,
+      "selector": "file"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 10,
+      "mode": "dynamic-unknown",
+      "context": "formula-origin",
+      "value": null,
+      "selector": "/$defs/production/properties/energy_chunk/description",
+      "reason": "unsupported_schema_keyword"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 11,
+      "mode": "authored-context",
+      "context": "value-origin",
+      "value": null,
+      "selector": null
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 12,
+      "mode": "authored-context",
+      "context": "assigning-origin",
+      "value": "`configuration_source(configuration, dotted_path)` returns the last\nassigning-source identifier in that leaf's recorded provenance history.\nExplicit configuration leaves record source filenames; generated overrides\nmay record identifiers containing a `#generated:` marker. Later recorded\nassignments override earlier assignments. The lookup returns `nothing` when\nthe history is absent or empty, even if a typed field has a value. It reads\nthe recorded history; it does not load or validate source files.",
+      "selector": "configuration-route:L17"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 13,
+      "mode": "authored-context",
+      "context": "synthetic-override-example",
+      "value": "The [merge-order fixture](https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/application/configuration_merge_order_and_fail_closed_validation.jl)\nstarts with a base file and applies `first.yaml` with `energy_chunk: 17`, then\n`second.yaml` with `energy_chunk: 23`. The resolved value is 23 and the assigning\nsource is `second.yaml`. Reversing those two overrides gives 17 and `first.yaml`.\nThese are fixture expectations; the source example is not a production-run receipt.",
+      "selector": "configuration-route:L25"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 14,
+      "mode": "authored-context",
+      "context": "authored-planner-policy",
+      "value": "[`resolve_execution_strategy`](@ref) can apply a selected plan. For the\n`auto_exact` production path, its recorded assigning policy is\n`application:auto_exact`; the selected plan supplies effective chunk/worker\nvalues. Other paths need not add that marker. Preserve the plan's hardware,\nstrategy and reasons separately; a marker is not a measurement receipt or the\nfull causal origin of a value. The [implementation](https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/src/application/auto_strategy.jl)\nand [resource limits](@ref resource-planning) define this boundary.\nMissing effective-plan provenance is unknown; do not infer it from 23, 17 or a\nconstructor default.",
+      "selector": "configuration-route:L72"
+    },
+    {
+      "subject": "production.energy_chunk",
+      "fact_index": 15,
+      "mode": "authored-context",
+      "context": "effective-origin",
+      "value": null,
+      "selector": null
+    }
+  ],
+  "diagnostics": [],
+  "aggregate_source_bytes": 245338,
+  "result": "partial",
+  "output": {
+    "path": "facts.json",
+    "sha256": "ead7c19658478682d9da3b966f5aaec2e0ec9a180a27b7c62442f5796b63e041",
+    "bytes": 19556
+  }
+}

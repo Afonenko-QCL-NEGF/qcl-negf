@@ -1,0 +1,12 @@
+{
+  "baseline": "c55d0c57c8feee13ce611d45a9da67eb9e912314",
+  "files": {
+    "hatch_build.py": "d8393b11add6af03825f587181d32ced35bdc50d9cefd9552ad56b12f47c747f",
+    "frontend/tools/asset-receipt.mjs": "e471dda9e68176d965b6cf560f0ae578b7f397de9083fa118caef1f5d17ae8e3",
+    "frontend/package.json": "dce393b2af93a6f6aa7c3189a65c0ae6b11e9245566bebcbf2a262faecb6f46d",
+    "tests/test_build_assets.py": "c229bc16514930887abe5bc69102e8fa1156618e9bbdd6dd91c6e2320e6f1240"
+  },
+  "staged_diff_sha256": "83815ff099b04871c40434622f9158857e40f507dcda45a66a25f279d2a18509",
+  "independent_review_sha256": "925a39a3d6f3e8beef5fc9d9af762f336c1a6e6801d970aa98a8a02355d4a019",
+  "targeted_receipt_sha256": "8578ffe2cf6f2e4d4b3014445628f938f9cd8193d0d3a30606b431c8089e0192"
+}

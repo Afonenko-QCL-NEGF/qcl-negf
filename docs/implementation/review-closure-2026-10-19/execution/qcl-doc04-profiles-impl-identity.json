@@ -1,0 +1,118 @@
+{
+  "kind": "qcl-doc04-owning-profiles-source-implementation",
+  "stage": "source-I-awaiting-independent-high-CPP",
+  "date": "2026-10-20",
+  "root_observed_head": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "inputs": [
+    {
+      "path": "/tmp/qcl-doc04-recipes-design.md",
+      "sha256": "008650e7c9ff98bdaf38a3450d2b3b13818409795c92738d0a9dbddaba2c2505",
+      "bytes": 19393
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-design-v2.md",
+      "sha256": "ce582cc394d7dd70971c2a25929bf9362aad7d829403f1e2e0fba68a8ff65610",
+      "bytes": 6646
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-design-v3.md",
+      "sha256": "960a639dd281d7a5b99c582f2c9dc8b17e816715753557791460ebcef1159aee",
+      "bytes": 5828
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-design-v3-review.md",
+      "sha256": "7db5ad18c7c9e197fb0430422b917228ddc0216f90c0cdfb37f78ee80e9a4211",
+      "bytes": 8289
+    },
+    {
+      "path": "/tmp/qcl-doc04-profile-path-contract.md",
+      "sha256": "ec7717494878fbec813fe89c1ded0c5c43dcbeb6942271d0ef8d113445f5a935",
+      "bytes": 15261
+    },
+    {
+      "path": "/tmp/qcl-doc04-profile-path-contract-review.md",
+      "sha256": "45d21330010644038db3b215a76f04d026e329dc0cf2844eb42ce00b99cac12a",
+      "bytes": 11181
+    }
+  ],
+  "components": [
+    {
+      "owner": "core",
+      "worktree": "/tmp/qcl-doc04-core-profile-worktree",
+      "base_head": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+      "current_head": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+      "branch": "codex/review-closure-docs-pilot-profile",
+      "modified_paths": [
+        "docs/make.jl"
+      ],
+      "original_make_sha256": "edafb4e03b0fd9982039267dc24ba7c6332551f7e3770fca20b35fc8dae9380f",
+      "modified_make_sha256": "b26574d7632747feee06094ef99ce96edcc35c97d794a2f243f6921c2de3812e",
+      "original_make_bytes": 1553,
+      "modified_make_bytes": 7704,
+      "default_branch_byte_exact": true,
+      "default_branch_extracted_sha256": "edafb4e03b0fd9982039267dc24ba7c6332551f7e3770fca20b35fc8dae9380f",
+      "pilot_page_vector_byte_exact_after_removing_four_space_indent": true,
+      "patch": "/tmp/qcl-doc04-core-profile.patch",
+      "patch_sha256": "8ec0fd22e1c46ddcac0a9abed36a361c86a3530206bd9d1b542c684d5a0a1682",
+      "patch_bytes": 6620
+    },
+    {
+      "owner": "runner",
+      "worktree": "/tmp/qcl-doc04-runner-profile-worktree",
+      "base_head": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+      "current_head": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+      "branch": "codex/review-closure-docs-pilot-profile",
+      "modified_paths": [
+        "docs/make.jl"
+      ],
+      "original_make_sha256": "0749b9989ce07c34034dddac2fe8127a9ecca72d43105425928f7468dae16cbc",
+      "modified_make_sha256": "6db896ca38bad4ac8ad6b5ba9103712d51383ca065709a1b856b25a99049f051",
+      "original_make_bytes": 744,
+      "modified_make_bytes": 6068,
+      "default_branch_byte_exact": true,
+      "default_branch_extracted_sha256": "0749b9989ce07c34034dddac2fe8127a9ecca72d43105425928f7468dae16cbc",
+      "pilot_page_vector_byte_exact_after_removing_four_space_indent": true,
+      "patch": "/tmp/qcl-doc04-runner-profile.patch",
+      "patch_sha256": "59c5354e289adf00f6a5d3a317f20c677d617c07aad9401d1e92c38a25633a64",
+      "patch_bytes": 5807
+    }
+  ],
+  "source_verification": {
+    "git_diff_check": "pass-both",
+    "default_byte_comparison": "pass-both",
+    "pilot_page_vector_byte_comparison": "pass-both",
+    "target_language_parsing_typechecking": "not_run",
+    "runtime_guard_controls": "not_run",
+    "render": "not_run"
+  },
+  "actions": {
+    "owning_recipe_files_modified": 2,
+    "commits_pushes": 0,
+    "root_product_edits": 0,
+    "Julia_Documenter_target_imports": 0,
+    "Julia_parser_typecheck_tests_render_build": 0,
+    "network_solver": 0
+  },
+  "resources": {
+    "cpu_cap": 1,
+    "ram_cap_bytes": 2147483648,
+    "source_read_cap_bytes": 4194304,
+    "read_accounting": "conservative named full-file upper bound with reserve",
+    "initial_read_upper_bound_bytes": 606590,
+    "all_continuation_final_reads_reserved_bytes": 524288,
+    "total_read_upper_bound_bytes": 1130878,
+    "physical_IO_RSS": "not_measured",
+    "continuation_wall_cap_minutes": 10,
+    "output_cap_bytes": 98304
+  },
+  "BUILD_admitted": false,
+  "external_prerequisites": [
+    "fresh external BUILD admission/resource envelope",
+    "exclusive owned attempt namespace",
+    "source graph/recipe/staged payload regular-file hashes and effect allowlist",
+    "complete import/docstring/cache/toolchain closure",
+    "reviewed fixed light assets and full license closure"
+  ],
+  "next_gate": "independent high CPP; owning PR/G1 by coordinator only",
+  "stop": true
+}

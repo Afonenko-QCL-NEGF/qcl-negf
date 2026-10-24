@@ -1,0 +1,25 @@
+{
+  "stage":"I2D-boundary1-source-only",
+  "verdict":"candidate-partial-not-ready",
+  "worktree":"/tmp/qcl-docs-test-routing-worktree",
+  "head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "review_sha256":"caeb6ee6f85b19ba0fa2d748c1256aaac60c5497b829e70a1285cbe2f1f19a5f",
+  "predecessor_packet":{"report":"56a4dc2179353ad20a4a40879a4e5f9aabd74871d0b82c6081156fc92d632bac","identity":"398e5004484dd86b93f5f2cc701b8f1cd77b96d120ae43a05c86d180bd00b9e9","complete_patch":"7fd92c7f21bcc63e16872fc7ea0f25b6267324e1277f2fa5a3c221a2ab61c13e"},
+  "patch":{"kind":"complete-four-file-delta-from-exact-I2C","bytes":67002,"sha256":"0ed917aaefeab58b04a661c6b2406f62a08846c669576d11576029794aee1c9b","format":"unified-a-b-relative-path-labels","applied":false},
+  "files":{
+    "ops/docs_tests_native.py":{"before":"5b43a26b416d127cfb606898bd617145af8df7e50ee7001c4228aa3d61ca4adb","after":"547fb2149a40e1e768434813f114dff0b3c03f4e263d1b58e04c55e7979acccc"},
+    "ops/docs_tests_cli.ts":{"before":"b89aa1da8cdebf3544212f19ac2454671478819d382082f2be5b8444b6889d3f","after":"dc9cf494e4be657e4722094ee823a1856494d7f5276149eb3a09f7940d76c9ca"},
+    "tests/test_docs_test_native.py":{"before":"29fd56b6882b81e915cd46464614245b3b6a2bf1361441aa9f0d2467e3a6ba2b","after":"4357a8d7f08d2ac45cfd376522b27b00d6424e716cba1292f99d843d4229caea","nominal_methods":8,"observed":null},
+    "tests/docs_test_native_protocol_test.ts":{"before":"48628f79ef3b4ffde506f90be81577834c3a422543fd26e19405b2523326721b","after":"813e75cc27141373741880e775bc5a89ee6be42b39918dc045cc250ada7cd8b4","nominal_registrations":8,"observed":null}
+  },
+  "external_root_format1":{"confirmed_by_root":true,"edited_by_I2D":false,"helper_sha256":"38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b","fixture_sha256":"8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b","included_in_delta":false},
+  "source_evidence":{"requires_successful_bind":true,"requires_validated_observations":true,"rejected_ref_is_not_proof":true,"candidate_not_CPP_PASS":true},
+  "retention_evidence":{"actual_ref_ledger_guard":true,"publisher_durability_proof_available":false,"default_status":"unknown","positive_phase_blocked_without_proof":true},
+  "remaining":["full-nested-registration-and-receipt-unions","publisher-owned-durability-proof-boundary2","first-FD-cleanup-and-dual-store-failures-boundary2","exact-ordinal-source-and-write-ledger-boundary3","full-fake-process-C8"],
+  "native16_import_paths_changed":false,
+  "read_ledger":{"conservative_upper_bytes":3145728,"cap_bytes":5242880},
+  "execution":{"parser":0,"compiler":0,"import":0,"scripts":0,"tests":0,"Deno":0,"Julia":0,"native":0,"network":0,"CI":0,"science":0},
+  "resource_cap":{"minutes":20,"CPU":1,"RAM_bytes":1073741824,"output_bytes":196608},
+  "measured_resources":{"CPU":null,"RSS":null,"physical_IO":null},
+  "next_gate":"fresh-independent-high-CPP"
+}

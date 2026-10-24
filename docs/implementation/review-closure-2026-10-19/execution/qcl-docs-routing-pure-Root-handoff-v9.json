@@ -1,0 +1,20 @@
+{
+  "status": "PURE_HANDOFF",
+  "issuer": "Root",
+  "scope": "docs-routing-pure-local-engineering-v9",
+  "attempt": "DOCS-ROUTING-CORRECTION-E1",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "isolated_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "source_files": {
+    "ops/docs_tests.ts": "12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab",
+    "tests/docs_test_routing_test.ts": "a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"
+  },
+  "shared_budget": {
+    "milestone_start": 90,
+    "milestone_ceiling": 91,
+    "calls_before": 90,
+    "calls_reserved": 1,
+    "calls_after": 91,
+    "no_rerun": true
+  }
+}

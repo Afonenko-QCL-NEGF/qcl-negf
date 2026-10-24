@@ -1,0 +1,9 @@
+{
+  "state": "reviewed_source_fact_erratum_applied",
+  "before": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+  "after": "733b3f0cc9221494e349398d9f9fb570dd37ade93bc139d92eb634e1011b28a2",
+  "patch": "a2d28d0d743f65277623cdcb7230d9dd6baa5fbd695e5a90afe5c509f81b2475",
+  "review": "385c2ae4358a7fb296399d6d955eb4d9ac5995c26f8baa2c27526ad11677d5ce",
+  "scope": "one source-fact pointer via /properties/production/$ref to /$defs/production/properties/energy_chunk; no contract/formula/model/API change",
+  "frozen_previous_inputs": "preservedinRoot514anddesign/Rsnapshot; notretrorewritten"
+}

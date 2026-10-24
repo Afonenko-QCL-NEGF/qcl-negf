@@ -1,0 +1,209 @@
+{
+  "packet": "DEV02 O08-05 / DEV07 absolute scattering kernel oracle design",
+  "revision": "D1",
+  "stage": "source_design_only",
+  "status": "candidate_for_independent_CP_DESIGN",
+  "author_role": "Sol gpt-6.1-sol ultra",
+  "generated_at_utc": "2026-10-19 18:08:06 UTC",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "selected_root_commit": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "selected_core_commit": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+  "observed_core_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "core_git_status_short": "",
+  "root_status_submodules_head_gitlinks_capture": "MM components/QCLNEGF.jl\nM  components/QCLNEGFRunner.jl\n M components/qcl-negf-contracts\nMM docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev22-source-projection-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc02-code-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-known-red-diagnostic-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-local-bind-harness-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-syntax-correction-report.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-syntax-correction-review.md\nA  docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si07-coordination-audit.md\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-dev22-projection-source-summary.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc02-publication-journal.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-freeze.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-source-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-identity.json\nAM docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-core-publication-journal.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-local-admission-bind.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding-v2.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-source-commit.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-syntax-correction-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/qcl-si07-preservation-manifest.json\nM  docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/README.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/stderr.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/stdout.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/answer.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/intent.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/operations.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/prompt.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/campaign.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/case-scoring-basis.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/comparison.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/protocol.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/sample-records.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/scoring-final.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/forward/scoring-interim.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/archive-receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/current-checkout.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/frozen-plan.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/poisson.jl\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/source-identity.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/README.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/check.py\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/target.md\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T14/request.txt\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T14/telemetry.json\nA  docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/manifest.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-1/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-1/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-2/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-2/receipt.json\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-DIAGNOSTIC-3/original.txt\nA  docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-DIAGNOSTIC-3/receipt.json\nM  docs/single-server-deployment.md\n M docs/system/physics-documentation.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc03-design-v2.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-attribute-encoding-design.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-attribute-encoding-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-contracts-final-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-diagnostic-gap-audit.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-engineering-E1-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-engineering-E1-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci06-reader-audit.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-v2-delta.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc03-design-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-contracts-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-engineering-E1-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding-v3.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-COMPATIBILITY-6/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CONTRACTS-4/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-5/\n+7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c components/QCLNEGF.jl (v0.2.0-14-g7324d98)\n 9378396a3681c1eddf2c62f16674834fc4465583 components/QCLNEGFRunner.jl (v0.2.0-26-g9378396)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n+12fc26462bbab3df76904c6deb01f8c6596de7be components/qcl-negf-contracts (v0.2.0-14-g12fc264)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n160000 commit f7b108bef206d2b2dc5afe0306b2dff60d27ac59\tcomponents/QCLNEGF.jl\n160000 commit 23860d9e660a3cddf6cb5203d449d1b62f3745a1\tcomponents/QCLNEGFRunner.jl\n160000 commit d8f8092ca1c76523d85384b4bac8198d8bfa736b\tcomponents/qcl-negf-aiida\n160000 commit 02a564b78dc9c5e19eacf496bc8c891361eafaab\tcomponents/qcl-negf-contracts\n160000 commit b067723c82382689bff5cc366981c56e99b926f8\tcomponents/qcl-negf-platform\n160000 commit 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d\tcomponents/qcl-negf-portal\n160000 commit 1eacefcd81a50e245ea9da74a0b717b33818c61e\tcomponents/qcl-negf-research\n160000 commit e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae\tcomponents/qcl-negf-results\n",
+  "capture_note": "Read-only snapshot during this design turn; shared root has unrelated concurrent dirty/staged changes. No Git mutations by this packet. Snapshot is evidence, not an alternative revision lock.",
+  "core_selected_vs_actual_production_diff": "empty for kernels, constants, scaling, grids, basis, Hamiltonian",
+  "source_blobs": {
+    "src/numerics/reference/kernels.jl": "bad297072d742f27b2e1eb35eab1fb937d6ae3db",
+    "src/domain/types.jl": "e917407bf93e0ea0224c00d138acd56856caecf0",
+    "src/domain/constants.jl": "4ec0934fca833b26e541f253c0158110a0407941",
+    "src/domain/scaling.jl": "e0c9341fe601cdf0edb1183831f40213c048071f",
+    "src/numerics/reference/grids.jl": "2719dab3b3211f5c361a91ce276f92cc1440cd37",
+    "src/numerics/reference/hamiltonian.jl": "52f11f9db2b91bb54b2b608346d4c5cf614ae535",
+    "src/numerics/reference/basis.jl": "85596354002c63d86408909f43968018f741d927",
+    "docs/src/theory/08_kernels.md": "c0d8af179614c20d8291c51f49aec554619384e3",
+    "test/physics/exact_kernel_rescaling.jl": "cde889a3165411bbb01657729f71f21af265c774",
+    "test/numerics/frozen_scientific_fixtures.jl": "803ad60a73bdf1240994167a43f8f4add680cb06"
+  },
+  "accepted_previous_body": {
+    "path": "/tmp/qcl-dev02-accepted-technical-body.md",
+    "sha256": "ca3c12e84ee41bee3f13d1e1294c030197d0f35adca0f2ef61ebb9cd92b1707b",
+    "scope": "Only O08-05 supplemented; other accepted oracle contracts preserved"
+  },
+  "primary_sources": [
+    {
+      "url": "https://arxiv.org/pdf/cond-mat/0212059v1",
+      "path": "/tmp/qcl-dev02-lee-wacker-0212059v1.pdf",
+      "bytes": 514376,
+      "sha256": "dfabd791bfb2aa4603233e9b545879e07a3bfc63e8906cbc810760726358ea0c",
+      "equations": [
+        "B19-B23",
+        "B10-B11 interface vertex"
+      ],
+      "limitations": [
+        "Unscreened LO primary; positive q_LO,s is owning declared screened model assumption",
+        "B8 exponential covariance is not Gaussian IFR evidence"
+      ],
+      "retrieval": "existing cached original PDF, not downloaded in this packet"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2205.00365v2",
+      "path": "/tmp/qcl-dev07-huang-2205.00365v2.pdf",
+      "bytes": 301118,
+      "sha256": "00297abb84fdc44fc865461b9ba102dfef7ff7cde2924b2999b0deca054f5f5c",
+      "equations": [
+        "8",
+        "9"
+      ],
+      "limitations": [
+        "Paper carrier screening factor not imported into owning bare IFR/alloy covariance",
+        "Original PDF version fixed v2"
+      ]
+    },
+    {
+      "url": "https://arxiv.org/pdf/2012.12344v1",
+      "path": "/tmp/qcl-dev07-archetti-2012.12344v1.pdf",
+      "bytes": 1641929,
+      "sha256": "843184eec1632f8f46fde7e3a2492126763487dc99172f0950761239f9ae046e",
+      "equations": [
+        "20",
+        "Appendix Derivation of Eq.20"
+      ],
+      "limitations": [
+        "Primary nanowire geometry differs; planar covariance projection derived independently"
+      ]
+    }
+  ],
+  "source_tracing_only": {
+    "url": "https://arxiv.org/pdf/1412.3563v1",
+    "path": "/tmp/qcl-dev02-jirauschek-kubis-1412.3563v1.pdf",
+    "bytes": 2685475,
+    "sha256": "e2e43e27c96994bfa5aa8750044bef33afe92de1360c0c0c5861bf235d8ff7c8",
+    "acceptance_evidence": false
+  },
+  "primary_download_intent": {
+    "recorded_before_attempts": true,
+    "urls": [
+      "https://arxiv.org/pdf/2205.00365v2",
+      "https://arxiv.org/pdf/2012.12344v1"
+    ],
+    "max_logical_retrievals": 2,
+    "max_command_attempts": 3,
+    "max_bytes_per_pdf": 16777216,
+    "max_seconds_per_command": 60,
+    "tls_verification": true,
+    "redirects_allowed": false,
+    "credentials_used": false,
+    "budget_extension": "Parent explicitly extended engineering primary-source read/storage cap from 5 MiB to 32 MiB and authorized one network escalation fallback after DNS 0-byte failure. Other caps unchanged.",
+    "attempts": [
+      {
+        "id": "DEV07-PDF-HUANG-SANDBOX-1",
+        "logical_retrieval": "Huang-v2",
+        "exit": 6,
+        "http": "000",
+        "actual_bytes": 0,
+        "original_error": "curl: (6) Could not resolve host: arxiv.org",
+        "outcome": "No source request reached; no PDF bytes retrieved"
+      },
+      {
+        "id": "DEV07-PDF-HUANG-ESCALATED-2",
+        "logical_retrieval": "Huang-v2",
+        "exit": 0,
+        "http": "200",
+        "actual_bytes": 301118,
+        "effective_url": "https://arxiv.org/pdf/2205.00365v2",
+        "wall_seconds": 0.41318715,
+        "outcome": "Original versioned PDF retained and SHA256 recorded"
+      },
+      {
+        "id": "DEV07-PDF-ARCHETTI-ESCALATED-3",
+        "logical_retrieval": "Archetti-v1",
+        "exit": 0,
+        "http": "200",
+        "actual_bytes": 1641929,
+        "effective_url": "https://arxiv.org/pdf/2012.12344v1",
+        "wall_seconds": 0.939131684,
+        "outcome": "Original versioned PDF retained and SHA256 recorded"
+      }
+    ]
+  },
+  "cost": {
+    "wall_time_cap_minutes": 60,
+    "cpu_cap": 1,
+    "ram_cap_gib": 2,
+    "read_cap_bytes": 33554432,
+    "storage_cap_bytes": 33554432,
+    "output_cap_bytes": 131072,
+    "unique_local_literature_bytes": 5142898,
+    "logical_pdf_file_exposures": {
+      "note": "File sizes multiplied by explicit local hash/extraction calls; extraction is conservatively counted as exposure of full PDF per command. This is not measured OS disk I/O and does not include opaque web transport or Git pack I/O.",
+      "lee_wacker_calls": 2,
+      "review_calls": 2,
+      "huang_calls": 1,
+      "archetti_calls": 3,
+      "total_bytes": 11626607
+    },
+    "actual_disk_io_bytes": "not_measured",
+    "hidden_web_transport_bytes": "unknown",
+    "new_primary_pdf_storage_bytes": 1943047,
+    "children_spawned": 0
+  },
+  "invariants": [
+    "S1 equilibrium 0 mV 70 K",
+    "five channels LO IFR acoustic alloy impurity",
+    "electron-electron none",
+    "no production code/model/threshold edits",
+    "original dirty checkout protected",
+    "other oracles preserved"
+  ],
+  "per_channel": {
+    "LO": {
+      "design": "complete_candidate_for_review",
+      "runtime": "not_run",
+      "scientific_acceptance": "not_established",
+      "limitation": "Phenomenological screening physics and continuum quadrature not validated"
+    },
+    "IFR": {
+      "design": "complete_candidate_for_review",
+      "runtime": "not_run",
+      "scientific_acceptance": "not_established",
+      "limitation": "Discrete seam/interpolation is not continuum validation"
+    },
+    "acoustic": {
+      "design": "complete_candidate_for_review",
+      "runtime": "not_run",
+      "scientific_acceptance": "not_established",
+      "limitation": "Elastic/equipartition applicability of real spectrum not validated"
+    },
+    "alloy": {
+      "design": "complete_candidate_for_review",
+      "runtime": "not_run",
+      "scientific_acceptance": "not_established",
+      "limitation": "Synthetic contrast is not material calibration"
+    }
+  },
+  "proposed_implementation_path": "components/QCLNEGF.jl/test/physics/absolute_scattering_kernel_oracles.jl",
+  "performed": [
+    "Read-only Git/source inspection",
+    "Primary PDF equation reading and SHA256",
+    "Independent manual analytic derivation"
+  ],
+  "not_performed": [
+    "Actual repository edits",
+    "Git mutations",
+    "Julia target imports",
+    "Python target imports",
+    "Tests",
+    "Parser execution",
+    "SCBA/Poisson",
+    "Profiling/benchmarks",
+    "Builds/installations",
+    "Server actions"
+  ],
+  "output": {
+    "design_path": "/tmp/qcl-dev07-absolute-design.md",
+    "design_sha256": "1d74158042e305c37875ceef25589b08f6ca9256fdd7f65993ee6825c165a07e",
+    "design_bytes": 40239
+  },
+  "stop": "Frozen D1 candidate for independent CP-DESIGN; not implemented, runtime pass or scientific device validation"
+}

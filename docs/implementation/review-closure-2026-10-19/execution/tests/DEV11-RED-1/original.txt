@@ -1,0 +1,138 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_export_pins_inventory_plan_payload_status_and_cache[False] ________
+
+composite_source = namespace(facade=namespace(get_export_selection=<function test_export_pins_inventory_plan_payload_status_and_cache.<lo...ic-plan-v2",\n  "model_revision": "transport-contract-v2",\n  "computation_count": 1\n}\n\n'], execution='execution-1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f81e0500e90>
+switch_after_resolve = False
+
+    @pytest.mark.parametrize("switch_after_resolve", [False, True])
+    def test_export_pins_inventory_plan_payload_status_and_cache(composite_source, monkeypatch, switch_after_resolve):
+        source = composite_source
+        exported = []
+    
+        def exporting(root, destination, **kwargs):
+            files = {str(path.relative_to(root)): path.read_bytes() for path in root.rglob("*") if path.is_file()}
+            exported.append((files, kwargs))
+            return publish_test_archive(destination, kwargs["profile"], files["same.bin"])
+    
+        monkeypatch.setattr("qcl_negf_results.export.export_snapshot", exporting)
+        original = source.facade.get_export_selection
+    
+        def resolve(*args, **kwargs):
+            binding = original(*args, **kwargs)
+            if switch_after_resolve:
+                source.selection.update(attempt=1, calcjob_uuid=CODE)
+            return binding
+    
+        source.facade.get_export_selection = resolve
+        store = ExportStore(source.facade, Settings(TOKEN, (CODE,)))
+        try:
+>           entry = store.create(RUN.upper(), source.execution, "science")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-portal/tests/test_exports.py:393: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-portal/src/qcl_negf_api/exports.py:89: in create
+    entries = [item for item in self.service.list_artifacts(run)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+components/qcl-negf-portal/tests/test_exports.py:366: in <lambda>
+    facade.list_artifacts = lambda *args: (_ for _ in ()).throw(AssertionError("all-attempt inventory read"))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <tuple_iterator object at 0x7f81e057dcc0>
+
+>   facade.list_artifacts = lambda *args: (_ for _ in ()).throw(AssertionError("all-attempt inventory read"))
+E   AssertionError: all-attempt inventory read
+
+components/qcl-negf-portal/tests/test_exports.py:366: AssertionError
+________ test_export_pins_inventory_plan_payload_status_and_cache[True] ________
+
+composite_source = namespace(facade=namespace(get_export_selection=<function test_export_pins_inventory_plan_payload_status_and_cache.<lo...ic-plan-v2",\n  "model_revision": "transport-contract-v2",\n  "computation_count": 1\n}\n\n'], execution='execution-1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f81d68ddba0>
+switch_after_resolve = True
+
+    @pytest.mark.parametrize("switch_after_resolve", [False, True])
+    def test_export_pins_inventory_plan_payload_status_and_cache(composite_source, monkeypatch, switch_after_resolve):
+        source = composite_source
+        exported = []
+    
+        def exporting(root, destination, **kwargs):
+            files = {str(path.relative_to(root)): path.read_bytes() for path in root.rglob("*") if path.is_file()}
+            exported.append((files, kwargs))
+            return publish_test_archive(destination, kwargs["profile"], files["same.bin"])
+    
+        monkeypatch.setattr("qcl_negf_results.export.export_snapshot", exporting)
+        original = source.facade.get_export_selection
+    
+        def resolve(*args, **kwargs):
+            binding = original(*args, **kwargs)
+            if switch_after_resolve:
+                source.selection.update(attempt=1, calcjob_uuid=CODE)
+            return binding
+    
+        source.facade.get_export_selection = resolve
+        store = ExportStore(source.facade, Settings(TOKEN, (CODE,)))
+        try:
+>           entry = store.create(RUN.upper(), source.execution, "science")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-portal/tests/test_exports.py:393: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-portal/src/qcl_negf_api/exports.py:89: in create
+    entries = [item for item in self.service.list_artifacts(run)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+components/qcl-negf-portal/tests/test_exports.py:366: in <lambda>
+    facade.list_artifacts = lambda *args: (_ for _ in ()).throw(AssertionError("all-attempt inventory read"))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <tuple_iterator object at 0x7f81e057e6b0>
+
+>   facade.list_artifacts = lambda *args: (_ for _ in ()).throw(AssertionError("all-attempt inventory read"))
+E   AssertionError: all-attempt inventory read
+
+components/qcl-negf-portal/tests/test_exports.py:366: AssertionError
+_______________ test_same_child_new_status_preserves_old_export ________________
+
+composite_source = namespace(facade=namespace(get_export_selection=<function composite_source.<locals>.operation.<locals>.call at 0x7f81d...ic-plan-v2",\n  "model_revision": "transport-contract-v2",\n  "computation_count": 1\n}\n\n'], execution='execution-1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f81de214290>
+
+    def test_same_child_new_status_preserves_old_export(composite_source, monkeypatch):
+        source = composite_source
+        child = source.children[1]
+        result = child.outputs.pop("result")
+        statuses = []
+    
+        def exporting(root, destination, **kwargs):
+            statuses.append(kwargs["job_status"])
+            return publish_test_archive(destination, kwargs["profile"])
+    
+        monkeypatch.setattr("qcl_negf_results.export.export_snapshot", exporting)
+        store = ExportStore(source.facade, Settings(TOKEN, (CODE,)))
+        try:
+>           old = store.create(RUN, source.execution, "science")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-portal/tests/test_exports.py:433: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-portal/src/qcl_negf_api/exports.py:89: in create
+    entries = [item for item in self.service.list_artifacts(run)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+components/qcl-negf-portal/tests/test_exports.py:366: in <lambda>
+    facade.list_artifacts = lambda *args: (_ for _ in ()).throw(AssertionError("all-attempt inventory read"))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <tuple_iterator object at 0x7f81e057e470>
+
+>   facade.list_artifacts = lambda *args: (_ for _ in ()).throw(AssertionError("all-attempt inventory read"))
+E   AssertionError: all-attempt inventory read
+
+components/qcl-negf-portal/tests/test_exports.py:366: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-portal/tests/test_exports.py::test_export_pins_inventory_plan_payload_status_and_cache[False]
+FAILED components/qcl-negf-portal/tests/test_exports.py::test_export_pins_inventory_plan_payload_status_and_cache[True]
+FAILED components/qcl-negf-portal/tests/test_exports.py::test_same_child_new_status_preserves_old_export
+3 failed, 10 deselected in 2.95s

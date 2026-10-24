@@ -1,0 +1,66 @@
+{
+  "scope": "docs-routing-source-I-round1-partial",
+  "worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "branch": "codex/review-closure-docs-test-routing",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "source_files": {
+    "deno.json": {
+      "sha256": "6fe2793e686ed0f373a3d44be50d3016b53280c4d879baeb726cac5d4e20086e",
+      "bytes": 1845
+    },
+    "ops/ci.ts": {
+      "sha256": "b46eb8d4db89b734324a9c40698d16ce3df8aff764a6d332b9ba52ba43be94e0",
+      "bytes": 3525
+    },
+    "ops/docs_tests.ts": {
+      "sha256": "bdc1684faffa4e6606b1667675f335768e3eb6216ae64b5842d2431460063356",
+      "bytes": 26301
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "d8dc81d6684933c40e58e26dda16903cbdede5713bd686c3a1743060ac5318fe",
+      "bytes": 2582
+    },
+    ".github/workflows/release.yml": {
+      "sha256": "53f54fdc377c5eaae6d1688bcbecd85a536caa10cff8523c13b4ea07c76a5b9b",
+      "bytes": 2333
+    },
+    "tests/docs_test_routing_test.ts": {
+      "sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+      "bytes": 38723
+    }
+  },
+  "artifacts": {
+    "/tmp/qcl-docs-routing-impl-report.md": {
+      "sha256": "be0c36f0dd250cd8d1525bdb6e5ab7b2404a2e6e5b79da1ee4ce1aed890dda7c",
+      "bytes": 9606
+    },
+    "/tmp/qcl-docs-routing-impl-complete.patch": {
+      "sha256": "26882ff074c0f8c8ded44f34b0caa288c62da30ef6afc5dad42d420d0c6a057e",
+      "bytes": 72735
+    },
+    "/tmp/qcl-docs-routing-fixture-typing-proposed.patch": {
+      "sha256": "7d65aba44b29dcccdcbd079fc0f804c5afee29646cdc195e39b9e55ae42f9a5b",
+      "bytes": 951
+    }
+  },
+  "native_integration": "blocked_missing_trusted_interfaces",
+  "doc06_external_seeding": "not_implemented_pending_supervisor_binding",
+  "runtime_typecheck_formatter_tests_build_network_ci_runs": 0,
+  "frozen_fixture_modified": false,
+  "proposed_typing_patch_applied": false,
+  "typing_locators": [
+    "tests/docs_test_routing_test.ts:631",
+    "tests/docs_test_routing_test.ts:632",
+    "tests/docs_test_routing_test.ts:633",
+    "tests/docs_test_routing_test.ts:760"
+  ],
+  "limits": {
+    "source_reads_max_bytes": 3145728,
+    "wall_seconds": 1200,
+    "cpu": 1,
+    "ram_bytes": 1073741824,
+    "output_bytes": 98304
+  },
+  "measurement_limits": "CPU/RSS/physical I/O not instrumented; source/read bound conservative",
+  "remaining": "STOP for Root independent high CPP; no GREEN/commit/push"
+}

@@ -1,0 +1,47 @@
+{
+  "stage": "SCI12Math-local-guard-v1-independent-high-source-review",
+  "date": "2026-10-20",
+  "verdict": "CHANGES_REQUIRED_SOURCE_ONLY_NOT_EXECUTION_READY",
+  "blocking_findings": [
+    {
+      "id": "B1",
+      "locator": "/tmp/qcl-sci12-math-local-guard-v1.py:309",
+      "failure_path": "Successful Popen; observe raises before collector_attempted; finally stops/reaps child then only closes original stream; already emitted stdout pipe bytes not drained or retained",
+      "minimal_correction": "Set collector_attempted and construct RawCapture immediately after successful Popen, before first potentially raising live observe; preserve unknown-owner forced-exit branch",
+      "runtime_reproduced": false
+    }
+  ],
+  "review_report": {
+    "path": "/tmp/qcl-sci12-math-local-guard-v1-review.md",
+    "sha256": "f85ca6895125a4780ec6eb050a793691a4bb6f216ee1c0e5b7b16b5907944dec",
+    "bytes": 11338
+  },
+  "inputs_sha256": {
+    "/tmp/qcl-sci12-math-local-guard-v1.py": "5aa294ebcd86969d1bef07f1d108fd607e250978170641e4609d9d5ebb9a09e4",
+    "/tmp/qcl-sci12-math-local-plan-v1.json": "2260d9cb6dfe5e7695968a3287cad7dc87a109e0e16447221dc9534484b39da5",
+    "/tmp/qcl-sci12-math-local-report-v1.md": "c86aa27e369ad5b0b6137667476de22f622a3aa7cea593c2e6051dcbfd5c0471",
+    "/tmp/qcl-sci12-math-local-identity-v1.json": "0b335c27ead7ff0146a0cd5e08f6c738712e7b293e9932778b0ccc227972480f",
+    "/tmp/qcl-local-julia-guard-v2.py": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f",
+    "/tmp/qcl-owned-temp-sampler-v2.py": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+    "/tmp/qcl-docs-routing-pure-guard-v7.py": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+    "/tmp/qcl-sci12-math-results-worktree/tests/test_equilibrium_map_math.py": "995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d",
+    "/tmp/qcl-sci12-math-fixture-v2-review.md": "c855f328402a217225b13fda3821000a8a6e55ed6894235e42b57802f3e69ec9",
+    "/tmp/qcl-DOCS-ROUTING-GREEN-1/receipt.json": "ea7d990e99e87834148d10b8c7ec7c3e0ac0c701c152de967b6bbacb45d66cf3",
+    "/tmp/qcl-DOCS-ROUTING-GREEN-1/original.log": "f86a8761f4aac28e7798d14c76c2e8a9fe27c85f61daa4d093a21b4f4ac19b30"
+  },
+  "selected_root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "selected_root_status": "execution checkpoint modified and four execution evidence/publication paths untracked at observation; all eight gitlinks matched",
+  "candidate_head": "de70638a982f91b7e125ab1cfc70a2daef2a656d",
+  "candidate_status": "only untracked tests/test_equilibrium_map_math.py; no recursive submodules",
+  "source_artifact_changes": 0,
+  "scripts_import_parser_compiler_pytest_numeric_network_target_calls": 0,
+  "product_index_CP_READY_counter_writes": 0,
+  "subagents": 0,
+  "review_resource_observation": {
+    "CPU_RSS_physical_IO": "not_measured",
+    "content_read_bytes": null,
+    "read_envelope_pass": false,
+    "deviation": "One broad rg on site-packages with *.py; actual content read unknown and could exceed assigned 2MiB. Reported to Root; not repeated. One tool output truncated, not used as complete evidence. Guard and helper full reads independently untruncated."
+  },
+  "stop": "Source correction B1 and exact follow-up review only; no automatic execution or rerun; Root remains sole owner of handoff, READY, ledger and counters"
+}

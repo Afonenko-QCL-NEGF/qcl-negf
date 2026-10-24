@@ -1,0 +1,31 @@
+{
+  "task": "DEV11",
+  "attempt": "GREEN-NODE-1",
+  "started_utc": "2026-10-19T13:03:35.904904+00:00",
+  "recorded_at_utc": "2026-10-19T13:03:36.340483+00:00",
+  "command": [
+    "/nix/store/frlyjd2wya3rk8xmdc98yq3x0rhpkh9n-nodejs-24.21.0/bin/node",
+    "--experimental-strip-types",
+    "--test",
+    "--test-reporter=tap",
+    "tests/api.test.ts",
+    "tests/export-selection.test.ts"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal/frontend",
+  "exit_code": 0,
+  "wall_seconds": 0.436,
+  "sampled_peak_process_tree_RSS_bytes": 155500544,
+  "stdout_stderr_bytes": 1944,
+  "temporary_bytes": 0,
+  "stop_reason": null,
+  "limits": {
+    "wall_seconds": 90,
+    "aggregate_RSS_bytes": 1073741824,
+    "CPU_affinity_count": 1,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "RSS_guard": "50ms sampled process-tree RSS, not a cgroup hard limit"
+  },
+  "original_log": "/tmp/qcl-DEV11-GREEN-NODE-1/original.log",
+  "environment": "selected installed Node24.21.0; locked node_modules; no build/install"
+}

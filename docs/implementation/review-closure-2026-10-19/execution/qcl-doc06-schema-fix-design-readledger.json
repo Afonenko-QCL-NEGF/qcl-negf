@@ -1,0 +1,134 @@
+{
+  "format": "qcl-negf.doc06-schema-fix-design-readledger.v1",
+  "stage": "D-source-only",
+  "source_budget_bytes": 3145728,
+  "conservative_logical_payload_upper_bytes": 2621440,
+  "accounting": "Conservative full-file-equivalent upper bound, includes repeated selected adapter/test/schema reads+hashes, primary packet, instructions and bounded path inventory output; not measured physical I/O. Exact9 snapshot raw hashes read once here; semantic selected slices read separately. Broad /tmp filename inventory produced noisy path-only output and was not source authority. One wrong A1 directory read failed without payload; corrected named read retained.",
+  "inputs": [
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts",
+      "bytes": 43061,
+      "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts",
+      "bytes": 35095,
+      "sha256": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69"
+    },
+    {
+      "path": "/tmp/qcl-doc06-static-slice-design.md",
+      "bytes": 18493,
+      "sha256": "34b80d4ae1c8b94d23657124f17c9051251cea4763af8f92007d24929aafb2e8"
+    },
+    {
+      "path": "/tmp/qcl-doc06-static-slice-design-review.md",
+      "bytes": 16821,
+      "sha256": "385c2ae4358a7fb296399d6d955eb4d9ac5995c26f8baa2c27526ad11677d5ce"
+    },
+    {
+      "path": "/tmp/qcl-doc06-actual-meaning-review.md",
+      "bytes": 18195,
+      "sha256": "4c35b2517718e3b9a137047a45652c4924de7e21ae3ad9041cd8d1e90df56861"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/input-receipt.json",
+      "bytes": 2756,
+      "sha256": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/DOC06-ACTUAL-A1/owned-tmp/out/facts.json",
+      "bytes": 19556,
+      "sha256": "ead7c19658478682d9da3b966f5aaec2e0ec9a180a27b7c62442f5796b63e041"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/DOC06-ACTUAL-A1/owned-tmp/out/source-receipt.json",
+      "bytes": 15444,
+      "sha256": "7bd0d68220ec0d37972b2cb25ad20b5f3b99078f95e06f64327727b446f7bd92"
+    }
+  ],
+  "snapshot_files": [
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/runner/src/application/configuration_types.jl",
+      "bytes": 8663,
+      "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/runner/src/infrastructure/config/configuration.jl",
+      "bytes": 71428,
+      "sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/runner/src/infrastructure/config/configuration_sources.jl",
+      "bytes": 3381,
+      "sha256": "bb08a718dd765a15db2a4fba7de0ff2ea79753f29dc516900f67485331dafbb1"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/runner/src/application/auto_strategy.jl",
+      "bytes": 19019,
+      "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/runner/docs/src/user/configuration.md",
+      "bytes": 10648,
+      "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/runner/test/fixtures/configurations/base.yaml",
+      "bytes": 6973,
+      "sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/runner/schema/run.schema.json",
+      "bytes": 54815,
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/contracts/src/qcl_negf_contracts/schemas/run.schema.json",
+      "bytes": 54815,
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/snapshot/core/src/numerics/optimized/production_contracts.jl",
+      "bytes": 15596,
+      "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019"
+    }
+  ],
+  "snapshot_bytes": 245338,
+  "original_checkout_head": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "selected_root_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "selected_root_status": "dirty coordinator checkpoint/evidence; no source edits by this agent",
+  "selected_submodules": {
+    "core": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+    "runner": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "aiida": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+    "contracts": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+    "platform": "f729e2681224d6537538179ab760fefefd575003",
+    "portal": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+    "research": "3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731",
+    "results": "de70638a982f91b7e125ab1cfc70a2daef2a656d"
+  },
+  "observed_tmp_adapter_copy": {
+    "head": "514cd9707a32cde60c630d60986973a898d35b18",
+    "adapter_matches_canonical": true,
+    "test_delta": "formatting only; canonical test SHA e825... owns future patch"
+  },
+  "executions": {
+    "product": 0,
+    "tests": 0,
+    "Deno_or_compiler": 0,
+    "harness": 0,
+    "target_parser": 0,
+    "target_import": 0,
+    "network": 0,
+    "solver": 0,
+    "build": 0
+  },
+  "resource_limits": {
+    "wall_minutes": 10,
+    "cpu_count": 1,
+    "memory_bytes": 1073741824,
+    "output_bytes": 131072
+  },
+  "resource_observation": "No CPU/RSS/physical-I/O sampler; metadata shell/Python only. No expensive calculation.",
+  "delegation": "All4 slots active at inspection; independent high D reviewer remains next gate."
+}

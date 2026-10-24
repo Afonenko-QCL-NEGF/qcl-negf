@@ -1,0 +1,45 @@
+{
+  "format": "qcl-negf.doc06-schema-format-only-independent-review.v1",
+  "verdict": "PASS_FORMAT_ONLY_EQUIVALENCE",
+  "machine_binding": {
+    "path": "/tmp/qcl-doc06-schema-format-only-review.json",
+    "sha256": "0130a35e4445fbc73feda5d5ad7e0df20b032b59cc3490abef7409535ce162e3",
+    "bytes": 716
+  },
+  "report": {
+    "path": "/tmp/qcl-doc06-schema-format-only-review.md",
+    "sha256": "77c888f4b3dda1f0ffa31ca9d180c93d84693875b6353d6d650e615369098bd1",
+    "bytes": 6402
+  },
+  "input_source_sha256": {
+    "ops/docs/static-slice.ts": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee",
+    "tests/docs_static_slice_test.ts": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04"
+  },
+  "output_source_sha256": {
+    "ops/docs/static-slice.ts": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "formatter_receipt_sha256": "aaaf0be83c834ba83736959d37025113dc067c306ed0dc9ed4b46736d3be3dcc",
+  "accepted_cpp_sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7",
+  "full_diff_sha256": "a645fe4317d061ba713aa084cc0686c9b8df62dde3b7728bd3b8a11e47cfd700",
+  "full_diff_regenerated_exact": true,
+  "hunks_reviewed": 8,
+  "baseline_test_prefix_bytes_unchanged": 35096,
+  "observed_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "reviewer_candidate_executions": 0,
+  "reviewer_runtime_tests": 0,
+  "reviewer_compiler_parser_runs": 0,
+  "source_read_cap_bytes": 2097152,
+  "source_read_conservative_upper_bytes": 1048576,
+  "wall_cap_seconds": 600,
+  "cpu_count": 1,
+  "ram_cap_bytes": 1073741824,
+  "output_cap_bytes": 131072,
+  "physical_resources": "not_measured",
+  "execution_grant": false,
+  "writes": [
+    "/tmp/qcl-doc06-schema-format-only-review.md",
+    "/tmp/qcl-doc06-schema-format-only-review.json",
+    "/tmp/qcl-doc06-schema-format-only-review-identity.json"
+  ]
+}

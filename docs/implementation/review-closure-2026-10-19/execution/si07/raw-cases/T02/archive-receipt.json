@@ -1,0 +1,23 @@
+{
+  "fixture_kind": "public_synthetic_metadata_only",
+  "archive_source": {
+    "root_commit": "9f8b08bbf8b2f941eaa6426bc07c2b436a2a81d8",
+    "Core_commit": "f5b73369a96d1225bd96fb34f5262c8dcf965f86"
+  },
+  "identity": {
+    "execution_id": "SI07-public-E",
+    "attempt": 2,
+    "state_id": "SI07-public-state",
+    "state_sequence": 3,
+    "plan_fingerprint": "cc502a4746c8985c9bfbe6ab9043718889533612a676d7786e38fa278c887e7d"
+  },
+  "process_exit_code": 0,
+  "producer_assessment": "not_measured",
+  "final_owner": {
+    "declared_path": "physics.h5",
+    "present_in_packet": false,
+    "bytes": null,
+    "sha256": null
+  },
+  "raw_payload_present": false
+}

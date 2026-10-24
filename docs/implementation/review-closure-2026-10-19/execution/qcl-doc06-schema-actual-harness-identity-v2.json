@@ -1,0 +1,62 @@
+{
+  "format": "qcl-negf.doc06-schema-actual-source-packet.v2",
+  "files": {
+    "/tmp/qcl-doc06-schema-actual-plan-v2.json": {
+      "sha256": "1f0f73b9216aa097a1b86ba455192820b6ebb872a8d7d9d57e1b5b682ccecceb",
+      "bytes": 3962
+    },
+    "/tmp/qcl-doc06-schema-actual-local-run-v2.py": {
+      "sha256": "322c38d71f67c037e780e0f811b8ea67cd863d61f9a1bf7690391ffdaf3976f8",
+      "bytes": 21737
+    },
+    "/tmp/qcl-doc06-schema-actual-preparation-v2.py": {
+      "sha256": "55dba3288b2c1e8fbf84f6f03d2cda171d0466107d60db26fbd4746e175bd9b0",
+      "bytes": 11134
+    }
+  },
+  "root_head_requested": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "root_actual_git_read_performed_in_source_stage": false,
+  "namespace_created_in_source_stage": false,
+  "preserved_old_artifact_sha256": {
+    "/tmp/qcl-doc06-actual-local-run-v1.py": "dd12fd9383130fd77039049114a02ff513ff6eb7d1caac6bfb34d96a94ee0e61",
+    "/tmp/qcl-doc06-actual-source-prep-v1.py": "d4b824dd2d2f5781a5853e6db35f53ad37b560fa2a9d94bab9272f85887b2cec",
+    "/tmp/qcl-doc06-actual-Root-control-v1.py": "a7f72ca21192eaa62fe07c51808fd65ead85bdd6d3282684413789f9c3cda6d1",
+    "/tmp/qcl-doc06-actual-engineering-plan-v1.json": "1916f0b4aa51d2a835525aa159e5411fb80f23c97233f8bba92bd1b8b223f18c",
+    "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/preparation.json": "03db672d25120747f86469e37a1685f6dfff8bed64199b6a619b5296b8adf5b8",
+    "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/input-receipt.json": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a",
+    "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1/committed-source-graph.json": "b7244ee91167b688e598efea33ba9620772c974264920d7e368ec87de4d939e1"
+  },
+  "reviews_read": {
+    "/tmp/qcl-doc06-actual-harness-review.md": "97efc49edccf2ae54fb67189c09792971e796d1991e6659c3fa2e6bad17403b0",
+    "/tmp/qcl-doc06-actual-meaning-review.md": "4c35b2517718e3b9a137047a45652c4924de7e21ae3ad9041cd8d1e90df56861",
+    "/tmp/qcl-doc06-schema-v2-outcome-review.md": "ee8620ebbb06fdcddae5f742717e8ba6c32b97d60c12a17fe3c2f3447e37269b"
+  },
+  "guard_semantics": "Exact buffer helper; nullable RSS with valid>=1/no failures; unknown VmRSS fails; outer best-effort failure receipt; no retry identities; exact Git binding before/after",
+  "limits": {
+    "wall_seconds_max": 720,
+    "source_read_bytes_max": 4194304,
+    "logical_source_read_conservative_upper_bytes": 2097152,
+    "cpu_count": 1,
+    "ram_max_bytes": 1073741824,
+    "output_bytes_max": 196608,
+    "physical_cpu_RSS_IO_measured": false
+  },
+  "executions": {
+    "new_snapshot_export": 0,
+    "harness": 0,
+    "target_parser": 0,
+    "compiler": 0,
+    "Deno": 0,
+    "Julia": 0,
+    "formatter": 0,
+    "linter": 0,
+    "unit": 0,
+    "actual_projection": 0,
+    "network": 0,
+    "runtime_probe": 0,
+    "Git": 0,
+    "solver": 0
+  },
+  "writes": "Only own /tmp/qcl-doc06-schema-actual-* source/plan/report/identity; no Root code/CP/old namespace",
+  "status": "STOP_SOURCE_ONLY_FOR_SEPARATE_HIGH_REVIEW"
+}

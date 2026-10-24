@@ -1,0 +1,19 @@
+{
+  "operation_id": "DOC06-SCHEMA-SOURCE-BIND-1",
+  "state": "source_bound_FMT_LINT_unit_actual_pending",
+  "root_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "CPP": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7",
+  "files": {
+    "ops/docs/static-slice.ts": {
+      "before": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+      "after": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee"
+    },
+    "tests/docs_static_slice_test.ts": {
+      "before": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69",
+      "after": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04"
+    }
+  },
+  "nominal_tests": 74,
+  "old56controls_retained": true,
+  "full_source_READY": false
+}

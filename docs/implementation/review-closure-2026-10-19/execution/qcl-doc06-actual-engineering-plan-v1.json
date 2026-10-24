@@ -1,0 +1,104 @@
+{
+  "format": "qcl-negf.doc06-actual-engineering-plan.v1",
+  "status": "proposed_not_executed_requires_independent_high_review_and_Root_READY",
+  "source_stage": "selected exact-Git source projection preparation; no BUILD/scientific admission",
+  "root_revision": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "namespace": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1",
+  "old_namespace": "/tmp/qcl-DOC06-ACTUAL-PREP-1 retained untouched; older e22 graph, never current",
+  "maximum_product_calls": 2,
+  "attempts": [
+    "DOC06-ACTUAL-A1",
+    "DOC06-ACTUAL-A2"
+  ],
+  "sole_execution_and_count_writer": "Root",
+  "additional_DEV_checks": "Two separately authorized actual-source projections; original DOC06 unit cap and C08 untouched. No retries, aliases, automatic calls or fallback. Each attempt permanently reserves its folder before checks.",
+  "source_export": {
+    "script": "/tmp/qcl-doc06-actual-source-prep-v1.py",
+    "execute_only_after": "Separate independent review plus Root READY_SOURCE_PREPARATION binding exact script/current root; no export performed by preparer",
+    "authority": "Eight root committed gitlinks from git ls-tree; nine file blobs read from selected component Git objects only. Derived graph and receipt are ephemeral external binding evidence, not parallel maintained lock.",
+    "bounds": {
+      "wall_seconds": 120,
+      "cpu_affinity_count": 1,
+      "RLIMIT_CPU_seconds": 120,
+      "source_bytes": 524288,
+      "per_source_file_bytes": 131072,
+      "receipt_bytes": 16384,
+      "preparation_receipt_bytes": 32768
+    },
+    "limitations": "Exact Git reads have timeouts; no hard RAM quota. No target execution, imports, tree checkout, submodule updates, installation or network. Failed namespace retained."
+  },
+  "source_bindings": {
+    "/tmp/qcl-doc06-actual-local-run-v1.py": {
+      "sha256": "dd12fd9383130fd77039049114a02ff513ff6eb7d1caac6bfb34d96a94ee0e61",
+      "bytes": 12255
+    },
+    "/tmp/qcl-doc06-actual-source-prep-v1.py": {
+      "sha256": "d4b824dd2d2f5781a5853e6db35f53ad37b560fa2a9d94bab9272f85887b2cec",
+      "bytes": 5674
+    }
+  },
+  "runtime": {
+    "path": "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+    "version": "2.8.3",
+    "executed_or_probed_in_preparation": false
+  },
+  "adapter": {
+    "path": "ops/docs/static-slice.ts",
+    "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "module_closure": "No static or dynamic imports, no eval/Function/WebAssembly/fetch/Command/dlopen matches; only import.meta.main. Deno module loader reads script independently of read grants; source review is mandatory."
+  },
+  "limits_per_product_call": {
+    "wall_seconds": 120,
+    "cpu_affinity_count": 1,
+    "RLIMIT_CPU_seconds": 120,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "sampled_owned_regular_TMP_bytes": 16777216,
+    "raw_output_bytes": 1048576,
+    "raw_stop_threshold_bytes": 917504,
+    "sample_seconds": 0.05,
+    "source_bytes": 524288,
+    "source_file_bytes": 131072,
+    "facts_bytes": 32768,
+    "output_source_receipt_bytes": 32768
+  },
+  "aggregate_product_maximums": {
+    "calls": 2,
+    "child_wall_seconds": 240,
+    "raw_bytes": 2097152,
+    "retained_sampled_TMP_bytes": 33554432
+  },
+  "child_environment": "Exact clear environment map only: DENO_DIR/TMPDIR/HOME newly owned attempt children; DENO_NO_UPDATE_CHECK=1 and OMP/OPENBLAS/MKL thread caps=1. No inherited env. No allow-env/run/net/ffi. Read script+snapshot+input receipt+owned TMP; write owned TMP only; no config/npm/remote/prompt; cached-only/no-lock.",
+  "trusted_python_loading": "Each guard/sampler source is read once bounded, SHA verified, then exact buffer compile/exec in fresh ModuleType with non-main name; no SourceFileLoader/importlib/pyc. Only RawCapture and owned regular TMP sampler used.",
+  "READY_product_fields": [
+    "status=READY",
+    "attempt=DOC06-ACTUAL-A1|DOC06-ACTUAL-A2",
+    "harness_sha256",
+    "plan_sha256",
+    "preparation_sha256",
+    "input_receipt_sha256",
+    "independent_review_status=accepted",
+    "independent_review_sha256",
+    "created_unix <=300s",
+    "sole_executor_and_count_writer=Root",
+    "authorized_total_calls=2",
+    "prior_product_calls=0|1",
+    "prior_receipt_sha256 for A2"
+  ],
+  "sequence": [
+    "Independent high source review; Root separately authorizes one exact-Git export.",
+    "Root checks newly exported nine sources/graph/preparation receipt and binds exact files to READY A1.",
+    "Root alone executes A1 once; retains all original raw/errors/outputs even refusal/guard failure. Stop and review receipt; A2 requires a new Root READY and successful complete partial A1.",
+    "Root alone executes A2 once against same source receipt and snapshot; preserve raw/facts/output receipt. Stop permanently.",
+    "Separate bounded postprocessing compares complete facts bytes and SHA A1/A2, all public refs/no private paths, ten fact classes per subject; then independent authored-meaning review against exact owning sources. This harness does not execute a comparison or imply acceptance."
+  ],
+  "expected_evidence": "Each CLI prints only {status:partial}, exit0, no guard/capture error, exact input/adapter/harness identities before and after, exactly facts.json+source-receipt.json bounded and parseable with receipt matching facts SHA/bytes. This means complete partial projection only. Equality twice is later evidence; neither equality nor exit0 proves authored meaning.",
+  "limitations": [
+    "Sampled RSS/TMP logical regular bytes are stop guards, not hard quotas, physical allocation, transient peak or hostile namespace guarantees.",
+    "Raw byte-preserving capture retains overshoot and reports failure; no false truncation-success claim. Local process-group cleanup is not an escaped-descendant sandbox proof.",
+    "External Git export binds commits to bytes; adapter only verifies supplied receipt and input bytes. No application_release/run identity invented.",
+    "Source-prototype public facts must contain repo-relative selected locators, no absolute/private filenames or secrets; verify afterward.",
+    "No runtime/target/native/test/build/science/network execution occurred while preparing these files. No product or CP edits."
+  ]
+}

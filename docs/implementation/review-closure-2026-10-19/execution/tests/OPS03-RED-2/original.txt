@@ -1,0 +1,189 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+_ OPS03LifecycleOwnerTests.test_o01_actual_update_process_blocks_public_activate_and_prepare _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o01_actual_update_process_blocks_public_activate_and_prepare>
+
+    def test_o01_actual_update_process_blocks_public_activate_and_prepare(self):
+        process, pipe = self.child(self.hold_delivery)
+        before = self.gate.read_bytes()
+        for action in ('activate', 'prepare_initial'):
+            with self.subTest(action=action):
+                self.commands.calls.clear()
+>               with self.assertRaises((BlockingIOError, RuntimeError)):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: (<class 'BlockingIOError'>, <class 'RuntimeError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:2943: AssertionError
+_ OPS03LifecycleOwnerTests.test_o01_reverse_public_activate_process_blocks_actual_update _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o01_reverse_public_activate_process_blocks_actual_update>
+
+    def test_o01_reverse_public_activate_process_blocks_actual_update(self):
+        def child(pipe):
+            def command(argv):
+                if argv[0] == 'nix-store':
+                    pipe.send('held')
+                    if not pipe.poll(5):
+                        raise AssertionError('parent handshake deadline')
+                    pipe.recv()
+                return self.boundary(argv)
+            try:
+                self.activate(run=command)
+            except BaseException as error:
+                pipe.send(('child-error', type(error).__name__, str(error)))
+                raise
+        process, pipe = self.child(child)
+        ledger = []
+        with patch.object(self.ops, '_deliver_cli_locked', lambda *a, **k: ledger.append('mutation')):
+>           with self.assertRaises((BlockingIOError, RuntimeError)):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: (<class 'BlockingIOError'>, <class 'RuntimeError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:2973: AssertionError
+_ OPS03LifecycleOwnerTests.test_o07_expiry_after_command_stops_next_persistent_mutation _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o07_expiry_after_command_stops_next_persistent_mutation>
+
+    def test_o07_expiry_after_command_stops_next_persistent_mutation(self):
+        clock = [100.0]
+        def boundary(argv):
+            output = self.boundary(argv)
+            if argv[0] == 'nix-store':
+                clock[0] = 111.0
+            return output
+        with patch.object(self.ops.time, 'monotonic', lambda: clock[0]):
+>           with self.assertRaises((ValueError, RuntimeError, TimeoutError)):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: (<class 'ValueError'>, <class 'RuntimeError'>, <class 'TimeoutError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:3088: AssertionError
+_ OPS03LifecycleOwnerTests.test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation>
+
+    def test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation(self):
+        attempts = self.runtime / 'delivery-attempts'
+        attempts.mkdir()
+        for name, value in (
+            ('orphan.lifecycle-intent.json', {'schema': 'qcl-negf-lifecycle-intent-v1'}),
+            ('old.admission-intent.json', {'schema': 'qcl-negf-admission-intent-v1'}),
+            ('local.json', {'schema': 'qcl-negf-delivery-attempt-v1', 'status': 'running',
+                            'pending_local_mutation': {'node': 'controller'}}),
+        ):
+            with self.subTest(marker=name):
+                path = attempts / name
+                raw = json.dumps(value).encode()
+                path.write_bytes(raw)
+                self.commands.calls.clear()
+>               with self.assertRaises((ValueError, RuntimeError)):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: (<class 'ValueError'>, <class 'RuntimeError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:3110: AssertionError
+_ OPS03LifecycleOwnerTests.test_o11_legacy_activation_fence_blocks_update_without_truncation _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o11_legacy_activation_fence_blocks_update_without_truncation>
+
+    def test_o11_legacy_activation_fence_blocks_update_without_truncation(self):
+        legacy = self.runtime / 'activation.lock'
+        legacy.write_bytes(b'legacy bytes must remain')
+        with legacy.open('r+') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            ledger = []
+            with patch.object(self.ops, '_deliver_cli_locked', lambda *a, **k: ledger.append('entered')):
+>               with self.assertRaises((BlockingIOError, RuntimeError)):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: (<class 'BlockingIOError'>, <class 'RuntimeError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:3214: AssertionError
+_ OPS03LifecycleOwnerTests.test_o14_public_activate_requires_matching_closed_selected_gate _
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o14_public_activate_requires_matching_closed_selected_gate>
+
+    def test_o14_public_activate_requires_matching_closed_selected_gate(self):
+        for gate in ({'open': True, 'release_id': 'release-a'},
+                     {'open': False, 'release_id': 'foreign'}):
+            with self.subTest(gate=gate):
+                self.gate.write_text(json.dumps(gate))
+>               with self.assertRaises((ValueError, RuntimeError)):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: (<class 'ValueError'>, <class 'RuntimeError'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:3242: AssertionError
+___ OPS03LifecycleOwnerTests.test_o18_service_environment_uses_selected_gate ___
+
+self = <test_application_release.OPS03LifecycleOwnerTests testMethod=test_o18_service_environment_uses_selected_gate>
+
+    def test_o18_service_environment_uses_selected_gate(self):
+        self.activate()
+>       self.assertIn('QCL_NEGF_RELEASE_GATE=' + str(self.gate) + '\n',
+                      (self.runtime / 'service.env').read_text())
+E       AssertionError: 'QCL_NEGF_RELEASE_GATE=/tmp/ops03-d4kejb5k/selected-gate.json\n' not found in 'QCL_NEGF_RELEASE_ID=release-a\nQCL_NEGF_SOLVER_EXECUTABLE=/nix/store/solver/bin/qcl-negf\nQCL_NEGF_RELEASE_GATE=/srv/qcl-negf/jobs/.release-admission.json\n'
+
+components/qcl-negf-platform/tests/test_application_release.py:3248: AssertionError
+_ ShutdownIntentTests.test_ops03_o15_same_node_startup_contends_during_runner_wait _
+
+self = <test_worker_shutdown_intent.ShutdownIntentTests testMethod=test_ops03_o15_same_node_startup_contends_during_runner_wait>
+
+    def test_ops03_o15_same_node_startup_contends_during_runner_wait(self):
+        # Complete real capture/finalize first, but hold the finite invocation
+        # at its return boundary while shutdown_step still owns the node lock.
+        # An awaiting-jobs fixture would let startup refuse incomplete scope
+        # before exposing its missing node-lock acquisition on the baseline.
+        context = multiprocessing.get_context('fork')
+        ready = context.Event()
+        finish = context.Event()
+        def client():
+            original = worker._shutdown_owned_poll
+            def finalized(*args, **kwargs):
+                result = original(*args, **kwargs)
+                if result is not True:
+                    raise AssertionError('fixture did not reach complete safe-stop scope')
+                ready.set()
+                if not finish.wait(5):
+                    raise AssertionError('finite shutdown-return wait watchdog')
+                return result
+            with patch.object(worker, '_shutdown_owned_poll', finalized):
+                self.shutdown()
+        process = context.Process(target=client)
+        process.start()
+        try:
+            self.assertTrue(ready.wait(5), 'shutdown did not finalize safe-stop scope')
+            self.assertEqual(self.intent()['phase'], 'safe_to_power_off')
+            self.assertTrue(self.intent()['capture_complete'])
+            self.assertEqual(self.intent()['jobs'], {})
+            before = (self.state / 'worker.json').read_bytes()
+            self.run.identity = {**WORKER, 'boot_id': NEW_BOOT}
+            # Contention must be the reason; pending intent alone is not a
+            # substitute for holding the node lock across the Runner wait.
+>           with self.assertRaises(BlockingIOError):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: BlockingIOError not raised
+
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py:159: AssertionError
+_ ShutdownIntentTests.test_ops03_o16_startup_node_lock_released_after_failed_preflight _
+
+self = <test_worker_shutdown_intent.ShutdownIntentTests testMethod=test_ops03_o16_startup_node_lock_released_after_failed_preflight>
+
+    def test_ops03_o16_startup_node_lock_released_after_failed_preflight(self):
+        path = self.runtime / 'shutdown-worker.lock'
+        path.write_bytes(b'original lock bytes')
+        with path.open('r+') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+>           with self.assertRaises(BlockingIOError):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: BlockingIOError not raised
+
+components/qcl-negf-platform/tests/test_worker_shutdown_intent.py:177: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_actual_update_process_blocks_public_activate_and_prepare
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o01_reverse_public_activate_process_blocks_actual_update
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o07_expiry_after_command_stops_next_persistent_mutation
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o10_foreign_or_orphan_barriers_prevent_direct_api_mutation
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o11_legacy_activation_fence_blocks_update_without_truncation
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o14_public_activate_requires_matching_closed_selected_gate
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03LifecycleOwnerTests::test_o18_service_environment_uses_selected_gate
+FAILED components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o15_same_node_startup_contends_during_runner_wait
+FAILED components/qcl-negf-platform/tests/test_worker_shutdown_intent.py::ShutdownIntentTests::test_ops03_o16_startup_node_lock_released_after_failed_preflight
+9 failed in 0.95s

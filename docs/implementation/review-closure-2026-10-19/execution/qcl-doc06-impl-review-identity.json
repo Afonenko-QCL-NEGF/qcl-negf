@@ -1,0 +1,55 @@
+{
+  "format": "qcl-source-review-identity-v1",
+  "task": "DOC06 production adapter independent high CPP",
+  "reviewer": "/root/sci03_current_bound_review",
+  "verdict": "REQUEST_CHANGES",
+  "report": "/tmp/qcl-doc06-impl-review.md",
+  "report_sha256": "34307c58f4a98d7aca2c028fd39f28794c82cd1c415872b955ce15a40ad2b958",
+  "report_bytes": 15933,
+  "production_sha256": "524582ec31305b6f34688b8f3e2fe1cd9c2ac03ae8d75ea1d46db2ee1144c128",
+  "test_sha256": "2957b182f531bf08895ca705d8ad4d81d5d736a79ebef8b1ae7541989cb0dfa2",
+  "preserved_v2_test_sha256": "13c33da622b4d1c2e779dda4221057617b8fbd10942824dec52cf78e19fe80f2",
+  "test_delta_sha256": "d294e4eae87398ef614de69c56324195b8aaf8e9c7b75d00ab17f79e25138827",
+  "full_patch_sha256": "4ee47106176f6527d71773a4887d8eb19d7d9e6ee2d62651acef49f828a18823",
+  "design_sha256": "34b80d4ae1c8b94d23657124f17c9051251cea4763af8f92007d24929aafb2e8",
+  "design_review_sha256": "385c2ae4358a7fb296399d6d955eb4d9ac5995c26f8baa2c27526ad11677d5ce",
+  "author_report_sha256": "3a2d7f87e2f2c9c6a2b551cafbee8d3af4b4ac3a7745b4d13cd2461ac6409105",
+  "first_finding_formed_before_author_report": true,
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P2",
+      "locator": "ops/docs/static-slice.ts:220-259 and :292-307",
+      "trigger": "field-like energy_chunk assignment inside multiline backtick Cmd literal",
+      "effect": "known typed-default can be emitted for nonexistent field",
+      "minimal_fix": "Mask bounded Cmd literal or conservatively mark unsupported; add literal negative with healthy sibling"
+    },
+    {
+      "id": "R2",
+      "priority": "P2",
+      "locator": "ops/docs/static-slice.ts:296-304",
+      "trigger": "local typed assignment inside inner constructor before first end",
+      "effect": "known field default can be fabricated from constructor local variable",
+      "minimal_fix": "Reject unsupported non-flat/nested struct context conservatively; add independent local-variable negative"
+    }
+  ],
+  "other_blocking_findings": [],
+  "buffer_copy_test_delta": "APPROVED_SOURCE; exact three-line ownership fix; assertions unchanged",
+  "first_RED": {
+    "raw_sha256": "0b7bfb1a1bb0379ea68de7258c827ba83b45369196a0c0384dacabfc7f50ec59",
+    "receipt_sha256": "d2029a30e2a1bddee31dce0e59e3889290ff683a7c8482f632bdd93dd25a089a",
+    "classification": "compile stage TS2307+TS2345, not behavioral guard witness"
+  },
+  "source_no_target_execution_path_found": true,
+  "native_public_scientific_acceptance": false,
+  "new_runtime_GREEN": false,
+  "resource": {
+    "source_read_cap_bytes": 6291456,
+    "source_read_charged_upper_bound_bytes": 461727,
+    "ledger_groups_bytes": [223866,117261,43101,77499],
+    "physical_io_RSS_measured": false
+  },
+  "reviewer_runtime_import_parser_typecheck_test_build_network_product_Git_CP_checkpoint_children_C08_science_counts": 0,
+  "next": "One collated narrow writer correction cycle for R1/R2, then independent exact-source recheck before Root sole GREEN",
+  "stop": true
+}

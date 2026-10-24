@@ -1,0 +1,431 @@
+{
+  "format": "qcl-negf.docs-routing-pure-source-outcome-v7-independent-review.v1",
+  "status": "SOURCE_RESULTS_ACCEPTED_NOT_UNIT_READY_NOT_EXECUTION_GRANT",
+  "verdict": "PASS_SOURCE_TOOLS_RESULTS",
+  "blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-source-outcome-v7-review.md",
+    "sha256": "32d57314d7dcbf2a59d3550502f67e98b71798e7980c62489de0e7c071e5f440",
+    "bytes": 10588
+  },
+  "source_files": {
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+  },
+  "config_sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+  "accepted_results": {
+    "FORMAT2": {
+      "status": "PASS_SOURCE_RESULT",
+      "receipt_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+        "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32"
+      },
+      "raw_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/original.log",
+        "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+      },
+      "scope": "docs-routing-pure-local-engineering-v6",
+      "guard_sha256": "c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6",
+      "plan_sha256": "3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9",
+      "wrapper_sha256": "8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85",
+      "command": [
+        "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+        "fmt",
+        "--config",
+        "/tmp/qcl-docs-test-routing-worktree/deno.json",
+        "ops/docs_tests.ts",
+        "tests/docs_test_routing_test.ts"
+      ],
+      "cwd": "/tmp/qcl-docs-test-routing-worktree",
+      "environment_clear": true,
+      "environment": {
+        "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/owned-tmp/deno-cache",
+        "TMPDIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/owned-tmp/tmp",
+        "HOME": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/owned-tmp/home"
+      },
+      "source_before": {
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+      },
+      "source_after": {
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+      },
+      "config_sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+      "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+      "shared_source_budget": {
+        "maximum_calls": 8,
+        "calls_before": 4,
+        "calls_reserved": 1,
+        "calls_after": 5,
+        "no_rerun": true
+      },
+      "target_calls": 1,
+      "exit_code": 0,
+      "wall_seconds": 0.05678660102421418,
+      "raw_bytes": 16,
+      "raw_capture_complete": true,
+      "collector_terminal": true,
+      "RSS_attempted_samples": 2,
+      "RSS_valid_samples": 2,
+      "RSS_unknown_samples": 0,
+      "RSS_NA_after_reap_proofs": [
+        {
+          "proof": "Popen.poll_returncode_before_RSS_attempt",
+          "pid": 2988208,
+          "returncode": 0,
+          "elapsed_seconds": 0.05430484999669716
+        }
+      ],
+      "sampled_peak_process_tree_RSS_bytes": 446464,
+      "TMP_sample_count": 4,
+      "sampled_peak_owned_tmp_all_entry_st_size_bytes": 20720,
+      "observed_engine_tests": null,
+      "test_registration_performed": false
+    },
+    "LINT2": {
+      "status": "PASS_SOURCE_RESULT",
+      "receipt_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/receipt.json",
+        "sha256": "a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4"
+      },
+      "raw_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/original.log",
+        "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+      },
+      "scope": "docs-routing-pure-local-engineering-v6",
+      "guard_sha256": "c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6",
+      "plan_sha256": "3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9",
+      "wrapper_sha256": "d27fd04195f76459dc80ee132cb85be6751358908493e95a628ced1d16cc9368",
+      "command": [
+        "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+        "lint",
+        "--config",
+        "/tmp/qcl-docs-test-routing-worktree/deno.json",
+        "ops/docs_tests.ts",
+        "tests/docs_test_routing_test.ts"
+      ],
+      "cwd": "/tmp/qcl-docs-test-routing-worktree",
+      "environment_clear": true,
+      "environment": {
+        "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/owned-tmp/deno-cache",
+        "TMPDIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/owned-tmp/tmp",
+        "HOME": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/owned-tmp/home"
+      },
+      "source_before": {
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+      },
+      "source_after": {
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+      },
+      "config_sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+      "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+      "shared_source_budget": {
+        "maximum_calls": 8,
+        "calls_before": 5,
+        "calls_reserved": 1,
+        "calls_after": 6,
+        "no_rerun": true
+      },
+      "target_calls": 1,
+      "exit_code": 0,
+      "wall_seconds": 0.10741273802705109,
+      "raw_bytes": 16,
+      "raw_capture_complete": true,
+      "collector_terminal": true,
+      "RSS_attempted_samples": 3,
+      "RSS_valid_samples": 3,
+      "RSS_unknown_samples": 0,
+      "RSS_NA_after_reap_proofs": [
+        {
+          "proof": "Popen.poll_returncode_before_RSS_attempt",
+          "pid": 2993371,
+          "returncode": 0,
+          "elapsed_seconds": 0.1045249910093844
+        }
+      ],
+      "sampled_peak_process_tree_RSS_bytes": 45441024,
+      "TMP_sample_count": 5,
+      "sampled_peak_owned_tmp_all_entry_st_size_bytes": 242988,
+      "observed_engine_tests": null,
+      "test_registration_performed": false
+    },
+    "CHECK2": {
+      "status": "PASS_SOURCE_RESULT",
+      "receipt_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/receipt.json",
+        "sha256": "cd9f980eef98391d92aa0a3901686c25f7afc5ef167ee1b532fe8eeed8b0371b"
+      },
+      "raw_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/original.log",
+        "sha256": "04d40e18cad60bff4992e517b0a3b5e8bdab983c1944034cd919f20f827b8f91"
+      },
+      "scope": "docs-routing-pure-local-engineering-v7",
+      "guard_sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+      "plan_sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+      "wrapper_sha256": "f0fee486f3708905a1f240667eb1839f889f3bde9be1e11799a875179d7adbb4",
+      "command": [
+        "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+        "check",
+        "--config",
+        "/tmp/qcl-docs-test-routing-worktree/deno.json",
+        "--no-lock",
+        "--no-npm",
+        "--no-remote",
+        "ops/docs_tests.ts",
+        "tests/docs_test_routing_test.ts"
+      ],
+      "cwd": "/tmp/qcl-docs-test-routing-worktree",
+      "environment_clear": true,
+      "environment": {
+        "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/owned-tmp/deno-cache",
+        "TMPDIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/owned-tmp/tmp",
+        "HOME": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/owned-tmp/home"
+      },
+      "source_before": {
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+      },
+      "source_after": {
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+      },
+      "config_sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+      "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+      "shared_source_budget": {
+        "maximum_calls": 8,
+        "calls_before": 7,
+        "calls_reserved": 1,
+        "calls_after": 8,
+        "no_rerun": true
+      },
+      "target_calls": 1,
+      "exit_code": 0,
+      "wall_seconds": 1.580418098019436,
+      "raw_bytes": 88,
+      "raw_capture_complete": true,
+      "collector_terminal": true,
+      "RSS_attempted_samples": 32,
+      "RSS_valid_samples": 32,
+      "RSS_unknown_samples": 0,
+      "RSS_NA_after_reap_proofs": [
+        {
+          "proof": "Popen.poll_returncode_before_RSS_attempt",
+          "pid": 3008164,
+          "returncode": 0,
+          "elapsed_seconds": 1.5761717379791662
+        }
+      ],
+      "sampled_peak_process_tree_RSS_bytes": 273604608,
+      "TMP_sample_count": 34,
+      "sampled_peak_owned_tmp_all_entry_st_size_bytes": 3011380,
+      "observed_engine_tests": null,
+      "test_registration_performed": false
+    }
+  },
+  "all_source_results_binding": {
+    "status": "PASS_SOURCE_TOOLS_RESULTS",
+    "source_files": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "ordered_stages": [
+      "FORMAT2(v6)",
+      "LINT2(v6)",
+      "CHECK2(v7)"
+    ],
+    "receipt_refs": [
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+        "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/receipt.json",
+        "sha256": "a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/receipt.json",
+        "sha256": "cd9f980eef98391d92aa0a3901686c25f7afc5ef167ee1b532fe8eeed8b0371b"
+      }
+    ],
+    "raw_refs": [
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/original.log",
+        "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/original.log",
+        "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/original.log",
+        "sha256": "04d40e18cad60bff4992e517b0a3b5e8bdab983c1944034cd919f20f827b8f91"
+      }
+    ],
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-source-outcome-v7-review.md",
+      "sha256": "32d57314d7dcbf2a59d3550502f67e98b71798e7980c62489de0e7c071e5f440"
+    },
+    "source_budget_used": 8,
+    "source_budget_maximum": 8,
+    "source_budget_status": "EXHAUSTED_NO_RETRIES",
+    "product_calls_unchanged": 87
+  },
+  "format_binding": {
+    "status": "PASS_FORMAT_ONLY",
+    "unformatted_sources": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "formatted_sources": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "review_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+    },
+    "receipt_refs": [
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+        "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/receipt.json",
+        "sha256": "a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/receipt.json",
+        "sha256": "cd9f980eef98391d92aa0a3901686c25f7afc5ef167ee1b532fe8eeed8b0371b"
+      }
+    ]
+  },
+  "accepted_cpp": {
+    "status": "PASS_SOURCE_PURE_CLOSURE",
+    "source_files": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+    },
+    "pure_only_slice": true,
+    "baseline_cpp_ref": {
+      "path": "/tmp/qcl-docs-routing-impl-i2b-review.md",
+      "sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea"
+    }
+  },
+  "preserved_comment_only_CPP_ref": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+    "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d"
+  },
+  "preserved_FORMAT2_final_CPP_ref": {
+    "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+    "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+  },
+  "accepted_v7_guard_review_ref": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v7-review.md",
+    "sha256": "364e912a1c12adc2dc6103ce807dcdb6ad0d0d29520d3b02422f050095f9dce1"
+  },
+  "CHECK2_control_refs": {
+    "/tmp/qcl-docs-routing-source-Root-control-v7.py": {
+      "path": "/tmp/qcl-docs-routing-source-Root-control-v7.py",
+      "sha256": "297182f8b23a4af975820c091d65407a9c92a59c7f7c7e5f9e2326c118991810",
+      "bytes": 9794
+    },
+    "/tmp/qcl-docs-routing-source-CHECK2-Root-ready-v7.json": {
+      "path": "/tmp/qcl-docs-routing-source-CHECK2-Root-ready-v7.json",
+      "sha256": "1dbaa980bd1d98e0401a013b31a670df08733c673b76e688bcf88b285ecd12e3",
+      "bytes": 4492
+    },
+    "/tmp/qcl-docs-routing-source-CHECK2-Root-handoff-v7.json": {
+      "path": "/tmp/qcl-docs-routing-source-CHECK2-Root-handoff-v7.json",
+      "sha256": "0edb6284a9bcc773b8a11735bfa39e430cf04dc6c73ff184a1ce414803e91b06",
+      "bytes": 714
+    },
+    "/tmp/qcl-docs-routing-source-CHECK2-Root-outer-v7.json": {
+      "path": "/tmp/qcl-docs-routing-source-CHECK2-Root-outer-v7.json",
+      "sha256": "c48bad37c6cf21d7811c7c97d40bf467e1eed2f06bfb24a60a38eab95b12a8b7",
+      "bytes": 174
+    }
+  },
+  "history": {
+    "failed_CHECK1_receipt_ref": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/receipt.json",
+      "sha256": "277a3287b57bd7e121ddcee2854a038765f4471c491d73cf5748c0a584fe7531"
+    },
+    "failed_CHECK1_raw_ref": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/original.log",
+      "sha256": "3676ae80e731a183977f2a96b7b6d613d332c148bf755a0321c8a76e5d05b98f"
+    },
+    "failed_CHECK1_classification": "Consumed FAILED CLI rejection before typecheck; not passed/typechecked/230tests; source6to7retained",
+    "original_RED_receipt_ref": {
+      "path": "/tmp/qcl-DOCS-ROUTING-RED-1/receipt.json",
+      "sha256": "e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0"
+    },
+    "original_RED_raw_ref": {
+      "path": "/tmp/qcl-DOCS-ROUTING-RED-1/original.log",
+      "sha256": "6b044ed571751341f215353d5dafd384dcf009a70c4b471595ebdcb53b8589ad"
+    },
+    "original_RED_two_diagnostic_inconclusive_preserved": true,
+    "DOC06_unknown_FAILED_not_reclassified": true,
+    "all_history_unedited": true
+  },
+  "CHECK2_observed_claim": "Successful compiler/source typecheck exacttwofiles/config; not moduleevaluation/testregistration or230observedtests",
+  "static_registered_tests": 230,
+  "observed_engine_tests": null,
+  "metadata": {
+    "retained_root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "retained_isolated_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "CP_source_calls_snapshot": 8,
+    "CP_product_calls_snapshot": 87,
+    "CP_source_active": null,
+    "CP_target_active": null,
+    "CP_is_authority_marker": false
+  },
+  "remaining_required": [
+    "Fresh Root unit controller/admission/actual metadata/counters/SourceRefs/lateREADY",
+    "Same sole DOCS-ROUTING-GREEN-1 product87to88 only if separately admitted",
+    "Independent completeTAP230/result/resource review afterward"
+  ],
+  "execution_counts": {
+    "prepared_scripts": 0,
+    "guard_import_compile_exec": 0,
+    "parser": 0,
+    "compiler": 0,
+    "formatter": 0,
+    "linter": 0,
+    "tests": 0,
+    "runtime": 0,
+    "native": 0,
+    "network": 0,
+    "subagents": 0
+  },
+  "mutations": {
+    "Root": 0,
+    "CP": 0,
+    "source": 0,
+    "index": 0,
+    "history": 0,
+    "review_deliverables": 2
+  },
+  "budget": {
+    "wall_ceiling_seconds": 300,
+    "payload_read_ceiling_bytes": 1048576,
+    "review_CPU_ceiling": 1,
+    "review_RAM_ceiling_bytes": 1073741824,
+    "all_output_ceiling_bytes": 65536,
+    "physical_reviewer_CPU_RSS_IO_measured": false
+  },
+  "limitations": [
+    "Allsource results acceptance not unitREADY/rungrant",
+    "Source8of8exhausted; no source retry/launch authority",
+    "Sampled metrics not hardpeak/quota/OSisolation proof",
+    "Runtimebinary not fullrehashed in1MiBbudget; exact retained guard/controller/provenance pins used",
+    "Pure-only closure not wholeNative/fullCI/science acceptance",
+    "TrustedRoot substantive unit admission remains separate"
+  ]
+}

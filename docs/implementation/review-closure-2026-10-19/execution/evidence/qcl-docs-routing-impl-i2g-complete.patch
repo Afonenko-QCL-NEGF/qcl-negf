@@ -1,0 +1,130 @@
+--- a/ops/docs_tests_native.py
++++ b/ops/docs_tests_native.py
+@@ -1336,6 +1336,11 @@
+         finally:
+             primary = sys.exc_info()[1]; failures = []
+             if primary is not None: cleanup_stage(failures,"command",lambda:(_ for _ in ()).throw(primary))
++            # execute's finally runs after its successful return is prepared.
++            # Import that owner history before any ticket can be issued, while
++            # retaining the already published good capture/stream observations.
++            for failure in launch_state.get("failures",[]):
++                if failure not in failures and len(failures) < 16: failures.append(failure)
+             if entry["streams"] is None:
+                 entry["streams"] = cleanup_stage(failures,"partial-streams",lambda:partial_streams(paths,cap))
+             actual_raw = None if entry["streams"] is None else sum(item["bytes"] for item in entry["streams"].values() if item is not None)
+@@ -1365,7 +1370,11 @@
+             if failures:
+                 entry["outcome"] = "unknown"
+                 entry["failures"] = failures
+-                cleanup_stage(failures,"settlement-retain",lambda:self.retain("command-settlement",{"format":"root-docs-command-settlement-failure.v1","id":ident,"primary":failures[0],"secondary":failures[1:8],"owner_failures":launch_state.get("failures",[])[:8],"pending_ref":entry["pending_ref"],"terminal_ref":entry["terminal_ref"],"streams":entry["streams"]},8192))
++                def retain_settlement():
++                    record = {"format":"root-docs-command-settlement-failure.v1","id":ident,"primary":failures[0],"secondary":failures[1:],"owner_failures":launch_state.get("failures",[])[:16],"pending_ref":entry["pending_ref"],"terminal_ref":entry["terminal_ref"],"streams":entry["streams"]}
++                    self.storage.debit("metadata",len(canonical(record)))
++                    return retain_record(Path(self.metadata_root)/(ident+".settlement.json"),record,8192,proofs=self.durable_publications)
++                entry["failure_ref"] = cleanup_stage(failures,"settlement-retain",retain_settlement)
+                 if primary is None: raise Refusal("command settlement unknown: "+canonical(failures).decode()[:1024])
+         ticket = secrets.token_hex(16)
+         self.tickets[ticket] = {"streams":streams,"offsets":{"stdout":0,"stderr":0},"capture":result,"binding_digest":digest(canonical(self.binding)),"closed":set()}
+@@ -1586,8 +1595,8 @@
+ def retain_evidence_index(active):
+     entries = []
+     for item in active.command_ledger:
+-        terminal = item["terminal_ref"]
+-        suffix = None if terminal is None else ("failure.json" if terminal["path"].endswith(".failure.json") else "json")
++        terminal = item.get("failure_ref") or item["terminal_ref"]
++        suffix = None if terminal is None else ("settlement.json" if terminal["path"].endswith(".settlement.json") else "failure.json" if terminal["path"].endswith(".failure.json") else "json")
+         entries.append([item["id"],None if item["pending_ref"] is None else item["pending_ref"]["sha256"],None if terminal is None else terminal["sha256"],suffix,item["outcome"]])
+     return active.retain("evidence-index",{"format":"root-docs-command-index.v1","metadata_root":active.metadata_root,"commands":entries})
+ 
+--- a/tests/test_docs_test_native.py
++++ b/tests/test_docs_test_native.py
+@@ -60,6 +60,80 @@
+                 native.decode_capsule(bad)
+ 
+     def test_frame_negative_pairs(self):
++        # Actual execute -> command, with real raw/record publishers. A sole
++        # late owner-close failure must fail the attempt, preserving good raw.
++        healthy_receipt = None
++        for fault,primary_failure in ((None,False),("pidfd",False),("channel",False),("pidfd",True)):
++            events = []; original = RuntimeError("original-terminal-observe")
++            capture = {"stdout":"ok\n","stderr":"","exit_code":0,"signal":None,"started_at":"2026-10-20T08:00:00.000000Z","ended_at":"2026-10-20T08:00:00.000001Z","capture_complete":True,"drains_complete":True,"stop_reason":None}
++            class FS(MemoryPublishOps):
++                def __init__(self): super().__init__(); self.offsets = {}
++                def open(self,path,flags,mode=0o600):
++                    if not flags & (native.os.O_CREAT|native.os.O_DIRECTORY) and str(path) not in self.files: raise FileNotFoundError(path)
++                    fd = super().open(path,flags,mode); self.offsets[fd] = 0; return fd
++                def fstat(self,fd):
++                    path,kind = self.fds[fd]
++                    return type("Stat",(),{"st_size":len(self.files.get(path,b"")),"st_mode":native.stat.S_IFDIR if kind == "dir" else native.stat.S_IFREG,"st_dev":1,"st_ino":fd,"st_mtime_ns":1})()
++                def stat(self,path,**kwargs):
++                    if str(path) not in self.files: raise FileNotFoundError(path)
++                    return type("Stat",(),{"st_size":len(self.files[str(path)]),"st_mode":native.stat.S_IFREG})()
++                def read(self,fd,n):
++                    path,_ = self.fds[fd]; start = self.offsets[fd]; data = bytes(self.files[path][start:start+n]); self.offsets[fd] += len(data); return data
++                def close(self,fd):
++                    events.append(("close",fd))
++                    if fd == 703 and fault == "pidfd": raise OSError("pidfd-close")
++            fs = FS()
++            class Socket:
++                def __init__(self,name): self.name = name
++                def close(self):
++                    events.append(("channel",self.name))
++                    if self.name == "parent" and fault == "channel": raise OSError("channel-close")
++                def recv(self,n): return native.canonical(capture)+b"\n"
++                def setblocking(self,value): pass
++                def makefile(self,*args,**kwargs): return io.BytesIO()
++                def fileno(self): return 9
++            class Ledger:
++                durable_publications = set()
++                def reserve(self,name,size): return name
++                def debit(self,*args): pass
++                def commit(self,name,size): events.append(("commit",name))
++                def release(self,name): events.append(("release",name))
++                def observe(self,stage):
++                    if stage == "terminal" and primary_failure: raise original
++            active = object.__new__(native.ActiveDocsAttempt)
++            active.poll_parent = lambda:None; active.binding = {}; active.storage = Ledger()
++            active.raw_root = "/owned/raw"; active.metadata_root = "/owned/meta"; active.command_ledger = []; active.tickets = {}
++            active.durable_publications = active.storage.durable_publications = set(); active.deadline = 100; active.channel = Socket("control")
++            active.guard = type("Guard",(),{"inspect_binding":lambda s:None,"attach_private_supervisor":lambda *a:None,"observe":lambda *a:{}})()
++            ident = "a"*32
++            fs.files["/owned/raw/"+ident+".stdout.partial"] = bytearray(b"ok\n")
++            fs.files["/owned/raw/"+ident+".stderr.partial"] = bytearray()
++            with patch.object(native.secrets,"token_hex",return_value=ident), patch.object(native.time,"monotonic",return_value=0), patch.object(native.socket,"socketpair",return_value=(Socket("parent"),Socket("child"))), patch.object(native.os,"pipe2",return_value=(701,702)), patch.object(native.os,"fork",return_value=123), patch.object(native,"proc_birth",return_value=456), patch.object(native.os,"pidfd_open",return_value=703), patch.object(native.os,"waitpid",return_value=(123,0)), patch.object(native,"cancelled",return_value=False), patch.object(native.os,"open",side_effect=fs.open), patch.object(native.os,"fstat",side_effect=fs.fstat), patch.object(native.os,"stat",side_effect=fs.stat), patch.object(native.os,"read",side_effect=fs.read), patch.object(native.os,"write",side_effect=lambda fd,data:len(data) if fd == 702 else fs.write(fd,data)), patch.object(native.os,"close",side_effect=fs.close), patch.object(native.os,"fsync",side_effect=fs.fsync), patch.object(native.os,"link",side_effect=fs.link), patch.object(native.os,"unlink",side_effect=fs.unlink), patch.object(native.os.path,"exists",side_effect=lambda path:str(path) in fs.files):
++                if fault is None:
++                    ticket,result,streams = active.command({"argv":["/fixture"]},10,10)
++                    self.assertIn(ticket,active.tickets); self.assertEqual(active.command_ledger[0]["outcome"],"complete")
++                else:
++                    with self.assertRaises(RuntimeError if primary_failure else native.Refusal) as caught: active.command({"argv":["/fixture"]},10,10)
++                    if primary_failure: self.assertIs(caught.exception,original)
++                    self.assertEqual(active.tickets,{})
++                    entry = active.command_ledger[0]; self.assertEqual(entry["outcome"],"unknown")
++                    failure = native.decode(bytes(fs.files[entry["failure_ref"]["path"]]),8192)
++                    self.assertEqual(failure["primary"]["stage"],"command" if primary_failure else "pidfd-close" if fault == "pidfd" else "channel-close")
++                    if primary_failure: self.assertIn({"stage":"pidfd-close","error":"OSError"},failure["secondary"])
++                    index = native.retain_evidence_index(active)
++                    row = native.decode(bytes(fs.files[index["path"]]),131072)["commands"][0]
++                    self.assertEqual(row[2],entry["failure_ref"]["sha256"]); self.assertEqual(row[3],"settlement.json")
++            receipt_path = "/owned/meta/"+ident+".json"
++            receipt = native.decode(bytes(fs.files[receipt_path]),4096)
++            if fault is None: healthy_receipt = bytes(fs.files[receipt_path])
++            else:
++                self.assertEqual(bytes(fs.files[receipt_path]),healthy_receipt)
++                self.assertEqual(active.command_ledger[0]["terminal_ref"]["sha256"],native.digest(healthy_receipt))
++            self.assertTrue(receipt["capture"]["capture_complete"])
++            self.assertEqual(receipt["streams"]["stdout"]["sha256"],native.digest(b"ok\n"))
++            self.assertEqual(fs.files["/owned/raw/"+ident+".stdout"],b"ok\n")
++            self.assertIn(("channel","parent"),events); self.assertIn(("close",703),events)
++            self.assertIn(("commit","raw"),events); self.assertIn(("release","metadata"),events)
+         # Removing actual-record typing would accept bool/int and float/int
+         # aliases. Exercise the storage reader, never replace its validator.
+         admission = {"monotonic_expires":100,"measured_at_utc":"2026-10-20T12:00:00.000000Z",
+@@ -216,7 +290,7 @@
+             def statting(*args,**kwargs):
+                 if fault == "stat": raise OSError("stat")
+                 raise FileNotFoundError()
+-            with patch.object(native,"retain_record",return_value={"path":"/owned/pending","sha256":"a"*64}), patch.object(native,"execute_bounded",side_effect=RuntimeError("original-execute")), patch.object(native,"partial_streams",side_effect=OSError("partial") if fault == "partial" else lambda *a:{"stdout":None,"stderr":None}), patch.object(native.os,"stat",side_effect=statting):
++            with patch.object(native,"retain_record",side_effect=lambda path,record,*a,**k:saved.append((str(path),record)) or {"path":str(path),"sha256":"a"*64}), patch.object(native,"execute_bounded",side_effect=RuntimeError("original-execute")), patch.object(native,"partial_streams",side_effect=OSError("partial") if fault == "partial" else lambda *a:{"stdout":None,"stderr":None}), patch.object(native.os,"stat",side_effect=statting):
+                 with self.assertRaisesRegex(RuntimeError,"original-execute"): active.command({},10,1)
+             self.assertIn("metadata-commit",events)
+             self.assertTrue(saved); self.assertEqual(saved[-1][1]["primary"]["error"],"RuntimeError")

@@ -1,0 +1,37 @@
+{
+  "stage": "DOC03 D frozen for independent review; CP-DESIGN pending",
+  "report": {
+    "path": "/tmp/qcl-doc03-design.md",
+    "bytes": 50004,
+    "sha256": "a25204b1883c97b5c3be1b2a26fb228e5efe8d4aa89230c938e34b56b903afcd"
+  },
+  "identity": {
+    "path": "/tmp/qcl-doc03-source-identity.json",
+    "bytes": 26642,
+    "sha256": "71900e472eeba5cd819207de6752e08ce2ea87bc3cb8f09c963ec9b09df1fecf"
+  },
+  "static_author_checks": {
+    "utf8": true,
+    "five_negative_cases": true,
+    "distinct_three_origins": true,
+    "ten_fact_classes": true,
+    "exact_selected_root": true,
+    "source_hashes_count": 61,
+    "files_below_128kib": true,
+    "whitespace_stdout_empty": true,
+    "whitespace_stderr_empty": true,
+    "whitespace_exit": 1
+  },
+  "not_run": [
+    "product tests",
+    "target imports",
+    "install",
+    "build",
+    "browser",
+    "network",
+    "server/native",
+    "CI",
+    "solver"
+  ],
+  "scope": "No tracked edits or Git mutations; only /tmp outputs; no children"
+}

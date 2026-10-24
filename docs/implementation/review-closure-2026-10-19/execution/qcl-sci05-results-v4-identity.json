@@ -1,0 +1,27 @@
+{
+  "task": "SCI05-N1-Results-E2-F1-plus-explicit-producer-control-v4",
+  "stage": "frozen_source_pending_independent_review_and_runtime",
+  "worktree": "/tmp/qcl-sci05-results-worktree",
+  "branch": "codex/review-closure-final-audit-reader",
+  "head": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae",
+  "F1_review_sha256": "9ae7330b6a4ba3bdf5f7ffd358a976be48b36037fa37a1319e93efce6335e6b0",
+  "Runner_test_source_read_sha256": "2deeff785cc09ee724dbbaffd0d99693178483c90b7b5685eefe47bbcc773e8b",
+  "producer_env": "QCL_SCI05_RUNNER_FIXTURE_ROOT",
+  "producer_commit_relative_path": "archive/final/commit.json",
+  "producer_fixture": "not_created_or_read_by_this_task",
+  "producer_control_physical_cap_bytes": 4194304,
+  "files": {
+    "src/qcl_negf_results/native.py": {"bytes": 16498, "sha256": "532fbedf8b1b296e0fb5bc026788a522bf92aeee94ae1192ca651e2e34a407e5"},
+    "src/qcl_negf_results/state.py": {"bytes": 29877, "sha256": "4de0129ca7a5d0a85d9e33b06bf9c5e48858c1c1c73c56e2949e1f9376c93823"},
+    "tests/test_final_fixed_point_audit.py": {"bytes": 33332, "sha256": "c94bd68fa6b328c880211d15d61ec1baaeb2da2b3a8e72e429edf8f6b5fccb6f"}
+  },
+  "patch": {"path": "/tmp/qcl-sci05-results-v4-patch.diff", "bytes": 47760, "sha256": "d2fe0d8e4830cfca663e734950294ebf3292c39c0d1061e0790ef4d869706c88"},
+  "v3_preserved": {
+    "report_sha256": "d313606547313efe81e0f92fcbcb98870f5953101f422e00c8056d2a5614e9b8",
+    "identity_sha256": "a8eae785481379d1763439e2ab6c5426970b46e8380e084a2778edd42a6dc1fd",
+    "patch_sha256": "c6b9a9cf45ae0cfbc284de64ddc82cb1eae32567ddec5f30406a3594636a67e3"
+  },
+  "checks": {"git_diff_check": "exit_0", "imports_tests_HDF5_Julia_parser_target_execution": 0, "new_C08_calls": 0, "stage_commit_push": false, "children": 0},
+  "pending": ["independent_source_review", "Runner_owning_test_output_root_whitelist_update", "actual_call7_fixture_and_source_binding", "call8_with_explicit_env_no_skip_as_evidence"],
+  "source_mutation_stopped": true
+}

@@ -1,0 +1,29 @@
+{
+  "task":"SCI08-R1-design-D2",
+  "status":"D2_READY_FOR_FOCUSED_HIGH_REVIEW",
+  "stage":"source_design_correction_only",
+  "primary_D1_sha256":"16b07bbafce8235e0e103205e90c5b6e6b0db6c13c5bd4c883074f32888fe3c7",
+  "primary_D1_identity_sha256":"bba244acc5e66421db0c460f128578ebfd06c120434107fbc8be4790a7141cc1",
+  "primary_D1_readledger_sha256":"f7565807b887c928e3fc63ec11181c3af0700cf152f0218d396ccdd4ba3860e2",
+  "review_path":"/tmp/qcl-sci08-R1-design-review.md",
+  "review_sha256":"a68ecf63af984355148b46d4a943cc5ca35adbe9da80102c512858d2b4847d69",
+  "finding":"R1-P2 exact selection legacy callback default /proc read",
+  "managed_root":"/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "historical_D1_root_head":"469ef4ec36c1dfb967856108e5f9455429559c15",
+  "current_observed_root_head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "current_root_status":"dirty coordinator checkpoint/census/manifest/evidence; untouched",
+  "runner_head":"fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "runner_status_short":"",
+  "source_sha256": {
+    "test/application/execution_resource_contract.jl":"c6eabaad77f868bb3413b54f0f2b8069d315491353195793bc65a6fe72c34760",
+    "src/composition/native_phase_telemetry.jl":"9605f1a4852f5edbe8ca83652500c2e0a2352feec7a04cf9d0e85bd0e712f173",
+    "src/infrastructure/resources/linux_resources.jl":"eed7dc41e655fa94d3b29db514b5e5682e3023b862b91e53f58dbc18f3f363b8"
+  },
+  "composition_authority":"Git gitlinks; historical/current observations are forensic evidence, not another maintained revision lock",
+  "preserved":{"property_groups":31,"selected_file_includes":5,"C08_exhausted":"8/8","standalone_policy":true,"S1_caps_and_model":true,"D1_immutable":true},
+  "engineering_plan":{"D1_single_GREEN":"tentative proposal only","RED_GREEN":"separate finite coordinator plan may be chosen; not selected or approved by D2","new_calls_authorized":0},
+  "current_scope":{"read_bytes":1048576,"wall_seconds":300,"cpus":1,"ram_bytes":1073741824,"output_bytes":65536},
+  "actual_target_calls":{"runtime":0,"parser":0,"imports":0,"tests":0,"native":0,"network":0,"build":0,"solver":0,"scientific_attempts":0,"product_writes":0,"CP_writes":0,"git_mutations":0},
+  "outputs":["/tmp/qcl-sci08-R1-design-v2.md","/tmp/qcl-sci08-R1-design-v2-identity.json","/tmp/qcl-sci08-R1-design-v2-delta-readledger.json"],
+  "residual":["focused high source rereview pending","fixture correction is future I requirement, no product diff written","runtime RED/GREEN not observed or granted","SCI08/S1 remains needs_guard/needs_admission"]
+}

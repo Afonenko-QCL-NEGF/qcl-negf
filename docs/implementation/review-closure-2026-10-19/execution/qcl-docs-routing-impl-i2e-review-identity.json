@@ -1,0 +1,71 @@
+{
+  "stage": "independent-high-CPP-I2E-boundary1-residue-and-boundary2",
+  "verdict": "CHANGES_REQUIRED",
+  "native_ready": false,
+  "review": {
+    "path": "/tmp/qcl-docs-routing-impl-i2e-review.md",
+    "bytes": 25361,
+    "sha256": "c8224246cc32b3327680841a292a9b232fa82b87834ad52067577b1805827e62"
+  },
+  "source": {
+    "worktree": "/tmp/qcl-docs-test-routing-worktree",
+    "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "kind": "uncommitted-four-file-overlay",
+    "files": {
+      "ops/docs_tests_native.py": {"bytes":167994,"sha256":"86d041a368ef6eb1607c2a92dfa58cb9d17e7f605e53d22505e43465a49d3d97"},
+      "ops/docs_tests_cli.ts": {"bytes":24364,"sha256":"70a28e1922352732e1484820df81eb0420021ff7c119aea05e37252c2843d798"},
+      "tests/test_docs_test_native.py": {"bytes":28396,"sha256":"25e6e9dfc6838238c892d65b4a221d2a18cb8a6a2e90fd6d6aa6eb6094667eb4","nominal_methods":8,"observed":null},
+      "tests/docs_test_native_protocol_test.ts": {"bytes":6222,"sha256":"eea4109924d857edeb5a12c4e5751c89759a007070cebc06d7d175e2af097110","nominal_registrations":8,"observed":null}
+    },
+    "modified_tracked":[".github/workflows/ci.yml",".github/workflows/release.yml","deno.json","ops/ci.ts","ops/git.ts"],
+    "untracked":["ops/docs_tests.ts","ops/docs_tests_cli.ts","ops/docs_tests_native.py","tests/docs_test_native_protocol_test.ts","tests/docs_test_routing_test.ts","tests/test_docs_test_native.py"],
+    "gitlinks_uninitialized":true,
+    "gitlinks": {
+      "components/QCLNEGF.jl":"9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "components/QCLNEGFRunner.jl":"fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "components/qcl-negf-aiida":"d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+      "components/qcl-negf-contracts":"f4009c933183d8537e289d2fa5fa898defd2d9b5",
+      "components/qcl-negf-platform":"f729e2681224d6537538179ab760fefefd575003",
+      "components/qcl-negf-portal":"2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "components/qcl-negf-research":"3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731",
+      "components/qcl-negf-results":"de70638a982f91b7e125ab1cfc70a2daef2a656d"
+    }
+  },
+  "input_packet": {
+    "report":{"path":"/tmp/qcl-docs-routing-impl-i2e-report.md","sha256":"7d7fa3bc3a265da8c00dee17b5358996ae1e79f5ae4869dc9d433624a21fa2d4"},
+    "identity":{"path":"/tmp/qcl-docs-routing-impl-i2e-identity.json","sha256":"569fd093509c4d388b51c4be40bd82b502b3e212ee43a63b924892b6232a194a"},
+    "patch":{"path":"/tmp/qcl-docs-routing-impl-i2e-complete.patch","bytes":98658,"sha256":"1ce20122993d7868189332ff3f4dd8252937c1f8f62c5fc860dc7a0a8c46ac4a","kind":"four-file-I2D-to-I2E-delta","applied_by_review":false},
+    "prior_review":{"path":"/tmp/qcl-docs-routing-impl-i2d-review.md","sha256":"8a666cf1d9771aab53ce9fecc156faae2b139ce60cc4a9875ec9056f6f1f1916"}
+  },
+  "authority": {
+    "D4":"24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0",
+    "D5":"6049f427a10c769b69c2beaaa1374e583d217d6eb68926337204e560b824ed48",
+    "D6":"80509e2b9fc8725a6309733c6857a75657a640addcc7047e5199d21002ddbcc6",
+    "previous_R1_R9_preserved":true,
+    "queued_phase_self_ref_counter_fixes_not_reopened":true
+  },
+  "external_dependencies": {
+    "ops/docs_tests.ts":"68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "tests/docs_test_routing_test.ts":"2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "behavior_reaccepted":false,
+    "old_native16_acceptance_inherited":false,
+    "CHECK1":"unsupported-cached-only-failure-preserved-separate-gate",
+    "v7_CLI_preparation_is_native_acceptance":false
+  },
+  "narrow_source_closures":["coercing-string-enums","registration-nested-schema-improvement","ordered-phase-scope-request-guard","actual-retention-predicate-artifact-pairs","legal-preflight-first-finalizer-fixture","owning-no-replace-file-and-directory-publisher","command-raw-publication-after-proof","driver-raw-manifest-and-retention","no-self-SHA-phase-and-setup-publication","first-socket-pipe-fork-failure-guard","driver-exec-FD-census","immutable-positive-phase-on-later-delivery-failure"],
+  "findings": [
+    {"id":"I2E-R1","priority":"P1","owner":"ops/docs_tests_native.py","locators":["854-901","927-929","977-1005","1240-1258","1731-1735","2101-2113"],"ticket":"B2a-total-settlement-and-primary-secondary-failure-retention"},
+    {"id":"I2E-R2","priority":"P1","owner":"ops/docs_tests_native.py","locators":["917-921","1119-1129","1601","2354"],"ticket":"B2b-private-worker-fork-exact-FD-keep-set"},
+    {"id":"I2E-R3","priority":"P1-schema","owner":"ops/docs_tests_native.py","locators":["1171-1181","1289-1294","1796-1800","2205-2208"],"ticket":"B1r-typed-actual-retained-record-readers"},
+    {"id":"I2E-R4","priority":"P1","owner":"ops/docs_tests_native.py","locators":["2129-2155","2173-2180"],"ticket":"B2c-producer-and-participant-actual-stream-manifest-binding"}
+  ],
+  "later_boundaries": {
+    "B3":["exact-ordinal-Git-slots","failed-cost-finally-debits","config-source-identity-race-binding","driver-protocol-path-domain-binding-at-1580-1583","full-physical-domain-and-global-raw-metadata-protocol-fallback-trace","independent-source-measurement-versus-unit-result"],
+    "B4_C8":"manufactured-existing-lease-broker-driver-execute-D6-finalizer-route-and-malformed-failure-matrix",
+    "external_trusted_provider":"actual-runtime-BIND-prerequisite-not-new-repo-trust-architecture"
+  },
+  "execution": {"target_imports":0,"scripts":0,"parser":0,"compiler":0,"lint":0,"tests":0,"Deno":0,"Julia":0,"runtime":0,"native":0,"network":0,"server":0,"CI":0,"science":0,"product_calls":0},
+  "mutations": {"source":0,"fixtures":0,"checkpoint":0,"index":0,"historical_artifacts":0,"created_only":["/tmp/qcl-docs-routing-impl-i2e-review.md","/tmp/qcl-docs-routing-impl-i2e-review-identity.json"]},
+  "budget": {"started_utc":"2026-10-20T08:49:20Z","minutes_cap":12,"CPU_cap":1,"RAM_cap_bytes":1073741824,"read_cap_bytes":5242880,"conservative_read_upper_bytes":3145728,"output_cap_bytes":131072,"artifact_bytes_under_32768":true,"tool_transcript_output_cap_complied":false,"tool_transcript_exact_bytes":null,"deviation":"repeated-source-text-tool-responses-exceeded-output-cap-no-target-execution","CPU_measured":null,"RSS_measured":null,"physical_IO_measured":null},
+  "next_gate":"sole-medium-writer-finite-B1r-B2a-B2b-B2c-correction-then-fresh-exact-manifest-CPP-no-runtime-authorization"
+}

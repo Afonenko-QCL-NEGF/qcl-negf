@@ -1,0 +1,29 @@
+{
+  "CP_CODE": "24fb1c4de5f6d9d880636d1d79bf7f346c150e6a4240b8d04838b2fbe87737d4",
+  "components": {
+    "qcl-negf-results": {
+      "state": "G1_merged",
+      "operation_id": "PUBLISH-SCI03-M1-de70638",
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-results",
+      "base": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+      "base_branch": "codex/review-closure-final-audit-reader-integration",
+      "head": "de70638a982f91b7e125ab1cfc70a2daef2a656d",
+      "branch": "codex/review-closure-current-bound-measurements-integration",
+      "files": {
+        "README.md": "830c67bc0fc0e43c2ae698dbe5c5aa8f518728b6f3f5d760dafb505d3da9e648",
+        "src/qcl_negf_results/equilibrium.py": "bb3d204378fd7d95691cfd9b58360afc6f48ede1b37fe7a0f6d2a6ff06944915",
+        "tests/test_equilibrium_diagnostics.py": "d4bb720fff951df9ed402709a4f11422f07680925e0dddf6e91dcc2dcef87f79"
+      },
+      "source_review": "c529835dfdb9ac374b3933af4403bab26ea2fb0b89494a56918f7960f8be7e8c",
+      "documentation_review": "ab7f64f8caa36c365a30ff7dac7314a4192b7f595744af615b19fce20f8335c6",
+      "pr": 9,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results/pull/9",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "229456972870be53e2c6c9d3d4451bf9c85aba49",
+      "merged_at": "2026-10-19T21:07:27Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

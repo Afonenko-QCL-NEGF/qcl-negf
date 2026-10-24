@@ -1,0 +1,30 @@
+{
+  "format":"qcl-negf.docs-routing-pure-source-identity.v9",
+  "status":"SOURCE_ONLY_STOP_FOR_FRESH_INDEPENDENT_HIGH_REVIEW",
+  "artifacts":{
+    "/tmp/qcl-docs-routing-pure-guard-v9.py":{"sha256":"e02576c6b421b158a00a570ca729b076737d47c1e79111606d15fb60a2cba01e","bytes":68918},
+    "/tmp/qcl-docs-routing-pure-plan-v9.json":{"sha256":"e32f4b534b928cef44cc8e9f35f242e979752b12b70e9eea687c5cca3cc3b2af","bytes":8983},
+    "/tmp/qcl-docs-routing-pure-check-v9.py":{"sha256":"1dd84dcdf977f458b960e6dd78dbb100e4d3c3c83a60e29430d630a455f91f1a","bytes":1369},
+    "/tmp/qcl-docs-routing-pure-report-v9.md":{"sha256":"8a784485090caadb1486ae0b96632c04cf3c2cfc02c0d94dfcbdd1991b72dea7","bytes":8952},
+    "/tmp/qcl-docs-routing-pure-v8-to-v9.diff":{"sha256":"d5365c2e1a1cef4db4b2aa3704a46beb6f3d57009c0db9a6077c44e2652e8c16","bytes":20333}
+  },
+  "owned_bytes_excluding_identity":108555,
+  "purpose":"Discriminating failing-RSS instrumentation only; no root-cause-fix claim, criterion relaxation, new N/A policy or retry-until-pass.",
+  "failed_CHECK3":{"receipt_sha256":"a399281f3159ffd88cc014a5fd8504110fb8c272e21472cab5404e3ff67eb05a","raw_sha256":"04d40e18cad60bff4992e517b0a3b5e8bdab983c1944034cd919f20f827b8f91","raw_bytes":88,"target_calls":1,"exit_code":0,"RSS_valid":32,"RSS_unknown":1,"guard_verdict":"STOP_RECONCILE_NO_RERUN","cause":"UNKNOWN","preserved_without_reclassification":true},
+  "source_append":{"stage":"CHECK4","attempt":"DOCS-ROUTING-SOURCE-CHECK-4","maximum_new_calls":1,"counter":[11,12],"cap":12,"old_source11_exhausted":true,"FORMAT_LINT_RED_new_calls":0},
+  "unit":{"attempt":"DOCS-ROUTING-CORRECTION-E1","same_unique_unused":true,"counter":[90,91],"nominal":232,"observed":null,"ordered_good_source_stages":["FORMAT3(v8)","LINT3(v8)","CHECK4(v9)"]},
+  "aggregate":{"original_calls":4,"original_wall_seconds":480,"original_raw_bytes":8388608,"append_calls":1,"calls_including_unused_unit":5,"wall_seconds":600,"raw_bytes":10485760,"no_reset":true,"sequential":true},
+  "per_call":{"wall_seconds":120,"CPU":1,"sampled_RSS_bytes":1073741824,"sampled_owned_TMP_bytes":16777216,"raw_bytes":2097152},
+  "diagnostics":{"failure_events_maximum":4,"per_event_bytes_limit":16384,"implementation_compact_event_limit":16000,"total_diagnostics_bytes_limit":65536,"receipt_bytes_limit":262144,"status_raw_prefix_bytes":3072,"children_raw_prefix_bytes":1024,"task_census_prefix":128,"error_text_prefix_characters":256,"new_proc_probes":0,"birth_identity":"not_read/explicit_null","loss_policy":"explicit capture_failed/oversize/dropped/truncated status; RSSNone still fails","child_raw_changed":false},
+  "formatted_sources":{"ops/docs_tests.ts":"12fbb1d8c754536135e7b919ca14a465532bd3910bdff7f68ef6fdb129376bab","tests/docs_test_routing_test.ts":"a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164"},
+  "format_and_pure_CPP":{"path":"/tmp/qcl-docs-routing-pure-format3-final-v8-review.md","sha256":"8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3"},
+  "mixed_identity_policy":"Retained exact v8 FMT3/LINT3 H5cec/P813a/wrappersF8785/L1410/receipt/raw/privateenv/sourcebeforeafter/counters validated as own identities; newCHECK4 uses future actual currentv9 H/P/wrapper/env/source/counters11to12. Old H/P never equated to new. FailedK3 only immutable history.",
+  "history":"CONTINUATION pins all v8 H/P/threewrappers/receipts/raw/highreviews plus older history. OriginalGREEN1 actual230/221/9 remains unchanged.",
+  "unchanged_acceptance":"LiveRSSNone immediate/finalFAIL, unknowncount explicit, valid>=1 mandatory; separate prior-proven poll/reapedN/A unchanged. Samplingperiod/caps/R1b/watchdog/collector/helpers/argv/config/env unchanged. Diagnostics never turn loss into pass.",
+  "authority":"Root must record finite one-call120s2MiB extension after high review before execution, fresh meaningful review/CPP/sourceidentity/counters/Gitmetadata/all8gitlinks/helper/exe/budget/admission and actual future CHECK4/source outcome before unit. No READY/CP/manualmarker minted here.",
+  "execution_counts":{"scripts":0,"parser":0,"compiler":0,"guard_import_exec":0,"formatter":0,"linter":0,"tests":0,"Deno":0,"runtime":0,"network":0,"native":0,"science":0,"children":0},
+  "mutations":{"productfiles":0,"nativepaths":0,"config":0,"helpers":0,"Root_control":0,"CP":0,"READY":0,"git_index":0,"old_artifacts":0,"new_source_deliverables":6},
+  "verification":"Narrow source/retained receipt reads, SHA/size, textual diff saved/selected sections inspected; no parser/syntax/runtime execution. Physical preparation CPU/RSS/IO not measured; no truncated tool output.",
+  "preparation_budget":{"wall_seconds":600,"CPU":1,"RAM_bytes":1073741824,"read_ceiling_bytes":2097152,"tool_output_ceiling_bytes":98304},
+  "stop":"STOP for independent high source review. Diagnostic not executed; cause not resolved; no grant/admission created."
+}

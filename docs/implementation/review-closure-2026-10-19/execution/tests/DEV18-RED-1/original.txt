@@ -1,0 +1,837 @@
+┌ Info: DEV18 source-selected fixture
+│   source = "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/src/composition/application_runtime.jl"
+│   sha256 = "ad8b0fe43df8d21765d91dbfcbef7cbbc498453b0d1b41a8193c0db8d2a99efe"
+│   repository_source = "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/src/infrastructure/runtime/filesystem_repository.jl"
+└   repository_sha256 = "cd65f6f5b1e7128e3f5e7be9c6126a7eb5db799e2723431c86a9db36ae07a03f"
+
+C01: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C02: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C03: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C04: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C05: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C06: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C07: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C08: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C09: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C10: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C11: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C12: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C13: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C14: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C15: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C16: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C17: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C18: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C19: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+C20: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#109#110"{Symbol, Int64, String, Bool}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E01: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E02: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E03: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E04: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E05: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E06: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E07: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E08: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+E09: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#115#116"{Int64}}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R06: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+  Expression: result.error isa CheckpointIntegrityError
+   Evaluated: while parsing a flow sequence at line 1, column 8: expected ',' or ']', but got YAML.StreamEndToken at line 1, column 21 isa Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointIntegrityError
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R09: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+  Expression: result.error isa CheckpointIntegrityError
+   Evaluated: nothing isa Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointIntegrityError
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R09: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:325
+  Expression: result.value === nothing
+   Evaluated: Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.LoadedCheckpoint(Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointReference("run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", 2, 1, "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-vVKOS3/root/run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/points/point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/checkpoints/000000000002.payload.yaml", "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-vVKOS3/root/run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/points/point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/checkpoints/000000000003.metadata.yaml", "e4b35af9bfa1ed5cccb92b8675b70a13cbeabaa72945d890b16b41989f752260", "iteration", 1), Dict{Any, Any}("state" => "new"), Dict{String, Any}("payload_bytes" => 11, "payload_file" => "000000000002.payload.yaml", "attempt" => 1, "generation" => 2, "sha256" => "e4b35af9bfa1ed5cccb92b8675b70a13cbeabaa72945d890b16b41989f752260", "metadata" => Dict{String, Any}(), "payload_extension" => "yaml", "point_id" => "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "iteration" => 1, "kind" => "iteration"…)) === nothing
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:325
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R09: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:326
+  Expression: counter[] == 0
+   Evaluated: 1 == 0
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:326
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R14: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+  Expression: result.error isa CheckpointIntegrityError
+   Evaluated: MethodError(Core.kwcall, ((expected_attempt = 1,), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.load_latest_checkpoint, Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository("/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-QNnXLe/root", ReentrantLock(), Dict{String, Int64}()), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CallbackCheckpointCodec("yaml", Main.Suite_RuntimeCheckpointDurability.var"#codec##0#codec##1"(), Main.Suite_RuntimeCheckpointDurability.var"#25#26"{Base.RefValue{Int64}}(Base.RefValue{Int64}(0)), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.var"#5#6"()), "run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"), 0x0000000000009ba5) isa Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointIntegrityError
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R15: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+  Expression: result.error isa CheckpointIntegrityError
+   Evaluated: nothing isa Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointIntegrityError
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R15: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:325
+  Expression: result.value === nothing
+   Evaluated: Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.LoadedCheckpoint(Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointReference("run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", 2, 1, "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-ERTGCj/root/run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/points/point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/checkpoints/000000000002.payload.yaml", "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-ERTGCj/root/run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/points/point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/checkpoints/000000000002.metadata.yaml", "e4b35af9bfa1ed5cccb92b8675b70a13cbeabaa72945d890b16b41989f752260", "iteration", 1), Dict{Any, Any}("state" => "new"), Dict{String, Any}("payload_bytes" => 11, "payload_file" => "000000000002.payload.yaml", "attempt" => 1, "generation" => 2, "sha256" => "e4b35af9bfa1ed5cccb92b8675b70a13cbeabaa72945d890b16b41989f752260", "metadata" => Dict{String, Any}(), "payload_extension" => "yaml", "point_id" => "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "iteration" => 1, "kind" => "iteration"…)) === nothing
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:325
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R15: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:326
+  Expression: counter[] == 0
+   Evaluated: 1 == 0
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:326
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R16: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+  Expression: result.error isa CheckpointIntegrityError
+   Evaluated: nothing isa Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointIntegrityError
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:324
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R16: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:325
+  Expression: result.value === nothing
+   Evaluated: Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.LoadedCheckpoint(Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CheckpointReference("run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", 2, 1, "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-RUn5oc/root/run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/points/point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/checkpoints/000000000002.payload.yaml", "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-RUn5oc/root/run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/points/point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/checkpoints/000000000002.metadata.yaml", "e4b35af9bfa1ed5cccb92b8675b70a13cbeabaa72945d890b16b41989f752260", "iteration", 1), Dict{Any, Any}("state" => "new"), Dict{String, Any}("payload_bytes" => 11, "payload_file" => "000000000002.payload.yaml", "attempt" => 1, "generation" => 2, "sha256" => "e4b35af9bfa1ed5cccb92b8675b70a13cbeabaa72945d890b16b41989f752260", "metadata" => Dict{String, Any}(), "payload_extension" => "yaml", "point_id" => "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "iteration" => 1, "kind" => "iteration"…)) === nothing
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:325
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R16: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:326
+  Expression: counter[] == 0
+   Evaluated: 1 == 0
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:326
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#129#130"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R17: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:337
+  Expression: result.error isa ArgumentError
+   Evaluated: MethodError(Core.kwcall, ((expected_attempt = 0,), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.load_latest_checkpoint, Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository("/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-dXNClX/root", ReentrantLock(), Dict{String, Int64}()), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CallbackCheckpointCodec("yaml", Main.Suite_RuntimeCheckpointDurability.var"#codec##0#codec##1"(), Main.Suite_RuntimeCheckpointDurability.var"#25#26"{Base.RefValue{Int64}}(Base.RefValue{Int64}(0)), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.var"#5#6"()), "run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"), 0x0000000000009ba9) isa ArgumentError
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#135#136"{Int64})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:337
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#135#136"{Int64}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+R18: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:337
+  Expression: result.error isa ArgumentError
+   Evaluated: MethodError(Core.kwcall, ((expected_attempt = true,), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.load_latest_checkpoint, Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository("/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-m2QUrb/root", ReentrantLock(), Dict{String, Int64}()), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CallbackCheckpointCodec("yaml", Main.Suite_RuntimeCheckpointDurability.var"#codec##0#codec##1"(), Main.Suite_RuntimeCheckpointDurability.var"#25#26"{Base.RefValue{Int64}}(Base.RefValue{Int64}(0)), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.var"#5#6"()), "run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"), 0x0000000000009ba9) isa ArgumentError
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#135#136"{Bool})(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:337
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#135#136"{Bool}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H01: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#139#140"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H02: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#141#142"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H03: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#145#146"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H04: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:379
+  Expression: matching.error === nothing
+   Evaluated: MethodError(Core.kwcall, ((expected_attempt = 1,), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.load_latest_checkpoint, Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository("/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-qgoAaA/root", ReentrantLock(), Dict{String, Int64}()), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CallbackCheckpointCodec("yaml", Main.Suite_RuntimeCheckpointDurability.var"#codec##0#codec##1"(), Main.Suite_RuntimeCheckpointDurability.var"#25#26"{Base.RefValue{Int64}}(Base.RefValue{Int64}(1)), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.var"#5#6"()), "run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"), 0x0000000000009bb7) === nothing
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#147#148")(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:379
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#147#148", name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H04: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:381
+  Expression: counter[] == 2
+   Evaluated: 1 == 2
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#147#148")(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:381
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#147#148", name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H04: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:385
+  Expression: absent.error === nothing
+   Evaluated: MethodError(Core.kwcall, ((expected_attempt = 2,), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.load_latest_checkpoint, Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository("/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-qgoAaA/root", ReentrantLock(), Dict{String, Int64}()), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.CallbackCheckpointCodec("yaml", Main.Suite_RuntimeCheckpointDurability.var"#codec##0#codec##1"(), Main.Suite_RuntimeCheckpointDurability.var"#25#26"{Base.RefValue{Int64}}(Base.RefValue{Int64}(1)), Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.var"#5#6"()), "run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "point-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"), 0x0000000000009bb7) === nothing
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#147#148")(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:385
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#147#148", name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H04: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:387
+  Expression: counter[] == 2
+   Evaluated: 1 == 2
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.Suite_RuntimeCheckpointDurability.var"#147#148")(r::Main.Suite_RuntimeCheckpointDurability.QCLApplicationRuntime.FilesystemRunRepository, tree::String)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:387
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#147#148", name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+H05: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#153#154"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+L01: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#157#158"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+L02: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#179#180"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+
+L03: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109
+  Expression: HAVE_SEAM
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] #19
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:109 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:96 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] cell(f::Main.Suite_RuntimeCheckpointDurability.var"#19#20"{Main.Suite_RuntimeCheckpointDurability.var"#185#186"}, name::String; old::Bool, nested::Bool)
+     @ Main.Suite_RuntimeCheckpointDurability ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:95
+┌ Info: DEV18 retained raw fixture trees
+│   trees =
+│    55-element Vector{String}:
+│     "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-vqYvZL"
+│     "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-s0xLkf"
+│     ⋮
+│     "/tmp/qcl-DEV18-RED-1/tmp/qcl-dev18-ToXUYD"
+│   cells =
+│    55-element Vector{String}:
+│     "C01"
+│     "C02"
+│     ⋮
+└     "L03"
+Test Summary:                         | Pass  Fail  Total   Time
+Runtime checkpoint publication faults |  233    53    286  10.1s
+  C01                                 |          1      1   1.6s
+  C02                                 |          1      1   0.0s
+  C03                                 |          1      1   0.0s
+  C04                                 |          1      1   0.0s
+  C05                                 |          1      1   0.0s
+  C06                                 |          1      1   0.0s
+  C07                                 |          1      1   0.0s
+  C08                                 |          1      1   0.0s
+  C09                                 |          1      1   0.0s
+  C10                                 |          1      1   0.0s
+  C11                                 |    4     1      5   0.0s
+  C12                                 |    4     1      5   0.0s
+  C13                                 |    4     1      5   0.0s
+  C14                                 |    4     1      5   0.0s
+  C15                                 |    4     1      5   0.0s
+  C16                                 |    4     1      5   0.0s
+  C17                                 |    4     1      5   0.0s
+  C18                                 |    4     1      5   0.0s
+  C19                                 |    4     1      5   0.0s
+  C20                                 |    4     1      5   0.0s
+  E01                                 |    4     1      5   0.0s
+  E02                                 |    4     1      5   0.0s
+  E03                                 |    4     1      5   0.0s
+  E04                                 |    4     1      5   0.0s
+  E05                                 |    4     1      5   0.0s
+  E06                                 |    4     1      5   0.0s
+  E07                                 |    4     1      5   0.0s
+  E08                                 |    4     1      5   0.0s
+  E09                                 |    4     1      5   0.0s
+  R01                                 |    8            8   3.0s
+  R02                                 |    8            8   0.0s
+  R03                                 |    8            8   0.0s
+  R04                                 |    8            8   0.0s
+  R05                                 |    8            8   0.0s
+  R06                                 |    7     1      8   0.5s
+  R07                                 |    8            8   0.0s
+  R08                                 |    8            8   0.0s
+  R09                                 |    5     3      8   0.2s
+  R10                                 |    8            8   0.0s
+  R11                                 |    8            8   0.0s
+  R12                                 |    8            8   0.0s
+  R13                                 |    8            8   0.0s
+  R14                                 |    7     1      8   0.2s
+  R15                                 |    6     3      9   0.0s
+  R16                                 |    6     3      9   0.0s
+  R17                                 |    6     1      7   0.0s
+  R18                                 |    6     1      7   0.1s
+  H01                                 |          1      1   0.0s
+  H02                                 |          1      1   0.0s
+  H03                                 |          1      1   0.0s
+  H04                                 |   12     4     16   0.0s
+  H05                                 |    4     1      5   0.0s
+  L01                                 |          1      1   0.0s
+  L02                                 |    4     1      5   0.0s
+  L03                                 |    4     1      5   0.0s
+RNG of the outermost testset: Random.Xoshiro(0xb6defad7891fef5a, 0x52d213889c215ba2, 0xc7cb86c668214b77, 0x66d38fef34bd0b27, 0x6617c6dbd755c9a4)
+ERROR: LoadError: Some tests did not pass: 233 passed, 53 failed, 0 errored, 0 broken.
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/test/infrastructure/runtime_checkpoint_durability_faults.jl:1

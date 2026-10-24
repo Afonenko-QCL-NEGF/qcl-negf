@@ -1,0 +1,743 @@
+{
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head": "c43935567df010d43cab9bcd8d851a9ed976a8d7",
+  "root_status_before": "m components/QCLNEGF.jl\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
+  "recursive_before": "f5b73369a96d1225bd96fb34f5262c8dcf965f86 components/QCLNEGF.jl (v0.2.0-8-gf5b7336)\n 2d0190d5573f74d847d92a0dac8dd6ec524d494c components/QCLNEGFRunner.jl (v0.2.0-24-g2d0190d)\n 312ed8a6363103d05a971d14ac9cbcca1c782358 components/qcl-negf-aiida (v0.2.0-16-g312ed8a)\n 26cacbe1688fee0af300d0949fc6b94e55a29f4a components/qcl-negf-contracts (v0.2.0-12-g26cacbe)\n 6a5d8048cd17e46d0149f529d03bef666276d5ce components/qcl-negf-platform (v0.2.0-89-g6a5d804)\n ff1e25f22eed2cb6f48ba11c1ba0a52495e7f363 components/qcl-negf-portal (v0.2.0-15-gff1e25f)\n 8325d228f5219bd1c219a1f9972a76db3c7a8c29 components/qcl-negf-research (v0.2.0-7-g8325d22)\n 17574ca4c5495f74d86ed9bef51c60dea8265062 components/qcl-negf-results (v0.2.0-18-g17574ca)",
+  "branch": "codex/review-closure-contribution-routing",
+  "components": {
+    "QCLNEGF.jl": {
+      "selected_gitlink": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "source_head_before": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "source_status_before": "M docs/src/development/review_oracle_contracts.md\n?? test/numerics/final_state_alignment_oracle.jl",
+      "source_diff_sha256_before": "645905bfe92a0304ec6a25e9a486d89c5c1ea0a8c0e4de5ca5031bab618fa258",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGF.jl",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGF.jl",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/QCLNEGF.jl",
+      "patch": "/tmp/qcl-si03-implementation-patches/QCLNEGF.jl.patch",
+      "patch_sha256": "8caed3f5cc20ee7ed3617118fd486310a060d04ac9a408bd40172e730e752fc7",
+      "file_sha256": "25c92d052efca42a28455990ff1e70d0e1a341ee3604c35118d1bade9a4b6fd9",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "f5b73369a96d1225bd96fb34f5262c8dcf965f86",
+      "source_status_after": "M docs/src/development/review_oracle_contracts.md\n?? test/numerics/final_state_alignment_oracle.jl"
+    },
+    "QCLNEGFRunner.jl": {
+      "selected_gitlink": "2d0190d5573f74d847d92a0dac8dd6ec524d494c",
+      "source_head_before": "2d0190d5573f74d847d92a0dac8dd6ec524d494c",
+      "source_status_before": "",
+      "source_diff_sha256_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGFRunner.jl",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/QCLNEGFRunner.jl",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/QCLNEGFRunner.jl",
+      "patch": "/tmp/qcl-si03-implementation-patches/QCLNEGFRunner.jl.patch",
+      "patch_sha256": "379630cdabbe36a0d8f0bf3f02490a25d077e665e5ffd312f6af233abda64bf9",
+      "file_sha256": "2e59d623c611e0ebfe9380590802bd79af61590ac3f3a65f5af92937de01efc0",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "2d0190d5573f74d847d92a0dac8dd6ec524d494c",
+      "source_status_after": ""
+    },
+    "qcl-negf-aiida": {
+      "selected_gitlink": "312ed8a6363103d05a971d14ac9cbcca1c782358",
+      "source_head_before": "312ed8a6363103d05a971d14ac9cbcca1c782358",
+      "source_status_before": "",
+      "source_diff_sha256_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-aiida",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-aiida",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/qcl-negf-aiida",
+      "patch": "/tmp/qcl-si03-implementation-patches/qcl-negf-aiida.patch",
+      "patch_sha256": "d48bea753badf76e2c3a6aeec6fb45d33a633f8fd5cedb44361b1ec897d72e20",
+      "file_sha256": "90dab32996d6952e40f74a1f26491f3ef43124f01f8a8a56eb60288a404876ca",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "312ed8a6363103d05a971d14ac9cbcca1c782358",
+      "source_status_after": ""
+    },
+    "qcl-negf-contracts": {
+      "selected_gitlink": "26cacbe1688fee0af300d0949fc6b94e55a29f4a",
+      "source_head_before": "26cacbe1688fee0af300d0949fc6b94e55a29f4a",
+      "source_status_before": "",
+      "source_diff_sha256_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-contracts",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-contracts",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/qcl-negf-contracts",
+      "patch": "/tmp/qcl-si03-implementation-patches/qcl-negf-contracts.patch",
+      "patch_sha256": "90df7364761a92885a066f241e702cc7c8d1c0de247d919670107db80eb4f1e8",
+      "file_sha256": "029859ad06814ad33740497d494227193b23593861c67423846176f8d3ce65bb",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "26cacbe1688fee0af300d0949fc6b94e55a29f4a",
+      "source_status_after": ""
+    },
+    "qcl-negf-platform": {
+      "selected_gitlink": "6a5d8048cd17e46d0149f529d03bef666276d5ce",
+      "source_head_before": "6a5d8048cd17e46d0149f529d03bef666276d5ce",
+      "source_status_before": "",
+      "source_diff_sha256_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-platform",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-platform",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/qcl-negf-platform",
+      "patch": "/tmp/qcl-si03-implementation-patches/qcl-negf-platform.patch",
+      "patch_sha256": "d9a9fd17720d9404e23adb15254df6b1ad724144965160c1dadfa39314086783",
+      "file_sha256": "1e957beb71b3c4d1ad632453f3aefdb7cfe97ecc02fbce038020480af1182f39",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "6a5d8048cd17e46d0149f529d03bef666276d5ce",
+      "source_status_after": ""
+    },
+    "qcl-negf-portal": {
+      "selected_gitlink": "ff1e25f22eed2cb6f48ba11c1ba0a52495e7f363",
+      "source_head_before": "ff1e25f22eed2cb6f48ba11c1ba0a52495e7f363",
+      "source_status_before": "",
+      "source_diff_sha256_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-portal",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-portal",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/qcl-negf-portal",
+      "patch": "/tmp/qcl-si03-implementation-patches/qcl-negf-portal.patch",
+      "patch_sha256": "d1f7a334f76e36f0a6342e1e0576f844438555713aa13413ed3ada24078a4ab2",
+      "file_sha256": "b0994d41b7e460e28e28710d6949258c6ccb084706ef6e07bb65f64e0a24ed10",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "ff1e25f22eed2cb6f48ba11c1ba0a52495e7f363",
+      "source_status_after": ""
+    },
+    "qcl-negf-research": {
+      "selected_gitlink": "8325d228f5219bd1c219a1f9972a76db3c7a8c29",
+      "source_head_before": "8325d228f5219bd1c219a1f9972a76db3c7a8c29",
+      "source_status_before": "",
+      "source_diff_sha256_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-research",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-research",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/qcl-negf-research",
+      "patch": "/tmp/qcl-si03-implementation-patches/qcl-negf-research.patch",
+      "patch_sha256": "8d7ae50b57f8051d6e49f1f2c2245ee85df765a70b1c76130c6fcc3eadb16639",
+      "file_sha256": "52e86709eb4013e08df130768e110908863ca103ab6468d6122bf030432f25fe",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "8325d228f5219bd1c219a1f9972a76db3c7a8c29",
+      "source_status_after": ""
+    },
+    "qcl-negf-results": {
+      "selected_gitlink": "17574ca4c5495f74d86ed9bef51c60dea8265062",
+      "source_head_before": "17574ca4c5495f74d86ed9bef51c60dea8265062",
+      "source_status_before": "",
+      "source_diff_sha256_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_git_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-results",
+      "source_git_common_dir": "/home/tolya/Загрузки/qcl-negf/.git/worktrees/qcl-negf19/modules/qcl-negf-results",
+      "superproject": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "worktree": "/tmp/qcl-si03-worktrees/qcl-negf-results",
+      "patch": "/tmp/qcl-si03-implementation-patches/qcl-negf-results.patch",
+      "patch_sha256": "dd1555b08daa405b97d931732e92557c8b65d85f6c92ed79f230c43278999cd7",
+      "file_sha256": "c228613ad22198b125128437aac6047de3c3e22885c5f5bb3ec3c71bb62be48c",
+      "worktree_status": "M CONTRIBUTING.md",
+      "source_head_after": "17574ca4c5495f74d86ed9bef51c60dea8265062",
+      "source_status_after": ""
+    }
+  },
+  "inputs": {
+    "AGENTS.md": {
+      "baseline_sha256": "b795916b286983cc4c71ed3614bc0fb431acfc1d29974594565e71a30e66b648",
+      "candidate_sha256": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330"
+    },
+    "components/QCLNEGF.jl/CONTRIBUTING.md": {
+      "baseline_sha256": "da2eb6272ebe7248a0b247d56a8ee1547b6b7128d93fffe38f072f7a9b5f73d1",
+      "candidate_sha256": "25c92d052efca42a28455990ff1e70d0e1a341ee3604c35118d1bade9a4b6fd9"
+    },
+    "components/QCLNEGFRunner.jl/CONTRIBUTING.md": {
+      "baseline_sha256": "33baab1a45e5d8d5486893b084ec677abf560a386514ec0dac00e0426bd9cc5a",
+      "candidate_sha256": "2e59d623c611e0ebfe9380590802bd79af61590ac3f3a65f5af92937de01efc0"
+    },
+    "components/qcl-negf-aiida/CONTRIBUTING.md": {
+      "baseline_sha256": "ca7013e5d39a76fae4178627afb0139039d51c545a402588e1affe5f9e7a3606",
+      "candidate_sha256": "90dab32996d6952e40f74a1f26491f3ef43124f01f8a8a56eb60288a404876ca"
+    },
+    "components/qcl-negf-contracts/CONTRIBUTING.md": {
+      "baseline_sha256": "8de856612b93ef9ce08b94da8b238658933ed094c25c031dcc9a9bb7cc35549d",
+      "candidate_sha256": "029859ad06814ad33740497d494227193b23593861c67423846176f8d3ce65bb"
+    },
+    "components/qcl-negf-platform/CONTRIBUTING.md": {
+      "baseline_sha256": "f3f5d3b006053947a0334ea9bc30a78a7a4bfc1bc844afe488496f51a9d7a61e",
+      "candidate_sha256": "1e957beb71b3c4d1ad632453f3aefdb7cfe97ecc02fbce038020480af1182f39"
+    },
+    "components/qcl-negf-portal/CONTRIBUTING.md": {
+      "baseline_sha256": "c873a46ae4fe62d145862568c6722eca3136c4413a02d886702fd1070bc5ed3f",
+      "candidate_sha256": "b0994d41b7e460e28e28710d6949258c6ccb084706ef6e07bb65f64e0a24ed10"
+    },
+    "components/qcl-negf-research/CONTRIBUTING.md": {
+      "baseline_sha256": "5ec397b20520ab511a34e847477ff32be19ca238ae16b62d1ad7145027f1ddf2",
+      "candidate_sha256": "52e86709eb4013e08df130768e110908863ca103ab6468d6122bf030432f25fe"
+    },
+    "components/qcl-negf-results/CONTRIBUTING.md": {
+      "baseline_sha256": "8de856612b93ef9ce08b94da8b238658933ed094c25c031dcc9a9bb7cc35549d",
+      "candidate_sha256": "c228613ad22198b125128437aac6047de3c3e22885c5f5bb3ec3c71bb62be48c"
+    }
+  },
+  "stage": "frozen_for_independent_CP_CODE",
+  "root_patch": {
+    "path": "/tmp/qcl-si03-implementation-patches/root.patch",
+    "sha256": "d411b33b5c8d715ec2666bcf963d08242f231739d43ce8fa6664b40b231cef3a"
+  },
+  "root_status_after": "M AGENTS.md\n m components/QCLNEGF.jl\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
+  "recursive_after": "f5b73369a96d1225bd96fb34f5262c8dcf965f86 components/QCLNEGF.jl (v0.2.0-8-gf5b7336)\n 2d0190d5573f74d847d92a0dac8dd6ec524d494c components/QCLNEGFRunner.jl (v0.2.0-24-g2d0190d)\n 312ed8a6363103d05a971d14ac9cbcca1c782358 components/qcl-negf-aiida (v0.2.0-16-g312ed8a)\n 26cacbe1688fee0af300d0949fc6b94e55a29f4a components/qcl-negf-contracts (v0.2.0-12-g26cacbe)\n 6a5d8048cd17e46d0149f529d03bef666276d5ce components/qcl-negf-platform (v0.2.0-89-g6a5d804)\n ff1e25f22eed2cb6f48ba11c1ba0a52495e7f363 components/qcl-negf-portal (v0.2.0-15-gff1e25f)\n 8325d228f5219bd1c219a1f9972a76db3c7a8c29 components/qcl-negf-research (v0.2.0-7-g8325d22)\n 17574ca4c5495f74d86ed9bef51c60dea8265062 components/qcl-negf-results (v0.2.0-18-g17574ca)",
+  "checks": [
+    {
+      "check": "root HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl isolated branch",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl candidate exact",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGF.jl diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl isolated branch",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl candidate exact",
+      "pass": true
+    },
+    {
+      "check": "QCLNEGFRunner.jl diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida isolated branch",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida candidate exact",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-aiida diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts isolated branch",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts candidate exact",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-contracts diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform isolated branch",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform candidate exact",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-platform diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal isolated branch",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal candidate exact",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-portal diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research isolated branch",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research candidate exact",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-research diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results source HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results source status unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results source diff unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results source CONTRIBUTING unchanged",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results isolated HEAD selected",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results isolated branch",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results only permitted changed path",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results candidate exact",
+      "pass": true
+    },
+    {
+      "check": "qcl-negf-results diff whitespace",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md fences",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link docs/architecture.md",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link docs/system/implementation-entrypoint.md",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link docs/system/release-roadmap.md#политика-ролей-и-координации",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md anchor docs/system/release-roadmap.md#политика-ролей-и-координации",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link .agents/skills/qcl-research-framing/SKILL.md",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link .agents/skills/qcl-physics-audit/SKILL.md",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link .agents/skills/qcl-results-analysis/SKILL.md",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link .agents/skills/qcl-performance-audit/SKILL.md",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link docs/system/agent-review-workflow.md#разбиение-до-ready",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md anchor docs/system/agent-review-workflow.md#разбиение-до-ready",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link docs/system/agent-review-workflow.md#полномочия-стоимость-и-маршрутизация",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md anchor docs/system/agent-review-workflow.md#полномочия-стоимость-и-маршрутизация",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link docs/single-server-deployment.md",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md link docs/research-workflow.md",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGF.jl/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/QCLNEGFRunner.jl/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-aiida/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-aiida/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-aiida/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-contracts/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-contracts/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-contracts/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-platform/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-platform/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-platform/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-platform/CONTRIBUTING.md link docs/infrastructure.md",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-portal/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-portal/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-portal/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-portal/CONTRIBUTING.md link AGENTS.md",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-research/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-research/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-research/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-research/CONTRIBUTING.md link README.md#validate-inputs",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-research/CONTRIBUTING.md anchor README.md#validate-inputs",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-results/CONTRIBUTING.md bytes exact",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-results/CONTRIBUTING.md final newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": "components/qcl-negf-results/CONTRIBUTING.md fences",
+      "pass": true
+    },
+    {
+      "check": "entire original root instructions preserved",
+      "pass": true
+    },
+    {
+      "check": "root whitespace",
+      "pass": true
+    },
+    {
+      "check": "root recursive component heads unchanged",
+      "pass": true
+    }
+  ],
+  "local_links": [
+    {
+      "source": "AGENTS.md",
+      "target": "docs/architecture.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/architecture.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": "docs/system/implementation-entrypoint.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/system/implementation-entrypoint.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": "docs/system/release-roadmap.md#политика-ролей-и-координации",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/system/release-roadmap.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": ".agents/skills/qcl-research-framing/SKILL.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-research-framing/SKILL.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": ".agents/skills/qcl-physics-audit/SKILL.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-physics-audit/SKILL.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": ".agents/skills/qcl-results-analysis/SKILL.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-results-analysis/SKILL.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": ".agents/skills/qcl-performance-audit/SKILL.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-performance-audit/SKILL.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": "docs/system/agent-review-workflow.md#разбиение-до-ready",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/system/agent-review-workflow.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": "docs/system/agent-review-workflow.md#полномочия-стоимость-и-маршрутизация",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/system/agent-review-workflow.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": "docs/single-server-deployment.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/single-server-deployment.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": "docs/research-workflow.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/research-workflow.md"
+    },
+    {
+      "source": "components/qcl-negf-platform/CONTRIBUTING.md",
+      "target": "docs/infrastructure.md",
+      "resolved": "/tmp/qcl-si03-worktrees/qcl-negf-platform/docs/infrastructure.md"
+    },
+    {
+      "source": "components/qcl-negf-portal/CONTRIBUTING.md",
+      "target": "AGENTS.md",
+      "resolved": "/tmp/qcl-si03-worktrees/qcl-negf-portal/AGENTS.md"
+    },
+    {
+      "source": "components/qcl-negf-research/CONTRIBUTING.md",
+      "target": "README.md#validate-inputs",
+      "resolved": "/tmp/qcl-si03-worktrees/qcl-negf-research/README.md"
+    }
+  ],
+  "runtime_checks": "not_run",
+  "commits_push_PR": "not_performed",
+  "invariant_evidence": "Exact frozen candidate match for 9 files and whole original root instructions preserved; component semantic invariants reviewed via approved CP-DESIGN and exact unchanged candidate."
+}

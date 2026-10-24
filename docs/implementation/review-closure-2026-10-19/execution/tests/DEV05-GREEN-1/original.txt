@@ -1,0 +1,36 @@
+
+Final state U G alignment: Error During Test at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_state_alignment_oracle.jl:649
+  Got exception outside of a @test
+  AssertionError: problem.grids.wˣ == [1.0, 1.0, 1.0]
+  Stacktrace:
+    [1] (::Main.FinalStateAlignmentOracle.var"#100#101")()
+      @ Main.FinalStateAlignmentOracle ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_state_alignment_oracle.jl:662
+    [2] setprecision(f::Main.FinalStateAlignmentOracle.var"#100#101", ::Type{BigFloat}, prec::Int64; base::Int64)
+      @ Base.MPFR ./mpfr.jl:1214
+    [3] setprecision(f::Function, ::Type{BigFloat}, prec::Int64)
+      @ Base.MPFR ./mpfr.jl:1213
+    [4] top-level scope
+      @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_state_alignment_oracle.jl:652
+    [5] macro expansion
+      @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+    [6] macro expansion
+      @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_state_alignment_oracle.jl:657 [inlined]
+    [7] include(mapexpr::Function, mod::Module, _path::String)
+      @ Base ./Base.jl:310
+    [8] IncludeInto
+      @ ./Base.jl:311 [inlined]
+    [9] foreach(f::Base.IncludeInto, itr::Vector{String})
+      @ Base ./abstractarray.jl:3212
+   [10] top-level scope
+      @ none:1
+   [11] eval(m::Module, e::Any)
+      @ Core ./boot.jl:489
+   [12] exec_options(opts::Base.JLOptions)
+      @ Base ./client.jl:310
+   [13] _start()
+      @ Base ./client.jl:577
+Test Summary:             | Pass  Error  Total   Time
+Final state U G alignment |   46      1     47  36.3s
+RNG of the outermost testset: Random.Xoshiro(0x6b80cc06d9df9080, 0x181f22795f4edad7, 0x8f7ea94f47d61ec2, 0x9962ca894b2051af, 0xb30b0bc06cdcf698)
+ERROR: LoadError: Some tests did not pass: 46 passed, 0 failed, 1 errored, 0 broken.
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_state_alignment_oracle.jl:1
