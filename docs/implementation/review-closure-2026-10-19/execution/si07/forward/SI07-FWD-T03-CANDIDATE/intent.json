@@ -1,0 +1,13 @@
+{
+  "intent_id": "SI07-FWD-T03-CANDIDATE",
+  "case": "T03",
+  "variant": "candidate",
+  "intent_at": "2026-10-19T17:20:18.213984+00:00",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "fork_turns": "none",
+  "state": "completed",
+  "agent_id": "/root/si07_forward_fresh/si07_t03_candidate",
+  "dispatched_at": "2026-10-19T17:21:06.199149+00:00",
+  "completed_at": "2026-10-19T17:23:08.120351+00:00"
+}

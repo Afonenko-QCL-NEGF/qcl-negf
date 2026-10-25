@@ -1,0 +1,37 @@
+{
+  "kind": "ops04-platform-compat-source-delta",
+  "status": "awaiting_independent_high_cp_code",
+  "runtime_status": "not_measured_after_correction",
+  "head_base": "b067723c82382689bff5cc366981c56e99b926f8",
+  "worktree": "/tmp/qcl-ops04-platform-worktree",
+  "changed_method": "EnrollmentTests.test_source_trust_substitution_does_not_change_late_transport_snapshot",
+  "patch": {
+    "path": "/tmp/qcl-ops04-platform-compat-patch.diff",
+    "bytes": 8688,
+    "sha256": "63e9dd9abee0943bf7f75b0a951fc795f587602e85fc266e8927ad5d6fa0a033",
+    "applies_over": "frozen_v2_tests_or_equivalent_main_test_commit"
+  },
+  "test_node_enrollment_before_sha256": "27b733487737501880023dc55607b21c357654821da5a65f53940873c0f0cfe5",
+  "test_node_enrollment_after_sha256": "d99c003fccc308c9cffed172f38ec69eeaa744f2753c7a95c28794d07aca305d",
+  "unchanged_application_test_sha256": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6",
+  "unchanged_production_sha256": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0",
+  "original_failed_artifacts": {
+    "receipt": "/tmp/qcl-OPS04-PLATFORM-FIRST-1/receipt.json",
+    "receipt_sha256": "a9d239bab5f5cb564b450d7168d3ba0262893c952e33bb7f579519efa73727db",
+    "log": "/tmp/qcl-OPS04-PLATFORM-FIRST-1/original.log",
+    "log_sha256": "898b0da0c1d550e96b6d719f4e21ce32e0cd4c231937429e45511e3f8aabd1e5",
+    "log_bytes": 5742
+  },
+  "reused_test_helpers": ["NativeUpdateModel", "control_response", "Commands", "clear_aiida", "controller_stop_state", "install_controller_config_io"],
+  "verification": {
+    "git_diff_check": "pass",
+    "new_target_imports_parsers_python_tests": 0,
+    "new_build_native_network_server_science_full_ci": 0,
+    "children_git_mutations": 0,
+    "platform_calls_used": 1,
+    "platform_calls_total": 2,
+    "shared_synthetic_commands_changed": false,
+    "production_changed": false,
+    "main_changed": false
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "qcl-doc04-operator-author-freeze-v1",
+  "recorded_local_date": "2026-10-20",
+  "stage": "docs-only-awaiting-independent-high-review",
+  "writer": "/root/doc03_design",
+  "worktree": "/tmp/qcl-doc04-operator-worktree",
+  "base_head": "d4113f43cddf02d46025434eb3a9dd8e110e90d6",
+  "branch": "codex/review-closure-docs-operator-reader",
+  "isolation": {
+    "kind": "explicitly-authorized-local-clone",
+    "no_hardlinks": true,
+    "network": false,
+    "submodules_initialized": false,
+    "initial_worktree_clean": true
+  },
+  "allowed_product_paths": ["docs/public/operator-recovery.md"],
+  "changed_product_paths": ["docs/public/operator-recovery.md"],
+  "chapter": {
+    "path": "docs/public/operator-recovery.md",
+    "sha256": "8f05ff4cced8579b09cccd4b4315101e861e1896b87321b42e597374da79de49",
+    "bytes": 10216,
+    "maximum_bytes": 24576,
+    "primary_url": "operator/recovery.html#operator-recovery",
+    "explicit_anchors": [
+      "operator-recovery",
+      "recovery-prerequisites",
+      "staging-prerequisites",
+      "recovery-selection",
+      "recovery-handoff",
+      "recovery-owning-references"
+    ],
+    "local_targets": [
+      "../runner/user/results.html#operator-recovery-route",
+      "../core/theory/12_validation.html#researcher-final-route"
+    ],
+    "cli_examples": 1,
+    "cli_example_fence": "text",
+    "scientific_formulas_or_thresholds_added": false,
+    "native_scientific_acceptance_claim": false
+  },
+  "source_inputs": {
+    "accepted_design_sha256": "77ee8593655f98b2e66d762620279ba6ac7ec7da126c62a2ccbd56a0262bf12b",
+    "accepted_review_sha256": "6caa4f15035e6a9f564d1ec86f14ecd64bbd31d73457556327e090e9d6628164",
+    "pilot_plan_sha256": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50",
+    "approved_doc03_candidate_sha256": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+    "approved_doc03_candidate_is_commit": false,
+    "approved_doc03_review_sha256": "f62bbe6998b178ea746a3a28ae73e4e910c751742e0e7887ac4d77b63786b231",
+    "runbook_sha256": "8f659f7ee6dc3a5ff89acba052b1eadbcbeb2436fa6429d47d8dd400948da242",
+    "runner_commit": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+    "runner_results_doc_sha256": "39e1178fc88a940b69ad61298d54538f44d1e39df6b9d9c2dd8e5264f395f561",
+    "runner_cli_sha256": "aa5e129312707a7927e1bc97caf4c830c7cf9ed29cf12c648f8afbd7fbcf2cd0",
+    "runner_point_artifacts_sha256": "9e8c1d8f624bb828134129c10226211968360950cbac9ffd82e247a8ec294cd4",
+    "core_commit": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+    "core_validation_doc_sha256": "be55b03e7a228aebad88b24410d2633cd575ae63211a01ff4187f2c1bb95755b",
+    "research_commit": "3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731",
+    "contracts_commit": "12fc26462bbab3df76904c6deb01f8c6596de7be"
+  },
+  "static_checks": {
+    "new_untracked_file_diff_check_exit_code": 0,
+    "primary_anchor_matches_pilot_plan": true,
+    "local_target_source_ids_verified": true,
+    "external_immutable_commit_paths_present": true,
+    "public_authored_content_review": true,
+    "private_inventory_host_credentials_payload_in_chapter": false,
+    "network_render_browser_tests": "not_run"
+  },
+  "artifacts": {
+    "report_path": "/tmp/qcl-doc04-operator-report.md",
+    "report_sha256": "db1deafd66705aeec7b8b9bceaefddca71f0ff645839c638bd7b84f22dcbc355",
+    "patch_path": "/tmp/qcl-doc04-operator-patch.diff",
+    "patch_sha256": "443e476860c493eb5337c2a375c464b1194d0af24c7667a5dd8317a0d3b315eb"
+  },
+  "prohibited_actions_performed": {
+    "target_execution_import_parser_test_render_build": 0,
+    "network_server": 0,
+    "children": 0,
+    "stage_commit_push": 0,
+    "main_root_checkpoint_modifications": 0
+  },
+  "next_gate": "independent high review before Root copy and publication",
+  "stop": true
+}

@@ -1,0 +1,28 @@
+{
+  "task": "DOC04 RED v2 narrow independent corrective test-source review",
+  "verdict": "PASS_SOURCE_F1_F4",
+  "report": "/tmp/qcl-doc04-root-red-v2-review.md",
+  "report_sha256": "f6d437e7f6e875643baaf374c96e6d04ab2b1c718892e40741a9bcf06700c79b",
+  "root_head": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "test_sources": {
+    "tests/test_docs_assembly.py": "ecacc18239241c45ac1ed9c4e7c4935cfd20919cc88ac236a69ffa435bdf038e",
+    "tests/docs_math_test.mjs": "7ae60b15740e7e9790318f8724d364f2a9ce567b2a0480cf13c988172966aef3"
+  },
+  "candidate_artifacts": {
+    "patch": "cd53b2d774fcae5845f8ec97436f177e3fecd61eee1c2eac3a977e999fa17a29",
+    "identity": "79f142661285e198e97bdd75a412e33cd78ef9853f8012d2892926673c09bb7b",
+    "author_report": "ec991a9557813386547bc743614a14f77c141f1f54b5465c7f0b3324f555dd63"
+  },
+  "closed_findings": ["F1", "F2", "F3", "F4"],
+  "new_findings": [],
+  "original_artifacts_hashes_unchanged": true,
+  "math_source_byte_unchanged": true,
+  "runtime_calls": 0,
+  "target_executions": 0,
+  "imports_or_parsers_executed": false,
+  "git_mutations": false,
+  "children": 0,
+  "product_or_test_source_writes": false,
+  "public_license_or_build_acceptance": false,
+  "state": "STOP"
+}

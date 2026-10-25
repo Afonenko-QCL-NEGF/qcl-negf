@@ -1,0 +1,43 @@
+{
+  "artifact": "SCI08-R2 I1 independent high CPP",
+  "date": "2026-10-20",
+  "verdict": "PASS_SOURCE_PARTIAL_refusal_only_no_writer_readiness",
+  "workspace": "/tmp/qcl-sci08-r2-runner-worktree",
+  "head": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+  "branch": "codex/review-closure-sci08-r2-resident-lifecycle",
+  "root_context": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "inputs_sha256": {
+    "complete.patch": "296de59f4bfbd30543c540f9710892e7f7c9f947b24646dc43ca45660f6aebbc",
+    "identity.json": "362de806b022e94185fc56d6ac63b867fb3021775fe3fb8d6b0a87b3d637bf65",
+    "report.md": "b4446bd5cfeeb30720e6a33db9e22a13900e07fc7d9c010b1023916f57f705f6",
+    "call-cleanup-table.md": "c8234c36dccf9045e0e1da52868774eb810cac06511dd1013ce60fe7cad11739",
+    "D1": "69313bd117c140cf28b68d62ebb85b09bbc078a0ad305b3199c65ee55636e08c",
+    "D2": "664fce6abccd4517a2bb8e2bd87caefff77cfbc5ee6d5991afed66d731fceeae",
+    "high_D2": "bc5f2544d193cc1c13815acc29c15928bca1a64e98bbc4c8541d4ec65c58742f"
+  },
+  "actual_source_sha256": {
+    "src/QCLNEGFRunner.jl": "338fae8ddc4449b2884f8c93ec08a723ae1d9ce086aee029c30475621982e2e8",
+    "src/composition/scientific_execution.jl": "d37f34670c2217fef95ba3acfb0bdd169ba10207d9874853e5cccc2341a2a7a9",
+    "src/composition/scientific_workflow.jl": "01dac114d72d099aab13f0e0e6e9972a558164e8927183682c2c53ff70adcfb7",
+    "src/composition/scratch_execution.jl": "944fd9370a1f251cdd4f555cb010752df93858bd4eb39480aa312ead49803824",
+    "src/infrastructure/persistence/atomic_files.jl": "da5ac0aac139bce7b7bedc824574a9fa8abb63b24956ce447e98f98ca11af810",
+    "src/infrastructure/persistence/point_artifacts.jl": "b0c3d112044c5877fa3e3dcd62c163ab1a389f715116e07308b3dae537c27242",
+    "src/infrastructure/persistence/production_state.jl": "3bb6dd53c28445cc1acb6285fbbbf4886f53c51b73236be767aff982f4867bb2",
+    "src/infrastructure/persistence/scientific_history.jl": "7812f59bd8e22d74baf502c8c7b38b8fc01070f5bb97709780bbcde3359e9273",
+    "src/infrastructure/telemetry/progress.jl": "ced57523d4076f544db7cb1034d62605038cc38cf77b2d5e0f74452938222d32",
+    "src/infrastructure/resources/resident_storage.jl": "10b3a78d9bdc516f4cba3167fa3a924e45f7ee6a71082275444d1211fef8fded",
+    "test/contracts/resident_refusal_contract.jl": "83a2c84d7c8ac53f9b72bff58b09116ccac29aefebd5ac23a477f046ea990c2f",
+    "docs/resident-storage-refusal.md": "48fde657319dab0c0f84048cf8ff19c01642b4b71b7c4fd689db84d3714d4cf5",
+    "src/composition/native_phase_telemetry.jl": "aba27f8c873b28f4b3f99d7736c9bedf40368ca4154e7c0af0ab592fc7ece216"
+  },
+  "read_scope": "complete patch in byte chunks; author report/identity/table; selected module/include/preflight/history/scientific/atomic source; additional call searches; earlier D1+D2/high D2 review context reused",
+  "locators": ["resident_storage.jl:17-26,34-56", "scratch_execution.jl:139,143,161-163", "native_phase_telemetry.jl:237-247", "scientific_execution.jl:388-392,449-462,1069-1075,1094,1097,1269,1272,1491", "scientific_history.jl:44-60,119-122", "progress.jl:597-620", "atomic_files.jl:8-11", "production_state.jl:3-6"],
+  "limitations": ["no complete transitive callgraph", "no runtime/compiler/dispatch proof", "fixtures unexecuted and not wired", "partial output truncations/per-chunk cap breaches disclosed; key patch/table subsequently read", "aggregate CPU/RSS/read/output not independently measured"],
+  "git_status": "nine expected modified tracked files, three expected untracked files; HEAD unchanged; recursive submodule status empty",
+  "checks": {"git_diff_check": "exit0_no_diagnostics", "source_after_hashes": "all12_match_author_identity"},
+  "executed": {"Julia": 0, "compiler": 0, "imports": 0, "parsers": 0, "project_scripts": 0, "tests": 0, "native": 0, "network": 0, "solver": 0, "CI": 0, "children": 0},
+  "reviewer_mutations": {"worktree_source": 0, "index": 0, "CP": 0, "READY": 0, "tmp_review_outputs": 2},
+  "C08": "8/8 EXHAUSTED; no new execution grant",
+  "full_R2": "still finite I-ready under D1+D2; lifecycle/proofobjects/settlement/cleanup/native authority absent; strict refusal must remain",
+  "stop": "review only"
+}

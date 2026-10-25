@@ -1,0 +1,13 @@
+{
+  "intent_id": "SI07-FWD-T03-CONTROL",
+  "case": "T03",
+  "variant": "control",
+  "intent_at": "2026-10-19T17:20:18.214190+00:00",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "fork_turns": "none",
+  "state": "completed",
+  "agent_id": "/root/si07_forward_fresh/si07_t03_control",
+  "dispatched_at": "2026-10-19T17:21:06.199262+00:00",
+  "completed_at": "2026-10-19T17:23:08.120673+00:00"
+}

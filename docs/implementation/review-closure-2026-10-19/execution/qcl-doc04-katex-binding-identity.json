@@ -1,0 +1,1148 @@
+{
+ "stage": "DOC04 KaTeX source/API binding D addendum frozen; independent review pending",
+ "source_root_contract": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+ "observed_root": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+ "observed_status": " M components/QCLNEGF.jl\n M components/QCLNEGFRunner.jl\n M components/qcl-negf-results\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev07-absolute-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev07-absolute-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev07-absolute-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev07-local-harness-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-v3-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-v4-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-v4-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-v5-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-results-v5-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-runner-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-runner-v2-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-runner-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-dev07-absolute-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc04-source-discovery.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-ops04-source-discovery.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-v3-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-v4-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-results-v5-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-runner-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV07-ABSOLUTE-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-RESULTS-8/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-RUNNER-7/\n",
+ "recursive_status": "+e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee components/QCLNEGF.jl (v0.2.0-15-ge431609)\n+1acc165650fd4f4c2d49605cc679f90e3f6fcdae components/QCLNEGFRunner.jl (v0.2.0-27-g1acc165)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n 12fc26462bbab3df76904c6deb01f8c6596de7be components/qcl-negf-contracts (v0.2.0-14-g12fc264)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n+33b1a39eab62b0c00532c4d6b30fa3279c06a5d3 components/qcl-negf-results (v0.2.0-20-g33b1a39)\n",
+ "immutable_parent_inputs": [
+  {
+   "path": "/tmp/qcl-doc04-design.md",
+   "bytes": 43290,
+   "sha256": "77ee8593655f98b2e66d762620279ba6ac7ec7da126c62a2ccbd56a0262bf12b"
+  },
+  {
+   "path": "/tmp/qcl-doc04-identity.json",
+   "bytes": 21499,
+   "sha256": "924fed8c97da7fa25ad0fe579789d4d8a44b46e5d5bb575bdbf6158bf7a82356"
+  },
+  {
+   "path": "/tmp/qcl-doc04-design-review.md",
+   "bytes": 17697,
+   "sha256": "6caa4f15035e6a9f564d1ec86f14ecd64bbd31d73457556327e090e9d6628164"
+  }
+ ],
+ "delivery_receipt": {
+  "path": "/tmp/qcl-doc04-katex-0.16.8/receipt.json",
+  "bytes": 36159,
+  "sha256": "4493f9d81a9b9ab0c09d5cd82e4849748f673d1af620d7389e2328ea7e36baa4",
+  "upstream_integrity": true,
+  "limit": "Root delivery receipt verified; no network or tarball integrity re-execution by addendum author"
+ },
+ "source_distribution": {
+  "path": "/tmp/qcl-doc04-katex-0.16.8/source/package",
+  "version": "0.16.8",
+  "upstream_tarball_url": "https://registry.npmjs.org/katex/-/katex-0.16.8.tgz",
+  "upstream_tarball_sha256": "7547e6a4088c2bbf0edb82510aa88822396fb39bf14b4e35ed491182b0e89c73",
+  "unpacked_bytes_from_delivery": 3967283,
+  "source_mutated": false
+ },
+ "report": {
+  "path": "/tmp/qcl-doc04-katex-binding-design.md",
+  "bytes": 20847,
+  "sha256": "c65c38f74b5fd8168c9ed5ee2fc79649e2d7bafa5655a9248aee4aa81dca25a2"
+ },
+ "primary_sources": [
+  {
+   "path": "package.json",
+   "bytes": 6019,
+   "sha256": "df6fe85c3ecfe46ea791087f689f1206fcfb5e3db265f4a0a9ef20f79cfd19d2",
+   "role": "source witness"
+  },
+  {
+   "path": "LICENSE",
+   "bytes": 1107,
+   "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
+   "role": "source witness"
+  },
+  {
+   "path": "dist/katex.mjs",
+   "bytes": 604462,
+   "sha256": "cd4b290a4ecf5068161d6a87745655aa74eb18a6e939fa2872d26520ce261b88",
+   "role": "build-only ESM"
+  },
+  {
+   "path": "src/Settings.js",
+   "bytes": 12789,
+   "sha256": "2d574dc1e5f245d114871e788b8843d7527a5cc84c2529bbdf3385afe00f781c",
+   "role": "source witness"
+  },
+  {
+   "path": "src/buildTree.js",
+   "bytes": 2095,
+   "sha256": "301974504f52b553c4b4915f3cd58e3656cf269aebbab4eb09d97abbbfe0cc90",
+   "role": "source witness"
+  },
+  {
+   "path": "src/Parser.js",
+   "bytes": 37561,
+   "sha256": "dc8d3424e9b3c8551743b7e02d7587dd36f9ae7013ed8793df9d0a92a04d66da",
+   "role": "source witness"
+  },
+  {
+   "path": "src/parseTree.js",
+   "bytes": 1556,
+   "sha256": "ee03077e2f4e92543ad3e2fa11242b610770f24d517ca19c5ca2a2b1eb31640f",
+   "role": "source witness"
+  },
+  {
+   "path": "src/MacroExpander.js",
+   "bytes": 16056,
+   "sha256": "30c7d746671cfca7804eab261898162d23713618e025f2b7b26e48486ffeb0d8",
+   "role": "source witness"
+  },
+  {
+   "path": "src/Namespace.js",
+   "bytes": 4553,
+   "sha256": "8e32edf234920c0a84e6fe816e849768b106d469b18d7594a97d7d9da18f15f7",
+   "role": "source witness"
+  },
+  {
+   "path": "src/functions/def.js",
+   "bytes": 6945,
+   "sha256": "9a3dd1e3804b462d9442d8031d934ec5794dcec4653ff41be93dd046d3266266",
+   "role": "source witness"
+  },
+  {
+   "path": "src/functions/html.js",
+   "bytes": 3271,
+   "sha256": "22b8872b146170301cd5fdf4cfc65f6706e6b4d71e936d42d81636d4f2a75971",
+   "role": "source witness"
+  },
+  {
+   "path": "src/functions/href.js",
+   "bytes": 2418,
+   "sha256": "43056167a26ea3283c2951e3b4f8c4ad302fc1ac476b7d00629172d40c05089d",
+   "role": "source witness"
+  },
+  {
+   "path": "src/functions/includegraphics.js",
+   "bytes": 5035,
+   "sha256": "75299140e7c347c81620856e7ac7faae709796ea0d4f55a1db0995dd0b16980e",
+   "role": "source witness"
+  },
+  {
+   "path": "src/macros.js",
+   "bytes": 40888,
+   "sha256": "d6962dd4edadfd62b5b24d802d91f0e4e635fd3e710c735c726e67c40844ae6b",
+   "role": "source witness"
+  },
+  {
+   "path": "src/domTree.js",
+   "bytes": 16609,
+   "sha256": "410c0995526398b1c6484ef08d57211505a5c6354f025479abbfa3f3a19c6594",
+   "role": "source witness"
+  },
+  {
+   "path": "src/mathMLTree.js",
+   "bytes": 7544,
+   "sha256": "83ed6846e3ca894e021d5374aa2f01f6a261924cf3a9ef12e7d093ccdd53c879",
+   "role": "source witness"
+  },
+  {
+   "path": "src/fonts/Makefile",
+   "bytes": 4177,
+   "sha256": "493804c19071e9424b297c9951e5738af5dde798c967cc0304517c3c7c6457ee",
+   "role": "source witness"
+  }
+ ],
+ "api_binding": {
+  "exports_import": "./dist/katex.mjs",
+  "public_export": "default",
+  "method": "default.renderToString",
+  "static_has_no_top_level_import_edges": true,
+  "runtime_imported": false
+ },
+ "public_asset_candidate_inventory": [
+  {
+   "source_path": "dist/katex.min.css",
+   "destination": "assets/vendor/katex/0.16.8/katex.min.css",
+   "bytes": 23112,
+   "sha256": "df9ef84e97d38557de02183e238f8ddfd10988b37741492e12c3157bc856011e",
+   "media_type": "text/css",
+   "license": "MIT"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_AMS-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_AMS-Regular.ttf",
+   "bytes": 63632,
+   "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_AMS-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_AMS-Regular.woff",
+   "bytes": 33516,
+   "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_AMS-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_AMS-Regular.woff2",
+   "bytes": 28076,
+   "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Caligraphic-Bold.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Bold.ttf",
+   "bytes": 12368,
+   "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Caligraphic-Bold.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Bold.woff",
+   "bytes": 7716,
+   "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Caligraphic-Bold.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Bold.woff2",
+   "bytes": 6912,
+   "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Caligraphic-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Regular.ttf",
+   "bytes": 12344,
+   "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Caligraphic-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Regular.woff",
+   "bytes": 7656,
+   "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Caligraphic-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Caligraphic-Regular.woff2",
+   "bytes": 6908,
+   "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Fraktur-Bold.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Bold.ttf",
+   "bytes": 19584,
+   "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Fraktur-Bold.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Bold.woff",
+   "bytes": 13296,
+   "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Fraktur-Bold.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Bold.woff2",
+   "bytes": 11348,
+   "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Fraktur-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Regular.ttf",
+   "bytes": 19572,
+   "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Fraktur-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Regular.woff",
+   "bytes": 13208,
+   "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Fraktur-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Fraktur-Regular.woff2",
+   "bytes": 11316,
+   "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Bold.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Bold.ttf",
+   "bytes": 51336,
+   "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Bold.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Bold.woff",
+   "bytes": 29912,
+   "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Bold.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Bold.woff2",
+   "bytes": 25324,
+   "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-BoldItalic.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-BoldItalic.ttf",
+   "bytes": 32968,
+   "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-BoldItalic.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-BoldItalic.woff",
+   "bytes": 19412,
+   "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-BoldItalic.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-BoldItalic.woff2",
+   "bytes": 16780,
+   "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Italic.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Italic.ttf",
+   "bytes": 33580,
+   "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Italic.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Italic.woff",
+   "bytes": 19676,
+   "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Italic.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Italic.woff2",
+   "bytes": 16988,
+   "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Regular.ttf",
+   "bytes": 53580,
+   "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Regular.woff",
+   "bytes": 30772,
+   "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Main-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Main-Regular.woff2",
+   "bytes": 26272,
+   "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Math-BoldItalic.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-BoldItalic.ttf",
+   "bytes": 31196,
+   "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Math-BoldItalic.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-BoldItalic.woff",
+   "bytes": 18668,
+   "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Math-BoldItalic.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-BoldItalic.woff2",
+   "bytes": 16400,
+   "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Math-Italic.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-Italic.ttf",
+   "bytes": 31308,
+   "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Math-Italic.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-Italic.woff",
+   "bytes": 18748,
+   "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Math-Italic.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Math-Italic.woff2",
+   "bytes": 16440,
+   "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Bold.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Bold.ttf",
+   "bytes": 24504,
+   "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Bold.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Bold.woff",
+   "bytes": 14408,
+   "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Bold.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Bold.woff2",
+   "bytes": 12216,
+   "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Italic.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Italic.ttf",
+   "bytes": 22364,
+   "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Italic.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Italic.woff",
+   "bytes": 14112,
+   "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Italic.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Italic.woff2",
+   "bytes": 12028,
+   "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Regular.ttf",
+   "bytes": 19436,
+   "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Regular.woff",
+   "bytes": 12316,
+   "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_SansSerif-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_SansSerif-Regular.woff2",
+   "bytes": 10344,
+   "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Script-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Script-Regular.ttf",
+   "bytes": 16648,
+   "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Script-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Script-Regular.woff",
+   "bytes": 10588,
+   "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Script-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Script-Regular.woff2",
+   "bytes": 9644,
+   "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size1-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size1-Regular.ttf",
+   "bytes": 12228,
+   "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size1-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size1-Regular.woff",
+   "bytes": 6496,
+   "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size1-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size1-Regular.woff2",
+   "bytes": 5468,
+   "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size2-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size2-Regular.ttf",
+   "bytes": 11508,
+   "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size2-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size2-Regular.woff",
+   "bytes": 6188,
+   "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size2-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size2-Regular.woff2",
+   "bytes": 5208,
+   "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size3-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size3-Regular.ttf",
+   "bytes": 7588,
+   "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size3-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size3-Regular.woff",
+   "bytes": 4420,
+   "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size3-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size3-Regular.woff2",
+   "bytes": 3624,
+   "sha256": "73d591271b1604960cb10bb90fee021670af7297017e0e98480b332d11f51995",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size4-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size4-Regular.ttf",
+   "bytes": 10364,
+   "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size4-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size4-Regular.woff",
+   "bytes": 5980,
+   "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Size4-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Size4-Regular.woff2",
+   "bytes": 4928,
+   "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Typewriter-Regular.ttf",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Typewriter-Regular.ttf",
+   "bytes": 27556,
+   "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa",
+   "media_type": "font/ttf",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Typewriter-Regular.woff",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Typewriter-Regular.woff",
+   "bytes": 16028,
+   "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7",
+   "media_type": "font/woff",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "dist/fonts/KaTeX_Typewriter-Regular.woff2",
+   "destination": "assets/vendor/katex/0.16.8/fonts/KaTeX_Typewriter-Regular.woff2",
+   "bytes": 13568,
+   "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b",
+   "media_type": "font/woff2",
+   "license": "OFL-1.1 font notice closure pending"
+  },
+  {
+   "source_path": "LICENSE",
+   "destination": "assets/licenses/katex-0.16.8-MIT.txt",
+   "bytes": 1107,
+   "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
+   "media_type": "text/plain",
+   "license": "MIT"
+  }
+ ],
+ "css_reference_edges": [
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_AMS-Regular.ttf",
+   "to": "dist/fonts/KaTeX_AMS-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_AMS-Regular.woff",
+   "to": "dist/fonts/KaTeX_AMS-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_AMS-Regular.woff2",
+   "to": "dist/fonts/KaTeX_AMS-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Caligraphic-Bold.ttf",
+   "to": "dist/fonts/KaTeX_Caligraphic-Bold.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Caligraphic-Bold.woff",
+   "to": "dist/fonts/KaTeX_Caligraphic-Bold.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Caligraphic-Bold.woff2",
+   "to": "dist/fonts/KaTeX_Caligraphic-Bold.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Caligraphic-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Caligraphic-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Caligraphic-Regular.woff",
+   "to": "dist/fonts/KaTeX_Caligraphic-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Caligraphic-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Caligraphic-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Fraktur-Bold.ttf",
+   "to": "dist/fonts/KaTeX_Fraktur-Bold.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Fraktur-Bold.woff",
+   "to": "dist/fonts/KaTeX_Fraktur-Bold.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Fraktur-Bold.woff2",
+   "to": "dist/fonts/KaTeX_Fraktur-Bold.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Fraktur-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Fraktur-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Fraktur-Regular.woff",
+   "to": "dist/fonts/KaTeX_Fraktur-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Fraktur-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Fraktur-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Bold.ttf",
+   "to": "dist/fonts/KaTeX_Main-Bold.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Bold.woff",
+   "to": "dist/fonts/KaTeX_Main-Bold.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Bold.woff2",
+   "to": "dist/fonts/KaTeX_Main-Bold.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-BoldItalic.ttf",
+   "to": "dist/fonts/KaTeX_Main-BoldItalic.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-BoldItalic.woff",
+   "to": "dist/fonts/KaTeX_Main-BoldItalic.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-BoldItalic.woff2",
+   "to": "dist/fonts/KaTeX_Main-BoldItalic.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Italic.ttf",
+   "to": "dist/fonts/KaTeX_Main-Italic.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Italic.woff",
+   "to": "dist/fonts/KaTeX_Main-Italic.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Italic.woff2",
+   "to": "dist/fonts/KaTeX_Main-Italic.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Main-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Regular.woff",
+   "to": "dist/fonts/KaTeX_Main-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Main-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Main-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Math-BoldItalic.ttf",
+   "to": "dist/fonts/KaTeX_Math-BoldItalic.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Math-BoldItalic.woff",
+   "to": "dist/fonts/KaTeX_Math-BoldItalic.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Math-BoldItalic.woff2",
+   "to": "dist/fonts/KaTeX_Math-BoldItalic.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Math-Italic.ttf",
+   "to": "dist/fonts/KaTeX_Math-Italic.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Math-Italic.woff",
+   "to": "dist/fonts/KaTeX_Math-Italic.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Math-Italic.woff2",
+   "to": "dist/fonts/KaTeX_Math-Italic.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Bold.ttf",
+   "to": "dist/fonts/KaTeX_SansSerif-Bold.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Bold.woff",
+   "to": "dist/fonts/KaTeX_SansSerif-Bold.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Bold.woff2",
+   "to": "dist/fonts/KaTeX_SansSerif-Bold.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Italic.ttf",
+   "to": "dist/fonts/KaTeX_SansSerif-Italic.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Italic.woff",
+   "to": "dist/fonts/KaTeX_SansSerif-Italic.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Italic.woff2",
+   "to": "dist/fonts/KaTeX_SansSerif-Italic.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Regular.ttf",
+   "to": "dist/fonts/KaTeX_SansSerif-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Regular.woff",
+   "to": "dist/fonts/KaTeX_SansSerif-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_SansSerif-Regular.woff2",
+   "to": "dist/fonts/KaTeX_SansSerif-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Script-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Script-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Script-Regular.woff",
+   "to": "dist/fonts/KaTeX_Script-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Script-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Script-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size1-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Size1-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size1-Regular.woff",
+   "to": "dist/fonts/KaTeX_Size1-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size1-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Size1-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size2-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Size2-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size2-Regular.woff",
+   "to": "dist/fonts/KaTeX_Size2-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size2-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Size2-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size3-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Size3-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size3-Regular.woff",
+   "to": "dist/fonts/KaTeX_Size3-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size3-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Size3-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size4-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Size4-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size4-Regular.woff",
+   "to": "dist/fonts/KaTeX_Size4-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Size4-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Size4-Regular.woff2"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Typewriter-Regular.ttf",
+   "to": "dist/fonts/KaTeX_Typewriter-Regular.ttf"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Typewriter-Regular.woff",
+   "to": "dist/fonts/KaTeX_Typewriter-Regular.woff"
+  },
+  {
+   "from": "dist/katex.min.css",
+   "uri": "fonts/KaTeX_Typewriter-Regular.woff2",
+   "to": "dist/fonts/KaTeX_Typewriter-Regular.woff2"
+  }
+ ],
+ "font_notice_observations": [
+  {
+   "path": "dist/fonts/KaTeX_AMS-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Caligraphic-Bold.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Caligraphic-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Fraktur-Bold.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Fraktur-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Main-Bold.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Main-BoldItalic.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Main-Italic.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Main-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Math-BoldItalic.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Math-Italic.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_SansSerif-Bold.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_SansSerif-Italic.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_SansSerif-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Script-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Size1-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Size2-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Size3-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Size4-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  },
+  {
+   "path": "dist/fonts/KaTeX_Typewriter-Regular.ttf",
+   "embedded_OFL11": true,
+   "embedded_Design_Science": true,
+   "embedded_Khan_Academy": true,
+   "method": "raw UTF-16BE literal byte search only; no font parser"
+  }
+ ],
+ "missing_license_input": {
+  "destination": "assets/licenses/katex-fonts-OFL-1.1.txt",
+  "status": "missing complete license text",
+  "sha256": null,
+  "admitted_asset_lock": false,
+  "reason": "Package LICENSE is MIT, font binaries carry OFL1.1; do not label fonts MIT or invent full license hash"
+ },
+ "source_checks": {
+  "all_read_files_in_delivery_receipt_match_when_present": true,
+  "parent_artifacts_unchanged": true,
+  "css_local_reference_count": 60,
+  "css_reference_files_exist_and_hashed": true,
+  "css_has_no_imports": true,
+  "static_public_binding_verified": true,
+  "font_bytes": 1076572,
+  "TTF_OFL_markers": 20,
+  "whitespace_diagnostics_empty": true
+ },
+ "whitespace_receipt": {
+  "command": "git diff --no-index --check /dev/null /tmp/qcl-doc04-katex-binding-design.md",
+  "exit": 1,
+  "stdout": "",
+  "stderr": ""
+ },
+ "freshly_hashed_source_bytes": 1872769,
+ "remaining_gates": [
+  "full OFL1.1 notice/public font license closure",
+  "other RD vendor inputs/hashes/licenses",
+  "complete installed Documenter tree",
+  "native binaries/import audit/fresh admission",
+  "bridge/source mapping/CSS rewrite implementation checks",
+  "actual render/browser/CSP/light/offline/layout acceptance"
+ ],
+ "not_run": [
+  "Node/module import",
+  "target parser or font parser",
+  "tests/render/build/Julia",
+  "download/network/server",
+  "Git mutations",
+  "solver",
+  "children"
+ ],
+ "limits": {
+  "wall_minutes": 25,
+  "cpu": 1,
+  "ram_gib": 2,
+  "read_mib": 6,
+  "output_kib": 64
+ },
+ "scope": "Only /tmp/qcl-doc04-katex-binding-design.md and identity written; raw distribution and parent design/reviews preserved",
+ "receipt_format_note": "Initial pretty-printed identity exceeded the 64 KiB combined output cap by 552 bytes; indentation reduced without changing evidence fields. No target execution or source mutation."
+}

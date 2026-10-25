@@ -1,0 +1,104 @@
+{
+  "format": "qcl-negf.doc06-symlink-preparation-design-review-identity.v1",
+  "recorded_utc": "2026-10-20T05:15:28.855521+00:00",
+  "verdict": "PASS_SOURCE_DESIGN",
+  "blocking_findings": [],
+  "reviewer_role": "independent high source-only",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "observed_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+  "source_binding": "selected overlay exact hashes, not clean HEAD claim",
+  "report": {
+    "path": "/tmp/qcl-doc06-symlink-preparation-design-review.md",
+    "bytes": 14463,
+    "sha256": "cae997412488ef7e1508a0c8920120d167f7c59b48047f387e354802506f065d"
+  },
+  "inputs": [
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design.md",
+      "bytes": 19886,
+      "sha256": "f21dcb464b17c8511eaed0bd60ff6b10722f9416e9005ae3849631f14924dcba"
+    },
+    {
+      "path": "/tmp/qcl-doc06-symlink-preparation-design-identity.json",
+      "bytes": 4069,
+      "sha256": "149ce91707343463aac8a12155c24d53a38909dafa6c95d12231f3372e62b276"
+    },
+    {
+      "path": "/tmp/qcl-doc06-local-unit-run-v1.py",
+      "bytes": 9515,
+      "sha256": "9bf3e58d14ee135ff047f045f12beac67310567febffd18d2a5005ce5c0ba32e"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts",
+      "bytes": 30378,
+      "sha256": "382a881675093137e5b42563d17851114e4ffbe8217ba3ead4636999e39cc8c4"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts",
+      "bytes": 43061,
+      "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b"
+    },
+    {
+      "path": "/tmp/qcl-owned-temp-sampler-v2.py",
+      "bytes": 1567,
+      "sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/original.log",
+      "bytes": 5423,
+      "sha256": "3cae707b9a921a38e820cbb83ca0c7a73437048ed7b86fce27ae803b7d854b54"
+    },
+    {
+      "path": "/tmp/qcl-DOC06-GREEN-1/receipt.json",
+      "bytes": 2463,
+      "sha256": "2b058e3083a35824321936074e58db5f2f328dee0954bbbc97428c3a164c4fa1"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design.md",
+      "bytes": 17703,
+      "sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v2.md",
+      "bytes": 17745,
+      "sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70"
+    }
+  ],
+  "cpp_required": [
+    "child metadata reads stay within canonical TMP; outside ancestors launcher-only",
+    "exact no-follow seed inventory and special-file refusal before content reads",
+    "actual alias/backing/all9 source read/hash/length witnesses before adapter",
+    "prelaunch and terminal sample/deadline values enforce guards, not receipt-only",
+    "final reviewed test/harness hashes and byte-exact unchanged adapter; other54 cases unchanged"
+  ],
+  "stage_limits": {
+    "wall_seconds": 900,
+    "cpu": 1,
+    "ram_bytes": 1073741824,
+    "source_read_bytes": 2097152,
+    "report_bytes": 98304
+  },
+  "conservative_source_read_upper_bound_bytes": 1048576,
+  "resource_caveat": "read ledger conservatively charged; CPU/RSS/physical I/O not measured as hard caps",
+  "actions": {
+    "target_execution": false,
+    "target_import_or_parser": false,
+    "typecheck_tests_build": false,
+    "network": false,
+    "server": false,
+    "scientific_runs": 0,
+    "ci_dispatches": 0,
+    "target_source_edits": false,
+    "checkpoint_edits": false,
+    "delegation": false,
+    "git_mutation_requested": false
+  },
+  "git_read_caveat": "initial read-only git status command did not explicitly set GIT_OPTIONAL_LOCKS=0; optional index refresh not forensically excluded",
+  "attempt_policy": {
+    "original_DOC06": "2/2 exhausted; failed GREEN retained",
+    "E1_executed": false,
+    "E1_approved_by_this_review": false,
+    "required_before_E1": "separate applicable grant/binding plus reviewed final source/harness CPP"
+  },
+  "stop": "report+identity returned to coordinator; no checkpoint mutation"
+}

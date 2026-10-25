@@ -1,0 +1,14 @@
+[0m[1mTS2307 [0m[ERROR]: Cannot find module 'file:///tmp/qcl-docs-test-routing-worktree/ops/docs_tests.ts'.
+    at [0m[36mfile:///tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts[0m:[0m[33m13[0m:[0m[33m8[0m
+
+[0m[1mTS7006 [0m[ERROR]: Parameter 'step' implicitly has an 'any' type.
+  equal(result.steps.slice(1).map((step) => {
+[0m[31m                                   ~~~~[0m
+    at [0m[36mfile:///tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts[0m:[0m[33m311[0m:[0m[33m36[0m
+
+Found 2 errors.
+
+[0m[1m[31merror[0m: Type checking failed.
+
+  [33minfo:[39m The program failed type-checking, but it still might work correctly.
+  [36mhint:[39m Re-run with [4m--no-check[24m to skip type-checking.

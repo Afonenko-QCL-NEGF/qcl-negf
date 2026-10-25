@@ -1,0 +1,39 @@
+{
+  "scope": "OPS04.S independent source-only CLI seam addendum review",
+  "date": "2026-10-19",
+  "verdict": "APPROVE source design; not CP-CODE or runtime/native acceptance",
+  "reviewer_task": "/root/ops04_cli_seam_review",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "root_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "source_authority": "root Git tree, not this identity receipt",
+  "git_status_short_before_and_after": " M tests/application_cd_test.ts\n M tests/solver_test.ts\n",
+  "submodules": "eight selected root gitlinks, uninitialized; no update performed",
+  "inputs_sha256": {
+    "/tmp/qcl-ops04-cli-seam-design.md": "93ffbbcdd50770295f2f21e1a9befc47acc63231279b1ff79aebf48e7cc69a7f",
+    "/tmp/qcl-ops04-cli-seam-design-identity.json": "1979f183b9035f891c2296687aba2944b8628a084c1c73b6c0b8c7e7e5d4949f",
+    "/tmp/qcl-ops04-source-design-v2.md": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+    "/tmp/qcl-ops04-source-design-v2-review.md": "12e811ec56093734fdeb7fd6aac370f312ef880c2b7a64edd9689c8bca26ec42",
+    "ops/solver.ts": "bc513f610cce976d108e17902ebd423c434992ba0edb91e2bdc3da2e5f3c247f",
+    "ops/application_cd.ts": "91989d0171e011f4518e178e247d4f7a466d08bd02b7931308a202c4354ee9ce",
+    "nix/solver.nix": "16c99da166ee2d9afc7d238fa317e43f0bcc71e2eccb8de3ff11e97b70aa858f",
+    "tests/solver_test.ts": "7cd0aa5695564c4dd177e910b16051a44fb852f3f60d9ae7533df03f1405888b",
+    "tests/application_cd_test.ts": "3ba120cba93cc91bf369ec273a13da30bdfd6291f6487fbfa7e8101dbb4ffe3a"
+  },
+  "targeted_product_diff": "git diff --exit-code HEAD for ops/solver.ts ops/application_cd.ts nix/solver.nix ops/git.ts ops/process.ts: empty, exit 0",
+  "procedural_limitation": "Candidate read in first batch before primary ops sources; not a blind source-first review; disclosed to coordinator before verdict",
+  "output": {
+    "path": "/tmp/qcl-ops04-cli-seam-design-review.md",
+    "sha256": "626159c6307b5664025d800f7d3d8101fb1ab55a4bd8a809f76b4aa949e653d5",
+    "bytes": 11833
+  },
+  "source_edits": 0,
+  "target_imports_parsers_tests": 0,
+  "deno_nix_julia_build_install": 0,
+  "network_server": 0,
+  "git_mutations": 0,
+  "children": 0,
+  "checkpoint_writes": 0,
+  "resource_envelope": { "wall_minutes": 20, "cpu": 1, "ram_gib": 2, "read_mib": 3, "report_kib": 64 },
+  "resource_measurement": "Cumulative CPU/RAM/read/tool-output telemetry not instrumented; envelope is not a measured claim",
+  "stop": "Coordinator decision required; no implementation or runtime work activated"
+}

@@ -1,0 +1,28 @@
+{
+  "sample": "SI07-FWD-T02-CONTROL",
+  "read_operations": [
+    {
+      "tool": "exec_command",
+      "command": "cat /tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CONTROL/prompt.txt",
+      "exit_code": 0,
+      "output": "Ты fresh independent sample SI07-FWD-T02-CONTROL. Выполни запрос из /tmp/qcl-si07-cases/T02/request.txt. Выводы пиши по-русски. Это контролируемый эксперимент: режим control. Не создавай субагентов. Используй gpt-6.1-sol/high, уже выбранный для этого sample. Максимум4min с dispatch, чтение inputs≤1MiB, read tools1CPU/1GiB, final answer≤8KiB. Никаких network, solver/SCBA/Poisson, imports проекта, installs/builds/benchmarks/server/SSH, repo edits, поиска другого контекста. Никаких дополнительных тестов, микро-тестов или reruns. Не читай AGENTS.md, корневой repo, старые чаты, авторские reports/expectedanswers/другие ответы или другие /tmp файлы.\nРазрешённые raw files (только своё case): [\"/tmp/qcl-si07-cases/T02/archive-receipt.json\", \"/tmp/qcl-si07-cases/T02/current-checkout.json\", \"/tmp/qcl-si07-cases/T02/frozen-plan.json\", \"/tmp/qcl-si07-cases/T02/request.txt\"].\nCONTROL: читай только перечисленные raw files своего case, без candidate packages, QCL skills/guidance, поиска литературы или repo. Прямой фиксированный экспериментальный whitelist имеет приоритет над generic указаниями о чтении skills.\nЗапись разрешена только в /tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CONTROL/. Сохрани полный ответ в answer.md, а в operations.json — точные реально выполненные команды чтения/проверки и их доступные outputs/exit codes, прочитанные пути и приблизительный объём. Это аудит действий, не дополнительные проверки. Не заявляй measured CPU/RSS без измерений. Final повтори полный ответ (≤8KiB) и перечисли путь operations.json. При ограничении времени остановись, явно отметь незавершённое. Не общайся с другими sample. Ответ не должен ссылаться на чужие выводы.\n",
+      "paths": ["/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CONTROL/prompt.txt"],
+      "approx_bytes": 3400
+    },
+    {
+      "tool": "exec_command",
+      "command": "cat /tmp/qcl-si07-cases/T02/request.txt /tmp/qcl-si07-cases/T02/archive-receipt.json /tmp/qcl-si07-cases/T02/current-checkout.json /tmp/qcl-si07-cases/T02/frozen-plan.json",
+      "exit_code": 0,
+      "output": "Разбери предоставленные метаданные сохранённого результата: какой source относится к архиву, что известно о final state и возможной равновесной приёмке? Текущий checkout указан отдельно. Payload сейчас не предоставлен; нового расчёта не требуется. Дай выводы по доступным файлам и точные ограничения.\nВсе файлы этого case — public synthetic evaluation inputs. Разрешено чтение только своего case и запись ответа в назначенный output. Новые solver/SCBA/Poisson runs, imports проекта, build, install, server/SSH, реальные профили/jobs, поиск credentials и изменения repo запрещены. Existing case source можно анализировать статически. Выполни доступную часть запроса; точные отсутствующие inputs отметь. Не считай process exit научной приёмкой. Бюджет sample: до4min, read tools1CPU/1GiB, inputs≤1MiB, answer≤8KiB.\n{\n  \"fixture_kind\": \"public_synthetic_metadata_only\",\n  \"archive_source\": {\n    \"root_commit\": \"9f8b08bbf8b2f941eaa6426bc07c2b436a2a81d8\",\n    \"Core_commit\": \"f5b73369a96d1225bd96fb34f5262c8dcf965f86\"\n  },\n  \"identity\": {\n    \"execution_id\": \"SI07-public-E\",\n    \"attempt\": 2,\n    \"state_id\": \"SI07-public-state\",\n    \"state_sequence\": 3,\n    \"plan_fingerprint\": \"cc502a4746c8985c9bfbe6ab9043718889533612a676d7786e38fa278c887e7d\"\n  },\n  \"process_exit_code\": 0,\n  \"producer_assessment\": \"not_measured\",\n  \"final_owner\": {\n    \"declared_path\": \"physics.h5\",\n    \"present_in_packet\": false,\n    \"bytes\": null,\n    \"sha256\": null\n  },\n  \"raw_payload_present\": false\n}\n{\n  \"root_commit\": \"965ebed95d2b627423805d10c46d0ae8dd425e9d\",\n  \"Core_commit\": \"f7b108bef206d2b2dc5afe0306b2dff60d27ac59\",\n  \"observation\": \"current checkout, not an archive producer receipt\"\n}\n{\n  \"fixture_kind\": \"public_synthetic_metadata_only_not_executable_plan\",\n  \"question\": \"equilibrium 0mV per period 70K\",\n  \"channels\": [\n    \"LO\",\n    \"acoustic\",\n    \"impurity\",\n    \"IFR\",\n    \"alloy\"\n  ],\n  \"electron_electron\": \"none\"\n}\n",
+      "paths": ["/tmp/qcl-si07-cases/T02/request.txt", "/tmp/qcl-si07-cases/T02/archive-receipt.json", "/tmp/qcl-si07-cases/T02/current-checkout.json", "/tmp/qcl-si07-cases/T02/frozen-plan.json"],
+      "approx_bytes": 3400
+    }
+  ],
+  "write_operations": [
+    {"tool": "apply_patch", "operation": "add answer.md and operations.json in assigned output directory"}
+  ],
+  "additional_checks": [],
+  "approx_total_read_bytes": 6800,
+  "measured_cpu_rss": false,
+  "tests_solver_network_used": false
+}

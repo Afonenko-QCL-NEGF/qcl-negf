@@ -1,0 +1,160 @@
+{
+  "id": "OWNING-SCI12-MATH-PUBLISH-1",
+  "state": "G1_merged_exact_tree_confirmed",
+  "base": "de70638a982f91b7e125ab1cfc70a2daef2a656d",
+  "base_branch": "codex/review-closure-current-bound-measurements-integration",
+  "branch": "codex/review-closure-equilibrium-map-math",
+  "repo": "Afonenko-QCL-NEGF/qcl-negf-results",
+  "files": {
+    "src/qcl_negf_results/_equilibrium_map_math.py": "0750ac7b1f74588278a4a6fd468ecf0a8ce739342383d717d719bc4126cfcdaa",
+    "tests/test_equilibrium_map_math.py": "995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d"
+  },
+  "source_CPP": {
+    "path": "/tmp/qcl-sci12-math-i1-review.md",
+    "sha256": "9f785fbb16e804950be1ab24fb12da92f96f414a16ee73fe59711e1278073e07",
+    "bytes": 9414
+  },
+  "GREEN_outcome": {
+    "path": "/tmp/qcl-sci12-math-GREEN1-outcome-review.md",
+    "sha256": "6737b7405ce987f885027b11d64caa87a857777492781bca14cf3582126979d3",
+    "bytes": 8084
+  },
+  "observed_tests": 97,
+  "CI_dispatches": 0,
+  "scientific_submits": 0,
+  "no_auto_CI_workflows_at_base": true,
+  "no_rerun": true,
+  "created_at": "2026-10-20T09:38:30.929240+00:00",
+  "index_tree": "ea560717fe63b2a7010e533bafde55366d6cd271",
+  "commit": "c00bc60790a3d50bf2eac7e999ab45a60ace9047",
+  "tree": "ea560717fe63b2a7010e533bafde55366d6cd271",
+  "commit_output": "[codex/review-closure-equilibrium-map-math c00bc60] Add bounded equilibrium comparison math primitives\n 2 files changed, 777 insertions(+)\n create mode 100644 src/qcl_negf_results/_equilibrium_map_math.py\n create mode 100644 tests/test_equilibrium_map_math.py\n",
+  "calls": {
+    "local-head": {
+      "state": "returned",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "capture": {
+        "path": "/tmp/qcl-sci12-math-publication-local-head.json",
+        "sha256": "b89d58cf2118b9741c678098bd6501bcaeb6aef4eaca68abe9c70108eaab545e"
+      }
+    },
+    "local-status": {
+      "state": "returned",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit": 0,
+      "capture": {
+        "path": "/tmp/qcl-sci12-math-publication-local-status.json",
+        "sha256": "732883d74fff105b6916110dd67928d04765fdfa4fce96791f3d3be410b4440f"
+      }
+    },
+    "remote-before": {
+      "state": "returned",
+      "argv": [
+        "git",
+        "ls-remote",
+        "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results.git",
+        "refs/heads/codex/review-closure-equilibrium-map-math",
+        "refs/heads/codex/review-closure-current-bound-measurements-integration"
+      ],
+      "exit": 0,
+      "capture": {
+        "path": "/tmp/qcl-sci12-math-publication-remote-before.json",
+        "sha256": "e27f9806787da5215d7826283bac40e46965b71b2586bb419b1244ec408e7c24"
+      }
+    },
+    "push": {
+      "state": "returned",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=!gh auth git-credential",
+        "push",
+        "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results.git",
+        "codex/review-closure-equilibrium-map-math"
+      ],
+      "exit": 0,
+      "capture": {
+        "path": "/tmp/qcl-sci12-math-publication-push.json",
+        "sha256": "82c2095f6db539a24e5552cfc6fc68a7d461fcc812b13212f8ac85ff04b329fd"
+      }
+    },
+    "remote-after": {
+      "state": "returned",
+      "argv": [
+        "git",
+        "ls-remote",
+        "--exit-code",
+        "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results.git",
+        "refs/heads/codex/review-closure-equilibrium-map-math"
+      ],
+      "exit": 0,
+      "capture": {
+        "path": "/tmp/qcl-sci12-math-publication-remote-after.json",
+        "sha256": "35bdef8b87a9f85d486acfdd1387683b5b790c51ce82eec1c0b396a36b16b47b"
+      }
+    },
+    "pr-list": {
+      "state": "returned",
+      "argv": [
+        "gh",
+        "pr",
+        "list",
+        "-R",
+        "Afonenko-QCL-NEGF/qcl-negf-results",
+        "--head",
+        "codex/review-closure-equilibrium-map-math",
+        "--state",
+        "all",
+        "--json",
+        "number,url,state,baseRefName"
+      ],
+      "exit": 0,
+      "capture": {
+        "path": "/tmp/qcl-sci12-math-publication-pr-list.json",
+        "sha256": "a9566fdd329b2b6e3d7db1bf44be6b07e0b03d6794232f28e2bb7716d35d1de3"
+      }
+    },
+    "pr-create": {
+      "state": "returned",
+      "argv": [
+        "gh",
+        "pr",
+        "create",
+        "-R",
+        "Afonenko-QCL-NEGF/qcl-negf-results",
+        "--draft",
+        "--base",
+        "codex/review-closure-current-bound-measurements-integration",
+        "--head",
+        "codex/review-closure-equilibrium-map-math",
+        "--title",
+        "Add bounded equilibrium comparison math primitives",
+        "--body-file",
+        "/tmp/qcl-sci12-math-owning-pr-body.md"
+      ],
+      "exit": 0,
+      "capture": {
+        "path": "/tmp/qcl-sci12-math-publication-pr-create.json",
+        "sha256": "f494354fea648c50b143265b4858e5338e5a301debcf8d4f76ceadc5ebc5d5e2"
+      }
+    }
+  },
+  "updated_at": "2026-10-20T09:41:17.542915+00:00",
+  "body": {
+    "path": "/tmp/qcl-sci12-math-owning-pr-body.md",
+    "sha256": "1d1e6c76a8af58fe59f82806cf497787af3eeecfc3dcf7aeae9f785b6cd36867"
+  },
+  "PR": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-results/pull/10",
+  "PR_attached": true,
+  "G1_operation": "G1-SCI12-MATH-RESULTS-c00bc60",
+  "merge_commit": "193a852d1bf0cefb7044d2fc69fc53b008dab3c6"
+}

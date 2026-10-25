@@ -1,0 +1,396 @@
+{
+  "format": "qcl-negf.docs-routing-pure-harness-v7-independent-review.v1",
+  "status": "SOURCE_REVIEW_COMPLETE_NOT_READY_NOT_EXECUTION_GRANT",
+  "verdict": "PASS_SOURCE",
+  "specific_verdict": "PASS_SOURCE_V7_CHECK2_CORRECTION_AND_RETAINED_V6_BINDINGS",
+  "blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v7-review.md",
+    "sha256": "364e912a1c12adc2dc6103ce807dcdb6ad0d0d29520d3b02422f050095f9dce1",
+    "bytes": 12790
+  },
+  "packet_hash_map": {
+    "/tmp/qcl-docs-routing-pure-guard-v7.py": {
+      "path": "/tmp/qcl-docs-routing-pure-guard-v7.py",
+      "sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+      "bytes": 61821
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v7.json": {
+      "path": "/tmp/qcl-docs-routing-pure-plan-v7.json",
+      "sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+      "bytes": 19379
+    },
+    "/tmp/qcl-docs-routing-pure-check-v7.py": {
+      "path": "/tmp/qcl-docs-routing-pure-check-v7.py",
+      "sha256": "f0fee486f3708905a1f240667eb1839f889f3bde9be1e11799a875179d7adbb4",
+      "bytes": 1366
+    },
+    "/tmp/qcl-docs-routing-pure-report-v7.md": {
+      "path": "/tmp/qcl-docs-routing-pure-report-v7.md",
+      "sha256": "254b8da51e13acf805017bfc385b9fc97db6dca47e4535c9a822d937ec3126f8",
+      "bytes": 7900
+    },
+    "/tmp/qcl-docs-routing-pure-identity-v7.json": {
+      "path": "/tmp/qcl-docs-routing-pure-identity-v7.json",
+      "sha256": "ca5863150329484807fad0b6f67e3618d18d61bbd8fe4d17a21abb47bc7b298b",
+      "bytes": 4668
+    }
+  },
+  "source_hash_map": {
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "deno.json": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce"
+  },
+  "ancestry_hash_map": {
+    "/tmp/qcl-docs-routing-pure-guard-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-guard-v6.py",
+      "sha256": "c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6",
+      "bytes": 56906
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v6.json": {
+      "path": "/tmp/qcl-docs-routing-pure-plan-v6.json",
+      "sha256": "3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9",
+      "bytes": 16109
+    },
+    "/tmp/qcl-docs-routing-pure-format-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-format-v6.py",
+      "sha256": "8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85",
+      "bytes": 1363
+    },
+    "/tmp/qcl-docs-routing-pure-lint-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-lint-v6.py",
+      "sha256": "d27fd04195f76459dc80ee132cb85be6751358908493e95a628ced1d16cc9368",
+      "bytes": 1357
+    },
+    "/tmp/qcl-docs-routing-pure-check-v6.py": {
+      "path": "/tmp/qcl-docs-routing-pure-check-v6.py",
+      "sha256": "02a0f86dcd35552798f1748b93335d84a0379db18dd19e65cec1e36dcb36f24f",
+      "bytes": 1366
+    },
+    "/tmp/qcl-docs-routing-pure-harness-v6-review.md": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+      "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d",
+      "bytes": 13693
+    },
+    "/tmp/qcl-docs-routing-pure-format-final-v6-review.md": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c",
+      "bytes": 9619
+    },
+    "/tmp/qcl-docs-routing-check-cli-source-evidence.json": {
+      "path": "/tmp/qcl-docs-routing-check-cli-source-evidence.json",
+      "sha256": "866ba52fbf3d993ddce7790f935425104ef5805a9ce9052cd98f67ad19a4f879",
+      "bytes": 1987
+    },
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/share/bash-completion/completions/deno.bash": {
+      "path": "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/share/bash-completion/completions/deno.bash",
+      "sha256": "6455a2ca4b1edf47e14a99c0fe22735af92aa7270c7626f4b494cc403e825177",
+      "bytes": 327789
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+      "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32",
+      "bytes": 3768
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/original.log",
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd",
+      "bytes": 16
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/receipt.json",
+      "sha256": "a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4",
+      "bytes": 3763
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/original.log",
+      "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd",
+      "bytes": 16
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/receipt.json": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/receipt.json",
+      "sha256": "277a3287b57bd7e121ddcee2854a038765f4471c491d73cf5748c0a584fe7531",
+      "bytes": 3841
+    },
+    "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/original.log": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/original.log",
+      "sha256": "3676ae80e731a183977f2a96b7b6d613d332c148bf755a0321c8a76e5d05b98f",
+      "bytes": 181
+    }
+  },
+  "unit_guard_review_binding": {
+    "status": "PASS_SOURCE",
+    "harness_sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+    "plan_sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v7-review.md",
+      "sha256": "364e912a1c12adc2dc6103ce807dcdb6ad0d0d29520d3b02422f050095f9dce1"
+    }
+  },
+  "CHECK2_guard_review_binding": {
+    "status": "PASS_SOURCE",
+    "wrapper_sha256": "f0fee486f3708905a1f240667eb1839f889f3bde9be1e11799a875179d7adbb4",
+    "guard_sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+    "plan_sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v7-review.md",
+      "sha256": "364e912a1c12adc2dc6103ce807dcdb6ad0d0d29520d3b02422f050095f9dce1"
+    }
+  },
+  "retained_v6_stage_identity_maps": {
+    "FORMAT2": {
+      "receipt_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+        "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32"
+      },
+      "raw_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/original.log",
+        "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+      },
+      "scope": "docs-routing-pure-local-engineering-v6",
+      "guard_sha256": "c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6",
+      "plan_sha256": "3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9",
+      "wrapper_sha256": "8fbd55186d81e50d23b31b220ce9c110b874624bfe59f008b1d362c52dfecf85",
+      "source_before": {
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+      },
+      "source_after": {
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+      },
+      "command": [
+        "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+        "fmt",
+        "--config",
+        "/tmp/qcl-docs-test-routing-worktree/deno.json",
+        "ops/docs_tests.ts",
+        "tests/docs_test_routing_test.ts"
+      ],
+      "cwd": "/tmp/qcl-docs-test-routing-worktree",
+      "environment": {
+        "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/owned-tmp/deno-cache",
+        "TMPDIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/owned-tmp/tmp",
+        "HOME": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/owned-tmp/home"
+      },
+      "environment_clear": true,
+      "shared_source_budget": {
+        "maximum_calls": 8,
+        "calls_before": 4,
+        "calls_reserved": 1,
+        "calls_after": 5,
+        "no_rerun": true
+      },
+      "exit_code": 0,
+      "verdict": "CAPTURED_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "RSS_valid_samples": 2,
+      "RSS_unknown_samples": 0,
+      "RSS_NA_after_reap_count": 1,
+      "collector_terminal": true,
+      "raw_capture_complete": true
+    },
+    "LINT2": {
+      "receipt_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/receipt.json",
+        "sha256": "a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4"
+      },
+      "raw_ref": {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/original.log",
+        "sha256": "0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd"
+      },
+      "scope": "docs-routing-pure-local-engineering-v6",
+      "guard_sha256": "c05f118102013b0f706c5f7c274b20542658ed57193dc12665a3b1a6dbc62ef6",
+      "plan_sha256": "3634be2bbf49863a84cb5b0db9075d1f2996f3e8fa74810b1563c7cf0f8c31b9",
+      "wrapper_sha256": "d27fd04195f76459dc80ee132cb85be6751358908493e95a628ced1d16cc9368",
+      "source_before": {
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+      },
+      "source_after": {
+        "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+        "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+      },
+      "command": [
+        "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+        "lint",
+        "--config",
+        "/tmp/qcl-docs-test-routing-worktree/deno.json",
+        "ops/docs_tests.ts",
+        "tests/docs_test_routing_test.ts"
+      ],
+      "cwd": "/tmp/qcl-docs-test-routing-worktree",
+      "environment": {
+        "DENO_DIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/owned-tmp/deno-cache",
+        "TMPDIR": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/owned-tmp/tmp",
+        "HOME": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/owned-tmp/home"
+      },
+      "environment_clear": true,
+      "shared_source_budget": {
+        "maximum_calls": 8,
+        "calls_before": 5,
+        "calls_reserved": 1,
+        "calls_after": 6,
+        "no_rerun": true
+      },
+      "exit_code": 0,
+      "verdict": "CAPTURED_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "RSS_valid_samples": 3,
+      "RSS_unknown_samples": 0,
+      "RSS_NA_after_reap_count": 1,
+      "collector_terminal": true,
+      "raw_capture_complete": true
+    }
+  },
+  "scope": {
+    "new_source_stage": "CHECK2",
+    "attempt": "DOCS-ROUTING-SOURCE-CHECK-2",
+    "source_counter": [
+      7,
+      8
+    ],
+    "source_ceiling": 8,
+    "source_main_rejects_other_stages_before_reservation": true,
+    "no_FORMAT_LINT_replay": true,
+    "unit_attempt": "DOCS-ROUTING-GREEN-1",
+    "product_counter": [
+      87,
+      88
+    ],
+    "unit_source_order": [
+      "FORMAT2(v6)",
+      "LINT2(v6)",
+      "CHECK2(v7)"
+    ],
+    "source_config_owning_code_changes": 0
+  },
+  "static_CLI_evidence": {
+    "packet_ref": {
+      "path": "/tmp/qcl-docs-routing-check-cli-source-evidence.json",
+      "sha256": "866ba52fbf3d993ddce7790f935425104ef5805a9ce9052cd98f67ad19a4f879"
+    },
+    "installed_completion_ref": {
+      "path": "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/share/bash-completion/completions/deno.bash",
+      "sha256": "6455a2ca4b1edf47e14a99c0fe22735af92aa7270c7626f4b494cc403e825177"
+    },
+    "completion_fully_rehashed_in_this_review": true,
+    "check_section_lines": [
+      1767,
+      1768
+    ],
+    "test_section_lines": [
+      6878,
+      6879
+    ],
+    "actual_check_options_line_exact_matches_packet": true,
+    "check_has_cached_only": false,
+    "test_has_cached_only": true,
+    "compiler_command_delta_only_removes_cached_only": true,
+    "unit_command_unchanged_keeps_cached_only": true,
+    "runtime_probe": false
+  },
+  "safety": {
+    "unit_lifecycle_byte_equal_v6": true,
+    "rss_limits_receipt_helpers_byte_equal_v6": true,
+    "source_lifecycle_to_terminal_bindings_byte_equal_v6": true,
+    "R1b_unknown_collector_fail_forceexit_under_watchdog": true,
+    "R2_attempted_live_unknown_fails_immediately_terminal_and_predecessor": true,
+    "preproven_reaped_only_separate_NA": true,
+    "no_retrospective_unknown_waiver": true,
+    "exact_buffer_no_pyc_unchanged": true,
+    "caps_permissions_environment_seed_unchanged": true,
+    "receipt_durability": "best effort only; no host/disk/SIGKILL guarantee"
+  },
+  "preserved_approvals": {
+    "comment_only_CPP": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+      "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d"
+    },
+    "FORMAT2_final_CPP": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+    },
+    "explicit_pure_only_slice": true,
+    "whole_native_CPP_remains": "CHANGES_REQUIRED",
+    "static_registered_tests": 230,
+    "observed_engine_tests": null
+  },
+  "failed_CHECK1": {
+    "receipt_ref": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/receipt.json",
+      "sha256": "277a3287b57bd7e121ddcee2854a038765f4471c491d73cf5748c0a584fe7531"
+    },
+    "raw_ref": {
+      "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-1/original.log",
+      "sha256": "3676ae80e731a183977f2a96b7b6d613d332c148bf755a0321c8a76e5d05b98f"
+    },
+    "classification": "Consumed FAILED compiler CLI argument rejection before typecheck; not passed, not230tests, not good prerequisite",
+    "exit_code": 1,
+    "source_counter": [
+      6,
+      7
+    ],
+    "observed_engine_tests": null,
+    "retained_unchanged": true
+  },
+  "metadata": {
+    "root_head_at_read": "107bac5697b37cf0e47c3feb44883a907837645c",
+    "isolated_head_at_read": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "CP_source_tools_calls_snapshot": 7,
+    "CP_product_calls_snapshot": 87,
+    "CP_source_active": null,
+    "CP_target_active": null,
+    "CP_is_authority_marker": false
+  },
+  "historical_protection": {
+    "all_v6_review_ancestry_refs_rehashed_unchanged": true,
+    "v2_two_diagnostic_RED_original_inconclusive_unchanged": true,
+    "DOC06_E1_unknown_FAILED_unchanged": true,
+    "failed_LINT1_and_CHECK1_not_reclassified": true
+  },
+  "remaining_required": [
+    "Root fresh CHECK2 control/admission/READY/actual SourceRefs and metadata/counters",
+    "Exactly one actual CHECK2 then independent retained outcome acceptance; no fallback/retry",
+    "Separate late unit Root admission/READY and independent completeTAP230 outcome review"
+  ],
+  "execution_counts": {
+    "prepared_scripts": 0,
+    "guard_import_compile_exec": 0,
+    "parser": 0,
+    "compiler": 0,
+    "formatter": 0,
+    "linter": 0,
+    "tests": 0,
+    "runtime": 0,
+    "Deno": 0,
+    "Julia": 0,
+    "native": 0,
+    "network": 0,
+    "subagents": 0
+  },
+  "mutations": {
+    "owning_source": 0,
+    "config": 0,
+    "Root": 0,
+    "CP": 0,
+    "history": 0,
+    "git_index": 0,
+    "review_deliverables": 2
+  },
+  "budget": {
+    "wall_ceiling_seconds": 600,
+    "read_ceiling_bytes": 5242880,
+    "conservative_reads_below_ceiling": true,
+    "CPU_ceiling": 1,
+    "RAM_ceiling_bytes": 1073741824,
+    "output_ceiling_bytes": 131072,
+    "physical_reviewer_CPU_RSS_IO_measured": false
+  },
+  "limitations": [
+    "Source acceptance not READY/run grant/observedCHECK2",
+    "Staticcompletion not successfulCLI/typecheck proof",
+    "Sampledmetrics not hardpeak/cgroup/diskquota",
+    "Runtime141648992B not fully rehashed or executed in source review; completion source fully checked",
+    "TrustedRoot substantive authority required; same-userJSON/hashchecks not authentication",
+    "No wholeNative/fullCI/science acceptance"
+  ]
+}

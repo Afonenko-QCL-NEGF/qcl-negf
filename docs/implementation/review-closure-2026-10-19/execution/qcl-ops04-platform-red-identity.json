@@ -1,0 +1,50 @@
+{
+  "kind": "ops04-platform-phase1-test-source-identity",
+  "status": "awaiting_independent_high_review",
+  "runtime_status": "not_measured",
+  "base_commit": "b067723c82382689bff5cc366981c56e99b926f8",
+  "head_commit": "b067723c82382689bff5cc366981c56e99b926f8",
+  "branch": "codex/review-closure-protected-reader-boundaries",
+  "worktree": "/tmp/qcl-ops04-platform-worktree",
+  "design": {
+    "path": "/tmp/qcl-ops04-source-design-v2.md",
+    "sha256": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147"
+  },
+  "design_review": {
+    "path": "/tmp/qcl-ops04-source-design-v2-review.md",
+    "sha256": "12e811ec56093734fdeb7fd6aac370f312ef880c2b7a64edd9689c8bca26ec42"
+  },
+  "patch": {
+    "path": "/tmp/qcl-ops04-platform-red-patch.diff",
+    "bytes": 15923,
+    "sha256": "b5aa36236fa373c709b6428198afbbf40c54895e2fa2c06fd8dbd365ea3bddef"
+  },
+  "changed_files": {
+    "tests/test_node_enrollment.py": "68c56e1f6d86966a7e9ad7294bef550f2a74511d131dd067ae11ad1569000a00",
+    "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6"
+  },
+  "unchanged_production": {
+    "ops/application_release.py": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0"
+  },
+  "verification": {
+    "git_diff_check": "pass",
+    "target_imports": 0,
+    "target_parsers": 0,
+    "python_invocations": 0,
+    "tests": 0,
+    "build_install": 0,
+    "network_native_server": 0,
+    "science_full_ci": 0,
+    "child_agents": 0,
+    "staged_committed_pushed": false,
+    "production_changes": false
+  },
+  "proposed_fixture_inventory": {
+    "new_t3_methods": 12,
+    "t3_subcases": 49,
+    "t2_shared_rejected_literals": 19,
+    "t2_preserved_extra_rejected_literals": 7,
+    "t2_accepted_literals": 7,
+    "measured_coverage": false
+  }
+}

@@ -1,0 +1,23 @@
+ERROR: LoadError: ParseError:
+# Error @ /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:172:64
+    @test abs(sigma.rows[2].ratio-literal_difference/(literal_scale+δ)) <= Bmatrix
+    mixed = SelfEnergyFamily(copy(x.sigma.Σᴿ),x.sigma.Σˡ.+2.0^-20.*(candidate.Σˡ.-x.sigma.Σˡ),copy(candidate.Σᵍ))
+#                                                              └─┘ ── ambiguous `.` syntax; add whitespace to clarify (eg `1.+2` might be `1.0+2` or `1 .+ 2`)
+Stacktrace:
+ [1] top-level scope
+   @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:172
+ [2] include(mapexpr::Function, mod::Module, _path::String)
+   @ Base ./Base.jl:310
+ [3] IncludeInto
+   @ ./Base.jl:311 [inlined]
+ [4] foreach(f::Base.IncludeInto, itr::Vector{String})
+   @ Base ./abstractarray.jl:3212
+ [5] top-level scope
+   @ none:1
+ [6] eval(m::Module, e::Any)
+   @ Core ./boot.jl:489
+ [7] exec_options(opts::Base.JLOptions)
+   @ Base ./client.jl:310
+ [8] _start()
+   @ Base ./client.jl:577
+in expression starting at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:172

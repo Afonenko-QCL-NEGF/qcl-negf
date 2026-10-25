@@ -1,0 +1,19 @@
+{
+  "CP_CODE": "9af40be6fe381405d588ecb0b3c6c00d652341bd4e9cd9ed57e07ff49b73e106",
+  "components": {
+    "qcl-negf-portal": {
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal",
+      "base": "d28d076c83611278153752d94cc3729d91b32667",
+      "head": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "file_sha256": "88d91cb17904398618bc79b92cbae956c91603075ad2cc1cbd5b27893d810c8d",
+      "state": "G1_merged",
+      "pr": 12,
+      "url": "https://github.com/Afonenko-QCL-NEGF/qcl-negf-portal/pull/12",
+      "base_branch": "codex/review-closure-contribution-routing",
+      "merge_commit": "b5625041242fdf2151196217260c6a13ebde01ae",
+      "merged_at": "2026-10-19T16:52:41Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "task": "DOC04 Root corrective Phase1 source-only cycle1 F1-F4",
+  "stage": "v2_frozen_test_sources_not_executed",
+  "root": "/tmp/qcl-doc04-root-worktree",
+  "root_revision": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "branch": "codex/review-closure-docs-presentation",
+  "parent_review": {"path":"/tmp/qcl-doc04-root-red-review.md","sha256":"4c7b969ce90fef61e427780edbc84d5b8700189b8a9e4ecc6da4b51698907863"},
+  "original_artifacts_verified_unchanged": [
+    {"path":"/tmp/qcl-doc04-root-red-report.md","sha256":"e60d76437fcd1a5070908de22f4db8a5e911cd50d56be8fc05ed124c2f95b87a"},
+    {"path":"/tmp/qcl-doc04-root-red-identity.json","sha256":"fda4daaf0b35e8851a437d382ddfafc5e3a4e526b7ee9dda6e7451fc53d5f108"},
+    {"path":"/tmp/qcl-doc04-root-red-patch.diff","sha256":"7ccff023590d62ff8e8959015cb44d1b24fded2276c6074b965e0f8949f0d440"}
+  ],
+  "accepted_design_inputs": [
+    {"path":"/tmp/qcl-doc04-design.md","sha256":"77ee8593655f98b2e66d762620279ba6ac7ec7da126c62a2ccbd56a0262bf12b"},
+    {"path":"/tmp/qcl-doc04-design-review.md","sha256":"6caa4f15035e6a9f564d1ec86f14ecd64bbd31d73457556327e090e9d6628164"},
+    {"path":"/tmp/qcl-doc04-katex-binding-design.md","sha256":"c65c38f74b5fd8168c9ed5ee2fc79649e2d7bafa5655a9248aee4aa81dca25a2"},
+    {"path":"/tmp/qcl-doc04-katex-binding-design-review.md","sha256":"b599846a0bf40f45a9834a84b61d280d64500a625c6fc3fda0cce4e3feee5e28"}
+  ],
+  "test_sources": [
+    {"path":"tests/test_docs_assembly.py","bytes":19642,"sha256":"ecacc18239241c45ac1ed9c4e7c4935cfd20919cc88ac236a69ffa435bdf038e","changed_from_v1":true},
+    {"path":"tests/docs_math_test.mjs","bytes":9405,"sha256":"7ae60b15740e7e9790318f8724d364f2a9ce567b2a0480cf13c988172966aef3","changed_from_v1":false}
+  ],
+  "patch": {"path":"/tmp/qcl-doc04-root-red-v2-patch.diff","bytes":29916,"sha256":"cd53b2d774fcae5845f8ec97436f177e3fecd61eee1c2eac3a977e999fa17a29"},
+  "delta": {
+    "F1":"document-relative assets/worker.js; independently restored healthy font/worker/importScripts missing-target controls; wrong-root-worker negative",
+    "F2":"independent root-relative literal three-slice primary_sources/primary_urls; literal available set; per-slice one-field source/URL mutants",
+    "F3":"separate private synthetic font-shaped OFL-1.1 policy fixture; MIT-only attribution mutant; missing/wrong-hash notice negatives; no public license claim",
+    "F4":"known BaseURL value preservation; test-only stdlib HTMLParser/URL resolver source; local external script must resolve to generated config file; combined script closure with missing-file negative"
+  },
+  "runtime_calls":0,
+  "checks": {
+    "source_review":"manual source reads only; receiving-code-review applied",
+    "whitespace":"git diff --no-index --check produced no findings; difference exit 1 is not a runtime/test verdict",
+    "python_syntax":"not_measured",
+    "node_syntax":"not_measured",
+    "red":"not_measured",
+    "green":"not_measured",
+    "browser_build_science":"not_measured"
+  },
+  "required_runtime_identities_unchanged":"Before separately authorized local unit DEV, record selected Python 3.14 and Node 24 absolute executable/version/SHA256; explicit DOC04_KATEX_ROOT and module/CSS pins remain in unchanged math test. Actual BUILD still requires fresh admission/toolchain/import/asset/schema/license gates.",
+  "final_git_status":["?? tests/docs_math_test.mjs","?? tests/test_docs_assembly.py"],
+  "submodules":"all eight uninitialized; no update or network",
+  "production_source_written":false,
+  "protected_original_written":false,
+  "stage_commit_push":false,
+  "children_spawned":false,
+  "stop":"High independent review before bounded RED; no product implementation or execution in this phase"
+}

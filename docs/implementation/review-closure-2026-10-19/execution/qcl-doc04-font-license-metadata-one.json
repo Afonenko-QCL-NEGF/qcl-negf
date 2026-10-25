@@ -1,0 +1,31 @@
+{
+  "source": "/tmp/qcl-doc04-katex-0.16.8/source/package/dist/fonts/KaTeX_Main-Regular.ttf",
+  "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830",
+  "read_bytes": 53580,
+  "rows": [
+    {
+      "platform": 3,
+      "language": 1033,
+      "name_id": 0,
+      "value": "Copyright (c) 2009-2010 Design Science, Inc.\nCopyright (c) 2014-2018 Khan Academy"
+    },
+    {
+      "platform": 3,
+      "language": 1033,
+      "name_id": 1,
+      "value": "KaTeX_Main"
+    },
+    {
+      "platform": 3,
+      "language": 1033,
+      "name_id": 13,
+      "value": "Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)\nCopyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),\nwith Reserved Font Name KaTeX_Main.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license available with a FAQ at:\nhttp://scripts.sil.org/OFL"
+    },
+    {
+      "platform": 3,
+      "language": 1033,
+      "name_id": 14,
+      "value": "http://scripts.sil.org/OFL"
+    }
+  ]
+}

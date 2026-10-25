@@ -1,0 +1,35 @@
+{
+  "stage": "formatted_candidate_CPP_pending",
+  "base": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "worktree": "/tmp/qcl-doc04-root-worktree",
+  "files": {
+    "ops/docs/assemble.py": {
+      "bytes": 31656,
+      "sha256": "4c665bc22c1375e51815f6b229bfc9b9030204e7c9bd7284fee49dcec9437270"
+    },
+    "ops/docs/math-render.mjs": {
+      "bytes": 16207,
+      "sha256": "cc44314b063213a8d9bb478f9d53e165c562169121ffdde22b5e89834964309b"
+    },
+    "ops/docs/pilot-plan.json": {
+      "bytes": 2120,
+      "sha256": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50"
+    },
+    "tests/test_docs_assembly.py": {
+      "bytes": 19642,
+      "sha256": "ecacc18239241c45ac1ed9c4e7c4935cfd20919cc88ac236a69ffa435bdf038e"
+    },
+    "tests/docs_math_test.mjs": {
+      "bytes": 9799,
+      "sha256": "ca055653d7946bd077db69447455aa74e476ce8d37543baaa40b75e082dc11d4"
+    }
+  },
+  "functional_identity": "870989b44732b1f252a70608d67e611ec65b11567b435424ef36747db92e1b8b",
+  "format_receipt": "54a2fad4ae10bf982998780105b0006e4e6aef1a6de42669e070bec197af239a",
+  "format_delta": "f7e27acf204aa8234614834739c9a41c6c8290b16c9307ca955b0e7e1568a659",
+  "full_patch": "e7dd232373d3d08c2f3df4bae98cb3b037c4cefee380f1dc290f5a64a5c56f7d",
+  "format_invocations": 1,
+  "unit_calls_used": 2,
+  "unit_calls_max": 4,
+  "stop": "independentCPP thenRootsolePY+NodeGREEN, no publicfontclosure/schema/nativeclaim"
+}

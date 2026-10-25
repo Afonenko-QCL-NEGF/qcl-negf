@@ -1,0 +1,25 @@
+{
+  "stage":"I2H-B3a-partial-source-candidate",
+  "verdict":"awaiting-fresh-high-CPP-not-whole-B3-PASS-not-native-READY",
+  "worktree":"/tmp/qcl-docs-test-routing-worktree",
+  "head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "inputs":{"I2G_review":"497f6d9840040d1d5e4eef4b9c0bcf1579b33af4440a0848f32f83c45506b0cd","I2G_review_identity":"19050d562f528ae3557467a18f08b0b9b9d3eb97850238a2656a42092f95237b"},
+  "frozen_before":"/tmp/qcl-docs-routing-i2g-frozen-before-i2h/manifest.sha256",
+  "patch":{"path":"/tmp/qcl-docs-routing-impl-i2h-complete.patch","kind":"complete-four-file-I2G-to-I2H-delta-two-TS-files-unchanged","bytes":35774,"sha256":"35bd0a7cd6859c6e7124a0e88fea3f674fca4439405ec61975c8ef5dce81ed3b"},
+  "files":{
+    "ops/docs_tests_native.py":{"before":"57c5b88a05a9af8f307669f84e7694bb507ba4f9229cb72308831687238f86db","after":"46cadd60536140b696607c0003d159b1aae7e3f98483490584726d2d0a8b8eda"},
+    "ops/docs_tests_cli.ts":{"before":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7","after":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7"},
+    "tests/test_docs_test_native.py":{"before":"c68d1ee3570bf9aaa1d6558b1f81fefb4b7844ad1d9ee27d0e99d9d700521fff","after":"c44a21b3bb014e25b0ff47470bddd8e7bc6f580455aea37608684da088f2e67b","nominal_methods":8,"observed":null},
+    "tests/docs_test_native_protocol_test.ts":{"before":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2","after":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2","nominal_registrations":8,"observed":null}
+  },
+  "normal_reads":{"preflight":100,"check":444,"docs_actual":376,"docs_conservative_reservation":444,"failure_reserve":16,"padding_added":false},
+  "caps_unchanged":{"phase_calls":512,"phase_raw_bytes":8388608,"phase_seconds":60,"global_metadata_bytes":2097152},
+  "source_binding_scope":"actual-native16-and-existing-Git-metadata-fingerprints-plus-observed-graph-facts-not-all-workfile-immutable-lease",
+  "remaining":["fresh-high-CPP","exact-failure-prefix-terminal-transition","B3b-complete-global-physical-trace-including-source-read-I/O","actual-full-source-immutable-inventory-BIND","B4-full-C8","separate-native-unit-parser-conformance","finite-DEV-compiler-native-admission"],
+  "execution":{"scripts":0,"parser":0,"compiler":0,"import":0,"tests":0,"runtime":0,"native":0,"network":0,"server":0,"CI":0,"science":0},
+  "historical_calls":{"product":89,"source":8,"increment":0,"MathGREEN90_used":false},
+  "resource_cap":{"minutes":20,"CPU":1,"RAM_bytes":2147483648,"read_bytes":4194304,"output_bytes":131072},
+  "read_ledger":{"conservative_estimate_bytes":3145728},
+  "measured_resources":{"CPU":null,"RSS":null,"physical_IO":null,"aggregate_transcript_bytes":null,"truncation_observed":true,"output_cap_certified":false},
+  "next_gate":"fresh-high-CPP-on-exact-four-file-manifest"
+}

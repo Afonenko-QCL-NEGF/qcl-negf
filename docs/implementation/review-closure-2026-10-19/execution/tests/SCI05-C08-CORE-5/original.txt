@@ -1,0 +1,14 @@
+Test Summary:                                                 | Pass  Total  Time
+Same-pass independent Dyson witnesses and nonfinite inventory |   26     26  0.3s
+Test Summary:                                               | Pass  Total  Time
+Literal near-zero additive floor and measured-zero controls |   24     24  0.7s
+Test Summary:                                                     | Pass  Total  Time
+Frozen complex matrix, weighted number and unnormalized candidate |   28     28  1.4s
+Test Summary:                                                              | Pass  Total  Time
+One owning Poisson solve with independent literal residual/gauge enclosure |   21     21  3.7s
+Test Summary:                                           | Pass  Total  Time
+Approved D2 finite ratio0 with overflowed normalization |   89     89  2.5s
+Test Summary:                                                           | Pass  Total  Time
+Bounded Core template, explicit unavailable and signed/nonfinite charge |   76     76  1.3s
+Test Summary:                                                                        | Pass  Total   Time
+Public validation retains failed outcome, raw rU and compatible assessment transport |   23     23  10.3s

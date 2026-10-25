@@ -1,0 +1,452 @@
+--- a/ops/docs_tests_native.py
++++ b/ops/docs_tests_native.py
+@@ -1380,24 +1380,49 @@
+         self.tickets[ticket] = {"streams":streams,"offsets":{"stdout":0,"stderr":0},"capture":result,"binding_digest":digest(canonical(self.binding)),"closed":set()}
+         return ticket,result,streams
+ 
+-    def git_read(self,root,args):
++    def git_read(self,root,args,*,owner="native"):
+         validate_git(root,args,self.workspace,self.components)
+         family = next((item for item in self.request["expected_source"]["git_families"] if item["root"] == root and item["args"] == args),None)
+         ensure(family is not None,"frozen source-controlled Git family required")
+         cap = max(1,family["stdout_bytes"]+family["stderr_bytes"])
++        batch = self.source_reads.reserve(owner,root,args)
++        if self.snapshot is None or self.snapshot.get("batch") != batch:
++            self.snapshot = {"batch":batch,"calls":0,"bytes":0,"started":time.monotonic()}
+         self.git_calls += 1
+-        ensure(self.git_calls <= 512 and self.git_raw <= 8*1048576 and self.git_seconds < 60,"phase Git budget")
+-        started = time.monotonic()
+-        ticket,capture,streams = self.command({"argv":[self.expected_tools["git"]["path"],"--no-optional-locks",
+-            "-c","core.fsmonitor=false","-c","core.untrackedCache=false","-c","core.hooksPath=/dev/null","-C",root,*args],"env":GIT_ENV,"cwd":root,"binary_stdout":args[:2] == ["cat-file","blob"]},cap,min(5,60-self.git_seconds))
+-        self.git_seconds += time.monotonic()-started
+-        self.git_raw += sum(s["bytes"] for s in streams.values())
+-        ensure(self.git_raw <= 8*1048576 and self.git_seconds <= 60,"phase Git completed budget")
+-        if self.snapshot is not None:
+-            self.snapshot["calls"] += 1; self.snapshot["bytes"] += sum(s["bytes"] for s in streams.values())
+-            ensure(self.snapshot["calls"] <= 128 and self.snapshot["bytes"] <= 2*1048576 and time.monotonic()-self.snapshot["started"] <= 20,"snapshot Git budget")
+-        if family["sha256"] is not None: ensure(streams["stdout"]["sha256"] == family["sha256"],"frozen object raw SHA")
+-        ensure(capture["capture_complete"] and capture["drains_complete"] and capture["exit_code"] == 0 and capture["signal"] is None,"source Git capture failure")
++        ensure(self.git_calls <= 512 and getattr(self,"git_charged_raw",self.git_raw)+cap <= 8*1048576 and self.git_seconds < 60,"phase Git budget")
++        started = time.monotonic(); ledger_start = len(self.command_ledger); streams = None
++        try:
++            verify_source_read_binding(self)
++            ticket,capture,streams = self.command({"argv":[self.expected_tools["git"]["path"],"--no-optional-locks",
++                "-c","core.fsmonitor=false","-c","core.untrackedCache=false","-c","core.hooksPath=/dev/null","-C",root,*args],"env":GIT_ENV,"cwd":root,"binary_stdout":args[:2] == ["cat-file","blob"]},cap,min(5,60-self.git_seconds))
++            if family["sha256"] is not None: ensure(streams["stdout"]["sha256"] == family["sha256"],"frozen object raw SHA")
++            ensure(capture["capture_complete"] and capture["drains_complete"] and capture["exit_code"] == 0 and capture["signal"] is None,"source Git capture failure")
++            if owner == "driver": validate_graph_read(root,args,capture,self.request["expected_source"])
++        finally:
++            primary = sys.exc_info()[1]
++            if streams is None and len(self.command_ledger) > ledger_start: streams = self.command_ledger[-1]["streams"]
++            known = sum(s["bytes"] for s in (streams or {}).values() if s is not None)
++            complete = streams is not None and all(s is not None for s in streams.values())
++            observed_complete = complete or len(self.command_ledger) == ledger_start
++            self.git_raw_complete = getattr(self,"git_raw_complete",True) and observed_complete
++            self.git_raw += known
++            charge = known if observed_complete else cap
++            self.git_charged_raw = getattr(self,"git_charged_raw",self.git_raw-known)+charge
++            if self.snapshot is not None:
++                self.snapshot["calls"] += 1; self.snapshot["bytes"] += known
++                self.snapshot["raw_complete"] = self.snapshot.get("raw_complete",True) and observed_complete
++                self.snapshot["charged_bytes"] = self.snapshot.get("charged_bytes",self.snapshot["bytes"]-known)+charge
++            try:
++                try: verify_source_read_binding(self)
++                finally: self.git_seconds += max(0,time.monotonic()-started)
++                ensure(self.git_charged_raw <= 8*1048576 and self.git_seconds <= 60,"phase Git completed budget")
++                if self.snapshot is not None:
++                    ensure(self.snapshot["calls"] <= 128 and self.snapshot["charged_bytes"] <= 2*1048576 and time.monotonic()-self.snapshot["started"] <= 20,"snapshot Git budget")
++            except BaseException:
++                self.source_reads.failed = True
++                if primary is None: raise
++            if primary is not None: self.source_reads.failed = True
++        if owner == "driver" and self.source_reads.batch_complete(batch): self.source_graph_measured = True
+         return ticket,capture,streams
+ 
+ 
+@@ -1509,8 +1534,8 @@
+     finite_number(request["monotonic_deadline"],0.000001)
+ 
+ 
+-def admit_source_schedule(active):
+-    source = active.request["expected_source"]; workspace = source["workspace"]
++def source_read_batches(source):
++    workspace = source["workspace"]
+     graph = [(workspace,["rev-parse","HEAD"]),(workspace,["status","--porcelain"]),
+         (workspace,["config","-f",".gitmodules","--get-regexp","^submodule\\..*\\.path$"]),(workspace,["ls-tree","-rz","HEAD"])]
+     for item in source["components"]:
+@@ -1518,6 +1543,72 @@
+         graph.extend([(workspace,["config","-f",".gitmodules","--get",item["section"]+".url"]),
+             (root,["ls-tree","-rz","HEAD"]),(root,["rev-parse","HEAD"]),(root,["status","--porcelain"])])
+     closure = [(workspace,args) for item in source["native"] for args in (["ls-tree","HEAD","--",item["path"]],["cat-file","blob","HEAD:"+item["path"]])]
++    return graph,closure
++
++
++def source_read_events(source,phase):
++    graph,closure = source_read_batches(source); events = []; batch = 0
++    def reads(owner,rows):
++        nonlocal batch
++        events.extend(("read",owner,root,tuple(args),batch) for root,args in rows); batch += 1
++    reads("native",closure); reads("driver",graph)
++    if phase != "preflight":
++        events.append(("mark","prepare")); reads("driver",graph)
++        for index in range(4 if phase == "check" else 3):
++            events.append(("mark","execute:"+str(index))); reads("native",closure)
++            events.append(("mark","unit:"+str(index))); reads("driver",graph)
++        reads("driver",graph)
++    events.append(("mark","finish")); reads("native",closure)
++    return events
++
++
++class SourceReadSchedule:
++    def __init__(self,events): self.events = tuple(events); self.ordinal = 0; self.failed = False
++    def take(self,expected):
++        if self.failed or self.ordinal >= len(self.events) or self.events[self.ordinal][:len(expected)] != expected:
++            self.failed = True
++            raise Refusal("exact native source schedule/order refused")
++        event = self.events[self.ordinal]; self.ordinal += 1; return event
++    def reserve(self,owner,root,args): return self.take(("read",owner,root,tuple(args)))[4]
++    def mark(self,name): self.take(("mark",name))
++    def batch_complete(self,batch):
++        return self.ordinal == len(self.events) or self.events[self.ordinal][0] != "read" or self.events[self.ordinal][4] != batch
++    def complete(self):
++        ensure(not self.failed and self.ordinal == len(self.events),"incomplete native source schedule")
++
++
++def validate_graph_read(root,args,capture,source):
++    text = capture["stdout"]; ensure(capture["stderr"] == "","source graph stderr")
++    workspace = source["workspace"]
++    components = {item["path"]:item for item in source["components"]}
++    if args == ["rev-parse","HEAD"]:
++        expected = source["head"] if root == workspace else components[root[len(workspace)+1:]]["revision"]
++        ensure(text == expected+"\n","actual graph HEAD")
++    elif args == ["status","--porcelain"]: ensure(text == "","actual graph clean status")
++    elif args[:4] == ["config","-f",".gitmodules","--get"]:
++        expected = next(item["url"] for item in source["components"] if args[4] == item["section"]+".url")
++        ensure(text == expected+"\n","actual graph component URL")
++    elif args[:4] == ["config","-f",".gitmodules","--get-regexp"]:
++        rows = {}
++        for line in text.splitlines():
++            match = re.fullmatch(r"(submodule\..+)\.path (components/[A-Za-z0-9][A-Za-z0-9.-]*)",line)
++            ensure(match and match[2] not in rows,"actual unique graph sections")
++            rows[match[2]] = match[1]
++        ensure(rows == {path:item["section"] for path,item in components.items()},"actual graph section set")
++    elif args == ["ls-tree","-rz","HEAD"]:
++        links = {}
++        for record in text.split("\x00"):
++            if not record.startswith("160000 "): continue
++            match = re.fullmatch(r"160000 commit ([a-f0-9]{40})\t(components/[A-Za-z0-9][A-Za-z0-9.-]*)",record)
++            ensure(root == workspace and match and match[2] not in links,"actual flat unique graph gitlinks")
++            links[match[2]] = match[1]
++        ensure(links == ({path:item["revision"] for path,item in components.items()} if root == workspace else {}),"actual graph gitlink set")
++    else: raise Refusal("unknown graph slot")
++
++
++def admit_source_schedule(active):
++    source = active.request["expected_source"]
++    graph,closure = source_read_batches(source)
+     families = source["git_families"]
+     def cost(schedule):
+         total = 0
+@@ -1539,26 +1630,49 @@
+         ensure(calls+16 <= 512 and raw+262144 <= 8*1048576,"phase full schedule plus failure reserve")
+         schedules.append({"phase":phase["phase"],"git_calls":calls,"source_raw_bound":raw,"failure_calls_reserve":16,"failure_raw_reserve":262144})
+     commands = sum(item["git_calls"]+(4 if item["phase"] == "check" else 3 if item["phase"] == "docs" else 0) for item in schedules)
+-    # 512B pre-child index +1536B compact command receipt;32 setup-wide
+-    # failure records reserved. D6 lifecycle/fallback allowance stays global.
++    # Legacy necessary reservation estimate only. Pending aliases, driver
++    # originals, settlement/index/sample metadata need the separate B3b full
++    # physical-domain trace; passing this check is not sufficient admission.
+     metadata_bound = (commands+16)*1792+884736+131072
+-    ensure(metadata_bound <= min(active.storage.limits["metadata"],2*1048576),"complete metadata schedule fit")
++    ensure(metadata_bound <= min(active.storage.limits["metadata"],2*1048576),"legacy metadata reservation estimate fit")
+     raw_bound = sum(item["source_raw_bound"]+item["failure_raw_reserve"] for item in schedules)+4194304+2*262144
+-    ensure(raw_bound <= active.storage.limits["raw"],"global source/unit/driver raw reserve fit")
++    ensure(raw_bound <= active.storage.limits["raw"],"legacy raw reservation estimate fit")
+     active.source_schedule = schedules
++    active.source_reads = SourceReadSchedule(source_read_events(source,active.binding["phase"]))
++    active.source_read_binding = source_read_binding(active)
+     return schedules
+ 
+ 
++def source_read_binding(active):
++    # Selected native16 bytes and existing Git configuration/attributes only.
++    # This does not establish an immutable lease over every working-tree file.
++    source = active.request["expected_source"]
++    native = []
++    for item in source["native"]:
++        actual = read_bound_regular({"path":source["workspace"]+"/"+item["path"],"sha256":item["sha256"]},262144,active.uid)
++        ensure(len(actual["bytes"]) == item["bytes"],"native source retained byte size")
++        native.append([item["path"],actual["sha256"]])
++    metadata = [noexec_git_metadata(root,active.deadline-3)["observed_sha256"] for root in (active.workspace,*active.components)]
++    return digest(canonical({"registered_source":source,"native":native,"metadata":metadata}))
++
++
++def verify_source_read_binding(active):
++    ensure(source_read_binding(active) == active.source_read_binding,"native source/config binding changed")
++
++
+ def noexec_git_metadata(root,deadline=None):
+     # Read-only status may consult clean filters. Reject executable filter and
+     # include/attributes indirection before the first Git subprocess, rather
+     # than assuming core.fsmonitor=false disables every helper.
+-    dot = Path(root)/".git"
++    dot = Path(root)/".git"; observed = []
+     def read(path,cap):
+         fd = os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
+         try:
+             info = os.fstat(fd); ensure(stat.S_ISREG(info.st_mode) and info.st_size <= cap,"Git metadata regular/size")
+-            raw = os.read(fd,cap+1); ensure(len(raw) <= cap,"Git metadata read bound"); return raw
++            raw = os.read(fd,cap+1); ensure(len(raw) <= cap,"Git metadata read bound")
++            after = os.fstat(fd)
++            ensure((info.st_dev,info.st_ino,info.st_size,info.st_mtime_ns) == (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns),"Git metadata changed during read")
++            observed.append([str(path),digest(raw)]); return raw
+         finally: os.close(fd)
+     if dot.is_file():
+         raw = read(dot,4096)
+@@ -1570,6 +1684,7 @@
+     if (gitdir/"commondir").exists():
+         raw = read(gitdir/"commondir",4096); ensure(raw.endswith(b"\n"),"Git common pointer")
+         common = (gitdir/raw[:-1].decode("utf-8","strict")).resolve(strict=True); real_directory(str(common))
++    if (Path(root)/".gitmodules").exists(): read(Path(root)/".gitmodules",262144)
+     for config in (common/"config",gitdir/"config.worktree"):
+         if config.exists():
+             text = read(config,262144).decode("utf-8","strict").lower()
+@@ -1589,7 +1704,7 @@
+                     ensure(not item.is_symlink(),"attribute link indirection")
+                     raw = read(item.path,262144); total += len(raw)
+                     ensure(total <= 262144 and not re.search(rb"(?:^|\s)[-!]?filter(?:=|\s|$)",raw),"Git clean filter attributes")
+-    return {"nodes":nodes,"attribute_bytes":total}
++    return {"nodes":nodes,"attribute_bytes":total,"observed_sha256":digest(canonical(sorted(observed)))}
+ 
+ 
+ def retain_evidence_index(active):
+@@ -1704,8 +1819,8 @@
+         self.stderr_path = str(Path(active.raw_root)/("driver-"+active.request_id+".stderr"))
+         self.stderr_reserve = active.storage.reserve("raw",262144)
+         self.stderr_fd = os.open(self.stderr_path+".partial",os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+-        self.stdout_path = str(Path(active.raw_root)/("driver-"+active.request_id+".stdout"))
+         self.stdout_domain = "protocol" if "protocol" in active.storage.roots else "raw"
++        self.stdout_path = str(Path(active.storage.roots[self.stdout_domain])/("driver-"+active.request_id+".stdout"))
+         self.stdout_reserve = active.storage.reserve(self.stdout_domain,24*1048576)
+         self.stdout_fd = os.open(self.stdout_path+".partial",os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+         self.stdout_bytes = 0
+@@ -1996,8 +2111,9 @@
+ 
+ def run_phase(active,phase):
+     active.binding = phase["binding"]; active.request_id = secrets.token_hex(16)
+-    active.git_calls = 0; active.git_raw = 0; active.git_seconds = 0; active.wire_bytes = 0
++    active.git_calls = 0; active.git_raw = 0; active.git_raw_complete = True; active.git_charged_raw = 0; active.git_seconds = 0; active.wire_bytes = 0
+     active.tickets = {}; active.snapshot = None
++    active.source_graph_measured = False
+     active.plan = None; active.captures = []; driver = None; validation_ref = None; summary_ref = None; index_ref = None; aggregate_sha = None; terminal = None
+     result = "failed"; command_closure = "unknown"
+     source_bound = False; observations_valid = False; source_validated = False
+@@ -2010,6 +2126,7 @@
+         source_bound = True
+         metadata = native_metadata(inputs,active)
+         observations_valid = True
++        verify_source_read_binding(active)
+         driver = object.__new__(DriverPipe); driver.__init__(active)
+         sequence = 0; prepared = False; graph_reads = 0
+         while True:
+@@ -2025,12 +2142,9 @@
+                 reply = dict(kind="metadata",metadata=metadata,binding_digest=digest(canonical(active.binding)))
+             elif op == "git-read":
+                 ensure(frame["args"][:2] != ["cat-file","blob"] and not (frame["args"][:2] == ["ls-tree","HEAD"]),"native-only closure argv")
+-                if graph_reads % 36 == 0:
+-                    active.snapshot = {"calls":0,"bytes":0,"started":time.monotonic()}
+                 ensure(graph_reads < (36 if phase["phase"] == "preflight" else 252),"bounded owning graph slots")
+-                ticket,capture,streams = active.git_read(frame["root"],frame["args"])
++                ticket,capture,streams = active.git_read(frame["root"],frame["args"],owner="driver")
+                 graph_reads += 1
+-                if graph_reads % 36 == 0: active.snapshot = None
+                 reply = dict(kind="git-capture",ticket_id=ticket,streams=streams,exit_code=capture["exit_code"],signal=capture["signal"],complete=capture["capture_complete"],stop_reason=capture["stop_reason"])
+             elif op == "stream-read":
+                 integer(frame["offset"],0,1048576)
+@@ -2042,6 +2156,7 @@
+                 reply = dict(kind="stream-chunk",ticket_id=frame["ticket_id"],stream=name,offset=frame["offset"],data=base64url(part),eof=ticket["offsets"][name] == len(raw),chunk_sha256=digest(part))
+             elif op == "prepare":
+                 ensure(not prepared and phase["phase"] != "preflight","one unit preparation")
++                active.source_reads.mark("prepare")
+                 active.plan = native_plan(phase["phase"],inputs,active)
+                 ensure(frame["input_sha256"] == active.binding["input_sha256"] and frame["plan"] == active.plan,"independent exact plan")
+                 for name in ("node","python","doc06"): os.mkdir(inputs["storage"]["owned_tmp_root"]+"/"+name,0o700)
+@@ -2051,19 +2166,23 @@
+             elif op == "execute":
+                 integer(frame["index"],0,3)
+                 ensure(prepared and frame["index"] == len(active.captures) and frame["step"] == active.plan["steps"][frame["index"]],"ordered exact executor step")
++                active.source_reads.mark("execute:"+str(frame["index"]))
+                 source_bound = False
+                 bind_native_context(inputs,active); source_bound = True
+                 step = frame["step"]; env = step["env"] if step["clearEnv"] else active.base_environment
+                 ticket,capture,streams = active.command({"argv":[step["executable"],*step["args"]],"cwd":step["cwd"],"env":env},step["limits"]["log_bytes"],step["limits"]["wall_seconds"])
+                 active.captures.append((ticket,capture,streams))
++                active.source_reads.mark("unit:"+str(frame["index"]))
+                 reply = dict(kind="capture",index=frame["index"],ticket_id=ticket,capture_meta={k:v for k,v in capture.items() if k not in ("stdout","stderr")},streams=streams)
+             else:
+                 accepted = False
+                 try:
++                    active.source_reads.mark("finish")
+                     source_bound = False
+-                    bind_native_context(inputs,active); source_bound = True
++                    bind_native_context(inputs,active); source_bound = True; source_validated = True
++                    active.source_reads.complete()
+                     result = validate_driver_finish(frame["aggregate_summary"],frame["aggregate_sha256"],active,inputs)
+-                    aggregate_sha = frame["aggregate_sha256"]; accepted = True; source_validated = True
++                    aggregate_sha = frame["aggregate_sha256"]; accepted = True
+                 except (Refusal,OSError,KeyError,TypeError,ValueError): result = "failed"
+                 summary_ref = active.retain("summary",frame["aggregate_summary"])
+                 index_ref = retain_evidence_index(active)
+@@ -2094,7 +2213,7 @@
+             try: index_ref = retain_evidence_index(active)
+             except (OSError,Refusal): pass
+         retention = validate_phase_retention(active,index_ref,terminal,[validation_ref,summary_ref,index_ref])
+-        measured = source_bound and observations_valid and source_validated
++        measured = observations_valid and ((source_bound and source_validated) or active.source_graph_measured)
+         if retention != "complete" or not measured or command_closure != "closed" or not driver_closed: result = "failed"
+         ref = active.retain("phase",{"format":"root-docs-phase-receipt.v2","binding":active.binding,"request_id":active.request_id,"finish_validation_ref":validation_ref,"aggregate_sha256":aggregate_sha,"summary_ref":summary_ref,"evidence_index_ref":index_ref,"driver":terminal,"command_closure":command_closure,"phase_driver_closure":"closed" if driver_closed else "unknown","result":result,"source_observation":"measured" if measured else "not_measured","retention_status":retention,"setup_state":"active" if result in ("passed","ready_for_unit_attempt") else "closing","whole_workload_empty":"not_claimed","closed_at_utc":utc_now()},32768)
+         active.phases.append({"phase":phase["phase"],"attempt":phase["attempt"],"binding_digest":digest(canonical(active.binding)),"ref":ref})
+--- a/tests/test_docs_test_native.py
++++ b/tests/test_docs_test_native.py
+@@ -297,6 +297,110 @@
+             self.assertEqual(active.command_ledger[0]["outcome"],"unknown")
+ 
+     def test_source_git_closed_argv(self):
++        source = {"workspace":"/fixture","components":[{"path":"components/c"+str(i),"section":"submodule.c"+str(i)} for i in range(8)],"native":[{"path":path} for path in native.NATIVE_PATHS]}
++        for phase,count in (("preflight",100),("check",444),("docs",376)):
++            events = native.source_read_events(source,phase)
++            self.assertEqual(sum(e[0] == "read" for e in events),count)
++            schedule = native.SourceReadSchedule(events)
++            for event in events:
++                if event[0] == "mark": schedule.mark(event[1])
++                else: schedule.reserve(event[1],event[2],list(event[3]))
++            schedule.complete()
++            with self.assertRaises(native.Refusal): schedule.reserve("native","/fixture",["rev-parse","HEAD"])
++        first = native.source_read_events(source,"check")[0]
++        self.assertEqual(first[:4],("read","native","/fixture",("ls-tree","HEAD","--","deno.json")))
++        check = native.source_read_events(source,"check")
++        self.assertEqual([(i,check[i]) for i in (68,105,138,175,208,245,278,315,348,421)],[(68,("mark","prepare")),(105,("mark","execute:0")),(138,("mark","unit:0")),(175,("mark","execute:1")),(208,("mark","unit:1")),(245,("mark","execute:2")),(278,("mark","unit:2")),(315,("mark","execute:3")),(348,("mark","unit:3")),(421,("mark","finish"))])
++        graph,_ = native.source_read_batches(dict(source,components=list(reversed(source["components"]))))
++        self.assertEqual(graph[4],("/fixture",["config","-f",".gitmodules","--get","submodule.c7.url"]))
++        for wrong in (("driver",first[2],list(first[3])),("native","/wrong",list(first[3])),("native",first[2],["rev-parse","HEAD"])):
++            schedule = native.SourceReadSchedule(native.source_read_events(source,"check"))
++            with self.assertRaises(native.Refusal): schedule.reserve(*wrong)
++            with self.assertRaises(native.Refusal): schedule.reserve(first[1],first[2],list(first[3]))
++        schedule = native.SourceReadSchedule(native.source_read_events(source,"check"))
++        with self.assertRaises(native.Refusal): schedule.mark("execute:0")
++        graph_source = {"workspace":"/fixture","head":"a"*40,"components":[{"path":"components/core","revision":"b"*40,"section":"submodule.core","url":"https://github.com/example/core"}]}
++        for root,args,good,bad in (("/fixture",["rev-parse","HEAD"],"a"*40+"\n","c"*40+"\n"),("/fixture/components/core",["status","--porcelain"],""," M file\n"),("/fixture",["ls-tree","-rz","HEAD"],"160000 commit "+"b"*40+"\tcomponents/core\x00","160000 commit "+"c"*40+"\tcomponents/core\x00"),("/fixture",["config","-f",".gitmodules","--get","submodule.core.url"],"https://github.com/example/core\n","https://github.com/example/other\n")):
++            native.validate_graph_read(root,args,{"stdout":good,"stderr":""},graph_source)
++            with self.assertRaises(native.Refusal): native.validate_graph_read(root,args,{"stdout":bad,"stderr":""},graph_source)
++        guarded = type("Guarded",(),{"workspace":"/fixture","components":{},"deadline":100,"uid":0,"request":{"expected_source":{"workspace":"/fixture","native":[{"path":"owned.py","sha256":native.digest(b"good"),"bytes":4}]}}})()
++        def actual(ref,cap,uid):
++            native.ensure(ref["sha256"] == native.digest(b"good"),"actual immutable bytes")
++            return {"bytes":b"good","sha256":native.digest(b"good")}
++        with patch.object(native,"read_bound_regular",side_effect=actual), patch.object(native,"noexec_git_metadata",return_value={"observed_sha256":"a"*64}):
++            guarded.source_read_binding = native.source_read_binding(guarded)
++            native.verify_source_read_binding(guarded)
++        with patch.object(native,"read_bound_regular",side_effect=actual), patch.object(native,"noexec_git_metadata",return_value={"observed_sha256":"b"*64}):
++            with self.assertRaises(native.Refusal): native.verify_source_read_binding(guarded)
++        with patch.object(native,"read_bound_regular",side_effect=native.Refusal("actual native bytes changed")):
++            with self.assertRaises(native.Refusal): native.verify_source_read_binding(guarded)
++        # A complete actual native-read G batch creates a measured fact before
++        # unit/report acceptance; a partial batch never does.
++        graph_source = {"workspace":"/fixture","head":"a"*40,"native":[],"components":[dict(item,revision="b"*40,url="https://github.com/example/c"+str(i)) for i,item in enumerate(source["components"])]}
++        graph,_ = native.source_read_batches(graph_source)
++        facts = object.__new__(native.ActiveDocsAttempt); facts.workspace = "/fixture"
++        facts.components = {"/fixture/"+item["path"]:item["section"] for item in graph_source["components"]}
++        facts.snapshot = None; facts.git_calls = facts.git_raw = facts.git_seconds = 0; facts.command_ledger = []; facts.source_graph_measured = False
++        facts.request = {"expected_source":dict(graph_source,git_families=[{"root":root,"args":args,"stdout_bytes":4096,"stderr_bytes":0,"sha256":None} for root,args in graph])}
++        facts.expected_tools = {"git":{"path":"/fixture/git"}}
++        facts.source_reads = native.SourceReadSchedule([("read","driver",root,tuple(args),0) for root,args in graph])
++        for index,(root,args) in enumerate(graph):
++            if args == ["rev-parse","HEAD"]: text = ("a" if root == "/fixture" else "b")*40+"\n"
++            elif args == ["status","--porcelain"]: text = ""
++            elif args[-2] == "--get-regexp": text = "".join("submodule.c"+str(i)+".path components/c"+str(i)+"\n" for i in range(8))
++            elif args[-2] == "--get": text = "https://github.com/example/"+args[-1].split(".")[1]+"\n"
++            elif root == "/fixture": text = "".join("160000 commit "+"b"*40+"\tcomponents/c"+str(i)+"\x00" for i in range(8))
++            else: text = ""
++            raw = {"stdout":{"bytes":len(text.encode()),"sha256":native.digest(text.encode())},"stderr":{"bytes":0,"sha256":native.digest(b"")}}
++            def capture(*args):
++                facts.command_ledger.append({"streams":raw})
++                return "ticket",{"stdout":text,"stderr":"","capture_complete":True,"drains_complete":True,"exit_code":0,"signal":None},raw
++            facts.command = capture
++            with patch.object(native.time,"monotonic",return_value=0), patch.object(native,"verify_source_read_binding"):
++                facts.git_read(root,args,owner="driver")
++            self.assertEqual(facts.source_graph_measured,index == 35)
++        for roots,expected in (({"raw":"/owned/raw"},"raw"),({"raw":"/owned/raw","protocol":"/owned/protocol"},"protocol")):
++            opened = []; reserved = []
++            ledger = type("Ledger",(),{"roots":roots,"reserve":lambda s,domain,size:reserved.append((domain,size))})()
++            active = type("Active",(),{"deadline":100,"raw_root":"/owned/raw","request_id":"a"*32,"storage":ledger})()
++            driver = object.__new__(native.DriverPipe)
++            with patch.object(native,"_CommandOwner"), patch.object(native.os,"open",side_effect=lambda path,*a:opened.append(str(path)) or 81), patch.object(native.os,"pipe2",side_effect=OSError("stop before fork")):
++                with self.assertRaises(OSError): driver._initialize(active)
++            self.assertEqual(reserved,[("raw",262144),(expected,24*1048576)])
++            self.assertEqual(opened[1],roots[expected]+"/driver-"+"a"*32+".stdout.partial")
++        # A failed actual command still consumes its ordinal, partial raw and
++        # elapsed time; an original exception must not be replaced by debit.
++        for fails,missing,guard_failure in ((False,False,None),(True,False,None),(True,True,None),(False,False,"before"),(False,False,"after"),(True,False,"after")):
++            active = object.__new__(native.ActiveDocsAttempt)
++            active.workspace = "/fixture"; active.components = {}; active.snapshot = {"calls":0,"bytes":0,"started":0}
++            active.git_calls = 0; active.git_raw = 0; active.git_seconds = 0; active.command_ledger = []
++            active.request = {"expected_source":{"git_families":[{"root":"/fixture","args":["rev-parse","HEAD"],"stdout_bytes":10,"stderr_bytes":0,"sha256":None}]}}
++            active.expected_tools = {"git":{"path":"/fixture/git"}}
++            active.source_reads = native.SourceReadSchedule([("read","native","/fixture",("rev-parse","HEAD"),0)])
++            raw = {"stdout":{"bytes":3,"sha256":"a"*64},"stderr":{"bytes":0,"sha256":"b"*64}}
++            if missing: raw["stderr"] = None
++            original = OSError("partial capture")
++            def command(*args):
++                active.command_ledger.append({"streams":raw})
++                if fails: raise original
++                return "ticket",{"capture_complete":True,"drains_complete":True,"exit_code":0,"signal":None},raw
++            active.command = command
++            guard_results = [native.Refusal("changed before read") if guard_failure == "before" else None,native.Refusal("changed after read") if guard_failure else None]
++            with patch.object(native.time,"monotonic",side_effect=[0,0,2,2]), patch.object(native,"verify_source_read_binding",side_effect=guard_results):
++                if fails:
++                    with self.assertRaises(OSError) as caught: active.git_read("/fixture",["rev-parse","HEAD"])
++                    self.assertIs(caught.exception,original)
++                elif guard_failure:
++                    with self.assertRaises(native.Refusal): active.git_read("/fixture",["rev-parse","HEAD"])
++                else: active.git_read("/fixture",["rev-parse","HEAD"])
++            known = 0 if guard_failure == "before" else 3
++            self.assertEqual((active.git_calls,active.git_raw,active.git_seconds),(1,known,2))
++            self.assertEqual((active.snapshot["calls"],active.snapshot["bytes"]),(1,known))
++            self.assertEqual(active.git_charged_raw,10 if missing else known)
++            self.assertEqual(active.git_raw_complete,not missing)
++            self.assertEqual(active.snapshot["raw_complete"],not missing)
++            self.assertEqual(active.source_reads.failed,fails or guard_failure is not None)
++            if guard_failure == "before": self.assertEqual(active.command_ledger,[])
+         root = "/fixture/source"
+         self.assertEqual(native.validate_git(root, ["rev-parse", "HEAD"], root, []), ["rev-parse", "HEAD"])
+         for args in [["--version"], ["status", "--porcelain", ";bad"], ["cat-file", "blob", "HEAD:unbound"]]:
+@@ -556,6 +660,7 @@
+                     if path.split("/")[-1] in ("command.stdout","command.stderr","command.pending.json","command.json","index","closure"): self.store.put(path.split("/")[-1],bytes(data))
+                 self.metadata_root = "/owned"; self.durable_publications = self.store.proofs
+                 self.phases = []; self.command_ledger = healthy_evidence.command_ledger; self.saved = []; self.dispatches = 0
++                self.source_reads = native.SourceReadSchedule([("mark","finish")])
+             def retain(self,kind,record,maximum=131072):
+                 self.saved.append((kind,record)); return self.store.put(kind,record)
+         terminal = healthy_terminal
+@@ -568,12 +673,12 @@
+             def send(self,frame): self.active.saved.append(("wire",frame))
+             def close(self): return terminal
+         phase = {"phase":"docs","attempt":"once","binding":{"phase":"docs"}}
+-        for source_failure,index_failure in ((False,False),(True,False),(False,True)):
++        for source_failure,index_failure,unit_failure in ((False,False,False),(True,False,False),(False,True,False),(False,False,True)):
+             active = Active()
+             outcomes = [None,native.Refusal("final source read failed")] if source_failure else [None,None]
+             input_ref = active.store.put("input",b"{}")
+             active.request = {"input_ref":input_ref}
+-            with patch.object(native,"admit_source_schedule"), patch.object(native,"noexec_git_metadata"), patch.object(native,"read_bound_regular",side_effect=active.store.read), patch.object(native,"bind_native_context",side_effect=outcomes), patch.object(native,"native_metadata",return_value={}), patch.object(native,"DriverPipe",Driver), patch.object(native,"validate_driver_finish",return_value="passed"), patch.object(native,"retain_evidence_index",side_effect=native.Refusal("missing index") if index_failure else lambda a:index):
++            with patch.object(native,"admit_source_schedule"), patch.object(native,"noexec_git_metadata"), patch.object(native,"verify_source_read_binding"), patch.object(native,"read_bound_regular",side_effect=active.store.read), patch.object(native,"bind_native_context",side_effect=outcomes), patch.object(native,"native_metadata",return_value={}), patch.object(native,"DriverPipe",Driver), patch.object(native,"validate_driver_finish",side_effect=native.Refusal("failed unit report") if unit_failure else lambda *a:"passed"), patch.object(native,"retain_evidence_index",side_effect=native.Refusal("missing index") if index_failure else lambda a:index):
+                 native.run_phase(active,phase)
+             receipt = next(record for kind,record in active.saved if kind == "phase")
+             self.assertEqual(active.dispatches,0)
+@@ -587,6 +692,7 @@
+             if not source_failure and not index_failure:
+                 self.assertEqual(receipt["source_observation"],"measured")
+                 self.assertEqual(receipt["retention_status"],"complete")
++            if unit_failure: self.assertEqual(receipt["result"],"failed")
+ 
+ 
+ if __name__ == "__main__":

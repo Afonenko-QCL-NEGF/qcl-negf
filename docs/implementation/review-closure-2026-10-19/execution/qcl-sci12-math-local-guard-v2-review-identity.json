@@ -1,0 +1,39 @@
+{
+  "stage": "SCI12Math-local-guard-v2-independent-narrow-B1-followup",
+  "date": "2026-10-20",
+  "verdict": "ACCEPTED_SOURCE_ONLY_NOT_EXECUTION_READY",
+  "blocking_findings_in_delta_scope": [],
+  "B1": "Closed in source: Popen then attempted flag then successful RawCapture assignment then first potentially raising live observe",
+  "unchanged_unknown_owner_branch": "attempted flag remains before constructor; unknown ownership forces incomplete receipt and os._exit without competing read/close",
+  "review_report": {
+    "path": "/tmp/qcl-sci12-math-local-guard-v2-review.md",
+    "sha256": "2227d19cce9c1169bf637234b15d583453f28cadae7e2682d89b6474365b1fa0",
+    "bytes": 6094
+  },
+  "inputs_sha256": {
+    "guard_v2": "d5b46ac8eaf1a9b9456b47d90bf5e04ec42ff6859363cf53847c6c1884ef858a",
+    "plan_v2": "968c537b5b3bacf23f288d28254b50670930d27d8ae7e7afeceaba7ba463bf77",
+    "report_v2": "7db537449fa2fbfbda448caad1551be2a6ed3dd7a0a282dcda7efdb574aa5161",
+    "identity_v2": "5db2d50ec51e17c81a8849cbb4974e35f61c3d5de3d8f653c013a61f62cd36c7",
+    "v1_to_v2_diff": "32cb2bcd43d245d53091dc1766964e9fe7fec3c5e3e8649d5b34dfa3b04db7e0",
+    "prior_review_v1": "f85ca6895125a4780ec6eb050a793691a4bb6f216ee1c0e5b7b16b5907944dec",
+    "prior_review_identity_v1": "20260a676ac16fa71a70ee0d8c25003ce86fcece6acdeceb2326b5457801da7f"
+  },
+  "independent_text_diff": "Only first live observe move, guard PLAN v2 path and guard/plan SCOPE v2 identifiers",
+  "prior_v1_artifacts_preserved": true,
+  "caps_environment_argv_Root_handoff_source_stage_contract": "unchanged by exact delta",
+  "execution_parser_compiler_import_scripts_tests_numeric_network_target_calls": 0,
+  "product_source_index_CP_READY_counter_writes": 0,
+  "subagents": 0,
+  "review_resource_accounting": {
+    "known_input_content_reads_before_outputs_bytes": 161213,
+    "conservative_logical_content_read_upper_bound_including_final_checks_bytes": 230000,
+    "assigned_read_limit_bytes": 262144,
+    "total_output_bound_bytes": 32768,
+    "CPU_RSS_physical_IO": "not_measured",
+    "hard_isolation": false,
+    "prior_v1_unknown_read_deviation": "Preserved; not retroactively resource PASS. This v2 review used only bounded named files and no broad search."
+  },
+  "limitations": "Narrow source delta follow-up only, no runtime fault injection, no fresh Git/counter or semantic CP verification, no Contracts actual origin/scientific/native claim",
+  "stop": "Root alone owns fresh handoff, meaningful reviews, READY and counters; no automatic execution or rerun"
+}

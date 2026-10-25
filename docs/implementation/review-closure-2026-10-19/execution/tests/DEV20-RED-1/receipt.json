@@ -1,0 +1,44 @@
+{
+  "task": "DEV20",
+  "attempt": "RED-1",
+  "started_utc": "2026-10-19T15:15:34.093420+00:00",
+  "recorded_at_utc": "2026-10-19T15:15:34.838249+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "components/qcl-negf-portal/tests/test_build_assets.py::WheelReceiptTests::test_wheel_rejects_stale_frontend_inputs",
+    "components/qcl-negf-portal/tests/test_build_assets.py::WheelReceiptTests::test_wheel_rejects_changed_asset_bytes",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-DEV20-RED-1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "60f1e75cad84047e6a9322dab4d2531ca50713bac4893956bd6d9c68a654c38d",
+  "fixture_sha256": {
+    "components/qcl-negf-portal/tests/test_build_assets.py::WheelReceiptTests::test_wheel_rejects_stale_frontend_inputs": "c229bc16514930887abe5bc69102e8fa1156618e9bbdd6dd91c6e2320e6f1240",
+    "components/qcl-negf-portal/tests/test_build_assets.py::WheelReceiptTests::test_wheel_rejects_changed_asset_bytes": "c229bc16514930887abe5bc69102e8fa1156618e9bbdd6dd91c6e2320e6f1240"
+  },
+  "exit_code": 1,
+  "wall_seconds": 0.745,
+  "sampled_peak_process_tree_RSS_bytes": 48672768,
+  "sampled_owned_temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 2068,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "selected locked .venv Python3.14.7, owning editable imports; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-DEV20-RED-1/original.log"
+}

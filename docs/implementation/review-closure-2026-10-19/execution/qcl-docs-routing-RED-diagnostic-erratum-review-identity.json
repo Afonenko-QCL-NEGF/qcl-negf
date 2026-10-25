@@ -1,0 +1,38 @@
+{
+  "kind": "qcl-docs-routing-RED-diagnostic-erratum-high-D-review-v1",
+  "verdict": "PASS_DESIGN_EXACT_PREDECESSOR_ONLY",
+  "blocking_findings": [],
+  "execution_authorized_by_review": false,
+  "new_product_calls": 0,
+  "target_harness_parser_import_compile_tests_native_network_calls": 0,
+  "product_fixture_checkpoint_git_mutations_by_reviewer": 0,
+  "source_bindings": {
+    "/tmp/qcl-docs-routing-RED-diagnostic-erratum.md": "6dfb097abf97aeabd9114354c987b5846fd19f449c4d0bfc2168299a1e03383b",
+    "/tmp/qcl-docs-routing-RED-diagnostic-erratum-identity.json": "3b58a17464d0ce2b12dadb5e8bec1c794a4b88247b2077aa3c3fe12d6fdc59b9",
+    "/tmp/qcl-docs-routing-RED-diagnostic-erratum-read-ledger.md": "a366b49c742dd0b632dad98afe84fdf813e23b83137e36c57561d8e963c0e20c",
+    "/tmp/qcl-DOCS-ROUTING-RED-1/receipt.json": "e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0",
+    "/tmp/qcl-DOCS-ROUTING-RED-1/original.log": "6b044ed571751341f215353d5dafd384dcf009a70c4b471595ebdcb53b8589ad",
+    "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+    "/tmp/qcl-docs-routing-local-unit-run-v2.py": "0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7",
+    "/tmp/qcl-docs-routing-engineering-plan-v2.json": "5147cab0a8df1d50fb908b3c247e8c7b0e11852ee01a990f8a35228b3e70157a",
+    "/tmp/qcl-docs-test-routing-red-report.md": "e0621ad8010399bb7013a35353496ecc6581193c8d0f90ea358ab00985070215"
+  },
+  "report": {
+    "path": "/tmp/qcl-docs-routing-RED-diagnostic-erratum-review.md",
+    "sha256": "9537f35088687da532bd44f551ed637e320b40481ee6c76628621ba712d426f1",
+    "bytes": 11125
+  },
+  "causal_conclusion": "Exact fixture TS7006 at311 derives from unresolved runChecks result at303; source-causal cascade supported under frozen typed API contract, independent fixture defect not established; future actual helper typing remains unverified",
+  "original_RED_classification_preserved": "completed_inconclusive_or_guardfailure_preserve_no_rerun",
+  "RED_typecheck_errors_observed_in_raw": 2,
+  "RED_observed_engine_tests": null,
+  "new_RED_permitted": false,
+  "remaining_named_engineering_attempt": "DOCS-ROUTING-GREEN-1",
+  "future_v3_prerequisites": "Exact immutable v2 ancestor identities and receipt/raw constants separated from current v3 H/P; full raw layout equality; preserved classification; no permissions/caps changes; exact source review and separate Root handoff required",
+  "root_head_observed": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "live_worktree_head_observed": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "live_helper_context": "New untracked ops/docs_tests.ts observed from other concurrent work; contents not read; historical absent helper inferred only from frozen RED source checks/receipt",
+  "logical_source_reads_conservative_reserve_bytes": 393216,
+  "physical_IO_CPU_RSS_wall_instrumented": false,
+  "stop": "Source-only D acceptance; no v3 implementation acceptance, READY, runtime execution, new RED or pass claim"
+}

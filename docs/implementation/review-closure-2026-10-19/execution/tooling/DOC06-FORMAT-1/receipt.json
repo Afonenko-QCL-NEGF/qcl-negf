@@ -1,0 +1,41 @@
+{
+  "task": "DOC06",
+  "attempt": "FORMAT-1",
+  "started_utc": "2026-10-20T04:55:33.818570+00:00",
+  "recorded_at_utc": "2026-10-20T04:55:33.970161+00:00",
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "fmt",
+    "ops/docs/static-slice.ts",
+    "tests/docs_static_slice_test.ts"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "fc7082aad8a3f6fe32d83a333d99ec485e5eec2ef45873b4e205b23f98ff892f",
+  "fixture_sha256": {
+    "ops/docs/static-slice.ts": "f11c439cab0fa3ae4f33d0122f83f118ab90453bddc0e436c73f2e386114fe16",
+    "tests/docs_static_slice_test.ts": "0b1cd93487767af0469b4946cd1aa2abb822916577e81ed1cae98909053f06d6"
+  },
+  "exit_code": 0,
+  "wall_seconds": 0.152,
+  "sampled_peak_process_tree_RSS_bytes": 42217472,
+  "sampled_owned_temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 189,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 20,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "pinned Deno2.8.3 source formatter only; no product imports/tests/Nix/fullCI",
+  "original_log": "/tmp/qcl-DOC06-FORMAT-1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 2,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

@@ -1,0 +1,27 @@
+{
+  "task":"SCI08-R1-design-D2",
+  "delta": [
+    "Require explicit fake_proc and fake_cgroup roots for existing execution_resource_contract width fixture callback",
+    "Preserve four width assertions; add attempted/completed healthy/negative continuation counter assertions within L2, with four callback invocations unchanged",
+    "Require caller-to-read source trace; continuation counters alone do not prove no real /proc read",
+    "Clarify tentative D1 GREEN proposal is no TDD exception; separate finite RED/GREEN plan may be chosen by coordinator, with no calls/approval added here"
+  ],
+  "unchanged":["D1 bytes and identity","31 property groups","five selected file includes","standalone policy","S1 model and caps","C08 exhausted8/8","remaining R2/R3/P1/P2/A1/C1 dependencies"],
+  "read_scope":"focused source/text/hash/Git metadata only",
+  "budget_bytes":1048576,
+  "conservative_total_upper_bound_bytes":262144,
+  "charge_method":"Full named underlying file charged for each ranged/hash read; small metadata/skill/generated-artifact reserve. No broad recursive content search.",
+  "read_inputs":[
+    "complete independent high SCI08-R1 design review",
+    "D1 identity/readledger and D1 hash; D1 semantic context already read in original task",
+    "Runner execution_resource_contract.jl125-148 and whole-file SHA256",
+    "Runner linux_resources.jl1-56 and whole-file SHA256",
+    "Runner native_phase_telemetry.jl132-153 and whole-file SHA256",
+    "receiving-code-review SKILL.md and test-driven-development SKILL.md",
+    "root/Runner HEAD and status; recursive submodule status",
+    "three final output hashes"
+  ],
+  "physical_io_cpu_rss_measured":false,
+  "writes_only":["/tmp/qcl-sci08-R1-design-v2.md","/tmp/qcl-sci08-R1-design-v2-identity.json","/tmp/qcl-sci08-R1-design-v2-delta-readledger.json"],
+  "stop":"Return artifacts/hashes for focused rereview; no target runtime/parser/tests/native/network/product/CP actions"
+}

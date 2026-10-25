@@ -1,0 +1,95 @@
+{
+  "format": "qcl-negf.docs-routing-pure-harness-independent-source-review.v5",
+  "verdict": "PASS_SOURCE_R1B_R2_CORRECTIONS_V5",
+  "status": "STOP_FOR_ROOT_ADMISSION_AND_LATE_BINDINGS",
+  "inputs": {
+    "/tmp/qcl-docs-routing-pure-guard-v5.py": {
+      "sha256": "e49cda399947c9ce9a60352c9def75076d8f5bab29d054f16a8d6874837e1372",
+      "bytes": 53270
+    },
+    "/tmp/qcl-docs-routing-pure-plan-v5.json": {
+      "sha256": "73b79ab73cf2b0702ace55de6f6c0cca6f48106bf0eaa7556221bad4804f9b06",
+      "bytes": 13320
+    },
+    "/tmp/qcl-docs-routing-pure-format-v5.py": {
+      "sha256": "ddb56177a58077e502a1b647b034b590a01ee07d9ccc5de2634a5594c8c1060b",
+      "bytes": 1363
+    },
+    "/tmp/qcl-docs-routing-pure-lint-v5.py": {
+      "sha256": "9c2e13e7f288d2705e12a3dc1378413deb5a045cdfc4b04f67a061a9c893112e",
+      "bytes": 1357
+    },
+    "/tmp/qcl-docs-routing-pure-check-v5.py": {
+      "sha256": "e2847a0f69cb470613946be8a9437fe930c1999bb66cca9388c2381d0d003cc9",
+      "bytes": 1366
+    },
+    "/tmp/qcl-docs-routing-pure-report-v5.md": {
+      "sha256": "d3845f06f29720d5ed74c97aa81720884406eca901a666d733d1a07aef90c633",
+      "bytes": 6833
+    },
+    "/tmp/qcl-docs-routing-pure-identity-v5.json": {
+      "sha256": "5c90ec78c2985fe6f235faf5a5495a01d25d6b9fbbba33aca548fb21cedf83d2",
+      "bytes": 4132
+    }
+  },
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v5-review.md",
+    "sha256": "140472debae1d9a47c8c694b964ed36213003fd3dbffe172001928b141bfb084",
+    "bytes": 11023
+  },
+  "previous_review_preserved_sha256": "206731b357638ae735a0b33019108725f4cbe8d329b2009c2f35dce6633791bb",
+  "resolved_findings": [
+    "R1b_unknown_collector_construction_ownership",
+    "R2_attempted_live_RSS_unknown_failure_and_preproven_NA"
+  ],
+  "new_blocking_findings": [],
+  "static_registered_tests": 230,
+  "observed_engine_tests": null,
+  "source_counters": {
+    "FORMAT1": [
+      2,
+      3
+    ],
+    "LINT1": [
+      3,
+      4
+    ],
+    "CHECK1": [
+      4,
+      5
+    ],
+    "ceiling": 8
+  },
+  "sole_unit_budget": [
+    87,
+    88
+  ],
+  "scope_history_grants_ordering_config_unchanged": true,
+  "historical_DOC06_E1_unknown_failed_preserved": true,
+  "historical_RED_inconclusive_preserved": true,
+  "remaining_gates": [
+    "fresh_trusted_Root_admission_per_phase",
+    "real_bounded_source_calls_and_independent_receipt_reviews",
+    "independent_baseline_final_format_only_review",
+    "exact_final_pure_CPP",
+    "fresh_single_GREEN_READY",
+    "independent_complete_TAP230_outcome_review"
+  ],
+  "READY": false,
+  "execution_grant": false,
+  "prepared_code_parser_compiler_runtime_tests_network_executions": 0,
+  "Root_CP_source_writes": 0,
+  "writes": [
+    "/tmp/qcl-docs-routing-pure-harness-v5-review.md",
+    "/tmp/qcl-docs-routing-pure-harness-v5-review-identity.json"
+  ],
+  "limits": {
+    "read_cap_bytes": 4194304,
+    "read_conservative_upper_bytes": 1048576,
+    "wall_cap_seconds": 600,
+    "cpu_count": 1,
+    "ram_cap_bytes": 1073741824,
+    "output_cap_bytes": 131072,
+    "physical_measurements": "not_measured"
+  }
+}

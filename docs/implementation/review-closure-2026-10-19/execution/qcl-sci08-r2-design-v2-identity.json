@@ -1,0 +1,35 @@
+{
+  "artifact": "SCI08-R2 D2 narrow F1 cleanup repair",
+  "date": "2026-10-20",
+  "stage": "D_source_only",
+  "status": "awaiting_fresh_independent_high_review",
+  "design_path": "/tmp/qcl-sci08-r2-design-v2.md",
+  "design_sha256": "664fce6abccd4517a2bb8e2bd87caefff77cfbc5ee6d5991afed66d731fceeae",
+  "workspace": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "actual_root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "actual_runner_head": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+  "git_composition_authority": "gitlinks; this is a frozen forensic input record, not a maintained revision lock",
+  "inputs_sha256": {
+    "/tmp/qcl-sci08-r2-design-v1.md": "69313bd117c140cf28b68d62ebb85b09bbc078a0ad305b3199c65ee55636e08c",
+    "/tmp/qcl-sci08-r2-design-v1-identity.json": "5fe810be19f9279fe915374a8bab8f8e83d2e0b1e22cbc286c904dcba5824ff1",
+    "/tmp/qcl-sci08-r2-design-v1-read-ledger.json": "7334cf7b7f3f648007e2eedebc8d1a5e42f37f01bab0f6b66b7e6901005a7ab6",
+    "/tmp/qcl-sci08-r2-design-v1-review.md": "0b720a06e1b0386be753ae00814da4d0db5df5933fa1d000d14c97af523d76f9",
+    "/tmp/qcl-sci08-r2-design-v1-review-identity.json": "3c729d60b86eb35245e5ee32230bb6f81fee4b2e63377ee756ef8a3998f11759",
+    "components/QCLNEGFRunner.jl/src/infrastructure/persistence/point_artifacts.jl": "18bcd0fe2c6ff42050c500b57f17678b06a38f14871a9a3de437841cb5f8d1ad",
+    "components/QCLNEGFRunner.jl/src/composition/scratch_execution.jl": "cad52756bb47a6d1fa63cd8c86a03c4e4dcd0d9a4e12383a0671dd766697f395",
+    "components/QCLNEGFRunner.jl/src/infrastructure/persistence/scientific_history.jl": "afecbfb4ad3716af06c0ee0d7fc49563387b69948061a0102f1240e1ab6189a1",
+    "components/QCLNEGFRunner.jl/src/infrastructure/telemetry/progress.jl": "17ad29c7085dff0880d6ee20e9890f3fa43b614b33e896a9b675611aef783d2f"
+  },
+  "root_status_short": [
+    " M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
+    "?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-impl-i2b-review.md",
+    "?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-impl-i2b-review-identity.json",
+    "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch15-publication.json",
+    "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch15-manifest.json"
+  ],
+  "mutations": {"source": 0, "git_index": 0, "checkpoint": 0, "v1_artifacts": 0},
+  "execution": {"subagents": 0, "scripts": 0, "imports": 0, "parsers": 0, "compiler": 0, "tests": 0, "runtime": 0, "network": 0, "native_server": 0, "solver": 0, "CI": 0},
+  "outputs": ["/tmp/qcl-sci08-r2-design-v2.md", "/tmp/qcl-sci08-r2-design-v2-identity.json", "/tmp/qcl-sci08-r2-design-v2-read-ledger.json"],
+  "new_resource_grant": false,
+  "next": "STOP fresh independent high source review"
+}

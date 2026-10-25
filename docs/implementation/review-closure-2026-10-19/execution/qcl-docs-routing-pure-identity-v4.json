@@ -1,0 +1,37 @@
+{
+  "format":"qcl-negf.docs-routing-pure-source-identity.v4",
+  "status":"SOURCE_ONLY_STOP_FOR_INDEPENDENT_HIGH_REVIEW",
+  "artifacts":{
+    "/tmp/qcl-docs-routing-pure-guard-v4.py":{"sha256":"c6534b6f1cf129877cd80482ebaddce7664dc179ff7f03760acef37f0f7a820c","bytes":47309},
+    "/tmp/qcl-docs-routing-pure-plan-v4.json":{"sha256":"4a8966be6c6bc5a3e4dfc1765b31b16be66355427af2b971e3d1c3bfd42646b6","bytes":11825},
+    "/tmp/qcl-docs-routing-pure-format-v4.py":{"sha256":"4805b0be5aaf9e46c787f2ad43edaf0a57a35c522b52e24a91352fd947b9da70","bytes":1363},
+    "/tmp/qcl-docs-routing-pure-lint-v4.py":{"sha256":"5c80d3c4d11c00809ae6e29316ce0d320373a1d9f85fd27851b4e19d1d90bb3c","bytes":1357},
+    "/tmp/qcl-docs-routing-pure-check-v4.py":{"sha256":"61be9d6f59b49856a1d4a0b3d85c194b4c00646efbf1a7f2bb32c4e91ca00463","bytes":1366},
+    "/tmp/qcl-docs-routing-pure-report-v4.md":{"sha256":"d0d3d51adb47082c5b7fe95bb778c8f20029406542d714e7b58a6f9a305dbabd","bytes":9731}
+  },
+  "owned_artifact_bytes_excluding_identity":72951,
+  "preserved_v3":{
+    "/tmp/qcl-docs-routing-pure-guard-v3.py":"750fc342884b2f47372912c538d7cfd47d60c8aa6f2ac9ee37aee02373976c0a",
+    "/tmp/qcl-docs-routing-pure-plan-v3.json":"9863ffb52c44f9d3ab95ff1165233132ebbca965338883a7c2724e8b9cbde742",
+    "/tmp/qcl-docs-routing-pure-report-v3.md":"f45d28da3cc4aae41e5094301f354b1fff967954305ed36e1170e97b4e05eb0d",
+    "/tmp/qcl-docs-routing-pure-identity-v3.json":"3ee980db931a3ce1ba6777921e8e639531117aae8e95a7cfd8a162bcfe4e9a00"
+  },
+  "correction_review_ref":{"path":"/tmp/qcl-docs-routing-pure-harness-v3-review.md","sha256":"85a8f8930b94824b07e9d46dc66240fc30e98a0e8499fac45cf95a9f928319ec"},
+  "baseline_pure_cpp_ref":{"path":"/tmp/qcl-docs-routing-impl-i2b-review.md","sha256":"4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea"},
+  "baseline_pure_cpp_interpretation":"Explicit pure-only slice supports prospective pure stage; whole I2B review remains CHANGES_REQUIRED.",
+  "source_bindings":{
+    "isolated_base_head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "coordinator_root_head_at_read":"107bac5697b37cf0e47c3feb44883a907837645c",
+    "deno.json":"a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce",
+    "ops/docs_tests.ts":"676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts":"f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+  },
+  "ancestry":"All historical RED constants copied unchanged from preserved v3 ANCESTORS. Fixed v2 H/P/04589 fixture/receipt/raw remain separate from current v4/final formatted source. Original inconclusive classification and consumed RED ID unchanged.",
+  "unit":{"attempt":"DOCS-ROUTING-GREEN-1","nominal_registered_tests":230,"observed_engine_tests":null,"global_calls_before":87,"global_calls_after":88,"new_RED_allowed":false,"retry_allowed":false},
+  "source_stages":{"FORMAT1":[2,3],"LINT1":[3,4],"CHECK1":[4,5],"ceiling":8,"executed":false,"automatic_next_stage":false},
+  "execution_counts":{"scripts":0,"guard_parser_compile_exec_import":0,"target_parser":0,"target_compile":0,"target_import":0,"Deno":0,"Julia":0,"formatter":0,"lint":0,"tests":0,"native":0,"network":0,"CI":0,"science":0},
+  "mutations":{"product":0,"fixtures":0,"Root_CP":0,"git_index":0,"gitlinks":0,"retained_original_artifacts":0,"predecessor_record":0,"READY":0},
+  "verification":"Textual source corrections/readback plus SHA/size observations only; no parser or prepared script execution. Wrapper GUARD_SHA binds exact latest guard buffer. No runtime proof claimed.",
+  "budget":"15min/4MiB logical reads/1CPU/1GiB/256KiB output source-only grant. Conservative reads<4MiB; output artifacts<128KiB. Physical CPU/RSS/IO not instrumented.",
+  "stop":"Separate independent high review of exact v4 bundle, then Root source admission. No execution or automatic continuation."
+}

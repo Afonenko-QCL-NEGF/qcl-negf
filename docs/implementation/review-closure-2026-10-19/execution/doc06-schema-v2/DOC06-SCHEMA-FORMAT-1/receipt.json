@@ -1,0 +1,87 @@
+{
+  "task": "DOC06",
+  "attempt": "SCHEMA-FORMAT-1",
+  "started_utc": "2026-10-20T06:37:08.581956+00:00",
+  "recorded_at_utc": "2026-10-20T06:37:09.301396+00:00",
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "fmt",
+    "--config",
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/deno.json",
+    "ops/docs/static-slice.ts",
+    "tests/docs_static_slice_test.ts"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "2daef993d218ac2d4e1cabfc44018725c19a55d60187d43d3d954cef33664aa4",
+  "fixture_sha256": {
+    "ops/docs/static-slice.ts": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee",
+    "tests/docs_static_slice_test.ts": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04"
+  },
+  "exit_code": 0,
+  "wall_seconds": 0.719,
+  "sampled_peak_process_tree_RSS_bytes": 56705024,
+  "sampled_owned_temporary_bytes_peak": 78096,
+  "stdout_stderr_bytes": 189,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 20,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "pinned Deno2.8.3 source formatter only; no product imports/tests/Nix/fullCI",
+  "original_log": "/tmp/DOC06-SCHEMA-FORMAT-1/original.log",
+  "rss_samples_completed": 2,
+  "rss_samples_failed": 0,
+  "rss_sample_phases": {
+    "postspawn": 1,
+    "loop": 1,
+    "terminal": 0
+  },
+  "rss_errors": [],
+  "rss_status": "sampled_lower_bound",
+  "head_observations": {
+    "readiness": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+    "prelaunch": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+    "terminal": "b07974b8e46bf8afdf1740947b842669a62a5ccc"
+  },
+  "expected_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "stage_id": "DOC06-SCHEMA-FORMAT-1",
+  "plan_sha256": "2206d06e2c072b5132db0a2a89048a7df5ef2602961bd03c19ef916cad5c824c",
+  "ready_sha256": "0520e891f2197c21ec9d5c870a374db2b28ed3188424af7436fb9592af165307",
+  "accepted_cpp_sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7",
+  "final_format_only_review": null,
+  "input_source_sha256": {
+    "ops/docs/static-slice.ts": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee",
+    "tests/docs_static_slice_test.ts": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04"
+  },
+  "output_source_sha256": {
+    "ops/docs/static-slice.ts": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72",
+    "tests/docs_static_slice_test.ts": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "config_sha256": "a4043c0ec1c976c03704253316c90a94cb8c7ca2cfe4222f7182ea05565249b7",
+  "owned_temporary_sample_phases": {
+    "prelaunch": 1,
+    "loop": 1,
+    "terminal": 1
+  },
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 3,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof.",
+  "raw_metadata": {
+    "status": "measured",
+    "bytes": 189,
+    "sha256": "dbd62c13facc85425d25919de4a089675905eb14da7f39fcf404d1c3983005b9",
+    "expected_summary": false,
+    "tail": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts\n/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts\nChecked 2 files\n",
+    "error": null
+  },
+  "outcome": "guarded_pass"
+}

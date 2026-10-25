@@ -1,0 +1,34 @@
+{
+  "task":"SCI08-R1-design-D3",
+  "stage":"source_design_correction_only",
+  "status":"D3_READY_FOR_FOCUSED_HIGH_REVIEW",
+  "root_instruction_source":"Previously read managed Root AGENTS/architecture and Runner CONTRIBUTING; no scope expansion",
+  "source_worktree":"/tmp/qcl-sci08-r1-runner-worktree",
+  "runner_head":"fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "runner_status":"M test/application/execution_resource_contract.jl; M test/infrastructure/linux_process_resource_probe.jl; ?? test/contracts/checked_storage_forecast.jl; ?? test/infrastructure/strict_campaign_resource_admission.jl",
+  "recursive_submodule_status":"",
+  "targeted_diff_head":"empty for src/composition/native_phase_telemetry.jl and test/integration/native_phase_resource_contract.jl",
+  "inputs": [
+    {"path":"/tmp/qcl-sci08-R1-design.md","sha256":"16b07bbafce8235e0e103205e90c5b6e6b0db6c13c5bd4c883074f32888fe3c7"},
+    {"path":"/tmp/qcl-sci08-R1-design-v2.md","sha256":"5a50afe3ca4014991dcb61d6dfb2879b2fef99e10f18347b5aa5d4eefe54d642"},
+    {"path":"/tmp/qcl-sci08-R1-design-v2-review.md","sha256":"23e50f07964c441f16b1e121f9d7952cf1bafd737544b81000a56a9da28e32fa"},
+    {"path":"/tmp/qcl-sci08-R1-fixtures-review.md","sha256":"7c7d9d3faff2d8b167eb401433be534cd3bdad59af04f2beee12a974d24575e9"},
+    {"path":"/tmp/qcl-sci08-R1-behavioral-red.jl","sha256":"c519b715f645de58a27dea3e19cda5ad9142b393347a07dd8e4265edad914028"}
+  ],
+  "source_sha256": {
+    "src/composition/native_phase_telemetry.jl":"9605f1a4852f5edbe8ca83652500c2e0a2352feec7a04cf9d0e85bd0e712f173",
+    "test/integration/native_phase_resource_contract.jl":"30c511c1b8a811855934d719b500192ff9be8efa301eb477651114143d37b5e0"
+  },
+  "finding":"Integration event sink reaches journal lazy constructor hardcoded /proc/sys/kernel/random/boot_id despite fake membership roots",
+  "proposed_seam":"private proc_root::String=\"/proc\" keyword on _native_phase_journal and _record_native_phase!; existing String directory cache key and default path/strip/catch/identity semantics unchanged",
+  "fixture_adjustment":"explicit fake proc root plus literal boot A and changed fake boot B, retain all prior15 assertions, add4 constructor/cache assertions, clean only owned cache keys in finally",
+  "denominator":{"logical_groups":31,"selected_file_includes":5,"baseline_nominal_assertions":345,"proposed_additional_assertions":4,"proposed_nominal_assertions":349,"baseline_integration_assertions":15,"proposed_integration_assertions":19,"RED_assertions":2},
+  "RED_selection":"Separate existing-API behavioral-red.jl only; no integration/group/producer-journal include; no early production edit",
+  "engineering_grant":"none added or selected by D3",
+  "authority":"Private fixture root/producer clock text is not trusted host/boot admission BIND; strict campaign remains closed",
+  "preserved":["D1+D2+accepted high D2","all31 groups and old345 nominal assertions","standalone defaults","journal cache key and existing session/clock schema","O1/O2 actual caller trace requirements","S1 model and caps","C08 exhausted8/8","SCI08 common code-round cap"],
+  "scope":{"source_read_limit_bytes":1048576,"wall_seconds":480,"cpus":1,"ram_bytes":1073741824,"output_bytes":65536},
+  "target_calls":{"runtime":0,"parser":0,"imports":0,"tests":0,"build":0,"native":0,"network":0,"solver":0,"scientific_attempts":0,"C08":0,"product_writes":0,"CP_writes":0,"git_mutations":0},
+  "outputs":["/tmp/qcl-sci08-R1-design-v3.md","/tmp/qcl-sci08-R1-design-v3-identity.json","/tmp/qcl-sci08-R1-design-v3-delta-readledger.json"],
+  "residual":["independent focused high D3 review pending","source implementation and adjusted integration fixture absent","RED/GREEN not observed; no engineering grant","actual O1/O2 caller traces still mandatory","full S1 remains needs_guard/needs_admission"]
+}

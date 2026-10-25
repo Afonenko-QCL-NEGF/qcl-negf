@@ -1,0 +1,19 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_present_attempt_without_value_is_invalid_not_legacy ___________
+
+source = ([namespace(uuid='20dd2a4c-031b-425c-90b8-2f7ea564d313', inputs=namespace(execution_id=namespace(value='E'), attempt=n...namespace(outputs={}), {'attempt': 2, 'calcjob_uuid': '20dd2a4c-031b-425c-90b8-2f7ea564d313', 'execution_id': 'E'}, [])
+
+    def test_present_attempt_without_value_is_invalid_not_legacy(source):
+        children, node, _, events = source
+        children.pop(0)
+        children[0].inputs.attempt = NS()
+        node.outputs.clear()
+>       with pytest.raises(ValueError, match="Selected child identity is invalid"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+components/qcl-negf-aiida/tests/test_export_selection.py:265: Failed
+=========================== short test summary info ============================
+FAILED components/qcl-negf-aiida/tests/test_export_selection.py::test_present_attempt_without_value_is_invalid_not_legacy
+1 failed in 0.16s

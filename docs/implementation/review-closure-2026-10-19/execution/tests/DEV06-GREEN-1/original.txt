@@ -1,0 +1,2 @@
+Test Summary:                                                        | Pass  Total  Time
+Nonzero current measure and basis coherence: manufactured functional |  248    248  8.6s

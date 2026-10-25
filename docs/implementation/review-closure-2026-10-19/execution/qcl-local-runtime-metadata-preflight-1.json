@@ -1,0 +1,26 @@
+{
+  "id": "LOCAL-DOC04-OPS04-RUNTIME-PREFLIGHT-1",
+  "rows": [
+    {
+      "command": [
+        "nix-store",
+        "--query",
+        "--hash",
+        "/nix/store/q6zfrswar6d0fkihnxc198vmkdxrmvq5-source"
+      ],
+      "exit": 1,
+      "raw_utf8": "error: cannot connect to socket at '/nix/var/nix/daemon-socket/socket': Connection refused\n",
+      "bytes": 91,
+      "sha256": "75a87665b70d7f50150c3cbe6fc945096c7f62b26a09d70fee9efb8d47d5cb79"
+    }
+  ],
+  "wall_seconds": 0.020041261974256486,
+  "utc": "2026-10-19T20:54:23.685859+00:00",
+  "limits": "90s1CPU2GiBAS1MiBraw; subprocess CPU limits per command; overall wall enforced by remaining timeout; no product imports or builds",
+  "prior_sandbox_denial": {
+    "command": "nix-store --query --hash",
+    "failure": "daemon socket Operation not permitted",
+    "tool_chunk": "40264d",
+    "native_builds": 0
+  }
+}

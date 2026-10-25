@@ -1,0 +1,48 @@
+{
+  "state": "G1_merged",
+  "repo": "Afonenko-QCL-NEGF/QCLNEGF.jl",
+  "branch": "codex/review-closure-final-audit-integration",
+  "base_branch": "codex/review-closure-reader-routes",
+  "base": "239d76bb59c955b32888eeaec518d6e465b4178d",
+  "head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "files": {
+    "src/QCLNEGF.jl": {
+      "sha256": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+      "bytes": 31400
+    },
+    "src/numerics/reference/final_audit.jl": {
+      "sha256": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+      "bytes": 30783
+    },
+    "src/numerics/reference/validation.jl": {
+      "sha256": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+      "bytes": 33446
+    },
+    "src/numerics/reference/poisson.jl": {
+      "sha256": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+      "bytes": 3329
+    },
+    "src/numerics/optimized/production_solver.jl": {
+      "sha256": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+      "bytes": 52380
+    },
+    "test/numerics/final_audit_evidence.jl": {
+      "sha256": "ede25dde26d72c313fb15e8bfcc515e8d29673b41336535c760a6eb0113309e9",
+      "bytes": 40051
+    }
+  },
+  "C08_calls": 6,
+  "corrective_rounds": 3,
+  "runtime_state": "287new_and930compatibility_pass_pending_final_independent_evidence_review",
+  "CP_SOURCE": "e317a4a23a68d510f0e4a85b9da2fd3ecc43ea2eed4563a0fa7f433e172826fa",
+  "pr": 12,
+  "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/12",
+  "previous_published_head": "e86ac74c4fe04a8999b889970c5a9f3c65575694",
+  "original_corrective_cap": 2,
+  "engineering_extension": 1,
+  "push_outcome": "confirmed by fresh gh pr view and REST pull head, both7324d98/draft/open; no second push",
+  "merge_commit": "9c7792fa146c820c45591749116b49706e0465e2",
+  "merged_at": "2026-10-19T18:06:22Z",
+  "final_review": "933886f7d8f0c2de0c2e689b9129b374686c59f15a0497ef546bf27ac751997c",
+  "G1_journal": "/tmp/qcl-sci05-core-G1-journal.json"
+}

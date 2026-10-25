@@ -1,0 +1,434 @@
+[
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CANDIDATE/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/answer.md",
+    "bytes": 6442,
+    "sha256": "71592675205a1a5ff8bebed9ea020150fc8bfbc8995e84df24d1e3456c474a81"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CANDIDATE/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/intent.json",
+    "bytes": 412,
+    "sha256": "7d731cf2b19533d94c9d3a258bda2776affed95768a8a8178c5a61a5ba988486"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CANDIDATE/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/operations.json",
+    "bytes": 4443,
+    "sha256": "275a0686bfe4bdf69b8044a4b168572fe99db9d1ca76df8e6f4e2f52d4819cce"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CANDIDATE/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CANDIDATE/prompt.txt",
+    "bytes": 3399,
+    "sha256": "0b1a729067e7ab861521e6553b1541f864b261d362e30e858bcb0aea855b4d3b"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CONTROL/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/answer.md",
+    "bytes": 6152,
+    "sha256": "7d0a46ef5931aa9c867e389d51c8617c249e377e991406e804183558c6297348"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CONTROL/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/intent.json",
+    "bytes": 406,
+    "sha256": "99ed134fcc819946336346cf97feea4ecc65c49285e59e6c7b3b996cdb5c6f15"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CONTROL/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/operations.json",
+    "bytes": 6043,
+    "sha256": "e87f6a0afd13d2a813d31bc9bc528e20ec735b27894282b8372b2e61931e3544"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T02-CONTROL/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T02-CONTROL/prompt.txt",
+    "bytes": 2422,
+    "sha256": "c1888799b23ad1cc9d8cb4c0c6709b28544a7f9f589a0a996ad684117005eb41"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CANDIDATE/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/answer.md",
+    "bytes": 7911,
+    "sha256": "967ce0fe9bc8dcaf041eabf0deb3344d75a83b5879fba4cc5a6e66856f5120d0"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CANDIDATE/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/intent.json",
+    "bytes": 412,
+    "sha256": "5d0fc3a66f2e1d021439781c1a1125bb8ae4ed7db1f0194d81da920745a81d0b"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CANDIDATE/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/operations.json",
+    "bytes": 50971,
+    "sha256": "3c4ef5b3b45e9ff4833f85f3f9e91de3fd0cb75734127872c8b42f9d8951b081"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CANDIDATE/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CANDIDATE/prompt.txt",
+    "bytes": 3344,
+    "sha256": "37cfd3e7e0f803a9b141c456225cf3c98782e4fe0efd904ba3942f61b6f6a1ff"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CONTROL/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/answer.md",
+    "bytes": 8122,
+    "sha256": "c35a7396df31d663ac9b28faa9f1b176f68979080743fafce9ee94716e964c1c"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CONTROL/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/intent.json",
+    "bytes": 406,
+    "sha256": "94d3958b30aa207dd0a8010ccb1356b20ff8b93426dcd634af5dfb4a47fea1cb"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CONTROL/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/operations.json",
+    "bytes": 11303,
+    "sha256": "52c0b967ea5e3308f33fc688163027064869d452ec5b0dc3769c4fe06f07b16b"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T03-CONTROL/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T03-CONTROL/prompt.txt",
+    "bytes": 2367,
+    "sha256": "dc5db243b46ec6acc5cf461d22c8cd8e4c5a55a2f39eb47e93e67f6ef48b4e35"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CANDIDATE/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/answer.md",
+    "bytes": 1857,
+    "sha256": "ef6e7bb3a072c0af48b86cd8ff1607620650e2d5326c6bd0121db858fd5081e5"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CANDIDATE/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/intent.json",
+    "bytes": 675,
+    "sha256": "5bf13e1670b5ab4927adc3573d1c3890570eb437288d143cc15e09a089d72651"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CANDIDATE/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/operations.json",
+    "bytes": 1700,
+    "sha256": "cd5d5d3155841060798c8347780d1b4c76957a9803d007df195b36b139c94d5c"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CANDIDATE/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CANDIDATE/prompt.txt",
+    "bytes": 4059,
+    "sha256": "f99d3e0614798098a3876df0d3af942ce287adaabb9008a0ebc025fdda1b8e3b"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CONTROL/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/answer.md",
+    "bytes": 2078,
+    "sha256": "f9e4137d5789046cafb3c4eebf7d565e72794c667dffc5122e394d56246d2060"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CONTROL/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/intent.json",
+    "bytes": 669,
+    "sha256": "40459f56fdcab69337834b020c2f0f32e732f4b8faed487b343aee5d819a1746"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CONTROL/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/operations.json",
+    "bytes": 1752,
+    "sha256": "0f991d12e55777f449bea9429778883405e917cf1a68d92429dd62cdafe2cd2a"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T05-CONTROL/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T05-CONTROL/prompt.txt",
+    "bytes": 3082,
+    "sha256": "6207a704a06f5166773bdc3a6c2eaa4d80de5bacc80bdec0d579bdb1a88ba1aa"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CANDIDATE/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/answer.md",
+    "bytes": 4236,
+    "sha256": "fed82f856ff8e485c91637b84b0fb7cf29ffd8dc06607a6c6da6934d272d66c3"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CANDIDATE/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/intent.json",
+    "bytes": 675,
+    "sha256": "65b18dd7266bc932912b5848bf94704d9a73c263d16b7e81232757ac9b089ef4"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CANDIDATE/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/operations.json",
+    "bytes": 1632,
+    "sha256": "d35cae012b345bb34f5d2ce5b94bcbeb569b1640fe2a0ae12d88f55ca818a8e8"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CANDIDATE/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CANDIDATE/prompt.txt",
+    "bytes": 3793,
+    "sha256": "cb1f69b56b7a2dc89c2e0a14229a64c0de78185b34442c69ca6f18abcd9107de"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/answer.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/answer.md",
+    "bytes": 4164,
+    "sha256": "2b17574d2ab7bcd665510a320d15a62fd8ea41ef494625d43d3536c96b8dbb49"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/intent.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/intent.json",
+    "bytes": 669,
+    "sha256": "d29ba7648c885c59027df977892b9f732a46fd0b25596b09c2efa1afeb55748a"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/operations.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/operations.json",
+    "bytes": 1495,
+    "sha256": "33915cdb0ce132c04df1f73653a4df1230a80e81f83880a83bd0557c058845d7"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/SI07-FWD-T14-CONTROL/prompt.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/SI07-FWD-T14-CONTROL/prompt.txt",
+    "bytes": 2816,
+    "sha256": "eb989f515557ecf631c44664712f9996a113f85eabd34c4f6db01c15d1f9338f"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/campaign.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/campaign.json",
+    "bytes": 597,
+    "sha256": "f3bde9b84720789499eea2c801f73662cdde9942d61abb6402ff63a7ab5e5e01"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/case-scoring-basis.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/case-scoring-basis.json",
+    "bytes": 3210,
+    "sha256": "075750dac0790c710fa59991226e5945bba9308eb4c4eb24e4816d977af6d533"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/comparison.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/comparison.md",
+    "bytes": 5823,
+    "sha256": "61bb942ac1758c4711169a046c36c2c96cebdb34057b3ebf1ec9808ed2402096"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/protocol.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/protocol.json",
+    "bytes": 7790,
+    "sha256": "508b5a80cef8b97f5d34243a56a2130f6a269e396888a7b892ebda09144c40cc"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/sample-records.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/sample-records.json",
+    "bytes": 8976,
+    "sha256": "ea42be34d0064ff9a8537758c529ff9bd5158478717721a3a74037050b1c1671"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/scoring-final.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/scoring-final.json",
+    "bytes": 727,
+    "sha256": "1d2010dae2741fab308a534d59678b1775a9339da649f2ffe72fea818e0443f1"
+  },
+  {
+    "source": "/tmp/qcl-si07-forward-fresh/scoring-interim.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/forward/scoring-interim.json",
+    "bytes": 3454,
+    "sha256": "90a702c2a74d225ef5605b9d7a97940505c672ad30cae5682966bb02600900fe"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T02/archive-receipt.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/archive-receipt.json",
+    "bytes": 664,
+    "sha256": "30bcfdc73bb6bbca43bf6ef9c41491ed221dc5c7fb63b550b87cbad8fdb513c9"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T02/current-checkout.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/current-checkout.json",
+    "bytes": 195,
+    "sha256": "f398e048db6961f760f50668181f43b9d840ef469b61f293fe35855c76b2372f"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T02/frozen-plan.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/frozen-plan.json",
+    "bytes": 240,
+    "sha256": "cc502a4746c8985c9bfbe6ab9043718889533612a676d7786e38fa278c887e7d"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T02/request.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T02/request.txt",
+    "bytes": 1271,
+    "sha256": "140c6e67e7be57d6b987ff7214197dad8e66fd45e9e08b5194a347162b025bd2"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T03/poisson.jl",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/poisson.jl",
+    "bytes": 2385,
+    "sha256": "8989ced0c4adc67e5d553b98863cd8ee3584705546ba445565cb5da0e7130645"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T03/request.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/request.txt",
+    "bytes": 1177,
+    "sha256": "79ff6ee1fbe362e322fbd657348c7777b4fab5dec70f36578e14561d212f8043"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T03/source-identity.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T03/source-identity.json",
+    "bytes": 268,
+    "sha256": "605a87a9978b4b03801ff3b3ff1c429052309a8cc44f8a5ef579c45043ae6b53"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T05/README.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/README.md",
+    "bytes": 45,
+    "sha256": "7eecc12c920cd98bfbe3844ea2bc1046e34f6d41962880e5ffd072e1e8d10ddd"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T05/check.py",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/check.py",
+    "bytes": 589,
+    "sha256": "986ccecaa3e35a844d782d1faf550eb5fcd5ad63e643af8eaac601567e3c0305"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T05/request.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/request.txt",
+    "bytes": 1533,
+    "sha256": "80aafaed9169982a595159b87059abe287896e7bfa599d071f18327f03c58315"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T05/target.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T05/target.md",
+    "bytes": 46,
+    "sha256": "cbef9658527394642f452a6a082e3a1bba187ef26135d85739f0e2b0ea08ff38"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T14/request.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T14/request.txt",
+    "bytes": 1148,
+    "sha256": "88b7375b43021128f50c063ee72238e1ad38dec9cb221352dc09efcd11a1f47d"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/T14/telemetry.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/T14/telemetry.json",
+    "bytes": 518,
+    "sha256": "50385c86aceb0f8e501174c6e718de5eb28dbff2ade02f271641c1696773f58d"
+  },
+  {
+    "source": "/tmp/qcl-si07-cases/manifest.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/raw-cases/manifest.json",
+    "bytes": 2318,
+    "sha256": "d9b3c759a4dffe56b63a29609b09cae3e9110fb7f3f72bf1af9ae40d8c447e37"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/00-runtime-manual/receipt.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/receipt.json",
+    "bytes": 1109,
+    "sha256": "8fc47330afa683c865ef13b621b771ed6d9b45a23e20e4cc009985b5fee7e99d"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/00-runtime-manual/stderr.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/00-runtime-manual/stdout.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/00-runtime-manual/stdout.txt",
+    "bytes": 8136,
+    "sha256": "8a2f20233ba8b261479f1bc7028c617b8973af86a7a2b2dd487e0cd23e9f0201"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/freeze-envelope-guard-v1/receipt.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/receipt.json",
+    "bytes": 667,
+    "sha256": "9a0628c06ab74909c9641d87f6ef8dca1607ec9dd96c2061e19c62e73ea66c99"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/freeze-envelope-guard-v1/stderr.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/stderr.txt",
+    "bytes": 227,
+    "sha256": "cbf1faf8d02314d892977b99c125d70a4dab14a7b6d2f68f012526aae29bc7a2"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/freeze-envelope-guard-v1/stdout.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/freeze-envelope-guard-v1/stdout.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-performance-audit/receipt.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/receipt.json",
+    "bytes": 1455,
+    "sha256": "2e4edcbe4d415f91e31fea31efb8af8a79a1538fd7abc79ffbf30118c69520b1"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-performance-audit/stderr.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-performance-audit/stdout.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-performance-audit/stdout.txt",
+    "bytes": 16,
+    "sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-physics-audit/receipt.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/receipt.json",
+    "bytes": 1438,
+    "sha256": "bc6c365b8f96bba188daa1bb265c21be80b34d69c05f927f9d799b51089d4387"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-physics-audit/stderr.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-physics-audit/stdout.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-physics-audit/stdout.txt",
+    "bytes": 16,
+    "sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-research-framing/receipt.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/receipt.json",
+    "bytes": 1452,
+    "sha256": "c524394489bd46541ddcd3f9552fce772ad625ce285ba760542a0f46129b5320"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-research-framing/stderr.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-research-framing/stdout.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-research-framing/stdout.txt",
+    "bytes": 16,
+    "sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-results-analysis/receipt.json",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/receipt.json",
+    "bytes": 1451,
+    "sha256": "321e238d607d7ad94e2bb3943f4796202e0fd21afa67fc52fa3645100f1a9918"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-results-analysis/stderr.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-results-analysis/stdout.txt",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/si07/formal-raw/qcl-results-analysis/stdout.txt",
+    "bytes": 16,
+    "sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0"
+  },
+  {
+    "source": "/tmp/qcl-si07-coordination-audit.md",
+    "path": "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si07-coordination-audit.md",
+    "bytes": 3823,
+    "sha256": "a8482e2adb2dc9d2b74810cdcfa266fd0b8fdb5ce69815733987de8f82e9843b"
+  }
+]

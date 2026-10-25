@@ -1,0 +1,65 @@
+{
+  "id": "LOCAL-DOC04-OPS04-RUNTIME-PREFLIGHT-3",
+  "engineering_replan": "latest human resource grant, E3 coordinator finite replan after explicit feature-name error in E2; enable read-only-local-store for this process only; one call90s1CPU2GiBAS1MiBraw; stop on any further failure, preserve E1/E2",
+  "registered_nixpkgs_source": {
+    "row": [
+      "/nix/store/q6zfrswar6d0fkihnxc198vmkdxrmvq5-source",
+      "sha256:711ad69488d5449e811c3afd71a51d5ec677a30cd620a607a4d9863c70489c85",
+      null,
+      206622144
+    ],
+    "nar_sri": "sha256-cRrWlIjVRJ6BHDr9caUdXsZ3owzWIKYHpNmGPHBInIU=",
+    "locked": {
+      "lastModified": 1790340521,
+      "narHash": "sha256-cRrWlIjVRJ6BHDr9caUdXsZ3owzWIKYHpNmGPHBInIU=",
+      "owner": "NixOS",
+      "repo": "nixpkgs",
+      "rev": "f5c082a40f7571c266e74e80ae2e68aadd8a9fc7",
+      "type": "github"
+    },
+    "proof_limit": "trusted local read-only store registration, not fresh NAR content verification"
+  },
+  "rows": [
+    {
+      "command": [
+        "nix",
+        "--extra-experimental-features",
+        "nix-command read-only-local-store",
+        "--store",
+        "local?read-only=true",
+        "eval",
+        "--offline",
+        "--raw",
+        "--impure",
+        "--expr",
+        "let p=import /nix/store/q6zfrswar6d0fkihnxc198vmkdxrmvq5-source {system=\"x86_64-linux\";}; in builtins.toJSON { deno=p.deno.outPath; node=p.nodejs_24.outPath; }"
+      ],
+      "exit": 0,
+      "raw_utf8": "{\"deno\":\"/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3\",\"node\":\"/nix/store/frlyjd2wya3rk8xmdc98yq3x0rhpkh9n-nodejs-24.21.0\"}",
+      "bytes": 133,
+      "sha256": "c7382032e8ed36c7046879f3d32cebaacedc46ab74896eaa4c38347dd164b525"
+    },
+    {
+      "command": [
+        "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+        "--version"
+      ],
+      "exit": 0,
+      "raw_utf8": "deno 2.8.3 (stable, release, x86_64-unknown-linux-gnu)\nv8 14.9.207.2-rusty\ntypescript 6.0.3\n",
+      "bytes": 92,
+      "sha256": "93a1c5b6aced33852d074766c1531e97cf5f28bcae39f5373eac2a7d9f4bccbe"
+    },
+    {
+      "command": [
+        "/nix/store/frlyjd2wya3rk8xmdc98yq3x0rhpkh9n-nodejs-24.21.0/bin/node",
+        "--version"
+      ],
+      "exit": 0,
+      "raw_utf8": "v24.21.0\n",
+      "bytes": 9,
+      "sha256": "f2ec568164f99546161909b0189b57bb5be3e80f8e2ccd8a51a4aed8c4055a04"
+    }
+  ],
+  "wall_seconds": 1.213912072009407,
+  "utc": "2026-10-19T20:55:30.096986+00:00"
+}

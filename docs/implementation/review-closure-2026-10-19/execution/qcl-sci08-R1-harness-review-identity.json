@@ -1,0 +1,50 @@
+{
+  "status": "CHANGES_REQUIRED_SOURCE",
+  "review_scope": "independent static high source review only; no execution grant",
+  "report": {
+    "path": "/tmp/qcl-sci08-R1-harness-review.md",
+    "sha256": "0436f8fc877b63ff0921a758593b9353be9300027f664c913d93bd5ee32163d5",
+    "bytes": 14886
+  },
+  "reviewed_harness_sha256": "e198d49c81ecded2ca4e5cecf0d2a40776ae56358a973e53d536ec24980c8930",
+  "reviewed_plan_sha256": "0cb62f99bd8439bf5f6b33aaabdda1000d7b17520894b99d9c062e9005a0ec48",
+  "reviewed_harness_report_sha256": "37da39acdda0280179b5b8050cd617338ba317c3cdbee93a3f357edb1c14d86a",
+  "reviewed_harness_identity_sha256": "d4c7f0445ecb057fdf05bcd9f8010177c194efd1ea496fa6811242c43aa6fb6a",
+  "owning_runner_head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "bound_root_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "bound_core_head": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+  "cwd_root_head": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "blocking_findings": [
+    {
+      "id": "B1",
+      "priority": "P1",
+      "locator": "harness:75-90,173,179-180,211,225",
+      "summary": "Fast/disappearing child can report unmeasured RSS as zero and satisfy bounded predicate."
+    },
+    {
+      "id": "B2",
+      "priority": "P2",
+      "locator": "harness:snapshot:55-61; Runner configuration_contract.jl:2,45-64; selected application fixture:46-48",
+      "summary": "Claimed complete snapshot omits imported tools verifier and used YAML/schema/provenance inputs; executable plan/harness post binding also absent."
+    }
+  ],
+  "environment_only_limitation": "Acceptable as explicitly acknowledged bounded trusted engineering assumption after source blockers are corrected; never hard filesystem/network or native isolation acceptance.",
+  "calls": {
+    "target_runtime_parser_import_tests_native_network_install": 0,
+    "candidate_harness_or_helper_import_compile_selftest": 0,
+    "C08": 0
+  },
+  "writes": {
+    "production_test_CP_Git": 0,
+    "outputs_only": [
+      "/tmp/qcl-sci08-R1-harness-review.md",
+      "/tmp/qcl-sci08-R1-harness-review-identity.json"
+    ]
+  },
+  "source_read_budget_bytes": 3145728,
+  "conservative_logical_read_charge_upper_bound_bytes": 1048576,
+  "physical_IO_CPU_RSS": "not_measured",
+  "wall_budget_seconds": 900,
+  "report_budget_bytes": 131072,
+  "stop": "No RED/GREEN until corrected frozen harness/plan rereview and separate fresh Root READY."
+}

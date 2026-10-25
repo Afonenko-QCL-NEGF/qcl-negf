@@ -1,0 +1,67 @@
+{
+  "operation_id": "ENG-REPLAN-DOCS-ROUTING-CORRECTION-E1-1",
+  "authority": "Direct human standing engineering resource grant after DEV10: разрешаю здесь и дальше использовать все доступные ресурсы для ускорения процесса разработки и развертывания",
+  "scope": "Known observed Node TAP false rejection and selected Deno reporter-header correction; two pure paths only, 232nominal; no native16/CI/solver",
+  "state": "finite_engineering_packet_authorized_requires_freshRoot_admission_and_ready_each_stage",
+  "root_head_at_plan": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "source_calls": [
+    {
+      "stage": "FORMAT3",
+      "before": 8,
+      "after": 9
+    },
+    {
+      "stage": "LINT3",
+      "before": 9,
+      "after": 10
+    },
+    {
+      "stage": "CHECK3",
+      "before": 10,
+      "after": 11
+    }
+  ],
+  "product_call": {
+    "id": "DOCS-ROUTING-CORRECTION-E1",
+    "before": 90,
+    "after": 91,
+    "maximum_calls": 1,
+    "expected_tests": 232,
+    "observed": null
+  },
+  "limits": {
+    "each_wall_seconds": 120,
+    "each_CPU_affinity": 1,
+    "each_sampled_RSS_stop_bytes": 1073741824,
+    "each_sampled_owned_TMP_stop_bytes": 16777216,
+    "each_raw_bytes": 2097152,
+    "aggregate_calls": 4,
+    "aggregate_wall_seconds": 480,
+    "aggregate_raw_bytes": 8388608,
+    "concurrent_calls_all_agents": 1,
+    "no_automatic_rerun": true
+  },
+  "source_composition": "RootexactHEAD+all8gitlinks checked beforeeachcall; isolated2bb05d3 base independent. FORMAT3exactunformatted12fb/3f3; thenactualformat-equivalenceANDfullpureclosurehighreview bindsnewhashes/report, notold23a4 or preformat3842 alone",
+  "history": "Original source8of8 and originalpureGLOBAL88/GREEN1 230=221pass9fail consumed and retained. MathRED89/GREEN90 consumed2of2,97PASS accepted, no reset. C08SCI05/08 stays8of8, fullCI/science/nativebuild0. New IDs only, no retries.",
+  "guard": {
+    "path": "/tmp/qcl-docs-routing-pure-guard-v8.py",
+    "sha256": "5cecec92f20bed186ab51b08b4b98585dde5452af5e4eef31ad27adbf386763b",
+    "bytes": 61984
+  },
+  "guard_plan": {
+    "path": "/tmp/qcl-docs-routing-pure-plan-v8.json",
+    "sha256": "813afe65ddf7245eaf2562472398baf8f541463bba0d7022256ebc75f4cdaaa5",
+    "bytes": 10236
+  },
+  "guard_review": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v8-review.md",
+    "sha256": "e86dda23d6b98d9b03431c19a9b281f4ea87001feaf57431976a4cd7388347cf",
+    "bytes": 11787
+  },
+  "source_CPP": {
+    "path": "/tmp/qcl-docs-routing-tap-correction-i1-review.md",
+    "sha256": "3842d4b5acf76a41d54b1fe3ac079969bb744526955ef6613ce01938f754ee9e",
+    "bytes": 10264
+  },
+  "resource_limit": "sampled stops nothardquota/peak/OS/nativeadmission; runtime hash streamed141648992B beforeeachcall byRootandguard, notloadedfullRAM; no native/scientificclaim"
+}

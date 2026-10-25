@@ -1,0 +1,41 @@
+{
+  "task": "SCI08-R1-design",
+  "stage": "source_design_only",
+  "status": "D_READY_FOR_INDEPENDENT_HIGH_REVIEW",
+  "managed_root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "observed_root_head": "469ef4ec36c1dfb967856108e5f9455429559c15",
+  "observed_runner_head_and_gitlink": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "observed_core_gitlink": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+  "composition_authority": "Git gitlinks; this identity is one-time forensic evidence, not a maintained lock",
+  "runner_status_short": "",
+  "root_status": "dirty coordinator checkpoint/census/evidence plus DOC06/DOC07 untracked changes; unrelated inputs untouched",
+  "contracts_checkout_mismatch": {
+    "tree_gitlink": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+    "worktree_head": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+    "used_as_R1_source": false
+  },
+  "primaries": [
+    {"path":"/tmp/qcl-sci07-resource-design.md","sha256":"1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635"},
+    {"path":"/tmp/qcl-sci07-resource-design-v2.md","sha256":"fc78a0c77394f4d12a1c5633b7e4acb587429667abc106f5aa72c1dc4dd9d010"},
+    {"path":"/tmp/qcl-sci07-resource-design-review.md","sha256":"48f97407846b4b179de2442e1295e8cc2028ed7d4e3ca9c2f28c8079ac5d4e67"},
+    {"path":"/tmp/qcl-sci07-resource-design-v2-review.md","sha256":"80e2f1ca784b9c4a082d0785e6ee6bc9ceb507eeecc43c63822f65f532a1d18e"}
+  ],
+  "runner_source_sha256": {
+    "src/application/resource_contract.jl":"6be67c1ca1ded92b57063cec6e493a589c1520ccc282e569ca131b5f65effb8c",
+    "src/infrastructure/resources/linux_resources.jl":"eed7dc41e655fa94d3b29db514b5e5682e3023b862b91e53f58dbc18f3f363b8",
+    "src/composition/native_phase_telemetry.jl":"9605f1a4852f5edbe8ca83652500c2e0a2352feec7a04cf9d0e85bd0e712f173",
+    "src/infrastructure/persistence/point_artifacts.jl":"9e8c1d8f624bb828134129c10226211968360950cbac9ffd82e247a8ec294cd4",
+    "src/composition/scientific_execution.jl":"55a3737a35b21867d91992a2a3a7807729a3b9d83b0931006d99dc82addbf9cd"
+  },
+  "test_pattern_sha256": {
+    "test/application/execution_resource_contract.jl":"c6eabaad77f868bb3413b54f0f2b8069d315491353195793bc65a6fe72c34760",
+    "test/infrastructure/linux_process_resource_probe.jl":"1f966a0c980db205bb97b32b3ca67c40f44ef2d85590e8405ea8deb22ef97d1e",
+    "test/integration/native_phase_resource_contract.jl":"30c511c1b8a811855934d719b500192ff9be8efa301eb477651114143d37b5e0",
+    "test/run_group.jl":"0f9217506bf87e2e7f1492c163c77a185b4333e7c0fccf9a7da87c7c170187b7"
+  },
+  "current_scope": {"source_read_limit_bytes":4194304,"wall_limit_seconds":600,"cpus":1,"ram_limit_bytes":1073741824,"output_limit_bytes":131072},
+  "target_calls": {"runtime":0,"imports":0,"parser":0,"tests":0,"build":0,"native":0,"network":0,"solver":0,"scientific_attempts":0,"C08":0,"product_writes":0,"CP_writes":0,"git_mutations":0},
+  "future_test_plan": {"id":"SCI08-R1-ENG-1","authorization":"proposal_only_not_granted","process_invocations":1,"file_includes":5,"required_property_groups":31,"max_attempts":1,"wall_seconds":600,"cpus":1,"ram_bytes":2147483648,"output_bytes":1048576,"fixture_write_bytes":16777216,"installs":0,"solver_calls":0},
+  "residual": ["independent high D review pending","no product implementation","no manufactured runtime evidence","strict campaign remains needs_guard/needs_admission","R2/R3/P1/P2/A1/C1/native guards not closed","C08 exhausted8/8 unchanged"],
+  "artifacts": ["/tmp/qcl-sci08-R1-design.md","/tmp/qcl-sci08-R1-identity.json","/tmp/qcl-sci08-R1-readledger.json"]
+}

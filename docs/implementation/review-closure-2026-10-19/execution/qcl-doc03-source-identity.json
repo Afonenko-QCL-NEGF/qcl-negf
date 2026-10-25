@@ -1,0 +1,528 @@
+{
+  "stage": "DOC03 D frozen source receipt, not CP-DESIGN acceptance",
+  "source_root": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "initial_status": " M components/QCLNEGF.jl\n M components/QCLNEGFRunner.jl\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/single-server-deployment.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev22-source-projection-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc02-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-dev22-projection-source-summary.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc02-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-source-commit.json\n",
+  "observed_head_now": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "observed_status_now": " M components/QCLNEGF.jl\n M components/QCLNEGFRunner.jl\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n M docs/single-server-deployment.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev22-source-projection-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc02-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci05-local-bind-harness-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si07-coordination-audit.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-dev22-projection-source-summary.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc02-publication-journal.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-local-admission-bind.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-main-source-binding.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci05-source-commit.json\n?? docs/implementation/review-closure-2026-10-19/execution/si07/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-1/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/SCI05-C08-CORE-2/\n",
+  "recursive_status_now": "+e86ac74c4fe04a8999b889970c5a9f3c65575694 components/QCLNEGF.jl (v0.2.0-13-ge86ac74)\n+9378396a3681c1eddf2c62f16674834fc4465583 components/QCLNEGFRunner.jl (v0.2.0-26-g9378396)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n 02a564b78dc9c5e19eacf496bc8c891361eafaab components/qcl-negf-contracts (v0.2.0-13-g02a564b)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n",
+  "gitlinks_derived_from_source_root": {
+    "components/QCLNEGF.jl": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+    "components/QCLNEGFRunner.jl": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+    "components/qcl-negf-aiida": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+    "components/qcl-negf-contracts": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+    "components/qcl-negf-platform": "b067723c82382689bff5cc366981c56e99b926f8",
+    "components/qcl-negf-portal": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+    "components/qcl-negf-research": "1eacefcd81a50e245ea9da74a0b717b33818c61e",
+    "components/qcl-negf-results": "e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae"
+  },
+  "files": [
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "AGENTS.md",
+      "label": "selected root",
+      "bytes": 17383,
+      "sha256": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/architecture.md",
+      "label": "selected root",
+      "bytes": 5501,
+      "sha256": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/system/physics-documentation.md",
+      "label": "selected root",
+      "bytes": 28349,
+      "sha256": "434ad2513188d52c915ea2de5dee92b4257711abad3e19d51be47f31f2b7da20"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/system/documentation-methodology.md",
+      "label": "selected root",
+      "bytes": 18188,
+      "sha256": "709356cb384f6c05b0351e0f36787f96883b89cd69323bb6f9c61c9d9bbb396c"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/system/requirements.md",
+      "label": "selected root",
+      "bytes": 31503,
+      "sha256": "af8febf7c71a409ee3f8e05720103ef4013117e67215dfabb2c87dfe96e7c6d8"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/system/requirement-dispositions-2026-10-19.md",
+      "label": "selected root",
+      "bytes": 29126,
+      "sha256": "feb8457cdedabee3e68743bea7d2739040758b6af79e9ff11ff289165952433a"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/system/release-roadmap.md",
+      "label": "selected root",
+      "bytes": 30425,
+      "sha256": "58c7ce6007fe13b71027a397908555138065e2b9d72da24aba588542fd0256e3"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/implementation/review-closure-2026-10-19/documentation-instructions.md",
+      "label": "selected root",
+      "bytes": 24800,
+      "sha256": "17fc16b7808ae0e2b29732c65033a5f544bca79577788cbade386870e0246254"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/implementation/review-closure-2026-10-19/autonomy.md",
+      "label": "selected root",
+      "bytes": 29026,
+      "sha256": "056fb2bcbca56ea7700fa2a4de36b0da9ad7533a44e4e6b0dfcfab94ed76b1bd"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "docs/implementation/review-closure-2026-10-19/operator-permissions.md",
+      "label": "selected root",
+      "bytes": 32033,
+      "sha256": "4887a5d4ad67a84424225d5b827ba2975ec97e319c94efe59a3e67b9120054a0"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "ops/git.ts",
+      "label": "selected root",
+      "bytes": 3580,
+      "sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "ops/release.ts",
+      "label": "selected root",
+      "bytes": 3900,
+      "sha256": "a72e6e4ff6c89333a42df8031524b966e0a718f2b3b8c3a7b1503f34499f5ba2"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "ops/ci.ts",
+      "label": "selected root",
+      "bytes": 3479,
+      "sha256": "2d6750a2703fb1ac2a9ab7d6ec2195daa92a6f5bc3e51b762273bc935fe66702"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "ops/environment.ts",
+      "label": "selected root",
+      "bytes": 2343,
+      "sha256": "ac241561486efea1509d227b2640f525d64c562a7fd154ece2db4d726a5139f0"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "julia/Project.toml",
+      "label": "selected root",
+      "bytes": 659,
+      "sha256": "859c6e7b2aedf4b58cd48731ea9a3970d70a43e018796472ec99550d186fdafe"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "julia/Manifest.toml",
+      "label": "selected root",
+      "bytes": 25261,
+      "sha256": "a6cb226a2d6fe990e9a067658c16b44acdbaf984e68c3474232a22f72d8d8b47"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "flake.nix",
+      "label": "selected root",
+      "bytes": 2279,
+      "sha256": "4eeae196e7f561e3a61a4c073a13f88578f0ee306745ca0c1d0cff0e4f43771f"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": "flake.lock",
+      "label": "selected root",
+      "bytes": 3061,
+      "sha256": "9f6d261f1a705a4f1b46497107d0cb0a59d0dcfa240cb81255ba103aba3fcd36"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+      "revision": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+      "path": ".gitmodules",
+      "label": "selected root",
+      "bytes": 1041,
+      "sha256": "b3ac1b38e64b96cc5924f20f2f2327ba4b414d597ef4116846ab90e5e1894e24"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "CONTRIBUTING.md",
+      "label": "selected gitlink",
+      "bytes": 1930,
+      "sha256": "25c92d052efca42a28455990ff1e70d0e1a341ee3604c35118d1bade9a4b6fd9"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "docs/make.jl",
+      "label": "selected gitlink",
+      "bytes": 1553,
+      "sha256": "edafb4e03b0fd9982039267dc24ba7c6332551f7e3770fca20b35fc8dae9380f"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "docs/Project.toml",
+      "label": "selected gitlink",
+      "bytes": 259,
+      "sha256": "89f75b805803f233b9f4a0d2d38c0eac59fbd2c9cd316f222ba47276254df74c"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "src/numerics/optimized/production_contracts.jl",
+      "label": "selected gitlink",
+      "bytes": 15596,
+      "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "src/domain/types.jl",
+      "label": "selected gitlink",
+      "bytes": 36507,
+      "sha256": "f428a6c7ce2c7d4796d6be2983decffcdbfc25f21ec400a600038863f673e71b"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "src/domain/presets.jl",
+      "label": "selected gitlink",
+      "bytes": 7811,
+      "sha256": "84a0fffbb732fbd7c51889be2e0c06c46abd74eb7a03dce11beb8fc72dce5050"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "docs/src/theory/08_kernels.md",
+      "label": "selected gitlink",
+      "bytes": 12221,
+      "sha256": "4668b946604a4d6cfc84f639d0eb0b5bbef25e8162c2dd78ba638a99b03a0db2"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "docs/src/physics/models.md",
+      "label": "selected gitlink",
+      "bytes": 19876,
+      "sha256": "3aa51193aa3a141b0dd1c7d607c08b77225b718e73cd9b7e95f6ed86b8ea47cf"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "docs/src/developer/traceability.md",
+      "label": "selected gitlink",
+      "bytes": 7417,
+      "sha256": "3b8e5a006f60c599ae2568fd67fbf98abe6579682b962be0ed86446448c3811f"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "f7b108bef206d2b2dc5afe0306b2dff60d27ac59",
+      "path": "docs/src/api/public.md",
+      "label": "selected gitlink",
+      "bytes": 4900,
+      "sha256": "614f72b6775d5533813c9816010bf4bf8cec2c8b77c65ab2f0782ca082c64975"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "CONTRIBUTING.md",
+      "label": "selected gitlink",
+      "bytes": 1874,
+      "sha256": "2e59d623c611e0ebfe9380590802bd79af61590ac3f3a65f5af92937de01efc0"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "docs/make.jl",
+      "label": "selected gitlink",
+      "bytes": 744,
+      "sha256": "0749b9989ce07c34034dddac2fe8127a9ecca72d43105425928f7468dae16cbc"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "docs/Project.toml",
+      "label": "selected gitlink",
+      "bytes": 404,
+      "sha256": "d62edc078612a911a8c8e596fd86b938c90f9e106545e7733ecf8a4ece73efc4"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "tools/ci.ts",
+      "label": "selected gitlink",
+      "bytes": 2899,
+      "sha256": "2400983e57f62fea85a876163b9eaabdc32d04996c6c8099e0fc3ada806aac46"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/application/configuration_types.jl",
+      "label": "selected gitlink",
+      "bytes": 8663,
+      "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/infrastructure/config/configuration.jl",
+      "label": "selected gitlink",
+      "bytes": 71428,
+      "sha256": "b07516d1fa1b9f7918efd4fa9096327be45af5ea32233ba15a9e88bf225daebb"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/infrastructure/scientific/definitions.jl",
+      "label": "selected gitlink",
+      "bytes": 21636,
+      "sha256": "948f88d47ab3c668b0a79254e889cb62ac6cbb3702f508468dbfc101c8fa220b"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/application/scientific/planning.jl",
+      "label": "selected gitlink",
+      "bytes": 18116,
+      "sha256": "717ab6fed4d4ed923f0eee3096314a56fc9fded7180cc84322c5a102d02f94f0"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "23860d9e660a3cddf6cb5203d449d1b62f3745a1",
+      "path": "src/application/auto_strategy.jl",
+      "label": "selected gitlink",
+      "bytes": 19019,
+      "sha256": "810c72af8e4289c3dd61d4f49549a083568472646fa69eb625f41c5702840326"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+      "revision": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "CONTRIBUTING.md",
+      "label": "selected gitlink",
+      "bytes": 1583,
+      "sha256": "029859ad06814ad33740497d494227193b23593861c67423846176f8d3ce65bb"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+      "revision": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+      "label": "selected gitlink",
+      "bytes": 54815,
+      "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+      "revision": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "src/qcl_negf_contracts/schemas/scientific-plan.schema.json",
+      "label": "selected gitlink",
+      "bytes": 10922,
+      "sha256": "abed7316f061d1e386a210bc2ed95171ba38c9563e5bf4dd8d5b2701aa0e1256"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts",
+      "revision": "02a564b78dc9c5e19eacf496bc8c891361eafaab",
+      "path": "src/qcl_negf_contracts/__init__.py",
+      "label": "selected gitlink",
+      "bytes": 1692,
+      "sha256": "41b5b746bbf28cd0e60bb85bc927f1c55ba0ac2695f3271b875f83c057a744d1"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-research",
+      "revision": "1eacefcd81a50e245ea9da74a0b717b33818c61e",
+      "path": "CONTRIBUTING.md",
+      "label": "selected gitlink",
+      "bytes": 2191,
+      "sha256": "52e86709eb4013e08df130768e110908863ca103ab6468d6122bf030432f25fe"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-research",
+      "revision": "1eacefcd81a50e245ea9da74a0b717b33818c61e",
+      "path": "config/model/reference-2019-70k.yaml",
+      "label": "selected gitlink",
+      "bytes": 7010,
+      "sha256": "78444c7a358fabef315e07e028d3d65f65fec07efd119ac9ca238cc25c110829"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal",
+      "revision": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "path": "CONTRIBUTING.md",
+      "label": "selected gitlink",
+      "bytes": 2288,
+      "sha256": "b0994d41b7e460e28e28710d6949258c6ccb084706ef6e07bb65f64e0a24ed10"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal",
+      "revision": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "path": "AGENTS.md",
+      "label": "selected gitlink",
+      "bytes": 944,
+      "sha256": "146bfd657d5b9d8b09e9a6f668058457a28a3b61d4e4f22e935160c9c9a4b94c"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal",
+      "revision": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "path": "src/qcl_negf_api/api.py",
+      "label": "selected gitlink",
+      "bytes": 25747,
+      "sha256": "d324a9188d8b4f0b3a8bea5de38a0aa3891949a8f0b924c12790711496ea5e63"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal",
+      "revision": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "path": "src/qcl_negf_api/service.py",
+      "label": "selected gitlink",
+      "bytes": 25777,
+      "sha256": "b4dd4da7da85bdfca7993da3928dcf720f78e4f3ca8e70e27a2df36b79d01ef3"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal",
+      "revision": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "path": "frontend/src/main.tsx",
+      "label": "selected gitlink",
+      "bytes": 30237,
+      "sha256": "6abbc037617f0afda676fb693ad6205f68146049975b3463eda1e45767dd9888"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal",
+      "revision": "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d",
+      "path": "frontend/src/style.css",
+      "label": "selected gitlink",
+      "bytes": 7101,
+      "sha256": "3b2f217d4ac4a516e3a5f449cb1dc9f10401354624864df078601eea1a3faa1f"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform",
+      "revision": "b067723c82382689bff5cc366981c56e99b926f8",
+      "path": "CONTRIBUTING.md",
+      "label": "selected gitlink",
+      "bytes": 3168,
+      "sha256": "1e957beb71b3c4d1ad632453f3aefdb7cfe97ecc02fbce038020480af1182f39"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform",
+      "revision": "b067723c82382689bff5cc366981c56e99b926f8",
+      "path": "modules/application.nix",
+      "label": "selected gitlink",
+      "bytes": 12649,
+      "sha256": "c25bca65ab3aa05e312411f4c2851d586c7cb0ed31c81d299d693f60ce56876d"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform",
+      "revision": "b067723c82382689bff5cc366981c56e99b926f8",
+      "path": "nix/application.nix",
+      "label": "selected gitlink",
+      "bytes": 2304,
+      "sha256": "6da5caf7119ff8cfea0e7d84ff15c70efb93a6bd34abf9a9aeafbe63617eb11d"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform",
+      "revision": "b067723c82382689bff5cc366981c56e99b926f8",
+      "path": "flake.nix",
+      "label": "selected gitlink",
+      "bytes": 4105,
+      "sha256": "c77f554642dcfe6fd0f8e21141a1daa4415e9ee5530558927ef7c458279a1cc2"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform",
+      "revision": "b067723c82382689bff5cc366981c56e99b926f8",
+      "path": "flake.lock",
+      "label": "selected gitlink",
+      "bytes": 2625,
+      "sha256": "f28b24b18a4fa006bee6a7144e8a48738f32ed42ffd06ffbf3ed4fcbb6cbde07"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-aiida",
+      "revision": "d8f8092ca1c76523d85384b4bac8198d8bfa736b",
+      "path": "src/aiida_qcl_negf/service.py",
+      "label": "selected gitlink",
+      "bytes": 32672,
+      "sha256": "5f7e9b28f9007255e3de319fff43e48143d4c23a9c9487164ecda92ebac8c762"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "239d76bb59c955b32888eeaec518d6e465b4178d",
+      "path": "docs/src/theory/09_scba.md",
+      "label": "DOC02 candidate, not selected by root 9d8cf0c",
+      "bytes": 10788,
+      "sha256": "a1a3c438c14ff0d967a6890df3e7d3abf7ed7fb95e422ecb81ceef6c2350b004"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "revision": "239d76bb59c955b32888eeaec518d6e465b4178d",
+      "path": "docs/src/theory/12_validation.md",
+      "label": "DOC02 candidate, not selected by root 9d8cf0c",
+      "bytes": 30020,
+      "sha256": "be55b03e7a228aebad88b24410d2633cd575ae63211a01ff4187f2c1bb95755b"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "9378396a3681c1eddf2c62f16674834fc4465583",
+      "path": "docs/src/user/configuration.md",
+      "label": "DOC02 candidate, not selected by root 9d8cf0c",
+      "bytes": 10648,
+      "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "9378396a3681c1eddf2c62f16674834fc4465583",
+      "path": "docs/src/user/results.md",
+      "label": "DOC02 candidate, not selected by root 9d8cf0c",
+      "bytes": 15359,
+      "sha256": "a1efe47c40fee8873239ef2c8f99b9058781dcdc19d4102fbcc078a38cfeff28"
+    },
+    {
+      "repository": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl",
+      "revision": "9378396a3681c1eddf2c62f16674834fc4465583",
+      "path": "docs/src/api/public.md",
+      "label": "DOC02 candidate, not selected by root 9d8cf0c",
+      "bytes": 7050,
+      "sha256": "e59e1231197ed92823d691353ddc21dafe0b62252d586cf4018b2f331cda05dd"
+    }
+  ],
+  "auxiliary_receipts": [
+    {
+      "path": "/tmp/qcl-doc02-implementation-identity.json",
+      "bytes": 58603,
+      "sha256": "173cde03d3f74797085805c09e69ab71b474cd26210ffd8b1dab239906c896b6"
+    },
+    {
+      "path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/docs/implementation/review-closure-2026-10-19/execution/qcl-doc02-publication-journal.json",
+      "bytes": 2020,
+      "sha256": "0a0d263c6787f27f0afa19e7b8ab9ceecf79c2cbcb712dc20e4f710de389ee23"
+    }
+  ],
+  "hashed_source_bytes": 846485,
+  "limitations": [
+    "No Git mutations or tracked edits by DOC03 author",
+    "No target imports, installs, product tests, builds, browser, network, server, CI or solver",
+    "Runtime/native/scientific acceptance not established",
+    "Candidate DOC02 docs are distinct from selected root gitlinks"
+  ]
+}

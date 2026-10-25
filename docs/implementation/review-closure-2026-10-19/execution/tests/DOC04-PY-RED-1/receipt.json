@@ -1,0 +1,46 @@
+{
+  "task": "DOC04",
+  "attempt": "PY-RED-1",
+  "started_utc": "2026-10-19T21:01:20.488626+00:00",
+  "recorded_at_utc": "2026-10-19T21:01:21.235728+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_docs_assembly.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-DOC04-PY-RED-1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+  "fixture_sha256": {
+    "tests/test_docs_assembly.py": "ecacc18239241c45ac1ed9c4e7c4935cfd20919cc88ac236a69ffa435bdf038e"
+  },
+  "exit_code": 2,
+  "wall_seconds": 0.747,
+  "sampled_peak_process_tree_RSS_bytes": 54267904,
+  "sampled_owned_temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 841,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "source-bound local root units: PY; offline no setup/solver/fullCI; Node no network-call witness is source-based, Deno no net/run permission",
+  "runtime_sha256": "dd65a07e8f535525443d63e2bd6dd10efbf22bf22e0b6d65e634266acc7ac976",
+  "original_log": "/tmp/qcl-DOC04-PY-RED-1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 10,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

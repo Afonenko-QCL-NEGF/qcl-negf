@@ -1,0 +1,1014 @@
+.........F.F...F...............FF.....F.....F.F.F......FF.......F..F.... [ 30%]
+..........................F..FF....F..F.F...FFFF..F..........F..FF....F. [ 61%]
+.F...F...FFFF..F.............................F.......................... [ 92%]
+..................                                                       [100%]
+=================================== FAILURES ===================================
+_ ApplicationReleaseTests.test_controller_fetches_and_checks_both_hashes_before_closing_admission _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_controller_fetches_and_checks_both_hashes_before_closing_admission>
+
+    def test_controller_fetches_and_checks_both_hashes_before_closing_admission(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            gate = Path(temporary) / "admission.json"
+            gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+            original = gate.read_bytes()
+            run = DeliveryCommands(gate)
+            with patch.object(self.ops, "publish_admission", lambda _path, value, **kw: self.ops.publish_json(gate, value, **kw)):
+                report = self.ops.deliver_cli(delivery_manifest(), POOL, runtime=self.runtime, gate=self.gate, run=run)
+>           self.assertTrue(report["open"])
+E           AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:984: AssertionError
+_ ApplicationReleaseTests.test_deadline_after_returned_mutation_retains_started_unknown _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_deadline_after_returned_mutation_retains_started_unknown>
+
+    def test_deadline_after_returned_mutation_retains_started_unknown(self):
+        self.gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+        run = DeliveryCommands(self.gate)
+        clock = [100.0]
+        def completed_after_deadline(args):
+            result = run(args)
+            if 'register_aiida.py' in ' '.join(args):
+                clock[0] = 111.0
+            return result
+        with patch.object(self.ops.time, "monotonic", lambda: clock[0]):
+            result = self.ops.deliver_cli(delivery_manifest(), POOL, run=completed_after_deadline,
+                runtime=self.runtime, gate=self.gate, delivery_timeout_seconds=10)
+>       self.assertTrue(any('register_aiida.py' in ' '.join(a) for a in run.calls), "intended local activation effect was reached")
+E       AssertionError: False is not true : intended local activation effect was reached
+
+components/qcl-negf-platform/tests/test_application_release.py:533: AssertionError
+_ ApplicationReleaseTests.test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry>
+
+    def test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry(self):
+        self.gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+        source, pool = self.runtime.parent / "manifest.json", self.runtime.parent / "pool.json"
+        source.write_text(json.dumps(delivery_manifest()))
+        pool.write_text(json.dumps(POOL))
+        run = DeliveryCommands(self.gate)
+        original_deliver = self.ops.deliver_cli
+        publish = self.ops.publish_json
+        admission = self.ops.publish_admission
+        opened = [False]
+        def injected_delivery(value, selected, **kwargs):
+            return original_deliver(value, selected, run=run, **kwargs)
+        def persistent_terminal(path, value, **kwargs):
+            if Path(path).parent.name == "delivery-attempts" and value.get("phase") == "finished":
+                raise OSError("persistent terminal failure")
+            return publish(path, value, **kwargs)
+        def failed_close(path, value, **kwargs):
+            if not value["open"] and opened[0]:
+                raise OSError("failed recovery close")
+            result = admission(path, value, **kwargs)
+            if value["open"]:
+                opened[0] = True
+            return result
+        args = ["release", "deliver", "--manifest", str(source), "--pool", str(pool), "--enrollment", "/synthetic/enrollment.json",
+                "--runtime", str(self.runtime), "--gate", str(self.gate)]
+        with patch.object(sys, "argv", args), patch.object(self.ops, "deliver_cli", injected_delivery), \
+             patch.object(self.ops, "publish_json", persistent_terminal), \
+             patch.object(self.ops, "publish_admission", failed_close), patch("builtins.print") as printed:
+            with self.assertRaises(SystemExit) as caught:
+                self.ops.main()
+        self.assertEqual(caught.exception.code, 1)
+        payload = json.loads(printed.call_args.args[0])
+>       self.assertIsNone(payload["open"])
+E       AssertionError: False is not None
+
+components/qcl-negf-platform/tests/test_application_release.py:684: AssertionError
+_ ApplicationReleaseTests.test_malformed_remote_check_is_unknown_and_stops_pool _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_malformed_remote_check_is_unknown_and_stops_pool>
+
+    def test_malformed_remote_check_is_unknown_and_stops_pool(self):
+        self.gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+        run = DeliveryCommands(self.gate)
+        def incomplete(args):
+            result = run(args)
+            return '{"ready":' if args[0] == "ssh" and " check " in args[-1] else result
+        result = self.ops.deliver_cli(delivery_manifest(), POOL, run=incomplete,
+                                     runtime=self.runtime, gate=self.gate)
+        self.assertTrue(result["requires_reconciliation"])
+>       self.assertEqual(result["nodes"]["worker"]["status"], "not_attempted")
+E       AssertionError: 'failed' != 'not_attempted'
+E       - failed
+E       + not_attempted
+
+components/qcl-negf-platform/tests/test_application_release.py:465: AssertionError
+_ ApplicationReleaseTests.test_malformed_remote_identity_is_reported_per_node __
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_malformed_remote_identity_is_reported_per_node>
+
+    def test_malformed_remote_identity_is_reported_per_node(self):
+        for response in (None, []):
+            with self.subTest(response=response), tempfile.TemporaryDirectory() as temporary:
+                gate = Path(temporary) / "admission.json"
+>               report = self.ops.deliver_pool(release(), ["worker"], gate, quiesce=lambda: None,
+                    deliver=lambda _n, _m: response)
+
+components/qcl-negf-platform/tests/test_application_release.py:1253: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_application_release.py:304: in bound_pool
+    return original_pool(value, nodes, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+components/qcl-negf-platform/ops/application_release.py:1543: in deliver_pool
+    lifecycle_guard(runtime)
+components/qcl-negf-platform/ops/application_release.py:692: in lifecycle_guard
+    unresolved_deliveries(runtime, owner=owner)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+runtime = PosixPath('/tmp/qcl-OPS03-GREEN-1/tmp/tmpw51n7tnp/runtime')
+
+    def unresolved_deliveries(runtime, *, owner=None, emergency_close=False):
+        attempts = Path(runtime) / "delivery-attempts"
+        if attempts.exists():
+            for path in attempts.glob("*.json"):
+                if _own_artifact(owner, path) or (emergency_close and owner is not None and _registered_artifact(owner, path)):
+                    continue
+                previous = load(path)
+                if (not isinstance(previous, dict) or path.name.endswith('.lifecycle-intent.json')
+                        or previous.get('schema') not in ('qcl-negf-delivery-attempt-v1', 'qcl-negf-admission-intent-v1')
+                        or previous.get('pending_local_mutation')):
+>                   raise RuntimeError('Unresolved local mutation requires trusted reconciliation')
+E                   RuntimeError: Unresolved local mutation requires trusted reconciliation
+
+components/qcl-negf-platform/ops/application_release.py:619: RuntimeError
+_ ApplicationReleaseTests.test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies>
+
+    def test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            gate = Path(temporary) / "admission.json"
+            gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+            completed = []
+    
+            def deliver(node, manifest):
+                self.assertFalse(json.loads(gate.read_text())["open"])
+                if node == "worker-b":
+                    raise RuntimeError("worker offline")
+                completed.append(node)
+                return {**manifest, "ready": True}
+    
+            report = self.ops.deliver_pool(release(), ["worker-a", "worker-b"], gate,
+                                           deliver=deliver, quiesce=lambda: None)
+            self.assertFalse(report["open"])
+            self.assertEqual(report["nodes"]["worker-b"]["status"], "failed")
+            self.assertFalse(json.loads(gate.read_text())["open"])
+>           report = self.ops.deliver_pool(release(), ["worker-a", "worker-b"], gate,
+                                           deliver=lambda _n, m: {**m, "ready": True}, quiesce=lambda: None)
+
+components/qcl-negf-platform/tests/test_application_release.py:1204: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/tests/test_application_release.py:304: in bound_pool
+    return original_pool(value, nodes, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+components/qcl-negf-platform/ops/application_release.py:1543: in deliver_pool
+    lifecycle_guard(runtime)
+components/qcl-negf-platform/ops/application_release.py:692: in lifecycle_guard
+    unresolved_deliveries(runtime, owner=owner)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+runtime = PosixPath('/tmp/qcl-OPS03-GREEN-1/tmp/tmp8aanotvm/runtime')
+
+    def unresolved_deliveries(runtime, *, owner=None, emergency_close=False):
+        attempts = Path(runtime) / "delivery-attempts"
+        if attempts.exists():
+            for path in attempts.glob("*.json"):
+                if _own_artifact(owner, path) or (emergency_close and owner is not None and _registered_artifact(owner, path)):
+                    continue
+                previous = load(path)
+                if (not isinstance(previous, dict) or path.name.endswith('.lifecycle-intent.json')
+                        or previous.get('schema') not in ('qcl-negf-delivery-attempt-v1', 'qcl-negf-admission-intent-v1')
+                        or previous.get('pending_local_mutation')):
+>                   raise RuntimeError('Unresolved local mutation requires trusted reconciliation')
+E                   RuntimeError: Unresolved local mutation requires trusted reconciliation
+
+components/qcl-negf-platform/ops/application_release.py:619: RuntimeError
+_ ApplicationReleaseTests.test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker>
+
+    def test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker(self):
+        for failure in ("gate_fsync", "terminal_after_replace", "terminal_persistent", "close_failure"):
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                gate, runtime = root / "gate", root / "runtime"
+                gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+                run = DeliveryCommands(gate)
+                publish = self.ops.publish_json
+                admission = self.ops.publish_admission
+                fired = [False]
+                def fail_receipt(path, value, **kwargs):
+                    if Path(path).parent.name == "delivery-attempts" and value.get("phase") == "finished":
+                        if failure == "terminal_persistent":
+                            raise OSError("persistent terminal receipt failure")
+                        if failure == "terminal_after_replace" and not fired[0]:
+                            publish(path, value, **kwargs)
+                            fired[0] = True
+                            raise OSError("terminal directory fsync failed after replace")
+                    return publish(path, value, **kwargs)
+                def fail_admission(path, value, **kwargs):
+                    if value["open"] and failure in ("gate_fsync", "close_failure"):
+                        admission(path, value, **kwargs)
+                        fired[0] = True
+                        raise OSError("gate directory fsync failed after replace")
+                    if not value["open"] and failure == "close_failure" and fired[0]:
+                        raise OSError("cannot confirm closed gate")
+                    return admission(path, value, **kwargs)
+                with patch.object(self.ops, "publish_json", fail_receipt), \
+                     patch.object(self.ops, "publish_admission", fail_admission):
+                    if failure in ("terminal_persistent", "terminal_after_replace"):
+                        with self.assertRaises(OSError):
+                            self.ops.deliver_cli(delivery_manifest(), POOL, run=run, runtime=runtime, gate=gate)
+                        result = None
+                    else:
+                        result = self.ops.deliver_cli(delivery_manifest(), POOL, run=run, runtime=runtime, gate=gate)
+                self.assertEqual(json.loads(gate.read_text())["open"], failure == "close_failure")
+>               self.assertTrue(list((runtime / "delivery-attempts").glob("*.admission-intent.json")))
+E               AssertionError: [] is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:578: AssertionError
+_ ApplicationReleaseTests.test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards _
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards>
+
+    def test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root, run = Path(temporary), InitialCommands()
+            gate, record = root / "gate", root / "runtime/release.json"
+            record.parent.mkdir()
+            record.write_text(json.dumps({**release(), "ready": False}))
+            gate.write_text(json.dumps({"open": False, "release_id": "release-a"}))
+            (root / "profile").symlink_to("/nix/store/application")
+            credentials = {"uid": 0, "gid": 42}
+            reads, original_read = [], Path.read_bytes
+            original_text = Path.read_text
+            def nfs_read(path):
+                if path == gate:
+                    reads.append(dict(credentials))
+                    if credentials != {"uid": 3000, "gid": 3000}:
+                        raise PermissionError("root_squash denies mode0750 jobs traversal")
+                return original_read(path)
+            def nfs_text(path, *args, **kwargs):
+                return nfs_read(path).decode() if path == gate else original_text(path, *args, **kwargs)
+            def change_uid(value):
+                credentials["uid"] = value
+            def change_gid(value):
+                credentials["gid"] = value
+            with patch.object(self.ops, "GATE", gate), \
+                 patch.object(self.ops.os, "geteuid", lambda: credentials["uid"]), \
+                 patch.object(self.ops.os, "getegid", lambda: credentials["gid"]), \
+                 patch.object(self.ops.os, "seteuid", change_uid), \
+                 patch.object(self.ops.os, "setegid", change_gid), \
+                 patch.object(self.ops.pwd, "getpwnam", lambda _: SimpleNamespace(pw_uid=3000, pw_gid=3000)), \
+                 patch.object(Path, "read_bytes", nfs_read), patch.object(Path, "read_text", nfs_text):
+                try:
+                    self.ops.node_check(record, gate, root / "profile", run=run)
+                    with self.assertRaisesRegex(ValueError, "closed"):
+                        self.ops.guard("release-a", "/nix/store/solver/bin/qcl-negf", record, gate)
+>                   self.ops.prepare_initial(release(), profile=root / "profile", runtime=record.parent,
+                        gate=gate, role="worker", run=run)
+
+components/qcl-negf-platform/tests/test_application_release.py:738: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-platform/ops/application_release.py:1258: in prepare_initial
+    with lifecycle_owner(runtime, operation='prepare_initial', release_id=expected['release_id'],
+/usr/lib/python3.14/contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+runtime = PosixPath('/tmp/qcl-OPS03-GREEN-1/tmp/tmpbo0snqrs/runtime')
+
+    @contextmanager
+    def lifecycle_owner(runtime, *, operation, release_id, deadline, release_identity=None):
+        deadline = _finite_deadline(deadline)
+        if operation not in _OWNER_OPERATIONS:
+            raise ValueError('Unknown lifecycle operation')
+        identity = manifest(release_identity) if release_identity is not None else None
+        if (identity is None and operation not in ('shutdown_capture', 'shutdown_finalize')) or (
+                identity is not None and release_id != identity['release_id']):
+            raise ValueError('Lifecycle owner requires exact release identity')
+        runtime = Path(runtime).absolute()
+        if any(s['runtime'] == runtime for s in _OWNER_RECORDS.values()):
+            raise BlockingIOError('Lifecycle owner is not reentrant')
+        runtime.mkdir(parents=True, exist_ok=True, mode=0o700)
+        if runtime.resolve() != runtime:
+            raise PermissionError('Lifecycle runtime must not traverse symlinks')
+        directory = os.open(runtime, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
+        locks = []
+        owner = None
+        try:
+            info = os.fstat(directory)
+            if info.st_uid != os.geteuid() or info.st_mode & 0o022:
+>               raise PermissionError('Lifecycle runtime is not private administrator state')
+E               PermissionError: Lifecycle runtime is not private administrator state
+
+components/qcl-negf-platform/ops/application_release.py:829: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards>
+
+    def test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root, run = Path(temporary), InitialCommands()
+            gate, record = root / "gate", root / "runtime/release.json"
+            record.parent.mkdir()
+            record.write_text(json.dumps({**release(), "ready": False}))
+            gate.write_text(json.dumps({"open": False, "release_id": "release-a"}))
+            (root / "profile").symlink_to("/nix/store/application")
+            credentials = {"uid": 0, "gid": 42}
+            reads, original_read = [], Path.read_bytes
+            original_text = Path.read_text
+            def nfs_read(path):
+                if path == gate:
+                    reads.append(dict(credentials))
+                    if credentials != {"uid": 3000, "gid": 3000}:
+                        raise PermissionError("root_squash denies mode0750 jobs traversal")
+                return original_read(path)
+            def nfs_text(path, *args, **kwargs):
+                return nfs_read(path).decode() if path == gate else original_text(path, *args, **kwargs)
+            def change_uid(value):
+                credentials["uid"] = value
+            def change_gid(value):
+                credentials["gid"] = value
+            with patch.object(self.ops, "GATE", gate), \
+                 patch.object(self.ops.os, "geteuid", lambda: credentials["uid"]), \
+                 patch.object(self.ops.os, "getegid", lambda: credentials["gid"]), \
+                 patch.object(self.ops.os, "seteuid", change_uid), \
+                 patch.object(self.ops.os, "setegid", change_gid), \
+                 patch.object(self.ops.pwd, "getpwnam", lambda _: SimpleNamespace(pw_uid=3000, pw_gid=3000)), \
+                 patch.object(Path, "read_bytes", nfs_read), patch.object(Path, "read_text", nfs_text):
+                try:
+                    self.ops.node_check(record, gate, root / "profile", run=run)
+                    with self.assertRaisesRegex(ValueError, "closed"):
+                        self.ops.guard("release-a", "/nix/store/solver/bin/qcl-negf", record, gate)
+                    self.ops.prepare_initial(release(), profile=root / "profile", runtime=record.parent,
+                        gate=gate, role="worker", run=run)
+                except PermissionError as error:
+>                   self.fail("Shared gate must be read with UID3000 authority: " + str(error))
+E                   AssertionError: Shared gate must be read with UID3000 authority: Lifecycle runtime is not private administrator state
+
+components/qcl-negf-platform/tests/test_application_release.py:741: AssertionError
+____ ApplicationReleaseTests.test_uncertain_activation_receipt_blocks_retry ____
+
+self = <test_application_release.ApplicationReleaseTests testMethod=test_uncertain_activation_receipt_blocks_retry>
+
+    def test_uncertain_activation_receipt_blocks_retry(self):
+        self.gate.write_text(json.dumps({"open": True, "release_id": "old"}))
+        run = DeliveryCommands(self.gate)
+        def loss(args):
+            result = run(args)
+            if 'register_aiida.py' in ' '.join(args):
+                raise self.ops.CommandFailure({"failure": "nonzero", "returncode": 255,
+                    "stdout": "partial", "stderr": "lost", "child_started": True,
+                    "cleanup_confirmed": True, "elapsed_seconds": .1, "output_truncated": False})
+            return result
+        result = self.ops.deliver_cli(delivery_manifest(), POOL, run=loss,
+                                     runtime=self.runtime, gate=self.gate)
+>       self.assertTrue(result["requires_reconciliation"])
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:375: AssertionError
+_______ I14UpdateTests.test_i14_crash_gate_write_failure_retains_intent ________
+
+self = <test_application_release.I14UpdateTests testMethod=test_i14_crash_gate_write_failure_retains_intent>
+
+    def test_i14_crash_gate_write_failure_retains_intent(self):
+        original=self.ops.publish_admission
+        def gate(path,value,**kwargs):
+            if value['open']:raise OSError('open fsync failed')
+            return original(path,value,**kwargs)
+        with patch.object(self.ops,'publish_admission',gate):
+            result=self.deliver()
+>       self.assertFalse(result['open']);self.assertTrue(result['requires_reconciliation'])
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:1582: AssertionError
+_______ I14UpdateTests.test_i14_final_fleet_recheck_after_all_mutations ________
+
+self = <test_application_release.I14UpdateTests testMethod=test_i14_final_fleet_recheck_after_all_mutations>
+
+    def test_i14_final_fleet_recheck_after_all_mutations(self):
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:1530: AssertionError
+____________ I14UpdateTests.test_i14_one_release_nfs_failure_closed ____________
+
+self = <test_application_release.I14UpdateTests testMethod=test_i14_one_release_nfs_failure_closed>
+
+    def test_i14_one_release_nfs_failure_closed(self):
+        self.nfs_fault=True
+        result=self.deliver();self.assertFalse(result['open'])
+>       self.assertTrue(any(a[0]=='ssh' and 'health-update' in shlex.split(a[-1]) for a in self.calls))
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:1546: AssertionError
+_ I14UpdateTests.test_i14_post_restart_check_reuses_complete_two_workflow_type_guard _
+
+self = <test_application_release.I14UpdateTests testMethod=test_i14_post_restart_check_reuses_complete_two_workflow_type_guard>
+
+    def test_i14_post_restart_check_reuses_complete_two_workflow_type_guard(self):
+        self.active_after_restart=True
+        result=self.deliver();self.assertFalse(result['open'])
+        queries=[a for a in self.calls if 'aiida_update_check.py' in ' '.join(a)]
+        self.assertTrue(getattr(self,'restarted',False),'actual activation boundary reached before newly active retry')
+>       self.assertGreaterEqual(len(queries),3)
+E       AssertionError: 2 not greater than or equal to 3
+
+components/qcl-negf-platform/tests/test_application_release.py:1640: AssertionError
+_____ I14WholeRepairTests.test_f3_known_retry_retains_original_provenance ______
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_f3_known_retry_retains_original_provenance>
+
+    def test_f3_known_retry_retains_original_provenance(self):
+        self.query_fault='error'
+        with self.assertRaisesRegex(RuntimeError,'DB inaccessible'):self.deliver()
+        first=self.receipt();self.assertIn(first['slurm_before']['worker']['Reason'],('None',''));self.assertNotIn('Reason=',first['slurm_before']['worker']['_raw'])
+        self.query_fault=None
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2216: AssertionError
+______ I14WholeRepairTests.test_f4_postresume_changed_or_down_never_opens ______
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_f4_postresume_changed_or_down_never_opens>
+
+    def test_f4_postresume_changed_or_down_never_opens(self):
+        for changes in ({'State':'DOWN','Reason':'foreign failure'},{'CPUTot':'13'},{'SlurmdStartTime':'2026-10-09T00:03:00'}, {'State':'IDLE+NOT_RESPONDING','BootTime':'None','SlurmdStartTime':'None'}):
+            with self.subTest(changes=changes),self.isolated_delivery_case():
+                command=self.model.command
+                def native(args):
+                    result=command(args)
+                    if 'State=RESUME' in args and 'NodeName=worker' in args:self.model.resume_reads['worker']=[changes]*10
+                    return result
+                self.model.command=native
+                result=self.deliver();self.assertFalse(result['open'])
+>               self.assertEqual(sum('State=RESUME' in a and 'NodeName=worker' in a for a in self.calls),1)
+E               AssertionError: 0 != 1
+
+components/qcl-negf-platform/tests/test_application_release.py:2313: AssertionError
+__________ I14WholeRepairTests.test_f4_postresume_wait_and_exact_idle __________
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_f4_postresume_wait_and_exact_idle>
+
+    def test_f4_postresume_wait_and_exact_idle(self):
+        self.model.resume_reads['worker']=[{'State':'IDLE+NOT_RESPONDING','BootTime':'None','SlurmdStartTime':'None'}]*2
+        # Responses apply only after RESUME, not during initial capture.
+        queued=self.model.resume_reads.pop('worker');command=self.model.command
+        def native(args):
+            result=command(args)
+            if 'State=RESUME' in args and 'NodeName=worker' in args:self.model.resume_reads['worker']=queued
+            return result
+        self.model.command=native
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2299: AssertionError
+__ I14WholeRepairTests.test_f5_read_reservation_precedes_access_and_sentinel ___
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_f5_read_reservation_precedes_access_and_sentinel>
+
+    def test_f5_read_reservation_precedes_access_and_sentinel(self):
+        fs=self.fs();fs.write('/etc/large',b'x'*65537);scan=self.ops.UpdateScan(200.);fs.budget=scan
+        scan.bytes=32*1024*1024-16;before=len(fs.trace)
+        with self.assertRaisesRegex(ValueError,'bound|budget'):scan.read('/etc/large',65536)
+>       self.assertFalse(any(t[0] in ('open','io.open','read') for t in fs.trace[before:]),'reservation failure precedes actual IO')
+E       AssertionError: True is not false : reservation failure precedes actual IO
+
+components/qcl-negf-platform/tests/test_application_release.py:2319: AssertionError
+______ I14WholeRepairTests.test_f6_positive_factory_full_body_transition _______
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_f6_positive_factory_full_body_transition>
+
+    def test_f6_positive_factory_full_body_transition(self):
+>       result=self.deliver();self.assertTrue(result['open']);self.assertFalse(result['requires_reconciliation'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2385: AssertionError
+_ I14WholeRepairTests.test_native_annotated_unset_reason_completes_update_without_losing_raw _
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_native_annotated_unset_reason_completes_update_without_losing_raw>
+
+    def test_native_annotated_unset_reason_completes_update_without_losing_raw(self):
+        annotation='None [root@2026-10-12T15:48:11]'
+        for node in self.model.nodes.values():node['Reason']=annotation
+        command=self.model.command
+        def annotated(args):
+            text=command(args)
+            if 'State=RESUME' in args:
+                name=next(x.split('=',1)[1] for x in args if x.startswith('NodeName='))
+                self.model.nodes[name]['Reason']=annotation
+            return text
+        self.model.command=annotated
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2266: AssertionError
+___________ I14WholeRepairTests.test_r2_healthy_idle_optional_reason ___________
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_r2_healthy_idle_optional_reason>
+
+    def test_r2_healthy_idle_optional_reason(self):
+        native='NodeName=worker CPUTot=12 RealMemory=28000 Version=25.11.0 BootTime=2026-10-09T00:00:00 SlurmdStartTime=2026-10-09T00:01:00 CPUAlloc=0 AllocMem=0 State=IDLE'
+        for suffix in ('',' Reason=',' Reason=None'):
+            with self.subTest(suffix=suffix):
+                raw=native+suffix;value=self.ops.registration_fields(raw)
+                self.assertIn(value['Reason'],('','None'));self.assertEqual(value['_raw'],raw)
+        for raw in (native.replace('State=IDLE','State=IDLE+DRAIN'),native.replace('State=IDLE','State=DOWN'),native.replace('State=IDLE','State=IDLE+NOT_RESPONDING'),native.replace(' CPUTot=12',''),native.replace('CPUAlloc=0','CPUAlloc=1'),native+' CPUTot=12'):
+            with self.subTest(raw=raw):
+                with self.assertRaisesRegex(ValueError,'Reason|Incomplete|Allocated|Ambiguous'):self.ops.registration_fields(raw)
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2540: AssertionError
+______ I14WholeRepairTests.test_r2_own_native_reason_causality_and_retry _______
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_r2_own_native_reason_causality_and_retry>
+
+    def test_r2_own_native_reason_causality_and_retry(self):
+        for case in ('plain','suffix','actor','tag','stale','future','calendar','extra','retry','missing'):
+            with self.subTest(case=case),self.isolated_delivery_case():
+                self.model.reason_form='plain' if case=='plain' else 'suffix';self.model.reason_fault=case if case in ('actor','tag','stale','future','calendar','extra') else None
+                self.query_fault='error' if case in ('retry','missing') else None
+                if case in ('retry','missing'):
+                    with self.assertRaisesRegex(RuntimeError,'DB inaccessible'):self.deliver()
+                    first=self.receipt();drain=first['slurm_drain']['worker'];self.assertEqual(drain['reason_evidence']['actor_name'],'operator')
+                    self.assertEqual(drain['after_readback']['Reason'],self.model.nodes['worker']['Reason']);self.assertIn('[operator@',drain['after_readback']['Reason'])
+                    if case=='missing':
+                        receipt_path=self.runtime/'delivery-attempts'/(first['attempt_id']+'.json');del first['slurm_drain']['worker']['reason_evidence'];receipt_path.write_text(json.dumps(first));before=len(self.calls)
+                        with self.assertRaisesRegex(RuntimeError,'causal|reconciliation'):self.deliver()
+                        self.assertEqual(len(self.calls),before)
+                    else:
+                        self.query_fault=None;result=self.deliver();self.assertTrue(result['open']);later=self.receipt()
+                        self.assertEqual(later['slurm_before']['worker'],first['slurm_before']['worker'])
+                    continue
+                result=self.deliver();record=self.receipt()
+                self.assertIn(['id','-u'],self.calls);self.assertIn(['id','-un'],self.calls)
+                self.assertIn(['env','TZ=UTC','LC_ALL=C','date','+%s'],self.calls)
+                for args in self.calls:
+                    if 'scontrol' in args:self.assertEqual(args[:5],['env','TZ=UTC','LC_ALL=C','SLURM_CONF=/etc/slurm.conf','scontrol'])
+                if case in ('plain','suffix'):
+>                   self.assertTrue(result['open']);drain=record['slurm_drain']['worker'];self.assertEqual(drain['status'],'completed')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2567: AssertionError
+____ I14WholeRepairTests.test_r3_identity_and_safety_ignore_only_accounting ____
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_r3_identity_and_safety_ignore_only_accounting>
+
+    def test_r3_identity_and_safety_ignore_only_accounting(self):
+        # Real metadata IO mutates accounting/state without changing its generation.
+        for case in ('accounting','ticks','uid','cgroup','executable','invocation'):
+            with self.subTest(case=case),tempfile.TemporaryDirectory() as temporary,ExitStack() as cleanup:
+                old=self.root;self.root=Path(temporary)
+                try:
+                    fs=self.fs(force=True);cleanup.callback(fs.stack.close);raw_open=io.open;count=[0]
+                    def changing(path,*args,**kwargs):
+                        if str(path)=='/proc/123/stat':
+                            count[0]+=1;fields=['0']*18+['42'];fields[10]=str(count[0]);state='R' if count[0]%2 else 'S'
+                            if case=='ticks' and count[0]>1:fields[-1]='99'
+                            fs.write('/proc/123/stat','123 (slurmd) '+state+' '+' '.join(fields)+'\n')
+                            if case=='uid' and count[0]>1:fs.write('/proc/123/status','Name:\tslurmd\nUid:\t1\t1\t1\t1\n')
+                            if case=='cgroup' and count[0]>1:fs.write('/proc/123/cgroup','0::/foreign\n')
+                        return raw_open(path,*args,**kwargs)
+                    cleanup.enter_context(patch.object(io,'open',changing))
+                    exe_events=[]
+                    if case=='executable':
+                        native_readlink=os.readlink
+                        def between_full_captures(path,*args,**kwargs):
+                            result=native_readlink(path,*args,**kwargs)
+                            if str(path)=='/proc/123/exe':
+                                exe_events.append(('capture',result))
+                                if len(exe_events)==1:
+                                    self.assertEqual(result,'/nix/store/slurm/bin/slurmd')
+                                    link=fs.real('/proc/123/exe');link.unlink();link.symlink_to('/nix/store/replaced/bin/slurmd')
+                                    exe_events.append(('mutation','/nix/store/replaced/bin/slurmd'))
+                            return result
+                        cleanup.enter_context(patch.object(os,'readlink',between_full_captures))
+                    if case=='invocation':
+                        native=fs.native
+                        def drift(args):
+                            result=native(args)
+                            if args[:2]==['systemctl','stop']:fs.state['InvocationID']='c'*32
+                            return result
+                        fs.native=drift
+                    if case=='accounting':
+                        record=self.ops.process_record(self.ops.UpdateScan(200.),Path('/proc/123'))
+                        self.assertNotEqual(record['observations']['before']['stat'],record['observations']['after']['stat'])
+                        result=fs.stop();self.assertTrue(result['forced_daemon_stop']);self.assertEqual(sum(a[:2]==['systemctl','kill'] for a in fs.calls),1)
+                    else:
+                        if case=='executable':
+                            with self.assertRaisesRegex(ValueError,'^Process generation/executable identity changed$'):fs.stop()
+                            self.assertEqual(exe_events,[('capture','/nix/store/slurm/bin/slurmd'),('mutation','/nix/store/replaced/bin/slurmd'),('capture','/nix/store/replaced/bin/slurmd')])
+                            self.assertFalse(any(a[:2]==['systemctl','mask'] for a in fs.calls))
+                        else:
+                            with self.assertRaisesRegex(ValueError,'changed|identity|classification|scope'):fs.stop()
+                        self.assertFalse(any(a[:2]==['systemctl','kill'] for a in fs.calls))
+                    self.assertGreater(count[0],1)
+                finally:self.root=old
+        with self.isolated_delivery_case():
+>           self.model.volatile=True;result=self.deliver();self.assertTrue(result['open']);record=self.receipt()
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2625: AssertionError
+_________ I14WholeRepairTests.test_r4_actual_main_update_budget_routes _________
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_r4_actual_main_update_budget_routes>
+
+    def test_r4_actual_main_update_budget_routes(self):
+        for role,action,case in (('worker','check','normal'),('controller','check','normal'),('controller','activate','normal'),('worker','check','expired_manifest'),('worker','check','oversized_release'),('controller','activate','expired_settings'),('controller','check','cap_manifest')):
+            with self.subTest(role=role,action=action,case=case),tempfile.TemporaryDirectory() as temporary,ExitStack() as cleanup:
+                old=self.root;self.root=Path(temporary)
+                try:
+                    fs=self.fs(role=role);cleanup.callback(fs.stack.close);fs.write('/etc/candidate.json',json.dumps(release()))
+                    self.assertEqual(fs.mapped('/var/lib/qcl-negf'),str(fs.root/'var/lib/qcl-negf'))
+                    self.assertEqual(fs.mapped('/var/lib/qcl-negf/allowed-codes'),str(fs.root/'var/lib/qcl-negf/allowed-codes'))
+                    captured=[];original_init=self.ops.UpdateScan.__init__
+                    def actual_init(scan,deadline):
+                        original_init(scan,deadline);captured.append(scan);fs.budget=scan
+                        if case=='expired_manifest':fs.clock[0]=deadline+1
+                        if case=='cap_manifest':scan.bytes=32*1024*1024-16
+                    cleanup.enter_context(patch.object(self.ops.UpdateScan,'__init__',actual_init))
+                    if case=='oversized_release':fs.write(fs.runtime/'release.json',b' '*65537)
+                    native=fs.native
+                    def boundary(argv,**kwargs):return native(argv)
+                    cleanup.enter_context(patch.object(self.ops,'command',boundary))
+                    raw_read=os.read
+                    def expire_gate(fd,n):
+                        result=raw_read(fd,n)
+                        if case=='expired_settings' and fs.fd_paths.get(fd)==str(fs.gate):fs.clock[0]=4000.
+                        return result
+                    # Gate uses io.open, so expire immediately after its actual read instead.
+                    raw_open=io.open
+                    class GateRead:
+                        def __init__(inner,handle):inner.handle=handle
+                        def __enter__(inner):inner.handle.__enter__();return inner
+                        def __exit__(inner,*args):return inner.handle.__exit__(*args)
+                        def read(inner,n=-1):
+                            value=inner.handle.read(n);fs.clock[0]=4000.;return value
+                    def gate_boundary(path,*a,**kw):
+                        handle=raw_open(path,*a,**kw)
+                        return GateRead(handle) if case=='expired_settings' and str(path)==str(fs.gate) else handle
+                    cleanup.enter_context(patch.object(io,'open',gate_boundary))
+                    argv=['release',action,'--manifest','/etc/candidate.json','--role',role,'--runtime',str(fs.runtime),'--gate',str(fs.gate),'--update-attempt-id',fs.attempt,'--expected-node-identity-base64',base64.urlsafe_b64encode(json.dumps(fs.identity).encode()).decode()]
+                    with patch.object(sys,'argv',argv),patch('builtins.print'):
+                        if case in ('normal',):self.ops.main()
+                        else:
+>                           with self.assertRaisesRegex((ValueError,self.ops.CommandFailure),'deadline|bound|exceeds'):self.ops.main()
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                           AssertionError: (<class 'ValueError'>, <class 'application_release.CommandFailure'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:2677: AssertionError
+_ I14WholeRepairTests.test_resume_explicitly_clears_own_reason_before_opening_admission _
+
+self = <test_application_release.I14WholeRepairTests testMethod=test_resume_explicitly_clears_own_reason_before_opening_admission>
+
+    def test_resume_explicitly_clears_own_reason_before_opening_admission(self):
+        result=self.deliver()
+>       self.assertTrue(result['open'],'RESUME must not strand the own drain reason on an idle node')
+E       AssertionError: False is not true : RESUME must not strand the own drain reason on an idle node
+
+components/qcl-negf-platform/tests/test_application_release.py:2246: AssertionError
+____ I14SlurmInfinityTests.test_f3_known_retry_retains_original_provenance _____
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_f3_known_retry_retains_original_provenance>
+
+    def test_f3_known_retry_retains_original_provenance(self):
+        self.query_fault='error'
+        with self.assertRaisesRegex(RuntimeError,'DB inaccessible'):self.deliver()
+        first=self.receipt();self.assertIn(first['slurm_before']['worker']['Reason'],('None',''));self.assertNotIn('Reason=',first['slurm_before']['worker']['_raw'])
+        self.query_fault=None
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2216: AssertionError
+_____ I14SlurmInfinityTests.test_f4_postresume_changed_or_down_never_opens _____
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_f4_postresume_changed_or_down_never_opens>
+
+    def test_f4_postresume_changed_or_down_never_opens(self):
+        for changes in ({'State':'DOWN','Reason':'foreign failure'},{'CPUTot':'13'},{'SlurmdStartTime':'2026-10-09T00:03:00'}, {'State':'IDLE+NOT_RESPONDING','BootTime':'None','SlurmdStartTime':'None'}):
+            with self.subTest(changes=changes),self.isolated_delivery_case():
+                command=self.model.command
+                def native(args):
+                    result=command(args)
+                    if 'State=RESUME' in args and 'NodeName=worker' in args:self.model.resume_reads['worker']=[changes]*10
+                    return result
+                self.model.command=native
+                result=self.deliver();self.assertFalse(result['open'])
+>               self.assertEqual(sum('State=RESUME' in a and 'NodeName=worker' in a for a in self.calls),1)
+E               AssertionError: 0 != 1
+
+components/qcl-negf-platform/tests/test_application_release.py:2313: AssertionError
+_________ I14SlurmInfinityTests.test_f4_postresume_wait_and_exact_idle _________
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_f4_postresume_wait_and_exact_idle>
+
+    def test_f4_postresume_wait_and_exact_idle(self):
+        self.model.resume_reads['worker']=[{'State':'IDLE+NOT_RESPONDING','BootTime':'None','SlurmdStartTime':'None'}]*2
+        # Responses apply only after RESUME, not during initial capture.
+        queued=self.model.resume_reads.pop('worker');command=self.model.command
+        def native(args):
+            result=command(args)
+            if 'State=RESUME' in args and 'NodeName=worker' in args:self.model.resume_reads['worker']=queued
+            return result
+        self.model.command=native
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2299: AssertionError
+_ I14SlurmInfinityTests.test_f5_read_reservation_precedes_access_and_sentinel __
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_f5_read_reservation_precedes_access_and_sentinel>
+
+    def test_f5_read_reservation_precedes_access_and_sentinel(self):
+        fs=self.fs();fs.write('/etc/large',b'x'*65537);scan=self.ops.UpdateScan(200.);fs.budget=scan
+        scan.bytes=32*1024*1024-16;before=len(fs.trace)
+        with self.assertRaisesRegex(ValueError,'bound|budget'):scan.read('/etc/large',65536)
+>       self.assertFalse(any(t[0] in ('open','io.open','read') for t in fs.trace[before:]),'reservation failure precedes actual IO')
+E       AssertionError: True is not false : reservation failure precedes actual IO
+
+components/qcl-negf-platform/tests/test_application_release.py:2319: AssertionError
+_____ I14SlurmInfinityTests.test_f6_positive_factory_full_body_transition ______
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_f6_positive_factory_full_body_transition>
+
+    def test_f6_positive_factory_full_body_transition(self):
+>       result=self.deliver();self.assertTrue(result['open']);self.assertFalse(result['requires_reconciliation'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2385: AssertionError
+_ I14SlurmInfinityTests.test_native_annotated_unset_reason_completes_update_without_losing_raw _
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_native_annotated_unset_reason_completes_update_without_losing_raw>
+
+    def test_native_annotated_unset_reason_completes_update_without_losing_raw(self):
+        annotation='None [root@2026-10-12T15:48:11]'
+        for node in self.model.nodes.values():node['Reason']=annotation
+        command=self.model.command
+        def annotated(args):
+            text=command(args)
+            if 'State=RESUME' in args:
+                name=next(x.split('=',1)[1] for x in args if x.startswith('NodeName='))
+                self.model.nodes[name]['Reason']=annotation
+            return text
+        self.model.command=annotated
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2266: AssertionError
+__________ I14SlurmInfinityTests.test_r2_healthy_idle_optional_reason __________
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_r2_healthy_idle_optional_reason>
+
+    def test_r2_healthy_idle_optional_reason(self):
+        native='NodeName=worker CPUTot=12 RealMemory=28000 Version=25.11.0 BootTime=2026-10-09T00:00:00 SlurmdStartTime=2026-10-09T00:01:00 CPUAlloc=0 AllocMem=0 State=IDLE'
+        for suffix in ('',' Reason=',' Reason=None'):
+            with self.subTest(suffix=suffix):
+                raw=native+suffix;value=self.ops.registration_fields(raw)
+                self.assertIn(value['Reason'],('','None'));self.assertEqual(value['_raw'],raw)
+        for raw in (native.replace('State=IDLE','State=IDLE+DRAIN'),native.replace('State=IDLE','State=DOWN'),native.replace('State=IDLE','State=IDLE+NOT_RESPONDING'),native.replace(' CPUTot=12',''),native.replace('CPUAlloc=0','CPUAlloc=1'),native+' CPUTot=12'):
+            with self.subTest(raw=raw):
+                with self.assertRaisesRegex(ValueError,'Reason|Incomplete|Allocated|Ambiguous'):self.ops.registration_fields(raw)
+>       result=self.deliver();self.assertTrue(result['open'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2540: AssertionError
+_____ I14SlurmInfinityTests.test_r2_own_native_reason_causality_and_retry ______
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_r2_own_native_reason_causality_and_retry>
+
+    def test_r2_own_native_reason_causality_and_retry(self):
+        for case in ('plain','suffix','actor','tag','stale','future','calendar','extra','retry','missing'):
+            with self.subTest(case=case),self.isolated_delivery_case():
+                self.model.reason_form='plain' if case=='plain' else 'suffix';self.model.reason_fault=case if case in ('actor','tag','stale','future','calendar','extra') else None
+                self.query_fault='error' if case in ('retry','missing') else None
+                if case in ('retry','missing'):
+                    with self.assertRaisesRegex(RuntimeError,'DB inaccessible'):self.deliver()
+                    first=self.receipt();drain=first['slurm_drain']['worker'];self.assertEqual(drain['reason_evidence']['actor_name'],'operator')
+                    self.assertEqual(drain['after_readback']['Reason'],self.model.nodes['worker']['Reason']);self.assertIn('[operator@',drain['after_readback']['Reason'])
+                    if case=='missing':
+                        receipt_path=self.runtime/'delivery-attempts'/(first['attempt_id']+'.json');del first['slurm_drain']['worker']['reason_evidence'];receipt_path.write_text(json.dumps(first));before=len(self.calls)
+                        with self.assertRaisesRegex(RuntimeError,'causal|reconciliation'):self.deliver()
+                        self.assertEqual(len(self.calls),before)
+                    else:
+                        self.query_fault=None;result=self.deliver();self.assertTrue(result['open']);later=self.receipt()
+                        self.assertEqual(later['slurm_before']['worker'],first['slurm_before']['worker'])
+                    continue
+                result=self.deliver();record=self.receipt()
+                self.assertIn(['id','-u'],self.calls);self.assertIn(['id','-un'],self.calls)
+                self.assertIn(['env','TZ=UTC','LC_ALL=C','date','+%s'],self.calls)
+                for args in self.calls:
+                    if 'scontrol' in args:self.assertEqual(args[:5],['env','TZ=UTC','LC_ALL=C','SLURM_CONF=/etc/slurm.conf','scontrol'])
+                if case in ('plain','suffix'):
+>                   self.assertTrue(result['open']);drain=record['slurm_drain']['worker'];self.assertEqual(drain['status'],'completed')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2567: AssertionError
+___ I14SlurmInfinityTests.test_r3_identity_and_safety_ignore_only_accounting ___
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_r3_identity_and_safety_ignore_only_accounting>
+
+    def test_r3_identity_and_safety_ignore_only_accounting(self):
+        # Real metadata IO mutates accounting/state without changing its generation.
+        for case in ('accounting','ticks','uid','cgroup','executable','invocation'):
+            with self.subTest(case=case),tempfile.TemporaryDirectory() as temporary,ExitStack() as cleanup:
+                old=self.root;self.root=Path(temporary)
+                try:
+                    fs=self.fs(force=True);cleanup.callback(fs.stack.close);raw_open=io.open;count=[0]
+                    def changing(path,*args,**kwargs):
+                        if str(path)=='/proc/123/stat':
+                            count[0]+=1;fields=['0']*18+['42'];fields[10]=str(count[0]);state='R' if count[0]%2 else 'S'
+                            if case=='ticks' and count[0]>1:fields[-1]='99'
+                            fs.write('/proc/123/stat','123 (slurmd) '+state+' '+' '.join(fields)+'\n')
+                            if case=='uid' and count[0]>1:fs.write('/proc/123/status','Name:\tslurmd\nUid:\t1\t1\t1\t1\n')
+                            if case=='cgroup' and count[0]>1:fs.write('/proc/123/cgroup','0::/foreign\n')
+                        return raw_open(path,*args,**kwargs)
+                    cleanup.enter_context(patch.object(io,'open',changing))
+                    exe_events=[]
+                    if case=='executable':
+                        native_readlink=os.readlink
+                        def between_full_captures(path,*args,**kwargs):
+                            result=native_readlink(path,*args,**kwargs)
+                            if str(path)=='/proc/123/exe':
+                                exe_events.append(('capture',result))
+                                if len(exe_events)==1:
+                                    self.assertEqual(result,'/nix/store/slurm/bin/slurmd')
+                                    link=fs.real('/proc/123/exe');link.unlink();link.symlink_to('/nix/store/replaced/bin/slurmd')
+                                    exe_events.append(('mutation','/nix/store/replaced/bin/slurmd'))
+                            return result
+                        cleanup.enter_context(patch.object(os,'readlink',between_full_captures))
+                    if case=='invocation':
+                        native=fs.native
+                        def drift(args):
+                            result=native(args)
+                            if args[:2]==['systemctl','stop']:fs.state['InvocationID']='c'*32
+                            return result
+                        fs.native=drift
+                    if case=='accounting':
+                        record=self.ops.process_record(self.ops.UpdateScan(200.),Path('/proc/123'))
+                        self.assertNotEqual(record['observations']['before']['stat'],record['observations']['after']['stat'])
+                        result=fs.stop();self.assertTrue(result['forced_daemon_stop']);self.assertEqual(sum(a[:2]==['systemctl','kill'] for a in fs.calls),1)
+                    else:
+                        if case=='executable':
+                            with self.assertRaisesRegex(ValueError,'^Process generation/executable identity changed$'):fs.stop()
+                            self.assertEqual(exe_events,[('capture','/nix/store/slurm/bin/slurmd'),('mutation','/nix/store/replaced/bin/slurmd'),('capture','/nix/store/replaced/bin/slurmd')])
+                            self.assertFalse(any(a[:2]==['systemctl','mask'] for a in fs.calls))
+                        else:
+                            with self.assertRaisesRegex(ValueError,'changed|identity|classification|scope'):fs.stop()
+                        self.assertFalse(any(a[:2]==['systemctl','kill'] for a in fs.calls))
+                    self.assertGreater(count[0],1)
+                finally:self.root=old
+        with self.isolated_delivery_case():
+>           self.model.volatile=True;result=self.deliver();self.assertTrue(result['open']);record=self.receipt()
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: False is not true
+
+components/qcl-negf-platform/tests/test_application_release.py:2625: AssertionError
+________ I14SlurmInfinityTests.test_r4_actual_main_update_budget_routes ________
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_r4_actual_main_update_budget_routes>
+
+    def test_r4_actual_main_update_budget_routes(self):
+        for role,action,case in (('worker','check','normal'),('controller','check','normal'),('controller','activate','normal'),('worker','check','expired_manifest'),('worker','check','oversized_release'),('controller','activate','expired_settings'),('controller','check','cap_manifest')):
+            with self.subTest(role=role,action=action,case=case),tempfile.TemporaryDirectory() as temporary,ExitStack() as cleanup:
+                old=self.root;self.root=Path(temporary)
+                try:
+                    fs=self.fs(role=role);cleanup.callback(fs.stack.close);fs.write('/etc/candidate.json',json.dumps(release()))
+                    self.assertEqual(fs.mapped('/var/lib/qcl-negf'),str(fs.root/'var/lib/qcl-negf'))
+                    self.assertEqual(fs.mapped('/var/lib/qcl-negf/allowed-codes'),str(fs.root/'var/lib/qcl-negf/allowed-codes'))
+                    captured=[];original_init=self.ops.UpdateScan.__init__
+                    def actual_init(scan,deadline):
+                        original_init(scan,deadline);captured.append(scan);fs.budget=scan
+                        if case=='expired_manifest':fs.clock[0]=deadline+1
+                        if case=='cap_manifest':scan.bytes=32*1024*1024-16
+                    cleanup.enter_context(patch.object(self.ops.UpdateScan,'__init__',actual_init))
+                    if case=='oversized_release':fs.write(fs.runtime/'release.json',b' '*65537)
+                    native=fs.native
+                    def boundary(argv,**kwargs):return native(argv)
+                    cleanup.enter_context(patch.object(self.ops,'command',boundary))
+                    raw_read=os.read
+                    def expire_gate(fd,n):
+                        result=raw_read(fd,n)
+                        if case=='expired_settings' and fs.fd_paths.get(fd)==str(fs.gate):fs.clock[0]=4000.
+                        return result
+                    # Gate uses io.open, so expire immediately after its actual read instead.
+                    raw_open=io.open
+                    class GateRead:
+                        def __init__(inner,handle):inner.handle=handle
+                        def __enter__(inner):inner.handle.__enter__();return inner
+                        def __exit__(inner,*args):return inner.handle.__exit__(*args)
+                        def read(inner,n=-1):
+                            value=inner.handle.read(n);fs.clock[0]=4000.;return value
+                    def gate_boundary(path,*a,**kw):
+                        handle=raw_open(path,*a,**kw)
+                        return GateRead(handle) if case=='expired_settings' and str(path)==str(fs.gate) else handle
+                    cleanup.enter_context(patch.object(io,'open',gate_boundary))
+                    argv=['release',action,'--manifest','/etc/candidate.json','--role',role,'--runtime',str(fs.runtime),'--gate',str(fs.gate),'--update-attempt-id',fs.attempt,'--expected-node-identity-base64',base64.urlsafe_b64encode(json.dumps(fs.identity).encode()).decode()]
+                    with patch.object(sys,'argv',argv),patch('builtins.print'):
+                        if case in ('normal',):self.ops.main()
+                        else:
+>                           with self.assertRaisesRegex((ValueError,self.ops.CommandFailure),'deadline|bound|exceeds'):self.ops.main()
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                           AssertionError: (<class 'ValueError'>, <class 'application_release.CommandFailure'>) not raised
+
+components/qcl-negf-platform/tests/test_application_release.py:2677: AssertionError
+_ I14SlurmInfinityTests.test_resume_explicitly_clears_own_reason_before_opening_admission _
+
+self = <test_application_release.I14SlurmInfinityTests testMethod=test_resume_explicitly_clears_own_reason_before_opening_admission>
+
+    def test_resume_explicitly_clears_own_reason_before_opening_admission(self):
+        result=self.deliver()
+>       self.assertTrue(result['open'],'RESUME must not strand the own drain reason on an idle node')
+E       AssertionError: False is not true : RESUME must not strand the own drain reason on an idle node
+
+components/qcl-negf-platform/tests/test_application_release.py:2246: AssertionError
+_ OPS03WholeRoutingTests.test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire _
+
+self = <test_application_release.OPS03WholeRoutingTests testMethod=test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire>
+
+    def test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire(self):
+        helper=self.ops._activate_owned;flock=self.ops.fcntl.flock
+        held=[];calls=[];pending=[]
+        def acquired(fd,operation):
+            if operation & fcntl.LOCK_EX:held.append(os.fstat(fd).st_ino)
+            return flock(fd,operation)
+        def local(value,**kwargs):
+            owner=kwargs['owner'];state=self.ops._owner_before(owner)
+            self.assertEqual(len(held),2)
+            self.assertEqual(state['operation'],'whole_update')
+            receipt_files=[p for p in (self.runtime/'delivery-attempts').glob('*.json')
+                           if not p.name.endswith('.lifecycle-intent.json')]
+            pending.extend(json.loads(p.read_text()).get('pending_local_mutation') for p in receipt_files)
+            calls.append(owner)
+            result=helper(value,**kwargs)
+            self.assertEqual(len(held),2)
+            return result
+        with patch.object(self.ops.fcntl,'flock',acquired),patch.object(self.ops,'_activate_owned',local):
+            result=self.deliver()
+>       self.assertEqual(result['status'],'completed')
+E       AssertionError: 'failed' != 'completed'
+E       - failed
+E       + completed
+
+components/qcl-negf-platform/tests/test_application_release.py:3617: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_deadline_after_returned_mutation_retains_started_unknown
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_final_combined_cli_failure_prints_current_unknown_and_blocks_retry
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_check_is_unknown_and_stops_pool
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_malformed_remote_identity_is_reported_per_node
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_partial_fleet_delivery_closes_admission_until_every_selected_node_verifies
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_review_gate_open_fsync_and_terminal_receipt_failure_keep_blocker
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_root_squashed_shared_gate_is_read_as_scientific_owner_without_relaxing_guards
+FAILED components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_uncertain_activation_receipt_blocks_retry
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_crash_gate_write_failure_retains_intent
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_final_fleet_recheck_after_all_mutations
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_one_release_nfs_failure_closed
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14UpdateTests::test_i14_post_restart_check_reuses_complete_two_workflow_type_guard
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f3_known_retry_retains_original_provenance
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_changed_or_down_never_opens
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f4_postresume_wait_and_exact_idle
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f5_read_reservation_precedes_access_and_sentinel
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_healthy_idle_optional_reason
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r2_own_native_reason_causality_and_retry
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r3_identity_and_safety_ignore_only_accounting
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_r4_actual_main_update_budget_routes
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f3_known_retry_retains_original_provenance
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_changed_or_down_never_opens
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f4_postresume_wait_and_exact_idle
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f5_read_reservation_precedes_access_and_sentinel
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_f6_positive_factory_full_body_transition
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_native_annotated_unset_reason_completes_update_without_losing_raw
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_healthy_idle_optional_reason
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r2_own_native_reason_causality_and_retry
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r3_identity_and_safety_ignore_only_accounting
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_r4_actual_main_update_budget_routes
+FAILED components/qcl-negf-platform/tests/test_application_release.py::I14SlurmInfinityTests::test_resume_explicitly_clears_own_reason_before_opening_admission
+FAILED components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire
+36 failed, 198 passed in 52.35s

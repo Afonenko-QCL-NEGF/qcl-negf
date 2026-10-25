@@ -1,0 +1,6 @@
+{
+  "source_sha256": "8f05ff4cced8579b09cccd4b4315101e861e1896b87321b42e597374da79de49",
+  "review_sha256": "ba3ac68d16203cbfd77b568bba9f446df39a29bb11015c5cd4659ba6b33d9dc0",
+  "stage": "acceptedpublicprose_bound_no_render",
+  "whitespace_erratum": "author no-index exit0 disproved; exit1 with empty diagnostics; frozenchapter unchanged"
+}

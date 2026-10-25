@@ -1,0 +1,91 @@
+{
+  "format": "qcl-negf.doc06-schema-fix-impl-source.v1",
+  "worktree": "/tmp/qcl-doc06-schema-fix-worktree",
+  "branch": "codex/review-closure-doc06-schema-context",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "baseline": {
+    "adapter": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "tests": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69"
+  },
+  "design_sha256": "3a655b213799ce5ead32a1acec7aa0f05cd1effb8d2750e76fb10d271fac818b",
+  "design_review_sha256": "e224495073190f73277fefb7189d3c40f814e7c846dab1a7d14470cfaa2605ce",
+  "meaning_review_sha256": "4c35b2517718e3b9a137047a45652c4924de7e21ae3ad9041cd8d1e90df56861",
+  "files": {
+    "ops/docs/static-slice.ts": {
+      "sha256": "aa476aabdb044b020040816fdf7c2f7983082d28f6c15b01ccf1cbae307998ee",
+      "bytes": 48269
+    },
+    "tests/docs_static_slice_test.ts": {
+      "sha256": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04",
+      "bytes": 45959
+    }
+  },
+  "patch_sha256": "31f2192473c1ee7c1a0ca5c837545cb2222e4fbd0709fdbf0a685cddd45d4174",
+  "source_order": {
+    "tests_authored_first_sha256": "ec4f0d5c323bf3c1d81c5073516c1b7648e0aba3e49c14b4cbdd8a65e6d41e04",
+    "adapter_at_test_write_sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+    "old_tests_exact_prefix": true
+  },
+  "registration_count": {
+    "baseline_authority": 56,
+    "added_static_expansion": 18,
+    "total_static_expansion": 74,
+    "future_envelope_max": 87,
+    "discovery_executed": false
+  },
+  "new_registration_names": [
+    "DOC06 unrelated root condition preserves direct declarations with partial validation",
+    "DOC06 root conditional selected production fails closed in if",
+    "DOC06 root conditional selected production fails closed in then",
+    "DOC06 root conditional rejects unknown item key: else",
+    "DOC06 root conditional rejects unknown item key: item escaped extra",
+    "DOC06 root conditional rejects root-wide clause key: required",
+    "DOC06 root conditional rejects root-wide clause key: additionalProperties",
+    "DOC06 root conditional rejects root-wide clause key: not",
+    "DOC06 root conditional rejects root-wide clause key: $ref",
+    "DOC06 root conditional rejects root-wide clause key: x/y~z",
+    "DOC06 root anyOf keeps direct required independent",
+    "DOC06 unsupported selected context preserves failure locators: production allOf",
+    "DOC06 unsupported selected context preserves failure locators: leaf anyOf",
+    "DOC06 escaped resolved production required uses its source pointer",
+    "DOC06 direct root membership false remains literal under unsupported context",
+    "DOC06 description failure keeps absence and unavailable distinct: description_absent",
+    "DOC06 description failure keeps absence and unavailable distinct: source_missing",
+    "DOC06 no root composition still states partial validation coverage"
+  ],
+  "rounds": {
+    "source_edit": 1,
+    "code_correction": 0,
+    "maximum_source_rounds": 2
+  },
+  "executions": {
+    "deno": 0,
+    "formatter": 0,
+    "target_parser": 0,
+    "typecheck": 0,
+    "tests": 0,
+    "harness": 0,
+    "native": 0,
+    "network": 0,
+    "solver": 0,
+    "git_writes": 0,
+    "commit": 0,
+    "push": 0
+  },
+  "limits": {
+    "logical_source_read_max_bytes": 4194304,
+    "logical_source_read_conservative_upper_bytes": 2097152,
+    "wall_max_seconds": 900,
+    "cpu_max": 1,
+    "ram_max_bytes": 1073741824,
+    "report_max_bytes": 131072,
+    "cpu_rss_io_measured": false
+  },
+  "acceptance": "SOURCE_ONLY_AWAITING_INDEPENDENT_HIGH_CPP_AND_COORDINATOR_READY",
+  "prior_counters_preserved": {
+    "unit": "2/2",
+    "E1": "1/1",
+    "actual": "2/2"
+  },
+  "worktree_submodules": "8 uninitialized (-); gitlinks match HEAD; no initialization or update"
+}

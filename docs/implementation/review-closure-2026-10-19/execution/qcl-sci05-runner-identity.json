@@ -1,0 +1,30 @@
+{
+  "task": "SCI05-N1-Runner",
+  "stage": "source_implementation_not_runtime",
+  "status": "SOURCE_CANDIDATE_STOP",
+  "root_head": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "runner_base_head": "9378396a3681c1eddf2c62f16674834fc4465583",
+  "core_read_head": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "contracts_read_head": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+  "worktree": "/tmp/qcl-sci05-runner-worktree",
+  "branch": "codex/review-closure-final-audit-writer",
+  "patch": "/tmp/qcl-sci05-runner-patch.diff",
+  "patch_sha256": "9fc71bb3ca3c9724b6d545c7b231c90dd4b053455f7d298eb63692d523e6ad70",
+  "source_sha256": {
+    "src/infrastructure/persistence/physics_diagnostics.jl": "e57d57ef46bf2b4cf36e21fee0a59d8607d8c4aced808fc9bcfa16c410345a83",
+    "src/infrastructure/persistence/hdf5.jl": "d9ceeec9a76b8a7bc4c41eb24aaa2d4bb1fc1994cbce0407b9a344bdacb8d143",
+    "src/infrastructure/persistence/point_artifacts.jl": "c59cc27dc5c4e3b5e640105ad362a89365285e03d3d741c8141598dfd7e9329d",
+    "src/infrastructure/persistence/light_results.jl": "75c418fcc02e1023f951ccca216d60a0fd78e662f2a21fac1a477e609b141f06",
+    "test/infrastructure/final_fixed_point_audit.jl": "2deeff785cc09ee724dbbaffd0d99693178483c90b7b5685eefe47bbcc773e8b",
+    "docs/src/user/results.md": "e67f5b22b23d1f1f7edd03d7d9e20935cbd63e681d743739eca62f5c3f65e06f"
+  },
+  "checks": {"git_diff_check": "passed", "runtime_tests": "not_run", "independent_review": "pending"},
+  "c08_calls_consumed": 0,
+  "committed": false,
+  "pushed": false,
+  "child_agents": 0,
+  "future_fixture_root": "/tmp/qcl-sci05-runner-portable-fixture",
+  "future_fixture_env": "QCL_SCI05_RUNNER_FIXTURE_ROOT",
+  "future_fixture_exists_claim": false,
+  "science_acceptance": "not_measured"
+}

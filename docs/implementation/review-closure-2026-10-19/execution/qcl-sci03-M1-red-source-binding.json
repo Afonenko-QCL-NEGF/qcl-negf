@@ -1,0 +1,12 @@
+{
+  "state": "RED_source_bound_execution_pending",
+  "base": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+  "head": "d6e1f18b456c54fd43cbfb99f5486fe98fe4a3cd",
+  "branch": "codex/review-closure-current-bound-measurements-integration",
+  "test_sha256": "d4bb720fff951df9ed402709a4f11422f07680925e0dddf6e91dcc2dcef87f79",
+  "production_sha256": "3f8ee56390741e15bc2c709de67d4b0c80260733c99752d8fbbb4f538e3042e6",
+  "review_sha256": "4df1f319e5abc1918fddbbad464bec5b0eeaf5b5a45a09a063b3b6a150c633cc",
+  "harness_sha256": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b",
+  "published": false,
+  "science_accepted": false
+}

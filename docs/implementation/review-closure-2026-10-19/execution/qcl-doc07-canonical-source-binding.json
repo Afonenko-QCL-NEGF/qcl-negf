@@ -1,0 +1,10 @@
+{
+  "stage": "reviewed_append_bound_publication_pending",
+  "path": "docs/system/physics-documentation.md",
+  "before_sha256": "4b046312d0c1f04566c3a80ca6fb8a441ca7b025003c3c3b1c4c2bab2242f6cb",
+  "before_bytes": 88916,
+  "after_sha256": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+  "prefix_preserved": true,
+  "independent_design_review": "f62bbe6998b178ea746a3a28ae73e4e910c751742e0e7887ac4d77b63786b231",
+  "runtime_calls": 0
+}

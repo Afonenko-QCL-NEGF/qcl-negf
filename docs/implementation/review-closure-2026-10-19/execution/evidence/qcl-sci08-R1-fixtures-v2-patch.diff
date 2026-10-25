@@ -1,0 +1,473 @@
+diff --git a/test/application/execution_resource_contract.jl b/test/application/execution_resource_contract.jl
+index af5a2ad..58dfc64 100644
+--- a/test/application/execution_resource_contract.jl
++++ b/test/application/execution_resource_contract.jl
+@@ -132,11 +132,32 @@ end
+ end
+ 
+ @testset "Phase width respects the fixed Julia pool" begin
+-    request = QCLNEGFRunner._native_phase_request(nothing)
+-    pool = Threads.nthreads(:default)
+-    @test request((task_width = 1, elastic = true)) == 1
+-    @test request((task_width = pool, elastic = false)) == pool
+-    @test request((task_width = pool + 1, elastic = true)) == pool
+-    @test_throws ArgumentError request((task_width = 0, elastic = true))
++    # L2: literal membership and both explicit roots prevent default /proc reads.
++    mktempdir() do root
++        fake_proc = mkpath(joinpath(root, "fake_proc"))
++        fake_cgroup = mkpath(joinpath(root, "fake_cgroup"))
++        mkpath(joinpath(fake_proc, "self"))
++        write(joinpath(fake_proc, "self", "cgroup"), "0::/fixture.slice/solver.scope\n")
++        mkpath(joinpath(fake_cgroup, "fixture.slice", "solver.scope"))
++        request = QCLNEGFRunner._native_phase_request(nothing;
++            proc_root = fake_proc, cgroup_root = fake_cgroup)
++        pool = Threads.nthreads(:default)
++        attempted = Ref(0)
++        completed = Ref(0)
++        function continuation(req)
++            attempted[] += 1
++            width = request(req)
++            completed[] += 1
++            return width
++        end
++        @test continuation((task_width = 1, elastic = true)) == 1
++        @test continuation((task_width = pool, elastic = false)) == pool
++        @test continuation((task_width = pool + 1, elastic = true)) == pool
++        @test attempted[] == 3
++        @test completed[] == 3
++        @test_throws ArgumentError continuation((task_width = 0, elastic = true))
++        @test attempted[] == 4
++        @test completed[] == 3
++    end
+ end
+ end
+diff --git a/test/infrastructure/linux_process_resource_probe.jl b/test/infrastructure/linux_process_resource_probe.jl
+index e5bc89e..1b6e235 100644
+--- a/test/infrastructure/linux_process_resource_probe.jl
++++ b/test/infrastructure/linux_process_resource_probe.jl
+@@ -97,6 +97,15 @@ include("../support/resource_probe.jl")
+         @test hardware.available_memory_bytes == 6gib
+         @test hardware.cgroup_memory_max_bytes == typemax(Int)
+         @test hardware.cgroup_path == "."
++        # L3 legacy current fallback remains; strict S5/S9 refuse these inputs.
++        _write_resource_fixture(joinpath(cgroup_root, "memory.current"), "broken")
++        legacy_unknown_current = probe_hardware(;
++            proc_root, cgroup_root, physical_memory_override = 8gib,
++            available_memory_override = 6gib, host_logical_cpus = 8,
++            julia_threads = 8, blas_vendor_override = "fixture-blas")
++        @test legacy_unknown_current.cgroup_memory_current_bytes == 0
++        @test QCLNEGFRunner._resource_integer("max") == typemax(Int)
++        @test QCLNEGFRunner._resource_integer("broken") == typemax(Int)
+     end
+ 
+     @test QCLNEGFRunner._cpuset_count("0-3,8,10-11") == 7
+diff --git a/test/integration/native_phase_resource_contract.jl b/test/integration/native_phase_resource_contract.jl
+index 59b4bcf..ab8255f 100644
+--- a/test/integration/native_phase_resource_contract.jl
++++ b/test/integration/native_phase_resource_contract.jl
+@@ -13,13 +13,19 @@ const N=QCLNEGFRunner.QCLNumerics
+         width=Threads.nthreads(:default)
+         proc = mkpath(joinpath(root, "proc", "self"))
+         write(joinpath(proc, "cgroup"), "0::/group")
+-        let
+-            callback=QCLNEGFRunner._native_phase_request(root; proc_root = dirname(proc), cgroup_root = root)
++        fake_proc = dirname(proc)
++        boot_A = "00000000-0000-4000-8000-000000000001"
++        boot_B = "00000000-0000-4000-8000-000000000002"
++        boot_file = joinpath(fake_proc, "sys", "kernel", "random", "boot_id")
++        mkpath(dirname(boot_file))
++        write(boot_file, boot_A * "\n")
++        try
++            callback=QCLNEGFRunner._native_phase_request(root; proc_root = fake_proc, cgroup_root = root)
+             @test callback((task_width = 1, elastic = true))==1
+             options=ProductionOptions(
+                 worker_count = width,
+                 phase_timing = true,
+-                event_sink = event->QCLNEGFRunner._record_native_phase!(root, event),
++                event_sink = event->QCLNEGFRunner._record_native_phase!(root, event; proc_root = fake_proc),
+                 phase_request = callback,
+             )
+             outer=N._production_phase_begin(
+@@ -53,6 +59,14 @@ const N=QCLNEGFRunner.QCLNumerics
+             @test rows[4]["memory_granted_additional_bytes"]==1024
+             @test rows[3]["memory_admission_mode"]=="unavailable"
+             @test rows[1]["clock_domain_id"]==rows[4]["clock_domain_id"]
++            # D3: real lazy initialization reads literal fake boot A; a cache
++            # hit after replacing A with B preserves directory-owned identity.
++            @test startswith(rows[1]["clock_domain_id"], boot_A * ":julia:")
++            @test haskey(QCLNEGFRunner._NATIVE_PHASE_JOURNALS, root)
++            journal = QCLNEGFRunner._NATIVE_PHASE_JOURNALS[root]
++            write(boot_file, boot_B * "\n")
++            @test QCLNEGFRunner._native_phase_journal(root; proc_root = fake_proc) === journal
++            @test journal.clock_domain == rows[1]["clock_domain_id"]
+             write(joinpath(group, "memory.current"), "999999")
+             request=(
+                 name = :mixing,
+@@ -66,6 +80,9 @@ const N=QCLNEGFRunner.QCLNumerics
+             @test pressure["reason"]=="phase_memory_bound"
+             @test pressure["incremental_estimate_bytes"]==2
+             @test length(readlines(joinpath(root, "phases.jsonl")))==4
++        finally
++            pop!(QCLNEGFRunner._NATIVE_PHASE_JOURNALS, root, nothing)
++            pop!(QCLNEGFRunner._NATIVE_PHASE_ADMISSIONS, root, nothing)
+         end
+     end
+ end
+diff --git a/test/contracts/checked_storage_forecast.jl b/test/contracts/checked_storage_forecast.jl
+new file mode 100644
+index 0000000..b576cfb
+--- /dev/null
++++ b/test/contracts/checked_storage_forecast.jl
+@@ -0,0 +1,121 @@
++module CheckedStorageForecastTests
++include("../support/common.jl")
++const R = QCLNEGFRunner
++const M = typemax(Int)
++const C = 16777216
++forecast(ne, nk, nb, sizes = Int[], f = 0) =
++    R._checkpoint_storage_forecast_bytes(ne, nk, nb, sizes, f)
++# The oracle never invokes a production validator or forecast.
++oracle(ne, nk, nb, sizes, f) = big(C) + 4 *
++    (big(128) * ne * nk * nb * nb + sum(BigInt.(sizes); init = big(0)) + f)
++
++@testset "F1 literal nontrivial forecast" begin
++    @test forecast(2, 3, 5, [7, 11], 13) == 16854140
++end
++@testset "F2 empty and known zero kernels" begin
++    @test forecast(1, 1, 1) == 16777728
++    @test forecast(1, 1, 1, [0, 0], 0) == 16777728
++end
++@testset "F3 dimensions reject independently" begin
++    for index in 1:3, bad in (true, 0, -1, 1.0, nothing, big(M) + 1)
++        args = Any[1, 1, 1]
++        args[index] = bad
++        @test_throws ArgumentError forecast(args...)
++    end
++end
++@testset "F4 kernel and F sizes reject independently" begin
++    for bad in (true, -1, 1.0, nothing, big(M) + 1)
++        @test_throws ArgumentError forecast(1, 1, 1, Any[bad], 0)
++        @test_throws ArgumentError forecast(1, 1, 1, Int[], bad)
++    end
++end
++@testset "F5 six isolated checked arithmetic boundaries" begin
++    # Each chosen intermediate exceeds M, while its immediate operands fit Int.
++    nb = isqrt(M) + 1
++    @test big(nb) * nb > M
++    @test_throws OverflowError forecast(1, 1, nb)
++    ne = fld(M, 128) + 1
++    @test big(128) * ne > M
++    @test_throws OverflowError forecast(ne, 1, 1)
++    @test big(M) + 1 > M
++    @test_throws OverflowError forecast(1, 1, 1, [M, 1], 0)
++    @test big(128) + (M - 127) > M
++    @test_throws OverflowError forecast(1, 1, 1, [M - 127], 0)
++    k_scale = fld(M, 4) - 128 + 1
++    @test big(128) + k_scale <= M
++    @test 4 * (big(128) + k_scale) > M
++    @test_throws OverflowError forecast(1, 1, 1, [k_scale], 0)
++    k_add = fld(M - C, 4) - 128 + 1
++    scaled = 4 * (big(128) + k_add)
++    @test scaled <= M
++    @test big(C) + scaled > M
++    @test_throws OverflowError forecast(1, 1, 1, [k_add], 0)
++end
++@testset "F6 adjacent representable boundary" begin
++    k = fld(M - C, 4) - 128
++    expected = oracle(1, 1, 1, [k], 0)
++    @test expected <= M
++    @test forecast(1, 1, 1, [k], 0) == expected
++    @test oracle(1, 1, 1, [k + 1], 0) > M
++    @test_throws OverflowError forecast(1, 1, 1, [k + 1], 0)
++end
++@testset "B1 exact budget fit" begin
++    @test R._storage_budget_used(17, 25, 3, 5) == 17
++end
++@testset "B2 budget one byte short" begin
++    @test_throws ArgumentError R._storage_budget_used(17, 24, 3, 5)
++end
++@testset "B3 known zero and already exhausted" begin
++    @test R._storage_budget_used(0, 1, 0, 0) == 0
++    @test_throws ArgumentError R._storage_budget_used(26, 25, 0, 0)
++end
++@testset "B4 malformed budget inputs before reader" begin
++    for index in 1:4, bad in (true, -1, 1.0, nothing, big(M) + 1)
++        args = Any[17, 25, 3, 5]
++        args[index] = bad
++        @test_throws ArgumentError R._storage_budget_used(args...)
++    end
++    @test_throws ArgumentError R._storage_budget_used(0, 0, 0, 0)
++    reads = Ref(0)
++    reader = paths -> (reads[] += 1; 17)
++    for index in 1:3, bad in (true, -1, 1.0, nothing, big(M) + 1)
++        args = Any[25, 3, 5]
++        args[index] = bad
++        @test_throws ArgumentError R._check_storage_budget(String[], args...; storage_reader = reader)
++    end
++    @test_throws ArgumentError R._check_storage_budget(String[], 0, 0, 0; storage_reader = reader)
++    @test reads[] == 0
++    @test R._check_storage_budget(String[], 25, 3, 5; storage_reader = reader) == 17
++    @test reads[] == 1
++end
++@testset "B5 first and second addition overflow" begin
++    @test_throws OverflowError R._storage_budget_used(M, M, 1, 0)
++    @test_throws OverflowError R._storage_budget_used(M - 1, M, 1, 1)
++end
++@testset "D1 exact free capacity" begin
++    @test R._storage_free_permit(25, 25) == 25
++end
++@testset "D2 one byte free capacity short" begin
++    @test_throws ArgumentError R._storage_free_permit(24, 25)
++end
++@testset "D3 known zero and malformed free inputs" begin
++    @test R._storage_free_permit(0, 0) == 0
++    for index in 1:2, bad in (true, -1, 1.0, nothing, big(M) + 1)
++        args = Any[25, 25]
++        args[index] = bad
++        @test_throws ArgumentError R._storage_free_permit(args...)
++    end
++end
++@testset "D4 unavailable disk and validation before reader" begin
++    reads = Ref(0)
++    available = path -> (reads[] += 1; 25)
++    for bad in (true, -1, 1.0, nothing, big(M) + 1)
++        @test_throws ArgumentError R._check_storage_free("fake-only", bad; available_reader = available)
++    end
++    @test reads[] == 0
++    @test R._check_storage_free("fake-only", 25; available_reader = available) == 25
++    @test reads[] == 1
++    @test_throws ArgumentError R._check_storage_free("fake-only", 0; available_reader = path -> nothing)
++    @test_throws ErrorException R._check_storage_free("fake-only", 0; available_reader = path -> error("fixture disk unavailable"))
++end
++end
+diff --git a/test/infrastructure/strict_campaign_resource_admission.jl b/test/infrastructure/strict_campaign_resource_admission.jl
+new file mode 100644
+index 0000000..1010872
+--- /dev/null
++++ b/test/infrastructure/strict_campaign_resource_admission.jl
+@@ -0,0 +1,225 @@
++module StrictCampaignResourceAdmissionTests
++include("../support/common.jl")
++include("../support/resource_probe.jl")
++const R = QCLNEGFRunner
++const M = typemax(Int)
++
++# Every callback and probe receives BOTH explicit fake roots. This fixture's
++# three ancestors are leaf -> slice -> root; no defaults may observe the host.
++function fixture(f; bound = 100, current = 90)
++    mktempdir() do root
++        proc = joinpath(root, "proc")
++        cgroup = joinpath(root, "cgroup")
++        slice = joinpath(cgroup, "fixture.slice")
++        leaf = joinpath(slice, "solver.scope")
++        groups = [leaf, slice, cgroup]
++        _write_resource_fixture(joinpath(proc, "self", "cgroup"), "0::/fixture.slice/solver.scope\n")
++        _write_resource_fixture(joinpath(proc, "self", "status"), "Cpus_allowed_list:\t0\n")
++        for group in groups
++            _write_resource_fixture(joinpath(group, "memory.max"), group == slice ? string(bound) : "max")
++            _write_resource_fixture(joinpath(group, "memory.high"), "max")
++            _write_resource_fixture(joinpath(group, "memory.current"), string(current))
++            _write_resource_fixture(joinpath(group, "cpu.max"), group == slice ? "100000 100000" : "max 100000")
++            _write_resource_fixture(joinpath(group, "cpuset.cpus.effective"), "0")
++        end
++        directory = mkpath(joinpath(root, "telemetry"))
++        f((; root, proc, cgroup, groups, directory))
++    end
++end
++phase(x; directory = x.directory) = R._native_phase_request(directory;
++    proc_root = x.proc, cgroup_root = x.cgroup, resource_policy = :campaign_strict)
++request(; task_width = 1, memory_burst_bytes = 10) =
++    (; task_width, memory_burst_bytes, elastic = true, name = :fixture, iteration = 0)
++function probe(x; overrides...)
++    arguments = merge((;
++        proc_root = x.proc, cgroup_root = x.cgroup,
++        physical_memory_override = 200, available_memory_override = 110,
++        host_logical_cpus = 1, julia_threads = 1, blas_vendor_override = "fixture",
++        resource_policy = :campaign_strict), (; overrides...))
++    return R.probe_hardware(; arguments...)
++end
++function after_phase!(completed, callback, req)
++    width = callback(req)
++    completed[] += 1
++    return width
++end
++
++@testset "S1 strict exact fit and fixed pool" begin
++    fixture() do x
++        completed = Ref(0)
++        @test after_phase!(completed, phase(x), request(task_width = Threads.nthreads(:default) + 1)) == Threads.nthreads(:default)
++        @test completed[] == 1
++    end
++end
++@testset "S2 strict memory one byte short" begin
++    fixture(; bound = 99) do x
++        completed = Ref(0)
++        @test_throws R._NativePhasePressure after_phase!(completed, phase(x), request())
++        @test completed[] == 0
++    end
++end
++@testset "S3 each ancestor malformed or missing bound" begin
++    for index in 1:3, bad in ("", "broken", "-1", string(big(M) + 1), nothing)
++        fixture() do x
++            path = joinpath(x.groups[index], "memory.max")
++            bad === nothing ? rm(path) : write(path, bad)
++            @test_throws ArgumentError phase(x)(request())
++        end
++    end
++end
++@testset "S4 no finite bound or valid membership" begin
++    fixture() do x
++        for group in x.groups
++            write(joinpath(group, "memory.max"), "max")
++        end
++        @test_throws ArgumentError phase(x)(request())
++        @test_throws ArgumentError R._native_phase_memory_permit!(x.directory, String[], request(); resource_policy = :campaign_strict)
++    end
++    for membership in (nothing, "1:name=systemd:/legacy", "0::/../escape", "0::relative", "0::/absent.scope")
++        fixture() do x
++            path = joinpath(x.proc, "self", "cgroup")
++            membership === nothing ? rm(path) : write(path, membership)
++            @test_throws ArgumentError phase(x)(request())
++        end
++    end
++end
++@testset "S5 each ancestor current unknown is not zero" begin
++    for index in 1:3, bad in ("", "max", "broken", "-1", string(big(M) + 1), nothing)
++        fixture() do x
++            # Make each ancestor an applicable finite bound in turn.
++            write(joinpath(x.groups[index], "memory.max"), "100")
++            path = joinpath(x.groups[index], "memory.current")
++            bad === nothing ? rm(path) : write(path, bad)
++            @test_throws ArgumentError phase(x)(request())
++        end
++    end
++end
++@testset "S6 unknown burst or directory refuses" begin
++    fixture() do x
++        @test_throws ArgumentError phase(x)((task_width = 1, elastic = true))
++        for bad in (nothing, true, -1, 1.0, big(M) + 1)
++            @test_throws ArgumentError phase(x)(request(memory_burst_bytes = bad))
++        end
++        @test_throws ArgumentError phase(x; directory = nothing)(request())
++    end
++end
++@testset "S7 zero burst still requires measurement" begin
++    fixture() do x
++        @test phase(x)(request(memory_burst_bytes = 0)) == 1
++        write(joinpath(x.groups[2], "memory.current"), "broken")
++        @test_throws ArgumentError phase(x)(request(memory_burst_bytes = 0))
++    end
++end
++@testset "S8 width validation and required byte overflow" begin
++    fixture() do x
++        completed = Ref(0)
++        for bad in (true, 0, -1, 1.0, big(M) + 1)
++            @test_throws ArgumentError after_phase!(completed, phase(x), request(task_width = bad))
++        end
++        @test completed[] == 0
++        write(joinpath(x.groups[2], "memory.max"), string(M))
++        write(joinpath(x.groups[2], "memory.current"), string(M))
++        @test_throws OverflowError after_phase!(completed, phase(x), request(memory_burst_bytes = 1))
++        @test completed[] == 0
++    end
++end
++@testset "S9 strict CPU input and raw status distinctions" begin
++    fixture() do x
++        @test probe(x).logical_cpus == 1
++        @test R._strict_resource_integer("max").status === :unlimited
++        @test R._strict_resource_integer("0").status === :finite
++        @test R._strict_resource_integer("0").value == 0
++        @test R._strict_resource_integer("").status === :unknown
++        @test R._strict_resource_integer("broken").status === :malformed
++        @test R._strict_resource_integer(string(big(M) + 1)).status === :out_of_range
++    end
++    for bad in (nothing, "", "Cpus_allowed_list:\tbroken", "Cpus_allowed_list:\t0-999999999999999999999999")
++        fixture() do x
++            path = joinpath(x.proc, "self", "status")
++            bad === nothing ? rm(path) : write(path, bad)
++            @test_throws ArgumentError probe(x)
++        end
++    end
++    for index in 1:3, bad in (nothing, "", "broken", "max 0", "-1 100000", "1 0", "NaN 100000")
++        fixture() do x
++            path = joinpath(x.groups[index], "cpu.max")
++            bad === nothing ? rm(path) : write(path, bad)
++            @test_throws ArgumentError probe(x)
++        end
++    end
++    for bad in (nothing, "", "broken", "-1")
++        fixture() do x
++            path = joinpath(x.groups[1], "cpuset.cpus.effective")
++            bad === nothing ? rm(path) : write(path, bad)
++            @test_throws ArgumentError probe(x)
++        end
++    end
++    for key in (:physical_memory_override, :available_memory_override, :host_logical_cpus, :julia_threads), bad in (true, -1, 1.0, big(M) + 1)
++        fixture() do x
++            @test_throws ArgumentError probe(x; (key => bad,)...)
++        end
++    end
++    for key in (:host_logical_cpus, :julia_threads)
++        fixture() do x
++            @test_throws ArgumentError probe(x; (key => 0,)...)
++        end
++    end
++    fixture() do x
++        write(joinpath(x.proc, "self", "cgroup"), "1:name=systemd:/legacy")
++        @test_throws ArgumentError probe(x)
++    end
++end
++
++@testset "O1 actual entry preflight seam remains closed" begin
++    completed = Ref(0)
++    envelope = R.ExecutionEnvelope("fixture", 8, 1, 1, 10, 1, [0])
++    for (policy, grant) in ((:campaign_strict, nothing), (:wrong_policy, envelope), (:campaign_strict, envelope))
++        @test_throws ArgumentError begin
++            R._scientific_resource_preflight(policy, grant)
++            completed[] += 1
++        end
++    end
++    @test completed[] == 0
++    # Actual execute_scientific_plan must call this seam before mkpath, plan
++    # writing and problem construction. Independent source trace is mandatory.
++end
++function tiny_solution(ne)
++    return (problem = (numerical = (N_E = ne, N_k = 1, N_b = 1),
++        kernels = (K = Dict{Symbol,Vector{UInt8}}(), Fᴸᴼ = UInt8[])),)
++end
++@testset "O2 actual checkpoint preflight seam before writer" begin
++    completed = Ref(0)
++    @test_throws ArgumentError begin
++        R._checkpoint_storage_preflight(tiny_solution(true), 0)
++        completed[] += 1
++    end
++    @test_throws OverflowError begin
++        R._checkpoint_storage_preflight(tiny_solution(1), M)
++        completed[] += 1
++    end
++    @test completed[] == 0
++    # Actual commit_point_artifacts must use this same checked forecast/reserve
++    # seam before generation creation/HDF5. Root mkdir is a separate effect.
++end
++@testset "O3 actual phase callback before continuation" begin
++    fixture() do x
++        completed = Ref(0)
++        callback = phase(x)
++        @test_throws ArgumentError after_phase!(completed, callback, (task_width = 1, elastic = true))
++        @test completed[] == 0
++        @test !haskey(R._NATIVE_PHASE_ADMISSIONS, x.directory) ||
++            get(R._NATIVE_PHASE_ADMISSIONS[x.directory], "memory_admission_mode", "") != "cgroup_v2"
++        @test !isfile(joinpath(x.directory, "phases.jsonl"))
++    end
++end
++@testset "O4 healthy finite gate fires real continuation" begin
++    fixture() do x
++        completed = Ref(0)
++        @test after_phase!(completed, phase(x), request()) == 1
++        @test completed[] == 1
++        @test R._checkpoint_storage_preflight(tiny_solution(1), 0) ==
++            (forecast_bytes = 16777728, required_bytes = 16777728)
++        @test R._scientific_resource_preflight(:standalone, nothing) === nothing
++    end
++end
++end

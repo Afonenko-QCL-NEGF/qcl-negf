@@ -264,6 +264,31 @@ systemd проверяет владельца и права, а зависимы
 multipart receipts сохраняется. Admission budget и TTL экспортного кеша задаются
 явно; scientific export profiles остаются прежними.
 
+## Recovery прерванного научного запуска
+
+Цель этого маршрута — продолжить совместимую acknowledged generation с
+сохранением исходной попытки и её причин отказа. Начните с frozen plan,
+execution/point, source attempt и полного recovery tree; проверьте наличие
+metadata и доступный byte budget. Подробный порядок и executable CLI contract
+находятся в owning [Runner: Results and restart](../components/QCLNEGFRunner.jl/docs/src/user/results.md)
+и [public API](../components/QCLNEGFRunner.jl/docs/src/api/public.md).
+
+| Наблюдаемое состояние | Действие и ожидаемый результат |
+| --- | --- |
+| Есть только `pending-*` или progress snapshot | Считать recovery недоступным: pending не resume. Сохранить исходные файлы и логи. |
+| Latest/current corrupt, previous доступен | Дать owning reader проверить previous вместе с pointer/commit/receipt и всеми declared artifacts. Продолжать только из verified previous, сохранив его source identity и consumed budget. |
+| Оба acknowledged candidates отсутствуют или не проходят проверку | Явная ошибка `no valid acknowledged recovery generation`; сохранить pointers, failed receipts/logs и original attempt. Не подменять её cold start и не удалять evidence. |
+| Полная verified generation и обязательные prior-final archives доступны | Новый явно разрешённый attempt использует owning `--recovery-bundle` маршрут с проверкой frozen identity, совместимости и накопленного бюджета; source attempt сохраняется. |
+
+Resume выполняет вычисление и использует конечный разрешённый бюджет; наличие
+этого текста не запускает его и не меняет научную модель. Проверенная локальная
+публикация не доказывает cross-node/LAN durability, успешный restore или
+научную приёмку. Этот runbook хранит эксплуатационный маршрут; формулы и
+критерии остаются в [Core](../components/QCLNEGF.jl/docs/src/theory/12_validation.md),
+форматы — в [Contracts](../components/qcl-negf-contracts/README.md).
+Здесь не приведён production artifact locator; synthetic fixtures Runner
+проверяют свой контракт, а не recovery существующего S01 или нового device run.
+
 При отсутствии внешнего backup-хранилища штатный state archive проверяется
 локальным восстановлением и затем вручную копируется на внешний диск вместе
 с необходимыми NFS-данными и отдельным набором runtime-секретов. Копия на том же

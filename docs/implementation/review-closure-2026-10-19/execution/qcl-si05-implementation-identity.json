@@ -1,0 +1,690 @@
+{
+  "stage": "frozen_for_CP_CODE",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "head": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+  "status_before": " M .agents/skills/qcl-performance-audit/references/telemetry.md\n M .agents/skills/qcl-physics-audit/references/physics-checks.md\n M .agents/skills/qcl-research-framing/references/brief.md\n M .agents/skills/qcl-results-analysis/references/comparison.md\n M components/QCLNEGF.jl\n M components/qcl-negf-portal\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev05-d2-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev24-auth-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-checkmatrix.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV05-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV24-GREEN-2/\n",
+  "recursive_before": "+f7b108bef206d2b2dc5afe0306b2dff60d27ac59 components/QCLNEGF.jl (v0.2.0-10-gf7b108b)\n 23860d9e660a3cddf6cb5203d449d1b62f3745a1 components/QCLNEGFRunner.jl (v0.2.0-25-g23860d9)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n 02a564b78dc9c5e19eacf496bc8c891361eafaab components/qcl-negf-contracts (v0.2.0-13-g02a564b)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n+2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n",
+  "files": [
+    {
+      "path": ".agents/skills/qcl-research-framing/SKILL.md",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "9e5f756d1a98dde7a4104e1f134432e5c414548bce338d4114c619adac2d76c3",
+      "baseline_bytes": 4067,
+      "candidate_sha256": "5c3833087f43e9e639e2b3f3022b1df00682473b8aa2c200b72a0ac53d54e500",
+      "candidate_bytes": 5280
+    },
+    {
+      "path": ".agents/skills/qcl-research-framing/agents/openai.yaml",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "560852d932690b2bd100deaefd5d85c758ba67b869d432ab16f94f215e87c25f",
+      "baseline_bytes": 420,
+      "candidate_sha256": "e1ad31b68e4749ffb1bf88de23fd465f27b91e7c94786cef943db25f304c60ae",
+      "candidate_bytes": 452
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/SKILL.md",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "1ec906ee78824504ea7b8036a48f8e70f6338f3724d7675e61a5b5f9de09d93e",
+      "baseline_bytes": 4033,
+      "candidate_sha256": "b9a4265d90964efeacfff6eac997f22e9fa9214c3d713ed704191a7dd46127fe",
+      "candidate_bytes": 5425
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/agents/openai.yaml",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "316f47d2d7d5ab305d0ac7e16f55554b18928dd3583a23abc2a4133fea2dfc3a",
+      "baseline_bytes": 383,
+      "candidate_sha256": "f51b508e3ad0a1103c851c0c1ef5aef79e0c63064f9ee02321e7db8a225ae318",
+      "candidate_bytes": 429
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/SKILL.md",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "d7bda599b3b222c16f04c9513f7615a4e70fbe266238c8bc3267b5f84339c578",
+      "baseline_bytes": 4939,
+      "candidate_sha256": "89bdd7be7b91cb46da1663777a639fab0f6ce738a989c0e0cfa633c92d3da4bc",
+      "candidate_bytes": 6717
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/agents/openai.yaml",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "e336d2664ebe3c5b80585746364a9312ece8009244bdb0857f796e897af9339a",
+      "baseline_bytes": 363,
+      "candidate_sha256": "b4974c1c32d462d7d1128a6a058980f1a1b712a3460d83d6925fa0ad78985423",
+      "candidate_bytes": 393
+    },
+    {
+      "path": ".agents/skills/qcl-performance-audit/SKILL.md",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "0ccc0aaed3c88c3620082bf9808113c3c725aaa2bc3b47b56db9d349e0d58f74",
+      "baseline_bytes": 10475,
+      "candidate_sha256": "597043c2c3a660ae18c84c17ba96729ba393b2e4f53491574af3d156c408ea3b",
+      "candidate_bytes": 11631
+    },
+    {
+      "path": ".agents/skills/qcl-performance-audit/agents/openai.yaml",
+      "selected_root": "965ebed95d2b627423805d10c46d0ae8dd425e9d",
+      "baseline_sha256": "cb0884aaf1fc3efaeab9dc836ba33b51364724d2747789c07cde14fbd4a0b17a",
+      "baseline_bytes": 416,
+      "candidate_sha256": "2a8721c4ee8de5fae982cad3f112ff5df1ae2aef6dca633b14ea980733f25836",
+      "candidate_bytes": 404
+    }
+  ],
+  "guards": [
+    {
+      "path": ".agents/skills/qcl-research-framing/references/brief.md",
+      "sha256": "5acf06b37185d31f25b8b52a08bd62d6dfe2d5e8d5244afc9da1eedf272a9f0e",
+      "equals_accepted_SI04_candidate": true
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/references/physics-checks.md",
+      "sha256": "a2b41df68de6ced8921e43a8f46bb123b84381fe9cc30441211cc8d306d5fb29",
+      "equals_accepted_SI04_candidate": true
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/references/comparison.md",
+      "sha256": "ae11f2a66bbc43289f64ef850180d5bf165ca77b1a24e95fed8c2df008a9860f",
+      "equals_accepted_SI04_candidate": true
+    },
+    {
+      "path": ".agents/skills/qcl-performance-audit/references/telemetry.md",
+      "sha256": "c7a463d9e5397f331b1b4ab5a73c2c19daf02c42c4c0ae70e1193d3efc1fe7d5",
+      "equals_accepted_SI04_candidate": true
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7"
+    },
+    {
+      "path": "docs/system/agent-review-workflow.md",
+      "sha256": "8a00d94c2306ffb391887f8e6eaa6d7c6ebc82c55461e5135891147619647dfc"
+    },
+    {
+      "path": "docs/implementation/review-closure-2026-10-19/documentation-instructions.md",
+      "sha256": "17fc16b7808ae0e2b29732c65033a5f544bca79577788cbade386870e0246254"
+    }
+  ],
+  "original_guards": [
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-research-framing/SKILL.md",
+      "sha256": "9e5f756d1a98dde7a4104e1f134432e5c414548bce338d4114c619adac2d76c3"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-research-framing/agents/openai.yaml",
+      "sha256": "560852d932690b2bd100deaefd5d85c758ba67b869d432ab16f94f215e87c25f"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-physics-audit/SKILL.md",
+      "sha256": "1ec906ee78824504ea7b8036a48f8e70f6338f3724d7675e61a5b5f9de09d93e"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-physics-audit/agents/openai.yaml",
+      "sha256": "316f47d2d7d5ab305d0ac7e16f55554b18928dd3583a23abc2a4133fea2dfc3a"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-results-analysis/SKILL.md",
+      "sha256": "d7bda599b3b222c16f04c9513f7615a4e70fbe266238c8bc3267b5f84339c578"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-results-analysis/agents/openai.yaml",
+      "sha256": "e336d2664ebe3c5b80585746364a9312ece8009244bdb0857f796e897af9339a"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-performance-audit/SKILL.md",
+      "sha256": "0ccc0aaed3c88c3620082bf9808113c3c725aaa2bc3b47b56db9d349e0d58f74"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-performance-audit/agents/openai.yaml",
+      "sha256": "cb0884aaf1fc3efaeab9dc836ba33b51364724d2747789c07cde14fbd4a0b17a"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-research-framing/references/brief.md",
+      "sha256": "b98635fb4df9ac2c4671523c7c1d88ebd163d78284f9422df4572dba4746e271"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-physics-audit/references/physics-checks.md",
+      "sha256": "6fcba7b193003ae315e6158f47528f5ed87b45d78c457a01c305154c7aa4c315"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-results-analysis/references/comparison.md",
+      "sha256": "4e7aa8013da33e0ee0f47ab4c00b5471b28cb0aae7fbb93c3c2162acf1e5ff78"
+    },
+    {
+      "path": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-performance-audit/references/telemetry.md",
+      "sha256": "1b7168a1bb12525f6e8c7677266ed3adb64faafebf6e1a7816337cb8df399d1b"
+    }
+  ],
+  "checks": [
+    {
+      "check": "assigned root HEAD",
+      "pass": true
+    },
+    {
+      "check": "design.patch identity",
+      "pass": true
+    },
+    {
+      "check": "design-review.md identity",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml baseline live bytes",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml baseline hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/references/brief.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/references/physics-checks.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/references/comparison.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/references/telemetry.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": "docs/architecture.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": "docs/system/agent-review-workflow.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": "docs/implementation/review-closure-2026-10-19/documentation-instructions.md guard baseline",
+      "pass": true
+    },
+    {
+      "check": "assigned root HEAD unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md frontmatter exact preservation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md local link references/brief.md",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/SKILL.md local link references/brief.md",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml all ancillary UI bytes preserved",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml literal own invocation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/agents/openai.yaml short description character count",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md frontmatter exact preservation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md local link references/physics-checks.md",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/SKILL.md local link references/physics-checks.md",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml all ancillary UI bytes preserved",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml literal own invocation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/agents/openai.yaml short description character count",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md frontmatter exact preservation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md local link references/comparison.md",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/SKILL.md local link references/comparison.md",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml all ancillary UI bytes preserved",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml literal own invocation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/agents/openai.yaml short description character count",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md frontmatter exact preservation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/SKILL.md local link references/telemetry.md",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml exact candidate after",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml exact candidate hash",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml UTF8/newline/trailing whitespace",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml balanced fences",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml all ancillary UI bytes preserved",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml literal own invocation",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/agents/openai.yaml short description character count",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-research-framing/references/brief.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-physics-audit/references/physics-checks.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-results-analysis/references/comparison.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": ".agents/skills/qcl-performance-audit/references/telemetry.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "AGENTS.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "docs/architecture.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "docs/system/agent-review-workflow.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "docs/implementation/review-closure-2026-10-19/documentation-instructions.md managed guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-research-framing/SKILL.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-research-framing/agents/openai.yaml original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-physics-audit/SKILL.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-physics-audit/agents/openai.yaml original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-results-analysis/SKILL.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-results-analysis/agents/openai.yaml original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-performance-audit/SKILL.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-performance-audit/agents/openai.yaml original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-research-framing/references/brief.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-physics-audit/references/physics-checks.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-results-analysis/references/comparison.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "/home/tolya/Загрузки/qcl-negf/.agents/skills/qcl-performance-audit/references/telemetry.md original/catalog guard unchanged",
+      "pass": true
+    },
+    {
+      "check": "owned eight git diff --check zero diagnostics",
+      "pass": true
+    },
+    {
+      "check": "frozen patch exact8 owned paths",
+      "pass": true
+    },
+    {
+      "check": "skill dirty paths only eight owned plus accepted four SI04",
+      "pass": true
+    }
+  ],
+  "local_links": [
+    {
+      "source": ".agents/skills/qcl-research-framing/SKILL.md",
+      "target": "references/brief.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-research-framing/references/brief.md"
+    },
+    {
+      "source": ".agents/skills/qcl-research-framing/SKILL.md",
+      "target": "references/brief.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-research-framing/references/brief.md"
+    },
+    {
+      "source": ".agents/skills/qcl-physics-audit/SKILL.md",
+      "target": "references/physics-checks.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-physics-audit/references/physics-checks.md"
+    },
+    {
+      "source": ".agents/skills/qcl-physics-audit/SKILL.md",
+      "target": "references/physics-checks.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-physics-audit/references/physics-checks.md"
+    },
+    {
+      "source": ".agents/skills/qcl-results-analysis/SKILL.md",
+      "target": "references/comparison.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-results-analysis/references/comparison.md"
+    },
+    {
+      "source": ".agents/skills/qcl-results-analysis/SKILL.md",
+      "target": "references/comparison.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-results-analysis/references/comparison.md"
+    },
+    {
+      "source": ".agents/skills/qcl-performance-audit/SKILL.md",
+      "target": "references/telemetry.md",
+      "resolved": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.agents/skills/qcl-performance-audit/references/telemetry.md"
+    }
+  ],
+  "manual_text_observations": [
+    {
+      "path": ".agents/skills/qcl-research-framing/agents/openai.yaml",
+      "short_description_chars": 48,
+      "scope": "byte/text check only; not YAML parser or formal validator"
+    },
+    {
+      "path": ".agents/skills/qcl-physics-audit/agents/openai.yaml",
+      "short_description_chars": 46,
+      "scope": "byte/text check only; not YAML parser or formal validator"
+    },
+    {
+      "path": ".agents/skills/qcl-results-analysis/agents/openai.yaml",
+      "short_description_chars": 41,
+      "scope": "byte/text check only; not YAML parser or formal validator"
+    },
+    {
+      "path": ".agents/skills/qcl-performance-audit/agents/openai.yaml",
+      "short_description_chars": 50,
+      "scope": "byte/text check only; not YAML parser or formal validator"
+    }
+  ],
+  "patch": {
+    "path": "/tmp/qcl-si05-implementation.patch",
+    "sha256": "0823e86175a4283582df5a6602555b90df825f5abcd8e1a3b7797b41d6b1fcd6",
+    "bytes": 19840
+  },
+  "status_after": " M .agents/skills/qcl-performance-audit/SKILL.md\n M .agents/skills/qcl-performance-audit/agents/openai.yaml\n M .agents/skills/qcl-performance-audit/references/telemetry.md\n M .agents/skills/qcl-physics-audit/SKILL.md\n M .agents/skills/qcl-physics-audit/agents/openai.yaml\n M .agents/skills/qcl-physics-audit/references/physics-checks.md\n M .agents/skills/qcl-research-framing/SKILL.md\n M .agents/skills/qcl-research-framing/agents/openai.yaml\n M .agents/skills/qcl-research-framing/references/brief.md\n M .agents/skills/qcl-results-analysis/SKILL.md\n M .agents/skills/qcl-results-analysis/agents/openai.yaml\n M .agents/skills/qcl-results-analysis/references/comparison.md\n M components/QCLNEGF.jl\n M components/qcl-negf-portal\n M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev05-d2-code-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-dev24-auth-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci04-design-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-checkmatrix.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-si04-design-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV05-GREEN-2/\n?? docs/implementation/review-closure-2026-10-19/execution/tests/DEV24-GREEN-2/\n",
+  "recursive_after": "+f7b108bef206d2b2dc5afe0306b2dff60d27ac59 components/QCLNEGF.jl (v0.2.0-10-gf7b108b)\n 23860d9e660a3cddf6cb5203d449d1b62f3745a1 components/QCLNEGFRunner.jl (v0.2.0-25-g23860d9)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n 02a564b78dc9c5e19eacf496bc8c891361eafaab components/qcl-negf-contracts (v0.2.0-13-g02a564b)\n b067723c82382689bff5cc366981c56e99b926f8 components/qcl-negf-platform (v0.2.0-90-gb067723)\n+2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 1eacefcd81a50e245ea9da74a0b717b33818c61e components/qcl-negf-research (v0.2.0-8-g1eacefc)\n e2fdeda29ab4064fb92626f4e98c3d39aac2e4ae components/qcl-negf-results (v0.2.0-19-ge2fdeda)\n",
+  "formal_validator": "not_run",
+  "YAML_parser": "not_run",
+  "forward_samples": "not_run",
+  "runtime": "not_run",
+  "publication": "not_performed"
+}

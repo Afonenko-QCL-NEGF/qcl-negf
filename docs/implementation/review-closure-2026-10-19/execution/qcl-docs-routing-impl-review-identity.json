@@ -1,0 +1,31 @@
+{
+  "scope": "docs-routing-source-I-round1-independent-review",
+  "worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "branch": "codex/review-closure-docs-test-routing",
+  "helper_sha256": "bdc1684faffa4e6606b1667675f335768e3eb6216ae64b5842d2431460063356",
+  "fixture_sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+  "complete_patch_sha256": "26882ff074c0f8c8ded44f34b0caa288c62da30ef6afc5dad42d420d0c6a057e",
+  "proposed_typing_patch_sha256": "7d65aba44b29dcccdcbd079fc0f804c5afee29646cdc195e39b9e55ae42f9a5b",
+  "design1_sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270",
+  "design2_sha256": "bbb8cbeb4845a9a7b9514010f5c988beeac66080246d9fca1d6c12ee8a81cf70",
+  "verdict": "changes_required_pure_failure_retention_and_native_integration_still_blocked",
+  "findings": [
+    { "id": "R1", "priority": "P1", "locator": "ops/docs_tests.ts:348", "topic": "Final sourceGraph rejection escapes without aggregate and available captures" },
+    { "id": "R2", "classification": "acknowledged_D3_gate", "locator": "ops/docs_tests.ts:58", "topic": "Incomplete private receipt identity and supervisor attempt binding" }
+  ],
+  "typing_patch": "source_approved_unapplied_not_compiler_verified",
+  "actual_routing": "source_consistent_not_runtime_verified",
+  "native_integration": "always_blocked_missing_trusted_interfaces_and_seed",
+  "report": "/tmp/qcl-docs-routing-impl-review.md",
+  "report_sha256": "f82e57e11833ffefe1cd85b6778bdfcb9d0749476e768472624f0e34fa5a70a2",
+  "execution_counts": {
+    "deno": 0, "parser": 0, "typecheck": 0, "formatter": 0,
+    "tests": 0, "target_imports": 0, "native_tool_runs": 0,
+    "builds": 0, "network": 0, "ci": 0, "science": 0,
+    "product_writes": 0, "checkpoint_writes": 0, "git_writes": 0
+  },
+  "source_read_conservative_bound_bytes": 1048576,
+  "cpu_ram_io": "not_instrumented",
+  "stop": true
+}

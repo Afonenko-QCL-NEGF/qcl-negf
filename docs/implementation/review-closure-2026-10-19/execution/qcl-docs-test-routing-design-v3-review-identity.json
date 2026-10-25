@@ -1,0 +1,29 @@
+{
+  "scope": "docs-routing-D3-independent-high-source-review",
+  "selected_root": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "selected_platform": "f729e2681224d6537538179ab760fefefd575003",
+  "design_sha256": "c586234a65a647c3896eb17af4ac0ae0b8a02f4f56d41dcbf25728d997282554",
+  "design_identity_sha256": "71a3c92513604ebb6bec44490cee5ccdeb9b72bd2baf3f23ccdeb6bf14aef7a6",
+  "design_ledger_sha256": "0d26e68bad4d54440ba5a3b8425c463b3645813b642fc22b0601f456f4f93b74",
+  "prior_cpp_sha256": "f82e57e11833ffefe1cd85b6778bdfcb9d0749476e768472624f0e34fa5a70a2",
+  "report": "/tmp/qcl-docs-test-routing-design-v3-review.md",
+  "report_sha256": "228adacf29beb41b48f21b90d055a648b13ded0e8c5e3154f5709a023d2e40d0",
+  "verdict": "changes_required_before_ready_I2",
+  "findings": [
+    { "id": "R1", "priority": "P1", "locators": "D3:57-59,23,67", "topic": "Exact trusted producer/factory/control-pipe task/workflow route missing; bootstrap must be fixed" },
+    { "id": "R2", "priority": "P1", "locators": "D3:25,67,84,101-116; ops/git.ts:39; ops/process.ts:15", "topic": "Driver/Git binding subprocesses not explicitly within bounded supervisor/resource/retention boundary" }
+  ],
+  "prior_graph_failure_retention": "design_requirement_addressed_implementation_unverified",
+  "descriptor_D2_seed": "source_preserved",
+  "fixture_ancestry": "historic_RED_and_current_reviewed_narrowing_hashes_distinct",
+  "native_evidence": "not_present_not_claimed",
+  "execution_counts": {
+    "deno": 0, "parser_compiler": 0, "target_import": 0,
+    "test": 0, "native_probe": 0, "build": 0,
+    "network": 0, "solver": 0, "final_ci": 0,
+    "product_writes": 0, "checkpoint_writes": 0, "git_writes": 0
+  },
+  "source_read_conservative_bound_bytes": 1048576,
+  "cpu_ram_io": "not_instrumented",
+  "stop": true
+}

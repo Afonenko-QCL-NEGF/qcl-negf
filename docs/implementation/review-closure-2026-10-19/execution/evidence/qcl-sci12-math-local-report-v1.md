@@ -1,0 +1,29 @@
+# SCI12-MATH local guard v1 — source-only подготовка
+
+Подготовлен prospective bounded Python capture harness; запусков, импортов, parser/compiler/probes нет. Это `/tmp` tooling, product implementation не менялась. Нужен свежий независимый high review; этот текст не READY и не разрешение расходовать вызовы.
+
+Фактический checkout подготовки `/home/tolya/Загрузки/qcl-negf` HEAD `e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1`; status содержал прежние изменения AGENTS/README/TODO/architecture/deployment и untracked comprehensive-review/system docs. Git submodule status зафиксирован read-only в transcript; gitlinks не обновлялись. Целевая Results worktree фактически показала HEAD `de70638a982f91b7e125ab1cfc70a2daef2a656d`. Конкретный runtime, frozen F2 и helper hashes заданы в guard/plan. Архитектура прочитана. Task — подготовка tooling по готовому контракту, не изменение физики и не вычислительный эксперимент. Дочерних агентов нет.
+
+Root сообщил, что pureGREEN уже расходовал 87→88 и завершился FAILED; original raw/receipt сохраняются, rerun не разрешён. Math RED88→89 и GREEN89→90 остаются только prospective и требуют Root reconciliation, но не требуют pure PASS. Исторический milestone81→88 не переписан; C08source8/8 не изменён. Harness не владеет CP/ledger и не выдаёт approvals.
+
+Каждый вызов имеет wall90s, affinity1CPU, RLIMIT_CPU90s, sampled RSS1GiB, sampled owned temporary regular-file logical bytes32MiB, raw envelope2MiB. Early wall stop78s оставляет12s на cleanup/receipt. Aggregate180s/4MiB и глобальный counter Root проверяет по retained predecessor/ledger до fresh READY. Envelope превышение сохраняется как ошибка; byte-preserving collector может превысить лимит до sampled остановки. Нет hard peak proof, OS storage/RAM quota, filesystem jail, native/admission/scientific acceptance.
+
+Ready schema требует Root handoff, exact H/P hashes, source closure, predecessor/review references, budget и Root attestation о проверенных meaningful reviews, predecessor, counter и aggregate. Guard проверяет одинаковые байты этих references до/после; смысл reviews и CP проверяет только Root. Source closure перечисляет все *.py Results/src и выбранного Contracts/src, fixture и pyproject. Reject implicit conftest/pytest.ini/setup.cfg/tox.ini в pytest parents. Fixture hash frozen F2; RED строго требует отсутствия нового module; GREEN hash остаётся неизвестным до будущего exact product CPP и нового READY. Root handoff сообщает base/root HEAD, guard не выполняет Git и не выдаёт самостоятельного утверждения об actual HEAD: Root обязан проверить HEAD/status перед handoff.
+
+Runtime/hash/source/config/helper/READY/reference checks идут before/after. Helper module получает ровно прочитанный и хешированный buffer через compile/exec только при будущем вызове, исключая hash/path double-read mismatch. Target argv точный `-m pytest -q --tb=short -p no:cacheprovider tests/test_equilibrium_map_math.py`, без -I/filters/maxfail; env explicit-only, plugin autoload отключён, hashseed0 и BLAS/OMP/MKL/NUMEXPR1. HOME/TMPDIR собственные.
+
+R1b/R2: collector_attempted ставится непосредственно перед constructor; raised constructor после native thread start означает UNKNOWN ownership, consumed/incomplete receipt и os._exit без competing read/close. Assigned alive thread после finish(timeout) сохраняет failed receipt и forceexit без отмены watchdog. Любой attempted live RSS None становится немедленной причиной stop и сохраняется до final; обязательна хотя бы одна valid sample. Reaped N/A допускается лишь после предшествующего poll returncode и записывается отдельным proof, не нулём. Cleanup посылает сигналы только собственной process group, reap только собственного Popen; escape descendant не исключён OS isolation. Нельзя приписывать этому hard process-tree accounting.
+
+RED expected97=2 literal PASS+95 call-phase AssertionError FAIL+0ERROR остаётся прогнозом. Даже capture verdict и expected exit1 не доказывают его: independent complete raw review должен проверить count/names/stage/assertions/error/skip. GREEN expected97PASS также не выводится из exit0. Fixture доказывает selected Results/module actual origins; Contracts fixture не утверждает own path, а env `QCL_NEGF_TEST_CONTRACTS_SOURCE` не является runtime доказательством Contracts ownership. Guard ничего такого и никаких observed science claims не заявляет; расширение child bootstrap в этот контракт не внесено.
+
+Проверка подготовки: чтение исходников, текстовая сверка, Git identity, SHA256/size. Python parser/syntax compilation/import/target/runtime/tests/network0; никакие scripts не исполнялись. Только четыре разрешённых `/tmp/qcl-sci12-math-local-*` outputs; product/CP/READY/index/component writes0. Консервативный read-content charge <1MiB, tool-response/output <128KiB, files <40KiB. CPU/RAM/physical I/O не измерялись, жёсткая resource isolation подготовки не заявляется. Ошибочный первый shell read несуществующего skill path дал exit1 с пустым выводом и не изменил файлы; затем skill прочитан по правильному пути, SUBAGENT-STOP применим.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Подготовлен source candidate | guard-v1.py и plan-v1.json, SHA в identity | Без syntax/runtime проверки, review ещё нужен | дополнительно измерить |
+| Lifecycle дефекты старого harness не перенесены | unknown-owner branch, live RSS failure, terminal thread guard | Только статическая авторская проверка | дополнительно измерить |
+| RED/GREEN уже выполнены | Артефактов Math execution нет | Вызовы prospective, counter не менялся | данных недостаточно |
+| Contracts actual ownership установлен | Только explicit environment и frozen fixture | Fixture own-path assertion отсутствует | данных недостаточно |
+| Есть scientific/native READY | Нет соответствующих evidence | Scope только локальный capture | данных недостаточно |
+
+STOP: свежий независимый high review у Root, без автоматического исполнения или rerun.

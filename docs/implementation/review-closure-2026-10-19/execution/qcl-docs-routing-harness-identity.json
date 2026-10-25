@@ -1,0 +1,22 @@
+{
+  "format": "qcl-negf.docs-routing-harness-identity.v1",
+  "execution_count": 0,
+  "product_mutations": 0,
+  "checkpoint_mutations": 0,
+  "artifacts": {
+    "/tmp/qcl-docs-routing-local-unit-run-v1.py": {
+      "sha256": "4dbc78e81ff40f4a70e317dce8e7538dfe5f0f68f458896a8bf910309fae2920",
+      "bytes": 15570
+    },
+    "/tmp/qcl-docs-routing-engineering-plan-v1.json": {
+      "sha256": "e21b6446c4a83275e0b3877c2d32271a887ce2ea48baafe3bf5d424157cb0591",
+      "bytes": 5977
+    },
+    "/tmp/qcl-docs-routing-harness-report.md": {
+      "sha256": "b2d266d6f5f8931bfeb1790e17e0a9aff22e404b86cdb90121bc744cb497b1d4",
+      "bytes": 8363
+    }
+  },
+  "verification": "generation and textual source preparation only; no harness/parser/import/runtime/native/test execution",
+  "owned_output_total_bytes_excluding_identity": 29910
+}

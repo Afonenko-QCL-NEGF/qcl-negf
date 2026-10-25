@@ -1,0 +1,47 @@
+
+Frozen complex matrix, weighted number and unnormalized candidate: Error During Test at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:162
+  Test threw exception
+  Expression: abs(number_functional(wrong_transpose, grids, 2) - x.raw_number) > Bmatrix
+  DomainError with 0.2582304378268251 - 0.8300177489439131im:
+  number functional is not real
+  Stacktrace:
+   [1] number_functional(Gˡ::Array{ComplexF64, 4}, grids::QCLNEGF.QCLDomain.ModelGrids, g_s::Int64)
+     @ QCLNEGF.QCLReferenceOperators ~/.codex/worktrees/review-closure-exec/qcl-negf/.build/local-julia-int01/import-phase-1/environment/components/QCLNEGF.jl/src/numerics/reference/greens.jl:106
+   [2] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:750 [inlined]
+   [3] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:162 [inlined]
+   [4] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [5] top-level scope
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:120
+
+One owning Poisson solve with independent literal residual/gauge enclosure: Test Failed at /home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:312
+  Expression: literal_poisson_matches(neutralref, neutral, published)
+   Evaluated: literal_poisson_matches((q = Main.FinalAuditEvidence.PBall(1.0, 1.0), la = Main.FinalAuditEvidence.PBall(18.095128179727822725908481515944004058837890625, 18.095128179727822725908481515944004058837890625), hb = Main.FinalAuditEvidence.PBall(2.0, 2.0), donor = Main.FinalAuditEvidence.PBall(1.0, 1.0), nf = Main.FinalAuditEvidence.PBall[Main.FinalAuditEvidence.PBall(1.0, 1.0), Main.FinalAuditEvidence.PBall(1.0, 1.0), Main.FinalAuditEvidence.PBall(1.0, 1.0)], S = Main.FinalAuditEvidence.PBall(3.0, 3.0), b = Main.FinalAuditEvidence.PBall[Main.FinalAuditEvidence.PBall(-0.0, 0.0), Main.FinalAuditEvidence.PBall(-0.0, 0.0), Main.FinalAuditEvidence.PBall(-0.0, 0.0)], exactU = Main.FinalAuditEvidence.PBall[Main.FinalAuditEvidence.PBall(-3.06162552392804064826516800863445954613634651246984072752002302386537660298317259558645486075199832725648211037107925e-115, 1.53081276196402032413258400431722977306817325623492036376001151193268830149158629779322743037599916362824105518553962e-115), Main.FinalAuditEvidence.PBall(-3.06162552392804064826516800863445954613634651246984072752002302386537660298317259558645486075199832725648211037107925e-115, 1.53081276196402032413258400431722977306817325623492036376001151193268830149158629779322743037599916362824105518553962e-115), Main.FinalAuditEvidence.PBall(-3.06162552392804064826516800863445954613634651246984072752002302386537660298317259558645486075199832725648211037107925e-115, 1.53081276196402032413258400431722977306817325623492036376001151193268830149158629779322743037599916362824105518553962e-115)], exactZ = Main.FinalAuditEvidence.PBall(-0.0, 0.0), M = [2 -1 -1; -1 2 -1; -1 -1 2], Q4 = Main.FinalAuditEvidence.PBall[Main.FinalAuditEvidence.PBall(0.5, 0.5) Main.FinalAuditEvidence.PBall(-0.25, -0.25) Main.FinalAuditEvidence.PBall(-0.25, -0.25) Main.FinalAuditEvidence.PBall(0.57735026918962584208117050366126932203769683837890625, 0.57735026918962584208117050366126932203769683837890625); Main.FinalAuditEvidence.PBall(-0.25, -0.25) Main.FinalAuditEvidence.PBall(0.5, 0.5) Main.FinalAuditEvidence.PBall(-0.25, -0.25) Main.FinalAuditEvidence.PBall(0.57735026918962584208117050366126932203769683837890625, 0.57735026918962584208117050366126932203769683837890625); Main.FinalAuditEvidence.PBall(-0.25, -0.25) Main.FinalAuditEvidence.PBall(-0.25, -0.25) Main.FinalAuditEvidence.PBall(0.5, 0.5) Main.FinalAuditEvidence.PBall(0.57735026918962584208117050366126932203769683837890625, 0.57735026918962584208117050366126932203769683837890625); Main.FinalAuditEvidence.PBall(0.57735026918962584208117050366126932203769683837890625, 0.57735026918962584208117050366126932203769683837890625) Main.FinalAuditEvidence.PBall(0.57735026918962584208117050366126932203769683837890625, 0.57735026918962584208117050366126932203769683837890625) Main.FinalAuditEvidence.PBall(0.57735026918962584208117050366126932203769683837890625, 0.57735026918962584208117050366126932203769683837890625) Main.FinalAuditEvidence.PBall(0.0, 0.0)], rhs4 = Main.FinalAuditEvidence.PBall[Main.FinalAuditEvidence.PBall(-0.0, 0.0), Main.FinalAuditEvidence.PBall(-0.0, 0.0), Main.FinalAuditEvidence.PBall(-0.0, 0.0), Main.FinalAuditEvidence.PBall(0.0, 0.0)], short = Main.FinalAuditEvidence.PBall(1.92860428211303020298407971647422380756912187739902566762096611450398463093632452108974084241495848509672731182179841e-13, 1.92860428211303020298407971647422380756912187739902566762096611450398463093632452108974084241495848509672731182179858e-13), donorSheet = Main.FinalAuditEvidence.PBall(6.0, 6.0)), (solution = ([0.0, 0.0, 0.0], 0.0, 0.0, 0.0), diagnostics = (residual_ratio = 0.0, residual_numerator_F = 0.0, rhs_F = 0.0, additive_floor = 1.8095128179727823e-13, denominator = 1.8095128179727823e-13, border_scale = 4.0, zeta_signed = 0.0, neutrality_signed = 0.0, neutrality_abs = 0.0, target_sheet = 6.0, neutrality_ratio = 0.0)), [0.125, -0.25, 0.125])
+  Stacktrace:
+   [1] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:753 [inlined]
+   [2] (::Main.FinalAuditEvidence.var"#65#66")()
+     @ Main.FinalAuditEvidence ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:312
+   [3] setprecision(f::Main.FinalAuditEvidence.var"#65#66", ::Type{BigFloat}, prec::Int64; base::Int64)
+     @ Base.MPFR ./mpfr.jl:1214
+   [4] setprecision(f::Function, ::Type{BigFloat}, prec::Int64)
+     @ Base.MPFR ./mpfr.jl:1213
+   [5] top-level scope
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:295
+   [6] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/share/julia/stdlib/v1.13/Test/src/Test.jl:1962 [inlined]
+   [7] macro expansion
+     @ ~/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl:295 [inlined]
+Test Summary:                                                                          | Pass  Fail  Error  Total   Time
+C08 all-block diagnostic (known red)                                                   |  275     1      1    277  28.0s
+  Same-pass independent Dyson witnesses and nonfinite inventory                        |   26                  26   0.3s
+  Literal near-zero additive floor and measured-zero controls                          |   24                  24   0.7s
+  Frozen complex matrix, weighted number and unnormalized candidate                    |   21            1     22   2.6s
+  One owning Poisson solve with independent literal residual/gauge enclosure           |   16     1            17   5.2s
+  Approved D2 finite ratio0 with overflowed normalization                              |   89                  89   2.5s
+  Bounded Core template, explicit unavailable and signed/nonfinite charge              |   76                  76   1.3s
+  Public validation retains failed outcome, raw rU and compatible assessment transport |   23                  23  10.9s
+RNG of the outermost testset: Random.Xoshiro(0xb8500d51d8c5a865, 0x3fea8e90e599c239, 0xb40e5a797aa92700, 0xefb3980317b0b44b, 0x8a40a57994b5a01d)
+ERROR: Some tests did not pass: 275 passed, 1 failed, 1 errored, 0 broken.

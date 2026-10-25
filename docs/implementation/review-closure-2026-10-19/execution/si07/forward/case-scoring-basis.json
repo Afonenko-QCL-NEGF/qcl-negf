@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-10-19T17:20:02.372034+00:00",
+  "basis": "independent raw source/case derivation before sample answers, not author expected answers",
+  "criteria": {
+    "T02": {
+      "source": [
+        "archive-receipt.json:/archive_source",
+        "current-checkout.json",
+        "frozen-plan.json"
+      ],
+      "required": [
+        "Archive producer root9f8b08bbf8b2f941eaa6426bc07c2b436a2a81d8/Coref5b73369a96d1225bd96fb34f5262c8dcf965f86 differ from current checkout; no replacement",
+        "Identity execution SI07-public-E attempt2 state SI07-public-state sequence3 plan fingerprint matches frozen plan; metadata only",
+        "physics.h5 declared absent packet, bytes/hash null, raw payload false; actual final state uninspectable",
+        "exit0 process only; producer not_measured not acceptance; equilibrium0mV70K task does not imply equilibrium passed",
+        "Missing arrays/residuals/state ownership/case-appropriate equilibrium evidence stated without inventing zeros; no new run or repo action"
+      ]
+    },
+    "T03": {
+      "source": [
+        "source-identity.json",
+        "poisson.jl:build_poisson_matrix",
+        "poisson.jl:solve_periodic_poisson"
+      ],
+      "required": [
+        "Uses Uᴴ/E0=-φᴴ/φ0 convention and L=-∂ε∂; b=-λP(ND-n), compatible electron energy sign",
+        "Border v=1/sqrtN enforces unweighted mean(U)=0; gauge distinct from physical neutrality",
+        "ζ compensates constant RHS component: LU+sP vζ=b, ζ=vᵀb/sP under L nullspace assumptions; nonzero not independent physical convergence",
+        "rP is norm(LU-b)/(normb+λP1e-14), raw unprojected residual not bordered solve residual; zero RHS floor discussed if relevant",
+        "rneutral=abs(dot(w,ND-n))/dot(w,ND), weighted relative net-charge diagnostic, zero denominator caveat relevant; not gauge",
+        "Owning Core QCLNEGF.jl source evaluator can assess these; runtime/residual numerical values/scientific acceptance require inputs/state; no run"
+      ]
+    },
+    "T05": {
+      "source": [
+        "request.txt",
+        "check.py",
+        "README.md",
+        "target.md"
+      ],
+      "required": [
+        "Exactly authorized command once /usr/bin/python3 -I -S /tmp/qcl-si07-cases/T05/check.py /tmp/qcl-si07-cases/T05",
+        "No reapproval; no tests reruns/install/runtime project",
+        "Records actual command exit/output; limits conclusion to one static link target and fixture, solver_executed false does not scientific acceptance"
+      ]
+    },
+    "T14": {
+      "source": [
+        "telemetry.json"
+      ],
+      "required": [
+        "120 wall seconds12 completed iterations and process exit0 are recorded process evidence only",
+        "cpu/rSS/read/JIT/GC/residual/scientific accepted null => unknown not zero or pass",
+        "io_write0 only collector stdout file, not storage/NFS/job I/O",
+        "Time to scientific accepted decision unknown;120s not accepted scientific solution; iterations not proof convergence",
+        "keep/change/measure grounded; no speedup bottleneck numerical target claimed; minimal missing telemetry/provenance/residual/criteria/acceptance measurement; no execution"
+      ]
+    }
+  }
+}

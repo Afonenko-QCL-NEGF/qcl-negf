@@ -1,0 +1,25 @@
+{
+  "scope": "OPS04.S Root T1/T2 phase1 test source only",
+  "base_commit": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "worktree": "/tmp/qcl-ops04-root-worktree",
+  "branch": "codex/review-closure-depot-byte-binding",
+  "design_sha256": "19d56005eacf80aae3164291728530fe9b78eb9f43948f306e67c73d34c99147",
+  "review_sha256": "12e811ec56093734fdeb7fd6aac370f312ef880c2b7a64edd9689c8bca26ec42",
+  "baseline_sha256": {
+    "tests/solver_test.ts": "610091e9e5b8a8d30babf5798e3035c164c5b2750e539a6b3e7b0b317ebebd7d",
+    "tests/application_cd_test.ts": "fe4ed69f3c2eeb81813ed0ead23ac1ef70b4edd3745625d311bfade342525034",
+    "ops/solver.ts": "bc513f610cce976d108e17902ebd423c434992ba0edb91e2bdc3da2e5f3c247f",
+    "ops/application_cd.ts": "91989d0171e011f4518e178e247d4f7a466d08bd02b7931308a202c4354ee9ce",
+    "nix/solver.nix": "16c99da166ee2d9afc7d238fa317e43f0bcc71e2eccb8de3ff11e97b70aa858f"
+  },
+  "frozen_sha256": {
+    "tests/solver_test.ts": "7cd0aa5695564c4dd177e910b16051a44fb852f3f60d9ae7533df03f1405888b",
+    "tests/application_cd_test.ts": "3ba120cba93cc91bf369ec273a13da30bdfd6291f6487fbfa7e8101dbb4ffe3a"
+  },
+  "tests_executed": 0,
+  "production_changed": false,
+  "observed_red": false,
+  "unresolved": "No accepted capture/CLI assembly seam: production CLI behavioral coverage pending coordinator decision; no API guess",
+  "resource_envelope": { "wall_minutes": 30, "cpu": 1, "ram_gib": 2, "read_mib": 4, "output_kib": 64 },
+  "resource_measurement": "Not instrumented; no runtime, benchmark or child agent execution"
+}

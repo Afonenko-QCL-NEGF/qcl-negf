@@ -1,5 +1,11 @@
 # QCL-NEGF: детальный план автономной разработки в Codex
 
+**Дополнение 2026-10-24: принято упрощение контроля ресурсов.** Действует
+[ресурсная поправка](resource-policy-2026-10-24.md) для initial/production S1.
+Исторические PLAN/standby ниже не отменяют позднейшие активированные grants;
+их повторное утверждение не требуется. Scientific criteria и technical BIND
+с fresh admission сохраняются; поправка сама по себе не является runtime READY.
+
 > **For agentic workers:** будущая реализация — через
 > `superpowers:subagent-driven-development` либо выбранный оператором
 > `superpowers:executing-plans`, по checkbox tasks. Сейчас **только PLAN**.
@@ -249,7 +255,9 @@ required backend/cluster/evidence gap; пользователь видит ко�
    предоставить эти входы. Внутри B CP-OPS BIND с source/hash/targets/window/
    backup/rollback закрывают coordinator+reviewer, без нового human approval.
 3. S1 без e–e уже принят: CP-SCI READY закрывается по justified frozen criteria,
-   finite catalog, guards и fresh admission. Неизвестный bound не становится pass.
+   finite catalog, fresh admission и ordinary platform/storage/recovery controls
+   [поправки 2026-10-24](resource-policy-2026-10-24.md). Legacy strict VFD/NBD/
+   exhaustive per-effect proofs не B0 gate; unknown scientific bound не pass.
 4. Destructive/merge/trust/model exceptions вне B/G1/S1 и public release —
    конкретное решение по evidence; глобального неявного разрешения нет.
 

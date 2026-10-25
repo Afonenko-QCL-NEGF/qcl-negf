@@ -1,0 +1,75 @@
+{
+  "stage": "D5 independent high source design review",
+  "verdict": "CHANGES_REQUIRED",
+  "blocking_findings": [
+    {
+      "id": "D5-R1",
+      "severity": "P1",
+      "title": "Whole workload cgroup-empty and final receipt cannot precede live setup/driver shutdown",
+      "locators": {
+        "D4": [132, 133, 134],
+        "D5": [76, 77, 78, 79, 81, 121, 149, 160],
+        "native_python": [326, 327, 328, 329]
+      },
+      "required_amendment": "Separate command closure, phase descendant closure with bounded driver finish acknowledgement, and outer-parent whole-workload-empty after producer exit; exact preclosure/final refs and ACK order. Preserve one admitted workload boundary and independent fallback."
+    }
+  ],
+  "source_pass_subscope": [
+    "four-env canonical bounded capsule with hello-first independent live token lookup",
+    "existing trusted parent grant and active allocation route, conditional on actual prerequisites",
+    "redacted durable intent independent from secret-bearing startup transport",
+    "32KiB raw chunks with tickets offsets hashes and 24MiB protocol maximum",
+    "unchanged full pure Capture with bounded hydration and compact wire projection",
+    "independent raw evidence and fallback retention requirements"
+  ],
+  "selected_worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "selected_observations": {
+    "tracked_modified_count": 5,
+    "untracked_source_count": 6,
+    "submodules": "eight uninitialized, unchanged gitlinks",
+    "implementation_unchanged_from_I2": true
+  },
+  "inputs_sha256": {
+    "/tmp/qcl-docs-test-routing-design-v5.md": "6049f427a10c769b69c2beaaa1374e583d217d6eb68926337204e560b824ed48",
+    "/tmp/qcl-docs-test-routing-design-v5-delta-ledger.md": "c07e749848f5b4040c3ae0350b783faa9402627314d2dc80aacb9cc6b2a2202f",
+    "/tmp/qcl-docs-test-routing-design-v5-identity.json": "bf560be45400d2b7363fc730be1b6b0a4582ee4832506858f595d5556697ffd7",
+    "/tmp/qcl-docs-routing-i2-review.md": "5b7ec1e5f1fefad767315f539fe637c12c322902c78d542acea16639931ced60",
+    "/tmp/qcl-docs-test-routing-design-v4.md": "24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0"
+  },
+  "selected_source_sha256_rechecked": {
+    "ops/docs_tests_native.py": "4f87e4abd2ab06ecc4873f7eca4f66f37cb5f524df1b55ba52ddc53b4444e77f",
+    "ops/docs_tests_cli.ts": "e4349103a43e4050c6ae4bf28d4fc7d8d5dc8e3ad7f51cc57b6c3472db9a5832",
+    "ops/docs_tests.ts": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+  },
+  "report": {
+    "path": "/tmp/qcl-docs-test-routing-design-v5-review.md",
+    "sha256": "bb0319a40211616d36316c0adf04b8b0ac1f9bdefb8c71d274a96aecb3fd5d7d",
+    "bytes": 16731
+  },
+  "execution": {
+    "target_import": 0,
+    "parser": 0,
+    "compiler": 0,
+    "lint": 0,
+    "formatter": 0,
+    "tests": 0,
+    "native": 0,
+    "runtime": 0,
+    "network": 0,
+    "server": 0,
+    "build": 0,
+    "solver": 0,
+    "CI": 0
+  },
+  "source_fixture_checkpoint_edits": 0,
+  "new_read_bytes_conservative_bound": 1048576,
+  "new_output_bytes_bound": 32768,
+  "wall_time_minutes_upper_bound": 10,
+  "CPU_RSS_physical_IO_measured": false,
+  "subagents": 0,
+  "implementation_findings_remaining": "All I2 R1-R9 remain open until corrected source CPP",
+  "native_ready": false,
+  "stop": "Root exact lifecycle amendment and focused review before medium I2B; no execution"
+}

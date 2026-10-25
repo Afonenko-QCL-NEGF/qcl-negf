@@ -1,0 +1,20 @@
+{
+  "format": "qcl-negf.doc06-implementation-source.v2",
+  "stage": "CPP-R1-R2-source-correction-before-sole-GREEN",
+  "base_root": "514cd9707a32cde60c630d60986973a898d35b18",
+  "worktree": "/tmp/qcl-doc06-worktree",
+  "adapter_sha256": "b56713b6534013511fb392b8dd403a76b01798fdf3a7338c6f6215cf17de7fc5",
+  "adapter_bytes": 40336,
+  "test_sha256": "373354120983c1ecf9f591c09ff4b108e614567d58409ea6abbeae8704c52290",
+  "test_bytes": 28755,
+  "review_sha256": "34307c58f4a98d7aca2c028fd39f28794c82cd1c415872b955ce15a40ad2b958",
+  "full_patch_sha256": "c14b4f0a3d101a633ade0f0dfabdf263509f941916e3831a5efd84f02f80190c",
+  "adapter_delta_sha256": "46487ee003fc5bf7b57076a11d51c87eda9a2065959bafaafc92964d968152d0",
+  "test_delta_sha256": "6e2c8b92fa5a9f7edaf6cd5aca9d91343195f180cd6d77e943955fbdb8bf1bfe",
+  "nominal_test_cases": 56,
+  "prior_packet_preserved": true,
+  "executor_runtime_parser_typecheck_tests_network_build_calls": 0,
+  "existing_test_assertions_changed": false,
+  "Root_remaining_GREEN_calls": 1,
+  "stop": "same-independent-high-review-before-sole-Root-GREEN"
+}

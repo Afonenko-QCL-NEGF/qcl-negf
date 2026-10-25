@@ -1,0 +1,38 @@
+{
+  "label": "qcl-performance-audit",
+  "kind": "quick_validate",
+  "command_argv": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-I",
+    "-S",
+    "-B",
+    "-c",
+    "import sys, runpy; sys.path.append('/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/lib/python3.14/site-packages'); runpy.run_path('/home/tolya/.codex/skills/.system/skill-creator/scripts/quick_validate.py', run_name='__main__')",
+    "/tmp/qcl-SI07-FORMAL-1/packages/qcl-performance-audit"
+  ],
+  "started_unix": 1792429659.621157,
+  "wall_seconds": 0.11518831696594134,
+  "exit_code": 0,
+  "timed_out": false,
+  "stdout": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-performance-audit/stdout.txt",
+  "stderr": "/tmp/qcl-SI07-FORMAL-1/raw/qcl-performance-audit/stderr.txt",
+  "output_sizes": {
+    "stderr.txt": 0,
+    "stdout.txt": 16
+  },
+  "output_sha256": {
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.txt": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0"
+  },
+  "limits": {
+    "wall_seconds": 30,
+    "cpu_seconds": 15,
+    "affinity_cpu": 0,
+    "address_space_bytes": 536870912,
+    "each_log_bytes": 65536,
+    "combined_log_bytes": 131072,
+    "temporary_bytes": 1048576
+  },
+  "validator_sha256": "ee6dba90f44d37171c5a6edb8095979c54919ff6822c1a907afca2e78c48738c",
+  "wrapper_sha256": "a766be1950920b60e6cd9eeeafa224be205d74b4d4b1b478b28a812444c3e841"
+}

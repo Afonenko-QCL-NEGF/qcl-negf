@@ -1,0 +1,36 @@
+{
+  "task":"SCI08-R1-design",
+  "started_utc":"2026-10-20 05:33:11 UTC",
+  "protocol":"read-only source/text/hash/Git metadata; no target runtime or parser",
+  "budget_bytes":4194304,
+  "accounting":"Conservative full underlying file charge for each named cat/sed/rg/hash; filename/stat/du/Git metadata reserve. Ranged output is not charged as only visible lines. Source-wide rg charged entire Runner src subtree (1049142B). Broad composition rg also conservatively bounded by whole src subtree. Conservative total includes repeated primaries, selected source/test reads and final artifact hashes.",
+  "conservative_total_upper_bound_bytes":4128768,
+  "physical_io_cpu_rss_measured":false,
+  "semantic_inputs": [
+    "root AGENTS.md and docs/architecture.md",
+    "qcl-performance-audit SKILL.md",
+    "docs/system/implementation-entrypoint.md",
+    "docs/system/agent-review-workflow.md READY rows",
+    "docs/system/release-roadmap.md role/coordination policy",
+    "Runner CONTRIBUTING.md and docs/src/user/resources.md",
+    "SCI07 D1 plus focused input/unknown/storage/ticket ranges",
+    "SCI07 D2 complete baseline normalization and oracles",
+    "SCI07 both independent high reviews",
+    "Runner resource_contract/linux_resources/native_phase_telemetry",
+    "Runner point_artifacts forecast/budget/free/commit prefix",
+    "Runner scientific_execution entry/reservation/configure/phase sites",
+    "Runner configured_run/configured_execution source locators",
+    "Runner test/run_group, support/common and five selected pattern source files"
+  ],
+  "metadata_observations":["root git rev-parse HEAD","root git status --short twice","git submodule status --recursive","exact HEAD git ls-tree three relevant gitlinks","Runner git status --short empty","source/test SHA256 listed in identity"],
+  "read_limitations":[
+    "Early batched text output truncated; relevant D1/D2/source ranges and complete first review subsequently read separately. No claim of full semantic audit of all Runner src.",
+    "Filename-only rg --files /tmp encountered unrelated private-directory permission denials; their contents not accessed. Later /tmp reads used named paths.",
+    "Locator src/application/scientific_execution.jl absent; owning actual src/composition/scientific_execution.jl located and read.",
+    "test/groups.jl absent; existing test/run_group.jl is the actual selector.",
+    "du docs/system from Runner path absent; no source read resulted. Root policy files were read from root.",
+    "Conservative resource charge is a source-volume bound, not OS-measured physical I/O or performance telemetry. No runtime timing history available."
+  ],
+  "writes_only":["/tmp/qcl-sci08-R1-design.md","/tmp/qcl-sci08-R1-identity.json","/tmp/qcl-sci08-R1-readledger.json"],
+  "stop":"After hashing the three artifacts. No tests/native/source mutation or follow-up execution."
+}

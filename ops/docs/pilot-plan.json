@@ -1,0 +1,70 @@
+{
+  "format": "qcl-negf.docs-pilot-plan.v1",
+  "profile": "pilot-v1",
+  "slices": [
+    {
+      "id": "researcher",
+      "owner": "core",
+      "primary_sources": ["components/QCLNEGF.jl/docs/src/theory/09_scba.md"],
+      "section": "core",
+      "primary_urls": ["core/theory/09_scba.html#researcher-scba-route"]
+    },
+    {
+      "id": "developer",
+      "owner": "runner",
+      "primary_sources": [
+        "components/QCLNEGFRunner.jl/docs/src/api/public.md",
+        "components/QCLNEGFRunner.jl/docs/src/user/configuration.md"
+      ],
+      "section": "runner",
+      "primary_urls": [
+        "runner/api/public.html#reader-api-routes",
+        "runner/user/configuration.html#developer-configuration-route"
+      ]
+    },
+    {
+      "id": "operator",
+      "owner": "root",
+      "primary_sources": ["docs/public/operator-recovery.md"],
+      "section": "operator",
+      "primary_urls": ["operator/recovery.html#operator-recovery"]
+    }
+  ],
+  "support_policy": "existing_owning_page_graphs",
+  "source_inputs": [
+    "julia/Project.toml",
+    "julia/Manifest.toml",
+    "components/QCLNEGF.jl/docs/make.jl",
+    "components/QCLNEGFRunner.jl/docs/make.jl",
+    "docs/public/make.jl",
+    "docs/public/operator-recovery.md",
+    "components/qcl-negf-contracts/src/qcl_negf_contracts/schemas/model-help.schema.json"
+  ],
+  "assets_lock": "ops/docs/assets.lock.json",
+  "transform_policy": "documenter-1.17-light-self-v1",
+  "public_prefix": "/docs",
+  "limits": {
+    "files": 10000,
+    "total_bytes": 268435456,
+    "file_bytes": 16777216,
+    "manifest_bytes": 2097152,
+    "fragment_bytes": 32768,
+    "help_view_bytes": 65536,
+    "tex_bytes": 16384,
+    "math_batch_bytes": 4194304,
+    "math_records": 10000,
+    "math_markup_bytes": 262144,
+    "math_total_markup_bytes": 33554432,
+    "math_css_bytes": 1048576,
+    "math_style_groups": 20000,
+    "math_batch_wall_seconds": 60
+  },
+  "expected_primary_anchors": [
+    "researcher-scba-route",
+    "researcher-final-route",
+    "reader-api-routes",
+    "developer-configuration-route",
+    "operator-recovery-route",
+    "operator-recovery"
+  ]
+}

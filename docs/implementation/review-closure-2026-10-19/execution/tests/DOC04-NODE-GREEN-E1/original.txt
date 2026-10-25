@@ -1,0 +1,23 @@
+✔ verified default ESM renders static HTML+MathML and retains exact source occurrence (47.1543ms)
+✔ module hash mismatch fails before target import and preserves original input (4.797122ms)
+✔ wrong claimed version never falls back to another installed KaTeX (5.910391ms)
+✔ definition and resource commands fail without colored unsupported fallback (59.749488ms)
+✔ lexer respects comments and escaped backslashes while preserving original TeX (12.266045ms)
+✔ unknown TeX, authored sizing and cross-expression macro state are not repaired (12.979518ms)
+✔ UTF-8 bytes and macro expansions are bounded without clamping geometry (22.154328ms)
+✔ record shape/hash/mapping errors cannot select arbitrary HTML or dollar text (5.91633ms)
+✔ style extraction retains ordered duplicates, units and semantic MathML/SVG (0.940578ms)
+✔ important conflicts and unsafe dynamic style grammars fail closed (0.63808ms)
+✔ unknown active/resource markup cannot become static math (0.684203ms)
+✔ important shorthands and all cannot change extracted longhand geometry (0.957279ms)
+✔ render bridge binds a complete supplied stylesheet context beyond pinned KaTeX (29.921585ms)
+✔ all eleven pinned KaTeX authored size primitives are unsupported without rewriting (22.899939ms)
+✔ all sixteen pinned manual delimiter sizes fail while automatic stretch remains supported (31.564335ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 336.429873

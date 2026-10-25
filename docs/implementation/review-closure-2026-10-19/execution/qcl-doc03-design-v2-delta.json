@@ -1,0 +1,63 @@
+{
+  "stage": "DOC03 D2 author self-check; independent CP-DESIGN recheck pending",
+  "report": {
+    "path": "/tmp/qcl-doc03-design-v2.md",
+    "bytes": 70041,
+    "sha256": "01bd504b382062ad896280e58dca4588e67f725e5deb72f350eae99c91aca625"
+  },
+  "identity": {
+    "path": "/tmp/qcl-doc03-design-v2-identity.json",
+    "bytes": 7537,
+    "sha256": "855fabbf01442e527304f4fc1a91a5ec49ccac1c6b12bdde9181fd6974818c9e"
+  },
+  "parent_report_sha256": "a25204b1883c97b5c3be1b2a26fb228e5efe8d4aa89230c938e34b56b903afcd",
+  "review_sha256": "176f2b3e317bfabc4e0b7525e89738df02a64aa4006f8044cf307273ab8b1f53",
+  "R1": {
+    "disposition": "changed after primary verification",
+    "sections": [
+      "5.2a",
+      "5.3 InputView",
+      "D2 controls"
+    ],
+    "change": "Bound reference parameter/context; separate declared/used value_origin; equality insufficient; no retained capture receipt => unknown, no new capture ingress invented"
+  },
+  "R2": {
+    "disposition": "changed after primary verification",
+    "sections": [
+      "5.3a",
+      "5.3b",
+      "D2 controls",
+      "handoff"
+    ],
+    "change": "Runner-local context without UUID; immutable per-point/attempt snapshot under existing executions retrieval; required parser index and atomic selected-child actor enrichment; exact capture mappings and retry retention"
+  },
+  "preserved": [
+    "Documenter 1.17 + static hub",
+    "light/offline/serving contract",
+    "physics/S1/model/acceptance",
+    "unknown semantics",
+    "D1 artifacts"
+  ],
+  "static_checks": {
+    "D1_artifacts_unchanged": true,
+    "review_hash_verified": true,
+    "selected_primary_witnesses_verified": true,
+    "reference_only_and_actual_value_origin": true,
+    "runner_local_no_aiida_uuid": true,
+    "per_point_attempt_retrieval_parser_mapping": true,
+    "R1_R2_controls_defined": true,
+    "five_original_negatives_preserved": true,
+    "whitespace_diagnostics_empty": true
+  },
+  "whitespace_receipt": {
+    "command": "git diff --no-index --check /dev/null /tmp/qcl-doc03-design-v2.md",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "limits": [
+    "No product/runtime/browser/native/scientific tests were executed",
+    "Selected source has no retained public source-binding capture receipt; actual origin remains unknown without it",
+    "Fresh reviewer must recheck D2; author cannot close CP-DESIGN"
+  ]
+}

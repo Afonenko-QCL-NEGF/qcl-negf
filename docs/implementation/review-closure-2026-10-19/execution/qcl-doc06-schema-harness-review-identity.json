@@ -1,0 +1,74 @@
+{
+  "format": "qcl-negf.doc06-schema-harness-independent-source-review.v1",
+  "verdict": "STOP_SOURCE_CHANGES_REQUIRED",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "observed_head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "inputs": {
+    "/tmp/qcl-doc06-schema-format-run-v1.py": {
+      "sha256": "8bbd4a6ea15434188d8ab2c77075549e3a071e99aab0148ad29b005b02ba3ce2",
+      "bytes": 15130
+    },
+    "/tmp/qcl-doc06-schema-lint-run-v1.py": {
+      "sha256": "aad22de63191b5c9357c49fbc5264710dc3e190eab2505e70632162754fa4c94",
+      "bytes": 15125
+    },
+    "/tmp/qcl-doc06-schema-local-unit-run-v1.py": {
+      "sha256": "5b1c4457fc3955b8691fb9126c636458476ecbe47b7e441c9c1a32ce481fc11e",
+      "bytes": 22253
+    },
+    "/tmp/qcl-doc06-schema-engineering-plan-v1.json": {
+      "sha256": "54f05c78253f5d3037dc71ecde67e131e297c46b5299f69f2d2b0f5d9a9f0342",
+      "bytes": 4085
+    },
+    "/tmp/qcl-doc06-schema-harness-report.md": {
+      "sha256": "a979563443854d7a6e4a0137d9672a791e0665158c4d05acd4ca2b42432e1da4",
+      "bytes": 9193
+    },
+    "/tmp/qcl-doc06-schema-harness-identity.json": {
+      "sha256": "cf12fbd084b8d7c01673dee3a77ba044721726291b4fb8d4d5ec0ca83de8c300",
+      "bytes": 2282
+    }
+  },
+  "report": {
+    "path": "/tmp/qcl-doc06-schema-harness-review.md",
+    "sha256": "787e5728d3541584ca91b84be1b76e181863cd83e12233b399e209110d9a3fa3",
+    "bytes": 11654
+  },
+  "findings": [
+    "R1_obsolete_and_unverified_Root_HEAD",
+    "R2_unknown_RSS_serialized_zero",
+    "R3_failure_receipt_gap"
+  ],
+  "executions": {
+    "prepared_scripts": 0,
+    "helpers": 0,
+    "target": 0,
+    "deno": 0,
+    "formatter": 0,
+    "linter": 0,
+    "parser": 0,
+    "compiler": 0,
+    "typecheck": 0,
+    "selftest": 0,
+    "unit": 0,
+    "actual": 0,
+    "native": 0,
+    "network": 0,
+    "science": 0
+  },
+  "writes": [
+    "/tmp/qcl-doc06-schema-harness-review.md",
+    "/tmp/qcl-doc06-schema-harness-review-identity.json"
+  ],
+  "limits": {
+    "source_read_cap_bytes": 3145728,
+    "source_read_conservative_upper_bytes": 1048576,
+    "wall_cap_seconds": 600,
+    "cpu_count": 1,
+    "rss_cap_bytes": 1073741824,
+    "report_cap_bytes": 98304,
+    "physical_resource_measurements": "not_measured"
+  },
+  "execution_grant": false,
+  "status": "STOP"
+}

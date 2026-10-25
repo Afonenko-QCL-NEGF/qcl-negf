@@ -1,0 +1,46 @@
+{
+  "task": "OPS03",
+  "attempt": "DIAG-1",
+  "started_utc": "2026-10-19T15:28:46.642151+00:00",
+  "recorded_at_utc": "2026-10-19T15:28:48.634900+00:00",
+  "command": [
+    "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python",
+    "-m",
+    "pytest",
+    "components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire",
+    "components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission",
+    "components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/tmp/qcl-OPS03-DIAG-1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "60f1e75cad84047e6a9322dab4d2531ca50713bac4893956bd6d9c68a654c38d",
+  "fixture_sha256": {
+    "components/qcl-negf-platform/tests/test_application_release.py::OPS03WholeRoutingTests::test_o03_whole_update_calls_real_local_helper_without_self_ssh_or_reacquire": "f56062eef912a7c63ab9743a24f1db8a5043c2e24620db0732ab516485c0ce21",
+    "components/qcl-negf-platform/tests/test_application_release.py::ApplicationReleaseTests::test_controller_fetches_and_checks_both_hashes_before_closing_admission": "f56062eef912a7c63ab9743a24f1db8a5043c2e24620db0732ab516485c0ce21",
+    "components/qcl-negf-platform/tests/test_application_release.py::I14WholeRepairTests::test_f6_positive_factory_full_body_transition": "f56062eef912a7c63ab9743a24f1db8a5043c2e24620db0732ab516485c0ce21"
+  },
+  "exit_code": 1,
+  "wall_seconds": 1.995,
+  "sampled_peak_process_tree_RSS_bytes": 81805312,
+  "sampled_owned_temporary_bytes_peak": 34814,
+  "stdout_stderr_bytes": 8334,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 16777216,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "selected locked .venv Python3.14.7, owning editable imports; no setup/solver/fullCI",
+  "original_log": "/tmp/qcl-OPS03-DIAG-1/original.log"
+}

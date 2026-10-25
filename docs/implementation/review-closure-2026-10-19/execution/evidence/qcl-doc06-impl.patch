@@ -1,0 +1,1146 @@
+diff --git a/ops/docs/static-slice.ts b/ops/docs/static-slice.ts
+new file mode 100644
+index 0000000..05e1197
+--- /dev/null
++++ b/ops/docs/static-slice.ts
+@@ -0,0 +1,643 @@
++/** Fixed DOC06 source projection. All selected package files remain inert bytes.
++ * Local DEV output, not a shared Fragment/Bundle or a configuration validator.
++ * External snapshot preparation alone establishes commit-to-bytes binding.
++ */
++const PROFILE = "configuration-source-energy-chunk-v1";
++const TOOL = "qcl-negf.doc06-static-slice.v1";
++const CLASSES = ["signature", "units", "default", "constraint", "effects", "errors",
++  "formula_origin", "value_origin", "assigning_origin", "effective_origin"];
++const PATHS = [
++  "runner/src/application/configuration_types.jl",
++  "runner/src/infrastructure/config/configuration.jl",
++  "runner/src/infrastructure/config/configuration_sources.jl",
++  "runner/src/application/auto_strategy.jl",
++  "runner/docs/src/user/configuration.md",
++  "runner/test/fixtures/configurations/base.yaml",
++  "runner/schema/run.schema.json",
++  "contracts/src/qcl_negf_contracts/schemas/run.schema.json",
++  "core/src/numerics/optimized/production_contracts.jl",
++] as const;
++const OWNERS: Record<string, string> = {
++  runner: "components/QCLNEGFRunner.jl",
++  contracts: "components/qcl-negf-contracts",
++  core: "components/QCLNEGF.jl",
++};
++const encoder = new TextEncoder();
++const decoder = new TextDecoder("utf-8", { fatal: true });
++const FILE_CAP = 128 * 1024;
++const SOURCE_CAP = 512 * 1024;
++const RECEIPT_CAP = 16 * 1024;
++const OUTPUT_CAP = 32 * 1024;
++class Refusal extends Error { constructor(readonly reason: string) { super(reason); } }
++class Unsupported extends Error { constructor(readonly reason: string) { super(reason); } }
++function refuse(reason: string): never { throw new Refusal(reason); }
++function unsupported(reason: string): never { throw new Unsupported(reason); }
++function object(value: unknown): Record<string, unknown> {
++  if (value === null || typeof value !== "object" || Array.isArray(value)) unsupported("malformed_schema");
++  return value as Record<string, unknown>;
++}
++function own(obj: Record<string, unknown>, key: string): boolean {
++  return Object.prototype.hasOwnProperty.call(obj, key);
++}
++function bytes(text: string): number { return encoder.encode(text).length; }
++async function sha256(data: Uint8Array): Promise<string> {
++  // An owned ArrayBuffer is required by the Deno2.8 WebCrypto DOM signature.
++  const owned = new Uint8Array(data.length);
++  owned.set(data);
++  return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", owned.buffer)),
++    (b) => b.toString(16).padStart(2, "0")).join("");
++}
++function json(value: unknown): string { return JSON.stringify(value, null, 2) + "\n"; }
++
++/** Bounded lexical/syntax guard, then built-in JSON.parse as data only.
++ * No target loaders, references or embedded code are invoked by this routine.
++ */
++function parseData(text: string): unknown {
++  let i = 0, tokens = 0;
++  function token() { if (++tokens > 32768) refuse("json_token_cap"); }
++  function ws() { while (i < text.length && /[\x20\t\r\n]/.test(text[i])) i++; }
++  function punct(c: string) {
++    ws();
++    if (text[i] !== c) unsupported("malformed_schema");
++    token(); i++;
++  }
++  function string(): string {
++    ws();
++    if (text[i] !== '"') unsupported("malformed_schema");
++    token();
++    const start = i++;
++    let contentBytes = 0;
++    while (i < text.length) {
++      const c = text[i++];
++      if (c === '"') {
++        let value: unknown;
++        try { value = JSON.parse(text.slice(start, i)); }
++        catch { unsupported("malformed_schema"); }
++        if (typeof value !== "string") unsupported("malformed_schema");
++        if (bytes(value) > 16384) refuse("json_string_cap");
++        return value;
++      }
++      if (c.charCodeAt(0) < 32) unsupported("malformed_schema");
++      if (c === "\\") {
++        if (i >= text.length) unsupported("malformed_schema");
++        const escape = text[i++];
++        if (escape === "u") {
++          if (!/^[0-9a-fA-F]{4}$/.test(text.slice(i, i + 4))) unsupported("malformed_schema");
++          i += 4;
++        } else if (!'"\\/bfnrt'.includes(escape)) unsupported("malformed_schema");
++      }
++      // Bound raw token work before decoding; escaped strings may take up to
++      // six raw ASCII bytes per decoded character, still within file cap.
++      contentBytes++;
++      if (contentBytes > 6 * 16384) refuse("json_string_cap");
++    }
++    unsupported("malformed_schema");
++  }
++  function value(depth: number): void {
++    ws();
++    if (text[i] === "{" || text[i] === "[") {
++      if (depth >= 32) refuse("json_depth_cap");
++      if (text[i] === "{") {
++        punct("{"); ws();
++        const keys = new Set<string>();
++        if (text[i] !== "}") while (true) {
++          const key = string();
++          if (keys.has(key) || ["__proto__", "prototype", "constructor"].includes(key)) unsupported("malformed_schema");
++          keys.add(key); punct(":"); value(depth + 1); ws();
++          if (text[i] !== ",") break;
++          punct(",");
++        }
++        punct("}");
++      } else {
++        punct("["); ws();
++        if (text[i] !== "]") while (true) {
++          value(depth + 1); ws();
++          if (text[i] !== ",") break;
++          punct(",");
++        }
++        punct("]");
++      }
++    } else if (text[i] === '"') { string(); }
++    else {
++      const tail = text.slice(i);
++      const literal = /^(?:true|false|null)/.exec(tail);
++      const number = /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(tail);
++      const match = literal ?? number;
++      if (!match) unsupported("malformed_schema");
++      token(); i += match[0].length;
++      if (number && !literal) {
++        const n = Number(match[0]);
++        if (!Number.isFinite(n) || (Number.isInteger(n) && !Number.isSafeInteger(n))) unsupported("malformed_schema");
++      }
++    }
++  }
++  value(0); ws();
++  if (i !== text.length) unsupported("malformed_schema");
++  try { return JSON.parse(text); } catch { unsupported("malformed_schema"); }
++}
++
++function absolute(path: string): string {
++  if (!path.startsWith("/") || path.includes("\0") || path.includes("\\")) refuse("invalid_path");
++  const parts = path.split("/");
++  if (parts.includes(".") || parts.includes("..")) refuse("invalid_path");
++  return "/" + parts.filter(Boolean).join("/");
++}
++function within(path: string, root: string): boolean { return path === root || path.startsWith(root + "/"); }
++async function statMaybe(path: string): Promise<Deno.FileInfo | null> {
++  try { return await Deno.lstat(path); }
++  catch (error) { if (error instanceof Deno.errors.NotFound) return null; throw error; }
++}
++async function realDirectory(path: string) {
++  const info = await Deno.lstat(path);
++  if (info.isSymlink || !info.isDirectory || await Deno.realPath(path) !== path) refuse("symlink_or_invalid_directory");
++}
++async function selectedPath(root: string, relative: string): Promise<boolean> {
++  let path = root;
++  const parts = relative.split("/");
++  for (let i = 0; i < parts.length; i++) {
++    path += "/" + parts[i];
++    const info = await statMaybe(path);
++    if (!info) return false;
++    if (info.isSymlink || (i < parts.length - 1 && !info.isDirectory) || (i === parts.length - 1 && !info.isFile)) refuse("symlink_or_invalid_source");
++  }
++  return true;
++}
++async function boundedRead(path: string, cap: number): Promise<Uint8Array> {
++  const info = await Deno.lstat(path);
++  if (info.isSymlink || !info.isFile) refuse("symlink_or_invalid_source");
++  if (info.size > cap) refuse("input_byte_cap");
++  // Read into a prebounded buffer; readFile could allocate beyond a prior stat
++  // if the source grew. A retained frozen snapshot is still an external premise.
++  const buffer = new Uint8Array(info.size + 1);
++  const file = await Deno.open(path, { read: true });
++  try {
++    const opened = await file.stat();
++    if (!opened.isFile || opened.size !== info.size) refuse("source_changed");
++    let count = 0;
++    while (count < buffer.length) {
++      const n = await file.read(buffer.subarray(count));
++      if (n === null) break;
++      count += n;
++    }
++    if (count !== info.size || (await file.stat()).size !== info.size) refuse("source_changed");
++    return buffer.subarray(0, count);
++  } finally { file.close(); }
++}
++function strictText(data: Uint8Array): string {
++  try { return decoder.decode(data).replace(/\r\n?/g, "\n"); }
++  catch { refuse("invalid_utf8"); }
++}
++type InputEntry = { path: string; owner: string; revision: string; sha256: string; bytes: number };
++type Input = InputEntry & { actual_sha256: string | null; actual_bytes: number | null; status: string; text: string | null };
++function inputEntries(value: unknown): { graph: string; files: InputEntry[] } {
++  const root = object(value);
++  if (root.format !== "qcl-negf.doc06-source-input.v1" ||
++    typeof root.source_graph_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(root.source_graph_sha256) || !Array.isArray(root.files)) refuse("invalid_source_receipt");
++  if (root.files.length > 12) refuse("source_count_cap");
++  if (root.files.length !== PATHS.length) refuse("incomplete_source_receipt");
++  const seen = new Set<string>();
++  const files: InputEntry[] = [];
++  for (const raw of root.files) {
++    const item = object(raw);
++    if (typeof item.path !== "string" || !PATHS.some((p) => p === item.path) || seen.has(item.path)) refuse("invalid_source_path");
++    seen.add(item.path);
++    const owner = OWNERS[item.path.split("/")[0]];
++    if (item.owner !== owner || typeof item.revision !== "string" || !/^[a-f0-9]{40}$/.test(item.revision) ||
++      typeof item.sha256 !== "string" || !/^[a-f0-9]{64}$/.test(item.sha256) ||
++      typeof item.bytes !== "number" || !Number.isSafeInteger(item.bytes) || item.bytes < 0) refuse("invalid_source_identity");
++    if (item.bytes > FILE_CAP) refuse("input_byte_cap");
++    files.push({ path: item.path, owner, revision: item.revision, sha256: item.sha256, bytes: item.bytes });
++  }
++  if (files.reduce((sum, f) => sum + f.bytes, 0) > SOURCE_CAP) refuse("aggregate_source_cap");
++  return { graph: root.source_graph_sha256, files };
++}
++
++type Observation = { value: unknown; reason?: string; selector: string };
++function missing(selector: string): Observation { return { value: null, reason: "source_missing", selector }; }
++function failed(selector: string, reason = "unsupported_syntax"): Observation { return { value: null, reason, selector }; }
++type JuliaText = { mask: string; docs: { start: number; end: number; text: string; literal: boolean }[] };
++/** Mask strings/comments, retaining offsets and newlines. No Julia AST/evaluation. */
++function juliaText(text: string): JuliaText {
++  const mask = text.split("");
++  const docs: JuliaText["docs"] = [];
++  function blank(start: number, end: number) {
++    for (let j = start; j < end; j++) if (text[j] !== "\n") mask[j] = " ";
++  }
++  let i = 0;
++  while (i < text.length) {
++    const start = i;
++    if (text.startsWith("#=", i)) {
++      i += 2; let depth = 1;
++      while (i < text.length && depth) {
++        if (text.startsWith("#=", i)) { depth++; i += 2; }
++        else if (text.startsWith("=#", i)) { depth--; i += 2; }
++        else i++;
++      }
++      blank(start, i);
++    } else if (text[i] === "#") {
++      while (i < text.length && text[i] !== "\n") i++;
++      blank(start, i);
++    } else if (text[i] === '"' || text[i] === "'") {
++      const triple = text.startsWith('"""', i);
++      const delimiter = triple ? '"""' : text[i];
++      i += delimiter.length;
++      const content = i;
++      let literal = true, closed = false;
++      while (i < text.length) {
++        if (text[i] === "\\") { i += 2; continue; }
++        if (text[i] === "$") literal = false;
++        if (text.startsWith(delimiter, i)) { closed = true; break; }
++        i++;
++      }
++      // An assigned/string-macro literal is not an associated docstring.
++      const prefix = text.slice(text.lastIndexOf("\n", start - 1) + 1, start);
++      if (triple && closed && /^\s*$/.test(prefix)) docs.push({ start, end: i + 3, text: text.slice(content, i), literal });
++      i = closed ? i + delimiter.length : text.length;
++      blank(start, i);
++    } else i++;
++  }
++  return { mask: mask.join(""), docs };
++}
++function lines(text: string, offset: number): number { return text.slice(0, offset).split("\n").length; }
++function apiObservations(input: Input): { documented: Observation; typed: Observation; doc: Observation } {
++  const selector = "configuration_source";
++  if (input.text === null) return { documented: missing(selector), typed: missing(selector), doc: missing(selector) };
++  const text = input.text;
++  const lex = juliaText(text);
++  const methods = [...lex.mask.matchAll(/\bfunction\s+configuration_source\s*\(/g)];
++  let typed = failed(selector), documented = failed(selector), doc = failed(selector);
++  if (methods.length !== 1) return { documented, typed, doc };
++  const method = methods[0], start = method.index!;
++  const previous = lex.docs.filter((d) => d.end <= start).at(-1);
++  if (previous && previous.literal && /^\s*(?:@\w+\s*)?$/.test(lex.mask.slice(previous.end, start))) {
++    if (bytes(previous.text) > 4096) refuse("docstring_byte_cap");
++    const signatures = [...previous.text.matchAll(/^\s*(configuration_source\(configuration,\s*dotted_path\))\s*$/gm)];
++    if (signatures.length === 1) {
++      const value = signatures[0][1].replace(/,\s*/, ", ");
++      if (bytes(value) > 512) refuse("signature_byte_cap");
++      documented = { value, selector: `configuration_source:docstring:L${lines(text, previous.start)}` };
++      doc = { value: previous.text.trim(), selector: documented.selector };
++    }
++  }
++  const linePrefix = lex.mask.slice(lex.mask.lastIndexOf("\n", start - 1) + 1, start);
++  const header = /^function\s+configuration_source\s*\(([^)]*)\)([^\n]*)/.exec(lex.mask.slice(start));
++  if (header && /^\s*$/.test(linePrefix) && !/@\w+/.test(lex.mask.slice(0, start)) &&
++    /^configuration::ResolvedRunConfiguration,dotted_path::AbstractString,?$/.test(header[1].replace(/\s/g, "")) && /^\s*$/.test(header[2])) {
++    if (bytes(header[0]) > 512) refuse("signature_byte_cap");
++    typed = { value: "configuration_source(configuration::ResolvedRunConfiguration, dotted_path::AbstractString)",
++      selector: `configuration_source:typed-header:L${lines(text, start)}` };
++  }
++  return { documented, typed, doc };
++}
++function typedDefault(input: Input): Observation {
++  const selector = "ProductionOptions.energy_chunk";
++  if (input.text === null) return missing(selector);
++  const lex = juliaText(input.text);
++  const structs = [...lex.mask.matchAll(/^\s*(?:Base\.@kwdef\s+)?struct\s+ProductionOptions\s*$/gm)];
++  if (structs.length !== 1) return failed(selector);
++  const start = structs[0].index! + structs[0][0].length;
++  const end = /^\s*end\s*$/m.exec(lex.mask.slice(start));
++  if (!end) return failed(selector);
++  const region = lex.mask.slice(start, start + end.index);
++  if (/@\w+/.test(region)) return failed(selector, "unsupported_macro_context");
++  const fields = [...region.matchAll(/^\s*energy_chunk\s*::\s*Int\s*=([^\n]*)$/gm)];
++  if (fields.length !== 1 || !/^\s*\d+\s*$/.test(fields[0][1])) return failed(selector);
++  const value = Number(fields[0][1].trim());
++  if (!Number.isSafeInteger(value)) return failed(selector, "unsafe_integer_literal");
++  return { value, selector: `${selector}:L${lines(input.text, start + fields[0].index!)}` };
++}
++function exampleValue(input: Input): Observation {
++  const selector = "production.energy_chunk";
++  if (input.text === null) return missing(selector);
++  const text = input.text;
++  const blocks = [...text.matchAll(/^production:\s*(?:#[^\n]*)?$/gm)];
++  if (blocks.length !== 1) return failed(selector);
++  const start = blocks[0].index! + blocks[0][0].length;
++  const rest = text.slice(start).replace(/^\n/, "");
++  const block = rest.split(/^(?=[^\s#])/m)[0];
++  if (/^\s*(?:<<:|[!&*])/m.test(block)) return failed(selector);
++  const leaves = [...block.matchAll(/^  energy_chunk:([^\n]*)$/gm)];
++  if (leaves.length !== 1) return failed(selector);
++  const literal = /^\s*(\d+)\s*(?:#[^\n]*)?$/.exec(leaves[0][1]);
++  if (!literal || !Number.isSafeInteger(Number(literal[1]))) return failed(selector);
++  return { value: Number(literal[1]), selector: `${selector}:L${lines(text, start) + 1}` };
++}
++
++type SchemaProjection = {
++  constraint: Observation; declaration: Observation; description: Observation;
++  rootRequired: Observation;
++};
++function schemaProjection(input: Input): SchemaProjection {
++  const pointer = "/$defs/production/properties/energy_chunk";
++  const unavailable = input.text === null ? missing(pointer) : failed(pointer);
++  const result: SchemaProjection = { constraint: unavailable, declaration: unavailable,
++    description: unavailable, rootRequired: unavailable };
++  if (input.text === null) return result;
++  try {
++    const root = object(parseData(input.text));
++    function required(node: Record<string, unknown>): string[] {
++      if (!own(node, "required")) return [];
++      const list = node.required;
++      if (!Array.isArray(list) || list.some((x) => typeof x !== "string") || new Set(list).size !== list.length) unsupported("malformed_schema");
++      return list as string[];
++    }
++    function allowed(node: Record<string, unknown>, keys: string[]) {
++      if (Object.keys(node).some((key) => !keys.includes(key))) unsupported("unsupported_schema_keyword");
++    }
++    // Only keywords which cannot add an unprojected selected-path condition
++    // are permitted here. Unselected properties/$defs are opaque data.
++    const objectKeys = ["$schema", "$id", "$comment", "title", "description", "examples",
++      "type", "required", "properties", "$defs", "definitions", "additionalProperties", "$ref"];
++    const leafKeys = ["$comment", "title", "description", "examples", "type", "minimum", "default", "$ref"];
++    allowed(root, objectKeys);
++    if (own(root, "$ref")) unsupported("unsupported_root_ref");
++    if (own(root, "type") && root.type !== "object") unsupported("malformed_schema");
++    result.rootRequired = { value: required(root).includes("production"), selector: "/required" };
++    let hops = 0;
++    const seen = new Set<string>();
++    function resolve(raw: unknown, location: string): { node: Record<string, unknown>; location: string } {
++      let node = object(raw);
++      while (own(node, "$ref")) {
++        // Draft-specific sibling constraints are intentionally unsupported.
++        if (Object.keys(node).some((k) => !["$ref", "$comment", "title", "description"].includes(k))) unsupported("unsupported_ref_siblings");
++        const ref = node.$ref;
++        if (typeof ref !== "string" || !ref.startsWith("#/")) unsupported("unsupported_local_ref");
++        if (seen.has(ref)) unsupported("cyclic_local_ref");
++        if (++hops > 8) refuse("local_ref_hop_cap");
++        seen.add(ref);
++        let value: unknown = root;
++        const parts = ref.slice(2).split("/");
++        for (const part of parts) {
++          if (/~(?![01])/.test(part)) unsupported("unsupported_local_ref");
++          const key = part.replace(/~1/g, "/").replace(/~0/g, "~");
++          const container = object(value);
++          if (!own(container, key)) unsupported("missing_local_ref");
++          value = container[key];
++        }
++        node = object(value);
++        location = ref.slice(1);
++      }
++      return { node, location };
++    }
++    const production = resolve(object(root.properties).production, "/properties/production");
++    allowed(production.node, objectKeys);
++    if (production.node.type !== "object") unsupported("malformed_schema");
++    const productionRequired = required(production.node);
++    const selected = resolve(object(production.node.properties).energy_chunk, production.location + "/properties/energy_chunk");
++    allowed(selected.node, leafKeys);
++    if (selected.node.type !== "integer" || typeof selected.node.minimum !== "number" || !Number.isFinite(selected.node.minimum)) unsupported("malformed_schema");
++    if (own(selected.node, "description") && typeof selected.node.description !== "string") unsupported("malformed_schema");
++    if (own(selected.node, "default") && (typeof selected.node.default !== "number" || !Number.isSafeInteger(selected.node.default))) unsupported("unsupported_schema_default");
++    result.constraint = { value: { type: "integer", minimum: selected.node.minimum,
++      required: productionRequired.includes("energy_chunk") }, selector: selected.location };
++    result.declaration = { value: own(selected.node, "default") ? selected.node.default : null,
++      selector: selected.location + "/default" };
++    result.description = typeof selected.node.description === "string"
++      ? { value: selected.node.description, selector: selected.location + "/description" }
++      : failed(selected.location + "/description", "description_absent");
++  } catch (error) {
++    if (!(error instanceof Unsupported)) throw error;
++    // Never project a successfully read prefix as a full selected constraint.
++    result.constraint = failed(pointer, error.reason);
++    result.declaration = failed(pointer + "/default", error.reason);
++    result.description = failed(pointer + "/description", error.reason);
++  }
++  return result;
++}
++
++type Status = "known" | "partial" | "unknown" | "not_assigned" | "not_applicable";
++type Mode = "literal-extraction" | "authored-context" | "dynamic-unknown";
++type SourceRef = { owner: string; revision: string; path: string; sha256: string; selector: string };
++type Fact = { name: string; status: Status; text: string; sources: SourceRef[] };
++type Extraction = { subject: string; fact_index: number; mode: Mode; context: string;
++  value: unknown; selector: string | null; reason?: string };
++type Subject = { kind: "api" | "input"; key: string; facts: Fact[] };
++function sourceRef(input: Input, selector: string): SourceRef[] {
++  if (input.actual_sha256 === null) return [];
++  return [{ owner: input.owner, revision: input.revision,
++    path: input.path.slice(input.path.indexOf("/") + 1), sha256: input.actual_sha256, selector }];
++}
++function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
++  const api: Subject = { kind: "api", key: "configuration_source", facts: [] };
++  const leaf: Subject = { kind: "input", key: "production.energy_chunk", facts: [] };
++  const extractions: Extraction[] = [];
++  const diagnostics: { reason: string }[] = [];
++  const byPath = (path: string) => inputs.find((i) => i.path === path)!;
++  const apiInput = byPath(PATHS[0]), coreInput = byPath(PATHS[8]), exampleInput = byPath(PATHS[5]);
++  const schemaInput = byPath(PATHS[7]), packagedInput = byPath(PATHS[6]), routeInput = byPath(PATHS[4]);
++  const observedApi = apiObservations(apiInput);
++  const observedTyped = typedDefault(coreInput);
++  const observedExample = exampleValue(exampleInput);
++  const observedSchema = schemaProjection(schemaInput);
++  // Precheck packaged schema independently; it can never replace canonical facts.
++  if (packagedInput.text !== null) {
++    try { parseData(packagedInput.text); }
++    catch (error) {
++      if (!(error instanceof Unsupported)) throw error;
++      diagnostics.push({ reason: "malformed_packaged_schema" });
++    }
++  }
++  if (packagedInput.actual_sha256 !== null && schemaInput.actual_sha256 !== null &&
++    packagedInput.actual_sha256 !== schemaInput.actual_sha256) diagnostics.push({ reason: "packaged_schema_mismatch" });
++  function add(subject: Subject, name: string, status: Status, text: string, context: string,
++    observation?: Observation, input?: Input, mode?: Mode) {
++    if (text.length > 2048) refuse("fact_text_cap");
++    const sources = input && observation ? sourceRef(input, observation.selector) : [];
++    const fact_index = subject.facts.length;
++    subject.facts.push({ name, status, text, sources });
++    extractions.push({ subject: subject.key, fact_index,
++      mode: mode ?? (observation?.reason ? "dynamic-unknown" : "authored-context"),
++      context, value: observation?.value ?? null, selector: observation?.selector ?? null,
++      ...(observation?.reason ? { reason: observation.reason } : {}) });
++  }
++  function literal(subject: Subject, name: string, context: string, observation: Observation,
++    input: Input, label: string, known: Status = "known") {
++    add(subject, name, observation.reason ? (observation.reason === "source_missing" ? "unknown" : "partial") : known,
++      observation.reason ? `${label}: извлечение недоступно (${observation.reason}); значение не вычислялось.`
++        : `${label}: ${typeof observation.value === "string" ? observation.value : JSON.stringify(observation.value)}. Это декларация исходного текста.`,
++      context, observation, input, observation.reason ? "dynamic-unknown" : "literal-extraction");
++  }
++  // API literal documentation is distinct from the nonexhaustive typed header.
++  literal(api, "signature", "documented-signature", observedApi.documented, apiInput, "Документированная сигнатура");
++  literal(api, "signature", "typed-signature", observedApi.typed, apiInput, "Текстовый typed header; не полный список методов", "partial");
++  add(api, "units", "not_applicable", "Авторский контекст: идентификатор источника или nothing не является физической величиной.", "units");
++  add(api, "default", observedApi.typed.reason ? "partial" : "not_assigned",
++    observedApi.typed.reason ? "Аргументные defaults не установлены: header не распознан."
++      : "В распознанном текстовом header аргументные defaults не объявлены; методы не исполнялись.",
++    "argument-defaults", observedApi.typed, apiInput);
++  add(api, "constraint", "partial", "Текстовый header описывает ResolvedRunConfiguration и AbstractString; lookup не подтверждает schema validation и полный dispatch contract.",
++    "typed-constraints", observedApi.typed, apiInput);
++  if (!observedApi.doc.reason) {
++    add(api, "effects", "known", "Документированное описание (не runtime effect inventory):\n" + String(observedApi.doc.value),
++      "documented-effects", observedApi.doc, apiInput, "literal-extraction");
++  } else {
++    add(api, "effects", "unknown", "Документированное описание lookup недоступно; effects не восстанавливались из тела функции.",
++      "documented-effects", observedApi.doc, apiInput, "dynamic-unknown");
++  }
++  add(api, "errors", "partial", "Docstring и header не являются исчерпывающим throws/error contract; вызов не выполнялся.", "errors", observedApi.doc, apiInput);
++  add(api, "formula_origin", "not_applicable", "Авторский контекст: lookup provenance не задаёт физическую формулу.", "formula-origin");
++  add(api, "value_origin", "not_applicable", "Физическое происхождение численного значения к этому lookup не применяется; фактический возвращённый identifier не задан.", "value-origin");
++  add(api, "assigning_origin", "partial", "Статическое документированное правило относится к recorded assigning history; фактическая history отсутствует. Полная causal chain не восстановлена.",
++    "assigning-origin", observedApi.doc, apiInput);
++  add(api, "effective_origin", "unknown", "Retained run/execution context отсутствует; effective origin неизвестен.", "effective-origin");
++
++  const constraint = observedSchema.constraint;
++  const declaredDefault = observedSchema.declaration;
++  literal(leaf, "signature", "schema-type", constraint.reason ? constraint
++    : { value: "integer", selector: constraint.selector + "/type" }, schemaInput, "Объявленный тип owning schema");
++  literal(leaf, "signature", "typed-field", observedTyped.reason ? observedTyped
++    : { value: "energy_chunk::Int", selector: observedTyped.selector }, coreInput, "Текстовая Int field declaration; не runtime inventory", "partial");
++  // Copy owning description; scheduling interpretation is explicitly authored.
++  if (!observedSchema.description.reason) {
++    add(leaf, "units", "known", "Owning schema description (source declaration): " + String(observedSchema.description.value),
++      "units", observedSchema.description, schemaInput, "literal-extraction");
++  } else {
++    add(leaf, "units", "unknown", "Owning description отсутствует; физические единицы из имени не выводятся.", "units", observedSchema.description, schemaInput);
++  }
++  literal(leaf, "default", "schema-default", declaredDefault, schemaInput,
++    "Default в schema context; декларация не применяется к конфигурации", declaredDefault.value === null ? "not_assigned" : "known");
++  literal(leaf, "default", "typed-default", observedTyped, coreInput, "Отдельная текстовая default declaration ProductionOptions");
++  literal(leaf, "default", "example-explicit", observedExample, exampleInput, "Отдельное явное значение illustrative base fixture; не default");
++  literal(leaf, "constraint", "schema-constraint", constraint, schemaInput, "Прямые type/minimum/required декларации owning schema; не полный validator");
++  literal(leaf, "constraint", "root-production-required", observedSchema.rootRequired, schemaInput, "Root required-production membership");
++  add(leaf, "effects", observedSchema.description.reason ? "unknown" : "partial",
++    "Авторский контекст: параметр планирования energy-node work; этот adapter не меняет сетку/физическую модель и не исполняет scheduling. Owning description приведено отдельно; полный effect inventory не установлен.",
++    "effects", observedSchema.description, schemaInput);
++  add(leaf, "errors", "partial", "Прямые schema declarations не являются полным loader error inventory. Core guard/body не интерпретируются; runtime exception path не проверен.",
++    "errors", { value: null, selector: "file" }, coreInput);
++  add(leaf, "formula_origin", "not_applicable", "Авторский контекст: scheduling count не предоставляет физическую формулу; формула NEGF или rationale допуска не генерируются.",
++    "formula-origin", observedSchema.description, schemaInput);
++  add(leaf, "value_origin", "partial", "Schema, typed declaration и явный example — отдельные source contexts. Actual instance numeric origin неизвестен; совпадение чисел не является provenance.",
++    "value-origin");
++  // Only authored excerpts are copied; fenced configuration/inspection code is not run.
++  const route = routeInput.text;
++  const marker = route?.indexOf("## Recorded assignments and value origins") ?? -1;
++  const next = route && marker >= 0 ? route.indexOf("\n\n", marker) : -1;
++  const paragraphStart = next >= 0 ? next + 2 : -1;
++  const paragraphEnd = route && paragraphStart >= 0 ? route.indexOf("\n\n", paragraphStart) : -1;
++  const excerpt = route && paragraphStart >= 0 && paragraphEnd >= 0 ? route.slice(paragraphStart, paragraphEnd) : null;
++  const routeObservation: Observation = route === null ? missing("configuration-route")
++    : excerpt ? { value: excerpt, selector: `configuration-route:L${lines(route, paragraphStart)}` }
++      : failed("configuration-route", "authored_excerpt_unavailable");
++  add(leaf, "assigning_origin", "partial", excerpt
++    ? "Авторский контекст из owning route; actual assigning history отсутствует:\n" + excerpt
++    : "Actual assigning identifier неизвестен: source files, generated policy и effective ExecutionPlan не восстановлены из defaults или example.",
++    "assigning-origin", routeObservation, routeInput, excerpt ? "authored-context" : "dynamic-unknown");
++  if (route !== null) {
++    // These are literal authored paragraphs, never results of a merge/planner.
++    const paragraphs = route.split(/\n\s*\n/);
++    for (const [context, matches] of [
++      ["synthetic-override-example", (p: string) => /energy_chunk/.test(p) && /fixture expectations|Synthetic example:|synthetic source example/.test(p)],
++      ["authored-planner-policy", (p: string) => /application:auto_exact/.test(p)],
++    ] as const) {
++      const candidates = paragraphs.filter(matches);
++      if (candidates.length === 1) {
++        const paragraph = candidates[0];
++        add(leaf, "assigning_origin", "partial", "Цитата owning route; синтетическое/статическое объяснение, не результат выполнения:\n" + paragraph,
++          context, { value: paragraph, selector: `configuration-route:L${lines(route, route.indexOf(paragraph))}` }, routeInput, "authored-context");
++      }
++    }
++  }
++  add(leaf, "effective_origin", "unknown", "Effective configuration/ExecutionPlan/snapshot отсутствуют; origin не выводится из literal defaults, примера или application:auto_exact marker.", "effective-origin");
++
++  const facts = {
++    format: TOOL, profile: PROFILE, source_manifest_sha256: manifestHash,
++    subjects: [api, leaf], coverage: { fact_classes: CLASSES, scope: "fixed-slice", status: "partial" },
++    binding: { status: "source-prototype", application_release: null, run: null },
++  };
++  const receipt = {
++    tool: TOOL, profile: PROFILE, source_graph_sha256: graph,
++    source_manifest_sha256: manifestHash,
++    external_binding: "Receipt hashes verify supplied bytes only; external source preparation must prove commit-to-bytes binding.",
++    lexical_normalization: "UTF-8 strict; CRLF/CR normalized to LF for extraction; hashes use raw bytes",
++    inputs: inputs.map(({ text: _text, sha256, bytes: expectedBytes, ...input }) => ({
++      ...input, expected_sha256: sha256, expected_bytes: expectedBytes,
++    })),
++    extractions, diagnostics,
++    aggregate_source_bytes: inputs.reduce((sum, input) => sum + (input.actual_bytes ?? 0), 0),
++    result: "partial" as const,
++  };
++  return { facts, receipt };
++}
++
++export type SliceOptions = { snapshotDir: string; sourceReceiptPath: string; outDir: string };
++export type SliceResult = { status: "produced" | "partial" | "refused"; reason?: string };
++export async function generateStaticSlice(options: SliceOptions): Promise<SliceResult> {
++  try {
++    const snapshot = absolute(options.snapshotDir);
++    const sourceReceipt = absolute(options.sourceReceiptPath);
++    const out = absolute(options.outDir);
++    if (snapshot === "/" || out === "/" || within(out, snapshot) || within(snapshot, out) || within(sourceReceipt, out)) refuse("source_output_overlap");
++    await realDirectory(snapshot);
++    const receiptInfo = await Deno.lstat(sourceReceipt);
++    if (receiptInfo.isSymlink || !receiptInfo.isFile || await Deno.realPath(sourceReceipt) !== sourceReceipt) refuse("symlink_or_invalid_receipt");
++    const parent = out.slice(0, out.lastIndexOf("/")) || "/";
++    await realDirectory(parent);
++    if (await statMaybe(out)) refuse("output_not_fresh");
++    const receiptBytes = await boundedRead(sourceReceipt, RECEIPT_CAP);
++    const receiptText = strictText(receiptBytes);
++    let parsed: { graph: string; files: InputEntry[] };
++    try { parsed = inputEntries(parseData(receiptText)); }
++    catch (error) {
++      if (error instanceof Unsupported) refuse("invalid_source_receipt");
++      throw error;
++    }
++    const inputs: Input[] = [];
++    let aggregate = 0;
++    // Canonical fixed order, independent of supplied receipt entry ordering.
++    for (const path of PATHS) {
++      const expected = parsed.files.find((entry) => entry.path === path)!;
++      if (!await selectedPath(snapshot, path)) {
++        inputs.push({ ...expected, actual_sha256: null, actual_bytes: null, status: "source_missing", text: null });
++        continue;
++      }
++      const fullPath = snapshot + "/" + path;
++      const info = await Deno.lstat(fullPath);
++      if (info.size > FILE_CAP || aggregate + info.size > SOURCE_CAP) refuse("aggregate_source_cap");
++      const raw = await boundedRead(fullPath, FILE_CAP);
++      const actualHash = await sha256(raw);
++      if (raw.length !== expected.bytes || actualHash !== expected.sha256) refuse("source_identity_mismatch");
++      aggregate += raw.length;
++      inputs.push({ ...expected, actual_sha256: actualHash, actual_bytes: raw.length, status: "verified", text: strictText(raw) });
++    }
++    const manifestHash = await sha256(receiptBytes);
++    const built = buildProjection(inputs, parsed.graph, manifestHash);
++    const factsText = json(built.facts);
++    if (bytes(factsText) > OUTPUT_CAP) refuse("facts_output_cap");
++    const receiptTextOut = json({ ...built.receipt,
++      output: { path: "facts.json", sha256: await sha256(encoder.encode(factsText)), bytes: bytes(factsText) } });
++    if (bytes(receiptTextOut) > OUTPUT_CAP) refuse("receipt_output_cap");
++    if (bytes(json(built.receipt.diagnostics)) > 8192) refuse("diagnostics_output_cap");
++    // No output directory exists until all reads/projection/caps have passed.
++    // createNew prevents clobbering a competing writer; filesystem atomicity
++    // against adversarial concurrent namespace replacement is not certified.
++    await Deno.mkdir(out);
++    await Deno.writeTextFile(out + "/source-receipt.json", receiptTextOut, { createNew: true });
++    // Stage a bounded file, retaining failed pending evidence if I/O fails.
++    // Publish complete facts last, inside the fresh single-writer directory.
++    await Deno.writeTextFile(out + "/facts.pending.json", factsText, { createNew: true });
++    await Deno.rename(out + "/facts.pending.json", out + "/facts.json");
++    return { status: "partial" };
++  } catch (error) {
++    if (error instanceof Refusal) return { status: "refused", reason: error.reason };
++    if (error instanceof Unsupported) return { status: "refused", reason: error.reason };
++    // Avoid leaking host/private paths from platform exceptions into artifacts.
++    return { status: "refused", reason: "io_or_input_failure" };
++  }
++}
++
++if (import.meta.main) {
++  const flags = new Map<string, string>();
++  const names = ["--snapshot", "--source-receipt", "--out"];
++  let valid = Deno.args.length === 6;
++  for (let i = 0; i < Deno.args.length && valid; i += 2) {
++    const key = Deno.args[i], value = Deno.args[i + 1];
++    if (!names.includes(key) || flags.has(key) || !value || value.startsWith("--")) valid = false;
++    else flags.set(key, value);
++  }
++  const result = valid && flags.size === 3
++    ? await generateStaticSlice({ snapshotDir: flags.get("--snapshot")!, sourceReceiptPath: flags.get("--source-receipt")!, outDir: flags.get("--out")! })
++    : { status: "refused", reason: "invalid_options" };
++  console.log(json(result).trimEnd());
++  Deno.exitCode = result.status === "refused" ? 2 : 0;
++}
+diff --git a/tests/docs_static_slice_test.ts b/tests/docs_static_slice_test.ts
+new file mode 100644
+index 0000000..081803a
+--- /dev/null
++++ b/tests/docs_static_slice_test.ts
+@@ -0,0 +1,491 @@
++// DOC06 source-only controls. Target sources are inert fixture bytes.
++// No std/downloaded modules, process/env/network/FFI capabilities are needed.
++import { generateStaticSlice } from "../ops/docs/static-slice.ts";
++
++type Fact = { name: string; status: string; text: string; sources: unknown[] };
++type Extraction = {
++  subject: string;
++  fact_index: number;
++  mode: "literal-extraction" | "authored-context" | "dynamic-unknown";
++  context: string;
++  value: unknown;
++  reason?: string;
++  selector?: string;
++};
++type Projection = {
++  format: string;
++  profile: string;
++  subjects: { kind: string; key: string; facts: Fact[] }[];
++  coverage: { fact_classes: string[]; scope: string; status: string };
++  binding: { status: string; application_release: null; run: null };
++};
++type Receipt = {
++  result: string;
++  inputs: { path: string; actual_sha256: string | null; actual_bytes: number | null; status: string }[];
++  extractions: Extraction[];
++  diagnostics?: { reason: string }[];
++};
++type Run = {
++  status: string;
++  reason?: string;
++  facts?: Projection;
++  receipt?: Receipt;
++  bytes?: string;
++};
++const CLASSES = ["signature", "units", "default", "constraint", "effects", "errors",
++  "formula_origin", "value_origin", "assigning_origin", "effective_origin"];
++const PATHS = [
++  "runner/src/application/configuration_types.jl",
++  "runner/src/infrastructure/config/configuration.jl",
++  "runner/src/infrastructure/config/configuration_sources.jl",
++  "runner/src/application/auto_strategy.jl",
++  "runner/docs/src/user/configuration.md",
++  "runner/test/fixtures/configurations/base.yaml",
++  "runner/schema/run.schema.json",
++  "contracts/src/qcl_negf_contracts/schemas/run.schema.json",
++  "core/src/numerics/optimized/production_contracts.jl",
++] as const;
++const API = "configuration_source";
++const INPUT = "production.energy_chunk";
++const REVISION = {
++  runner: "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
++  contracts: "12fc26462bbab3df76904c6deb01f8c6596de7be",
++  core: "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
++};
++const OWNER = {
++  runner: "components/QCLNEGFRunner.jl",
++  contracts: "components/qcl-negf-contracts",
++  core: "components/QCLNEGF.jl",
++};
++// Mandatory pre-created harness-owned /tmp capability, covered by its 8 MiB sampler.
++// No environment lookup, implicit temp directory, or worktree write fallback.
++const TMP = Deno.args[0];
++if (!TMP || !TMP.startsWith("/tmp/") || Deno.args.length !== 1) {
++  throw new Error("pass exactly one harness-owned /tmp capability after --");
++}
++const encoder = new TextEncoder();
++function assert(ok: unknown, message = "assertion failed"): asserts ok {
++  if (!ok) throw new Error(message);
++}
++function equal(actual: unknown, expected: unknown, message: string) {
++  assert(JSON.stringify(actual) === JSON.stringify(expected),
++    `${message}: got ${JSON.stringify(actual)}, wanted ${JSON.stringify(expected)}`);
++}
++async function hash(bytes: Uint8Array): Promise<string> {
++  const owned = new Uint8Array(bytes.length);
++  owned.set(bytes);
++  const result = new Uint8Array(await crypto.subtle.digest("SHA-256", owned.buffer));
++  return Array.from(result, (b) => b.toString(16).padStart(2, "0")).join("");
++}
++function schema(leaf = '"type":"integer","minimum":1,"description":"Maximum number of energy points in one scheduling chunk; not an energy spacing. No schema default."'): string {
++  return `{"type":"object","required":["production"],"properties":{"production":{"$ref":"#/$defs/production"}},"$defs":{"production":{"type":"object","required":["energy_chunk"],"properties":{"energy_chunk":{${leaf}}}}}}`;
++}
++function sources(typed = 64, example = 64): Record<string, string> {
++  const json = schema();
++  return {
++    [PATHS[0]]: `"""\n    configuration_source(configuration, dotted_path)\n\nReturn the last recorded assigning source identifier, or nothing when history is absent or empty.\nThis lookup does not load or validate sources and does not establish an effective origin.\n"""\nfunction configuration_source(\n    configuration::ResolvedRunConfiguration,\n    dotted_path::AbstractString,\n)\n    history = get(configuration.source_history, String(dotted_path), nothing)\n    return isnothing(history) || isempty(history) ? nothing : last(history)\nend\n`,
++    [PATHS[1]]: `function _deep_merge!(target, source, source_file)\n    # Source observation only; fixture must never invoke this body.\n    assigning_identifier = abspath(source_file)\nend\n`,
++    [PATHS[2]]: "# Ordered sources are collected, merged, validated, then resolved.\n",
++    [PATHS[3]]: '# Selected execution plan can replace energy_chunk and record application:auto_exact.\n',
++    [PATHS[4]]: "# Run configurations\nLater source files override explicit fields. configuration_source returns the last recorded assigning identifier, not a complete effective origin.\n\nSynthetic example: production.energy_chunk is 17 in first.yaml and 23 in second.yaml; the expected final explicit value is 23. This is a synthetic source example, not a measured run.\n",
++    [PATHS[5]]: `production:\n  energy_chunk: ${example}\nother:\n  energy_chunk: 123\n`,
++    [PATHS[6]]: json,
++    [PATHS[7]]: json,
++    [PATHS[8]]: `"""Production operators without changing the physical model."""\nBase.@kwdef struct ProductionOptions\n    energy_chunk::Int = ${typed}\n    residual_chunk::Int = 256\nend\nfunction _check_production_options(options::ProductionOptions)\n    options.energy_chunk > 0 || throw(ArgumentError("energy_chunk must be positive"))\nend\n`,
++  };
++}
++async function write(path: string, bytes: string | Uint8Array) {
++  await Deno.mkdir(path.slice(0, path.lastIndexOf("/")), { recursive: true });
++  await Deno.writeFile(path, typeof bytes === "string" ? encoder.encode(bytes) : bytes);
++}
++async function exists(path: string): Promise<boolean> {
++  try { await Deno.lstat(path); return true; }
++  catch (error) { if (error instanceof Deno.errors.NotFound) return false; throw error; }
++}
++type Entry = { path: string; owner: string; revision: string; sha256: string; bytes: number };
++class Fixture {
++  constructor(readonly dir: string, readonly text: Record<string, string>) {}
++  entries: Entry[] = [];
++  get snapshot() { return `${this.dir}/snapshot`; }
++  get sourceReceipt() { return `${this.dir}/input-receipt.json`; }
++  async prepare() {
++    for (const path of PATHS) {
++      const bytes = encoder.encode(this.text[path]);
++      const alias = path.split("/")[0] as keyof typeof OWNER;
++      await write(`${this.snapshot}/${path}`, bytes);
++      this.entries.push({ path, owner: OWNER[alias], revision: REVISION[alias],
++        sha256: await hash(bytes), bytes: bytes.length });
++    }
++    await this.receipt();
++  }
++  async receipt() {
++    await write(this.sourceReceipt, JSON.stringify({
++      format: "qcl-negf.doc06-source-input.v1",
++      source_graph_sha256: "a".repeat(64),
++      files: this.entries,
++    }, null, 2) + "\n");
++  }
++  async run(label = "out"): Promise<Run> {
++    const outDir = `${this.dir}/${label}`;
++    const result = await generateStaticSlice({ snapshotDir: this.snapshot,
++      sourceReceiptPath: this.sourceReceipt, outDir });
++    assert(["produced", "partial", "refused"].includes(result.status), "explicit bounded result");
++    if (result.status === "refused") {
++      assert(!await exists(`${outDir}/facts.json`), "refusal cannot publish facts");
++      return result;
++    }
++    const bytes = await Deno.readTextFile(`${outDir}/facts.json`);
++    const receiptBytes = await Deno.readTextFile(`${outDir}/source-receipt.json`);
++    assert(encoder.encode(bytes).length <= 32768, "facts output cap");
++    assert(encoder.encode(receiptBytes).length <= 32768, "receipt output cap");
++    const facts = JSON.parse(bytes) as Projection;
++    const receipt = JSON.parse(receiptBytes) as Receipt;
++    equal(receipt.result, result.status, "receipt/result coherence");
++    return { ...result, facts, receipt, bytes };
++  }
++}
++async function fixture(body: (f: Fixture) => Promise<void>, text = sources()) {
++  const dir = await Deno.makeTempDir({ dir: TMP, prefix: "slice-" });
++  let completed = false;
++  try {
++    const f = new Fixture(dir, text);
++    await f.prepare();
++    await body(f);
++    completed = true;
++  } finally {
++    // Preserve failed-case evidence for the coordinator; never remove raw logs.
++    if (completed) await Deno.remove(dir, { recursive: true });
++  }
++}
++function facts(run: Run, key: string): Fact[] {
++  assert(run.status !== "refused", `projection required: ${run.reason}`);
++  const subject = run.facts!.subjects.find((s) => s.key === key);
++  assert(subject, `subject ${key} present`);
++  return subject.facts;
++}
++function extraction(run: Run, key: string, context: string): Extraction {
++  const records = run.receipt!.extractions.filter((e) => e.subject === key && e.context === context);
++  equal(records.length, 1, `one extraction for ${key}/${context}`);
++  return records[0];
++}
++function literal(run: Run, context: string, value: unknown) {
++  const entry = extraction(run, INPUT, context);
++  equal(entry.mode, "literal-extraction", `${context} is literal`);
++  equal(entry.value, value, `${context} value independently expected`);
++  equal(facts(run, INPUT)[entry.fact_index].status, "known", `${context} source fact known`);
++}
++function unsupported(run: Run, key: string, context: string, reason?: string, allowRefusal = false) {
++  if (run.status === "refused") {
++    assert(allowRefusal, `${context}: this unsupported construct must preserve partial projection`);
++    assert(run.reason, "refusal has reason");
++    return;
++  }
++  const entry = extraction(run, key, context);
++  equal(entry.value, null, `${context}: no stale or computed value`);
++  assert(["partial", "unknown"].includes(facts(run, key)[entry.fact_index].status),
++    `${context}: unsupported must not become known/pass`);
++  assert(entry.reason && (!reason || entry.reason === reason), `${context}: explicit reason ${reason ?? "required"}`);
++}
++
++// Catches constant-64 implementations, class loss, fabricated origins, and nondeterminism.
++Deno.test("DOC06 positive: source numbers stay separate and all ten classes survive", async () => {
++  for (const [typed, example] of [[64, 64], [79, 31], [101, 47]]) {
++    await fixture(async (f) => {
++      const run = await f.run();
++      equal(run.facts!.format, "qcl-negf.doc06-static-slice.v1", "private prototype format");
++      equal(run.facts!.profile, "configuration-source-energy-chunk-v1", "fixed scope");
++      equal(run.facts!.binding, { status: "source-prototype", application_release: null, run: null }, "no fabricated run/release");
++      for (const key of [API, INPUT]) {
++        const fs = facts(run, key);
++        equal([...new Set(fs.map((x) => x.name))].sort(), [...CLASSES].sort(), "all ten fact classes");
++        for (const fact of fs) {
++          equal(Object.keys(fact).sort(), ["name", "sources", "status", "text"], "Fact shape unchanged");
++          assert(fact.text.length <= 2048, "fact text bounded");
++        }
++        assert(fs.some((x) => x.name === "effective_origin" && x.status === "unknown"), "effective context absent");
++      }
++      const api = extraction(run, API, "documented-signature");
++      equal(api.value, "configuration_source(configuration, dotted_path)", "documented two-argument signature");
++      equal(facts(run, API)[api.fact_index].status, "known", "documented signature known");
++      equal(facts(run, API)[extraction(run, API, "typed-signature").fact_index].status, "partial", "typed declaration is not method inventory");
++      const constraint = extraction(run, INPUT, "schema-constraint");
++      equal(constraint.value, { type: "integer", minimum: 1, required: true }, "direct schema constraints");
++      equal(constraint.selector, "/$defs/production/properties/energy_chunk", "resolved exact pointer");
++      const absent = extraction(run, INPUT, "schema-default");
++      equal(absent.value, null, "schema has no assignment");
++      equal(facts(run, INPUT)[absent.fact_index].status, "not_assigned", "schema absent default distinct");
++      literal(run, "typed-default", typed);
++      literal(run, "example-explicit", example);
++      assert(!run.bytes!.includes(f.dir), "private paths absent from public facts");
++      equal((await f.run("again")).bytes, run.bytes, "same bytes deterministic across output directories");
++    }, sources(typed, example));
++  }
++});
++
++// Catches fallback to fixture/default values when an expected source is missing.
++for (const [path, key, context] of [
++  [PATHS[0], API, "documented-signature"],
++  [PATHS[7], INPUT, "schema-constraint"],
++] as const) Deno.test(`DOC06 missing source: ${path}`, async () => {
++  await fixture(async (f) => {
++    await Deno.remove(`${f.snapshot}/${path}`);
++    const run = await f.run();
++    assert(run.status !== "refused", "missing selected source produces bounded partial coverage");
++    unsupported(run, key, context, "source_missing");
++    const missing = run.receipt!.inputs.find((x) => x.path === path)!;
++    equal(missing.actual_sha256, null, "missing hash is null");
++    equal(missing.actual_bytes, null, "missing size is null, not zero");
++    literal(run, "typed-default", 64);
++    literal(run, "example-explicit", 64);
++    if (path === PATHS[0]) equal(extraction(run, INPUT, "schema-constraint").value,
++      { type: "integer", minimum: 1, required: true }, "unaffected canonical schema remains independently known");
++  });
++});
++
++// Catches accepting changed bytes under stale source identities.
++Deno.test("DOC06 refuses receipt hash mismatch", async () => fixture(async (f) => {
++  await write(`${f.snapshot}/${PATHS[8]}`, f.text[PATHS[8]].replace("= 64", "= 83"));
++  equal((await f.run()).status, "refused", "mismatch must refuse");
++}));
++
++// Catches permissive namespace/owner parsing and private path projection.
++for (const bad of ["../private/secret.jl", "/private/secret.jl", "runner/not-allowlisted.jl"]) {
++  Deno.test(`DOC06 refuses nonallowlisted input ${bad}`, async () => fixture(async (f) => {
++    f.entries[0].path = bad;
++    await f.receipt();
++    equal((await f.run()).status, "refused", "input namespace refusal");
++  }));
++}
++Deno.test("DOC06 refuses wrong owning component", async () => fixture(async (f) => {
++  f.entries[0].owner = OWNER.core;
++  await f.receipt();
++  equal((await f.run()).status, "refused", "wrong owner refusal");
++}));
++Deno.test("DOC06 refuses symlink selected file even with matching bytes", async () => fixture(async (f) => {
++  const destination = `${f.dir}/outside-selected-file.jl`;
++  await write(destination, f.text[PATHS[0]]);
++  await Deno.remove(`${f.snapshot}/${PATHS[0]}`);
++  await Deno.symlink(destination, `${f.snapshot}/${PATHS[0]}`);
++  equal((await f.run()).status, "refused", "no symlink input");
++}));
++Deno.test("DOC06 refuses symlink input ancestor", async () => fixture(async (f) => {
++  await Deno.rename(`${f.snapshot}/core`, `${f.dir}/core-elsewhere`);
++  await Deno.symlink(`${f.dir}/core-elsewhere`, `${f.snapshot}/core`);
++  equal((await f.run()).status, "refused", "no symlink ancestor");
++}));
++Deno.test("DOC06 refuses existing output and source overlap", async () => fixture(async (f) => {
++  const occupied = `${f.dir}/occupied`;
++  await write(`${occupied}/keep`, "preserve");
++  for (const outDir of [occupied, `${f.snapshot}/new-output`]) {
++    equal((await generateStaticSlice({ snapshotDir: f.snapshot,
++      sourceReceiptPath: f.sourceReceipt, outDir })).status, "refused", "output boundary");
++  }
++  equal(await Deno.readTextFile(`${occupied}/keep`), "preserve", "existing output preserved");
++}));
++
++// Catches last-key-wins parsing, remote fetching and numeric loss of precision.
++const BAD_SCHEMA: [string, string][] = [
++  ["invalid-json", "{broken"],
++  ["duplicate-key", schema().replace('"minimum":1', '"minimum":1,"minimum":2')],
++  ["duplicate-selected-property", schema().replace('"energy_chunk":{', '"energy_chunk":{"type":"number"},"energy_chunk":{')],
++  ["wrong-minimum-type", schema('"type":"integer","minimum":"1"')],
++  ["unsafe-integer", schema('"type":"integer","minimum":9007199254740993')],
++  ["nonfinite-number", schema('"type":"integer","minimum":1e999')],
++  ["missing-ref", schema().replace("#/$defs/production", "#/$defs/missing")],
++  ["cyclic-ref", '{"required":["production"],"properties":{"production":{"$ref":"#/$defs/p"}},"$defs":{"p":{"$ref":"#/$defs/p"}}}'],
++  ["remote-ref", schema().replace("#/$defs/production", "https://invalid.example/schema.json")],
++  ["prototype-key", schema().replace('"type":"object"', '"__proto__":{},"type":"object"')],
++  ["combinator", schema('"type":"integer","minimum":1,"anyOf":[{"maximum":4},{"minimum":9}]')],
++];
++for (const [label, json] of BAD_SCHEMA) Deno.test(`DOC06 schema unsupported: ${label}`, async () => {
++  const text = sources();
++  text[PATHS[6]] = text[PATHS[7]] = json;
++  const malformed = ["invalid-json", "duplicate-key", "duplicate-selected-property",
++    "wrong-minimum-type", "unsafe-integer", "nonfinite-number", "prototype-key"].includes(label);
++  await fixture(async (f) => unsupported(await f.run(), INPUT, "schema-constraint", undefined, malformed), text);
++});
++Deno.test("DOC06 local pointer escaping is decoded with own-key traversal", async () => {
++  const text = sources();
++  text[PATHS[6]] = text[PATHS[7]] = schema().replace('"production":{"type"', '"p/~q":{"type"')
++    .replace("#/$defs/production", "#/$defs/p~1~0q");
++  await fixture(async (f) => {
++    const run = await f.run();
++    equal(extraction(run, INPUT, "schema-constraint").value, { type: "integer", minimum: 1, required: true }, "escaped local ref resolved");
++  }, text);
++});
++Deno.test("DOC06 packaged schema mismatch is explicit without replacing canonical authority", async () => {
++  const text = sources();
++  text[PATHS[6]] = schema('"type":"integer","minimum":8');
++  await fixture(async (f) => {
++    const run = await f.run();
++    equal(extraction(run, INPUT, "schema-constraint").value, { type: "integer", minimum: 1, required: true }, "Contracts source remains authority");
++    assert(run.receipt!.diagnostics?.some((d) => d.reason === "packaged_schema_mismatch"), "mismatch diagnostic");
++  }, text);
++});
++Deno.test("DOC06 schema default declaration is reported without applying it", async () => {
++  const text = sources(79, 31);
++  text[PATHS[6]] = text[PATHS[7]] = schema('"type":"integer","minimum":1,"default":11');
++  await fixture(async (f) => {
++    const run = await f.run();
++    literal(run, "schema-default", 11);
++    literal(run, "typed-default", 79);
++    literal(run, "example-explicit", 31);
++    assert(facts(run, INPUT).some((x) => x.name === "effective_origin" && x.status === "unknown"), "declared default is not runtime provenance");
++  }, text);
++});
++
++// Catches constant folding/evaluation and matching target strings/comments as declarations.
++for (const rhs of ['ENV["QCL_CHUNK"]', "compute_chunk()", "32 + 32", "@value 64", "9007199254740993"]) {
++  Deno.test(`DOC06 dynamic typed RHS remains unsupported: ${rhs}`, async () => {
++    const text = sources();
++    text[PATHS[8]] = text[PATHS[8]].replace("energy_chunk::Int = 64", `energy_chunk::Int = ${rhs}`);
++    await fixture(async (f) => {
++      const run = await f.run();
++      unsupported(run, INPUT, "typed-default");
++      if (run.status !== "refused") literal(run, "example-explicit", 64);
++    }, text);
++  });
++}
++for (const [label, replacement] of [
++  ["comment", "# energy_chunk::Int = 64"],
++  ["string", 'note::String = "energy_chunk::Int = 64"'],
++  ["duplicate", "energy_chunk::Int = 64\n    energy_chunk::Int = 79"],
++] as const) Deno.test(`DOC06 rejects false typed field match: ${label}`, async () => {
++  const text = sources();
++  text[PATHS[8]] = text[PATHS[8]].replace("energy_chunk::Int = 64", replacement);
++  await fixture(async (f) => unsupported(await f.run(), INPUT, "typed-default"), text);
++});
++for (const prefix of ["@generate ", "@eval "]) Deno.test(`DOC06 macro method is not typed inventory: ${prefix}`, async () => {
++  const text = sources();
++  text[PATHS[0]] = text[PATHS[0]].replace("function configuration_source(", `${prefix}function configuration_source(`);
++  await fixture(async (f) => unsupported(await f.run(), API, "typed-signature"), text);
++});
++Deno.test("DOC06 signature inside string is not a declaration", async () => {
++  const text = sources();
++  text[PATHS[0]] = 's = "function configuration_source(configuration::ResolvedRunConfiguration, dotted_path::AbstractString)"\n';
++  await fixture(async (f) => unsupported(await f.run(), API, "typed-signature"), text);
++});
++for (const scalar of ["*chunk", "!!int 64", "&chunk 64", "64 + 1"]) Deno.test(`DOC06 YAML target is opaque unsupported: ${scalar}`, async () => {
++  const text = sources();
++  text[PATHS[5]] = `production:\n  energy_chunk: ${scalar}\n`;
++  await fixture(async (f) => unsupported(await f.run(), INPUT, "example-explicit"), text);
++});
++Deno.test("DOC06 YAML duplicate selected leaf is ambiguous", async () => {
++  const text = sources();
++  text[PATHS[5]] = "production:\n  energy_chunk: 64\n  energy_chunk: 79\n";
++  await fixture(async (f) => unsupported(await f.run(), INPUT, "example-explicit"), text);
++});
++
++// Catches allocation-after-read. Each fixture is freed serially.
++for (const [label, mutate] of [
++  ["file-bytes", (t: Record<string, string>) => { t[PATHS[1]] = "x".repeat(131073); }],
++  ["docstring", (t: Record<string, string>) => { t[PATHS[0]] = t[PATHS[0]].replace("Return the last", "x".repeat(4097) + "Return the last"); }],
++] as [string, (t: Record<string, string>) => void][]) Deno.test(`DOC06 refuses cap overrun: ${label}`, async () => {
++  const text = sources();
++  mutate(text);
++  await fixture(async (f) => equal((await f.run()).status, "refused", "explicit overrun refusal"), text);
++});
++
++// Catches missing lexical guards without allowing malformed selected shape or
++// Fact text limits to explain refusal. Only an unused $defs annotation changes;
++// the complete healthy production ref/type/minimum/required/default path remains.
++function schemaWithUnusedExample(fragment: string): string {
++  return schema().replace('"$defs":{', `"$defs":{"unused":{"examples":[${fragment}]},`);
++}
++for (const [label, under, over] of [
++  ["json-depth", "[".repeat(20) + "0" + "]".repeat(20), "[".repeat(34) + "0" + "]".repeat(34)],
++  ["json-string", `"${"x".repeat(16000)}"`, `"${"x".repeat(16385)}"`],
++  ["json-tokens", `[${"0,".repeat(100)}0]`, `[${"0,".repeat(32769)}0]`],
++] as const) Deno.test(`DOC06 lexical cap with healthy selected schema: ${label}`, async () => {
++  const healthy = sources(79, 31);
++  healthy[PATHS[6]] = healthy[PATHS[7]] = schemaWithUnusedExample(under);
++  await fixture(async (f) => {
++    const run = await f.run();
++    assert(run.status !== "refused", "under-cap unused annotation preserves healthy projection");
++    const selected = extraction(run, INPUT, "schema-constraint");
++    equal(selected.value, { type: "integer", minimum: 1, required: true }, "independent healthy selected constraint");
++    equal(facts(run, INPUT)[selected.fact_index].status, "known", "selected declaration remains known");
++    equal(selected.selector, "/$defs/production/properties/energy_chunk", "selected pointer unchanged");
++    const absent = extraction(run, INPUT, "schema-default");
++    equal(absent.value, null, "unused branch does not assign schema default");
++    equal(facts(run, INPUT)[absent.fact_index].status, "not_assigned", "schema default stays absent");
++    literal(run, "typed-default", 79);
++    literal(run, "example-explicit", 31);
++  }, healthy);
++  const overflow = sources(79, 31);
++  overflow[PATHS[6]] = overflow[PATHS[7]] = schemaWithUnusedExample(over);
++  await fixture(async (f) => equal((await f.run()).status, "refused", "lexical cap must refuse healthy-shaped schema"), overflow);
++});
++Deno.test("DOC06 refuses receipt-byte and source-count caps", async () => fixture(async (f) => {
++  await write(f.sourceReceipt, " ".repeat(16385));
++  equal((await f.run()).status, "refused", "receipt cap before parser");
++  f.entries.push(...Array.from({ length: 4 }, () => ({ ...f.entries[0] })));
++  await f.receipt();
++  equal((await f.run("count")).status, "refused", "input count cap");
++}));
++Deno.test("DOC06 refuses source aggregate cap without truncated success", async () => {
++  const text = sources();
++  for (const path of [PATHS[1], PATHS[2], PATHS[3], PATHS[4], PATHS[8]]) {
++    text[path] = "#" + "x".repeat(110000) + "\n" + text[path];
++  }
++  await fixture(async (f) => equal((await f.run()).status, "refused", "aggregate cap"), text);
++});
++
++// Catches eval/module execution. Marker is first created/read/deleted in the very
++// same writable subtree; absence cannot be explained by a denied write capability.
++Deno.test("DOC06 Julia and valid JavaScript sentinels remain inert bytes", async () => fixture(async (f) => {
++  const marker = `${f.dir}/sentinel-marker`;
++  await write(marker, "capability-proven");
++  equal(await Deno.readTextFile(marker), "capability-proven", "marker is writable/readable");
++  await Deno.remove(marker);
++  // Julia sentinel is data, never loaded by Julia or another process.
++  const julia = `open(${JSON.stringify(marker)}, "w") do io; write(io, "executed"); end\n`;
++  const js = `Deno.writeTextFileSync(${JSON.stringify(marker)}, "executed");\n`;
++  for (const [label, prefix] of [["julia", julia], ["js", js]]) {
++    // Rebind hashes to sentinel bytes so refusal cannot be a stale-hash trick.
++    const text = sources();
++    text[PATHS[1]] = prefix;
++    const bytes = encoder.encode(prefix);
++    await write(`${f.snapshot}/${PATHS[1]}`, bytes);
++    const entry = f.entries.find((e) => e.path === PATHS[1])!;
++    entry.sha256 = await hash(bytes);
++    entry.bytes = bytes.length;
++    await f.receipt();
++    const run = await f.run(label);
++    assert(run.status !== "refused", "opaque supporting source accepts bounded inert sentinel bytes");
++    literal(run, "typed-default", 64);
++    assert(!await exists(marker), `${label} target bytes never executed`);
++  }
++}));
++
++// Catches permissive UTF-8 decoding and source receipt identity ambiguity.
++Deno.test("DOC06 invalid UTF-8 is refused even with matching receipt hash", async () => fixture(async (f) => {
++  const bytes = new Uint8Array([0x23, 0x20, 0xc3, 0x28]);
++  await write(`${f.snapshot}/${PATHS[1]}`, bytes);
++  const entry = f.entries.find((e) => e.path === PATHS[1])!;
++  entry.sha256 = await hash(bytes);
++  entry.bytes = bytes.length;
++  await f.receipt();
++  equal((await f.run()).status, "refused", "strict UTF-8 decoding");
++}));
++Deno.test("DOC06 duplicate receipt path is refused", async () => fixture(async (f) => {
++  f.entries[1] = { ...f.entries[0] };
++  await f.receipt();
++  equal((await f.run()).status, "refused", "receipt cannot collapse duplicate paths");
++}));
++Deno.test("DOC06 wrong source byte length is refused", async () => fixture(async (f) => {
++  f.entries[0].bytes += 1;
++  await f.receipt();
++  equal((await f.run()).status, "refused", "identity includes raw byte length");
++}));
++Deno.test("DOC06 duplicate required member is not a direct complete constraint", async () => {
++  const text = sources();
++  text[PATHS[6]] = text[PATHS[7]] = schema().replace('["energy_chunk"]', '["energy_chunk","energy_chunk"]');
++  await fixture(async (f) => unsupported(await f.run(), INPUT, "schema-constraint", undefined, true), text);
++});
++Deno.test("DOC06 local reference hop cap refuses a long acyclic chain", async () => {
++  const text = sources();
++  const refs = Array.from({ length: 10 }, (_, i) => `"p${i}":{"$ref":"#/$defs/p${i + 1}"}`).join(",");
++  text[PATHS[6]] = text[PATHS[7]] = `{"properties":{"production":{"$ref":"#/$defs/p0"}},"$defs":{${refs},"p10":{"type":"object","required":["energy_chunk"],"properties":{"energy_chunk":{"type":"integer","minimum":1}}}}}`;
++  await fixture(async (f) => equal((await f.run()).status, "refused", "reference hop cap"), text);
++});

@@ -1,0 +1,32 @@
+WARN Failed to acquire environment lock: Could not create temporary file
+Resolved 112 packages in 1ms
+WARN Retry attempt #0. Sleeping 1.538097165s before the next attempt
+WARN Retry attempt #0. Sleeping 1.304988278s before the next attempt
+WARN Retry attempt #0. Sleeping 1.590931759s before the next attempt
+WARN Retry attempt #0. Sleeping 1.505768557s before the next attempt
+WARN Retry attempt #0. Sleeping 1.111966061s before the next attempt
+WARN Retry attempt #0. Sleeping 1.848593934s before the next attempt
+WARN Retry attempt #1. Sleeping 3.272840085s before the next attempt
+WARN Retry attempt #1. Sleeping 1.021082319s before the next attempt
+WARN Retry attempt #1. Sleeping 1.446768313s before the next attempt
+WARN Retry attempt #1. Sleeping 2.353074692s before the next attempt
+WARN Retry attempt #1. Sleeping 1.229060404s before the next attempt
+WARN Retry attempt #1. Sleeping 2.034961306s before the next attempt
+WARN Retry attempt #2. Sleeping 2.116745788s before the next attempt
+WARN Retry attempt #2. Sleeping 4.068185057s before the next attempt
+WARN Retry attempt #2. Sleeping 7.156883659s before the next attempt
+WARN Retry attempt #2. Sleeping 7.300714527s before the next attempt
+WARN Retry attempt #2. Sleeping 6.682938613s before the next attempt
+WARN Retry attempt #2. Sleeping 7.242703824s before the next attempt
+  × Failed to download `ruff==0.16.9`
+  ├─▶ Request failed after 3 retries in 4.4s
+  ├─▶ Failed to fetch:
+  │   `https://files.pythonhosted.org/packages/bc/b8/9c543074918061abbefc3bd139bee22de35abedb00dde0f2d27288838962/ruff-0.16.9-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl`
+  ├─▶ error sending request for url
+  │   (https://files.pythonhosted.org/packages/bc/b8/9c543074918061abbefc3bd139bee22de35abedb00dde0f2d27288838962/ruff-0.16.9-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl)
+  ├─▶ client error (Connect)
+  ├─▶ dns error
+  ╰─▶ failed to lookup address information: Temporary failure in name
+      resolution
+
+hint: `ruff` (v0.16.9) was included because `qcl-negf-api:test` (v0.2.0) depends on `ruff`

@@ -29,6 +29,35 @@
 | Разобрать HDF5, метаданные, сравнения и доказательность | [qcl-results-analysis](.agents/skills/qcl-results-analysis/SKILL.md) |
 | Объяснить стоимость, предложить изменение или сохранение | [qcl-performance-audit](.agents/skills/qcl-performance-audit/SKILL.md) |
 
+## Маршрутизация действий
+
+Выбирай класс по фактическому действию; смешанное задание разбивай на этапы.
+Используй [канонический контракт задания](docs/system/agent-review-workflow.md#разбиение-до-ready)
+и [маршрут полномочий](docs/system/agent-review-workflow.md#полномочия-стоимость-и-маршрутизация),
+не создавая ещё одной обязательной формы.
+
+| Действие | Проверка и граница этапа |
+| --- | --- |
+| Docs-only: текст, ссылки, формат | Diff, ссылки/anchors и формат изменённых файлов; Julia, imports, установка, docs build и полные suites не нужны. Исполняемые примеры и recipes требуют своего класса проверки. |
+| Source audit | Читать выбранные source/symbols и owning contracts; source verdict не доказывает runtime или science. |
+| Метаданные и готовые данные | Проверить archive/model/run/attempt identity и полноту; ограничить чтение/постобработку по объёму, памяти и I/O. Нового solve нет. |
+| Targeted code check | В порученном code scope выполнить relevant fixtures/controls в существующей среде с конечным общим бюджетом; отсутствие runtime ограничивает проверку, но не блокирует доступную правку документа. |
+| Численная среда | Установка, bootstrap, instantiate/precompile и смена dependencies — отдельный порученный этап с конечным бюджетом; не скрывать его внутри проверки. |
+| Build и полные suites | Docs render, package/image build и full tests требуют своего этапа/envelope; native build — fresh admission и preflight ниже. |
+| Live/native | Чтение trusted host — только в active read scope; mutation/install/restore — с точными targets, fresh admission и technical BIND. Ни source check, ни build exit не закрывают native gates. |
+| Science | Новые SCBA/Poisson — в порученном этапе с frozen model/plan/criteria и конечным envelope; CP-SCI READY и scientific verdict раздельны. Profiling/benchmarks требуют своего порученного этапа и бюджета по правилам стоимости ниже. |
+
+Последнее применимое прямое поручение пользователя определяет active scope/grants;
+исторические PLAN/standby не отменяют активированный EXEC. Уже разрешённые готовые
+действия выполняй без повторного вопроса. Для активированных B/G1/S1 сохраняются
+technical BIND/READY и fresh admission; CP-EXCEPTION нужен при выходе за approved
+predicates. Missing data, inventory, admission или credentials блокируют только
+зависимые действия и claims; независимые READY задачи продолжаются. Более поздний
+ресурсный grant не отменяет неотменённые scientific caps, protected reserves или
+CI-once; общий бюджет не умножается на агентов. Старый S01, foreign jobs/VM,
+existing disks/data и original failed raw/logs/provenance сохраняются; разрешение
+кампании само по себе не устанавливает ownership чужого ресурса.
+
 ## Физическая и численная добросовестность
 
 - Разделяй: выполнение процесса, сходимость уравнений, физические проверки,

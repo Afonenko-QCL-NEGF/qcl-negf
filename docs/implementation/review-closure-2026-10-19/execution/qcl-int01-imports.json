@@ -1,0 +1,20 @@
+{
+  "stage": "INT01",
+  "observed_date": "2026-10-19",
+  "tool_session_id": 53869,
+  "exit_code": 0,
+  "source_root_at_observation": "e0f244d075dd49874ba4f3847f4efa693f3b3622",
+  "python_executable": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.venv/bin/python3",
+  "python_version": "3.14.7",
+  "route": "uv run --locked --no-sync python after uv sync --locked --python /usr/bin/python3.14 --group test",
+  "uv_executable": "/nix/store/zvdbpcaqqjmnzs2dpmgsszg3hh229cbp-uv-0.11.21/bin/uv",
+  "uv_lock_sha256": "db19ba9ace32c03d2b0a9da9b11b90f9f16de23c9539aa2276cd3dafd4f56336",
+  "owning_import_files": {
+    "qcl_negf_contracts": "components/qcl-negf-contracts/src/qcl_negf_contracts/__init__.py",
+    "qcl_negf_results": "components/qcl-negf-results/src/qcl_negf_results/__init__.py",
+    "aiida_qcl_negf.service": "components/qcl-negf-aiida/src/aiida_qcl_negf/service.py",
+    "qcl_negf_api.exports": "components/qcl-negf-portal/src/qcl_negf_api/exports.py"
+  },
+  "path_assertion": "Each resolved module __file__ was asserted is_relative_to exact selected component src path under execution worktree",
+  "limitations": "Recorded from actual earlier INT01 tool stdout after restart reconciliation; not a new invocation. Establishes owning editable import route at observation, not final implementation byte identity or native AiiDA service acceptance. Subsequent DEV10 test receipts bind new code through immutable diff and RED/GREEN."
+}

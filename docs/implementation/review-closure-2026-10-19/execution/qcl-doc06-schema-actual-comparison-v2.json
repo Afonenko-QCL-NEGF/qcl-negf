@@ -1,0 +1,14 @@
+{
+  "facts.json": {
+    "sha256": "577f43c0653e7394355dda4df58a6e9d299589941c59d7ccbb2395824df2550e",
+    "bytes": 20951,
+    "byte_equal": true
+  },
+  "source-receipt.json": {
+    "sha256": "30e3824f61194d24918fbaea6f8c9802fb40c2bf7cd4f57f4f6d7b690b6ac60e",
+    "bytes": 17056,
+    "byte_equal": true
+  },
+  "source_continuity": true,
+  "root_head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0"
+}

@@ -1,0 +1,17 @@
+# SCI12 MATH8 — final commit binding
+
+2026-10-20. **Привязка подтверждена:** qualified source stamp `CP-CODE@c00bc60790a3d50bf2eac7e999ab45a60ace9047` относится только к owning Results MATH8, frozen97-case fixture и принятому GREEN. Это узкое отображение уже существующих CPP/runtime свидетельств на exact committed tree; новый CPP, тест или Root gate не выполнялся.
+
+Фактический HEAD `c00bc60790a3d50bf2eac7e999ab45a60ace9047`, tree `ea560717fe63b2a7010e533bafde55366d6cd271`, единственный parent `de70638a982f91b7e125ab1cfc70a2daef2a656d`, branch `codex/review-closure-equilibrium-map-math`. `git status --short` пуст. Публикационный journal в прочитанном состоянии `committed_not_pushed`; push/PR publication находятся у Root и этим review не подтверждаются.
+
+| Утверждение | Свидетельство | Ограничение | Решение |
+| --- | --- | --- | --- |
+| Commit содержит ровно reviewed candidate и fixture | `git diff-tree --name-status -r c00bc60`: только два added paths. Git object module SHA256 `0750ac7b1f74588278a4a6fd468ecf0a8ce739342383d717d719bc4126cfcdaa`, fixture SHA256 `995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d`; совпадают с clean worktree и frozen CPP | Git paths за пределами двух additions неизменны относительно exact parent; это не full release source/runtime validation | сохранить |
+| Existing source CPP применим к exact owning commit | Source CPP SHA256 `9f785fbb16e804950be1ab24fb12da92f96f414a16ee73fe59711e1278073e07` повторно совпал; проверены commit parent/tree и оба source hashes | Source CPP сохраняет все собственные ограничения, включая rounded-zero/general primitive proof; новая независимая физическая проверка не заявлена | сохранить |
+| Принятый GREEN выполнен на тех же source bytes | Outcome review SHA256 `6737b7405ce987f885027b11d64caa87a857777492781bca14cf3582126979d3`, identity `5526c487c57f7910ba0a2d3384f5604c61ca1ead0fd085cf7fddcdc6dd8e9b08`; actual receipt SHA256 `191dba67f16ac19b5053692f6017f7b889fdbbc43c0b068d493362669d97371f` совпал. Receipt31/54 и111/134 связывает оба hashes до/после; текстовый cmp35-entry closure20–54 против100–134 совпал | Приёмка97/97 унаследована из exact accepted outcome; runtime не повторялся. Contracts imported origin остаётся отдельно не доказан | сохранить |
+| P1 exact reviewed HEAD stamp можно привязать к c00bc60 в узком MATH8 scope | Parent/base, полный diff inventory, commit objects SHA256 и unchanged closure выше | `CP-CODE@c00bc60790a3d50bf2eac7e999ab45a60ace9047 / scope=Results private MATH8+fixture / evidence=source CPP+accepted GREEN`. Это source-qualified stamp, не самостоятельное разрешение CI/run/deploy | сохранить |
+| Root gitlink/fullCI/READY/native/science gates переносятся автоматически | Соответствующих artifacts в этом узком review нет | Новый owning HEAD не наследует Root fullCI receipt; root gitlink не проверялся и не менялся. Full primitive proof, PAIR/N0 и science acceptance сохраняют прежний статус | данных недостаточно |
+
+Commit Git blobs: module `0583450620cc3e5d319d1947bb13622c0718387d`, fixture `4d3ac3314937d950acac76ea8eef52a60945d9e7`, mode100644. Source counter/runtime unchanged: reviewer execution0; Math2/2 exhausted, no rerun. Следующий шаг — отдельная уже порученная Root publication с сохранением exact source binding и без переноса посторонних gates.
+
+Только read-only Git/text/hash/cmp и два /tmp outputs; нет scripts/parser/compiler/import/tests/runtime/network/CP/index/source mutations или subagents. Чтения и вывод узкие, исходные файлы/receipts не редактировались. STOP.

@@ -1,0 +1,370 @@
+{
+  "format": "qcl-negf.doc06-static-slice.v1",
+  "profile": "configuration-source-energy-chunk-v1",
+  "source_manifest_sha256": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a",
+  "subjects": [
+    {
+      "kind": "api",
+      "key": "configuration_source",
+      "facts": [
+        {
+          "name": "signature",
+          "status": "known",
+          "text": "Документированная сигнатура: configuration_source(configuration, dotted_path). Это декларация исходного текста.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "src/application/configuration_types.jl",
+              "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+              "selector": "configuration_source:docstring:L208"
+            }
+          ]
+        },
+        {
+          "name": "signature",
+          "status": "partial",
+          "text": "Текстовый typed header; не полный список методов: configuration_source(configuration::ResolvedRunConfiguration, dotted_path::AbstractString). Это декларация исходного текста.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "src/application/configuration_types.jl",
+              "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+              "selector": "configuration_source:typed-header:L224"
+            }
+          ]
+        },
+        {
+          "name": "units",
+          "status": "not_applicable",
+          "text": "Авторский контекст: идентификатор источника или nothing не является физической величиной.",
+          "sources": []
+        },
+        {
+          "name": "default",
+          "status": "not_assigned",
+          "text": "В распознанном текстовом header аргументные defaults не объявлены; методы не исполнялись.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "src/application/configuration_types.jl",
+              "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+              "selector": "configuration_source:typed-header:L224"
+            }
+          ]
+        },
+        {
+          "name": "constraint",
+          "status": "partial",
+          "text": "Текстовый header описывает ResolvedRunConfiguration и AbstractString; lookup не подтверждает schema validation и полный dispatch contract.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "src/application/configuration_types.jl",
+              "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+              "selector": "configuration_source:typed-header:L224"
+            }
+          ]
+        },
+        {
+          "name": "effects",
+          "status": "known",
+          "text": "Документированное описание (не runtime effect inventory):\nconfiguration_source(configuration, dotted_path)\n\nReturn the last assigning-source identifier recorded in the provenance\nhistory for `dotted_path`, or `nothing` when that history is absent or empty.\nExplicit configuration leaves record source filenames; generated overrides\nmay record identifiers containing a `#generated:` marker. Later recorded\nassignments override earlier assignments.\n\nThis lookup reports an assigning source. It does not infer a schema default,\na typed-constructor default, or the complete origin of an effective value.\nIt reads provenance only; source loading and validation are performed by\n`validate_configuration_source` and `load_configuration_source`.\n\nSee [YAML run configurations](@ref yaml-run-configurations).",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "src/application/configuration_types.jl",
+              "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+              "selector": "configuration_source:docstring:L208"
+            }
+          ]
+        },
+        {
+          "name": "errors",
+          "status": "partial",
+          "text": "Docstring и header не являются исчерпывающим throws/error contract; вызов не выполнялся.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "src/application/configuration_types.jl",
+              "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+              "selector": "configuration_source:docstring:L208"
+            }
+          ]
+        },
+        {
+          "name": "formula_origin",
+          "status": "not_applicable",
+          "text": "Авторский контекст: lookup provenance не задаёт физическую формулу.",
+          "sources": []
+        },
+        {
+          "name": "value_origin",
+          "status": "not_applicable",
+          "text": "Физическое происхождение численного значения к этому lookup не применяется; фактический возвращённый identifier не задан.",
+          "sources": []
+        },
+        {
+          "name": "assigning_origin",
+          "status": "partial",
+          "text": "Статическое документированное правило относится к recorded assigning history; фактическая history отсутствует. Полная causal chain не восстановлена.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "src/application/configuration_types.jl",
+              "sha256": "6851ee3d8827912e4542b881ec7014460e5a0f5c83fc4f322b97e1dfce9518f0",
+              "selector": "configuration_source:docstring:L208"
+            }
+          ]
+        },
+        {
+          "name": "effective_origin",
+          "status": "unknown",
+          "text": "Retained run/execution context отсутствует; effective origin неизвестен.",
+          "sources": []
+        }
+      ]
+    },
+    {
+      "kind": "input",
+      "key": "production.energy_chunk",
+      "facts": [
+        {
+          "name": "signature",
+          "status": "partial",
+          "text": "Объявленный тип owning schema: извлечение недоступно (unsupported_schema_keyword); значение не вычислялось.",
+          "sources": [
+            {
+              "owner": "components/qcl-negf-contracts",
+              "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+              "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+              "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+              "selector": "/$defs/production/properties/energy_chunk"
+            }
+          ]
+        },
+        {
+          "name": "signature",
+          "status": "partial",
+          "text": "Текстовая Int field declaration; не runtime inventory: energy_chunk::Int. Это декларация исходного текста.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGF.jl",
+              "revision": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+              "path": "src/numerics/optimized/production_contracts.jl",
+              "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+              "selector": "ProductionOptions.energy_chunk:L92"
+            }
+          ]
+        },
+        {
+          "name": "units",
+          "status": "unknown",
+          "text": "Owning description отсутствует; физические единицы из имени не выводятся.",
+          "sources": [
+            {
+              "owner": "components/qcl-negf-contracts",
+              "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+              "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+              "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+              "selector": "/$defs/production/properties/energy_chunk/description"
+            }
+          ]
+        },
+        {
+          "name": "default",
+          "status": "partial",
+          "text": "Default в schema context; декларация не применяется к конфигурации: извлечение недоступно (unsupported_schema_keyword); значение не вычислялось.",
+          "sources": [
+            {
+              "owner": "components/qcl-negf-contracts",
+              "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+              "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+              "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+              "selector": "/$defs/production/properties/energy_chunk/default"
+            }
+          ]
+        },
+        {
+          "name": "default",
+          "status": "known",
+          "text": "Отдельная текстовая default declaration ProductionOptions: 64. Это декларация исходного текста.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGF.jl",
+              "revision": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+              "path": "src/numerics/optimized/production_contracts.jl",
+              "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+              "selector": "ProductionOptions.energy_chunk:L92"
+            }
+          ]
+        },
+        {
+          "name": "default",
+          "status": "known",
+          "text": "Отдельное явное значение illustrative base fixture; не default: 64. Это декларация исходного текста.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "test/fixtures/configurations/base.yaml",
+              "sha256": "735c0077cc7c64c901829a5a86bd5bab6c9b78e473d469e3240062aa7bc810b2",
+              "selector": "production.energy_chunk:L163"
+            }
+          ]
+        },
+        {
+          "name": "constraint",
+          "status": "partial",
+          "text": "Прямые type/minimum/required декларации owning schema; не полный validator: извлечение недоступно (unsupported_schema_keyword); значение не вычислялось.",
+          "sources": [
+            {
+              "owner": "components/qcl-negf-contracts",
+              "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+              "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+              "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+              "selector": "/$defs/production/properties/energy_chunk"
+            }
+          ]
+        },
+        {
+          "name": "constraint",
+          "status": "partial",
+          "text": "Root required-production membership: извлечение недоступно (unsupported_syntax); значение не вычислялось.",
+          "sources": [
+            {
+              "owner": "components/qcl-negf-contracts",
+              "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+              "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+              "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+              "selector": "/$defs/production/properties/energy_chunk"
+            }
+          ]
+        },
+        {
+          "name": "effects",
+          "status": "unknown",
+          "text": "Авторский контекст: параметр планирования energy-node work; этот adapter не меняет сетку/физическую модель и не исполняет scheduling. Owning description приведено отдельно; полный effect inventory не установлен.",
+          "sources": [
+            {
+              "owner": "components/qcl-negf-contracts",
+              "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+              "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+              "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+              "selector": "/$defs/production/properties/energy_chunk/description"
+            }
+          ]
+        },
+        {
+          "name": "errors",
+          "status": "partial",
+          "text": "Прямые schema declarations не являются полным loader error inventory. Core guard/body не интерпретируются; runtime exception path не проверен.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGF.jl",
+              "revision": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+              "path": "src/numerics/optimized/production_contracts.jl",
+              "sha256": "ebb614494b4e58477231dbaf25a5283e8867e1c612859b2e26690c167b61a019",
+              "selector": "file"
+            }
+          ]
+        },
+        {
+          "name": "formula_origin",
+          "status": "not_applicable",
+          "text": "Авторский контекст: scheduling count не предоставляет физическую формулу; формула NEGF или rationale допуска не генерируются.",
+          "sources": [
+            {
+              "owner": "components/qcl-negf-contracts",
+              "revision": "f4009c933183d8537e289d2fa5fa898defd2d9b5",
+              "path": "src/qcl_negf_contracts/schemas/run.schema.json",
+              "sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+              "selector": "/$defs/production/properties/energy_chunk/description"
+            }
+          ]
+        },
+        {
+          "name": "value_origin",
+          "status": "partial",
+          "text": "Schema, typed declaration и явный example — отдельные source contexts. Actual instance numeric origin неизвестен; совпадение чисел не является provenance.",
+          "sources": []
+        },
+        {
+          "name": "assigning_origin",
+          "status": "partial",
+          "text": "Авторский контекст из owning route; actual assigning history отсутствует:\n`configuration_source(configuration, dotted_path)` returns the last\nassigning-source identifier in that leaf's recorded provenance history.\nExplicit configuration leaves record source filenames; generated overrides\nmay record identifiers containing a `#generated:` marker. Later recorded\nassignments override earlier assignments. The lookup returns `nothing` when\nthe history is absent or empty, even if a typed field has a value. It reads\nthe recorded history; it does not load or validate source files.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "docs/src/user/configuration.md",
+              "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+              "selector": "configuration-route:L17"
+            }
+          ]
+        },
+        {
+          "name": "assigning_origin",
+          "status": "partial",
+          "text": "Цитата owning route; синтетическое/статическое объяснение, не результат выполнения:\nThe [merge-order fixture](https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/test/application/configuration_merge_order_and_fail_closed_validation.jl)\nstarts with a base file and applies `first.yaml` with `energy_chunk: 17`, then\n`second.yaml` with `energy_chunk: 23`. The resolved value is 23 and the assigning\nsource is `second.yaml`. Reversing those two overrides gives 17 and `first.yaml`.\nThese are fixture expectations; the source example is not a production-run receipt.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "docs/src/user/configuration.md",
+              "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+              "selector": "configuration-route:L25"
+            }
+          ]
+        },
+        {
+          "name": "assigning_origin",
+          "status": "partial",
+          "text": "Цитата owning route; синтетическое/статическое объяснение, не результат выполнения:\n[`resolve_execution_strategy`](@ref) can apply a selected plan. For the\n`auto_exact` production path, its recorded assigning policy is\n`application:auto_exact`; the selected plan supplies effective chunk/worker\nvalues. Other paths need not add that marker. Preserve the plan's hardware,\nstrategy and reasons separately; a marker is not a measurement receipt or the\nfull causal origin of a value. The [implementation](https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/23860d9e660a3cddf6cb5203d449d1b62f3745a1/src/application/auto_strategy.jl)\nand [resource limits](@ref resource-planning) define this boundary.\nMissing effective-plan provenance is unknown; do not infer it from 23, 17 or a\nconstructor default.",
+          "sources": [
+            {
+              "owner": "components/QCLNEGFRunner.jl",
+              "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+              "path": "docs/src/user/configuration.md",
+              "sha256": "5f1fb2243240a957a1d765af0b8dee4f44a7e105dcea35889c725843bacf4cbf",
+              "selector": "configuration-route:L72"
+            }
+          ]
+        },
+        {
+          "name": "effective_origin",
+          "status": "unknown",
+          "text": "Effective configuration/ExecutionPlan/snapshot отсутствуют; origin не выводится из literal defaults, примера или application:auto_exact marker.",
+          "sources": []
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "fact_classes": [
+      "signature",
+      "units",
+      "default",
+      "constraint",
+      "effects",
+      "errors",
+      "formula_origin",
+      "value_origin",
+      "assigning_origin",
+      "effective_origin"
+    ],
+    "scope": "fixed-slice",
+    "status": "partial"
+  },
+  "binding": {
+    "status": "source-prototype",
+    "application_release": null,
+    "run": null
+  }
+}

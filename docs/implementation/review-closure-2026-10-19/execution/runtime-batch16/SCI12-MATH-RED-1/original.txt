@@ -1,0 +1,955 @@
+..FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 74%]
+FFFFFFFFFFFFFFFFFFFFFFFFF                                                [100%]
+=================================== FAILURES ===================================
+_______________ test_hat_clips_without_extrapolating[args0-0.5] ________________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffcee5940>._candidate
+______________ test_hat_clips_without_extrapolating[args1-0.125] _______________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffd29d090>._candidate
+______________ test_hat_clips_without_extrapolating[args2-0.375] _______________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce27d90>._candidate
+______________ test_hat_clips_without_extrapolating[args3-0.375] _______________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce71e00>._candidate
+______________ test_hat_clips_without_extrapolating[args4-0.125] _______________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce71220>._candidate
+_______________ test_hat_clips_without_extrapolating[args5-0.0] ________________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce8db50>._candidate
+_______________ test_hat_clips_without_extrapolating[args6-0.0] ________________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce65370>._candidate
+_______________ test_hat_clips_without_extrapolating[args7-0.5] ________________
+tests/test_equilibrium_map_math.py:98: in test_hat_clips_without_extrapolating
+    assert api._hat_area(*args) == want
+           ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce658c0>._candidate
+____________________ test_hat_signed_integral_and_partition ____________________
+tests/test_equilibrium_map_math.py:103: in test_hat_signed_integral_and_partition
+    low = api._hat_area(-1.0, 0.0, -1.0, -0.5, "left")
+          ^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc325850>._candidate
+___________ test_annulus_squared_measure_has_no_extra_pi[args0-0.25] ___________
+tests/test_equilibrium_map_math.py:128: in test_annulus_squared_measure_has_no_extra_pi
+    assert api._annulus_square_area(*args) == want
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc326050>._candidate
+___________ test_annulus_squared_measure_has_no_extra_pi[args1-2.0] ____________
+tests/test_equilibrium_map_math.py:128: in test_annulus_squared_measure_has_no_extra_pi
+    assert api._annulus_square_area(*args) == want
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc393f20>._candidate
+___________ test_annulus_squared_measure_has_no_extra_pi[args2-1.75] ___________
+tests/test_equilibrium_map_math.py:128: in test_annulus_squared_measure_has_no_extra_pi
+    assert api._annulus_square_area(*args) == want
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc389040>._candidate
+___________ test_annulus_squared_measure_has_no_extra_pi[args3-0.0] ____________
+tests/test_equilibrium_map_math.py:128: in test_annulus_squared_measure_has_no_extra_pi
+    assert api._annulus_square_area(*args) == want
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc355b70>._candidate
+__________ test_annulus_squared_measure_has_no_extra_pi[args4-1.6875] __________
+tests/test_equilibrium_map_math.py:128: in test_annulus_squared_measure_has_no_extra_pi
+    assert api._annulus_square_area(*args) == want
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc355fd0>._candidate
+__________ test_annulus_squared_measure_has_no_extra_pi[args5-0.8125] __________
+tests/test_equilibrium_map_math.py:128: in test_annulus_squared_measure_has_no_extra_pi
+    assert api._annulus_square_area(*args) == want
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc365710>._candidate
+___________ test_annulus_squared_measure_has_no_extra_pi[args6-0.0] ____________
+tests/test_equilibrium_map_math.py:128: in test_annulus_squared_measure_has_no_extra_pi
+    assert api._annulus_square_area(*args) == want
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce91cd0>._candidate
+_____________ test_overlap_does_not_drop_partial_cells[args0-0.25] _____________
+tests/test_equilibrium_map_math.py:138: in test_overlap_does_not_drop_partial_cells
+    assert api._overlap_cell(*args) == want
+           ^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffce91e50>._candidate
+_____________ test_overlap_does_not_drop_partial_cells[args1-0.0] ______________
+tests/test_equilibrium_map_math.py:138: in test_overlap_does_not_drop_partial_cells
+    assert api._overlap_cell(*args) == want
+           ^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc353e30>._candidate
+_____________ test_overlap_does_not_drop_partial_cells[args2-0.5] ______________
+tests/test_equilibrium_map_math.py:138: in test_overlap_does_not_drop_partial_cells
+    assert api._overlap_cell(*args) == want
+           ^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc340100>._candidate
+_____________ test_overlap_does_not_drop_partial_cells[args3-0.0] ______________
+tests/test_equilibrium_map_math.py:138: in test_overlap_does_not_drop_partial_cells
+    assert api._overlap_cell(*args) == want
+           ^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc370230>._candidate
+_______ test_restriction_preserves_signed_cell_integrals[values0-want0] ________
+tests/test_equilibrium_map_math.py:148: in test_restriction_preserves_signed_cell_integrals
+    result = api._restrict_cells([0.0, 0.5, 1.0, 1.5, 2.0], [0.0, 1.0, 2.0], values)
+             ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3705f0>._candidate
+_______ test_restriction_preserves_signed_cell_integrals[values1-want1] ________
+tests/test_equilibrium_map_math.py:148: in test_restriction_preserves_signed_cell_integrals
+    result = api._restrict_cells([0.0, 0.5, 1.0, 1.5, 2.0], [0.0, 1.0, 2.0], values)
+             ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffd1e03b0>._candidate
+_______ test_restriction_preserves_signed_cell_integrals[values2-want2] ________
+tests/test_equilibrium_map_math.py:148: in test_restriction_preserves_signed_cell_integrals
+    result = api._restrict_cells([0.0, 0.5, 1.0, 1.5, 2.0], [0.0, 1.0, 2.0], values)
+             ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc33d150>._candidate
+_______ test_restriction_preserves_signed_cell_integrals[values3-want3] ________
+tests/test_equilibrium_map_math.py:148: in test_restriction_preserves_signed_cell_integrals
+    result = api._restrict_cells([0.0, 0.5, 1.0, 1.5, 2.0], [0.0, 1.0, 2.0], values)
+             ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc33d550>._candidate
+________________________ test_restriction_sheet_literal ________________________
+tests/test_equilibrium_map_math.py:154: in test_restriction_sheet_literal
+    result = api._restrict_cells([0.0, 0.5, 1.0, 1.5, 2.0], [0.0, 1.0, 2.0], [1.0, 3.0, 2.0, 6.0])
+             ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc35acf0>._candidate
+_ test_restriction_refuses_changed_domain_or_missing_cells[source0-target0-values0] _
+tests/test_equilibrium_map_math.py:169: in test_restriction_refuses_changed_domain_or_missing_cells
+    api._restrict_cells(source, target, values)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc35b700>._candidate
+_ test_restriction_refuses_changed_domain_or_missing_cells[source1-target1-values1] _
+tests/test_equilibrium_map_math.py:169: in test_restriction_refuses_changed_domain_or_missing_cells
+    api._restrict_cells(source, target, values)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc381df0>._candidate
+_ test_restriction_refuses_changed_domain_or_missing_cells[source2-target2-values2] _
+tests/test_equilibrium_map_math.py:169: in test_restriction_refuses_changed_domain_or_missing_cells
+    api._restrict_cells(source, target, values)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc382570>._candidate
+_ test_restriction_refuses_changed_domain_or_missing_cells[source3-target3-values3] _
+tests/test_equilibrium_map_math.py:169: in test_restriction_refuses_changed_domain_or_missing_cells
+    api._restrict_cells(source, target, values)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc399f90>._candidate
+_ test_restriction_refuses_changed_domain_or_missing_cells[source4-target4-values4] _
+tests/test_equilibrium_map_math.py:169: in test_restriction_refuses_changed_domain_or_missing_cells
+    api._restrict_cells(source, target, values)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39a260>._candidate
+_ test_restriction_refuses_changed_domain_or_missing_cells[source5-target5-values5] _
+tests/test_equilibrium_map_math.py:169: in test_restriction_refuses_changed_domain_or_missing_cells
+    api._restrict_cells(source, target, values)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39ae90>._candidate
+__________ test_complex_product_keeps_offdiagonal_imaginary_and_order __________
+tests/test_equilibrium_map_math.py:176: in test_complex_product_keeps_offdiagonal_imaginary_and_order
+    assert api._complex_matmul(a, b, out) is None
+           ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39afd0>._candidate
+______________________ test_gram_conjugates_left_operand _______________________
+tests/test_equilibrium_map_math.py:185: in test_gram_conjugates_left_operand
+    assert api._gram(a, a, out) is None
+           ^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39b110>._candidate
+__________________ test_gram_discrepancy_is_not_renormalized ___________________
+tests/test_equilibrium_map_math.py:192: in test_gram_discrepancy_is_not_renormalized
+    api._gram(f, f, out)
+    ^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc399fe0>._candidate
+______________ test_rectangular_gram_keeps_missing_third_subspace ______________
+tests/test_equilibrium_map_math.py:201: in test_rectangular_gram_keeps_missing_third_subspace
+    api._gram(fa, fb, out)
+    ^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39b070>._candidate
+_ test_density_bond_coherence_conjugation_and_unitary[identity-mreal0-mimag0-want_n0--3.0-1.0-6.0] _
+tests/test_equilibrium_map_math.py:222: in test_density_bond_coherence_conjugation_and_unitary
+    assert api._density_from_integrated(phi, m, 1.0, density) is None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39ab20>._candidate
+_ test_density_bond_coherence_conjugation_and_unitary[identity-mreal1-mimag1-want_n1-0.0-1.0-6.0] _
+tests/test_equilibrium_map_math.py:222: in test_density_bond_coherence_conjugation_and_unitary
+    assert api._density_from_integrated(phi, m, 1.0, density) is None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39b4d0>._candidate
+_ test_density_bond_coherence_conjugation_and_unitary[identity-mreal2-mimag2-want_n2-3.0-1.0-6.0] _
+tests/test_equilibrium_map_math.py:222: in test_density_bond_coherence_conjugation_and_unitary
+    assert api._density_from_integrated(phi, m, 1.0, density) is None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39b890>._candidate
+_ test_density_bond_coherence_conjugation_and_unitary[unitary-mreal3-mimag3-want_n3--3.0-1.0-6.0] _
+tests/test_equilibrium_map_math.py:222: in test_density_bond_coherence_conjugation_and_unitary
+    assert api._density_from_integrated(phi, m, 1.0, density) is None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39b6b0>._candidate
+_ test_density_bond_coherence_conjugation_and_unitary[identity-mreal4-mimag4-want_n4-0.0-0.25-0.375] _
+tests/test_equilibrium_map_math.py:222: in test_density_bond_coherence_conjugation_and_unitary
+    assert api._density_from_integrated(phi, m, 1.0, density) is None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39bf70>._candidate
+_________ test_unequal_dx_uses_actual_chi_for_density_and_phi_for_bond _________
+tests/test_equilibrium_map_math.py:233: in test_unequal_dx_uses_actual_chi_for_density_and_phi_for_bond
+    api._density_from_integrated(chi, m, 1.0, n)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39bf20>._candidate
+_______ test_scalar_invalid_inputs_are_contract_errors[_hat_area-args0] ________
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39be30>._candidate
+_______ test_scalar_invalid_inputs_are_contract_errors[_hat_area-args1] ________
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39bfc0>._candidate
+_______ test_scalar_invalid_inputs_are_contract_errors[_hat_area-args2] ________
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39afd0>._candidate
+_______ test_scalar_invalid_inputs_are_contract_errors[_hat_area-args3] ________
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39b070>._candidate
+_______ test_scalar_invalid_inputs_are_contract_errors[_hat_area-args4] ________
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9090>._candidate
+_______ test_scalar_invalid_inputs_are_contract_errors[_hat_area-args5] ________
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8eb0>._candidate
+__ test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args6] __
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f90e0>._candidate
+__ test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args7] __
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9a90>._candidate
+__ test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args8] __
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9bd0>._candidate
+__ test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args9] __
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fac60>._candidate
+_____ test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args10] _____
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fb070>._candidate
+_____ test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args11] _____
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39bfc0>._candidate
+_____ test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args12] _____
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39be30>._candidate
+_____ test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args13] _____
+tests/test_equilibrium_map_math.py:263: in test_scalar_invalid_inputs_are_contract_errors
+    getattr(api, name)(*args)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8460>._candidate
+_________ test_product_refuses_implicit_copy_and_invalid_planes[bool] __________
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8190>._candidate
+________ test_product_refuses_implicit_copy_and_invalid_planes[integer] ________
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fa490>._candidate
+________ test_product_refuses_implicit_copy_and_invalid_planes[object] _________
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9ea0>._candidate
+_____ test_product_refuses_implicit_copy_and_invalid_planes[noncontiguous] _____
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8eb0>._candidate
+_________ test_product_refuses_implicit_copy_and_invalid_planes[shape] _________
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9a90>._candidate
+_______ test_product_refuses_implicit_copy_and_invalid_planes[nonfinite] _______
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fb700>._candidate
+_________ test_product_refuses_implicit_copy_and_invalid_planes[empty] _________
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fb1b0>._candidate
+_________ test_product_refuses_implicit_copy_and_invalid_planes[list] __________
+tests/test_equilibrium_map_math.py:283: in test_product_refuses_implicit_copy_and_invalid_planes
+    api._complex_matmul(bad, good, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8ff0>._candidate
+_ test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-input_alias] _
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fab20>._candidate
+_ test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-component_alias] _
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f93b0>._candidate
+_ test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-readonly] _
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9220>._candidate
+_ test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-wrong_shape] _
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f98b0>._candidate
+___ test_matrix_outputs_reject_alias_and_invalid_storage[_gram-input_alias] ____
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9540>._candidate
+_ test_matrix_outputs_reject_alias_and_invalid_storage[_gram-component_alias] __
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39be30>._candidate
+_____ test_matrix_outputs_reject_alias_and_invalid_storage[_gram-readonly] _____
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8f50>._candidate
+___ test_matrix_outputs_reject_alias_and_invalid_storage[_gram-wrong_shape] ____
+tests/test_equilibrium_map_math.py:300: in test_matrix_outputs_reject_alias_and_invalid_storage
+    getattr(api, name)(good, good, out)
+    ^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fa6c0>._candidate
+________ test_density_refuses_bad_scale_output_and_overflow[zero_scale] ________
+tests/test_equilibrium_map_math.py:323: in test_density_refuses_bad_scale_output_and_overflow
+    api._density_from_integrated(chi, m, scale, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f80f0>._candidate
+________ test_density_refuses_bad_scale_output_and_overflow[bool_scale] ________
+tests/test_equilibrium_map_math.py:323: in test_density_refuses_bad_scale_output_and_overflow
+    api._density_from_integrated(chi, m, scale, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8140>._candidate
+______ test_density_refuses_bad_scale_output_and_overflow[negative_scale] ______
+tests/test_equilibrium_map_math.py:323: in test_density_refuses_bad_scale_output_and_overflow
+    api._density_from_integrated(chi, m, scale, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fbe30>._candidate
+_________ test_density_refuses_bad_scale_output_and_overflow[readonly] _________
+tests/test_equilibrium_map_math.py:323: in test_density_refuses_bad_scale_output_and_overflow
+    api._density_from_integrated(chi, m, scale, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fb9d0>._candidate
+__________ test_density_refuses_bad_scale_output_and_overflow[alias] ___________
+tests/test_equilibrium_map_math.py:323: in test_density_refuses_bad_scale_output_and_overflow
+    api._density_from_integrated(chi, m, scale, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fbc50>._candidate
+__________ test_density_refuses_bad_scale_output_and_overflow[shape] ___________
+tests/test_equilibrium_map_math.py:323: in test_density_refuses_bad_scale_output_and_overflow
+    api._density_from_integrated(chi, m, scale, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc39be30>._candidate
+_________ test_density_refuses_bad_scale_output_and_overflow[overflow] _________
+tests/test_equilibrium_map_math.py:323: in test_density_refuses_bad_scale_output_and_overflow
+    api._density_from_integrated(chi, m, scale, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f8140>._candidate
+__________ test_bond_refuses_bad_physical_inputs_and_output[zero_dx] ___________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fbe30>._candidate
+_______ test_bond_refuses_bad_physical_inputs_and_output[negative_mass] ________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f98b0>._candidate
+_________ test_bond_refuses_bad_physical_inputs_and_output[zero_mass] __________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9540>._candidate
+_________ test_bond_refuses_bad_physical_inputs_and_output[mass_shape] _________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fa6c0>._candidate
+_________ test_bond_refuses_bad_physical_inputs_and_output[nonfinite] __________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3740a0>._candidate
+_________ test_bond_refuses_bad_physical_inputs_and_output[bool_cbar] __________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc375630>._candidate
+__________ test_bond_refuses_bad_physical_inputs_and_output[readonly] __________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc375770>._candidate
+___________ test_bond_refuses_bad_physical_inputs_and_output[alias] ____________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc376d50>._candidate
+___________ test_bond_refuses_bad_physical_inputs_and_output[shape] ____________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc377160>._candidate
+__________ test_bond_refuses_bad_physical_inputs_and_output[overflow] __________
+tests/test_equilibrium_map_math.py:352: in test_bond_refuses_bad_physical_inputs_and_output
+    api._bond_from_integrated(phi, m, masses, dx, cbar, 1.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc377430>._candidate
+__________ test_density_mixed_complex_row_uses_conjugation_and_scale ___________
+tests/test_equilibrium_map_math.py:359: in test_density_mixed_complex_row_uses_conjugation_and_scale
+    api._density_from_integrated(chi, m, 2.0, out)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f9540>._candidate
+____________________ test_gram_rank_deficiency_is_retained _____________________
+tests/test_equilibrium_map_math.py:366: in test_gram_rank_deficiency_is_retained
+    api._gram(f, f, out)
+    ^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3206e0>._candidate
+____________ test_product_three_by_three_zero_is_known_not_missing _____________
+tests/test_equilibrium_map_math.py:373: in test_product_three_by_three_zero_is_known_not_missing
+    api._complex_matmul(zero, zero, out)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3faa30>._candidate
+______________ test_product_overflow_is_not_a_finite_measurement _______________
+tests/test_equilibrium_map_math.py:380: in test_product_overflow_is_not_a_finite_measurement
+    api._complex_matmul(huge, huge, output(2, 2))
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3f98b0>._candidate
+______________ test_partial_annuli_keep_signed_weighted_numerator ______________
+tests/test_equilibrium_map_math.py:384: in test_partial_annuli_keep_signed_weighted_numerator
+    result = api._annulus_square_area(0.0, 0.5, 0.75, 1.75)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc3fb070>._candidate
+_____________ test_partial_spatial_overlap_keeps_uncovered_strips ______________
+tests/test_equilibrium_map_math.py:391: in test_partial_spatial_overlap_keeps_uncovered_strips
+    interior = api._overlap_cell(0.0, 0.5, 0.25, 1.75)
+               ^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffc398640>._candidate
+________ test_restriction_cell_cap_rejects_lengths_before_element_reads ________
+tests/test_equilibrium_map_math.py:419: in test_restriction_cell_cap_rejects_lengths_before_element_reads
+    api._restrict_cells(source_edges, [0.0, 1.0], values)
+    ^^^^^^^^^^^^^^^^^^^
+tests/test_equilibrium_map_math.py:31: in __getattr__
+    assert self._candidate is not None, (
+E   AssertionError: NEW_API_MISSING: _equilibrium_map_math; no behavioral verdict
+E   assert None is not None
+E    +  where None = <test_equilibrium_map_math._CallPhaseAPI object at 0x7f0ffd2e4230>._candidate
+=========================== short test summary info ============================
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args0-0.5]
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args1-0.125]
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args2-0.375]
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args3-0.375]
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args4-0.125]
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args5-0.0]
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args6-0.0]
+FAILED tests/test_equilibrium_map_math.py::test_hat_clips_without_extrapolating[args7-0.5]
+FAILED tests/test_equilibrium_map_math.py::test_hat_signed_integral_and_partition
+FAILED tests/test_equilibrium_map_math.py::test_annulus_squared_measure_has_no_extra_pi[args0-0.25]
+FAILED tests/test_equilibrium_map_math.py::test_annulus_squared_measure_has_no_extra_pi[args1-2.0]
+FAILED tests/test_equilibrium_map_math.py::test_annulus_squared_measure_has_no_extra_pi[args2-1.75]
+FAILED tests/test_equilibrium_map_math.py::test_annulus_squared_measure_has_no_extra_pi[args3-0.0]
+FAILED tests/test_equilibrium_map_math.py::test_annulus_squared_measure_has_no_extra_pi[args4-1.6875]
+FAILED tests/test_equilibrium_map_math.py::test_annulus_squared_measure_has_no_extra_pi[args5-0.8125]
+FAILED tests/test_equilibrium_map_math.py::test_annulus_squared_measure_has_no_extra_pi[args6-0.0]
+FAILED tests/test_equilibrium_map_math.py::test_overlap_does_not_drop_partial_cells[args0-0.25]
+FAILED tests/test_equilibrium_map_math.py::test_overlap_does_not_drop_partial_cells[args1-0.0]
+FAILED tests/test_equilibrium_map_math.py::test_overlap_does_not_drop_partial_cells[args2-0.5]
+FAILED tests/test_equilibrium_map_math.py::test_overlap_does_not_drop_partial_cells[args3-0.0]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_preserves_signed_cell_integrals[values0-want0]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_preserves_signed_cell_integrals[values1-want1]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_preserves_signed_cell_integrals[values2-want2]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_preserves_signed_cell_integrals[values3-want3]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_sheet_literal - A...
+FAILED tests/test_equilibrium_map_math.py::test_restriction_refuses_changed_domain_or_missing_cells[source0-target0-values0]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_refuses_changed_domain_or_missing_cells[source1-target1-values1]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_refuses_changed_domain_or_missing_cells[source2-target2-values2]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_refuses_changed_domain_or_missing_cells[source3-target3-values3]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_refuses_changed_domain_or_missing_cells[source4-target4-values4]
+FAILED tests/test_equilibrium_map_math.py::test_restriction_refuses_changed_domain_or_missing_cells[source5-target5-values5]
+FAILED tests/test_equilibrium_map_math.py::test_complex_product_keeps_offdiagonal_imaginary_and_order
+FAILED tests/test_equilibrium_map_math.py::test_gram_conjugates_left_operand
+FAILED tests/test_equilibrium_map_math.py::test_gram_discrepancy_is_not_renormalized
+FAILED tests/test_equilibrium_map_math.py::test_rectangular_gram_keeps_missing_third_subspace
+FAILED tests/test_equilibrium_map_math.py::test_density_bond_coherence_conjugation_and_unitary[identity-mreal0-mimag0-want_n0--3.0-1.0-6.0]
+FAILED tests/test_equilibrium_map_math.py::test_density_bond_coherence_conjugation_and_unitary[identity-mreal1-mimag1-want_n1-0.0-1.0-6.0]
+FAILED tests/test_equilibrium_map_math.py::test_density_bond_coherence_conjugation_and_unitary[identity-mreal2-mimag2-want_n2-3.0-1.0-6.0]
+FAILED tests/test_equilibrium_map_math.py::test_density_bond_coherence_conjugation_and_unitary[unitary-mreal3-mimag3-want_n3--3.0-1.0-6.0]
+FAILED tests/test_equilibrium_map_math.py::test_density_bond_coherence_conjugation_and_unitary[identity-mreal4-mimag4-want_n4-0.0-0.25-0.375]
+FAILED tests/test_equilibrium_map_math.py::test_unequal_dx_uses_actual_chi_for_density_and_phi_for_bond
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_hat_area-args0]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_hat_area-args1]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_hat_area-args2]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_hat_area-args3]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_hat_area-args4]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_hat_area-args5]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args6]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args7]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args8]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_annulus_square_area-args9]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args10]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args11]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args12]
+FAILED tests/test_equilibrium_map_math.py::test_scalar_invalid_inputs_are_contract_errors[_overlap_cell-args13]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[bool]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[integer]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[object]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[noncontiguous]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[shape]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[nonfinite]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[empty]
+FAILED tests/test_equilibrium_map_math.py::test_product_refuses_implicit_copy_and_invalid_planes[list]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-input_alias]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-component_alias]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-readonly]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_complex_matmul-wrong_shape]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_gram-input_alias]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_gram-component_alias]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_gram-readonly]
+FAILED tests/test_equilibrium_map_math.py::test_matrix_outputs_reject_alias_and_invalid_storage[_gram-wrong_shape]
+FAILED tests/test_equilibrium_map_math.py::test_density_refuses_bad_scale_output_and_overflow[zero_scale]
+FAILED tests/test_equilibrium_map_math.py::test_density_refuses_bad_scale_output_and_overflow[bool_scale]
+FAILED tests/test_equilibrium_map_math.py::test_density_refuses_bad_scale_output_and_overflow[negative_scale]
+FAILED tests/test_equilibrium_map_math.py::test_density_refuses_bad_scale_output_and_overflow[readonly]
+FAILED tests/test_equilibrium_map_math.py::test_density_refuses_bad_scale_output_and_overflow[alias]
+FAILED tests/test_equilibrium_map_math.py::test_density_refuses_bad_scale_output_and_overflow[shape]
+FAILED tests/test_equilibrium_map_math.py::test_density_refuses_bad_scale_output_and_overflow[overflow]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[zero_dx]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[negative_mass]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[zero_mass]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[mass_shape]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[nonfinite]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[bool_cbar]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[readonly]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[alias]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[shape]
+FAILED tests/test_equilibrium_map_math.py::test_bond_refuses_bad_physical_inputs_and_output[overflow]
+FAILED tests/test_equilibrium_map_math.py::test_density_mixed_complex_row_uses_conjugation_and_scale
+FAILED tests/test_equilibrium_map_math.py::test_gram_rank_deficiency_is_retained
+FAILED tests/test_equilibrium_map_math.py::test_product_three_by_three_zero_is_known_not_missing
+FAILED tests/test_equilibrium_map_math.py::test_product_overflow_is_not_a_finite_measurement
+FAILED tests/test_equilibrium_map_math.py::test_partial_annuli_keep_signed_weighted_numerator
+FAILED tests/test_equilibrium_map_math.py::test_partial_spatial_overlap_keeps_uncovered_strips
+FAILED tests/test_equilibrium_map_math.py::test_restriction_cell_cap_rejects_lengths_before_element_reads
+95 failed, 2 passed in 1.69s

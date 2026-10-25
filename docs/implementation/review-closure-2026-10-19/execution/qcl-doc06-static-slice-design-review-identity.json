@@ -1,0 +1,42 @@
+{
+  "task": "Independent high DOC06 static fixed-slice CP-DESIGN review",
+  "verdict": "PASS_SOURCE_CP_DESIGN",
+  "pointer_erratum_verdict": "APPROVED_FACTUAL_CORRECTION_NOT_APPLIED",
+  "report": "/tmp/qcl-doc06-static-slice-design-review.md",
+  "report_sha256": "385c2ae4358a7fb296399d6d955eb4d9ac5995c26f8baa2c27526ad11677d5ce",
+  "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+  "selected_revisions": {
+    "runner": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+    "contracts": "12fc26462bbab3df76904c6deb01f8c6596de7be",
+    "core": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee"
+  },
+  "observed_contracts_checkout_separate_from_selected": "d791dea33f4628cf23c0b8552ebee9e51d7dd605",
+  "design_sha256": "34b80d4ae1c8b94d23657124f17c9051251cea4763af8f92007d24929aafb2e8",
+  "author_identity_sha256": "d5662374c67a13f186628b9f07e2d2d972a478dc5d490a9a0a95c1ee12a416c7",
+  "author_source_ledger_sha256": "687915c43d0a8520f4ac7bdda3ce29cdde031c887a2c98dbed400eda1c0a9010",
+  "canonical_sha256": "fe1df31aa294163f46ba5d8d9ddbd4aa0b636a402bee9f810de44299f402f794",
+  "handoff_sha256": "17fc16b7808ae0e2b29732c65033a5f544bca79577788cbade386870e0246254",
+  "pointer_erratum_sha256": "a2d28d0d743f65277623cdcb7230d9dd6baa5fbd695e5a90afe5c509f81b2475",
+  "selected_run_schema_sha256": "62df4ac2758b40cb78da2f9c5e12e8f8b647d980102f505dfe94bee40fc0e58b",
+  "new_findings": [],
+  "read_ledger": {
+    "kind": "conservative named logical source upper estimate; report section6",
+    "logical_payload_upper_bound_bytes": 2097152,
+    "review_grant_cap_bytes": 4194304,
+    "canonical_handoff_full_equivalents_each": 3,
+    "runner_types_configuration_sources_autostrategy_equivalents_each": 2,
+    "runner_docs_equivalents": 3,
+    "runner_fixture_equivalents": 2,
+    "runner_packaged_schema_hash_passes": 1,
+    "contracts_schema_equivalents_including_gitshow_selected": 3,
+    "core_contracts_equivalents": 2,
+    "design_identity_ledger_erratum_equivalents_each": 2,
+    "physical_IO_CPU_RSS": "not_measured"
+  },
+  "reviewer_target_execution_import_parser_test_calls": 0,
+  "runtime_calls_consumed_or_granted": 0,
+  "network_children_product_checkpoint_git_mutations": false,
+  "public_native_scientific_acceptance": "not_established",
+  "next_stage": "medium implementation after coordinator exact source binding; proposed checks require separate finite dispatch",
+  "state": "STOP"
+}

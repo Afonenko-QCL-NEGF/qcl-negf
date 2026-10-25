@@ -1,8 +1,11 @@
 # Порядок рефакторинга и приёмки
 
-Статус: предлагаемый поэтапный roadmap, а не executable implementation
-plan. Объём полного релиза согласован; интерфейсы каждого этапа уточняются
-перед реализацией. Никакие builds, solver runs и server actions не запущены.
+Статус: target roadmap от 2026-10-09 с уточнением authority **2026-10-19**.
+Текущий executable handoff — [75 карточек](../implementation/review-closure-2026-10-19/README.md),
+активированных отдельным EXEC; [P1](../implementation/review-closure-2026-10-19/operator-permissions.md)
+и [dispositions 59 ID](requirement-dispositions-2026-10-19.md) имеют приоритет
+при расхождении с исторической последовательностью ниже. Приёмка source,
+native runtime, restore и science раздельная; roadmap не доказывает их outcomes.
 
 Для новой сессии исполнителя использовать
 [точку входа в реализацию](implementation-entrypoint.md): первый read-only
@@ -76,7 +79,7 @@ science milestone не откладывается до завершения эт
 flowchart TD
   A[0. Зафиксировать требования и owners] --> B[1. Critical contracts + minimum scientific path]
   B --> C[2. Local lifecycle и cold bootstrap readiness]
-  C --> D[3. QCL wipe / SSD / cold bootstrap acceptance]
+  C --> D[3. Safe backup/restore и named install<br/>historical wipe — только отдельное решение]
   D --> E[4. S01: равновесие 0 V / 70 K]
   B --> F[5. Domain config + research card + agent API]
   F --> G[6. Sweep / continuation / plots]
@@ -89,8 +92,11 @@ flowchart TD
 Этапы 2–3 можно ограничить необходимым минимумом для S01. Если доступен
 уже проверенный локальный runtime, отдельно обозначенное exploratory
 исследование допускается раньше clean rebuild; оно имеет собственную source/
-runtime identity и не является cold-start приёмкой нового состава. Его старые
-state/depot/results не переносятся через wipe. Не создавать ложную зависимость
+runtime identity и не является cold-start приёмкой нового состава.
+Историческая пересборка без старого state — условный clean-install scenario,
+не prerequisite полного wipe перед S01. Existing persistent DB/repository/NFS,
+raw и failed receipts защищены P1; replacement ждёт verified backup/restore.
+Не создавать ложную зависимость
 physics → все installer/GUI. После завершения S01 физическая модель не
 объявляется навсегда validated для всех новых сценариев.
 
@@ -101,11 +107,11 @@ physics → все installer/GUI. После завершения S01 физич
 | 0 | Root: принять corpus, владельцев, exclusions, source authority; open решения перечислить явно | Один нормативный индекс; baseline audit отделён от target | D01–D03 |
 | 1 | Portal/AiiDA/contracts: CR01 exact attempt locator; platform: CR02–CR05 lifecycle/identity/time/profile; core/Runner: status contract CR06 и прозрачный origin CR07 | Targeted small failure tests подтверждают исправление; compatibility описана; полные numerical builds только при необходимости/бюджете | R03, I10–I12; CR01–CR07 |
 | 2 | Platform: локальный serial entry point, private inputs/preflight, обычный VM handoff и whole-cluster update после ручной отмены; устранить GitHub deploy credentials | Все workers остановлены при обновлении, один проверенный релиз до открытия admission; resources по measured reserve; нет hidden oldstate dependency | I01–I05, I10–I14, D07–D08 |
-| 3 | Platform/private site: exact teardown plan, SSD/100GB/swap decision, wipe всех QCLowned ресурсов, cold bootstrap из свежего clone | Foreign VM сохранны; QCL остатков нет; lifecycle/synthetic smoke приняты; CI в согласованном build окне этого source-кандидата | D04–D06, I11 |
-| 4 | Research/core/Runner/results: равновесие 0 V / 70 K, FD/FDR oracle, raw map/Poisson и различающие refinements | S01 подтверждён либо явно не достигнут с причиной; совпадение seed с Fermi не выдаётся за решение; далее отдельная ненулевая transport point | S01, S07, C01–C02, R09 |
+| 3 | Platform/private site: fresh storage/ownership inventory, SSD/swap admission; verified capture/backup/isolated restore и named install из выбранного source | Existing persistent/foreign state сохранны; restore и native lifecycle проверены. D04 full wipe и D06/D07 без старого state — historical-only conditional, вне B для existing данных | D04–D07, I11; P1/PERM08–12 |
+| 4 | Research/core/Runner/results: равновесие 0 V / 70 K, FD/FDR oracle, raw map/Poisson и различающие refinements | S01 подтверждён либо явно не достигнут с причиной; совпадение seed с Fermi не выдаётся за решение; finite-bias требует отдельного scientific решения вне S1 | S01, S07, C01–C02, R09 |
 | 5 | Research/Runner/contracts: domain request/protocol resolver; AiiDA/service: карточка/CPU grant; portal: forms/YAML/structure preview/brief/full/slices, model/source help, файл отчёта агента и разные credentials | UI/YAML/API дают одинаковый смысл; агент получает saved manifest и model help; unknown/overrides показаны; concurrent submissions в общем grant; отчёт связан с вопросом/запусками | C03–C13, R01–R05, R07–R12, I06 |
 | 6 | Runner/AiiDA/results/portal: independent sweep, continuation failure branch, separate comparisons, graph и QCL transport plot templates | Оба явных пути ВАХ; failure не подставляет seed; disconnected external agent не останавливает jobs; оптические спектры не включены | S02–S06, S08–S09, R02, R06 |
-| 7 | Platform: Proxmox/libvirt/Hyper-V install profiles, explicit controller address, trusted node enrollment и release/capacity checks | По одной принятой установке каждого требуемого backend; новый узел DRAIN до проверки; stale/duplicate identity отклоняется | I07–I08 |
+| 7 | Platform: Proxmox/libvirt/Hyper-V install profiles, explicit controller address, trusted node enrollment и release/capacity checks | Три required backend, включая обе required Windows machines; native boot/job/stop gates отдельно, missing backend оставляет release partial; новый узел DRAIN до проверки | I07–I08 |
 | 8 | Root/all owners: integration, current docs, least necessary integrity checks, rebuild/recovery/service/science status matrix | Каждый requirement имеет evidence/unknown/decision; CI final ready ref выполняется в build окне; если ref не менялся, dispatch не повторяется; scope не преувеличен | Все, включая I09/R09/D01 |
 
 CR02–CR05 относятся к безопасной эксплуатации и должны быть закрыты до
@@ -119,11 +125,14 @@ physical defect, расширение автоматического массо�
 ждёт его разбора. Первая S01 использует существующий Results/CLI; новый
 agent API принимается позднее на том же сохранённом результате.
 
-Final CI относится к конкретному ready source набору и выполняется в его
-build окне. Поздние component changes образуют новый кандидат: для него
-нужна своя приёмка в новом idle-bound build окне, а не автоматический rerun
-старого ref. Обычный ресурсный переход ради CI ждёт завершения S01;
-явное обновление следует I14: оператор предварительно отменяет все задания.
+Final CI выполняется **один раз** на final ready source ref в B-envelope
+(≤180 min); automatic rerun не разрешён. Все component changes интегрируются
+до source freeze. Новый root не наследует старую full release acceptance;
+если после sole CI нужен другой candidate, required evidence и решение о
+дополнительном dispatch нельзя подменить повтором по умолчанию. Обычный reclaim
+ждёт idle; I14 update требует отдельного operator-step, durable proof и
+подтверждённой отмены обоих слоёв. PERM10 охватывает только campaign-owned jobs;
+old S01/foreign state защищены. Updater сам cancellation не начинает.
 Если scientific core/model изменились, отдельно пересмотреть применимость
 свидетельств S01; изменение portal CSS само не доказывает и не опровергает
 старый научный результат, но новый root не наследует full release acceptance.
@@ -140,18 +149,21 @@ build окне. Поздние component changes образуют новый к�
 gain/absorption спектры отложены до отдельного обоснования количественного
 отклика. Последнее устраняет обещание accepted optics до scientific audit.
 Первым S01 выбран 0 V / 70 K; continuation остаётся внутри одного запуска.
-При обновлении оператор вручную отменяет всю очередь/задания и сигналит
-доставку, все workers останавливаются, hard stop допустим. Старый вариант
-ожидания LAN jobs и migration pending между релизами исключён.
+Исторический I14 требует отдельную operator cancellation и сигнал доставки,
+остановку всех enrolled workers, без migration pending между релизами.
+P1/PERM10 делегирует агенту только campaign-owned operator-step после durable
+proof; old S01/foreign jobs не включены. P1 защищает confirmed persistent данные
+и требует verified restore до production replacement. Hard stop не обещает
+сохранить последний in-memory progress и не отменяет этот durable-data gate.
 CR08 и DOC02 остаются в review существующего кода, но не задерживают S01
 и закрываются до возврата оптического пути в поддерживаемую область.
 
 | Когда | Нерешённый контракт / контрпример | Рекомендуемое разрешение |
 | --- | --- | --- |
-| До S01 | Oracle и physical set должны соответствовать 0 V / 70 K; Fermi seed или нулевой J сами не доказывают решённое равновесие | Brief фиксирует thermal baths, μ/нейтральность, raw/FDR checks и sensitivity с основанием. Boltzmann только при проверенном dilute limit; численные критерии/бюджет ещё устанавливаются, validation отдельна |
+| До S01 | Oracle и physical set должны соответствовать 0 V / 70 K; Fermi seed или нулевой J сами не доказывают решённое равновесие | Brief фиксирует thermal baths, μ/нейтральность, raw/FDR checks и sensitivity с основанием. Boltzmann только при проверенном dilute limit; S1 budget принят P1, criterion bounds freeze SCI03 по evidence/independent review; validation вне S1 |
 | До первого resource admission | После cold start нет RSS calibration; оптимистичный прогноз может дать OOM | Пользователь отложил точный выбор до реализации/обследования диска. До запуска определить bound/reserves/confidence и finite budget; нехватка capacity даёт wait/reject, не автоматическое уменьшение модели |
 | До resource transitions | Lifecycle executor может находиться на выключаемом builder и исчезнуть посреди перехода | Первый install инициируется trusted локальной Linux средой; daily operation исполняется постоянным control-контуром. CLI/GUI используют одного owner и durable operation state; обрыв клиента не открывает admission |
-| Перед сигналом доставки | Верхние AiiDA workflows/retries и Slurm jobs/queue отменяются оператором; один scancel не останавливает parent WorkChain | Доставка закрывает submission, проверяет завершённую отмену обоих слоёв, останавливает все QCL workers, активирует один релиз и открывает admission после общего health check. Использовать existing kill_run; при новых jobs до закрытия gate — отказ до повторной ручной отмены; ни rolling, ни multiversion queue migration |
+| Перед сигналом доставки | Отдельный operator-step отменяет только разрешённые campaign-owned AiiDA workflows/retries и Slurm jobs после durable proof; один scancel не останавливает parent WorkChain | Доставка закрывает submission, проверяет завершённую отмену обоих слоёв, останавливает все QCL workers, активирует один релиз и открывает admission после общего health check. Использовать existing kill_run; при новых/unknown-owned jobs — closed/reconciliation; old S01/foreign jobs требуют отдельного решения; ни rolling, ни multiversion queue migration |
 | До большого builder/compute старта | Configured minimum foreign VM не доказывает безопасный live reclaim; VM может остаться active с OOM внутри | Свежий inventory и консервативный reserve; до ограниченной проверки не считать allocation−floor свободной QCL RAM. Swap/ballooning не заменяют доказанную capacity |
 | До domain resolver/API | Новый protocol меняет смысл старого короткого YAML; произвольный Julia callback не сериализуется как обычный JSON | Submission фиксирует resolved inputs, protocol version и overrides; обновление создаёт новый вариант с diff. Expert callbacks/operators остаются в локальном Julia API, remote путь принимает объявленные serializable inputs |
 | До NFS result API | Brief объявляет completed до публикации payload, либо retry перезаписывает тот же файл | Использовать existing Runner commits/recovery; AiiDA retrieve малые metadata и external locator. Results читает опубликованную generation на NFS, missing данные явны. Конкретная стратегия и read/derive: [results contract](results-and-postprocessing.md) |
@@ -229,6 +241,8 @@ DB, второй scheduler или универсального DSL, решени
 реализации. Большой codebase поддерживается ограниченными публичными
 контрактами, не увеличением числа обязательных документов каждого run.
 
-Общий deadline исследования пока отложен. Суточный ориентир относится к
-настройке минимальной инфраструктуры. Для будущих вычислений всё равно
-нужны конечные CPU/RAM/wall/output budgets; время сходимости не обещано.
+Общий deadline как продуктовая функция ранее отложен. Текущий S1 имеет
+конечные caps P1: 13 attempts / 936 execution node-hours, ≤72 h/attempt,
+concurrency ≤2 и отдельные byte guards. Это ceilings всех агентов вместе;
+actual/allocation core-hours учитываются отдельно. Суточный ориентир относится
+к минимальной инфраструктуре; он не SLA и не обещание научной сходимости.

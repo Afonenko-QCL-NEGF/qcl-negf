@@ -1,0 +1,24 @@
+{
+  "state": "source_bound_runtime_pending",
+  "head": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+  "base": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+  "branch": "codex/review-closure-absolute-kernel-integration",
+  "files": {
+    "test/physics/absolute_scattering_kernel_oracles.jl": {
+      "path": "test/physics/absolute_scattering_kernel_oracles.jl",
+      "bytes": 17498,
+      "sha256": "d3651d095d81a1c02dd02ffc660c906998e8486a4634302ee3e7722bc62678ad"
+    },
+    "docs/src/development/review_oracle_contracts.md": {
+      "path": "docs/src/development/review_oracle_contracts.md",
+      "bytes": 98738,
+      "sha256": "42d747275644df419ea1b1e0749821e96e9d82a843d9ac93366ad0caf11f3e62"
+    }
+  },
+  "independent_functional_review": "169a8563adb1693d0f93f8626187349f0f21596a79d46a3d9309c6f284af3e11",
+  "errata_review": "bf7360b5a375420db1dfdc05c70d889d83fda8e2f31a0415474d12f6d1f7fbc2",
+  "harness_review": "fae468fd7ad515dcaaaede8afd578bb1c39cf79ead4fbe00fc62bf030098dafa",
+  "runtime_calls": 0,
+  "runtime_cap": 2,
+  "published": false
+}

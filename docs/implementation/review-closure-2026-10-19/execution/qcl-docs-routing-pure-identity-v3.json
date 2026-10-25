@@ -1,0 +1,30 @@
+{
+  "format": "qcl-negf.docs-routing-pure-source-identity.v3",
+  "status": "SOURCE_ONLY_STOP_FOR_INDEPENDENT_HIGH_REVIEW",
+  "artifacts": {
+    "/tmp/qcl-docs-routing-pure-guard-v3.py": {"sha256":"750fc342884b2f47372912c538d7cfd47d60c8aa6f2ac9ee37aee02373976c0a","bytes":26935},
+    "/tmp/qcl-docs-routing-pure-plan-v3.json": {"sha256":"9863ffb52c44f9d3ab95ff1165233132ebbca965338883a7c2724e8b9cbde742","bytes":8181},
+    "/tmp/qcl-docs-routing-pure-report-v3.md": {"sha256":"f45d28da3cc4aae41e5094301f354b1fff967954305ed36e1170e97b4e05eb0d","bytes":7665}
+  },
+  "owned_artifact_bytes_excluding_identity": 42781,
+  "execution_counts": {"product":0,"target_parser":0,"target_compile":0,"target_import":0,"guard_parser_compile_exec_import":0,"Deno":0,"Julia":0,"formatter":0,"lint":0,"tests":0,"native":0,"network":0,"CI":0,"science":0},
+  "mutations": {"product":0,"fixture":0,"Root_CP":0,"git_index":0,"gitlinks":0,"predecessor_record":0,"READY":0},
+  "observed_roots": {
+    "initial_cwd_head":"e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+    "coordinator_root":"/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+    "coordinator_head":"c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+    "coordinator_status":"dirty CP/evidence from other work, preserved",
+    "isolated_product_root":"/tmp/qcl-docs-test-routing-worktree",
+    "isolated_base_head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+    "isolated_status":"dirty I2B overlay, eight uninitialized gitlinks, preserved"
+  },
+  "pure_source_closure": {
+    "ops/docs_tests.ts":"676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c",
+    "tests/docs_test_routing_test.ts":"f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+  },
+  "historical_fixture_sha256":"04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+  "historical_receipt_sha256":"e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0",
+  "historical_raw_sha256":"6b044ed571751341f215353d5dafd384dcf009a70c4b471595ebdcb53b8589ad",
+  "review_required":"Independent high source review of exact guard/plan; then separate Root source-tool handoff, final format-only/CPP binding, fresh global Root READY before single GREEN.",
+  "limits":"Source-only grant 12min/4MiB logical reads/1CPU/1GiB/192KiB output; physical CPU/RSS/IO/wall peaks not instrumented. Conservative named-source reserve4MiB; source discovery outputs included truncation, needed named bindings reread. Owned outputs under192KiB. No runtime success claim."
+}

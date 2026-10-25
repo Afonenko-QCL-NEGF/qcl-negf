@@ -1,0 +1,38 @@
+{
+  "state": "second_final_corrective_round_source_approved_C08_2_pending",
+  "base": "239d76bb59c955b32888eeaec518d6e465b4178d",
+  "original_frozen_head": "1b8fda18881007f7c0c7f68758c7dbf42b44dfc6",
+  "integrated_head": "e86ac74c4fe04a8999b889970c5a9f3c65575694",
+  "branch": "codex/review-closure-final-audit-integration",
+  "files": {
+    "src/QCLNEGF.jl": {
+      "sha256": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+      "bytes": 31400
+    },
+    "src/numerics/reference/final_audit.jl": {
+      "sha256": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+      "bytes": 30783
+    },
+    "src/numerics/reference/validation.jl": {
+      "sha256": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+      "bytes": 33446
+    },
+    "src/numerics/reference/poisson.jl": {
+      "sha256": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+      "bytes": 3329
+    },
+    "src/numerics/optimized/production_solver.jl": {
+      "sha256": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+      "bytes": 52380
+    },
+    "test/numerics/final_audit_evidence.jl": {
+      "sha256": "d4ac564013d46021a84b323338635f6860f16d1aa76e4b417c4aaf64debf64c4",
+      "bytes": 38519
+    }
+  },
+  "old_DEV05_preserved": true,
+  "C08_calls": 1,
+  "previous_integrated_head": "90f1048d290d6ec9518754e288333c694fe874de",
+  "corrective_rounds_used": 2,
+  "syntax_review": "0e7ddf0fb822b9aaaba5d8f08bc8e41ec40a19a6386fc8624ea31693b5a600f2"
+}

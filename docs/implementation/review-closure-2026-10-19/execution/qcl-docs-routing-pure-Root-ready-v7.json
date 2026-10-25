@@ -1,0 +1,111 @@
+{
+  "status": "READY",
+  "issuer": "Root",
+  "scope": "docs-routing-pure-local-engineering-v7",
+  "attempt": "DOCS-ROUTING-GREEN-1",
+  "created_unix": 1792487071.2136445,
+  "harness_sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+  "plan_sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "isolated_base_head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "root_source_handoff_ref": {
+    "path": "/tmp/qcl-docs-routing-pure-Root-handoff-v7.json",
+    "sha256": "0832b5a99fcbd61da057de8e09a5584dd88da48b700f51f9584e0a6fa841dbdd"
+  },
+  "shared_budget": {
+    "milestone_start": 81,
+    "milestone_ceiling": 88,
+    "calls_before": 87,
+    "calls_reserved": 1,
+    "calls_after": 88,
+    "no_rerun": true
+  },
+  "source_files": {
+    "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+    "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+  },
+  "accepted_cpp": {
+    "status": "PASS_SOURCE_PURE_CLOSURE",
+    "source_files": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+    },
+    "pure_only_slice": true,
+    "baseline_cpp_ref": {
+      "path": "/tmp/qcl-docs-routing-impl-i2b-review.md",
+      "sha256": "4903c3d64d8254a7b4ac89fcc08efed049485a21b1a1c155922b515b6118c4ea"
+    }
+  },
+  "format_binding": {
+    "status": "PASS_FORMAT_ONLY",
+    "unformatted_sources": {
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99",
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5"
+    },
+    "formatted_sources": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "review_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v6-review.md",
+      "sha256": "23a4d2c955579eb3f1796b3a1a57bf93803ec39cc8d641e87217c330fb913c8c"
+    },
+    "receipt_refs": [
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-2/receipt.json",
+        "sha256": "1111e3496ea3aa5f522b1fbc4c00ebf9912d8ddd28a81f06de5f7e5902b3aa32"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-2/receipt.json",
+        "sha256": "a2083bec007ed94d11657db5717831144135fc9f1fc3f6221cf6c9de7f79d7c4"
+      },
+      {
+        "path": "/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/receipt.json",
+        "sha256": "cd9f980eef98391d92aa0a3901686c25f7afc5ef167ee1b532fe8eeed8b0371b"
+      }
+    ]
+  },
+  "accepted_guard_review": {
+    "status": "PASS_SOURCE",
+    "harness_sha256": "33c0dcdbe74e1ad67d2e1fd208443c16619abcdac18c66518c8a3e40ab38dbd6",
+    "plan_sha256": "690c47ed46320874288f4e65c43e61a754833ec22be07289f1269e4860d4feb3",
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v7-review.md",
+      "sha256": "364e912a1c12adc2dc6103ce807dcdb6ad0d0d29520d3b02422f050095f9dce1"
+    }
+  },
+  "predecessor_ref": {
+    "path": "/tmp/qcl-docs-routing-pure-predecessor-v7.json",
+    "sha256": "b952b930de9e1ca9cf44f69109f8cf122233428f97bf9ef01d7bc833947f83d2"
+  },
+  "explicit_environment_only_sampled_storage_acknowledged": true,
+  "comment_only_cpp": {
+    "status": "PASS_COMMENT_ONLY_PURE_CORRECTION",
+    "pure_only_slice": true,
+    "before_sources": {
+      "ops/docs_tests.ts": "38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b",
+      "tests/docs_test_routing_test.ts": "8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b"
+    },
+    "after_sources": {
+      "ops/docs_tests.ts": "68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5",
+      "tests/docs_test_routing_test.ts": "2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99"
+    },
+    "patch_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-lint-comment-correction-v1.patch",
+      "sha256": "0ba7a8cdd4b18f7207acbd8f49c86e29b7012d8f25f19dfe8a0a14b6e60628e3"
+    },
+    "prior_format_review_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-format-final-v5-review.md",
+      "sha256": "50b8d8d5c83d509df3928750a6ad947f8b779dcacaa2baa3b690c65f18b81ba2"
+    },
+    "report_ref": {
+      "path": "/tmp/qcl-docs-routing-pure-harness-v6-review.md",
+      "sha256": "656d06531a69f4504038bffacdfbbd653f8966b51f64d805fc8835aa5c3ebe9d"
+    }
+  }
+}

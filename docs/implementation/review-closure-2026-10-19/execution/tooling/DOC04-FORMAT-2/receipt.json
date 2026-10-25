@@ -1,0 +1,43 @@
+{
+  "task": "DOC04",
+  "attempt": "FORMAT-2",
+  "started_utc": "2026-10-19T21:30:27.527819+00:00",
+  "recorded_at_utc": "2026-10-19T21:30:27.580800+00:00",
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "fmt",
+    "ops/docs/math-render.mjs",
+    "ops/docs/pilot-plan.json",
+    "tests/docs_math_test.mjs"
+  ],
+  "cwd": "/tmp/qcl-doc04-root-worktree",
+  "harness_sha256": "2c662207e55e39836a26933ec7c8409d0473c5599028fab9ec4818dd6351305e",
+  "fixture_sha256": {
+    "ops/docs/math-render.mjs": "585dfa5bd02c7968d089d2b746d611c4d137487232c7c20e2639851ee5450433",
+    "ops/docs/pilot-plan.json": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50",
+    "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7"
+  },
+  "exit_code": 0,
+  "wall_seconds": 0.053,
+  "sampled_peak_process_tree_RSS_bytes": 4755456,
+  "sampled_owned_temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 124,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 20,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "pinned Deno2.8.3 source formatter only; no product imports/tests/Nix/fullCI",
+  "original_log": "/tmp/qcl-DOC04-FORMAT-2/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 1,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

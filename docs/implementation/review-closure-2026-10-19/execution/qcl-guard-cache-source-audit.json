@@ -1,0 +1,29 @@
+{
+  "id": "GUARD-CACHE-SOURCE-AUDIT-1",
+  "utc": "2026-10-20T05:38:41.053834+00:00",
+  "rows": [
+    {
+      "source": "/tmp/qcl-local-julia-guard-v2.py",
+      "source_bytes": 14409,
+      "source_sha256": "e88ca841c6d03fe74e82b83f0a46fff82f4f7c2cac3b0da721ce0d8395c2be3f",
+      "cache": "/tmp/__pycache__/qcl-local-julia-guard-v2.cpython-314.pyc",
+      "cache_bytes": 31211,
+      "cache_sha256": "cafa7356132d734af54690c927a5398480bdcbea3674bb44f9f4595eaee699f2",
+      "all_recursive_code_object_fields_equal_to_compile_of_current_source": true,
+      "target_code_executed": false
+    },
+    {
+      "source": "/tmp/qcl-owned-temp-sampler-v2.py",
+      "source_bytes": 1567,
+      "source_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+      "cache": "/tmp/__pycache__/qcl-owned-temp-sampler-v2.cpython-314.pyc",
+      "cache_bytes": 2407,
+      "cache_sha256": "072b078600826cdcc2f3d6a6f9af6aa52771702a164f486937b33f2521d39ee0",
+      "all_recursive_code_object_fields_equal_to_compile_of_current_source": true,
+      "target_code_executed": false
+    }
+  ],
+  "verdict": "current_cache_matches_current_hashverified_source",
+  "method": "bounded cache metadata read; Python compile guard source and recursively compare every code-object execution/metadata field incl nested constants; do not exec/import guard or target",
+  "limitation": "posthoc current-state source audit cannot establish unrecorded historical cache bytes at earlier test launch; historical guard source SHA alone is not cache identity binding or adversarial provenance. Existing local software observations retained with this limit. Future harness bypasses caches by executing exact verified guard source bytes."
+}

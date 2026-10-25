@@ -1,0 +1,103 @@
+{
+  "format": "qcl-source-audit-identity-v1",
+  "task": "OPS08 whole-cluster maintenance source/fault coverage",
+  "reviewer": "/root/sci03_current_bound_review",
+  "verdict": "REQUEST_CHANGES",
+  "coverage": "selected source/control audit; non-exhaustive; no whole-final or native acceptance",
+  "report": "/tmp/qcl-ops08-source-audit.md",
+  "report_sha256": "fa228b4619a26f1abf284ec675b10e7ed272e0192f17873bb9f0eb73ca90da01",
+  "report_bytes": 24753,
+  "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+  "owning_path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-platform",
+  "owning_head": "f5bc368654414039f7368bb19ca3201fa7f29f9d",
+  "owning_status_clean_observed": true,
+  "root_status_clean": false,
+  "source_hashes": {
+    "ops/application_release.py": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0",
+    "ops/aiida_update_check.py": "401022a96a0c553e496430b8202d86767177bfaeda2d65d1b11b7388bbae8dc0",
+    "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6",
+    "docs/application-cd.md": "2d7add594947768ed1423efd0e8b3dae45b6c1f904e583b0cb1eb2e8f4f97414"
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P2",
+      "locator": "ops/application_release.py:594-596 and :1603-1613",
+      "trigger": "Correct envelope schema and node identity, but ready false/missing or another valid release",
+      "effect": "Plain ValueError does not stop later node dispatch",
+      "followup": "READY_I existing failure/dispatch contract; literal semantic-negative regression; no new D required"
+    },
+    {
+      "id": "R2",
+      "priority": "P1",
+      "locator": "ops/application_release.py:2889-2890 -> :994-1006 -> :2906-2916",
+      "trigger": "Whole-update local journal completion publication or own lifecycle-intent unlink fails after gate open",
+      "effect": "Outer exception lacks recovery close; failed completion may retain open job admission",
+      "followup": "READY_I existing post-open recovery contract; actual whole-route controlled finalization faults"
+    },
+    {
+      "id": "R3",
+      "priority": "P3",
+      "locator": "docs/application-cd.md:382 versus ops/application_release.py:1679",
+      "trigger": "Documented32MiB versus selected64MiB UpdateScan cap",
+      "followup": "READY_I docs-only factual correction, no cap reduction"
+    }
+  ],
+  "phases": [
+    {
+      "id": "initial",
+      "resource_status": "FAILED_RESOURCE_CAP",
+      "source_read_cap_bytes": 2097152,
+      "source_read_bytes_exact": null,
+      "source_read_lower_bound_bytes": 2291892,
+      "lower_bound_basis": "At least12 complete passes of190991-byte application_release.py; excludes other reads",
+      "cause": "Repeated sed -n passes consumed complete source files; no prepaid per-pass ledger",
+      "partial_report": "/tmp/qcl-ops08-source-audit-phase1-partial.md",
+      "partial_report_sha256": "07c437e178984841be309cad12c61eeb8e964d9aa0cababec6584c3b1275a19a",
+      "partial_report_bytes": 23507
+    },
+    {
+      "id": "separately_authorized_continuation",
+      "authorization": "Direct Root message after initial overrun; named checkpoint /tmp/qcl-ops08-source-continuation-plan.json",
+      "checkpoint_plan_hash": null,
+      "checkpoint_plan_read": false,
+      "source_read_cap_bytes": 8388608,
+      "source_read_bytes": 0,
+      "source_read_ledger": [],
+      "activity": "Preserve initial partial report and collate already established findings/identity only",
+      "wall_limit_seconds": 900,
+      "cpu_limit": 1,
+      "ram_limit_bytes": 2147483648,
+      "report_limit_bytes": 98304,
+      "original_failure_reclassified": false,
+      "third_phase": false
+    }
+  ],
+  "post_verdict_evidence": {
+    "own_source_verdict_formed_before_prior_reviews": true,
+    "OPS03_GREEN4_receipt_sha256": "b2411039050e39b38b8a95fc02e1a77f867d6933fc83836ffa049b33540ba7c7",
+    "OPS03_GREEN4_terminal": "234passed in93.54s; receipt94.294s; no rerun",
+    "OPS03_whole_raw_independently_reconstructed": false,
+    "OPS04_PLATFORM_GREEN2_receipt_sha256": "a3483add4b4c805e6719a78c9e9cc5ca4657a30594954b61e5f7a86248574fc8",
+    "OPS04_PLATFORM_GREEN2_terminal": "16passed in0.87s; receipt1.558s; narrow scope only",
+    "publication_journal_sha256": "ab3467e1d4e43b71c08d70f7e69f67d34a68246bd96edfaa6caa1c3a1ca7817e",
+    "remote_publication_independently_checked": false
+  },
+  "execution_counts": {
+    "target_imports": 0,
+    "parsers": 0,
+    "tests": 0,
+    "builds": 0,
+    "network_server_deploy": 0,
+    "solver": 0,
+    "children": 0,
+    "product_edits": 0,
+    "git_mutations": 0,
+    "checkpoint_writes": 0,
+    "C08": 0
+  },
+  "native_facts": "unknown; no native acceptance",
+  "future_test_calls_allocated": 0,
+  "OPS03_consumed_counter_reset": false,
+  "stop": true
+}

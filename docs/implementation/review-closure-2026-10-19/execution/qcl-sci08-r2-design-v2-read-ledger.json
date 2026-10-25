@@ -1,0 +1,22 @@
+{
+  "scope": "narrow D2 F1 repair, no implementation",
+  "assigned": {"wall_minutes": 6, "cpu": 1, "ram_gib": 1, "reads_bytes_max": 1048576, "total_output_bytes_max": 49152},
+  "read_methods": ["read-only git", "sed narrow chunks", "rg exact function/caller locators", "sha256sum"],
+  "source_semantic_reads": [
+    {"path": "components/QCLNEGFRunner.jl/src/infrastructure/persistence/point_artifacts.jl", "ranges": ["816-865", "1064-1107", "1256-1286", "1293-1327", "751-786", "27-42"], "finding": "two unconditional stage finally deletes; strict prune must not delete unverified generations; existing prepare sync contract"},
+    {"path": "components/QCLNEGFRunner.jl/src/composition/scratch_execution.jl", "ranges": ["50-82", "82-114"], "finding": "partial child result removed recursively pre-rename; post-rename outer container distinct from final destination"},
+    {"path": "components/QCLNEGFRunner.jl/src/infrastructure/persistence/scientific_history.jl", "ranges": ["117-157", "185-227"], "finding": "temp file delete before rename; counters updated before durable index; rows clear after sync"},
+    {"path": "components/QCLNEGFRunner.jl/src/infrastructure/telemetry/progress.jl", "ranges": ["597-627"], "finding": "atomic text helper catch removes partial temp; context-aware strict path required"},
+    {"path": "components/QCLNEGFRunner.jl/src/composition/scientific_execution.jl", "ranges": ["rg exact commit_operator_artifacts/flush_scientific_history call-site lines"], "finding": "635,1090,1264,1485 caller locators only; full bodies not read in D2"}
+  ],
+  "document_reads": [{"path": "/tmp/qcl-sci08-r2-design-v1-review.md", "ranges": ["1-160"], "finding": "F1 and already I-ready refusal-only subset"}],
+  "hash_only_not_semantic_read": ["v1 design", "v1 identity", "v1 read ledger", "high review identity", "complete selected source files"],
+  "inherited_context": "v1 semantic evidence remains limited to v1 ledger; no new full-file or whole-callgraph audit claimed",
+  "raw_git": ["root HEAD and status --short", "Runner HEAD"],
+  "truncation": "none in D2 semantic reader outputs",
+  "budget_measurement": "CPU/RAM and exact reader/output byte totals not independently metered; no measured compliance assertion",
+  "received_global_context": {"product_used": 90, "source": 11, "sourceCHECK": 3, "compiler": 0, "RSS_unknown_guard_failed": 1, "unit_call": false, "C08_SCI05_SCI08": "8/8 EXHAUSTED"},
+  "executed_here": {"runtime": 0, "compiler": 0, "tests": 0, "unit_calls": 0, "science": 0, "network": 0, "native": 0},
+  "write_scope": "three requested v2 /tmp artifacts only; v1/source/index/checkpoint unchanged by this task",
+  "stop": "fresh independent high review; no runtime grant"
+}

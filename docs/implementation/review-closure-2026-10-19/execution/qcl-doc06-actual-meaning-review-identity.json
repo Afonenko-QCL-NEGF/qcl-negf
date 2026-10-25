@@ -1,0 +1,95 @@
+{
+  "format": "qcl-negf.doc06-actual-meaning-review.v1",
+  "verdict": "REQUEST_CHANGES_FOR_FULL_DOC06_FIXED_SLICE",
+  "accepted_narrow_evidence": "REPRODUCIBLE_PARTIAL_SOURCE_ENGINEERING_EVIDENCE",
+  "root_revision": "2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "adapter_sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b",
+  "report": {
+    "path": "/tmp/qcl-doc06-actual-meaning-review.md",
+    "sha256": "4c35b2517718e3b9a137047a45652c4924de7e21ae3ad9041cd8d1e90df56861",
+    "bytes": 18195
+  },
+  "input_bindings": {
+    "committed_source_graph_sha256": "b7244ee91167b688e598efea33ba9620772c974264920d7e368ec87de4d939e1",
+    "input_receipt_sha256": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a",
+    "preparation_sha256": "03db672d25120747f86469e37a1685f6dfff8bed64199b6a619b5296b8adf5b8",
+    "preparation_readback_sha256": "fada5dea902c3f886d437da96d81342a75af83e789d6e937f366e6528d644778",
+    "comparison_sha256": "28029ded29e20b1d08198604b09729e5ddfc43536f4472bc47e74cecea498fc3",
+    "A1_receipt_sha256": "d525dd33a202c17436e85280187d692ff4297da7ab3c11ff96ed96a854fbd19f",
+    "A2_receipt_sha256": "6af221c17e590bc24352a016cec9da71204adf8720c76dd3a9dc1bb0710a0755",
+    "both_raw_sha256": "ff602a8401c76f68f448a0ae58b37281211b6ed20427e1cdbf0603207c92b301",
+    "both_facts_sha256": "ead7c19658478682d9da3b966f5aaec2e0ec9a180a27b7c62442f5796b63e041",
+    "both_output_source_receipt_sha256": "7bd0d68220ec0d37972b2cb25ad20b5f3b99078f95e06f64327727b446f7bd92",
+    "facts_bytes": 19556,
+    "output_source_receipt_bytes": 15444,
+    "snapshot_files": 9,
+    "snapshot_aggregate_bytes": 245338,
+    "all_nine_raw_hashes_recomputed": true,
+    "full_output_cmp_equal": true,
+    "R1_R2_external_checks_satisfied_for_these_attempts": true
+  },
+  "coverage": {
+    "API_fact_rows": 11,
+    "input_fact_rows": 16,
+    "all_ten_names_each": true,
+    "positive_schema_content_requirement_met": false,
+    "actual_origin_fabricated": false
+  },
+  "findings": [
+    {
+      "id": "M1",
+      "blocking_for_full_fixed_slice": true,
+      "summary": "Root allOf is rejected before schema declaration/ref projection; real schema type/minimum/required/default absence unavailable despite governing positive fixed-slice requirement",
+      "source": "Root ops/docs/static-slice.ts:518-550; selected Contracts schema:179-423 and 1420-1441",
+      "artifact": "facts.json subjects[1].facts[0,3,6,7]; output source receipt fact_index0/3/6/7",
+      "cheapest_fix": "Separate literal direct declarations from incomplete composed-validation coverage; preserve scoped partial diagnostic and never blindly ignore allOf"
+    },
+    {
+      "id": "M2",
+      "blocking_for_full_fixed_slice": true,
+      "summary": "Extraction failure is falsely described as absent owning description, and effects promises a description which was not quoted",
+      "source": "Root ops/docs/static-slice.ts:880-889 and 932-940; selected schema:1440",
+      "artifact": "facts.json:169,253; source receipt fact_index2 reason=unsupported_schema_keyword",
+      "cheapest_fix": "Reason-aware extraction-unavailable wording distinct from real absence; conditional description cross-reference"
+    },
+    {
+      "id": "M3",
+      "blocking_independently": false,
+      "summary": "Authored not_applicable formula_origin has dynamic-unknown receipt mode because unsupported schema description is reused",
+      "source": "Root ops/docs/static-slice.ts:950-958; selected owning route:67",
+      "artifact": "facts.json leaf fact_index10; source receipt:275-283",
+      "cheapest_fix": "Explicit authored-context with owning-route evidence, or consistently unknown evidence/text"
+    }
+  ],
+  "not_accepted": [
+    "full DOC06 fixed-slice semantic coverage",
+    "DOC03 shared Fragment/Bundle compatibility",
+    "documentation render and link validation",
+    "native target execution/method inventory",
+    "scientific physics/convergence/discretization/experimental acceptance",
+    "full release readiness"
+  ],
+  "review_actions": {
+    "new_target_harness_export_parser_tests_Deno_native_network_SCI_calls": 0,
+    "source_product_checkpoint_git_or_original_artifact_writes": false,
+    "own_report_identity_only": true,
+    "delegation": false
+  },
+  "existing_budget_state": {
+    "actual_calls_consumed": 2,
+    "actual_call_limit": 2,
+    "unit_calls_unchanged": "2/2",
+    "separate_E1_calls_unchanged": "1/1",
+    "retry_or_patch_authorized_by_review": false
+  },
+  "review_budget": {
+    "maximum_source_read_bytes": 2097152,
+    "conservative_logical_source_read_upper_bound_bytes": 1572864,
+    "maximum_wall_seconds": 600,
+    "maximum_CPU": 1,
+    "maximum_RAM_bytes": 1073741824,
+    "maximum_report_bytes": 98304,
+    "reviewer_CPU_RSS_physical_IO": "not_measured"
+  },
+  "state": "STOP"
+}

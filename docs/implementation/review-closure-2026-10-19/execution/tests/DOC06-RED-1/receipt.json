@@ -1,0 +1,48 @@
+{
+  "task": "DOC06",
+  "attempt": "RED-1",
+  "started_utc": "2026-10-20T04:35:42.303457+00:00",
+  "recorded_at_utc": "2026-10-20T04:35:43.641321+00:00",
+  "command": [
+    "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "test",
+    "--cached-only",
+    "--no-remote",
+    "--no-npm",
+    "--no-config",
+    "--allow-read=/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts,/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/ops/docs/static-slice.ts,/tmp/qcl-DOC06-RED-1/tmp",
+    "--allow-write=/tmp/qcl-DOC06-RED-1/tmp",
+    "tests/docs_static_slice_test.ts",
+    "--",
+    "/tmp/qcl-DOC06-RED-1/tmp"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "9bf3e58d14ee135ff047f045f12beac67310567febffd18d2a5005ce5c0ba32e",
+  "fixture_sha256": {
+    "tests/docs_static_slice_test.ts": "13c33da622b4d1c2e779dda4221057617b8fbd10942824dec52cf78e19fe80f2"
+  },
+  "exit_code": 1,
+  "wall_seconds": 1.338,
+  "sampled_peak_process_tree_RSS_bytes": 264060928,
+  "sampled_owned_temporary_bytes_peak": 332984,
+  "stdout_stderr_bytes": 1236,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 120,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 8388608,
+    "output_bytes": 1048576,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "DOC06sourceonlyDeno; exacttrustedtest/adapter+ownTMPread, ownTMPwrite; noenv/run/net/ffi, nocustomconfig; no targetimports byreviewedsource, notclaimedbypermissionsalone",
+  "runtime_sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+  "original_log": "/tmp/qcl-DOC06-RED-1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 18,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

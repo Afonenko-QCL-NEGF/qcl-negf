@@ -1,0 +1,434 @@
+diff --git a/ops/docs/static-slice.ts b/ops/docs/static-slice.ts
+index bdee76b..3d9d071 100644
+--- a/ops/docs/static-slice.ts
++++ b/ops/docs/static-slice.ts
+@@ -493,6 +493,8 @@ type SchemaProjection = {
+   declaration: Observation;
+   description: Observation;
+   rootRequired: Observation;
++  productionRequired: Observation;
++  validationCoverage: Observation;
+ };
+ function schemaProjection(input: Input): SchemaProjection {
+   const pointer = "/$defs/production/properties/energy_chunk";
+@@ -501,12 +503,17 @@ function schemaProjection(input: Input): SchemaProjection {
+     constraint: unavailable,
+     declaration: unavailable,
+     description: unavailable,
+-    rootRequired: unavailable,
++    rootRequired: input.text === null ? missing("/required") : failed("/required"),
++    productionRequired: unavailable,
++    validationCoverage: input.text === null ? missing("") : failed(""),
+   };
+   if (input.text === null) return result;
++  let failurePointer = "";
++  const segment = (key: string) => key.replace(/~/g, "~0").replace(/\//g, "~1");
+   try {
+     const root = object(parseData(input.text));
+-    const required = function (node: Record<string, unknown>): string[] {
++    const required = function (node: Record<string, unknown>, location: string): string[] {
++      failurePointer = location + "/required";
+       if (!own(node, "required")) return [];
+       const list = node.required;
+       if (
+@@ -515,9 +522,16 @@ function schemaProjection(input: Input): SchemaProjection {
+       ) unsupported("malformed_schema");
+       return list as string[];
+     };
+-    const allowed = function (node: Record<string, unknown>, keys: string[]) {
+-      if (Object.keys(node).some((key) => !keys.includes(key))) {
+-        unsupported("unsupported_schema_keyword");
++    const allowed = function (
++      node: Record<string, unknown>,
++      keys: string[],
++      location: string,
++      reason = "unsupported_schema_keyword",
++    ) {
++      const extra = Object.keys(node).find((key) => !keys.includes(key));
++      if (extra !== undefined) {
++        failurePointer = location + "/" + segment(extra);
++        unsupported(reason);
+       }
+     };
+     // Only keywords which cannot add an unprojected selected-path condition
+@@ -547,22 +561,60 @@ function schemaProjection(input: Input): SchemaProjection {
+       "default",
+       "$ref",
+     ];
+-    allowed(root, objectKeys);
+-    if (own(root, "$ref")) unsupported("unsupported_root_ref");
++    // Literal root membership is independent of later selected-path coverage.
++    failurePointer = "/type";
+     if (own(root, "type") && root.type !== "object") unsupported("malformed_schema");
+-    result.rootRequired = { value: required(root).includes("production"), selector: "/required" };
++    result.rootRequired = { value: required(root, "").includes("production"), selector: "/required" };
++    // allOf is accepted only through this narrow scope classifier. Conditions
++    // are never evaluated; values below other immediate root properties are
++    // opaque source data, including their nested refs/combinators.
++    allowed(root, [...objectKeys, "allOf"], "", "unsupported_selected_schema_context");
++    if (own(root, "$ref")) {
++      failurePointer = "/$ref";
++      unsupported("unsupported_root_ref");
++    }
++    const footprint: { if: string[]; then: string[] }[] = [];
++    if (own(root, "allOf")) {
++      failurePointer = "/allOf";
++      if (!Array.isArray(root.allOf) || root.allOf.length === 0) unsupported("malformed_schema");
++      for (let i = 0; i < root.allOf.length; i++) {
++        const location = `/allOf/${i}`;
++        failurePointer = location;
++        const item = object(root.allOf[i]);
++        allowed(item, ["if", "then"], location, "unsupported_selected_schema_context");
++        const scopes = { if: [] as string[], then: [] as string[] };
++        for (const clause of ["if", "then"] as const) {
++          failurePointer = location + "/" + clause;
++          if (!own(item, clause)) unsupported("unsupported_selected_schema_context");
++          const node = object(item[clause]);
++          allowed(node, ["properties"], failurePointer, "unsupported_selected_schema_context");
++          failurePointer = location + "/" + clause + "/properties";
++          if (!own(node, "properties")) unsupported("unsupported_selected_schema_context");
++          const properties = object(node.properties);
++          const names = Object.keys(properties);
++          if (names.length === 0) unsupported("malformed_schema");
++          if (own(properties, "production")) {
++            failurePointer += "/production";
++            unsupported("unsupported_selected_schema_context");
++          }
++          scopes[clause] = names;
++        }
++        footprint.push(scopes);
++      }
++    }
++    result.validationCoverage = { value: footprint, selector: own(root, "allOf") ? "/allOf" : "" };
+     let hops = 0;
+     const seen = new Set<string>();
+     const resolve = function (
+       raw: unknown,
+       location: string,
+     ): { node: Record<string, unknown>; location: string } {
++      failurePointer = location;
+       let node = object(raw);
+       while (own(node, "$ref")) {
++        failurePointer = location + "/$ref";
+         // Draft-specific sibling constraints are intentionally unsupported.
+-        if (
+-          Object.keys(node).some((k) => !["$ref", "$comment", "title", "description"].includes(k))
+-        ) unsupported("unsupported_ref_siblings");
++        allowed(node, ["$ref", "$comment", "title", "description"], location, "unsupported_ref_siblings");
+         const ref = node.$ref;
+         if (typeof ref !== "string" || !ref.startsWith("#/")) unsupported("unsupported_local_ref");
+         if (seen.has(ref)) unsupported("cyclic_local_ref");
+@@ -577,27 +629,39 @@ function schemaProjection(input: Input): SchemaProjection {
+           if (!own(container, key)) unsupported("missing_local_ref");
+           value = container[key];
+         }
+-        node = object(value);
+         location = ref.slice(1);
++        failurePointer = location;
++        node = object(value);
+       }
+       return { node, location };
+     };
++    failurePointer = "/properties";
+     const production = resolve(object(root.properties).production, "/properties/production");
+-    allowed(production.node, objectKeys);
++    allowed(production.node, objectKeys, production.location);
++    failurePointer = production.location + "/type";
+     if (production.node.type !== "object") unsupported("malformed_schema");
+-    const productionRequired = required(production.node);
++    const productionRequired = required(production.node, production.location);
++    result.productionRequired = {
++      value: productionRequired.includes("energy_chunk"),
++      selector: production.location + "/required",
++    };
++    failurePointer = production.location + "/properties";
+     const selected = resolve(
+       object(production.node.properties).energy_chunk,
+       production.location + "/properties/energy_chunk",
+     );
+-    allowed(selected.node, leafKeys);
+-    if (
+-      selected.node.type !== "integer" || typeof selected.node.minimum !== "number" ||
+-      !Number.isFinite(selected.node.minimum)
+-    ) unsupported("malformed_schema");
++    allowed(selected.node, leafKeys, selected.location);
++    failurePointer = selected.location + "/type";
++    if (selected.node.type !== "integer") unsupported("malformed_schema");
++    failurePointer = selected.location + "/minimum";
++    if (typeof selected.node.minimum !== "number" || !Number.isFinite(selected.node.minimum)) {
++      unsupported("malformed_schema");
++    }
++    failurePointer = selected.location + "/description";
+     if (own(selected.node, "description") && typeof selected.node.description !== "string") {
+       unsupported("malformed_schema");
+     }
++    failurePointer = selected.location + "/default";
+     if (
+       own(selected.node, "default") &&
+       (typeof selected.node.default !== "number" || !Number.isSafeInteger(selected.node.default))
+@@ -620,9 +684,10 @@ function schemaProjection(input: Input): SchemaProjection {
+   } catch (error) {
+     if (!(error instanceof Unsupported)) throw error;
+     // Never project a successfully read prefix as a full selected constraint.
+-    result.constraint = failed(pointer, error.reason);
+-    result.declaration = failed(pointer + "/default", error.reason);
+-    result.description = failed(pointer + "/description", error.reason);
++    result.constraint = failed(failurePointer, error.reason);
++    result.declaration = failed(failurePointer, error.reason);
++    result.description = failed(failurePointer, error.reason);
++    result.validationCoverage = failed(failurePointer, error.reason);
+   }
+   return result;
+ }
+@@ -882,7 +947,9 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
+       leaf,
+       "units",
+       "unknown",
+-      "Owning description отсутствует; физические единицы из имени не выводятся.",
++      observedSchema.description.reason === "description_absent"
++        ? "В распознанном direct leaf description не объявлено; физические единицы из имени не выводятся."
++        : `Owning description не извлечено (${observedSchema.description.reason}); физические единицы из имени не выводятся.`,
+       "units",
+       observedSchema.description,
+       schemaInput,
+@@ -894,7 +961,9 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
+     "schema-default",
+     declaredDefault,
+     schemaInput,
+-    "Default в schema context; декларация не применяется к конфигурации",
++    !declaredDefault.reason && declaredDefault.value === null
++      ? "В распознанном direct leaf нет own default keyword; это не runtime assignment"
++      : "Default в schema context; декларация не применяется к конфигурации",
+     declaredDefault.value === null ? "not_assigned" : "known",
+   );
+   literal(
+@@ -921,6 +990,11 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
+     schemaInput,
+     "Прямые type/minimum/required декларации owning schema; не полный validator",
+   );
++  if (!constraint.reason) {
++    leaf.facts[leaf.facts.length - 1].sources.push(
++      ...sourceRef(schemaInput, observedSchema.productionRequired.selector),
++    );
++  }
+   literal(
+     leaf,
+     "constraint",
+@@ -929,14 +1003,29 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
+     schemaInput,
+     "Root required-production membership",
+   );
++  add(
++    leaf,
++    "constraint",
++    "partial",
++    observedSchema.validationCoverage.reason
++      ? `Selected schema context не распознан (${observedSchema.validationCoverage.reason}); полная validation не выполнялась.`
++      : "Авторский контекст: извлечены прямые selected declarations и scope root properties; root conditional predicates и полный validator не вычислялись. Footprint: " + JSON.stringify(observedSchema.validationCoverage.value),
++    "schema-validation-coverage",
++    observedSchema.validationCoverage,
++    schemaInput,
++    observedSchema.validationCoverage.reason ? "dynamic-unknown" : "authored-context",
++  );
+   add(
+     leaf,
+     "effects",
+     observedSchema.description.reason ? "unknown" : "partial",
+-    "Авторский контекст: параметр планирования energy-node work; этот adapter не меняет сетку/физическую модель и не исполняет scheduling. Owning description приведено отдельно; полный effect inventory не установлен.",
++    observedSchema.description.reason
++      ? `Owning description не извлечено (${observedSchema.description.reason}); полный effect inventory неизвестен.`
++      : "Авторский контекст: параметр планирования energy-node work; этот adapter не меняет сетку/физическую модель и не исполняет scheduling. Owning description приведено отдельно; полный effect inventory не установлен.",
+     "effects",
+     observedSchema.description,
+     schemaInput,
++    observedSchema.description.reason ? "dynamic-unknown" : "authored-context",
+   );
+   add(
+     leaf,
+@@ -950,11 +1039,14 @@ function buildProjection(inputs: Input[], graph: string, manifestHash: string) {
+   add(
+     leaf,
+     "formula_origin",
+-    "not_applicable",
+-    "Авторский контекст: scheduling count не предоставляет физическую формулу; формула NEGF или rationale допуска не генерируются.",
++    observedSchema.description.reason ? "unknown" : "not_applicable",
++    observedSchema.description.reason
++      ? `Owning description не извлечено (${observedSchema.description.reason}); formula origin неизвестен.`
++      : "Авторский контекст: scheduling count не предоставляет физическую формулу; формула NEGF или rationale допуска не генерируются.",
+     "formula-origin",
+     observedSchema.description,
+     schemaInput,
++    observedSchema.description.reason ? "dynamic-unknown" : "authored-context",
+   );
+   add(
+     leaf,
+diff --git a/tests/docs_static_slice_test.ts b/tests/docs_static_slice_test.ts
+index ee0e46e..56356be 100644
+--- a/tests/docs_static_slice_test.ts
++++ b/tests/docs_static_slice_test.ts
+@@ -855,3 +855,165 @@ for (
+     }, text);
+   });
+ }
++
++// M1/M2/M3 regressions authored before the source correction. A1/A2 are the
++// existing RED evidence; this source-only stage does not execute a new RED.
++function rootConditional(json = schema(), branch = '"algorithms":{"anyOf":[false,{"$ref":"https://invalid.example/inert"}]}') {
++  return json.replace('{"type":"object"', `{"allOf":[{"if":{"properties":{"run":{"not":false}}},"then":{"properties":{${branch}}}}],"type":"object"`);
++}
++function assertSchemaUnknown(run: Run, selector: string, reason = "unsupported_selected_schema_context") {
++  for (const context of ["schema-type", "schema-constraint", "schema-default", "units"]) {
++    unsupported(run, INPUT, context, reason);
++    equal(extraction(run, INPUT, context).selector, selector, `${context} cites offending pointer`);
++  }
++  literal(run, "root-production-required", true);
++  equal(extraction(run, INPUT, "root-production-required").selector, "/required", "independent root membership locator");
++  literal(run, "typed-default", 79);
++  literal(run, "example-explicit", 31);
++  equal(extraction(run, API, "documented-signature").mode, "literal-extraction", "independent API survives");
++  for (const context of ["units", "effects", "formula-origin"]) {
++    const entry = extraction(run, INPUT, context);
++    const fact = facts(run, INPUT)[entry.fact_index];
++    equal(entry.mode, "dynamic-unknown", `${context} has no authored evidence`);
++    equal(fact.status, "unknown", `${context} unknown`);
++    assert(fact.text.includes(reason), `${context} preserves failure reason`);
++    assert(!fact.text.includes("description отсутствует"), "failure is not absence");
++    assert(!fact.text.includes("приведено отдельно"), "no missing quotation promise");
++    assert(!fact.text.includes("параметр планирования"), "no unsupported scheduling claim");
++  }
++}
++Deno.test("DOC06 unrelated root condition preserves direct declarations with partial validation", async () => {
++  const text = sources(79, 31);
++  text[PATHS[6]] = text[PATHS[7]] = rootConditional();
++  await fixture(async (f) => {
++    const run = await f.run();
++    literal(run, "schema-type", "integer");
++    literal(run, "schema-constraint", { type: "integer", minimum: 1, required: true });
++    literal(run, "root-production-required", true);
++    const absent = extraction(run, INPUT, "schema-default");
++    equal(absent.mode, "literal-extraction", "own default absence is literal");
++    equal(absent.value, null, "no own default keyword");
++    equal(facts(run, INPUT)[absent.fact_index].status, "not_assigned", "recognized direct default absence");
++    assert(facts(run, INPUT)[absent.fact_index].text.includes("own default"), "absence claim limited to own keyword");
++    const constraint = extraction(run, INPUT, "schema-constraint");
++    const selectors = (facts(run, INPUT)[constraint.fact_index].sources as { selector: string }[]).map((s) => s.selector);
++    equal(selectors, ["/$defs/production/properties/energy_chunk", "/$defs/production/required"], "combined direct declaration cites leaf and required");
++    const coverage = extraction(run, INPUT, "schema-validation-coverage");
++    equal(coverage.mode, "authored-context", "coverage explicitly authored");
++    equal(coverage.selector, "/allOf", "root conditional scope locator");
++    equal(coverage.value, [{ if: ["run"], then: ["algorithms"] }], "literal property footprint without predicate evaluation");
++    equal(facts(run, INPUT)[coverage.fact_index].status, "partial", "full validation remains partial");
++    const description = extraction(run, INPUT, "units");
++    equal(description.mode, "literal-extraction", "description literal");
++    equal(description.selector, "/$defs/production/properties/energy_chunk/description", "exact owning description");
++    for (const context of ["effects", "formula-origin"]) {
++      const entry = extraction(run, INPUT, context);
++      equal(entry.mode, "authored-context", `${context} authored interpretation`);
++      equal(entry.selector, description.selector, `${context} grounded in extracted description`);
++      equal(facts(run, INPUT)[entry.fact_index].status, context === "effects" ? "partial" : "not_applicable", `${context} bounded status`);
++    }
++    literal(run, "typed-default", 79);
++    literal(run, "example-explicit", 31);
++    for (const key of [API, INPUT]) {
++      equal([...new Set(facts(run, key).map((fact) => fact.name))].sort(), [...CLASSES].sort(), "all ten classes retained");
++    }
++    equal(run.facts!.binding, { status: "source-prototype", application_release: null, run: null }, "no runtime identity");
++    equal(run.facts!.coverage.status, "partial", "partial global coverage");
++    equal((await f.run("again")).bytes, run.bytes, "facts deterministic across fresh dirs");
++    equal(await Deno.readTextFile(`${f.dir}/again/source-receipt.json`), await Deno.readTextFile(`${f.dir}/out/source-receipt.json`), "receipt deterministic across fresh dirs");
++  }, text);
++});
++for (const clause of ["if", "then"] as const) {
++  Deno.test(`DOC06 root conditional selected production fails closed in ${clause}`, async () => {
++    const text = sources(79, 31);
++    const positive = rootConditional();
++    text[PATHS[6]] = text[PATHS[7]] = clause === "if"
++      ? positive.replace('"run":{"not":false}', '"production":{"not":false}')
++      : positive.replace('"algorithms":{"anyOf"', '"production":{"anyOf"');
++    await fixture(async (f) => assertSchemaUnknown(await f.run(), `/allOf/0/${clause}/properties/production`), text);
++  });
++}
++for (const [label, replacement, selector] of [
++  ["else", '"else":{},"if":', "/allOf/0/else"],
++  ["item escaped extra", '"x/y~z":{},"if":', "/allOf/0/x~1y~0z"],
++] as const) {
++  Deno.test(`DOC06 root conditional rejects unknown item key: ${label}`, async () => {
++    const text = sources(79, 31);
++    text[PATHS[6]] = text[PATHS[7]] = rootConditional().replace('"if":', replacement);
++    await fixture(async (f) => assertSchemaUnknown(await f.run(), selector), text);
++  });
++}
++for (const keyword of ["required", "additionalProperties", "not", "$ref", "x/y~z"] as const) {
++  Deno.test(`DOC06 root conditional rejects root-wide clause key: ${keyword}`, async () => {
++    const text = sources(79, 31);
++    text[PATHS[6]] = text[PATHS[7]] = rootConditional().replace('"then":{"properties":', `"then":{${JSON.stringify(keyword)}:false,"properties":`);
++    const segment = keyword.replace(/~/g, "~0").replace(/\//g, "~1");
++    await fixture(async (f) => assertSchemaUnknown(await f.run(), `/allOf/0/then/${segment}`), text);
++  });
++}
++Deno.test("DOC06 root anyOf keeps direct required independent", async () => {
++  const text = sources(79, 31);
++  text[PATHS[6]] = text[PATHS[7]] = schema().replace('{"type":', '{"anyOf":[{}],"type":');
++  await fixture(async (f) => assertSchemaUnknown(await f.run(), "/anyOf"), text);
++});
++for (const [label, json, pointer] of [
++  ["production allOf", schema().replace('"production":{"type":', '"production":{"allOf":[{}],"type":'), "/$defs/production/allOf"],
++  ["leaf anyOf", schema('"type":"integer","minimum":1,"description":"Present despite failure","anyOf":[{}]'), "/$defs/production/properties/energy_chunk/anyOf"],
++] as const) {
++  Deno.test(`DOC06 unsupported selected context preserves failure locators: ${label}`, async () => {
++    const text = sources(79, 31);
++    text[PATHS[6]] = text[PATHS[7]] = json;
++    await fixture(async (f) => assertSchemaUnknown(await f.run(), pointer, "unsupported_schema_keyword"), text);
++  });
++}
++Deno.test("DOC06 escaped resolved production required uses its source pointer", async () => {
++  const text = sources(79, 31);
++  text[PATHS[6]] = text[PATHS[7]] = rootConditional(schema().replace('"production":{"type"', '"p/~q":{"type"').replace("#/$defs/production", "#/$defs/p~1~0q"));
++  await fixture(async (f) => {
++    const run = await f.run();
++    const constraint = extraction(run, INPUT, "schema-constraint");
++    literal(run, "schema-constraint", { type: "integer", minimum: 1, required: true });
++    equal((facts(run, INPUT)[constraint.fact_index].sources as { selector: string }[]).map((s) => s.selector), ["/$defs/p~1~0q/properties/energy_chunk", "/$defs/p~1~0q/required"], "escaped source locations retained");
++  }, text);
++});
++Deno.test("DOC06 direct root membership false remains literal under unsupported context", async () => {
++  const text = sources(79, 31);
++  text[PATHS[6]] = text[PATHS[7]] = rootConditional().replace('["production"]', '[]').replace('"algorithms":{"anyOf"', '"production":{"anyOf"');
++  await fixture(async (f) => {
++    const run = await f.run();
++    literal(run, "root-production-required", false);
++    equal(extraction(run, INPUT, "root-production-required").selector, "/required", "false direct membership exact locator");
++    unsupported(run, INPUT, "schema-constraint", "unsupported_selected_schema_context");
++  }, text);
++});
++for (const absent of ["description_absent", "source_missing"] as const) {
++  Deno.test(`DOC06 description failure keeps absence and unavailable distinct: ${absent}`, async () => {
++    const text = sources(79, 31);
++    if (absent === "description_absent") text[PATHS[6]] = text[PATHS[7]] = schema('"type":"integer","minimum":1');
++    await fixture(async (f) => {
++      if (absent === "source_missing") await Deno.remove(`${f.snapshot}/${PATHS[7]}`);
++      const run = await f.run();
++      const units = extraction(run, INPUT, "units");
++      equal(units.reason, absent, "reason is not rewritten as absence");
++      const unitText = facts(run, INPUT)[units.fact_index].text;
++      assert(unitText.includes(absent === "description_absent" ? "direct leaf description не объявлено" : "не извлечено (source_missing)"), "reason-aware units text");
++      for (const context of ["effects", "formula-origin"]) {
++        const entry = extraction(run, INPUT, context);
++        equal(entry.mode, "dynamic-unknown", "no fabricated authored interpretation");
++        equal(facts(run, INPUT)[entry.fact_index].status, "unknown", "failure status unknown");
++        assert(facts(run, INPUT)[entry.fact_index].text.includes(absent), "reason retained");
++        assert(!facts(run, INPUT)[entry.fact_index].text.includes("приведено отдельно"), "no quotation promise");
++      }
++      literal(run, "typed-default", 79);
++      literal(run, "example-explicit", 31);
++    }, text);
++  });
++}
++Deno.test("DOC06 no root composition still states partial validation coverage", () => fixture(async (f) => {
++  const run = await f.run();
++  const coverage = extraction(run, INPUT, "schema-validation-coverage");
++  equal(coverage.selector, "", "root JSON pointer without allOf");
++  equal(coverage.value, [], "no conditional footprint");
++  equal(coverage.mode, "authored-context", "explicit interpretation mode");
++  equal(facts(run, INPUT)[coverage.fact_index].status, "partial", "direct facts never claim instance validation");
++}));

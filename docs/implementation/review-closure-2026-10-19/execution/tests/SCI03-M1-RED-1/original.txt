@@ -1,0 +1,510 @@
+....................................FFFFFFFFFFFFF..                      [100%]
+=================================== FAILURES ===================================
+_____ test_M1_01_literal_noncommuting_norms_terms_signs_and_weights[False] _____
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_01_literal_noncommutin0/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+quarter_capacity = False
+
+    @pytest.mark.parametrize('quarter_capacity', [False, True])
+    def test_M1_01_literal_noncommuting_norms_terms_signs_and_weights(archive, quarter_capacity):
+        # Catches missing instrumentation; dropped Im/offdiagonal; missing deltaS;
+        # wrong W/gs/radial factor; n+p closure; side reuse; total double counting.
+        m1_archive(archive, quarter_capacity=quarter_capacity)
+        report = diagnose(archive, mu_algorithm_abs_tol_eV=1e-12)
+        mu = report['mu']
+        known = -KT*math.log(3) if quarter_capacity else 0
+        assert mu['status'] == 'measured' and mu['reason'] is None
+        assert mu['lower_eV'] <= known <= mu['upper_eV']
+        assert mu['stop_reason'] in ('absolute_mu_width', 'adjacent_binary64_endpoints')
+        assert (mu['bracket_width_eV'] <= mu['algorithm_abs_tol_eV'] or
+                math.nextafter(mu['lower_eV'], mu['upper_eV']) == mu['upper_eV'])
+        assert abs(mu['value_relative_eV']-known) <= mu['uncertainty_eV'] + M1_ROUNDOFF
+>       m1_check_literal_report(report)
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:765: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:697: in m1_check_literal_report
+    bound = m1_bound_namespace(report)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...75624989341, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...75624989341, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_____ test_M1_01_literal_noncommuting_norms_terms_signs_and_weights[True] ______
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_01_literal_noncommutin1/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+quarter_capacity = True
+
+    @pytest.mark.parametrize('quarter_capacity', [False, True])
+    def test_M1_01_literal_noncommuting_norms_terms_signs_and_weights(archive, quarter_capacity):
+        # Catches missing instrumentation; dropped Im/offdiagonal; missing deltaS;
+        # wrong W/gs/radial factor; n+p closure; side reuse; total double counting.
+        m1_archive(archive, quarter_capacity=quarter_capacity)
+        report = diagnose(archive, mu_algorithm_abs_tol_eV=1e-12)
+        mu = report['mu']
+        known = -KT*math.log(3) if quarter_capacity else 0
+        assert mu['status'] == 'measured' and mu['reason'] is None
+        assert mu['lower_eV'] <= known <= mu['upper_eV']
+        assert mu['stop_reason'] in ('absolute_mu_width', 'adjacent_binary64_endpoints')
+        assert (mu['bracket_width_eV'] <= mu['algorithm_abs_tol_eV'] or
+                math.nextafter(mu['lower_eV'], mu['upper_eV']) == mu['upper_eV'])
+        assert abs(mu['value_relative_eV']-known) <= mu['uncertainty_eV'] + M1_ROUNDOFF
+>       m1_check_literal_report(report)
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:765: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:697: in m1_check_literal_report
+    bound = m1_bound_namespace(report)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...75624989341, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...75624989341, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+____________________ test_M1_02_full_complex_current_bound _____________________
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_02_full_complex_curren0/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+
+    def test_M1_02_full_complex_current_bound(archive):
+        # Catches abs(ReJ)-only validation and discarded imaginary norm components.
+        m1_archive(archive, imaginary=True)
+        report = diagnose(archive, mu_algorithm_abs_tol_eV=1e-12)
+>       m1_check_literal_report(report, imaginary=True)
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:776: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:697: in m1_check_literal_report
+    bound = m1_bound_namespace(report)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...malized_imaginary_A_per_m2': 0.018184695646241946, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...malized_imaginary_A_per_m2': 0.018184695646241946, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+__________ test_M1_03_zero_boundary_is_measured_zero_with_defined_mu ___________
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_03_zero_boundary_is_me0/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+
+    def test_M1_03_zero_boundary_is_measured_zero_with_defined_mu(archive):
+        m1_archive(archive, zero_boundary=True)
+        report = diagnose(archive)
+        assert report['mu']['status'] == 'measured'
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:784: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_ test_M1_04_missing_mu_precedes_zero_boundary[missing_context-not_measured-missing_model_context] _
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_04_missing_mu_precedes0/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+unavailable = 'missing_context', status = 'not_measured'
+reason = 'missing_model_context'
+
+    @pytest.mark.parametrize('unavailable,status,reason', [
+        ('missing_context', 'not_measured', 'missing_model_context'),
+        ('finite_drive', 'not_applicable', 'finite_drive'),
+        ('unequal_lo', 'not_applicable', 'unequal_LO_temperature'),
+        ('ee', 'unsupported_context', 'unsupported_electron_electron_closure'),
+        ('empty', 'not_measured', 'empty_represented_spectrum'),
+        ('iteration_limit', 'algorithm_limit', 'algorithm_limit')])
+    def test_M1_04_missing_mu_precedes_zero_boundary(archive, unavailable, status, reason):
+        m1_archive(archive, zero_boundary=True)
+        options = {}
+        if unavailable == 'missing_context':
+            del archive[1]['stationary_assessment']['model_context']
+            publish(archive[0], archive[1])
+        elif unavailable == 'finite_drive':
+            mutate(archive, lambda h: h['inputs/F_bias_V_per_m'].__setitem__((), 1))
+        elif unavailable == 'unequal_lo':
+            mutate(archive, lambda h: h['inputs/T_LO_K'].__setitem__((), 71))
+        elif unavailable == 'ee':
+            archive[1]['stationary_assessment']['model_context']['physical_models']['electron_electron']['mode'] = 'closure'
+            publish(archive[0], archive[1])
+        elif unavailable == 'empty':
+            mutate(archive, lambda h: replace_complex(h, 'state_dimensionless/A', np.zeros((1, 2, 2, 2), complex)))
+        else:
+            options['mu_max_iterations'] = 1
+        report = diagnose(archive, **options)
+        assert report['mu']['status'] == status and report['mu']['reason'] == reason
+        assert report['mu']['value_relative_eV'] is None
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:826: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': 'missing_model_context', 'status': 'not_measured'}, 'budgets': {'bytes_read_total': 61490...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': 'missing_model_context', 'status': 'not_measured'}, 'budgets': {'bytes_read_total': 61490...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_ test_M1_04_missing_mu_precedes_zero_boundary[finite_drive-not_applicable-finite_drive] _
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_04_missing_mu_precedes1/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+unavailable = 'finite_drive', status = 'not_applicable', reason = 'finite_drive'
+
+    @pytest.mark.parametrize('unavailable,status,reason', [
+        ('missing_context', 'not_measured', 'missing_model_context'),
+        ('finite_drive', 'not_applicable', 'finite_drive'),
+        ('unequal_lo', 'not_applicable', 'unequal_LO_temperature'),
+        ('ee', 'unsupported_context', 'unsupported_electron_electron_closure'),
+        ('empty', 'not_measured', 'empty_represented_spectrum'),
+        ('iteration_limit', 'algorithm_limit', 'algorithm_limit')])
+    def test_M1_04_missing_mu_precedes_zero_boundary(archive, unavailable, status, reason):
+        m1_archive(archive, zero_boundary=True)
+        options = {}
+        if unavailable == 'missing_context':
+            del archive[1]['stationary_assessment']['model_context']
+            publish(archive[0], archive[1])
+        elif unavailable == 'finite_drive':
+            mutate(archive, lambda h: h['inputs/F_bias_V_per_m'].__setitem__((), 1))
+        elif unavailable == 'unequal_lo':
+            mutate(archive, lambda h: h['inputs/T_LO_K'].__setitem__((), 71))
+        elif unavailable == 'ee':
+            archive[1]['stationary_assessment']['model_context']['physical_models']['electron_electron']['mode'] = 'closure'
+            publish(archive[0], archive[1])
+        elif unavailable == 'empty':
+            mutate(archive, lambda h: replace_complex(h, 'state_dimensionless/A', np.zeros((1, 2, 2, 2), complex)))
+        else:
+            options['mu_max_iterations'] = 1
+        report = diagnose(archive, **options)
+        assert report['mu']['status'] == status and report['mu']['reason'] == reason
+        assert report['mu']['value_relative_eV'] is None
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:826: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': 'finite_drive', 'status': 'not_applicable'}, 'budgets': {'bytes_read_total': 615180, 'ene...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': 'finite_drive', 'status': 'not_applicable'}, 'budgets': {'bytes_read_total': 615180, 'ene...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_ test_M1_04_missing_mu_precedes_zero_boundary[unequal_lo-not_applicable-unequal_LO_temperature] _
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_04_missing_mu_precedes2/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+unavailable = 'unequal_lo', status = 'not_applicable'
+reason = 'unequal_LO_temperature'
+
+    @pytest.mark.parametrize('unavailable,status,reason', [
+        ('missing_context', 'not_measured', 'missing_model_context'),
+        ('finite_drive', 'not_applicable', 'finite_drive'),
+        ('unequal_lo', 'not_applicable', 'unequal_LO_temperature'),
+        ('ee', 'unsupported_context', 'unsupported_electron_electron_closure'),
+        ('empty', 'not_measured', 'empty_represented_spectrum'),
+        ('iteration_limit', 'algorithm_limit', 'algorithm_limit')])
+    def test_M1_04_missing_mu_precedes_zero_boundary(archive, unavailable, status, reason):
+        m1_archive(archive, zero_boundary=True)
+        options = {}
+        if unavailable == 'missing_context':
+            del archive[1]['stationary_assessment']['model_context']
+            publish(archive[0], archive[1])
+        elif unavailable == 'finite_drive':
+            mutate(archive, lambda h: h['inputs/F_bias_V_per_m'].__setitem__((), 1))
+        elif unavailable == 'unequal_lo':
+            mutate(archive, lambda h: h['inputs/T_LO_K'].__setitem__((), 71))
+        elif unavailable == 'ee':
+            archive[1]['stationary_assessment']['model_context']['physical_models']['electron_electron']['mode'] = 'closure'
+            publish(archive[0], archive[1])
+        elif unavailable == 'empty':
+            mutate(archive, lambda h: replace_complex(h, 'state_dimensionless/A', np.zeros((1, 2, 2, 2), complex)))
+        else:
+            options['mu_max_iterations'] = 1
+        report = diagnose(archive, **options)
+        assert report['mu']['status'] == status and report['mu']['reason'] == reason
+        assert report['mu']['value_relative_eV'] is None
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:826: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': 'unequal_LO_temperature', 'status': 'not_applicable'}, 'budgets': {'bytes_read_total': 61...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': 'unequal_LO_temperature', 'status': 'not_applicable'}, 'budgets': {'bytes_read_total': 61...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_ test_M1_04_missing_mu_precedes_zero_boundary[ee-unsupported_context-unsupported_electron_electron_closure] _
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_04_missing_mu_precedes3/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+unavailable = 'ee', status = 'unsupported_context'
+reason = 'unsupported_electron_electron_closure'
+
+    @pytest.mark.parametrize('unavailable,status,reason', [
+        ('missing_context', 'not_measured', 'missing_model_context'),
+        ('finite_drive', 'not_applicable', 'finite_drive'),
+        ('unequal_lo', 'not_applicable', 'unequal_LO_temperature'),
+        ('ee', 'unsupported_context', 'unsupported_electron_electron_closure'),
+        ('empty', 'not_measured', 'empty_represented_spectrum'),
+        ('iteration_limit', 'algorithm_limit', 'algorithm_limit')])
+    def test_M1_04_missing_mu_precedes_zero_boundary(archive, unavailable, status, reason):
+        m1_archive(archive, zero_boundary=True)
+        options = {}
+        if unavailable == 'missing_context':
+            del archive[1]['stationary_assessment']['model_context']
+            publish(archive[0], archive[1])
+        elif unavailable == 'finite_drive':
+            mutate(archive, lambda h: h['inputs/F_bias_V_per_m'].__setitem__((), 1))
+        elif unavailable == 'unequal_lo':
+            mutate(archive, lambda h: h['inputs/T_LO_K'].__setitem__((), 71))
+        elif unavailable == 'ee':
+            archive[1]['stationary_assessment']['model_context']['physical_models']['electron_electron']['mode'] = 'closure'
+            publish(archive[0], archive[1])
+        elif unavailable == 'empty':
+            mutate(archive, lambda h: replace_complex(h, 'state_dimensionless/A', np.zeros((1, 2, 2, 2), complex)))
+        else:
+            options['mu_max_iterations'] = 1
+        report = diagnose(archive, **options)
+        assert report['mu']['status'] == status and report['mu']['reason'] == reason
+        assert report['mu']['value_relative_eV'] is None
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:826: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': 'unsupported_electron_electron_closure', 'status': 'unsupported_context'}, 'budgets': {'b...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': 'unsupported_electron_electron_closure', 'status': 'unsupported_context'}, 'budgets': {'b...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_ test_M1_04_missing_mu_precedes_zero_boundary[empty-not_measured-empty_represented_spectrum] _
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_04_missing_mu_precedes4/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+unavailable = 'empty', status = 'not_measured'
+reason = 'empty_represented_spectrum'
+
+    @pytest.mark.parametrize('unavailable,status,reason', [
+        ('missing_context', 'not_measured', 'missing_model_context'),
+        ('finite_drive', 'not_applicable', 'finite_drive'),
+        ('unequal_lo', 'not_applicable', 'unequal_LO_temperature'),
+        ('ee', 'unsupported_context', 'unsupported_electron_electron_closure'),
+        ('empty', 'not_measured', 'empty_represented_spectrum'),
+        ('iteration_limit', 'algorithm_limit', 'algorithm_limit')])
+    def test_M1_04_missing_mu_precedes_zero_boundary(archive, unavailable, status, reason):
+        m1_archive(archive, zero_boundary=True)
+        options = {}
+        if unavailable == 'missing_context':
+            del archive[1]['stationary_assessment']['model_context']
+            publish(archive[0], archive[1])
+        elif unavailable == 'finite_drive':
+            mutate(archive, lambda h: h['inputs/F_bias_V_per_m'].__setitem__((), 1))
+        elif unavailable == 'unequal_lo':
+            mutate(archive, lambda h: h['inputs/T_LO_K'].__setitem__((), 71))
+        elif unavailable == 'ee':
+            archive[1]['stationary_assessment']['model_context']['physical_models']['electron_electron']['mode'] = 'closure'
+            publish(archive[0], archive[1])
+        elif unavailable == 'empty':
+            mutate(archive, lambda h: replace_complex(h, 'state_dimensionless/A', np.zeros((1, 2, 2, 2), complex)))
+        else:
+            options['mu_max_iterations'] = 1
+        report = diagnose(archive, **options)
+        assert report['mu']['status'] == status and report['mu']['reason'] == reason
+        assert report['mu']['value_relative_eV'] is None
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:826: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_ test_M1_04_missing_mu_precedes_zero_boundary[iteration_limit-algorithm_limit-algorithm_limit] _
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_04_missing_mu_precedes5/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+unavailable = 'iteration_limit', status = 'algorithm_limit'
+reason = 'algorithm_limit'
+
+    @pytest.mark.parametrize('unavailable,status,reason', [
+        ('missing_context', 'not_measured', 'missing_model_context'),
+        ('finite_drive', 'not_applicable', 'finite_drive'),
+        ('unequal_lo', 'not_applicable', 'unequal_LO_temperature'),
+        ('ee', 'unsupported_context', 'unsupported_electron_electron_closure'),
+        ('empty', 'not_measured', 'empty_represented_spectrum'),
+        ('iteration_limit', 'algorithm_limit', 'algorithm_limit')])
+    def test_M1_04_missing_mu_precedes_zero_boundary(archive, unavailable, status, reason):
+        m1_archive(archive, zero_boundary=True)
+        options = {}
+        if unavailable == 'missing_context':
+            del archive[1]['stationary_assessment']['model_context']
+            publish(archive[0], archive[1])
+        elif unavailable == 'finite_drive':
+            mutate(archive, lambda h: h['inputs/F_bias_V_per_m'].__setitem__((), 1))
+        elif unavailable == 'unequal_lo':
+            mutate(archive, lambda h: h['inputs/T_LO_K'].__setitem__((), 71))
+        elif unavailable == 'ee':
+            archive[1]['stationary_assessment']['model_context']['physical_models']['electron_electron']['mode'] = 'closure'
+            publish(archive[0], archive[1])
+        elif unavailable == 'empty':
+            mutate(archive, lambda h: replace_complex(h, 'state_dimensionless/A', np.zeros((1, 2, 2, 2), complex)))
+        else:
+            options['mu_max_iterations'] = 1
+        report = diagnose(archive, **options)
+        assert report['mu']['status'] == status and report['mu']['reason'] == reason
+        assert report['mu']['value_relative_eV'] is None
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:826: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...zed_common_z_A_per_m2': 0.0, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': 0.0, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+_____ test_M1_05_additive_healthy_compatibility_and_no_extra_matrix_reads ______
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_05_additive_healthy_co0/manufactured'), {'artifacts': [{'bytes': 26634....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7f6dad2520>
+
+    def test_M1_05_additive_healthy_compatibility_and_no_extra_matrix_reads(archive, monkeypatch):
+        # Existing nonuniform 5E fixture and its helper arithmetic are unchanged.
+        reads = []
+        original = StateReader.read
+        def read(reader, path, *args, **kwargs):
+            if path.startswith(('state_dimensionless/', 'selfenergy_dimensionless/')):
+                reads.append(path)
+            return original(reader, path, *args, **kwargs)
+        monkeypatch.setattr(StateReader, 'read', read)
+        report = diagnose(archive, mu_algorithm_abs_tol_eV=1e-12)
+>       bound = m1_bound_namespace(report)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:850: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 612748, 'energy_tile_nodes...zed_imaginary_A_per_m2': -9.33183578415511e-21, 'normalized_outward_A_per_m2': -7.173848759069241e-20, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 612748, 'energy_tile_nodes...zed_imaginary_A_per_m2': -9.33183578415511e-21, 'normalized_outward_A_per_m2': -7.173848759069241e-20, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+__________________ test_M1_06_bound_scalar_overflow_rejected ___________________
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_06_bound_scalar_overfl0/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+
+    def test_M1_06_bound_scalar_overflow_rejected(archive):
+        # Finite arrays/norms and small signed currents can coexist with an
+        # overflowing absolute bound term. Never publish measured Inf or null.
+        m1_archive(archive)
+        def enlarge(h):
+            for name in ('GL', 'GG'):
+                for part in ('real', 'imag'):
+                    ds = h[f'state_dimensionless/{name}/{part}']
+                    ds[...] = 64*ds[...]
+            h['scales/J0_A_per_m2'][()] = 1e308
+        mutate(archive, enlarge)
+>       error(archive, 'invalid_data')
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:875: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_06_bound_scalar_overfl0/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+code = 'invalid_data', kwargs = {}
+caught = <ExceptionInfo for raises contextmanager>
+
+    def error(archive, code, **kwargs):
+>       with pytest.raises(ContractError) as caught:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'qcl_negf_contracts.messages.ContractError'>
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:183: Failed
+_________________ test_M1_07_bound_report_cap_is_not_truncated _________________
+
+archive = (PosixPath('/tmp/qcl-SCI03-M1-RED-1/tmp/test_M1_07_bound_report_cap_is0/manufactured'), {'artifacts': [{'bytes': 28068....68930905-3.52472388j, -3.87059967-1.14103353j],
+         [-1.6348871 +1.48334358j, -7.138591  -3.7012275j ]]]]), ...})
+
+    def test_M1_07_bound_report_cap_is_not_truncated(archive):
+        m1_archive(archive)
+        report = diagnose(archive)
+>       m1_bound_namespace(report)
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:881: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+report = {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...75624989341, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+    def m1_bound_namespace(report):
+>       assert 'represented_current_bound' in report, 'missing SCI03-5.3 measured current-bound instrumentation'
+E       AssertionError: missing SCI03-5.3 measured current-bound instrumentation
+E       assert 'represented_current_bound' in {'applicability': {'reason': None, 'status': 'applicable'}, 'budgets': {'bytes_read_total': 615180, 'energy_tile_nodes...75624989341, 'normalized_imaginary_A_per_m2': 0.0, 'normalized_outward_A_per_m2': -0.0032675624989341, ...}, ...}, ...}
+
+components/qcl-negf-results/tests/test_equilibrium_diagnostics.py:614: AssertionError
+=========================== short test summary info ============================
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_01_literal_noncommuting_norms_terms_signs_and_weights[False]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_01_literal_noncommuting_norms_terms_signs_and_weights[True]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_02_full_complex_current_bound
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_03_zero_boundary_is_measured_zero_with_defined_mu
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_04_missing_mu_precedes_zero_boundary[missing_context-not_measured-missing_model_context]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_04_missing_mu_precedes_zero_boundary[finite_drive-not_applicable-finite_drive]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_04_missing_mu_precedes_zero_boundary[unequal_lo-not_applicable-unequal_LO_temperature]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_04_missing_mu_precedes_zero_boundary[ee-unsupported_context-unsupported_electron_electron_closure]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_04_missing_mu_precedes_zero_boundary[empty-not_measured-empty_represented_spectrum]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_04_missing_mu_precedes_zero_boundary[iteration_limit-algorithm_limit-algorithm_limit]
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_05_additive_healthy_compatibility_and_no_extra_matrix_reads
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_06_bound_scalar_overflow_rejected
+FAILED components/qcl-negf-results/tests/test_equilibrium_diagnostics.py::test_M1_07_bound_report_cap_is_not_truncated
+13 failed, 38 passed in 11.51s

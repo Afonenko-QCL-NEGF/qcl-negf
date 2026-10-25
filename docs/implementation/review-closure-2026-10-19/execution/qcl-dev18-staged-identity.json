@@ -1,0 +1,10 @@
+{
+  "baseline": "647055e6bed794ddfc15f0bca4e18468195079df",
+  "files": {
+    "src/infrastructure/runtime/filesystem_repository.jl": "44a1d6e907b985bdcd5fb89b73a50ca434ab6209462564d63936562317521849",
+    "test/infrastructure/runtime_checkpoint_durability_faults.jl": "db32630942eace2429ca7014df4caec66044fca2cd643386617a2c0413b1c69c"
+  },
+  "staged_diff_sha256": "6011c9637b709e4d8b3037beac65bf6bb98f4144414a9c4369718af8c1bff334",
+  "independent_review_sha256": "16cf99eda6ddb128598cdf0fa905bb034f803aaa4a8a48dfa0bf110123c4e4c8",
+  "targeted_receipt_sha256": "b8f811d1c3c802f1803c4cbd8cb31c82e3bdab6ac2fed80224a5ad33fa5fe7e1"
+}

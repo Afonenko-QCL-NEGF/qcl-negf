@@ -1,0 +1,4 @@
+Test Summary:                                              | Pass  Total  Time
+Independent literal omitted-diagonal direct and FFT PV map |   13     13  1.8s
+Test Summary:                                                      | Pass  Total  Time
+Center-only continuum PV separates omitted cell and finite support |  198    198  0.4s

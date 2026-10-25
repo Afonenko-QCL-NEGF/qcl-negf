@@ -1,0 +1,45 @@
+{
+  "stage": "C08_local_prepared_source_BIND_READY_not_native",
+  "observed_utc": "2026-10-19T17:22:36.076677+00:00",
+  "core_head": "90f1048d290d6ec9518754e288333c694fe874de",
+  "file_hashes": {
+    "src/QCLNEGF.jl": {
+      "sha256": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+      "bytes": 31400
+    },
+    "src/numerics/reference/final_audit.jl": {
+      "sha256": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+      "bytes": 30783
+    },
+    "src/numerics/reference/validation.jl": {
+      "sha256": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+      "bytes": 33446
+    },
+    "src/numerics/reference/poisson.jl": {
+      "sha256": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+      "bytes": 3329
+    },
+    "src/numerics/optimized/production_solver.jl": {
+      "sha256": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+      "bytes": 52380
+    },
+    "test/numerics/final_audit_evidence.jl": {
+      "sha256": "6a2e954230c119a92e11e70c5bc8d31376fc06e209faa907429b9f6ee13455b5",
+      "bytes": 38516
+    }
+  },
+  "runtime": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGFRunner.jl/.build/julia/bin/julia",
+  "runtime_sha256": "02618fb870c4b0f35976837605b39026b55ed998fc51dfe1edb95ae928c85d4f",
+  "prepared_project": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.build/local-julia-int01/import-phase-1/environment/julia",
+  "project_sha256": "859c6e7b2aedf4b58cd48731ea9a3970d70a43e018796472ec99550d186fdafe",
+  "manifest_sha256": "a6cb226a2d6fe990e9a067658c16b44acdbaf984e68c3474232a22f72d8d8b47",
+  "copy_equal_selected_root_locks": true,
+  "source_symlink_resolves": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+  "affinity_cpu_count": 12,
+  "memory_available_bytes": 12650749952,
+  "tmp_available_bytes": 16158109696,
+  "C08_max_total_calls": 8,
+  "C08_consumed": 0,
+  "first_call_limits": "existing JL-v5 tighter120s/1CPU/2GiB/sampleTMP16MiB/raw2MiB, no install/setup; samples not hard quota",
+  "SI07_targeted_slot": "wait until T05 pair completion"
+}

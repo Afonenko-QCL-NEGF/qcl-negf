@@ -1,0 +1,101 @@
+{
+  "format": "qcl-negf.sci07-source-design-identity.v2",
+  "date": "2026-10-20",
+  "status": "FROZEN_NARROW_D2_PENDING_INDEPENDENT_HIGH_R",
+  "admission_status": "needs_admission/needs_guard",
+  "outputs": [
+    {
+      "path": "/tmp/qcl-sci07-resource-design-v2.md",
+      "bytes": 16555,
+      "sha256": "fc78a0c77394f4d12a1c5633b7e4acb587429667abc106f5aa72c1dc4dd9d010"
+    },
+    {
+      "path": "/tmp/qcl-sci07-resource-design-v2-delta.json",
+      "bytes": 970,
+      "sha256": "2c8974770340f32233ff825009fc9c099ddc20f9534012262d21d4ed2d896667"
+    }
+  ],
+  "source_ledger": [
+    {
+      "path": "/tmp/qcl-sci07-resource-design.md",
+      "bytes": 42322,
+      "sha256": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635",
+      "charged_full_file_passes": 3
+    },
+    {
+      "path": "/tmp/qcl-sci07-resource-design-identity.json",
+      "bytes": 22478,
+      "sha256": "0d652cf597008ce67957d99c22e81a3ad147e31fd1ce620ed2dbdcff2b6b2479",
+      "charged_full_file_passes": 2
+    },
+    {
+      "path": "/tmp/qcl-sci07-resource-source-ledger.md",
+      "bytes": 11040,
+      "sha256": "cf625aefd68f7335e34a5cb07900ee743e8e6ba45142bd79dbe99c26824fedfe",
+      "charged_full_file_passes": 2
+    },
+    {
+      "path": "/tmp/qcl-sci07-resource-design-review.md",
+      "bytes": 23357,
+      "sha256": "48f97407846b4b179de2442e1295e8cc2028ed7d4e3ca9c2f28c8079ac5d4e67",
+      "charged_full_file_passes": 3
+    },
+    {
+      "owner": "Runner",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "path": "src/infrastructure/persistence/point_artifacts.jl",
+      "bytes": 77381,
+      "sha256": "9e8c1d8f624bb828134129c10226211968360950cbac9ffd82e247a8ec294cd4",
+      "charged_full_file_passes": 2
+    },
+    {
+      "owner": "Runner",
+      "revision": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "path": "src/composition/scratch_execution.jl",
+      "bytes": 8476,
+      "sha256": "cad52756bb47a6d1fa63cd8c86a03c4e4dcd0d9a4e12383a0671dd766697f395",
+      "charged_full_file_passes": 2
+    }
+  ],
+  "chronology": {
+    "initial_published_root": {
+      "revision": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+      "git_ls_tree_components": "160000 commit e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee\tcomponents/QCLNEGF.jl\n160000 commit 1acc165650fd4f4c2d49605cc679f90e3f6fcdae\tcomponents/QCLNEGFRunner.jl\n160000 commit d8f8092ca1c76523d85384b4bac8198d8bfa736b\tcomponents/qcl-negf-aiida\n160000 commit d791dea33f4628cf23c0b8552ebee9e51d7dd605\tcomponents/qcl-negf-contracts\n160000 commit f5bc368654414039f7368bb19ca3201fa7f29f9d\tcomponents/qcl-negf-platform\n160000 commit 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d\tcomponents/qcl-negf-portal\n160000 commit 3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731\tcomponents/qcl-negf-research\n160000 commit de70638a982f91b7e125ab1cfc70a2daef2a656d\tcomponents/qcl-negf-results\n"
+    },
+    "later_published_root": {
+      "revision": "469ef4ec36c1dfb967856108e5f9455429559c15",
+      "git_ls_tree_components": "160000 commit 9f4a96d032ad868ec010ce92d915bb81087c8d92\tcomponents/QCLNEGF.jl\n160000 commit fefaa27f194bfddf85dd51a0e255beef2218c06d\tcomponents/QCLNEGFRunner.jl\n160000 commit d8f8092ca1c76523d85384b4bac8198d8bfa736b\tcomponents/qcl-negf-aiida\n160000 commit d791dea33f4628cf23c0b8552ebee9e51d7dd605\tcomponents/qcl-negf-contracts\n160000 commit f729e2681224d6537538179ab760fefefd575003\tcomponents/qcl-negf-platform\n160000 commit 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d\tcomponents/qcl-negf-portal\n160000 commit 3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731\tcomponents/qcl-negf-research\n160000 commit de70638a982f91b7e125ab1cfc70a2daef2a656d\tcomponents/qcl-negf-results\n"
+    }
+  },
+  "chronology_erratum": "D1 metadata_snapshot_later.published_gitlinks was queried for initial e22, not later head469; final/native readiness not inferred",
+  "native_observations": "coordinator-reported partial READ_NATIVE; no raw native receipts consumed or ownership/READY inferred by author",
+  "scientific_scope_caps_changed": false,
+  "SCI08_ticket_count": 7,
+  "resource": {
+    "grant": {
+      "wall_minutes": 10,
+      "cpu": 1,
+      "ram_gib": 1,
+      "read_bytes": 1048576,
+      "report_bytes": 98304
+    },
+    "conservative_source_read_upper_bound_bytes": 452171,
+    "metadata_reserve_bytes": 16384,
+    "accounting": "full named files charged for ranged/rg/hash reads; physical IO/RSS not measured"
+  },
+  "actions": {
+    "target_runtime": false,
+    "native_server": false,
+    "imports_or_parsers": false,
+    "tests": 0,
+    "build": false,
+    "network": false,
+    "product_code": false,
+    "checkpoint_edits": false,
+    "git_mutations": false,
+    "science_submits": 0,
+    "ci_dispatches": 0,
+    "children": 0
+  },
+  "stop": "same independent high R; no SCI08 I/native execution"
+}

@@ -1,0 +1,37 @@
+{
+  "format": "qcl-negf.docs-routing-pure-harness-v9-independent-review.identity.v1",
+  "verdict": "PASS_SOURCE",
+  "blocking_findings": [],
+  "report": {
+    "path": "/tmp/qcl-docs-routing-pure-harness-v9-review.md",
+    "sha256": "33a3902a914e8f270999eb6b9bd169c300776b95288577e5f2085ccf524ef009"
+  },
+  "reviewed": {
+    "/tmp/qcl-docs-routing-pure-guard-v9.py": "e02576c6b421b158a00a570ca729b076737d47c1e79111606d15fb60a2cba01e",
+    "/tmp/qcl-docs-routing-pure-plan-v9.json": "e32f4b534b928cef44cc8e9f35f242e979752b12b70e9eea687c5cca3cc3b2af",
+    "/tmp/qcl-docs-routing-pure-check-v9.py": "1dd84dcdf977f458b960e6dd78dbb100e4d3c3c83a60e29430d630a455f91f1a",
+    "/tmp/qcl-docs-routing-pure-report-v9.md": "8a784485090caadb1486ae0b96632c04cf3c2cfc02c0d94dfcbdd1991b72dea7",
+    "/tmp/qcl-docs-routing-pure-identity-v9.json": "e6b1edbc38286abd1468fd269e0b526c3ba312e9ff0b529f8dd80e4a7873d09f",
+    "/tmp/qcl-docs-routing-pure-v8-to-v9.diff": "d5365c2e1a1cef4db4b2aa3704a46beb6f3d57009c0db9a6077c44e2652e8c16"
+  },
+  "actual_root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "actual_review_checkout": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "all_eight_submodule_statuses_read": true,
+  "exact_actual_diff_matches_saved_diff": true,
+  "source_counter_actual_before_root_extension": {"used": 11, "cap": 11, "status": "EXHAUSTED"},
+  "proposed_check4_counter": [11, 12],
+  "unit_attempt": "DOCS-ROUTING-CORRECTION-E1",
+  "unit_counter_unchanged": [90, 91],
+  "old_check3": {"verdict": "STOP_RECONCILE_NO_RERUN", "valid": 32, "unknown": 1, "cause": "UNKNOWN"},
+  "execution_counts": {"scripts_under_review": 0, "parser": 0, "import": 0, "compiler": 0, "tests": 0, "Deno": 0, "network": 0, "solver": 0, "child_agents": 0},
+  "mutations": {"product": 0, "CP": 0, "READY": 0, "git_index": 0, "review_deliverables_in_tmp": 2},
+  "limitations": [
+    "Source-only verdict; not execution grant or runtime/scientific/native acceptance",
+    "Root finite source extension and fresh admission remain required before CHECK4",
+    "No diagnostic execution and no causefixed claim",
+    "Startup failure before RSS sampling may have no failure event; cannot establish measured startup RSS",
+    "One aggregate tool response truncated; full diff reread and exact comparison performed",
+    "Total tool-output ceiling64KiB compliance not established; no claim of compliance",
+    "Physical review CPU/RSS/IO not measured"
+  ]
+}

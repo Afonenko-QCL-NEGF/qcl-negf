@@ -1,0 +1,85 @@
+Check tests/docs_static_slice_test.ts
+running 56 tests from ./tests/docs_static_slice_test.ts
+DOC06 positive: source numbers stay separate and all ten classes survive ... ok (62ms)
+DOC06 missing source: runner/src/application/configuration_types.jl ... ok (6ms)
+DOC06 missing source: contracts/src/qcl_negf_contracts/schemas/run.schema.json ... ok (5ms)
+DOC06 refuses receipt hash mismatch ... ok (5ms)
+DOC06 refuses nonallowlisted input ../private/secret.jl ... ok (2ms)
+DOC06 refuses nonallowlisted input /private/secret.jl ... ok (1ms)
+DOC06 refuses nonallowlisted input runner/not-allowlisted.jl ... ok (3ms)
+DOC06 refuses wrong owning component ... ok (3ms)
+DOC06 refuses symlink selected file even with matching bytes ... FAILED (1ms)
+DOC06 refuses symlink input ancestor ... FAILED (1ms)
+DOC06 refuses existing output and source overlap ... ok (1ms)
+DOC06 schema unsupported: invalid-json ... ok (6ms)
+DOC06 schema unsupported: duplicate-key ... ok (5ms)
+DOC06 schema unsupported: duplicate-selected-property ... ok (5ms)
+DOC06 schema unsupported: wrong-minimum-type ... ok (6ms)
+DOC06 schema unsupported: unsafe-integer ... ok (5ms)
+DOC06 schema unsupported: nonfinite-number ... ok (5ms)
+DOC06 schema unsupported: missing-ref ... ok (6ms)
+DOC06 schema unsupported: cyclic-ref ... ok (5ms)
+DOC06 schema unsupported: remote-ref ... ok (5ms)
+DOC06 schema unsupported: prototype-key ... ok (6ms)
+DOC06 schema unsupported: combinator ... ok (6ms)
+DOC06 local pointer escaping is decoded with own-key traversal ... ok (5ms)
+DOC06 packaged schema mismatch is explicit without replacing canonical authority ... ok (6ms)
+DOC06 schema default declaration is reported without applying it ... ok (5ms)
+DOC06 dynamic typed RHS remains unsupported: ENV["QCL_CHUNK"] ... ok (5ms)
+DOC06 dynamic typed RHS remains unsupported: compute_chunk() ... ok (5ms)
+DOC06 dynamic typed RHS remains unsupported: 32 + 32 ... ok (5ms)
+DOC06 dynamic typed RHS remains unsupported: @value 64 ... ok (5ms)
+DOC06 dynamic typed RHS remains unsupported: 9007199254740993 ... ok (6ms)
+DOC06 rejects false typed field match: comment ... ok (5ms)
+DOC06 rejects false typed field match: string ... ok (6ms)
+DOC06 rejects false typed field match: duplicate ... ok (5ms)
+DOC06 macro method is not typed inventory: @generate  ... ok (4ms)
+DOC06 macro method is not typed inventory: @eval  ... ok (5ms)
+DOC06 signature inside string is not a declaration ... ok (4ms)
+DOC06 YAML target is opaque unsupported: *chunk ... ok (5ms)
+DOC06 YAML target is opaque unsupported: !!int 64 ... ok (5ms)
+DOC06 YAML target is opaque unsupported: &chunk 64 ... ok (5ms)
+DOC06 YAML target is opaque unsupported: 64 + 1 ... ok (4ms)
+DOC06 YAML duplicate selected leaf is ambiguous ... ok (5ms)
+DOC06 refuses cap overrun: file-bytes ... ok (3ms)
+DOC06 refuses cap overrun: docstring ... ok (4ms)
+DOC06 lexical cap with healthy selected schema: json-depth ... ok (9ms)
+DOC06 lexical cap with healthy selected schema: json-string ... ok (11ms)
+DOC06 lexical cap with healthy selected schema: json-tokens ... ok (21ms)
+DOC06 refuses receipt-byte and source-count caps ... ok (5ms)
+DOC06 refuses source aggregate cap without truncated success ... ok (7ms)
+DOC06 Julia and valid JavaScript sentinels remain inert bytes ... ok (24ms)
+DOC06 invalid UTF-8 is refused even with matching receipt hash ... ok (2ms)
+DOC06 duplicate receipt path is refused ... ok (1ms)
+DOC06 wrong source byte length is refused ... ok (2ms)
+DOC06 duplicate required member is not a direct complete constraint ... ok (5ms)
+DOC06 local reference hop cap refuses a long acyclic chain ... ok (5ms)
+DOC06 false field context stays unknown: Cmd literal ... ok (10ms)
+DOC06 false field context stays unknown: inner constructor local ... ok (12ms)
+
+ ERRORS 
+
+DOC06 refuses symlink selected file even with matching bytes => ./tests/docs_static_slice_test.ts:377:6
+error: NotCapable: Deno.symlink() requires unscoped --allow-read and --allow-write permissions; path-scoped grants (e.g. --allow-write=<path>) are not supported because a symlink's target is only resolved when the link is traversed
+    await Deno.symlink(destination, `${f.snapshot}/${PATHS[0]}`);
+               ^
+    at Object.symlink (ext:deno_fs/30_fs.js:575:9)
+    at file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:382:16
+    at async fixture (file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:202:5)
+
+DOC06 refuses symlink input ancestor => ./tests/docs_static_slice_test.ts:385:6
+error: NotCapable: Deno.symlink() requires unscoped --allow-read and --allow-write permissions; path-scoped grants (e.g. --allow-write=<path>) are not supported because a symlink's target is only resolved when the link is traversed
+    await Deno.symlink(`${f.dir}/core-elsewhere`, `${f.snapshot}/core`);
+               ^
+    at Object.symlink (ext:deno_fs/30_fs.js:575:9)
+    at file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:388:16
+    at async fixture (file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/tests/docs_static_slice_test.ts:202:5)
+
+ FAILURES 
+
+DOC06 refuses symlink selected file even with matching bytes => ./tests/docs_static_slice_test.ts:377:6
+DOC06 refuses symlink input ancestor => ./tests/docs_static_slice_test.ts:385:6
+
+FAILED | 54 passed | 2 failed (408ms)
+
+error: Test failed

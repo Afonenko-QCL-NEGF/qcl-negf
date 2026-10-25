@@ -1,0 +1,91 @@
+{
+  "state": "retained_actual_Runner_synthetic_fixture_verified_after_call7",
+  "root": "/tmp/qcl-SCI05-C08-RUNNER-7/tmp/producer-fixture",
+  "backup_root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/.build/review-closure-coordination/producer-fixtures/SCI05-C08-RUNNER-7",
+  "operation_id": "SCI05-C08-RUNNER-7",
+  "Runner_head": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+  "Core_head": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+  "source_review": "002a592d503be8fbbce1dc4424a387617419fe3f19d0e4d31ea2ce7d7c4ea25a",
+  "call7_receipt_sha256": "a4f36879beea61bb97f6b42f1808179578b1bf259a748566f32c273c65a9a23f",
+  "call7_raw_sha256": "ffa7fa3f1d64008aca4f9b85953fad5d40ea0069810825d3606127e952d92c1b",
+  "final_identity": {
+    "point_id": "fixture-point",
+    "state_id": "2f4bd866cf1d51bacfae9505c3a5ac46afe104df1982149a2494da4431ccb998",
+    "execution_id": "fixture-execution",
+    "attempt": 2,
+    "plan_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "state_sequence": 1
+  },
+  "files": {
+    "archive/final/analysis.h5": {
+      "bytes": 400577,
+      "sha256": "0dd69512b8e3b8d4119abca5d1a00f251cedf59dbf36a2214992b984ccd15c15"
+    },
+    "archive/final/commit.json": {
+      "bytes": 84489,
+      "sha256": "8d6cb70ecb10f0f858ce4953416fb8e775547db2e23ca216bca43ddc891d2651"
+    },
+    "archive/final/physics.h5": {
+      "bytes": 483275,
+      "sha256": "685d41b2efc7b1d81c3e6ff5af7cbd911f93a6850f68142e77a4c95c9ee8f04f"
+    },
+    "archive/final/receipt.json": {
+      "bytes": 587,
+      "sha256": "0770f158101082417b51d95a559e2d8c3be1cb6c41656d757d951be6033a5f4a"
+    },
+    "archive/final/recovery.json": {
+      "bytes": 285,
+      "sha256": "8064f2ee481e006c664af1b9c8d30ce3a58ca5e5d53f6d638f875a92ae60bfc3"
+    },
+    "artifacts/current.json": {
+      "bytes": 215,
+      "sha256": "aa3538ab81957c16c457c26d7523bff16f9d070305ec0ba892875696bf190ec1"
+    },
+    "artifacts/generation-000001/analysis.h5": {
+      "bytes": 391063,
+      "sha256": "0f6ad684421d3448b16f78772dfb042de7d3ee1847f70863eab5fb0ed1b2245b"
+    },
+    "artifacts/generation-000001/commit.json": {
+      "bytes": 75628,
+      "sha256": "922fc700079e17e0e2da453235fab6a0e1a3e338b9744b2cbe729afc56731834"
+    },
+    "artifacts/generation-000001/physics.h5": {
+      "bytes": 476956,
+      "sha256": "0571c628212df88116acb38d99e600cda0cf5104d295b01c7b907b64108304d5"
+    },
+    "artifacts/generation-000001/receipt.json": {
+      "bytes": 587,
+      "sha256": "83099c1c770654f4533af9ccebb0ab7d4917bdaa26ca117d0a73b7f5339c982b"
+    },
+    "artifacts/generation-000001/recovery.json": {
+      "bytes": 285,
+      "sha256": "49b14f0b6cc734aaeb9509251ea5a2030e1591ae5f0ced3574a86c2fbb412d94"
+    },
+    "fixture-source.txt": {
+      "bytes": 227,
+      "sha256": "b07ad7654bb87bb5f70d28a5853a0110d955010fa2b0b78147287494764fd6aa"
+    },
+    "legacy/archive/final/commit.json": {
+      "bytes": 74925,
+      "sha256": "faf9e1ca18f3e69f9ede7c6e65459e9ee628e67c2e57e73654e163349a20590e"
+    },
+    "legacy/archive/final/physics.h5": {
+      "bytes": 473658,
+      "sha256": "cd3c75e92b5ca754b8d93b0262c6e29d6686e791f5ba7a056c159a4c2de25725"
+    },
+    "legacy/archive/final/receipt.json": {
+      "bytes": 587,
+      "sha256": "fc7bdef50046091f54dbee8002c19e7d5cea5cc8ec81b156a669cfc57cbd14e2"
+    },
+    "legacy/archive/final/recovery.json": {
+      "bytes": 285,
+      "sha256": "c1af886b9e6e1ebbdbb82570b48398a6274448404fdd2ee01ac9f2772fc0eb08"
+    }
+  },
+  "retained_bytes": 2463629,
+  "digest_verification_bytes_processed": 4927258,
+  "metric_limit": "logical bytes delivered to digest verification, not physical disk I/O; noHDFarraydeserialization",
+  "recorded_utc": "2026-10-19T18:39:05.232135+00:00",
+  "scientific_accepted": false,
+  "artifact_scope": "actual Julia writer-produced manufactured storage fixture; privateignoredbackup, no arrayscommitted"
+}

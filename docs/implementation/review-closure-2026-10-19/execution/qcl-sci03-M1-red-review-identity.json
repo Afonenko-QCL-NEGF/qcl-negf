@@ -1,0 +1,51 @@
+{
+  "schema": "qcl-sci03-M1-red-review-identity-v1",
+  "date": "2026-10-19",
+  "role": "independent high source reviewer",
+  "stage": "Phase1 RED sources and narrow harness delta; STOP",
+  "test_verdict": "changes_requested",
+  "harness_verdict": "approved_narrow_delta",
+  "findings": [{
+    "id": "R1",
+    "locator": "/tmp/qcl-sci03-M1-results-worktree/tests/test_equilibrium_diagnostics.py:716",
+    "symbol": "m1_check_literal_report",
+    "claim": "exact runtime raw sum_norm zero is not guaranteed by finite-mu Float64 full-defect arithmetic",
+    "evidence": "manual binary64 counterexample f=1/2-2^-54: rounded 1-f=1/2; diagonal defect sum=2^-53",
+    "decision": "use existing m1_close runtime engineering policy; retain exact dyadic f0 and zero-boundary controls; freeze new source before RED",
+    "executed": false
+  }],
+  "source_binding": {
+    "research_commit": "3ed8a9f",
+    "research_file_sha256": "61058d7b33b21e8b43232239569012567e764035dd15900b80d742bd9d6ed38c",
+    "results_base_commit": "33b1a39eab62b0c00532c4d6b30fa3279c06a5d3",
+    "test_sha256": "7d2a9d69a0d4cb02334b9b4617a09a9cb3746247eba17f7ebff364eb62ab8921",
+    "test_bytes": 46686,
+    "baseline_test_sha256": "ce35954b2503d7a910048d6e95bcc6b6b0c88eea40f8a018dc13bdf8ca4bbad0",
+    "baseline_prefix_bytes_compared": 29322,
+    "baseline_prefix_byte_equal": true,
+    "production_sha256": "3f8ee56390741e15bc2c709de67d4b0c80260733c99752d8fbbb4f538e3042e6",
+    "readme_sha256": "39c5c06b1335e6820b980ba3967a42ac25f8fad4b80a771e7297a5982d1363e9",
+    "patch_sha256": "8c7aa6f21518e86534135c99fec4d354a1162b546f03f8dd85598c9dcc7575b1",
+    "author_report_sha256": "dd95cd8eabc86f7978c11a0e0af457a449b02f1b721ef1779acb507b98848d7e",
+    "author_identity_sha256": "c501b2e6f762fc77ba5d84d467bb793ca3d2912de8e91b50fdfb897ad1e0a8ab",
+    "sole_diff": "tests/test_equilibrium_diagnostics.py +324/-0",
+    "diff_check": "no output",
+    "existing_production_and_readme_unchanged": true
+  },
+  "harness": {
+    "baseline": "/tmp/qcl-python-targeted-run-v6.py",
+    "baseline_sha256": "16e908e64bfc6fd9a4467897b9eade95cd8a353535610c52144c2ca912e41b75",
+    "candidate": "/tmp/qcl-python-sci03-m1-run-v1.py",
+    "candidate_sha256": "98d91c6795ca4c9425c7dd91a62a3619ca703a936ebac6097158924f7c42124b",
+    "delta": "exactly two 16*1024**2 to 32*1024**2 literals: TMP guard and receipt TMP limit",
+    "v6_guard_composition_preserved": true,
+    "actual_root_fixture_source_binding": "pending coordinator; /tmp fixture path directly rejected by preserved guard",
+    "executed": false
+  },
+  "predicted_red_not_executed": {"total_cases": 51, "failed": 13, "passed": 38, "missing_namespace_failures": 12, "overflow_missing_error_failure": 1},
+  "budget": {"wall_minutes_max": 20, "cpu_max": 1, "ram_bytes_max": 2147483648, "read_bytes_max": 3145728, "output_bytes_max": 98304, "logical_source_text_conservative_upper_bytes": 1572864, "physical_io_telemetry": "not instrumented", "root_execution_subtree_search": false},
+  "execution": {"imports": 0, "parsers": 0, "test_collection": 0, "pytest": 0, "hdf_reads": 0, "julia": 0, "solver": 0, "build": 0, "network": 0, "server": 0, "source_writes": 0, "git_mutations": 0, "children": 0, "M1_python_calls_consumed": 0, "C08_calls_consumed": 0},
+  "scientific_acceptance": "not established; S1/model/tolerances unchanged; arrays/run/attempt/plan/admission/epsilon_J_abs/H absent",
+  "outputs": {"report": "/tmp/qcl-sci03-M1-red-review.md", "report_sha256": "ba228b23c4d9e17f0c1b35fb171b38cad0d6e75feba2efd9903cedce306299fc", "report_bytes": 15638, "identity": "/tmp/qcl-sci03-M1-red-review-identity.json"},
+  "stop": true
+}

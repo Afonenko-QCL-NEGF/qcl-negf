@@ -1,0 +1,135 @@
+Using CPython 3.14.7 interpreter at: /usr/bin/python3.14
+Creating virtual environment at: .venv
+Resolved 112 packages in 4ms
+   Building aiida-qcl-negf @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-aiida
+   Building qcl-negf-api @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal
+   Building qcl-negf-results @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-results
+   Building qcl-negf-contracts @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts
+Downloading cryptography (4.5MiB)
+Downloading pyarrow (47.8MiB)
+Downloading psycopg-binary (5.0MiB)
+Downloading numpy (15.9MiB)
+Downloading pygments (1.2MiB)
+Downloading pydantic-core (2.0MiB)
+Downloading sqlalchemy (4.4MiB)
+Downloading pynacl (1.3MiB)
+Downloading aiida-core (1.4MiB)
+Downloading h5py (5.2MiB)
+Downloading jedi (1.5MiB)
+ Downloaded pygments
+ Downloaded pynacl
+ Downloaded aiida-core
+ Downloaded jedi
+ Downloaded pydantic-core
+ Downloaded sqlalchemy
+ Downloaded cryptography
+ Downloaded psycopg-binary
+ Downloaded h5py
+      Built aiida-qcl-negf @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-aiida
+      Built qcl-negf-contracts @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts
+      Built qcl-negf-results @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-results
+      Built qcl-negf-api @ file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal
+ Downloaded numpy
+ Downloaded pyarrow
+Prepared 97 packages in 12.56s
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 97 packages in 796ms
+ + aiida-core==2.9.2
+ + aiida-qcl-negf==0.2.0 (from file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-aiida)
+ + aio-pika==9.5.8
+ + aiormq==6.9.4
+ + alembic==1.20.0
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + archive-path==0.4.2
+ + asttokens==3.0.2
+ + asyncssh==2.22.0
+ + attrs==26.1.0
+ + bcrypt==5.0.0
+ + certifi==2026.7.22
+ + cffi==2.1.1
+ + charset-normalizer==3.5.1
+ + circus==0.19.0
+ + click==8.2.1
+ + click-spinner==0.1.11
+ + cryptography==50.0.1
+ + deprecation==2.1.0
+ + disk-objectstore==1.5.0
+ + docstring-parser==0.18.0
+ + executing==2.2.1
+ + fastapi==0.141.1
+ + graphviz==0.21
+ + greenback==1.3.0
+ + greenlet==3.5.6
+ + h11==0.16.0
+ + h5py==3.16.0
+ + idna==3.20
+ + ijson==3.5.1
+ + importlib-metadata==6.11.0
+ + iniconfig==2.3.0
+ + ipython==9.17.1
+ + ipython-pygments-lexers==1.1.1
+ + jedi==0.18.2
+ + jinja2==3.1.6
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + kiwipy==0.9.0
+ + mako==1.4.3
+ + markupsafe==3.0.3
+ + matplotlib-inline==0.2.2
+ + multidict==6.9.1
+ + numpy==2.5.3
+ + outcome==1.3.0.post0
+ + packaging==26.3
+ + pamqp==3.3.0
+ + paramiko==3.5.1
+ + parso==0.8.7
+ + pexpect==4.9.0
+ + pgsu==0.3.0
+ + pluggy==1.6.0
+ + plumpy==0.26.1
+ + prompt-toolkit==3.0.53
+ + propcache==0.5.4
+ + psutil==7.2.2
+ + psycopg==3.3.6
+ + psycopg-binary==3.3.6
+ + ptyprocess==0.7.0
+ + pure-eval==0.2.4
+ + pyarrow==25.0.1
+ + pycparser==3.0
+ + pydantic==2.13.5
+ + pydantic-core==2.46.5
+ + pygments==2.21.0
+ + pynacl==1.6.2
+ + pytest==8.4.2
+ + pytray==0.3.4
+ + pytz==2021.3
+ + pyyaml==6.0.3
+ + pyzmq==27.2.0
+ + qcl-negf-api==0.2.0 (from file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-portal)
+ + qcl-negf-contracts==0.2.0 (from file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-contracts)
+ + qcl-negf-results==0.2.0 (from file:///home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/qcl-negf-results)
+ + referencing==0.37.0
+ + requests==2.34.2
+ + rpds-py==2026.6.3
+ + shortuuid==1.0.13
+ + sniffio==1.3.1
+ + sqlalchemy==2.1.1
+ + stack-data==0.6.3
+ + starlette==1.7.0
+ + tabulate==0.9.0
+ + tornado==6.5.10
+ + tqdm==4.70.1
+ + traitlets==5.16.1
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + upf-to-json==0.9.5
+ + urllib3==2.8.0
+ + uvicorn==0.54.0
+ + wcwidth==0.9.1
+ + wrapt==1.17.3
+ + yarl==1.25.1
+ + zipp==4.1.0

@@ -1,0 +1,80 @@
+{
+  "kind": "qcl-docs-routing-RED-diagnostic-source-erratum-v1",
+  "verdict": "PROPOSED_NARROW_DESIGN_REQUIRES_INDEPENDENT_HIGH_D_REVIEW",
+  "scope": "Actual DOCS-ROUTING-RED-1 diagnostics and future exact-artifact v3 predecessor validator only",
+  "root_head_observed": "e48e5b2ef16d3e6f1d633dd29c95f94d60ca8cc1",
+  "root_status_observed": [
+    " M AGENTS.md",
+    " M README.md",
+    " M TODO.md",
+    " M docs/architecture.md",
+    " M docs/single-server-deployment.md",
+    "?? docs/implementation/comprehensive-review-source-audit-2026-10-14.md",
+    "?? docs/implementation/comprehensive-review/",
+    "?? docs/implementation/exports/",
+    "?? docs/system/"
+  ],
+  "root_gitlinks_observed": {
+    "components/QCLNEGF.jl": "3108150dd1b6b1377470b384b15c26e272fe5c5d",
+    "components/QCLNEGFRunner.jl": "0c53c6d0f68e0b25fce79388db831da6fc3ae856",
+    "components/qcl-negf-aiida": "69aa1309c8465a838e4778b9dff464a306229f01",
+    "components/qcl-negf-contracts": "923e0c6cd9cbbe63bd1fb9c77892ef171385ed76",
+    "components/qcl-negf-platform": "4ce214e29b72276157b10a9267e2f30fef4ac66f",
+    "components/qcl-negf-portal": "10b6c871bb89cce4f2bdc1c4cdaa91e500111ceb",
+    "components/qcl-negf-research": "5458212063a41051328ef8b5d14d63d5ac7dc781",
+    "components/qcl-negf-results": "fe27a2a9ed065f9afacecc84113311f30d0c68d6"
+  },
+  "fixture_worktree_head": "e22d7bb64e4b6c91fdd10e51dcbb818d1aee3b4b",
+  "fixture_worktree_status_observed": "?? tests/docs_test_routing_test.ts",
+  "predecessor": {
+    "attempt": "DOCS-ROUTING-RED-1",
+    "original_classification_unchanged": "completed_inconclusive_or_guardfailure_preserve_no_rerun",
+    "harness_sha256": "0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7",
+    "plan_sha256": "5147cab0a8df1d50fb908b3c247e8c7b0e11852ee01a990f8a35228b3e70157a",
+    "fixture_sha256": "04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3",
+    "runtime_sha256_receipt_binding_not_new_measurement": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c",
+    "receipt_sha256": "e874825467896121a89e7c0d31272ed5b923da8b0cc08e30846adca56c6806b0",
+    "raw_sha256": "6b044ed571751341f215353d5dafd384dcf009a70c4b471595ebdcb53b8589ad",
+    "raw_bytes": 765,
+    "nominal_registrations": 227,
+    "observed_engine_tests": null,
+    "product_calls_consumed": 1,
+    "product_calls_total_cap": 2,
+    "only_remaining_attempt": "DOCS-ROUTING-GREEN-1"
+  },
+  "source_finding": {
+    "TS2307": "Missing fixture import ../ops/docs_tests.ts at13:8",
+    "TS7006": "At311:36, result.steps derives solely from unresolved imported runChecks at303; absent contextual map signature explains implicit-any callback",
+    "independent_fixture_defect_established": false,
+    "limitation": "No executed counterfactual or actual future helper typing; a residual typing error must fail GREEN",
+    "v3_design": "Pin exact immutable v2 ancestor H/P/test/runtime/receipt/raw separately from current v3 READY H/P; full normalized raw layout equality plus exact raw hash; preserve inconclusive classification"
+  },
+  "outputs": {
+    "/tmp/qcl-docs-routing-RED-diagnostic-erratum.md": {
+      "bytes": 15954,
+      "sha256": "6dfb097abf97aeabd9114354c987b5846fd19f449c4d0bfc2168299a1e03383b"
+    },
+    "/tmp/qcl-docs-routing-RED-diagnostic-erratum-read-ledger.md": {
+      "bytes": 2590,
+      "sha256": "a366b49c742dd0b632dad98afe84fdf813e23b83137e36c57561d8e963c0e20c"
+    }
+  },
+  "actions": {
+    "new_product_calls": 0,
+    "target_harness_guard_import_compile_parser_typecheck_test": 0,
+    "runtime_probes": 0,
+    "network_native": 0,
+    "product_fixture_CP_git_mutations": 0,
+    "v3_harness_plan_authored": 0,
+    "acceptance_eligibility_READY_authored": 0
+  },
+  "resources": {
+    "granted": "10min/1CPU/1GiB/1MiB source reads/64KiB output",
+    "conservative_logical_read_bound_bytes_including_verification_and_reserves": 983040,
+    "generated_deliverables_cap_bytes": 65536,
+    "tool_transcript_output_bytes": "not_measured; batch truncations; aggregate cap compliance not claimed",
+    "physical_IO_CPU_RSS_wall": "not_measured; source-only work; no runtime limiter installed"
+  },
+  "next_gate": "Independent high D review of exact erratum; then separate medium implementation and source review; no execution granted here",
+  "stop": true
+}

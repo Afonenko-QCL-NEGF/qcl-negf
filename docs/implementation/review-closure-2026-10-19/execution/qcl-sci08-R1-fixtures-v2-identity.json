@@ -1,0 +1,74 @@
+{
+  "stage": "SOURCE_ONLY_FIXTURE_V2_D3",
+  "runner_worktree": "/tmp/qcl-sci08-r1-runner-worktree",
+  "head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+  "branch": "codex/review-closure-sci08-r1-checked-resources",
+  "status": " M test/application/execution_resource_contract.jl\n M test/infrastructure/linux_process_resource_probe.jl\n M test/integration/native_phase_resource_contract.jl\n?? test/contracts/checked_storage_forecast.jl\n?? test/infrastructure/strict_campaign_resource_admission.jl\n",
+  "files": {
+    "test/contracts/checked_storage_forecast.jl": "f3f263ad0b1b13dcc8a20b5668bfdccb7bb7fa5d30937bd72d7793a0013d2cc4",
+    "test/infrastructure/strict_campaign_resource_admission.jl": "b6470f1d8e3b89b5ad71b9a8cb6cbcc9873221c85a2515cb8e3188306831b8c2",
+    "test/application/execution_resource_contract.jl": "42fb1de375ee1c6e3e0b4710dc045a8b308b3507790468eb6a112bd01e836aa9",
+    "test/infrastructure/linux_process_resource_probe.jl": "fb36182464c643c42951bcd89a0ad59f6f0118f0524050c3dbe0c0a80c3a581c",
+    "test/integration/native_phase_resource_contract.jl": "63d83e77025c74140cd67af9d9efb2b1bb7df735bebf7ac9c06c4c16e3476a6a"
+  },
+  "red": {
+    "path": "/tmp/qcl-sci08-R1-behavioral-red.jl",
+    "sha256": "c519b715f645de58a27dea3e19cda5ad9142b393347a07dd8e4265edad914028",
+    "assertions": 2,
+    "observed": false
+  },
+  "patch_sha256": "e989e733d13a4b96f870358a599c494177703185978aa19d81f4f5568d7819ae",
+  "inputs": {
+    "/tmp/qcl-sci08-R1-design.md": "16b07bbafce8235e0e103205e90c5b6e6b0db6c13c5bd4c883074f32888fe3c7",
+    "/tmp/qcl-sci08-R1-design-v2.md": "5a50afe3ca4014991dcb61d6dfb2879b2fef99e10f18347b5aa5d4eefe54d642",
+    "/tmp/qcl-sci08-R1-design-review.md": "a68ecf63af984355148b46d4a943cc5ca35adbe9da80102c512858d2b4847d69",
+    "/tmp/qcl-sci08-R1-design-v2-review.md": "23e50f07964c441f16b1e121f9d7952cf1bafd737544b81000a56a9da28e32fa"
+  },
+  "production_src_diff_empty": true,
+  "target_calls": 0,
+  "property_groups": 31,
+  "planned_assertions_if_all_reached": 349,
+  "assertions_by_group": {
+    "F1": 1,
+    "F2": 2,
+    "F3": 18,
+    "F4": 10,
+    "F5": 14,
+    "F6": 4,
+    "B1": 1,
+    "B2": 1,
+    "B3": 2,
+    "B4": 40,
+    "B5": 2,
+    "D1": 1,
+    "D2": 1,
+    "D3": 11,
+    "D4": 10,
+    "S1": 2,
+    "S2": 2,
+    "S3": 15,
+    "S4": 7,
+    "S5": 18,
+    "S6": 7,
+    "S7": 2,
+    "S8": 8,
+    "S9": 55,
+    "O1": 4,
+    "O2": 3,
+    "O3": 4,
+    "O4": 4
+  },
+  "legacy_assertions_by_file": {
+    "test/application/execution_resource_contract.jl": 55,
+    "test/infrastructure/linux_process_resource_probe.jl": 26,
+    "test/integration/native_phase_resource_contract.jl": 19
+  },
+  "previous_fixture_identity_sha256": "35684ed22b678cd1b74229aa29642a69d854da6a72b07f89b3987f47d97b0e27",
+  "previous_fixture_report_sha256": "9557a176d31c78c261846809c3945a555dad39c18363fcbf61a63a110a889b03",
+  "d3_inputs": {
+    "/tmp/qcl-sci08-R1-design-v3.md": "373a5da4ca765561e4a3ee46fa9c0bd06959a067ebf9f56c415e33666ad507c7",
+    "/tmp/qcl-sci08-R1-design-v3-review.md": "7b8108df1708f103a988ca567feb0e50c8b8c8f455ac657217033ed692c0ff46"
+  },
+  "integration_old_assertions_preserved_textually": true,
+  "integration_new_assertions": 4
+}

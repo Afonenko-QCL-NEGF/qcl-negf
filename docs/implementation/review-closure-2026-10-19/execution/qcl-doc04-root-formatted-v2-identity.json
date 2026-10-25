@@ -1,0 +1,35 @@
+{
+  "stage": "corrective_formattedv2_CPP_pending",
+  "worktree": "/tmp/qcl-doc04-root-worktree",
+  "base": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "files": {
+    "ops/docs/assemble.py": {
+      "sha256": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+      "bytes": 33127
+    },
+    "ops/docs/math-render.mjs": {
+      "sha256": "585dfa5bd02c7968d089d2b746d611c4d137487232c7c20e2639851ee5450433",
+      "bytes": 20731
+    },
+    "ops/docs/pilot-plan.json": {
+      "sha256": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50",
+      "bytes": 2120
+    },
+    "tests/test_docs_assembly.py": {
+      "sha256": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca",
+      "bytes": 22976
+    },
+    "tests/docs_math_test.mjs": {
+      "sha256": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7",
+      "bytes": 14430
+    }
+  },
+  "functional_v2_identity": "fd1048ec166a299689b8bd093c84a76b934a538bb0db90d052778e7c3fbd4117",
+  "full_patch": "78d3a7116f287bd95538a79f06ad3858fff9c7ba2291dc17cbb198d02e915322",
+  "format_delta": "774be7b4962a097ce00f44ce13a681c156483490dd8b11bd8d4c17ea063256f4",
+  "format_receipt": "bc7d3271ad7be9dd68284b78ce9c7ac5189e7757eea28228d056c0337050ec5e",
+  "lint_receipt": "a32b62c413d75b9e691ea086dcc299fa36598eb08724ee4a342c219e4a595674",
+  "unit_calls_used": 2,
+  "unit_calls_max": 4,
+  "stop": "independentR2 beforeRootsolePY+NODE_GREEN"
+}

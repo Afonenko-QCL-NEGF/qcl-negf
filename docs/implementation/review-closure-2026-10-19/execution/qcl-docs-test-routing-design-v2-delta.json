@@ -1,0 +1,11 @@
+{
+  "format": "qcl-negf.docs-test-routing-design-delta.v1",
+  "parent_design_sha256": "fb8ca769d5406150ecac0381d8dbe250a2515664b16417dead7f4ebba5a88270",
+  "review_sha256": "9e16ff7519453db4661833455450da9d83c72b5f76c9eefd4fb27370da812930",
+  "changes": [
+    {"review": "R1", "d1_sections": [3,4,6,7], "d2_sections": [2,3,6], "delta": "exact three-entry units map with path/hash/positive expected_tests/report_format; separate base-task vs dedicated-unit receipts and scope"},
+    {"review": "R2", "d1_sections": [3,4,6,7], "d2_sections": [2,4,5,6], "delta": "exact empty loader_env; exact dedicated clearEnv maps including Python; base existing inherited behavior explicit; retained-only preflight versions with no tool execution"}
+  ],
+  "preserved": ["original frozen D/R/source ledger", "exact two exclusions", "mandatory aggregate coverage", "existing frameworks and test bodies", "workflow/default/targeted scopes", "external native/admission/resource gates", "sole final CI budget"],
+  "no_product_edits_or_runtime": true
+}

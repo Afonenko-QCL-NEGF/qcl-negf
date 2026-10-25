@@ -1,0 +1,40 @@
+{
+  "task": "DOC04",
+  "attempt": "NODE-GREEN-E1",
+  "started_utc": "2026-10-20T03:59:11.174302+00:00",
+  "recorded_at_utc": "2026-10-20T03:59:11.623255+00:00",
+  "command": [
+    "/nix/store/frlyjd2wya3rk8xmdc98yq3x0rhpkh9n-nodejs-24.21.0/bin/node",
+    "--test",
+    "tests/docs_math_test.mjs"
+  ],
+  "cwd": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "harness_sha256": "eb55de0a1c668723871ea1ae142630df43b024d164fd9564f36be3df68187195",
+  "fixture_sha256": {
+    "tests/docs_math_test.mjs": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7"
+  },
+  "exit_code": 0,
+  "wall_seconds": 0.449,
+  "sampled_peak_process_tree_RSS_bytes": 172105728,
+  "sampled_owned_temporary_bytes_peak": 0,
+  "stdout_stderr_bytes": 1503,
+  "output_envelope_overrun": false,
+  "guard_error": null,
+  "stop_reason": null,
+  "raw_capture_complete": true,
+  "raw_capture_error": null,
+  "limits": {
+    "wall_seconds": 90,
+    "CPU_affinity_count": 1,
+    "sampled_process_tree_RSS_bytes": 1073741824,
+    "temporary_bytes": 33554432,
+    "output_bytes": 2097152,
+    "caveat": "RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure"
+  },
+  "environment": "source-bound local root units: NODE; offline no setup/solver/fullCI; Node no network-call witness is source-based, Deno no net/run permission",
+  "runtime_sha256": "decd3927d7a6b9f7c00a58da94f209ea92377a647fd232d4d865ba0e3a28e928",
+  "original_log": "/tmp/qcl-DOC04-NODE-GREEN-E1/original.log",
+  "temporary_sampler_sha256": "16a038c0c3a530e30989965593c1c66cfac1df841178d3ad849a9f03e292b12e",
+  "owned_temporary_samples_completed": 6,
+  "owned_temporary_metric": "Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof."
+}

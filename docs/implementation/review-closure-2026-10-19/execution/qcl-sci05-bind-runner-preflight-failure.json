@@ -1,0 +1,12 @@
+{
+  "tool_chunk_id": "504abf",
+  "original_script_sha256": "7851885d4c5531cec4d5dd195dc35cc807ab910900d8f729534ed1e6ab95e350",
+  "original_script_preserved": "/tmp/qcl-sci05-bind-runner-v3-preflight-failed-v1.py",
+  "exit_code": 1,
+  "failure": "FileNotFoundError for new untracked target test during read-only comparison before any git switch/copy/stage/commit",
+  "fresh_readback_HEAD": "9378396a3681c1eddf2c62f16674834fc4465583",
+  "fresh_status": "clean",
+  "mutations": 0,
+  "C08_submits": 0,
+  "fix": "new test absence is expected; classify as changed without reading nonexistent target"
+}

@@ -1,5 +1,11 @@
 # SCI01–SCI15: автономный scientific handoff
 
+**Дополнение 2026-10-24: принято упрощение контроля ресурсов.** Действует
+[ресурсная поправка](resource-policy-2026-10-24.md) для initial/production S1.
+Исторические PLAN/standby ниже не отменяют позднейшие активированные grants;
+их повторное утверждение не требуется. Scientific criteria и technical BIND
+с fresh admission сохраняются; поправка сама по себе не является runtime READY.
+
 2026-10-19: **PLAN; S1 без e–e согласован, approved_standby; EXEC не активирован**.
 [P1](operator-permissions.md) фиксирует прямой ответ оператора и имеет приоритет
 по разрешениям и caps. Solver/imports/tests/install/
@@ -143,7 +149,7 @@ accuracy refinements до cause review. Один node/threaded Julia process, BL
 fresh CPUs/RAM, allocated core-hours=Σallocated CPUs×charged wall, actual CPU/queue
 отдельно. CP задаёт deadline/concurrency/reserves; parallelism grant не умножает.
 Принят весь conditional S1, а не только W1; для него обязательны P1 concurrency≤2
-и byte ceilings. Combined final config не возникает из «лучших»
+и resource budgets по [поправке](resource-policy-2026-10-24.md). Combined final config не возникает из «лучших»
 чисел автоматически. H не для подбора thresholds; unmeasured axis unknown.
 Embedding4→8 — boundary-model sensitivity вне numerical pass/default cap,
 новое human model decision.
@@ -153,25 +159,29 @@ Embedding4→8 — boundary-model sensitivity вне numerical pass/default cap,
 Fresh host/VM/cgroup/cpuset/quota/allocation/foreign reserves, Code/release/storage
 даёт platform линия; four roles/nginx/native worker/trust/staging/restore/CI
 свои gates. Одна B0 ComplexF64 array16×30721×11×5²=135172400 bytes≈129 MiB.
-Rough B0 **12–13 GiB**, E1 **24–26 GiB**, не measured RSS/request. Exact estimator+
-Julia/native/allocator/HDF5/fresh-audit headroom обязательны; calibration имеет
+Rough B0 **12–13 GiB**, E1 **24–26 GiB**, не measured RSS/request. Консервативный
+estimator и Julia/native/HDF5/fresh-audit headroom нужны для fresh admission;
+полная теорема всех будущих native allocations не требуется. Calibration имеет
 отдельный finite cap. Auto_exact меняет equivalent chunks/workers, не physics.
 
-Recovery8 GiB нельзя считать достаточным: pending generation/receipt/pointers
-до prune при 2 retained; finals/logs/attempt/retrieval/export отдельно. SCI07:
-uncompressed inventory×cadence1800 s×72 h, peak resident и duplicates per filesystem,
-early durable-stop reserve; cumulative writes/reads/hashes/logs/telemetry/common
-allocation accounting через existing jobs/receipts. Quota≠cumulative writes,
-io.stat может не покрывать NFS — coverage/storage-side guard. Guard перед growth/
-phase и external log enforcement; нет counter→needs_guard, не READY. Raw/failures
-не удалять, ENOSPC/OOM не штатный stop, grid/basis/channels ради RAM не урезать.
+Recovery8 GiB нельзя считать достаточным: SCI07 учитывает 2 retained+pending,
+receipt/pointers до prune, finals/logs/retrieval/export и filesystem overhead;
+cadence1800 s×72 h задаёт плановую I/O оценку. Space/quota/reserve и RAM/CPU/tasks/
+time controls проверяются до запуска; checkpoint и early-stop margin сохраняются.
+Применимые I/O rate caps и shared telemetry заменяют обязательные guards перед
+каждым growth/phase/native effect и full source-program proof. Coverage local/NFS/
+controller counters явен: missing = unknown+gap, не pass. Quota и io.stat не дают
+точной cumulative гарантии; не требуется закрыть все native aliases до SCI.
+Raw/failures не удалять; OOM/ENOSPC/timeout — failed technical attempt, не durable
+STOP/scientific PASS. Grid/basis/channels ради RAM не урезать.
 
-Утверждённые resource ceilings — **P1/S1**, не measured capacity: W1 per execution
-resident128 GiB/writes2 TiB/reads4 TiB/log1 GiB; W2/W3/R/H resident256 GiB/
-writes4 TiB/reads8 TiB/log1 GiB. Shared campaign resident2 TiB/writes44 TiB/
-reads88 TiB/logs13 GiB, включая retrieval/export duplicates. SCI07/08 доказывают
-достаточность и enforceability до READY. W1-only 1 TiB/8 TiB proposal не выбран;
-молчаливое изменение caps либо capacity assumptions запрещены.
+**P1/S1 budgets**, не measured capacity: W1 resident128 GiB/log1 GiB; W2/W3/R/H
+resident256 GiB/log1 GiB; shared resident2 TiB/logs13 GiB — finite space budgets.
+Writes/reads W1 2/4 TiB, прочие 4/8 TiB, shared44/88 TiB — monitored planning/
+early-stop budgets с возможным recorded technical overshoot. Действует обычный
+Runner `:standalone` под внешними controls по [поправке](resource-policy-2026-10-24.md),
+без объявления прежнего `campaign_strict` accepted. W1-only proposal не выбран;
+числа budgets и assumptions не меняются молча.
 
 ## Будущие команды/API: сейчас не выполнять
 
@@ -371,36 +381,38 @@ receipt, zero denominator, missing context/channel. Их literal sums/inverse2
 не должны импортировать проверяемый reducer. Выход: independence/property/assertion matrix и report source binding; discovered
 code gap уходит owning I medium с готовым контрактом, не исправляется под видом audit.
 
-### SCI07 — измеримый resource/storage admission contract
+### SCI07 — оперативный resource/storage admission
 
 **D Sol ultra; owners Runner/Platform/AiiDA, R high.** P, SCI04, resource section,
 `auto_strategy.jl::_configured_production_estimate`, Core `estimate_production_memory`,
-Runner resources/results docs. Вопрос: помещаются ли attempt, audit и durable stop
-в реально выделенный envelope без изменения модели? Получить fresh host/cgroup
-и storage facts, оценить 2 retained+pending+final/retrieval/export peak, 1800 s
-cadence×72 h и cumulative bytes/logs. Positive: estimates+reserve+enforceable limits;
-negative:8 GiB pre-prune, OOM, NFS counter blind spot, quota без writes limit.
-Выход: finite signed admission inputs для CP-SCI и exact guard tickets SCI08;
-caps всех conditional waves, shared concurrency и campaign deadline. Design≤90 min,
-≤1 CPU/2 GiB; fresh server read только после доступа в platform scope.
-Без input/guard — `needs_admission`, не fallback к меньшему Nb/window/channels.
+Runner resources/results docs и [поправка 2026-10-24](resource-policy-2026-10-24.md).
+Получить fresh host/cgroup/storage facts; проверить консервативные memory/headroom,
+2 retained+pending+final/retrieval/export peak, quota/reserves/log space, 1800 s
+cadence×72 h planning I/O, actual platform limits и telemetry coverage/gaps.
+Выход: finite admission inputs для CP-SCI, shared concurrency/deadlines и только
+конкретные defects обычного рабочего пути для SCI08. Нет обязательных custom
+VFD/NBD/per-effect allocator/full native allocation/source-program proofs.
+Design≤90 min, ≤1 CPU/2 GiB; fresh server read только в platform scope.
+Нет нужного allocation/reserve/control — `needs_admission`; unknown I/O coverage
+фиксируется gap, не становится pass и не требует bespoke framework. Physics не урезать.
 
-### SCI08 — реализовать и fault-check недостающие guards
+### SCI08 — recovery и failure containment обычного пути
 
 **I medium; owning Runner/Platform, R high; Contracts только если нужен формат.**
-Вход frozen SCI07 contract/P, existing checkpoint/recovery/staging paths и C08.
-Вопрос: отказ произойдёт до uncontrolled write с сохранением последнего verified
-generation? Implementation locator сначала найти по current results docs/producer;
-не заменять enclosing atomic/fsync contract новым параллельным writer.
-Наблюдаемая — resident/cumulative bytes, early-stop reserve и receipt ownership;
-переполнение integer/unknown counter fail-closed, units bytes, near-zero budget
-означает refusal, не unlimited. Positive: exact-fit/new-generation publish;
-negative: one-byte-short до prune, temp pointer/receipt overhead, external log
-growth, failure/cancel mid-write, retained finals. C08 existing recovery и archive
-preflight плюс новые named owning regressions из ticket; quotas/NFS/LAN/powerloss
-требуют отдельного native infrastructure evidence. ≤2 code rounds в общем cap.
-Выход: candidate, logs, guard coverage/gaps; no runtime attempt до закрытия
-обязательных gaps. Нельзя понизить archive.full_final или удалить failure arrays.
+Вход SCI07/P, existing checkpoint/recovery/staging paths и C08. Проверить ordinary
+HDF5 supported ABI/roundtrip с independent readback/hashes, actual platform bounds,
+space/log controls и сохранение последней verified generation при failure/cancel
+mid-write. Partial generation не публикуется; existing atomic/fsync остаётся.
+Сохранить C08 recovery/archive preflight, tests рабочего native/trust пути и
+regressions его обнаруженных defects. Не требовать завершить legacy strict guards,
+каждый emitter/alias или controller NBD перед B0. Integer overflow/invalid identity
+в применяемых preflight остаётся refusal; missing cumulative counter — explicit
+unknown+gap, не unlimited/pass. Near-zero space/reserve означает refusal.
+Quotas/NFS/LAN/powerloss claims требуют соответствующего native evidence;
+OOM/ENOSPC не штатный durable STOP. Выход: actual checks, logs, coverage/gaps;
+≤2 code rounds в общем cap, runtime checks только в конечном admitted envelope.
+Нельзя понизить archive.full_final или удалить failure arrays. Legacy partial
+branches/evidence сохраняются без переклассификации старых failures в pass.
 
 ### SCI09 — frozen catalog/CP-SCI
 
@@ -511,14 +523,16 @@ gain/power/threshold. Этот каталог не включает finite-bias/
 
 ## Зависимости и closure
 
-01/02/06 параллельно; 02→03→04→05; fresh resources+04→07→08;
-03/07→12 design→09→CP-SCI→10→14 baseline review→11→approved W2/W3→H/14→15.
+01/02/06 параллельно; 02→03→04→05; fresh resources+04→07;
+07→08 только для проверок/defects ordinary рабочего пути, не legacy strict closure.
+03/07 и применимые recovery/trust checks→12 design→09→CP-SCI→10→14 baseline review→11→approved W2/W3→H/14→15.
 SCI13 адресно при failure; frozen D до I. Historical gap01 ограничивает старый
 run, не source design. Platform обеспечивает runtime/admission, не физику.
 
 Stop affected execution/wave: nonfinite/unrecoverable PSD/causality, bad identity/
 completeness, missing required audit/criterion, OOM/storage reserve, wall/attempt/
-bytes cap, ambiguous submit,2 identical failure fingerprints. Evidence не
+space/log cap, ambiguous submit,2 identical failure fingerprints. Monitored cumulative
+I/O threshold вызывает early-stop request с записью coverage/possible overshoot. Evidence не
 перезаписывать. Resume после stop proof/fresh admission, без reset iterations;
 новая model/weaker criteria/cost scope — human proposal.
 

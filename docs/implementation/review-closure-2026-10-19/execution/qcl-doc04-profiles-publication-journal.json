@@ -1,0 +1,53 @@
+{
+  "CP_CODE": "05e032597606fb447528081d66ec1f59e641e5e5231a3293b5a52bbb0c81c147",
+  "components": {
+    "QCLNEGF.jl": {
+      "state": "G1_merged",
+      "operation_id": "PUBLISH-DOC04-PROFILES-QCLNEGF.jl-1",
+      "worktree": "/tmp/qcl-doc04-core-profile-worktree",
+      "base": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+      "base_branch": "codex/review-closure-absolute-kernel-integration",
+      "branch": "codex/review-closure-docs-pilot-profile",
+      "files": {
+        "docs/make.jl": "b26574d7632747feee06094ef99ce96edcc35c97d794a2f243f6921c2de3812e"
+      },
+      "source_review": "05e032597606fb447528081d66ec1f59e641e5e5231a3293b5a52bbb0c81c147",
+      "runtime_controls": "not_run",
+      "native_acceptance": false,
+      "fullCI": 0,
+      "head": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+      "pr": 14,
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/14",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "8c0eca888c4648f7fde979b8c1a0a7a75c70d599",
+      "merged_at": "2026-10-20T04:49:06Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    },
+    "QCLNEGFRunner.jl": {
+      "state": "G1_merged",
+      "operation_id": "PUBLISH-DOC04-PROFILES-QCLNEGFRunner.jl-1",
+      "worktree": "/tmp/qcl-doc04-runner-profile-worktree",
+      "base": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+      "base_branch": "codex/review-closure-final-audit-writer-integration",
+      "branch": "codex/review-closure-docs-pilot-profile",
+      "files": {
+        "docs/make.jl": "6db896ca38bad4ac8ad6b5ba9103712d51383ca065709a1b856b25a99049f051"
+      },
+      "source_review": "05e032597606fb447528081d66ec1f59e641e5e5231a3293b5a52bbb0c81c147",
+      "runtime_controls": "not_run",
+      "native_acceptance": false,
+      "fullCI": 0,
+      "head": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+      "pr": 15,
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/pull/15",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "d3585f2bad8170ec9a420a4630fca9b99925ff6b",
+      "merged_at": "2026-10-20T04:49:29Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}

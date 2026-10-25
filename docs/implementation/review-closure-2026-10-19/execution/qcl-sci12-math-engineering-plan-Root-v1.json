@@ -1,0 +1,62 @@
+{
+  "operation_id": "ENG-REPLAN-SCI12-MATH-2CALLS-1",
+  "authority": "direct human standing engineering resource grant: разрешаю здесь и дальше использовать все доступные ресурсы для ускорения процесса разработки и развертывания",
+  "state": "finite_scope_authorized_requires_fresh_reviewed_guard_and_Root_READY_before_each_call",
+  "source_root": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "candidate_worktree": "/tmp/qcl-sci12-math-results-worktree",
+  "candidate_base": "de70638a982f91b7e125ab1cfc70a2daef2a656d",
+  "scope": "Eight accepted private MATH-I1-DYADIC helpers only; no native/HDF5 pair/solver/profile/build/fullCI",
+  "calls": [
+    {
+      "id": "SCI12-MATH-RED-1",
+      "before": 88,
+      "after": 89,
+      "product_module": "must_be_absent",
+      "expected": "97nominal=2literalPASS+95missingAPIassertFAIL;0setupERROR; structuralnewAPInotpreexistingphysicsbug"
+    },
+    {
+      "id": "SCI12-MATH-GREEN-1",
+      "before": 89,
+      "after": 90,
+      "product_module": "exact candidate source hash and independent highCPP required after RED",
+      "expected": "all97 independent fixtures pass with0fail/error/skip/xfail/xpass; no observed count assumed"
+    }
+  ],
+  "shared_limits": {
+    "maximum_new_calls": 2,
+    "global_calls_before": 88,
+    "global_ceiling": 90,
+    "each_wall_seconds": 90,
+    "aggregate_target_wall_seconds": 180,
+    "concurrent_calls": 1,
+    "CPU_affinity_count": 1,
+    "sampled_RSS_stop_bytes": 1073741824,
+    "sampled_owned_TMP_stop_bytes": 33554432,
+    "each_raw_bytes": 2097152,
+    "aggregate_raw_bytes": 4194304,
+    "RLIMIT_CPU_seconds": 90,
+    "no_automatic_reruns": true
+  },
+  "history": "Old engineering milestone81to88 consumed, RoutingGREEN1 failed retained; no reset. Source8of8 and C088of8 unchanged. No finalCI/scientific/native grant from this plan. Sampled stops are not hard RAM/disk/peak proof. Any failedcall remains consumed; no automatic correction cycle.",
+  "F2_review": {
+    "path": "/tmp/qcl-sci12-math-fixture-v2-review.md",
+    "sha256": "c855f328402a217225b13fda3821000a8a6e55ed6894235e42b57802f3e69ec9",
+    "bytes": 11360
+  },
+  "F2_identity": {
+    "path": "/tmp/qcl-sci12-math-fixture-v2-review-identity.json",
+    "sha256": "c2858755c08d6d680dd0bdf6f8f2e372e35ac9615ababda759a57c107aeff50e",
+    "bytes": 2651
+  },
+  "OPS_review": {
+    "path": "/tmp/qcl-sci12-map-ops-design-review.md",
+    "sha256": "3f0d7aa11fbc66cb3dbc5e66a0604d22eacb2e6705de165a4e1cc89198bd68d3",
+    "bytes": 16158
+  },
+  "fixture": {
+    "path": "/tmp/qcl-sci12-math-results-worktree/tests/test_equilibrium_map_math.py",
+    "sha256": "995b364b93a56c403859f9ad074d55ef4abb5dddb70e2ad0982f689cb1b45a6d",
+    "bytes": 17308
+  },
+  "runtime_import_scope": "Candidate Results ownership asserted by F2; explicit Contracts source environment is not by itself proof of actual imported origin. No fullinstalled/native/dependencyroute claim."
+}

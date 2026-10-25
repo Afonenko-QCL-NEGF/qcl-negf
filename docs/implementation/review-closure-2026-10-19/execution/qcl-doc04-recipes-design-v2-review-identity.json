@@ -1,0 +1,72 @@
+{
+  "format": "qcl-source-review-identity-v1",
+  "task": "DOC04 recipes D2 independent source-only review",
+  "reviewer": "/root/sci03_current_bound_review",
+  "verdict": "REQUEST_CHANGES",
+  "report": "/tmp/qcl-doc04-recipes-design-v2-review.md",
+  "report_sha256": "759039e4040d54652d288b4bc100fd238b2da679127a49b73be66a873583c017",
+  "report_bytes": 15636,
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head": "514cd9707a32cde60c630d60986973a898d35b18",
+  "selected_core": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+  "selected_runner": "1acc165650fd4f4c2d49605cc679f90e3f6fcdae",
+  "inputs": [
+    {
+      "path": "/tmp/qcl-doc04-recipes-design-v2.md",
+      "sha256": "ce582cc394d7dd70971c2a25929bf9362aad7d829403f1e2e0fba68a8ff65610"
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-source-effect-ledger-v2.md",
+      "sha256": "39eb90584c32d883e2db0bab32a500a31f7a6427eb0260c54b22315741fe77a4"
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-identity.json",
+      "sha256": "5938cc4edbd0f34f8911ed73bff72ccfbe0ba697c38f862251faa43eb02b3d1e"
+    },
+    {
+      "path": "/tmp/qcl-doc04-recipes-continuation-witnesses.txt",
+      "sha256": "38d6cc0f65c9b44eea7322a71d55bc04bff8ae2e84202726184b2f96c2a3c2c8"
+    }
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "locator": "D2:48; D1:94,100; Documenter/AXNMp/src/documents.jl:420",
+      "decision": "change",
+      "minimal_correction": "Freeze operator modules=Module[] instead of literal modules=[]"
+    },
+    {
+      "id": "R2",
+      "locator": "D1:99-105; Documenter/AXNMp/src/documents.jl:427; src/html/HTMLWriter.jl:825",
+      "decision": "change",
+      "minimal_correction": "Freeze explicit nonempty sitename for all pilot recipes, preserving existing owner names"
+    }
+  ],
+  "execution": {
+    "target_imports": 0,
+    "tests": 0,
+    "builds": 0,
+    "solver_runs": 0,
+    "network_calls": 0,
+    "children": 0,
+    "product_edits": 0,
+    "git_mutations": 0,
+    "checkpoint_writes": 0,
+    "C08_calls": 0
+  },
+  "resources": {
+    "read_cap_bytes": 2097152,
+    "read_bytes_exact": null,
+    "estimated_payload_MiB": "1.8-1.9",
+    "metered_resource_pass_claimed": false,
+    "physical_io_bytes": null,
+    "peak_rss_bytes": null,
+    "author_original_scan_status": "FAILED_RESOURCE_CAP",
+    "author_continuation_logical_read_bytes": 1142390,
+    "author_continuation_is_separate_authorization": true
+  },
+  "build_authorized": false,
+  "scientific_acceptance_claimed": false,
+  "next": "Narrow author correction of R1/R2; no implementation or execution granted by this review",
+  "stop": true
+}

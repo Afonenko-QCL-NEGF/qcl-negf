@@ -1,0 +1,310 @@
+--- /tmp/qcl-docs-routing-pure-guard-v8.py	2026-10-20 12:29:38.675549687 +0300
++++ /tmp/qcl-docs-routing-pure-guard-v9.py	2026-10-20 13:06:17.536315414 +0300
+@@ -21,9 +21,9 @@
+ import types
+ 
+ ROOT = pathlib.Path('/tmp/qcl-docs-test-routing-worktree')
+-PLAN = pathlib.Path('/tmp/qcl-docs-routing-pure-plan-v8.json')
++PLAN = pathlib.Path('/tmp/qcl-docs-routing-pure-plan-v9.json')
+ ATTEMPT = 'DOCS-ROUTING-CORRECTION-E1'
+-SCOPE = 'docs-routing-pure-local-engineering-v8'
++SCOPE = 'docs-routing-pure-local-engineering-v9'
+ ANCESTOR_SCOPE = 'docs-routing-pure-local-engineering-v1'
+ FIXTURE = 'tests/docs_test_routing_test.ts'
+ HELPER = 'ops/docs_tests.ts'
+@@ -41,6 +41,10 @@
+ V7_SOURCES = {
+  FIXTURE: '2639be2132a88adb3e1ccd204112180efa065089e9ade5cae87e38c970952f99',
+  HELPER: '68f0efb5b45a03f130a52d14279e427c83c11b317a3c244e43375dbac5b8d3f5'}
++FORMATTED = {HELPER:BASELINE[HELPER],
++ FIXTURE:'a629e366cdebacc9d6ffbef1458990cf00232d99ca3cb1668696c169fc4a1164'}
++FORMAT3_CPP = {'path':'/tmp/qcl-docs-routing-pure-format3-final-v8-review.md',
++ 'sha256':'8ac8702532f17c9fc43149578cfa64bc477bd69679bf5b403d7174b1c615c3b3'}
+ FORMAT1_SOURCES = {
+  FIXTURE: '8946e323023da597629f669dcb60c17bb6674f9c5a9bd9e2492dea280c35f16b',
+  HELPER: '38a56bff45bd7f7e36e8eb1a4542756b5225388d53827b6c24c73c9b059dc62b'}
+@@ -90,6 +94,20 @@
+  '/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-2/original.log':'04d40e18cad60bff4992e517b0a3b5e8bdab983c1944034cd919f20f827b8f91',
+  '/tmp/qcl-DOCS-ROUTING-GREEN-1/receipt.json':'ea7d990e99e87834148d10b8c7ec7c3e0ac0c701c152de967b6bbacb45d66cf3',
+  '/tmp/qcl-DOCS-ROUTING-GREEN-1/original.log':'f86a8761f4aac28e7798d14c76c2e8a9fe27c85f61daa4d093a21b4f4ac19b30'})
++CONTINUATION.update({
++ '/tmp/qcl-docs-routing-pure-guard-v8.py':'5cecec92f20bed186ab51b08b4b98585dde5452af5e4eef31ad27adbf386763b',
++ '/tmp/qcl-docs-routing-pure-plan-v8.json':'813afe65ddf7245eaf2562472398baf8f541463bba0d7022256ebc75f4cdaaa5',
++ '/tmp/qcl-docs-routing-pure-format-v8.py':'878571e3142b392a9fc3c5107db393cbd1c730e3136c19a776c978003e6fa838',
++ '/tmp/qcl-docs-routing-pure-lint-v8.py':'1410dbc054df7b292337b7fb1b7f9e7ca6e62a4e285881839954fdc82d6d3095',
++ '/tmp/qcl-docs-routing-pure-check-v8.py':'362a1744f4c7e7b216085fa8c4751b0cd4af8e8a9051d7268f6a29dffdfd495c',
++ '/tmp/qcl-docs-routing-pure-harness-v8-review.md':'e86dda23d6b98d9b03431c19a9b281f4ea87001feaf57431976a4cd7388347cf',
++ '/tmp/qcl-docs-routing-pure-format3-final-v8-review.md':FORMAT3_CPP['sha256'],
++ '/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/receipt.json':'26228b8059235d0c6f37ac32a08a4a65a3af5976058c34913f9ba83f0629b714',
++ '/tmp/qcl-DOCS-ROUTING-SOURCE-FORMAT-3/original.log':'16730458a0bb58d3ac5d7f9b94f775368ede6566c55f85dc0ccde4316bddd4d6',
++ '/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-3/receipt.json':'fc42be7624a2af8238a5bcc5059ef1b7469c4e79cad7fd661b38131433ebe5a8',
++ '/tmp/qcl-DOCS-ROUTING-SOURCE-LINT-3/original.log':'0ac7c2631e5af776de63c5209860d6c55979825c853537ecee2289736c3856fd',
++ '/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-3/receipt.json':'a399281f3159ffd88cc014a5fd8504110fb8c272e21472cab5404e3ff67eb05a',
++ '/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-3/original.log':'04d40e18cad60bff4992e517b0a3b5e8bdab983c1944034cd919f20f827b8f91'})
+ OLD_FIXTURE_SHA = '04589b3993e51885b2abc08cb516c7a6467709e3d278c593874c598ecaa9ecf3'
+ ANCESTORS = {
+  '/tmp/qcl-docs-routing-local-unit-run-v2.py': '0061c27ec61bf8ca15d6e94d304db695072b12adc3fe6ca8ddef2ee254df82e7',
+@@ -257,12 +275,18 @@
+     require(old_green['attempt'] == 'DOCS-ROUTING-GREEN-1'
+       and old_green['source_before'] == V7_SOURCES and old_green['source_after'] == V7_SOURCES,
+       'historical GREEN1 exact bytes retained; actual TAP230 has221pass9fail')
++    failed = json_buffer(buffers['/tmp/qcl-DOCS-ROUTING-SOURCE-CHECK-3/receipt.json'])
++    require(failed['stage'] == 'CHECK3' and failed['target_calls'] == 1
++      and failed['exit_code'] == 0 and failed['RSS_valid_samples'] == 32
++      and failed['RSS_unknown_samples'] == 1 and failed['stop_reason'] == 'attempted_live_RSS_unknown'
++      and failed['verdict'] == 'STOP_RECONCILE_NO_RERUN', 'CHECK3 guard failure retained; cause UNKNOWN')
+ 
+ def formatted_binding(ready, sources, receipt_refs):
+     # Future hashes/reports are unknown now. Trusted Root validates the review's
+     # substantive format equivalence AND full pure closure before issuing READY.
+     cpp, fmt = ready['accepted_cpp'], ready['format_binding']
+     require(type(cpp) is dict and set(cpp) == {'status','source_files','report_ref','pure_only_slice','baseline_cpp_ref'}, 'CPP binding schema')
++    require(sources == FORMATTED and cpp['report_ref'] == FORMAT3_CPP, 'fixed actual FORMAT3 review/source identity')
+     require(cpp['status'] == 'PASS_SOURCE_PURE_CLOSURE' and cpp['source_files'] == sources
+       and cpp['pure_only_slice'] is True and cpp['baseline_cpp_ref'] == PURE_CPP, 'current formatted CPP binding')
+     require(type(fmt) is dict and set(fmt) == {'status','unformatted_sources','formatted_sources','review_ref','receipt_refs'}, 'format binding schema')
+@@ -281,7 +305,7 @@
+     formatted_binding(ready,sources,fmt['receipt_refs'])
+     require(type(fmt['receipt_refs']) is list and len(fmt['receipt_refs']) == 3, 'three source tool receipts')
+     require(len({r['path'] for r in fmt['receipt_refs']}) == 3, 'distinct source receipts')
+-    for stage, ref in zip(('FORMAT3','LINT3','CHECK3'),fmt['receipt_refs']):
++    for stage, ref in zip(('FORMAT3','LINT3','CHECK4'),fmt['receipt_refs']):
+         source_receipt_ref(ref,stage,sources)
+     review = ready['accepted_guard_review']
+     require(type(review) is dict and set(review) == {'status','harness_sha256','plan_sha256','report_ref'}, 'guard review schema')
+@@ -317,32 +341,95 @@
+                 continue
+     return total
+ 
++RSS_FAILURE_DIAGNOSTICS = []
++RSS_DIAGNOSTIC_STATE = {'events_seen':0,'events_dropped':0,'capture_errors':0,
++                        'truncated':False,'birth_identity':'not_read_by_RSS_sampler'}
++
++def rss_failure(reason, context, exc=None):
++    # Observation only: never changes None/fail policy and never probes /proc.
++    RSS_DIAGNOSTIC_STATE['events_seen'] += 1
++    if len(RSS_FAILURE_DIAGNOSTICS) >= 4:
++        RSS_DIAGNOSTIC_STATE['events_dropped'] += 1
++        RSS_DIAGNOSTIC_STATE['truncated'] = True
++        return None
++    try:
++        event = dict(context)
++        event.update(reason=reason,errno=getattr(exc,'errno',None),
++          error_type=type(exc).__name__ if exc is not None else None,
++          error_text=str(exc)[:256] if exc is not None else None,
++          birth_identity=None,birth_identity_status='not_read',
++          diagnostic_status='captured',truncated=context['truncated'])
++        encoded = json.dumps(event,ensure_ascii=True,separators=(',',':')).encode('ascii')
++        if len(encoded) > 16000:
++            event = {key:event[key] for key in ('reason','step','pid','tid','path','errno','error_type')}
++            event.update(diagnostic_status='oversize_payload_omitted',truncated=True,
++                         status_raw_hex=None,task_census=None,children_raw_hex=None,
++                         birth_identity=None,birth_identity_status='not_read')
++        RSS_FAILURE_DIAGNOSTICS.append(event)
++        RSS_DIAGNOSTIC_STATE['truncated'] |= event['truncated']
++    except BaseException:
++        RSS_DIAGNOSTIC_STATE['capture_errors'] += 1
++        RSS_DIAGNOSTIC_STATE['truncated'] = True
++        RSS_FAILURE_DIAGNOSTICS.append({'reason':reason,'diagnostic_status':'capture_failed',
++          'truncated':True,'pid':None,'tid':None,'path':None,'errno':None,
++          'step':'unknown','status_raw_hex':None,'task_census':None,'birth_identity':None})
++    return None
++
+ def rss_tree(pid):
+     pending, seen, total = [pid], set(), 0
++    context = {'root_pid':pid,'pid':pid,'tid':None,'step':'start','path':None,
++      'status_raw_hex':None,'status_raw_bytes':None,'status_raw_truncated':None,
++      'task_census':None,'task_census_count':None,'task_census_truncated':None,
++      'children_raw_hex':None,'children_raw_bytes':None,'children_raw_truncated':None,
++      'truncated':False}
+     try:
+         while pending:
+             current = pending.pop()
+             if current in seen:
+                 continue
+             seen.add(current)
++            context.update(pid=current,tid=None,step='process_count',path=None,
++              status_raw_hex=None,status_raw_bytes=None,status_raw_truncated=None,
++              task_census=None,task_census_count=None,task_census_truncated=None,
++              children_raw_hex=None,children_raw_bytes=None,children_raw_truncated=None)
+             if len(seen) > 256:
+-                return None
++                return rss_failure('process_census_limit',context)
+             proc = pathlib.Path('/proc', str(current))
+-            rows = [line.split() for line in (proc/'status').read_text().splitlines() if line.startswith('VmRSS:')]
++            context.update(step='status_read',path=str(proc/'status'))
++            status_raw = (proc/'status').read_bytes()
++            context.update(status_raw_hex=status_raw[:3072].hex(),status_raw_bytes=len(status_raw),
++                           status_raw_truncated=len(status_raw)>3072)
++            context['truncated'] |= len(status_raw)>3072
++            context['step'] = 'status_decode'
++            status_text = status_raw.decode()
++            context['step'] = 'VmRSS_shape'
++            rows = [line.split() for line in status_text.splitlines() if line.startswith('VmRSS:')]
+             if len(rows) != 1 or len(rows[0]) != 3 or rows[0][2] != 'kB':
+-                return None
++                return rss_failure('VmRSS_shape_or_unit',context)
++            context['step'] = 'VmRSS_integer'
+             amount = int(rows[0][1])
+             if amount < 0:
+-                return None
++                return rss_failure('VmRSS_negative',context)
+             total += amount*1024
++            context.update(step='task_census',path=str(proc/'task'))
+             tasks = list((proc/'task').iterdir())
++            context.update(task_census=[task.name[:32] for task in tasks[:128]],
++              task_census_count=len(tasks),task_census_truncated=len(tasks)>128)
++            context['truncated'] |= len(tasks)>128
+             if not tasks:
+-                return None
++                return rss_failure('task_census_empty',context)
+             for task in tasks:
+-                pending.extend(int(item) for item in (task/'children').read_text().split())
+-        return total if seen else None
+-    except (OSError, ValueError):
+-        return None
++                context.update(step='task_children_read',tid=task.name[:32],path=str(task/'children'),
++                  children_raw_hex=None,children_raw_bytes=None,children_raw_truncated=None)
++                children_raw = (task/'children').read_bytes()
++                context.update(children_raw_hex=children_raw[:1024].hex(),children_raw_bytes=len(children_raw),
++                  children_raw_truncated=len(children_raw)>1024)
++                context['truncated'] |= len(children_raw)>1024
++                context['step'] = 'task_children_decode_or_integer'
++                pending.extend(int(item) for item in children_raw.decode().split())
++        return total if seen else rss_failure('empty_process_census',context)
++    except (OSError, ValueError) as exc:
++        return rss_failure('RSS_read_or_parse_failure',context,exc)
+ 
+ def child_limits():
+     os.setsid()
+@@ -369,8 +456,13 @@
+ 
+ def receipt_write(folder, record, name='receipt.json'):
+     try:
++        record.update(RSS_failure_diagnostics=RSS_FAILURE_DIAGNOSTICS,
++                      RSS_failure_diagnostic_state=dict(RSS_DIAGNOSTIC_STATE))
+         pending = folder/(name+'.pending')
+-        pending.write_text(json.dumps(record, indent=2, allow_nan=False)+'\n')
++        # Compact JSON bounds diagnostic bytes exactly; child original.log untouched.
++        payload = json.dumps(record,ensure_ascii=True,separators=(',',':'),allow_nan=False)+'\n'
++        require(len(payload.encode('ascii')) <= 262144,'receipt byte envelope')
++        pending.write_text(payload)
+         os.replace(pending, folder/name)
+         return True
+     except BaseException:
+@@ -645,13 +737,13 @@
+         signal.setitimer(signal.ITIMER_REAL,0)
+     return 0 if good and saved else 1
+ 
+-SOURCE_STAGES = {'FORMAT3': ('fmt',8,9), 'LINT3': ('lint',9,10), 'CHECK3': ('check',10,11)}
++SOURCE_STAGES = {'FORMAT3': ('fmt',8,9), 'LINT3': ('lint',9,10), 'CHECK4': ('check',11,12)}
+ SOURCE_TEMP = TEMP
+ 
+ def source_command(stage):
+     verb = SOURCE_STAGES[stage][0]
+     args = [str(RUNTIME),verb,'--config',str(CONFIG)]
+-    if stage == 'CHECK3':
++    if stage == 'CHECK4':
+         args += ['--no-lock','--no-npm','--no-remote']
+     return args+[HELPER,FIXTURE]
+ 
+@@ -664,19 +756,22 @@
+ def source_receipt_ref(ref, stage, sources):
+     attempt = source_attempt(stage)
+     folder = pathlib.Path('/tmp')/('qcl-'+attempt)
+-    record = json_buffer(ref_bytes(ref,str(folder/'receipt.json'),32768))
+-    require(stage in SOURCE_STAGES, 'only current v8 source prerequisites')
+-    wrapper_name = {'FORMAT3':'format','LINT3':'lint','CHECK3':'check'}[stage]
++    record = json_buffer(ref_bytes(ref,str(folder/'receipt.json'),262144))
++    require(stage in SOURCE_STAGES, 'retained exact FORMAT3/LINT3 or new CHECK4 only')
++    wrapper_name = {'FORMAT3':'format','LINT3':'lint','CHECK4':'check'}[stage]
+     _,prior_calls,after_calls = SOURCE_STAGES[stage]
+     expected_identity = {
+-      'scope':SCOPE,'stage':stage,'attempt':attempt,
+-      'guard_sha256':sha(read_file(pathlib.Path(__file__))),
+-      'plan_sha256':sha(read_file(PLAN,32768)),
+-      'wrapper_sha256':sha(read_file(pathlib.Path('/tmp/qcl-docs-routing-pure-'+wrapper_name+'-v8.py'))),
++      'scope':'docs-routing-pure-local-engineering-v8' if stage != 'CHECK4' else SCOPE,'stage':stage,'attempt':attempt,
++      'guard_sha256':CONTINUATION['/tmp/qcl-docs-routing-pure-guard-v8.py'] if stage != 'CHECK4' else sha(read_file(pathlib.Path(__file__))),
++      'plan_sha256':CONTINUATION['/tmp/qcl-docs-routing-pure-plan-v8.json'] if stage != 'CHECK4' else sha(read_file(PLAN,32768)),
++      'wrapper_sha256':CONTINUATION['/tmp/qcl-docs-routing-pure-'+wrapper_name+'-v8.py'] if stage != 'CHECK4' else sha(read_file(pathlib.Path('/tmp/qcl-docs-routing-pure-check-v9.py'))),
+       'source_before':BASELINE if stage == 'FORMAT3' else sources,
+       'source_after':sources,'command':source_command(stage),
+       'runtime_sha256':RUNTIME_SHA,'config_sha256':CONFIG_SHA,
+-      'shared_source_budget':{'maximum_calls':11,'calls_before':prior_calls,'calls_reserved':1,'calls_after':after_calls,'no_rerun':True}}
++      'shared_source_budget':{'maximum_calls':11 if stage != 'CHECK4' else 12,'calls_before':prior_calls,'calls_reserved':1,'calls_after':after_calls,'no_rerun':True}}
++    if stage != 'CHECK4':
++        require(ref == {'path':str(folder/'receipt.json'),'sha256':CONTINUATION[str(folder/'receipt.json')]},'retained v8 actual receipt identity')
++        expected_identity.update(raw_sha256=CONTINUATION[str(folder/'original.log')],raw_bytes=84 if stage == 'FORMAT3' else 16)
+     expected_identity.update(cwd=str(ROOT),environment_clear=True,environment={
+       key:str(folder/'owned-tmp'/name) for key,name in [('DENO_DIR','deno-cache'),('TMPDIR','tmp'),('HOME','home')]})
+     require(all(record.get(key) == value for key,value in expected_identity.items()), 'per-stage exact predecessor identity map')
+@@ -711,7 +806,7 @@
+     return record
+ 
+ def source_main(stage, wrapper_path, wrapper_bytes, guard_bytes):
+-    require(stage in SOURCE_STAGES and len(sys.argv) == 3 and sys.argv[1] == '--execute', 'finite v8 source stages only')
++    require(stage == 'CHECK4' and len(sys.argv) == 3 and sys.argv[1] == '--execute', 'only single CHECK4 diagnostic source stage')
+     plan_bytes = read_file(PLAN,32768)
+     plan = json_buffer(plan_bytes)
+     ready_bytes = read_file(pathlib.Path(sys.argv[2]),32768)
+@@ -731,8 +826,7 @@
+     require(ready['runtime_sha256'] == RUNTIME_SHA and ready['config_sha256'] == CONFIG_SHA and sha(read_file(CONFIG)) == CONFIG_SHA, 'source runtime/config')
+     require(ready['isolated_base_head'] == BASE_HEAD and type(ready['root_head']) is str and re.fullmatch('[0-9a-f]{40}',ready['root_head']), 'separate global/isolated revisions')
+     before = snapshot(ready['source_before'])
+-    if stage == 'FORMAT3':
+-        require(before == BASELINE, 'FORMAT3 fixed unformatted baseline')
++    require(before == FORMATTED, 'CHECK4 exact already reviewed formatted files')
+     comment_correction_evidence(ready)
+     h = ref_bytes(ready['root_source_handoff_ref'],maximum=32768)
+     handoff = json_buffer(h)
+@@ -741,7 +835,7 @@
+       'config_sha256':CONFIG_SHA,'shared_source_budget':ready['shared_source_budget']}
+     require(handoff == expected_handoff, 'explicit Root SourceRef handoff, not CP authority marker')
+     _, prior_calls, after_calls = SOURCE_STAGES[stage]
+-    require(ready['shared_source_budget'] == {'maximum_calls':11,'calls_before':prior_calls,'calls_reserved':1,'calls_after':after_calls,'no_rerun':True}, 'new three-call packet after exhausted historical eight')
++    require(ready['shared_source_budget'] == {'maximum_calls':12,'calls_before':prior_calls,'calls_reserved':1,'calls_after':after_calls,'no_rerun':True}, 'single diagnostic append after consumed source11')
+     require(ready['pure_only_slice'] is True and ready['accepted_pure_cpp_ref'] == PURE_CPP, 'new pure correction baseline CPP')
+     ref_bytes(PURE_CPP)
+     require(ready['explicit_environment_only_sampled_storage_acknowledged'] is True, 'source env-only acknowledgment')
+@@ -750,16 +844,11 @@
+     require(review['status'] == 'PASS_SOURCE' and all(review[key] == ready[key] for key in ('wrapper_sha256','guard_sha256','plan_sha256')), 'source supervisor review identities')
+     ref_bytes(review['report_ref'])
+     previous = ready['previous_receipt_refs']
+-    required_previous = {'FORMAT3':set(),'LINT3':{'FORMAT3'},'CHECK3':{'FORMAT3','LINT3'}}[stage]
++    required_previous = {'FORMAT3','LINT3'}
+     require(type(previous) is dict and set(previous) == required_previous, 'source stage ordering')
+     for previous_stage, ref in previous.items():
+         source_receipt_ref(ref,previous_stage,before)
+-    if stage == 'FORMAT3':
+-        require(ready['format_binding'] is None and ready['accepted_cpp'] == {
+-          'status':'PASS_SOURCE_PURE_CLOSURE','source_files':BASELINE,'report_ref':PURE_CPP,
+-          'pure_only_slice':True,'baseline_cpp_ref':PURE_CPP}, 'FORMAT3 baseline CPP, no invented future report')
+-    else:
+-        formatted_binding(ready,before,[previous['FORMAT3']])
++    formatted_binding(ready,before,[previous['FORMAT3']])
+     # Root verifies substantive approvals/provenance; same-user JSON is not authentication.
+     rh = hashlib.sha256()
+     with RUNTIME.open('rb') as stream:
+@@ -922,8 +1011,7 @@
+             reason = reason or 'source_terminal_TMP_unknown'
+         try:
+             after = observed_source_files()
+-            if stage != 'FORMAT3':
+-                require(after == before,'read-only source stage mutated source')
++            require(after == before,'CHECK4 mutated source')
+             require(sha(read_file(CONFIG)) == CONFIG_SHA,'source config drift')
+             require(sha(read_file(wrapper_path)) == sha(wrapper_bytes) and sha(read_file(pathlib.Path(__file__))) == sha(guard_bytes) and sha(read_file(PLAN,32768)) == sha(plan_bytes),'source executable drift')
+             require(sha(read_file(pathlib.Path(sys.argv[2]),32768)) == sha(ready_bytes),'source READY drift')
+@@ -934,10 +1022,7 @@
+             comment_correction_evidence(ready)
+             for previous_stage,ref in previous.items():
+                 source_receipt_ref(ref,previous_stage,before)
+-            if stage == 'FORMAT3':
+-                require(ready['format_binding'] is None,'FORMAT3 cannot mint format approval')
+-            else:
+-                formatted_binding(ready,before,[previous['FORMAT3']])
++            formatted_binding(ready,before,[previous['FORMAT3']])
+         except BaseException:
+             error = (error or '')+traceback.format_exc()
+             reason = reason or 'source_terminal_bindings_unknown'

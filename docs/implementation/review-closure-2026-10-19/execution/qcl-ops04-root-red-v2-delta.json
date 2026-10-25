@@ -1,0 +1,17 @@
+{
+  "from": "qcl-ops04-root-red",
+  "to": "qcl-ops04-root-red-v2",
+  "production_delta": false,
+  "prior_artifacts_preserved": true,
+  "test_delta": "Append accepted named CLI seam fixtures; existing v1 corpus preserved",
+  "from_sha256": {
+    "tests/solver_test.ts": "7cd0aa5695564c4dd177e910b16051a44fb852f3f60d9ae7533df03f1405888b",
+    "tests/application_cd_test.ts": "3ba120cba93cc91bf369ec273a13da30bdfd6291f6487fbfa7e8101dbb4ffe3a"
+  },
+  "to_sha256": {
+    "tests/solver_test.ts": "d26512392d63eaccf44ab7711ea07b1b6c8a15a3fb3108afd47c1ccacbf9d542",
+    "tests/application_cd_test.ts": "bd92a82d858ea17d1a124f2a9d257a76329f7f1630e423aad5ba1840c1982f85"
+  },
+  "resolved_source_gap": "Accepted capture/solver/application named seams remove need to guess API or use source grep/subprocess controls",
+  "execution_delta": 0
+}

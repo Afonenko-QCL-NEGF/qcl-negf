@@ -1,0 +1,46 @@
+{
+  "task": "DOC04 Phase2 pure adapters implementation",
+  "stage": "source_only_frozen_for_independent_CPP",
+  "root": "/tmp/qcl-doc04-root-worktree",
+  "root_revision": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "branch": "codex/review-closure-docs-presentation",
+  "product_sources": [
+    {"path":"ops/docs/assemble.py","bytes":31656,"sha256":"4c665bc22c1375e51815f6b229bfc9b9030204e7c9bd7284fee49dcec9437270"},
+    {"path":"ops/docs/math-render.mjs","bytes":15765,"sha256":"11a4c1381d88e071ecbae89f1727a1d63b3d5e9d0fecfded6bc189b0d5fc54b5"},
+    {"path":"ops/docs/pilot-plan.json","bytes":2120,"sha256":"cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50"}
+  ],
+  "immutable_tests": [
+    {"path":"tests/test_docs_assembly.py","bytes":19642,"sha256":"ecacc18239241c45ac1ed9c4e7c4935cfd20919cc88ac236a69ffa435bdf038e","modified":false},
+    {"path":"tests/docs_math_test.mjs","bytes":9405,"sha256":"7ae60b15740e7e9790318f8724d364f2a9ce567b2a0480cf13c988172966aef3","modified":false}
+  ],
+  "patch":{"path":"/tmp/qcl-doc04-root-impl-patch.diff","bytes":51080,"sha256":"9dd6022c325a4fcc7b19b0eadf6fe9e87263abf12680f39ecd9453af45edfc57"},
+  "accepted_inputs": [
+    {"path":"/tmp/qcl-doc04-design.md","sha256":"77ee8593655f98b2e66d762620279ba6ac7ec7da126c62a2ccbd56a0262bf12b"},
+    {"path":"/tmp/qcl-doc04-design-review.md","sha256":"6caa4f15035e6a9f564d1ec86f14ecd64bbd31d73457556327e090e9d6628164"},
+    {"path":"/tmp/qcl-doc04-katex-binding-design.md","sha256":"c65c38f74b5fd8168c9ed5ee2fc79649e2d7bafa5655a9248aee4aa81dca25a2"},
+    {"path":"/tmp/qcl-doc04-katex-binding-design-review.md","sha256":"b599846a0bf40f45a9834a84b61d280d64500a625c6fc3fda0cce4e3feee5e28"},
+    {"path":"/tmp/qcl-doc04-root-red-v2-review.md","sha256":"f6d437e7f6e875643baaf374c96e6d04ab2b1c718892e40741a9bcf06700c79b"}
+  ],
+  "retained_root_RED": [
+    {"receipt":"/tmp/qcl-DOC04-PY-RED-1/receipt.json","receipt_sha256":"33fe5f5018fd6b127f19292af725e5e1ca90c6ecd769dcd8ce371a5bcc202ca0","log_sha256":"58282a442b4a9e330815d13a30f26fb90ac7e19f68125bba30805e86e12918fa","classification":"readiness_collection_FileNotFoundError_not_behavioral_RED","exit_code":2,"wall_seconds":0.747},
+    {"receipt":"/tmp/qcl-DOC04-NODE-RED-1/receipt.json","receipt_sha256":"7bada01584783740ffe35ec48e685f923b436697a8c54dea5a95e4c56f9faf9a","log_sha256":"65670f82e8b6622e6e20de0c89ddecc12fbcd99e198914dbb90117ba8b639aec","classification":"readiness_module_ERR_MODULE_NOT_FOUND_not_behavioral_RED","exit_code":1,"wall_seconds":0.152}
+  ],
+  "allocation": {
+    "current_source_stage":{"wall_minutes":40,"cpu":1,"ram_bytes":2147483648,"read_bytes_cap":5242880,"output_bytes_cap":131072,"execution_calls":0},
+    "unit_calls_used_by_root":2,
+    "unit_calls_total":4,
+    "unit_calls_remaining":{"PY_GREEN":1,"NODE_GREEN":1,"owner":"Root only after independent high CPP; no automatic rerun"},
+    "root_unit_caps_from_retained_receipts":{"wall_seconds":90,"cpu_affinity":1,"sampled_RSS_bytes":1073741824,"sampled_temporary_bytes":33554432,"output_bytes":2097152,"limitation":"50ms sampled RSS/temp, no hard quota/transient peak proof; byte-preserving output capture"}
+  },
+  "implemented_caps":{"tex_bytes":16384,"batch_json_bytes":4194304,"records":10000,"markup_bytes_per_expression":262144,"aggregate_markup_bytes":33554432,"css_bytes":1048576,"style_groups":20000,"html_page_bytes":16777216,"html_depth":512,"html_nodes_per_page":100000,"payload_files":10000,"payload_logical_bytes":268435456,"payload_file_bytes":16777216},
+  "external_supervisor_required":{"math_wall_seconds":60,"cpu_ram_log":"fresh admitted limits; not enforced by synchronous bridge"},
+  "public_gates":{"font_OFL":"blocked_missing_admitted_full_notice","assets_lock":"missing_not_fabricated","shared_DOC03_schema":"blocked","native_BUILD":"missing_fresh_admission_toolchain_import_manifest","browser":"not_measured","scientific":"not_measured"},
+  "checks":{"test_hashes":"verified_unchanged","whitespace":"no findings from per-file git diff --no-index --check","syntax":"not_measured","imports":"not_measured","unit_GREEN":"not_measured","render_build_browser":"not_measured"},
+  "runtime_calls_by_executor":0,
+  "network_calls":0,
+  "children_spawned":false,
+  "stage_commit_push":false,
+  "protected_original_written":false,
+  "additional_runtime_asset_lock_schema_files_created":false,
+  "stop":"Independent high CPP on frozen product/test hashes before Root sole PY-GREEN and NODE-GREEN; no autorerun"
+}

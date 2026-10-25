@@ -1,0 +1,62 @@
+{
+  "phase": "DOC04-I-Root-independent-high-source-review",
+  "result": "PARTIAL_NOT_READY_SOURCE_CHANGES_REQUIRED",
+  "overall_pass": false,
+  "worktree": "/tmp/qcl-doc04-root-recipe-worktree",
+  "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc",
+  "source_files": [
+    {"path": "docs/public/make.jl", "bytes": 4134, "sha256": "b673bf4e2ba53179bccd7dcff631c8c1fe03893944cf2add868155e133705c8b"},
+    {"path": "ops/docs.ts", "bytes": 12923, "sha256": "1ab9df1f6b43df745500e176a7125f482105131e1581be5c9205282b99406db0"},
+    {"path": "tests/docs_recipe_orchestration_test.ts", "bytes": 7799, "sha256": "c3f10ffeeb3149c4439a8c2d786da4393a44d76d792e9104c40b31586b0d6ae5"}
+  ],
+  "input_artifacts": [
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-complete.patch", "sha256": "6f2e25ab81a25223f957d92edee7fab6ea34400bd22eb46ec92bda16156a0b81"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-report.md", "sha256": "dbcb6dbb7463839d95bda76b70b989ba90c6787444cf025d4d7bfaa7c34c3f1f"},
+    {"path": "/tmp/qcl-doc04-root-recipe-impl-identity.json", "sha256": "4320cfcaa0a7f5962c046b2ef81ea517e43ecf2a4d91d1afe54a13911135a006"},
+    {"path": "/tmp/qcl-doc04-recipes-design.md", "sha256": "008650e7c9ff98bdaf38a3450d2b3b13818409795c92738d0a9dbddaba2c2505"},
+    {"path": "/tmp/qcl-doc04-recipes-design-v2.md", "sha256": "ce582cc394d7dd70971c2a25929bf9362aad7d829403f1e2e0fba68a8ff65610"},
+    {"path": "/tmp/qcl-doc04-recipes-design-v3.md", "sha256": "960a639dd281d7a5b99c582f2c9dc8b17e816715753557791460ebcef1159aee"},
+    {"path": "/tmp/qcl-doc04-profile-path-contract.md", "sha256": "ec7717494878fbec813fe89c1ded0c5c43dcbeb6942271d0ef8d113445f5a935"},
+    {"path": "/tmp/qcl-doc04-recipes-design-v2-review.md", "sha256": "759039e4040d54652d288b4bc100fd238b2da679127a49b73be66a873583c017"},
+    {"path": "/tmp/qcl-doc04-recipes-design-v3-review.md", "sha256": "7db5ad18c7c9e197fb0430422b917228ddc0216f90c0cdfb37f78ee80e9a4211"},
+    {"path": "/tmp/qcl-doc04-profile-path-contract-review.md", "sha256": "45d21330010644038db3b215a76f04d026e329dc0cf2844eb42ce00b99cac12a"}
+  ],
+  "primary_bindings": {
+    "operator_chapter_sha256": "8f05ff4cced8579b09cccd4b4315101e861e1896b87321b42e597374da79de49",
+    "assembler_sha256": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda",
+    "git_api_sha256": "1fd37fad1ac94e890e8fbc4b8f73147965b4a5eb5cd9ce735a98c2ff15d13be7",
+    "process_api_sha256": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249",
+    "pilot_plan_sha256": "cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50",
+    "core_gitlink": "9f4a96d032ad868ec010ce92d915bb81087c8d92",
+    "runner_gitlink": "fefaa27f194bfddf85dd51a0e255beef2218c06d",
+    "submodules_initialized": false
+  },
+  "findings": [
+    {"id": "R1", "priority": "P2", "kind": "source_contract", "paths": ["ops/docs.ts:223", "ops/docs.ts:207"], "summary": "stat followed by whole-file read does not enforce finite actual read/allocation when the file grows"},
+    {"id": "R2", "priority": "P2", "kind": "source_contract_and_controls", "paths": ["tests/docs_recipe_orchestration_test.ts:69", "ops/docs.ts:160", "ops/docs.ts:176"], "summary": "retention fixture accepts zero saved bytes; receipt counters precede successful save; sink completion and terminal snapshot remain unbound"}
+  ],
+  "disposition": {
+    "operator_guard_kwargs_source": "consistent_with_reviewed_contract_runtime_not_measured",
+    "default_core_runner": "untouched_by_three_file_patch_not_reexecuted",
+    "operator_mapping": "in_memory_byte_binding_only_no_actual_staging",
+    "cli": "always_blocked_no_dispatch",
+    "old_buffered_source_graph_called": false,
+    "source_integration": "incomplete",
+    "next_source_ticket": "finite_read_and_retention_contract_then_bounded_sourceGraph_runner_seam",
+    "external_build_evidence": "missing_separate_from_avoidable_source_gaps"
+  },
+  "review_report": {"path": "/tmp/qcl-doc04-root-recipe-impl-review.md", "bytes": 17236, "sha256": "6c405424aad14554e579f31c9675969ba0510e43abd4b17326c22ff10f9e1f3b"},
+  "limits": {
+    "grant_read_bytes": 6291456,
+    "conservative_named_content_read_reserve_bytes": 4194304,
+    "physical_io_rss_measured": false,
+    "transport_output_metered": false,
+    "formal_resource_enforcement_pass_claimed": false,
+    "metadata_inventory_caveat": "one broad rg --files /tmp enumerated paths; discovered execution payload contents were not read"
+  },
+  "execution": {
+    "target_code": 0, "parser_compiler": 0, "format_lint": 0, "tests": 0,
+    "julia_imports_render": 0, "build_native": 0, "network": 0, "science": 0,
+    "server_cp": 0, "source_edits": 0, "git_mutations": 0, "subagents": 0
+  }
+}

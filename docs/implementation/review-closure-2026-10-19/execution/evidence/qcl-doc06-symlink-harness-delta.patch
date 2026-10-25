@@ -1,0 +1,212 @@
+diff --git a/tmp/qcl-doc06-local-unit-run-v1.py b/tmp/qcl-doc06-local-unit-run-v2.py
+index 2410a93..64cc38d 100644
+--- a/tmp/qcl-doc06-local-unit-run-v1.py
++++ b/tmp/qcl-doc06-local-unit-run-v2.py
+@@ -1,9 +1,9 @@
+-import datetime, hashlib, importlib.util, json, os, pathlib, resource, signal, subprocess, sys, time, traceback, re
++import datetime, hashlib, importlib.util, json, os, pathlib, resource, signal, stat, subprocess, sys, time, traceback, re
+ 
+ root = pathlib.Path('/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf')
+ task, attempt = sys.argv[1:3]
+ assert task == 'DOC06'
+-assert re.fullmatch(r'[A-Z0-9][A-Z0-9-]{0,63}', attempt)
++assert attempt == 'SYMLINK-E1'  # One distinct engineering attempt only; no retry alias.
+ kind = sys.argv[3]
+ fixtures = sys.argv[4:]
+ allowed = {('DOC06','DENO'): ['tests/docs_static_slice_test.ts']}
+@@ -23,18 +23,15 @@ sampler_spec = importlib.util.spec_from_file_location('reviewed_owned_temp_sampl
+ sampler = importlib.util.module_from_spec(sampler_spec)
+ sampler_spec.loader.exec_module(sampler)
+ folder = pathlib.Path('/tmp') / ('qcl-' + task + '-' + attempt)
+-folder.mkdir(exist_ok=False)
++assert pathlib.Path('/tmp').resolve(strict=True) == pathlib.Path('/tmp')
++assert stat.S_ISDIR(pathlib.Path('/tmp').lstat().st_mode)
++folder.mkdir(mode=0o700, exist_ok=False)
+ temporary = folder / 'tmp'
+-temporary.mkdir()
+-runtime = root / '.venv/bin/python' if kind == 'PY' else pathlib.Path('/nix/store/frlyjd2wya3rk8xmdc98yq3x0rhpkh9n-nodejs-24.21.0/bin/node' if kind == 'NODE' else '/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno')
+-expected_runtime = {'PY':'dd65a07e8f535525443d63e2bd6dd10efbf22bf22e0b6d65e634266acc7ac976','NODE':'decd3927d7a6b9f7c00a58da94f209ea92377a647fd232d4d865ba0e3a28e928','DENO':'cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c'}[kind]
++temporary.mkdir(mode=0o700)
++runtime = pathlib.Path('/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno')
++expected_runtime = 'cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c'
+ assert hashlib.sha256(runtime.read_bytes()).hexdigest()==expected_runtime
+-if kind == 'PY':
+-    command = [str(runtime), '-m', 'pytest', *fixtures, '-q', '-p', 'no:cacheprovider', '--basetemp', str(temporary)]
+-elif kind == 'NODE':
+-    command = [str(runtime), '--test', *fixtures]
+-else:
+-    command = [str(runtime), 'test', '--cached-only', '--no-remote', '--no-npm', '--no-config', '--allow-read='+str(root/'tests/docs_static_slice_test.ts')+','+str(root/'ops/docs/static-slice.ts')+','+str(temporary), '--allow-write='+str(temporary), *fixtures, '--', str(temporary)]
++command = [str(runtime), 'test', '--cached-only', '--no-remote', '--no-npm', '--no-config', '--allow-read='+str(root/'tests/docs_static_slice_test.ts')+','+str(root/'ops/docs/static-slice.ts')+','+str(temporary), '--allow-write='+str(temporary), *fixtures, '--', str(temporary)]
+ env = os.environ.copy()
+ for key in ('LD_LIBRARY_PATH', 'LD_PRELOAD', 'PYTHONPATH', 'PYTHONHOME', 'NODE_OPTIONS', 'NODE_PATH'):
+     env.pop(key, None)
+@@ -42,8 +39,78 @@ for key in list(env):
+     if key.startswith('DENO_'):
+         env.pop(key, None)
+ env.update(PYTHONDONTWRITEBYTECODE='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1', OMP_NUM_THREADS='1', UV_PYTHON_DOWNLOADS='never', TMPDIR=str(temporary), DENO_DIR=str(temporary/'deno-cache'), DENO_NO_UPDATE_CHECK='1')
+-if kind == 'NODE':
+-    env['DOC04_KATEX_ROOT']='/tmp/qcl-doc04-katex-0.16.8/source/package'
++
++# Fixed seed inventory. No caller/environment-supplied targets or target imports.
++seed_nodes = [
++    ('prepared-symlink-file', 'directory', None),
++    ('prepared-symlink-file/backing', 'directory', None),
++    ('prepared-symlink-file/backing/configuration_types.jl', 'file', None),
++    ('prepared-symlink-file/snapshot', 'directory', None),
++    ('prepared-symlink-file/snapshot/runner', 'directory', None),
++    ('prepared-symlink-file/snapshot/runner/src', 'directory', None),
++    ('prepared-symlink-file/snapshot/runner/src/application', 'directory', None),
++    ('prepared-symlink-file/snapshot/runner/src/application/configuration_types.jl', 'symlink', '../../../../backing/configuration_types.jl'),
++    ('prepared-symlink-directory', 'directory', None),
++    ('prepared-symlink-directory/backing', 'directory', None),
++    ('prepared-symlink-directory/backing/core', 'directory', None),
++    ('prepared-symlink-directory/snapshot', 'directory', None),
++    ('prepared-symlink-directory/snapshot/core', 'symlink', '../backing/core'),
++]
++adapter = root / 'ops/docs/static-slice.ts'
++adapter_sha256 = '3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b'
++assert hashlib.sha256(adapter.read_bytes()).hexdigest() == adapter_sha256
++source_hashes = {fixture: hashlib.sha256(source.read_bytes()).hexdigest() for fixture, source in zip(fixtures, sources)}
++harness_hash = hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()
++
++def prepare_symlink_seed():
++    for ancestor in (folder, temporary):
++        info = ancestor.lstat()
++        assert stat.S_ISDIR(info.st_mode) and info.st_uid == os.getuid()
++        assert stat.S_IMODE(info.st_mode) == 0o700
++        assert ancestor.resolve(strict=True) == ancestor
++    assert not list(temporary.iterdir())
++    for relative, kind, target in seed_nodes:
++        path = temporary / relative
++        if kind == 'directory':
++            path.mkdir(mode=0o700, exist_ok=False)
++        elif kind == 'file':
++            descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
++            os.close(descriptor)
++        else:
++            os.symlink(target, path)
++    expected = {relative: (kind, target) for relative, kind, target in seed_nodes}
++    observations = []
++    pending = [temporary]
++    while pending:
++        parent = pending.pop()
++        for path in parent.iterdir():
++            relative = str(path.relative_to(temporary))
++            assert relative in expected
++            info = path.lstat()
++            kind = 'symlink' if stat.S_ISLNK(info.st_mode) else 'directory' if stat.S_ISDIR(info.st_mode) else 'file' if stat.S_ISREG(info.st_mode) else 'special'
++            expected_kind, target = expected[relative]
++            assert kind == expected_kind and info.st_uid == os.getuid()
++            item = {'path': relative, 'type': kind, 'lstat_checked': True}
++            if kind == 'symlink':
++                assert os.readlink(path) == target
++                backing_relative = 'prepared-symlink-file/backing/configuration_types.jl' if relative.startswith('prepared-symlink-file/') else 'prepared-symlink-directory/backing/core'
++                resolved = path.resolve(strict=True)
++                assert resolved == temporary / backing_relative and resolved.is_relative_to(temporary)
++                target_info = resolved.lstat()
++                assert stat.S_ISREG(target_info.st_mode) if backing_relative.endswith('.jl') else stat.S_ISDIR(target_info.st_mode)
++                item.update(link_text=target, backing_target=backing_relative, realpath_checked=True)
++            else:
++                assert path.resolve(strict=True) == path
++                assert stat.S_IMODE(info.st_mode) == (0o700 if kind == 'directory' else 0o600)
++                if kind == 'directory': pending.append(path)
++                else: assert info.st_size == 0
++            observations.append(item)
++    assert len(observations) == len(expected) and {item['path'] for item in observations} == set(expected)
++    counts = {kind: sum(item['type'] == kind for item in observations) for kind in ('directory', 'symlink', 'file')}
++    assert counts == {'directory': 10, 'symlink': 2, 'file': 1}
++    payload = sum(len(item['link_text'].encode('utf-8')) for item in observations if item['type'] == 'symlink')
++    assert payload == 57
++    return {'entries': sorted(observations, key=lambda item: item['path']), 'counts': counts, 'link_payload_bytes': payload, 'regular_payload_bytes': 0, 'physical_allocation': 'not_measured'}
+ 
+ def limits():
+     os.setsid()
+@@ -71,16 +138,44 @@ reason = None
+ peak = 0
+ temp_peak = 0
+ temp_samples = 0
++sample_phases = {'before_seed': 0, 'prelaunch': 0, 'loop': 0, 'terminal': 0}
++seed = {'phase': 'not_started', 'status': 'pending', 'child_started': False}
++observed_source_hashes = None
++observed_adapter_hash = None
++observed_harness_hash = None
+ guard_error = None
+ stream = None
++def sample_temporary(phase):
++    global temp_peak, temp_samples, reason
++    measured = sampler.sample_owned_temporary_bytes(temporary)
++    temp_peak = max(temp_peak, measured)
++    temp_samples += 1
++    sample_phases[phase] += 1
++    if measured > 8 * 1024**2: reason = reason or 'temporary_limit'
++    if time.monotonic() - start > 120: reason = reason or 'wall_time_limit'
++    return measured
+ try:
+     stream = (folder / 'original.log').open('xb', buffering=0)
++    seed['phase'] = 'preparation'
++    seed_start = time.monotonic()
++    seed['before_seed_sampled_regular_bytes'] = sample_temporary('before_seed')
++    assert seed['before_seed_sampled_regular_bytes'] == 0
++    if reason: raise RuntimeError('preparation resource guard refused seed')
++    seed.update(prepare_symlink_seed())
++    seed['bindings'] = {'test_sha256': source_hashes, 'adapter_sha256': adapter_sha256, 'harness_sha256': harness_hash, 'sampler_sha256': sampler_sha256}
++    seed['elapsed_seconds'] = round(time.monotonic() - seed_start, 6)
++    seed['prelaunch_sampled_regular_bytes'] = sample_temporary('prelaunch')
++    assert seed['prelaunch_sampled_regular_bytes'] == 0
++    seed.update(phase='prelaunch', status='prepared')
++    assert len(json.dumps(seed).encode('utf-8')) <= 8192
++    if reason: raise RuntimeError('prelaunch resource guard refused child')
+     process = subprocess.Popen(command, cwd=root, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, preexec_fn=limits)
++    seed['child_started'] = True
++    seed['phase'] = 'child'
+     capture = lib.RawCapture(process.stdout, stream)
+     while process.poll() is None:
+         peak = max(peak, rss_tree(process.pid))
+-        temp_peak = max(temp_peak, sampler.sample_owned_temporary_bytes(temporary))
+-        temp_samples += 1
++        sample_temporary('loop')
+         if time.monotonic() - start > 120: reason = 'wall_time_limit'
+         if peak > 1024**3: reason = 'sampled_process_tree_RSS_limit'
+         if temp_peak > 8 * 1024**2: reason = 'temporary_limit'
+@@ -98,6 +193,9 @@ try:
+ except BaseException:
+     guard_error = traceback.format_exc()
+     reason = reason or 'guard_exception'
++    if not seed['child_started']:
++        seed.update(status='failed', failure='preparation_or_prelaunch_guard_failed', failed_phase=seed['phase'])
++        if 'seed_start' in globals(): seed['elapsed_seconds'] = round(time.monotonic() - seed_start, 6)
+ finally:
+     if process is not None and process.poll() is None:
+         try: os.killpg(process.pid, signal.SIGKILL)
+@@ -138,9 +236,30 @@ finally:
+     if process is not None:
+         try: process.wait(timeout=5)
+         except subprocess.TimeoutExpired: reason = reason or 'unknown_process_exit'
+-    data = {'task': task, 'attempt': attempt, 'started_utc': started, 'recorded_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'command': command, 'cwd': str(root), 'harness_sha256': hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest(), 'fixture_sha256': {fixture: hashlib.sha256(source.read_bytes()).hexdigest() for fixture, source in zip(fixtures, sources)}, 'exit_code': process.returncode if process else None, 'wall_seconds': round(time.monotonic() - start, 3), 'sampled_peak_process_tree_RSS_bytes': peak, 'sampled_owned_temporary_bytes_peak': temp_peak, 'stdout_stderr_bytes': captured_bytes, 'output_envelope_overrun': output_overrun, 'guard_error': guard_error, 'stop_reason': reason, 'raw_capture_complete': complete, 'raw_capture_error': capture_error, 'limits': {'wall_seconds': 120, 'CPU_affinity_count': 1, 'sampled_process_tree_RSS_bytes': 1024**3, 'temporary_bytes': 8 * 1024**2, 'output_bytes': 1 * 1024**2, 'caveat': 'RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure'}, 'environment': 'DOC06sourceonlyDeno; exacttrustedtest/adapter+ownTMPread, ownTMPwrite; noenv/run/net/ffi, nocustomconfig; no targetimports byreviewedsource, notclaimedbypermissionsalone', 'runtime_sha256':expected_runtime, 'original_log': str(folder / 'original.log')}
++    # Terminal observation participates in the same actual threshold guards,
++    # including fast children which might never enter the polling loop.
++    try:
++        seed['terminal_sampled_regular_bytes'] = sample_temporary('terminal')
++        observed_adapter_hash = hashlib.sha256(adapter.read_bytes()).hexdigest()
++        observed_source_hashes = {fixture: hashlib.sha256(source.read_bytes()).hexdigest() for fixture, source in zip(fixtures, sources)}
++        observed_harness_hash = hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()
++        assert observed_adapter_hash == adapter_sha256
++        assert observed_source_hashes == source_hashes
++        assert observed_harness_hash == harness_hash
++        seed['phase'] = 'terminal'
++        assert len(json.dumps(seed).encode('utf-8')) <= 8192
++    except BaseException:
++        guard_error = (guard_error or '') + traceback.format_exc()
++        reason = reason or 'terminal_observation_or_binding_failure'
++        (folder / 'guard-error.txt').write_text(guard_error)
++    data = {'task': task, 'attempt': attempt, 'started_utc': started, 'recorded_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'command': command, 'cwd': str(root), 'harness_sha256': harness_hash, 'fixture_sha256': source_hashes, 'exit_code': process.returncode if process else None, 'wall_seconds': round(time.monotonic() - start, 3), 'sampled_peak_process_tree_RSS_bytes': peak, 'sampled_owned_temporary_bytes_peak': temp_peak, 'stdout_stderr_bytes': captured_bytes, 'output_envelope_overrun': output_overrun, 'guard_error': guard_error, 'stop_reason': reason, 'raw_capture_complete': complete, 'raw_capture_error': capture_error, 'limits': {'wall_seconds': 120, 'CPU_affinity_count': 1, 'sampled_process_tree_RSS_bytes': 1024**3, 'temporary_bytes': 8 * 1024**2, 'output_bytes': 1 * 1024**2, 'caveat': 'RSS and owned TMPDIR bytes sampled every50ms, no hard cgroup/disk quota or transient peak proof; explicit paths outside TMPDIR unmeasured. Output byte-preserving capture drains on stop, overrun honestfailure'}, 'environment': 'DOC06sourceonlyDeno; exacttrustedtest/adapter+ownTMPread, ownTMPwrite; noenv/run/net/ffi, nocustomconfig; no targetimports byreviewedsource, notclaimedbypermissionsalone', 'runtime_sha256':expected_runtime, 'original_log': str(folder / 'original.log')}
+     data.update(temporary_sampler_sha256=sampler_sha256,
+                 owned_temporary_samples_completed=temp_samples,
++                owned_temporary_sample_phases=sample_phases,
++                symlink_preparation=seed,
++                bound_fixture_sha256=source_hashes,
++                adapter_sha256=adapter_sha256,
++                terminal_source_bindings={'test_sha256': observed_source_hashes, 'adapter_sha256': observed_adapter_hash, 'harness_sha256': observed_harness_hash},
+                 owned_temporary_metric='Sampled sum of regular-file logical st_size bytes only; symlinks excluded and directory symlinks not traversed; concurrent ENOENT tolerated. Trusted owned TEMP, no adversarial namespace guarantee; not physical storage, hard quota, or transient peak proof.')
+     (folder / 'receipt.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+ print(json.dumps(data, ensure_ascii=False, indent=2))

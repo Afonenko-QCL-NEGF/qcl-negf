@@ -1,0 +1,10 @@
+{
+  "operation": "G1-SI03-qcl-negf-results-e2fdeda",
+  "stage": "initial_read_only_PR_admission",
+  "outcome": "TLS handshake timeout before ready or merge",
+  "mutations_submitted": 0,
+  "merge_submits": 0,
+  "journal_state": "draft_PR_created",
+  "raw_error": "Post https://api.github.com/graphql: net/http: TLS handshake timeout",
+  "recorded_utc": "2026-10-19T16:32:26.959042+00:00"
+}

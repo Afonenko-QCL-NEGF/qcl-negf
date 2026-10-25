@@ -1,0 +1,60 @@
+{
+  "task": "SCI05-C1-final-syntax-correction",
+  "recorded_at_utc": "2026-10-19T17:30:43.008931+00:00",
+  "root_head": "9d8cf0cad32743791cc3b80ac7c2a948dab02f48",
+  "core_head": "90f1048d290d6ec9518754e288333c694fe874de",
+  "core_branch": "codex/review-closure-final-audit-integration",
+  "source_tree_at_HEAD": "33d66e0539f254a1492a37be64bc826b83e84b7d",
+  "permitted_path": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl/test/numerics/final_audit_evidence.jl",
+  "before_sha256": "6a2e954230c119a92e11e70c5bc8d31376fc06e209faa907429b9f6ee13455b5",
+  "after_sha256": "d4ac564013d46021a84b323338635f6860f16d1aa76e4b417c4aaf64debf64c4",
+  "before_bytes": 38516,
+  "after_bytes": 38519,
+  "normalized_nonwhitespace_equal": true,
+  "normalized_nonwhitespace_sha256": "ad65dd3c2cd48b123bcc1c96e85b391a1bc1fb1a7c8ea9233adbb11bb7737342",
+  "changed_lines": [
+    172,
+    303,
+    664
+  ],
+  "inserted_ASCII_spaces": 3,
+  "unchanged_other_5_accepted_source_files": {
+    "src/QCLNEGF.jl": {
+      "sha256": "cec01e69f58466511102138f01d7f2ab26624b22c3d0af77e825a0b8c51481f2",
+      "bytes": 31400,
+      "equals_HEAD": true
+    },
+    "src/numerics/optimized/production_solver.jl": {
+      "sha256": "5d0fa48c016877897f97ccc919e3100fd4ba9fdedcd907166447d2bbc89ad0c2",
+      "bytes": 52380,
+      "equals_HEAD": true
+    },
+    "src/numerics/reference/final_audit.jl": {
+      "sha256": "ac20ca9ded521220224d4e3c0688b0149db0c1b3b9fb264c25b1cabd4367be73",
+      "bytes": 30783,
+      "equals_HEAD": true
+    },
+    "src/numerics/reference/poisson.jl": {
+      "sha256": "730777452e3f17c6b55490fb05f190a9d97806d533a13b45666a91e1427e39c5",
+      "bytes": 3329,
+      "equals_HEAD": true
+    },
+    "src/numerics/reference/validation.jl": {
+      "sha256": "50de158f55ea88b34f61dddd18fb62dd6954eb9c37ab9ac6e1bbe6f9289a338c",
+      "bytes": 33446,
+      "equals_HEAD": true
+    }
+  },
+  "remaining_tracked_core_source_unchanged": true,
+  "remaining_tracked_core_source_basis": "git diff --name-only contains only the permitted path; unchanged tracked blobs inherited from source_tree_at_HEAD",
+  "preserved_failed_evidence": {
+    "/tmp/qcl-SCI05-C08-CORE-1/original.log": "7bf8efd9db1986388edb93f2918266e105d03bf34566574283bf455b4fb671bf",
+    "/tmp/qcl-SCI05-C08-CORE-1/receipt.json": "72a3d601d394a8be429022f63226eb5102785411e476f4cd9ce7bd80ebe094aa"
+  },
+  "patch_sha256": "fd9b32d0c90dd54188fe101cd5e234e6525373002d08e7adba958967230d0ce8",
+  "julia_parser_import_test_build_install_network_server_calls": 0,
+  "git_stage_commit_push_calls": 0,
+  "runtime_parse_result": "not_measured",
+  "numerical_result": "not_measured",
+  "status": "STOP_FOR_INDEPENDENT_REVIEW"
+}

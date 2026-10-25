@@ -1,0 +1,28 @@
+{
+  "task": "OPS04 Platform RED v2 narrow corrective source review",
+  "verdict": "PASS_SOURCE_R1_R2_CLOSED",
+  "report": "/tmp/qcl-ops04-platform-red-v2-review.md",
+  "report_sha256": "ae225ee188ab7f98c647cdecfa32bf4e6a05d7057639a81c771725fc74510120",
+  "head": "b067723c82382689bff5cc366981c56e99b926f8",
+  "source_hashes": {
+    "tests/test_node_enrollment.py": "27b733487737501880023dc55607b21c357654821da5a65f53940873c0f0cfe5",
+    "tests/test_application_release.py": "3b39987d1a3e1914ba45c8224af6d600dc92cffa6c030a9feaa955dfb0e326d6",
+    "ops/application_release.py": "1d4422bed5986901ddef22890ca16fe600336e6af2bef17d83ae809ebe794df0"
+  },
+  "artifact_hashes": {
+    "patch": "ebb800e1cdd95366548f91bcbc86562ecf5ab18e8716e7ec22b47a283a1d610c",
+    "delta": "aec8116650eca89efd626c10cc177d4d0598bb998b7c40306845e37787b61e3b",
+    "identity": "89fb707baa45571901d1e285ebcce0f74f181d7340307196619d617ecd5adaf7",
+    "author_report": "4339bfc67ecb6a584254fa51fc126944edb53f922f59b0d2e64e3f766395e069"
+  },
+  "closed_findings": ["R1/F1", "R2/F2"],
+  "new_findings": [],
+  "T2_and_production_unchanged": true,
+  "original_artifacts_preserved": true,
+  "reviewer_execution_calls": 0,
+  "imports_or_parsers_or_tests_or_network": false,
+  "git_mutations_or_source_edits": false,
+  "children": 0,
+  "runtime_bind_still_required": true,
+  "state": "STOP"
+}

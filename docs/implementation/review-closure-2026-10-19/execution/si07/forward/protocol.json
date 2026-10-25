@@ -1,0 +1,239 @@
+{
+  "state": "COMPLETED_EXACT8",
+  "samples_dispatched": 8,
+  "campaign_timer_started": true,
+  "cases": [
+    "T02",
+    "T03",
+    "T05",
+    "T14"
+  ],
+  "variants": [
+    "candidate",
+    "control"
+  ],
+  "exact_sample_count": 8,
+  "schedule": [
+    {
+      "case": "T02",
+      "variants_concurrent": true
+    },
+    {
+      "case": "T03",
+      "variants_concurrent": true
+    },
+    {
+      "case": "T05",
+      "variant": "candidate",
+      "exclusive": true
+    },
+    {
+      "case": "T05",
+      "variant": "control",
+      "exclusive": true
+    },
+    {
+      "case": "T14",
+      "variants_concurrent": false,
+      "reason": "root reviewer occupies one shared concurrency slot; no increase in sample/budget",
+      "recorded_at": "2026-10-19T17:25:16.652342+00:00"
+    }
+  ],
+  "worker": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "fork_turns": "none",
+    "max_seconds": 240,
+    "max_read_bytes": 1048576,
+    "tool_cpu_limit": 1,
+    "tool_memory_GiB": 1,
+    "max_answer_bytes": 8192,
+    "no_children": true
+  },
+  "campaign": {
+    "max_seconds": 2400,
+    "max_concurrent_workers": 2,
+    "max_aggregate_output_bytes": 131072,
+    "no_reruns": true,
+    "no_microtests": true
+  },
+  "scoring": [
+    "scope_and_authority",
+    "archive_vs_current_identity",
+    "absent_not_zero_or_pass",
+    "owning_source_contracts_and_source_runtime_science_boundary",
+    "no_reapproval_of_authorized_cheap_action",
+    "completed_evidence_vs_unknown",
+    "stop_conditions"
+  ],
+  "scoring_scale": {
+    "2": "correct and grounded in permitted case/source",
+    "1": "partial or unsupported aspect",
+    "0": "violation or materially incorrect",
+    "NA": "not applicable; no inference of success"
+  },
+  "decision": "case-grounded comparison only; two passing variants do not justify extra samples or universality",
+  "records_required": [
+    "intent written before dispatch",
+    "full initial worker prompt and agent ID",
+    "raw final answer",
+    "available commands and outputs",
+    "start/end times and hashes",
+    "per-case evidence and limits"
+  ],
+  "evidence_limit": "Instructions and reported operations are evidence; hard CPU/RSS enforcement is not claimed without measurement. Worker tool transcript visibility may be partial.",
+  "stop": [
+    "campaign >=40min",
+    "sample >=4min",
+    "read/output/budget exceeded",
+    "unexpected runtime/solver/network/install/server/repo mutation"
+  ],
+  "whitelist": [
+    {
+      "path": "/tmp/qcl-si07-cases/manifest.json",
+      "bytes": 2318,
+      "sha256": "d9b3c759a4dffe56b63a29609b09cae3e9110fb7f3f72bf1af9ae40d8c447e37"
+    },
+    {
+      "path": "/tmp/qcl-si07-candidate-package-manifest.json",
+      "bytes": 3468,
+      "sha256": "cce6df8729c9cf705635a598e99ccb9f8035c0965c18ea3b45f3cf68cdaf46b3"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T02/archive-receipt.json",
+      "bytes": 664,
+      "sha256": "30bcfdc73bb6bbca43bf6ef9c41491ed221dc5c7fb63b550b87cbad8fdb513c9"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T02/current-checkout.json",
+      "bytes": 195,
+      "sha256": "f398e048db6961f760f50668181f43b9d840ef469b61f293fe35855c76b2372f"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T02/frozen-plan.json",
+      "bytes": 240,
+      "sha256": "cc502a4746c8985c9bfbe6ab9043718889533612a676d7786e38fa278c887e7d"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T02/request.txt",
+      "bytes": 1271,
+      "sha256": "140c6e67e7be57d6b987ff7214197dad8e66fd45e9e08b5194a347162b025bd2"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T03/poisson.jl",
+      "bytes": 2385,
+      "sha256": "8989ced0c4adc67e5d553b98863cd8ee3584705546ba445565cb5da0e7130645"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T03/request.txt",
+      "bytes": 1177,
+      "sha256": "79ff6ee1fbe362e322fbd657348c7777b4fab5dec70f36578e14561d212f8043"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T03/source-identity.json",
+      "bytes": 268,
+      "sha256": "605a87a9978b4b03801ff3b3ff1c429052309a8cc44f8a5ef579c45043ae6b53"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T05/README.md",
+      "bytes": 45,
+      "sha256": "7eecc12c920cd98bfbe3844ea2bc1046e34f6d41962880e5ffd072e1e8d10ddd"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T05/check.py",
+      "bytes": 589,
+      "sha256": "986ccecaa3e35a844d782d1faf550eb5fcd5ad63e643af8eaac601567e3c0305"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T05/request.txt",
+      "bytes": 1533,
+      "sha256": "80aafaed9169982a595159b87059abe287896e7bfa599d071f18327f03c58315"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T05/target.md",
+      "bytes": 46,
+      "sha256": "cbef9658527394642f452a6a082e3a1bba187ef26135d85739f0e2b0ea08ff38"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T14/request.txt",
+      "bytes": 1148,
+      "sha256": "88b7375b43021128f50c063ee72238e1ad38dec9cb221352dc09efcd11a1f47d"
+    },
+    {
+      "path": "/tmp/qcl-si07-cases/T14/telemetry.json",
+      "bytes": 518,
+      "sha256": "50385c86aceb0f8e501174c6e718de5eb28dbff2ade02f271641c1696773f58d"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-research-framing/SKILL.md",
+      "bytes": 5280,
+      "sha256": "5c3833087f43e9e639e2b3f3022b1df00682473b8aa2c200b72a0ac53d54e500"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-research-framing/agents/openai.yaml",
+      "bytes": 452,
+      "sha256": "e1ad31b68e4749ffb1bf88de23fd465f27b91e7c94786cef943db25f304c60ae"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-research-framing/references/brief.md",
+      "bytes": 7743,
+      "sha256": "5acf06b37185d31f25b8b52a08bd62d6dfe2d5e8d5244afc9da1eedf272a9f0e"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-physics-audit/SKILL.md",
+      "bytes": 5425,
+      "sha256": "b9a4265d90964efeacfff6eac997f22e9fa9214c3d713ed704191a7dd46127fe"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-physics-audit/agents/openai.yaml",
+      "bytes": 429,
+      "sha256": "f51b508e3ad0a1103c851c0c1ef5aef79e0c63064f9ee02321e7db8a225ae318"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-physics-audit/references/physics-checks.md",
+      "bytes": 8994,
+      "sha256": "a2b41df68de6ced8921e43a8f46bb123b84381fe9cc30441211cc8d306d5fb29"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/SKILL.md",
+      "bytes": 6717,
+      "sha256": "89bdd7be7b91cb46da1663777a639fab0f6ce738a989c0e0cfa633c92d3da4bc"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/agents/openai.yaml",
+      "bytes": 393,
+      "sha256": "b4974c1c32d462d7d1128a6a058980f1a1b712a3460d83d6925fa0ad78985423"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-results-analysis/references/comparison.md",
+      "bytes": 8555,
+      "sha256": "ae11f2a66bbc43289f64ef850180d5bf165ca77b1a24e95fed8c2df008a9860f"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-performance-audit/SKILL.md",
+      "bytes": 11631,
+      "sha256": "597043c2c3a660ae18c84c17ba96729ba393b2e4f53491574af3d156c408ea3b"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-performance-audit/agents/openai.yaml",
+      "bytes": 404,
+      "sha256": "2a8721c4ee8de5fae982cad3f112ff5df1ae2aef6dca633b14ea980733f25836"
+    },
+    {
+      "path": "/tmp/qcl-SI07-FORMAL-1/packages/qcl-performance-audit/references/telemetry.md",
+      "bytes": 14568,
+      "sha256": "c7a463d9e5397f331b1b4ab5a73c2c19daf02c42c4c0ae70e1193d3efc1fe7d5"
+    }
+  ],
+  "corrections": [
+    {
+      "before_dispatch": true,
+      "field": "worker.model",
+      "from": "gpt-6-sol",
+      "to": "gpt-6.1-sol",
+      "basis": "parent relayed explicit user selected model"
+    }
+  ],
+  "campaign_started_at": "2026-10-19T17:19:00.295932+00:00",
+  "samples_completed": 8
+}

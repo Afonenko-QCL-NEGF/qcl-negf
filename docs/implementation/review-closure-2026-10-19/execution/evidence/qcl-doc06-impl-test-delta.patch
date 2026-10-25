@@ -1,0 +1,15 @@
+diff --git a/tmp/qcl-doc06-impl-v2-docs_static_slice_test.ts b/tests/docs_static_slice_test.ts
+index b8e35e4..081803a 100644
+--- a/tmp/qcl-doc06-impl-v2-docs_static_slice_test.ts
++++ b/tests/docs_static_slice_test.ts
+@@ -72,7 +72,9 @@ function equal(actual: unknown, expected: unknown, message: string) {
+     `${message}: got ${JSON.stringify(actual)}, wanted ${JSON.stringify(expected)}`);
+ }
+ async function hash(bytes: Uint8Array): Promise<string> {
+-  const result = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
++  const owned = new Uint8Array(bytes.length);
++  owned.set(bytes);
++  const result = new Uint8Array(await crypto.subtle.digest("SHA-256", owned.buffer));
+   return Array.from(result, (b) => b.toString(16).padStart(2, "0")).join("");
+ }
+ function schema(leaf = '"type":"integer","minimum":1,"description":"Maximum number of energy points in one scheduling chunk; not an energy spacing. No schema default."'): string {

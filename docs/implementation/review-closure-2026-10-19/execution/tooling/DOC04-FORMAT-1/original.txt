@@ -1,0 +1,3 @@
+/tmp/qcl-doc04-root-worktree/tests/docs_math_test.mjs
+/tmp/qcl-doc04-root-worktree/ops/docs/math-render.mjs
+Checked 3 files

@@ -1,0 +1,9 @@
+{
+  "baseline": "d28d076c83611278153752d94cc3729d91b32667",
+  "files": {
+    "tests/test_api.py": "88d91cb17904398618bc79b92cbae956c91603075ad2cc1cbd5b27893d810c8d"
+  },
+  "independent_final_review_sha256": "9af40be6fe381405d588ecb0b3c6c00d652341bd4e9cd9ed57e07ff49b73e106",
+  "targeted_receipt_sha256": "2bc6444cc375c543606bba248f897503e41a51e5e09934bf73f229768b70bf52",
+  "staged_diff_sha256": "74c9d37f9502a50f7afb6a99353fe409155e612f2d4ac598178a05581a8ff2e3"
+}

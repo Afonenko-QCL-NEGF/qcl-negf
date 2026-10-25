@@ -1,0 +1,315 @@
+{
+  "stage": "D5 source-only private contract; STOP independent high R",
+  "created_utc": "2026-10-20T06:50:55.824894+00:00",
+  "selected_worktree": "/tmp/qcl-docs-test-routing-worktree",
+  "git_observations": {
+    "selected": {
+      "head": "2bb05d3651af4509fe7f02c1253b40f1e5146fec\n",
+      "status": " M .github/workflows/ci.yml\n M .github/workflows/release.yml\n M deno.json\n M ops/ci.ts\n M ops/git.ts\n?? ops/docs_tests.ts\n?? ops/docs_tests_cli.ts\n?? ops/docs_tests_native.py\n?? tests/docs_test_native_protocol_test.ts\n?? tests/docs_test_routing_test.ts\n?? tests/test_docs_test_native.py\n",
+      "submodules": "-9f4a96d032ad868ec010ce92d915bb81087c8d92 components/QCLNEGF.jl\n-fefaa27f194bfddf85dd51a0e255beef2218c06d components/QCLNEGFRunner.jl\n-d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida\n-f4009c933183d8537e289d2fa5fa898defd2d9b5 components/qcl-negf-contracts\n-f729e2681224d6537538179ab760fefefd575003 components/qcl-negf-platform\n-2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal\n-3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731 components/qcl-negf-research\n-de70638a982f91b7e125ab1cfc70a2daef2a656d components/qcl-negf-results\n"
+    },
+    "coordinator": {
+      "head": "b07974b8e46bf8afdf1740947b842669a62a5ccc\n",
+      "status": " M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json\n M docs/implementation/review-closure-2026-10-19/execution/qcl-targeted-receipt-census.json\n M ops/docs/static-slice.ts\n M tests/docs_static_slice_test.ts\n?? docs/implementation/review-closure-2026-10-19/execution/doc06-actual/DOC06-ACTUAL-A1/original.txt\n?? docs/implementation/review-closure-2026-10-19/execution/doc06-actual/DOC06-ACTUAL-A2/original.txt\n?? docs/implementation/review-closure-2026-10-19/execution/doc06-actual/preparation-original.txt\n?? docs/implementation/review-closure-2026-10-19/execution/doc06-schema-v2/\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-fix-impl-complete.patch\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-fix-impl-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-fix-impl-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-harness-report-v2.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-harness-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-doc06-schema-harness-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-historical-RED-fixture.ts.txt\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-impl-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design-v4-delta-ledger.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design-v4-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-test-routing-design-v4.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-fixtures-v2-patch.diff\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-fixtures-v2-report.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-fixtures-v2-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci08-R1-harness-review.md\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-engineering-plan-v2.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-fix-impl-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-fix-impl-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-fix-promotion.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-harness-identity-v2.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-harness-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-doc06-schema-harness-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-impl-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-design-v4-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-test-routing-design-v4-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch13-publication.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch13-manifest.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-fixtures-v2-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-fixtures-v2-review-identity.json\n?? docs/implementation/review-closure-2026-10-19/execution/qcl-sci08-R1-harness-review-identity.json\n",
+      "submodules": " 9f4a96d032ad868ec010ce92d915bb81087c8d92 components/QCLNEGF.jl (v0.2.0-16-g9f4a96d)\n fefaa27f194bfddf85dd51a0e255beef2218c06d components/QCLNEGFRunner.jl (v0.2.0-28-gfefaa27)\n d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida (v0.2.0-17-gd8f8092)\n f4009c933183d8537e289d2fa5fa898defd2d9b5 components/qcl-negf-contracts (v0.2.0-16-gf4009c9)\n f729e2681224d6537538179ab760fefefd575003 components/qcl-negf-platform (v0.2.0-93-gf729e26)\n 2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal (v0.2.0-17-g2622de5)\n 3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731 components/qcl-negf-research (v0.2.0-9-g3ed8a9f)\n de70638a982f91b7e125ab1cfc70a2daef2a656d components/qcl-negf-results (v0.2.0-23-gde70638)\n"
+    }
+  },
+  "immutable_inputs": [
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v4.md",
+      "bytes": 35392,
+      "sha256": "24a7d68b612e7d3dc437404bb805df777ede1f5159c0bff39eca7d693ebe8fc0"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v4-review.md",
+      "bytes": 8854,
+      "sha256": "ca5a8d36b04ff6e5f52817da420b6fb3ca92e95d9e70e45c1ea6f44f74b9fb48"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v4-identity.json",
+      "bytes": 3201,
+      "sha256": "f1b21f21cc54958c62eed33ac518683d928d3e09a4667c619fc3682b78ea2107"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v4-review-identity.json",
+      "bytes": 1793,
+      "sha256": "e4604bb1e8e7e0a7006332a917d4b8ffe6fc9e82545699d4c30a9345167a8f77"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-i2-review.md",
+      "bytes": 24241,
+      "sha256": "5b7ec1e5f1fefad767315f539fe637c12c322902c78d542acea16639931ced60"
+    },
+    {
+      "path": "/tmp/qcl-docs-routing-i2-review-identity.json",
+      "bytes": 4791,
+      "sha256": "8e29186dc03947b6c9500264a48e4db73846ae312797bc33315ac01ff3884dc0"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v3.md",
+      "bytes": 29656,
+      "sha256": "c586234a65a647c3896eb17af4ac0ae0b8a02f4f56d41dcbf25728d997282554"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/deno.json",
+      "bytes": 1829,
+      "sha256": "a637ff88ad0e1011480402de58895cb6d178eb1bbe98bdb27ca939b8821f6bce"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/ci.ts",
+      "bytes": 3525,
+      "sha256": "b46eb8d4db89b734324a9c40698d16ce3df8aff764a6d332b9ba52ba43be94e0"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs_tests.ts",
+      "bytes": 25884,
+      "sha256": "676a3db1a4de455bbd73a46e57f316b4ae7721e631aa3b7d81a2da8564340d8c"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_routing_test.ts",
+      "bytes": 40125,
+      "sha256": "f02f541d633c56280077701ba9fbee3928ae7c2e055cae8b2e78d759bd3a9761"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/.github/workflows/ci.yml",
+      "bytes": 2582,
+      "sha256": "d8dc81d6684933c40e58e26dda16903cbdede5713bd686c3a1743060ac5318fe"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/.github/workflows/release.yml",
+      "bytes": 2333,
+      "sha256": "53f54fdc377c5eaae6d1688bcbecd85a536caa10cff8523c13b4ea07c76a5b9b"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/tests/test_docs_assembly.py",
+      "bytes": 22976,
+      "sha256": "2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs/assemble.py",
+      "bytes": 33127,
+      "sha256": "58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_math_test.mjs",
+      "bytes": 14430,
+      "sha256": "a3e47d219238e9e0b6be4b64ef42154a7057e4ac79776621f3bca84f58acc6a7"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs/math-render.mjs",
+      "bytes": 20769,
+      "sha256": "663c712d01db3bdc4bca66d3bb58b9aa6bbffd850c8961e1560c30292fd1aba5"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_static_slice_test.ts",
+      "bytes": 35095,
+      "sha256": "e825f6e1e849df0f8c2f6f2453c92f2cf4b39135d76008fb2b78ae557af9be69"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs/static-slice.ts",
+      "bytes": 43061,
+      "sha256": "3dde28ca8ab371ba55948ea0b47518d05e4eea6e715c15c310b0678c1538594b"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs_tests_native.py",
+      "bytes": 34632,
+      "sha256": "4f87e4abd2ab06ecc4873f7eca4f66f37cb5f524df1b55ba52ddc53b4444e77f"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs_tests_cli.ts",
+      "bytes": 6541,
+      "sha256": "e4349103a43e4050c6ae4bf28d4fc7d8d5dc8e3ad7f51cc57b6c3472db9a5832"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/git.ts",
+      "bytes": 3732,
+      "sha256": "f1b37ea11c20bd3e64ac7e57ce4d5bc649897a8db9f099ccdc87ada4e4e65764"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/ops/process.ts",
+      "bytes": 1345,
+      "sha256": "8783e0e7dddd07df7c58d1f2d22f4a44d5ac8a634c68b6ca4722ab25e214f249"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/tests/test_docs_test_native.py",
+      "bytes": 4189,
+      "sha256": "9543d126c8d834d8e8e45953e73de34b508ce68ad84bc023e00d642a7bfcf27e"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/tests/docs_test_native_protocol_test.ts",
+      "bytes": 3510,
+      "sha256": "1a12d3821e744f10c2386b42585f8fac1e773dbc52e80e1809049b945fb46442"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/docs/architecture.md",
+      "bytes": 5501,
+      "sha256": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/AGENTS.md",
+      "bytes": 17383,
+      "sha256": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-worktree/docs/system/implementation-entrypoint.md",
+      "bytes": 23164,
+      "sha256": "5b91401110fd7fd8ec667e6eda3f79e3af69972a0234b8c6984c7ba62161dbd8"
+    }
+  ],
+  "i2_selected_18_hashes_match": true,
+  "deliverables": [
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v5.md",
+      "bytes": 39871,
+      "sha256": "6049f427a10c769b69c2beaaa1374e583d217d6eb68926337204e560b824ed48"
+    },
+    {
+      "path": "/tmp/qcl-docs-test-routing-design-v5-delta-ledger.md",
+      "bytes": 4359,
+      "sha256": "c07e749848f5b4040c3ae0350b783faa9402627314d2dc80aacb9cc6b2a2202f"
+    }
+  ],
+  "decisions": [
+    "preserve D4 hello-first; remove unsupported I2 server challenge",
+    "explicit bounded capsule codec in existing QCL_DOCS_PHASE_TOKEN; four env names unchanged; parent-held binding plus independent live token lookup",
+    "chunk hydration raw<=32768B with stream ticket, offset, SHA and phase protocol cap24MiB; pure Capture unchanged",
+    "finish/client/log/receipt <=131072B summary/ref/SHA; originals independently retained",
+    "exact active constructor/producer/leader/broker/driver/executor/finalizer route; conditional runtime prerequisites remain"
+  ],
+  "root_steer": "Parent explicitly allowed bounded chunk hydration for this design; no execution authorization created",
+  "preserved": [
+    "exact12 public descriptor and three tools",
+    "D2 dedicated argv/maps/permissions",
+    "nine pure exports/full Capture strings",
+    "native16 closure/eight authoritative gitlinks",
+    "fixed13-node seed/counts",
+    "historic227/current230 split",
+    "existing trust boundary/nondowngrade/failure receipts",
+    "all compiler/DEV/GREEN/native/final CI/science gates separate"
+  ],
+  "conditional_native_gates": [
+    "actual pre-existing trusted parent/wrapper with scoped execution grant",
+    "independently admitted immutable runtime/tools and retained registrations/KaTeX/count records",
+    "live delegation/guard authority/control reserve/current admission/storage allocation",
+    "clean committed native16/source graph final binding",
+    "kernel process/peer/cgroup/cleanup evidence"
+  ],
+  "source_read_accounting": {
+    "method": "Whole file byte length charged for each explicit content-reading invocation (including sed/nl); freeze reads exact file bytes plus one I2 identity JSON reread. This is a logical-content ledger, not kernel physical-I/O instrumentation; Git/directory metadata overhead unmeasured.",
+    "before_freeze": [
+      {
+        "path": "/tmp/qcl-docs-test-routing-design-v4.md",
+        "full_file_charges_before_freeze": 2,
+        "bytes_each": 35392,
+        "logical_bytes_charged": 70784
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-design-v4-review.md",
+        "full_file_charges_before_freeze": 2,
+        "bytes_each": 8854,
+        "logical_bytes_charged": 17708
+      },
+      {
+        "path": "/tmp/qcl-docs-routing-i2-review.md",
+        "full_file_charges_before_freeze": 3,
+        "bytes_each": 24241,
+        "logical_bytes_charged": 72723
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-design-v4-identity.json",
+        "full_file_charges_before_freeze": 1,
+        "bytes_each": 3201,
+        "logical_bytes_charged": 3201
+      },
+      {
+        "path": "/tmp/qcl-docs-routing-i2-review-identity.json",
+        "full_file_charges_before_freeze": 1,
+        "bytes_each": 4791,
+        "logical_bytes_charged": 4791
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-design-v3.md",
+        "full_file_charges_before_freeze": 1,
+        "bytes_each": 29656,
+        "logical_bytes_charged": 29656
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-worktree/docs/architecture.md",
+        "full_file_charges_before_freeze": 2,
+        "bytes_each": 5501,
+        "logical_bytes_charged": 11002
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-worktree/AGENTS.md",
+        "full_file_charges_before_freeze": 1,
+        "bytes_each": 17383,
+        "logical_bytes_charged": 17383
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-worktree/docs/system/implementation-entrypoint.md",
+        "full_file_charges_before_freeze": 1,
+        "bytes_each": 23164,
+        "logical_bytes_charged": 23164
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs_tests_cli.ts",
+        "full_file_charges_before_freeze": 1,
+        "bytes_each": 6541,
+        "logical_bytes_charged": 6541
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs_tests_native.py",
+        "full_file_charges_before_freeze": 3,
+        "bytes_each": 34632,
+        "logical_bytes_charged": 103896
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-worktree/ops/docs_tests.ts",
+        "full_file_charges_before_freeze": 2,
+        "bytes_each": 25884,
+        "logical_bytes_charged": 51768
+      },
+      {
+        "path": "/tmp/qcl-docs-test-routing-worktree/ops/git.ts",
+        "full_file_charges_before_freeze": 1,
+        "bytes_each": 3732,
+        "logical_bytes_charged": 3732
+      }
+    ],
+    "skill_bytes": 3192,
+    "freeze_content_bytes": 458452,
+    "logical_content_bytes_charged": 877993,
+    "cap_bytes": 8388608,
+    "remaining_charged_bytes": 7510615
+  },
+  "resource_metrics": {
+    "cpu_seconds": null,
+    "peak_rss_bytes": null,
+    "physical_io_bytes": null,
+    "reason": "not instrumented; source text/Git metadata reads and three document writes only",
+    "requested_envelope": "15min wall, 1CPU, 1GiB, <=8MiB source reads, <=192KiB deliverable output",
+    "wall_seconds": null
+  },
+  "execution_counts": {
+    "target_import": 0,
+    "parser": 0,
+    "compiler": 0,
+    "formatter": 0,
+    "lint": 0,
+    "tests": 0,
+    "runtime": 0,
+    "native": 0,
+    "network": 0,
+    "server": 0,
+    "build": 0,
+    "solver": 0,
+    "final_ci": 0,
+    "product_source_write": 0,
+    "fixture_write": 0,
+    "checkpoint_write": 0,
+    "git_write": 0
+  },
+  "self_check": "Frozen D4 and highI2 input SHA checked; all18 I2 selected source hashes matched freeze; design/delta exact bytes hashed. No execution/readiness/source PASS claim.",
+  "stop": "Independent high R next; do not implement or run from this delegated task",
+  "output_total_bytes": 61507
+}

@@ -1,0 +1,24 @@
+{
+  "stage":"I2J-native-TAP-R1-R2-source-candidate",
+  "verdict":"awaiting-fresh-independent-high-CPP",
+  "worktree":"/tmp/qcl-docs-test-routing-worktree",
+  "head":"2bb05d3651af4509fe7f02c1253b40f1e5146fec",
+  "inputs":{"I2I_review":"eb81697fe8339decc511e47c6d82178cfeeb6008abeda823e1b84cefa4ab0acd","I2I_review_identity":"1397b31314a48c56871d4ea9d4368d639963963e3a8d2e4f469422d39748e2d0"},
+  "frozen_before":"/tmp/qcl-docs-routing-i2i-before-i2j/manifest.sha256",
+  "patch":{"path":"/tmp/qcl-docs-routing-impl-i2j-complete.patch","kind":"complete-four-file-I2I-to-I2J-delta-two-TS-files-unchanged","bytes":7512,"sha256":"5c20f5aa4c81ac303fbd97d3cc1446d13f93d961b503dd3242272a6f08dba305"},
+  "files":{
+    "ops/docs_tests_native.py":{"before":"71827cae802566e37087e4390a1040fe1dee57e284dc1a2a58542c0e2c659bbc","after":"eb5402cd7a949f29d4b8da87e792f762caeba9fc6acb9e5b58fcee38548c1be6"},
+    "ops/docs_tests_cli.ts":{"before":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7","after":"268554ff880349939d7577cd07104762cc2d8f446dd597079171985e36c2cae7"},
+    "tests/test_docs_test_native.py":{"before":"153a78a78008f4a656abf780b28f0937cb50c0a613e82294c6246c045a914688","after":"a7759bad387d953f152304ceab1bd436a62d7d859bf525bfaf266f9100efb683","nominal_methods":8,"observed":null},
+    "tests/docs_test_native_protocol_test.ts":{"before":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2","after":"a3c9baf9f095b230a0d78082fb5769f1f11b84efa3f16a2e440a21e55c311dd2","nominal_registrations":8,"observed":null}
+  },
+  "scope":["global-ASCII-case-insensitive-TAP-failure-tokens","explicit-JS-trim-set","ASCII-TAP-numeric-grammar","JS-line-terminator-body-exclusions","independent-literal-boundary-pairs"],
+  "normative_citation":{"url":"https://tc39.es/ecma262/multipage/text-processing.html#sec-compileassertion","authority":"Root-provided-primary-source-resolution","web_probe_executed":false},
+  "execution":{"scripts":0,"import":0,"parser":0,"compiler":0,"tests":0,"formatter":0,"linter":0,"solver":0,"native":0,"network":0,"CI":0,"science":0,"children":0},
+  "counters":{"product":"91/91-EXHAUSTED","source":"12/12-EXHAUSTED","increment":0},
+  "E1_context":{"resource_status":"FAILED","valid_samples":44,"unknown_samples":1,"unknown":"captured-Z-noVmRSS","waived":false,"rerun":false,"independent_TAP_review":"separate-pending"},
+  "claims":{"RSS_fixed":false,"native_READY":false,"S1":false},
+  "resource_cap":{"minutes":8,"CPU":1,"RAM_bytes":1073741824,"read_bytes":6291456,"output_bytes":98304,"per_output_chars":3000},
+  "ledger":{"conservative_read_estimate_bytes":5242880,"aggregate_output_bytes":null,"early_truncation":true,"per_output_cap_certified":false,"CPU":null,"RSS":null,"physical_IO":null},
+  "next_gate":"fresh-independent-high-CPP-on-exact-four-file-manifest"
+}

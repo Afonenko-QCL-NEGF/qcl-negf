@@ -1,0 +1,85 @@
+{
+  "format": "qcl-negf.doc06-schema-actual-plan.v2",
+  "status": "source_only_requires_high_review_and_fresh_Root_READY",
+  "root": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "root_head": "c5ef91f4d11a93bd2cdcc9d0b6b18bba0df80ed0",
+  "namespace": "/tmp/qcl-DOC06-ACTUAL-c5ef91f-schemafix-v2",
+  "preparation": {
+    "id": "DOC06-SCHEMA-ACTUAL-PREP-1",
+    "script": "/tmp/qcl-doc06-schema-actual-preparation-v2.py",
+    "max_exports": 1,
+    "wall_seconds": 120,
+    "CPU_count": 1,
+    "source_cap": 524288,
+    "file_cap": 131072,
+    "receipt_cap": 32768
+  },
+  "product_ids": [
+    "DOC06-SCHEMA-ACTUAL-A1",
+    "DOC06-SCHEMA-ACTUAL-A2"
+  ],
+  "product_script": "/tmp/qcl-doc06-schema-actual-local-run-v2.py",
+  "maximum_product_calls": 2,
+  "product_limits": {
+    "wall_seconds": 120,
+    "CPU_count": 1,
+    "sampled_RSS_bytes": 1073741824,
+    "sampled_TMP_regular_bytes": 16777216,
+    "raw_bytes": 1048576,
+    "sample_seconds": 0.05
+  },
+  "adapter": {
+    "path": "ops/docs/static-slice.ts",
+    "sha256": "a852318af5105aaf224913e2264342c4349cb0ed70991842f00ab78e4d6c4b72"
+  },
+  "test_binding": {
+    "path": "tests/docs_static_slice_test.ts",
+    "sha256": "45febb3ccfdd9d641447d5cec6e26bbfc6c9b97f188c2e9a620142794c1a3b31"
+  },
+  "runtime": {
+    "path": "/nix/store/xn4n2ijvg7pq49qm8kl5252j21sq3g3m-deno-2.8.3/bin/deno",
+    "sha256": "cdd88de791341a151d80ee5c189abb4b7681beb0aca9f5c1a4b0f4fe9429e26c"
+  },
+  "evidence": {
+    "source_cpp": {
+      "path": "/tmp/qcl-doc06-schema-fix-impl-review.md",
+      "sha256": "2706d0bb54a9e9027ae9cc633bc42fded380501a3ca45bd48400915e35c89be7"
+    },
+    "format_review": {
+      "path": "/tmp/qcl-doc06-schema-format-only-review.json",
+      "sha256": "0130a35e4445fbc73feda5d5ad7e0df20b032b59cc3490abef7409535ce162e3"
+    },
+    "outcome_review": {
+      "path": "/tmp/qcl-doc06-schema-v2-outcome-review.md",
+      "sha256": "ee8620ebbb06fdcddae5f742717e8ba6c32b97d60c12a17fe3c2f3447e37269b"
+    }
+  },
+  "authority": "Root executes and reconciles exactly one new preparation and two new actual calls. No CP writer in scripts; no unit rerun. Old source/unit/actual attempts preserved.",
+  "git_source_authority": "derive all8 gitlinks from fixed root ls-tree; read exact9 selected component blobs; export readonly bytes and derived graph/manifest. No manual parallel revision lock.",
+  "root_prerequisites": {
+    "R1": "Root independently verifies preparation graph/manifest and all9 bytes against current root gitlinks/Git blobs; supplies root_r1_readback JSON ref with binding+preparation_sha256+status exact_Git_R1_verified",
+    "R2": "A1 before=after=Root R1 binding; A2 before=after=A1 before=A1 after; READY A2 prior receipt hash. Guard also recomputes exact Git equality before/after itself."
+  },
+  "READY_contract": {
+    "format": "qcl-negf.doc06-schema-actual-ready.v2",
+    "required": [
+      "coordinator_authorized=true",
+      "id",
+      "root_head",
+      "script_sha256",
+      "plan_sha256",
+      "source_review={path,sha256} accepted high review",
+      "evidence_sha256 exact plan evidence map",
+      "created_unix age<=300s",
+      "limits exact phase map"
+    ],
+    "product_additional": [
+      "preparation_sha256",
+      "input_receipt_sha256",
+      "root_r1_readback={path,sha256}",
+      "prior_receipt_sha256 for A2"
+    ]
+  },
+  "acceptance_limits": "Complete partial engineering projection only; no scientific/native/CI/meaning acceptance. Equality of output bytes is separate postprocessing. Unit74 passed assertions but resource gate failed29valid+1unknown; remains failed, no retry or reclassification.",
+  "guards": "Permanent identities; exact verified-buffer helper loading no pyc; nullable RSS with valid>=1 and errors fail; best-effort receipt with stderr fallback; raw retained, bounded metadata; sampled lower bounds not hard quotas. No target source execution except trusted Root adapter projection CLI; selected9 are inert bytes."
+}

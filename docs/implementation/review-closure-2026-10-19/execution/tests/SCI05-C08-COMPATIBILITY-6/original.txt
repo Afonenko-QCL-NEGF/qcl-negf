@@ -1,0 +1,4 @@
+Test Summary:                                                              | Pass  Total  Time
+Independent resonant scalar oracle requires the fresh candidate Dyson gate |    5      5  0.4s
+Test Summary:             | Pass  Total   Time
+Final state U G alignment |  925    925  42.2s

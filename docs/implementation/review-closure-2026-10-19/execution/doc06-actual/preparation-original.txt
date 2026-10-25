@@ -1,0 +1,1 @@
+{"status": "prepared_not_executed", "namespace": "/tmp/qcl-DOC06-ACTUAL-2bb05d3-v1", "source_files": 9, "source_bytes": 245338, "input_receipt_sha256": "971fc29af70d409e64b37f2e331b03596e92736a2e3a993bad22e9d802bffd1a"}

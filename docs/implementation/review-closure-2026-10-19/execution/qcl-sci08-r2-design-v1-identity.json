@@ -1,0 +1,69 @@
+{
+  "artifact": "SCI08-R2 resident growth source design v1",
+  "date": "2026-10-20",
+  "stage": "D_source_only",
+  "status": "awaiting_independent_high_source_review",
+  "design_path": "/tmp/qcl-sci08-r2-design-v1.md",
+  "design_sha256": "69313bd117c140cf28b68d62ebb85b09bbc078a0ad305b3199c65ee55636e08c",
+  "workspace": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf",
+  "observed_root_head": "107bac5697b37cf0e47c3feb44883a907837645c",
+  "observed_runner_head": "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f",
+  "composition_authority": "Git gitlinks; observations below are forensic inputs, not a maintained revision lock",
+  "observed_submodule_status": [
+    "9f4a96d032ad868ec010ce92d915bb81087c8d92 components/QCLNEGF.jl",
+    "4f60f1680c6903f79f6d07bf4d14ced74d8c4f3f components/QCLNEGFRunner.jl",
+    "d8f8092ca1c76523d85384b4bac8198d8bfa736b components/qcl-negf-aiida",
+    "f4009c933183d8537e289d2fa5fa898defd2d9b5 components/qcl-negf-contracts",
+    "f729e2681224d6537538179ab760fefefd575003 components/qcl-negf-platform",
+    "2622de5ee28b454ff4f809cc3dd00c1e5bc2295d components/qcl-negf-portal",
+    "3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731 components/qcl-negf-research",
+    "de70638a982f91b7e125ab1cfc70a2daef2a656d components/qcl-negf-results"
+  ],
+  "initial_root_status_short": [
+    " M docs/implementation/review-closure-2026-10-19/execution/checkpoint.json",
+    "?? docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-docs-routing-impl-i2b-review.md",
+    "?? docs/implementation/review-closure-2026-10-19/execution/qcl-docs-routing-impl-i2b-review-identity.json",
+    "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-batch15-publication.json",
+    "?? docs/implementation/review-closure-2026-10-19/execution/qcl-root-progress-batch15-manifest.json"
+  ],
+  "runner_status_short_at_hash_snapshot": "",
+  "inputs_sha256": {
+    "AGENTS.md": "ef2ef40fe24e1f83758a59497526017955df377827004fb39bd0d39ca90d9330",
+    "docs/architecture.md": "8e49c02d948891f31f6d27360564b4a2708d7a1546808d9f10f38d0c5ebec6b7",
+    "docs/implementation/review-closure-2026-10-19/science.md": "0f52fc7148456b9eeff6bb993b5d1e701825781c58733dc519972c5312b8c26a",
+    "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-review.md": "48f97407846b4b179de2442e1295e8cc2028ed7d4e3ca9c2f28c8079ac5d4e67",
+    "docs/implementation/review-closure-2026-10-19/execution/evidence/qcl-sci07-resource-design-v2-review.md": "80e2f1ca784b9c4a082d0785e6ee6bc9ceb507eeecc43c63822f65f532a1d18e",
+    "/tmp/qcl-sci07-resource-design.md": "1f569ba726873d80715523621933caa6c0a0b0ad84e5a59ba9ef077b12001635",
+    "/tmp/qcl-sci07-resource-design-v2.md": "fc78a0c77394f4d12a1c5633b7e4acb587429667abc106f5aa72c1dc4dd9d010",
+    "components/QCLNEGFRunner.jl/src/application/resource_contract.jl": "6be67c1ca1ded92b57063cec6e493a589c1520ccc282e569ca131b5f65effb8c",
+    "components/QCLNEGFRunner.jl/src/infrastructure/resources/linux_resources.jl": "c6cceec4f6c8706485dbfa2902531f3c76d95b7c47dcffb773d9934de267f39f",
+    "components/QCLNEGFRunner.jl/src/infrastructure/persistence/point_artifacts.jl": "18bcd0fe2c6ff42050c500b57f17678b06a38f14871a9a3de437841cb5f8d1ad",
+    "components/QCLNEGFRunner.jl/src/infrastructure/persistence/hdf5.jl": "d9ceeec9a76b8a7bc4c41eb24aaa2d4bb1fc1994cbce0407b9a344bdacb8d143",
+    "components/QCLNEGFRunner.jl/src/infrastructure/persistence/scientific_history.jl": "afecbfb4ad3716af06c0ee0d7fc49563387b69948061a0102f1240e1ab6189a1",
+    "components/QCLNEGFRunner.jl/src/composition/scientific_execution.jl": "52aded550f1362b67f7c3781e2d45daac0e001a6dd0248a730f29299d443645f",
+    "components/QCLNEGFRunner.jl/src/composition/scratch_execution.jl": "cad52756bb47a6d1fa63cd8c86a03c4e4dcd0d9a4e12383a0671dd766697f395"
+  },
+  "source_graph_interpretation": "Current R1 accepted source input; historical SCI07 D1/D2 source chronology is not reused as current source composition",
+  "execution": {
+    "source_edits": 0,
+    "git_mutations": 0,
+    "subagents": 0,
+    "julia_or_python_imports": 0,
+    "scripts_or_parsers": 0,
+    "tests": 0,
+    "builds": 0,
+    "solver": 0,
+    "benchmarks": 0,
+    "native_or_server_probes": 0,
+    "network": 0,
+    "ci": 0,
+    "created_outputs": [
+      "/tmp/qcl-sci08-r2-design-v1.md",
+      "/tmp/qcl-sci08-r2-design-v1-identity.json",
+      "/tmp/qcl-sci08-r2-design-v1-read-ledger.json"
+    ]
+  },
+  "no_resource_grant_from_design": true,
+  "not_claimed": ["implementation pass", "runtime pass", "native capacity", "shared campaign enforcement", "CP-SCI READY", "scientific acceptance"],
+  "next": "STOP for independent high source review of these immutable outputs"
+}

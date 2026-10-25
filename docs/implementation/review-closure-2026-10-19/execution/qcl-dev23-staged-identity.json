@@ -1,0 +1,12 @@
+{
+  "baseline": "5579d55684939495230241f446b7ea07c8ae0224",
+  "files": {
+    "src/aiida_qcl_negf/service.py": "5f7e9b28f9007255e3de319fff43e48143d4c23a9c9487164ecda92ebac8c762",
+    "tests/test_cancellation_contract.py": "8b276505d190811526bd6d308acb09bf0b00317c36be14a92861236141204809",
+    "tests/test_restart.py": "eaf3b5e78cce5e8dc1ca7a919b299a76443bb5dab3fed584010b523a65c1ad70",
+    "README.md": "490e49b686047d45d64b20f61984506bd3d48dd8c8f1227d6477a4b7f6ab96fb"
+  },
+  "staged_diff_sha256": "d338b099965935d45a52954f96a6a522db375feaffc07672e63ba3b880f0a50b",
+  "independent_review_sha256": "0c68778d7a5e7927f3508e317535d7fcad76ec3950e6f9a836be530305a6fc6f",
+  "targeted_receipt_sha256": "b5f8f6bac2946f35aebea77ef4c4d86e366e8eb183d474409a84af66841d0f1c"
+}

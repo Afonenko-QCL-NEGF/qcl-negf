@@ -1,0 +1,46 @@
+{
+  "task": "DOC04 corrective source-only cycle1 F1-F5",
+  "stage": "frozen_unformatted_v2_for_CPP",
+  "root": "/tmp/qcl-doc04-root-worktree",
+  "revision": "cfc38e1761f24caf436d938f378dbcdbf71a28f0",
+  "branch": "codex/review-closure-docs-presentation",
+  "review": {"path":"/tmp/qcl-doc04-root-code-review.md","sha256":"5d196aa49b46ab3f9e8984095df053c99b4c61403584f4bffc2111b429d90a74"},
+  "formatted_parent": {"path":"/tmp/qcl-doc04-root-formatted-identity.json","sha256":"9c74aed0ee5a8d47f11ccb20bb5e76fbe16bc9b555a4c4a13dfaecbd16110393"},
+  "files": [
+    {"path":"ops/docs/assemble.py","bytes":33127,"sha256":"58d47789da8af18a66136676228c7398fcd50c8797838e8614c8aa07f3d64fda"},
+    {"path":"ops/docs/math-render.mjs","bytes":20534,"sha256":"9069974229f5c7923725c6d16be9d7cbe57a35d5c069b1380141aa326edb82e3"},
+    {"path":"ops/docs/pilot-plan.json","bytes":2120,"sha256":"cde7ee8b4e19878eeda8e92b4cfe6167b105dd3440409da351c0039e600e9e50","changed":false},
+    {"path":"tests/test_docs_assembly.py","bytes":22976,"sha256":"2207f3bce01e55774b2a4f3a5930fbb5cc880b84fe6e1b38afeafab3a2a548ca"},
+    {"path":"tests/docs_math_test.mjs","bytes":14072,"sha256":"ebdecfa1910a03d1c86dd2783c1634b185f324c1473620a2938e0def8f31169d"}
+  ],
+  "patch": {"path":"/tmp/qcl-doc04-root-impl-v2-patch.diff","bytes":95710,"sha256":"55d7bb4529db0eb39266bb3f7f859c1ec477b6864534197404dc14786e1438a3","kind":"full five additions relative to exact cfc38e1 baseline"},
+  "delta": {
+    "F1":"Closed literal unqualified CSS import edges; media/layer/escaped/unknown forms fail closed; static ESM import/export keywords rejected as unsupported runtime grammar",
+    "F2":"important property-atom overlap handles all/margin/padding/border/font/background/inset/logical aliases; unknown important grammar rejects; optional completeStylesheets binds finite full caller-supplied context paths/bytes/hashes/order and required KaTeX CSS",
+    "F3":"shared _start_node for ordinary/self-closing tags enforces identical duplicate-attr/count/depth guards",
+    "F4":"literal eleven sizeFuncs and sixteen manual delimsizing primitives denied from exact pinned source, ordinary/automatic left-right supported",
+    "F5":"unused whole renamed _whole; unused html destructure replaced by explicit occurrence-field projection, mapping validation retained"
+  },
+  "added_controls": {
+    "python":["CSS quoted/url import healthy and missing-local/external controls; media/layer/escape negatives","static ESM side-effect/import-from/export-from local/external rejects with healthy module script","self-closing healthy/duplicate/over-node-cap/depth controls with refreshed raw hash"],
+    "node":["ten important shorthand/all conflicts plus disjoint-important healthy and unknown/escaped grammar rejects","full pinned stylesheet context healthy, partial metadata, competing extra sheet, missing pin/bad extra hash/omitted consumed sheet rejects","all eleven pinned global font size commands rejected, ordinary source preserved","all sixteen manual delimiter sizes rejected; automatic left/right healthy"],
+    "existing_controls":"retained; Node original formatted 9799-byte prefix verified SHA256 ca055653d7946bd077db69447455aa74e476ce8d37543baaa40b75e082dc11d4; Python insertions only"
+  },
+  "primary_pinned_sources":[
+    {"path":"/tmp/qcl-doc04-katex-0.16.8/source/package/src/functions/sizing.js","sha256":"7efd9a5c2e07fc65499d5142182ea3812e5bd3dc13b298f5ef26c3a7c65736f1"},
+    {"path":"/tmp/qcl-doc04-katex-0.16.8/source/package/src/functions/delimsizing.js","sha256":"1594085127352d6881d94f0d41ad5d83863cba47c570abdd90d6db1d48a46c1e"}
+  ],
+  "retained_originals_verified":[
+    {"path":"/tmp/qcl-doc04-root-impl-report.md","sha256":"e3bdb5aa91563b6e99f8ad0103509107d0cfd9944cb5c0b836876c0757bbbe31"},
+    {"path":"/tmp/qcl-doc04-root-impl-identity.json","sha256":"870989b44732b1f252a70608d67e611ec65b11567b435424ef36747db92e1b8b"},
+    {"path":"/tmp/qcl-doc04-root-impl-patch.diff","sha256":"9dd6022c325a4fcc7b19b0eadf6fe9e87263abf12680f39ecd9453af45edfc57"},
+    {"path":"/tmp/qcl-DOC04-LINT-1/original.log","sha256":"3c314a42fb584b69e473183745401f1d1dd41b20b4087c9b4d542911e38ab82e"},
+    {"path":"/tmp/qcl-DOC04-LINT-1/receipt.json","sha256":"7a473ea2d38a5772f48c378a9335cbc53c6c1b8ea6e8f23b4fec35c0b2aee871"}
+  ],
+  "context_boundary":"completeStylesheets is private caller-supplied page context; hashes/order checked, actual HTML inventory completeness belongs to owning final materializer. Default private partial context is explicitly complete=false, never public acceptance.",
+  "allocation":{"wall_minutes":35,"cpu":1,"ram_bytes":2147483648,"read_bytes_cap":5242880,"output_bytes_cap":131072,"executor_runtime_calls":0,"unit_calls_used":2,"unit_calls_max":4,"unit_calls_remaining":"Root sole PY-GREEN + NODE-GREEN after separate CPP; no autorerun"},
+  "checks":{"source":"manual read-only inspection and primary SHA checks","whitespace":"per-file git diff --no-index --check: no findings","syntax_import_parser":"not_measured","format_lint":"not_run_by_executor; Root next finite source-tool revision","unit_GREEN":"not_measured","public_native_browser_science":"not_measured"},
+  "network_build_children_git_mutation":false,
+  "other_root_paths_written":false,
+  "stop":"Separate CPP; Root finite format/lint revision and final CPP before remaining unit calls; no fullCI/science/public claims"
+}

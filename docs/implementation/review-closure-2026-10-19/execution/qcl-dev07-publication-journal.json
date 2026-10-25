@@ -1,0 +1,28 @@
+{
+  "operation_id": "PUBLISH-DEV07-QCLNEGF.jl-e431609",
+  "CP_CODE": "60164256c1660a153b3d6180b22e100213b627e84edbb586a13e482e1f45bb08",
+  "components": {
+    "QCLNEGF.jl": {
+      "state": "G1_merged",
+      "worktree": "/home/tolya/.codex/worktrees/review-closure-exec/qcl-negf/components/QCLNEGF.jl",
+      "base": "7324d98c0fccd61b4a1a2756b5cabe2fd0e0e49c",
+      "base_branch": "codex/review-closure-final-audit-integration",
+      "head": "e431609f4f5ca6d21225aaf5b18aaf7b50f0c7ee",
+      "branch": "codex/review-closure-absolute-kernel-integration",
+      "files": {
+        "test/physics/absolute_scattering_kernel_oracles.jl": "d3651d095d81a1c02dd02ffc660c906998e8486a4634302ee3e7722bc62678ad",
+        "docs/src/development/review_oracle_contracts.md": "42d747275644df419ea1b1e0749821e96e9d82a843d9ac93366ad0caf11f3e62"
+      },
+      "receipt_sha256": "3185a8b6a27a61a64e02f6608b4ff372fb364318d73b8c3fd994b2541afad236",
+      "assertions": 824,
+      "pr": 13,
+      "url": "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/pull/13",
+      "create_exit": 0,
+      "sole_create_submit": true,
+      "merge_commit": "e2480a9482cf2d4bc8aab792f3925c291370edc8",
+      "merged_at": "2026-10-19T18:45:43Z",
+      "merge_exit": 0,
+      "sole_merge_submit": true
+    }
+  }
+}
