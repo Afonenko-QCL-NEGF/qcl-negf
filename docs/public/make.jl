@@ -5,7 +5,7 @@ get(ENV, "QCL_DOCS_PROFILE", "") == "pilot-v1" ||
 
 # Staging reads this versioned literal without executing Julia. Keep the exact LF
 # bytes and final newline; this is generated index source, not a second chapter.
-const QCL_DOCS_OPERATOR_INDEX = "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n"
+const QCL_DOCS_OPERATOR_INDEX = "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n\n[Неизменяемый runtime захвата](capture-runtime-delivery.md)\n\n[Свидетельство сборки solver](solver-build-receipt.md)\n"
 
 function _qcl_docs_path(name)
     value = get(ENV, name, "")
@@ -79,7 +79,9 @@ makedocs(
         prerender = false, mathengine = nothing,
         assets = ["assets/qcl-fixed-light.css"],
         repolink = "https://github.com/Afonenko-QCL-NEGF/qcl-negf"),
-    pages = ["Home" => "index.md", "Recovery" => "recovery.md"],
+    pages = ["Home" => "index.md", "Recovery" => "recovery.md",
+        "Capture runtime" => "capture-runtime-delivery.md",
+        "Solver build receipt" => "solver-build-receipt.md"],
     pagesonly = false,
     doctest = false,
     linkcheck = false,

@@ -23,6 +23,10 @@ const hash = "sha256-" + btoa(String.fromCharCode(...Array(32).fill(1)));
 const otherHash = "sha256-" + btoa(String.fromCharCode(...Array(32).fill(2)));
 const encoder = new TextEncoder();
 
+const solverOutput = "/nix/store/" + "b".repeat(32) + "-qcl-solver";
+const solverDrv = "/nix/store/" + "c".repeat(32) + "-qcl-solver.drv";
+const buildStdout = JSON.stringify([{ drvPath: solverDrv, outputs: { out: solverOutput } }]);
+
 interface Binding {
   captured_input_sha256: string;
   captured_input_bytes: number;
@@ -120,7 +124,7 @@ async function refuses(raw: unknown, label: string) {
   try {
     await build(raw as string, graph, manifestSha, (command) => {
       commands.push(command);
-      return Promise.resolve("");
+      return Promise.resolve(buildStdout);
     });
   } catch {
     rejected = true;
@@ -163,7 +167,7 @@ Deno.test("OPS04 HTTPS metadata binds exact consumed JSON bytes and production w
   const commands: Command[] = [];
   const receipt = await build(raw, graph, manifestSha, (command) => {
     commands.push(command);
-    return Promise.resolve("");
+    return Promise.resolve(buildStdout);
   }, parseBuildOptions(["--test-workers", "16"]));
   assert(
     commands.length === 1 && commands[0].executable === "nix" && commands[0].args[0] === "build",
@@ -202,7 +206,7 @@ Deno.test("OPS04 path replacement after capture keeps A while replacement before
     const receipt = await build(captured, graph, manifestSha, async (command) => {
       commands.push(command);
       if (command.args[0] === "store") await Deno.writeTextFile(path, JSON.stringify(specB));
-      return "";
+      return buildStdout;
     });
     assert(commands.length === 2 && commands[1].args[0] === "build", "Prefetch must precede build");
     assert(
@@ -226,7 +230,7 @@ Deno.test("OPS04 path replacement after capture keeps A while replacement before
     const commandsB: Command[] = [];
     const receiptB = await build(capturedB, graph, manifestSha, (command) => {
       commandsB.push(command);
-      return Promise.resolve("");
+      return Promise.resolve(buildStdout);
     });
     assert(
       commandsB.length === 2 && commandsB[0].args.includes(specB.url) &&
@@ -250,7 +254,7 @@ Deno.test("OPS04 first callback cannot mutate captured operative metadata or res
     spec.hash = otherHash;
     options.profile = "local-debug";
     options.testWorkerLimit = 2;
-    return Promise.resolve("");
+    return Promise.resolve(buildStdout);
   }, options);
   assert(commands.length === 2, "Expected verified local build");
   await bound(commands[1], receipt, raw, "file:///artifact/depot.tar.gz", hash);
@@ -262,47 +266,11 @@ Deno.test("OPS04 first callback cannot mutate captured operative metadata or res
   assert(commands[1].args[worker + 1] === "16", "Callback mutated frozen worker budget");
 });
 
-Deno.test("OPS04 graph and object order are immaterial while raw duplicate members normalize once", async () => {
+Deno.test("OPS04 duplicate JSON members and reordered consumed source arrays refuse before dispatch", async () => {
   const spec = depot();
+  await refuses('{"hash":"discarded",' + JSON.stringify(spec).slice(1), "duplicate JSON key");
   spec.sources.components.reverse();
-  const raw = '{"hash":"discarded","url":"https://discarded.invalid",' +
-    JSON.stringify(spec).slice(1);
-  const commands: Command[] = [];
-  const receipt = await build(raw, graph, manifestSha, (command) => {
-    commands.push(command);
-    return Promise.resolve("");
-  });
-  assert(commands.length === 1, "Ordering or duplicate-member parse outcome rejected");
-  await bound(commands[0], receipt, raw, spec.url, hash);
-  // Repeated members replace values while retaining their first insertion positions.
-  // This ordered expectation is independent of the outgoing JSON and production parser.
-  const expected = JSON.stringify({
-    hash,
-    url: "https://artifacts.example.invalid/depot.tar.gz",
-    format: "qcl-negf.julia-depot.v1",
-    sources: {
-      format: "qcl-negf.git-graph.v1",
-      revision: "a".repeat(40),
-      components: [
-        {
-          path: "components/QCLNEGFRunner.jl",
-          revision: "c".repeat(40),
-          url: "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl",
-        },
-        {
-          path: "components/QCLNEGF.jl",
-          revision: "b".repeat(40),
-          url: "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl",
-        },
-      ],
-    },
-    julia: "1.13.0",
-    juliaManifest: "d".repeat(64),
-  });
-  assert(
-    argument(commands[0], "depotManifestJson") === expected,
-    "Produced JSON must have one JS parse outcome with first-insertion key order",
-  );
+  await refuses(JSON.stringify(spec), "consumed source array order differs");
 });
 
 Deno.test("OPS04 rejected prefetch and command failures never return success observation", async () => {
@@ -407,7 +375,7 @@ Deno.test("OPS04 accepts exactly 65536 captured UTF8 bytes without truncation", 
   const commands: Command[] = [];
   const receipt = await build(raw, graph, manifestSha, (command) => {
     commands.push(command);
-    return Promise.resolve("");
+    return Promise.resolve(buildStdout);
   });
   assert(commands.length === 1, "Exact raw bound rejected");
   await bound(commands[0], receipt, raw, depot().url, hash);
@@ -427,7 +395,7 @@ Deno.test("OPS04 programmatic invalid options reject before callback", async () 
     try {
       await build(JSON.stringify(depot()), graph, manifestSha, () => {
         calls++;
-        return Promise.resolve("");
+        return Promise.resolve(buildStdout);
       }, options as BuildOptions);
     } catch {
       rejected = true;
@@ -449,7 +417,7 @@ Deno.test("OPS04 unchecked legacy object plus pathname invocation is rejected be
     try {
       await legacy(depot(), graph.revision, path, () => {
         commands++;
-        return Promise.resolve("");
+        return Promise.resolve(buildStdout);
       });
     } catch {
       rejected = true;
@@ -701,7 +669,7 @@ Deno.test("OPS04 solver CLI preserves argv compatibility and captures once for H
       execute: (command, capture) => {
         commands.push(command);
         captures.push(capture);
-        return Promise.resolve("");
+        return Promise.resolve(buildStdout);
       },
     });
     assert(input.opens === 1 && input.closes === 1, "Solver CLI must use one actual capture");
@@ -710,8 +678,8 @@ Deno.test("OPS04 solver CLI preserves argv compatibility and captures once for H
       "Solver CLI dispatch route changed",
     );
     assert(
-      captures.every((value) => value !== true),
-      "Solver CLI unexpectedly captures command stdout",
+      captures.at(-1) === true && captures.slice(0, -1).every((value) => value !== true),
+      "Solver CLI must capture actual build JSON only",
     );
     const command = commands.at(-1)!;
     await bound(command, receipt, raw, url, hash);
@@ -747,7 +715,7 @@ Deno.test("OPS04 solver CLI invalid argv encoding size graph and lock preflight 
         readJuliaManifestSha256: () => Promise.resolve(fixture.lock ?? manifestSha),
         execute: () => {
           calls++;
-          return Promise.resolve("");
+          return Promise.resolve(buildStdout);
         },
       });
     } catch {

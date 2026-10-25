@@ -529,7 +529,9 @@ def produce(inputs, work, output):
             if '$' in index or not index.endswith('\n'):
                 raise ValueError('operator_index_literal')
             files = {'index.md': index.encode(),
-                     'recovery.md': read_file(root / 'docs/public/operator-recovery.md')}
+                     'recovery.md': read_file(root / 'docs/public/operator-recovery.md'),
+                     'capture-runtime-delivery.md': read_file(root / 'docs/capture-runtime-delivery.md'),
+                     'solver-build-receipt.md': read_file(root / 'docs/solver-build-receipt.md')}
         else:
             recipe = root / component / 'docs/make.jl'
             files = source_tree(root, component + '/docs/src')

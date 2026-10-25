@@ -771,7 +771,7 @@ Deno.test("operator staging preserves frozen chapter bytes and recipe-owned inde
   assert(staged.recovery === recovery, "exact recovery bytes must be retained");
   assert(
     new TextDecoder().decode(staged.index) ===
-      "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n",
+      "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n\n[Неизменяемый runtime захвата](capture-runtime-delivery.md)\n\n[Свидетельство сборки solver](solver-build-receipt.md)\n",
   );
   const changed = recovery.slice();
   changed[0] ^= 1;

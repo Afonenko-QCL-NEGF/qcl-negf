@@ -24,6 +24,9 @@
         pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
       in import ./components/QCLNEGFRunner.jl/nix/package.nix {
         inherit pkgs preparedDepot;
+        # Select only the Results capture CLI from the shared locked PythonSet.
+        # Runner retains one ordinary spawn when this capability is unavailable.
+        captureExecutable = "${(self.lib.mkApplication { inherit system; }).captureRuntime}/bin/qcl-negf-results";
         testProfile = juliaTestProfile;
         julia = import ./components/QCLNEGFRunner.jl/nix/julia.nix {
           inherit pkgs;

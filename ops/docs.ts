@@ -171,6 +171,8 @@ export function parseDocsPlan(value: unknown): DocsPlan {
     "components/QCLNEGFRunner.jl/docs/make.jl",
     "docs/public/make.jl",
     "docs/public/operator-recovery.md",
+    "docs/capture-runtime-delivery.md",
+    "docs/solver-build-receipt.md",
     "components/qcl-negf-contracts/src/qcl_negf_contracts/schemas/model-help.schema.json",
   ];
   if (

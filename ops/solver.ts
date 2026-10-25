@@ -12,6 +12,7 @@ export interface BuildCliDependencies {
   openDepotInput: OpenDepotInput;
   readSourceGraph(): Promise<SourceGraph>;
   readJuliaManifestSha256(): Promise<string>;
+  readInstalledJuliaManifestSha256(output: string): Promise<string>;
   execute(command: Command, capture?: boolean): Promise<string>;
 }
 
@@ -27,6 +28,133 @@ export interface DepotBinding {
   readonly archive_hash: string;
 }
 
+// Existing build receipt, extended with observations from the actual build command.
+export interface SolverBuildResult extends DepotBinding {
+  readonly source_graph_sha256: string;
+  readonly consumed_metadata_json: string;
+  readonly build_stdout_json: string;
+  readonly drv_path: string;
+  readonly output_path: string;
+}
+
+export function canonicalSourceGraphJson(value: SourceGraph): string {
+  const exact = (item: Record<string, unknown>, keys: string[]) =>
+    JSON.stringify(Object.keys(item).sort()) === JSON.stringify(keys.sort());
+  if (
+    !object(value) || !exact(value, ["format", "revision", "components"]) ||
+    value.format !== "qcl-negf.git-graph.v1" || typeof value.revision !== "string" ||
+    value.revision.length !== 40 || !/^[a-f0-9]{40}$/.test(value.revision) ||
+    !Array.isArray(value.components) || value.components.length < 1 || value.components.length > 64
+  ) throw new Error("Invalid ASCII source graph");
+  const paths = new Set<string>();
+  for (const row of value.components) {
+    if (
+      !object(row) || !exact(row, ["path", "revision", "url"]) ||
+      ![row.path, row.revision, row.url].every((item) =>
+        typeof item === "string" && item.length <= 256 && !/[^\x21-\x7e]/.test(item)
+      ) ||
+      !/^components\/[A-Za-z0-9][A-Za-z0-9.-]*$/.test(row.path) ||
+      !/^[a-f0-9]{40}$/.test(row.revision) ||
+      !/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9_.-]+$/.test(row.url) ||
+      paths.has(row.path)
+    ) throw new Error("Invalid or duplicate ASCII source component");
+    paths.add(row.path);
+  }
+  const sorted = (item: unknown): unknown => {
+    if (Array.isArray(item)) return item.map(sorted);
+    if (object(item)) {
+      return Object.fromEntries(Object.keys(item).sort().map((key) => [key, sorted(item[key])]));
+    }
+    return item;
+  };
+  return JSON.stringify(sorted(value));
+}
+
+// JSON.parse alone silently accepts duplicate object keys. Refuse them before
+// parsing captured depot/build JSON, including escaped spellings of the same key.
+function uniqueJson(raw: string): unknown {
+  let offset = 0;
+  const space = () => {
+    while (/\s/.test(raw[offset] ?? "") && offset < raw.length) offset++;
+  };
+  const string = (): string => {
+    const start = offset++;
+    while (offset < raw.length) {
+      const next = raw[offset++];
+      if (next === "\\") offset++;
+      else if (next === '"') return JSON.parse(raw.slice(start, offset));
+    }
+    throw new Error("Unterminated JSON string");
+  };
+  const value = (depth = 0): void => {
+    if (depth > 64) throw new Error("JSON nesting exceeds bound");
+    space();
+    if (raw[offset] === '"') {
+      string();
+      return;
+    }
+    const open = raw[offset];
+    if (open === "{" || open === "[") {
+      offset++;
+      space();
+      const close = open === "{" ? "}" : "]";
+      const keys = new Set<string>();
+      if (raw[offset] === close) {
+        offset++;
+        return;
+      }
+      while (offset < raw.length) {
+        if (open === "{") {
+          space();
+          if (raw[offset] !== '"') throw new Error("Invalid JSON key");
+          const key = string();
+          if (keys.has(key)) throw new Error("Duplicate JSON key");
+          keys.add(key);
+          space();
+          if (raw[offset++] !== ":") throw new Error("Invalid JSON separator");
+        }
+        value(depth + 1);
+        space();
+        if (raw[offset] === close) {
+          offset++;
+          return;
+        }
+        if (raw[offset++] !== ",") throw new Error("Invalid JSON separator");
+      }
+      throw new Error("Unterminated JSON container");
+    }
+    const token = /^(?:true|false|null|-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)/.exec(
+      raw.slice(offset),
+    );
+    if (!token) throw new Error("Invalid JSON value");
+    offset += token[0].length;
+  };
+  value();
+  space();
+  if (offset !== raw.length) throw new Error("Trailing JSON data");
+  return JSON.parse(raw);
+}
+
+export function solverBuildOutput(raw: string): { drv_path: string; output_path: string } {
+  if (typeof raw !== "string" || new TextEncoder().encode(raw).length > 65536) {
+    throw new Error("Missing or oversized actual Nix build JSON");
+  }
+  const rows = uniqueJson(raw);
+  if (!Array.isArray(rows) || rows.length !== 1 || !object(rows[0])) {
+    throw new Error("Expected exactly one solver build result");
+  }
+  const { drvPath, outputs } = rows[0];
+  const store = /^\/nix\/store\/[a-z0-9]{32}-[A-Za-z0-9+._?-]+$/;
+  if (
+    typeof drvPath !== "string" || !store.test(drvPath) || /[\r\n]/.test(drvPath) ||
+    !drvPath.endsWith(".drv") ||
+    !object(outputs) || Object.keys(outputs).length !== 1 ||
+    typeof outputs.out !== "string" || !store.test(outputs.out) || /[\r\n]/.test(outputs.out) ||
+    outputs.out.endsWith(".drv")
+  ) throw new Error("Invalid actual solver derivation/output association");
+  return { drv_path: drvPath, output_path: outputs.out };
+}
+
 const metadataLimit = 65536;
 const encoder = new TextEncoder();
 const openDepotInput: OpenDepotInput = (path) => Deno.open(path, { read: true });
@@ -40,6 +168,28 @@ async function sha256(bytes: Uint8Array): Promise<string> {
 
 export async function readJuliaManifestSha256(): Promise<string> {
   return await sha256(await Deno.readFile(`${workspace}/julia/Manifest.toml`));
+}
+
+export async function readInstalledJuliaManifestSha256(output: string): Promise<string> {
+  const file = await Deno.open(`${output}/share/qcl-negf/julia/Manifest.toml`, { read: true });
+  try {
+    const limit = 1048576;
+    if (!(await file.stat()).isFile) throw new Error("Installed Manifest must be a regular file");
+    const bytes = new Uint8Array(limit + 1);
+    let count = 0;
+    while (true) {
+      const read = await file.read(bytes.subarray(count));
+      if (read === null) break;
+      if (read <= 0 || read > bytes.length - count) {
+        throw new Error("Invalid Manifest read progress");
+      }
+      count += read;
+      if (count > limit) throw new Error("Installed Manifest exceeds bound");
+    }
+    return await sha256(bytes.subarray(0, count));
+  } finally {
+    file.close();
+  }
 }
 
 export async function captureDepotMetadata(
@@ -112,7 +262,7 @@ export async function prepareDepotMetadata(
   ) {
     throw new Error("Invalid or oversized depot metadata string");
   }
-  const metadata: unknown = JSON.parse(metadataJson);
+  const metadata: unknown = uniqueJson(metadataJson);
   if (
     !object(metadata) || metadata.format !== "qcl-negf.julia-depot.v1" ||
     metadata.julia !== "1.13.0" || typeof expectedManifest !== "string" ||
@@ -128,6 +278,12 @@ export async function prepareDepotMetadata(
     sources.revision !== expectedGraph.revision
   ) {
     throw new Error("Depot belongs to a different source graph");
+  }
+  if (
+    canonicalSourceGraphJson(expectedGraph) !==
+      canonicalSourceGraphJson(sources as unknown as SourceGraph)
+  ) {
+    throw new Error("Consumed depot source graph differs from selected source graph");
   }
   const expected = graphComponents(expectedGraph.components);
   const actual = graphComponents(sources.components);
@@ -208,9 +364,9 @@ export async function buildSolver(
   metadataJson: string,
   expectedGraph: SourceGraph,
   expectedJuliaManifestSha256: string,
-  execute: (command: Command) => Promise<string> = run,
+  execute: (command: Command, capture?: boolean) => Promise<string> = run,
   options: BuildOptions = parseBuildOptions([]),
-): Promise<DepotBinding> {
+): Promise<SolverBuildResult> {
   // Validate programmatic callers before prefetch/build as well as CLI input.
   options = parseBuildOptions([
     "--profile",
@@ -219,6 +375,7 @@ export async function buildSolver(
       ? []
       : ["--test-workers", String(options.testWorkerLimit)]),
   ]);
+  expectedGraph = structuredClone(expectedGraph);
   const profile = options.profile;
   const workers = options.testWorkerLimit;
   const { boundJson, protocol, binding } = await prepareDepotMetadata(
@@ -248,13 +405,14 @@ export async function buildSolver(
   const fileUrl = new URL(`file://${workspace}/`);
   fileUrl.searchParams.set("rev", binding.source_revision);
   fileUrl.searchParams.set("submodules", "1");
-  await execute({
+  const sourceGraphSha = await sha256(encoder.encode(canonicalSourceGraphJson(expectedGraph)));
+  const buildStdout = await execute({
     executable: "nix",
     args: [
       "build",
       "--impure",
       "--no-link",
-      "--print-out-paths",
+      "--json",
       "--file",
       "nix/solver.nix",
       "--argstr",
@@ -276,14 +434,21 @@ export async function buildSolver(
       ]),
     ],
     cwd: workspace,
+  }, true);
+  const actual = solverBuildOutput(buildStdout);
+  return Object.freeze({
+    ...binding,
+    source_graph_sha256: sourceGraphSha,
+    consumed_metadata_json: boundJson,
+    build_stdout_json: buildStdout,
+    ...actual,
   });
-  return binding;
 }
 
 export async function runSolverBuildCli(
   args: readonly string[],
   dependencies: Partial<BuildCliDependencies> = {},
-): Promise<DepotBinding> {
+): Promise<SolverBuildResult> {
   const {
     openDepotInput: open = openDepotInput,
     readSourceGraph: readGraph = sourceGraph,
@@ -300,7 +465,7 @@ export async function runSolverBuildCli(
   const captured = await captureDepotMetadata(target, open);
   const graph = structuredClone(await readGraph());
   const manifest = await readManifest();
-  return await buildSolver(captured, graph, manifest, (command) => execute(command), options);
+  return await buildSolver(captured, graph, manifest, execute, options);
 }
 
 async function checksum(path: string): Promise<string> {
