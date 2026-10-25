@@ -5,7 +5,9 @@ let
   bind = value:
     if builtins.isString value && builtins.match "/nix/store/.*" value != null
     then builtins.storePath value
-    else if builtins.isAttrs value then builtins.mapAttrs (_: bind) value
+    # Deriver is plain metadata, not an input/fetch target (it may be absent).
+    else if builtins.isAttrs value then builtins.mapAttrs
+      (key: item: if key == "deriver" then item else bind item) value
     else if builtins.isList value then map bind value
     else value;
   inputs = bind raw;

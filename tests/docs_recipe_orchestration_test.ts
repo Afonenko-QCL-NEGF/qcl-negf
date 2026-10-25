@@ -14,6 +14,7 @@ import {
   docsIdentityDigest,
   docsIdentityProjection,
   type DocsObservation,
+  type DocsTool,
   type GitLimits,
   GitObservationError,
   type GitReply,
@@ -21,6 +22,7 @@ import {
   makeDocsGitReader,
   makeDocsGitTransport,
   observeDocsSources,
+  observeDocsTool,
   type Operation,
   operatorSources,
   parseDocsAdmission,
@@ -1654,6 +1656,7 @@ function completeAdmissionFixture(created_epoch: unknown) {
     store_path: store,
     executable: store + "/bin/tool",
     deriver: store + ".drv",
+    nar_hash: "sha256:" + "a".repeat(52),
     version: "1.0",
   };
   const file = (path: string) => ({ path, sha256: "b".repeat(64) });
@@ -1696,4 +1699,167 @@ Deno.test("DOC04 fractional admission epoch matches numeric contract and retains
   }
   rejects(() => checkDocsAdmissionFreshness(admission.created_epoch, epoch - 0.125));
   rejects(() => checkDocsAdmissionFreshness(admission.created_epoch, epoch + 300.125));
+});
+
+function toolIdentityFixture() {
+  const tool = { ...completeAdmissionFixture(1).tools.python };
+  const calls: { executable: string; argv: string[] }[] = [];
+  const paths: string[] = [];
+  const state = {
+    actual: tool.executable,
+    version: "tool 1.0 full version\n",
+    hash: tool.nar_hash + "\n",
+    deriver: tool.deriver + "\n",
+    isFile: true,
+    mode: 0o555 as number | null,
+    failure: null as Partial<GitReply["result"]> | null,
+    buildCalls: 0,
+  };
+  const nixStore = tool.store_path + "/bin/nix-store";
+  const io = {
+    ancestors: (path: string, directory: boolean) => {
+      assert(directory && path === tool.store_path);
+      paths.push(path);
+      return Promise.resolve();
+    },
+    realPath: (path: string) => {
+      assert(path === tool.executable);
+      paths.push(path);
+      return Promise.resolve(state.actual);
+    },
+    stat: (path: string) => {
+      assert(path === state.actual);
+      paths.push(path);
+      return Promise.resolve({ isFile: state.isFile, mode: state.mode });
+    },
+    command: (executable: string, argv: string[]) => {
+      calls.push({ executable, argv });
+      const versionCall = argv.length === 1 && argv[0] === "--version";
+      assert(executable === (versionCall ? tool.executable : nixStore));
+      if (!versionCall) {
+        assert(JSON.stringify(argv.slice(0, 3)) === '["--store","local","--query"]');
+        assert(argv.length === 5 && argv[4] === tool.store_path);
+        assert(argv[3] === "--hash" || argv[3] === "--deriver");
+      }
+      const text = versionCall ? state.version : argv[3] === "--hash" ? state.hash : state.deriver;
+      const reply = oneByteReply();
+      reply.stdout = new TextEncoder().encode(text);
+      if (!versionCall && argv[3] === "--hash" && state.failure) {
+        reply.result = { ...reply.result, ...state.failure };
+      }
+      return Promise.resolve(reply);
+    },
+  };
+  return {
+    tool,
+    state,
+    calls,
+    paths,
+    async prebuild(expected: DocsTool = tool) {
+      const result = await observeDocsTool("python", expected, nixStore, io);
+      // A failed tool gate must never reach even this inert builder stand-in.
+      state.buildCalls++;
+      return result;
+    },
+  };
+}
+Deno.test("DOC04 Tool identity accepts absent deriver metadata with explicit provenance limit", async () => {
+  for (const expectedNull of [true, false]) {
+    for (const observedKnown of [true, false]) {
+      if (!expectedNull && !observedKnown) continue;
+      const f = toolIdentityFixture();
+      f.state.deriver = observedKnown ? f.tool.deriver + "\n" : "unknown-deriver\n";
+      const result = await f.prebuild({ ...f.tool, deriver: expectedNull ? null : f.tool.deriver });
+      assert(result.deriver === (observedKnown ? f.tool.deriver : null));
+      assert(result.deriver_binding === (expectedNull ? "not_asserted" : "matched"));
+      assert(result.derivation_provenance === "derivation provenance not established");
+      assert(result.store_path === f.tool.store_path && result.nar_hash === f.tool.nar_hash);
+      assert(result.version === "tool 1.0 full version");
+      assert(!f.paths.includes(f.tool.deriver), "physical .drv must never be queried");
+      assert(f.calls.length === 3 && f.calls.filter((c) => c.argv[3] === "--hash").length === 1);
+      assert(f.state.buildCalls === 1);
+    }
+  }
+});
+Deno.test("DOC04 Tool identity strictly refuses malformed admission and producer projection", () => {
+  for (
+    const value of [
+      null,
+      "",
+      "sha256:" + "a".repeat(51),
+      "sha256:" + "e".repeat(52),
+      "sha512:" + "a".repeat(52),
+      "sha256:" + "a".repeat(52) + "\n",
+      false,
+    ]
+  ) {
+    const input = completeAdmissionFixture(1);
+    Object.assign(input.tools.python, { nar_hash: value });
+    rejects(() => parseDocsAdmission(input));
+  }
+  for (
+    const value of [
+      "unknown-deriver",
+      "null",
+      false,
+      "",
+      "/tmp/a.drv",
+      "/nix/store/" + "a".repeat(32) + "-a.drv/child",
+    ]
+  ) {
+    const input = completeAdmissionFixture(1);
+    Object.assign(input.tools.python, { deriver: value });
+    rejects(() => parseDocsAdmission(input));
+  }
+  const old = completeAdmissionFixture(1);
+  Reflect.deleteProperty(old.tools.python, "nar_hash");
+  rejects(() => parseDocsAdmission(old));
+  for (const field of ["nar_hash", "deriver"] as const) {
+    const input = completeAdmissionFixture(1);
+    Object.assign(input.inputs.tools, {
+      python: {
+        ...input.inputs.tools.python,
+        ...(field === "nar_hash" ? { nar_hash: "sha256:" + "b".repeat(52) } : { deriver: null }),
+      },
+    });
+    try {
+      parseDocsAdmission(input);
+      throw new Error("expected producer_tool_mismatch");
+    } catch (error) {
+      assert(error instanceof Error && error.message === "producer_tool_mismatch");
+    }
+  }
+  const nullable = completeAdmissionFixture(1);
+  Object.assign(nullable.tools.python, { deriver: null });
+  assert(parseDocsAdmission(nullable).tools.python.deriver === null);
+});
+Deno.test("DOC04 Tool identity failures block before build with fixed finite queries", async () => {
+  const cases: [string, (f: ReturnType<typeof toolIdentityFixture>) => void][] = [
+    ["tool_nar_hash_mismatch", (f) => f.state.hash = "sha256:" + "b".repeat(52) + "\n"],
+    ["tool_deriver_mismatch", (f) => f.state.deriver = "unknown-deriver\n"],
+    ["tool_deriver_mismatch", (f) => f.state.deriver = f.tool.store_path + "-other.drv\n"],
+    ["tool_path_mismatch", (f) => f.state.actual = f.tool.store_path + "/bin/other"],
+    ["tool_path_mismatch", (f) => f.state.actual = "/tmp/escaped"],
+    ["tool_path_mismatch", (f) => f.state.actual = f.tool.store_path + "-other/bin/tool"],
+    ["tool_not_executable", (f) => f.state.mode = 0o444],
+    ["tool_not_executable", (f) => f.state.isFile = false],
+    ["tool_version_mismatch", (f) => f.state.version = "tool 2.0"],
+    ["invalid_tool_nar_hash", (f) => f.state.hash += f.state.hash],
+    ["invalid_tool_nar_hash", (f) => f.state.hash = " " + f.state.hash],
+    ["invalid_tool_nar_hash", (f) => f.state.hash += "\n"],
+    ["invalid_tool_nar_hash", (f) => f.state.hash = ""],
+    ["noncanonical_absolute_path", (f) => f.state.deriver = "unknown-deriver\nextra\n"],
+    ["command_failed", (f) => f.state.failure = { exit: { code: 1, success: false } }],
+    ["command_failed", (f) => f.state.failure = { reason: "log_cap" }],
+    ["command_failed", (f) => f.state.failure = { drain: "incomplete" }],
+    ["command_failed", (f) => f.state.failure = { retention: "failed_unknown_partial" }],
+    ["command_failed", (f) => f.state.failure = { errors: ["retained failure"] }],
+  ];
+  for (const [expected, change] of cases) {
+    const f = toolIdentityFixture();
+    change(f);
+    const error = await caught(() => f.prebuild());
+    assert(error instanceof Error && error.message.startsWith(expected), `${expected}: ${error}`);
+    assert(f.state.buildCalls === 0 && f.calls.length <= 3);
+  }
 });

@@ -291,7 +291,8 @@ export interface PathRecord {
 export interface DocsTool {
   store_path: string;
   executable: string;
-  deriver: string;
+  deriver: string | null;
+  nar_hash: string;
   version: string;
 }
 export interface ProducerInputs {
@@ -340,13 +341,92 @@ function pathRecord(value: unknown): asserts value is PathRecord {
     throw new Error("invalid_input_sha256");
   }
 }
+// Deriver is lexical metadata: never stat/import its physical .drv.
+function toolDeriver(value: unknown): asserts value is string | null {
+  if (value === null) return;
+  storePath(value);
+  if (!/^\/nix\/store\/[0123456789abcdfghijklmnpqrsvwxyz]{32}-[^/]+\.drv$/.test(value)) {
+    throw new Error("invalid_tool_deriver");
+  }
+}
+function toolNarHash(value: unknown): asserts value is string {
+  if (
+    typeof value !== "string" || value.length !== 59 ||
+    !/^sha256:[0123456789abcdfghijklmnpqrsvwxyz]{52}$/.test(value)
+  ) throw new Error("invalid_tool_nar_hash");
+}
+function docsCommandOutput(reply: GitReply, trim = true): string {
+  const r = reply.result;
+  if (
+    r.reason !== null || !r.exit?.success || r.exit.code !== 0 || r.drain !== "complete" ||
+    r.retention !== "acknowledged" || r.errors.length
+  ) throw new Error(`command_failed: ${JSON.stringify(reply.receipt)}`);
+  const text = new TextDecoder("utf-8", { fatal: true }).decode(reply.stdout);
+  return trim ? text.trim() : text;
+}
+// This seam uses the production bounded/retained command transport. Tests supply
+// finite replies and filesystem observations, never a real native tool or build.
+export async function observeDocsTool(
+  name: string,
+  tool: DocsTool,
+  nixStore: string,
+  io: {
+    ancestors: (path: string, directory: boolean) => Promise<void>;
+    realPath: (path: string) => Promise<string>;
+    stat: (path: string) => Promise<{ isFile: boolean; mode: number | null }>;
+    command: (executable: string, argv: string[]) => Promise<GitReply>;
+  },
+) {
+  docsTool(tool);
+  await io.ancestors(tool.store_path, true);
+  const actual = await io.realPath(tool.executable);
+  if (actual !== tool.executable || !contains(tool.store_path, actual)) {
+    throw new Error(`tool_path_mismatch: ${name}`);
+  }
+  const info = await io.stat(actual);
+  if (!info.isFile || info.mode === null || !(info.mode & 0o111)) {
+    throw new Error(`tool_not_executable: ${name}`);
+  }
+  const version = docsCommandOutput(await io.command(actual, ["--version"]));
+  if (!version.includes(tool.version)) throw new Error(`tool_version_mismatch: ${name}`);
+  const query = async (kind: "--hash" | "--deriver") => {
+    const raw = docsCommandOutput(
+      await io.command(nixStore, ["--store", "local", "--query", kind, tool.store_path]),
+      false,
+    );
+    // Legacy query emits one record with an optional final LF. No trim/coercion.
+    return raw.endsWith("\n") ? raw.slice(0, -1) : raw;
+  };
+  const nar_hash = await query("--hash");
+  toolNarHash(nar_hash);
+  if (nar_hash !== tool.nar_hash) throw new Error(`tool_nar_hash_mismatch: ${name}`);
+  const deriver_raw = await query("--deriver");
+  const deriver = deriver_raw === "unknown-deriver" ? null : deriver_raw;
+  toolDeriver(deriver);
+  if (tool.deriver !== null && deriver !== tool.deriver) {
+    throw new Error(`tool_deriver_mismatch: ${name}`);
+  }
+  return {
+    store_path: tool.store_path,
+    executable: actual,
+    version,
+    nar_hash,
+    deriver,
+    deriver_raw,
+    deriver_binding: tool.deriver === null ? "not_asserted" : "matched",
+    // Registered local-store NAR metadata is not a fresh physical rehash;
+    // matching known metadata is not reproducible-build proof either.
+    derivation_provenance: "derivation provenance not established",
+  };
+}
 function docsTool(value: unknown): asserts value is DocsTool {
-  exactKeys(value, ["store_path", "executable", "deriver", "version"]);
+  exactKeys(value, ["store_path", "executable", "deriver", "nar_hash", "version"]);
   storePath(value.store_path);
   storePath(value.executable);
-  storePath(value.deriver);
+  toolDeriver(value.deriver);
+  toolNarHash(value.nar_hash);
   if (
-    value.store_path.slice(11).includes("/") || !value.deriver.endsWith(".drv") ||
+    value.store_path.slice(11).includes("/") ||
     !contains(value.store_path, value.executable) || value.store_path === value.executable ||
     typeof value.version !== "string" || !value.version.trim() || value.version.length > 256
   ) {
@@ -496,7 +576,7 @@ export function parseDocsAdmission(value: unknown): DocsAdmission {
   for (const [key, tool] of Object.entries(inputs.tools)) {
     docsTool(tool);
     if (
-      ["store_path", "executable", "deriver", "version"].some((field) =>
+      ["store_path", "executable", "deriver", "nar_hash", "version"].some((field) =>
         tool[field as keyof DocsTool] !== (tools[key] as DocsTool)[field as keyof DocsTool]
       )
     ) {
@@ -2086,14 +2166,7 @@ export async function preflight(
     });
     return reply;
   };
-  const output = (reply: GitReply) => {
-    const r = reply.result;
-    if (
-      r.reason !== null || !r.exit?.success || r.exit.code !== 0 || r.drain !== "complete" ||
-      r.retention !== "acknowledged" || r.errors.length
-    ) throw new Error(`command_failed: ${JSON.stringify(reply.receipt)}`);
-    return new TextDecoder("utf-8", { fatal: true }).decode(reply.stdout).trim();
-  };
+  const output = docsCommandOutput;
   const gitExecutable = deps ? null : await observe("git_executable", async () => {
     const path = await resolveDocsExecutable("git");
     if (admission && path !== admission.tools.git.executable) {
@@ -2290,23 +2363,12 @@ export async function preflight(
         throw new Error("nix_store_tool_path_mismatch");
       }
       for (const [name, tool] of Object.entries(admission.tools)) {
-        await ancestors(tool.store_path, true);
-        await ancestors(tool.deriver, false);
-        const actual = await Deno.realPath(tool.executable);
-        if (actual !== tool.executable || !contains(tool.store_path, actual)) {
-          throw new Error(`tool_path_mismatch: ${name}`);
-        }
-        const info = await Deno.stat(actual);
-        if (!info.isFile || info.mode === null || !(info.mode & 0o111)) {
-          throw new Error(`tool_not_executable: ${name}`);
-        }
-        const version = output(await command(actual, ["--version"]));
-        if (!version.includes(tool.version)) throw new Error(`tool_version_mismatch: ${name}`);
-        const deriver = output(
-          await command(nixStore, ["--store", "local", "--query", "--deriver", tool.store_path]),
-        );
-        if (deriver !== tool.deriver) throw new Error(`tool_deriver_mismatch: ${name}`);
-        toolReadbacks[name] = { executable: actual, version, deriver };
+        toolReadbacks[name] = await observeDocsTool(name, tool, nixStore, {
+          ancestors,
+          realPath: (path) => Deno.realPath(path),
+          stat: (path) => Deno.stat(path),
+          command,
+        });
       }
       if (
         await Deno.realPath(Deno.execPath()) !== admission.tools.deno.executable
