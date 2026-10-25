@@ -239,6 +239,26 @@ def put_tree(root, files):
             handle.write(data)
 
 
+def validate_tool(name, tool):
+    fields(tool, ('store_path', 'executable', 'deriver', 'nar_hash', 'version'))
+    base = store_path(tool['store_path'])
+    executable = store_path(tool['executable'])
+    # Metadata only: an absent physical .drv is not an output dependency.
+    deriver = tool['deriver']
+    if deriver is not None and (not isinstance(deriver, str) or
+            not re.fullmatch(r'/nix/store/[0-9a-df-np-sv-z]{32}-[^/\\\x00-\x1f\x7f]+\.drv', deriver)):
+        raise ValueError('tool_deriver: ' + name)
+    nar_hash = tool['nar_hash']
+    if not isinstance(nar_hash, str) or not re.fullmatch(r'sha256:[0123456789abcdfghijklmnpqrsvwxyz]{52}', nar_hash):
+        raise ValueError('tool_nar_hash: ' + name)
+    version = tool['version']
+    if (base.parent != Path('/nix/store') or executable == base or
+            not executable.is_relative_to(base) or executable.resolve() != executable or
+            not executable.is_file() or not os.access(executable, os.X_OK) or
+            not isinstance(version, str) or not version.strip() or len(version) > 256):
+        raise ValueError('tool_identity: ' + name)
+
+
 def validate_inputs(inputs):
     fields(inputs, ('source_root', 'source_graph', 'plan', 'project', 'manifest',
                     'prepared_depot', 'assets_lock', 'asset_inputs', 'review_inputs', 'tools'))
@@ -259,12 +279,7 @@ def validate_inputs(inputs):
     record(inputs['prepared_depot']['metadata'], 2 * 1024 * 1024)
     fields(inputs['tools'], ('python', 'node', 'julia', 'git'))
     for name, tool in inputs['tools'].items():
-        fields(tool, ('store_path', 'executable', 'deriver', 'version'))
-        base = store_path(tool['store_path'])
-        executable = store_path(tool['executable'])
-        store_path(tool['deriver'])
-        if not executable.is_relative_to(base) or not os.access(executable, os.X_OK) or not tool['version']:
-            raise ValueError('tool_identity: ' + name)
+        validate_tool(name, tool)
     assets = decode_json(record(inputs['asset_inputs'], 2 * 1024 * 1024))
     if not isinstance(assets, dict) or len(assets) > 10000:
         raise ValueError('asset_inputs_shape')
@@ -343,6 +358,38 @@ def coverage_for(assembly, retained, payload):
     return rows
 
 
+def source_media_bytes(assembly, root, retained, path, raw):
+    """Pre-admission equality: renderer output, actual S and detached source."""
+    if path not in assembly.PUBLIC_SOURCE_MEDIA:
+        raise ValueError('unreviewed_source_media_path: ' + path)
+    component = 'components/QCLNEGF.jl'
+    source = 'docs/src/' + path.removeprefix('core/')
+    row = retained['sources'].get((component, source))
+    if row is None:
+        raise FileNotFoundError('missing media source: ' + source)
+    if raw != row['bytes'] or raw != read_file(root / component / source):
+        raise ValueError('source_media_identity: ' + path)
+    return raw
+
+
+def bind_source_media(assembly, evidence, retained, document):
+    """Final authority uses the real retained candidate, never a preflight bundle."""
+    paths = {row['path'] for row in document['files']} & assembly.PUBLIC_SOURCE_MEDIA
+    if not paths:
+        return  # Historical small media-free engineering fixtures stay valid.
+    if paths != assembly.PUBLIC_SOURCE_MEDIA:
+        raise FileNotFoundError('incomplete reviewed media payload')
+    for path in sorted(paths):
+        component = 'components/QCLNEGF.jl'
+        source = 'docs/src/' + path.removeprefix('core/')
+        if (component, source) not in retained['sources']:
+            raise FileNotFoundError('missing media source: ' + source)
+        data = evidence.source(reference(retained, component, source))
+        item = retained['payload'].get(path)
+        if not isinstance(item, dict) or item.get('kind') != 'file' or item.get('bytes') != data:
+            raise ValueError('source_media_payload_mismatch: ' + path)
+
+
 def owning_callbacks(root, graph, retained, payload):
     contracts_src = root / 'components/qcl-negf-contracts/src'
     # Exact source priority before importing owning C1/C2; no installed fallback.
@@ -357,6 +404,7 @@ def owning_callbacks(root, graph, retained, payload):
     if not getattr(yaml, '__version__', None) or not getattr(jsonschema, '__file__', None):
         raise ValueError('python_dependency_identity')
     validator = contracts.schema_validator('model-help.schema.json')
+    assembly = module('_qcl_bind_media_assembly', Path(__file__).with_name('assemble.py'))
     retained['payload'] = {path: {'kind': 'file', 'bytes': data} for path, data in payload.items()}
     def bindings(document, *, coverage):
         # AS1 already constructed the exact candidate bytes; retaining that one
@@ -367,9 +415,12 @@ def owning_callbacks(root, graph, retained, payload):
         try:
             model_help._validate_model_help_bindings(document, retained=retained)
             evidence = model_help._Evidence(retained)
+            bind_source_media(assembly, evidence, retained, document)
             for row in coverage:
                 for source in row['sources']:
                     evidence.source(source)
+        except model_help._MissingProof as error:
+            raise FileNotFoundError('missing owning retained proof') from error
         except ContractError as error:
             if isinstance(error.__cause__, model_help._MissingProof):
                 raise FileNotFoundError('missing owning retained proof') from error
@@ -524,7 +575,12 @@ def produce(inputs, work, output):
                     raise ValueError('unexpected_documenter_payload: ' + name)
                 payload[page] = raw
                 retained_assets[page] = raw
+            elif (owner, name) == ('core', 'assets/physics/data/basis_metrics.csv'):
+                payload[page] = source_media_bytes(assembly, root, retained, page, raw)
+                retained_assets[page] = raw
             elif PurePosixPath(name).suffix.lower() in ('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico'):
+                if page in assembly.PUBLIC_SOURCE_MEDIA:
+                    source_media_bytes(assembly, root, retained, page, raw)
                 payload[page] = raw
                 retained_assets[page] = raw
     # Add runtime/fixed-light and KaTeX styles to EVERY page, with exact ordered
@@ -571,8 +627,14 @@ def produce(inputs, work, output):
         raise ValueError('public_64MiB_limit')
     asset_inputs['runtime-contexts.json'] = encode(list(contexts.values()))
     def assets(lock_raw, source_inputs, *, payload):
+        # This full owning render must carry every reviewed media file. The
+        # generic bindings adapter also serves historical media-free fixtures.
+        if not assembly.PUBLIC_SOURCE_MEDIA.issubset(payload):
+            raise FileNotFoundError('incomplete reviewed media payload')
         verified = runtime.validate_assets(lock_raw, source_inputs, payload=payload)
         for path, data in retained_assets.items():
+            if path in assembly.PUBLIC_SOURCE_MEDIA:
+                source_media_bytes(assembly, root, retained, path, data)
             if path in verified and verified[path] != data or payload.get(path) != data:
                 raise ValueError('retained_asset_mismatch')
             verified[path] = data

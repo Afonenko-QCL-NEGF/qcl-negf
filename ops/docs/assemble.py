@@ -31,6 +31,15 @@ def _sha(data):
 BINDING = {"documenter_version": "1.17.0",
            "documenter_tree_sha1": "56e9c37b5e7c3b4f080ab1da18d72d5c290e184a",
            "policy": "documenter-1.17-light-self-v1"}
+# Finite source-reviewed standalone media. These paths confer no byte authority:
+# the producer and final owning C2 adapter must bind each to exact reviewed source.
+PUBLIC_SOURCE_CSV = "core/assets/physics/data/basis_metrics.csv"
+PUBLIC_SOURCE_MEDIA = frozenset("core/assets/physics/" + name for name in (
+    "band_dispersion.svg", "basis_localization.svg", "basis_operators.svg",
+    "coherence_current.svg", "hartree_response.svg", "localization_metrics.svg",
+    "optical_response.svg", "reference2019_structure.svg", "scattering_factors.svg",
+    "scba_fixed_point.svg", "spectral_population.svg", "data/basis_metrics.csv",
+))
 PRIMARY = {
     "researcher": ("core", "core", ["components/QCLNEGF.jl/docs/src/theory/09_scba.md"],
                    ["core/theory/09_scba.html#researcher-scba-route"]),
@@ -453,6 +462,8 @@ class _PayloadHTML(HTMLParser):
         if tag == "svg":
             self.svg_depth += 1
             self.svg_scopes.append({"markers": set(), "references": set()})
+        if self.svg_depth and "xml:space" in attrs and (tag != "text" or attrs["xml:space"] != "preserve"):
+            _fail("unsupported_generated_shape", "SVG xml:space")
         if self.svg_depth and tag not in {"svg", "g", "path", "line", "rect", "circle", "ellipse",
                                           "polyline", "polygon", "title", "desc", "defs", "marker", "text"}:
             _fail("unsupported_generated_shape", "unreviewed SVG vocabulary")
@@ -461,7 +472,7 @@ class _PayloadHTML(HTMLParser):
                       "stroke-linejoin", "font-family", "font-size", "font-weight", "text-anchor",
                       "transform", "role", "aria-label", "aria-hidden"}
             allowed = common | ({"markerwidth", "markerheight", "refx", "refy", "orient"}
-                                if tag == "marker" else set())
+                                if tag == "marker" else {"xml:space"})
             if not set(attrs).issubset(allowed):
                 _fail("unsupported_generated_shape", "unreviewed SVG marker/text attribute")
             if tag == "marker":
@@ -685,7 +696,7 @@ def validate_payload(files, *, symlinks=(), verified_assets=None):
         _fail("asset_payload_mismatch")
     total = 0
     html, texts, edges, script_documents = {}, {}, [], defaultdict(set)
-    allowed = {".html", ".css", ".js", ".json", ".woff", ".woff2", ".ttf", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".ico", ".txt"}
+    allowed = {".html", ".css", ".js", ".json", ".woff", ".woff2", ".ttf", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".ico", ".txt", ".csv"}
     for path, data in files.items():
         _relative(path)
         if path not in {"index.html", "bundle.json", "NOTICE.txt"} and not path.startswith(
@@ -696,6 +707,11 @@ def validate_payload(files, *, symlinks=(), verified_assets=None):
             _fail("theme_alternative", path)
         if suffix not in allowed or path.endswith(".map") or any(p in {"logs", "depot", "depots", "raw", "results"} for p in PurePosixPath(path).parts):
             _fail("public_allowlist", path)
+        if suffix == ".csv":
+            if path != PUBLIC_SOURCE_CSV:
+                _fail("public_allowlist", path)
+            if path not in verified_assets:
+                _fail("asset_validation_evidence", path)
         if suffix == ".txt" and path != "NOTICE.txt" and not path.startswith("assets/licenses/"):
             _fail("public_allowlist", path)
         if not isinstance(data, bytes) or len(data) > 16 * 1024 * 1024:
@@ -703,7 +719,7 @@ def validate_payload(files, *, symlinks=(), verified_assets=None):
         total += len(data)
         if total > 256 * 1024 * 1024:
             _fail("payload_limit")
-        if suffix in {".html", ".css", ".js", ".json", ".svg", ".txt"}:
+        if suffix in {".html", ".css", ".js", ".json", ".svg", ".txt", ".csv"}:
             text = _decode(data)
             texts[path] = text
             if PRIVATE.search(_private_scan_text(path, data, verified_assets.get(path))):
@@ -714,7 +730,10 @@ def validate_payload(files, *, symlinks=(), verified_assets=None):
             if (THEME.search(_theme_scan_text(path, data, verified_assets.get(path)))
                     and not (suffix == ".css" and path in verified_assets)):
                 _fail("theme_alternative", path)
-            if suffix in {".html", ".svg"}:
+            # Exact trusted bytes only; HTML, other SVG and every preceding
+            # path/privacy/theme/UTF-8/cap check retain their strict policy.
+            if suffix == ".html" or (suffix == ".svg" and not (
+                    path in PUBLIC_SOURCE_MEDIA and path in verified_assets)):
                 parser = _PayloadHTML(path)
                 parser.feed(text)
                 parser.close()
@@ -854,6 +873,7 @@ _MEDIA_TYPES = {
     ".ttf": "font/ttf", ".png": "image/png", ".jpg": "image/jpeg",
     ".jpeg": "image/jpeg", ".gif": "image/gif", ".webp": "image/webp",
     ".svg": "image/svg+xml", ".ico": "image/vnd.microsoft.icon", ".txt": "text/plain",
+    ".csv": "text/csv",
 }
 
 
