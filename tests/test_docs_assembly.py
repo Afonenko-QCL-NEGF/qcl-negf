@@ -26,7 +26,7 @@ RAW = b'''<!DOCTYPE html><html><head><meta charset="utf-8">
 <link rel="stylesheet" class="docs-theme-link" data-theme-name="documenter-light" href="assets/themes/documenter-light.css">
 <link rel="stylesheet" class="docs-theme-link" data-theme-name="documenter-dark" href="assets/themes/documenter-dark.css">
 <script src="assets/themeswap.js"></script>
-<script>documenterBaseURL="."</script>
+<script>documenterBaseURL=".."</script>
 </head><body data-theme-primary-dark="documenter-dark">
 <a id="documenter-settings-button" href="#documenter-settings">Settings</a>
 <div id="documenter-settings"><select id="documenter-themepicker"><option>Automatic (OS)</option><option>Dark</option></select></div>
@@ -122,9 +122,8 @@ class DocsAssemblyTests(unittest.TestCase):
                         if b"documenterBaseURL" in content}
         self.assertEqual(len(config_files), 1)
         config_path, config_bytes = next(iter(config_files.items()))
-        # Known input assignment value must survive; no eval and no path-name contract.
-        self.assertRegex(config_bytes.decode(),
-                         r'''\A\s*(?:var\s+)?documenterBaseURL\s*=\s*(["'])\.\1\s*;?\s*\Z''')
+        self.assertEqual(config_path, 'assets/pages/6cb63afa59ff8389372f824c5f23b2257cecdeab6953440423f8c6501125707a.js')
+        self.assertEqual(config_bytes, b'documenterBaseURL="..";\n')
         scripts = ScriptReferences()
         scripts.feed(html)
         resolved = []
@@ -157,11 +156,55 @@ class DocsAssemblyTests(unittest.TestCase):
 
     def test_unknown_or_duplicate_inline_head_node_is_not_silently_stripped(self):
         for addition in (b'<script>alert(1)</script>',
-                         b'<script>documenterBaseURL="."</script>'):
+                         b'<script>documenterBaseURL=".."</script>'):
             raw = RAW.replace(b"</head>", addition + b"</head>")
             self.rejected(lambda: assembly.transform_page(
                 raw, page="core/theory/09_scba.html", binding=BINDING,
                 expected_sha256=digest(raw), math_mapping=MATH_MAPPING), "unsupported_generated_shape")
+
+    def test_config_identity_is_page_and_canonical_assignment_not_article_bytes(self):
+        original = self.transform()
+        changed = RAW.replace(b'Small mixed step', b'A different article')
+        updated = assembly.transform_page(changed, page='core/theory/09_scba.html',
+            binding=BINDING, expected_sha256=digest(changed), math_mapping=MATH_MAPPING)
+        self.assertEqual(updated['generated_files'], original['generated_files'])
+        self.assertNotEqual(updated['input_sha256'], original['input_sha256'])
+        self.assertNotEqual(updated['output_sha256'], original['output_sha256'])
+        self.rejected(lambda: assembly.transform_page(changed, page='core/theory/09_scba.html',
+            binding=BINDING, expected_sha256=digest(RAW), math_mapping=MATH_MAPPING), 'input_hash_mismatch')
+
+    def test_config_vectors_and_invalid_page_paths(self):
+        vectors = (
+            ('operator/index.html', '.', 'a7c9b4631206fa4d149ec937a2cf290193dff35c0790137839d5cbb80760d174'),
+            ('operator/capture-runtime-delivery.html', '.', '6cae3f7d445a8cc1be74951d6c355a857e905b4035e1baa01a0d19d14037b901'),
+            ('core/a/b/c.html', '../..', 'cc083dd2fdf34e27d50757a365c5f0a9803d465890051a58c530b7358e830ba1'),
+        )
+        for page, base, identifier in vectors:
+            raw = (b'<html><head><link rel="stylesheet" class="docs-theme-link" '
+                   b'data-theme-name="documenter-light" href="assets/themes/documenter-light.css">'
+                   b'<script>documenterBaseURL="' + base.encode() + b'"</script></head><body></body></html>')
+            result = assembly.transform_page(raw, page=page, binding=BINDING,
+                expected_sha256=digest(raw), math_mapping=[])
+            config_files = {name: data for name, data in result['generated_files'].items()
+                            if name.startswith('assets/pages/')}
+            self.assertEqual(config_files, {
+                'assets/pages/' + identifier + '.js': b'documenterBaseURL="' + base.encode() + b'";\n'})
+        for page in ('index.html', 'other/a.html', 'core/a.md', 'core/../a.html',
+                     '/core/a.html', 'core\\a.html', 'core/%61.html'):
+            with self.subTest(page=page):
+                self.rejected(lambda: assembly.transform_page(RAW, page=page, binding=BINDING,
+                    expected_sha256=digest(RAW), math_mapping=[]), 'public_allowlist')
+
+    def test_wrong_or_missing_base_assignment_is_rejected(self):
+        for value in (b'.', b'../../', b'../.', b'', b'/'):
+            raw = RAW.replace(b'documenterBaseURL=".."', b'documenterBaseURL="' + value + b'"')
+            self.rejected(lambda: assembly.transform_page(raw, page='core/theory/09_scba.html',
+                binding=BINDING, expected_sha256=digest(raw), math_mapping=MATH_MAPPING),
+                'unsupported_generated_shape')
+        raw = RAW.replace(b'<script>documenterBaseURL=".."</script>', b'')
+        self.rejected(lambda: assembly.transform_page(raw, page='core/theory/09_scba.html',
+            binding=BINDING, expected_sha256=digest(raw), math_mapping=MATH_MAPPING),
+            'unsupported_generated_shape')
 
     def test_only_exact_documenter_math_nodes_are_captured(self):
         result = self.transform()
