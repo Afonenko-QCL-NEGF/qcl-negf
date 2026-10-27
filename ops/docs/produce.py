@@ -227,6 +227,12 @@ def source_tree(root, relative):
     return files
 
 
+def _documenter_payload_candidates(files):
+    """Keep exact raw-root renderer metadata in diagnostics, outside public."""
+    ancillary = {'.documenter-siteinfo.json', 'objects.inv'}
+    return {name: data for name, data in files.items() if name not in ancillary}
+
+
 def put_tree(root, files):
     root.mkdir(parents=True, exist_ok=False)
     for name, data in sorted(files.items()):
@@ -529,7 +535,9 @@ def produce(inputs, work, output):
             if '$' in index or not index.endswith('\n'):
                 raise ValueError('operator_index_literal')
             files = {'index.md': index.encode(),
-                     'recovery.md': read_file(root / 'docs/public/operator-recovery.md')}
+                     'recovery.md': read_file(root / 'docs/public/operator-recovery.md'),
+                     'capture-runtime-delivery.md': read_file(root / 'docs/capture-runtime-delivery.md'),
+                     'solver-build-receipt.md': read_file(root / 'docs/solver-build-receipt.md')}
         else:
             recipe = root / component / 'docs/make.jl'
             files = source_tree(root, component + '/docs/src')
@@ -547,7 +555,7 @@ def produce(inputs, work, output):
     snippets = {name: asset_inputs['documenter/assets/html/js/' + name] for name in runtime.SNIPPETS}
     remote_map = lock['resource_map']
     for owner, _ in OWNERS:
-        for name, raw in source_tree(work, 'raw/' + owner).items():
+        for name, raw in _documenter_payload_candidates(source_tree(work, 'raw/' + owner)).items():
             page = owner + '/' + name
             if name.endswith('.html'):
                 bridged, mapping = bridge_math(raw, page)

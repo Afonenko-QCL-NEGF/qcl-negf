@@ -2,14 +2,18 @@ import { type SourceGraph, sourceGraph } from "./git.ts";
 import {
   type BuildCliDependencies,
   buildSolver,
+  canonicalSourceGraphJson,
   captureDepotMetadata,
   prepareDepotMetadata,
+  readInstalledJuliaManifestSha256,
   readJuliaManifestSha256,
+  solverBuildOutput,
+  type SolverBuildResult,
 } from "./solver.ts";
 import { main, run, workspace } from "./process.ts";
 
 export function immutableStorePath(value: string): string {
-  if (!/^\/nix\/store\/[a-z0-9]{32}-[A-Za-z0-9+._?-]+$/.test(value)) {
+  if (/[\r\n]/.test(value) || !/^\/nix\/store\/[a-z0-9]{32}-[A-Za-z0-9+._?-]+$/.test(value)) {
     throw new Error("Release requires a single immutable Nix store closure path");
   }
   return value;
@@ -37,12 +41,69 @@ function validateCacheUri(cacheUri: unknown): void {
   }
 }
 
+export interface SolverAssemblyReceipt {
+  // Trusted builder adapter input, never request/client metadata. The raw build
+  // stdout must come from the command that consumed consumed_metadata_json.
+  result: SolverBuildResult;
+  juliaManifestSha256: string;
+  installedJuliaManifestSha256: string;
+}
+
+async function checkedSolverBuild(
+  sources: SourceGraph,
+  solver: string,
+  evidence: Record<string, { narHash?: string; deriver?: string }>,
+  receipt: SolverAssemblyReceipt,
+) {
+  const result = receipt.result;
+  const actual = solverBuildOutput(result.build_stdout_json);
+  const prepared = await prepareDepotMetadata(
+    result.consumed_metadata_json,
+    sources,
+    receipt.juliaManifestSha256,
+  );
+  const graphDigest = new Uint8Array(
+    await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(canonicalSourceGraphJson(sources)),
+    ),
+  );
+  const sourceGraphSha = Array.from(graphDigest, (byte) => byte.toString(16).padStart(2, "0")).join(
+    "",
+  );
+  const refs = new Set(sources.components.map((row) => row.path));
+  if (
+    !refs.has("components/QCLNEGF.jl") || !refs.has("components/QCLNEGFRunner.jl") ||
+    result.source_graph_sha256 !== sourceGraphSha || result.source_revision !== sources.revision ||
+    result.consumed_metadata_sha256 !== prepared.binding.consumed_metadata_sha256 ||
+    result.consumed_metadata_bytes !== prepared.binding.consumed_metadata_bytes ||
+    result.normalization !== prepared.binding.normalization ||
+    result.archive_url !== prepared.binding.archive_url ||
+    result.archive_hash !== prepared.binding.archive_hash ||
+    result.julia_manifest_sha256 !== receipt.juliaManifestSha256 ||
+    receipt.installedJuliaManifestSha256 !== receipt.juliaManifestSha256 ||
+    actual.drv_path !== result.drv_path || actual.output_path !== result.output_path ||
+    actual.output_path !== solver
+  ) throw new Error("Solver build receipt differs from consumed source, Manifest or actual output");
+  const deriver = evidence[solver]?.deriver;
+  if (deriver && deriver !== "unknown-deriver" && deriver !== actual.drv_path) {
+    throw new Error("Known solver deriver differs from captured actual build JSON");
+  }
+  return {
+    source_graph_sha256: sourceGraphSha,
+    julia_manifest_sha256: result.julia_manifest_sha256,
+    drv_path: actual.drv_path,
+    output_path: actual.output_path,
+  };
+}
+
 export async function deploymentManifest(
   sources: SourceGraph,
   application: string,
   solver: string,
-  evidence: Record<string, { narHash?: string }>,
+  evidence: Record<string, { narHash?: string; deriver?: string }>,
   cacheUri?: string,
+  solverReceipt?: SolverAssemblyReceipt,
 ) {
   immutableStorePath(application);
   immutableStorePath(solver);
@@ -54,6 +115,9 @@ export async function deploymentManifest(
     }
     return { path, narHash };
   });
+  const solverBuild = solverReceipt === undefined
+    ? undefined
+    : await checkedSolverBuild(sources, solver, evidence, solverReceipt);
   const digest = await crypto.subtle.digest(
     "SHA-256",
     new TextEncoder().encode(JSON.stringify({ sources, closures })),
@@ -69,6 +133,7 @@ export async function deploymentManifest(
     solver_executable: `${solver}/bin/qcl-negf`,
     sources,
     closures,
+    ...(solverBuild === undefined ? {} : { solver_build: solverBuild }),
     ...(cacheUri === undefined ? {} : { cache_uri: cacheUri }),
   };
 }
@@ -84,6 +149,7 @@ export async function runApplicationCdCli(
     openDepotInput: open = (path: string) => Deno.open(path, { read: true }),
     readSourceGraph: readGraph = sourceGraph,
     readJuliaManifestSha256: readManifest = readJuliaManifestSha256,
+    readInstalledJuliaManifestSha256: readInstalled = readInstalledJuliaManifestSha256,
     execute = run,
   } = dependencies;
   const [depotFile, output, cache] = args;
@@ -102,22 +168,23 @@ export async function runApplicationCdCli(
       cwd: workspace,
     }, true),
   );
-  let solver = "";
-  const depotBinding = await buildSolver(captured, sources, juliaManifest, async (command) => {
-    const response = await execute(command, true);
-    if (command.args[0] === "build") solver = immutableStorePath(response);
-    return response;
-  });
+  const depotBinding = await buildSolver(captured, sources, juliaManifest, execute);
+  const solver = immutableStorePath(depotBinding.output_path);
+  const installedJuliaManifest = await readInstalled(solver);
   const rawInfo = JSON.parse(
     await execute({
       executable: "nix",
       args: ["path-info", "--json", application, solver],
     }, true),
   );
-  const evidence: Record<string, { narHash?: string }> = Array.isArray(rawInfo)
+  const evidence: Record<string, { narHash?: string; deriver?: string }> = Array.isArray(rawInfo)
     ? Object.fromEntries(rawInfo.map((item) => [item.path, item]))
     : rawInfo;
-  const manifest = await deploymentManifest(sources, application, solver, evidence, cache);
+  const manifest = await deploymentManifest(sources, application, solver, evidence, cache, {
+    result: depotBinding,
+    juliaManifestSha256: juliaManifest,
+    installedJuliaManifestSha256: installedJuliaManifest,
+  });
   if (JSON.stringify(await readGraph()) !== JSON.stringify(sources)) {
     throw new Error("Source graph changed during release assembly");
   }

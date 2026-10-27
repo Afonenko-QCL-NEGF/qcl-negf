@@ -8,10 +8,16 @@ const graph: SourceGraph = {
     path: "components/QCLNEGFRunner.jl",
     revision: "b".repeat(40),
     url: "https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl",
+  }, {
+    path: "components/QCLNEGF.jl",
+    revision: "c".repeat(40),
+    url: "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl",
   }],
 };
 const application = "/nix/store/" + "a".repeat(32) + "-qcl-application";
 const solver = "/nix/store/" + "b".repeat(32) + "-qcl-solver";
+const solverDrv = "/nix/store/" + "c".repeat(32) + "-qcl-solver.drv";
+const solverStdout = JSON.stringify([{ drvPath: solverDrv, outputs: { out: solver } }]);
 const hash = "sha256-" + btoa(String.fromCharCode(...Array(32).fill(1)));
 
 function assert(value: boolean, message: string): void {
@@ -179,6 +185,7 @@ interface CdDependencies {
   openDepotInput(path: string): Promise<CdInputFile>;
   readSourceGraph(): Promise<SourceGraph>;
   readJuliaManifestSha256(): Promise<string>;
+  readInstalledJuliaManifestSha256(output: string): Promise<string>;
   execute(command: Command, capture?: boolean): Promise<string>;
 }
 const applicationCli = (applicationCdModule as unknown as {
@@ -252,6 +259,7 @@ Deno.test("OPS04 application CLI captures A before first application callback an
         events.push("graph");
         return Promise.resolve(structuredClone(graph));
       },
+      readInstalledJuliaManifestSha256: () => Promise.resolve(cdManifestSha),
       readJuliaManifestSha256() {
         events.push("lock");
         return Promise.resolve(cdManifestSha);
@@ -275,7 +283,7 @@ Deno.test("OPS04 application CLI captures A before first application callback an
         }
         if (command.args[0] === "build" && command.args.includes("nix/solver.nix")) {
           events.push("solver");
-          return solver;
+          return solverStdout;
         }
         if (command.args[0] === "path-info") {
           events.push("path-info");
@@ -310,7 +318,7 @@ Deno.test("OPS04 application CLI captures A before first application callback an
       "Assembly causality changed",
     );
     assert(
-      commands.length === 5 && captures[0] === true && captures[1] === true &&
+      commands.length === 5 && captures[0] === true && captures[1] !== true &&
         captures[2] === true && captures[3] === true && captures[4] !== true,
       "CLI stdout capture behavior changed",
     );
@@ -366,6 +374,12 @@ Deno.test("OPS04 application CLI captures A before first application callback an
       "Cache must remain one literal argument",
     );
     const written = JSON.parse(await Deno.readTextFile(output));
+    assert(
+      written.solver_build?.drv_path === solverDrv &&
+        written.solver_build?.output_path === solver &&
+        written.solver_build?.julia_manifest_sha256 === cdManifestSha,
+      "CLI dropped actual build identity or installed Manifest binding",
+    );
     const expectedReleaseId = await cdSha(
       JSON.stringify({
         sources: graph,
@@ -408,6 +422,7 @@ Deno.test("OPS04 application CLI accepts captured B with its archive and no cach
         graphReads++;
         return Promise.resolve(graphReads === 1 ? borrowedGraph : structuredClone(graph));
       },
+      readInstalledJuliaManifestSha256: () => Promise.resolve(cdManifestSha),
       readJuliaManifestSha256: () => Promise.resolve(cdManifestSha),
       execute(command) {
         commands.push(command);
@@ -422,7 +437,7 @@ Deno.test("OPS04 application CLI accepts captured B with its archive and no cach
           return Promise.resolve(application);
         }
         if (command.args[0] === "store") return Promise.resolve("");
-        if (command.args[0] === "build") return Promise.resolve(solver);
+        if (command.args[0] === "build") return Promise.resolve(solverStdout);
         if (command.args[0] === "path-info") {
           return Promise.resolve(
             JSON.stringify([{ path: application, narHash: hash }, { path: solver, narHash: hash }]),
@@ -548,11 +563,12 @@ Deno.test("OPS04 application graph drift blocks copy and all manifest writes aft
           if (graphReads > 1) value.components[0].revision = "f".repeat(40);
           return Promise.resolve(value);
         },
+        readInstalledJuliaManifestSha256: () => Promise.resolve(cdManifestSha),
         readJuliaManifestSha256: () => Promise.resolve(cdManifestSha),
         execute(command) {
           commands.push(command);
           if (command.args.includes(".#application")) return Promise.resolve(application);
-          if (command.args[0] === "build") return Promise.resolve(solver);
+          if (command.args[0] === "build") return Promise.resolve(solverStdout);
           if (command.args[0] === "path-info") {
             return Promise.resolve(
               JSON.stringify({ [application]: { narHash: hash }, [solver]: { narHash: hash } }),
@@ -595,11 +611,12 @@ Deno.test("OPS04 application pending collision preserves original attempt and re
       await applicationCli([input, output], {
         openDepotInput: (path) => Deno.open(path, { read: true }),
         readSourceGraph: () => Promise.resolve(structuredClone(graph)),
+        readInstalledJuliaManifestSha256: () => Promise.resolve(cdManifestSha),
         readJuliaManifestSha256: () => Promise.resolve(cdManifestSha),
         execute(command) {
           commands.push(command);
           if (command.args.includes(".#application")) return Promise.resolve(application);
-          if (command.args[0] === "build") return Promise.resolve(solver);
+          if (command.args[0] === "build") return Promise.resolve(solverStdout);
           if (command.args[0] === "path-info") {
             return Promise.resolve(
               JSON.stringify({ [application]: { narHash: hash }, [solver]: { narHash: hash } }),
@@ -618,5 +635,285 @@ Deno.test("OPS04 application pending collision preserves original attempt and re
     );
   } finally {
     await Deno.remove(directory, { recursive: true });
+  }
+});
+
+import {
+  buildSolver,
+  canonicalSourceGraphJson,
+  prepareDepotMetadata,
+  solverBuildOutput,
+} from "../ops/solver.ts";
+import { type SolverAssemblyReceipt } from "../ops/application_cd.ts";
+
+Deno.test("quantum graph encoding matches the literal Python sorted publish fixture without newline", async () => {
+  const fixture: SourceGraph = {
+    format: "qcl-negf.git-graph.v1",
+    revision: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    components: [{
+      revision: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      path: "components/QCLNEGF.jl",
+      url: "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl",
+    }],
+  };
+  const literal =
+    '{"components":[{"path":"components/QCLNEGF.jl","revision":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","url":"https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl"}],"format":"qcl-negf.git-graph.v1","revision":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}';
+  assert(canonicalSourceGraphJson(fixture) === literal, "Cross-language literal bytes differ");
+  const sortedPublishReload = JSON.parse(literal);
+  assert(
+    canonicalSourceGraphJson(sortedPublishReload) === literal &&
+      await cdSha(canonicalSourceGraphJson(JSON.parse(JSON.stringify(fixture, null, 2)))) ===
+        await cdSha(literal),
+    "Key reordering or pretty publication changed canonical graph hash",
+  );
+  const reordered = structuredClone(graph);
+  reordered.components.reverse();
+  assert(
+    canonicalSourceGraphJson(reordered) !== canonicalSourceGraphJson(graph),
+    "Graph component array order must remain significant",
+  );
+  for (
+    const mutate of [
+      (value: Record<string, unknown>) => {
+        value.extra = "unknown";
+      },
+      (value: Record<string, unknown>) => {
+        value.revision = "a".repeat(40) + "\n";
+      },
+      (value: Record<string, unknown>) => {
+        value.components = [];
+      },
+      (value: Record<string, unknown>) => {
+        value.components = Array(65).fill(fixture.components[0]);
+      },
+      (value: Record<string, unknown>) => {
+        value.components = [fixture.components[0], fixture.components[0]];
+      },
+      (value: Record<string, unknown>) => {
+        value.components = [{ ...fixture.components[0], path: "components/../Core" }];
+      },
+      (value: Record<string, unknown>) => {
+        value.components = [{ ...fixture.components[0], url: fixture.components[0].url + "μ" }];
+      },
+      (value: Record<string, unknown>) => {
+        value.components = [{ ...fixture.components[0], url: fixture.components[0].url + "\n" }];
+      },
+      (value: Record<string, unknown>) => {
+        value.components = [{ ...fixture.components[0], extra: true }];
+      },
+    ]
+  ) {
+    const value = structuredClone(fixture) as unknown as Record<string, unknown>;
+    mutate(value);
+    let refused = false;
+    try {
+      canonicalSourceGraphJson(value as unknown as SourceGraph);
+    } catch {
+      refused = true;
+    }
+    assert(refused, "Malformed, unknown or non-ASCII source graph accepted");
+  }
+  const raw = JSON.stringify(cdDepot()).replace(
+    '"revision":"' + graph.revision + '"',
+    '"revision":"' + graph.revision + '","revi\\u0073ion":"' + graph.revision + '"',
+  );
+  let refused = false;
+  try {
+    await prepareDepotMetadata(raw, graph, cdManifestSha);
+  } catch {
+    refused = true;
+  }
+  assert(refused, "Escaped duplicate source JSON key accepted");
+});
+
+async function quantumReceipt(): Promise<SolverAssemblyReceipt> {
+  let builds = 0;
+  const result = await buildSolver(
+    JSON.stringify(cdDepot()),
+    graph,
+    cdManifestSha,
+    (command, capture) => {
+      if (command.args[0] === "store") return Promise.resolve("");
+      builds++;
+      assert(
+        command.args[0] === "build" && command.args.includes("--json") &&
+          !command.args.includes("--print-out-paths") && capture === true,
+        "Actual solver build stdout was not captured as JSON",
+      );
+      assert(
+        cdArgument(command, "depotManifestJson") === JSON.stringify(cdDepot()),
+        "Receipt does not correspond to actual consumed metadata bytes",
+      );
+      return Promise.resolve(solverStdout);
+    },
+  );
+  assert(builds === 1, "Receipt lacked exactly one actual build callback");
+  assert(result.build_stdout_json === solverStdout, "Actual stdout was replaced by labels");
+  return {
+    result,
+    juliaManifestSha256: cdManifestSha,
+    installedJuliaManifestSha256: cdManifestSha,
+  };
+}
+
+Deno.test("quantum assembler keeps actual build receipt and existing release identity; no drv closure required", async () => {
+  const receipt = await quantumReceipt();
+  const evidence = { [application]: { narHash: hash }, [solver]: { narHash: hash } };
+  const legacy = await deploymentManifest(graph, application, solver, evidence);
+  const value = await deploymentManifest(graph, application, solver, evidence, undefined, receipt);
+  assert(!("solver_build" in legacy), "Legacy manifest manufactured a build proof");
+  assert(value.release_id === legacy.release_id, "New metadata changed historical release ID");
+  assert(
+    JSON.stringify(value.solver_build) === JSON.stringify({
+      source_graph_sha256: await cdSha(canonicalSourceGraphJson(graph)),
+      julia_manifest_sha256: cdManifestSha,
+      drv_path: solverDrv,
+      output_path: solver,
+    }),
+    "Delivery metadata lost actual source/Manifest/derivation/output binding",
+  );
+  assert(
+    value.closures.length === 2 && value.closures.every((row) => row.path !== solverDrv),
+    "Delivery unexpectedly requires copying the build derivation closure",
+  );
+  const substituted = await deploymentManifest(
+    graph,
+    application,
+    solver,
+    {
+      ...evidence,
+      [solver]: { narHash: hash, deriver: "unknown-deriver" },
+    },
+    undefined,
+    receipt,
+  );
+  assert(
+    substituted.release_id === value.release_id,
+    "Unknown destination deriver blocked receipt",
+  );
+});
+
+Deno.test("quantum assembler refuses wrong actual drv/output/source/Manifest and missing NAR", async () => {
+  const baseline = await quantumReceipt();
+  const mutations: Array<(receipt: SolverAssemblyReceipt) => void> = [
+    (receipt) => {
+      receipt.result = { ...receipt.result, build_stdout_json: "" };
+    },
+    (receipt) => {
+      receipt.result = { ...receipt.result, drv_path: application + ".drv" };
+    },
+    (receipt) => {
+      receipt.result = { ...receipt.result, output_path: application };
+    },
+    (receipt) => {
+      receipt.result = {
+        ...receipt.result,
+        build_stdout_json: JSON.stringify([{
+          drvPath: application + ".drv",
+          outputs: { out: solver },
+        }]),
+      };
+    },
+    (receipt) => {
+      receipt.result = {
+        ...receipt.result,
+        build_stdout_json: JSON.stringify([{ drvPath: solverDrv, outputs: { out: application } }]),
+      };
+    },
+    (receipt) => {
+      receipt.result = { ...receipt.result, source_revision: "e".repeat(40) };
+    },
+    (receipt) => {
+      receipt.result = { ...receipt.result, source_graph_sha256: "e".repeat(64) };
+    },
+    (receipt) => {
+      receipt.result = { ...receipt.result, consumed_metadata_sha256: "e".repeat(64) };
+    },
+    (receipt) => {
+      receipt.result = { ...receipt.result, consumed_metadata_bytes: 1 };
+    },
+    (receipt) => {
+      receipt.result = {
+        ...receipt.result,
+        consumed_metadata_json: receipt.result.consumed_metadata_json.replace(
+          graph.revision,
+          "e".repeat(40),
+        ),
+      };
+    },
+    (receipt) => {
+      receipt.result = { ...receipt.result, julia_manifest_sha256: "e".repeat(64) };
+    },
+    (receipt) => {
+      receipt.juliaManifestSha256 = "e".repeat(64);
+    },
+    (receipt) => {
+      receipt.installedJuliaManifestSha256 = "e".repeat(64);
+    },
+  ];
+  for (const mutate of mutations) {
+    const receipt = structuredClone(baseline);
+    mutate(receipt);
+    let refused = false;
+    try {
+      await deploymentManifest(
+        graph,
+        application,
+        solver,
+        {
+          [application]: { narHash: hash },
+          [solver]: { narHash: hash },
+        },
+        undefined,
+        receipt,
+      );
+    } catch {
+      refused = true;
+    }
+    assert(refused, "Mismatched actual build binding accepted");
+  }
+  for (
+    const evidence of [
+      { [application]: { narHash: hash } },
+      {
+        [application]: { narHash: hash },
+        [solver]: { narHash: hash, deriver: application + ".drv" },
+      },
+    ]
+  ) {
+    let refused = false;
+    try {
+      await deploymentManifest(graph, application, solver, evidence, undefined, baseline);
+    } catch {
+      refused = true;
+    }
+    assert(refused, "Missing NAR or contradictory known deriver accepted");
+  }
+});
+
+Deno.test("quantum actual build JSON parser refuses labels, ambiguous rows, outputs and duplicate keys", () => {
+  for (
+    const raw of [
+      solver,
+      "",
+      "[]",
+      "{}",
+      JSON.stringify([{ outputs: { out: solver } }]),
+      JSON.stringify([{ drvPath: solverDrv, outputs: { out: solver } }, {
+        drvPath: solverDrv,
+        outputs: { out: solver },
+      }]),
+      JSON.stringify([{ drvPath: solverDrv, outputs: { out: solver, dev: application } }]),
+      '[{"drvPath":"' + solverDrv + '","drvPath":"' + solverDrv + '","outputs":{"out":"' + solver +
+      '"}}]',
+    ]
+  ) {
+    let refused = false;
+    try {
+      solverBuildOutput(raw);
+    } catch {
+      refused = true;
+    }
+    assert(refused, "Non-actual or ambiguous build JSON accepted");
   }
 });

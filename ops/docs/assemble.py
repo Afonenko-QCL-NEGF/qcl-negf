@@ -88,6 +88,18 @@ def _relative(path, code="public_allowlist"):
     return path
 
 
+def _page_config(page):
+    """Canonical Documenter base and exact pre-render public config asset."""
+    _relative(page)
+    parts = page.split("/")
+    if len(parts) < 2 or parts[0] not in {"core", "runner", "operator"} or not page.endswith(".html"):
+        _fail("public_allowlist", page)
+    base = posixpath.relpath(parts[0], posixpath.dirname(page))
+    content = ("documenterBaseURL=" + json.dumps(base) + ";\n").encode("utf-8")
+    destination = "assets/pages/" + _sha(page.encode("utf-8") + b"\0" + content) + ".js"
+    return base, content, destination
+
+
 def _object(value, fields, code):
     if not isinstance(value, dict) or set(value) != set(fields):
         _fail(code, "unexpected/missing fields")
@@ -303,7 +315,7 @@ def transform_page(raw, *, page, binding, expected_sha256, math_mapping, resourc
         _fail("page_limit")
     if _sha(raw) != expected_sha256:
         _fail("input_hash_mismatch")
-    _relative(page)
+    expected_base, config_content, config_destination = _page_config(page)
     tree = _Tree(_decode(raw))
     generated, operations = {}, []
     config_count = light_count = 0
@@ -363,12 +375,10 @@ def transform_page(raw, *, page, binding, expected_sha256, math_mapping, resourc
                     if config_count != 1:
                         _fail("unsupported_generated_shape", "duplicate page config")
                     value = match.group(1)
-                    if value.startswith("/") or any(p not in {"..", "."} for p in value.split("/")):
+                    if value != expected_base:
                         _fail("unsupported_generated_shape", "base URL")
-                    content = ('documenterBaseURL=' + json.dumps(value) + ';\n').encode()
-                    destination = "assets/pages/" + _sha(page.encode() + b"\0" + raw) + ".js"
-                    generated[destination] = content
-                    node.attrs = [("src", posixpath.relpath(destination, posixpath.dirname(page)))]
+                    generated[config_destination] = config_content
+                    node.attrs = [("src", posixpath.relpath(config_destination, posixpath.dirname(page)))]
                     node.children, node.changed = [], True
                     attrs = node.attr()
                     operations.append("externalize_page_config")

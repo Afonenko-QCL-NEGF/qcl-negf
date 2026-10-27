@@ -11,6 +11,40 @@ spec = importlib.util.spec_from_file_location('docs_producer', ROOT / 'ops/docs/
 producer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(producer)
 class ProducerControls(unittest.TestCase):
+    def test_exact_raw_root_ancillary_selection_preserves_original_bytes(self):
+        import tempfile
+        import shutil
+        with tempfile.TemporaryDirectory() as directory:
+            work = Path(directory)
+            raw_root = work / 'raw/core'
+            raw_root.mkdir(parents=True)
+            originals = {
+                '.documenter-siteinfo.json': b'{"timestamp":"original"}',
+                'objects.inv': b'\x00raw inventory\xff',
+                'index.html': b'<html></html>',
+                'search_index.js': b'var index = [];',
+                'nested/objects.inv': b'nested is public candidate',
+                'nested/.documenter-siteinfo.json': b'nested is public candidate',
+            }
+            for name, data in originals.items():
+                path = raw_root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(data)
+            readback = producer.source_tree(work, 'raw/core')
+            selected = producer._documenter_payload_candidates(readback)
+            self.assertEqual(set(selected), set(originals) - {'.documenter-siteinfo.json', 'objects.inv'})
+            self.assertEqual(readback, originals)
+            diagnostics = work / 'diagnostics/raw/core'
+            shutil.copytree(raw_root, diagnostics)
+            for name, data in originals.items():
+                self.assertEqual((diagnostics / name).read_bytes(), data)
+
+    def test_other_raw_json_and_js_remain_public_candidates(self):
+        files = {'unexpected.json': b'{}', 'unexpected.js': b'x',
+                 'assets/search_index.js': b'var index = [];',
+                 'other/objects.inv': b'x', 'other/.documenter-siteinfo.json': b'x'}
+        self.assertEqual(producer._documenter_payload_candidates(files), files)
+
     def test_documenter_math_bridge(self):
         raw = b'<p class="math-container">\\[x &lt; y\\]</p><span>$a+b$</span>'
         bridged, records = producer.bridge_math(raw, 'core/a.html')
@@ -36,6 +70,8 @@ class ProducerControls(unittest.TestCase):
             def failed_render(inputs, work, out):
                 (work / 'raw/core').mkdir(parents=True)
                 (work / 'raw/core/original.html').write_bytes(b'original failed render')
+                (work / 'raw/core/.documenter-siteinfo.json').write_bytes(b'{"original":true}')
+                (work / 'raw/core/objects.inv').write_bytes(b'\x00original\xff')
                 (work / 'mapping-original.json').write_bytes(b'{"retained":true}')
                 raise RuntimeError('injected render failure')
             with patch.object(producer, 'produce', failed_render):
@@ -45,6 +81,8 @@ class ProducerControls(unittest.TestCase):
             self.assertEqual(len(workspaces), 1)
             work = workspaces[0]
             self.assertEqual((work / 'raw/core/original.html').read_bytes(), b'original failed render')
+            self.assertEqual((work / 'raw/core/.documenter-siteinfo.json').read_bytes(), b'{"original":true}')
+            self.assertEqual((work / 'raw/core/objects.inv').read_bytes(), b'\x00original\xff')
             self.assertEqual((work / 'mapping-original.json').read_bytes(), b'{"retained":true}')
             failure = producer.decode_json((work / 'failure.json').read_bytes())
             self.assertEqual(failure['workspace'], str(work))
@@ -437,6 +475,28 @@ class ProducerClosureControls(unittest.TestCase):
         kwargs, retained = self.case()
         retained['public_reviews'] = ()
         self.assertEqual(self.assembly.finalize_bundle(**kwargs)['status'], 'blocked')
+
+    def test_real_c2_requires_exact_config_output_entry_and_bytes(self):
+        import copy
+        kwargs, retained = self.case()
+        baseline = self.assembly.finalize_bundle(**kwargs)
+        self.assertEqual(baseline['status'], 'candidate')
+        manifest = copy.deepcopy(baseline['manifest'])
+        path = 'assets/pages/6cb63afa59ff8389372f824c5f23b2257cecdeab6953440423f8c6501125707a.js'
+        data = b'documenterBaseURL="..";\n'
+        manifest['files'].append({'path': path, 'media_type': 'text/javascript',
+                                  'bytes': len(data), 'sha256': producer.sha(data)})
+        retained['payload'][path] = {'kind': 'file', 'bytes': data}
+        bundle = self.fixture.raw(manifest)
+        retained['bundle'] = {'bytes': bundle, 'sha256': producer.sha(bundle)}
+        with self.assertRaisesRegex(Exception, 'outside output allowlist'):
+            self.fixture.model_help._validate_model_help_bindings(manifest, retained=retained)
+        retained['output_allowlist'] = (*retained['output_allowlist'], path)
+        retained['payload'][path]['bytes'] = b'documenterBaseURL=".";\n'
+        with self.assertRaisesRegex(Exception, 'inventory size or digest mismatch'):
+            self.fixture.model_help._validate_model_help_bindings(manifest, retained=retained)
+        retained['payload'][path]['bytes'] = data
+        self.fixture.model_help._validate_model_help_bindings(manifest, retained=retained)
 
     def test_source_identity_mismatch_refused(self):
         kwargs, retained = self.case()
