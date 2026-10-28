@@ -22,6 +22,10 @@
       mkSolver = { system, preparedDepot, juliaTestProfile ? "production-build",
         juliaTestWorkerLimit ? null }: let
         pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
+        runtimeSources = import ./nix/runtime-sources.nix {
+          inherit (pkgs) lib;
+          root = ./.;
+        };
       in import ./components/QCLNEGFRunner.jl/nix/package.nix {
         inherit pkgs preparedDepot;
         # Select only the Results capture CLI from the shared locked PythonSet.
@@ -33,9 +37,9 @@
           testProfile = juliaTestProfile;
           testWorkerLimit = juliaTestWorkerLimit;
         };
-        coreSrc = ./components/QCLNEGF.jl;
-        runnerSrc = ./components/QCLNEGFRunner.jl;
-        environmentSrc = ./julia;
+        coreSrc = runtimeSources.core;
+        runnerSrc = runtimeSources.runner;
+        environmentSrc = runtimeSources.environment;
       };
     };
     packages = forAll (system: {
