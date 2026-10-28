@@ -69,8 +69,10 @@ PY
 
 Runner проверяет exact Julia, неизменность Manifest и artifact tree hashes; удаляет
 compiled/log/scratch caches и сохраняет captured registry. Не используйте receipt неудачной
-подготовки. Для готового depot пропустите этот блок, сохранив исходный receipt и архив. Далее новый
-binding создаётся одинаково для обоих случаев:
+подготовки. Для готового depot сохраните исходный receipt и архив. V1 пригоден только для того же
+source graph; совпадения Manifest недостаточно. Для другого snapshot нужен новый qualified v2 по
+[depot compatibility](depot-compatibility.md), причём для exact `local-debug` factory. Original
+producer `sources` не переписывается. Далее binding создаётся без retagging:
 
 ```sh
 python3 - <<'PY'
@@ -87,20 +89,27 @@ assert graph['revision'] == revision
 assert subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD']).decode().strip() == revision
 assert not subprocess.check_output(['git', '-C', str(repo), 'status', '--porcelain=v1', '--untracked-files=all'])
 manifest_hash = hashlib.sha256((repo / 'julia/Manifest.toml').read_bytes()).hexdigest()
-old = json.loads(Path(os.environ['LAB_DEPOT_METADATA']).read_text())
-assert old['format'] == 'qcl-negf.julia-depot.v1' and old['julia'] == '1.13.0'
+original = Path(os.environ['LAB_DEPOT_METADATA']).read_bytes()
+old = json.loads(original)
+assert old['format'] in ('qcl-negf.julia-depot.v1', 'qcl-negf.julia-depot.v2') and old['julia'] == '1.13.0'
+if old['format'] == 'qcl-negf.julia-depot.v1':
+    assert old['sources'] == graph
+else:
+    assert old['compatibility']['inputs']['julia']['profile'] == 'local-debug'
 assert old['juliaManifest'] == manifest_hash
 output = Path(os.environ['LAB_PACKAGES'])
-metadata = {**old, 'sources': graph}
+metadata = old  # Original producer graph сохраняется.
 metadata_path = output / 'solver-depot.json'
 inputs = {'source': 'git+' + repo.as_uri() + '?rev=' + revision + '&submodules=1',
           'snapshotRevision': revision, 'sourceGraph': graph,
           'preparedManifestSha256': manifest_hash, 'depotManifest': str(metadata_path)}
 binding = {'snapshot_evidence': str(evidence_path), 'snapshot_revision': revision,
            'dependency_receipt': str(Path(os.environ['LAB_DEPOT_METADATA'])),
-           'semantics': 'external dependency depot reused with identical native Manifest; sources selects build graph',
+           'semantics': 'Original provenance сохранён; v2 проверяется selected Nix, v1 требует exact graph',
            'scientific_accepted': False, 'published_release': False}
-for path, value in ((metadata_path, metadata), (output / 'package-input.json', inputs),
+with metadata_path.open('xb') as out:
+    out.write(original)
+for path, value in ((output / 'package-input.json', inputs),
                     (output / 'depot-binding.json', binding)):
     with path.open('x') as out:
         out.write(json.dumps(value, indent=2) + '\n')

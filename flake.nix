@@ -8,13 +8,29 @@
   in {
     inherit (platform) nixosModules;
     lib = {
-      mkPreparedDepot = { system, metadata }: let
+      mkPinnedJulia = { system, juliaTestProfile ? "production-build", juliaTestWorkerLimit ? null }:
+        import ./components/QCLNEGFRunner.jl/nix/julia.nix {
+          pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
+          testProfile = juliaTestProfile; testWorkerLimit = juliaTestWorkerLimit;
+        };
+      depotCompatibilityInputs = { system, juliaTestProfile ? "production-build", juliaTestWorkerLimit ? null }:
+        (import ./nix/depot-compatibility.nix).inputs {
+          root = ./.; inherit system juliaTestProfile juliaTestWorkerLimit;
+          julia = self.lib.mkPinnedJulia { inherit system juliaTestProfile juliaTestWorkerLimit; };
+        };
+      mkPreparedDepot = { system, metadata, juliaTestProfile ? "production-build", juliaTestWorkerLimit ? null }: let
         pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
-      in assert metadata.format == "qcl-negf.julia-depot.v1";
-         assert metadata.julia == "1.13.0";
-         assert metadata.sources.revision == self.rev;
-         assert metadata.juliaManifest == builtins.hashFile "sha256" ./julia/Manifest.toml;
-         import ./nix/depot.nix { inherit pkgs metadata; };
+        policy = import ./nix/depot-compatibility.nix;
+        v2 = metadata.format == "qcl-negf.julia-depot.v2";
+        expected = self.lib.depotCompatibilityInputs { inherit system juliaTestProfile juliaTestWorkerLimit; };
+        manifest = builtins.hashFile "sha256" ./julia/Manifest.toml;
+        depot = import ./nix/depot.nix { inherit pkgs; metadata = { inherit (metadata) url hash; }; };
+      in assert metadata.julia == "1.13.0";
+         assert metadata.juliaManifest == manifest;
+         assert if v2 then policy.valid { inherit metadata expected manifest; }
+           else metadata.format == "qcl-negf.julia-depot.v1" && metadata.sources.revision == self.rev;
+         depot // { qclDepotFormat = metadata.format;
+           qclDepotInputsSha256 = if v2 then policy.hash expected else null; };
       mkApplication = { system }: platform.lib.mkApplication {
         inherit system;
         workspaceRoot = self.outPath;
@@ -26,17 +42,16 @@
           inherit (pkgs) lib;
           root = ./.;
         };
-      in import ./components/QCLNEGFRunner.jl/nix/package.nix {
+      in assert (preparedDepot.qclDepotFormat or null) != "qcl-negf.julia-depot.v2" ||
+        preparedDepot.qclDepotInputsSha256 == (import ./nix/depot-compatibility.nix).hash
+          (self.lib.depotCompatibilityInputs { inherit system juliaTestProfile juliaTestWorkerLimit; });
+      import ./components/QCLNEGFRunner.jl/nix/package.nix {
         inherit pkgs preparedDepot;
         # Select only the Results capture CLI from the shared locked PythonSet.
         # Runner retains one ordinary spawn when this capability is unavailable.
         captureExecutable = "${(self.lib.mkApplication { inherit system; }).captureRuntime}/bin/qcl-negf-results";
         testProfile = juliaTestProfile;
-        julia = import ./components/QCLNEGFRunner.jl/nix/julia.nix {
-          inherit pkgs;
-          testProfile = juliaTestProfile;
-          testWorkerLimit = juliaTestWorkerLimit;
-        };
+        julia = self.lib.mkPinnedJulia { inherit system juliaTestProfile juliaTestWorkerLimit; };
         coreSrc = runtimeSources.core;
         runnerSrc = runtimeSources.runner;
         environmentSrc = runtimeSources.environment;
