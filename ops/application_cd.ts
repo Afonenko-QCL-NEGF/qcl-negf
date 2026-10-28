@@ -4,7 +4,11 @@ import {
   buildSolver,
   canonicalSourceGraphJson,
   captureDepotMetadata,
+  type DepotInputs,
+  depotNeedsInputs,
+  parseBuildOptions,
   prepareDepotMetadata,
+  readDepotInputs,
   readInstalledJuliaManifestSha256,
   readJuliaManifestSha256,
   solverBuildOutput,
@@ -45,6 +49,7 @@ export interface SolverAssemblyReceipt {
   // Trusted builder adapter input, never request/client metadata. The raw build
   // stdout must come from the command that consumed consumed_metadata_json.
   result: SolverBuildResult;
+  depotInputs?: DepotInputs;
   juliaManifestSha256: string;
   installedJuliaManifestSha256: string;
 }
@@ -61,6 +66,7 @@ async function checkedSolverBuild(
     result.consumed_metadata_json,
     sources,
     receipt.juliaManifestSha256,
+    receipt.depotInputs,
   );
   const graphDigest = new Uint8Array(
     await crypto.subtle.digest(
@@ -78,6 +84,8 @@ async function checkedSolverBuild(
     result.consumed_metadata_sha256 !== prepared.binding.consumed_metadata_sha256 ||
     result.consumed_metadata_bytes !== prepared.binding.consumed_metadata_bytes ||
     result.normalization !== prepared.binding.normalization ||
+    result.depot_format !== prepared.binding.depot_format ||
+    result.depot_inputs_sha256 !== prepared.binding.depot_inputs_sha256 ||
     result.archive_url !== prepared.binding.archive_url ||
     result.archive_hash !== prepared.binding.archive_hash ||
     result.julia_manifest_sha256 !== receipt.juliaManifestSha256 ||
@@ -151,16 +159,23 @@ export async function runApplicationCdCli(
     readJuliaManifestSha256: readManifest = readJuliaManifestSha256,
     readInstalledJuliaManifestSha256: readInstalled = readInstalledJuliaManifestSha256,
     execute = run,
+    readDepotInputs: readInputs = readDepotInputs,
   } = dependencies;
-  const [depotFile, output, cache] = args;
-  if (!depotFile || !output || args.length > 3) {
+  const flagAt = args.findIndex((v) => v.startsWith("--"));
+  const positional = flagAt < 0 ? args : args.slice(0, flagAt);
+  const options = parseBuildOptions(flagAt < 0 ? [] : [...args.slice(flagAt)]);
+  const [depotFile, output, cache] = positional;
+  if (!depotFile || !output || positional.length > 3) {
     throw new Error("Usage: application_cd.ts DEPOT_JSON MANIFEST_JSON [NIX_CACHE_URI]");
   }
   validateCacheUri(cache);
   const captured = await captureDepotMetadata(depotFile, open);
   const sources = structuredClone(await readGraph());
   const juliaManifest = await readManifest();
-  await prepareDepotMetadata(captured, sources, juliaManifest);
+  // Legacy v1 does not perform a new Nix evaluation. V2 requires CURRENT expected inputs.
+  const isV2 = depotNeedsInputs(captured);
+  const depotInputs = isV2 ? await readInputs(sources, options) : undefined;
+  await prepareDepotMetadata(captured, sources, juliaManifest, depotInputs);
   const application = immutableStorePath(
     await execute({
       executable: "nix",
@@ -168,7 +183,14 @@ export async function runApplicationCdCli(
       cwd: workspace,
     }, true),
   );
-  const depotBinding = await buildSolver(captured, sources, juliaManifest, execute);
+  const depotBinding = await buildSolver(
+    captured,
+    sources,
+    juliaManifest,
+    execute,
+    options,
+    depotInputs,
+  );
   const solver = immutableStorePath(depotBinding.output_path);
   const installedJuliaManifest = await readInstalled(solver);
   const rawInfo = JSON.parse(
@@ -182,6 +204,7 @@ export async function runApplicationCdCli(
     : rawInfo;
   const manifest = await deploymentManifest(sources, application, solver, evidence, cache, {
     result: depotBinding,
+    depotInputs,
     juliaManifestSha256: juliaManifest,
     installedJuliaManifestSha256: installedJuliaManifest,
   });

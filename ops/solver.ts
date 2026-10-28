@@ -1,3 +1,13 @@
+import { pathToFileURL } from "node:url";
+import {
+  type DepotInputs,
+  digest,
+  exact,
+  nixDataApplication,
+  validateCompatibility,
+  validateInputs,
+} from "./depot_compatibility.ts";
+export type { DepotInputs } from "./depot_compatibility.ts";
 import { type SourceGraph, sourceGraph } from "./git.ts";
 import { type Command, exists, main, run, workspace } from "./process.ts";
 
@@ -12,11 +22,14 @@ export interface BuildCliDependencies {
   openDepotInput: OpenDepotInput;
   readSourceGraph(): Promise<SourceGraph>;
   readJuliaManifestSha256(): Promise<string>;
+  readDepotInputs(graph: SourceGraph, options: BuildOptions): Promise<DepotInputs>;
   readInstalledJuliaManifestSha256(output: string): Promise<string>;
   execute(command: Command, capture?: boolean): Promise<string>;
 }
 
 export interface DepotBinding {
+  readonly depot_format: string;
+  readonly depot_inputs_sha256: string | null;
   readonly captured_input_sha256: string;
   readonly captured_input_bytes: number;
   readonly consumed_metadata_sha256: string;
@@ -229,20 +242,30 @@ function object(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function graphComponents(value: unknown): Map<string, { revision: string; url: string }> {
-  if (!Array.isArray(value)) throw new Error("Invalid depot component graph");
-  const components = new Map<string, { revision: string; url: string }>();
-  for (const component of value) {
-    if (
-      !object(component) || typeof component.path !== "string" ||
-      typeof component.revision !== "string" || typeof component.url !== "string" ||
-      components.has(component.path)
-    ) {
-      throw new Error("Invalid or duplicate depot component");
-    }
-    components.set(component.path, { revision: component.revision, url: component.url });
+export function decodeDepotJson(raw: string): unknown {
+  if (typeof raw !== "string" || raw.length > metadataLimit) {
+    throw Error("Invalid bounded proof string");
   }
-  return components;
+  const encoded = encoder.encode(raw);
+  if (
+    encoded.length > metadataLimit || raw.startsWith("\uFEFF") || raw.includes("\0") ||
+    new TextDecoder("utf-8", { fatal: true }).decode(encoded) !== raw
+  ) throw Error("Invalid bounded proof JSON");
+  const value = uniqueJson(raw);
+  const finite = (v: unknown): boolean =>
+    typeof v === "number"
+      ? Number.isFinite(v)
+      : Array.isArray(v)
+      ? v.every(finite)
+      : object(v)
+      ? Object.values(v).every(finite)
+      : true;
+  if (!finite(value)) throw Error("Nonfinite proof number");
+  return value;
+}
+export function depotNeedsInputs(raw: string): boolean {
+  const m = decodeDepotJson(raw);
+  return object(m) && m.format === "qcl-negf.julia-depot.v2";
 }
 
 // Shared CLI preflight and direct-helper validation; no dispatch or pathname access.
@@ -250,9 +273,13 @@ export async function prepareDepotMetadata(
   metadataJson: string,
   expectedGraph: SourceGraph,
   expectedManifest: string,
+  expectedInputs?: DepotInputs,
 ) {
   if (typeof metadataJson !== "string") {
     throw new Error("Depot metadata must be a captured JSON string");
+  }
+  if (metadataJson.length > metadataLimit) {
+    throw Error("Depot metadata exceeds bounded string length");
   }
   const captured = encoder.encode(metadataJson);
   if (
@@ -264,7 +291,8 @@ export async function prepareDepotMetadata(
   }
   const metadata: unknown = uniqueJson(metadataJson);
   if (
-    !object(metadata) || metadata.format !== "qcl-negf.julia-depot.v1" ||
+    !object(metadata) ||
+    !["qcl-negf.julia-depot.v1", "qcl-negf.julia-depot.v2"].includes(String(metadata.format)) ||
     metadata.julia !== "1.13.0" || typeof expectedManifest !== "string" ||
     !/^[a-f0-9]{64}$/.test(expectedManifest) || metadata.juliaManifest !== expectedManifest
   ) {
@@ -275,33 +303,48 @@ export async function prepareDepotMetadata(
     !object(sources) || sources.format !== "qcl-negf.git-graph.v1" || !object(expectedGraph) ||
     expectedGraph.format !== "qcl-negf.git-graph.v1" ||
     typeof expectedGraph.revision !== "string" || !/^[a-f0-9]{40}$/.test(expectedGraph.revision) ||
-    sources.revision !== expectedGraph.revision
+    !/^[a-f0-9]{40}$/.test(String(sources.revision))
   ) {
     throw new Error("Depot belongs to a different source graph");
   }
-  if (
+  // Validate both graphs; V2 keeps the immutable original producer graph separately.
+  canonicalSourceGraphJson(expectedGraph);
+  canonicalSourceGraphJson(sources as unknown as SourceGraph);
+  let inputSha: string | null = null;
+  if (metadata.format === "qcl-negf.julia-depot.v2") {
+    exact(metadata, [
+      "format",
+      "sources",
+      "julia",
+      "juliaManifest",
+      "url",
+      "hash",
+      "compatibility",
+    ]);
+    inputSha = await validateCompatibility(
+      metadata.compatibility,
+      expectedInputs,
+      expectedManifest,
+    );
+  } else if (
     canonicalSourceGraphJson(expectedGraph) !==
       canonicalSourceGraphJson(sources as unknown as SourceGraph)
   ) {
-    throw new Error("Consumed depot source graph differs from selected source graph");
-  }
-  const expected = graphComponents(expectedGraph.components);
-  const actual = graphComponents(sources.components);
-  if (actual.size !== expected.size) throw new Error("Depot component set mismatch");
-  for (const [path, component] of expected) {
-    const candidate = actual.get(path);
-    if (
-      !candidate || candidate.revision !== component.revision || candidate.url !== component.url
-    ) {
-      throw new Error("Depot component identity mismatch");
-    }
+    throw Error("Consumed depot source graph differs from selected source graph");
   }
   if (typeof metadata.url !== "string" || typeof metadata.hash !== "string") {
     throw new Error("Depot archive URL and hash must be strings");
   }
   const url = metadata.url;
   const archiveHash = metadata.hash;
-  const protocol = new URL(url).protocol;
+  const archiveRoute = new URL(url);
+  const protocol = archiveRoute.protocol;
+  if (
+    !["file:", "https:", "http:"].includes(protocol) || archiveRoute.username ||
+    archiveRoute.password ||
+    Array.from(url).some((c) => c.charCodeAt(0) <= 32 || c.charCodeAt(0) === 127) ||
+    !/^sha256-[A-Za-z0-9+/]{43}=$/.test(archiveHash)
+  ) throw Error("Invalid depot archive route/hash");
   const revision = expectedGraph.revision;
   const manifest = expectedManifest;
   const boundJson = JSON.stringify(metadata);
@@ -313,6 +356,8 @@ export async function prepareDepotMetadata(
   const capturedSha = await sha256(captured);
   const consumedSha = await sha256(consumed);
   const binding: DepotBinding = Object.freeze({
+    depot_format: String(metadata.format),
+    depot_inputs_sha256: inputSha,
     captured_input_sha256: capturedSha,
     captured_input_bytes: captured.length,
     consumed_metadata_sha256: consumedSha,
@@ -366,6 +411,7 @@ export async function buildSolver(
   expectedJuliaManifestSha256: string,
   execute: (command: Command, capture?: boolean) => Promise<string> = run,
   options: BuildOptions = parseBuildOptions([]),
+  expectedInputs?: DepotInputs,
 ): Promise<SolverBuildResult> {
   // Validate programmatic callers before prefetch/build as well as CLI input.
   options = parseBuildOptions([
@@ -375,6 +421,15 @@ export async function buildSolver(
       ? []
       : ["--test-workers", String(options.testWorkerLimit)]),
   ]);
+  if (expectedInputs !== undefined) {
+    validateInputs(expectedInputs);
+    const workers = options.profile === "local-debug" ? 2 : options.testWorkerLimit;
+    if (
+      expectedInputs.julia.profile !== options.profile ||
+      expectedInputs.julia.test_workers !== workers
+    ) throw Error("Selected factory options differ from CURRENT depot inputs");
+    expectedInputs = structuredClone(expectedInputs);
+  }
   expectedGraph = structuredClone(expectedGraph);
   const profile = options.profile;
   const workers = options.testWorkerLimit;
@@ -382,6 +437,7 @@ export async function buildSolver(
     metadataJson,
     expectedGraph,
     expectedJuliaManifestSha256,
+    expectedInputs,
   );
   if (protocol === "file:") {
     // The sandbox cannot see the archive's host path. Verified flat-file
@@ -402,7 +458,7 @@ export async function buildSolver(
       cwd: workspace,
     });
   }
-  const fileUrl = new URL(`file://${workspace}/`);
+  const fileUrl = pathToFileURL(workspace + "/");
   fileUrl.searchParams.set("rev", binding.source_revision);
   fileUrl.searchParams.set("submodules", "1");
   const sourceGraphSha = await sha256(encoder.encode(canonicalSourceGraphJson(expectedGraph)));
@@ -454,6 +510,7 @@ export async function runSolverBuildCli(
     readSourceGraph: readGraph = sourceGraph,
     readJuliaManifestSha256: readManifest = readJuliaManifestSha256,
     execute = run,
+    readDepotInputs: readInputs = readDepotInputs,
   } = dependencies;
   const [target, ...flags] = args;
   if (!target) {
@@ -465,7 +522,8 @@ export async function runSolverBuildCli(
   const captured = await captureDepotMetadata(target, open);
   const graph = structuredClone(await readGraph());
   const manifest = await readManifest();
-  return await buildSolver(captured, graph, manifest, execute, options);
+  const expected = depotNeedsInputs(captured) ? await readInputs(graph, options) : undefined;
+  return await buildSolver(captured, graph, manifest, execute, options, expected);
 }
 
 async function checksum(path: string): Promise<string> {
@@ -484,11 +542,21 @@ async function solver(): Promise<void> {
   const [operation, target, ...flags] = Deno.args;
   if (!target || !["depot", "build"].includes(operation)) {
     throw new Error(
-      "Usage: solver.ts depot OUTPUT_DIRECTORY [--url URL] | build DEPOT_JSON [--profile PROFILE] [--test-workers INTEGER]",
+      "Usage: solver.ts depot OUTPUT_DIRECTORY [--url URL] [--format v2 --qualification RELATIVE_RECEIPT --profile PROFILE --test-workers N] | build DEPOT_JSON [--profile PROFILE] [--test-workers INTEGER]. Explicit v2 capture realizes pinned Nix Julia and downloads dependencies; qualification finalization is separate.",
     );
   }
   if (operation === "build") {
     await runSolverBuildCli([target, ...flags]);
+    return;
+  }
+  const formatAt = flags.indexOf("--format");
+  if (formatAt >= 0) {
+    if (flags[formatAt + 1] !== "v2" || flags.lastIndexOf("--format") !== formatAt) {
+      throw Error("Only explicit new v2 format is supported");
+    }
+    const rest = [...flags.slice(0, formatAt), ...flags.slice(formatAt + 2)];
+    const { runDepotV2 } = await import("./depot_producer.ts");
+    await runDepotV2(target, rest);
     return;
   }
   const graph = await sourceGraph();
@@ -538,7 +606,7 @@ async function solver(): Promise<void> {
     sources: graph,
     julia: "1.13.0",
     juliaManifest: await checksum(`${workspace}/julia/Manifest.toml`),
-    url: requestedUrl?.href ?? new URL(`file://${archive}`).href,
+    url: requestedUrl?.href ?? pathToFileURL(archive).href,
     hash: sri(await checksum(archive)),
   };
   await Deno.writeTextFile(`${output}/solver-depot.json`, JSON.stringify(manifest, null, 2) + "\n");
@@ -547,3 +615,80 @@ async function solver(): Promise<void> {
 }
 
 if (import.meta.main) await main(solver);
+
+// Source-only evaluation of CURRENT selected flake. This never realizes a derivation.
+export async function readDepotInputs(
+  graph: SourceGraph,
+  options: BuildOptions,
+): Promise<DepotInputs> {
+  const fileUrl = pathToFileURL(workspace + "/");
+  fileUrl.searchParams.set("rev", graph.revision);
+  fileUrl.searchParams.set("submodules", "1");
+  const raw = await run({
+    executable: "nix",
+    args: [
+      "eval",
+      "--offline",
+      "--impure",
+      "--json",
+      "--file",
+      "nix/depot-inputs.nix",
+      "--apply",
+      nixDataApplication({
+        source: `git+${fileUrl.href}`,
+        juliaTestProfile: options.profile,
+        juliaTestWorkerLimit: options.testWorkerLimit,
+      }),
+    ],
+    cwd: workspace,
+  }, true);
+  const value = uniqueJson(raw);
+  validateInputs(value);
+  return value;
+}
+export async function workerDepotBinding(
+  result: SolverBuildResult,
+  selected: { ref: { path: string; bytes: number; sha256: string }; json: string },
+) {
+  exact(selected, ["ref", "json"]);
+  exact(selected.ref, ["path", "bytes", "sha256"]);
+  const graph = decodeDepotJson(selected.json) as unknown as SourceGraph;
+  if (
+    !/^[A-Za-z0-9_.+/-]{1,240}$/.test(selected.ref.path) ||
+    selected.ref.path.split("/").some((p) => ["", ".", ".."].includes(p)) ||
+    new TextEncoder().encode(selected.json).length !== selected.ref.bytes ||
+    await digest(selected.json) !== selected.ref.sha256 ||
+    await digest(canonicalSourceGraphJson(graph)) !== result.source_graph_sha256 ||
+    graph.revision !== result.source_revision
+  ) throw Error("Selected source graph record differs from actual build");
+  const metadata = decodeDepotJson(result.consumed_metadata_json) as Record<string, unknown>;
+  const inputs = object(metadata.compatibility)
+    ? metadata.compatibility.inputs as DepotInputs
+    : undefined;
+  const checked = await prepareDepotMetadata(
+    result.consumed_metadata_json,
+    graph,
+    result.julia_manifest_sha256,
+    inputs,
+  );
+  const actual = solverBuildOutput(result.build_stdout_json);
+  if (
+    result.depot_format !== "qcl-negf.julia-depot.v2" ||
+    checked.binding.consumed_metadata_sha256 !== result.consumed_metadata_sha256 ||
+    checked.binding.consumed_metadata_bytes !== result.consumed_metadata_bytes ||
+    checked.binding.depot_inputs_sha256 !== result.depot_inputs_sha256 ||
+    checked.binding.archive_url !== result.archive_url ||
+    checked.binding.archive_hash !== result.archive_hash || actual.drv_path !== result.drv_path ||
+    actual.output_path !== result.output_path
+  ) throw Error("Portable export requires validated actual V2 build receipt");
+  return {
+    schema: "qcl-negf-worker-depot-binding-v1",
+    producer_source_graph_sha256: await digest(
+      canonicalSourceGraphJson(metadata.sources as unknown as SourceGraph),
+    ),
+    selected_source_graph_record_sha256: selected.ref.sha256,
+    inputs_sha256: result.depot_inputs_sha256,
+    consumed_metadata_sha256: result.consumed_metadata_sha256,
+    consumed_metadata_bytes: result.consumed_metadata_bytes,
+  };
+}

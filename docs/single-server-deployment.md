@@ -29,15 +29,26 @@ releases. Его артефакты размещаются в `/var/lib/qcl-negf
 сборкой выполнить preflight ниже; команды не являются разрешением обойти его:
 
 ```sh
-deno task --cwd components/QCLNEGFRunner.jl bootstrap
-export JULIA="$PWD/components/QCLNEGFRunner.jl/.build/julia/bin/julia"
 deno task graph
-deno task solver:depot /var/lib/qcl-negf-artifacts/first-install
-deno task solver:build /var/lib/qcl-negf-artifacts/first-install/solver-depot.json
+deno task solver:depot /var/lib/qcl-negf-artifacts/first-install --format v2 --test-workers 2
+# После отдельного SOURCE review actual native facts и qualification receipt в output:
+deno task solver:depot /var/lib/qcl-negf-artifacts/first-install --format v2 --test-workers 2 --qualification qualification.json
+deno task solver:build /var/lib/qcl-negf-artifacts/first-install/solver-depot.json --test-workers 2
 ```
 
-Подготовленный depot включает закреплённый registry и lazy artifacts; его receipt
-связан с commit superproject и SHA-256 Julia manifest. Архив остаётся вне Git.
+Это явная native подготовка: v2 реализует exact pinned Nix Julia factory, затем скачивает
+зависимости/lazy artifacts в пустой depot. Число test workers выбирают по фактическому reserve
+builder; `2` здесь — конкретный пример, не общий лимит. Первый шаг выпускает только candidate, не
+usable metadata. Qualification связывает original raw candidate/facts и trusted SOURCE review; она
+не возникает автоматически из exit code. Форматы и отказ при custom selectors/preferences описаны в
+[depot compatibility](depot-compatibility.md). Native qualification и offline package installCheck
+остаются отдельными gates. Registry сохраняется как captured immutable contents; reachable presence
+check не доказывает заранее закреплённый registry tree.
+
+Старый `solver:depot OUTPUT [--url URL]` сохраняет v1 и прежний явный JULIA/prepare flow. Его можно
+использовать только для exact producer graph; v1 не получает guarantees нового profile. Архив и
+original receipt остаются вне Git.
+
 Для локального `file://` receipt команда `solver:build` сначала проверяет hash
 через `nix store prefetch-file` с тем же именем store-объекта, что и `fetchurl`.
 Этот шаг выполняется на builder до прямой сборки site-образов: холодный Nix

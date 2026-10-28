@@ -6,6 +6,6 @@ assert builtins.hashString "sha256" depotManifestJson == depotManifestSha256;
 let
   project = builtins.getFlake source;
   metadata = builtins.fromJSON depotManifestJson;
-  preparedDepot = project.lib.mkPreparedDepot { inherit system metadata; };
+  preparedDepot = project.lib.mkPreparedDepot { inherit system metadata juliaTestProfile juliaTestWorkerLimit; };
 in
 project.lib.mkSolver { inherit system preparedDepot juliaTestProfile juliaTestWorkerLimit; }

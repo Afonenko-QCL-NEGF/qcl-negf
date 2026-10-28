@@ -13,7 +13,7 @@ let
   '';
   metadata = builtins.fromJSON (builtins.readFile input.depotManifest);
   manifestHash = builtins.hashFile "sha256" (project.outPath + "/julia/Manifest.toml");
-  preparedDepot = project.lib.mkPreparedDepot { system = "x86_64-linux"; inherit metadata; };
+  preparedDepot = project.lib.mkPreparedDepot { system = "x86_64-linux"; inherit metadata; juliaTestProfile = "local-debug"; };
 in
 assert builtins.elem package [ "application" "solver" "synthetic" ];
 assert project.rev == input.snapshotRevision;
@@ -24,7 +24,7 @@ else if package == "synthetic" then
   assert builtins.pathExists fixture;
   synthetic
 else
-  assert metadata.sources == input.sourceGraph;
+  assert metadata.format == "qcl-negf.julia-depot.v2" || metadata.sources == input.sourceGraph;
   assert metadata.juliaManifest == manifestHash;
   assert input.preparedManifestSha256 == manifestHash;
   project.lib.mkSolver {
