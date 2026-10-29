@@ -349,6 +349,13 @@ def reference(retained, component, path):
 
 def coverage_for(assembly, retained, payload):
     rows = []
+    # Required final/recovery anchors live on existing supporting owning pages,
+    # separate from the three primary entry routes. Never search unrelated pages
+    # for a matching id or synthesize an anchor to satisfy the coverage check.
+    support_pages = {
+        'researcher': ('core/theory/12_validation.html',),
+        'operator': ('runner/user/results.html',),
+    }
     for identity, (_, _, sources, urls) in assembly.PRIMARY.items():
         refs = []
         for full in sources:
@@ -356,7 +363,8 @@ def coverage_for(assembly, retained, payload):
             path = full if component == 'root' else full[len(component) + 1:]
             refs.append(reference(retained, component, path))
         paths = {url.split('#')[0] for url in urls}
-        # Include additional required anchors in the exact primary page(s).
+        paths.update(support_pages.get(identity, ()))
+        # Include required anchors only from their admitted owning pages.
         pages = []
         for path in sorted(paths):
             parser = assembly._PayloadHTML(path)
