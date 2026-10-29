@@ -19,6 +19,13 @@ concurrency:
 jobs:
   integration:
     runs-on: [self-hosted, linux, x64, qcl-negf-ci]
+    # Supplied by the owned runner provisioning. Missing inputs fail; checks
+    # never install tools, fetch assets, or synthesize a release review.
+    env:
+      QCL_NEGF_DOCS_INPUTS: ${{ vars.QCL_NEGF_DOCS_INPUTS }}
+      QCL_NEGF_DOCS_NODE: ${{ vars.QCL_NEGF_DOCS_NODE }}
+      QCL_NEGF_DOCS_PYTHON: ${{ vars.QCL_NEGF_DOCS_PYTHON }}
+      QCL_NEGF_DOCS_ASSET_INPUTS: ${{ vars.QCL_NEGF_DOCS_ASSET_INPUTS }}
     timeout-minutes: ${{ github.event.inputs.scope == 'runner-smoke' && 5 || 180 }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803

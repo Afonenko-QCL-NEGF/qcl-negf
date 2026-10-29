@@ -198,16 +198,10 @@ registry["julia-integration"] = {
   gates: ["Results/Julia integration requires actual prepared package environment"],
 };
 registry["docs-build"] = {
-  check: ({ root, julia }) =>
-    ["core", "runner"].map((g) => ({
-      executable: "deno",
-      args: ["task", "docs"],
-      cwd: `${root}/${juliaPath(g)}`,
-      env: { JULIA: julia, QCL_NEGF_PROJECT: `${root}/julia` },
-    })),
-  prepare: (c) => registry.runner.prepare(c),
+  check: ({ root }) => [{ executable: "deno", args: ["task", "docs:build"], cwd: root }],
+  prepare: ({ root }) => [{ executable: "deno", args: ["task", "docs:prepare"], cwd: root }],
   gates: [
-    "Full Julia documentation builds require prepared project; prose-only D never selects this group",
+    "One full documentation artifact requires explicit captured inputs and native offline/cache/browser qualification; prose-only D never selects it",
   ],
 };
 registry.platform = {

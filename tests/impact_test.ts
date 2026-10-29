@@ -149,7 +149,7 @@ Deno.test("executable docs/config/native metadata differ from prose; unknown req
     equal(p.scientificStage, "not_requested");
   }
 });
-Deno.test("infra checks never install providers; full retains both docs; manual parser stays strict", async () => {
+Deno.test("infra checks never install providers; full retains one Root docs package; manual parser stays strict", async () => {
   const p = selectedPlan([], parseImpactOptions(["--infra"]));
   const checks = checkCommands(p, context), prep = preparationCommands(p, context);
   ok(
@@ -163,9 +163,9 @@ Deno.test("infra checks never install providers; full retains both docs; manual 
   );
   equal(
     checkCommands(selectedPlan([], parseImpactOptions([])), context).filter((c) =>
-      c.args.includes("docs")
+      c.args.includes("docs:build")
     ).length,
-    2,
+    1,
   );
   for (
     const flags of [["--base", "x"], ["--head", "x"], ["--base", "--evil", "--head", "HEAD"], [
