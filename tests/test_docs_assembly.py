@@ -235,6 +235,95 @@ class DocsAssemblyTests(unittest.TestCase):
         assembly.validate_authored_source('```julia\nerror("literal only")\n```\n')
         assembly.validate_authored_source('```@meta\nCurrentModule = QCLNEGF\n```\n```@docs\nsolve\n```\n')
 
+    def test_source_gate_accepts_only_static_cross_graph_navigation(self):
+        source = ('```@raw html\n<ul>\n<li><a href="../runner/user/results.html#operator-recovery-route">'
+                  'Runner</a> и <a href="https://example.org/reference">reference</a>.</li>\n</ul>\n```\n')
+        assembly.validate_authored_source(source)
+        # Actual authored chapter must pass the same producer preflight.
+        assembly.validate_authored_source((ROOT / 'docs/public/operator-recovery.md').read_text())
+
+    def test_source_navigation_rejects_code_attributes_and_malformed_fragments(self):
+        bad = [
+            '<script>sentinel()</script>', '<ul onclick="sentinel()"><li>x</li></ul>',
+            '<ul><li><a href="x" style="color:red">x</a></li></ul>',
+            '<ul><li><a href="javascript:sentinel()">x</a></li></ul>',
+            '<ul><li><a href="data:text/html,x">x</a></li></ul>',
+            '<ul><li><a href="//example.org/x">x</a></li></ul>',
+            '<ul><li><a href="/absolute">x</a></li></ul>',
+            '<ul><li><a href="https://user:password@example.org/x">x</a></li></ul>',
+            '<ul><li><a href="https://@example.org/x">x</a></li></ul>',
+            '<ul><li><a href="x" href="y">x</a></li></ul>',
+            '<ul><li><a href="x"><img src="x"></a></li></ul>',
+            '<ul><li><a href="x"/></li></ul>', '<ul><li>x</ul>',
+            '<ul><li><!-- hidden -->x</li></ul>', '<!DOCTYPE html><ul><li>x</li></ul>',
+            '<ul><li>x</li></ul><ul><li>second root</li></ul>',
+            'non-list text<ul><li>x</li></ul>', '<ul><a href="x">outside li</a></ul>',
+            '<ul><li><a href="x"><a href="y">nested</a></a></li></ul>',
+            '<ul><li><a href="x?query=1">x</a></li></ul>', '<ul><li><a href="x">x</a></li></ul>' + ' ' * 32769,
+        ]
+        for html in bad:
+            with self.subTest(fragment=html[:90]):
+                self.rejected(lambda: assembly.validate_authored_source(
+                    '```@raw html\n' + html + '\n```\n'), 'unsupported_navigation_fragment')
+        for info in ('@raw latex', '@raw HTML', '@raw html extra'):
+            self.rejected(lambda: assembly.validate_authored_source(
+                '```' + info + '\n<ul><li>x</li></ul>\n```\n'), 'unsupported_docs_directive')
+        self.rejected(lambda: assembly.validate_authored_source(
+            '```@raw html\n<ul><li><a href="x">x</a></li></ul>\n'),
+            'unsupported_navigation_fragment')
+
+    def test_source_navigation_rejects_discarded_closing_syntax(self):
+        for end in ('</a onclick="sentinel()">', '</a garbage>', '</a/>', '</>'):
+            with self.subTest(end=end):
+                fragment = '<ul><li><a href="x">x' + end + '</li></ul>'
+                self.rejected(lambda: assembly.validate_authored_source(
+                    '```@raw html\n' + fragment + '\n```\n'),
+                    'unsupported_navigation_fragment')
+
+    def test_source_navigation_rejects_tolerated_malformed_opening_syntax(self):
+        for fragment in ('<ul / ><li><a href="x">x</a></li></ul>',
+                         '<ul><li><a/href="x">x</a></li></ul>'):
+            with self.subTest(fragment=fragment):
+                self.rejected(lambda: assembly.validate_authored_source(
+                    '```@raw html\n' + fragment + '\n```\n'),
+                    'unsupported_navigation_fragment')
+        assembly.validate_authored_source(
+            '```@raw html\n<UL ><LI><A href=x>x</A ></LI></UL>\n```\n')
+
+    def test_source_navigation_validates_https_ports_and_control_bytes(self):
+        for href in ('https://example.org:nope/x', 'https://example.org:70000/x',
+                     'https://example.org:-1/x', 'https://example.org:/x',
+                     'https://example.org/x\x7f', 'https://example.org/x%7F',
+                     'https://example.org/x&#127;'):
+            with self.subTest(href=repr(href)):
+                self.rejected(lambda: assembly.validate_authored_source(
+                    '```@raw html\n<ul><li><a href="' + href +
+                    '">x</a></li></ul>\n```\n'), 'unsupported_navigation_fragment')
+        for href in ('https://example.org:443/x', 'https://[::1]:443/x',
+                     'https://example.org/x', '../runner/user/results.html#operator-recovery-route'):
+            with self.subTest(valid_href=href):
+                assembly.validate_authored_source(
+                    '```@raw html\n<ul><li><a href="' + href +
+                    '">x</a></li></ul>\n```\n')
+
+    def test_source_navigation_validates_literal_authority_before_percent_decoding(self):
+        bad = ('https://example.org:%34%34%33/x', 'https://example.org:44%33/x',
+               'https://example.org:%30%30%34%34%33/x', 'https://example.org%3A443/x',
+               'https://example.org%2Fother/x', 'https://example.org%23fragment/x',
+               'https://%5B::1%5D:443/x', 'h%74tps://example.org/x',
+               'https://example%zz.org/x')
+        for href in bad:
+            with self.subTest(href=href):
+                self.rejected(lambda: assembly.validate_authored_source(
+                    '```@raw html\n<ul><li><a href="' + href +
+                    '">x</a></li></ul>\n```\n'), 'unsupported_navigation_fragment')
+        for href in ('https://example.org&#58;443/x', 'https://example.org:&#52;43/x',
+                     'https://example.org/path/%D0%B0', 'https://[::1]:443/x'):
+            with self.subTest(valid_href=href):
+                assembly.validate_authored_source(
+                    '```@raw html\n<ul><li><a href="' + href +
+                    '">x</a></li></ul>\n```\n')
+
     def test_three_primary_slices_require_exact_sources_and_anchors(self):
         plan = assembly.load_pilot_plan(ROOT / "ops/docs/pilot-plan.json")
         slices = {item["id"]: item for item in plan["slices"]}

@@ -201,26 +201,144 @@ def _validate_pilot_plan(plan):
     return plan
 
 
+class _AuthoredNavigation(HTMLParser):
+    """Inert link-list grammar only; final bundle still owns path/anchor proof."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.stack = []
+        self.seen_root = False
+        self.links = 0
+
+    def handle_starttag(self, tag, attrs):
+        # Token spelling is checked before HTMLParser's tolerant attribute
+        # interpretation; e.g. <a/href=x> must not become an ordinary link.
+        raw = self.get_starttag_text()
+        if tag in {'ul', 'li'}:
+            spelling = r'<' + tag + r'[ \t\r\n\f]*>'
+        elif tag == 'a':
+            spelling = (r'<a[ \t\r\n\f]+href[ \t\r\n\f]*=[ \t\r\n\f]*'
+                        r'''(?:"[^"]*"|'[^']*'|[^\s"'=<>`]+)[ \t\r\n\f]*>''')
+        else:
+            _fail('unsupported_navigation_fragment')
+        if not re.fullmatch(spelling, raw, re.I):
+            _fail('unsupported_navigation_fragment')
+        if tag == 'ul':
+            valid = not self.stack and not self.seen_root and not attrs
+            self.seen_root = True
+        elif tag == 'li':
+            valid = self.stack == ['ul'] and not attrs
+        elif tag == 'a':
+            valid = self.stack == ['ul', 'li'] and len(attrs) == 1 and attrs[0][0] == 'href'
+            if valid:
+                # HTMLParser removes some invalid numeric control references
+                # from attributes, so reject them before that normalization.
+                for ref in re.finditer(r'&#(?:[xX]([0-9a-fA-F]+)|([0-9]+));?', self.get_starttag_text()):
+                    code = int(ref[1] or ref[2], 16 if ref[1] else 10)
+                    if code < 32 or code == 127:
+                        _fail('unsupported_navigation_fragment')
+                value = attrs[0][1]
+                valid = isinstance(value, str) and 0 < len(value) <= 4096
+                if valid:
+                    decoded = unquote(unescape(value))
+                    valid = not any(c.isspace() or (ord(c) < 32 or ord(c) == 127) or c in '\\<>"\'' for c in decoded)
+                    # HTMLParser already decoded HTML entities. Validate that
+                    # literal URL, without allowing percent escapes to create a
+                    # different authority or scheme. Encoded authorities are
+                    # outside this finite authored-navigation profile.
+                    parsed = urlsplit(value)
+                    normalized = urlsplit(decoded)
+                    valid = (valid and not parsed.query and not normalized.query
+                             and parsed.username is None and parsed.password is None
+                             and '%' not in parsed.netloc
+                             and (parsed.scheme, parsed.netloc) == (normalized.scheme, normalized.netloc))
+                    if parsed.scheme:
+                        # urlsplit delays port syntax/range validation until this property.
+                        _ = parsed.port
+                        valid = (valid and parsed.scheme == 'https' and bool(parsed.hostname)
+                                 and not parsed.netloc.endswith(':'))
+                    else:
+                        valid = valid and not parsed.netloc and not decoded.startswith('/')
+            self.links += 1
+        else:
+            valid = False
+        if not valid:
+            _fail('unsupported_navigation_fragment')
+        self.stack.append(tag)
+
+    def handle_endtag(self, tag):
+        if not self.stack or self.stack[-1] != tag:
+            _fail('unsupported_navigation_fragment')
+        self.stack.pop()
+
+    def handle_data(self, text):
+        if text.strip() and (not self.stack or self.stack[-1] not in {'li', 'a'}):
+            _fail('unsupported_navigation_fragment')
+
+    def handle_startendtag(self, tag, attrs):
+        _fail('unsupported_navigation_fragment')
+
+    def handle_comment(self, data):
+        _fail('unsupported_navigation_fragment')
+
+    def handle_decl(self, decl):
+        _fail('unsupported_navigation_fragment')
+
+    def handle_pi(self, data):
+        _fail('unsupported_navigation_fragment')
+
+    def unknown_decl(self, data):
+        _fail('unsupported_navigation_fragment')
+
+
+def _validate_navigation_fragment(source):
+    if len(source.encode()) > PLAN_LIMITS['fragment_bytes']:
+        _fail('unsupported_navigation_fragment')
+    # HTMLParser discards trailing end-tag syntax before handle_endtag. Admit
+    # only the literal closing tokens of this finite grammar before that loss.
+    for token in re.finditer(r'</[^>]*(?:>|$)', source):
+        if not re.fullmatch(r'</(?:ul|li|a)[ \t\r\n\f]*>', token[0], re.I):
+            _fail('unsupported_navigation_fragment')
+    parser = _AuthoredNavigation()
+    try:
+        parser.feed(source)
+        parser.close()
+    except (ValueError, AssertionError) as error:
+        if isinstance(error, DocsError):
+            raise
+        _fail('unsupported_navigation_fragment')
+    if parser.stack or not parser.seen_root or not parser.links:
+        _fail('unsupported_navigation_fragment')
+
+
 def validate_authored_source(source):
     if not isinstance(source, str) or len(source.encode()) > 16 * 1024 * 1024:
         _fail("source_limit")
     # Inspect fence information strings, not occurrences in prose or literal code.
     fence = None
+    navigation = None
     for line in source.splitlines():
         match = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if fence is not None:
+            if match and match[1][0] == fence[0] and len(match[1]) >= len(fence) and not match[2].strip():
+                if navigation is not None:
+                    _validate_navigation_fragment('\n'.join(navigation))
+                fence, navigation = None, None
+            elif navigation is not None:
+                navigation.append(line)
+            continue
         if not match:
             continue
         marker, info = match.groups()
-        if fence is not None:
-            if marker[0] == fence[0] and len(marker) >= len(fence) and not info.strip():
-                fence = None
-            continue
         directive = info.strip().split(maxsplit=1)[0] if info.strip() else ""
         if directive in {"@example", "@eval", "@repl", "@setup", "jldoctest"}:
             _fail("executable_docs_directive", directive)
-        if directive.startswith("@") and directive not in {"@meta", "@docs", "@autodocs", "@index", "@contents"}:
+        if directive == '@raw' and info.strip() == '@raw html':
+            navigation = []
+        elif directive.startswith("@") and directive not in {"@meta", "@docs", "@autodocs", "@index", "@contents"}:
             _fail("unsupported_docs_directive", directive)
         fence = marker
+    if navigation is not None:
+        _fail('unsupported_navigation_fragment')
 
 
 class _Node:
