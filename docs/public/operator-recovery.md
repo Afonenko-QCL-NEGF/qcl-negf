@@ -102,10 +102,13 @@ attempt. Solver/mixer state и использованные cumulative iteration
 
 ## [Owning справка](@id recovery-owning-references)
 
-- [Runner: полный маршрут recovery](../runner/user/results.html#operator-recovery-route)
-  и [закреплённый source этой справки](https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/1acc165650fd4f4c2d49605cc679f90e3f6fcdae/docs/src/user/results.md).
-- [Core: чтение финальной точки и критериев](../core/theory/12_validation.html#researcher-final-route).
-  Формулы и пороги принадлежат Core и
-  [Research contract](https://github.com/Afonenko-QCL-NEGF/qcl-negf-research/blob/3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731/docs/equilibrium-measurement-contract.md).
-- [Contracts: artifact format](https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/12fc26462bbab3df76904c6deb01f8c6596de7be/src/qcl_negf_contracts/artifacts.py).
-  Эта глава не вводит отдельного формата или критерия научной приёмки.
+Ссылки между Core, Runner и operator относятся к единому bundle; их локальные
+цели и anchors проверяет итоговая сборка, после отдельных owning-графов.
+
+```@raw html
+<ul>
+<li><a href="../runner/user/results.html#operator-recovery-route">Runner: полный маршрут recovery</a> и <a href="https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/1acc165650fd4f4c2d49605cc679f90e3f6fcdae/docs/src/user/results.md">закреплённый source этой справки</a>.</li>
+<li><a href="../core/theory/12_validation.html#researcher-final-route">Core: чтение финальной точки и критериев</a>. Формулы и пороги принадлежат Core и <a href="https://github.com/Afonenko-QCL-NEGF/qcl-negf-research/blob/3ed8a9fe5f16f51bbcb7547ff2d677e8d3608731/docs/equilibrium-measurement-contract.md">Research contract</a>.</li>
+<li><a href="https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts/blob/12fc26462bbab3df76904c6deb01f8c6596de7be/src/qcl_negf_contracts/artifacts.py">Contracts: artifact format</a>. Эта глава не вводит отдельного формата или критерия научной приёмки.</li>
+</ul>
+```
