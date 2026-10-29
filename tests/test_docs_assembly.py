@@ -442,6 +442,76 @@ class DocsAssemblyTests(unittest.TestCase):
         self.rejected(lambda: transformed(b'<div>' * 513 + b'<br/>' + b'</div>' * 513),
                       "page_limit")
 
+    def test_pinned_table_alignment_moves_to_external_css_without_changing_cells(self):
+        for direction in ('left', 'center', 'right'):
+            with self.subTest(direction=direction):
+                table = ('<table><tr><th class="kept" style="text-align: ' + direction +
+                         '">Header</th></tr><tr><td style="text-align: ' + direction +
+                         '">-2 &amp; 3</td></tr></table>').encode()
+                raw = RAW.replace(b'</article>', table + b'</article>')
+                result = assembly.transform_page(raw, page='core/theory/09_scba.html',
+                    binding=BINDING, expected_sha256=digest(raw), math_mapping=copy.deepcopy(MATH_MAPPING))
+                self.assertNotIn(b'style=', result['html'])
+                self.assertIn(('class="kept qcl-table-align-' + direction + '"').encode(), result['html'])
+                self.assertIn(('class="qcl-table-align-' + direction + '"').encode(), result['html'])
+                self.assertIn(b'>Header</th>', result['html'])
+                self.assertIn(b'>-2 &amp; 3</td>', result['html'])
+                css = result['generated_files']['assets/runtime/qcl-fixed-light.css']
+                self.assertIn(('#documenter-page th.qcl-table-align-' + direction + ',#documenter-page td.qcl-table-align-' +
+                               direction + '{text-align:' + direction + '}').encode(), css)
+                parser = assembly._PayloadHTML('core/theory/09_scba.html')
+                parser.feed(result['html'].decode())
+                parser.close()
+
+    def test_table_alignment_does_not_admit_other_inline_css_or_tags(self):
+        for tag, style in (('p', 'text-align: right'), ('table', 'text-align: right'),
+                           ('td', 'text-align: right; color:red'), ('th', 'text-align: right;'),
+                           ('td', 'text-align: justify'), ('td', 'TEXT-ALIGN: right'),
+                           ('td', 'text-align: url(x)'), ('td', 'text-align:right')):
+            with self.subTest(tag=tag, style=style):
+                addition = ('<' + tag + ' style="' + style + '">x</' + tag + '>').encode()
+                raw = RAW.replace(b'</article>', addition + b'</article>')
+                self.rejected(lambda: assembly.transform_page(raw, page='core/theory/09_scba.html',
+                    binding=BINDING, expected_sha256=digest(raw), math_mapping=copy.deepcopy(MATH_MAPPING)),
+                    'inline_style')
+
+    def test_pinned_article_toggle_becomes_native_button_without_javascript_url(self):
+        toggle = (b'<a id="documenter-article-toggle-button" '
+                  b'class="docs-article-toggle-button fa-solid fa-chevron-up" '
+                  b'href="javascript:;" title="Collapse all docstrings"></a>')
+        raw = RAW.replace(b'</article>', toggle + b'</article>')
+        result = assembly.transform_page(raw, page='core/theory/09_scba.html',
+            binding=BINDING, expected_sha256=digest(raw), math_mapping=copy.deepcopy(MATH_MAPPING))
+        self.assertIn(b'<button id="documenter-article-toggle-button"', result['html'])
+        self.assertIn(b'class="docs-article-toggle-button fa-solid fa-chevron-up"', result['html'])
+        self.assertIn(b'title="Collapse all docstrings" type="button"></button>', result['html'])
+        self.assertNotIn(b'javascript:', result['html'])
+        parser = assembly._PayloadHTML('core/theory/09_scba.html')
+        parser.feed(result['html'].decode())
+        parser.close()
+
+    def test_article_toggle_adapter_rejects_unknown_shapes_and_preserves_url_veto(self):
+        toggle = (b'<a id="documenter-article-toggle-button" '
+                  b'class="docs-article-toggle-button fa-solid fa-chevron-up" '
+                  b'href="javascript:;" title="Collapse all docstrings"></a>')
+        variants = (toggle.replace(b'fa-chevron-up', b'fa-chevron-down'),
+                    toggle.replace(b'javascript:;', b'javascript:sentinel()'),
+                    toggle.replace(b'javascript:;', b'#'),
+                    toggle.replace(b'title=', b'data-extra="x" title='),
+                    toggle.replace(b'></a>', b'>unexpected</a>'),
+                    toggle.replace(b'<a ', b'<p ').replace(b'</a>', b'</p>'))
+        for addition in variants:
+            with self.subTest(addition=addition):
+                raw = RAW.replace(b'</article>', addition + b'</article>')
+                self.rejected(lambda: assembly.transform_page(raw, page='core/theory/09_scba.html',
+                    binding=BINDING, expected_sha256=digest(raw), math_mapping=copy.deepcopy(MATH_MAPPING)),
+                    'unsupported_generated_shape')
+        raw = RAW.replace(b'</article>', b'<a href="javascript:;">other</a></article>')
+        result = assembly.transform_page(raw, page='core/theory/09_scba.html',
+            binding=BINDING, expected_sha256=digest(raw), math_mapping=copy.deepcopy(MATH_MAPPING))
+        parser = assembly._PayloadHTML('core/theory/09_scba.html')
+        self.rejected(lambda: parser.feed(result['html'].decode()), 'external_resource')
+
     def test_runtime_csp_residue_and_theme_alternatives_are_rejected(self):
         cases = [
             ("index.html", b'<script src="https://cdn.example/x.js"></script>', "external_resource"),

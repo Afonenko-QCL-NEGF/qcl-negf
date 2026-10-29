@@ -71,7 +71,11 @@ FIXED_LIGHT = (b":root{color-scheme:light;}body,.docs-main,.docs-sidebar,.docs-n
                b"input,select,textarea,button,dialog{color:#17212b;background:#fff;}"
                b":focus-visible{outline:2px solid #075ca8;outline-offset:2px;}"
                b"[role=alert],.admonition.is-danger{background:#fff2f2;color:#721515;}"
-               b"[aria-busy=true],.docs-search-results{background:#fff;color:#17212b;}\n")
+               b"[aria-busy=true],.docs-search-results{background:#fff;color:#17212b;}"
+               b"#documenter-page th.qcl-table-align-left,#documenter-page td.qcl-table-align-left{text-align:left}"
+               b"#documenter-page th.qcl-table-align-center,#documenter-page td.qcl-table-align-center{text-align:center}"
+               b"#documenter-page th.qcl-table-align-right,#documenter-page td.qcl-table-align-right{text-align:right}"
+               b"button#documenter-article-toggle-button{border:0;padding:0;background:#fff;color:#075ca8;cursor:pointer}\n")
 
 
 def _relative(path, code="public_allowlist"):
@@ -460,6 +464,19 @@ def transform_page(raw, *, page, binding, expected_sha256, math_mapping, resourc
             attrs = node.attr()
             classes = attrs.get("class", "").split()
             identity = attrs.get("id", "")
+            if identity == "documenter-article-toggle-button":
+                # Pinned navbar control; collapse.js delegates clicks by class.
+                # A native button preserves that handler and keyboard activation
+                # without a javascript: URL or a default fragment navigation.
+                if (node.tag != "a" or set(attrs) != {"id", "class", "href", "title"}
+                        or classes != ["docs-article-toggle-button", "fa-solid", "fa-chevron-up"]
+                        or attrs["href"] != "javascript:;" or attrs["title"] != "Collapse all docstrings"
+                        or node.children):
+                    _fail("unsupported_generated_shape", "article toggle")
+                attrs.pop("href")
+                attrs["type"] = "button"
+                node.tag, node.attrs, node.changed = "button", list(attrs.items()), True
+                operations.append("native_article_toggle_button")
             remove = identity in {"documenter-settings", "documenter-settings-button", "documenter-version-selector"}
             remove = remove or "docs-dark-only" in classes
             if node.tag == "link" and "docs-theme-link" in classes:
@@ -516,6 +533,16 @@ def transform_page(raw, *, page, binding, expected_sha256, math_mapping, resourc
                 node.attrs, node.changed = filtered, True
             if any(k.lower().startswith("on") for k, _ in node.attrs):
                 _fail("inline_event")
+            # Documenter 1.17 HTMLWriter.domify(::MarkdownAST.Table) emits
+            # exactly these three cell attributes. Keep their layout in the
+            # external fixed-light sheet; all other inline CSS still fails.
+            attrs = node.attr()
+            if node.tag in {"th", "td"} and attrs.get("style") in {
+                    "text-align: left", "text-align: center", "text-align: right"}:
+                direction = attrs.pop("style").removeprefix("text-align: ")
+                attrs["class"] = " ".join(filter(None, (attrs.get("class"), "qcl-table-align-" + direction)))
+                node.attrs, node.changed = list(attrs.items()), True
+                operations.append("externalize_table_alignment")
             if "style" in node.attr() or node.tag == "style":
                 _fail("inline_style")
             selector = "#" + identity
