@@ -87,21 +87,21 @@
           assets_lock = file "ops/docs/assets.lock.json";
           asset_inputs = assetInputs; review_inputs = reviewInputs;
           tools = { python = (tool python "python3" pkgs.python314.version) // { executable = python.interpreter; };
-            node = tool pkgs.nodejs_24 "node" pkgs.nodejs_24.version;
+            node = tool pkgs.nodejs-slim_24 "node" pkgs.nodejs-slim_24.version;
             git = tool pkgs.git "git" pkgs.git.version;
             julia = tool julia "julia" "1.13.0"; };
         };
         inputFile = pkgs.writeText "qcl-docs-producer-inputs.json" (builtins.toJSON inputs);
         inputClosure = pkgs.linkFarm "qcl-docs-inputs" (map (name: { inherit name; path = {
           inherit workspace depot python julia assetClosure reviewClosure inputFile;
-          node = pkgs.nodejs_24; git = pkgs.git;
+          node = pkgs.nodejs-slim_24; git = pkgs.git;
         }.${name}; }) [ "workspace" "depot" "python" "julia" "node" "git" "assetClosure" "reviewClosure" "inputFile" ]);
         artifact = builtins.derivation {
           name = "qcl-negf-documentation-v1"; inherit system;
           builder = python.interpreter;
           args = [ "-B" "${workspace}/ops/docs/produce.py" "--inputs" inputFile ];
           inherit assetClosure reviewClosure;
-          PATH = "${python}/bin:${pkgs.nodejs_24}/bin:${julia}/bin:${pkgs.git}/bin";
+          PATH = "${python}/bin:${pkgs.nodejs-slim_24}/bin:${julia}/bin:${pkgs.git}/bin";
           PYTHONDONTWRITEBYTECODE = "1"; PYTHONNOUSERSITE = "1";
           JULIA_PKG_OFFLINE = "true"; JULIA_LOAD_PATH = "@:@stdlib";
           JULIA_NUM_THREADS = "1"; OPENBLAS_NUM_THREADS = "1"; OMP_NUM_THREADS = "1"; MKL_NUM_THREADS = "1";
