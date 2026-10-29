@@ -55,7 +55,7 @@ class ProducerControls(unittest.TestCase):
         for raw in (b'<p class="math-container">bad</p>', b'<span>$x</span>', b'<span>$<em>x</em>$</span>'):
             with self.assertRaises(ValueError): producer.bridge_math(raw, 'core/a.html')
     def test_json_refused(self):
-        for raw in (b'{"a":1,"a":2}', b'{"a":NaN}'):
+        for raw in (b'{"a":1,"a":2}', b'{"a":NaN}', b'{"a":1e999}', b'\xff'):
             with self.assertRaises(ValueError): producer.decode_json(raw)
     def test_runtime_depth(self):
         self.assertEqual(producer.runtime_context('core/theory/a.html'), {'destination':'assets/runtime-depth-2.js','worker_url':'../../assets/search-worker.js','asset_prefix':'../../assets/vendor'})
@@ -91,8 +91,12 @@ class ProducerControls(unittest.TestCase):
 
     def test_derivation(self):
         text=(ROOT/'nix/docs.nix').read_text()
-        for value in ('builtins.derivation','builtins.storePath','allowSubstitutes = false','preferLocalBuild = true','"-B"','inputsFile'): self.assertIn(value,text)
-        for value in ('fetchTarball','fetchGit','nixpkgs','fixedOutput'): self.assertNotIn(value,text)
+        self.assertIn('project.lib.mkDocumentation', text)
+        self.assertIn('capturedMetadata = raw.depot_capture_json', text)
+        factory = (ROOT / 'flake.nix').read_text()
+        self.assertIn('mkDocumentation =', factory)
+        self.assertNotIn('allowSubstitutes = false', factory[factory.index('mkDocumentation ='):])
+        self.assertNotIn('preferLocalBuild = true', factory[factory.index('mkDocumentation ='):])
 
 class ToolIdentityControls(unittest.TestCase):
     """Actual Tool validator, no Nix queries, solver or physical deriver access."""
@@ -104,13 +108,13 @@ class ToolIdentityControls(unittest.TestCase):
         executable.parent.mkdir()
         executable.write_text('inert executable fixture')
         executable.chmod(0o555)
-        tool = dict(store_path=str(base), executable=str(base / 'bin/tool'),
-                    deriver=str(base) + '.drv', version='1.0', nar_hash='sha256:' + 'a' * 52)
+        tool = dict(output=str(base), executable=str(base / 'bin/tool'),
+                    drv=str(base) + '.drv', expected_version='1.0')
         calls = []
         def existing_store(value):
             calls.append(value)
-            self.assertIn(value, (tool['store_path'], tool['executable']))
-            return base if value == tool['store_path'] else base / 'bin/tool'
+            self.assertIn(value, (tool['output'], tool['executable']))
+            return base if value == tool['output'] else base / 'bin/tool'
         # Substitute only immutable filesystem observations. The validator's
         # actual shape, metadata grammar, containment and mode checks still run.
         original_resolve = Path.resolve
@@ -149,21 +153,20 @@ class ToolIdentityControls(unittest.TestCase):
         for deriver in ('known', None):
             with tempfile.TemporaryDirectory() as directory:
                 tool, calls, patches = self.fixture(directory)
-                known = tool['deriver']
-                if deriver is None: tool['deriver'] = None
+                known = tool['drv']
+                if deriver is None: tool['drv'] = None
                 self.validate(tool, patches)
-                self.assertEqual(calls, [tool['store_path'], tool['executable']])
+                self.assertEqual(calls, [tool['output'], tool['executable']])
                 self.assertNotIn(known, calls)
 
     def test_tool_shape_and_metadata_refuse_implicit_coercion(self):
         import tempfile
-        bad = [('nar_hash', value) for value in (None, '', False,
-            'sha256:' + 'a' * 51, 'sha256:' + 'e' * 52,
-            'sha512:' + 'a' * 52, 'sha256:' + 'a' * 52 + '\n')]
-        bad += [('deriver', value) for value in ('unknown-deriver', 'null', False,
+        for value in (None, '', False, '/tmp/tool'):
+            with self.assertRaises(ValueError): producer.store_path(value)
+        bad = [('drv', value) for value in ('unknown-deriver', 'null', False,
             '', '/tmp/a.drv', '/nix/store/' + 'a' * 32 + '-a.drv/child',
             '/nix/store/' + 'a' * 32 + '-a.drv\n')]
-        bad += [('version', value) for value in (False, None, '', ' ', 'v' * 257)]
+        bad += [('expected_version', value) for value in (False, None, '', ' ', 'v' * 257)]
         for key, value in bad:
             with self.subTest(key=key, value=value), tempfile.TemporaryDirectory() as directory:
                 tool, _, patches = self.fixture(directory)
@@ -171,7 +174,7 @@ class ToolIdentityControls(unittest.TestCase):
                 with self.assertRaises(ValueError): self.validate(tool, patches)
         with tempfile.TemporaryDirectory() as directory:
             tool, _, patches = self.fixture(directory)
-            del tool['nar_hash']
+            tool['nar_hash'] = 'unexpected old DTO field'
             with self.assertRaises(ValueError): self.validate(tool, patches)
 
     def test_executable_checks_still_apply(self):
@@ -189,13 +192,46 @@ class ToolIdentityControls(unittest.TestCase):
                     self.validate(tool, patches)
 
     def test_deriver_nix_context_exception_is_narrow_source_guard(self):
-        # Supplementary source guard; independent HIGH must assess Nix semantics.
-        text = (ROOT / 'nix/docs.nix').read_text()
-        self.assertIn('if key == "deriver" then item else bind item', text)
-        self.assertIn('then builtins.storePath value', text)
-        self.assertIn('else if builtins.isList value then map bind value', text)
-        for field in ('source_root', 'tools.python.executable', 'asset_inputs.path', 'review_inputs.path'):
-            self.assertIn('inputs.' + field, text)
+        # Supplementary source guard; the pure Nix fixture checks the constructor.
+        text = (ROOT / 'flake.nix').read_text()
+        self.assertIn('builtins.unsafeDiscardStringContext output.drvPath', text)
+        self.assertIn('builtins.storePath value', text)
+        for field in ('source_root', 'prepared_depot', 'asset_inputs', 'review_inputs'):
+            self.assertIn(field, text)
+
+
+def published_callbacks(graph, retained, payload):
+    """Actual published public API, isolated from the historical fixture package.
+
+    Only historical inputs/media/oracles belong to the snapshot. No private API
+    compatibility fallback and no fabricated qualification of that old graph.
+    """
+    import sys
+    from contextlib import contextmanager
+    prefix = 'qcl_negf_contracts'
+    @contextmanager
+    def selected(modules=None):
+        saved = {k: v for k, v in sys.modules.items() if k == prefix or k.startswith(prefix + '.')}
+        saved_path = sys.path[:]
+        for key in saved: del sys.modules[key]
+        if modules is not None: sys.modules.update(modules)
+        try:
+            yield
+        finally:
+            for key in list(sys.modules):
+                if key == prefix or key.startswith(prefix + '.'): del sys.modules[key]
+            sys.modules.update(saved)
+            sys.path[:] = saved_path
+    with selected():
+        shape, binding = producer.owning_callbacks(ROOT, graph, retained, payload)
+        modules = {k: v for k, v in sys.modules.items() if k == prefix or k.startswith(prefix + '.')}
+        assert hasattr(modules[prefix + '.model_help'], 'validate_documentation_bundle')
+        assert Path(modules[prefix].__file__).resolve().is_relative_to(ROOT / 'components/qcl-negf-contracts/src')
+    def adapt(callback):
+        def invoke(*args, **kwargs):
+            with selected(modules): return callback(*args, **kwargs)
+        return invoke
+    return adapt(shape), adapt(binding)
 
 class MediaCompatibilityControls(unittest.TestCase):
     """Exact public media in the historical full C1/C2 engineering fixture.
@@ -240,8 +276,8 @@ class MediaCompatibilityControls(unittest.TestCase):
             source = 'docs/src/' + output.removeprefix('core/')
             kwargs['payload'][output] = retained['sources'][(self.component, source)]['bytes']
         retained['output_allowlist'] = tuple(kwargs['payload'])
-        kwargs['validate_shape'], kwargs['validate_bindings'] = producer.owning_callbacks(
-            self.snapshot, kwargs['before'], retained, kwargs['payload'])
+        kwargs['validate_shape'], kwargs['validate_bindings'] = published_callbacks(
+            kwargs['before'], retained, kwargs['payload'])
         def assets(lock, inputs, *, payload):
             self.assertEqual(lock, b'{"assets":[],"engineering_fixture":true}')
             self.assertEqual(inputs, {})
@@ -460,8 +496,8 @@ class ProducerClosureControls(unittest.TestCase):
 
     def case(self):
         kwargs, expected, blob, retained = self.fixture.frozen_case()
-        kwargs['validate_shape'], kwargs['validate_bindings'] = producer.owning_callbacks(
-            self.snapshot, kwargs['before'], retained, kwargs['payload'])
+        kwargs['validate_shape'], kwargs['validate_bindings'] = published_callbacks(
+            kwargs['before'], retained, kwargs['payload'])
         return kwargs, retained
 
     def test_small_render_through_real_c1_c2(self):
@@ -690,8 +726,8 @@ for (const item of packet.cases) {
 }
 process.stdout.write(JSON.stringify(results));
 '''
-        node = os.environ.get('DOC04_NODE') or shutil.which('node')
-        self.assertTrue(node, 'existing admitted Node executable required for AMD control')
+        node = os.environ.get('DOC04_NODE')
+        self.assertTrue(node, 'explicit DOC04_NODE executable required for AMD source control')
         completed = subprocess.run([node, '-e', script],
             input=producer.encode({'loader': loader.decode(), 'cases': cases}),
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5, check=False)

@@ -1,7 +1,6 @@
 """One ordinary sandboxed DOC04 producer, invoked only by nix/docs.nix.
 
-Only declared immutable public inputs enter this process. Private admission,
-resource inventory and host credentials stay with the CLI. Candidate completion
+Only declared immutable public inputs enter this process. Resource inventory and host credentials stay with the native owner. Candidate completion
 uses the existing AS1 and owning Contracts C1/C2; it is not publication/science.
 """
 from __future__ import annotations
@@ -10,6 +9,7 @@ import hashlib
 from html import escape
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path, PurePosixPath
 import posixpath
@@ -47,7 +47,12 @@ def decode_json(data):
                 raise ValueError('duplicate_json_key')
             result[key] = value
         return result
-    return json.loads(data.decode('utf-8'), object_pairs_hook=pairs,
+    def finite_float(text):
+        value = float(text)
+        if not math.isfinite(value):
+            raise ValueError('nonfinite_json')
+        return value
+    return json.loads(data.decode('utf-8'), object_pairs_hook=pairs, parse_float=finite_float,
                       parse_constant=lambda _: (_ for _ in ()).throw(ValueError('nonfinite_json')))
 
 
@@ -157,11 +162,10 @@ class Pipeline:
         self.log_bytes = 0
         self.steps = []
 
-    def run(self, argv, env, label, *, timeout=1800):
+    def run(self, argv, env, label, *, timeout=None):
         """Drain both pipes with combined bound; no shell or buffered fallback."""
-        remaining = min(timeout, 1800 - (time.monotonic() - self.start))
-        if remaining <= 0:
-            raise TimeoutError('producer_deadline')
+        if timeout is not None and (not isinstance(timeout, (int, float)) or timeout <= 0):
+            raise ValueError('invalid_command_timeout')
         before = time.monotonic()
         output = bytearray()
         counts = {"stdout": 0, "stderr": 0}
@@ -173,22 +177,21 @@ class Pipeline:
         selector.register(child.stderr, selectors.EVENT_READ, sys.stderr.buffer)
         try:
             while selector.get_map():
-                if time.monotonic() - before > remaining:
+                if timeout is not None and time.monotonic() - before > timeout:
                     raise TimeoutError('producer_deadline: ' + label)
-                for key, _ in selector.select(timeout=min(0.2, remaining)):
+                for key, _ in selector.select(timeout=0.2):
                     chunk = os.read(key.fileobj.fileno(), 65536)
                     if not chunk:
                         selector.unregister(key.fileobj)
                         continue
                     counts["stdout" if key.fileobj is child.stdout else "stderr"] += len(chunk)
-                    self.log_bytes += len(chunk)
-                    if self.log_bytes > MAX_LOG:
+                    if sum(counts.values()) > MAX_LOG:
                         raise ValueError('combined_log_limit')
                     key.data.write(chunk)
                     key.data.flush()
                     if key.fileobj is child.stdout:
                         output.extend(chunk)
-            code = child.wait(timeout=max(0.01, remaining - (time.monotonic() - before)))
+            code = child.wait(timeout=None if timeout is None else max(0.01, timeout - (time.monotonic() - before)))
             usage = resource.getrusage(resource.RUSAGE_CHILDREN)
             self.steps.append({'step': label, 'argv': argv, 'exit_code': code,
                 'wall_seconds': time.monotonic() - before, 'stream_bytes': counts,
@@ -246,18 +249,15 @@ def put_tree(root, files):
 
 
 def validate_tool(name, tool):
-    fields(tool, ('store_path', 'executable', 'deriver', 'nar_hash', 'version'))
-    base = store_path(tool['store_path'])
+    fields(tool, ('output', 'executable', 'drv', 'expected_version'))
+    base = store_path(tool['output'])
     executable = store_path(tool['executable'])
     # Metadata only: an absent physical .drv is not an output dependency.
-    deriver = tool['deriver']
+    deriver = tool['drv']
     if deriver is not None and (not isinstance(deriver, str) or
             not re.fullmatch(r'/nix/store/[0-9a-df-np-sv-z]{32}-[^/\\\x00-\x1f\x7f]+\.drv', deriver)):
         raise ValueError('tool_deriver: ' + name)
-    nar_hash = tool['nar_hash']
-    if not isinstance(nar_hash, str) or not re.fullmatch(r'sha256:[0123456789abcdfghijklmnpqrsvwxyz]{52}', nar_hash):
-        raise ValueError('tool_nar_hash: ' + name)
-    version = tool['version']
+    version = tool['expected_version']
     if (base.parent != Path('/nix/store') or executable == base or
             not executable.is_relative_to(base) or executable.resolve() != executable or
             not executable.is_file() or not os.access(executable, os.X_OK) or
@@ -283,6 +283,7 @@ def validate_inputs(inputs):
     # Opaque truthful snapshot metadata is retained, never re-labelled as a new
     # root's producer receipt. Its original bytes/hash remain part of this input.
     record(inputs['prepared_depot']['metadata'], 2 * 1024 * 1024)
+    decode_json(record(inputs['prepared_depot']['metadata'], 65536))
     fields(inputs['tools'], ('python', 'node', 'julia', 'git'))
     for name, tool in inputs['tools'].items():
         validate_tool(name, tool)
@@ -339,7 +340,9 @@ def detached_review(root, graph, review):
 
 
 def reference(retained, component, path):
-    row = retained['sources'][(component, path)]
+    row = retained['sources'].get((component, path))
+    if row is None:
+        raise FileNotFoundError('missing retained source: ' + component + '/' + path)
     return {'component': component, 'revision': row['revision'], 'path': path,
             'selector': {'kind': 'file', 'value': ''}, 'sha256': sha(row['bytes'])}
 
@@ -378,7 +381,7 @@ def source_media_bytes(assembly, root, retained, path, raw):
     return raw
 
 
-def bind_source_media(assembly, evidence, retained, document):
+def bind_source_media(assembly, retained, document):
     """Final authority uses the real retained candidate, never a preflight bundle."""
     paths = {row['path'] for row in document['files']} & assembly.PUBLIC_SOURCE_MEDIA
     if not paths:
@@ -390,7 +393,7 @@ def bind_source_media(assembly, evidence, retained, document):
         source = 'docs/src/' + path.removeprefix('core/')
         if (component, source) not in retained['sources']:
             raise FileNotFoundError('missing media source: ' + source)
-        data = evidence.source(reference(retained, component, source))
+        data = retained['sources'][(component, source)]['bytes']
         item = retained['payload'].get(path)
         if not isinstance(item, dict) or item.get('kind') != 'file' or item.get('bytes') != data:
             raise ValueError('source_media_payload_mismatch: ' + path)
@@ -402,7 +405,6 @@ def owning_callbacks(root, graph, retained, payload):
     sys.path.insert(0, str(contracts_src))
     import qcl_negf_contracts as contracts
     from qcl_negf_contracts import model_help
-    from qcl_negf_contracts.messages import ContractError
     if not Path(contracts.__file__).resolve().is_relative_to(contracts_src):
         raise ValueError('contracts_import_identity')
     import yaml
@@ -418,19 +420,15 @@ def owning_callbacks(root, graph, retained, payload):
         # source/recipe public-review receipts above remain independent inputs.
         blob = encode(document)
         retained['bundle'] = {'bytes': blob, 'sha256': sha(blob)}
+        refs = [source for row in coverage for source in row['sources']]
+        for path in sorted({row['path'] for row in document['files']} & assembly.PUBLIC_SOURCE_MEDIA):
+            refs.append(reference(retained, 'components/QCLNEGF.jl',
+                                  'docs/src/' + path.removeprefix('core/')))
         try:
-            model_help._validate_model_help_bindings(document, retained=retained)
-            evidence = model_help._Evidence(retained)
-            bind_source_media(assembly, evidence, retained, document)
-            for row in coverage:
-                for source in row['sources']:
-                    evidence.source(source)
-        except model_help._MissingProof as error:
+            model_help.validate_documentation_bundle(document, retained=retained, required_sources=refs)
+        except model_help.DocumentationProofMissing as error:
             raise FileNotFoundError('missing owning retained proof') from error
-        except ContractError as error:
-            if isinstance(error.__cause__, model_help._MissingProof):
-                raise FileNotFoundError('missing owning retained proof') from error
-            raise
+        bind_source_media(assembly, retained, document)
     return validator.validate, bindings
 
 
@@ -510,7 +508,13 @@ def produce(inputs, work, output):
            'JULIA_PKG_OFFLINE': 'true', 'JULIA_LOAD_PATH': '@:@stdlib',
            'JULIA_NUM_THREADS': '1', 'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1',
            'MKL_NUM_THREADS': '1', 'JULIA_DEPOT_PATH': str(work / 'depot') + ':' + inputs['prepared_depot']['store_path'],
-           'QCL_DOCS_PROFILE': 'pilot-v1', 'QCL_DOCS_ROOT': str(root), 'QCL_DOCS_ATTEMPT': str(work)}
+           'QCL_DOCS_PROFILE': 'offline-v1', 'QCL_DOCS_ROOT': str(root), 'QCL_DOCS_ATTEMPT': str(work)}
+    if sys.version.split()[0] != inputs['tools']['python']['expected_version']:
+        raise ValueError('python_version_identity')
+    for name, option, prefix in (('node', '--version', 'v'), ('git', '--version', 'git version ')):
+        observed = pipeline.run([inputs['tools'][name]['executable'], option], env, name + '-identity').decode().strip()
+        if observed != prefix + inputs['tools'][name]['expected_version']:
+            raise ValueError('tool_version_identity: ' + name)
     # Once, inside the same cap: actual Julia+Documenter import identity. The
     # three owning recipes repeat their own root/project guards independently.
     check = ('using Documenter; using TOML; VERSION == v"1.13.0" || error("Julia identity"); '
@@ -666,17 +670,15 @@ def produce(inputs, work, output):
     put_tree(output / 'public', payload)
     # The AS1 serialization is the final public write; no self hash.
     (output / 'public/bundle.json').write_bytes(result['bundle_bytes'])
-    diagnostics = output / 'diagnostics'
-    diagnostics.mkdir()
-    shutil.copytree(work / 'raw', diagnostics / 'raw')
-    for path in work.glob('mapping-*.json'):
-        shutil.copyfile(path, diagnostics / path.name)
-    shutil.copyfile(result_path, diagnostics / 'math-output.json')
+    # Operational raw/timing/argv diagnostics remain outside the artifact in Nix
+    # logs/retained failure scratch. This private provenance is deterministic.
     receipt = {'format':'qcl-negf.docs-producer-receipt.v1', 'status':'candidate',
         'source_graph_sha256':inputs['source_graph']['sha256'], 'inputs_sha256':sha(encode(inputs)),
+        'depot_metadata_sha256':inputs['prepared_depot']['metadata']['sha256'],
         'bundle_sha256':result['bundle_sha256'], 'payload_files':len(payload),
-        'payload_bytes':sum(map(len,payload.values())), 'elapsed_seconds':time.monotonic()-pipeline.start,
-        'steps':pipeline.steps, 'acceptance':{'render':'completed','publication':'not_measured','science':'not_measured'}}
+        'payload_bytes':sum(map(len,payload.values())),
+        'inputs':inputs,
+        'acceptance':{'render':'completed','publication':'not_measured','science':'not_measured'}}
     (output / 'producer-receipt.json').write_bytes(encode(receipt))
 
 
@@ -702,10 +704,61 @@ def run_attempt(inputs, output, temporary_root):
     return work
 
 
+def unit_asset_fixture(input_file, output):
+    """Materialize only source-test views of already captured assets; no fetch/render.
+
+    The unchanged runtime validator verifies every supplied byte/license before
+    any test ESM import. Temporary CSS/KaTeX views are not a prepared depot or a
+    publication/native acceptance receipt.
+    """
+    raw = read_file(input_file, 2 * 1024 * 1024)
+    mapping = decode_json(raw)
+    if not isinstance(mapping, dict) or not mapping or len(mapping) > 10000:
+        raise ValueError('asset_inputs_shape')
+    data = {}
+    total = 0
+    for key, path in mapping.items():
+        if not isinstance(key, str) or posixpath.normpath(key) != key or key.startswith('/'):
+            raise ValueError('asset_inputs_shape')
+        data[key] = read_file(store_path(path), MAX_PUBLIC)
+        total += len(data[key])
+        if total > 256 * 1024 * 1024:
+            raise ValueError('asset_input_total_limit')
+    runtime = module('_qcl_unit_runtime', Path(__file__).with_name('runtime-assets.py'))
+    assembly = module('_qcl_unit_assembly', Path(__file__).with_name('assemble.py'))
+    lock = runtime.load_lock()
+    data = runtime.extract_inputs(data, lock)
+    payload = runtime.verify_inputs(data, lock)
+    output.mkdir(exist_ok=False)
+    put_tree(output / 'katex', {'dist/katex.mjs': data['katex/dist/katex.mjs'],
+                             'dist/katex.min.css': data['katex/dist/katex.min.css']})
+    put_tree(output / 'documenter', {'assets/html/themes/documenter-light.css':
+                                    data['documenter/assets/html/themes/documenter-light.css']})
+    css = {path: value for path, value in payload.items() if path.endswith('.css')}
+    css['assets/qcl-fixed-light.css'] = assembly.FIXED_LIGHT
+    css['assets/qcl-runtime.css'] = b'.qcl-search-small{font-size:smaller}.qcl-copy-fallback{position:fixed;opacity:0}\n'
+    put_tree(output / 'css', css)
+    sheets = [{'path': path, 'input': str(output / 'css' / path), 'sha256': sha(value)}
+              for path, value in sorted(css.items())]
+    (output / 'css.json').write_bytes(encode(sheets))
+    return {'katex': str(output / 'katex'), 'documenter': str(output / 'documenter'),
+            'css': str(output / 'css.json'), 'asset_inputs_sha256': sha(raw),
+            'qualification': 'source_units_only_not_native_documentation'}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--inputs', required=True)
+    parser.add_argument('--inputs')
+    parser.add_argument('--unit-assets')
+    parser.add_argument('--unit-output')
     args = parser.parse_args()
+    if args.unit_assets is not None:
+        if args.inputs is not None or args.unit_output is None:
+            parser.error('unit assets require only --unit-assets and --unit-output')
+        print(encode(unit_asset_fixture(Path(args.unit_assets), Path(args.unit_output))).decode())
+        return
+    if args.inputs is None or args.unit_output is not None:
+        parser.error('expected --inputs')
     inputs = decode_json(read_file(store_path(args.inputs), 2 * 1024 * 1024))
     output = Path(os.environ['out'])
     run_attempt(inputs, output, os.environ.get('TMPDIR', '/tmp'))

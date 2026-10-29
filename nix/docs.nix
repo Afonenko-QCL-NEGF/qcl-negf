@@ -1,37 +1,28 @@
-# One ordinary offline derivation. Every public input is already in the store.
-{ inputsFile }:
+# Realize exactly one selected immutable CURRENT documentation package/closure.
+{ inputFile, inputSha256, target ? "docs" }:
 let
-  raw = builtins.fromJSON (builtins.readFile inputsFile);
-  bind = value:
-    if builtins.isString value && builtins.match "/nix/store/.*" value != null
-    then builtins.storePath value
-    # Deriver is plain metadata, not an input/fetch target (it may be absent).
-    else if builtins.isAttrs value then builtins.mapAttrs
-      (key: item: if key == "deriver" then item else bind item) value
-    else if builtins.isList value then map bind value
-    else value;
-  inputs = bind raw;
-  # Asset manifest values are paths too; retain their contexts as dependencies.
-  assets = bind (builtins.fromJSON (builtins.readFile inputs.asset_inputs.path));
-  materialized = builtins.toFile "qcl-docs-producer-inputs.json" (builtins.toJSON inputs);
-  assetDependencies = builtins.toJSON assets;
-  reviewDependencies = builtins.toJSON (bind (builtins.fromJSON (builtins.readFile inputs.review_inputs.path)));
-in builtins.derivation {
-  name = "qcl-docs-pilot-v1";
-  system = "x86_64-linux";
-  builder = inputs.tools.python.executable;
-  args = [ "-B" "${inputs.source_root}/ops/docs/produce.py" "--inputs" materialized ];
-  inherit assetDependencies reviewDependencies;
-  preferLocalBuild = true;
-  allowSubstitutes = false;
-  outputs = [ "out" ];
-  PATH = "${inputs.tools.python.store_path}/bin:${inputs.tools.node.store_path}/bin:${inputs.tools.julia.store_path}/bin:${inputs.tools.git.store_path}/bin";
-  PYTHONDONTWRITEBYTECODE = "1";
-  PYTHONNOUSERSITE = "1";
-  JULIA_PKG_OFFLINE = "true";
-  JULIA_LOAD_PATH = "@:@stdlib";
-  JULIA_NUM_THREADS = "1";
-  OPENBLAS_NUM_THREADS = "1";
-  OMP_NUM_THREADS = "1";
-  MKL_NUM_THREADS = "1";
-}
+  bytes = builtins.readFile inputFile;
+  raw = builtins.fromJSON bytes;
+  exact = value: names: builtins.isAttrs value && builtins.attrNames value == builtins.sort builtins.lessThan names;
+  project = builtins.getFlake raw.source;
+  file = name: text: let path = builtins.toFile name text;
+    in { inherit path; sha256 = builtins.hashString "sha256" text; };
+  artifact = project.lib.mkDocumentation {
+    system = "x86_64-linux";
+    metadata = builtins.fromJSON raw.depot_metadata_json;
+    capturedMetadata = raw.depot_capture_json;
+    sources = raw.sources;
+    assetInputs = file "qcl-docs-asset-inputs.json" raw.asset_inputs_json;
+    reviewInputs = file "qcl-docs-review-inputs.json" raw.review_inputs_json;
+    juliaTestProfile = raw.factory.profile;
+    juliaTestWorkerLimit = raw.factory.test_workers;
+  };
+in assert builtins.hashString "sha256" bytes == inputSha256;
+assert exact raw [ "format" "source" "sources" "factory" "depot_metadata_json" "depot_capture_json"
+  "depot_capture_sha256" "asset_inputs_json" "review_inputs_json" ];
+assert raw.format == "qcl-negf.docs-package-inputs.v1";
+assert builtins.hashString "sha256" raw.depot_capture_json == raw.depot_capture_sha256;
+assert project.rev == raw.sources.revision;
+assert exact raw.factory [ "profile" "test_workers" ];
+assert builtins.elem target [ "docs" "inputs" ];
+if target == "inputs" then artifact.passthru.inputClosure else artifact
