@@ -3,10 +3,14 @@ on:
   workflow_dispatch:
     inputs:
       scope:
-        description: Full integration checks or a bounded runner admission check
+        description: Full, changed-source integration, or bounded runner admission check
         type: choice
-        options: [full, runner-smoke]
+        options: [full, changed, runner-smoke]
         default: full
+      base:
+        description: Existing local base ref for changed scope (no fetch)
+        type: string
+        default: ""
 permissions:
   contents: read
 concurrency:
@@ -23,21 +27,44 @@ jobs:
           persist-credentials: false
       - name: Check source graph
         run: deno task graph
-      - name: Bootstrap the pinned Julia runtime
+      - name: Plan checks from the shared impact registry
         if: github.event.inputs.scope != 'runner-smoke'
-        run: deno task --cwd components/QCLNEGFRunner.jl bootstrap
-      - name: Prepare native locked environments
-        if: github.event.inputs.scope != 'runner-smoke'
-        run: deno task prepare
         env:
+          IMPACT_SCOPE: ${{ github.event.inputs.scope }}
+          IMPACT_BASE: ${{ github.event.inputs.base }}
+        run: |
+          case "$IMPACT_SCOPE" in
+            changed) deno task impact --base "$IMPACT_BASE" --head HEAD ;;
+            full) deno task impact --full ;;
+            *) exit 1 ;;
+          esac
+      - name: Explicitly prepare selected native environments
+        if: github.event.inputs.scope != 'runner-smoke'
+        env:
+          IMPACT_SCOPE: ${{ github.event.inputs.scope }}
+          IMPACT_BASE: ${{ github.event.inputs.base }}
           JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
-      - name: Check typed operations
+        run: |
+          case "$IMPACT_SCOPE" in
+            changed) deno task prepare --base "$IMPACT_BASE" --head HEAD ;;
+            full) deno task prepare --full ;;
+            *) exit 1 ;;
+          esac
+      - name: Execute selected checks without preparation
+        if: github.event.inputs.scope != 'runner-smoke'
+        env:
+          IMPACT_SCOPE: ${{ github.event.inputs.scope }}
+          IMPACT_BASE: ${{ github.event.inputs.base }}
+          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
+        run: |
+          case "$IMPACT_SCOPE" in
+            changed) deno task test --base "$IMPACT_BASE" --head HEAD ;;
+            full) deno task test --full ;;
+            *) exit 1 ;;
+          esac
+      - name: Check typed operations for runner admission
+        if: github.event.inputs.scope == 'runner-smoke'
         run: deno task check
-      - name: Test packages and infrastructure definitions
-        if: github.event.inputs.scope != 'runner-smoke'
-        run: deno task test
-        env:
-          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
       - name: Check isolated runner account and shared build limits
         if: github.event.inputs.scope == 'runner-smoke'
         run: |

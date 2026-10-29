@@ -1,4 +1,13 @@
-import { main, run, workspace } from "./process.ts";
+import { type Command, main, run, workspace } from "./process.ts";
+import { type SourceGraph, sourceGraph } from "./git.ts";
+import { runPlanCommands } from "./ci.ts";
+import {
+  type ImpactContext,
+  type ImpactPlan,
+  parseImpactOptions,
+  preparationCommands,
+  resolveImpact,
+} from "./impact.ts";
 
 const components = `${workspace}/components`;
 const frontend = `${components}/qcl-negf-portal/frontend`;
@@ -9,20 +18,18 @@ export async function frontendBuild(): Promise<void> {
   await run({ executable: "npm", args: ["run", "build"], cwd: frontend });
 }
 
-export async function sync(): Promise<void> {
-  // Portal's native build hook refuses a wheel without its frontend assets.
-  await frontendBuild();
-  await run({
-    executable: "uv",
-    args: ["sync", "--locked", "--all-packages", "--all-extras", "--all-groups"],
-    cwd: workspace,
-  });
-  await run({
-    executable: julia,
-    args: ["--startup-file=no", "--project=julia", "-e", "using Pkg; Pkg.instantiate()"],
-    cwd: workspace,
-    env: { JULIA_NUM_PRECOMPILE_TASKS: "2", OPENBLAS_NUM_THREADS: "1" },
-  });
+export async function runPreparation(
+  plan: ImpactPlan,
+  context: ImpactContext,
+  execute: (command: Command) => Promise<string> = run,
+  readGraph: () => Promise<SourceGraph> = () => sourceGraph(context.root),
+): Promise<void> {
+  await runPlanCommands(plan, context, preparationCommands(plan, context), execute, readGraph);
+}
+
+export async function sync(args: readonly string[] = []): Promise<void> {
+  const plan = await resolveImpact(parseImpactOptions(args));
+  await runPreparation(plan, { root: workspace, julia: Deno.env.get("JULIA") ?? "julia" });
 }
 
 export async function lock(): Promise<void> {
@@ -62,10 +69,9 @@ export async function lock(): Promise<void> {
 
 if (import.meta.main) {
   await main(async () => {
-    if (Deno.args.length !== 1 || !["sync", "lock"].includes(Deno.args[0])) {
-      throw new Error("Usage: environment.ts sync|lock");
-    }
-    if (Deno.args[0] === "sync") await sync();
-    else await lock();
+    const [command, ...args] = Deno.args;
+    if (command === "sync") await sync(args);
+    else if (command === "lock" && args.length === 0) await lock();
+    else throw new Error("Usage: environment.ts sync [impact options] | lock");
   });
 }

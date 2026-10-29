@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "check": "deno fmt --check ops tests deno.json && deno lint ops tests && deno check ops/*.ts && deno test --allow-read --allow-write --allow-run=git tests && deno task transfer:check && deno task restore:check",
+    "check": "deno fmt --check ops tests deno.json && deno lint ops tests && deno check ops/*.ts && deno test --allow-env=JULIA --allow-read --allow-write --allow-run=git tests && deno task transfer:check && deno task restore:check",
     "transfer:check": "bash -n ops/transfer-github.sh && python3 -m unittest discover -s tests -p 'test_transfer.py'",
     "restore:check": "nix --extra-experimental-features nix-command --store dummy:// --offline eval --json --file tests/restore_site_eval.nix",
     "bootstrap:preflight": "python3 components/qcl-negf-platform/ops/bootstrap_build.py",
@@ -12,8 +12,13 @@
     "release": "deno run --allow-read --allow-write --allow-env --allow-run ops/release.ts",
     "solver:depot": "deno run --allow-read --allow-write --allow-env --allow-run ops/solver.ts depot",
     "solver:build": "deno run --allow-read --allow-write --allow-env --allow-run ops/solver.ts build",
-    "publish": "deno run --allow-read --allow-run=git,gh ops/publish.ts"
+    "publish": "deno run --allow-read --allow-run=git,gh ops/publish.ts",
+    "impact": "deno run --allow-read --allow-run=git ops/impact.ts"
   },
-  "compilerOptions": { "strict": true },
-  "fmt": { "lineWidth": 100 }
+  "compilerOptions": {
+    "strict": true
+  },
+  "fmt": {
+    "lineWidth": 100
+  }
 }
