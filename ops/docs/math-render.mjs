@@ -432,7 +432,14 @@ function stylesheetsContext(stylesheets) {
     return important;
   };
 }
-function declarations(text, important) {
+// KaTeX0.16.8 accent.js:153-175 (SHA87a5cb4b...7c4f09) derives these
+// intrinsic width/margin pairs from character skew. This finite subset is not
+// an authored calc grammar; only the verified renderer's private path uses it.
+const ACCENT_WIDTHS = new Map([
+  ["calc(100% - 0.0556em)", "0.0556em"],
+  ["calc(100% - 0.1111em)", "0.1111em"],
+]);
+function declarations(text, important, intrinsicAccent = false) {
   if (!text || /[\\&<>!]|url\s*\(|expression\s*\(|var\s*\(/i.test(text)) fail("unsupported_style");
   const list = [];
   for (const field of text.split(";")) {
@@ -443,6 +450,7 @@ function declarations(text, important) {
     let valid = false;
     if (LENGTH_PROPS.has(property)) {
       valid = LENGTH.test(value) && Number.isFinite(parseFloat(value));
+      if (property === "width" && intrinsicAccent && ACCENT_WIDTHS.has(value)) valid = true;
     } else if (
       property === "color" || property === "background-color" || property === "border-color"
     ) {
@@ -459,12 +467,34 @@ function declarations(text, important) {
     list.push([property, value]);
   }
   if (!list.length) fail("unsupported_style");
+  const intrinsic = list.find(([property, value]) =>
+    property === "width" && ACCENT_WIDTHS.has(value)
+  );
+  if (intrinsic) {
+    const widths = list.filter(([property]) => property === "width");
+    const margins = list.filter(([property]) => property === "margin-left");
+    if (
+      widths.length !== 1 || margins.length !== 1 ||
+      margins[0][1] !== ACCENT_WIDTHS.get(intrinsic[1])
+    ) fail("unsupported_style", "intrinsic accent pair");
+  }
   return list;
 }
 
 export function externalizeStyles(markup, { stylesheets } = {}) {
+  return externalizeMathStyles(markup, stylesheets, false);
+}
+
+function externalizeEngineStyles(markup, important) {
+  return externalizeMathStyles(markup, important, true);
+}
+
+function externalizeMathStyles(markup, context, engineGenerated) {
   if (typeof markup !== "string" || bytes(markup) > LIMIT.markup) fail("markup_limit");
-  const important = stylesheetsContext(stylesheets);
+  // Raw callers build their own context. The renderer alone supplies its local
+  // immutable rule closure, compiled once before the asynchronous ESM import.
+  // It still returns a fresh per-node important set for each tag/class pair.
+  const important = engineGenerated ? context : stylesheetsContext(context);
   const groups = new Map();
   const stack = [];
   let output = "", position = 0, tokens = 0;
@@ -485,7 +515,7 @@ export function externalizeStyles(markup, { stylesheets } = {}) {
     const token = markup.slice(position, end + 1);
     const closing = /^<\/([a-zA-Z][a-zA-Z0-9]*)\s*>$/.exec(token);
     if (closing) {
-      if (stack.pop() !== closing[1]) fail("unsupported_markup");
+      if (stack.pop()?.tag !== closing[1]) fail("unsupported_markup");
       output += token;
       position = end + 1;
       continue;
@@ -524,7 +554,10 @@ export function externalizeStyles(markup, { stylesheets } = {}) {
     }
     if (attrs.has("style")) {
       const original = attrs.get("style");
-      const values = declarations(original, important(tag, attrs.get("class")));
+      const intrinsicAccent = engineGenerated && tag === "span" &&
+        attrs.get("class") === "svg-align" &&
+        stack.some((ancestor) => ancestor.classes.has("mord") && ancestor.classes.has("accent"));
+      const values = declarations(original, important(tag, attrs.get("class")), intrinsicAccent);
       const className = `qcl-math-${sha(original)}`;
       groups.set(
         className,
@@ -537,7 +570,9 @@ export function externalizeStyles(markup, { stylesheets } = {}) {
     output += `<${tag}`;
     for (const [key, value] of attrs) output += ` ${key}="${escapeAttribute(value)}"`;
     output += selfClosing ? "/>" : ">";
-    if (!selfClosing) stack.push(tag);
+    if (!selfClosing) {
+      stack.push({ tag, classes: new Set((attrs.get("class") ?? "").split(/\s+/)) });
+    }
     position = end + 1;
   }
   if (stack.length) fail("unsupported_markup");
@@ -625,7 +660,7 @@ export async function renderMathBatch(records, inputs) {
     sourceGate(record.tex);
   }
   const styleContext = renderStyleContext(inputs);
-  stylesheetsContext(styleContext.sheets);
+  const important = stylesheetsContext(styleContext.sheets);
   // Import the supported public default ESM only; no named/internal API/plugins.
   // Prepared input directory must remain immutable for the whole admitted attempt.
   const katex = (await import(pathToFileURL(path).href)).default;
@@ -657,7 +692,7 @@ export async function renderMathBatch(records, inputs) {
     // No fallback colored command text is accepted. The lexical gate blocks its
     // upstream source triggers; closed markup guards also reject active resources.
     if (bytes(html) > LIMIT.markup) fail("markup_limit");
-    const transformed = externalizeStyles(html, { stylesheets: styleContext.sheets });
+    const transformed = externalizeEngineStyles(html, important);
     aggregate += bytes(transformed.html);
     if (aggregate > LIMIT.total) fail("aggregate_markup_limit");
     for (const line of transformed.css.split("\n").filter(Boolean)) {
