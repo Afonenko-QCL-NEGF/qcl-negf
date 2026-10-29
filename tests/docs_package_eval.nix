@@ -22,7 +22,7 @@ let
     inputs.nixpkgs = { inherit lib; legacyPackages.x86_64-linux = packages; };
   }; };
   project = projectFor pkgs;
-  self = { outPath = root; rev = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  self = { outPath = builtins.appendContext (toString root) { "${toString nixpkgs}" = { path = true; }; }; rev = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     lib = project.lib // {
       mkPinnedJulia = args: (fake "julia") // { version = "1.13.0"; };
       mkPreparedDepot = args: fake "depot";
@@ -59,7 +59,9 @@ let
   selected = import ../nix/docs-sources.nix { inherit lib root; };
   selectedPaths = lib.filesystem.listFilesRecursive selected.presentation;
   forbidden = builtins.filter (p: builtins.match ".*(/\\.git/|/\\.build/|/tests/).*" (toString p) != null) selectedPaths;
-in assert project.lib ? mkDocumentation;
+in assert builtins.typeOf self.outPath == "string";
+assert builtins.hasContext self.outPath;
+assert project.lib ? mkDocumentation;
 assert one.drvPath != two.drvPath;
 assert one.drvPath == (create sources (builtins.toJSON metadata)).drvPath;
 assert !mismatch.success && !wrong.success;
