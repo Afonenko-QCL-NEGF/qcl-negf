@@ -802,5 +802,71 @@ process.stdout.write(JSON.stringify(results));
         with self.assertRaises(ValueError):
             self.assembly.validate_payload(payload, verified_assets={'assets/runtime-depth-1.js':runtime})
 
+class NativePrimaryCoverageControls(unittest.TestCase):
+    """Actual owning routes are spread over six pages, not four role entries."""
+    def case(self):
+        assembly = producer.module('producer_native_primary_assembly', ROOT / 'ops/docs/assemble.py')
+        graph = {'format': 'qcl-negf.git-graph.v1', 'revision': 'a' * 40,
+                 'components': [{'path': 'components/QCLNEGF.jl', 'revision': 'b' * 40},
+                                {'path': 'components/QCLNEGFRunner.jl', 'revision': 'c' * 40}]}
+        sources = {
+            ('components/QCLNEGF.jl', 'docs/src/theory/09_scba.md'): {'revision': 'b' * 40, 'bytes': b'scba'},
+            ('components/QCLNEGFRunner.jl', 'docs/src/api/public.md'): {'revision': 'c' * 40, 'bytes': b'api'},
+            ('components/QCLNEGFRunner.jl', 'docs/src/user/configuration.md'): {'revision': 'c' * 40, 'bytes': b'configuration'},
+            ('root', 'docs/public/operator-recovery.md'): {'revision': 'a' * 40, 'bytes': b'operator'},
+        }
+        # Literal routes independently observed in retained native Documenter HTML.
+        payload = {
+            'core/theory/09_scba.html': b'<h1 id="researcher-scba-route">SCBA</h1>',
+            'core/theory/12_validation.html': b'<h1 id="researcher-final-route">Final</h1>',
+            'runner/api/public.html': b'<h1 id="reader-api-routes">API</h1>',
+            'runner/user/configuration.html': b'<h1 id="developer-configuration-route">Configuration</h1>',
+            'runner/user/results.html': b'<h1 id="operator-recovery-route">Recovery</h1>',
+            'operator/recovery.html': b'<h1 id="operator-recovery">Operator</h1>',
+        }
+        return assembly, graph, {'sources': sources}, payload
+
+    def test_all_six_actual_owning_routes_survive_primary_coverage(self):
+        assembly, graph, retained, payload = self.case()
+        coverage = producer.coverage_for(assembly, retained, payload)
+        pages = {row['id']: {p['path']: p['anchors'] for p in row['pages']} for row in coverage}
+        self.assertEqual(pages, {
+            'researcher': {'core/theory/09_scba.html': ['researcher-scba-route'],
+                           'core/theory/12_validation.html': ['researcher-final-route']},
+            'developer': {'runner/api/public.html': ['reader-api-routes'],
+                          'runner/user/configuration.html': ['developer-configuration-route']},
+            'operator': {'operator/recovery.html': ['operator-recovery'],
+                         'runner/user/results.html': ['operator-recovery-route']},
+        })
+        plan = assembly.load_pilot_plan(ROOT / 'ops/docs/pilot-plan.json')
+        self.assertIsNone(assembly._bundle_coverage(plan, graph, coverage, payload))
+        self.assertEqual([len(row['sources']) for row in coverage], [1, 2, 1])
+
+    def test_unrelated_page_cannot_supply_missing_support_anchor(self):
+        assembly, graph, retained, payload = self.case()
+        payload['core/theory/12_validation.html'] = b'<h1>No final route</h1>'
+        payload['core/unrelated.html'] = b'<h1 id="researcher-final-route">Unrelated</h1>'
+        coverage = producer.coverage_for(assembly, retained, payload)
+        self.assertNotIn('core/unrelated.html', [p['path'] for row in coverage for p in row['pages']])
+        with self.assertRaisesRegex(assembly.DocsError, 'missing_anchor'):
+            assembly._bundle_coverage(assembly.load_pilot_plan(ROOT / 'ops/docs/pilot-plan.json'),
+                                      graph, coverage, payload)
+
+    def test_missing_support_page_refuses_before_candidate(self):
+        for missing in ('core/theory/12_validation.html', 'runner/user/results.html'):
+            with self.subTest(missing=missing):
+                assembly, _, retained, payload = self.case()
+                del payload[missing]
+                with self.assertRaises(KeyError):
+                    producer.coverage_for(assembly, retained, payload)
+
+    def test_coalesced_legacy_fixture_cannot_replace_owning_support_pages(self):
+        assembly, _, retained, payload = self.case()
+        payload['core/theory/09_scba.html'] += payload.pop('core/theory/12_validation.html')
+        payload['operator/recovery.html'] += payload.pop('runner/user/results.html')
+        with self.assertRaises(KeyError):
+            producer.coverage_for(assembly, retained, payload)
+
+
 if __name__ == '__main__':
     unittest.main()
