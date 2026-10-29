@@ -1,95 +1,89 @@
 # QCL-NEGF
 
-An integrated, reproducible workspace for quantum-cascade transport research.
-Julia computes the numerical model, AiiDA records scientific workflows, Slurm allocates resources,
-and NixOS defines the machines. GitHub hosts source and workflow state; CI runs on your own runner.
+An integrated, reproducible workspace for quantum-cascade transport research. Julia computes the
+numerical model, AiiDA records scientific workflows, Slurm allocates resources, and NixOS defines
+the machines. GitHub hosts source and workflow state; CI runs on your own runner.
 
-## Спецификация следующего релиза
+## Текущая программа и руководства
 
-[Единый корпус требований и проект системы](docs/system/README.md) содержит новую
-архитектуру, сравнение с актуальными PR-исходниками, code review и порядок рефакторинга.
-Он отделяет согласованные требования от предлагаемых решений и реализованных возможностей.
-[Точка входа в реализацию для новой сессии CODEX](docs/system/implementation-entrypoint.md)
-задаёт первый адресный ticket этапа 1 и сохраняет минимальный путь к S01;
-policy ролей находится в roadmap. Корпус включён в эту версию исходников;
-для свежего clone выбирайте опубликованный docs ref, содержащий эти файлы.
-Первый научный рубеж — одна обоснованная стационарная точка опубликованной
-GaAs/AlGaAs-структуры при 0 mV/period и 70 K. Чистая пересборка QCL VM и изменения дисков сейчас описаны только в плане.
+Для исполнения программы от 2026-10-27 начните с
+[исполнительного плана](docs/implementation/codex-execution-2026-10-27.md),
+[архитектурных решений программы](docs/implementation/project-simplification-2026-10-27.md) и
+[AGENTS.md](AGENTS.md). Их актуальные scoped полномочия определяют порядок работ.
+[Текущий рабочий маршрут](docs/current-workflow.md) связывает руководства исследователя,
+разработчика и оператора с их owning компонентами и проверками.
 
-Ниже описан workspace и его инструменты. Расхождение доставки через GitHub workflow
-относится к историческому аудиту `bce0aee` и source `13d4560`
-([границы аудита](docs/system/README.md#состав-аудита)).
-В текущих исходниках release workflow содержит только assemble;
-локальная доставка I14 и её native gates описаны в
-[отчёте I14](docs/implementation/i14-local-update-ci-boundary.md).
-Публикация source не подтверждает native delivery/bootstrap или научную приёмку.
+[Корпус требований](docs/system/README.md) и прежняя
+[точка входа этапа 1](docs/system/implementation-entrypoint.md) сохраняют контекст проекта; для
+продолжения программы используйте исполнительный план выше. [Архитектура](docs/architecture.md)
+описывает границы компонентов. Опубликованный исходный код, сборка, установленная система и научная
+приёмка имеют отдельные свидетельства: публикация PR сама по себе не подтверждает готовность
+сервера.
+
+Новый научный запуск — отдельный следующий этап после инженерной synthetic-приёмки. Постановка
+первой стационарной точки приведена в
+[Research S01](components/qcl-negf-research/docs/equilibrium-s01.md).
 
 ## Components
 
 Each directory below is an independent Git submodule. The superproject commit identifies the
 complete compatible source set; there is no separate manually maintained source-revision lock.
 
-| Submodule | Responsibility |
-| --- | --- |
-| `components/QCLNEGF.jl` | Julia scientific library: domain types, physics, numerical operators and in-memory solving |
-| `components/QCLNEGFRunner.jl` | Julia scientific execution: plans, file adapters, checkpoints, CLI and local scratch staging |
-| `components/qcl-negf-contracts` | Shared schemas and validation |
-| `components/qcl-negf-results` | Independent reading, verification, export and visualization of results |
-| `components/qcl-negf-aiida` | CalcJob, Parser, WorkChain and workflow service |
-| `components/qcl-negf-portal` | Authenticated FastAPI service and its React client |
-| `components/qcl-negf-research` | Scientific input catalog and literature provenance |
-| `components/qcl-negf-platform` | NixOS roles, OpenTofu infrastructure and Arch host preparation |
+| Submodule                       | Responsibility                                                                               |
+| ------------------------------- | -------------------------------------------------------------------------------------------- |
+| `components/QCLNEGF.jl`         | Julia scientific library: domain types, physics, numerical operators and in-memory solving   |
+| `components/QCLNEGFRunner.jl`   | Julia scientific execution: plans, file adapters, checkpoints, CLI and local scratch staging |
+| `components/qcl-negf-contracts` | Shared schemas and validation                                                                |
+| `components/qcl-negf-results`   | Independent reading, verification, export and visualization of results                       |
+| `components/qcl-negf-aiida`     | CalcJob, Parser, WorkChain and workflow service                                              |
+| `components/qcl-negf-portal`    | Authenticated FastAPI service and its React client                                           |
+| `components/qcl-negf-research`  | Scientific input catalog and literature provenance                                           |
+| `components/qcl-negf-platform`  | NixOS roles, OpenTofu infrastructure and Arch host preparation                               |
 
 See [architecture](docs/architecture.md), [GitHub initialization](docs/publication.md), and
-[infrastructure](components/qcl-negf-platform/docs/infrastructure.md).
-For existing checkouts, see [the organization transfer procedure](docs/organization-transfer.md).
+[infrastructure](components/qcl-negf-platform/docs/infrastructure.md). For existing checkouts, see
+[the organization transfer procedure](docs/organization-transfer.md).
 
 ## Исследовательская работа с агентами
 
-Правила с приоритетом физической корректности находятся в [AGENTS.md](AGENTS.md).
-Четыре навыка в `.agents/skills` помогают подготовить постановку, проверить
-физику, разобрать готовые результаты и оценить производительность.
-См. [рабочий процесс, Codex и веб-ChatGPT](docs/research-workflow.md) и
+Правила с приоритетом физической корректности находятся в [AGENTS.md](AGENTS.md). Четыре навыка в
+`.agents/skills` помогают подготовить постановку, проверить физику, разобрать готовые результаты и
+оценить производительность. См. [рабочий процесс, Codex и веб-ChatGPT](docs/research-workflow.md) и
 [задачу упаковки результатов в RO-Crate](TODO.md#results-ro-crate).
 
-## Prepare and test
+## Подготовка и проверки
 
-After publication, clone the workspace with its component commits:
+Клонируйте выбранную ветку вместе с зафиксированными компонентами:
 
 ```sh
-git clone --recurse-submodules https://github.com/Afonenko-QCL-NEGF/qcl-negf.git
+git clone --branch codex/project-simplification-2026-10-27 --recurse-submodules https://github.com/Afonenko-QCL-NEGF/qcl-negf.git
 cd qcl-negf
-git submodule update --init --recursive
-nix develop
-deno task --cwd components/QCLNEGFRunner.jl bootstrap
-export JULIA="$PWD/components/QCLNEGFRunner.jl/.build/julia/bin/julia"
-deno task prepare
-deno task check
-deno task test
+git rev-parse HEAD
+git status --short
+git submodule status --recursive
 ```
 
-Nix 2.27 or newer is required for automatic submodule fetching. The flake declares
-`inputs.self.submodules = true`. The development shell provides Python 3.14, Node, Deno, uv,
-OpenTofu, Ansible, Git and GitHub CLI. Julia 1.13.0 is prepared separately and checksum-verified.
-An existing Julia 1.13.0 installation can be selected with `JULIA` instead.
+В существующем checkout сначала сохраните посторонние изменения. Не обновляйте submodules до latest
+ради воспроизведения выбранного состава. Его определяют root gitlinks; package locks определяют
+внешние зависимости.
 
-`prepare` builds the browser assets and installs the committed native environments.
-`test --python`, `test --julia` and `test --infra` select the corresponding checks.
-AiiDA integration tests require a normal process namespace and local process execution;
-Slurm VM tests additionally require a usable Nix builder and virtualization support.
-Run `nix build --no-link --no-update-lock-file .#checks.x86_64-linux.slurm-vm`
-to boot the three-VM Slurm/NFS integration test. The ordinary infrastructure checks evaluate
-this test definition; they do not boot its VMs.
+[Проверки по влиянию](docs/impact-checks.md) разделяют подготовку и выполнение:
+`deno task impact --base BASE --head HEAD` только показывает план по committed Git objects.
+`deno task prepare --base BASE --head HEAD` явно готовит выбранную среду;
+`deno task test --base BASE --head HEAD` выполняет проверки без скрытого bootstrap. Без refs
+сохраняется полный охват. Запуск проверок требует подходящей подготовленной среды; для source D
+достаточно форматирования, ссылок и review.
 
-Python uses one uv workspace and generated `uv.lock`. Julia uses the generated
-`julia/Project.toml` and `julia/Manifest.toml`, with local paths to the two selected submodules.
-Node, Nix and OpenTofu use their native generated locks. Git cannot replace the dependency
-resolvers for PyPI, Julia registries, npm or Nixpkgs.
+Nix development shell предоставляет инструменты разработки; Julia 1.13.0 подготавливается отдельно
+по owning инструкции Runner. Локальный `JULIA` выбирает интерпретатор для разрешённых проверок, но
+не доказывает эквивалентность квалифицированной Nix factory. Изменения зависимостей оформляются
+через native resolvers командой `deno task lock` с review полученных locks, а не ручным заполнением
+hashes.
 
-After editing native dependency declarations, run `deno task lock`. This invokes the native
-package managers; it does not fabricate hashes or copy commit IDs by hand. Review and commit
-generated changes in their owning component first, then update the superproject gitlinks and
-root environment locks. Ordinary preparation and CI use locked inputs.
+[Документация](docs/cached-documentation.md) имеет отдельные `docs:plan`, `docs:prepare`,
+`docs:build` и source-only `docs:check` с явными подготовленными inputs. Последняя команда требует
+asset map, Node 24 и Python 3.14 с PyYAML/jsonschema; она не устанавливает prerequisites. Unit
+checks не подтверждают render, cache hit или браузерную приёмку.
 
 ## Local scientific work
 
@@ -113,33 +107,34 @@ deno task solver:depot /var/lib/qcl-negf-artifacts/julia-0.2.0
 deno task solver:build /var/lib/qcl-negf-artifacts/julia-0.2.0/solver-depot.json
 ```
 
-The release command checks the actual Git source graph, builds four Python wheels using the
-locked build environment, retains their hashes and source provenance, and optionally builds the
-Nix application. Julia has its own prepared dependency depot and Nix package, so changing the
-web client does not re-prepare the numerical environment.
+The release command checks the actual Git source graph, builds four Python wheels using the locked
+build environment, retains their hashes and source provenance, and optionally builds the Nix
+application. Julia has its own prepared dependency depot and Nix package, so changing the web client
+does not re-prepare the numerical environment.
 
 `solver:depot` downloads the dependencies selected by the committed Julia manifest into a fresh
-depot, creates an archive and computes its hash automatically. It writes `solver-depot.json` for
-the local build and private site flake. Copy this JSON into the private site repository; retain
-the archive outside source control. The default artifact URL is local to the build machine.
+depot, creates an archive and computes its hash automatically. It writes `solver-depot.json` for the
+local build and private site flake. Copy this JSON into the private site repository; retain the
+archive outside source control. The default artifact URL is local to the build machine.
 `solver:build` first uses `nix store prefetch-file` to verify a local archive against the receipt's
-hash, with the same stable output name as the Nix depot fetcher. Run this step on the builder
-before building private-site images: a cold, direct site build cannot read an arbitrary local
-`file://` archive through the filesystem sandbox. Retain the original archive so the verified
-prefetch can be repeated after garbage collection; its store copy counts toward the artifact
-disk budget. A receipt still contains only the artifact URL and hash, never archive bytes.
-For another builder, pass `--url https://YOUR-ARTIFACT-SERVER/depot.tar.gz` and upload the generated
-archive to that exact address through your artifact storage. The command itself does not upload.
+hash, with the same stable output name as the Nix depot fetcher. Run this step on the builder before
+building private-site images: a cold, direct site build cannot read an arbitrary local `file://`
+archive through the filesystem sandbox. Retain the original archive so the verified prefetch can be
+repeated after garbage collection; its store copy counts toward the artifact disk budget. A receipt
+still contains only the artifact URL and hash, never archive bytes. For another builder, pass
+`--url https://YOUR-ARTIFACT-SERVER/depot.tar.gz` and upload the generated archive to that exact
+address through your artifact storage. The command itself does not upload.
 
-The primary Proxmox host runs storage, control, compute and isolated CI VMs. The existing Arch
-server hosts an additional NixOS worker through QEMU/KVM and libvirt; Arch is retained.
-Main NFS storage is on the primary Proxmox host in a dedicated NixOS storage VM. Worker scratch
-is local. The initial Arch worker uses 30 GiB RAM and 12 vCPUs out of a 32 GiB, 12-logical-CPU
-host; these are configurable caps, not a claim that SMT threads are physical cores.
+Существующий Proxmox-кластер разделяет storage, control, compute и изолированную CI VM. Первый
+дополнительный worker программы — Linux/libvirt на ноутбуке; доступность и готовность подтверждаются
+отдельными boot/enrollment/synthetic checks. Hyper-V и другой Proxmox проверяются после подготовки
+пользователем. NFS принадлежит storage VM; scratch worker остаётся локальным. CPU/RAM задаются по
+свежим ресурсам и защите хоста. Значения прежних примеров не являются текущим grant или
+доказательством готовности; SMT threads не равны физическим ядрам.
 
 Keep real host addresses, credentials, disk choices and application state outside this public
-workspace. Use the platform's private-site example and its image/provisioning commands.
-The source repository never contains generated VM images, dependency depots or scientific results.
+workspace. Use the platform's private-site example and its image/provisioning commands. The source
+repository never contains generated VM images, dependency depots or scientific results.
 
 For an initial deployment with only the four Proxmox roles, see the
 [single-server deployment procedure](docs/single-server-deployment.md).
