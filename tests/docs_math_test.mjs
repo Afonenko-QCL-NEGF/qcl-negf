@@ -542,3 +542,186 @@ test("exact Documenter rule is still refused when the extracted property matches
     /margin-right:1em!important/,
   );
 });
+
+async function intrinsicAccentInputs() {
+  const inputs = await exactInputs();
+  assert.ok(process.env.DOC04_COMPLETE_CSS_JSON, "complete admitted CSS fixture is required");
+  const supplied = JSON.parse(await readFile(process.env.DOC04_COMPLETE_CSS_JSON, "utf8"));
+  const completeStylesheets = [];
+  for (const item of supplied) {
+    const text = await readFile(item.input, "utf8");
+    assert.equal(sha(text), item.sha256);
+    completeStylesheets.push({ path: item.path, text, sha256: item.sha256 });
+  }
+  return { ...inputs, completeStylesheets };
+}
+
+test("verified intrinsic U accent width remains exact in external CSS and semantic MathML", async () => {
+  // Actual Docs7/8 formula, core/api/public #qcl-math-3; this catches a lost
+  // engine-only calc path, width clamping, or accidental source/MathML rewriting.
+  const tex = String.raw`\delta \widehat U
+= \frac{eF_{ref}L_0}{E_0}\,Z,`;
+  const result = await renderMathBatch([record(tex, true)], await intrinsicAccentInputs());
+  assert.equal(result.records[0].tex, tex);
+  assert.equal(result.records[0].tex_sha256, sha(tex));
+  assert.ok(result.records[0].html.includes(
+    '<mover accent="true"><mi>U</mi><mo stretchy="true">^</mo></mover>',
+  ));
+  assert.match(
+    result.css,
+    /width:calc\(100% - 0\.0556em\)!important;margin-left:0\.0556em!important;/,
+  );
+  assert.doesNotMatch(result.records[0].html, /\sstyle\s*=/);
+  assert.equal(result.stylesheet_context.complete, true);
+});
+
+test("verified intrinsic K accent width preserves the other pinned skew offset", async () => {
+  // Actual core/theory/03_arrays #qcl-math-30; independent literal expectation.
+  const tex = String.raw`\widehat K_s`;
+  const result = await renderMathBatch([record(tex, true)], await intrinsicAccentInputs());
+  assert.equal(result.records[0].tex, tex);
+  assert.equal(result.records[0].tex_sha256, sha(tex));
+  assert.ok(result.records[0].html.includes(
+    '<mover accent="true"><mi>K</mi><mo stretchy="true">^</mo></mover>',
+  ));
+  assert.match(
+    result.css,
+    /width:calc\(100% - 0\.1111em\)!important;margin-left:0\.1111em!important;/,
+  );
+  assert.doesNotMatch(result.records[0].html, /\sstyle\s*=/);
+});
+
+test("raw calc lookalikes cannot opt into intrinsic engine geometry", () => {
+  const markup = '<span class="mord accent"><span class="svg-align" ' +
+    'style="width:calc(100% - 0.0556em);margin-left:0.0556em;top:-3.6833em;"></span></span>';
+  assert.throws(() => externalizeStyles(markup, { stylesheets: [] }), codeIs("unsupported_style"));
+  assert.throws(() =>
+    externalizeStyles(markup, {
+      stylesheets: [],
+      verifiedEngine: true,
+    }), codeIs("unsupported_style"));
+});
+
+async function privateIntrinsicScanner() {
+  // Test-only source augmentation exercises the real private scanner against
+  // malformed engine output. No module mutation, engine mock, public export or
+  // production opt-in flag is introduced; renderMathBatch still verifies ESM.
+  const url = new URL("../ops/docs/math-render.mjs", import.meta.url);
+  const source = await readFile(url, "utf8");
+  const augmented = source +
+    "\nexport { externalizeEngineStyles as testEngineStyles, stylesheetsContext as testContext };\n";
+  const fixture = await import(
+    `data:text/javascript;base64,${Buffer.from(augmented).toString("base64")}`
+  );
+  const actual = await import(url.href);
+  assert.deepEqual(Object.keys(actual).sort(), [
+    "externalizeStyles",
+    "renderMathBatch",
+    "selectorMayMatch",
+    "validateMathMapping",
+  ]);
+  const scan = (markup, { stylesheets }) =>
+    fixture.testEngineStyles(markup, fixture.testContext(stylesheets));
+  scan.forContext = (stylesheets) => {
+    const context = fixture.testContext(stylesheets);
+    return (markup) => fixture.testEngineStyles(markup, context);
+  };
+  return scan;
+}
+
+test("private intrinsic scanner rejects class spoofing and every nonliteral or unpaired width", async () => {
+  const scan = await privateIntrinsicScanner();
+  const style = "width:calc(100% - 0.0556em);margin-left:0.0556em;top:-3.6833em;";
+  const wrap = (value, tag = "span", classes = "svg-align", ancestor = "mord accent") =>
+    `<span class="${ancestor}"><${tag} class="${classes}" style="${value}"></${tag}></span>`;
+  const healthy = scan(wrap(style), { stylesheets: [] });
+  assert.match(
+    healthy.css,
+    /width:calc\(100% - 0\.0556em\)!important;margin-left:0\.0556em!important;/,
+  );
+  assert.doesNotMatch(healthy.html, /\sstyle\s*=/);
+  const cases = [
+    wrap(style, "math"),
+    wrap(style, "span", "svg-align extra"),
+    wrap(style, "span", "svg-align", "accent"),
+    wrap(style, "span", "svg-align", "mord"),
+    wrap(style, "span", "svg-align", "other"),
+    wrap(style.replace("0.0556em", "0.0557em")),
+    wrap(style.replace("margin-left:0.0556em;", "")),
+    wrap(style.replace("margin-left:0.0556em", "margin-left:0.1111em")),
+    wrap(style + "margin-left:0.0556em;"),
+    wrap(style + "width:1em;"),
+    wrap(style + "width:calc(100% - 0.0556em);"),
+    wrap(style.replace("calc(100% - 0.0556em)", "calc(100% + 0.0556em)")),
+    wrap(style.replace("calc(100% - 0.0556em)", "calc(100% - calc(0.0556em))")),
+    wrap(style.replace("calc(100% - 0.0556em)", "var(--width)")),
+    wrap(style.replace("calc(100% - 0.0556em)", "url(https://example.invalid/x)")),
+    wrap(style.replace("calc(100% - 0.0556em)", String.raw`c\61 lc(100% - 0.0556em)`)),
+    wrap(style.replace("calc(100% - 0.0556em)", "calc(100% - 0.0556em)!important")),
+  ];
+  for (const markup of cases) {
+    assert.throws(() => scan(markup, { stylesheets: [] }), codeIs("unsupported_style"), markup);
+  }
+});
+
+test("private intrinsic geometry still refuses important width and margin cascade conflicts", async () => {
+  const scan = await privateIntrinsicScanner();
+  const markup = '<span class="mord accent"><span class="svg-align" ' +
+    'style="width:calc(100% - 0.1111em);margin-left:0.1111em;top:-3.6833em;"></span></span>';
+  for (const declaration of ["width:50%", "all:initial", "margin:0", "margin-left:1em"]) {
+    assert.throws(
+      () =>
+        scan(markup, {
+          stylesheets: [{ path: "fixture.css", text: `.svg-align{${declaration}!important}` }],
+        }),
+      codeIs("unsupported_style_context"),
+      declaration,
+    );
+  }
+});
+
+test("one shared private context rechecks different node classes in both orders", async () => {
+  const scan = await privateIntrinsicScanner();
+  const text = await readFile(
+    join(process.env.DOC04_DOCUMENTER_ROOT, "assets/html/themes/documenter-light.css"),
+    "utf8",
+  );
+  const sheet = { text, sha256: sha(text) };
+  const healthy = '<span class="mspace" style="margin-right:1em">x</span>';
+  const conflict = '<span class="katex-display" style="margin-right:1em">x</span>';
+  for (const order of [[healthy, conflict], [conflict, healthy]]) {
+    const shared = scan.forContext([sheet]);
+    for (const markup of order) {
+      if (markup === healthy) assert.match(shared(markup).css, /margin-right:1em!important;/);
+      else assert.throws(() => shared(markup), codeIs("unsupported_style_context"));
+    }
+    assert.match(shared(healthy).css, /margin-right:1em!important;/);
+  }
+});
+
+test("batch context cannot suppress later width conflicts or leak into a later batch", async () => {
+  const inputs = await intrinsicAccentInputs();
+  const plain = record("x", true, "#plain");
+  const accent = record(String.raw`\widehat U`, true, "#accent");
+  const text = ".svg-align{width:50%!important}";
+  const conflicting = {
+    ...inputs,
+    completeStylesheets: [...inputs.completeStylesheets, {
+      path: "assets/conflict.css",
+      text,
+      sha256: sha(text),
+    }],
+  };
+  for (const records of [[plain, accent], [accent, plain]]) {
+    await assert.rejects(
+      renderMathBatch(records, conflicting),
+      codeIs("unsupported_style_context"),
+    );
+    const result = await renderMathBatch(records, inputs);
+    assert.deepEqual(result.records.map(({ tex }) => tex), records.map(({ tex }) => tex));
+    assert.deepEqual(
+      result.stylesheet_context.files,
+      inputs.completeStylesheets.map(({ path, sha256 }) => ({ path, sha256 })),
+    );
+  }
+});
