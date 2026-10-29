@@ -147,3 +147,52 @@ process.stdout.write(JSON.stringify(messages));
         self.assertFalse(any(name == "style" for name, _ in target["attrs"]))
         self.assertIn("theory/transport.html (Transport manual)", target["text"])
         self.assertIn(b".qcl-search-small{font-size:smaller}", generated["assets/qcl-runtime.css"])
+
+    def test_actual_worker_preserves_cyrillic_search_and_julia_symbols(self):
+        import json
+        import os
+        import shutil
+        import subprocess
+
+        node = os.environ.get("DOC04_NODE") or shutil.which("node")
+        self.assertTrue(node, "existing Node executable required")
+        root = Path(os.environ["DOC04_DOCUMENTER_ROOT"])
+        snippets = {name: (root / "assets/html/js" / name).read_bytes() for name in assets.SNIPPETS}
+        worker = assets.build_runtime(snippets)["assets/search-worker.js"].decode()
+        inputs = json.loads(Path(os.environ["DOC04_ASSET_INPUTS_JSON"]).read_bytes())
+        mini = Path(inputs["responses/minisearch-min"]).read_bytes()
+        pin = next(x for x in assets.load_lock()["files"] if x["source_path"] == "responses/minisearch-min")
+        self.assertEqual(assets.digest(mini), pin["sha256"])
+        script = r"""
+const fs = require("node:fs"), vm = require("node:vm");
+const input = JSON.parse(fs.readFileSync(0, "utf8")), messages = [];
+const context = vm.createContext({postMessage: x => messages.push(x)});
+context.self = context;
+context.importScripts = path => {
+  if (path !== "vendor/minisearch/6.1.0/index.min.js") throw Error("unexpected import");
+  vm.runInContext(input.mini, context, {timeout: 1000});
+};
+vm.runInContext(input.worker, context, {timeout: 1000});
+context.onmessage({data: {type: "qcl-init", base: "..", filters: ["section"], docs: [
+  {location: "theory/scba.html", page: "Теория", category: "section",
+   title: "Самосогласованное НЕВЯЗКА учёт ёмкости", text: "Борновское приближение."},
+  {location: "api/public.html", page: "Public API", category: "section",
+   title: "solve_scba Base.sort! @time α₂", text: "Julia operators"}
+]}});
+for (const query of input.queries) context.onmessage({data: query});
+process.stdout.write(JSON.stringify(messages.map(rows => rows.map(x => x.div))));
+"""
+        queries = ["Самосогласованное", "самосогласованное", "НЕВЯЗКА", "учёт", "ёмкости",
+                   "solve_scba", "Base.sort!", "@time", "α₂", "zzzzmissingzzzz"]
+        completed = subprocess.run([node, "-e", script], input=json.dumps({
+            "worker": worker, "mini": mini.decode(), "queries": queries}),
+            text=True, capture_output=True, timeout=5, check=False)
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        results = json.loads(completed.stdout)
+        self.assertEqual(len(results), len(queries))
+        for query, rows in zip(queries[:-1], results[:-1], strict=True):
+            with self.subTest(query=query):
+                self.assertTrue(rows, "actual worker discarded the query")
+                expected = "theory/scba.html" if query in queries[:5] else "api/public.html"
+                self.assertTrue(any(expected in row for row in rows))
+        self.assertEqual(results[-1], [])

@@ -66,6 +66,8 @@ def build_runtime(snippets, *, worker_url="assets/search-worker.js", asset_prefi
     Worker URL and AMD paths are literals. Producer must select their relative
     values for each HTML depth, retaining every generated file in its asset map.
     Query protocol and MiniSearch implementation remain upstream's exact code.
+    The term-edge trimmer retains Unicode letters, marks and numbers so Russian
+    prose and Julia identifiers survive the same index/query normalization.
     """
     local_url(worker_url)
     local_url(asset_prefix)
@@ -80,6 +82,15 @@ def build_runtime(snippets, *, worker_url="assets/search-worker.js", asset_prefi
     worker = replace_once(worker,
         'class="has-text-left"\n            style="font-size: smaller;"',
         'class="has-text-left qcl-search-small"')
+    # The pinned upstream ASCII-only trimmer erases complete Cyrillic words.
+    # Keep its Julia punctuation and its exact two edge operations; only extend
+    # character admission. Source hashes and unique-shape checks stay mandatory.
+    worker = replace_once(worker,
+        r'.replace(/^[^a-zA-Z0-9@!+\-/*^&%|<>._=:]+/, "")',
+        r'.replace(/^[^\p{L}\p{M}\p{N}@!+\-/*^&%|<>._=:]+/u, "")')
+    worker = replace_once(worker,
+        r'.replace(/[^a-zA-Z0-9@!+\-/*^&%|<>._=:]+$/, "")',
+        r'.replace(/[^\p{L}\p{M}\p{N}@!+\-/*^&%|<>._=:]+$/u, "")')
     worker += '''\nself.onmessage = function (event) {
   const value = event.data;
   if (!value || value.type !== "qcl-init" || !Array.isArray(value.docs) ||
