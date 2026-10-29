@@ -39,7 +39,7 @@
         juliaTestProfile ? "production-build", juliaTestWorkerLimit ? null }: let
         pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
-        root = self.outPath;
+        root = /. + builtins.unsafeDiscardStringContext self.outPath;
         selected = import ./nix/docs-sources.nix { inherit lib root; };
         julia = self.lib.mkPinnedJulia { inherit system juliaTestProfile juliaTestWorkerLimit; };
         depot = self.lib.mkPreparedDepot { inherit system metadata juliaTestProfile juliaTestWorkerLimit; };
