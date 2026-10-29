@@ -1,4 +1,5 @@
 import { pathToFileURL } from "node:url";
+import { runDepotV2 } from "./depot_producer.ts";
 import {
   type DepotInputs,
   digest,
@@ -555,7 +556,6 @@ async function solver(): Promise<void> {
       throw Error("Only explicit new v2 format is supported");
     }
     const rest = [...flags.slice(0, formatAt), ...flags.slice(formatAt + 2)];
-    const { runDepotV2 } = await import("./depot_producer.ts");
     await runDepotV2(target, rest);
     return;
   }
