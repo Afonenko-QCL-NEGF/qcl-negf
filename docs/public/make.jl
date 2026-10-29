@@ -76,7 +76,8 @@ makedocs(
     sitename = "Документация оператора",
     format = Documenter.HTML(prettyurls = false, edit_link = nothing,
         disable_git = true, analytics = "", warn_outdated = false,
-        prerender = false, mathengine = nothing,
+        # Совместимо с Documenter 1.17; Root заменяет raw JS и рендерит формулы локально.
+        prerender = false, mathengine = Documenter.KaTeX(),
         assets = ["assets/qcl-fixed-light.css"],
         repolink = "https://github.com/Afonenko-QCL-NEGF/qcl-negf"),
     pages = ["Home" => "index.md", "Recovery" => "recovery.md",
