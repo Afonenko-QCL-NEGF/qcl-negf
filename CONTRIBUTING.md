@@ -25,3 +25,17 @@ Keep unrelated changes and foreign resources intact; do not commit VM images, en
 credentials, private inventories or scientific output. Cite literature at source and retain units
 and uncertainty. Review contributed code before executing it on infrastructure-connected self-hosted
 runners.
+
+## Проверки по влиянию
+
+`deno task impact --base BASE --head HEAD` читает committed Git objects и печатает план без
+подготовки среды и запуска проверок. `deno task test` и `deno task prepare` принимают те же refs и
+ручные `--full`, `--python`, `--julia`, `--infra`. Без аргументов сохраняется полный охват.
+Подготовка среды — отдельное явное действие; `test` не выполняет sync, bootstrap, Pkg instantiate
+или tofu init. Для выполнения выбранный HEAD должен совпадать с чистой текущей композицией; после
+команд композиция проверяется повторно.
+
+Для prose D достаточно форматирования и review локальных ссылок/anchors; Julia и сборка документации
+не требуются. README Python-пакета также входит в native wheel metadata. Неизвестное влияние требует
+полного релевантного integration gate. План и exit code не означают native readiness или научную
+приёмку. Команды и prerequisites описаны в [руководстве по impact checks](docs/impact-checks.md).
