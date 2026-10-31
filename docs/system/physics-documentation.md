@@ -396,7 +396,7 @@ application binding может отсутствовать; тогда UI не з
 | `full` | DocRef полного owning объяснения |
 | `related` | DocRef[] учебных/формальных/API продолжений, максимум 12 |
 | `equations` | `[{id, doc}]`, id существующего equation ID (например EQ-KIFR-001), doc=DocRef; формулы здесь не повторяются |
-| `inputs` | `[{path, schema_source, facts, reference_value_origin}]`; path — whitelisted dotted config leaf, schema_source=PublicRef с JSON Pointer, facts=Fact[]; reference_value_origin — ReferenceValueOrigin ниже, всегда reference-only |
+| `inputs` | `[{path, schema_source, facts, reference_value_origin}]`; path — whitelisted dotted config leaf, schema_source=PublicRef с JSON Pointer, facts=Fact[]; reference_value_origin — обязательный `ReferenceValueOrigin|null`: null означает отсутствие retained reference; nonnull всегда reference-only |
 | `api` | `[{symbol, source, doc, facts}]`; public symbol, PublicRef, DocRef, Fact[] |
 | `assumptions`, `limitations` | массивы короткого plain text, по максимум 12×400 chars; длинный вывод остаётся в full |
 
@@ -422,6 +422,11 @@ leaf нет автоматического DOI или pseudo-formula из его
   весь YAML. Unknown требует note и не допускает run-origin bound.
 - origin=Origin. Карточка всегда подписывает его «Источник reference-набора»;
   static known publication остаётся known **только в этом reference context**.
+
+При null reference declared/used origin может быть только unknown с `binding=null`:
+reason `origin_not_recorded` для известного значения и `value_unavailable` для
+неизвестного. Null не означает неприменимость и не разрешает создавать reference
+или receipt.
 
 Динамический InputView получает отдельное обязательное `value_origin`:
 `{declared:ValueOriginView, used:ValueOriginView}`. ValueOriginView имеет ровно
@@ -629,8 +634,10 @@ entry для malformed берётся из validated logical path/child, а не
 
 Parser проверяет exact path grammar, <=64 KiB/file, UTF-8/JSON/schema, unique path,
 hash/size, local plan fingerprints/model_revision, point membership execution,
-attempt равный child.inputs.attempt.value и path attempt, configuration_hash
-против frozen point passport. Число entries <=min(plan point count,10000),
+local attempt равный path attempt и выбранному capture context, configuration_hash
+против frozen point passport. Native transport attempt выбирается по trusted
+child/source association и может отличаться от local attempt; совпадение чисел не
+доказывает эту связь. Число entries <=min(plan point count,10000),
 index bytes <=2 MiB; incomplete generic inventory/превышение caps -> complete=false,
 без доверия частичному help index. Каждый file читается максимум один раз с
 size+1 guard, без HDF5/arrays. Invalid optional help не изменяет scientific exit;

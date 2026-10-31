@@ -8,7 +8,7 @@ let
 in {
   runtime = import ./runtime-sources.nix { inherit lib root; };
   core = select (root + "/components/QCLNEGF.jl") [ "docs/make.jl" "docs/Project.toml" "docs/src" ];
-  runner = select (root + "/components/QCLNEGFRunner.jl") [ "docs/make.jl" "docs/Project.toml" "docs/src" ];
+  runner = select (root + "/components/QCLNEGFRunner.jl") [ "docs/make.jl" "docs/Project.toml" "docs/src" "docs/help/fragments.json" ];
   contracts = select (root + "/components/qcl-negf-contracts") [ "src" "pyproject.toml" "LICENSE" ];
   presentation = select root [
     "ops/docs/produce.py" "ops/docs/assemble.py" "ops/docs/runtime-assets.py"

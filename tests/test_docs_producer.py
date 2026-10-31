@@ -870,3 +870,238 @@ class NativePrimaryCoverageControls(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class AuthoredHelpControls(unittest.TestCase):
+    def fixture(self):
+        import os
+        fixture = Path(os.environ['P10_HELP_FIXTURE'])
+        component = 'components/QCLNEGFRunner.jl'
+        revision = '1' * 40
+        graph = {'revision': '2' * 40, 'components': [{'path': component, 'revision': revision}]}
+        names = ['docs/help/fragments.json', 'docs/src/user/results.md',
+                 'src/infrastructure/scientific/model_help.jl']
+        sources = {(component, n): {'revision': revision, 'bytes': (fixture / n).read_bytes()} for n in names}
+        selectors = [(component, names[0], 'json_pointer', f'/0/inputs/{i}') for i in range(8)]
+        selectors += [(component, names[1], 'file', ''),
+                      (component, names[2], 'symbol', '_model_help_inputs')]
+        return graph, {'sources': sources, 'input_allowlist': tuple(sources),
+                       'selector_allowlist': tuple(selectors)}
+
+    def test_authored_fragment_uses_selected_bytes_and_public_schema(self):
+        import json
+        from qcl_negf_contracts import schema_validator
+        graph, retained = self.fixture()
+        descriptors, payload = producer.authored_fragments(graph, retained, 32768)
+        self.assertEqual(len(descriptors), 1)
+        document = json.loads(payload[descriptors[0]['file']])
+        schema_validator('model-help.schema.json').validate(document)
+        self.assertEqual(document['source_revision'], graph['revision'])
+        self.assertEqual(len(document['inputs']), 8)
+        self.assertTrue(all(i['reference_value_origin'] is None for i in document['inputs']))
+        self.assertTrue(all(i['schema_source']['revision'] == '1' * 40 for i in document['inputs']))
+        self.assertTrue(all(f['status'] == 'unknown' and f['sources'] == []
+                            for i in document['inputs'] for f in i['facts'] if f['text'] is None))
+
+    def test_missing_or_unapproved_source_fails_closed(self):
+        graph, retained = self.fixture()
+        retained['selector_allowlist'] = ()
+        with self.assertRaises(ValueError):
+            producer.authored_fragments(graph, retained, 32768)
+
+    def test_corrupt_missing_wrong_revision_and_byte_limits_fail_closed(self):
+        import copy
+        import json
+        graph, retained = self.fixture()
+        component = 'components/QCLNEGFRunner.jl'
+        template = (component, 'docs/help/fragments.json')
+        for mutation in ('missing_template', 'corrupt_template', 'wrong_revision',
+                         'missing_source', 'missing_input', 'oversized_template', 'output_limit',
+                         'excess_facts', 'fabricated_reference', 'injected_revision'):
+            with self.subTest(mutation=mutation):
+                case = copy.deepcopy(retained)
+                limit = 32768
+                if mutation == 'missing_template': del case['sources'][template]
+                if mutation == 'corrupt_template': case['sources'][template]['bytes'] = b'[{}]'
+                if mutation == 'wrong_revision': case['sources'][template]['revision'] = '3' * 40
+                if mutation == 'missing_source': del case['sources'][(component, 'docs/src/user/results.md')]
+                if mutation == 'missing_input': case['input_allowlist'] = ()
+                if mutation == 'oversized_template': case['sources'][template]['bytes'] += b' ' * 32768
+                if mutation == 'output_limit': limit = 100
+                if mutation in ('excess_facts', 'fabricated_reference', 'injected_revision'):
+                    template_doc = json.loads(case['sources'][template]['bytes'])
+                    if mutation == 'excess_facts': template_doc[0]['inputs'][0]['facts'].append({})
+                    if mutation == 'fabricated_reference': template_doc[0]['inputs'][0]['reference_value_origin'] = {}
+                    if mutation == 'injected_revision': template_doc[0]['meaning_source']['revision'] = '1' * 40
+                    case['sources'][template]['bytes'] = producer.encode(template_doc)
+                with self.assertRaises((ValueError, KeyError)):
+                    producer.authored_fragments(graph, case, limit)
+
+    def test_full_candidate_through_actual_public_contract(self):
+        """Synthetic graph/reviews; exact Runner inputs and selected Contracts bytes."""
+        import copy
+        import os
+        import sys
+        from contextlib import contextmanager
+        snapshot = Path(os.environ['QCL_DOCS_TEST_SNAPSHOT'])
+        contract_src = Path(os.environ['P10_CONTRACTS_SRC']).resolve()
+        prefix = 'qcl_negf_contracts'
+        saved = {k: v for k, v in sys.modules.items() if k == prefix or k.startswith(prefix + '.')}
+        saved_path = sys.path[:]
+        for key in saved: del sys.modules[key]
+        try:
+            historical = producer.module('_p10_historical_fixture', snapshot / 'tests/test_docs_bundle_closure.py')
+            kwargs, _, _, retained = historical.frozen_case()
+            for key in list(sys.modules):
+                if key == prefix or key.startswith(prefix + '.'): del sys.modules[key]
+            sys.path.insert(0, str(contract_src))
+            import qcl_negf_contracts as contracts
+            from qcl_negf_contracts import model_help
+            self.assertTrue(Path(contracts.__file__).resolve().is_relative_to(contract_src))
+            assembly = producer.module('_p10_contract_assembly', ROOT / 'ops/docs/assemble.py')
+            graph = kwargs['before']
+            component = 'components/QCLNEGFRunner.jl'
+            runner_revision = 'c8ac293798b8bd2505fe59063d79077f14d32018'
+            contract_component = 'components/qcl-negf-contracts'
+            # Detached engineering graph: Runner is published; candidate Contracts
+            # revision is deliberately synthetic until its owner publishes it.
+            candidate_revision = '4' * 40
+            for selected_graph in (kwargs['before'], kwargs['after'], retained['selection']['sources']):
+                for row in selected_graph['components']:
+                    if row['path'] == component: row['revision'] = runner_revision
+                    if row['path'] == contract_component: row['revision'] = candidate_revision
+            for (owner, _), row in retained['sources'].items():
+                if owner == component: row['revision'] = runner_revision
+                if owner == contract_component: row['revision'] = candidate_revision
+            for coverage in kwargs['coverage']:
+                for ref in coverage['sources']:
+                    if ref['component'] == component: ref['revision'] = runner_revision
+            for review in retained['public_reviews']:
+                if review['source']['component'] == component:
+                    review['source']['revision'] = runner_revision
+            schema_path = 'src/qcl_negf_contracts/schemas/model-help.schema.json'
+            schema = retained['sources'][(contract_component, schema_path)]
+            schema['bytes'] = (contract_src / 'qcl_negf_contracts/schemas/model-help.schema.json').read_bytes()
+            kwargs['schema_ref'] = producer.reference(retained, contract_component, schema_path)
+            for review in retained['public_reviews']:
+                if (review['source']['component'], review['source']['path']) == (contract_component, schema_path):
+                    review['source'] = copy.deepcopy(kwargs['schema_ref'])
+            fixture = Path(os.environ['P10_HELP_FIXTURE'])
+            names = ('docs/help/fragments.json', 'docs/src/user/results.md',
+                     'src/infrastructure/scientific/model_help.jl')
+            for name in names:
+                retained['sources'][(component, name)] = {'revision': runner_revision,
+                                                           'bytes': (fixture / name).read_bytes()}
+            retained['input_allowlist'] += tuple((component, name) for name in names)
+            retained['selector_allowlist'] += tuple((component, names[0], 'json_pointer', f'/0/inputs/{i}')
+                                                      for i in range(8))
+            retained['selector_allowlist'] += ((component, names[1], 'file', ''),
+                                                (component, names[2], 'symbol', '_model_help_inputs'))
+            recipe = kwargs['generator']['recipes'][0]
+            for name in names:
+                source = producer.reference(retained, component, name)
+                retained['public_reviews'] += ({'source': source, 'recipe': recipe,
+                    'receipt': {'bytes': b'synthetic review', 'sha256': producer.sha(b'synthetic review')}},)
+            descriptors, help_payload = producer.authored_fragments(graph, retained, 32768)
+            kwargs['fragments'] = descriptors
+            kwargs['payload'].update(help_payload)
+            kwargs['payload']['runner/user/results.html'] = (
+                b'<html><head></head><body><h1 id="solver-input-help">Actual input</h1></body></html>')
+            retained['output_allowlist'] += tuple(help_payload) + ('runner/user/results.html',)
+            kwargs['validate_shape'] = contracts.schema_validator('model-help.schema.json').validate
+            def bindings(document, *, coverage):
+                blob = producer.encode(document)
+                retained['bundle'] = {'bytes': blob, 'sha256': producer.sha(blob)}
+                retained['payload'] = {path: {'kind': 'file', 'bytes': data}
+                                       for path, data in kwargs['payload'].items()}
+                model_help.validate_documentation_bundle(document, retained=retained,
+                    required_sources=[r for row in coverage for r in row['sources']])
+            kwargs['validate_bindings'] = bindings
+            kwargs['validate_assets'] = lambda lock, inputs, *, payload: {}
+            result = assembly.finalize_bundle(**kwargs)
+            self.assertEqual(result['status'], 'candidate')
+            self.assertEqual(result['manifest']['sources']['revision'], graph['revision'])
+            path = descriptors[0]['file']
+            cases = ('wrong_source_hash', 'missing_review', 'missing_selector', 'wrong_revision',
+                     'missing_page_anchor', 'changed_fragment_bytes', 'missing_output_allowlist')
+            for mutation in cases:
+                with self.subTest(mutation=mutation):
+                    saved_retained, saved_payload = copy.deepcopy(retained), dict(kwargs['payload'])
+                    if mutation == 'wrong_source_hash': retained['sources'][(component, names[1])]['bytes'] += b'x'
+                    if mutation == 'missing_review': retained['public_reviews'] = ()
+                    if mutation == 'missing_selector': retained['selector_allowlist'] = ()
+                    if mutation == 'wrong_revision': retained['sources'][(component, names[0])]['revision'] = '3' * 40
+                    if mutation == 'missing_page_anchor': kwargs['payload']['runner/user/results.html'] = b'<html><head></head><body></body></html>'
+                    if mutation == 'changed_fragment_bytes': kwargs['payload'][path] += b' '
+                    if mutation == 'missing_output_allowlist': retained['output_allowlist'] = ()
+                    try:
+                        with self.assertRaises((model_help.ContractError,
+                                                model_help.DocumentationProofMissing, assembly.DocsError)):
+                            assembly.finalize_bundle(**kwargs)
+                    finally:
+                        retained.clear(); retained.update(saved_retained)
+                        kwargs['payload'].clear(); kwargs['payload'].update(saved_payload)
+        finally:
+            for key in list(sys.modules):
+                if key == prefix or key.startswith(prefix + '.'): del sys.modules[key]
+            sys.modules.update(saved)
+            sys.path[:] = saved_path
+
+class RunnerHelpSourceProjection(unittest.TestCase):
+    def test_only_authored_template_is_added_to_existing_runner_projection(self):
+        import re
+        source = (ROOT / 'nix/docs-sources.nix').read_text()
+        match = re.search(r'runner\s*=\s*select\s*\(root\s*\+\s*"/components/QCLNEGFRunner.jl"\)\s*\[([^]]+)\]', source)
+        self.assertIsNotNone(match)
+        paths = re.findall(r'"([^"]+)"', match.group(1))
+        self.assertEqual(paths, ['docs/make.jl', 'docs/Project.toml', 'docs/src', 'docs/help/fragments.json'])
+        flake = (ROOT / 'flake.nix').read_text()
+        self.assertIn('runnerDocs = selected.runner;', flake)
+        self.assertIn('cp -a "$runnerDocs"/. "$out/components/QCLNEGFRunner.jl/"', flake)
+        self.assertIn('source_root = workspace;', flake)
+
+    def test_actual_nix_fileset_includes_exact_bytes_and_excludes_sibling(self):
+        import hashlib
+        import json
+        import os
+        import shutil
+        import subprocess
+        import tempfile
+        nix = shutil.which('nix-instantiate')
+        lib = os.environ.get('P10_NIX_LIB')
+        fixture = os.environ.get('P10_HELP_FIXTURE')
+        if not (nix and lib and fixture):
+            self.skipTest('requires existing nix-instantiate, P10_NIX_LIB and frozen P10_HELP_FIXTURE')
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            docs = root / 'components/QCLNEGFRunner.jl/docs'
+            (docs / 'help').mkdir(parents=True)
+            (docs / 'src').mkdir()
+            (docs / 'make.jl').write_bytes(b'fixture')
+            (docs / 'Project.toml').write_bytes(b'fixture')
+            (docs / 'src/page.md').write_bytes(b'fixture')
+            original = (Path(fixture) / 'docs/help/fragments.json').read_bytes()
+            (docs / 'help/fragments.json').write_bytes(original)
+            (docs / 'help/unselected.txt').write_bytes(b'unselected')
+            def path(value):
+                return '(/. + ' + json.dumps(str(value), ensure_ascii=False) + ')'
+            expression = '''let
+              lib0 = import (LIB);
+              lib = lib0 // { fileset = lib0.fileset // {
+                toSource = { root, fileset }: lib0.fileset.toList fileset;
+              }; };
+              selected = import (SOURCE) { inherit lib; root = ROOTPATH; };
+              paths = selected.runner;
+              help = HELPPATH; extra = EXTRAPATH;
+              in { hash = builtins.hashFile "sha256" help;
+                   included = builtins.elem help paths;
+                   excluded = !(builtins.elem extra paths); }
+            '''
+            for key, value in {'LIB': path(lib), 'SOURCE': path(ROOT / 'nix/docs-sources.nix'),
+                               'ROOTPATH': path(root), 'HELPPATH': path(docs / 'help/fragments.json'),
+                               'EXTRAPATH': path(docs / 'help/unselected.txt')}.items():
+                expression = expression.replace(key, value)
+            result = subprocess.run([nix, '--eval', '--strict', '--json', '--expr', expression],
+                                    capture_output=True, text=True, timeout=30)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(result.stdout), {'included': True, 'excluded': True,
+                'hash': hashlib.sha256(original).hexdigest()})
