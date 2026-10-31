@@ -316,8 +316,9 @@ def detached_review(root, graph, review):
         if not isinstance(path, str) or posixpath.normpath(path) != path or path.startswith('/') or any(p in ('.', '..') for p in path.split('/')):
             raise ValueError('review_source_path')
         expected = root / ('' if component == 'root' else component) / path
-        data = record(row['file'])
-        if data != read_file(expected) or (component, path) in sources:
+        maximum = 32768 if (component, path) == ('components/QCLNEGFRunner.jl', 'docs/help/fragments.json') else MAX_FILE
+        data = record(row['file'], maximum)
+        if data != read_file(expected, maximum) or (component, path) in sources:
             raise ValueError('review_source_identity')
         sources[(component, path)] = {'revision': row['revision'], 'bytes': data}
     reviews = []
@@ -345,6 +346,62 @@ def reference(retained, component, path):
         raise FileNotFoundError('missing retained source: ' + component + '/' + path)
     return {'component': component, 'revision': row['revision'], 'path': path,
             'selector': {'kind': 'file', 'value': ''}, 'sha256': sha(row['bytes'])}
+
+
+def authored_fragments(graph, retained, fragment_limit):
+    """Complete only the selected Runner-authored fragment's explicit refs."""
+    if not isinstance(fragment_limit, int) or isinstance(fragment_limit, bool) or not 1 <= fragment_limit <= 32768:
+        raise ValueError('help_fragment_limit')
+    component = 'components/QCLNEGFRunner.jl'
+    template = 'docs/help/fragments.json'
+    paths = ('production.energy_chunk', 'physical.lattice_temperature',
+             'physical.lo_temperature', 'physical.interface_roughness_height',
+             'physical.interface_correlation_length', 'physical.impurity_screening_wavenumber',
+             'physical.lo_screening_wavenumber', 'physical.lo_phonon_energy')
+    revisions = [r['revision'] for r in graph['components'] if r['path'] == component]
+    if len(revisions) != 1:
+        raise ValueError('help_source_graph')
+    def bind(ref, path, kind, value):
+        if ref != {'component': component, 'path': path,
+                   'selector': {'kind': kind, 'value': value}}:
+            raise ValueError('help_source_association')
+        key = (component, path)
+        row = retained['sources'].get(key)
+        if (row is None or row['revision'] != revisions[0] or key not in retained['input_allowlist']
+                or (*key, kind, value) not in retained['selector_allowlist']):
+            raise ValueError('help_source_association')
+        return {**ref, 'revision': row['revision'], 'sha256': sha(row['bytes'])}
+    row = retained['sources'].get((component, template))
+    if row is None or len(row['bytes']) > fragment_limit:
+        raise ValueError('help_template_missing_or_large')
+    documents = decode_json(row['bytes'])
+    if not isinstance(documents, list) or len(documents) != 1 or not isinstance(documents[0], dict):
+        raise ValueError('help_template_shape')
+    doc = documents[0]
+    if (doc.get('id') != 'runner.actual-solver-inputs' or 'source_revision' in doc
+            or not isinstance(doc.get('inputs'), list) or len(doc['inputs']) != len(paths)
+            or [i.get('path') for i in doc['inputs']] != list(paths)
+            or doc.get('api') != [] or doc.get('related') != [] or doc.get('equations') != []):
+        raise ValueError('help_template_shape')
+    doc['source_revision'] = graph['revision']
+    doc['meaning_source'] = bind(doc['meaning_source'], 'docs/src/user/results.md',
+                                 'file', '')
+    for index, item in enumerate(doc['inputs']):
+        if item.get('reference_value_origin', False) is not None:
+            raise ValueError('help_reference_origin')
+        item['schema_source'] = bind(item['schema_source'], template, 'json_pointer', f'/0/inputs/{index}')
+        if not isinstance(item.get('facts'), list) or len(item['facts']) != 10:
+            raise ValueError('help_facts_limit')
+        for fact in item['facts']:
+            if not isinstance(fact, dict) or not isinstance(fact.get('sources'), list) or len(fact['sources']) > 1:
+                raise ValueError('help_facts_limit')
+            fact['sources'] = [bind(ref, 'src/infrastructure/scientific/model_help.jl',
+                                    'symbol', '_model_help_inputs') for ref in fact['sources']]
+    data = encode(doc)
+    if len(data) > fragment_limit:
+        raise ValueError('help_fragment_limit')
+    path = 'help/fragments/' + doc['id'] + '.json'
+    return [{'id': doc['id'], 'file': path, 'sha256': sha(data)}], {path: data}
 
 
 def coverage_for(assembly, retained, payload):
@@ -505,8 +562,11 @@ def produce(inputs, work, output):
     asset_inputs = runtime.extract_inputs(asset_inputs, lock)
     locked = runtime.verify_inputs(asset_inputs, lock)
     retained = detached_review(root, graph, decode_json(record(inputs['review_inputs'])))
+    fragments, help_payload = authored_fragments(graph, retained, plan['limits']['fragment_bytes'])
     # Missing prepared Python dependencies fail before any Julia render.
     shape, bindings = owning_callbacks(root, graph, retained, {})
+    for data in help_payload.values():
+        shape(decode_json(data))
     pipeline = Pipeline(inputs, work)
     (work / 'raw').mkdir()
     (work / 'home').mkdir()
@@ -643,6 +703,9 @@ def produce(inputs, work, output):
         '<h1>Документация QCL NEGF</h1><a href="core/theory/09_scba.html#researcher-scba-route">Исследователь</a> '
         '<a href="runner/api/public.html#reader-api-routes">Разработчик</a> '
         '<a href="operator/recovery.html#operator-recovery">Оператор</a></main></body></html>').encode()
+    if set(payload) & set(help_payload):
+        raise ValueError('help_payload_collision')
+    payload.update(help_payload)
     if sum(map(len, payload.values())) > MAX_PUBLIC:
         raise ValueError('public_64MiB_limit')
     asset_inputs['runtime-contexts.json'] = encode(list(contexts.values()))
@@ -667,7 +730,7 @@ def produce(inputs, work, output):
         'recipes':recipes, 'toolchain_lock':reference(retained,'root','julia/Manifest.toml')}
     result = assembly.finalize_bundle(plan=plan, before=graph, after=decode_json(record(inputs['source_graph'])),
         generator=generator, schema_ref=reference(retained,'components/qcl-negf-contracts','src/qcl_negf_contracts/schemas/model-help.schema.json'),
-        coverage=coverage_for(assembly, retained, payload), fragments=[], aliases=[], payload=payload,
+        coverage=coverage_for(assembly, retained, payload), fragments=fragments, aliases=[], payload=payload,
         asset_lock=lock_bytes, asset_inputs=asset_inputs, validate_shape=shape,
         validate_bindings=bindings, validate_assets=assets)
     if result['status'] != 'candidate':
