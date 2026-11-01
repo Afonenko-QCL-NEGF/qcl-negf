@@ -86,10 +86,18 @@ assert one.drvPath != withRaw.drvPath;
 assert tool.executable == (pkgs.python314.withPackages (p: [])).interpreter;
 assert !(builtins.hasContext tool.drv);
 assert forbidden == [];
+assert builtins.all (path: builtins.pathExists (selected.presentation + "/${path}")) [
+  "ops/docs/operator-guides.json" "docs/public/operator-installation.md"
+  "docs/single-server-deployment.md"
+  "components/qcl-negf-platform/docs/linux-workers.md"
+  "components/qcl-negf-platform/docs/guest-agent.md"
+  "components/qcl-negf-platform/docs/host-resource-integration.md"
+  "components/qcl-negf-platform/docs/native-attempts.md"
+];
 assert one.drvPath != changedAssets.drvPath;
 assert one.drvPath != changedReviews.drvPath;
 assert one.drvPath != changedTool.drvPath;
 assert toString one.passthru.inputs.prepared_depot.store_path == toString two.passthru.inputs.prepared_depot.store_path;
-{ sameInputsSameDerivation = true; changedGraphDocsMiss = true; rawMismatchReject = true; originalUnicodeWhitespaceRetained = true; rawBytesAffectDocsKey = true; derivationMetadataHasNoDependencyContext = true; sourceProjectionExcludesBuildGitTests = true; assetsReviewToolInputsAffectDocsKey = true; graphDoesNotRetagDepot = true;
+{ sameInputsSameDerivation = true; changedGraphDocsMiss = true; rawMismatchReject = true; originalUnicodeWhitespaceRetained = true; rawBytesAffectDocsKey = true; derivationMetadataHasNoDependencyContext = true; sourceProjectionExcludesBuildGitTests = true; finiteOperatorGuidesIncluded = true; assetsReviewToolInputsAffectDocsKey = true; graphDoesNotRetagDepot = true;
   nodeRuntimeMetadataClosurePathAgree = true; npmWrapperDoesNotAffectDocsKey = true;
   native = "NOT_RUN; mock tools/depot, symbolic derivations only"; }

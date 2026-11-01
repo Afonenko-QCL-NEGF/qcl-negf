@@ -5,7 +5,7 @@ get(ENV, "QCL_DOCS_PROFILE", "") in ("offline-v1", "pilot-v1") ||
 
 # Staging reads this versioned literal without executing Julia. Keep the exact LF
 # bytes and final newline; this is generated index source, not a second chapter.
-const QCL_DOCS_OPERATOR_INDEX = "# Документация оператора\n\n[Восстановление прерванного запуска](@ref operator-recovery)\n\n[Неизменяемый runtime захвата](capture-runtime-delivery.md)\n\n[Свидетельство сборки solver](solver-build-receipt.md)\n"
+const QCL_DOCS_OPERATOR_INDEX = "# Документация оператора\n\n[Recovery](recovery.md)\n\n[Маршрут установки и обновления](installation.md)\n\n[Развёртывание](guides/deployment.md)\n\n[Внешний Linux worker](guides/linux-workers.md)\n\n[Guest agent и протокол](guides/guest-agent.md)\n\n[Ресурсы и restricted RPC](guides/host-resources.md)\n\n[Native attempts и их границы](guides/native-attempts.md)\n\n[Capture runtime](capture-runtime-delivery.md)\n\n[Solver build receipt](solver-build-receipt.md)\n\n"
 
 function _qcl_docs_path(name)
     value = get(ENV, name, "")
@@ -80,9 +80,17 @@ makedocs(
         prerender = false, mathengine = Documenter.KaTeX(),
         assets = ["assets/qcl-fixed-light.css"],
         repolink = "https://github.com/Afonenko-QCL-NEGF/qcl-negf"),
-    pages = ["Home" => "index.md", "Recovery" => "recovery.md",
+    pages = ["Начало" => "index.md",
+        "Recovery" => "recovery.md",
+        "Маршрут установки и обновления" => "installation.md",
+        "Развёртывание" => "guides/deployment.md",
+        "Внешний Linux worker" => "guides/linux-workers.md",
+        "Guest agent и протокол" => "guides/guest-agent.md",
+        "Ресурсы и restricted RPC" => "guides/host-resources.md",
+        "Native attempts и их границы" => "guides/native-attempts.md",
         "Capture runtime" => "capture-runtime-delivery.md",
-        "Solver build receipt" => "solver-build-receipt.md"],
+        "Solver build receipt" => "solver-build-receipt.md",
+    ],
     pagesonly = false,
     doctest = false,
     linkcheck = false,

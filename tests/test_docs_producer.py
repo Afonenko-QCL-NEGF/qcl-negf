@@ -11,6 +11,113 @@ spec = importlib.util.spec_from_file_location('docs_producer', ROOT / 'ops/docs/
 producer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(producer)
 class ProducerControls(unittest.TestCase):
+    def _operator_case(self):
+        import json
+        registry = json.loads((ROOT / 'ops/docs/operator-guides.json').read_text())
+        graph = {'revision': 'a'*40, 'components': [{'path': 'components/qcl-negf-platform', 'revision': 'b'*40, 'url': 'https://github.com/Afonenko-QCL-NEGF/qcl-negf-platform.git'}, {'path':'components/QCLNEGFRunner.jl','revision':'c'*40,'url':'https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl'}, {'path':'components/QCLNEGF.jl','revision':'d'*40,'url':'https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl'}, {'path':'components/qcl-negf-contracts','revision':'e'*40,'url':'https://github.com/Afonenko-QCL-NEGF/qcl-negf-contracts'}]}
+        retained = {'sources': {}, 'input_allowlist': [], 'selector_allowlist': []}
+        for row in registry['guides']:
+            component, path = row['component'], row['path']
+            raw = (ROOT / (path if component == 'root' else component + '/' + path)).read_bytes()
+            retained['sources'][(component,path)] = {'revision': graph['revision'] if component == 'root' else 'b'*40, 'bytes':raw}
+            retained['input_allowlist'].append((component,path));retained['selector_allowlist'].append((component,path,'file',''))
+        return registry,graph,retained
+
+    def test_operator_projection_keeps_platform_body_and_owned_reference(self):
+        helper = getattr(producer, 'operator_sources', None)
+        self.assertTrue(callable(helper), 'finite operator staging helper missing')
+        registry,graph,retained=self._operator_case()
+        files=helper(ROOT,registry,graph,retained)
+        self.assertIn('guides/guest-agent.md',files)
+        self.assertIn('Протокол QEMU'.encode(),files['guides/guest-agent.md'])
+        self.assertIn('guides/deployment.md',files)
+        import re
+        for row in registry['guides']:
+            full=row['path'] if row['component']=='root' else row['component']+'/'+row['path']
+            original=(ROOT/full).read_bytes()
+            self.assertEqual(re.findall(rb'(?ms)^```[^\n]*\n.*?^```',original),re.findall(rb'(?ms)^```[^\n]*\n.*?^```',files[row['stage_path']]))
+
+    def test_operator_requires_original_retained_revision_bytes_and_selector(self):
+        import copy
+        for mutation in ['source','revision','bytes','selector','allowlist']:
+            registry,graph,retained=self._operator_case();key=('components/qcl-negf-platform','docs/guest-agent.md')
+            if mutation=='source':del retained['sources'][key]
+            if mutation=='revision':retained['sources'][key]['revision']='f'*40
+            if mutation=='bytes':retained['sources'][key]['bytes']+=b'changed'
+            if mutation=='selector':retained['selector_allowlist'].remove((*key,'file',''))
+            if mutation=='allowlist':retained['input_allowlist'].remove(key)
+            with self.subTest(mutation=mutation),self.assertRaisesRegex(ValueError,'operator_retained_source_mismatch'):
+                producer.operator_sources(ROOT,registry,graph,retained)
+
+    def test_operator_registry_refuses_traversal_unknown_owner_and_duplicate_output(self):
+        import copy
+        for mutation in ['traversal','component','duplicate','missing']:
+            registry,graph,retained=self._operator_case()
+            if mutation=='traversal':registry['guides'][0]['path']='../private/key'
+            if mutation=='component':registry['guides'][0]['component']='components/unknown'
+            if mutation=='duplicate':registry['guides'][1]['public_path']=registry['guides'][0]['public_path']
+            if mutation=='missing':registry['guides'].pop()
+            with self.subTest(mutation=mutation),self.assertRaises(ValueError):producer.operator_sources(ROOT,registry,graph,retained)
+
+    def test_operator_rejects_selected_symlink_before_read(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);registry,graph,retained=self._operator_case()
+            for row in registry['guides']:
+                full=row['path'] if row['component']=='root' else row['component']+'/'+row['path'];leaf=root/full;leaf.parent.mkdir(parents=True,exist_ok=True)
+                leaf.write_bytes((ROOT/full).read_bytes())
+            leaf=root/'components/qcl-negf-platform/docs/guest-agent.md';leaf.unlink();leaf.symlink_to(ROOT/'components/qcl-negf-platform/docs/guest-agent.md')
+            with self.assertRaisesRegex(ValueError,'operator_symlink_source'):producer.operator_sources(root,registry,graph,retained)
+
+    def test_operator_reference_links_and_private_URLs_fail_closed(self):
+        links={('root','docs/b.md'):dict(component='root',path='docs/b.md',public_path='operator/b.html',fragments={'section':'Section'})}
+        options=dict(component='root',path='docs/a.md',public_path='operator/a.html',links=links,graph={'revision':'a'*40,'components':[]})
+        self.assertEqual(producer.operator_link_text('[B][read]\n[read]: b.md#section\n',**options),'[B][read]\n[read]: b.md#Section\n')
+        for text in ['[B][missing]','[B][read]\n[read]: b.md\n[read]: b.md#section\n','[B](b(x).md)','[B](https://127.0.0.1/private)','[B](https://user:password@example.org/a)']:
+            with self.subTest(text=text),self.assertRaises(ValueError):producer.operator_link_text(text,**options)
+
+    def test_operator_later_valid_link_cannot_hide_earlier_unsupported_destination(self):
+        links={('root','docs/b.md'):dict(component='root',path='docs/b.md',public_path='operator/b.html',fragments={})}
+        options=dict(component='root',path='docs/a.md',public_path='operator/a.html',links=links,graph={'revision':'a'*40,'components':[]})
+        # Each rejected candidate is tested both alone and before a valid link.
+        for bad in ['[bad](https://127.0.0.1/x(y))','[bad](unknown(x).md)',
+                    r'[bad](unknown\(x\).md)', r'\[bad](unknown(x).md)']:
+            for suffix in ['', ' [good](b.md)']:
+                with self.subTest(bad=bad,suffix=suffix),self.assertRaises(ValueError):
+                    producer.operator_link_text(bad+suffix,**options)
+        self.assertEqual(producer.operator_link_text('[first](b.md) [second](b.md)',**options),
+                         '[first](b.md) [second](b.md)')
+        literal='`[bad](https://127.0.0.1/x(y))` [good](b.md)\n\n```md\n[bad](unknown(x).md) [good](b.md)\n```\n'
+        self.assertEqual(producer.operator_link_text(literal,**options),literal)
+        self.assertEqual(producer.operator_link_text('[first][ref] [second][ref]\n[ref]: b.md\n',**options),
+                         '[first][ref] [second][ref]\n[ref]: b.md\n')
+
+    def test_operator_cross_renderer_HTML_projection_uses_exact_selected_graph_URL(self):
+        registry,graph,retained=self._operator_case()
+        raw=b'<a href="https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/'+b'c'*40+b'/docs/src/api/public.md">API</a>'
+        result=producer.operator_page_links(raw,'operator/guides/deployment.html',registry,graph)
+        self.assertIn(b'href="../../runner/api/public.html"',result)
+        different=raw.replace(b'c'*40,b'f'*40)
+        self.assertEqual(producer.operator_page_links(different,'operator/guides/deployment.html',registry,graph),different)
+
+    def test_operator_binds_repository_heading_alias_to_exact_Documenter_slug(self):
+        fragments=producer._heading_fragments('# Первый boot, enrollment и допуск\n')
+        self.assertEqual(fragments['первый-boot-enrollment-и-допуск'],'Первый-boot,-enrollment-и-допуск')
+
+    def test_operator_link_adapter_preserves_code_and_fails_unknown_targets(self):
+        helper = getattr(producer, 'operator_link_text', None)
+        self.assertTrue(callable(helper), 'bounded operator link adapter missing')
+        links = {('root','docs/b.md'): {'public_path':'operator/b.html', 'fragments':{'section':'Section'}}}
+        graph = {'revision':'a'*40,'components':[]}
+        text = '[B](b.md#section)\n\n```sh\n[B](unknown.md)\n```\n`[B](unknown.md)`\n'
+        got = helper(text, component='root', path='docs/a.md', public_path='operator/a.html', links=links, graph=graph)
+        self.assertIn('[B](b.md#Section)',got)
+        self.assertIn('```sh\n[B](unknown.md)\n```',got)
+        self.assertIn('`[B](unknown.md)`',got)
+        for target in ['unknown.md','../../private/key','b.md?query=1','b.md#missing']:
+            with self.subTest(target=target), self.assertRaises(ValueError):
+                helper('[B]('+target+')',component='root',path='docs/a.md',public_path='operator/a.html',links=links,graph=graph)
+
     def test_exact_raw_root_ancillary_selection_preserves_original_bytes(self):
         import tempfile
         import shutil
@@ -233,6 +340,79 @@ def published_callbacks(graph, retained, payload):
         return invoke
     return adapt(shape), adapt(binding)
 
+def historical_fixture(name='producer_closure_frozen'):
+    """Import exact pinned historical Contracts without ambient-generation leaks."""
+    import os
+    import sys
+    path = Path(os.environ['QCL_DOCS_TEST_SNAPSHOT']) / 'tests/test_docs_bundle_closure.py'
+    cached = sys.modules.get(name)
+    if cached is not None:
+        if Path(cached.__file__).resolve() != path.resolve():
+            raise RuntimeError('cached frozen fixture source identity')
+        return cached
+    prefix = 'qcl_negf_contracts'
+    saved = {k:v for k,v in sys.modules.items() if k == prefix or k.startswith(prefix+'.')}
+    saved_path = sys.path[:]
+    for key in saved: del sys.modules[key]
+    try:
+        return producer.module(name, path)
+    except BaseException:
+        sys.modules.pop(name, None)
+        raise
+    finally:
+        for key in list(sys.modules):
+            if key == prefix or key.startswith(prefix+'.'): del sys.modules[key]
+        sys.modules.update(saved)
+        sys.path[:] = saved_path
+
+
+def current_operator_extension(kwargs, retained):
+    """Separate SYNTHETIC extension; immutable historical literals stay unchanged.
+
+    Historical Core/Runner bytes and revisions remain applicable to old media
+    oracles. Root/Platform get explicit fixture revisions for current guide and
+    recipe bytes, with exact C2 associations, never actual approval/render proof.
+    """
+    import json
+    graph = kwargs['before']
+    graph['revision'] = '1'*40
+    for row in graph['components']:
+        if row['path'] == 'components/qcl-negf-platform': row['revision'] = '2'*40
+    kwargs['after'] = producer.decode_json(producer.encode(graph))
+    retained['selection']['sources'] = producer.decode_json(producer.encode(graph))
+    for (component, path), row in retained['sources'].items():
+        if component == 'root': row['revision'] = graph['revision']
+    registry = json.loads((ROOT/'ops/docs/operator-guides.json').read_bytes())
+    for guide in registry['guides']:
+        component, path = guide['component'], guide['path']
+        full = path if component == 'root' else component+'/'+path
+        retained['sources'][(component,path)] = dict(revision=graph['revision'] if component=='root' else '2'*40,
+                                                    bytes=(ROOT/full).read_bytes())
+        if guide['public_path'] != 'operator/recovery.html':
+            anchor = ' id="operator-installation-route"' if guide['id']=='installation' else ''
+            kwargs['payload'][guide['public_path']] = ('<h1'+anchor+'>SYNTHETIC current guide</h1>').encode()
+    retained['sources'][('root','docs/public/make.jl')] = dict(revision=graph['revision'],bytes=(ROOT/'docs/public/make.jl').read_bytes())
+    # Move coalesced historical support IDs in the copied fixture onto their
+    # actual owning pages; the immutable historical payload is never mutated.
+    kwargs['payload']['core/theory/09_scba.html'] = kwargs['payload']['core/theory/09_scba.html'].replace(b' id="researcher-final-route"', b'')
+    kwargs['payload']['operator/recovery.html'] = kwargs['payload']['operator/recovery.html'].replace(b' id="operator-recovery-route"', b'')
+    kwargs['payload']['core/theory/12_validation.html'] = b'<h1 id="researcher-final-route">Synthetic support</h1>'
+    kwargs['payload']['runner/user/results.html'] = b'<h1 id="operator-recovery-route">Synthetic support</h1>'
+    generator = kwargs['generator']
+    generator['recipes'] = [producer.reference(retained,'root','docs/public/make.jl')]
+    generator['toolchain_lock'] = producer.reference(retained,'root','julia/Manifest.toml')
+    kwargs['plan'] = json.loads((ROOT/'ops/docs/pilot-plan.json').read_bytes())
+    kwargs['coverage'] = producer.coverage_for(producer.module('_current_extension_assembly',ROOT/'ops/docs/assemble.py'),retained,kwargs['payload'],registry)
+    retained['input_allowlist'] = tuple(retained['sources'])
+    retained['selector_allowlist'] = tuple((c,p,'file','') for c,p in retained['sources'])
+    retained['output_allowlist'] = tuple(kwargs['payload'])
+    retained['payload'] = {p:dict(kind='file',bytes=data)for p,data in kwargs['payload'].items()}
+    note = b'SYNTHETIC current guide extension association; not actual approval/render/native/science'
+    retained['public_reviews'] = tuple(dict(source=producer.reference(retained,c,p),recipe=generator['recipes'][0],
+        receipt=dict(bytes=note,sha256=producer.sha(note)))for c,p in retained['sources'])
+    return kwargs, retained
+
+
 class MediaCompatibilityControls(unittest.TestCase):
     """Exact public media in the historical full C1/C2 engineering fixture.
 
@@ -248,14 +428,13 @@ class MediaCompatibilityControls(unittest.TestCase):
         if not snapshot:
             raise RuntimeError('Root must supply QCL_DOCS_TEST_SNAPSHOT')
         cls.snapshot = Path(snapshot)
-        cls.fixture = sys.modules.get('producer_closure_frozen')
-        if cls.fixture is None:
-            cls.fixture = producer.module('producer_closure_frozen', cls.snapshot / 'tests/test_docs_bundle_closure.py')
+        cls.fixture = historical_fixture()
         cls.assembly = producer.module('producer_media_assembly', ROOT / 'ops/docs/assemble.py')
         cls.component = 'components/QCLNEGF.jl'
 
     def case(self):
         kwargs, _, _, retained = self.fixture.frozen_case()
+        kwargs, retained = current_operator_extension(kwargs, retained)
         revision = next(row['revision'] for row in kwargs['before']['components'] if row['path'] == self.component)
         # The actual Core primary files belong to precisely this historical Core.
         self.assertEqual(revision, '5b1cdd458eb07ff8c7c792642eda58d9061e1017')
@@ -487,18 +666,28 @@ class ProducerClosureControls(unittest.TestCase):
             raise RuntimeError('Root must supply QCL_DOCS_TEST_SNAPSHOT for real C1+C2 fixtures')
         cls.snapshot = Path(snapshot)
         fixture_path = cls.snapshot / 'tests/test_docs_bundle_closure.py'
-        cls.fixture = sys.modules.get('producer_closure_frozen')
-        if cls.fixture is None:
-            cls.fixture = producer.module('producer_closure_frozen', fixture_path)
+        cls.fixture = historical_fixture()
         if Path(cls.fixture.__file__).resolve() != fixture_path.resolve():
             raise RuntimeError('cached frozen fixture source identity')
         cls.assembly = producer.module('producer_current_assembly', ROOT / 'ops/docs/assemble.py')
 
     def case(self):
         kwargs, expected, blob, retained = self.fixture.frozen_case()
+        kwargs, retained = current_operator_extension(kwargs, retained)
         kwargs['validate_shape'], kwargs['validate_bindings'] = published_callbacks(
             kwargs['before'], retained, kwargs['payload'])
         return kwargs, retained
+
+    def test_historical_import_restores_selected_Contracts_generation(self):
+        import sys
+        import qcl_negf_contracts
+        before = {k:v for k,v in sys.modules.items() if k == 'qcl_negf_contracts' or k.startswith('qcl_negf_contracts.')}
+        path_before = sys.path[:]
+        historical = historical_fixture('producer_contracts_isolation_control')
+        self.assertEqual({k:v for k,v in sys.modules.items() if k == 'qcl_negf_contracts' or k.startswith('qcl_negf_contracts.')}, before)
+        self.assertEqual(sys.path, path_before)
+        self.assertTrue(Path(historical.model_help.__file__).resolve().is_relative_to(self.snapshot))
+        self.assertIs(sys.modules['qcl_negf_contracts'], qcl_negf_contracts)
 
     def test_small_render_through_real_c1_c2(self):
         kwargs, _ = self.case()
@@ -506,6 +695,18 @@ class ProducerClosureControls(unittest.TestCase):
         self.assertEqual(result['status'], 'candidate')
         self.assertEqual(result['manifest']['fragments'], [])
         self.assertEqual(len(kwargs['coverage']), 3)
+
+    def test_each_current_guide_requires_its_exact_C2_review(self):
+        kwargs, _ = self.case()
+        self.assertEqual(self.assembly.finalize_bundle(**kwargs)['status'], 'candidate')
+        guides = next(row['sources'] for row in kwargs['coverage'] if row['id']=='operator')
+        self.assertEqual(len(guides), 9)
+        for source in guides:
+            with self.subTest(component=source['component'], path=source['path']):
+                changed, retained = self.case()
+                retained['public_reviews'] = tuple(row for row in retained['public_reviews']
+                    if (row['source']['component'],row['source']['path']) != (source['component'],source['path']))
+                self.assertEqual(self.assembly.finalize_bundle(**changed)['status'], 'blocked')
 
     def test_missing_independent_review_blocks(self):
         kwargs, retained = self.case()
@@ -824,6 +1025,16 @@ class NativePrimaryCoverageControls(unittest.TestCase):
             'runner/user/results.html': b'<h1 id="operator-recovery-route">Recovery</h1>',
             'operator/recovery.html': b'<h1 id="operator-recovery">Operator</h1>',
         }
+        # The literal six-page historical evidence above stays unchanged. This
+        # separate synthetic current-selection extension supplies the new guide
+        # routes and original bytes; it is not new native Documenter evidence.
+        registry, selected, retained = ProducerControls()._operator_case()
+        graph['components'].append(selected['components'][0])
+        sources.update(retained['sources'])
+        for row in registry['guides']:
+            if row['public_path'] != 'operator/recovery.html':
+                anchor = ' id="operator-installation-route"' if row['id'] == 'installation' else ''
+                payload[row['public_path']] = ('<h1' + anchor + '>SYNTHETIC current guide</h1>').encode()
         return assembly, graph, {'sources': sources}, payload
 
     def test_all_six_actual_owning_routes_survive_primary_coverage(self):
@@ -836,11 +1047,19 @@ class NativePrimaryCoverageControls(unittest.TestCase):
             'developer': {'runner/api/public.html': ['reader-api-routes'],
                           'runner/user/configuration.html': ['developer-configuration-route']},
             'operator': {'operator/recovery.html': ['operator-recovery'],
+                         'operator/installation.html': ['operator-installation-route'],
+                         'operator/guides/deployment.html': [],
+                         'operator/guides/linux-workers.html': [],
+                         'operator/guides/guest-agent.html': [],
+                         'operator/guides/host-resources.html': [],
+                         'operator/guides/native-attempts.html': [],
+                         'operator/capture-runtime-delivery.html': [],
+                         'operator/solver-build-receipt.html': [],
                          'runner/user/results.html': ['operator-recovery-route']},
         })
         plan = assembly.load_pilot_plan(ROOT / 'ops/docs/pilot-plan.json')
         self.assertIsNone(assembly._bundle_coverage(plan, graph, coverage, payload))
-        self.assertEqual([len(row['sources']) for row in coverage], [1, 2, 1])
+        self.assertEqual([len(row['sources']) for row in coverage], [1, 2, 9])
 
     def test_unrelated_page_cannot_supply_missing_support_anchor(self):
         assembly, graph, retained, payload = self.case()
@@ -951,6 +1170,7 @@ class AuthoredHelpControls(unittest.TestCase):
         try:
             historical = producer.module('_p10_historical_fixture', snapshot / 'tests/test_docs_bundle_closure.py')
             kwargs, _, _, retained = historical.frozen_case()
+            kwargs, retained = current_operator_extension(kwargs, retained)
             for key in list(sys.modules):
                 if key == prefix or key.startswith(prefix + '.'): del sys.modules[key]
             sys.path.insert(0, str(contract_src))
@@ -1005,7 +1225,7 @@ class AuthoredHelpControls(unittest.TestCase):
             kwargs['fragments'] = descriptors
             kwargs['payload'].update(help_payload)
             kwargs['payload']['runner/user/results.html'] = (
-                b'<html><head></head><body><h1 id="solver-input-help">Actual input</h1></body></html>')
+                b'<html><head></head><body><h1 id="solver-input-help">Actual input</h1><p id="operator-recovery-route">Synthetic support</p></body></html>')
             retained['output_allowlist'] += tuple(help_payload) + ('runner/user/results.html',)
             kwargs['validate_shape'] = contracts.schema_validator('model-help.schema.json').validate
             def bindings(document, *, coverage):

@@ -73,6 +73,29 @@ AVAILABLE_PRIMARY = {
 }
 
 
+# Current projection expectations are independent literals; old PRIMARY stays a
+# historical three-entry-route fixture rather than being relabelled as current.
+CURRENT_OPERATOR_SOURCES = [
+    'docs/public/operator-recovery.md','docs/public/operator-installation.md',
+    'docs/single-server-deployment.md','components/qcl-negf-platform/docs/linux-workers.md',
+    'components/qcl-negf-platform/docs/guest-agent.md',
+    'components/qcl-negf-platform/docs/host-resource-integration.md',
+    'components/qcl-negf-platform/docs/native-attempts.md',
+    'docs/capture-runtime-delivery.md','docs/solver-build-receipt.md',
+]
+CURRENT_OPERATOR_URLS = [
+    'operator/recovery.html#operator-recovery',
+    'operator/installation.html#operator-installation-route',
+    'operator/guides/deployment.html','operator/guides/linux-workers.html',
+    'operator/guides/guest-agent.html','operator/guides/host-resources.html',
+    'operator/guides/native-attempts.html','operator/capture-runtime-delivery.html',
+    'operator/solver-build-receipt.html',
+]
+CURRENT_PRIMARY = {**PRIMARY, 'operator':dict(section='operator',
+    primary_sources=CURRENT_OPERATOR_SOURCES,primary_urls=CURRENT_OPERATOR_URLS)}
+CURRENT_AVAILABLE = AVAILABLE_PRIMARY | set(CURRENT_OPERATOR_SOURCES)
+
+
 class ScriptReferences(HTMLParser):
     """Test-only observation of external script attributes; never evaluates JS."""
 
@@ -328,7 +351,7 @@ class DocsAssemblyTests(unittest.TestCase):
         plan = assembly.load_pilot_plan(ROOT / "ops/docs/pilot-plan.json")
         slices = {item["id"]: item for item in plan["slices"]}
         self.assertEqual(set(slices), {"researcher", "developer", "operator"})
-        for identity, expected in PRIMARY.items():
+        for identity, expected in CURRENT_PRIMARY.items():
             with self.subTest(slice=identity):
                 self.assertEqual(slices[identity]["section"], expected["section"])
                 self.assertEqual(slices[identity]["primary_sources"], expected["primary_sources"])
@@ -336,11 +359,19 @@ class DocsAssemblyTests(unittest.TestCase):
         self.assertEqual(set(plan["expected_primary_anchors"]), {
             "researcher-scba-route", "researcher-final-route", "reader-api-routes",
             "developer-configuration-route", "operator-recovery-route", "operator-recovery",
+            "operator-installation-route",
         })
-        assembly.validate_primary_sources(plan, AVAILABLE_PRIMARY)
-        available = AVAILABLE_PRIMARY - {"components/QCLNEGF.jl/docs/src/theory/09_scba.md"}
+        assembly.validate_primary_sources(plan, CURRENT_AVAILABLE)
+        available = CURRENT_AVAILABLE - {"components/QCLNEGF.jl/docs/src/theory/09_scba.md"}
         self.rejected(lambda: assembly.validate_primary_sources(plan, available),
                       "missing_primary_source")
+
+    def test_operator_route_requires_installed_guides_not_only_recovery(self):
+        plan = assembly.load_pilot_plan(ROOT / "ops/docs/pilot-plan.json")
+        operator = next(row for row in plan['slices'] if row['id'] == 'operator')
+        self.assertIn('docs/single-server-deployment.md', operator['primary_sources'])
+        self.assertIn('components/qcl-negf-platform/docs/guest-agent.md', operator['primary_sources'])
+        self.assertIn('operator/installation.html#operator-installation-route', operator['primary_urls'])
 
     def test_primary_source_and_url_mutants_do_not_redefine_the_accepted_journeys(self):
         plan = assembly.load_pilot_plan(ROOT / "ops/docs/pilot-plan.json")
@@ -592,6 +623,24 @@ class DocsAssemblyTests(unittest.TestCase):
         self.assertIsNone(result["bundle_bytes"])
         self.assertNotIn("origins", result)
 
+
+
+def load_tests(loader, standard_tests, pattern):
+    """Existing docs:check runs current projection and real C1/C2 controls too."""
+    import sys
+    suite = unittest.TestSuite([standard_tests])
+    for name in ['test_docs_producer','test_docs_bundle_closure']:
+        candidate = sys.modules.get(name)
+        if candidate is None:
+            spec = importlib.util.spec_from_file_location(name, ROOT / 'tests' / (name+'.py'))
+            candidate = importlib.util.module_from_spec(spec);sys.modules[name]=candidate;spec.loader.exec_module(candidate)
+        if name == 'test_docs_producer':
+            suite.addTests(loader.loadTestsFromTestCase(candidate.NativePrimaryCoverageControls))
+            suite.addTests(candidate.ProducerControls(method) for method in loader.getTestCaseNames(candidate.ProducerControls) if method.startswith('test_operator_'))
+        else:
+            suite.addTests(loader.loadTestsFromTestCase(candidate.CurrentOperatorClosureTests))
+            suite.addTests(loader.loadTestsFromTestCase(candidate.DocsBundleClosureTests))
+    return suite
 
 if __name__ == "__main__":
     unittest.main()

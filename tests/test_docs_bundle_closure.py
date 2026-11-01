@@ -1171,8 +1171,17 @@ EXPECTED_FILES = [{'path': 'core/theory/09_scba.html',
   'bytes': 81,
   'sha256': 'b0a2c39b19b2de36c5e331cb1b15fe56ac617f28a9ed97568b596e18d5ed9f20'}]
 
+# Current Source/L constructor imports the actual selected candidate package.
+# Historical literal pins/GRAPH/source bytes above remain unchanged and are not
+# relabelled as this selection. This fixture is not final publication evidence.
+CURRENT_CONTRACTS_PINS = {
+ '__init__.py':'32cbb629679afd8a752f8de69982889b0b24dfe1e5692c127ac8ccdb351c03be',
+ 'messages.py':'109f2f59d294cad64015b9d14586506539a8fedfab2cdf0cf4a389b48f7bfc0e',
+ 'model_help.py':'085f566a262d2061e57a7c3c842ecf05374a6e3655a46e96b381f05c4be1cefe',
+ 'schemas/model-help.schema.json':'e5cdad2812637e4dcef14f563fa44a745e2abc26ac753ddc4f2f614383c850a1',
+}
 # Import only the exact candidate package after checking its selected source pins.
-for path, expected in CONTRACTS_PINS.items():
+for path, expected in CURRENT_CONTRACTS_PINS.items():
     if digest((CONTRACTS / path).read_bytes()) != expected:
         raise RuntimeError("Contracts source drift: " + path)
 if any(name == "qcl_negf_contracts" or name.startswith("qcl_negf_contracts.")
@@ -1293,10 +1302,148 @@ def frozen_case(payload=None):
     return kwargs, expected, expected_bytes, retained
 
 
+def current_case(payload=None):
+    """SYNTHETIC_CURRENT_SELECTION: real candidate C1/C2 over actual source bytes.
+
+    Root/Platform revisions below are explicit fixture identities for unpublished
+    projection/text edits. Other gitlinks are actual published-base metadata.
+    This is not an actual render, production review or final published graph.
+    The historical GRAPH/PAYLOAD/pins and frozen_case above stay untouched.
+    """
+    pspec=importlib.util.spec_from_file_location('current_fixture_producer',ROOT/'ops/docs/produce.py')
+    producer=importlib.util.module_from_spec(pspec);pspec.loader.exec_module(producer)
+    graph=copy.deepcopy(GRAPH);graph['revision']='1'*40
+    base_revisions={
+      'components/QCLNEGF.jl':'01d472141a91c9429f43f7237460a17592d65845',
+      'components/QCLNEGFRunner.jl':'195e42afdf3c26e796f2420c2a0a7e2674f7a395',
+      'components/qcl-negf-aiida':'336358dfd10c698e4b4a71d8c93562aaa8ee7182',
+      'components/qcl-negf-contracts':'5eb0e61a9fc12fa2215291e47b7cd28888ce64cc',
+      'components/qcl-negf-platform':'2'*40,
+      'components/qcl-negf-portal':'6a15eacc95a8096ac514500c4b81fa9b4e49ce5f',
+      'components/qcl-negf-research':'46fb51fbd594be80127cf543c7160fc69d8e3b2d',
+      'components/qcl-negf-results':'c50c9ee0cb52a626dfbca0759ce6581c924856e0',
+    }
+    for row in graph['components']:row['revision']=base_revisions[row['path']]
+    baseline={
+      'index.html':b'<!doctype html><p>Synthetic current-selection fixture only</p>',
+      'core/theory/09_scba.html':b'<h1 id="researcher-scba-route">Fixture</h1>',
+      'core/theory/12_validation.html':b'<h1 id="researcher-final-route">Fixture</h1>',
+      'runner/api/public.html':b'<h1 id="reader-api-routes">Fixture</h1>',
+      'runner/user/configuration.html':b'<h1 id="developer-configuration-route">Fixture</h1>',
+      'runner/user/results.html':b'<h1 id="operator-recovery-route">Fixture</h1>',
+      'operator/recovery.html':b'<h1 id="operator-recovery">Fixture</h1>',
+      'operator/installation.html':b'<h1 id="operator-installation-route">Fixture</h1>',
+      'operator/guides/deployment.html':b'<h1>Deployment source fixture</h1>',
+      'operator/guides/linux-workers.html':b'<h1>Linux source fixture</h1>',
+      'operator/guides/guest-agent.html':b'<h1>Guest agent source fixture</h1>',
+      'operator/guides/host-resources.html':b'<h1>Resource source fixture</h1>',
+      'operator/guides/native-attempts.html':b'<h1>Native attempt source fixture</h1>',
+      'operator/capture-runtime-delivery.html':b'<h1>Capture source fixture</h1>',
+      'operator/solver-build-receipt.html':b'<h1>Solver receipt source fixture</h1>',
+    }
+    actual=copy.deepcopy(baseline if payload is None else payload)
+    sources={}
+    paths={p for _,_,rows,_ in assembly.PRIMARY.values() for p in rows}
+    paths.update(['docs/public/make.jl','julia/Manifest.toml','julia/Project.toml',
+      'components/qcl-negf-contracts/src/qcl_negf_contracts/schemas/model-help.schema.json'])
+    for full in paths:
+        parts=full.split('/')
+        component='/'.join(parts[:2]) if parts[0]=='components' else 'root'
+        path='/'.join(parts[2:]) if component!='root' else full
+        revision=graph['revision'] if component=='root' else base_revisions[component]
+        sources[(component,path)]=dict(revision=revision,bytes=(ROOT/full).read_bytes())
+    retained=dict(selection={'sources':graph},sources=sources,input_allowlist=tuple(sources),
+        selector_allowlist=tuple((c,p,'file','')for c,p in sources),output_allowlist=tuple(baseline),metadata={})
+    ref=lambda c,p:producer.reference(retained,c,p)
+    recipe=ref('root','docs/public/make.jl')
+    generator=dict(name='Documenter',version='1.17.0',uuid='e30172f5-a6a5-5a46-863b-614d45cd2de4',
+        git_tree_sha1='56e9c37b5e7c3b4f080ab1da18d72d5c290e184a',julia_version='1.13.0',
+        project_sha256=digest((ROOT/'julia/Project.toml').read_bytes()),
+        manifest_sha256=digest((ROOT/'julia/Manifest.toml').read_bytes()),recipes=[recipe],
+        toolchain_lock=ref('root','julia/Manifest.toml'))
+    expected=dict(format='qcl-negf.docs-bundle.v1',sources=graph,
+        schema=ref('components/qcl-negf-contracts','src/qcl_negf_contracts/schemas/model-help.schema.json'),
+        generator=generator,fragments=[],aliases=[],files=[dict(path=p,media_type='text/html',bytes=len(data),sha256=digest(data)) for p,data in sorted(baseline.items())])
+    blob=raw(expected);retained['bundle']=dict(bytes=blob,sha256=digest(blob))
+    retained['payload']={p:dict(kind='file',bytes=data)for p,data in actual.items()}
+    note=b'SYNTHETIC current-source owning-review association fixture, not actual approval/render/native/science'
+    retained['public_reviews']=tuple(dict(source=ref(c,p),recipe=recipe,receipt=dict(bytes=note,sha256=digest(note)))for c,p in sources)
+    coverage=producer.coverage_for(assembly,retained,baseline)
+    def bindings(document,*,coverage):
+        try:
+            model_help.validate_documentation_bundle(document,retained=retained,
+                required_sources=[source for row in coverage for source in row['sources']])
+        except model_help.DocumentationProofMissing as error:raise FileNotFoundError('missing current owning proof')from error
+    def assets(lock,inputs,*,payload):
+        if lock!=b'{"assets":[],"engineering_fixture":true}' or inputs!={} or any(not p.endswith('.html')for p in payload):
+            raise ValueError('synthetic fixture is not asset/license evidence')
+        return {}
+    kwargs=dict(plan=json.loads((ROOT/'ops/docs/pilot-plan.json').read_bytes()),before=copy.deepcopy(graph),after=copy.deepcopy(graph),
+        generator=generator,schema_ref=expected['schema'],coverage=coverage,fragments=[],aliases=[],payload=actual,
+        asset_lock=b'{"assets":[],"engineering_fixture":true}',asset_inputs={},
+        validate_shape=contracts.schema_validator('model-help.schema.json').validate,
+        validate_bindings=bindings,validate_assets=assets)
+    return kwargs,expected,blob,retained
+
+
+class CurrentOperatorClosureTests(unittest.TestCase):
+    def test_current_platform_guides_have_genuine_C1_C2_associations(self):
+        constructor = globals().get('current_case')
+        self.assertTrue(callable(constructor), 'current selection constructor missing')
+        kwargs, expected, blob, retained = constructor()
+        refs = [ref for row in kwargs['coverage'] for ref in row['sources']]
+        model_help.validate_documentation_bundle(expected,retained=retained,required_sources=refs)
+        result = assembly.finalize_bundle(**kwargs)
+        self.assertEqual(result['status'],'candidate')
+        operator = next(row for row in kwargs['coverage'] if row['id']=='operator')
+        self.assertEqual(len([r for r in operator['sources'] if r['component']=='components/qcl-negf-platform']),4)
+        self.assertIn('operator/guides/deployment.html',{r['path'] for r in operator['pages']})
+    def test_platform_source_cannot_be_claimed_as_root_tree_alias(self):
+        kwargs,expected,blob,retained=current_case()
+        row=next(r for r in kwargs['coverage'] if r['id']=='operator')
+        source=next(r for r in row['sources'] if r['component']=='components/qcl-negf-platform')
+        source['path']=source['component']+'/'+source['path'];source['component']='root';source['revision']=kwargs['before']['revision']
+        with self.assertRaisesRegex(assembly.DocsError,'coverage_source_mismatch'):
+            assembly._bundle_coverage(kwargs['plan'],kwargs['before'],kwargs['coverage'],kwargs['payload'])
+
+    def test_current_C2_refuses_missing_review_source_and_false_reference_fields(self):
+        for mutation in ['review','source','revision','selector','hash']:
+            with self.subTest(mutation=mutation):
+                kwargs,expected,blob,retained=current_case()
+                refs=[copy.deepcopy(s)for row in kwargs['coverage'] for s in row['sources']]
+                target=next(s for s in refs if s['component']=='components/qcl-negf-platform')
+                key=(target['component'],target['path'])
+                if mutation=='review':retained['public_reviews']=tuple(r for r in retained['public_reviews'] if r['source']!=target)
+                if mutation=='source':del retained['sources'][key]
+                if mutation=='revision':target['revision']='f'*40
+                if mutation=='selector':target['selector']={'kind':'anchor','value':'unreviewed'}
+                if mutation=='hash':target['sha256']='0'*64
+                with self.assertRaises((ContractError,model_help.DocumentationProofMissing)):
+                    model_help.validate_documentation_bundle(expected,retained=retained,required_sources=refs)
+
+    def test_missing_guide_page_or_wrong_anchor_location_refuses_candidate(self):
+        for mutation in ['missing_payload','missing_coverage','wrong_anchor_page']:
+            with self.subTest(mutation=mutation):
+                kwargs,expected,blob,retained=current_case()
+                if mutation=='missing_payload':del kwargs['payload']['operator/guides/deployment.html']
+                if mutation=='missing_coverage':
+                    row=next(r for r in kwargs['coverage'] if r['id']=='operator');row['pages']=[p for p in row['pages'] if p['path']!='operator/guides/deployment.html']
+                if mutation=='wrong_anchor_page':
+                    kwargs['payload']['operator/installation.html']=b'<h1>Missing actual route</h1>'
+                    kwargs['payload']['operator/recovery.html']+=b'<p id="operator-installation-route">Unrelated</p>'
+                with self.assertRaises(assembly.DocsError):assembly.finalize_bundle(**kwargs)
+
+    def test_old_recovery_only_coverage_cannot_cover_new_plan(self):
+        kwargs,expected,blob,retained=current_case();operator=next(r for r in kwargs['coverage'] if r['id']=='operator')
+        operator['sources']=operator['sources'][:1];operator['pages']=[p for p in operator['pages'] if p['path']=='operator/recovery.html']
+        with self.assertRaisesRegex(assembly.DocsError,'coverage_mismatch'):assembly.finalize_bundle(**kwargs)
+
+
+
 class DocsBundleClosureTests(unittest.TestCase):
     def test_closed_synthetic_docs_emits_exact_candidate_with_owning_c1_c2(self):
         # Catches a missing emission seam, wrong inventory/hash/media/shape or self-hash.
-        kwargs, expected, expected_bytes, retained = frozen_case()
+        kwargs, expected, expected_bytes, retained = current_case()
         contracts.schema_validator("model-help.schema.json").validate(expected)
         model_help._validate_model_help_bindings(expected, retained=retained)
         result = assembly.finalize_bundle(**kwargs)
@@ -1305,11 +1452,11 @@ class DocsBundleClosureTests(unittest.TestCase):
         self.assertEqual(result["bundle_bytes"], expected_bytes)
         self.assertEqual(result["bundle_sha256"], digest(expected_bytes))
         self.assertNotIn("bundle.json", {row["path"] for row in result["manifest"]["files"]})
-        self.assertEqual(result["manifest"]["files"], EXPECTED_FILES)
+        self.assertEqual(result["manifest"]["files"], expected["files"])
 
     def test_changed_graph_refuses_before_candidate(self):
         # Catches accepting a before/after graph change under an old source receipt.
-        kwargs, expected, expected_bytes, retained = frozen_case()
+        kwargs, expected, expected_bytes, retained = current_case()
         kwargs["after"]["revision"] = "0" * 40
         with self.assertRaisesRegex(assembly.DocsError, "source_graph_mismatch"):
             assembly.finalize_bundle(**kwargs)
@@ -1319,18 +1466,18 @@ class DocsBundleClosureTests(unittest.TestCase):
         # Catches rehashing mutated bytes while silently replacing the retained oracle.
         for mutation in ("changed", "missing"):
             with self.subTest(mutation=mutation):
-                payload = copy.deepcopy(PAYLOAD)
+                payload = copy.deepcopy(current_case()[0]["payload"])
                 if mutation == "changed":
-                    payload["index.html"] = payload["index.html"].replace(b"index", b"other")
+                    payload["index.html"] += b"<p>changed fixture bytes</p>"
                 else:
                     del payload["index.html"]
-                kwargs, expected, expected_bytes, retained = frozen_case(payload)
+                kwargs, expected, expected_bytes, retained = current_case(payload)
                 original_blob = copy.deepcopy(retained["bundle"])
                 with self.assertRaisesRegex(ContractError, "bundle differs from retained manifest bytes"):
                     assembly.finalize_bundle(**kwargs)
                 self.assertEqual(retained["bundle"], original_blob)
                 self.assertEqual(retained["bundle"]["bytes"], expected_bytes)
-                self.assertEqual(expected["files"], EXPECTED_FILES)
+                self.assertEqual(expected["files"], current_case()[1]["files"])
 
 
 if __name__ == "__main__":
