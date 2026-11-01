@@ -235,15 +235,22 @@ replacement для этой стадии не требуется. Cold profile p
 первого handoff описаны в platform docs. Evaluation этих paths не подтверждает delivery, activation,
 application readiness или научную приёмку.
 
-Synthetic package устанавливает `bin/qcl-negf-synthetic-transport-1`: installed application Python
-исполняет immutable snapshot `components/qcl-negf-aiida/tests/transport_fixture.py`. Проверьте
-actual closure references на application и source, затем доставьте wrapper closure обоим workers.
-Это отдельный `SYNTHETIC-` InstalledCode. Controller rehearsal исполняет immutable
-`tests/run_transport_acceptance.py` через installed `verdi -p PROFILE run` с внешним deadline.
-Production Code allowlist и admission predicates сохраняются.
+Локальный package API принимает `application` и `solver`. Устаревший selector `synthetic` удалён;
+его Python transport producer создавал прежний формат и отдельный `SYNTHETIC-` InstalledCode.
 
-Приёмка transport требует ровно один owned Slurm attempt, WorkChain 400 / CalcJob 303, unchanged
-frozen plan, `converged:false`, `scientific_accepted:false` и измеренный terminal scheduler receipt.
-`qcl-negf self-check` — отдельная finite проверка (например, 300 s, 1 CPU, 2 GiB на worker).
-Integrity, завершение процесса, сходимость, физические проверки, дискретизация и экспериментальная
-валидация остаются отдельными утверждениями.
+Инженерную публикацию проверяют штатной командой `native-publication-fixture` настоящего immutable
+solver через native AiiDA PlanWorkChain → RestartWorkChain → CalcJob. Полный frozen constructor
+profile, исходные plan/source-graph/native-execution bytes и их genuine INPUT/CALL/CREATE связи
+сохраняются. Порядок подготовки и отдельные gates описаны в
+[native transport runbook](../components/qcl-negf-aiida/tests/TRANSPORT_ACCEPTANCE.md). Production
+Code allowlist и admission predicates продолжают действовать.
+
+У намеренно отрицательного fixture Slurm process может завершиться с кодом 0, а CalcJob сохраняет
+302 `ERROR_SCIENTIFIC_FAILURE` и WorkChain — 400 `ERROR_EXECUTION_FAILED`: result/point имеют
+`failed`, качество `invalid`, сходимость и научная приёмка отрицательны. Это проверка инженерной
+публикации, provenance и чтения exact checkpoint/diagnostics/observations; она не запускает
+SCBA/Poisson. Standalone legacy rehearsal не заменяет установленный native harness и его receipts.
+
+Большие загрузки, range/resume, отмена и backup/restore проверяются отдельными сценариями; маленькая
+constructor-only публикация их не подтверждает. Integrity, завершение процесса, сходимость,
+физические проверки, дискретизация и экспериментальная валидация имеют отдельные статусы.
