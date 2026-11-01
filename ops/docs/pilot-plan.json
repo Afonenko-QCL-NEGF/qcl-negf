@@ -5,9 +5,13 @@
     {
       "id": "researcher",
       "owner": "core",
-      "primary_sources": ["components/QCLNEGF.jl/docs/src/theory/09_scba.md"],
+      "primary_sources": [
+        "components/QCLNEGF.jl/docs/src/theory/09_scba.md"
+      ],
       "section": "core",
-      "primary_urls": ["core/theory/09_scba.html#researcher-scba-route"]
+      "primary_urls": [
+        "core/theory/09_scba.html#researcher-scba-route"
+      ]
     },
     {
       "id": "developer",
@@ -25,9 +29,29 @@
     {
       "id": "operator",
       "owner": "root",
-      "primary_sources": ["docs/public/operator-recovery.md"],
+      "primary_sources": [
+        "docs/public/operator-recovery.md",
+        "docs/public/operator-installation.md",
+        "docs/single-server-deployment.md",
+        "components/qcl-negf-platform/docs/linux-workers.md",
+        "components/qcl-negf-platform/docs/guest-agent.md",
+        "components/qcl-negf-platform/docs/host-resource-integration.md",
+        "components/qcl-negf-platform/docs/native-attempts.md",
+        "docs/capture-runtime-delivery.md",
+        "docs/solver-build-receipt.md"
+      ],
       "section": "operator",
-      "primary_urls": ["operator/recovery.html#operator-recovery"]
+      "primary_urls": [
+        "operator/recovery.html#operator-recovery",
+        "operator/installation.html#operator-installation-route",
+        "operator/guides/deployment.html",
+        "operator/guides/linux-workers.html",
+        "operator/guides/guest-agent.html",
+        "operator/guides/host-resources.html",
+        "operator/guides/native-attempts.html",
+        "operator/capture-runtime-delivery.html",
+        "operator/solver-build-receipt.html"
+      ]
     }
   ],
   "support_policy": "existing_owning_page_graphs",
@@ -40,7 +64,14 @@
     "docs/public/operator-recovery.md",
     "docs/capture-runtime-delivery.md",
     "docs/solver-build-receipt.md",
-    "components/qcl-negf-contracts/src/qcl_negf_contracts/schemas/model-help.schema.json"
+    "components/qcl-negf-contracts/src/qcl_negf_contracts/schemas/model-help.schema.json",
+    "ops/docs/operator-guides.json",
+    "docs/public/operator-installation.md",
+    "docs/single-server-deployment.md",
+    "components/qcl-negf-platform/docs/linux-workers.md",
+    "components/qcl-negf-platform/docs/guest-agent.md",
+    "components/qcl-negf-platform/docs/host-resource-integration.md",
+    "components/qcl-negf-platform/docs/native-attempts.md"
   ],
   "assets_lock": "ops/docs/assets.lock.json",
   "transform_policy": "documenter-1.17-light-self-v1",
@@ -67,6 +98,7 @@
     "reader-api-routes",
     "developer-configuration-route",
     "operator-recovery-route",
-    "operator-recovery"
+    "operator-recovery",
+    "operator-installation-route"
   ]
 }

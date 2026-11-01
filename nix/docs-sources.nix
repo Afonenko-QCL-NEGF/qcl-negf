@@ -12,8 +12,14 @@ in {
   contracts = select (root + "/components/qcl-negf-contracts") [ "src" "pyproject.toml" "LICENSE" ];
   presentation = select root [
     "ops/docs/produce.py" "ops/docs/assemble.py" "ops/docs/runtime-assets.py"
+    "ops/docs/operator-guides.json"
     "ops/docs/math-render.mjs" "ops/docs/assets.lock.json" "ops/docs/pilot-plan.json"
-    "docs/public/make.jl" "docs/public/operator-recovery.md"
+    "docs/public/make.jl" "docs/public/operator-recovery.md" "docs/public/operator-installation.md"
+    "docs/single-server-deployment.md"
+    "components/qcl-negf-platform/docs/linux-workers.md"
+    "components/qcl-negf-platform/docs/guest-agent.md"
+    "components/qcl-negf-platform/docs/host-resource-integration.md"
+    "components/qcl-negf-platform/docs/native-attempts.md"
     "docs/capture-runtime-delivery.md" "docs/solver-build-receipt.md"
   ];
 }

@@ -404,7 +404,244 @@ def authored_fragments(graph, retained, fragment_limit):
     return [{'id': doc['id'], 'file': path, 'sha256': sha(data)}], {path: data}
 
 
-def coverage_for(assembly, retained, payload):
+# Finite Root-owned presentation selection; renderer ownership remains unchanged.
+OPERATOR_IDS = {'installation', 'deployment', 'linux', 'qga', 'resources', 'native', 'recovery', 'capture', 'solver'}
+OPERATOR_COMPONENT = 'components/qcl-negf-platform'
+
+def _normal_source(path):
+    if (not isinstance(path, str) or not path or path.startswith('/') or '\\' in path
+            or any(p in {'', '.', '..', '.git', '.build', 'site', 'private'} for p in path.split('/'))):
+        raise ValueError('operator_source_path')
+    return path
+
+
+def operator_registry(value):
+    fields(value, ('guides', 'links'))
+    if not isinstance(value['guides'], list) or len(value['guides']) != 9 or not isinstance(value['links'], list) or len(value['links']) > 128:
+        raise ValueError('operator_registry_shape')
+    ids, outputs, originals = set(), set(), set()
+    for row in value['guides']:
+        fields(row, ('id', 'component', 'path', 'stage_path', 'public_path', 'title'))
+        if row['id'] not in OPERATOR_IDS or row['id'] in ids or row['component'] not in {'root', OPERATOR_COMPONENT}:
+            raise ValueError('operator_registry_owner')
+        for key in ('path', 'stage_path', 'public_path'):
+            _normal_source(row[key])
+        key = (row['component'], row['path'])
+        if (not row['path'].startswith('docs/') or not row['path'].endswith('.md')
+                or not row['stage_path'].endswith('.md')
+                or row['public_path'] != 'operator/' + row['stage_path'][:-3] + '.html'
+                or row['public_path'] in outputs or key in originals
+                or not isinstance(row['title'], str) or not 0 < len(row['title']) <= 128):
+            raise ValueError('operator_registry_path')
+        ids.add(row['id']);outputs.add(row['public_path']);originals.add(key)
+    seen = set(originals)
+    for row in value['links']:
+        fields(row, ('component', 'path', 'public_path', 'fragments'))
+        _normal_source(row['path'])
+        key = (row['component'], row['path'])
+        if key in seen or not isinstance(row['fragments'], dict) or len(row['fragments']) > 128:
+            raise ValueError('operator_link_map')
+        seen.add(key)
+        if row['public_path'] is not None:
+            _normal_source(row['public_path'])
+            if row['public_path'] not in {'runner/user/results.html', 'runner/api/public.html', 'core/theory/12_validation.html'}:
+                raise ValueError('operator_link_map')
+        if any(not isinstance(k, str) or not k or not isinstance(v, str) or not v for k, v in row['fragments'].items()):
+            raise ValueError('operator_link_fragment')
+    return value
+
+
+def _source_url(graph, component, path):
+    if component == 'root':
+        repository, revision = 'https://github.com/Afonenko-QCL-NEGF/qcl-negf', graph['revision']
+    else:
+        rows = [r for r in graph['components'] if r['path'] == component]
+        if len(rows) != 1:
+            raise ValueError('operator_link_graph')
+        repository, revision = rows[0]['url'].removesuffix('.git'), rows[0]['revision']
+    if (not re.fullmatch(r'https://github.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', repository)
+            or not re.fullmatch('[0-9a-f]{40}', revision)):
+        raise ValueError('operator_link_graph')
+    return repository + '/blob/' + revision + '/' + _normal_source(path)
+
+
+def _markdown_lines(text):
+    fence = None
+    for line in text.splitlines(keepends=True):
+        match = re.match(r'^ {0,3}(`{3,}|~{3,})(.*?)(?:\n)?$', line)
+        if match:
+            if fence and match[1][0] == fence[0] and len(match[1]) >= len(fence) and not match[2].strip():
+                fence = None
+            elif fence is None:
+                fence = match[1]
+            yield line, True
+        else:
+            yield line, fence is not None
+    if fence:
+        raise ValueError('operator_unclosed_fence')
+
+
+def _heading_fragments(text):
+    # Pinned Documenter1.17 utilities.slugify: case-preserving Unicode L/P/digit,
+    # whitespace->hyphen, ampersand->-and-, repeated/edge hyphens removed.
+    import unicodedata
+    result = {}
+    for line, literal in _markdown_lines(text):
+        if literal:
+            continue
+        match = re.match(r'^#{1,6}\s+(.+?)\s*$', line)
+        if not match:
+            continue
+        title = match[1]
+        explicit = re.fullmatch(r'\[.*\]\(@id ([A-Za-z0-9_-]+)\)', title)
+        if explicit:
+            slug = explicit[1]
+        else:
+            plain = title.replace('`', '').replace('*', '')
+            plain = re.sub(r'\s+', '-', plain).replace('&', '-and-')
+            slug = re.sub('-+', '-', ''.join(c for c in plain if unicodedata.category(c)[0] in {'L', 'P'} or c.isdigit() or c == '-')).strip('-')
+        if not slug or slug.casefold() in result:
+            raise ValueError('operator_ambiguous_heading')
+        result[slug.casefold()] = slug
+        # Existing repository links use GitHub-style lower-case punctuation-free
+        # heading aliases; bind those aliases to the actual Documenter slug.
+        alias = ''.join(c for c in slug if c.isalnum() or c in '-_').casefold()
+        if alias in result and result[alias] != slug:raise ValueError('operator_ambiguous_heading')
+        result[alias] = slug
+    return result
+
+
+def operator_link_text(text, *, component, path, public_path, links, graph):
+    """Bounded Markdown destination adapter; original/code bytes remain retained.
+
+    Operator links use staged .md pages (Documenter requires existing sources).
+    Cross-renderer links stage as pinned source URLs, then operator_page_links
+    projects only those exact hrefs to the final Core/Runner public inventory.
+    """
+    from urllib.parse import urlsplit
+    import ipaddress
+    if len(text.encode()) > MAX_FILE:
+        raise ValueError('operator_source_limit')
+    def destination(value):
+        if value.startswith('@id '):
+            return value
+        if value.startswith('@ref '):
+            anchor = value[5:]
+            if not any(anchor in row['fragments'].values() for row in links.values()):
+                raise ValueError('operator_unbound_fragment')
+            return value
+        parsed = urlsplit(value)
+        if parsed.scheme:
+            if parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password:
+                raise ValueError('operator_private_or_unsupported_url')
+            try:
+                address = ipaddress.ip_address(parsed.hostname)
+            except ValueError:
+                address = None
+            if ((address is not None and not address.is_global) or parsed.hostname == 'localhost'
+                    or parsed.hostname.endswith(('.local', '.internal'))):
+                raise ValueError('operator_private_or_unsupported_url')
+            return value
+        if parsed.netloc or parsed.query or '%' in parsed.path or parsed.path.startswith('/') or '\\' in value:
+            raise ValueError('operator_link_ambiguity')
+        target = posixpath.normpath(posixpath.join(posixpath.dirname(path), parsed.path)) if parsed.path else path
+        _normal_source(target)
+        row = links.get((component, target))
+        if row is None:
+            # A Root source may link into an explicitly selected component tree.
+            row = links.get(('root', target))
+            if component == 'root' and target.startswith('components/'):
+                parts = target.split('/');row = links.get(('/'.join(parts[:2]), '/'.join(parts[2:])))
+        if row is None:
+            raise ValueError('operator_unknown_local_target: ' + target)
+        fragment = ''
+        if parsed.fragment:
+            fragment = row['fragments'].get(parsed.fragment.casefold())
+            if fragment is None:
+                raise ValueError('operator_unbound_fragment: ' + value)
+            fragment = '#' + fragment
+        if row['public_path'] and row['public_path'].startswith('operator/'):
+            return posixpath.relpath(row['public_path'][:-5] + '.md', posixpath.dirname(public_path)) + fragment
+        return _source_url(graph, row['component'], row['path']) + fragment
+    definitions = {}
+    lines = list(_markdown_lines(text))
+    for line, literal in lines:
+        match = None if literal else re.fullmatch(r' {0,3}\[([^]\n]+)\]:\s*(\S+)\s*\n?', line)
+        if match:
+            key = match[1].strip().casefold()
+            if key in definitions:
+                raise ValueError('operator_reference_ambiguity')
+            definitions[key] = match[2]
+    result = []
+    for line, literal in lines:
+        if literal:
+            result.append(line);continue
+        definition = re.fullmatch(r'( {0,3}\[([^]\n]+)\]:\s*)(\S+)(\s*\n?)', line)
+        if definition:
+            result.append(definition[1] + destination(definition[3]) + definition[4]);continue
+        code = [(m.start(), m.end()) for m in re.finditer(r'(`+).*?\1', line)]
+        def is_code(start):return any(a <= start < z for a, z in code)
+        def inline(match):
+            return match[0] if is_code(match.start()) else match[1] + destination(match[2]) + ')'
+        line = re.sub(r'(!?\[[^]\n]+\]\()([^()\n]+)\)', inline, line)
+        code = [(m.start(), m.end()) for m in re.finditer(r'(`+).*?\1', line)]
+        for reference in re.finditer(r'\[([^]\n]+)\]\[([^]\n]*)\]', line):
+            if not is_code(reference.start()) and (reference[2] or reference[1]).strip().casefold() not in definitions:
+                raise ValueError('operator_unbound_reference')
+        # Validate this exact candidate, not any later link in the suffix. A
+        # subsequent valid link cannot authorize earlier unsupported syntax.
+        for candidate in re.finditer(r'\]\(', line):
+            if not is_code(candidate.start()) and not re.match(r'\]\([^()\n]+\)', line[candidate.start():]):
+                raise ValueError('operator_unsupported_link_grammar')
+        result.append(line)
+    return ''.join(result)
+
+
+def operator_sources(root, registry, graph, retained):
+    registry = operator_registry(registry)
+    assembly = module('_operator_source_validation', Path(__file__).with_name('assemble.py'))
+    revisions = {r['path']:r['revision'] for r in graph['components']};revisions['root'] = graph['revision']
+    originals = {};links = {(r['component'],r['path']):dict(r) for r in registry['links']}
+    total = 0
+    for row in registry['guides']:
+        component, path = row['component'], row['path'];full = root / (path if component == 'root' else component + '/' + path)
+        if any(p.is_symlink() for p in [full, *full.parents] if p == root or root in p.parents):
+            raise ValueError('operator_symlink_source')
+        data = read_file(full);total += len(data)
+        key = (component,path);proof = retained['sources'].get(key)
+        if (total > MAX_PUBLIC or proof is None or proof['bytes'] != data or proof['revision'] != revisions.get(component)
+                or key not in retained['input_allowlist'] or (*key,'file','') not in retained['selector_allowlist']):
+            raise ValueError('operator_retained_source_mismatch')
+        text = data.decode('utf-8');assembly.validate_authored_source(text);originals[key] = text
+        links[key] = {**row,'fragments':_heading_fragments(text)}
+    return {row['stage_path']:operator_link_text(originals[(row['component'],row['path'])],component=row['component'],path=row['path'],public_path=row['public_path'],links=links,graph=graph).encode() for row in registry['guides']}
+
+
+def operator_page_links(raw, page, registry, graph):
+    """Project exact cross-renderer source hrefs, never arbitrary HTML edges."""
+    assembly = module('_operator_page_validation', Path(__file__).with_name('assemble.py'))
+    mapping = {}
+    for row in registry['links']:
+        if row['public_path'] is None:
+            continue
+        source = _source_url(graph,row['component'],row['path'])
+        target = posixpath.relpath(row['public_path'],posixpath.dirname(page))
+        mapping[source] = target
+        for fragment in row['fragments'].values():mapping[source+'#'+fragment] = target+'#'+fragment
+    tree = assembly._Tree(raw.decode('utf-8'))
+    def visit(node):
+        attrs = node.attr()
+        if node.tag == 'a' and attrs.get('href') in mapping:
+            attrs['href'] = mapping[attrs['href']];node.attrs=list(attrs.items());node.changed=True
+        for child in node.children:visit(child)
+    visit(tree.root)
+    return assembly._serialize(tree.root).encode()
+
+
+
+def coverage_for(assembly, retained, payload, registry=None):
+    registry = operator_registry(decode_json(read_file(Path(__file__).with_name("operator-guides.json"))) if registry is None else registry)
+    source_map = {(r["path"] if r["component"] == "root" else r["component"] + "/" + r["path"]):(r["component"],r["path"]) for r in registry["guides"]}
     rows = []
     # Required final/recovery anchors live on existing supporting owning pages,
     # separate from the three primary entry routes. Never search unrelated pages
@@ -416,8 +653,12 @@ def coverage_for(assembly, retained, payload):
     for identity, (_, _, sources, urls) in assembly.PRIMARY.items():
         refs = []
         for full in sources:
-            component = next((c for _, c in OWNERS if c != 'root' and full.startswith(c + '/')), 'root')
-            path = full if component == 'root' else full[len(component) + 1:]
+            if identity == 'operator':
+                if full not in source_map:raise ValueError('operator_coverage_source_map')
+                component,path = source_map[full]
+            else:
+                component = next((c for _, c in OWNERS if c != 'root' and full.startswith(c + '/')), 'root')
+                path = full if component == 'root' else full[len(component) + 1:]
             refs.append(reference(retained, component, path))
         paths = {url.split('#')[0] for url in urls}
         paths.update(support_pages.get(identity, ()))
@@ -606,10 +847,8 @@ def produce(inputs, work, output):
             index = json.loads(match.group(1))
             if '$' in index or not index.endswith('\n'):
                 raise ValueError('operator_index_literal')
-            files = {'index.md': index.encode(),
-                     'recovery.md': read_file(root / 'docs/public/operator-recovery.md'),
-                     'capture-runtime-delivery.md': read_file(root / 'docs/capture-runtime-delivery.md'),
-                     'solver-build-receipt.md': read_file(root / 'docs/solver-build-receipt.md')}
+            registry = decode_json(read_file(root / 'ops/docs/operator-guides.json'))
+            files = {'index.md': index.encode(), **operator_sources(root, registry, graph, retained)}
         else:
             recipe = root / component / 'docs/make.jl'
             files = source_tree(root, component + '/docs/src')
@@ -630,7 +869,8 @@ def produce(inputs, work, output):
         for name, raw in _documenter_payload_candidates(source_tree(work, 'raw/' + owner)).items():
             page = owner + '/' + name
             if name.endswith('.html'):
-                bridged, mapping = bridge_math(raw, page)
+                navigation = operator_page_links(raw,page,registry,graph) if owner == 'operator' else raw
+                bridged, mapping = bridge_math(navigation, page)
                 context = runtime_context(page)
                 contexts[context['destination']] = context
                 generated = runtime.build_runtime(snippets, worker_url=context['worker_url'], asset_prefix=context['asset_prefix'])
@@ -730,7 +970,7 @@ def produce(inputs, work, output):
         'recipes':recipes, 'toolchain_lock':reference(retained,'root','julia/Manifest.toml')}
     result = assembly.finalize_bundle(plan=plan, before=graph, after=decode_json(record(inputs['source_graph'])),
         generator=generator, schema_ref=reference(retained,'components/qcl-negf-contracts','src/qcl_negf_contracts/schemas/model-help.schema.json'),
-        coverage=coverage_for(assembly, retained, payload), fragments=fragments, aliases=[], payload=payload,
+        coverage=coverage_for(assembly, retained, payload, registry), fragments=fragments, aliases=[], payload=payload,
         asset_lock=lock_bytes, asset_inputs=asset_inputs, validate_shape=shape,
         validate_bindings=bindings, validate_assets=assets)
     if result['status'] != 'candidate':

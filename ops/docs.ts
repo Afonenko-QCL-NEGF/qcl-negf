@@ -154,6 +154,13 @@ export function parseDocsPlan(value: unknown): DocsPlan {
     "docs/capture-runtime-delivery.md",
     "docs/solver-build-receipt.md",
     "components/qcl-negf-contracts/src/qcl_negf_contracts/schemas/model-help.schema.json",
+    "ops/docs/operator-guides.json",
+    "docs/public/operator-installation.md",
+    "docs/single-server-deployment.md",
+    "components/qcl-negf-platform/docs/linux-workers.md",
+    "components/qcl-negf-platform/docs/guest-agent.md",
+    "components/qcl-negf-platform/docs/host-resource-integration.md",
+    "components/qcl-negf-platform/docs/native-attempts.md",
   ];
   if (
     !Array.isArray(value.source_inputs) || value.source_inputs.length !== requiredInputs.length ||
@@ -168,6 +175,7 @@ export function parseDocsPlan(value: unknown): DocsPlan {
     "developer-configuration-route",
     "operator-recovery-route",
     "operator-recovery",
+    "operator-installation-route",
   ];
   if (
     !Array.isArray(value.expected_primary_anchors) ||
@@ -193,6 +201,35 @@ export function parseDocsPlan(value: unknown): DocsPlan {
         !slice.primary_urls.every((url) => relativeDocsPath(url) && url.startsWith(section + "/"));
     })
   ) throw new Error("invalid_docs_plan_journeys");
+  const operator = (value.slices as Record<string, unknown>[])[2];
+  const operatorSources = [
+    "docs/public/operator-recovery.md",
+    "docs/public/operator-installation.md",
+    "docs/single-server-deployment.md",
+    "components/qcl-negf-platform/docs/linux-workers.md",
+    "components/qcl-negf-platform/docs/guest-agent.md",
+    "components/qcl-negf-platform/docs/host-resource-integration.md",
+    "components/qcl-negf-platform/docs/native-attempts.md",
+    "docs/capture-runtime-delivery.md",
+    "docs/solver-build-receipt.md",
+  ];
+  const operatorUrls = [
+    "operator/recovery.html#operator-recovery",
+    "operator/installation.html#operator-installation-route",
+    "operator/guides/deployment.html",
+    "operator/guides/linux-workers.html",
+    "operator/guides/guest-agent.html",
+    "operator/guides/host-resources.html",
+    "operator/guides/native-attempts.html",
+    "operator/capture-runtime-delivery.html",
+    "operator/solver-build-receipt.html",
+  ];
+  if (
+    JSON.stringify(operator.primary_sources) !== JSON.stringify(operatorSources) ||
+    JSON.stringify(operator.primary_urls) !== JSON.stringify(operatorUrls)
+  ) {
+    throw new Error("invalid_docs_operator_projection");
+  }
   return structuredClone(value) as unknown as DocsPlan;
 }
 // Selected public Markdown only; this is not an arbitrary Julia effect proof.

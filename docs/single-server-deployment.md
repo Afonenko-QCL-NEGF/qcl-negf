@@ -1,15 +1,33 @@
 # Первое развёртывание на одном Proxmox-сервере
 
 Этот runbook описывает существующий маршрут и исторические проверки с
-ограниченной областью применимости. Требования следующего релиза и план
-холодной пересборки находятся в [едином корпусе](system/README.md) и
-[плане пересборки](system/rebuild.md). Новая схема локального управления и
-передачи ресурсов ещё не реализована; этот файл не является командой удалять VM/диски.
+ограниченной областью применимости. Текущие разрешения и проверки по влиянию задаёт
+[исполнительная программа от 2026-10-27](implementation/codex-execution-2026-10-27.md).
+Требования и исторический план холодной пересборки находятся в
+[едином корпусе](system/README.md) и [плане пересборки](system/rebuild.md).
+Source exports локального управления ресурсами описаны в
+[owning guide](../components/qcl-negf-platform/docs/host-resource-integration.md#source-installation-и-отдельная-n-приёмка);
+их установка и native qualification требуют отдельных фактических свидетельств.
+Этот файл не является командой удалять VM/диски.
 
 Первый site содержит четыре NixOS VM: storage, control, compute и CI/build.
 Дополнительный Arch worker подключается отдельным этапом. Адреса, MAC, VMID,
 диски, ключи, runtime-пути и OpenTofu state принадлежат приватному site-репозиторию.
 Состав исходников определяет опубликованный commit superproject и его gitlinks.
+
+## Краткий маршрут оператора
+
+| Этап | Руководство и обязательная граница |
+| --- | --- |
+| Guest agent | [Установка и приёмка QGA](../components/qcl-negf-platform/docs/guest-agent.md#приёмка-и-выбор-канала): для каждого owned QEMU guest после install/first boot/reboot проверить канал, ordinary ping и короткую команду; declared enable недостаточно. При timeout сначала различить protocol/client, guest service и VM, сохранив исходный отказ. |
+| Restricted resource RPC | [Установка и native checklist](../components/qcl-negf-platform/docs/host-resource-integration.md#source-installation-и-отдельная-n-приёмка): role UID, защищённые ключи, effective sshd/sudo и фактический caller/kernel protocol проверяются отдельно от копирования ключа. |
+| APP/solver | [Закрытый инженерный маршрут](../components/qcl-negf-platform/docs/application-cd.md#закрытый-инженерный-маршрут): metadata staging, выбор закрытого контекста и public local activation отделены от ordinary maintenance update и открытия admission. ACK не phase pass; unknown сначала сверяют по той же phase/unit/InvocationID/owner receipt. |
+| Первый Linux worker | [Image/boot/enrollment](../components/qcl-negf-platform/docs/linux-workers.md#первый-boot-enrollment-и-допуск) и [NetworkManager guard](../components/qcl-negf-platform/docs/linux-workers.md#native-networkmanager-port-first-dhcp-и-ограниченный-guard): accepted image не разрешает autostart/RESUME. Нужны actual host adapter/capacity, first boot, QGA, enrollment, smoke и отдельные IP-change/reboot/NM cases. |
+| Документация API | [Site binding документации](../components/qcl-negf-platform/docs/operations.md#документация-в-установленном-api): immutable public directory и manifest SHA задаются парой, затем проверяется versioned HTTP route через actual API. |
+
+Technical publication, native C/G/R и RSS, recovery и scientific acceptance фиксируются
+раздельно. Source/L, успешный build, ping или service exit0 не закрывают остальные gates;
+неизмеренное остаётся `not_measured`. Развёртывание и reboot не запускают SCBA/Poisson.
 
 Начальная VM сборки устанавливается с официального checksum-pinned NixOS ISO
 по [bootstrap-процедуре platform](../components/qcl-negf-platform/docs/bootstrap.md).
@@ -248,6 +266,12 @@ deployment, guest/service success или scientific acceptance для новог
 | Production acceptance | Реальные guest boot/services и transport/cancellation/failure contracts | Restore и scientific validation |
 | Restore | Согласованная archive boundary, проверка manifest/hash и фактическое восстановление | Независимость внешней backup-копии |
 | Final CI | Ready source ref, verified PR heads, empty queue и один full dispatch | Научная приёмка |
+
+Следующий порядок final CI сохраняет scope исторической процедуры этого раздела:
+его «один full run» и запрет automatic reruns не являются универсальным лимитом новых задач.
+В текущей [исполнительной программе](implementation/codex-execution-2026-10-27.md)
+проверки выбирают по влиянию и повторяют при изменении source или открытом failure;
+датированные budgets не превращаются в campaign quotas. Native readiness остаётся отдельной.
 
 Перед final CI публикуются и проверяются восемь owning component refs/PRs,
 затем superproject с exact gitlinks. Remote refs, PR state и защиты читаются

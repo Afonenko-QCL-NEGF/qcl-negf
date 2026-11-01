@@ -12,6 +12,7 @@ import {
   parseDocsArgs,
   parseDocsJson,
   parseDocsNixOutput,
+  parseDocsPlan,
   parseDocsRequest,
   planDocsBuild,
   readBounded,
@@ -483,4 +484,16 @@ Deno.test("factory profile healthy literals retain their exact worker policies",
   for (const profile of [null, false, 7, {}, [], ["production-build", "local-debug"], "unknown"]) {
     await refuses(() => parseDocsRequest({ ...request(), factory: { profile, test_workers: 2 } }));
   }
+});
+
+Deno.test("operator guide coverage cannot regress to recovery-only journey", async () => {
+  const value = JSON.parse(
+    await Deno.readTextFile(new URL("../ops/docs/pilot-plan.json", import.meta.url)),
+  );
+  const accepted = parseDocsPlan(value);
+  ok(accepted.slices[2].primary_sources.includes("docs/single-server-deployment.md"));
+  const incomplete = structuredClone(value);
+  incomplete.slices[2].primary_sources = ["docs/public/operator-recovery.md"];
+  incomplete.slices[2].primary_urls = ["operator/recovery.html#operator-recovery"];
+  await refuses(() => parseDocsPlan(incomplete));
 });

@@ -47,11 +47,11 @@ PRIMARY = {
                   "components/QCLNEGFRunner.jl/docs/src/user/configuration.md"],
                   ["runner/api/public.html#reader-api-routes",
                    "runner/user/configuration.html#developer-configuration-route"]),
-    "operator": ("root", "operator", ["docs/public/operator-recovery.md"],
-                 ["operator/recovery.html#operator-recovery"]),
+    "operator": ("root", "operator", ['docs/public/operator-recovery.md', 'docs/public/operator-installation.md', 'docs/single-server-deployment.md', 'components/qcl-negf-platform/docs/linux-workers.md', 'components/qcl-negf-platform/docs/guest-agent.md', 'components/qcl-negf-platform/docs/host-resource-integration.md', 'components/qcl-negf-platform/docs/native-attempts.md', 'docs/capture-runtime-delivery.md', 'docs/solver-build-receipt.md'],
+                 ['operator/recovery.html#operator-recovery', 'operator/installation.html#operator-installation-route', 'operator/guides/deployment.html', 'operator/guides/linux-workers.html', 'operator/guides/guest-agent.html', 'operator/guides/host-resources.html', 'operator/guides/native-attempts.html', 'operator/capture-runtime-delivery.html', 'operator/solver-build-receipt.html']),
 }
 ANCHORS = {"researcher-scba-route", "researcher-final-route", "reader-api-routes",
-           "developer-configuration-route", "operator-recovery-route", "operator-recovery"}
+           "developer-configuration-route", "operator-recovery-route", "operator-recovery", "operator-installation-route"}
 PLAN_LIMITS = {"files": 10000, "total_bytes": 268435456, "file_bytes": 16777216,
                "manifest_bytes": 2097152, "fragment_bytes": 32768, "help_view_bytes": 65536,
                "tex_bytes": 16384, "math_batch_bytes": 4194304, "math_records": 10000,
@@ -1063,6 +1063,8 @@ def _bundle_coverage(plan, graph, coverage, payload):
                     or not isinstance(reference["sha256"], str)
                     or not re.fullmatch(r"[a-f0-9]{64}", reference["sha256"])):
                 _fail("coverage_source_mismatch")
+            if component == "root" and path.startswith("components/"):
+                _fail("coverage_source_mismatch", "component source claimed as Root")
             source_paths.append(path if component == "root" else component + "/" + path)
         if source_paths != PRIMARY[identity][2]:
             _fail("coverage_source_mismatch", identity)
@@ -1075,6 +1077,7 @@ def _bundle_coverage(plan, graph, coverage, payload):
                     or not isinstance(page["anchors"], list)
                     or len(page["anchors"]) > 10000):
                 _fail("coverage_mismatch", path)
+            routes.add(path)
             parser = _PayloadHTML(path)
             parser.feed(_decode(payload[path]))
             parser.close()

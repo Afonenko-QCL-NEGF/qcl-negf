@@ -1,0 +1,325 @@
+{
+  "guides": [
+    {
+      "id": "installation",
+      "component": "root",
+      "path": "docs/public/operator-installation.md",
+      "stage_path": "installation.md",
+      "public_path": "operator/installation.html",
+      "title": "Маршрут установки и обновления"
+    },
+    {
+      "id": "deployment",
+      "component": "root",
+      "path": "docs/single-server-deployment.md",
+      "stage_path": "guides/deployment.md",
+      "public_path": "operator/guides/deployment.html",
+      "title": "Развёртывание"
+    },
+    {
+      "id": "linux",
+      "component": "components/qcl-negf-platform",
+      "path": "docs/linux-workers.md",
+      "stage_path": "guides/linux-workers.md",
+      "public_path": "operator/guides/linux-workers.html",
+      "title": "Внешний Linux worker"
+    },
+    {
+      "id": "qga",
+      "component": "components/qcl-negf-platform",
+      "path": "docs/guest-agent.md",
+      "stage_path": "guides/guest-agent.md",
+      "public_path": "operator/guides/guest-agent.html",
+      "title": "Guest agent и протокол"
+    },
+    {
+      "id": "resources",
+      "component": "components/qcl-negf-platform",
+      "path": "docs/host-resource-integration.md",
+      "stage_path": "guides/host-resources.md",
+      "public_path": "operator/guides/host-resources.html",
+      "title": "Ресурсы и restricted RPC"
+    },
+    {
+      "id": "native",
+      "component": "components/qcl-negf-platform",
+      "path": "docs/native-attempts.md",
+      "stage_path": "guides/native-attempts.md",
+      "public_path": "operator/guides/native-attempts.html",
+      "title": "Native attempts и их границы"
+    },
+    {
+      "id": "recovery",
+      "component": "root",
+      "path": "docs/public/operator-recovery.md",
+      "stage_path": "recovery.md",
+      "public_path": "operator/recovery.html",
+      "title": "Recovery"
+    },
+    {
+      "id": "capture",
+      "component": "root",
+      "path": "docs/capture-runtime-delivery.md",
+      "stage_path": "capture-runtime-delivery.md",
+      "public_path": "operator/capture-runtime-delivery.html",
+      "title": "Capture runtime"
+    },
+    {
+      "id": "solver",
+      "component": "root",
+      "path": "docs/solver-build-receipt.md",
+      "stage_path": "solver-build-receipt.md",
+      "public_path": "operator/solver-build-receipt.html",
+      "title": "Solver build receipt"
+    }
+  ],
+  "links": [
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/application-cd.md",
+      "public_path": null,
+      "fragments": {
+        "закрытый-инженерный-маршрут": "закрытый-инженерный-маршрут"
+      }
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/operations.md",
+      "public_path": null,
+      "fragments": {
+        "документация-в-установленном-api": "документация-в-установленном-api",
+        "identity-networks-and-storage": "identity-networks-and-storage"
+      }
+    },
+    {
+      "component": "root",
+      "path": "docs/implementation/codex-execution-2026-10-27.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "root",
+      "path": "docs/system/README.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "root",
+      "path": "docs/system/rebuild.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/bootstrap.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "root",
+      "path": "docs/depot-compatibility.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/image-transfer.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/nginx-preflight.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/QCLNEGFRunner.jl",
+      "path": "docs/src/user/results.md",
+      "public_path": "runner/user/results.html",
+      "fragments": {}
+    },
+    {
+      "component": "components/QCLNEGFRunner.jl",
+      "path": "docs/src/api/public.md",
+      "public_path": "runner/api/public.html",
+      "fragments": {}
+    },
+    {
+      "component": "components/QCLNEGF.jl",
+      "path": "docs/src/theory/12_validation.md",
+      "public_path": "core/theory/12_validation.html",
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-contracts",
+      "path": "README.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "tofu/arch-libvirt/site-base.json.example",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "ops/local_lab.py",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "examples/linux-worker/flake.nix.template",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "examples/linux-worker/worker.nix.example",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/resident-memory-policy.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "ops/worker_distribution.py",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/worker-distribution.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "tofu/build-images.ts",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "examples/private-site/flake.nix.template",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "examples/private-site/hosts.nix",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "examples/private-site/site.nix.example",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "ansible/requirements.yml",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "ansible/arch-libvirt.yml",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/host-network.md",
+      "public_path": null,
+      "fragments": {
+        "external-lan-worker-без-переписывания-cluster-source": "external-lan-worker-без-переписывания-cluster-source"
+      }
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "tofu/arch-libvirt/variables.tf",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "ops/application_release.py",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "tests/slurm-vm.nix",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "ansible/networkmanager-bridge.yml",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/host-resource-operations.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/host-resource-native-cleanup.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/host-resource-recovery.md",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "schemas/host-resource-native-demand.schema.json",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "schemas/host-resource-native-reference.schema.json",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "schemas/host-resource-native-operation.schema.json",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "schemas/host-resource-native-startup.schema.json",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "schemas/host-resource-native-projection.schema.json",
+      "public_path": null,
+      "fragments": {}
+    },
+    {
+      "component": "components/qcl-negf-platform",
+      "path": "docs/delivery-operations.md",
+      "public_path": null,
+      "fragments": {}
+    }
+  ]
+}
