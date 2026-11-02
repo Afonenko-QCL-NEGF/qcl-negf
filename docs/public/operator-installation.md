@@ -26,6 +26,8 @@
 разрешает autostart, открытие admission или Slurm RESUME. Сеть и хранилище
 привязывают к фактическому owned host и его возможностям.
 
+Обновления App/UI/сервисов всего кластера устанавливают и проверяют только после подтверждения
+остановки всех jobs. Чужие и unknown-owned jobs защищены; их отмена требует отдельного решения.
 Application обновляют по [application CD](../../components/qcl-negf-platform/docs/application-cd.md).
 Ordinary maintenance update использует свой публичный owner и gates. Закрытый
 инженерный путь с metadata staging, выбором закрытого контекста и public local
@@ -97,7 +99,8 @@ actual graph, selected source bytes, reviews, recipes и применимост�
 или нового solver run. Docs producer и его depot/assets provenance сохраняют
 собственную identity; граф справки может отличаться от source работающего App.
 
-После принятой сборки [установка документации в API](../../components/qcl-negf-platform/docs/operations.md#документация-в-установленном-api)
+После подтверждения остановки всех jobs кластера и принятой сборки
+[установка документации в API](../../components/qcl-negf-platform/docs/operations.md#документация-в-установленном-api)
 является отдельной операцией: immutable public directory и exact bundle SHA
 задают парой, затем проверяют actual versioned HTTP routes, inventory,
 MIME/cache/ETag/CSP, локальные ссылки и светлую тему. Наличие output в store
