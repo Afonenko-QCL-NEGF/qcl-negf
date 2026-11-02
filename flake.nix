@@ -35,6 +35,15 @@
         inherit system;
         workspaceRoot = self.outPath;
       };
+      mkPlatformCheck = { system }: platform.lib.mkPlatformCheck {
+        inherit system;
+        scope = "full";
+        applicationTestEnvironment = platform.lib.mkPythonEnvironment {
+          inherit system;
+          workspaceRoot = self.outPath;
+          includeTests = true;
+        };
+      };
       mkDocumentation = { system, metadata, capturedMetadata, assetInputs, reviewInputs, sources,
         juliaTestProfile ? "production-build", juliaTestWorkerLimit ? null }: let
         pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
@@ -138,6 +147,7 @@
     packages = forAll (system: {
       application = self.lib.mkApplication { inherit system; };
       default = self.packages.${system}.application;
+      platformCheckRunner = (self.lib.mkPlatformCheck { inherit system; }).runner;
     });
     devShells = forAll (system: let
       pkgs = platform.inputs.nixpkgs.legacyPackages.${system};
@@ -150,7 +160,8 @@
       };
     });
     checks = forAll (system: {
-      inherit (platform.checks.${system}) operations infrastructure slurm-vm;
+      inherit (platform.checks.${system}) infrastructure slurm-vm;
+      operations = (self.lib.mkPlatformCheck { inherit system; }).check;
     });
   };
 }

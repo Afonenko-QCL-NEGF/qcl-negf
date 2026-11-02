@@ -205,10 +205,34 @@ registry["docs-build"] = {
   ],
 };
 registry.platform = {
-  check: ({ root }) => [denoCheck(`${root}/components/qcl-negf-platform`)],
-  prepare: () => [],
+  check: ({ root }) => [{
+    executable: "bash",
+    args: [
+      "-eu",
+      "-c",
+      `platform_check=$(nix --extra-experimental-features 'nix-command flakes' --option allow-import-from-derivation false eval --raw --offline --no-update-lock-file .#packages.${Deno.build.arch}-${Deno.build.os}.platformCheckRunner.outPath)
+[[ "$platform_check" =~ ^/nix/store/[0-9abcdfghijklmnpqrsvwxyz]{32}-[A-Za-z0-9+._=-]+$ ]] || { echo 'Invalid prepared Platform runner path' >&2; exit 1; }
+nix --extra-experimental-features nix-command --offline path-info "$platform_check" >/dev/null
+test -x "$platform_check/bin/qcl-negf-platform-check"
+exec "$platform_check/bin/qcl-negf-platform-check"`,
+    ],
+    cwd: root,
+  }],
+  prepare: ({ root }) => [{
+    executable: "nix",
+    args: [
+      "--extra-experimental-features",
+      "nix-command flakes",
+      "build",
+      "--no-link",
+      "--no-update-lock-file",
+      `.#packages.${Deno.build.arch}-${Deno.build.os}.platformCheckRunner`,
+    ],
+    cwd: root,
+  }],
   gates: [
-    "Platform Python tests require its actual Python/pytest dependencies; Deno checks do not install them",
+    "Platform full checks require the explicitly prepared Root-locked App and declared Ops runner; check does not build or sync",
+    "Named source-package opt-in remains a separately required native gate; Ops-only checks are not full Platform coverage",
   ],
 };
 registry.infra = {

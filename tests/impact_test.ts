@@ -493,3 +493,29 @@ Deno.test("valid Markdown names remain D through raw/gitlink collection, dispatc
     }
   }
 });
+
+Deno.test("Platform whole check prepares a declared full runner and check never builds", () => {
+  const plan = planImpact([change("ops/host_resource_facts.py", owner("platform"))]);
+  const prep = preparationCommands(plan, context);
+  const checks = checkCommands(plan, context);
+  const build = prep.filter((c) => c.executable === "nix" && c.args.includes("build"));
+  equal(build.length, 1);
+  ok(build[0]?.args.includes("--no-update-lock-file"), "platform prepare can rewrite locks");
+  ok(build[0]?.args.some((a) => a.includes("platformCheckRunner")), "missing full public runner");
+  const platform = checks.filter((c) => c.executable === "bash");
+  equal(platform.length, 1);
+  const script = platform[0]?.args.at(-1) ?? "";
+  ok(
+    script.includes("path-info") && script.includes("--offline"),
+    "check does not require existing output",
+  );
+  ok(script.includes("allow-import-from-derivation false"), "check eval can build via IFD");
+  ok(
+    !script.includes("nix build") && !script.includes("nix run") && !script.includes("--no-build"),
+    "check hides bootstrap or invents flags",
+  );
+  ok(
+    !checks.some((c) => c.cwd?.endsWith("qcl-negf-platform") && c.executable === "deno"),
+    "bare PATH component check still selected",
+  );
+});
