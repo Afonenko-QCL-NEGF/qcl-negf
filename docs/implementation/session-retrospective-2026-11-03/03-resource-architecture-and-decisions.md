@@ -421,3 +421,14 @@ implemented/installed API.
 | Fixed fallback уже подтверждён installed evidence                                    | R11 показывает Source route; R10 сохраняет unknown       | Live configuration/transition/readiness этим review не проверены              | Данных недостаточно                                     |
 | Весь рост proof infrastructure уже окупился                                          | R12 фиксирует рост Source и незавершённый installed путь | Нет сопоставимого accepted-solution/cost before-after                         | Не выводить пользу из PASS/LOC; сохранить вопрос        |
 | Сейчас разрешено продолжить trial или dynamic implementation                         | Прямое пользовательское STOP                             | Отчёт — сохранение свидетельств, не запуск работ                              | Оставить code/infra без изменений                       |
+
+## Уточнение scope CD после исторического разбора4ноября
+
+Отсутствие требования нового самостоятельного scheduler не означает запрета на отдельную service
+обновлений. Initial plan `69d841fdd0fa84f835803560faf80bcfd682679c`,
+`project-simplification-2026-10-27.md` lines619–624, прямо предусматривает controller systemd
+service, durable request/attempt identity, переживание отключения клиента и reconciliation при
+restart. Следовательно, само появление delivery service нельзя называть внезапным непорученным
+daemon. Предмет оценки — выбранная полнота coordination/proof, стоимость и дублирование native
+функций; поздняя maintenance-only правка не отменила автоматически требования durability. Подробная
+хронология в[15](15-artifact-delivery-and-cd-history.md).

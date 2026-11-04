@@ -102,3 +102,24 @@ total token counter или число сообщений.
 | Evidence можно проверить после сессии     | Stable commits/locators/SHA; original failure retention | Часть primary private и не приложена публично | сохранить локально, выдавать адресно |
 | Public PR содержит все raw доказательства | Он содержит связные summaries/refs                      | Secrets/data не публикуются                   | не утверждать                        |
 | Reports разрешают продолжить программу    | UserSTOP и paused schedules                             | Старые grants/планы исторические              | сохранить остановку                  |
+
+## Дополнение4ноября: расширенное покрытие
+
+По прямому поручению рассмотрена доступная полная ancestry history девяти repositories с initial
+public/integrated imports26сентября2026:994metadata records,353merge records,9roots. Все examined
+repositories nonshallow.1070local visible commits включают76outside этих named published ancestry
+sets; это не доказательство missing production history. Private/reflog/pre-import/deleted remote
+histories не объявляются охваченными. Все994diffs целиком не прошли semantic review; paths и pivots
+выбирались по архитектурным решениям.
+
+Новые локальные evidence pointers:
+`.build/session-evidence-followup-20261104/repository-history-inventory.json`,
+`all-published-commit-metadata.json`, `whole-history-size-snapshots.json`,
+`opensource-source-log.json`, `verified-human-steering-locators.json`. Raw record/source excerpts не
+экспортируются;12officialwebsources открыты, никакой candidate tool не установлен.09–16 добавляют
+карту общих механизмов, трактовок, high-level observable decisions, OSS references, межкомпонентную
+и отдельные memory/CD histories. Изначальные01–08 остаются с сохранённой границей недельного аудита;
+Git commit первоначальной публикации позволяет проверить последующие уточнения.
+
+Current action по-прежнему docs/evidence-only. Ни report, ни issue не заменяет человеческое решение
+о будущей переработке.

@@ -326,3 +326,11 @@ foundation, а предъявленная пользовательская го�
 | Полный native research/recovery route готов                              | C08/C16/C19/C23 содержат явные ограничения            | Full end-to-end evidence здесь не предъявлено      | данных недостаточно                                 |
 | Dynamic qualification обязательно задерживает всякий полезный trial      | C20 и programme §§5.2/5.4 допускают fixed reservation | Fixed lane также требует actual qualification      | изменить приоритет после проверки existing fallback |
 | S01 научно принят                                                        | C24 предъявляет handoff, не final dataset             | Нет отдельной полной научной приёмки               | данных недостаточно                                 |
+
+## Уточнение после анализа4ноября
+
+Появление public Core state/observation API не доказывает полного удаления private Core imports из
+всего Runner. В published `97ab889ff83b73d9fad5d34e278309b2efe3b299` `src/core_api.jl` ещё
+импортирует `_scaled_physics`, `_seed_green` и другие legacy bindings. Утверждения выше о public
+boundary относятся к новому selected path, а не ко всем прежним callers. Это source-only ограничение
+дополнительно сохранено в[09](09-emergent-tools-and-reuse-boundaries.md); код не изменялся.
