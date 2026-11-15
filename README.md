@@ -1,5 +1,15 @@
 # QCL-NEGF
 
+## Новый этап: упрощение кластера и научного приложения
+
+Для ручного старта переработки используй [новую точку входа](docs/implementation/cluster-execution-2026-11-15.md),
+[план](docs/implementation/clean-start-plan-2026-11-15.md) и [карту функций](docs/implementation/functional-reassessment-2026-11-15.md).
+Ветка `codex/cluster-clean-start-2026-11-15` публикует инструкции; она не устанавливает новый runtime.
+Актуальные Core/Runner и результаты параллельной научной сессии проверяются при запуске.
+
+Ниже сохранено описание прежнего source baseline. Его bootstrap, роли NixOS/AiiDA/Slurm
+и исторические workflow/skills правила не являются инструкцией нового этапа.
+
 An integrated, reproducible workspace for quantum-cascade transport research.
 Julia computes the numerical model, AiiDA records scientific workflows, Slurm allocates resources,
 and NixOS defines the machines. GitHub hosts source and workflow state; CI runs on your own runner.
@@ -116,3 +126,4 @@ workspace. Use the platform's private-site example and its image/provisioning co
 The source repository never contains generated VM images, dependency depots or scientific results.
 
 MIT license. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
