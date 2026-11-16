@@ -1,3 +1,5 @@
+> Исторический checkpoint A. [Заключительный отчёт после перезагрузки и остановки кампании](issue133-postboot-report.md).
+
 # Кампания #133: исходный baseline не сошёлся; проверен отдельный равновесный вариант
 
 **Исходный real-energy SCBA baseline до сходимости не доведён.** Независимо подтверждены inner equations и charge/cutoff checks N512/N1024 **отдельного** all5 Matsubara/reference-tail+M3 finite-N варианта с заданным зарядом. Это численная опора на основе той же QCL-структуры и механизмов рассеяния, а не решение исходной дискретной задачи solver. Результат относится к U=V=0, finite45/hH-all9; он не принимает N→∞, Poisson, finite-bias transport, basis/k convergence или эксперимент.
