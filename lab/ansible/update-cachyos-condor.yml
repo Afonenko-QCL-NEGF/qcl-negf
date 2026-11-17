@@ -1,0 +1,228 @@
+---
+- name: Явно обновить только own HTCondor runtime пустого CachyOS worker
+  hosts: cachyos_workers
+  become: true
+  gather_facts: true
+  vars:
+    qcl_update_tools: false
+    qcl_condor_update_prefix: /opt/htcondor/current
+    qcl_condor_tarball_url: https://htcss-downloads.chtc.wisc.edu/tarball/26.0/current/condor-x86_64_Debian13-stripped.tar.gz
+    qcl_condor_update_archive: /var/cache/qcl/htcondor/condor-Debian13-current.tar.gz
+    qcl_condor_update_environment:
+      CONDOR_CONFIG: /etc/condor/condor_config
+      LD_LIBRARY_PATH: '{{ qcl_condor_update_prefix }}/lib'
+  pre_tasks:
+    - name: Требовать явный update и поддерживаемую платформу
+      ansible.builtin.assert:
+        that:
+          - qcl_update_tools | bool
+          - ansible_facts.os_family == 'Archlinux'
+          - ansible_facts.architecture == 'x86_64'
+          - qcl_condor_update_prefix == '/opt/htcondor/current'
+    - name: Найти existing native config tool без version equality gate
+      ansible.builtin.shell: |
+        config=$(command -v condor_config_val || true)
+        if [ -z "$config" ]; then
+          config="$(dirname "$(readlink -f "$(command -v condor_version)")")/condor_config_val"
+        fi
+        test -x "$config"
+        printf '%s\n' "$config"
+      args:
+        executable: /bin/bash
+      register: qcl_update_config_tool
+      changed_when: false
+    - name: Прочитать native runtime и state paths
+      ansible.builtin.command:
+        argv: ['{{ qcl_update_config_tool.stdout }}', '{{ item }}']
+      loop: [RELEASE_DIR, BIN, STARTD_ADDRESS_FILE, DAEMON_LIST, ETC]
+      register: qcl_update_paths
+      changed_when: false
+    - name: Не заменять distro runtime или другую native роль
+      ansible.builtin.assert:
+        that:
+          - qcl_update_paths.results[0].stdout.startswith('/opt/htcondor/')
+          - qcl_update_paths.results[3].stdout | upper | regex_findall('[A-Z_]+') | difference(['MASTER', 'STARTD', 'SHARED_PORT']) | length == 0
+          - qcl_update_paths.results[4].stdout == '/etc/condor'
+        fail_msg: Этот maintenance касается только известного own execute worker; системный пакет или другая роль обновляются отдельно.
+    - name: Прочитать service fragment
+      ansible.builtin.command:
+        argv: [systemctl, show, condor.service, -p, FragmentPath, --value]
+      register: qcl_update_fragment
+      changed_when: false
+    - name: Требовать отдельную QCL service definition
+      ansible.builtin.assert:
+        that: qcl_update_fragment.stdout | trim == '/etc/systemd/system/condor.service'
+    - name: Прочитать own unit без вывода environment
+      ansible.builtin.slurp:
+        src: /etc/systemd/system/condor.service
+      register: qcl_update_unit
+      no_log: true
+    - name: Подтвердить владельца и фактический config entrypoint
+      ansible.builtin.assert:
+        that:
+          - "'Description=HTCondor execute worker' in (qcl_update_unit.content | b64decode)"
+          - "('ExecStart=' ~ qcl_update_paths.results[0].stdout ~ '/sbin/condor_master -f') in (qcl_update_unit.content | b64decode)"
+          - "'Environment=CONDOR_CONFIG=/etc/condor/condor_config' in (qcl_update_unit.content | b64decode)"
+      no_log: true
+    - name: Прочитать native startd address
+      ansible.builtin.slurp:
+        src: '{{ qcl_update_paths.results[2].stdout }}'
+      register: qcl_update_startd
+      no_log: true
+    - name: Проверить пустой worker до обслуживания
+      ansible.builtin.command:
+        argv: ['{{ qcl_update_paths.results[1].stdout }}/condor_status', -direct, '{{ (qcl_update_startd.content | b64decode).splitlines()[0] }}', -af, State]
+      register: qcl_update_slots
+      changed_when: false
+    - name: Не прерывать running jobs
+      ansible.builtin.assert:
+        that:
+          - qcl_update_slots.stdout | trim | length > 0
+          - qcl_update_slots.stdout_lines | difference(['Unclaimed', 'Owner', 'Drained']) | length == 0
+    - name: Проверить собственность current directory
+      ansible.builtin.stat:
+        path: '{{ qcl_condor_update_prefix }}'
+        follow: false
+      register: qcl_update_prefix_stat
+    - name: Не перезаписывать чужой directory или symlink
+      ansible.builtin.assert:
+        that:
+          - not qcl_update_prefix_stat.stat.exists or (qcl_update_prefix_stat.stat.isdir | default(false) and qcl_update_prefix_stat.stat.uid == 0)
+    - name: Проверить existing native credentials без чтения содержимого
+      ansible.builtin.stat:
+        path: '/etc/condor/{{ item }}'
+        get_checksum: false
+        get_mime: false
+      loop: [passwords.d/POOL, tokens.d/daemon]
+      register: qcl_update_credentials
+      no_log: true
+    - name: Требовать существующие credentials
+      ansible.builtin.assert:
+        that:
+          - item.stat.isreg | default(false)
+          - item.stat.uid == 0
+          - item.stat.mode == '0600'
+          - item.item != 'passwords.d/POOL' or item.stat.size == 32
+      loop: '{{ qcl_update_credentials.results }}'
+      no_log: true
+    - name: Проверить ownership существующих CLI shortcuts
+      ansible.builtin.stat:
+        path: '/usr/local/bin/{{ item }}'
+        follow: false
+      loop: [condor_status, condor_q, condor_submit, condor_rm, condor_history, condor_version, condor_config_val]
+      register: qcl_update_cli
+    - name: Не заменять системные или чужие CLI files
+      ansible.builtin.assert:
+        that:
+          - not item.stat.exists or (item.stat.islnk | default(false) and item.stat.lnk_source.startswith('/opt/htcondor/'))
+      loop: '{{ qcl_update_cli.results }}'
+      loop_control:
+        label: '{{ item.item }}'
+  tasks:
+    - name: Создать cache directory для official current channel
+      ansible.builtin.file:
+        path: '{{ qcl_condor_update_archive | dirname }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Скачать текущий HTCondor 26 channel без exact patch или SHA allowlist
+      ansible.builtin.get_url:
+        url: '{{ qcl_condor_tarball_url }}'
+        dest: '{{ qcl_condor_update_archive }}'
+        force: true
+        mode: '0644'
+        timeout: 120
+    - name: Запретить новый claim атомарным native check и drain
+      ansible.builtin.command:
+        argv:
+          - '{{ qcl_update_paths.results[1].stdout }}/condor_drain'
+          - -graceful
+          - -check
+          - '(State =?= "Unclaimed") || (State =?= "Owner") || (State =?= "Drained")'
+          - -exit-on-completion
+          - '{{ (qcl_update_startd.content | b64decode).splitlines()[0] }}'
+    - name: Остановить известную пустую QCL службу
+      ansible.builtin.systemd_service:
+        name: condor
+        state: stopped
+    - name: Подготовить отдельный own prefix
+      ansible.builtin.file:
+        path: '{{ qcl_condor_update_prefix }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Распаковать официальный runtime без изменения state или credentials
+      ansible.builtin.unarchive:
+        src: '{{ qcl_condor_update_archive }}'
+        dest: '{{ qcl_condor_update_prefix }}'
+        remote_src: true
+        extra_opts: [--strip-components=1]
+        owner: root
+        group: root
+    - name: Проверить loader новой версии до изменения pointers
+      ansible.builtin.command:
+        argv: ['{{ qcl_condor_update_prefix }}/bin/condor_version']
+      environment:
+        CONDOR_CONFIG: /dev/null
+        LD_LIBRARY_PATH: '{{ qcl_condor_update_prefix }}/lib'
+      changed_when: false
+    - name: Перевести только RELEASE_DIR в existing main config
+      ansible.builtin.lineinfile:
+        path: /etc/condor/condor_config
+        regexp: '^RELEASE_DIR\s*='
+        line: 'RELEASE_DIR = {{ qcl_condor_update_prefix }}'
+        backup: true
+    - name: Перевести только old-runtime paths в existing unit с сохранением environment
+      ansible.builtin.replace:
+        path: /etc/systemd/system/condor.service
+        regexp: '{{ qcl_update_paths.results[0].stdout | regex_escape }}/'
+        replace: '{{ qcl_condor_update_prefix }}/'
+        backup: true
+      no_log: true
+    - name: Подключить только own CLI shortcuts
+      ansible.builtin.file:
+        src: '{{ qcl_condor_update_prefix }}/bin/{{ item }}'
+        dest: '/usr/local/bin/{{ item }}'
+        state: link
+      loop: [condor_status, condor_q, condor_submit, condor_rm, condor_history, condor_version, condor_config_val]
+    - name: Проверить native config parser до запуска
+      ansible.builtin.command:
+        argv: ['{{ qcl_condor_update_prefix }}/bin/condor_config_val', -summary]
+      environment: '{{ qcl_condor_update_environment }}'
+      changed_when: false
+    - name: Прочитать effective RELEASE_DIR после всех native includes
+      ansible.builtin.command:
+        argv: ['{{ qcl_condor_update_prefix }}/bin/condor_config_val', RELEASE_DIR]
+      register: qcl_update_effective_release
+      environment: '{{ qcl_condor_update_environment }}'
+      changed_when: false
+    - name: Не запускать mixed runtime с old child paths
+      ansible.builtin.assert:
+        that: qcl_update_effective_release.stdout | trim == qcl_condor_update_prefix
+    - name: Запустить native worker с прежними state paths и ресурсной конфигурацией
+      ansible.builtin.systemd_service:
+        name: condor
+        daemon_reload: true
+        state: started
+    - name: Проверить текущий CLI через выбранный PATH
+      ansible.builtin.command:
+        argv: [condor_version]
+      register: qcl_update_cli_version
+      changed_when: false
+    - name: Дождаться native startd readback без DNS или старого cached address
+      ansible.builtin.shell: |
+        address=$(head -n 1 {{ qcl_update_paths.results[2].stdout | quote }})
+        exec timeout 15 {{ (qcl_condor_update_prefix ~ '/bin/condor_status') | quote }} -direct "$address" -af State Cpus Memory CondorVersion
+      args:
+        executable: /bin/bash
+      register: qcl_update_readback
+      changed_when: false
+      until: qcl_update_readback.rc == 0 and qcl_update_readback.stdout | trim | length > 0
+      retries: 12
+      delay: 2
+      environment: '{{ qcl_condor_update_environment }}'
+    - name: Показать фактические CLI и daemon versions и native slots без version equality gate
+      ansible.builtin.debug:
+        msg: '{{ qcl_update_cli_version.stdout_lines + qcl_update_readback.stdout_lines }}'

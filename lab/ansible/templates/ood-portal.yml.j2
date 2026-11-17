@@ -1,0 +1,13 @@
+---
+servername: {{ qcl_manager_address | to_json }}
+ssl:
+  - 'SSLCertificateFile /etc/ood/qcl-tls/server.crt'
+  - 'SSLCertificateKeyFile /etc/ood/qcl-tls/server.key'
+  - 'SSLCertificateChainFile /etc/ood/qcl-tls/ca.crt'
+user_map_match: '^(qcl)$'
+auth:
+  - 'AuthType Basic'
+  - 'AuthName "QCL OnDemand"'
+  - 'AuthBasicProvider file'
+  - 'AuthUserFile /etc/ood/qcl-htpasswd'
+  - 'Require user qcl'

@@ -1,0 +1,43 @@
+---
+- name: Использовать системный OOD или установить текущий upstream package
+  hosts: qcl_manager
+  become: true
+  gather_facts: true
+  pre_tasks:
+    - name: Проверить платформу
+      ansible.builtin.assert:
+        that: ansible_facts.distribution == 'Ubuntu'
+    - name: Прочитать системные пакеты
+      ansible.builtin.package_facts:
+        manager: auto
+  tasks:
+    - name: Подключить текущий официальный OOD только при отсутствии установки
+      when: "'ondemand' not in ansible_facts.packages"
+      block:
+        - name: Установить native APT dependencies
+          ansible.builtin.apt:
+            name: [ca-certificates, python3-apt]
+            state: present
+            update_cache: true
+        - name: Создать APT keyrings
+          ansible.builtin.file:
+            path: /etc/apt/keyrings
+            state: directory
+            mode: '0755'
+        - name: Установить официальный APT public key
+          ansible.builtin.get_url:
+            url: https://apt.osc.edu/ondemand/DEB-GPG-KEY-ondemand-SHA512
+            dest: /etc/apt/keyrings/ondemand-web.asc
+            mode: '0644'
+        - name: Подключить native latest repository без release pin
+          ansible.builtin.copy:
+            dest: /etc/apt/sources.list.d/ondemand-web.list
+            mode: '0644'
+            content: |
+              deb [signed-by=/etc/apt/keyrings/ondemand-web.asc] https://apt.osc.edu/ondemand/latest/web/apt {{ ansible_facts.distribution_release }} main
+    - name: Установить недостающие Desktop и OOD packages без автоматического старта
+      ansible.builtin.apt:
+        name: [ubuntu-desktop-minimal, gnome-remote-desktop, ondemand, apache2-utils]
+        state: present
+        update_cache: true
+        policy_rc_d: 101

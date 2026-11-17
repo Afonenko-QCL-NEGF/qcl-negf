@@ -1,0 +1,59 @@
+--- a/internal/site/src/components/systems-table/systems-table-columns.tsx
++++ b/internal/site/src/components/systems-table/systems-table-columns.tsx
+@@ -142,7 +142,8 @@
+ 			header: sortableHeader,
+ 		},
+ 		{
+-			accessorFn: ({ info }) => info.cpu || undefined,
++			accessorFn: ({ info, status }) =>
++				status === SystemStatus.Up && info.v && Number.isFinite(info.cpu) ? info.cpu : undefined,
+ 			id: "cpu",
+ 			name: () => t`CPU`,
+ 			cell: TableCellWithMeter,
+@@ -151,7 +152,8 @@
+ 		},
+ 		{
+ 			// accessorKey: "info.mp",
+-			accessorFn: ({ info }) => info.mp || undefined,
++			accessorFn: ({ info, status }) =>
++				status === SystemStatus.Up && info.v && Number.isFinite(info.mp) ? info.mp : undefined,
+ 			id: "memory",
+ 			name: () => t`Memory`,
+ 			cell: TableCellWithMeter,
+@@ -159,7 +161,8 @@
+ 			header: sortableHeader,
+ 		},
+ 		{
+-			accessorFn: ({ info }) => info.dp || undefined,
++			accessorFn: ({ info, status }) =>
++				status === SystemStatus.Up && info.v && Number.isFinite(info.dp) ? info.dp : undefined,
+ 			id: "disk",
+ 			name: () => t`Disk`,
+ 			cell: (info: CellContext<SystemRecord, unknown>) =>
+@@ -551,7 +554,10 @@
+ 
+ function TableCellWithMeter(info: CellContext<SystemRecord, unknown>) {
+ 	const { colorWarn = 65, colorCrit = 90 } = useStore($userSettings, { keys: ["colorWarn", "colorCrit"] })
+-	const val = Number(info.getValue()) || 0
++	const val = info.getValue()
++	if (typeof val !== "number" || !Number.isFinite(val)) {
++		return <span className="text-muted-foreground" title="Нет текущих данных">—</span>
++	}
+ 	const threshold = getMeterStateByThresholds(val, colorWarn, colorCrit)
+ 	const meterClass = cn(
+ 		"h-full",
+@@ -572,9 +578,13 @@
+ 
+ function DiskCellWithMultiple(info: CellContext<SystemRecord, unknown>) {
+ 	const { colorWarn = 65, colorCrit = 90 } = useStore($userSettings, { keys: ["colorWarn", "colorCrit"] })
++	const value = info.getValue()
++	if (typeof value !== "number" || !Number.isFinite(value)) {
++		return <span className="text-muted-foreground" title="Нет текущих данных">—</span>
++	}
+ 	const { info: sysInfo, status, id } = info.row.original
+ 	const extraFs = Object.entries(sysInfo.efs ?? {})
+-	const rootDiskPct = sysInfo.dp
++	const rootDiskPct = value
+ 	const rootDiskName = sysInfo.rdn
+ 
+ 	extraFs.sort((a, b) => a[0].localeCompare(b[0]))

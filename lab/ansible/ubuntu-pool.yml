@@ -1,0 +1,277 @@
+---
+- name: Подготовить Ubuntu manager, submit и execute узел
+  hosts: qcl_manager
+  become: true
+  gather_facts: true
+  vars:
+    qcl_initialize_data: false
+    qcl_worker_cpus: 6
+    qcl_worker_memory: 11264
+    qcl_condor_uid_domain: qcl
+    qcl_condor_trust_domain: qcl
+    qcl_condor_daemon_identity: condor@qcl
+  pre_tasks:
+    - name: Проверить платформу, ресурсы и обязательные параметры
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.distribution == 'Ubuntu'
+          - qcl_data_device is defined
+          - qcl_data_device is match('^/dev/')
+          - qcl_manager_address is defined
+          - qcl_manager_address | length > 0
+          - qcl_pool_key_file is defined
+          - qcl_admin_public_key is defined
+          - qcl_admin_public_key is match('^ssh-(ed25519|rsa) [A-Za-z0-9+/]+={0,3}( .*)?$')
+          - qcl_worker_cpus | int <= (ansible_facts.processor_vcpus | int - 2)
+          - qcl_worker_memory | int <= (ansible_facts.memtotal_mb | int - 4096)
+          - qcl_worker_cpus | int > 0
+          - qcl_worker_memory | int > 0
+    - name: Проверить источник ключа pool на controller
+      ansible.builtin.stat:
+        path: '{{ qcl_pool_key_file }}'
+        get_checksum: false
+      delegate_to: localhost
+      become: false
+      register: qcl_source_key
+      no_log: true
+    - name: Требовать 32-байтный ключ
+      ansible.builtin.assert:
+        that:
+          - qcl_source_key.stat.isreg | default(false)
+          - qcl_source_key.stat.size | default(0) == 32
+      no_log: true
+    - name: Проверить блочное устройство
+      ansible.builtin.stat:
+        path: '{{ qcl_data_device }}'
+        follow: true
+      register: qcl_device_stat
+    - name: Требовать блочное устройство
+      ansible.builtin.assert:
+        that: qcl_device_stat.stat.isblk | default(false)
+    - name: Прочитать native идентификацию диска
+      ansible.builtin.command:
+        argv: [lsblk, --nodeps, --bytes, --json, --output, 'SERIAL,SIZE,TYPE', '{{ qcl_data_device }}']
+      register: qcl_lsblk
+      changed_when: false
+    - name: Требовать предназначенный диск 128 GiB
+      ansible.builtin.assert:
+        that:
+          - (qcl_lsblk.stdout | from_json).blockdevices | length == 1
+          - (qcl_lsblk.stdout | from_json).blockdevices[0].serial == 'qcl-clean-data'
+          - (qcl_lsblk.stdout | from_json).blockdevices[0].size | int == 137438953472
+          - (qcl_lsblk.stdout | from_json).blockdevices[0].type == 'disk'
+    - name: Проверить текущую файловую систему
+      ansible.builtin.command:
+        argv: [blkid, -p, -s, TYPE, -o, value, '{{ qcl_data_device }}']
+      register: qcl_blkid_type
+      changed_when: false
+      failed_when: qcl_blkid_type.rc not in [0, 2]
+    - name: Прочитать сигнатуры диска без изменения
+      ansible.builtin.command:
+        argv: [wipefs, --noheadings, --output, TYPE, '{{ qcl_data_device }}']
+      register: qcl_wipefs
+      changed_when: false
+    - name: Разрешить только имеющийся ext4 или чистый диск с явным разрешением
+      ansible.builtin.assert:
+        that:
+          - >-
+            (qcl_blkid_type.rc == 0 and qcl_blkid_type.stdout | trim == 'ext4') or
+            (qcl_blkid_type.rc == 2 and qcl_wipefs.stdout | trim == '' and qcl_initialize_data | bool)
+    - name: Проверить текущее монтирование диска
+      ansible.builtin.command:
+        argv: [findmnt, --noheadings, --output, TARGET, --source, '{{ qcl_data_device }}']
+      register: qcl_source_mount
+      changed_when: false
+      failed_when: qcl_source_mount.rc not in [0, 1]
+    - name: Не использовать диск, смонтированный в другом месте
+      ansible.builtin.assert:
+        that:
+          - qcl_source_mount.rc == 1 or (qcl_source_mount.stdout_lines | map('trim') | list == ['/srv/qcl'])
+    - name: Проверить установленный HTCondor
+      ansible.builtin.package_facts:
+        manager: auto
+    - name: Проверить состояние существующего HTCondor
+      ansible.builtin.command:
+        argv: [systemctl, is-active, condor]
+      register: qcl_condor_active
+      changed_when: false
+      failed_when: false
+      when: "'condor' in ansible_facts.packages"
+    - name: Остановиться, если существующую очередь нельзя проверить
+      ansible.builtin.assert:
+        that: qcl_condor_active.rc == 0
+        fail_msg: Существующий condor остановлен; проверьте очередь вручную до изменений.
+      when: "'condor' in ansible_facts.packages"
+    - name: Проверить, что существующая очередь пуста
+      ansible.builtin.command:
+        argv: [condor_q, -allusers, -autoformat, ClusterId]
+      register: qcl_queue_before
+      changed_when: false
+      when: "'condor' in ansible_facts.packages"
+    - name: Не менять работающий pool с заданиями
+      ansible.builtin.assert:
+        that: qcl_queue_before.stdout | trim == ''
+      when: "'condor' in ansible_facts.packages"
+
+  tasks:
+    - name: Форматировать только чистый диск при явном разрешении
+      ansible.builtin.command:
+        argv: [mkfs.ext4, -L, qcl-clean-data, '{{ qcl_data_device }}']
+      when: qcl_blkid_type.rc == 2 and qcl_initialize_data | bool
+    - name: Прочитать UUID файловой системы
+      ansible.builtin.command:
+        argv: [blkid, -s, UUID, -o, value, '{{ qcl_data_device }}']
+      register: qcl_data_uuid
+      changed_when: false
+    - name: Проверить, что UUID не пуст
+      ansible.builtin.assert:
+        that: qcl_data_uuid.stdout | trim | length > 0
+    - name: Проверить текущий mountpoint
+      ansible.builtin.command:
+        argv: [findmnt, --noheadings, --output, UUID, --mountpoint, /srv/qcl]
+      register: qcl_mount
+      changed_when: false
+      failed_when: qcl_mount.rc not in [0, 1]
+    - name: Не заменять чужое монтирование
+      ansible.builtin.assert:
+        that: qcl_mount.rc == 1 or qcl_mount.stdout | trim == qcl_data_uuid.stdout | trim
+    - name: Проверить существующую запись fstab
+      ansible.builtin.command:
+        argv: [findmnt, --fstab, --noheadings, --output, 'SOURCE,FSTYPE', --mountpoint, /srv/qcl]
+      register: qcl_fstab
+      changed_when: false
+      failed_when: qcl_fstab.rc not in [0, 1]
+    - name: Не изменять чужую запись fstab
+      ansible.builtin.assert:
+        that: qcl_fstab.rc == 1 or qcl_fstab.stdout.split() == ['UUID=' ~ (qcl_data_uuid.stdout | trim), 'ext4']
+    - name: Создать mountpoint
+      ansible.builtin.file:
+        path: /srv/qcl
+        state: directory
+        mode: '0755'
+      when: qcl_mount.rc == 1
+    - name: Добавить UUID в fstab
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        line: 'UUID={{ qcl_data_uuid.stdout | trim }} /srv/qcl ext4 defaults 0 2'
+        state: present
+      when: qcl_fstab.rc == 1
+    - name: Подключить диск, если он не подключён
+      ansible.builtin.command:
+        argv: [mount, /srv/qcl]
+      when: qcl_mount.rc == 1
+    - name: Подготовить системный HTCondor
+      ansible.builtin.include_tasks: tasks/htcondor-ubuntu.yml
+    - name: Создать каталоги runtime
+      ansible.builtin.file:
+        path: '/srv/qcl/condor/{{ item }}'
+        state: directory
+        owner: condor
+        group: condor
+        mode: '0755'
+      loop: [log, spool, execute, lock, run]
+    - name: Создать общую директорию пользователя
+      ansible.builtin.file:
+        path: /srv/qcl/home
+        state: directory
+        mode: '0755'
+    - name: Создать локальную учётную запись qcl
+      ansible.builtin.user:
+        name: qcl
+        home: /srv/qcl/home/qcl
+        shell: /bin/bash
+        create_home: true
+        password_lock: true
+    - name: Создать каталог SSH пользователя
+      ansible.builtin.file:
+        path: /srv/qcl/home/qcl/.ssh
+        state: directory
+        owner: qcl
+        group: qcl
+        mode: '0700'
+    - name: Добавить авторизованный ключ без замены существующих
+      ansible.builtin.lineinfile:
+        path: /srv/qcl/home/qcl/.ssh/authorized_keys
+        create: true
+        owner: qcl
+        group: qcl
+        mode: '0600'
+        line: '{{ qcl_admin_public_key }}'
+    - name: Создать каталоги credential pool
+      ansible.builtin.file:
+        path: '{{ item }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0700'
+      loop: [/etc/condor/passwords.d, /etc/condor/tokens.d]
+    - name: Скопировать неизменяемый pool key
+      ansible.builtin.copy:
+        src: '{{ qcl_pool_key_file }}'
+        dest: /etc/condor/passwords.d/POOL
+        owner: root
+        group: root
+        mode: '0600'
+        force: false
+      no_log: true
+    - name: Записать общую security конфигурацию
+      ansible.builtin.template:
+        src: templates/condor-security.conf.j2
+        dest: /etc/condor/config.d/10-security.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Проверить и перезапустить condor
+    - name: Записать конфигурацию manager и execute
+      ansible.builtin.template:
+        src: templates/condor-manager.conf.j2
+        dest: /etc/condor/config.d/20-manager.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Проверить и перезапустить condor
+    - name: Создать отсутствующий daemon token
+      ansible.builtin.command:
+        argv: [condor_token_create, -identity, 'condor@qcl', -key, POOL, -file, /etc/condor/tokens.d/daemon]
+        creates: /etc/condor/tokens.d/daemon
+      no_log: true
+      notify: Проверить и перезапустить condor
+    - name: Закрыть доступ к daemon token
+      ansible.builtin.file:
+        path: /etc/condor/tokens.d/daemon
+        owner: root
+        group: root
+        mode: '0600'
+      no_log: true
+    - name: Добавить зависимость systemd от диска
+      ansible.builtin.file:
+        path: /etc/systemd/system/condor.service.d
+        state: directory
+        mode: '0755'
+    - name: Записать systemd mount dependency
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/condor.service.d/qcl-mount.conf
+        mode: '0644'
+        content: |
+          [Unit]
+          RequiresMountsFor=/srv/qcl
+      notify: Проверить и перезапустить condor
+    - name: Проверить конфигурацию до запуска
+      ansible.builtin.command:
+        argv: [condor_config_val, -config]
+      changed_when: false
+    - name: Применить ожидающие изменения после проверки
+      ansible.builtin.meta: flush_handlers
+    - name: Включить и запустить HTCondor
+      ansible.builtin.systemd_service:
+        name: condor
+        daemon_reload: true
+        enabled: true
+        state: started
+
+  handlers:
+    - name: Проверить и перезапустить condor
+      ansible.builtin.systemd_service:
+        name: condor
+        daemon_reload: true
+        state: restarted

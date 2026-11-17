@@ -1,0 +1,261 @@
+--- a/internal/site/index.html
++++ b/internal/site/index.html
+@@ -1,7 +1,8 @@
+ <!doctype html>
+-<html lang="en" dir="ltr">
++<html lang="en" dir="ltr" class="light">
+ 	<head>
+ 		<meta charset="UTF-8" />
++		<meta name="color-scheme" content="only light" />
+ 		<link rel="manifest" href="./static/manifest.json" crossorigin="use-credentials" />
+ 		<link rel="icon" type="image/svg+xml" href="./static/icon.svg" />
+ 		<link rel="apple-touch-icon" href="./static/icon.png" />
+@@ -9,18 +10,8 @@
+ 		<meta name="robots" content="noindex, nofollow" />
+ 		<title>Beszel</title>
+ 		<style>
+-			.dark { background: hsl(220 5.5% 9%); color-scheme: dark; }
++			:root { background: hsl(30 8% 98%); color-scheme: only light; }
+ 		</style>
+-		<script>
+-			(function() {
+-				try {
+-					var theme = localStorage.getItem('ui-theme');
+-					var isDark = theme === 'dark' ||
+-						(theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+-					document.documentElement.classList.add(isDark ? 'dark' : 'light');
+-				} catch (e) {}
+-			})();
+-		</script>
+ 		<script>
+ 			globalThis.BESZEL = "{info}"
+ 		</script>
+--- a/internal/site/src/components/containers-table/containers-table.tsx
++++ b/internal/site/src/components/containers-table/containers-table.tsx
+@@ -36,7 +36,7 @@
+ import { LogsDisplay, LogsFullscreenDialog, LogsIconButton, LogsTimestampToggle } from "@/components/logs-display"
+ import { getLogTimestampDecorations } from "@/lib/logs"
+ 
+-const syntaxTheme = "github-dark-dimmed"
++const syntaxTheme = "github-light"
+ 
+ export default function ContainersTable({ systemId }: { systemId?: string }) {
+ 	const [data, setData] = useState<ContainerRecord[] | undefined>(undefined)
+@@ -433,7 +433,7 @@
+ 						</div>
+ 						<div
+ 							className={cn(
+-								"grow h-[calc(50dvh-4rem)] w-full overflow-auto p-3 rounded-md bg-gh-dark text-white text-sm",
++								"grow h-[calc(50dvh-4rem)] w-full overflow-auto p-3 rounded-md bg-card text-card-foreground text-sm",
+ 								!infoDisplay && "animate-pulse"
+ 							)}
+ 						>
+@@ -506,10 +506,10 @@
+ }) {
+ 	return (
+ 		<Dialog open={open} onOpenChange={onOpenChange}>
+-			<DialogContent className="w-[calc(100vw-20px)] h-[calc(100dvh-20px)] max-w-none p-0 bg-gh-dark border-0 text-white">
++			<DialogContent className="w-[calc(100vw-20px)] h-[calc(100dvh-20px)] max-w-none p-0 bg-card border-0 text-card-foreground">
+ 				<DialogTitle className="sr-only">{containerName} info</DialogTitle>
+ 				<div className="flex-1 overflow-auto">
+-					<div className="h-full w-full overflow-auto p-3 rounded-md bg-gh-dark text-sm leading-relaxed">
++					<div className="h-full w-full overflow-auto p-3 rounded-md bg-card text-sm leading-relaxed">
+ 						<div dangerouslySetInnerHTML={{ __html: infoDisplay }} />
+ 					</div>
+ 				</div>
+--- a/internal/site/src/components/login/login.tsx
++++ b/internal/site/src/components/login/login.tsx
+@@ -5,7 +5,6 @@
+ import { pb } from "@/lib/api"
+ import { $authenticated } from "@/lib/stores"
+ import { Logo } from "../logo"
+-import { ModeToggle } from "../mode-toggle"
+ import { $router } from "../router"
+ import { useTheme } from "../theme-provider"
+ import ForgotPassword from "./forgot-pass-form"
+@@ -72,9 +71,6 @@
+ 				// @ts-expect-error
+ 				style={{ maxWidth: "21.5em", "--border": resolvedTheme === "light" ? "hsl(30, 8%, 70%)" : "hsl(220, 3%, 25%)" }}
+ 			>
+-				<div className="absolute top-3 right-3">
+-					<ModeToggle />
+-				</div>
+ 				<div className="text-center">
+ 					<h1 className="mb-3">
+ 						{/* Logo's aria-label provides the heading text */}
+--- a/internal/site/src/components/logs-display.tsx
++++ b/internal/site/src/components/logs-display.tsx
+@@ -57,7 +57,7 @@
+ 		<div
+ 			ref={containerRef}
+ 			className={cn(
+-				"max-h-[calc(50dvh-10rem)] w-full overflow-auto p-3 rounded-md bg-gh-dark text-white text-sm",
++				"max-h-[calc(50dvh-10rem)] w-full overflow-auto p-3 rounded-md bg-card text-card-foreground text-sm",
+ 				!showTimestamps && "[&_.log-timestamp]:hidden",
+ 				!logsDisplay && ["animate-pulse", "h-full"]
+ 			)}
+@@ -97,19 +97,19 @@
+ 
+ 	return (
+ 		<Dialog open={open} onOpenChange={onOpenChange}>
+-			<DialogContent className="w-[calc(100vw-20px)] h-[calc(100dvh-20px)] max-w-none p-0 bg-gh-dark border-0 text-white">
++			<DialogContent className="w-[calc(100vw-20px)] h-[calc(100dvh-20px)] max-w-none p-0 bg-card border-0 text-card-foreground">
+ 				<DialogTitle className="sr-only">{name} logs</DialogTitle>
+ 				<div ref={outerContainerRef} className="absolute inset-x-0 bottom-0 top-12 overflow-auto">
+ 					<div
+ 						className={cn(
+-							"min-h-full w-full px-3 leading-relaxed rounded-md bg-gh-dark text-sm",
++							"min-h-full w-full px-3 leading-relaxed rounded-md bg-card text-sm",
+ 							!showTimestamps && "[&_.log-timestamp]:hidden"
+ 						)}
+ 					>
+ 						<div className="py-3" dangerouslySetInnerHTML={{ __html: logsDisplay }} />
+ 					</div>
+ 				</div>
+-				<LogsTimestampToggle className="absolute end-18 top-2 hover:bg-white/10 hover:text-white aria-pressed:bg-white/15 aria-pressed:text-white" />
++				<LogsTimestampToggle className="absolute end-18 top-2 hover:bg-accent hover:text-accent-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground" />
+ 				<Tooltip>
+ 					<TooltipTrigger asChild onFocus={keyboardFocusOnly}>
+ 						<button
+--- a/internal/site/src/components/navbar.tsx
++++ b/internal/site/src/components/navbar.tsx
+@@ -33,7 +33,6 @@
+ import { cn, runOnce } from "@/lib/utils"
+ import { AddSystemDialog } from "./add-system"
+ import { Logo } from "./logo"
+-import { ModeToggle } from "./mode-toggle"
+ import { $router, basePath, Link, navigate, prependBasePath } from "./router"
+ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
+ 
+@@ -79,7 +78,6 @@
+ 
+ 			{/* mobile menu */}
+ 			<div className="ms-auto flex items-center text-xl md:hidden">
+-				<ModeToggle />
+ 				<Button variant="ghost" size="icon" onClick={() => setCommandPaletteOpen(true)}>
+ 					<SearchIcon className="h-[1.2rem] w-[1.2rem]" />
+ 				</Button>
+@@ -199,7 +197,6 @@
+ 						<Trans>Network Monitors</Trans>
+ 					</TooltipContent>
+ 				</Tooltip>
+-				<ModeToggle />
+ 				<Tooltip>
+ 					<TooltipTrigger asChild>
+ 						<Link
+--- a/internal/site/src/components/systemd-table/systemd-table.tsx
++++ b/internal/site/src/components/systemd-table/systemd-table.tsx
+@@ -32,7 +32,7 @@
+ import type { SystemdRecord, SystemdServiceDetails } from "@/types"
+ import { Separator } from "../ui/separator"
+ 
+-const syntaxTheme = "github-dark-dimmed"
++const syntaxTheme = "github-light"
+ 
+ async function getSystemdLogsHtml(systemId: string, serviceName: string): Promise<string> {
+ 	const [{ highlighter }, { logs }] = await Promise.all([
+--- a/internal/site/src/components/theme-provider.tsx
++++ b/internal/site/src/components/theme-provider.tsx
+@@ -1,68 +1,32 @@
+-import { createContext, useContext, useEffect, useState } from "react"
++import { createContext, useContext, useEffect } from "react"
+ 
+ type Theme = "dark" | "light" | "system"
+-type ResolvedTheme = "dark" | "light"
+-
+-type ThemeProviderProps = {
+-	children: React.ReactNode
+-	defaultTheme?: Theme
+-	storageKey?: string
+-}
+ 
+ type ThemeProviderState = {
+ 	theme: Theme
+-	resolvedTheme: ResolvedTheme
++	resolvedTheme: "light"
+ 	setTheme: (theme: Theme) => void
+ }
+ 
+-const initialState: ThemeProviderState = {
+-	theme: "system",
++// This installation has one supported theme. Keep the context API for
++// upstream consumers, while ignoring stored preferences and OS changes.
++const lightTheme: ThemeProviderState = {
++	theme: "light",
+ 	resolvedTheme: "light",
+-	setTheme: () => null,
++	setTheme: () => undefined,
+ }
+ 
+-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
++const ThemeProviderContext = createContext<ThemeProviderState>(lightTheme)
+ 
+-export function ThemeProvider({
+-	children,
+-	defaultTheme = "system",
+-	storageKey = "ui-theme",
+-	...props
+-}: ThemeProviderProps) {
+-	const [theme, setTheme] = useState<Theme>(() => (localStorage.getItem(storageKey) as Theme) || defaultTheme)
+-	const [systemDark, setSystemDark] = useState(() => window.matchMedia("(prefers-color-scheme: dark)").matches)
+-
++export function ThemeProvider({ children }: { children: React.ReactNode }) {
+ 	useEffect(() => {
+-		const media = window.matchMedia("(prefers-color-scheme: dark)")
+-		const onChange = (event: MediaQueryListEvent) => setSystemDark(event.matches)
+-
+-		media.addEventListener("change", onChange)
+-		return () => media.removeEventListener("change", onChange)
++		const root = document.documentElement
++		root.classList.remove("dark")
++		root.classList.add("light")
++		root.style.colorScheme = "only light"
+ 	}, [])
+ 
+-	const resolvedTheme = theme === "system" ? (systemDark ? "dark" : "light") : theme
+-
+-	useEffect(() => {
+-		const root = window.document.documentElement
+-
+-		root.classList.remove("light", "dark")
+-		root.classList.add(resolvedTheme)
+-	}, [resolvedTheme])
+-
+-	const value = {
+-		theme,
+-		resolvedTheme,
+-		setTheme: (theme: Theme) => {
+-			localStorage.setItem(storageKey, theme)
+-			setTheme(theme)
+-		},
+-	}
+-
+-	return (
+-		<ThemeProviderContext.Provider {...props} value={value}>
+-			{children}
+-		</ThemeProviderContext.Provider>
+-	)
++	return <ThemeProviderContext.Provider value={lightTheme}>{children}</ThemeProviderContext.Provider>
+ }
+ 
+ export const useTheme = () => useContext(ThemeProviderContext)
+--- a/internal/site/src/lib/shiki.ts
++++ b/internal/site/src/lib/shiki.ts
+@@ -1,7 +1,7 @@
+ // https://shiki.style/guide/bundles#fine-grained-bundle
+ 
+ // directly import the theme and language modules, only the ones you imported will be bundled.
+-import githubDarkDimmed from '@shikijs/themes/github-dark-dimmed'
++import githubLight from '@shikijs/themes/github-light'
+ 
+ // `shiki/core` entry does not include any themes or languages or the wasm binary.
+ import { createHighlighterCore } from 'shiki/core'
+@@ -10,7 +10,7 @@
+ export const highlighter = await createHighlighterCore({
+    themes: [
+       // instead of strings, you need to pass the imported module
+-      githubDarkDimmed,
++      githubLight,
+       // or a dynamic import if you want to do chunk splitting
+       //  import('@shikijs/themes/material-theme-ocean')
+    ],

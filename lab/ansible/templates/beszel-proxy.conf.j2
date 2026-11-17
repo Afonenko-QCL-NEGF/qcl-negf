@@ -1,0 +1,12 @@
+<VirtualHost *:8443>
+    ServerName {{ qcl_manager_address }}
+    SSLEngine on
+    SSLCertificateFile /etc/ood/qcl-tls/server.crt
+    SSLCertificateKeyFile /etc/ood/qcl-tls/server.key
+    SSLCertificateChainFile /etc/ood/qcl-tls/ca.crt
+    ProxyRequests Off
+    ProxyPreserveHost On
+    RequestHeader set X-Forwarded-Proto "https"
+    ProxyPass / http://127.0.0.1:8090/ upgrade=websocket
+    ProxyPassReverse / http://127.0.0.1:8090/
+</VirtualHost>

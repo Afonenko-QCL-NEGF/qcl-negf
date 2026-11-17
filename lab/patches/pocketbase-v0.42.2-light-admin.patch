@@ -1,0 +1,106 @@
+--- a/ui/index.html
++++ b/ui/index.html
+@@ -1,7 +1,8 @@
+ <!doctype html>
+-<html lang="en">
++<html lang="en" data-color-scheme="light" style="color-scheme: only light; background: white">
+ <head>
+     <meta charset="UTF-8" />
++    <meta name="color-scheme" content="only light" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+     <title>PocketBase</title>
+--- a/ui/src/store.js
++++ b/ui/src/store.js
+@@ -29,13 +29,8 @@
+     _mediaColorScheme: "",
+     userColorScheme: window.localStorage.getItem(COLOR_SCHEME_STORAGE_KEY) || "",
+     get activeColorScheme() {
+-        // explicitly set
+-        if (app.store.userColorScheme) {
+-            return app.store.userColorScheme;
+-        }
+-
+-        // fallback to the loaded browser preference
+-        return app.store._mediaColorScheme || "light";
++        // Installation policy: ignore saved preferences and OS appearance.
++        return "light";
+     },
+ 
+     // api response errors
+@@ -294,11 +289,6 @@
+ });
+ 
+ // sync color scheme
+-const colorSchemeMedia = window.matchMedia("(prefers-color-scheme: dark)");
+-app.store._mediaColorScheme = colorSchemeMedia.matches ? "dark" : "light";
+-colorSchemeMedia.addEventListener("change", ({ matches }) => {
+-    app.store._mediaColorScheme = matches ? "dark" : "light";
+-});
+ watch(() => app.store.userColorScheme, (colorScheme) => {
+     if (!colorScheme) {
+         window.localStorage.removeItem(COLOR_SCHEME_STORAGE_KEY);
+--- a/ui/src/base/appHeader.js
++++ b/ui/src/base/appHeader.js
+@@ -56,7 +56,6 @@
+                 },
+             ),
+             t.div({ className: "flex-fill app-header-separator" }),
+-            colorSchemeButton(),
+             t.button(
+                 {
+                     type: "button",
+@@ -98,53 +97,3 @@
+         );
+     };
+ }
+-
+-function colorSchemeButton() {
+-    const options = [
+-        { value: "light", icon: "ri-sun-line", label: "Light" },
+-        { value: "dark", icon: "ri-moon-line", label: "Dark" },
+-        { value: "", icon: "ri-subtract-line", label: "Auto" },
+-    ];
+-
+-    return [
+-        t.button(
+-            {
+-                type: "button",
+-                className: "header-link color-scheme-picker",
+-                "html-popovertarget": "color-scheme-dropdown",
+-                title: "Color scheme",
+-            },
+-            t.i({
+-                className: () => app.store.activeColorScheme == "dark" ? "ri-moon-line" : "ri-sun-line",
+-                ariaHidden: true,
+-            }),
+-        ),
+-        t.div(
+-            {
+-                pbEvent: "colorSchemeDropdown",
+-                id: "color-scheme-dropdown",
+-                className: "dropdown sm nowrap color-scheme-dropdown",
+-                popover: "auto",
+-            },
+-            () => {
+-                return options.map((opt) => {
+-                    return t.button(
+-                        {
+-                            type: "button",
+-                            className: () =>
+-                                `dropdown-item dropdown-item-light ${
+-                                    app.store.userColorScheme == opt.value ? "active" : ""
+-                                }`,
+-                            onclick: (e) => {
+-                                e.target.closest(".dropdown").hidePopover();
+-                                app.store.userColorScheme = opt.value;
+-                            },
+-                        },
+-                        t.i({ className: opt.icon, ariaHidden: true }),
+-                        t.span({ className: "txt" }, opt.label),
+-                    );
+-                });
+-            },
+-        ),
+-    ];
+-}

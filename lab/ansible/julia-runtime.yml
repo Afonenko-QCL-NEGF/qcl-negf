@@ -1,0 +1,102 @@
+---
+- name: Использовать системную Julia или установить текущую stable
+  hosts: qcl_manager:ubuntu_workers
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Найти существующую Julia без ограничения версии
+      ansible.builtin.command:
+        argv: [sh, -c, 'command -v "$1"', sh, '{{ qcl_julia_executable | default("julia") }}']
+      register: qcl_julia_system
+      changed_when: false
+      failed_when: false
+
+    - name: Установить Julia, только если её ещё нет
+      when: qcl_julia_system.rc != 0
+      block:
+        - name: Обновить native APT metadata
+          ansible.builtin.apt:
+            update_cache: true
+            cache_valid_time: 3600
+        - name: Узнать наличие системного пакета Julia
+          ansible.builtin.command:
+            argv: [apt-cache, policy, julia]
+          environment:
+            LC_ALL: C
+          register: qcl_julia_apt
+          changed_when: false
+        - name: Установить доступный системный пакет
+          ansible.builtin.apt:
+            name: julia
+            state: present
+          when: qcl_julia_apt.stdout is regex('(?m)^\s*Candidate:\s+(?!\(none\))\S+')
+
+        - name: Использовать upstream stable при отсутствии native package
+          when: qcl_julia_apt.stdout is not regex('(?m)^\s*Candidate:\s+(?!\(none\))\S+')
+          block:
+            - name: Создать каталог загрузки
+              ansible.builtin.file:
+                path: /var/cache/qcl
+                state: directory
+                mode: '0755'
+            - name: Прочитать официальный каталог Julia releases
+              ansible.builtin.get_url:
+                url: https://julialang-s3.julialang.org/bin/versions.json
+                dest: /var/cache/qcl/julia-versions.json
+                force: true
+                mode: '0644'
+                timeout: 30
+            - name: Выбрать текущий stable archive для native architecture
+              ansible.builtin.command:
+                argv:
+                  - python3
+                  - -c
+                  - |
+                    import json, re, sys
+                    with open(sys.argv[2], encoding="utf-8") as stream:
+                        releases = json.load(stream)
+                    triplet = {"x86_64": "x86_64-linux-gnu", "aarch64": "aarch64-linux-gnu"}[sys.argv[1]]
+                    candidates = []
+                    for version, release in releases.items():
+                        if not release.get("stable") or not re.fullmatch(r"\d+\.\d+\.\d+", version):
+                            continue
+                        for archive in release.get("files", []):
+                            if archive.get("triplet") == triplet and archive.get("kind") == "archive" and archive["url"].endswith(".tar.gz"):
+                                candidates.append((tuple(map(int, version.split("."))), version, archive))
+                    if not candidates:
+                        raise SystemExit("No official stable Julia archive for " + triplet)
+                    _, version, archive = max(candidates, key=lambda row: row[0])
+                    print(json.dumps({"version": version, "url": archive["url"], "sha256": archive["sha256"]}))
+                  - '{{ ansible_facts.architecture }}'
+                  - /var/cache/qcl/julia-versions.json
+              register: qcl_julia_selected
+              changed_when: false
+            - name: Скачать официальный archive с checksum из того же каталога
+              ansible.builtin.get_url:
+                url: '{{ (qcl_julia_selected.stdout | from_json).url }}'
+                dest: /var/cache/qcl/julia-stable.tar.gz
+                checksum: 'sha256:{{ (qcl_julia_selected.stdout | from_json).sha256 }}'
+                mode: '0644'
+            - name: Распаковать официальный runtime
+              ansible.builtin.unarchive:
+                src: /var/cache/qcl/julia-stable.tar.gz
+                dest: /opt
+                remote_src: true
+            - name: Подключить новую Julia к обычному PATH
+              ansible.builtin.file:
+                src: '/opt/julia-{{ (qcl_julia_selected.stdout | from_json).version }}/bin/julia'
+                dest: /usr/local/bin/julia
+                state: link
+
+    - name: Прочитать выбранный native executable
+      ansible.builtin.command:
+        argv: [sh, -c, 'command -v "$1"', sh, '{{ qcl_julia_system.stdout | trim if qcl_julia_system.rc == 0 else "julia" }}']
+      register: qcl_julia_resolved
+      changed_when: false
+    - name: Передать фактический путь Pkg play
+      ansible.builtin.set_fact:
+        qcl_julia_executable: '{{ qcl_julia_resolved.stdout | trim }}'
+    - name: Записать фактическую версию без version gate
+      ansible.builtin.command:
+        argv: ['{{ qcl_julia_executable }}', --startup-file=no, --version]
+      changed_when: false

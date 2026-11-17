@@ -1,0 +1,46 @@
+---
+# Accept an installed system HTCondor. Explicit maintenance updates use the
+# selected upstream channel, without an exact release or an allowlist.
+- name: Найти установленный HTCondor
+  ansible.builtin.shell: command -v condor_version
+  register: qcl_system_condor
+  changed_when: false
+  failed_when: qcl_system_condor.rc not in [0, 1]
+- name: Установить отсутствующий HTCondor или выполнить запрошенное обновление
+  when: qcl_system_condor.rc != 0 or qcl_update_tools | default(false) | bool
+  block:
+    - name: Установить обычные APT зависимости
+      ansible.builtin.apt:
+        name: [ca-certificates, python3-apt]
+        state: present
+        update_cache: true
+    - name: Создать APT keyrings
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+    - name: Получить штатный repository key выбранного канала
+      ansible.builtin.get_url:
+        url: 'https://htcss-downloads.chtc.wisc.edu/repo/keys/HTCondor-{{ qcl_condor_channel | default("26.0") }}-Key'
+        dest: /etc/apt/keyrings/htcondor.asc
+        mode: '0644'
+    - name: Подключить подвижный официальный канал HTCondor
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/htcondor.list
+        mode: '0644'
+        content: |
+          deb [signed-by=/etc/apt/keyrings/htcondor.asc] https://htcss-downloads.chtc.wisc.edu/repo/ubuntu/{{ qcl_condor_channel | default('26.0') }} {{ ansible_facts.distribution_release }} main
+    - name: Удалить временный QCL pin старого опыта
+      ansible.builtin.file:
+        path: /etc/apt/preferences.d/qcl-htcondor
+        state: absent
+    - name: Установить текущий пакет канала штатным APT
+      ansible.builtin.apt:
+        name: condor
+        state: '{{ "latest" if qcl_update_tools | default(false) | bool else "present" }}'
+        update_cache: true
+        policy_rc_d: 101
+- name: Показать фактически используемый HTCondor без проверки точного номера
+  ansible.builtin.command:
+    argv: [condor_version]
+  changed_when: false

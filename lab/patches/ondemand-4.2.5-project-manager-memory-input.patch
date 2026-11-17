@@ -1,0 +1,188 @@
+--- a/app/controllers/launchers_controller.rb
++++ b/app/controllers/launchers_controller.rb
+@@ -9,6 +9,8 @@
+   SAVE_LAUNCHER_KEYS = [
+     :cluster, :auto_accounts, :auto_accounts_exclude, :auto_accounts_fixed,
+     :auto_cores, :auto_cores_fixed, :auto_cores_min, :auto_cores_max,
++    :auto_memory, :auto_memory_fixed, :auto_memory_min, :auto_memory_max,
++    :auto_input_files, :auto_input_files_fixed,
+     :auto_scripts, :auto_scripts_exclude, :auto_scripts_fixed,
+     :auto_queues, :auto_queues_exclude, :auto_queues_fixed,
+     :auto_batch_clusters, :auto_batch_clusters_exclude, :auto_batch_clusters_fixed,
+--- a/app/helpers/projects_helper.rb
++++ b/app/helpers/projects_helper.rb
+@@ -47,6 +47,8 @@
+       'held'
+     when 'suspended'
+       'held'
++    when 'undetermined'
++      nil
+     else
+       status
+     end
+--- /dev/null
++++ b/app/lib/smart_attributes/attributes/auto_input_files.rb
+@@ -0,0 +1,22 @@
++# frozen_string_literal: true
++
++module SmartAttributes
++  class AttributeFactory
++    def self.build_auto_input_files(opts = {})
++      Attributes::AutoInputFiles.new('auto_input_files', opts)
++    end
++  end
++
++  module Attributes
++    class AutoInputFiles < Attribute
++      def label(*)
++        (opts[:label] || 'Input files').to_s
++      end
++
++      def submit(fmt: nil)
++        raise ArgumentError, 'Input file transfer requires the HTCondor adapter' unless fmt == 'htcondor'
++        { script: { native: { transfer_input_files: value } } }
++      end
++    end
++  end
++end
+--- /dev/null
++++ b/app/lib/smart_attributes/attributes/auto_memory.rb
+@@ -0,0 +1,37 @@
++# frozen_string_literal: true
++
++module SmartAttributes
++  class AttributeFactory
++    def self.build_auto_memory(opts = {})
++      Attributes::AutoMemory.new('auto_memory', opts)
++    end
++  end
++
++  module Attributes
++    class AutoMemory < Attribute
++      def initialize(id, opts)
++        super
++        @opts = @opts.reverse_merge(min: 1, step: 1)
++      end
++
++      def widget
++        'number_field'
++      end
++
++      def value
++        (opts[:value] || '1024').to_s
++      end
++
++      def label(*)
++        (opts[:label] || 'Memory (MiB)').to_s
++      end
++
++      def submit(fmt: nil)
++        raise ArgumentError, 'Memory field requires the HTCondor adapter' unless fmt == 'htcondor'
++        memory = Integer(value, 10)
++        raise ArgumentError, 'Memory must be a positive integer in MiB' unless memory.positive?
++        { script: { native: { request_memory: memory } } }
++      end
++    end
++  end
++end
+--- a/app/lib/smart_attributes.rb
++++ b/app/lib/smart_attributes.rb
+@@ -25,5 +25,7 @@
+   require 'smart_attributes/attributes/bc_vnc_resolution'
+   require 'smart_attributes/attributes/auto_environment_variable'
+   require 'smart_attributes/attributes/auto_cores'
++  require 'smart_attributes/attributes/auto_memory'
++  require 'smart_attributes/attributes/auto_input_files'
+   require 'smart_attributes/attributes/global_attribute'
+ end
+--- a/app/models/hpc_job.rb
++++ b/app/models/hpc_job.rb
+@@ -15,6 +15,9 @@
+ 
+   def initialize(**args)
+     args = args.deep_symbolize_keys
++    unless args[:native].is_a?(Hash)
++      args[:native] = { state: "UNKNOWN", raw: args[:native] }
++    end
+     @cluster = args[:cluster]
+     super(**args)
+   end
+@@ -42,6 +45,7 @@
+   end
+ 
+   def fix_time(time)
+-    distance_of_time_in_words(time, 0, false, :only => [:minutes, :hours], :accumulate_on => :hours)
++    return nil if time.nil?
++    distance_of_time_in_words(time, 0, :only => [:minutes, :hours], :accumulate_on => :hours)
+   end
+ end
+--- a/app/models/project.rb
++++ b/app/models/project.rb
+@@ -291,9 +291,6 @@
+   end
+ 
+   def job(job_id, cluster)
+-    cached_job = jobs.detect { |j| j.id == job_id && j.cluster == cluster }
+-    return cached_job if cached_job.completed?
+-
+     info = adapter(cluster).info(job_id)
+     job = HpcJob.from_core_info(info: info, cluster: cluster)
+     Project.upsert_job!(directory, job)
+--- a/app/views/projects/_job_details.html.erb
++++ b/app/views/projects/_job_details.html.erb
+@@ -1,5 +1,5 @@
+ <%- 
+-  id = "job_#{job.cluster}_#{job.id}"
++  id = "job_#{job.cluster}_#{job.id}".gsub(/[^a-zA-Z0-9_-]/, '_')
+ -%>
+ 
+ <div id="<%= id %>" data-job-poller="true"
+--- a/app/views/projects/_job_details.turbo_stream.erb
++++ b/app/views/projects/_job_details.turbo_stream.erb
+@@ -1,6 +1,6 @@
+ 
+ <%- 
+-  id = "job_#{job.cluster}_#{job.id}"
++  id = "job_#{job.cluster}_#{job.id}".gsub(/[^a-zA-Z0-9_-]/, '_')
+ -%>
+ 
+ <turbo-stream action="replace" target="<%= id %>" data-job-status="<%= job.status %>" data-job-native-state="<%= job.native.dig(:state).to_s %>">
+--- a/app/views/projects/_job_details_content.html.erb
++++ b/app/views/projects/_job_details_content.html.erb
+@@ -1,6 +1,6 @@
+ 
+ <%- 
+-  id = "job_#{job.cluster}_#{job.id}"
++  id = "job_#{job.cluster}_#{job.id}".gsub(/[^a-zA-Z0-9_-]/, '_')
+ -%>
+ 
+ <div>
+--- a/config/routes.rb
++++ b/config/routes.rb
+@@ -9,9 +9,9 @@
+ 
+     resources :projects do
+       root 'projects#index'
+-      get '/jobs/:cluster/:jobid' => 'projects#job_details', :defaults => { :format => 'turbo_stream' }, :as => 'job_details'
+-      delete '/jobs/:cluster/:jobid' => 'projects#delete_job', :as => 'delete_job'
+-      post '/jobs/:cluster/:jobid/stop' => 'projects#stop_job', :as => 'stop_job'
++      get '/jobs/:cluster/:jobid' => 'projects#job_details', :defaults => { :format => 'turbo_stream' }, :as => 'job_details', :constraints => { :jobid => /[^\/]+/ }
++      delete '/jobs/:cluster/:jobid' => 'projects#delete_job', :as => 'delete_job', :constraints => { :jobid => /[^\/]+/ }
++      post '/jobs/:cluster/:jobid/stop' => 'projects#stop_job', :as => 'stop_job', :constraints => { :jobid => /[^\/]+/ }
+       
+       # These routes are unused but prevent errors
+       get 'workflows', to: 'projects#show', on: :member
+--- a/app/javascript/projects.js
++++ b/app/javascript/projects.js
+@@ -53,8 +53,9 @@
+ 
+       // if it's currently open keep it open.
+       if(currentlyOpen) {
+-        const dataDiv = responseElement.querySelector(`#${element.id}_data`);
+-        dataDiv.classList.add('show');
++        const template = responseElement.querySelector('template');
++        const dataDiv = template && template.content.querySelector(`#${element.id}_data`);
++        if(dataDiv) dataDiv.classList.add('show');
+       }
+ 
+       const jobStatus = responseElement.dataset['jobStatus'];

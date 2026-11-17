@@ -1,0 +1,4 @@
+---
+id: __template
+name: QCL native smoke
+description: CPU, RAM и явный перенос input.txt через штатный HTCondor. Только инженерная проверка.

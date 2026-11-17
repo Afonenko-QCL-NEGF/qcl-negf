@@ -1,0 +1,22 @@
+[Unit]
+Description=HTCondor execute worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Environment=CONDOR_CONFIG=/etc/condor/condor_config
+Environment=LD_LIBRARY_PATH={{ qcl_condor_prefix }}/lib
+ExecStart={{ qcl_condor_prefix }}/sbin/condor_master -f
+Delegate=true
+DelegateSubgroup=leaf
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10seconds
+KillMode=control-group
+TimeoutStopSec=60seconds
+KillSignal=SIGQUIT
+LimitNOFILE=32768
+TasksMax=4194303
+
+[Install]
+WantedBy=multi-user.target

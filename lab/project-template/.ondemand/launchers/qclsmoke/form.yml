@@ -1,0 +1,32 @@
+---
+title: QCL native smoke
+form:
+  - auto_batch_clusters
+  - auto_scripts
+  - auto_cores
+  - auto_memory
+  - auto_input_files
+  - auto_environment_variable_qcl_seconds
+attributes:
+  auto_batch_clusters:
+    value: qcl
+  auto_scripts:
+    value: smoke.sh
+  auto_cores:
+    label: CPU cores
+    value: '2'
+    min: 1
+    max: 8
+  auto_memory:
+    label: Memory (MiB)
+    value: '768'
+    min: 128
+    max: 11264
+  auto_input_files:
+    label: Input files to transfer
+    value: input.txt
+    help: Explicit HTCondor file list relative to this project. This smoke reads input.txt; include that file. The project directory is not shared with workers.
+  auto_environment_variable_qcl_seconds:
+    label: Smoke duration (seconds, 0..120)
+    value: '10'
+    required: true

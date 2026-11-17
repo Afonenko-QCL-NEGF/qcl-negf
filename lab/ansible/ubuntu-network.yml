@@ -1,0 +1,51 @@
+---
+- name: Сохранить штатную DHCP identity Ubuntu guest
+  hosts: qcl_manager
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Проверить фактический Ethernet interface
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.default_ipv4.interface is defined
+          - ansible_facts.default_ipv4.macaddress is defined
+          - ansible_facts.default_ipv4.interface is match('^[a-zA-Z0-9]+$')
+    - name: Записать native netplan renderer и постоянный DHCP client identifier
+      ansible.builtin.copy:
+        dest: /etc/netplan/60-qcl.yaml
+        mode: '0600'
+        content: |
+          network:
+            version: 2
+            renderer: networkd
+            ethernets:
+              {{ ansible_facts.default_ipv4.interface }}:
+                match:
+                  macaddress: '{{ ansible_facts.default_ipv4.macaddress }}'
+                dhcp4: true
+                dhcp-identifier: mac
+      register: qcl_netplan
+    - name: Проверить native netplan
+      ansible.builtin.command:
+        argv: [netplan, generate]
+      changed_when: false
+    - name: Применить только изменённую сетевую конфигурацию
+      ansible.builtin.command:
+        argv: [netplan, apply]
+      when: qcl_netplan.changed
+    - name: Оставить mDNS публикацию на используемом IPv4 LAN
+      ansible.builtin.lineinfile:
+        path: /etc/avahi/avahi-daemon.conf
+        regexp: '^#?use-ipv6='
+        line: use-ipv6=no
+      notify: Перезапустить Avahi
+    - name: Включить штатное hostname объявление
+      ansible.builtin.systemd_service:
+        name: avahi-daemon
+        enabled: true
+        state: started
+  handlers:
+    - name: Перезапустить Avahi
+      ansible.builtin.systemd_service:
+        name: avahi-daemon
+        state: restarted

@@ -1,5 +1,19 @@
 # QCL-NEGF
 
+## Новый этап: упрощение кластера и научного приложения
+
+Для ручного старта переработки используй [новую точку входа](docs/implementation/cluster-execution-2026-11-15.md),
+[план](docs/implementation/clean-start-plan-2026-11-15.md) и [карту функций](docs/implementation/functional-reassessment-2026-11-15.md).
+Исполнение начато вручную 17 ноября. Установленный инженерный контур и заготовки
+OpenTofu/Ansible описаны в [lab](lab/README.md); фактические научные refs и границы
+следующего этапа — в [handoff](docs/implementation/science-handoff-2026-11-17.md).
+[Контрольная точка17ноября](docs/implementation/cluster-checkpoint-2026-11-17.md)
+фиксирует реальные проверки и остаток. Готовность инфраструктуры не означает
+готовность научного приложения или сходимость solver.
+
+Ниже сохранено описание прежнего source baseline. Его bootstrap, роли NixOS/AiiDA/Slurm
+и исторические workflow/skills правила не являются инструкцией нового этапа.
+
 An integrated, reproducible workspace for quantum-cascade transport research.
 Julia computes the numerical model, AiiDA records scientific workflows, Slurm allocates resources,
 and NixOS defines the machines. GitHub hosts source and workflow state; CI runs on your own runner.

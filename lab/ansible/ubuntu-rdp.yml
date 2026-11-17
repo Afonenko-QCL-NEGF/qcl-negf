@@ -1,0 +1,108 @@
+---
+- name: Настроить штатный GNOME Remote Login
+  hosts: qcl_manager
+  become: true
+  gather_facts: false
+  vars:
+    qcl_rdp_cert: /var/lib/gnome-remote-desktop/qcl-rdp.crt
+    qcl_rdp_key: /var/lib/gnome-remote-desktop/qcl-rdp.key
+  pre_tasks:
+    - name: Проверить наличие приватного пароля RDP
+      ansible.builtin.assert:
+        that:
+          - qcl_web_password is defined
+          - qcl_web_password | length > 0
+          - "'\n' not in qcl_web_password"
+          - "'\r' not in qcl_web_password"
+      no_log: true
+    - name: Прочитать native статус без раскрытия credentials
+      ansible.builtin.command:
+        argv: [grdctl, --system, status]
+      register: qcl_grd_status
+      changed_when: false
+    - name: Не заменять чужой TLS путь в существующей конфигурации
+      ansible.builtin.assert:
+        that:
+          - "'TLS certificate: (null)' in qcl_grd_status.stdout or ('TLS certificate: ' ~ qcl_rdp_cert) in qcl_grd_status.stdout"
+          - "'TLS key: (null)' in qcl_grd_status.stdout or ('TLS key: ' ~ qcl_rdp_key) in qcl_grd_status.stdout"
+    - name: Проверить исходные файлы сертификата
+      ansible.builtin.stat:
+        path: '{{ item }}'
+        get_checksum: false
+      loop: [/etc/ood/qcl-tls/server.crt, /etc/ood/qcl-tls/server.key]
+      register: qcl_rdp_source
+      no_log: true
+    - name: Требовать готовые TLS материалы Open OnDemand
+      ansible.builtin.assert:
+        that:
+          - item.stat.isreg | default(false)
+          - item.stat.size | default(0) > 0
+      loop: '{{ qcl_rdp_source.results }}'
+      no_log: true
+    - name: Проверить существующие TLS файлы RDP
+      ansible.builtin.stat:
+        path: '{{ item }}'
+        get_checksum: false
+      loop: ['{{ qcl_rdp_cert }}', '{{ qcl_rdp_key }}']
+      register: qcl_rdp_existing
+      no_log: true
+    - name: Сохранить существующие daemon-owned TLS файлы без замены
+      ansible.builtin.assert:
+        that:
+          - not item.stat.exists or (item.stat.isreg | default(false) and item.stat.pw_name == 'gnome-remote-desktop' and item.stat.mode == '0600')
+      loop: '{{ qcl_rdp_existing.results }}'
+      no_log: true
+  tasks:
+    - name: Скопировать сертификат для системного сервиса GNOME
+      ansible.builtin.copy:
+        src: /etc/ood/qcl-tls/server.crt
+        dest: '{{ qcl_rdp_cert }}'
+        remote_src: true
+        owner: gnome-remote-desktop
+        group: gnome-remote-desktop
+        mode: '0600'
+        force: false
+    - name: Скопировать закрытый ключ для системного сервиса GNOME
+      ansible.builtin.copy:
+        src: /etc/ood/qcl-tls/server.key
+        dest: '{{ qcl_rdp_key }}'
+        remote_src: true
+        owner: gnome-remote-desktop
+        group: gnome-remote-desktop
+        mode: '0600'
+        force: false
+      no_log: true
+    - name: Установить путь сертификата при отсутствии
+      ansible.builtin.command:
+        argv: [grdctl, --system, rdp, set-tls-cert, '{{ qcl_rdp_cert }}']
+      when: "'TLS certificate: (null)' in qcl_grd_status.stdout"
+    - name: Установить путь ключа при отсутствии
+      ansible.builtin.command:
+        argv: [grdctl, --system, rdp, set-tls-key, '{{ qcl_rdp_key }}']
+      when: "'TLS key: (null)' in qcl_grd_status.stdout"
+    - name: Создать RDP credentials только если они отсутствуют
+      ansible.builtin.command:
+        argv: [grdctl, --system, rdp, set-credentials, qcl]
+        stdin: '{{ qcl_web_password }}'
+      when:
+        - "'Username: (empty)' in qcl_grd_status.stdout"
+        - "'Password: (empty)' in qcl_grd_status.stdout"
+      no_log: true
+    - name: Включить RDP если он отключён
+      ansible.builtin.command:
+        argv: [grdctl, --system, rdp, enable]
+      when: "'Status: disabled' in qcl_grd_status.stdout"
+    - name: Включить GDM
+      ansible.builtin.systemd_service:
+        name: gdm.service
+        enabled: true
+        state: started
+    - name: Включить системный GNOME Remote Desktop
+      ansible.builtin.systemd_service:
+        name: gnome-remote-desktop.service
+        enabled: true
+        state: started
+    - name: Прочитать итоговый статус без раскрытия credentials
+      ansible.builtin.command:
+        argv: [grdctl, --system, status]
+      changed_when: false

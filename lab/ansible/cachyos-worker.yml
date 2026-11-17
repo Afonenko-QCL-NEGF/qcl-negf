@@ -1,0 +1,462 @@
+---
+- name: Установить native HTCondor execute worker на CachyOS
+  hosts: cachyos_workers
+  become: true
+  gather_facts: true
+  vars:
+    qcl_worker_cpus: 8
+    qcl_worker_memory: 8192
+    qcl_worker_home: /var/lib/qcl-worker
+    qcl_worker_depot: '{{ qcl_worker_home }}/.julia'
+    qcl_update_tools: false
+    qcl_condor_fallback_prefix: /opt/htcondor/current
+    qcl_condor_local_dir: /var/lib/condor
+    # current/current upstream currently points to 25.x; use the current 26.0 channel.
+    qcl_condor_tarball_url: https://htcss-downloads.chtc.wisc.edu/tarball/26.0/current/condor-x86_64_Debian13-stripped.tar.gz
+    qcl_condor_tarball: /var/cache/qcl/htcondor/condor-Debian13-current.tar.gz
+    qcl_condor_daemon_identity: condor@qcl
+    qcl_condor_trust_domain: qcl
+    qcl_condor_uid_domain: qcl
+    qcl_condor_environment: '{{ {"CONDOR_CONFIG": "/etc/condor/condor_config", "LD_LIBRARY_PATH": qcl_condor_prefix ~ "/lib"} if qcl_condor_manage_own | default(false) | bool else {} }}'
+  pre_tasks:
+    - name: Проверить платформу и обязательные параметры
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.architecture == 'x86_64'
+          - ansible_facts.os_family == 'Archlinux'
+          - qcl_manager_address is defined
+          - qcl_manager_address | length > 0
+          - qcl_pool_key_file is defined
+          - qcl_worker_cpus | int > 0
+          - qcl_worker_memory | int > 0
+          - qcl_worker_cpus | int <= ansible_facts.processor_vcpus | int
+          - qcl_worker_memory | int < ansible_facts.memtotal_mb | int
+
+    - name: Найти установленный native HTCondor без проверки равенства версии
+      ansible.builtin.shell: |
+        version=$(command -v condor_version || true)
+        if [ -n "$version" ]; then
+          real=$(readlink -f "$version")
+          config=$(command -v condor_config_val || true)
+          if [ -z "$config" ]; then config="$(dirname "$real")/condor_config_val"; fi
+          test -x "$config"
+          printf '%s\n%s\n' "$real" "$config"
+        fi
+      args:
+        executable: /bin/bash
+      register: qcl_condor_discovery
+      changed_when: false
+      check_mode: false
+
+    - name: Прочитать фактический service fragment
+      ansible.builtin.command:
+        argv: [systemctl, show, condor.service, -p, FragmentPath, --value]
+      register: qcl_condor_fragment
+      changed_when: false
+      check_mode: false
+      failed_when: qcl_condor_fragment.rc not in [0, 1]
+
+    - name: Прочитать фактическое состояние службы
+      ansible.builtin.command:
+        argv: [systemctl, show, condor.service, -p, ActiveState, --value]
+      register: qcl_condor_active
+      changed_when: false
+      check_mode: false
+      failed_when: qcl_condor_active.rc not in [0, 1]
+
+    - name: Узнать paths установленного runtime из native config
+      ansible.builtin.command:
+        argv: ['{{ qcl_condor_discovery.stdout_lines[1] }}', '{{ item }}']
+      loop: [RELEASE_DIR, LOCAL_DIR, BIN, SBIN, LOG, ETC, LOCAL_CONFIG_DIR, STARTD_ADDRESS_FILE, MASTER_ADDRESS_FILE, DAEMON_LIST]
+      register: qcl_condor_existing_paths
+      changed_when: false
+      check_mode: false
+      when: qcl_condor_discovery.stdout | length > 0
+
+    - name: Не преобразовывать существующий submit или manager в worker
+      ansible.builtin.assert:
+        that:
+          - qcl_condor_existing_paths.results[9].stdout | upper | regex_findall('[A-Z_]+') | difference(['MASTER', 'STARTD', 'SHARED_PORT']) | length == 0
+        fail_msg: Установленный runtime имеет другую native роль; её queue и конфигурация не входят в worker install.
+      when: qcl_condor_discovery.stdout | length > 0
+
+    - name: Выбрать system-first runtime и явное обновление только своей установки
+      ansible.builtin.set_fact:
+        qcl_condor_existing_own: '{{ qcl_condor_discovery.stdout | length > 0 and qcl_condor_discovery.stdout_lines[0].startswith("/opt/htcondor/") }}'
+        qcl_condor_existing_release: '{{ qcl_condor_existing_paths.results[0].stdout | default("") }}'
+        qcl_condor_install_own: '{{ qcl_condor_discovery.stdout | length == 0 or (qcl_update_tools | bool and qcl_condor_discovery.stdout_lines[0].startswith("/opt/htcondor/")) }}'
+
+    - name: Не перекрывать distro или неизвестную службу своим runtime
+      ansible.builtin.assert:
+        that:
+          - not qcl_condor_install_own | bool or qcl_condor_fragment.stdout | trim in ['', '/etc/systemd/system/condor.service']
+          - qcl_condor_discovery.stdout | length > 0 or qcl_condor_active.stdout | trim != 'active'
+          - qcl_condor_active.stdout | trim in ['', 'inactive', 'failed', 'active']
+        fail_msg: Существующая служба не принадлежит отдельной QCL установке; её обновляет штатный package manager после выяснения владения.
+
+    - name: Прочитать существующую QCL service definition для проверки владельца
+      ansible.builtin.slurp:
+        src: /etc/systemd/system/condor.service
+      register: qcl_condor_existing_unit
+      when: qcl_condor_fragment.stdout | trim == '/etc/systemd/system/condor.service'
+      no_log: true
+
+    - name: Требовать известную QCL службу перед заменой её own runtime
+      ansible.builtin.assert:
+        that:
+          - qcl_condor_existing_own | bool
+          - "'Description=HTCondor execute worker' in (qcl_condor_existing_unit.content | b64decode)"
+          - "('ExecStart=' ~ qcl_condor_existing_release ~ '/sbin/condor_master -f') in (qcl_condor_existing_unit.content | b64decode)"
+        fail_msg: Неизвестное владение existing condor.service блокирует её замену.
+      when:
+        - qcl_condor_fragment.stdout | trim == '/etc/systemd/system/condor.service'
+      no_log: true
+
+    - name: Установить выбранные native paths
+      ansible.builtin.set_fact:
+        qcl_condor_prefix: '{{ qcl_condor_fallback_prefix if qcl_condor_install_own | bool else qcl_condor_existing_paths.results[0].stdout }}'
+        qcl_condor_manage_own: '{{ qcl_condor_install_own | bool or (qcl_condor_existing_own | bool and qcl_condor_fragment.stdout | trim in ["", "/etc/systemd/system/condor.service"]) }}'
+        qcl_condor_active_local_dir: '{{ qcl_condor_local_dir if qcl_condor_install_own | bool else qcl_condor_existing_paths.results[1].stdout }}'
+        qcl_condor_config_dir: '{{ "/etc/condor/config.d" if qcl_condor_install_own | bool else qcl_condor_existing_paths.results[6].stdout }}'
+        qcl_condor_etc: '{{ "/etc/condor" if qcl_condor_install_own | bool else qcl_condor_existing_paths.results[5].stdout }}'
+
+    - name: Требовать определённые одиночные config paths
+      ansible.builtin.assert:
+        that:
+          - qcl_condor_prefix.startswith('/')
+          - qcl_condor_active_local_dir.startswith('/')
+          - qcl_condor_etc.startswith('/')
+          - qcl_condor_config_dir.startswith('/')
+          - "',' not in qcl_condor_config_dir"
+          - "' ' not in qcl_condor_config_dir"
+        fail_msg: Native paths не определены однозначно; существующую конфигурацию не заменяем догадкой.
+
+    - name: Проверить владельца own fallback directory
+      ansible.builtin.stat:
+        path: '{{ qcl_condor_fallback_prefix }}'
+        follow: false
+      register: qcl_condor_fallback_stat
+      when: qcl_condor_install_own | bool
+
+    - name: Не заменять чужой каталог или symlink в own prefix
+      ansible.builtin.assert:
+        that:
+          - qcl_condor_fallback_prefix == '/opt/htcondor/current'
+          - not qcl_condor_fallback_stat.stat.exists or (qcl_condor_fallback_stat.stat.isdir | default(false) and qcl_condor_fallback_stat.stat.uid == 0)
+        fail_msg: Нужен принадлежащий root отдельный /opt/htcondor/current; неизвестное владение блокирует замену.
+      when: qcl_condor_install_own | bool
+
+    - name: Прочитать address работающего local startd без DNS догадок
+      ansible.builtin.slurp:
+        src: '{{ qcl_condor_existing_paths.results[7].stdout }}'
+      register: qcl_condor_startd_address
+      when: qcl_condor_active.stdout | trim == 'active'
+      no_log: true
+
+    - name: Проверить native slots перед любыми изменениями worker
+      ansible.builtin.command:
+        argv: ['{{ qcl_condor_existing_paths.results[2].stdout }}/condor_status', -direct, '{{ (qcl_condor_startd_address.content | b64decode).splitlines()[0] }}', -af, State]
+      register: qcl_condor_slots
+      changed_when: false
+      check_mode: false
+      when: qcl_condor_active.stdout | trim == 'active'
+
+    - name: Требовать пустой worker без eviction существующих jobs
+      ansible.builtin.assert:
+        that:
+          - qcl_condor_slots.stdout | trim | length > 0
+          - qcl_condor_slots.stdout_lines | difference(['Unclaimed', 'Owner', 'Drained']) | length == 0
+        fail_msg: Worker занят; сначала дождитесь завершения jobs, затем повторите обслуживание.
+      when: qcl_condor_active.stdout | trim == 'active'
+
+    - name: Проверить приватный ключ на controller без вывода
+      ansible.builtin.stat:
+        path: '{{ qcl_pool_key_file }}'
+        get_checksum: false
+        get_mime: false
+      register: qcl_source_key
+      delegate_to: localhost
+      become: false
+      no_log: true
+
+    - name: Требовать существующий binary32B pool key
+      ansible.builtin.assert:
+        that:
+          - qcl_source_key.stat.isreg | default(false)
+          - qcl_source_key.stat.size | default(0) == 32
+      no_log: true
+
+    - name: Проверить существующий signing key без вывода
+      ansible.builtin.stat:
+        path: '{{ qcl_condor_etc }}/passwords.d/POOL'
+        get_checksum: false
+        get_mime: false
+      register: qcl_existing_key
+      no_log: true
+
+    - name: Сохранить существующий native pool key без чтения или сравнения содержимого
+      ansible.builtin.assert:
+        that:
+          - not qcl_existing_key.stat.exists or (qcl_existing_key.stat.isreg | default(false) and qcl_existing_key.stat.uid == 0 and qcl_existing_key.stat.mode == '0600' and qcl_existing_key.stat.size == 32)
+          - qcl_condor_active.stdout | trim != 'active' or qcl_existing_key.stat.exists
+        fail_msg: Existing POOL не перезаписывается; требуется root-owned regular32B key с mode0600.
+      no_log: true
+
+  tasks:
+    - name: Узнать, установлены ли штатные runtime libraries
+      ansible.builtin.command:
+        argv: [pacman, -Q, libselinux, libsepol, openssl-3]
+      register: qcl_runtime_packages
+      changed_when: false
+      failed_when: qcl_runtime_packages.rc not in [0, 1]
+      when: qcl_condor_install_own | bool
+
+    - name: Установить недостающие штатные runtime libraries
+      ansible.builtin.command:
+        argv: [pacman, -S, --needed, --noconfirm, libselinux, libsepol, openssl-3]
+      when: qcl_condor_install_own | bool and qcl_runtime_packages.rc != 0
+
+    - name: Создать native daemon account
+      ansible.builtin.user:
+        name: condor
+        system: true
+        home: '{{ qcl_condor_active_local_dir }}'
+        create_home: false
+        shell: /usr/bin/nologin
+      register: qcl_condor_account
+
+    - name: Узнать, существует ли scientific account
+      ansible.builtin.getent:
+        database: passwd
+        key: qcl
+        fail_key: false
+
+    - name: Не менять чужой существующий account qcl
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.getent_passwd.qcl is none or ansible_facts.getent_passwd.qcl[4] == qcl_worker_home
+        fail_msg: Account qcl уже имеет другое home; сначала требуется установить его владельца.
+
+    - name: Создать локальный scientific account без пароля
+      ansible.builtin.user:
+        name: qcl
+        system: true
+        home: '{{ qcl_worker_home }}'
+        create_home: true
+        shell: /bin/bash
+        password_lock: true
+      register: qcl_science_account
+
+    - name: Подготовить постоянный локальный Julia depot
+      ansible.builtin.file:
+        path: '{{ qcl_worker_depot }}'
+        state: directory
+        owner: qcl
+        group: '{{ qcl_science_account.group }}'
+        mode: '0755'
+
+    - name: Создать root-owned release directory
+      ansible.builtin.file:
+        path: '{{ qcl_condor_prefix }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      when: qcl_condor_install_own | bool
+
+    - name: Подготовить cache официального native tarball
+      ansible.builtin.file:
+        path: '{{ qcl_condor_tarball | dirname }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      when: qcl_condor_install_own | bool
+
+    - name: Скачать текущий официальный HTCondor 26 channel без exact patch lock
+      ansible.builtin.get_url:
+        url: '{{ qcl_condor_tarball_url }}'
+        dest: '{{ qcl_condor_tarball }}'
+        mode: '0644'
+        force: true
+        timeout: 120
+      when: qcl_condor_install_own | bool
+
+    - name: Запретить новые claims атомарным native drain перед own update
+      ansible.builtin.command:
+        argv:
+          - '{{ qcl_condor_existing_paths.results[2].stdout }}/condor_drain'
+          - -graceful
+          - -check
+          - '(State =?= "Unclaimed") || (State =?= "Owner") || (State =?= "Drained")'
+          - -exit-on-completion
+          - '{{ (qcl_condor_startd_address.content | b64decode).splitlines()[0] }}'
+      when: qcl_condor_install_own | bool and qcl_condor_active.stdout | trim == 'active'
+
+    - name: Остановить только известную пустую QCL службу перед own update
+      ansible.builtin.systemd_service:
+        name: condor
+        state: stopped
+      when: qcl_condor_install_own | bool and qcl_condor_active.stdout | trim == 'active'
+
+    - name: Распаковать официальный release в отдельный prefix
+      ansible.builtin.unarchive:
+        src: '{{ qcl_condor_tarball }}'
+        dest: '{{ qcl_condor_prefix }}'
+        remote_src: true
+        extra_opts: [--strip-components=1]
+        owner: root
+        group: root
+      when: qcl_condor_install_own | bool
+
+    - name: Установить execute-only конфигурацию штатным installer
+      ansible.builtin.command:
+        argv:
+          - '{{ qcl_condor_prefix }}/condor_install'
+          - '--install={{ qcl_condor_prefix }}'
+          - '--prefix={{ qcl_condor_prefix }}'
+          - '--local-dir={{ qcl_condor_active_local_dir }}'
+          - --owner=condor
+          - --type=execute
+          - '--central-manager={{ qcl_manager_address }}'
+      environment:
+        LD_LIBRARY_PATH: '{{ qcl_condor_prefix }}/lib'
+      when: qcl_condor_install_own | bool
+
+    - name: Создать runtime directories worker
+      ansible.builtin.file:
+        path: '{{ qcl_condor_active_local_dir }}/{{ item }}'
+        state: directory
+        owner: condor
+        group: '{{ qcl_condor_account.group }}'
+        mode: '0755'
+      loop: [log, lock, run, spool, execute]
+
+    - name: Создать root-owned config directory
+      ansible.builtin.file:
+        path: '{{ item }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      loop: ['{{ qcl_condor_etc }}', '{{ qcl_condor_config_dir }}']
+
+    - name: Создать приватные каталоги native credentials
+      ansible.builtin.file:
+        path: '{{ item }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0700'
+      loop: ['{{ qcl_condor_etc }}/passwords.d', '{{ qcl_condor_etc }}/tokens.d']
+
+    - name: Записать root-owned main config
+      ansible.builtin.copy:
+        dest: /etc/condor/condor_config
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          RELEASE_DIR = {{ qcl_condor_prefix }}
+          LOCAL_DIR = {{ qcl_condor_active_local_dir }}
+          LOCAL_CONFIG_FILE =
+          LOCAL_CONFIG_DIR = /etc/condor/config.d
+          ETC = /etc/condor
+          CONDOR_IDS = {{ qcl_condor_account.uid }}.{{ qcl_condor_account.group }}
+          LOG = $(LOCAL_DIR)/log
+          LOCK = $(LOCAL_DIR)/lock
+          RUN = $(LOCAL_DIR)/run
+          SPOOL = $(LOCAL_DIR)/spool
+          EXECUTE = $(LOCAL_DIR)/execute
+      notify: Перезапустить condor
+      when: qcl_condor_manage_own | bool
+
+    - name: Записать общую security конфигурацию
+      ansible.builtin.template:
+        src: templates/condor-security.conf.j2
+        dest: '{{ qcl_condor_config_dir }}/10-security.conf'
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Перезапустить condor
+
+    - name: Записать execute-only конфигурацию
+      ansible.builtin.template:
+        src: templates/condor-worker.conf.j2
+        dest: '{{ qcl_condor_config_dir }}/20-worker.conf'
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Перезапустить condor
+
+    - name: Скопировать общий signing key без вывода
+      ansible.builtin.copy:
+        src: '{{ qcl_pool_key_file }}'
+        dest: '{{ qcl_condor_etc }}/passwords.d/POOL'
+        owner: root
+        group: root
+        mode: '0600'
+        force: false
+      no_log: true
+
+    - name: Создать отсутствующий native daemon token без вывода
+      ansible.builtin.command:
+        argv:
+          - '{{ qcl_condor_prefix }}/bin/condor_token_create'
+          - -identity
+          - '{{ qcl_condor_daemon_identity }}'
+          - -key
+          - POOL
+          - -file
+          - '{{ qcl_condor_etc }}/tokens.d/daemon'
+        creates: '{{ qcl_condor_etc }}/tokens.d/daemon'
+      environment: '{{ qcl_condor_environment }}'
+      no_log: true
+      notify: Перезапустить condor
+
+    - name: Установить закрытые права native daemon token
+      ansible.builtin.file:
+        path: '{{ qcl_condor_etc }}/tokens.d/daemon'
+        owner: root
+        group: root
+        mode: '0600'
+      no_log: true
+
+    - name: Проверить version до запуска службы
+      ansible.builtin.command:
+        argv: ['{{ qcl_condor_prefix }}/bin/condor_version']
+      environment: '{{ qcl_condor_environment }}'
+      changed_when: false
+
+    - name: Проверить native config parser до запуска службы
+      ansible.builtin.command:
+        argv: ['{{ qcl_condor_prefix }}/bin/condor_config_val', -summary]
+      environment: '{{ qcl_condor_environment }}'
+      changed_when: false
+
+    - name: Установить root systemd service
+      ansible.builtin.template:
+        src: templates/cachyos-condor.service.j2
+        dest: /etc/systemd/system/condor.service
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Перезапустить condor
+      when: qcl_condor_manage_own | bool
+
+    - name: Применить отложенный restart до последней проверки службы
+      ansible.builtin.meta: flush_handlers
+
+    - name: Запустить и включить native worker service
+      ansible.builtin.systemd_service:
+        name: condor
+        daemon_reload: true
+        enabled: true
+        state: started
+
+  handlers:
+    - name: Перезапустить condor
+      ansible.builtin.systemd_service:
+        name: condor
+        daemon_reload: true
+        state: restarted

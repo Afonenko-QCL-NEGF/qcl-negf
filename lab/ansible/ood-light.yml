@@ -1,0 +1,41 @@
+---
+- name: Светлые штатные приложения OOD
+  hosts: qcl_manager
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Выбрать светлый navbar Job Composer штатным ENV
+      ansible.builtin.lineinfile:
+        path: /etc/ood/config/apps/myjobs/env
+        create: true
+        owner: root
+        group: root
+        mode: '0644'
+        regexp: '^OOD_NAVBAR_TYPE='
+        line: OOD_NAVBAR_TYPE=default
+
+    - name: Подключить общий color-scheme в Job Composer
+      ansible.builtin.lineinfile:
+        path: /var/www/ood/apps/sys/myjobs/app/views/layouts/application.html.erb
+        insertbefore: '^</head>$'
+        line: '  <link rel="stylesheet" href="/public/qcl-light.css">'
+
+    - name: Разместить light-only настройку редактора
+      ansible.builtin.copy:
+        src: templates/qcl-editor-light.js
+        dest: /var/www/ood/public/qcl-editor-light.js
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Подключить штатный custom JS Dashboard
+      ansible.builtin.lineinfile:
+        path: /etc/ood/config/ondemand.d/qcl-brand.yml
+        regexp: '^custom_javascript_files:'
+        line: "custom_javascript_files: ['/qcl-editor-light.js']"
+    - name: Перечитать Passenger приложения после настройки
+      ansible.builtin.file:
+        path: "/var/www/ood/apps/sys/{{ item }}/tmp/restart.txt"
+        state: touch
+        mode: "0644"
+      loop: [dashboard, myjobs]
