@@ -65,9 +65,9 @@ shutdown/start canonical plan вернул No changes. Для нового worke
 корректного import недопустима.
 
 Проверены `tofu init`, provider schema validation и `fmt`; реальный clone/apply
-этих заготовок пока не выполнялся. Первый гость создан в инженерном опыте через
-[provision-guest.yml](ansible/provision-guest.yml); этот адресный исторический
-playbook не является способом дальнейшего управления VM вместо OpenTofu.
+этих заготовок пока не выполнялся. Первый гость создан в инженерном опыте до import. Адресный Ansible/QM
+provisioner оставлен только в Git history первоначальной установки; из активного
+пакета он удалён. Единственный поддерживаемый способ описания VM — OpenTofu.
 
 ## Окружение через Ansible
 

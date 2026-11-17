@@ -10,15 +10,6 @@ all:
       hosts:
         pve.example.invalid:
           ansible_user: root
-          # Historical first-guest provisioner; new VMs are managed by OpenTofu.
-          qcl_vmid: 715
-          qcl_guest_name: qcl-condor
-          qcl_image: /private/import/ubuntu-cloud.qcow2
-          qcl_root_storage: local-lvm
-          qcl_data_storage: data-lvm
-          qcl_bridge: vmbr0
-          qcl_guest_memory: 16384
-          qcl_guest_cores: 8
     qcl_manager:
       hosts:
         qcl-condor.example.invalid:
