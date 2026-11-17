@@ -50,7 +50,9 @@ bootstrap grants, CI-once, release/deployment программы и правил
 
 ## Простота, проверка и роли
 
-- Используй HTCondor, Julia Pkg, системные пакеты и Ansible. Для редких сбоев
+- Используй HTCondor, Julia Pkg, системные пакеты и Ansible. VM описывай OpenTofu.
+  По умолчанию принимай системную версию инструмента; при её отсутствии ставь
+  актуальную стабильную upstream. Не вводи exact version pins или hash-допуски. Для редких сбоев
   допустима ручная сверка. Не создавай собственный scheduler, package manager,
   SHA-допуск, receipt/reconciliation framework или постоянный agent dispatcher.
 - Один Sol/high ведёт задачу; другой Sol/high независимо проверяет существенные

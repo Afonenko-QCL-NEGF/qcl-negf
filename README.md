@@ -4,8 +4,10 @@
 
 Для ручного старта переработки используй [новую точку входа](docs/implementation/cluster-execution-2026-11-15.md),
 [план](docs/implementation/clean-start-plan-2026-11-15.md) и [карту функций](docs/implementation/functional-reassessment-2026-11-15.md).
-Ветка `codex/cluster-clean-start-2026-11-15` публикует инструкции; она не устанавливает новый runtime.
-Актуальные Core/Runner и результаты параллельной научной сессии проверяются при запуске.
+Исполнение начато вручную 17 ноября. Установленный инженерный контур и заготовки
+OpenTofu/Ansible описаны в [lab](lab/README.md); фактические научные refs и границы
+следующего этапа — в [handoff](docs/implementation/science-handoff-2026-11-17.md).
+Готовность инфраструктуры не означает готовность научного приложения или сходимость solver.
 
 Ниже сохранено описание прежнего source baseline. Его bootstrap, роли NixOS/AiiDA/Slurm
 и исторические workflow/skills правила не являются инструкцией нового этапа.
