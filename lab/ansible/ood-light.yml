@@ -13,13 +13,13 @@
         mode: '0644'
         regexp: '^OOD_NAVBAR_TYPE='
         line: OOD_NAVBAR_TYPE=default
-    
+
     - name: Подключить общий color-scheme в Job Composer
       ansible.builtin.lineinfile:
         path: /var/www/ood/apps/sys/myjobs/app/views/layouts/application.html.erb
         insertbefore: '^</head>$'
         line: '  <link rel="stylesheet" href="/public/qcl-light.css">'
-    
+
     - name: Разместить light-only настройку редактора
       ansible.builtin.copy:
         src: templates/qcl-editor-light.js
@@ -27,7 +27,7 @@
         owner: root
         group: root
         mode: '0644'
-    
+
     - name: Подключить штатный custom JS Dashboard
       ansible.builtin.lineinfile:
         path: /etc/ood/config/ondemand.d/qcl-brand.yml

@@ -40,12 +40,17 @@ Windows не входят в репозиторий. Подробности — 
 ```sh
 cd lab/tofu
 # PROXMOX_VE_ENDPOINT и native provider credentials заданы в private environment.
-tofu init -upgrade
+tofu init -upgrade -backend-config=/private/qcl/backend.hcl
 tofu plan -var-file=/private/qcl/workers.tfvars -out=/private/qcl/workers.tfplan
 tofu apply /private/qcl/workers.tfplan
 ```
 
 Provider получает credentials через штатные `PROXMOX_VE_*`, проверка TLS включена.
+`backend.hcl` содержит только `path` к приватному local state. Для постоянного
+доступа используется обычный PVE API token с минимальными native ACL; текущий
+операторский token имеет audit и управление только VM715, без прав изменения
+чужих VM. При добавлении новых принадлежащих QCL VM/template/storage native ACL
+расширяются адресно администратором перед apply. Собственного IAM/vault нет.
 Обычный `.terraform.lock.hcl` может создаваться локально самим OpenTofu;
 собственного hash/approval слоя нет. State, планы и private variable files
 хранятся вне Git с ограниченными правами: Windows bootstrap secrets могут попасть
