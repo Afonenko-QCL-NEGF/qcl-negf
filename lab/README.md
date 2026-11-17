@@ -56,9 +56,9 @@ Provider получает credentials через штатные `PROXMOX_VE_*`, 
 хранятся вне Git с ограниченными правами: Windows bootstrap secrets могут попасть
 в state. Перед destructive replacement сохраняются новые научные данные.
 
-Работающая VM первого опыта не пересоздавалась под template. Её последующее
-принятие в state — native `tofu import` с описанием, совпадающим с фактической
-VM, и просмотром drift до apply. Для нового worker задаётся `template_id`; при принятии существующей VM
+Работающая VM первого опыта не пересоздавалась под template. Она уже принята в приватный state через native `tofu import`; единственный
+metadata update `ostype→l26` выполнен после review/drain, после controlled
+shutdown/start canonical plan вернул No changes. Для нового worker задаётся `template_id`; при принятии существующей VM
 `template_id = null` исключает clone block. `data_serial` и `user_data_file_id`
 позволяют сохранить фактические serial и cloud-init snippet. До import описание
 аппаратуры и дисков сверяется с native `qm config`; подстановка VM ID без
@@ -172,6 +172,6 @@ Runner/Core и не выводятся из технического стату�
 Independent scientific VM/campaign133 не включена в этот lifecycle.
 
 Целевой научный GUI, автоматическая оценка памяти solve, scientific resume,
-Windows runtime и импорт существующей VM в OpenTofu пока не приняты. Остаток
+Windows runtime и длительная устойчивость после сбоев пока не приняты. Остаток
 и фактические scientific refs — в [handoff](../docs/implementation/science-handoff-2026-11-17.md)
 и контрольном отчёте этапа.
