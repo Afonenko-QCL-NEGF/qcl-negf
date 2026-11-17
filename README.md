@@ -130,4 +130,3 @@ workspace. Use the platform's private-site example and its image/provisioning co
 The source repository never contains generated VM images, dependency depots or scientific results.
 
 MIT license. See [CONTRIBUTING.md](CONTRIBUTING.md).
-

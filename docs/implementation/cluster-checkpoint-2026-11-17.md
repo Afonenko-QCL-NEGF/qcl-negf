@@ -26,7 +26,8 @@
 - GUI: native Project Manager создаёт проект из template, форма передаёт CPU/RAM
   и явные inputs. Job 6/12 с CPU8/RAM 769 MiB выполнились на host, `input.txt`
   передан через HTCondor, `result.txt` возвращён. После адресной правки job 14
-  с открытой карточкой перешёл Running→Completed по 30 с poll без console error.
+  с открытой карточкой получил Completed по 30 с poll без console error; первый
+  ответ этой проверки был queued. Running отдельно наблюдался у GUI cancel 15.
   GUI Stop 15 на26 дал native REMOVED, исчезновение payload processes и возврат
   allocation. Отмена не приравнивается к успешному normal exit.
 - Julia 1.13.4: постоянный Pkg project/depot, установка/precompile вне solver job,
