@@ -1,0 +1,339 @@
+---
+- name: Настроить Windows HTCondor execute worker
+  hosts: windows_workers
+  gather_facts: false
+  vars:
+    qcl_windows_condor_msi_url: https://htcss-downloads.chtc.wisc.edu/tarball/26.0/current/condor-Windows-x64.msi
+    qcl_windows_condor_root: 'C:\Condor'
+    qcl_windows_condor_config: 'C:\ProgramData\QCL\condor\qcl-worker.conf'
+    qcl_windows_token_dir: 'C:\ProgramData\QCL\condor\tokens.d'
+    qcl_windows_signing_dir: 'C:\ProgramData\QCL\condor\tokens.sk'
+    qcl_windows_filesystem_domain: 'windows-qcl-local'
+  pre_tasks:
+    - name: Проверить параметры inventory
+      ansible.builtin.assert:
+        that:
+          - qcl_manager_address is defined
+          - qcl_manager_address is match('^[a-zA-Z0-9.-]+$')
+          - qcl_manager_ip is defined
+          - qcl_manager_ip is match('^[0-9.]+$')
+          - qcl_windows_username is match('^[A-Za-z][A-Za-z0-9_-]{0,19}$')
+          - qcl_windows_user_password | length > 0
+          - qcl_windows_daemon_token_file is defined
+          - qcl_pool_key_file is defined
+      no_log: true
+    - name: Проверить существование частного daemon token
+      ansible.builtin.stat:
+        path: '{{ qcl_windows_daemon_token_file }}'
+      delegate_to: localhost
+      become: false
+      register: qcl_windows_source_token
+      no_log: true
+    - name: Требовать непустой token
+      ansible.builtin.assert:
+        that:
+          - qcl_windows_source_token.stat.isreg | default(false)
+          - qcl_windows_source_token.stat.size | default(0) > 0
+      no_log: true
+    - name: Проверить приватный signing key на controller
+      ansible.builtin.stat:
+        path: '{{ qcl_pool_key_file }}'
+      delegate_to: localhost
+      become: false
+      register: qcl_windows_source_pool
+      no_log: true
+    - name: Требовать pool signing key
+      ansible.builtin.assert:
+        that:
+          - qcl_windows_source_pool.stat.isreg | default(false)
+          - qcl_windows_source_pool.stat.size | default(0) > 0
+      no_log: true
+    - name: Прочитать физические и свободные ресурсы Windows
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+          $cpu = (Get-CimInstance Win32_ComputerSystem).NumberOfLogicalProcessors
+          $os = Get-CimInstance Win32_OperatingSystem
+          $Ansible.Result = @{ cpus = [int]$cpu; total_mb = [int][math]::Floor($os.TotalVisibleMemorySize / 1024); free_mb = [int][math]::Floor($os.FreePhysicalMemory / 1024) }
+      register: qcl_windows_resources
+    - name: Выбрать размеры с учётом host reserves и optional overrides
+      ansible.builtin.set_fact:
+        qcl_windows_effective_cpus: "{{ qcl_windows_worker_cpus | default((qcl_windows_resources.result.cpus | int) - (qcl_windows_reserve_cpus | default(2) | int)) | int }}"
+        qcl_windows_effective_memory_mb: "{{ qcl_windows_worker_memory_mb | default((qcl_windows_resources.result.total_mb | int) - (qcl_windows_reserve_memory_mb | default(4096) | int)) | int }}"
+    - name: Проверить реальный запас ресурсов
+      ansible.builtin.assert:
+        that:
+          - qcl_windows_effective_cpus | int > 0
+          - qcl_windows_effective_cpus | int <= (qcl_windows_resources.result.cpus | int - (qcl_windows_reserve_cpus | default(2) | int))
+          - qcl_windows_effective_memory_mb | int > 0
+          - qcl_windows_effective_memory_mb | int <= (qcl_windows_resources.result.free_mb | int - (qcl_windows_reserve_memory_mb | default(2048) | int))
+    - name: Найти системный HTCondor через PATH, реестр и службу
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+          $c = Get-Command condor_version.exe -ErrorAction SilentlyContinue
+          $reg = Get-ItemProperty 'HKLM:\SOFTWARE\Condor' -ErrorAction SilentlyContinue
+          $svc = Get-CimInstance Win32_Service -Filter "Name='Condor'" -ErrorAction SilentlyContinue
+          $bin = if ($c) { $c.Source } elseif ($reg.RELEASE_DIR -and (Test-Path (Join-Path $reg.RELEASE_DIR 'bin\condor_version.exe'))) { Join-Path $reg.RELEASE_DIR 'bin\condor_version.exe' } else { '' }
+          $identity = [Security.Principal.WindowsIdentity]::GetCurrent().Name -split '\\', 2
+          $admin = if ($identity.Count -eq 2) { "$($identity[1])@$($identity[0])" } else { "$($identity[0])@$env:COMPUTERNAME" }
+          $Ansible.Result = @{ version = $bin; config = [string]$reg.CONDOR_CONFIG; service_exists = [bool]$svc; service_running = [bool]($svc -and $svc.State -eq 'Running'); hostname = $env:COMPUTERNAME; admin_identity = $admin }
+      register: qcl_windows_discovery
+    - name: Не переустанавливать нераспознанную существующую службу
+      ansible.builtin.assert:
+        that: not qcl_windows_discovery.result.service_exists or qcl_windows_discovery.result.version | length > 0
+        fail_msg: Служба Condor существует, но исполняемый файл не найден; требуется сверить установленный экземпляр.
+    - name: Получить native адрес локального startd
+      ansible.windows.win_powershell:
+        script: |
+          param([string]$VersionPath)
+          $Ansible.Changed = $false
+          $tool = Join-Path (Split-Path $VersionPath) 'condor_config_val.exe'
+          $file = (& $tool STARTD_ADDRESS_FILE | Select-Object -First 1).Trim()
+          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $file)) { throw 'STARTD_ADDRESS_FILE недоступен' }
+          $Ansible.Result = (Get-Content -LiteralPath $file -TotalCount 1).Trim()
+          if (-not $Ansible.Result.StartsWith('<')) { throw 'Некорректный startd address' }
+        parameters:
+          VersionPath: '{{ qcl_windows_discovery.result.version }}'
+      register: qcl_windows_startd_address
+      when: qcl_windows_discovery.result.service_running
+    - name: Проверить живые задания непосредственно на startd
+      ansible.windows.win_command:
+        argv:
+          - "{{ qcl_windows_discovery.result.version | regex_replace('(?i)condor_version[.]exe$', 'condor_status.exe') }}"
+          - -direct
+          - '{{ qcl_windows_startd_address.result }}'
+          - -af
+          - State
+          - Activity
+      register: qcl_windows_active_slots
+      changed_when: false
+      when: qcl_windows_discovery.result.service_running
+    - name: Не менять runtime-конфигурацию при занятых слотах
+      ansible.builtin.assert:
+        that:
+          - qcl_windows_active_slots.stdout | trim | length > 0
+          - qcl_windows_active_slots.stdout is not search('(?i)(Claimed|Matched|Preempting|Busy|Retiring|Vacating|Suspended|Killing)')
+        fail_msg: Есть активные слоты либо их состояние не установлено; конфигурация не изменена.
+      when: qcl_windows_discovery.result.service_running
+    - name: Проверить владельца существующего QCL-каталога credentials
+      ansible.windows.win_powershell:
+        script: |
+          param([string]$Path)
+          $Ansible.Changed = $false
+          if (-not (Test-Path -LiteralPath $Path)) { $Ansible.Result = $true; return }
+          $item = Get-Item -LiteralPath $Path -Force
+          if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { $Ansible.Result = $false; return }
+          $owner = (Get-Acl -LiteralPath $Path).GetOwner([Security.Principal.SecurityIdentifier]).Value
+          $current = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+          $Ansible.Result = $owner -in @('S-1-5-18','S-1-5-32-544',$current)
+        parameters:
+          Path: '{{ item }}'
+      loop:
+        - '{{ qcl_windows_token_dir }}'
+        - '{{ qcl_windows_token_dir }}\daemon'
+        - '{{ qcl_windows_signing_dir }}'
+        - '{{ qcl_windows_signing_dir }}\POOL'
+      register: qcl_windows_token_owner
+      no_log: true
+    - name: Не менять каталог или token чужого либо неизвестного владельца
+      ansible.builtin.assert:
+        that: item.result | bool
+      loop: '{{ qcl_windows_token_owner.results }}'
+      no_log: true
+    - name: Проверить локального пользователя
+      ansible.windows.win_powershell:
+        script: |
+          param([string]$Name)
+          $Ansible.Changed = $false
+          $Ansible.Result = [bool](Get-LocalUser -Name $Name -ErrorAction SilentlyContinue)
+        parameters:
+          Name: '{{ qcl_windows_username }}'
+      register: qcl_windows_existing_user
+
+    - name: Прочитать существующую роль Condor
+      ansible.windows.win_command:
+        argv:
+          - '{{ qcl_windows_discovery.result.version | regex_replace("(?i)condor_version[.]exe$", "condor_config_val.exe") }}'
+          - DAEMON_LIST
+      register: qcl_windows_existing_role
+      changed_when: false
+      when: qcl_windows_discovery.result.version | length > 0
+    - name: Не преобразовывать manager или submit в execute worker
+      ansible.builtin.assert:
+        that:
+          - "'SCHEDD' not in qcl_windows_existing_role.stdout"
+          - "'COLLECTOR' not in qcl_windows_existing_role.stdout"
+          - "'NEGOTIATOR' not in qcl_windows_existing_role.stdout"
+      when: qcl_windows_discovery.result.version | length > 0
+  tasks:
+    - name: Создать обычного локального пользователя при отсутствии
+      ansible.windows.win_user:
+        name: '{{ qcl_windows_username }}'
+        password: '{{ qcl_windows_user_password }}'
+        update_password: on_create
+        groups: ['S-1-5-32-545']
+        groups_action: replace
+        state: present
+      when: not qcl_windows_existing_user.result
+      no_log: true
+    - name: Подготовить каталоги данных и credentials
+      ansible.windows.win_file:
+        path: '{{ item }}'
+        state: directory
+      loop:
+        - '{{ qcl_windows_condor_config | win_dirname }}'
+        - '{{ qcl_windows_token_dir }}'
+        - '{{ qcl_windows_signing_dir }}'
+        - 'C:\QCL\data'
+        - 'C:\QCL\depot'
+    - name: Привести ACL принадлежащего QCL каталога token к SYSTEM и Administrators
+      ansible.windows.win_powershell:
+        script: |
+          param([string]$Path)
+          $Ansible.Changed = $false
+          $acl = Get-Acl -LiteralPath $Path
+          $before = $acl.GetSecurityDescriptorSddlForm('Access')
+          $acl.SetAccessRuleProtection($true, $false)
+          foreach ($r in @($acl.Access)) { [void]$acl.RemoveAccessRuleSpecific($r) }
+          foreach ($sid in @('S-1-5-18', 'S-1-5-32-544')) {
+            $principal = [Security.Principal.SecurityIdentifier]::new($sid)
+            $rule = [Security.AccessControl.FileSystemAccessRule]::new($principal, 'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow')
+            $acl.AddAccessRule($rule)
+          }
+          if ($before -ne $acl.GetSecurityDescriptorSddlForm('Access')) {
+            Set-Acl -LiteralPath $Path -AclObject $acl
+            $Ansible.Changed = $true
+          }
+        parameters:
+          Path: '{{ item }}'
+      loop: ['{{ qcl_windows_token_dir }}', '{{ qcl_windows_signing_dir }}']
+      no_log: true
+    - name: Сохранить существующий daemon token, отсутствующий скопировать
+      ansible.windows.win_copy:
+        src: '{{ qcl_windows_daemon_token_file }}'
+        dest: '{{ qcl_windows_token_dir }}\daemon'
+        force: false
+      no_log: true
+      notify: Перечитать конфигурацию Condor
+    - name: Сохранить имеющийся POOL key или скопировать отсутствующий
+      ansible.windows.win_copy:
+        src: '{{ qcl_pool_key_file }}'
+        dest: '{{ qcl_windows_signing_dir }}\POOL'
+        force: false
+      no_log: true
+      notify: Перечитать конфигурацию Condor
+    - name: Привести ACL файлов credentials к SYSTEM и Administrators
+      ansible.windows.win_powershell:
+        script: |
+          param([string]$Path)
+          $Ansible.Changed = $false
+          $acl = Get-Acl -LiteralPath $Path
+          $before = $acl.GetSecurityDescriptorSddlForm('Access')
+          $acl.SetAccessRuleProtection($true, $false)
+          foreach ($r in @($acl.Access)) { [void]$acl.RemoveAccessRuleSpecific($r) }
+          foreach ($sid in @('S-1-5-18', 'S-1-5-32-544')) {
+            $principal = [Security.Principal.SecurityIdentifier]::new($sid)
+            $rule = [Security.AccessControl.FileSystemAccessRule]::new($principal, 'FullControl', 'Allow')
+            $acl.AddAccessRule($rule)
+          }
+          if ($before -ne $acl.GetSecurityDescriptorSddlForm('Access')) {
+            Set-Acl -LiteralPath $Path -AclObject $acl
+            $Ansible.Changed = $true
+          }
+        parameters:
+          Path: '{{ item }}'
+      loop: ['{{ qcl_windows_token_dir }}\daemon', '{{ qcl_windows_signing_dir }}\POOL']
+      no_log: true
+    - name: Записать конфигурацию worker
+      ansible.windows.win_template:
+        src: templates/windows-condor-worker.conf.j2
+        dest: '{{ qcl_windows_condor_config }}'
+      notify: Перечитать конфигурацию Condor
+    - name: Разрешить shared port для менеджера
+      community.windows.win_firewall_rule:
+        name: QCL HTCondor manager TCP 9618
+        localport: '9618'
+        remoteip: '{{ qcl_manager_ip }}'
+        protocol: tcp
+        direction: in
+        action: allow
+        enabled: true
+        state: present
+    - name: Установить MSI только при отсутствии системного HTCondor
+      ansible.windows.win_package:
+        path: '{{ qcl_windows_condor_msi_url }}'
+        state: present
+        creates_service: Condor
+        arguments:
+          - 'NEWPOOL=N'
+          - 'RUNJOBS=A'
+          - 'SUBMITJOBS=N'
+          - 'USEVMUNIVERSE=N'
+          - 'INSTALLDIR={{ qcl_windows_condor_root }}'
+          - 'POOLHOSTNAME={{ qcl_manager_address }}'
+          - 'LOCALCONFIG={{ qcl_windows_condor_config }}'
+      register: qcl_windows_install
+      when: qcl_windows_discovery.result.version | length == 0
+    - name: Учесть запрос MSI на перезагрузку
+      ansible.builtin.assert:
+        that: not (qcl_windows_install.reboot_required | default(false))
+        fail_msg: MSI запросил reboot; проверьте состояние VM до дальнейших действий.
+    - name: Прочитать реестр после возможной установки
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\Condor
+        name: CONDOR_CONFIG
+      register: qcl_windows_config_registry
+    - name: Требовать известный главный config существующей установки
+      ansible.builtin.assert:
+        that:
+          - qcl_windows_config_registry.exists
+          - qcl_windows_config_registry.value | length > 0
+    - name: Подключить QCL config через штатную директиву include
+      ansible.windows.win_lineinfile:
+        path: '{{ qcl_windows_config_registry.value }}'
+        line: 'include : {{ qcl_windows_condor_config }}'
+        state: present
+      notify: Перечитать конфигурацию Condor
+    - name: Проверить конфигурацию штатным parser
+      ansible.windows.win_command:
+        argv:
+          - >-
+            {{ (qcl_windows_discovery.result.version | regex_replace('(?i)condor_version[.]exe$', 'condor_config_val.exe')) if qcl_windows_discovery.result.version | length > 0 else qcl_windows_condor_root ~ '/bin/condor_config_val.exe' }}
+          - -config
+      register: qcl_windows_config_files
+      changed_when: false
+    - name: Проверить, что QCL config действительно подключён
+      ansible.builtin.assert:
+        that: qcl_windows_condor_config | lower in qcl_windows_config_files.stdout | lower
+        fail_msg: Главный config не подхвачен данным процессом; проверить CONDOR_CONFIG службы.
+    - name: Включить установленную службу Condor
+      ansible.windows.win_service:
+        name: Condor
+        start_mode: auto
+        state: started
+    - name: Применить изменения после проверки parser
+      ansible.builtin.meta: flush_handlers
+
+  handlers:
+    - name: Проверить свободный worker непосредственно перед restart
+      listen: Перечитать конфигурацию Condor
+      ansible.windows.win_powershell:
+        script: |
+          param([string]$VersionPath)
+          $bin = Split-Path $VersionPath
+          $tool = Join-Path $bin 'condor_config_val.exe'
+          $file = (& $tool STARTD_ADDRESS_FILE | Select-Object -First 1).Trim()
+          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $file)) { throw 'STARTD_ADDRESS_FILE недоступен' }
+          $addr = (Get-Content -LiteralPath $file -TotalCount 1).Trim()
+          if (-not $addr.StartsWith('<')) { throw 'Некорректный startd address' }
+          & (Join-Path $bin 'condor_drain.exe') -graceful -check '(State =?= "Unclaimed") || (State =?= "Owner") || (State =?= "Drained")' -exit-on-completion $addr
+          if ($LASTEXITCODE -ne 0) { throw 'Worker занят или native drain не выполнен' }
+        parameters:
+          VersionPath: >-
+            {{ qcl_windows_discovery.result.version if qcl_windows_discovery.result.version | length > 0 else qcl_windows_condor_root ~ '/bin/condor_version.exe' }}
+    - name: Перезапустить native Condor после проверки parser
+      listen: Перечитать конфигурацию Condor
+      ansible.windows.win_service:
+        name: Condor
+        state: restarted

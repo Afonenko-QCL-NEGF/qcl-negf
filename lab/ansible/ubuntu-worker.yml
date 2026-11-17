@@ -1,0 +1,184 @@
+---
+- name: Подготовить Ubuntu HTCondor execute worker
+  hosts: ubuntu_workers
+  become: true
+  gather_facts: true
+  vars:
+    qcl_host_reserved_cpus: 2
+    qcl_host_reserved_memory_mb: 2048
+    qcl_worker_home: /var/lib/qcl-worker
+    qcl_worker_depot: '{{ qcl_worker_home }}/.julia'
+    qcl_worker_filesystem_domain: '{{ inventory_hostname }}'
+  pre_tasks:
+    - name: Проверить платформу и private inventory
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.distribution == 'Ubuntu'
+          - qcl_manager_address is defined
+          - qcl_pool_key_file is defined
+          - ansible_facts.processor_vcpus | int > qcl_host_reserved_cpus | int
+          - ansible_facts.memtotal_mb | int > qcl_host_reserved_memory_mb | int
+    - name: Вычислить ресурсы worker после резервов хоста
+      ansible.builtin.set_fact:
+        qcl_worker_cpus: '{{ qcl_worker_cpus | default(ansible_facts.processor_vcpus | int - qcl_host_reserved_cpus | int) }}'
+        qcl_worker_memory: '{{ qcl_worker_memory | default(ansible_facts.memtotal_mb | int - qcl_host_reserved_memory_mb | int) }}'
+    - name: Проверить ресурсы после явного override
+      ansible.builtin.assert:
+        that:
+          - qcl_worker_cpus | int > 0
+          - qcl_worker_cpus | int <= ansible_facts.processor_vcpus | int - qcl_host_reserved_cpus | int
+          - qcl_worker_memory | int > 0
+          - qcl_worker_memory | int <= ansible_facts.memtotal_mb | int - qcl_host_reserved_memory_mb | int
+    - name: Сохранить существующую scientific учётную запись
+      ansible.builtin.getent:
+        database: passwd
+        key: qcl
+        fail_key: false
+    - name: Не менять чужой home
+      ansible.builtin.assert:
+        that: ansible_facts.getent_passwd.qcl is none or ansible_facts.getent_passwd.qcl[4] == qcl_worker_home
+    - name: Найти существующий native runtime
+      ansible.builtin.shell: command -v condor_version
+      register: qcl_worker_existing
+      changed_when: false
+      failed_when: qcl_worker_existing.rc not in [0, 1]
+    - name: Проверить существующую роль до изменения
+      ansible.builtin.command:
+        argv: [condor_config_val, DAEMON_LIST]
+      register: qcl_worker_daemons
+      changed_when: false
+      when: qcl_worker_existing.rc == 0
+    - name: Не превращать существующий submit или manager в execute worker
+      ansible.builtin.assert:
+        that:
+          - "'SCHEDD' not in qcl_worker_daemons.stdout"
+          - "'COLLECTOR' not in qcl_worker_daemons.stdout"
+      when: qcl_worker_existing.rc == 0
+    - name: Прочитать native состояние службы
+      ansible.builtin.command:
+        argv: [systemctl, is-active, condor]
+      register: qcl_worker_active
+      changed_when: false
+      failed_when: false
+    - name: Проверить свободный существующий worker по native address
+      when: qcl_worker_active.stdout | trim == 'active'
+      block:
+        - ansible.builtin.command:
+            argv: [condor_config_val, STARTD_ADDRESS_FILE]
+          register: qcl_worker_address_path
+          changed_when: false
+        - ansible.builtin.slurp:
+            src: '{{ qcl_worker_address_path.stdout | trim }}'
+          register: qcl_worker_address_file
+        - ansible.builtin.command:
+            argv: [condor_status, -direct, '{{ (qcl_worker_address_file.content | b64decode).splitlines()[0] }}', -af, State]
+          register: qcl_worker_states
+          changed_when: false
+        - ansible.builtin.assert:
+            that:
+              - qcl_worker_states.stdout | trim | length > 0
+              - qcl_worker_states.stdout_lines | difference(['Unclaimed', 'Owner', 'Drained']) | length == 0
+        - name: Запретить новые claims перед обслуживанием
+          ansible.builtin.command:
+            argv: [condor_drain, -graceful, -check, '(State =?= "Unclaimed") || (State =?= "Owner") || (State =?= "Drained")', -exit-on-completion, '{{ (qcl_worker_address_file.content | b64decode).splitlines()[0] }}']
+        - name: Остановить только свободную execute службу
+          ansible.builtin.systemd_service:
+            name: condor
+            state: stopped
+  tasks:
+    - name: Установить или принять системный HTCondor
+      ansible.builtin.include_tasks: tasks/htcondor-ubuntu.yml
+    - name: Установить native QEMU guest agent
+      ansible.builtin.apt:
+        name: qemu-guest-agent
+        state: present
+    - name: Создать scientific user
+      ansible.builtin.user:
+        name: qcl
+        system: true
+        home: '{{ qcl_worker_home }}'
+        create_home: true
+        shell: /bin/bash
+        password_lock: true
+    - name: Создать постоянный writable depot
+      ansible.builtin.file:
+        path: '{{ qcl_worker_depot }}'
+        state: directory
+        owner: qcl
+        group: qcl
+        mode: '0700'
+    - name: Создать приватные native credential каталоги
+      ansible.builtin.file:
+        path: '{{ item }}'
+
+        state: directory
+        owner: root
+        group: root
+        mode: '0700'
+      loop: [/etc/condor/tokens.d, /etc/condor/passwords.d]
+    - name: Передать native POOL signing key для проверки входящих IDTOKENS
+      ansible.builtin.copy:
+        src: '{{ qcl_pool_key_file }}'
+        dest: /etc/condor/passwords.d/POOL
+        force: false
+        owner: root
+        group: root
+        mode: '0600'
+      no_log: true
+      notify: Перезапустить worker
+    - name: Настроить штатную security и execute конфигурацию
+      ansible.builtin.template:
+        src: 'templates/{{ item.src }}'
+        dest: '/etc/condor/config.d/{{ item.dest }}'
+        owner: root
+        group: root
+        mode: '0644'
+      loop:
+        - {src: condor-security.conf.j2, dest: 10-qcl-security.conf}
+        - {src: condor-worker.conf.j2, dest: 20-qcl-worker.conf}
+      notify: Перезапустить worker
+    - name: Создать отсутствующий native daemon token
+      ansible.builtin.command:
+        argv: [condor_token_create, -identity, condor@qcl, -key, POOL, -file, /etc/condor/tokens.d/qcl-worker]
+        creates: /etc/condor/tokens.d/qcl-worker
+      no_log: true
+      notify: Перезапустить worker
+    - name: Закрыть daemon token от обычных пользователей
+      ansible.builtin.file:
+        path: /etc/condor/tokens.d/qcl-worker
+        owner: root
+        group: root
+        mode: '0600'
+      no_log: true
+    - name: Разрешить native cgroup delegation службы
+      ansible.builtin.file:
+        path: /etc/systemd/system/condor.service.d
+        state: directory
+        mode: '0755'
+    - name: Настроить cgroup subtree
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/condor.service.d/qcl-cgroups.conf
+        mode: '0644'
+        content: |
+          [Service]
+          Delegate=true
+          DelegateSubgroup=leaf
+      notify: Перезапустить worker
+    - name: Проверить native конфигурацию
+      ansible.builtin.command:
+        argv: [condor_config_val, -summary]
+      changed_when: false
+    - name: Применить конфигурацию после проверки
+      ansible.builtin.meta: flush_handlers
+    - name: Включить Condor
+      ansible.builtin.systemd_service:
+        name: condor
+        daemon_reload: true
+        enabled: true
+        state: started
+  handlers:
+    - name: Перезапустить worker
+      ansible.builtin.systemd_service:
+        name: condor
+        daemon_reload: true
+        state: restarted

@@ -1,0 +1,111 @@
+---
+- name: Исправить выбранный native OOD HTCondor путь
+  hosts: qcl_manager
+  become: true
+  gather_facts: false
+  vars:
+    qcl_ood_patches:
+      - file: ood-core-0.31.1-htcondor.patch
+        root: '{{ qcl_ood_core_root }}'
+      - file: ondemand-4.2.5-project-manager-memory-input.patch
+        root: /var/www/ood/apps/sys/dashboard
+  pre_tasks:
+    - name: Прочитать активный native bundle
+      ansible.builtin.slurp:
+        src: /var/www/ood/apps/sys/dashboard/Gemfile.lock
+      register: qcl_ood_bundle_lock
+    - name: Выбрать реальный package path из bundle, без version gate
+      ansible.builtin.set_fact:
+        qcl_ood_core_root: '/opt/ood/gems/gems/ood_core-{{ ((qcl_ood_bundle_lock.content | b64decode) | regex_findall("(?m)^    ood_core \(([^)]+)\)"))[0] }}'
+  tasks:
+    - name: Создать каталог адресных package patches
+      ansible.builtin.file:
+        path: /var/tmp/qcl-ood-patches
+        state: directory
+        mode: '0755'
+    - name: Передать reviewed source patches
+      ansible.builtin.copy:
+        src: '../patches/{{ item.file }}'
+        dest: '/var/tmp/qcl-ood-patches/{{ item.file }}'
+        mode: '0644'
+      loop: '{{ qcl_ood_patches }}'
+    - name: Проверить применение native patch до изменений
+      ansible.builtin.command:
+        argv: [patch, --batch, --forward, --dry-run, -p1, -i, '/var/tmp/qcl-ood-patches/{{ item.file }}']
+        chdir: '{{ item.root }}'
+      register: qcl_ood_forward
+      loop: '{{ qcl_ood_patches }}'
+      changed_when: false
+      failed_when: false
+    - name: Отличить уже применённый patch от неизвестного source
+      ansible.builtin.command:
+        argv: [patch, --batch, --reverse, --dry-run, -p1, -i, '/var/tmp/qcl-ood-patches/{{ item.item.file }}']
+        chdir: '{{ item.item.root }}'
+      loop: '{{ qcl_ood_forward.results }}'
+      when: item.rc != 0
+      changed_when: false
+    - name: Создать место для исходного package source
+      ansible.builtin.file:
+        path: /srv/qcl/ops/ood-originals
+        state: directory
+        mode: '0700'
+    - name: Сохранить только исходные изменяемые package файлы
+      ansible.builtin.copy:
+        src: '{{ item }}'
+        dest: '/srv/qcl/ops/ood-originals/{{ item | basename }}'
+        remote_src: true
+        force: false
+        mode: '0600'
+      loop:
+        - '{{ qcl_ood_core_root }}/lib/ood_core/job/adapters/htcondor.rb'
+        - /var/www/ood/apps/sys/dashboard/app/lib/smart_attributes.rb
+        - /var/www/ood/apps/sys/dashboard/app/controllers/launchers_controller.rb
+        - /var/www/ood/apps/sys/dashboard/app/javascript/projects.js
+        - /var/www/ood/apps/sys/dashboard/config/routes.rb
+        - /var/www/ood/apps/sys/dashboard/app/models/project.rb
+        - /var/www/ood/apps/sys/dashboard/app/models/hpc_job.rb
+        - /var/www/ood/apps/sys/dashboard/app/helpers/projects_helper.rb
+        - /var/www/ood/apps/sys/dashboard/app/views/projects/_job_details.html.erb
+        - /var/www/ood/apps/sys/dashboard/app/views/projects/_job_details.turbo_stream.erb
+        - /var/www/ood/apps/sys/dashboard/app/views/projects/_job_details_content.html.erb
+    - name: Применить только проверенные отсутствующие patches
+      ansible.builtin.command:
+        argv: [patch, --batch, --forward, -p1, -i, '/var/tmp/qcl-ood-patches/{{ item.item.file }}']
+        chdir: '{{ item.item.root }}'
+      loop: '{{ qcl_ood_forward.results }}'
+      when: item.rc == 0
+      register: qcl_ood_applied
+    - name: Передать обычный native asset build helper
+      ansible.builtin.copy:
+        src: templates/ood-build-assets.sh
+        dest: /var/tmp/qcl-ood-patches/build-assets.sh
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Собрать и precompile assets при применении Dashboard patch
+      ansible.builtin.command:
+        argv: [systemd-run, --quiet, --wait, --pipe, --collect, --unit=qcl-ood-assets, --property=MemoryMax=4G, --property=MemorySwapMax=0, --property=CPUQuota=200%, --property=RuntimeMaxSec=180, --property=PrivateNetwork=true, /bin/bash, /var/tmp/qcl-ood-patches/build-assets.sh]
+      when: qcl_rebuild_ood_assets | default(false) | bool or (qcl_ood_applied.results | selectattr('changed') | selectattr('item.item.file', 'equalto', 'ondemand-4.2.5-project-manager-memory-input.patch') | list | length > 0)
+    - name: Проверить Ruby parser затронутых компонентов
+      ansible.builtin.command:
+        argv: [ruby, -c, '{{ item }}']
+      changed_when: false
+      loop:
+        - '{{ qcl_ood_core_root }}/lib/ood_core/job/adapters/htcondor.rb'
+        - /var/www/ood/apps/sys/dashboard/app/lib/smart_attributes.rb
+        - /var/www/ood/apps/sys/dashboard/app/lib/smart_attributes/attributes/auto_memory.rb
+        - /var/www/ood/apps/sys/dashboard/app/lib/smart_attributes/attributes/auto_input_files.rb
+        - /var/www/ood/apps/sys/dashboard/app/controllers/launchers_controller.rb
+    - name: Установить штатный project template
+      ansible.builtin.copy:
+        src: ../project-template/
+        dest: /etc/ood/config/apps/dashboard/projects/qcl-smoke/
+        owner: root
+        group: root
+        mode: preserve
+    - name: Перечитать только Passenger приложения dashboard и myjobs
+      ansible.builtin.file:
+        path: '/var/www/ood/apps/sys/{{ item }}/tmp/restart.txt'
+        state: touch
+        mode: '0644'
+      loop: [dashboard, myjobs]

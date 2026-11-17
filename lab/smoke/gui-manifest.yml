@@ -1,0 +1,5 @@
+---
+name: QCL queue smoke
+host: qcl
+script: payload.sh
+notes: Короткая инженерная проверка очереди; не научный расчёт.

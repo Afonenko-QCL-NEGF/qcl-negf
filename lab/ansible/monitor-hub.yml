@@ -1,0 +1,255 @@
+---
+- name: Установить Beszel hub за штатным Apache TLS
+  hosts: qcl_manager
+  become: true
+  gather_facts: false
+  vars:
+    qcl_beszel_binary: /opt/beszel/beszel
+    qcl_beszel_data: /srv/qcl/beszel
+  pre_tasks:
+    - name: Проверить обязательные переменные
+      ansible.builtin.assert:
+        that:
+          - qcl_manager_address is defined
+          - qcl_manager_address is match('^[a-zA-Z0-9.-]+$')
+          - qcl_beszel_hub_binary_file is defined
+          - qcl_monitor_private_key_file is defined
+          - qcl_monitor_public_key is defined
+          - qcl_monitor_email is defined
+          - qcl_monitor_password is defined
+          - qcl_monitor_password | length > 0
+      no_log: true
+    - name: Проверить доступность light-сборки на controller
+      ansible.builtin.stat:
+        path: '{{ qcl_beszel_hub_binary_file }}'
+        get_checksum: false
+      delegate_to: localhost
+      become: false
+      register: qcl_beszel_source
+    - name: Требовать непустой обычный файл сборки
+      ansible.builtin.assert:
+        that:
+          - qcl_beszel_source.stat.isreg | default(false)
+          - qcl_beszel_source.stat.size | default(0) > 0
+    - name: Проверить monitor SSH key на controller
+      ansible.builtin.stat:
+        path: '{{ qcl_monitor_private_key_file }}'
+        get_checksum: false
+      delegate_to: localhost
+      become: false
+      register: qcl_monitor_key_source
+      no_log: true
+    - name: Требовать имеющийся приватный ключ
+      ansible.builtin.assert:
+        that:
+          - qcl_monitor_key_source.stat.isreg | default(false)
+          - qcl_monitor_key_source.stat.size | default(0) > 0
+      no_log: true
+    - name: Проверить смонтированный раздел данных
+      ansible.builtin.command:
+        argv: [findmnt, --noheadings, --mountpoint, /srv/qcl]
+      changed_when: false
+    - name: Прочитать существующие службы перед обслуживанием hub
+      ansible.builtin.service_facts:
+    - name: Проверить существующий ключ hub
+      ansible.builtin.stat:
+        path: '{{ qcl_beszel_data }}/id_ed25519'
+        get_checksum: false
+      register: qcl_monitor_existing_key
+      no_log: true
+    - name: Проверить существующую базу данных
+      ansible.builtin.stat:
+        path: '{{ qcl_beszel_data }}/data.db'
+      register: qcl_beszel_db
+    - name: Не внедрять новый ключ в существующую базу
+      ansible.builtin.assert:
+        that: not qcl_beszel_db.stat.exists or qcl_monitor_existing_key.stat.exists
+
+  tasks:
+    - name: Создать системную группу Beszel
+      ansible.builtin.group:
+        name: beszel
+        system: true
+    - name: Создать системного пользователя Beszel
+      ansible.builtin.user:
+        name: beszel
+        group: beszel
+        system: true
+        home: '{{ qcl_beszel_data }}'
+        create_home: false
+        shell: /usr/sbin/nologin
+    - name: Создать приватный каталог данных
+      ansible.builtin.file:
+        path: '{{ qcl_beszel_data }}'
+        state: directory
+        owner: beszel
+        group: beszel
+        mode: '0700'
+    - name: Создать каталог binary
+      ansible.builtin.file:
+        path: '{{ qcl_beszel_binary | dirname }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Записать неизменяемый приватный ключ hub
+      ansible.builtin.copy:
+        src: '{{ qcl_monitor_private_key_file }}'
+        dest: '{{ qcl_beszel_data }}/id_ed25519'
+        owner: beszel
+        group: beszel
+        mode: '0600'
+        force: false
+      no_log: true
+    - name: Получить публичную часть ключа hub
+      ansible.builtin.command:
+        argv: [ssh-keygen, -y, -f, '{{ qcl_beszel_data }}/id_ed25519']
+      become_user: beszel
+      register: qcl_beszel_derived_key
+      changed_when: false
+      no_log: true
+    - name: Сверить ключ hub с inventory до запуска
+      ansible.builtin.assert:
+        that:
+          - qcl_beszel_derived_key.stdout.split()[0:2] == qcl_monitor_public_key.split()[0:2]
+      no_log: true
+    - name: Определить необходимость замены binary без записи
+      ansible.builtin.copy:
+        src: '{{ qcl_beszel_hub_binary_file }}'
+        dest: '{{ qcl_beszel_binary }}'
+        owner: root
+        group: root
+        mode: '0755'
+      check_mode: true
+      notify: Остановить Beszel перед заменой binary
+    - name: Остановить существующий hub до записи binary
+      ansible.builtin.meta: flush_handlers
+    - name: Установить выбранную light-сборку
+      ansible.builtin.copy:
+        src: '{{ qcl_beszel_hub_binary_file }}'
+        dest: '{{ qcl_beszel_binary }}'
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Записать systemd unit
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/beszel.service
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          [Unit]
+          Description=Beszel QCL hub
+          After=network-online.target
+          Wants=network-online.target
+          RequiresMountsFor=/srv/qcl
+
+          [Service]
+          User=beszel
+          Group=beszel
+          ExecStart={{ qcl_beszel_binary }} serve --dir={{ qcl_beszel_data }} --http=127.0.0.1:8090
+          Environment=APP_URL=https://{{ qcl_manager_address }}:8443
+          Environment=CHECK_UPDATES=false
+          Restart=on-failure
+          MemoryMax=256M
+          CPUQuota=100%
+          NoNewPrivileges=true
+          ProtectSystem=strict
+          ReadWritePaths={{ qcl_beszel_data }}
+
+          [Install]
+          WantedBy=multi-user.target
+      register: qcl_beszel_unit
+    - name: Включить и запустить hub
+      ansible.builtin.systemd_service:
+        name: beszel.service
+        daemon_reload: '{{ qcl_beszel_unit.changed }}'
+        enabled: true
+        state: "{{ 'restarted' if qcl_beszel_unit.changed else 'started' }}"
+    - name: Узнать необходимость начального пользователя
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8090/api/beszel/first-run
+        method: GET
+        return_content: true
+        status_code: 200
+        timeout: 20
+      register: qcl_beszel_first_run
+      retries: 10
+      delay: 2
+      until: qcl_beszel_first_run.status | default(0) == 200
+    - name: Создать первого пользователя при пустой базе
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8090/api/beszel/create-user
+        method: POST
+        body_format: json
+        body:
+          email: '{{ qcl_monitor_email }}'
+          password: '{{ qcl_monitor_password }}'
+        status_code: 200
+        timeout: 20
+      when: qcl_beszel_first_run.json.firstRun | bool
+      no_log: true
+    - name: Аутентифицироваться в hub
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8090/api/collections/users/auth-with-password
+        method: POST
+        body_format: json
+        body:
+          identity: '{{ qcl_monitor_email }}'
+          password: '{{ qcl_monitor_password }}'
+        status_code: 200
+        timeout: 20
+      register: qcl_monitor_auth
+      no_log: true
+    - name: Прочитать сведения работающего hub
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8090/api/beszel/info
+        method: GET
+        headers:
+          Authorization: '{{ qcl_monitor_auth.json.token }}'
+        status_code: 200
+        timeout: 20
+      register: qcl_beszel_info
+      no_log: true
+    # На новом hub API key заполняется после первого подключения системы.
+    # Сверить API key после подключения агента; пустое значение не является pass.
+    - name: Включить необходимые модули Apache
+      ansible.builtin.command:
+        argv: [a2enmod, ssl, headers, proxy, proxy_http, proxy_wstunnel]
+      register: qcl_beszel_modules
+      changed_when: "'Enabling' in qcl_beszel_modules.stdout"
+    - name: Добавить отдельный TLS порт
+      ansible.builtin.blockinfile:
+        path: /etc/apache2/ports.conf
+        marker: '# {mark} QCL BESZEL'
+        block: |
+          Listen 8443
+        state: present
+    - name: Записать отдельный virtualhost Beszel
+      ansible.builtin.template:
+        src: templates/beszel-proxy.conf.j2
+        dest: /etc/apache2/sites-available/qcl-beszel.conf
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Включить virtualhost Beszel
+      ansible.builtin.command:
+        argv: [a2ensite, qcl-beszel.conf]
+      register: qcl_beszel_site
+      changed_when: "'Enabling' in qcl_beszel_site.stdout"
+    - name: Проверить Apache до reload
+      ansible.builtin.command:
+        argv: [apache2ctl, configtest]
+      changed_when: false
+    - name: Включить и перечитать Apache
+      ansible.builtin.systemd_service:
+        name: apache2.service
+        enabled: true
+        state: reloaded
+
+  handlers:
+    - name: Остановить Beszel перед заменой binary
+      ansible.builtin.systemd_service:
+        name: beszel.service
+        state: stopped
+      when: "'beszel.service' in ansible_facts.services"

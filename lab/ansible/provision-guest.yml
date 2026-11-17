@@ -1,0 +1,184 @@
+---
+- name: Создать новый QCL guest на Proxmox
+  hosts: proxmox
+  become: true
+  gather_facts: false
+  vars:
+    qcl_key_file: /var/lib/vz/snippets/qcl-clean-start-admin.pub
+    qcl_userdata_file: /var/lib/vz/snippets/qcl-clean-start-user-data.yaml
+  tasks:
+    - name: Проверить обязательные параметры
+      ansible.builtin.assert:
+        that:
+          - qcl_vmid is defined
+          - qcl_guest_name is defined
+          - qcl_image is defined
+          - qcl_root_storage is defined
+          - qcl_data_storage is defined
+          - qcl_bridge is defined
+          - qcl_guest_memory is defined
+          - qcl_guest_cores is defined
+          - qcl_admin_public_key is defined
+          - qcl_admin_public_key is match('^ssh-(ed25519|rsa) [A-Za-z0-9+/]+={0,3}( .*)?$')
+          - "'REPLACE_WITH_PUBLIC_KEY' not in qcl_admin_public_key"
+
+    - name: Узнать, существует ли конфигурация VM
+      ansible.builtin.command:
+        argv: [qm, config, '{{ qcl_vmid | string }}']
+      register: qcl_existing_vm
+      changed_when: false
+      failed_when: false
+
+    - name: Не принимать произвольную ошибку за отсутствующую VM
+      ansible.builtin.assert:
+        that:
+          - >-
+            qcl_existing_vm.rc == 0 or
+            ('does not exist' in (qcl_existing_vm.stderr | lower) and
+             (qcl_vmid | string) in qcl_existing_vm.stderr)
+
+    - name: Проверить имя и метку существующей VM
+      ansible.builtin.assert:
+        that:
+          - qcl_existing_vm.stdout is regex('(?m)^name:\s*' ~ (qcl_guest_name | regex_escape) ~ '\s*$')
+          - qcl_existing_vm.stdout is regex('(?m)^tags:.*\bqcl-clean-start\b')
+        fail_msg: VMID занят другой VM; ничего не изменено.
+      when: qcl_existing_vm.rc == 0
+
+    - name: Подготовить и создать только отсутствующую VM
+      when: qcl_existing_vm.rc != 0
+      block:
+        - name: Проверить исходный загрузочный cloud image до создания VM
+          ansible.builtin.stat:
+            path: '{{ qcl_image }}'
+          register: qcl_image_stat
+        - name: Требовать существующий непустой обычный файл образа
+          ansible.builtin.assert:
+            that:
+              - qcl_image_stat.stat.exists
+              - qcl_image_stat.stat.isreg | default(false)
+              - qcl_image_stat.stat.readable | default(false)
+              - (qcl_image_stat.stat.size | default(0) | int) > 0
+
+        - name: Проверить, что snippets не заняты
+          ansible.builtin.stat:
+            path: '{{ item }}'
+          loop:
+            - '{{ qcl_key_file }}'
+            - '{{ qcl_userdata_file }}'
+          register: qcl_snippets
+        - name: Не перезаписывать существующие snippets
+          ansible.builtin.assert:
+            that: not item.stat.exists
+            fail_msg: 'Snippet уже существует: {{ item.item }}; требуется ручная проверка владельца.'
+          loop: '{{ qcl_snippets.results }}'
+          loop_control:
+            label: '{{ item.item }}'
+
+        - name: Проверить существующий каталог snippets
+          ansible.builtin.stat:
+            path: /var/lib/vz/snippets
+          register: qcl_snippets_dir
+        - name: Требовать каталог snippets на local storage
+          ansible.builtin.assert:
+            that:
+              - qcl_snippets_dir.stat.isdir | default(false)
+        - name: Записать открытый ключ администратора
+          ansible.builtin.copy:
+            dest: '{{ qcl_key_file }}'
+            content: "{{ qcl_admin_public_key }}\n"
+            mode: '0644'
+            force: false
+        - name: Записать cloud-init user-data
+          ansible.builtin.copy:
+            dest: '{{ qcl_userdata_file }}'
+            mode: '0644'
+            force: false
+            content: |
+              #cloud-config
+              hostname: {{ qcl_guest_name | to_json }}
+              disable_root: true
+              ssh_pwauth: false
+              users:
+                - name: qcladmin
+                  shell: /bin/bash
+                  groups: [sudo]
+                  sudo: ALL=(ALL) NOPASSWD:ALL
+                  lock_passwd: true
+                  ssh_authorized_keys:
+                    - {{ qcl_admin_public_key | to_json }}
+              package_update: true
+              packages:
+                - qemu-guest-agent
+                - curl
+                - ca-certificates
+                - gnupg
+                - openssh-server
+              runcmd:
+                - [systemctl, enable, --now, qemu-guest-agent]
+
+        - name: Создать VM с заданной меткой
+          ansible.builtin.command:
+            argv:
+              - qm
+              - create
+              - '{{ qcl_vmid | string }}'
+              - --name
+              - '{{ qcl_guest_name }}'
+              - --tags
+              - qcl-clean-start
+              - --memory
+              - '{{ qcl_guest_memory | string }}'
+              - --cores
+              - '{{ qcl_guest_cores | string }}'
+              - --cpu
+              - host
+              - --balloon
+              - '0'
+              - --agent
+              - '1'
+              - --scsihw
+              - virtio-scsi-single
+              - --net0
+              - 'virtio,bridge={{ qcl_bridge }}'
+              - --serial0
+              - socket
+              - --vga
+              - virtio,memory=64
+              - --onboot
+              - '1'
+        - name: Импортировать загрузочный диск
+          ansible.builtin.command:
+            argv: [qm, set, '{{ qcl_vmid | string }}', --scsi0, '{{ qcl_root_storage }}:0,import-from={{ qcl_image }}']
+        - name: Установить размер загрузочного диска 64 GiB
+          ansible.builtin.command:
+            argv: [qm, disk, resize, '{{ qcl_vmid | string }}', scsi0, 64G]
+        - name: Добавить новый диск данных 128 GiB
+          ansible.builtin.command:
+            argv: [qm, set, '{{ qcl_vmid | string }}', --scsi1, '{{ qcl_data_storage }}:128,serial=qcl-clean-data']
+        - name: Подключить cloud-init и указать загрузочный диск
+          ansible.builtin.command:
+            argv:
+              - qm
+              - set
+              - '{{ qcl_vmid | string }}'
+              - --ide2
+              - '{{ qcl_root_storage }}:cloudinit'
+              - --boot
+              - order=scsi0
+              - --ciuser
+              - qcladmin
+              - --sshkeys
+              - '{{ qcl_key_file }}'
+              - --ipconfig0
+              - ip=dhcp
+              - --cicustom
+              - 'user=local:snippets/qcl-clean-start-user-data.yaml'
+        - name: Запустить новую VM
+          ansible.builtin.command:
+            argv: [qm, start, '{{ qcl_vmid | string }}']
+
+    - name: Оставить существующую помеченную VM без изменений
+      ansible.builtin.debug:
+        msg: VM уже существует; конфигурация и диски не менялись.
+      when: qcl_existing_vm.rc == 0

@@ -1,0 +1,36 @@
+---
+- name: Разрешить только два QCL TCP порта от manager в существующем UFW
+  hosts: cachyos_workers
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Прочитать действующий UFW без смены его общей политики
+      ansible.builtin.command:
+        argv: [ufw, status, verbose]
+      environment:
+        LC_ALL: C
+      register: qcl_ufw
+      changed_when: false
+    - name: Требовать уже активный принадлежащий хосту firewall
+      ansible.builtin.assert:
+        that: "'Status: active' in qcl_ufw.stdout"
+    - name: Разрешить IPv4 адрес проверенного native manager hostname
+      ansible.builtin.command:
+        argv: [getent, ahostsv4, '{{ qcl_manager_address }}']
+      register: qcl_manager_resolved
+      changed_when: false
+    - name: Использовать только текущий IPv4 manager
+      ansible.builtin.set_fact:
+        qcl_manager_ipv4: '{{ qcl_manager_resolved.stdout.splitlines()[0].split()[0] }}'
+    - name: Добавить только адресные HTCondor и monitor SSH-pull rules
+      ansible.builtin.command:
+        argv: [ufw, allow, proto, tcp, from, '{{ qcl_manager_ipv4 }}', to, any, port, '{{ item }}', comment, QCL-clean-start]
+      environment:
+        LC_ALL: C
+      loop: ['9618', '45876']
+      register: qcl_ufw_rules
+      changed_when: "'Skipping' not in qcl_ufw_rules.stdout"
+    - name: Показать native итоговые правила без других изменений
+      ansible.builtin.command:
+        argv: [ufw, status, numbered]
+      changed_when: false

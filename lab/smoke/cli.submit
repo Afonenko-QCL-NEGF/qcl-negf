@@ -1,0 +1,13 @@
+# Запускать из каталога с payload.sh. Для другого времени: -append 'arguments = 5'.
+# Выбор worker: -append 'requirements = (Machine == "<worker-fqdn>")'.
+universe = vanilla
+executable = payload.sh
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+request_cpus = 1
+request_memory = 256MB
+request_disk = 32MB
+log = cli.$(Cluster).$(Process).log
+output = cli.$(Cluster).$(Process).out
+error = cli.$(Cluster).$(Process).err
+queue 1

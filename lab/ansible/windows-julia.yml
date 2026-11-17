@@ -1,0 +1,138 @@
+---
+- name: Подготовить Julia и Pkg на Windows worker
+  hosts: windows_workers
+  gather_facts: false
+  vars:
+    # Документированный официальный актуальный x64 Juliaup MSI, fallback.
+    qcl_windows_juliaup_msi_url: https://install.julialang.org/Julia-x64.msi
+  pre_tasks:
+    - name: Проверить параметры обычной учётной записи
+      ansible.builtin.assert:
+        that:
+          - qcl_windows_username is defined
+          - qcl_windows_user_password is defined
+          - qcl_windows_user_password | length > 0
+      no_log: true
+    - name: Найти системную Julia без проверки версии
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+          $c = Get-Command julia.exe -ErrorAction SilentlyContinue
+          $Ansible.Result = if ($c) { $c.Source } else { '' }
+      register: qcl_windows_system_julia
+    - name: Найти Julia в профиле обычного пользователя
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+          $c = Get-Command julia.exe -ErrorAction SilentlyContinue
+          $Ansible.Result = if ($c) { $c.Source } else { '' }
+      become: true
+      become_method: runas
+      become_user: '{{ qcl_windows_username }}'
+      vars:
+        ansible_become_password: '{{ qcl_windows_user_password }}'
+      register: qcl_windows_existing_user_julia
+      no_log: true
+    - name: Проверить WinGet под обычным пользователем
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+          $Ansible.Result = [bool](Get-Command winget.exe -ErrorAction SilentlyContinue)
+      become: true
+      become_method: runas
+      become_user: '{{ qcl_windows_username }}'
+      vars:
+        ansible_become_password: '{{ qcl_windows_user_password }}'
+      no_log: true
+      register: qcl_windows_winget
+      when:
+        - qcl_windows_system_julia.result | length == 0
+        - qcl_windows_existing_user_julia.result | length == 0
+  tasks:
+    - name: Установить официальный Juliaup через WinGet при отсутствии Julia
+      ansible.windows.win_command:
+        argv: [winget, install, --name, Julia, --id, 9NJNWW8PVKMN, -e, -s, msstore, --accept-package-agreements, --accept-source-agreements, --disable-interactivity]
+      become: true
+      become_method: runas
+      become_user: '{{ qcl_windows_username }}'
+      vars:
+        ansible_become_password: '{{ qcl_windows_user_password }}'
+      register: qcl_windows_winget_install
+      failed_when: false
+      no_log: true
+      when:
+        - qcl_windows_system_julia.result | length == 0
+        - qcl_windows_existing_user_julia.result | length == 0
+        - qcl_windows_winget.result | default(false) | bool
+    - name: Установить официальный system Juliaup MSI если Julia и WinGet недоступны
+      ansible.windows.win_package:
+        path: '{{ qcl_windows_juliaup_msi_url }}'
+        state: present
+        arguments: [ALLUSERS=1]
+      when:
+        - qcl_windows_system_julia.result | length == 0
+        - qcl_windows_existing_user_julia.result | length == 0
+        - not (qcl_windows_winget.result | default(false) | bool) or (qcl_windows_winget_install.rc | default(1) != 0)
+    - name: Выбрать release channel Juliaup и найти Julia в профиле обычного пользователя
+      ansible.windows.win_powershell:
+        script: |
+          param([string]$SystemJulia)
+          $Ansible.Changed = $false
+          $env:PATH = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User') + ';' + $env:PATH
+          $depot = Join-Path $env:LOCALAPPDATA 'QCL\julia-depot'
+          if ($SystemJulia -and (Test-Path -LiteralPath $SystemJulia)) { $Ansible.Result = @{ julia = $SystemJulia; depot = $depot }; return }
+          $up = Get-Command juliaup.exe -ErrorAction SilentlyContinue
+          if (-not $up) { throw 'Juliaup не найден в профиле обычного пользователя после установки' }
+          & $up.Source add release
+          if ($LASTEXITCODE -ne 0) { throw 'Juliaup не установил release channel' }
+          $Ansible.Changed = $true
+          $cmd = Get-Command julia.exe -ErrorAction SilentlyContinue
+          if (-not $cmd) { throw 'Julia не найдена в профиле обычного пользователя' }
+          $Ansible.Result = @{ julia = $cmd.Source; depot = $depot }
+        parameters:
+          SystemJulia: '{{ qcl_windows_system_julia.result or qcl_windows_existing_user_julia.result }}'
+      become: true
+      become_method: runas
+      become_user: '{{ qcl_windows_username }}'
+      vars:
+        ansible_become_password: '{{ qcl_windows_user_password }}'
+      register: qcl_windows_user_julia
+      no_log: true
+    - name: Проверить Julia под обычным пользователем
+      ansible.windows.win_command:
+        argv: ['{{ qcl_windows_user_julia.result.julia }}', --version]
+      become: true
+      become_method: runas
+      become_user: '{{ qcl_windows_username }}'
+      vars:
+        ansible_become_password: '{{ qcl_windows_user_password }}'
+      changed_when: false
+      no_log: true
+    - name: Создать depot обычного пользователя
+      ansible.windows.win_file:
+        path: '{{ qcl_windows_user_depot | default(qcl_windows_user_julia.result.depot) }}'
+        state: directory
+      become: true
+      become_method: runas
+      become_user: '{{ qcl_windows_username }}'
+      vars:
+        ansible_become_password: '{{ qcl_windows_user_password }}'
+      no_log: true
+    - name: Подготовить Pkg проекта под обычным пользователем при заданном пути
+      ansible.windows.win_command:
+        argv:
+          - '{{ qcl_windows_user_julia.result.julia }}'
+          - '--project={{ qcl_windows_project_path }}'
+          - -e
+          - 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+      environment:
+        JULIA_DEPOT_PATH: '{{ qcl_windows_user_depot | default(qcl_windows_user_julia.result.depot) }}'
+      become: true
+      become_method: runas
+      become_user: '{{ qcl_windows_username }}'
+      vars:
+        ansible_become_password: '{{ qcl_windows_user_password }}'
+      async: 3600
+      poll: 30
+      no_log: true
+      when: qcl_windows_project_path is defined

@@ -1,0 +1,56 @@
+---
+# Copy outside Git; actual access files and tokens stay private.
+all:
+  vars:
+    qcl_manager_address: qcl-condor.example.invalid
+    qcl_pool_key_file: /private/qcl/pool.key
+    qcl_admin_public_key: 'ssh-ed25519 REPLACE_WITH_EXISTING_PUBLIC_KEY'
+  children:
+    proxmox:
+      hosts:
+        pve.example.invalid:
+          ansible_user: root
+          # Historical first-guest provisioner; new VMs are managed by OpenTofu.
+          qcl_vmid: 715
+          qcl_guest_name: qcl-condor
+          qcl_image: /private/import/ubuntu-cloud.qcow2
+          qcl_root_storage: local-lvm
+          qcl_data_storage: data-lvm
+          qcl_bridge: vmbr0
+          qcl_guest_memory: 16384
+          qcl_guest_cores: 8
+    qcl_manager:
+      hosts:
+        qcl-condor.example.invalid:
+          ansible_user: qcladmin
+          qcl_data_device: /dev/disk/by-id/REPLACE_WITH_OWNED_DATA_DISK
+          qcl_initialize_data: false
+    cachyos_workers:
+      hosts:
+        localhost:
+          ansible_connection: local
+          qcl_operator_user: operator
+          qcl_operator_home: /home/operator
+          qcl_known_hosts_file: /private/qcl/known_hosts
+          qcl_tls_ca_file: /private/qcl/tls/ca.crt
+          # Live host has unrelated workloads: choose reserves from inventory.
+          qcl_worker_cpus: 8
+          qcl_worker_memory: 8192
+    ubuntu_workers:
+      hosts:
+        qcl-linux-01.example.invalid:
+          ansible_user: qcladmin
+          qcl_host_reserved_cpus: 2
+          qcl_host_reserved_memory_mb: 2048
+    windows_workers:
+      hosts:
+        qcl-windows-01.example.invalid:
+          ansible_connection: psrp
+          ansible_psrp_protocol: https
+          ansible_psrp_cert_validation: validate
+          ansible_psrp_auth: negotiate
+          ansible_user: qcladmin
+          # Password uses a separate private vars file or native credential source.
+          qcl_manager_ip: 192.0.2.10
+          qcl_windows_username: qcl
+          qcl_windows_daemon_token_file: /private/qcl/windows-daemon.token

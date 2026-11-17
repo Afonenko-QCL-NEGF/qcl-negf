@@ -1,0 +1,124 @@
+---
+- name: Установить штатный Beszel agent с SSH pull
+  hosts: proxmox:qcl_manager:cachyos_workers
+  become: true
+  gather_facts: false
+  vars:
+    qcl_monitor_agent_install_dir: /opt/beszel-agent
+    qcl_monitor_agent_download_url: https://github.com/henrygd/beszel/releases/latest/download/beszel-agent_linux_amd64.tar.gz
+  tasks:
+    - name: Требовать публичный ключ принадлежащего лаборатории hub
+      ansible.builtin.assert:
+        that:
+          - qcl_monitor_public_key is defined
+          - qcl_monitor_public_key is match('^ssh-ed25519 [A-Za-z0-9+/]+')
+    - name: Найти уже установленный native agent
+      ansible.builtin.command:
+        argv: [sh, -c, 'command -v "$1"', sh, '{{ qcl_monitor_agent_binary | default("beszel-agent") }}']
+      register: qcl_agent_native
+      changed_when: false
+      failed_when: false
+    - name: Прочитать executable существующей службы agent
+      ansible.builtin.command:
+        argv: [systemctl, show, beszel-agent.service, --property=ExecStart, --value]
+      register: qcl_agent_service
+      changed_when: false
+      failed_when: false
+      when: qcl_agent_native.rc != 0
+    - name: Выбрать существующий executable либо обычную upstream установку
+      ansible.builtin.set_fact:
+        qcl_agent_existing_binary: >-
+          {{ qcl_agent_native.stdout | trim if qcl_agent_native.rc == 0 else
+             (qcl_agent_service.stdout | regex_findall('path=([^ ;]+)') | first |
+              default('')) }}
+    - name: Проверить найденный executable
+      ansible.builtin.stat:
+        path: '{{ qcl_agent_existing_binary }}'
+        follow: true
+        get_checksum: false
+      register: qcl_agent_binary_stat
+      when: qcl_agent_existing_binary | length > 0
+    - name: Использовать системный executable при его наличии
+      ansible.builtin.set_fact:
+        qcl_agent_install_needed: '{{ not (qcl_agent_binary_stat.stat.executable | default(false)) }}'
+        qcl_monitor_agent_binary: >-
+          {{ qcl_agent_existing_binary if qcl_agent_binary_stat.stat.executable | default(false)
+             else qcl_monitor_agent_install_dir ~ '/beszel-agent' }}
+    - name: Создать пользователя метрик без административных групп
+      ansible.builtin.user:
+        name: beszel-agent
+        system: true
+        home: /var/lib/beszel-agent
+        create_home: true
+        shell: /usr/sbin/nologin
+    - name: Создать каталог upstream agent, если системного нет
+      ansible.builtin.file:
+        path: '{{ qcl_monitor_agent_install_dir }}'
+        state: directory
+        mode: '0755'
+      when: qcl_agent_install_needed | bool
+    - name: Скачать текущий официальный stock agent
+      ansible.builtin.get_url:
+        url: '{{ qcl_monitor_agent_download_url }}'
+        dest: '{{ qcl_monitor_agent_install_dir }}/release.tar.gz'
+        force: true
+        mode: '0644'
+      when: qcl_agent_install_needed | bool
+    - name: Распаковать официальный agent
+      ansible.builtin.unarchive:
+        src: '{{ qcl_monitor_agent_install_dir }}/release.tar.gz'
+        dest: '{{ qcl_monitor_agent_install_dir }}'
+        remote_src: true
+      when: qcl_agent_install_needed | bool
+    - name: Создать каталог параметров
+      ansible.builtin.file:
+        path: /etc/beszel-agent
+        state: directory
+        mode: '0755'
+    - name: Записать публичный ключ и адрес listener
+      ansible.builtin.copy:
+        dest: /etc/beszel-agent/agent.env
+        mode: '0644'
+        content: |
+          LISTEN=45876
+          KEY="{{ qcl_monitor_public_key }}"
+      notify: Перезапустить Beszel agent
+    - name: Записать штатную systemd службу метрик
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/beszel-agent.service
+        mode: '0644'
+        content: |
+          [Unit]
+          Description=Beszel native metrics agent
+          After=network-online.target
+          Wants=network-online.target
+          [Service]
+          User=beszel-agent
+          Group=beszel-agent
+          WorkingDirectory=/var/lib/beszel-agent
+          EnvironmentFile=/etc/beszel-agent/agent.env
+          ExecStart={{ qcl_monitor_agent_binary }}
+          Restart=on-failure
+          RestartSec=10
+          NoNewPrivileges=true
+          PrivateTmp=true
+          ProtectSystem=strict
+          ProtectHome=true
+          ReadWritePaths=/var/lib/beszel-agent
+          MemoryMax=128M
+          CPUQuota=20%
+          [Install]
+          WantedBy=multi-user.target
+      notify: Перезапустить Beszel agent
+    - name: Включить native agent
+      ansible.builtin.systemd_service:
+        name: beszel-agent
+        enabled: true
+        daemon_reload: true
+        state: started
+  handlers:
+    - name: Перезапустить Beszel agent
+      ansible.builtin.systemd_service:
+        name: beszel-agent
+        daemon_reload: true
+        state: restarted

@@ -1,0 +1,28 @@
+CONDOR_HOST = {{ qcl_manager_address }}
+DAEMON_LIST = MASTER, STARTD
+USE_SHARED_PORT = true
+SHARED_PORT_PORT = 9618
+
+NUM_CPUS = {{ qcl_worker_cpus }}
+MEMORY = {{ qcl_worker_memory }}
+use FEATURE : PartitionableSlot
+
+# Один доверенный scientific user, независимо от reverse DNS submit host.
+STARTER_ALLOW_RUNAS_OWNER = false
+NOBODY_SLOT_USER = qcl
+TRUST_UID_DOMAIN = false
+SOFT_UID_DOMAIN = false
+FILESYSTEM_DOMAIN = {{ qcl_worker_filesystem_domain | default('cachyos-qcl-local') }}
+STARTER_JOB_ENVIRONMENT = "JULIA_DEPOT_PATH={{ qcl_worker_depot }}"
+STARTER_SETS_HOME_ENV = true
+
+# Per-job tracking и memory bound; CPU shares допускают свободные CPU.
+BASE_CGROUP = htcondor
+CGROUP_MEMORY_LIMIT_POLICY = hard
+DISABLE_SWAP_FOR_JOB = true
+USE_PID_NAMESPACES = true
+# qcl разделяет concurrent jobs: не отмечать его dedicated execute account.
+
+# Для LAN/mDNS используем IPv4, без link-local IPv6 peer addresses.
+ENABLE_IPV4 = true
+ENABLE_IPV6 = false

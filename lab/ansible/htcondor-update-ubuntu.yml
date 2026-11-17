@@ -1,0 +1,61 @@
+---
+- name: Обновить Ubuntu HTCondor штатным APT в обслуживание
+  hosts: qcl_manager:ubuntu_workers
+  become: true
+  gather_facts: true
+  vars:
+    qcl_update_tools: true
+  pre_tasks:
+    - name: Проверить пустую submit очередь manager
+      ansible.builtin.command:
+        argv: [condor_q, -allusers, -af, ClusterId]
+      register: qcl_update_queue
+      changed_when: false
+      when: "'qcl_manager' in group_names"
+    - name: Сохранить работающие задания
+      ansible.builtin.assert:
+        that: qcl_update_queue.stdout | trim == ''
+      when: "'qcl_manager' in group_names"
+    - name: Найти native startd address file
+      ansible.builtin.command:
+        argv: [condor_config_val, STARTD_ADDRESS_FILE]
+      register: qcl_update_startd_path
+      changed_when: false
+    - name: Прочитать native startd address
+      ansible.builtin.slurp:
+        src: '{{ qcl_update_startd_path.stdout | trim }}'
+      register: qcl_update_startd_address
+    - name: Проверить свободный worker
+      ansible.builtin.command:
+        argv: [condor_status, -direct, '{{ (qcl_update_startd_address.content | b64decode).splitlines()[0] }}', -af, State]
+      register: qcl_update_states
+      changed_when: false
+    - name: Не прерывать исполняемые jobs
+      ansible.builtin.assert:
+        that:
+          - qcl_update_states.stdout | trim | length > 0
+          - qcl_update_states.stdout_lines | difference(['Unclaimed', 'Owner', 'Drained']) | length == 0
+  tasks:
+    - name: Запретить новые claims атомарным native drain
+      ansible.builtin.command:
+        argv:
+          - condor_drain
+          - -graceful
+          - -check
+          - '(State =?= "Unclaimed") || (State =?= "Owner") || (State =?= "Drained")'
+          - -exit-on-completion
+          - '{{ (qcl_update_startd_address.content | b64decode).splitlines()[0] }}'
+    - name: Обновить native package выбранного канала
+      ansible.builtin.include_tasks: tasks/htcondor-ubuntu.yml
+    - name: Проверить native конфигурацию
+      ansible.builtin.command:
+        argv: [condor_config_val, -summary]
+      changed_when: false
+    - name: Запустить обновлённые daemon binaries
+      ansible.builtin.systemd_service:
+        name: condor
+        state: restarted
+    - name: Проверить native версию и очередь после обновления
+      ansible.builtin.command:
+        argv: [condor_version]
+      changed_when: false

@@ -1,0 +1,162 @@
+---
+- name: Настроить штатный Open OnDemand для QCL
+  hosts: qcl_manager
+  become: true
+  gather_facts: false
+  pre_tasks:
+    - name: Проверить обязательные значения
+      ansible.builtin.assert:
+        that:
+          - qcl_manager_address is defined
+          - qcl_manager_address is match('^[A-Za-z0-9.-]+$')
+          - qcl_web_htpasswd is defined
+          - qcl_web_htpasswd is match('^qcl:[^\r\n]+$')
+          - qcl_unix_password_hash is defined
+          - qcl_unix_password_hash[0] == '$'
+          - qcl_tls_certificate_file is defined
+          - qcl_tls_key_file is defined
+          - qcl_tls_ca_file is defined
+      no_log: true
+    - name: Проверить существующую локальную учётную запись qcl
+      ansible.builtin.command:
+        argv: [getent, passwd, qcl]
+      register: qcl_account
+      changed_when: false
+    - name: Проверить ожидаемый домашний каталог
+      ansible.builtin.assert:
+        that: qcl_account.stdout.split(':')[5] == '/srv/qcl/home/qcl'
+    - name: Проверить наличие OOD portal generator
+      ansible.builtin.stat:
+        path: /opt/ood/ood-portal-generator/sbin/update_ood_portal
+      register: qcl_generator
+    - name: Требовать уже установленный Open OnDemand
+      ansible.builtin.assert:
+        that: qcl_generator.stat.executable | default(false)
+  tasks:
+    - name: Установить пароль существующей локальной учётной записи
+      ansible.builtin.user:
+        name: qcl
+        password: '{{ qcl_unix_password_hash }}'
+        password_lock: false
+      no_log: true
+    - name: Создать каталоги конфигурации
+      ansible.builtin.file:
+        path: '{{ item }}'
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      loop:
+        - /etc/ood/config/clusters.d
+        - /etc/ood/config/ondemand.d
+        - /etc/ood/config/apps/myjobs/templates/default
+        - /var/www/ood/public
+    - name: Создать каталог TLS материалов
+      ansible.builtin.file:
+        path: /etc/ood/qcl-tls
+        state: directory
+        owner: root
+        group: root
+        mode: '0700'
+    - name: Скопировать серверный сертификат
+      ansible.builtin.copy:
+        src: '{{ qcl_tls_certificate_file }}'
+        dest: /etc/ood/qcl-tls/server.crt
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Скопировать сертификат частного CA
+      ansible.builtin.copy:
+        src: '{{ qcl_tls_ca_file }}'
+        dest: /etc/ood/qcl-tls/ca.crt
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Скопировать закрытый ключ TLS
+      ansible.builtin.copy:
+        src: '{{ qcl_tls_key_file }}'
+        dest: /etc/ood/qcl-tls/server.key
+        owner: root
+        group: root
+        mode: '0600'
+      no_log: true
+    - name: Записать Basic Auth hash пользователя qcl
+      ansible.builtin.copy:
+        dest: /etc/ood/qcl-htpasswd
+        content: "{{ qcl_web_htpasswd }}\n"
+        owner: root
+        group: www-data
+        mode: '0640'
+      no_log: true
+    - name: Записать конфигурацию портала
+      ansible.builtin.template:
+        src: templates/ood-portal.yml.j2
+        dest: /etc/ood/config/ood_portal.yml
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Записать конфигурацию очереди
+      ansible.builtin.template:
+        src: templates/ood-cluster.yml.j2
+        dest: /etc/ood/config/clusters.d/qcl.yml
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Настроить светлую тему dashboard
+      ansible.builtin.copy:
+        dest: /etc/ood/config/ondemand.d/qcl-brand.yml
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          navbar_type: light
+          brand_bg_color: '#ffffff'
+          brand_link_active_bg_color: '#e8eef4'
+          custom_css_files: ['/qcl-light.css']
+          custom_javascript_files: ['/qcl-editor-light.js']
+    - name: Установить светлые стили dashboard
+      ansible.builtin.copy:
+        dest: /var/www/ood/public/qcl-light.css
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          :root { color-scheme: only light; }
+          body, input, select, textarea, button { color-scheme: only light; }
+    - name: Установить manifest стандартного шаблона Job Composer
+      ansible.builtin.copy:
+        src: ../smoke/gui-manifest.yml
+        dest: /etc/ood/config/apps/myjobs/templates/default/manifest.yml
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Установить общий shell payload Job Composer
+      ansible.builtin.copy:
+        src: ../smoke/payload.sh
+        dest: /etc/ood/config/apps/myjobs/templates/default/payload.sh
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Включить требуемые модули Apache
+      ansible.builtin.command:
+        argv: [a2enmod, ssl, headers, auth_basic, authn_file, proxy, proxy_http, proxy_wstunnel, rewrite]
+      register: qcl_a2enmod
+      changed_when: "'Enabling' in qcl_a2enmod.stdout"
+    - name: Отключить стандартный HTTP virtualhost Ubuntu
+      ansible.builtin.command:
+        argv: [a2dissite, 000-default]
+      register: qcl_default_site
+      changed_when: "'Site 000-default disabled' in qcl_default_site.stdout"
+    - name: Сгенерировать конфигурацию портала
+      ansible.builtin.command:
+        argv: [/opt/ood/ood-portal-generator/sbin/update_ood_portal]
+      changed_when: true
+    - name: Проверить синтаксис Apache перед применением
+      ansible.builtin.command:
+        argv: [apache2ctl, configtest]
+      changed_when: false
+    - name: Включить и перечитать конфигурацию Apache
+      ansible.builtin.systemd_service:
+        name: apache2
+        enabled: true
+        state: reloaded

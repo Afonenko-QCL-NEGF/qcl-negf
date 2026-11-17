@@ -1,0 +1,74 @@
+---
+- name: Подготовить и проверить постоянный native Pkg cache
+  hosts: qcl_manager:cachyos_workers:ubuntu_workers
+  become: true
+  gather_facts: true
+  vars:
+    qcl_pkg_home: "{{ qcl_worker_home | default('/srv/qcl/home/qcl' if 'qcl_manager' in group_names else '/var/lib/qcl-worker') }}"
+    qcl_pkg_project: '{{ qcl_pkg_home }}/environments/pkg-smoke'
+  tasks:
+    - name: Найти выбранную или системную Julia без ограничения версии
+      ansible.builtin.command:
+        argv: [sh, -c, 'command -v "$1"', sh, '{{ qcl_julia_executable | default("julia") }}']
+      register: qcl_julia_native
+      changed_when: false
+    - name: Использовать фактический native executable
+      ansible.builtin.set_fact:
+        qcl_julia_executable: '{{ qcl_julia_native.stdout | trim }}'
+    - name: Создать среду пользователя на постоянном диске
+      ansible.builtin.file:
+        path: '{{ qcl_pkg_project }}'
+        state: directory
+        owner: qcl
+        group: qcl
+        mode: '0755'
+    - name: Подготовить зависимости штатным Pkg вне solver job
+      ansible.builtin.command:
+        argv:
+          - systemd-run
+          - --quiet
+          - --wait
+          - --pipe
+          - --collect
+          - '--unit=qcl-pkg-prepare-{{ inventory_hostname }}'
+          - --uid=qcl
+          - --property=MemoryMax=2G
+          - --property=MemorySwapMax=0
+          - --property=CPUQuota=200%
+          - --property=RuntimeMaxSec=600
+          - '--setenv=JULIA_DEPOT_PATH={{ qcl_pkg_home }}/.julia'
+          - --setenv=JULIA_NUM_THREADS=2
+          - --setenv=JULIA_NUM_PRECOMPILE_TASKS=2
+          - --setenv=OPENBLAS_NUM_THREADS=1
+          - '{{ qcl_julia_executable }}'
+          - --startup-file=no
+          - '--project={{ qcl_pkg_project }}'
+          - -e
+          - 'using Pkg; Pkg.add("JSON3"); Pkg.precompile(); Pkg.status()'
+        creates: '{{ qcl_pkg_project }}/Manifest.toml'
+    - name: Проверить чтение кеша без сети во втором процессе
+      ansible.builtin.command:
+        argv:
+          - systemd-run
+          - --quiet
+          - --wait
+          - --pipe
+          - --collect
+          - '--unit=qcl-pkg-offline-{{ inventory_hostname }}'
+          - --uid=qcl
+          - --property=MemoryMax=2G
+          - --property=MemorySwapMax=0
+          - --property=CPUQuota=200%
+          - --property=RuntimeMaxSec=180
+          - '--setenv=JULIA_DEPOT_PATH={{ qcl_pkg_home }}/.julia'
+          - --setenv=JULIA_NUM_THREADS=2
+          - --setenv=OPENBLAS_NUM_THREADS=1
+          - --setenv=JULIA_PKG_OFFLINE=true
+          - --property=IPAddressDeny=any
+          - --property=PrivateNetwork=true
+          - '{{ qcl_julia_executable }}'
+          - --startup-file=no
+          - '--project={{ qcl_pkg_project }}'
+          - -e
+          - 'using JSON3, LinearAlgebra; a=[1.0 2.0; 3.0 4.0]; @assert JSON3.read(JSON3.write((trace=tr(a),))).trace == 5.0; println("Julia ", VERSION, "; depot=", DEPOT_PATH, "; offline JSON3/matrix check passed")'
+      changed_when: false

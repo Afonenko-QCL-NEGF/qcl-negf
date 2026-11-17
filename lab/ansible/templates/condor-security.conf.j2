@@ -1,0 +1,18 @@
+# Native IDTOKENS для daemons; FS для локальных CLI users.
+use SECURITY : get_htcondor_idtokens
+TRUST_DOMAIN = {{ qcl_condor_trust_domain | default('qcl') }}
+UID_DOMAIN = {{ qcl_condor_uid_domain | default('qcl') }}
+SEC_DEFAULT_AUTHENTICATION_METHODS = FS,IDTOKENS
+SEC_DEFAULT_AUTHENTICATION = REQUIRED
+SEC_READ_AUTHENTICATION = REQUIRED
+SEC_CLIENT_AUTHENTICATION = REQUIRED
+SEC_READ_AUTHENTICATION_METHODS = FS,IDTOKENS
+SEC_CLIENT_AUTHENTICATION_METHODS = FS,IDTOKENS
+SEC_DEFAULT_ENCRYPTION = REQUIRED
+SEC_DEFAULT_INTEGRITY = REQUIRED
+ALLOW_DAEMON = {{ qcl_condor_daemon_identity | default('condor@qcl') }}
+ALLOW_NEGOTIATOR = {{ qcl_condor_daemon_identity | default('condor@qcl') }}
+ALLOW_ADMINISTRATOR = {{ qcl_condor_daemon_identity | default('condor@qcl') }},root@{{ qcl_condor_uid_domain | default('qcl') }}
+# WRITE принимает только аутентифицированных principals этого pool.
+ALLOW_WRITE = {{ qcl_condor_daemon_identity | default('condor@qcl') }},qcl@{{ qcl_condor_uid_domain | default('qcl') }},root@{{ qcl_condor_uid_domain | default('qcl') }}
+ALLOW_READ = *@{{ qcl_condor_uid_domain | default('qcl') }}

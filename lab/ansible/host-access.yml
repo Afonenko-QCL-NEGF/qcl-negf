@@ -1,0 +1,137 @@
+---
+- name: Завершить локальные доступы CachyOS одним административным действием
+  hosts: cachyos_workers
+  become: true
+  gather_facts: true
+  vars:
+    qcl_worker_depot: /var/lib/qcl-worker/.julia
+    qcl_worker_cpus: 8
+    qcl_worker_memory: 8192
+  tasks:
+    - name: Найти native config tool через PATH или sibling фактического binary
+      ansible.builtin.shell: |
+        config=$(command -v condor_config_val || true)
+        if [ -z "$config" ]; then
+          version=$(command -v condor_version)
+          config="$(dirname "$(readlink -f "$version")")/condor_config_val"
+        fi
+        test -x "$config"
+        printf '%s\n' "$config"
+      args:
+        executable: /bin/bash
+      register: qcl_native_config_tool
+      changed_when: false
+      check_mode: false
+    - name: Прочитать выбранные paths из native config
+      ansible.builtin.command:
+        argv: ['{{ qcl_native_config_tool.stdout }}', '{{ item }}']
+      loop: [BIN, SBIN, LOG, RELEASE_DIR, LOCAL_CONFIG_DIR, STARTD_ADDRESS_FILE, MASTER_ADDRESS_FILE, DAEMON_LIST]
+      register: qcl_native_paths
+      changed_when: false
+      check_mode: false
+    - name: Не преобразовывать native submit или manager в execute-only
+      ansible.builtin.assert:
+        that:
+          - qcl_native_paths.results[7].stdout | upper | regex_findall('[A-Z_]+') | difference(['MASTER', 'STARTD', 'SHARED_PORT']) | length == 0
+        fail_msg: Существующая роль имеет собственную queue или manager; это не host-access worker conversion.
+    - name: Сохранить native paths без exact-version prefix
+      ansible.builtin.set_fact:
+        qcl_native_bin: '{{ qcl_native_paths.results[0].stdout }}'
+        qcl_native_sbin: '{{ qcl_native_paths.results[1].stdout }}'
+        qcl_native_log: '{{ qcl_native_paths.results[2].stdout }}'
+        qcl_native_own: '{{ qcl_native_paths.results[3].stdout.startswith("/opt/htcondor/") }}'
+        qcl_native_config_dir: '{{ qcl_native_paths.results[4].stdout }}'
+        qcl_native_startd_address_file: '{{ qcl_native_paths.results[5].stdout }}'
+        qcl_native_master_address_file: '{{ qcl_native_paths.results[6].stdout }}'
+    - name: Требовать определённый native config directory
+      ansible.builtin.assert:
+        that:
+          - qcl_native_config_dir.startswith('/')
+          - "',' not in qcl_native_config_dir"
+          - "' ' not in qcl_native_config_dir"
+    - name: Прочитать native локальный startd address
+      ansible.builtin.slurp:
+        src: '{{ qcl_native_startd_address_file }}'
+      register: qcl_startd_address
+      no_log: true
+    - name: Проверить отсутствие исполняемых payload перед обслуживанием
+      ansible.builtin.command:
+        argv: ['{{ qcl_native_bin }}/condor_status', -direct, '{{ (qcl_startd_address.content | b64decode).splitlines()[0] }}', -af, State]
+      register: qcl_host_slots
+      changed_when: false
+    - name: Требовать свободный worker
+      ansible.builtin.assert:
+        that:
+          - qcl_host_slots.stdout | trim | length > 0
+          - qcl_host_slots.stdout_lines | difference(['Unclaimed', 'Owner', 'Drained']) | length == 0
+    - name: Установить штатные клиенты RDP, VNC и SSH
+      ansible.builtin.command:
+        argv: [pacman, -S, --needed, --noconfirm, remmina, freerdp]
+      register: qcl_clients
+      changed_when: "'there is nothing to do' not in qcl_clients.stdout"
+    - name: Установить публичный CA нового лабораторного HTTPS
+      ansible.builtin.copy:
+        src: '{{ qcl_tls_ca_file }}'
+        dest: /etc/ca-certificates/trust-source/anchors/qcl-clean-start.crt
+        mode: '0644'
+      register: qcl_ca
+    - name: Обновить native trust store
+      ansible.builtin.command:
+        argv: [update-ca-trust]
+      when: qcl_ca.changed
+    - name: Перевести worker на проверенное DNS имя manager
+      ansible.builtin.template:
+        src: templates/condor-worker.conf.j2
+        dest: '{{ qcl_native_config_dir }}/20-worker.conf'
+        mode: '0644'
+      register: qcl_worker_address
+    - name: Прочитать native локальный master address
+      ansible.builtin.slurp:
+        src: '{{ qcl_native_master_address_file }}'
+      register: qcl_master_address
+      no_log: true
+    - name: Перечитать native HTCondor конфигурацию
+      ansible.builtin.command:
+        argv: ['{{ qcl_native_sbin }}/condor_reconfig', -addr, '{{ (qcl_master_address.content | b64decode).splitlines()[0] }}']
+      when: qcl_worker_address.changed
+    - name: Проверить существующие CLI links перед own installation
+      ansible.builtin.stat:
+        path: '/usr/local/bin/{{ item }}'
+        follow: false
+      loop: [condor_status, condor_q, condor_submit, condor_rm, condor_history, condor_version, condor_config_val]
+      register: qcl_cli_links
+      when: qcl_native_own | bool
+    - name: Не заменять чужие CLI files или links
+      ansible.builtin.assert:
+        that:
+          - not item.stat.exists or (item.stat.islnk | default(false) and item.stat.lnk_source.startswith('/opt/htcondor/'))
+        fail_msg: /usr/local/bin содержит чужой CLI; системный файл или link не заменяем.
+      loop: '{{ qcl_cli_links.results }}'
+      loop_control:
+        label: '{{ item.item }}'
+      when: qcl_native_own | bool
+    - name: Подключить native HTCondor CLI
+      ansible.builtin.file:
+        src: '{{ qcl_native_bin }}/{{ item }}'
+        dest: '/usr/local/bin/{{ item }}'
+        state: link
+      loop: [condor_status, condor_q, condor_submit, condor_rm, condor_history, condor_version, condor_config_val]
+      when: qcl_native_own | bool
+    - name: Добавить адресные SSH подключения без замены существующих
+      ansible.builtin.blockinfile:
+        path: '{{ qcl_operator_home }}/.ssh/config'
+        marker: '# {mark} QCL clean-start'
+        insertbefore: BOF
+        owner: '{{ qcl_operator_user }}'
+        mode: '0600'
+        block: |
+          Host qcl-condor qcl-admin
+              Hostname {{ qcl_manager_address }}
+              AddressFamily inet
+              IdentityFile {{ qcl_operator_home }}/.ssh/proxmox-iac
+              UserKnownHostsFile {{ qcl_known_hosts_file }}
+              StrictHostKeyChecking yes
+          Host qcl-condor
+              User qcl
+          Host qcl-admin
+              User qcladmin
