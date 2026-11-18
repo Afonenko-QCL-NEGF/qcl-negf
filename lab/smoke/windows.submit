@@ -1,0 +1,20 @@
+# Pass worker=<Machine from condor_status>. Run from a fresh submission directory.
+universe = vanilla
+executable = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+arguments = -NoLogo -NoProfile -NonInteractive -ExecutionPolicy RemoteSigned -File windows-payload.ps1
+transfer_executable = False
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = windows-payload.ps1, challenge.txt
+transfer_output_files = result.json
+getenv = False
+run_as_owner = False
+requirements = (TARGET.OpSys == "WINDOWS") && (TARGET.Arch == "X86_64") && (TARGET.Machine == "$(worker)")
+request_cpus = 1
+request_memory = 256MB
+request_disk = 32MB
+periodic_remove = (CurrentTime - QDate > 120)
+log = windows.$(Cluster).$(Process).log
+output = windows.$(Cluster).$(Process).out
+error = windows.$(Cluster).$(Process).err
+queue 1
