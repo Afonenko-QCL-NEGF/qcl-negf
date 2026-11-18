@@ -3,12 +3,15 @@ $inputHash = (Get-FileHash -LiteralPath 'challenge.txt' -Algorithm SHA256).Hash.
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 $principal = [Security.Principal.WindowsPrincipal]::new($identity)
 $userSid = $identity.User.Value
-$whoami = Join-Path ([Environment]::SystemDirectory) 'whoami.exe'
-$groups = & $whoami /groups /fo csv /nh
-if ($LASTEXITCODE -ne 0 -or -not $groups) {
-    throw "Unable to inspect Windows token groups (whoami exit $LASTEXITCODE)"
+$claims = @($identity.UserClaims)
+$primarySid = @($claims | Where-Object Type -eq ([Security.Claims.ClaimTypes]::PrimarySid))
+if ($primarySid.Count -ne 1 -or $primarySid[0].Value -ne $userSid) {
+    throw 'Unable to confirm Windows token account SID'
 }
-$hasAdministratorsSid = [bool]($groups -match '^"(?:[^"]|"")*","(?:[^"]|"")*","S-1-5-32-544",')
+$groupSidTypes = @([Security.Claims.ClaimTypes]::GroupSid, [Security.Claims.ClaimTypes]::DenyOnlySid)
+$hasAdministratorsSid = [bool]($claims | Where-Object {
+    $_.Type -in $groupSidTypes -and $_.Value -eq 'S-1-5-32-544'
+})
 $isAdministrator = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if ($userSid -notmatch '^S-1-5-21-(\d+-){3}\d+$' -or
     $isAdministrator -or $hasAdministratorsSid) {

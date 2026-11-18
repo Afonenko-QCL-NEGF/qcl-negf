@@ -19,7 +19,7 @@ plan, указатели на зафиксированное поколение,
 
 ## Предварительная проверка и опыт восстановления
 
-Следующее — процедура для будущей native-проверки, не подтверждённая реализация.
+Ниже — процедура контролируемой проверки; её результаты и оставшиеся ограничения приведены далее.
 На доступном manager с текущими разрешёнными credentials для чтения конфигурации
 сначала запросить работающий schedd и проверить файловую систему, не меняя их.
 Локальные defaults TOOL не являются свидетельством конфигурации schedd:
@@ -54,22 +54,89 @@ Manifest и доступность зависимостей в соответс�
 resume повреждённой копии может записать failed в result JSON при CLI exit 0;
 после него повторный общий вызов может уже не иметь `full_state`. Поэтому
 нужно проверять структурированный результат, а не считать обычный exit 0
-научной приёмкой. После self-checkpoint с кодом 85 HTCondor сразу повторно запускает тот же
-executable в прежнем sandbox. Будущий опыт требует gate в обёртке до этого
-повторного входа в Runner: проверить завершённый transfer, замкнутость и хеши
-копии в spool. Только после проверки удалить одноразовый `control/pause.json`,
-чтобы корректное продолжение не запросило паузу повторно. Затем владелец
-контролируемо выполняет vacate/rematch только собственного задания и только на
-точно выбранный второй Linux worker с чистым sandbox. Этот gate и native
-сценарий пока не реализованы и не проверены. Проверить ту же постановку, бюджет итераций и
-непрерывность истории; до подтверждения сохранить прежний пригодный комплект.
-Пока native transfer, spool readback и межузловое восстановление не измерены.
+научной приёмкой. В проверенной обёртке после локальной проверки закрытой
+генерации удаляется одноразовый `control/pause.json`, затем создаётся tar и
+возвращается код 85. При повторном запуске на том же worker обёртка ожидает
+управляемого выселения и не входит повторно в Runner. Manager отдельно читает
+копию из spool и проверяет её хеш перед точечным vacate собственного задания.
+На выбранном втором worker обёртка отклоняет восстановленный архив с оставшимся
+`control/pause.json` и проверяет комплект до resume (`checkpoint-worker-v3.sh`).
+Проверять ту же постановку, бюджет итераций и непрерывность истории; до
+подтверждения сохранять прежний пригодный комплект.
+
+После восстановления доступа native preflight HTCondor 26.0.1 сообщил
+`SPOOL=/srv/qcl/condor/spool` и два свободных Linux worker; private receipt
+`linux-native/preflight-live.log` в `.build/issue135-followup-2026-11-18/`.
+Это не проверка checkpoint transfer или восстановления. При запуске manager
+опубликовал loopback-адрес; после проверки пустой очереди всех пользователей,
+стабильной LAN и смонтированного SPOOL перезапущен только его `condor.service`.
+Конфигурацию и сеть не меняли (`service-rebind-receipt.log`).
+
+Native задание `25.0` на первом Linux worker вернуло checkpoint exit code 85;
+HTCondor показал `NumCkpts=1`. Закрытый tar размером 2 447 360 байт был
+прочитан из spool: его SHA-256 совпал с копией из вывода задания
+(`1403b653d28c6bd4487160b7f8b480efd3c33ba05321e09546404de31764a3ef`).
+Проверка комплекта подтвердила `paused`, attempt 1, последнюю внутреннюю
+итерацию 1 и хеши артефактов (`closed-checkpoint-25.0.log`). После повторной
+регистрации второго Linux worker свежая проба передачи `26.0` завершилась с
+exit 0 и показала Julia 1.13.4 (`handoff-worker-guard.log`); это не доказывает
+совместимость полного окружения или восстановление checkpoint. Владелец изменил
+требование только задания `25.0` на второй worker и выполнил его fast vacate
+после повторной проверки spool (`handoff-vacate-25.0.log`). Затем `25.0` был назначен на второй worker и начал работу в новом scratch;
+прочитан восстановленный указатель attempt 1 со статусом `paused`
+(`resume-live-25.0.log`). На втором worker подтвердились хеш tar и проверка
+commit. Совпали версия Julia, SHA-256 Manifest и заявленные ревизии Core и Runner.
+Attempt 2 начал инициализацию из checkpoint, но
+завершился `failed` с `POINT_FAILED: ArgumentError: restart scattering operators
+differ (Khat, qK, or F_LO)` без fallback и нового commit; обёртка завершилась
+кодом 42 без повтора (`NumJobStarts=2`, `resume-terminal-25.0.log`). Численное
+продолжение не произошло; непрерывность истории через итерацию 2 не измерена.
+Диагностика только метаданных в заданиях `29.0/29.1` показала: исходная
+Ubuntu при настройках по умолчанию воспроизводит сохранённую identity, а
+второй worker отличается во всех каналах операторов. Фиксированные `generic`
+и `Nehalem` на двух установленных сборках Julia также не устранили различия;
+хеши бинарных файлов различались при одинаковой версии Julia
+(`kernel-probe-poll.log`). Это не устанавливает причину. Setup-only задания `31.0/31.1` с одним архивом Julia, совпадающими
+хешами пяти бинарных файлов, Manifest, Core, Runner и frozen plan, одним
+потоком, `-C generic` и фактическим Nehalem OpenBLAS дали идентичную полную
+identity операторов на обоих workers (`shared-kernel-result.log`). Она
+отличается от identity старого checkpoint `25.0`, поэтому не подтверждает
+его совместимость. Новое задание `32.0` с этой средой запущено отдельно;
+его закрытый checkpoint прочитан и проверен в spool: tar 2 498 560 байт,
+SCBA 1, пять хешей и профиль операторов (`shared-runtime-spool-readback.log`).
+После проверки владелец изменил только требование worker задания `32.0` и
+выполнил fast vacate (`shared-runtime-queue-only-handoff.log`). Задание было назначено второму worker в новом scratch; attempt 2 продолжил
+расчёт из checkpoint и достиг SCBA 2/2. То же задание завершилось с exit 0,
+двумя стартами и статусами series `completed_with_warnings`, point `completed`
+при отсутствии сходимости (`shared-runtime-resume-live.log`,
+`shared-runtime-terminal.log`). Независимая проверка подтвердила хеши артефактов, цепочку commit к spool,
+неизменный бюджет SCBA 2 и инициализацию из checkpoint без fallback. Координаты
+истории продолжились с [1] до [1, 2], первая строка совпала побитно во всех
+19 столбцах `/scba/*` (`shared-runtime-terminal.log`). Этот результат не является
+научной приёмкой. Сценарий
+использовал управляемый vacate, а не фактическую потерю хоста. На втором
+worker действовал лимит памяти 5 GiB на уровне cgroup, по одному потоку
+Julia и BLAS, без жёсткой CPU quota (`shared-runtime-dell-cgroup.log`). Для
+воспроизведения именно этого контролируемого опыта в приватном `linux-native`
+сохранены `shared-runtime-checkpoint-worker.sh`, `qualified-checkpoint-tools.py`
+и `shared-runtime-checkpoint.submit`; профиль — общий архив Julia 1.13.4,
+`-C generic`, Nehalem OpenBLAS и один поток Julia/BLAS.
+Указанные журналы находятся в приватном каталоге
+`linux-native` выше; это не опубликованные артефакты.
+
+Отдельный native negative control `28.0` использовал обёртку
+`checkpoint-worker-v3.sh` из опыта `25.0` и синтетический текстовый marker с неверным digest: передача входа и выхода
+завершилась, проверка отклонила marker, задание завершилось кодом 42 после
+одного старта, `NumCkpts=0`, без повтора. Julia и solver не запускались;
+это не native проверка повреждённого HDF5
+(`linux-native/synthetic-terminal-and-native-kernel-meta.log`).
 
 Локальные fixture-тесты Runner прошли 90/90, локальный CLI достиг паузы на
 SCBA 1/2. Повреждённая копия при публичном CLI resume дала series/point
 `failed/failed`, initialization `checkpoint` и `POINT_FAILED` с причиной
-`artifact byte count differs`, без fallback в solver; это отдельное свидетельство
-от fixture-проверки digest. Полный локальный tar восстановлен в новые каталоги: чистый CLI resume с тем же frozen plan
+`artifact byte count differs`, без fallback в solver. Отдельное повреждение
+без изменения размера также дало `failed/failed`, initialization `checkpoint`
+и `POINT_FAILED / ArgumentError: artifact digest differs`. Полный локальный tar восстановлен в новые каталоги: чистый CLI resume с тем же frozen plan
 продолжил attempt 1 `paused` с SCBA 1 в attempt 2 `completed_with_warnings /
 completed` (unconverged), initialization `checkpoint`, с историей SCBA [1, 2]. Префикс
 совпал по 19 HDF5 массивам, пять хешей проверены по commit. Оба CLI вызова
@@ -78,7 +145,7 @@ completed` (unconverged), initialization `checkpoint`, с историей SCBA 
 `local-cli-pause.json`, `local-cli-live.jsonl`, `local-cli-resume-live.jsonl`,
 `local-cli-checkpoint-sha256.log`, `local-cli-verification.log`,
 `local-cli-exits.log`;
-проверки недоступного manager — `preflight-live.log`, `preflight-numeric.log`,
+проверки недоступности manager до восстановления доступа — `preflight-live.log`, `preflight-numeric.log`,
 `preflight-owned-management.log`, `private-route-summary.log`. Это локаторы
 в приватном рабочем каталоге, а не публичные артефакты.
 
@@ -105,8 +172,7 @@ phase begin/end не заменяют проекцию. Поэтому timestamp
 [источник указателя Runner](https://github.com/Afonenko-QCL-NEGF/QCLNEGFRunner.jl/blob/48f31e95d550f0aaeaece6cddf1267810ea4715c/src/composition/scientific_execution.jl#L279-L316).
 Локально во время работающего CLI после resume наблюдались `stage=scba`,
 `iteration=2/2`, безразмерные `r_K` и `r_Σ` и `updated_unix`
-(`local-cli-resume-live.jsonl`). Последующее событие заменило эти метрики. Доступность
-актуальных невязок через HTCondor во время задания не проверена.
+(`local-cli-resume-live.jsonl`). Последующее событие заменило эти метрики.
 
 В возвращённом результате `20.0` указатель содержал `stage=poisson`,
 `iteration=0` и только метрику `J`; конечный `progress.yaml` содержал
@@ -119,16 +185,22 @@ SHA-256 `894b8252fad99030dd2782340c6c10e3f99c8739a864c1cc9fd35e9f4641d11d`.
 
 Возможный штатный путь чтения во время задания —
 [`condor_tail`](https://htcondor.readthedocs.io/en/26.0/man-pages/condor_tail.html)
-для конкретного файла, явно перечисленного в `transfer_output_files`. Его работа
-с вложенным путём одновременно с передачей каталога и фактическая доступность
-`current_point.json` в пуле ещё не проверены.
+для конкретного файла, явно перечисленного в `transfer_output_files`. В задании
+`25.0` он прочитал снимок с этапом SCBA, итерацией и timestamp во время работы
+на первом worker (`native-v3-progress-tail.log`); метрик невязки в этом снимке
+не было. В отдельном задании `30.0` обычный владелец очереди прочитал через
+`condor_tail` при `JobStatus=2` снимок SCBA 1/2 с `updated_unix` и
+безразмерными `r_D`, `r_K`, `r_Σ`, `r_λ`. Файл верхнего уровня
+`progress-scba.json` формировался из `current_point.json` при наличии метрик
+и был явно перечислен в output (`stationary-progress-live.log`). После
+восстановления `32.0` тот же оператор прочитал снимок SCBA 2/2, attempt 2,
+с невязками и временем (`shared-runtime-resume-live.log`). Метрики зависят
+от события, а по одному снимку нельзя установить непрерывную работу.
 
-В проверенном задании HTCondor `20.0` результат возвращался при `ON_EXIT`;
-доступность снимка вне worker во время исполнения не измерена. Свежая проверка
-manager не состоялась: mDNS не разрешился, а прежний SSH-маршрут ответил
-`No route to host`. Признак живого процесса также не проверен; один снимок
-не доказывает liveness.
+Проверка `20.0` охватывала возврат результата через `ON_EXIT`. Чтение
+живого снимка в `30.0` и `32.0` использовало `condor_tail` во время
+работы задания.
 
-Подтверждён обычный возврат файлов через HTCondor. Сценарий сохранения
-checkpoint в spool, потери worker и продолжения на другом узле остаётся
-открытым. [Отчёт сквозной проверки](../docs/implementation/stationary-checkpoint-2026-11-18.md).
+Подтверждён обычный возврат файлов через HTCondor. Передача закрытого checkpoint в spool и его readback подтверждены для `25.0`;
+первый профиль дал контролируемый отказ, а новый общий профиль позволил
+заданию `32.0` продолжиться на другом узле с проверенным префиксом истории. [Отчёт сквозной проверки](../docs/implementation/stationary-checkpoint-2026-11-18.md).

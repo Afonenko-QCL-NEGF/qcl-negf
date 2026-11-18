@@ -1,4 +1,4 @@
-# Windows worker: подготовка, не готовая интеграция
+# Подключение Windows worker к пулу HTCondor
 
 Каркас рассчитан на принадлежащую QCL Windows-машину; при наличии системной команды condor_version.exe установленный HTCondor используется без MSI и проверки конкретной версии. До применения: настроить WinRM/PSRP по TLS с доверенным сертификатом и отдельным private inventory администратора, установить ansible.windows/community.windows и Python transport на controller, подтвердить владение QCL VM, резерв CPU/RAM и адрес менеджера, подготовить private daemon IDTOKEN condor@qcl, выданный менеджером и разрешённый его конфигурацией. Для взаимной проверки IDTOKENS нужен native pool signing key; play передаёт его отдельно с SYSTEM/Administrators ACL и no_log. Это доверие полноценного узла пулу, а не простая проверка публичным ключом. При повторном запуске принадлежащие QCL каталоги credentials проверяются по владельцу и ACL; неизвестный владелец или reparse point блокирует изменение конкретного пути. Проверить срок token, фактическую NTFS ACL, другие действующие firewall rules, схему имён и локальные каталоги. MSI может автоматически запускать службу — MSI использует RUNJOBS=A и подготовленную заранее локальную конфигурацию; на реальной машине подтвердить, что LOCALCONFIG действительно загружен и закрытые сетевые настройки применены при первом старте.
 
@@ -24,15 +24,17 @@ Julia в Windows: сначала найти и использовать рабо
 SCM показал службу `Condor` в состоянии `Running` под `LocalSystem`.
 В списке процессов были `condor_master`, `condor_procd` и `condor_shared_port`;
 `condor_startd` отсутствовал. Проба в изолированной VM завершилась ошибкой
-связи с локальным collector. Установщик и служба проверены на этом образе,
-применение playbook и интеграция с QCL pool остаются непроверенными.
+связи с локальным collector. Эта попытка проверила установщик и службу
+на отдельном образе.
 
-При повторной проверке с ноутбука имя менеджера из private inventory
+До восстановления маршрута к менеджеру 18 ноября 2026 имя менеджера
+из private inventory на ноутбуке
 не разрешалось. Последний известный IPv4 вернул `No route to host` на SSH/22
 и TCP/9618. В inventory есть локальная ссылка на POOL signing key. Наличие
 файла не устанавливает соответствие работающему пулу или пригодность daemon
-IDTOKEN, а действующего Windows host entry в этом inventory нет. Подключение
-worker, взаимная аутентификация и Windows job не проверены. Снимок Windows
+IDTOKEN. В inventory отсутствовал действующий Windows host entry. Тогда
+проверки подключения worker, взаимной аутентификации и Windows job ещё
+ожидали восстановления маршрута. Снимок Windows
 остановлен, исходный диск использовался как read-only backing file. Закрытые
 журналы сохранены в `.build/issue135-followup-2026-11-18/windows/`
 (`guest-install-attempt2.log`, `pool-diagnose.log`, `single-vm-smoke.err`,
@@ -61,11 +63,14 @@ worker, взаимная аутентификация и Windows job не про
 
 2. На клоне проверить загруженные local config, итоговые `DAEMON_LIST` и
    `START`, управление через локальную NTSSPI, ACL credentials и состояние
-   `condor_startd`. Подтвердить IDTOKEN-связь в обе стороны. С manager проверить,
-   что тот же clone виден в `condor_status -af Machine OpSys Arch Name` как
-   `WINDOWS X86_64`. Сохранить соответствие `Machine`, имени компьютера и
-   Windows endpoint в закрытом журнале. Наличие одной записи collector не
-   подтверждает обратный маршрут для starter и transfer.
+   `condor_startd`. С manager сверить `Machine`, `OpSys`, `Arch` и `MyAddress`
+   через `condor_status`. Для клона за NAT проверить запись `CCBID` в
+   `MyAddress`, достижимость адреса schedd из гостя и выполнить с manager
+   `condor_ping -type startd -name "$worker" -verbose READ` с действующим
+   daemon IDTOKEN. Имя `worker` взять из `Machine` объявления точного
+   `startd`. Сохранить сведения об IDTOKENS, шифровании и целостности, а
+   также соответствие `Machine` имени компьютера в закрытом журнале.
+   Доступность starter и двустороннюю передачу файлов проверяет задание.
 
 3. После проверки связи запустить с действующего submit host как обычный
    оператор очереди. Ввести абсолютный путь к checkout и точное значение
@@ -118,9 +123,14 @@ worker, взаимная аутентификация и Windows job не про
    )
    ```
 
-   Сверить `Hostname` с Windows-клоном, а `User` и `UserSid` — с
-   идентичностью временного пользователя по StarterLog для того же JobID.
-   Отсутствие этого свидетельства оставляет slot identity непроверенной.
+   Сверить `Hostname` с Windows-клоном и имя временного пользователя
+   из `User` со StarterLog для того же JobID. Сверить `UserSid` с SID
+   этой учётной записи из гостевой Windows. Сохранить оба свидетельства
+   до очистки клона.
+   Скрипт сверяет SID пользователя с `PrimarySid` текущего токена,
+   проверяет роль Administrators и ищет SID Administrators среди
+   включённых и deny-only групп в `WindowsIdentity.UserClaims`.
+   [Реализация .NET Framework](https://github.com/microsoft/referencesource/blob/main/mscorlib/system/security/principal/windowsidentity.cs#L1234).
    Проба ограничена одним заданием на 1 CPU, 256 MiB RAM, 32 MiB scratch
    с удалением по достижении 120 секунд со времени постановки; выполнение
    политики зависит от её интервала проверки в schedd. При задержке
@@ -130,6 +140,46 @@ worker, взаимная аутентификация и Windows job не про
    `windows.submit` проверен локальным `condor_submit -dry-run` HTCondor
    26.0.1. В полученном ClassAd проверены требования `OpSys`, `Arch` и точное
    `Machine`, `RunAsOwner = false` и настройки transfer. Синтаксис PowerShell
-   проверен локальным парсером. Windows slot, политика
-   запуска PowerShell, передача файлов и cleanup по этой инструкции ещё
-   требуют нативной проверки.
+   проверен локальным парсером.
+
+## Нативные пробы через общий пул 18 ноября 2026
+
+На одноразовом Windows 10 x64 клоне официальный HTCondor 26.0.1
+зарегистрировал точный `startd` с `OpSys = WINDOWS`, `Arch = X86_64` и
+адресом CCB. Обратный `condor_ping READ` с manager прошёл с
+аутентификацией IDTOKENS, целостностью и шифрованием AES. Этот запуск
+использовал прямую настройку клона. SHA256 MSI совпал на хосте и в госте.
+Windows определила Authenticode как `NotSigned`. Проверка Ansible playbook,
+Julia, Pkg и численного расчёта требует отдельных опытов.
+
+Первое задание `27.0` получило входные файлы, а `StarterLog.slot1_1`
+зафиксировал успешный запуск Windows PowerShell под `condor-slot1_1`.
+PowerShell завершился с кодом 1 на проверке групп Windows-токена.
+`stderr` содержит диагностическое сообщение скрипта об отсутствии
+данных `whoami` и кода завершения команды. Журнал не устанавливает
+причину этого поведения. `result.json` не был создан, поэтому проверка
+обратной передачи результата, SID и SHA256 не завершилась. Schedd
+перевёл задание в Hold из-за отсутствующего файла. Оператор сохранил
+историю и удалил это задание. После остановки Condor проверено
+отсутствие обоих файлов credentials, затем удалён одноразовый слой в RAM.
+
+Закрытые журналы этой попытки сохранены в
+`.build/issue135-followup-2026-11-18/windows-native/`.
+`fresh-daemon-ping.private.log` содержит данные CCB-аутентификации,
+`fresh-job-27.0-terminal.private.log` содержит `StarterLog.slot1_1`,
+`fresh-cleanup.private.log` содержит результат очистки.
+
+После замены `whoami` на `WindowsIdentity.UserClaims` повторная проба
+на новом одноразовом клоне завершилась успешно. Schedd завершил задание
+`33.0` с кодом 0 и одним запуском. `StarterLog.slot1_1` подтвердил
+имя временного пользователя и успешную обратную передачу файлов.
+SID пользователя в `result.json` совпал с SID локальной учётной записи,
+зафиксированным в Windows во время работы задания, и с событиями
+Windows Security 4624 и 4634. Обе проверки прав администратора вернули
+`false`. SHA256 входного файла совпал со значением из результата, а
+SHA256 возвращённого `result.json` совпал со значением из `stdout`.
+Маркеры обоих стандартных потоков получены. После завершения задания
+остановлена служба, проверено отсутствие credentials и удалён второй
+одноразовый слой в RAM. Журналы в `windows-native/attempt-02/` содержат
+проверку в `independent-verdict.log` и свидетельства в
+`job-33.0-starter.private.log`, `slot-sid.private.log` и `cleanup.private.log`.
