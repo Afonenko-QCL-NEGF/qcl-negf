@@ -1,0 +1,10 @@
+observable,subband,field_kV_cm,lattice_temperature_K,time_ps,value,unit,source,figure
+equivalent_temperature,upper_lasing,21,50,100,162,K,Jonasson2016,8
+equivalent_temperature,lower_lasing,21,50,100,92,K,Jonasson2016,8
+equivalent_temperature,extractor,21,50,100,172,K,Jonasson2016,8
+equivalent_temperature,injector,21,50,100,203,K,Jonasson2016,8
+occupation_weighted_temperature,four_reported_subbands,21,50,100,159,K,Jonasson2016,8
+occupation_relative_to_upper,upper_lasing,21,50,,1.0,relative,Jonasson2016,4
+occupation_relative_to_upper,lower_lasing,21,50,,0.39,relative,Jonasson2016,4
+occupation_relative_to_upper,extractor,21,50,,0.60,relative,Jonasson2016,4
+occupation_relative_to_upper,injector,21,50,,0.33,relative,Jonasson2016,4
