@@ -78,12 +78,16 @@ coefficients affect L/G together and preserve the spectral jump.
 function direct_impurity(p, source, requested, a, c; workers=1, tile=12)
     size(source) == (p.r^2,2,p.ne,p.nk,length(LT.COLLISION_CHANNELS)) ||
         throw(DimensionMismatch("source must contain the five packed channels"))
+    total = dropdims(sum(source; dims=5); dims=5)
+    anchor = dropdims(sum(p.const_by_channel; dims=4); dims=4)
+    return direct_convolution(p,total,anchor,requested,a,c;workers,tile)
+end
+
+function direct_convolution(p,total,anchor,requested,a,c;workers=1,tile=12)
     workers > 0 && tile > 0 || throw(ArgumentError("nonpositive worker count or energy tile"))
     0 <= a <= 1 && 0 <= c <= 1 || throw(ArgumentError("invalid charge pair coefficients"))
     layout = common_queries(requested)
     energies = layout.queries
-    total = dropdims(sum(source; dims=5); dims=5)
-    anchor = dropdims(sum(p.const_by_channel; dims=4); dims=4)
     fields = Array{ComplexF64}(undef,p.r,p.r,3,length(energies),p.nk)
     ranges = [lo:min(lo+tile-1,length(energies)) for lo in 1:tile:length(energies)]
     parallel = min(workers, Threads.nthreads(:default), length(ranges))
