@@ -1,0 +1,275 @@
+{
+  "attempt": "wide54-pod9",
+  "status": "max_iterations",
+  "quality": "unresolved",
+  "scientific_acceptance": false,
+  "maps_recorded": 96,
+  "strict_rows": 0,
+  "identity": {
+    "case_sha256": "1fa2f48be380472d581bf816dc1502f08c11d73dc1cfaba263be8ba626f92bbf",
+    "core_commit": "e171caa60cce676c6c4238dd671e7c527f2bd977",
+    "core_tree": "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8",
+    "device_sha256": "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502",
+    "discrete_doped_thickness_nm": 4.878888888888889,
+    "driver_sha256": "0b53a06fcdaa25d8ace2e454c1b1482bc63cb090fbc1b34b90c8df535f160187",
+    "effective_basis_localization": "bloch_snapshot_pod",
+    "estimated_peak_bytes": 12339368128,
+    "field_bytes": 128315664,
+    "integrated_donor_sheet_m_minus_2": 300000000000000.0,
+    "julia_version": "1.13.4",
+    "manifest_sha256": "da0780fbe150c0e16e9fedf3566a1971095642f14f57f32524b52f430a4adb65",
+    "planned_budget_bytes": 16106127360,
+    "spatial_layer_cell_counts": [
+      14,
+      29,
+      8,
+      27,
+      14,
+      18,
+      16,
+      18
+    ],
+    "trust_energy_bounds_meV": [
+      -140.0,
+      3740.0
+    ],
+    "algorithm": {
+      "anderson_damping": 1.0,
+      "anderson_history_depth": 5,
+      "anderson_regularization": 1e-12,
+      "contraction": "dense_blas",
+      "elastic_retarded": "direct_green",
+      "embedding": "finite_chain",
+      "embedding_periods": 4,
+      "energy_shift": "sparse_plan",
+      "hilbert": "product_integration",
+      "kernel_build": "direct",
+      "localization": "pzp",
+      "low_rank_maximum_rank": 0,
+      "low_rank_relative_tolerance": 0.0,
+      "mixing": "linear",
+      "occupation_normalization": "paired_convex",
+      "retarded_real_part": "kramers_kronig",
+      "self_energy_structure": "full",
+      "solver_backend": "production",
+      "transverse_momentum": "resolved"
+    },
+    "effective_basis_construction": {
+      "basis_method": "bloch_snapshot_pod",
+      "basis_rank": 9,
+      "frozen_adapter_sha256": "abd4f904012ea0c3c805a594d55b9aba1e77c637cf7087c04aae3bf2744acf6a",
+      "max_principal_angle_rad": "unbounded",
+      "pzp_translation_diagnostics": "inapplicable",
+      "refinement_identity": "fath-cbo149-unbounded-pod7-r9-v1",
+      "train_bands": 7,
+      "train_phase_count": 24,
+      "train_voltage_mv": 0
+    },
+    "strict_thresholds": {
+      "r_A": 1e-09,
+      "r_C": 1e-08,
+      "r_D": 1e-11,
+      "r_J": 1e-06,
+      "r_K": 1e-08,
+      "r_P": 1e-11,
+      "r_PSD": 1e-10,
+      "r_U": 1e-07,
+      "r_caus": 1e-10,
+      "r_edge": 1e-06,
+      "r_imag": 1e-10,
+      "r_n": 1e-07,
+      "r_neutral": 1e-10,
+      "r_obs": 0.0001,
+      "r_power": 0.0001,
+      "r_roundoff": 1e-10,
+      "r_sum": 0.001,
+      "r_tail": 1e-06,
+      "r_Σ": 1e-08,
+      "r_ζ": 1e-10,
+      "r_λ": 1e-08
+    }
+  },
+  "resolved": {
+    "basis_method": "refined_bloch_pod_rank9",
+    "basis_sha256": "8e9eb862346d47e4cdc6f35ed6ff19d3738e2c06afe92b3b238dbc73b45c1293",
+    "dark": true,
+    "electron_electron": "none",
+    "field_kV_cm": 12.297882031427921,
+    "period_nm": 43.91000000000001,
+    "q_LO_nm_inverse": 0.2,
+    "q_impurity_nm_inverse": 0.2,
+    "scattering_channels": [
+      "LO",
+      "acoustic",
+      "impurity",
+      "IFR",
+      "alloy"
+    ],
+    "voltage_mV": 54.00000000000001,
+    "spectral_window": {
+      "coupling_margin": 22.890763750276683,
+      "estimate": "local_poles_not_interacting_spectrum",
+      "local_maximum": 16.938259053142666,
+      "local_minimum": -0.26248977528857964,
+      "local_spectrum_covered": true,
+      "sampled_maximum": 40.0,
+      "sampled_minimum": -4.0,
+      "trusted_local_spectrum_covered": true,
+      "trusted_maximum": 37.4,
+      "trusted_minimum": -1.4
+    }
+  },
+  "first": {
+    "ν": 1.0,
+    "outer": 0.0,
+    "J": 100941391.40004241,
+    "r_Σ": 630.3631369908377,
+    "r_K": 7246.71905755098,
+    "r_λ": 0.9978311024967007,
+    "r_D": 1.3345088158624855e-16,
+    "r_A": 3.718962475073213e-14,
+    "r_PSD": 0.0,
+    "r_caus": 0.0,
+    "r_roundoff": 3.8620926968545103e-16,
+    "r_Jchange": "inf",
+    "r_population": "inf",
+    "limiting_ratio": "inf"
+  },
+  "last": {
+    "ν": 96.0,
+    "outer": 0.0,
+    "J": 12789545.387893852,
+    "r_Σ": 0.0659522831152256,
+    "r_K": 0.04299917504341041,
+    "r_λ": 0.004740918298644647,
+    "r_D": 1.3922936688039133e-16,
+    "r_A": 5.816776027411844e-15,
+    "r_PSD": 0.11818571017323062,
+    "r_caus": 1.2844012290763892e-16,
+    "r_roundoff": 3.7829629651482537e-16,
+    "r_Jchange": 0.007110480060583916,
+    "r_population": 0.002483055169906698,
+    "limiting_ratio": 1181857101.7323062,
+    "limiting_metric": "r_PSD",
+    "J_plus_A_cm2": 1278.9545387893852
+  },
+  "best_each_independently": {
+    "r_Σ": {
+      "row": 96,
+      "value": 0.0659522831152256
+    },
+    "r_K": {
+      "row": 96,
+      "value": 0.04299917504341041
+    },
+    "r_λ": {
+      "row": 85,
+      "value": 0.00017738592982041723
+    },
+    "r_Jchange": {
+      "row": 43,
+      "value": 0.00016267492566123863
+    },
+    "r_population": {
+      "row": 59,
+      "value": 0.0017622960671022623
+    }
+  },
+  "last_16_scalar_span": {
+    "J": [
+      12789545.387893852,
+      13955828.358534882
+    ],
+    "r_Σ": [
+      0.0659522831152256,
+      0.14931122833484956
+    ],
+    "r_K": [
+      0.04299917504341041,
+      0.1272618684282963
+    ],
+    "r_λ": [
+      0.00017738592982041723,
+      0.004740918298644647
+    ]
+  },
+  "terminal_observables": {
+    "J_plus_out_A_cm2": 1278.9545387893852,
+    "J_minus_out_A_cm2": -1465.7743693657715,
+    "boundary_continuity_relative": 0.12745469867727438,
+    "bond_J_average_A_cm2": 92.00049024595394,
+    "bond_J_min_A_cm2": 62.767142949642285,
+    "bond_J_max_A_cm2": 146.88651239888068,
+    "sheet_trace_m_minus_2": 299999999999996.44,
+    "signed_particle_relative": 0.0023919886735396276,
+    "mixed_power_balance_relative": 1.0
+  },
+  "largest_fresh_channels": [
+    {
+      "channel": "embedding_minus",
+      "component": "lesser",
+      "residual_absolute": 2.1773371659580993,
+      "residual_relative": 0.06595228311522672,
+      "residual_scale": 33.013825497959246
+    },
+    {
+      "channel": "alloy",
+      "component": "lesser",
+      "residual_absolute": 6.867420057498547e-05,
+      "residual_relative": 0.06295960841485085,
+      "residual_scale": 0.0010907660054340024
+    },
+    {
+      "channel": "embedding",
+      "component": "lesser",
+      "residual_absolute": 2.192165669633656,
+      "residual_relative": 0.06173893297387109,
+      "residual_scale": 35.50702229598648
+    },
+    {
+      "channel": "acoustic",
+      "component": "lesser",
+      "residual_absolute": 2.143291072385076e-06,
+      "residual_relative": 0.05303975319171181,
+      "residual_scale": 4.040914489378878e-05
+    },
+    {
+      "channel": "IFR",
+      "component": "lesser",
+      "residual_absolute": 0.00042627014061775206,
+      "residual_relative": 0.04761628196876224,
+      "residual_scale": 0.008952192884293702
+    },
+    {
+      "channel": "LO",
+      "component": "lesser",
+      "residual_absolute": 0.0005735438883484793,
+      "residual_relative": 0.03312444213733404,
+      "residual_scale": 0.017314824079760604
+    }
+  ],
+  "sampled_gamma_over_dE_q10": 4.522585499618006,
+  "sampled_gamma_over_dE_q50": 9.538427146345994,
+  "sampled_gamma_over_dE_q90": 30.47497756260393,
+  "sampled_spectral_weight_underresolved": 0.0002940631009915243,
+  "lo_boundary_occupied_fraction": 7.169910188151819e-15,
+  "lo_boundary_spectral_fraction": 4.197239254121489e-18,
+  "field_boundary_occupied_fraction": 1.1446365422072239e-14,
+  "field_boundary_spectral_fraction": 6.701026565532166e-18,
+  "elapsed_seconds": 863.3994123150005,
+  "output_bytes": 3597631962,
+  "exit_code": 0,
+  "memory_peak_GiB": 12.412761688232422,
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+  "phase_median_after_warmup_seconds": {
+    "candidate_assembly": 0.065859422,
+    "candidate_embedding": 1.665313075,
+    "candidate_scattering": 1.7660713330000002,
+    "checkpoint_request": 0.000138806,
+    "dyson": 0.37637889100000005,
+    "mixing": 0.172863614,
+    "observables": 0.16252798100000002,
+    "physics_markers": 2.301475936,
+    "residuals": 1.6786416620000002
+  }
+}

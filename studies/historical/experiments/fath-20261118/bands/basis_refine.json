@@ -1,0 +1,408 @@
+{
+  "fd_window_periods": 7,
+  "fd_voltage_mv": 54.0,
+  "target_pair_definition": "full FD states with central probability >=0.85 and E strictly between 0 and 20 meV at CBO149",
+  "native_basis_anchor": {
+    "nb": 7,
+    "p_basis": 3
+  },
+  "sorting": [
+    "descending smaller principal squared cosine",
+    "ascending splitting error",
+    "ascending peak Bloch error"
+  ],
+  "proposed_spectral_goals": {
+    "pair_principal_low_squared_min": 0.95,
+    "energy_and_gap_error_mev_max": 0.1
+  },
+  "ranked_static_pass": [
+    {
+      "nb": 12,
+      "p_basis": 5
+    },
+    {
+      "nb": 12,
+      "p_basis": 4
+    },
+    {
+      "nb": 12,
+      "p_basis": 3
+    },
+    {
+      "nb": 14,
+      "p_basis": 2
+    },
+    {
+      "nb": 5,
+      "p_basis": 5
+    },
+    {
+      "nb": 7,
+      "p_basis": 3
+    }
+  ],
+  "count": 7,
+  "static_pass_count": 6,
+  "all_targets_pass_count": 0,
+  "cases": [
+    {
+      "nz": 192,
+      "nb": 12,
+      "p_basis": 5,
+      "e171_pass": true,
+      "failed_basis_gate": [],
+      "e171_error": null,
+      "r_translation": 0.029111921222113965,
+      "r_translation_nearest": 0.0005809808857611048,
+      "r_translation_two_pairs": 0.0007119720754143014,
+      "overlap_matrix_min_eig": 0.727169941956403,
+      "fd_reference_pair_mev": [
+        6.393417606741904,
+        10.823197312295525
+      ],
+      "fd_reference_pair_idx": [
+        19,
+        20
+      ],
+      "fd_central_probability": [
+        0.9794530628717287,
+        0.952681096909888
+      ],
+      "fd_reference_split_mev": 4.429779705553621,
+      "pzp_pair_mev": [
+        7.493847357059657,
+        18.036313412160858
+      ],
+      "pair_indices_1based": [
+        19,
+        20
+      ],
+      "pair_signed_errors_mev": [
+        1.100429750317753,
+        7.213116099865333
+      ],
+      "pair_split_mev": 10.542466055101201,
+      "pair_split_abs_error_mev": 6.11268634954758,
+      "pair_principal_lo_sq": 0.9005462723488717,
+      "pair_principal_hi_sq": 0.9991970672458876,
+      "full_pzp_subspace_principal_min_sq": 0.9824908245554833,
+      "bloch_1_4_error_mev": [
+        2.2741783820051413,
+        0.1785514607251244,
+        0.48781523445812525,
+        8.069042657380237
+      ],
+      "bloch_1_4_peak_mev": 8.069042657380237,
+      "native_projection_check_peak_mev_or_nm": 1.3642420526593924e-12,
+      "standalone_scientific_targets_pass": false
+    },
+    {
+      "nz": 192,
+      "nb": 12,
+      "p_basis": 4,
+      "e171_pass": true,
+      "failed_basis_gate": [],
+      "e171_error": null,
+      "r_translation": 0.029182405386163648,
+      "r_translation_nearest": 0.0011822539979004464,
+      "r_translation_two_pairs": 0.0016197538453366662,
+      "overlap_matrix_min_eig": 0.7297316119094837,
+      "fd_reference_pair_mev": [
+        6.393417606741904,
+        10.823197312295525
+      ],
+      "fd_reference_pair_idx": [
+        19,
+        20
+      ],
+      "fd_central_probability": [
+        0.9794530628717287,
+        0.952681096909888
+      ],
+      "fd_reference_split_mev": 4.429779705553621,
+      "pzp_pair_mev": [
+        7.49723062346518,
+        18.106523113950004
+      ],
+      "pair_indices_1based": [
+        19,
+        20
+      ],
+      "pair_signed_errors_mev": [
+        1.1038130167232758,
+        7.283325801654479
+      ],
+      "pair_split_mev": 10.609292490484824,
+      "pair_split_abs_error_mev": 6.1795127849312035,
+      "pair_principal_lo_sq": 0.8984078248442202,
+      "pair_principal_hi_sq": 0.9991882919732649,
+      "full_pzp_subspace_principal_min_sq": 0.9823331138388333,
+      "bloch_1_4_error_mev": [
+        2.290161432689425,
+        0.17877286867375375,
+        0.4892439955021999,
+        8.134492155854076
+      ],
+      "bloch_1_4_peak_mev": 8.134492155854076,
+      "native_projection_check_peak_mev_or_nm": 8.810729923425242e-13,
+      "standalone_scientific_targets_pass": false
+    },
+    {
+      "nz": 192,
+      "nb": 12,
+      "p_basis": 3,
+      "e171_pass": true,
+      "failed_basis_gate": [],
+      "e171_error": null,
+      "r_translation": 0.029430005397732172,
+      "r_translation_nearest": 0.00251443483387388,
+      "r_translation_two_pairs": 0.004205123799588102,
+      "overlap_matrix_min_eig": 0.7350697309859413,
+      "fd_reference_pair_mev": [
+        6.393417606741904,
+        10.823197312295525
+      ],
+      "fd_reference_pair_idx": [
+        19,
+        20
+      ],
+      "fd_central_probability": [
+        0.9794530628717287,
+        0.952681096909888
+      ],
+      "fd_reference_split_mev": 4.429779705553621,
+      "pzp_pair_mev": [
+        7.504447054098219,
+        18.258807291127134
+      ],
+      "pair_indices_1based": [
+        19,
+        20
+      ],
+      "pair_signed_errors_mev": [
+        1.111029447356315,
+        7.435609978831609
+      ],
+      "pair_split_mev": 10.754360237028916,
+      "pair_split_abs_error_mev": 6.324580531475295,
+      "pair_principal_lo_sq": 0.893522960081267,
+      "pair_principal_hi_sq": 0.9991681897837533,
+      "full_pzp_subspace_principal_min_sq": 0.9819629592628016,
+      "bloch_1_4_error_mev": [
+        2.3246268857439727,
+        0.17954352820607156,
+        0.49273916807068474,
+        8.276655486920973
+      ],
+      "bloch_1_4_peak_mev": 8.276655486920973,
+      "native_projection_check_peak_mev_or_nm": 3.836930773104541e-13,
+      "standalone_scientific_targets_pass": false
+    },
+    {
+      "nz": 192,
+      "nb": 14,
+      "p_basis": 2,
+      "e171_pass": true,
+      "failed_basis_gate": [],
+      "e171_error": null,
+      "r_translation": 0.02471428460702758,
+      "r_translation_nearest": 0.016446672208576044,
+      "r_translation_two_pairs": 0.016446672208576044,
+      "overlap_matrix_min_eig": 0.6693879816647146,
+      "fd_reference_pair_mev": [
+        6.393417606741904,
+        10.823197312295525
+      ],
+      "fd_reference_pair_idx": [
+        19,
+        20
+      ],
+      "fd_central_probability": [
+        0.9794530628717287,
+        0.952681096909888
+      ],
+      "fd_reference_split_mev": 4.429779705553621,
+      "pzp_pair_mev": [
+        7.565952143803432,
+        19.77671873567403
+      ],
+      "pair_indices_1based": [
+        19,
+        20
+      ],
+      "pair_signed_errors_mev": [
+        1.1725345370615274,
+        8.953521423378506
+      ],
+      "pair_split_mev": 12.210766591870598,
+      "pair_split_abs_error_mev": 7.7809868863169775,
+      "pair_principal_lo_sq": 0.813864206282235,
+      "pair_principal_hi_sq": 0.9988338553419183,
+      "full_pzp_subspace_principal_min_sq": 0.9799441633283562,
+      "bloch_1_4_error_mev": [
+        2.6474764243190556,
+        0.1995439529842109,
+        0.5798673845996092,
+        9.733014558120821
+      ],
+      "bloch_1_4_peak_mev": 9.733014558120821,
+      "native_projection_check_peak_mev_or_nm": 9.094947017729282e-13,
+      "standalone_scientific_targets_pass": false
+    },
+    {
+      "nz": 192,
+      "nb": 5,
+      "p_basis": 5,
+      "e171_pass": true,
+      "failed_basis_gate": [],
+      "e171_error": null,
+      "r_translation": 0.08190808726932991,
+      "r_translation_nearest": 0.0027732043248871485,
+      "r_translation_two_pairs": 0.003033945510896965,
+      "overlap_matrix_min_eig": 0.749832234689688,
+      "fd_reference_pair_mev": [
+        6.393417606741904,
+        10.823197312295525
+      ],
+      "fd_reference_pair_idx": [
+        19,
+        20
+      ],
+      "fd_central_probability": [
+        0.9794530628717287,
+        0.952681096909888
+      ],
+      "fd_reference_split_mev": 4.429779705553621,
+      "pzp_pair_mev": [
+        7.610234928380563,
+        16.617429187329563
+      ],
+      "pair_indices_1based": [
+        14,
+        15
+      ],
+      "pair_signed_errors_mev": [
+        1.2168173216386586,
+        5.794231875034038
+      ],
+      "pair_split_mev": 9.007194258949,
+      "pair_split_abs_error_mev": 4.5774145533953785,
+      "pair_principal_lo_sq": 0.7397799744911009,
+      "pair_principal_hi_sq": 0.9982897633584502,
+      "full_pzp_subspace_principal_min_sq": 0.9467303763972825,
+      "bloch_1_4_error_mev": [
+        5.311359039084923,
+        0.6864156544312081,
+        0.4902630789971383,
+        22.002313971977095
+      ],
+      "bloch_1_4_peak_mev": 22.002313971977095,
+      "native_projection_check_peak_mev_or_nm": 2.6290081223123707e-13,
+      "standalone_scientific_targets_pass": false
+    },
+    {
+      "nz": 192,
+      "nb": 7,
+      "p_basis": 3,
+      "e171_pass": true,
+      "failed_basis_gate": [],
+      "e171_error": null,
+      "r_translation": 0.04113876598804244,
+      "r_translation_nearest": 6.327842255041215e-06,
+      "r_translation_two_pairs": 0.0003173598842727163,
+      "overlap_matrix_min_eig": 0.860795955682134,
+      "fd_reference_pair_mev": [
+        6.393417606741904,
+        10.823197312295525
+      ],
+      "fd_reference_pair_idx": [
+        19,
+        20
+      ],
+      "fd_central_probability": [
+        0.9794530628717287,
+        0.952681096909888
+      ],
+      "fd_reference_split_mev": 4.429779705553621,
+      "pzp_pair_mev": [
+        7.769069497408743,
+        31.561115496885808
+      ],
+      "pair_indices_1based": [
+        17,
+        21
+      ],
+      "pair_signed_errors_mev": [
+        1.3756518906668385,
+        20.737918184590285
+      ],
+      "pair_split_mev": 23.792045999477065,
+      "pair_split_abs_error_mev": 19.362266293923444,
+      "pair_principal_lo_sq": 0.5754491510147091,
+      "pair_principal_hi_sq": 0.9975265983293868,
+      "full_pzp_subspace_principal_min_sq": 0.96135590879309,
+      "bloch_1_4_error_mev": [
+        4.608177590169291,
+        0.14431434084775674,
+        0.5281225787421988,
+        19.41612977221839
+      ],
+      "bloch_1_4_peak_mev": 19.41612977221839,
+      "native_projection_check_peak_mev_or_nm": 5.400124791776761e-13,
+      "standalone_scientific_targets_pass": false
+    },
+    {
+      "nz": 192,
+      "nb": 5,
+      "p_basis": 4,
+      "e171_pass": false,
+      "failed_basis_gate": [
+        "r_translation_two_pairs"
+      ],
+      "e171_error": null,
+      "r_translation": 0.08255213453648688,
+      "r_translation_nearest": 0.005223274318362653,
+      "r_translation_two_pairs": 0.006237389325371462,
+      "overlap_matrix_min_eig": 0.7558429094270491,
+      "fd_reference_pair_mev": [
+        6.393417606741904,
+        10.823197312295525
+      ],
+      "fd_reference_pair_idx": [
+        19,
+        20
+      ],
+      "fd_central_probability": [
+        0.9794530628717287,
+        0.952681096909888
+      ],
+      "fd_reference_split_mev": 4.429779705553621,
+      "pzp_pair_mev": [
+        7.617132560233272,
+        16.6688112331369
+      ],
+      "pair_indices_1based": [
+        14,
+        15
+      ],
+      "pair_signed_errors_mev": [
+        1.2237149534913678,
+        5.845613920841375
+      ],
+      "pair_split_mev": 9.051678672903627,
+      "pair_split_abs_error_mev": 4.621898967350006,
+      "pair_principal_lo_sq": 0.7317404113349807,
+      "pair_principal_hi_sq": 0.9983115935941645,
+      "full_pzp_subspace_principal_min_sq": 0.9465424633937224,
+      "bloch_1_4_error_mev": [
+        5.364160737380203,
+        0.6868218217372508,
+        0.4894672032690295,
+        22.66720432584416
+      ],
+      "bloch_1_4_peak_mev": 22.66720432584416,
+      "native_projection_check_peak_mev_or_nm": 3.268496584496461e-13,
+      "standalone_scientific_targets_pass": false
+    }
+  ]
+}

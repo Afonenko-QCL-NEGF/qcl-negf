@@ -1,0 +1,22 @@
+basis_method = "pzp"
+basis_sha256 = "1134c0824519c1f1137af39c2efcd78eac14c6c99cae9afe3ec0539e3e2c8f81"
+dark = true
+electron_electron = "none"
+field_kV_cm = 12.297882031427921
+period_nm = 43.91000000000001
+q_LO_nm_inverse = 0.2
+q_impurity_nm_inverse = 0.2
+scattering_channels = ["LO", "acoustic", "impurity", "IFR", "alloy"]
+voltage_mV = 54.00000000000001
+
+[spectral_window]
+coupling_margin = 1.1326979992451411
+estimate = "local_poles_not_interacting_spectrum"
+local_maximum = 4.847734620934345
+local_minimum = -0.24380364958961256
+local_spectrum_covered = true
+sampled_maximum = 5.6000000000000005
+sampled_minimum = -4.0
+trusted_local_spectrum_covered = false
+trusted_maximum = 3.0000000000000004
+trusted_minimum = -1.4

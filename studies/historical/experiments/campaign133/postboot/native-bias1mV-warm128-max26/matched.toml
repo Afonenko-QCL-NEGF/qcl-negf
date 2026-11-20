@@ -1,0 +1,37 @@
+identity = "campaign133-native-fullKeldysh-all5-noEE-C-PI-N24001-matched0-1mV-warm128maps-includes-boundary-postreboot-max26"
+runtime_authorized = false
+core_head = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+case_voltages_mV = [0.0, 1.0]
+# 128 fresh native map evaluations include first parent-boundary replay.
+# For a completed parent32: at most127 new post-parent Green states; nominal terminal159, not160.
+max_scba = 128
+solver_seconds = 1800.0
+memory_max_bytes = 23085449216
+memory_high_bytes = 22548578304
+reserve_bytes = 1468006400
+swap_max_bytes = 0
+single_file_max_bytes = 4294967296
+data_max_bytes = 4294967296
+overall_soft_seconds = 4200.0
+save_reserve_seconds = 120
+overall_data_max_bytes = 8589934592
+warm_mode = "unmodified_private_fullstate"
+
+[parents."0"]
+directory = "../native-bias1mV-postreboot/attempt01/case0"
+state_sha256 = "3caddc855578b8af691e105a1b871239bdd96e443a560472aa68e1408d46fae8"
+model_sha256 = "91c53995b6b3ff51387de23e97fe50676fa829066072545759f28a1c36cf9e21"
+input_sha256 = "f87c0801a1cfdea6952e246f01e35da4d027dad232cc09420cb1c8a3067604d5"
+identity_sha256 = "8a218eb74675a9a5b7a3af01a9d57a90c61299d133cc2d85d02107af684c4837"
+summary_sha256 = "35940987d30ec4ff3e57fd3d1a2fa931e30435e9e6c39940f44f36cd4ff6d68f"
+driver_sha256 = "1a25007ef353aabb7ee41de1474bf9043be45f0302eea6609943de42c6068726"
+
+[parents."1"]
+directory = "../native-bias1mV-postreboot/attempt01/case1"
+state_sha256 = "0a9d838adeb6b93a8d953167e273f91fe5b263c8f85fcaeb6cfbb85c4f5adbe6"
+model_sha256 = "ecb2b0dc93f6b44543a19f8be55302a7130aebb79fe4ab7a04cf981751284a94"
+input_sha256 = "26b2bb857b2d8fad11b5f502a13aebdb3c93a98ee15ba81f01ea4921ddeeafc7"
+identity_sha256 = "b47455b7dd00cf8e7eb74f9fd2c6b5badde654924be69b84e5117260837e78c0"
+summary_sha256 = "bcef546268439260c25ff0d7cc49d87412bd18ab10ceb610efcf4cc415ffd6f3"
+driver_sha256 = "1a25007ef353aabb7ee41de1474bf9043be45f0302eea6609943de42c6068726"

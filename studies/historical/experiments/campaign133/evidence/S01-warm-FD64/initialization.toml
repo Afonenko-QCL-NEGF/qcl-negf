@@ -1,0 +1,9 @@
+source_state_sha256 = "155f8d296715f8e8a4ca951a0ed07aa392742112bd8b3b934beea54304374a2a"
+resume_iterations = false
+history_reset = true
+FD_number_over_target = 1.0
+retarded_arrays_changed = false
+scope = "new warm initial guess, not exact restart; first unmodified boundary repeats source iteration; FD first lambda is constructive identity"
+consume_private_arrays = true
+mode = "FD_repair_from_retarded"
+common_mu_eV = 0.00851993257635369

@@ -1,0 +1,12 @@
+{
+  "donor_sheet_integral_fraction_from_Gless": 1.0000000000000002,
+  "independent_bond_J_max_error_A_cm2": 3.907985046680551e-12,
+  "k_at_max_r_sum_nm_inverse": 0.6,
+  "model_sha256": "98ffcb7326685c036ebe12c0e0fb36a87dca5628412fba5d5961ab5e166bc23d",
+  "occupied_sheet_above_95pct_kmax": 0.008152897131309568,
+  "occupied_sheet_in_outer_5pct_energy_each_side": 0.00178458067927104,
+  "occupied_sheet_outside_trust": 0.042576703879806006,
+  "r_sum_max_unweighted_per_k": 0.028687024374131422,
+  "spectral_trace_outside_trust": 0.14636492155991723,
+  "state_sha256": "6e9c124ecc9abbce6bc21faddc63dcdd4febcafdf17dc5936210a1b96947c49f"
+}

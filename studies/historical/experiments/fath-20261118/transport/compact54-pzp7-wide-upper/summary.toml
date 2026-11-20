@@ -1,0 +1,44 @@
+basis_diagnostic_only = true
+device_sha256 = "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502"
+elapsed_seconds = 226.5949511528015
+execution = "complete"
+fresh_maps_completed = 64
+inner_strictly_converged = false
+mode = "fixed"
+model_identity = "5200b18a21ba144511df2632fab590a3d4bae07a3d6c88d86d903dde1156296c"
+model_sha256 = "ab07f0cc87aa95651cc7ee59d80c06b6a0988679301006d86fa24aad79c5d16f"
+poisson_scientifically_accepted = false
+quality = "unresolved"
+scientific_acceptance = false
+state_sha256 = "3827dc95912d0f3a8dc0ae38019a7c0d626b53504095190bb7eabad67980cf45"
+status = "max_iterations"
+terminal_bond_mean_A_cm2 = 103.73140745655016
+terminal_boundary_continuity_relative = 0.11819833333755773
+terminal_current_plus_A_cm2 = 185.41127397007295
+voltage_mV = 54.0
+
+[last_assessment]
+eligible = true
+failed_metrics = ["r_K", "r_Σ", "r_λ", "r_Jchange", "r_population"]
+limiting_metric = "r_Σ"
+limiting_ratio = 1.0077014164825829e7
+passed = false
+
+[last_row]
+J = 1.8541127397007295e6
+lambda_change = 0.00042742156023500844
+normalized_charge = 0.030000000000000488
+r_A = 3.157912438700735e-15
+r_D = 1.88050149587375e-16
+r_Jchange = 0.018222247540158738
+r_K = 0.05928544522846303
+r_PSD = 0.0
+r_caus = 0.0
+r_population = 0.0019772712049834743
+r_roundoff = 2.6050158313151747e-16
+"r_Σ" = 0.10077014164825829
+"r_λ" = 0.001777081346210685
+raw_charge = 0.02994668755961368
+target_charge = 0.030000000000000002
+"λ" = 0.9982229186537893
+"ν" = 64

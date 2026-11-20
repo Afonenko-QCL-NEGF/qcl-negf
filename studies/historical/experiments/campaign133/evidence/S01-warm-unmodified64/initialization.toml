@@ -1,0 +1,6 @@
+source_state_sha256 = "155f8d296715f8e8a4ca951a0ed07aa392742112bd8b3b934beea54304374a2a"
+resume_iterations = false
+history_reset = true
+scope = "new warm initial guess, not exact restart; first unmodified boundary repeats source iteration; FD first lambda is constructive identity"
+consume_private_arrays = true
+mode = "unmodified"

@@ -1,0 +1,13 @@
+{
+  "file": "projected-768.h5",
+  "map": 768,
+  "sha256": "9c593a538a82149441e38651a1dfdb32bd8bf2291d7e22d4888171ba172603a9",
+  "rR_max_family": 6.242862105645037e-10,
+  "rR_total": 2.8247311286053888e-11,
+  "rR_max_abs_difference": 3.412120026781239e-24,
+  "rR_total_abs_difference": 1.8606733306159754e-18,
+  "A_from_GR_relative": 0.0,
+  "Gless_FDT_relative": 4.940088188257546e-16,
+  "Ggreater_FDT_relative": 4.043777105702193e-17,
+  "number_relative_to_target_error": 3.3306690738754696e-16
+}

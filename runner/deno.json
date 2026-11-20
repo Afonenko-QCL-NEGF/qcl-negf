@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "check": "deno check tools/ci.ts",
+    "test": "deno run --allow-run --allow-env --allow-read tools/ci.ts test",
+    "docs": "deno run --allow-run --allow-env --allow-read tools/ci.ts docs"
+  },
+  "fmt": {
+    "lineWidth": 100
+  },
+  "compilerOptions": {
+    "strict": true
+  }
+}

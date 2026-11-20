@@ -1,0 +1,16 @@
+# Submit from the directory containing runner/, plan.json and payload.sh.
+universe = vanilla
+executable = payload.sh
+should_transfer_files = YES
+transfer_input_files = runner,plan.json
+transfer_output_files = result
+when_to_transfer_output = ON_EXIT
+requirements = (OpSys == "LINUX")
+request_cpus = 1
+request_memory = 5GB
+request_disk = 256MB
+periodic_remove = (JobStatus == 2) && (time() - EnteredCurrentStatus > 600)
+log = scientific.$(Cluster).$(Process).log
+output = scientific.$(Cluster).$(Process).out
+error = scientific.$(Cluster).$(Process).err
+queue 1

@@ -1,0 +1,62 @@
+{
+  "check_scope": "archived mixed fields; fresh-map gates use the untouched e171 stock history",
+  "state_sha256": "2a90e8b95b6fc349087449c5b12f31eddec202a15c9b7ca41a99c4df79100c74",
+  "stock_map": 128,
+  "raw_lambda_mixed": 1.0000000000001732,
+  "rK_raw_mixed": 1.6164828215634538e-13,
+  "N_normalized_over_target": 1.0000000000000118,
+  "Jplus_out_A_cm2": -5.355425887971477e-11,
+  "Jminus_out_A_cm2": 2.1685360919535565e-11,
+  "Jnet_out_A_cm2": -3.18688979601792e-11,
+  "r_sum": 0.07836512055694449,
+  "spectral_sum_by_k": [
+    {
+      "k_nm_inverse": 0.0,
+      "relative_matrix_defect": 0.012391192400872837,
+      "trace": 7.009902287853455,
+      "eigenvalues_min_max": [
+        0.9747842593674053,
+        1.0155182708082204
+      ]
+    },
+    {
+      "k_nm_inverse": 0.2,
+      "relative_matrix_defect": 0.004409527833246311,
+      "trace": 7.005303782245138,
+      "eigenvalues_min_max": [
+        0.9942439808550156,
+        1.0051388397170775
+      ]
+    },
+    {
+      "k_nm_inverse": 0.4,
+      "relative_matrix_defect": 0.010047244773521593,
+      "trace": 7.027864438165444,
+      "eigenvalues_min_max": [
+        0.9919323464175005,
+        1.0216845332750109
+      ]
+    },
+    {
+      "k_nm_inverse": 0.6,
+      "relative_matrix_defect": 0.07836512055694449,
+      "trace": 6.772714795615847,
+      "eigenvalues_min_max": [
+        0.7936210850847375,
+        1.0037134262842153
+      ]
+    }
+  ],
+  "minimum_eigenvalues_solver_units": {
+    "A": -3.6099351179570045e-14,
+    "Gn": 2.7081397171243557e-50,
+    "Gp": 4.375660168769975e-63
+  },
+  "FDT_mu_meV": 14.628549325424709,
+  "FDT_relative_occupied": 7.904592268062303e-12,
+  "spectral_identity_relative": 1.0820527947348692e-14,
+  "raw_lambda_abs_difference": 1.1546319456101628e-14,
+  "Jplus_abs_difference_A_cm2": 7.387781056406782e-17,
+  "Jminus_abs_difference_A_cm2": 2.188982471034938e-15,
+  "r_sum_abs_difference": 1.3877787807814457e-17
+}

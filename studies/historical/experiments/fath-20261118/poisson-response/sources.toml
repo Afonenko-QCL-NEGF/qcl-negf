@@ -1,0 +1,21 @@
+core_commit = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+voltage_mV = 54.0
+case_scope = "single periodic Hartree response of stored fixed-Hartree density"
+solver_iterations = 0
+current_recomputed = false
+gauge = "zero cell-average electronic Hartree energy"
+
+[[source]]
+case = "native54-03"
+[[source]]
+case = "compact54-pzp7"
+[[source]]
+case = "compact54-bloch7"
+[[source]]
+case = "compact54-pzp7-wide-upper"
+[[source]]
+case = "wide54-pod9"
+[[source]]
+case = "native54-long-alpha02"
+checkpoint = "checkpoint-0128"

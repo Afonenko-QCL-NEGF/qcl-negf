@@ -1,31 +1,31 @@
-name: Integrated checks
+name: Application checks
 on:
   workflow_dispatch:
 permissions:
   contents: read
-concurrency:
-  group: qcl-negf-${{ github.ref }}
-  cancel-in-progress: false
 jobs:
-  integration:
+  runner-tests:
     runs-on: [self-hosted, linux, x64, qcl-negf-ci]
-    timeout-minutes: 180
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          submodules: recursive
           persist-credentials: false
-      - name: Check source graph
-        run: deno task graph
-      - name: Bootstrap the pinned Julia runtime
-        run: deno task --cwd components/QCLNEGFRunner.jl bootstrap
-      - name: Prepare native locked environments
-        run: deno task prepare
+      - name: Test Runner with Julia Pkg
+        run: >-
+          julia --startup-file=no --project=runner -e 'using Pkg;
+          Pkg.instantiate(); Pkg.test(; julia_args=["--check-bounds=yes", "--threads=2"])'
         env:
-          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
-      - name: Check typed operations
-        run: deno task check
-      - name: Test packages and infrastructure definitions
-        run: deno task test
-        env:
-          JULIA: ${{ github.workspace }}/components/QCLNEGFRunner.jl/.build/julia/bin/julia
+          OPENBLAS_NUM_THREADS: '1'
+  analysis-tests:
+    runs-on: [self-hosted, linux, x64, qcl-negf-ci]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Prepare Julia dependencies
+        run: julia --startup-file=no --project=runner -e 'using Pkg; Pkg.instantiate()'
+      - name: Test independent analysis and native producer
+        working-directory: analysis
+        run: uv run --extra test pytest tests contracts-tests integration

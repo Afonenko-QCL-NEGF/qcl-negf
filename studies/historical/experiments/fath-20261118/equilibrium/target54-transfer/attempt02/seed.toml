@@ -1,0 +1,14 @@
+bias_mV = 54
+native_raw_lambda = 1.0474507132946822
+rebuild_seconds = 7.67043399810791
+seed_Jminus_A_cm2 = -341.40208537991333
+seed_Jplus_A_cm2 = 318.80597822000914
+seed_r_sum = 5.510850490004079
+source_cold_maps = 48
+source_model_sha256 = "0a8eca5877b4c3770fc706922a9fb8562db734f92fbbbea98d74e514cd66d77e"
+source_projected_maps = 1450
+source_state_sha256 = "2a90e8b95b6fc349087449c5b12f31eddec202a15c9b7ca41a99c4df79100c74"
+source_unforced_from_projected_maps = 176
+target_FDT_projection = false
+target_history_reused = false
+target_model_sha256 = "006ad264fe19eb8fe76dbb2d4f18d28376ced559af54b526a950ca0f6c4047fa"

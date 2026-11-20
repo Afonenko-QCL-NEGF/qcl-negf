@@ -1,0 +1,16 @@
+identity = "campaign133-native-fullKeldysh-all5-noEE-C-PI-N48001-matched0-1mV-cold32-postreboot-fine48001"
+runtime_authorized = false
+core_head = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+case_voltages_mV = [0.0, 1.0]
+max_scba = 32
+solver_seconds = 900.0
+memory_max_bytes = 22011707392
+memory_high_bytes = 20937965568
+reserve_bytes = 1468006400
+swap_max_bytes = 0
+single_file_max_bytes = 8589934592
+data_max_bytes = 8589934592
+overall_soft_seconds = 2400.0
+save_reserve_seconds = 120
+overall_data_max_bytes = 17179869184

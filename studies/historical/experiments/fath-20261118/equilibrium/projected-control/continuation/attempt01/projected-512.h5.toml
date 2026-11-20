@@ -1,0 +1,11 @@
+alpha = 0.4
+maps = 512
+mu_meV = 14.62854932489765
+projected_elapsed_seconds = 492.24869203567505
+projected_threshold = 1.0e-10
+rR_max_family = 1.3859193601936154e-8
+rR_total = 6.380807984516688e-10
+reason = "periodic_checkpoint"
+sha256 = "c21ea8c2e9289a4d0fede564ffa1e036feff8541b7b444ec67805efb300f124e"
+strict_R_streak = 0
+unproductive_128_map_blocks = 0

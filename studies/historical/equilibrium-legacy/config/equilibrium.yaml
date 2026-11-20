@@ -1,0 +1,6 @@
+schema: qcl-negf-study-v2
+kind: meta
+id: equilibrium
+name: Stationary thermal equilibrium candidate at 0 mV and 70 K
+includes:
+- studies/equilibrium-0-70.yaml

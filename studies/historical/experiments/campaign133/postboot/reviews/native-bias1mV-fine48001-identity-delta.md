@@ -1,0 +1,3 @@
+# Fine48001 identity-only correction
+
+Проверено: новый false input SHA256 `f6e4aba26b697a60ae739a492b164c26a1925c9a3bd5d3c0855d275b6d33e6d4` обратной единственной заменой token N48001→N24001 восстанавливает **точные bytes/hash** ранее reviewed input `4c2b752b28967ca2afe599d9ddd9778c80d491c661b100a334a50ca5204892c7`. runtime_authorized=false сохранён; source `75a63edf3e87784862dbeaaef4bf7b77332f52d43acb9f18dc00564d1604eacb` не менялся. Minor provenance finding о stale grid token закрыт. Остальные выводы `native-bias1mV-fine48001-static.md` неизменны: future-only static approval, не actual/resource/global-data approval и не результат.

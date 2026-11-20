@@ -1,0 +1,36 @@
+{
+  "julia_native_and_numpy_projector_difference": 4.494453070361399e-10,
+  "implementation_holdout": {
+    "orthogonality_fro": 2.8419718360109075e-15,
+    "first_four_bloch_errors_mev": [
+      0.13879979976605838,
+      0.010096417943778135,
+      0.01424977102755065,
+      0.17233408763785718
+    ],
+    "first_four_bloch_peak_mev": 0.17233408763785718,
+    "fd_pair_mev": [
+      6.953008897576245,
+      11.331515283279392
+    ],
+    "ritz_pair_mev": [
+      6.992058705148426,
+      11.405855972619246
+    ],
+    "pair_error_mev": [
+      0.03904980757218102,
+      0.07434068933985394
+    ],
+    "splitting_error_mev": 0.03529088176767292,
+    "pair_principal_sq": 0.9995689405784558,
+    "pair_projection_min_principal_sq": 0.9997556886897115,
+    "broader_active_peak_mev": 0.28255001805150926,
+    "broader_active_min_sq": 0.9895489427090762,
+    "broader_active_distinct_matches": 7,
+    "broader_active_count": 7,
+    "energy_gate_peak_mev": 0.17233408763785718,
+    "static_05_pass": true,
+    "original_01_pass": false
+  },
+  "adapter_sha256": "5d0a0cc61f1c7b873567a9965154e41d1872b9ca1313c837282b6490b20cad58"
+}

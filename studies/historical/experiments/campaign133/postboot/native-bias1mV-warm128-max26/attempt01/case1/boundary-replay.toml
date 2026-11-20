@@ -1,0 +1,120 @@
+green_replay_passed = true
+scope = "same full state must reproduce Green; scalar raw equation differences recorded, not convergence acceptance"
+green_relative_allowance = 5.684341886080802e-14
+reset_fields = "nu/history/streak/Jchange/population/seed_mu intentionally reset; not equivalence gates"
+new_iteration = 1
+parent_iteration = 32
+
+[green_fields.GR]
+scale = 4912.357423993873
+weighted_relative = 0.0
+weighted_absolute = 0.0
+weighted_scale = 52.76620085868081
+absolute = 0.0
+relative = 0.0
+bitwise_equal = true
+
+[green_fields.GG]
+scale = 6911.3843768520355
+weighted_relative = 0.0
+weighted_absolute = 0.0
+weighted_scale = 74.52479759485037
+absolute = 0.0
+relative = 0.0
+bitwise_equal = true
+
+[green_fields.A]
+scale = 6955.331360478747
+weighted_relative = 0.0
+weighted_absolute = 0.0
+weighted_scale = 74.6986450317722
+absolute = 0.0
+relative = 0.0
+bitwise_equal = true
+
+[green_fields.GL]
+scale = 80.5888274567514
+weighted_relative = 0.0
+weighted_absolute = 0.0
+weighted_scale = 0.3802789563893092
+absolute = 0.0
+relative = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.r_K]
+parent = 0.5031378394220615
+fresh = 0.5031378394220615
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows."r_λ"]
+parent = 0.025105130672650855
+fresh = 0.025105130672650855
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.J]
+parent = 29597.788453788267
+fresh = 29597.788453788267
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.r_PSD]
+parent = 0.0
+fresh = 0.0
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.r_A]
+parent = 2.7541193324150866e-15
+fresh = 2.7541193324150866e-15
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.r_caus]
+parent = 0.0
+fresh = 0.0
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.r_roundoff]
+parent = 3.1707712587124992e-16
+fresh = 3.1707712587124992e-16
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.raw_charge]
+parent = 0.046129730880269296
+fresh = 0.046129730880269296
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows."r_Σ"]
+parent = 0.21256736158994768
+fresh = 0.21256736158994768
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows."λ"]
+parent = 1.0251051306726509
+fresh = 1.0251051306726509
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.normalized_charge]
+parent = 0.04499999999999993
+fresh = 0.04499999999999993
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.target_charge]
+parent = 0.045000000000000005
+fresh = 0.045000000000000005
+absolute_difference = 0.0
+bitwise_equal = true
+
+[fresh_equation_rows.r_D]
+parent = 2.299274857377446e-16
+fresh = 2.299274857377446e-16
+absolute_difference = 0.0
+bitwise_equal = true

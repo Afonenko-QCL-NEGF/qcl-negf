@@ -1,0 +1,62 @@
+{
+  "check_scope": "archived mixed fields; fresh-map gates use the untouched e171 stock history",
+  "state_sha256": "d6df731827b57e7b48565069080494a6363a3abd41aad885eb096ba053bdce15",
+  "stock_map": 48,
+  "raw_lambda_mixed": 0.999999945234428,
+  "rK_raw_mixed": 7.197948745002744e-10,
+  "N_normalized_over_target": 1.0,
+  "Jplus_out_A_cm2": 0.0007663677240946738,
+  "Jminus_out_A_cm2": 0.0006912190894176555,
+  "Jnet_out_A_cm2": 0.0014575868135123294,
+  "r_sum": 0.07836512092277341,
+  "spectral_sum_by_k": [
+    {
+      "k_nm_inverse": 0.0,
+      "relative_matrix_defect": 0.012392029805542009,
+      "trace": 7.009912927176889,
+      "eigenvalues_min_max": [
+        0.9747842899869539,
+        1.0155172922555555
+      ]
+    },
+    {
+      "k_nm_inverse": 0.2,
+      "relative_matrix_defect": 0.004407874104472838,
+      "trace": 7.005291834183084,
+      "eigenvalues_min_max": [
+        0.9942440124869452,
+        1.0051379639770723
+      ]
+    },
+    {
+      "k_nm_inverse": 0.4,
+      "relative_matrix_defect": 0.010047283991872297,
+      "trace": 7.0278641881885715,
+      "eigenvalues_min_max": [
+        0.9919320369019275,
+        1.0216845301034143
+      ]
+    },
+    {
+      "k_nm_inverse": 0.6,
+      "relative_matrix_defect": 0.07836512092277341,
+      "trace": 6.772714887642566,
+      "eigenvalues_min_max": [
+        0.7936210853021001,
+        1.0037134461845836
+      ]
+    }
+  ],
+  "minimum_eigenvalues_solver_units": {
+    "A": -3.4023583423956604e-16,
+    "Gn": -1.556292550625923e-30,
+    "Gp": -1.995527918081602e-39
+  },
+  "FDT_mu_meV": 14.628549323764183,
+  "FDT_relative_occupied": 6.917308396093573e-07,
+  "spectral_identity_relative": 4.900717603233269e-15,
+  "raw_lambda_abs_difference": 2.220446049250313e-16,
+  "Jplus_abs_difference_A_cm2": 3.7773603689394974e-16,
+  "Jminus_abs_difference_A_cm2": 2.5399604294817912e-15,
+  "r_sum_abs_difference": 1.3877787807814457e-17
+}

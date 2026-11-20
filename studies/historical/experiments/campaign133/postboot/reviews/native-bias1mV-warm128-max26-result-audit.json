@@ -1,0 +1,200 @@
+{
+  "status": "all256_small_rows_replayed_both_unresolved",
+  "summary_sha256": "adae7807439307a7ff42af8c7fc92c667713b796006835204c795e95f6fd4fdb",
+  "source_sha256": "3d83a82205e8dd203f5b89a7ae689821d914d0a07ec5791f0f711e0c78c11935",
+  "loader_sha256": "fecbab99e7cee48fefd6c59865db180aa3e346dbdf14782ebd90ba14b1802719",
+  "actual_input_sha256": "c62fde3d99f3963d54e36bc6b8caeb9c056320983246e6add15383e749261919",
+  "cases": [
+    {
+      "V_mV_period": 0,
+      "maps": 128,
+      "novel_post_parent_states": 127,
+      "nominal_final_cumulative_index": 159,
+      "last_raw": {
+        "\u03bd": 128.0,
+        "r_D": 2.3493584356033184e-16,
+        "r_A": 9.219503755386235e-15,
+        "r_K": 0.023959899242270134,
+        "r_\u03a3": 0.12298818087915687,
+        "r_\u03bb": 0.0029104279584658554,
+        "\u03bb": 0.9970895720415341,
+        "r_PSD": 0.0,
+        "r_caus": 1.2000871597139273e-16,
+        "r_roundoff": 3.170663758413121e-16,
+        "r_Jchange": 0.01833379344043063,
+        "r_population": 0.0004836431420943343,
+        "J": 1154960.341197073,
+        "raw_charge": 0.04486903074186904,
+        "target_charge": 0.045000000000000005,
+        "normalized_charge": 0.04499999999999965,
+        "lambda_change": 5.541346185933271e-05
+      },
+      "first_raw_matches_parent": true,
+      "boundary_Green_bitwise_equal_reported": true,
+      "marker_balance_iterations": [
+        1,
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        72,
+        80,
+        88,
+        96,
+        104,
+        112,
+        120,
+        128
+      ],
+      "rSigma_replay_maxabs": 1.434130592059546e-13,
+      "minimum_joint_raw": 0.08156873913434594,
+      "final_J_A_cm2_UNCONVERGED": 115.4960341197073,
+      "particle_relative_diagnostic": 0.007786209179868535,
+      "power_relative_diagnostic": 1.0,
+      "elapsed_case_seconds": 830.8984489440918,
+      "model_sha256_declared": "3de1f7fc933082439d10ccac56c1c3e33c8d93b65ac5aa2c3e7006e5bab9d6dc",
+      "state_sha256_declared": "e4fc9b91fe33e65d71a3475898efc615a554efa88c3ccca9c63e819da448fcc6"
+    },
+    {
+      "V_mV_period": 1,
+      "maps": 128,
+      "novel_post_parent_states": 127,
+      "nominal_final_cumulative_index": 159,
+      "last_raw": {
+        "\u03bd": 128.0,
+        "r_D": 2.6937468327625823e-16,
+        "r_A": 5.896465190403463e-15,
+        "r_K": 0.012124258263371553,
+        "r_\u03a3": 0.05077529348850718,
+        "r_\u03bb": 0.0011749556903282166,
+        "\u03bb": 1.0011749556903282,
+        "r_PSD": 0.0,
+        "r_caus": 1.3177082390906075e-16,
+        "r_roundoff": 3.169430874045589e-16,
+        "r_Jchange": 0.013668752413154754,
+        "r_population": 0.0009310373915871949,
+        "J": 173171.37901396715,
+        "raw_charge": 0.045052873006064774,
+        "target_charge": 0.045000000000000005,
+        "normalized_charge": 0.04499999999999866,
+        "lambda_change": -0.00018083358864728893
+      },
+      "first_raw_matches_parent": true,
+      "boundary_Green_bitwise_equal_reported": true,
+      "marker_balance_iterations": [
+        1,
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        72,
+        80,
+        88,
+        96,
+        104,
+        112,
+        120,
+        128
+      ],
+      "rSigma_replay_maxabs": 5.788702850395566e-13,
+      "minimum_joint_raw": 0.02517923606290017,
+      "final_J_A_cm2_UNCONVERGED": 17.317137901396716,
+      "particle_relative_diagnostic": 0.0006179141665917745,
+      "power_relative_diagnostic": 0.09957994434652924,
+      "elapsed_case_seconds": 749.0657651424408,
+      "model_sha256_declared": "7176db1901950a643603d90a58594dd67f766bdbbbcbe5019324de179711e0c1",
+      "state_sha256_declared": "c66dbab35e2659b07ec7f783e8aff0020df880d1d3a4c7817bb537ecef112fce"
+    }
+  ],
+  "phases": {
+    "case_begins": 2,
+    "raw_progress_rows": 256,
+    "balanced_begin_end": true,
+    "counter_scope": "process",
+    "summed_phase_wall_seconds": 1492.0182765649993,
+    "summed_phase_cpu_seconds": 28218.023216000074,
+    "by_phase": {
+      "initialization": {
+        "count": 2,
+        "wall": 0.116614939,
+        "cpu_process": 0.11610399999980814,
+        "allocated_bytes_process": 9959584.0
+      },
+      "dyson": {
+        "count": 256,
+        "wall": 124.74171218699998,
+        "cpu_process": 1917.6995329999959,
+        "allocated_bytes_process": 651637145536.0
+      },
+      "candidate_scattering": {
+        "count": 256,
+        "wall": 182.93774598899992,
+        "cpu_process": 2400.948153000029,
+        "allocated_bytes_process": 553391239840.0
+      },
+      "candidate_embedding": {
+        "count": 256,
+        "wall": 169.04433973699994,
+        "cpu_process": 1662.2656949999896,
+        "allocated_bytes_process": 364524571352.0
+      },
+      "candidate_assembly": {
+        "count": 256,
+        "wall": 15.033586131000012,
+        "cpu_process": 208.91933400001966,
+        "allocated_bytes_process": 81112409744.0
+      },
+      "residuals": {
+        "count": 256,
+        "wall": 857.3502891749994,
+        "cpu_process": 21217.593084000004,
+        "allocated_bytes_process": 94231042432.0
+      },
+      "observables": {
+        "count": 256,
+        "wall": 19.60503788899999,
+        "cpu_process": 19.469612000013257,
+        "allocated_bytes_process": 170070568.0
+      },
+      "checkpoint_request": {
+        "count": 256,
+        "wall": 0.047599587,
+        "cpu_process": 0.04691600000725771,
+        "allocated_bytes_process": 3727280.0
+      },
+      "physics_markers": {
+        "count": 256,
+        "wall": 85.57005979599998,
+        "cpu_process": 90.68674899999735,
+        "allocated_bytes_process": 83048610336.0
+      },
+      "mixing": {
+        "count": 254,
+        "wall": 37.57129113500001,
+        "cpu_process": 700.2780360000174,
+        "allocated_bytes_process": 24160640.0
+      }
+    }
+  },
+  "resources": {
+    "exit": 0,
+    "seconds": 1587.3974261283875,
+    "cgroup": {
+      "memory.peak": "17083142144",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "cpu.stat": "usage_usec 28325980635\nuser_usec 28104197160\nsystem_usec 221783475\nnice_usec 0\ncore_sched.force_idle_usec 0\nnr_periods 15874\nnr_throttled 163\nthrottled_usec 851091\nnr_bursts 0\nburst_usec 0"
+    },
+    "average_cpu_cores": 17.844290389260728,
+    "fraction_of_26core_quota": 0.6863188611254126
+  },
+  "output_bytes": 6847873652,
+  "no_Julia_Pkg_newmaps_or_large_HDF_reads": true
+}

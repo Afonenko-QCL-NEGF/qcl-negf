@@ -1,0 +1,7 @@
+voltage_per_period_mV,current_density_kA_cm2,digitization_uncertainty_voltage_mV,digitization_uncertainty_current_kA_cm2,value_kind,source_figure,curve,calibration
+40.0,2.039,0.3,0.02,digitized,Fig.3b,NEGF IV solid black,"vector path; J maximum anchored at 56 mV/period"
+44.0,2.216,0.3,0.02,digitized,Fig.3b,NEGF IV solid black,"vector path; J maximum anchored at 56 mV/period"
+48.0,2.657,0.3,0.02,digitized,Fig.3b,NEGF IV solid black,"vector path; J maximum anchored at 56 mV/period"
+52.0,3.105,0.3,0.02,digitized,Fig.3b,NEGF IV solid black,"vector path; J maximum anchored at 56 mV/period"
+56.0,3.432,0.3,0.02,digitized,Fig.3b,NEGF IV solid black,"vector path maximum; direct publication bias anchor"
+60.0,3.195,0.3,0.02,digitized,Fig.3b,NEGF IV solid black,"vector path; J maximum anchored at 56 mV/period"

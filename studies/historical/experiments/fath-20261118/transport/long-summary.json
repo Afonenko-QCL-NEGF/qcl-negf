@@ -1,0 +1,110 @@
+{
+  "model_identity": "62a8ec2b6be97cc7eac8ac0c9335de3765663f58bffd4a2ace1344efb83e238b",
+  "status": "max_iterations",
+  "scientific_acceptance": false,
+  "strict_rows": 0,
+  "local_maps": 768,
+  "per_gate_pass_count": {
+    "r_Σ": 0,
+    "r_K": 0,
+    "r_λ": 0,
+    "r_PSD": 768,
+    "r_Jchange": 1,
+    "r_population": 274
+  },
+  "checkpoints_and_terminal": [
+    {
+      "local_map": 128,
+      "sequence_map_without_replay_duplicates": 270,
+      "state_sha256": "2618fa431d41574c7fc1fffcb5677a08fec4396def3ba59a38b709d5a2dfaefd",
+      "leading_channel": "embedding_minus",
+      "component": "lesser",
+      "unweighted_absolute_F_dimensionless": 2.1907165725175397,
+      "unweighted_fresh_F_dimensionless": 48.548889902465646,
+      "unweighted_absolute_F_meV": 219.07165725175398,
+      "unweighted_fresh_F_meV": 4854.888990246564,
+      "rSigma": 0.04512392717767963,
+      "rK": 0.0074231444798005175,
+      "rLambda": 0.0002937851998277008,
+      "rPSD": 0.0,
+      "Jplus_A_cm2": 144.30203245251448,
+      "independent_spectral_sum_F_max": 0.011190346032736893,
+      "independent_internal_mean_A_cm2": 104.24239234269973
+    },
+    {
+      "local_map": 256,
+      "sequence_map_without_replay_duplicates": 398,
+      "state_sha256": "bb853140d30ddc679bc541671eebc93873c3854f9161b4d0dc1e5e0bc40c6e12",
+      "leading_channel": "embedding_minus",
+      "component": "lesser",
+      "unweighted_absolute_F_dimensionless": 0.5676649543688942,
+      "unweighted_fresh_F_dimensionless": 20.39077225048018,
+      "unweighted_absolute_F_meV": 56.76649543688942,
+      "unweighted_fresh_F_meV": 2039.077225048018,
+      "rSigma": 0.02783930629970715,
+      "rK": 0.005205004886261227,
+      "rLambda": 0.00020776653036291837,
+      "rPSD": 0.0,
+      "Jplus_A_cm2": 138.42350574753638,
+      "independent_spectral_sum_F_max": 0.011192554484325962,
+      "independent_internal_mean_A_cm2": 100.22724285893419
+    },
+    {
+      "local_map": 512,
+      "sequence_map_without_replay_duplicates": 654,
+      "state_sha256": "35208e4b5ddfdda6dadf5eb0349a58b2b94c7d5ed248cd4a3ce7261657f7f7c1",
+      "leading_channel": "embedding_minus",
+      "component": "lesser",
+      "unweighted_absolute_F_dimensionless": 0.14299432685771152,
+      "unweighted_fresh_F_dimensionless": 6.4739260350816235,
+      "unweighted_absolute_F_meV": 14.299432685771151,
+      "unweighted_fresh_F_meV": 647.3926035081623,
+      "rSigma": 0.022087729467829633,
+      "rK": 0.0039147889648784165,
+      "rLambda": 7.731554481649194e-05,
+      "rPSD": 0.0,
+      "Jplus_A_cm2": 131.2149317194599,
+      "independent_spectral_sum_F_max": 0.011198794780703247,
+      "independent_internal_mean_A_cm2": 95.1282527654336
+    },
+    {
+      "local_map": 768,
+      "sequence_map_without_replay_duplicates": 910,
+      "state_sha256": "8eac7b56f53c6b1138b7e764645f4dbe8b6f4be796c64a5c695d823b4b8b8eb9",
+      "leading_channel": "embedding_minus",
+      "component": "lesser",
+      "unweighted_absolute_F_dimensionless": 0.04545482759186209,
+      "unweighted_fresh_F_dimensionless": 2.0945363400895944,
+      "unweighted_absolute_F_meV": 4.545482759186209,
+      "unweighted_fresh_F_meV": 209.45363400895945,
+      "rSigma": 0.02170161802486879,
+      "rK": 0.003059348854004611,
+      "rLambda": 2.5742209973089736e-05,
+      "rPSD": 0.0,
+      "Jplus_A_cm2": 123.15763250390843
+    }
+  ],
+  "terminal_currents": {
+    "Jplus_A_cm2": 123.15763250390843,
+    "Jminus_out_A_cm2": -122.8382940764638,
+    "minus_Jminus_out_A_cm2": 122.8382940764638,
+    "absolute_boundary_imbalance_A_cm2": 0.3193384274446345,
+    "boundary_imbalance_relative": 0.002592924376282617,
+    "absolute_last_step_Jplus_change_A_cm2": 0.03141507771941833,
+    "internal_profile_mean_A_cm2": 89.77113793478303,
+    "internal_profile_minmax_A_cm2": [
+      1.0953918790716581,
+      196.20217858484318
+    ]
+  },
+  "terminal_k_E_audit": {
+    "r_sum_max": 0.011209649807186724,
+    "k_where_r_sum_max": 0.375,
+    "occupied_fraction_outside_trust": 0.00034252130864928287,
+    "occupied_fraction_near_k_max": 0.00013483724395652578,
+    "bond_compare_max_error_A_cm2": 1.2093437362636905e-11
+  },
+  "wall_seconds": 4137.234451227003,
+  "peak_GiB": 12.725204467773438,
+  "output_GiB": 9.838142999447882
+}

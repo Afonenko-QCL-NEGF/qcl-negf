@@ -1,0 +1,38 @@
+identity = "fath-cbo149-bounded-bloch-snapshot-pod-v1"
+core_commit = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+adapter_sha256 = "abd4f904012ea0c3c805a594d55b9aba1e77c637cf7087c04aae3bf2744acf6a"
+band_passport_sha256 = "cc7fde59f40fa83b896d33703e3ad1f0a657a41823af93bf71656e18f742a540"
+native_band_export_sha256 = "8c7ea1327be1d7eae82e76eae6c3752303eadff322467b734f09c216ea18fe2e"
+transport_device_sha256 = "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502"
+temperature_kelvin = 10.0
+electric_field_fit = false
+scattering_kernel_generation = "e171 direct production exact finite angle, all five rebuilt from final basis"
+electron_electron = "off"
+method = "bounded_bloch_snapshot_pod"
+basis_rank = 7
+train_bands = 5
+train_phase_count = 24
+train_voltage_mv = 0.0
+train_k_parallel_inverse_nm = 0.0
+train_phase_spacing = "2π*j/24 for j=0,…,23"
+anchor = "seven lowest eigenvectors of the isolated central diagonal Hcell block with native seam diagonal"
+max_principal_angle_rad = 0.25
+pzp_translation_diagnostics = "inapplicable"
+basis_ranks_surveyed = [5, 7, 9]
+holdout_phase_count = 211
+holdout_phase_spacing = "2π*(j+sqrt(3)/11)/211 for j=0,…,210"
+holdout_voltages_mv = [0.0, 54.0]
+holdout_cell_count = 7
+holdout_boundary = "matched Dirichlet end diagonal"
+active_full_fd_mev = [-100.0, 80.0]
+wide_full_fd_mev = [-100.0, 170.0]
+minimum_full_fd_central_weight = 0.10
+cavity_cell_count = 9
+spectral_broadening_mev = 0.5
+spectral_momentum_nodes = 17
+spectral_max_k_inverse_nm = 0.6
+sampled_energy_mev = [-400.0, 560.0]
+trusted_energy_mev = [-140.0, 300.0]
+verification_grid = { Nz = 144, Nb = 7, NE = 41, Nk = 2, Nphi = 4, Nqz = 5 }
+verification_scba_iterations = 0

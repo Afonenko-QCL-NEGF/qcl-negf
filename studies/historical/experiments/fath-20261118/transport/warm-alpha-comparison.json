@@ -1,0 +1,24 @@
+{
+  "warm_checkpoint_parent": "transport/native54-03",
+  "model_identity": "62a8ec2b6be97cc7eac8ac0c9335de3765663f58bffd4a2ace1344efb83e238b",
+  "replay_exact_for_tested_scalars": true,
+  "medians_control": {
+    "r_Σ": 0.04701641707004989,
+    "r_K": 0.016728967414367087,
+    "r_λ": 6.236001234372068e-05
+  },
+  "medians_alpha04": {
+    "r_Σ": 0.05057282937705654,
+    "r_K": 0.014515892365981588,
+    "r_λ": 0.0003097467754412109
+  },
+  "alpha04_over_alpha02": {
+    "r_Σ": 1.0756419252812894,
+    "r_K": 0.8677100030403025,
+    "r_λ": 4.967073671087891
+  },
+  "new_physical_failures_alpha04": [],
+  "continue_alpha04_under_predeclared_rule": false,
+  "control_status": "max_iterations",
+  "alpha04_status": "max_iterations"
+}

@@ -1,0 +1,96 @@
+{
+  "status": "small_metadata_replay_pass_no_large_state_reads",
+  "summary_sha256": "76bba8e87123f04a0298087b20a979e3ff23f3c1d921ea5eae91cf38a121d59b",
+  "input_sha256": "34d184c9543a5cdd097efba89dc64dffbf265835dedb2029c55516ef891767d0",
+  "cases": [
+    {
+      "Vperiod_mV": 0,
+      "maps": 32,
+      "status": "max_iterations",
+      "quality": "unresolved",
+      "last_raw": {
+        "\u03bd": 32.0,
+        "r_D": 3.867978458483343e-16,
+        "r_A": 3.1275656738961616e-15,
+        "r_K": 0.5317105319079968,
+        "r_\u03a3": 0.3160538647698913,
+        "r_\u03bb": 0.03920184939403759,
+        "\u03bb": 1.0392018493940376,
+        "r_PSD": 0.0,
+        "r_caus": 0.0,
+        "r_roundoff": 3.168921947115059e-16,
+        "r_Jchange": 0.0328017339714883,
+        "r_population": 0.006840159801635528,
+        "J": -6149838.57818197,
+        "raw_charge": 0.0467640832227317,
+        "target_charge": 0.045000000000000005,
+        "normalized_charge": 0.045000000000002385,
+        "lambda_change": -0.00040763392351594874
+      },
+      "rSigma_marker_replay_maxabs": 9.278133816792433e-13,
+      "particle_relative_diagnostic": 0.0194333752606692,
+      "power_relative_diagnostic": 0.6015374712051518,
+      "normalized_Gn_correction": 0.03772303659473892,
+      "sampled_linewidth_q10_q50_q90": [
+        39.96491253358189,
+        77.23461907946081,
+        249.04908392041958
+      ],
+      "sampled_underresolved_fraction": 2.8054200325372078e-08,
+      "final_J_A_cm2_UNCONVERGED": -614.983857818197,
+      "model_sha256_independent": "91c53995b6b3ff51387de23e97fe50676fa829066072545759f28a1c36cf9e21",
+      "state_sha256_declared_not_rehashed": "3caddc855578b8af691e105a1b871239bdd96e443a560472aa68e1408d46fae8",
+      "elapsed_seconds": 318.86363887786865
+    },
+    {
+      "Vperiod_mV": 1,
+      "maps": 32,
+      "status": "max_iterations",
+      "quality": "unresolved",
+      "last_raw": {
+        "\u03bd": 32.0,
+        "r_D": 2.299274857377446e-16,
+        "r_A": 2.7541193324150866e-15,
+        "r_K": 0.5031378394220615,
+        "r_\u03a3": 0.21256736158994768,
+        "r_\u03bb": 0.025105130672650855,
+        "\u03bb": 1.0251051306726509,
+        "r_PSD": 0.0,
+        "r_caus": 0.0,
+        "r_roundoff": 3.1707712587124992e-16,
+        "r_Jchange": 1.1070323618434605,
+        "r_population": 0.006621421753415537,
+        "J": 29597.788453788267,
+        "raw_charge": 0.046129730880269296,
+        "target_charge": 0.045000000000000005,
+        "normalized_charge": 0.04499999999999993,
+        "lambda_change": -0.0022508133442789013
+      },
+      "rSigma_marker_replay_maxabs": 7.457368056407176e-13,
+      "particle_relative_diagnostic": 0.012485651167112864,
+      "power_relative_diagnostic": 0.5336612196537524,
+      "normalized_Gn_correction": 0.024490298527905834,
+      "sampled_linewidth_q10_q50_q90": [
+        36.12100206673535,
+        74.52908296097526,
+        319.59579188123803
+      ],
+      "sampled_underresolved_fraction": 0.0,
+      "final_J_A_cm2_UNCONVERGED": 2.9597788453788265,
+      "model_sha256_independent": "ecb2b0dc93f6b44543a19f8be55302a7130aebb79fe4ab7a04cf981751284a94",
+      "state_sha256_declared_not_rehashed": "0a9d838adeb6b93a8d953167e273f91fe5b263c8f85fcaeb6cfbb85c4f5adbe6",
+      "elapsed_seconds": 210.52134203910828
+    }
+  ],
+  "execution": {
+    "exit": 0,
+    "seconds": 535.5086529254913,
+    "cgroup": {
+      "memory.peak": "12352028672",
+      "memory.events": "low 0\nhigh 1539\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "cpu.stat": "usage_usec 1321351965\nuser_usec 1269043134\nsystem_usec 52308831\nnice_usec 0\ncore_sched.force_idle_usec 0\nnr_periods 5348\nnr_throttled 406\nthrottled_usec 796424\nnr_bursts 0\nburst_usec 0"
+    }
+  },
+  "data_bytes": 6840148013,
+  "no_Julia_new_maps_or_large_state_arrays": true
+}

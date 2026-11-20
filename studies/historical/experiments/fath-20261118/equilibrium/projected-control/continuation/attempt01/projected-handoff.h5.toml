@@ -1,0 +1,11 @@
+alpha = 0.4
+maps = 898
+mu_meV = 14.628549325421524
+projected_elapsed_seconds = 841.7139108181
+projected_threshold = 1.0e-10
+rR_max_family = 9.243770137277719e-11
+rR_total = 3.408527644272857e-12
+reason = "retarded_three_passes"
+sha256 = "0596846088e66a92d4100028dade736d94e082c6342b92715f18658a04e5de98"
+strict_R_streak = 3
+unproductive_128_map_blocks = 0

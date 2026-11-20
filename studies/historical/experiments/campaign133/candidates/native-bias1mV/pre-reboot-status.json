@@ -1,0 +1,27 @@
+{
+  "at_utc": "2026-11-16T04:43:35.601474+00:00",
+  "large_native_cases_started": 0,
+  "main_0mV_1mV_results": "not_measured",
+  "user_requested_bias_mV_per_period": 1.0,
+  "e_e_scattering": "none",
+  "Hartree": "fixed U0; separate from no e-e scattering",
+  "user_heavy_hold": true,
+  "source_v1": "a257975defdc2c9e1f1396c7f257f6d8f18407fb6a0ae57cd1b77ac25a65dcb1",
+  "input_v1": "4761825d26543053168d2250123d12951d1feb5099b54df42844f9cd88f22fa1",
+  "source_resource_v2": "6681c5ac5b8cc7be1257576495649ea952ce16cea501d25a455b44140bf46f15",
+  "input_resource_v2": "0a6240cd49d3ba530043391ff006e71356a2babce19c0b53cda5a91c9f31de44",
+  "tiny_v1_assertions_passed": 14,
+  "tiny_scope": "small65E/3k/2bands/2fullnativeSCBAsteps each0/1mV plusHDFroundtrip; not main scientific run",
+  "plan_v1_peak_display_GiB": 9.42,
+  "plan_v1_budget_display_GiB": 10.63,
+  "resource_v1_admission": "rejected before input copy/Julia launch: MemAvailable14320840704 <12GiB+1400MiB=14352908288",
+  "resource_v2": "lowerhard11.75GiB/nativebudget11148460032; same arithmetic but new exact plan not executed after userhold",
+  "no_running_campaign_scopes": true,
+  "resume_obligations": [
+    "freshresources+sourcehash preflight after user/reboot ready",
+    "originalstart16:33:33Z unchanged; allwait counts",
+    "if05UTC cutoff insufficient activate preauthorized reserve before execution (absolute latest08:10heavy/09:10report UTC)",
+    "update old driver UTC05 stopguard only through new reviewed source/input with authorized absolute cutoff",
+    "new actual readvertised resource/time/data limits, no e-e/FD restriction changes"
+  ]
+}

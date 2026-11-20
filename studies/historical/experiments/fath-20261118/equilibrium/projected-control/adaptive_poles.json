@@ -1,0 +1,117 @@
+{
+  "source_state_sha256": "d6df731827b57e7b48565069080494a6363a3abd41aad885eb096ba053bdce15",
+  "k_nm_inverse": 0.6,
+  "omega_crossings": 21,
+  "ill_conditioned_affine_intervals": 0,
+  "integration_panels": 1457,
+  "results": [
+    {
+      "order": 8,
+      "eta_meV": 0.0,
+      "r_sum": 0.08429695411808151,
+      "trace": 6.7440735912232554,
+      "min_eigenvalue": 0.7785272577884658,
+      "max_eigenvalue": 1.0021065270636786,
+      "lowest_sampled_dyson_singular_meV": 0.08339302419453287,
+      "spectral_matrix_change_vs_previous": null
+    },
+    {
+      "order": 16,
+      "eta_meV": 0.0,
+      "r_sum": 0.08429693379887747,
+      "trace": 6.744073683112411,
+      "min_eigenvalue": 0.7785273075974303,
+      "max_eigenvalue": 1.0021065271234566,
+      "lowest_sampled_dyson_singular_meV": 0.08339300233854882,
+      "spectral_matrix_change_vs_previous": 3.7046986984224455e-08
+    },
+    {
+      "order": 32,
+      "eta_meV": 0.0,
+      "r_sum": 0.08429693365049491,
+      "trace": 6.744073683709886,
+      "min_eigenvalue": 0.7785273079696134,
+      "max_eigenvalue": 1.0021065271237775,
+      "lowest_sampled_dyson_singular_meV": 0.083393005265152,
+      "spectral_matrix_change_vs_previous": 2.258153460696827e-10
+    },
+    {
+      "order": 16,
+      "eta_meV": 1e-06,
+      "r_sum": 0.0842969409822917,
+      "trace": 6.744073633990085,
+      "min_eigenvalue": 0.7785272885002926,
+      "max_eigenvalue": 1.0021065219314529,
+      "lowest_sampled_dyson_singular_meV": 0.08339400233035629,
+      "spectral_matrix_change_vs_previous": 1.0284378412765062e-08
+    },
+    {
+      "order": 16,
+      "eta_meV": 0.0001,
+      "r_sum": 0.08429765214049788,
+      "trace": 6.74406877104187,
+      "min_eigenvalue": 0.7785253978874183,
+      "max_eigenvalue": 1.0021060079352377,
+      "lowest_sampled_dyson_singular_meV": 0.08349300152004083,
+      "spectral_matrix_change_vs_previous": 1.0058154038688271e-06
+    }
+  ],
+  "edge_areas": {
+    "lower_36_7": {
+      "trace": -2.210936590149032e-21,
+      "weak_mode_weight": -2.592224951443344e-22
+    },
+    "upper_36_7": {
+      "trace": 0.7624285470526126,
+      "weak_mode_weight": 0.6785088048055048
+    },
+    "upper_10": {
+      "trace": 0.22951954397281882,
+      "weak_mode_weight": 0.21804795589805026
+    }
+  },
+  "narrow_peak_windows": [
+    {
+      "centre_meV": 537.2939052600159,
+      "region_meV": [
+        537.1697309506336,
+        537.3383691103618
+      ],
+      "isolated_scalar_weight_estimate": 0.0033398997021443894,
+      "adaptive_weak_mode_weight": 0.0032010130460923495,
+      "aligned_0_1_weak_mode_weight": 0.006367498404834649
+    },
+    {
+      "centre_meV": 537.3828329607076,
+      "region_meV": [
+        537.3383691103618,
+        537.4857444196974
+      ],
+      "isolated_scalar_weight_estimate": 0.002741898951195192,
+      "adaptive_weak_mode_weight": 0.0018891469288116122,
+      "aligned_0_1_weak_mode_weight": 0.002064306739141486
+    },
+    {
+      "centre_meV": 548.910502385521,
+      "region_meV": [
+        548.9069296020658,
+        548.9140751689762
+      ],
+      "isolated_scalar_weight_estimate": 0.0013388255607315856,
+      "adaptive_weak_mode_weight": 0.001311034593884619,
+      "aligned_0_1_weak_mode_weight": 2.583183947465195e-06
+    },
+    {
+      "centre_meV": 548.9663452063912,
+      "region_meV": [
+        548.9610023190444,
+        548.9716880937381
+      ],
+      "isolated_scalar_weight_estimate": 0.0013672230038032406,
+      "adaptive_weak_mode_weight": 0.0008349535142161088,
+      "aligned_0_1_weak_mode_weight": 1.8432520818896903e-06
+    }
+  ],
+  "exact_real_poles": "No delta masses inserted; diag linewidths and finite sampled resolvent only.",
+  "exterior": "Unknown SigmaR outside archived interval, no extrapolation."
+}

@@ -1,0 +1,4 @@
+kind = "native Dyson replay before FDT reprojection"
+stock_A_relative = 0.0
+stock_retarded_relative = 0.0
+stock_state_sha256 = "d6df731827b57e7b48565069080494a6363a3abd41aad885eb096ba053bdce15"

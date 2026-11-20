@@ -1,0 +1,58 @@
+schema: qcl-negf-study-v2
+kind: study
+id: equilibrium-0-70
+name: Independent zero-bias thermal equilibrium candidate at 70 K
+tags:
+- research
+- analytical
+- 70k
+- reference-2019
+- equilibrium
+purpose: research
+operation: stationary
+configuration:
+  sources:
+  - ../model/reference-2019-70k.yaml
+  - ../policies/analytical-diagnostic.yaml
+  overrides:
+    physical:
+      voltage_per_period: 0 mV
+    solver:
+      maximum_scba_iterations: 2048
+      maximum_poisson_iterations: 128
+      self_energy_mixing: 0.2
+    production:
+      checkpoint_every_scba: 32
+variants:
+- id: baseline
+  method_id: configured
+axes:
+  temperatures:
+    values:
+    - 70
+    unit: K
+  voltages:
+    values:
+    - 0
+    unit: mV
+policies:
+  scba_to_poisson: adaptive_working
+  voltage:
+    mode: independent
+    invalid_predecessor: stop_branch
+  on_child_failure: continue
+output:
+  archive:
+    full_final: true
+    projections: true
+    optical: false
+    intermediate_history: 64
+  recovery:
+    enabled: true
+    interval_seconds: 1800.0
+    retain_generations: 2
+    byte_budget: 8589934592
+    reserve_bytes: 67108864
+  telemetry:
+    enabled: true
+    buffer_events: 256

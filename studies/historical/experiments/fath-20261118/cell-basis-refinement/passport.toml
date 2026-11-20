@@ -1,0 +1,89 @@
+identity = "fath-cbo149-cell-basis-static-refinement-v1"
+core_commit = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+zero_field_training_phase_count = 24
+holdout_phase_count = 131
+holdout_phase_definition = "2π*(j+sqrt(5)/13)/131 for j=0,…,130"
+spatial_nodes = [144, 192]
+barrier_mev = 149
+bias_mv = 54
+finite_compare_cells = 7
+finite_cavity_cells = 9
+target_central_probability_min = 0.85
+target_energy_mev_exclusive = [0, 20]
+broader_diagnostic_central_probability_min = 0.10
+broader_diagnostic_energy_mev = [-100, 80]
+pair_max_energy_error_mev_exclusive = 0.5
+pair_max_splitting_error_mev_exclusive = 0.5
+low_four_bloch_max_energy_error_mev_exclusive = 0.5
+target_pair_min_principal_squared_overlap = 0.95
+native_bands_stricter_energy_gate_mev = 0.1
+orthogonality_frobenius_limit = 1e-12
+spectral_sum_frobenius_limit = 0.001
+spectral_sum_evaluation = "e171 worst-momentum full-matrix Frobenius / sqrt(Nb), nodal trapezoid and analytic window on bare cavity"
+seed_broadening_mev = 0.5
+energy_min_mev = -400.0
+trust_margin_mev = 260.0
+candidate_energy_max_mev = [560, 850, 1200, 1600, 2200, 3000, 4200]
+candidate_energy_nodes = [2401, 3201, 4001]
+momentum_nodes = [13, 17]
+momentum_max_inverse_nm = 0.60
+reproduction_cpu_count = 1
+rss_ceiling_gib = 0.8
+transport_run = false
+current_fit = false
+
+[[variant]]
+name = "pod7-r9"
+method = "pod"
+rank = 9
+train_bands = 7
+[[variant]]
+name = "pod8-r10"
+method = "pod"
+rank = 10
+train_bands = 8
+[[variant]]
+name = "pod9-r11"
+method = "pod"
+rank = 11
+train_bands = 9
+[[variant]]
+name = "pod10-r12"
+method = "pod"
+rank = 12
+train_bands = 10
+[[variant]]
+name = "pod5-core7-cell-r9"
+method = "cell_augmented_pod"
+rank = 9
+train_bands = 5
+retained_pod_modes = 7
+[[variant]]
+name = "pod5-core8-cell-r10"
+method = "cell_augmented_pod"
+rank = 10
+train_bands = 5
+retained_pod_modes = 8
+[[variant]]
+name = "pod6-core8-cell-r11"
+method = "cell_augmented_pod"
+rank = 11
+train_bands = 6
+retained_pod_modes = 8
+[[variant]]
+name = "pod7-core9-cell-r12"
+method = "cell_augmented_pod"
+rank = 12
+train_bands = 7
+retained_pod_modes = 9
+[[variant]]
+name = "seam-shift35-r11"
+method = "shifted_seam_attachment"
+rank = 11
+shift_mev = 35.0
+[[variant]]
+name = "seam-shift35-r12"
+method = "shifted_seam_attachment"
+rank = 12
+shift_mev = 35.0

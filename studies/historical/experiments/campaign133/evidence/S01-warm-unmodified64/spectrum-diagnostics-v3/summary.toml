@@ -1,0 +1,10 @@
+mu_eV = 0.008494748987924138
+actual_charge = 0.045000000000001705
+paired_spectral_identity_relative = 1.070451663942504e-15
+state_sha256 = "2a4ba053931b1a9825d96ca2889ff41cbdded7c5b169ae0131c9ef251c2964f9"
+target_charge = 0.045000000000000005
+note = "Subsampling is quadrature on one fixed saved fine-grid spectrum, not independently solved coarse grids. Linewidths are sampled modal diagnostics, not FWHM or acceptance gates."
+fd_charge = 0.044999999999996924
+occupied_defect_over_thermal_occupied = 0.8745967285617561
+fdt_pair_over_A = 0.02584365965943788
+script_sha256 = "f386f4b9786daaec878cfcd38a33812df0d0801097e398a46fdba63822eb7372"

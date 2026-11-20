@@ -1,0 +1,23 @@
+{
+  "model": "Fathololoumi CBO149 at 0mV, fixed U=0, all five channels, no ee",
+  "source_state_sha256": "decf65ef6237b4287bcd026f0c6597b49b2d578982de0661a8c4936809acff77",
+  "map": 256,
+  "strict_status": "max_iterations",
+  "temperature_K": 10.0,
+  "kBT_meV": 0.8617333262145179,
+  "mu_meV_from_A_and_donor_number": 14.555311020465954,
+  "target_number_cm-2": 29999999999.999996,
+  "number_from_FD_cm-2": 29999999999.999996,
+  "number_from_archived_lesser_cm-2": 30000000000.000095,
+  "FDT_Gless_weighted_Frob_over_FD_A": 0.9835347426385082,
+  "FDT_Gless_weighted_Frob_over_Gless": 7.228013289905688,
+  "FDT_Gless_weighted_Frob_over_A": 0.019469547924860647,
+  "FDT_Gless_unweighted_Frob_over_FD_A": 0.9794042930336629,
+  "FDT_Ggreater_weighted_Frob_over_hole_A": 0.019485443053514132,
+  "spectral_identity_weighted_Frob_over_A": 1.9437456422547207e-14,
+  "max_Gless_block_defect": {
+    "dimensionless_Frobenius": 45.126190554191446,
+    "energy_meV": 14.400000000000023,
+    "k_nm_inverse": 0.0
+  }
+}

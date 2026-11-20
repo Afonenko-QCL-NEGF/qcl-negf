@@ -1,0 +1,14 @@
+quantity,value,unit,value_kind,source
+barrier_1,32.6,angstrom,direct,article text and Fig.3a
+well_1,79.9,angstrom,direct,article text and Fig.3a
+barrier_2,19.0,angstrom,direct,article text and Fig.3a
+well_2,84.0,angstrom,direct,article text and Fig.3a
+doped_well_segment,29.0,angstrom,direct,article text and Fig.3a
+well_3_remainder,51.6,angstrom,direct,article text and Fig.3a
+aluminum_fraction,0.25,1,direct,Fig.3a
+doping_sheet_density,4.5e10,cm^-2,direct,article main text
+published_operating_temperature,200,K,direct,Fig.3a
+published_peak_current_bias,56,mV/period,direct,article text and Fig.3a
+design_photon_energy,16.5,meV,direct,article main text
+oscillator_strength,0.20,1,direct,Fig.3a
+extraction_energy,41,meV,direct,article main text

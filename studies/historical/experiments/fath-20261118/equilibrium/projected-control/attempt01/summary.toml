@@ -1,0 +1,19 @@
+model_sha256 = "0a8eca5877b4c3770fc706922a9fb8562db734f92fbbbea98d74e514cd66d77e"
+native_r_sum_tolerance = 0.001
+r_sum_terminal = 0.0783651209227734
+state_sha256 = "d6df731827b57e7b48565069080494a6363a3abd41aad885eb096ba053bdce15"
+stock_alpha = 0.4
+stock_converged = false
+stock_maps = 48
+stock_status = "max_iterations"
+total_fresh_maps = 600
+wall_seconds_at_save = 646.9552128314972
+
+[handoff]
+maps = 552
+mu_meV = 14.6285493200083
+projected_elapsed_seconds = 552.8382349014282
+rR_max_family = 2.2597193110503852e-5
+rR_total = 1.1016097354881493e-6
+reason = "projected_map_budget"
+strict_R_streak = 0

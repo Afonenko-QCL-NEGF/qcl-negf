@@ -1,0 +1,77 @@
+{
+  "attempt": "native54-03",
+  "scope": "fixed U=0 at 54mV/10K CBO149",
+  "electron_electron": "none",
+  "local_scattering": [
+    "IFR",
+    "LO",
+    "acoustic",
+    "alloy",
+    "impurity"
+  ],
+  "process_status": "max_iterations",
+  "point_quality": "unresolved",
+  "scba_maps": 128,
+  "inner_strictly_converged": false,
+  "strictly_passing_rows": 0,
+  "scientific_acceptance": false,
+  "poisson": "not run",
+  "last_failed_gates": [
+    "r_K",
+    "r_Σ",
+    "r_λ",
+    "r_Jchange",
+    "r_population"
+  ],
+  "last_scaled_gates": {
+    "r_D": 2.1320358302519303e-05,
+    "r_A": 3.880084024701113e-06,
+    "r_K": 1996802.3400400002,
+    "r_Σ": 4187867.0587042593,
+    "r_λ": 52014.08508060945,
+    "r_PSD": 0.0,
+    "r_caus": 1.0030791565815141e-06,
+    "r_roundoff": 3.1891375435877058e-06,
+    "r_Jchange": 52.625981917999795,
+    "r_population": 8.110570117867551
+  },
+  "r_current_change_max_error": 0.0,
+  "r_lambda_max_error": 0.0,
+  "J_archive_history_A_cm2": 161.42158742605133,
+  "core_commit": "e171caa60cce676c6c4238dd671e7c527f2bd977",
+  "model_sha256": "41b88f390e59f8ce63958c53fd2961d112fffde2fec3fff1d3d789c68af212e6",
+  "state_sha256": "a51f7935e666d67473ce44132a6db5aa21cb48c88b2443472abb7c57676fdd42",
+  "quadrature_reconstruction": {
+    "energy_max_abs": 0.0,
+    "k_max_abs": 0.0
+  },
+  "independent_observables": {
+    "blocks": 120025,
+    "J_A_cm2": 161.4215874260573,
+    "J_A_cm2_exact_SI_h": 161.4215873271512,
+    "J_minus_A_cm2": -154.97462373760683,
+    "normalized_charge": 0.03000000000000037,
+    "relative_imag_flux": 2.3220145264075166e-16,
+    "relative_imag_flux_minus": 8.0637464558125e-15,
+    "relative_flux_cancellation": 0.9207361622967775,
+    "elapsed_seconds": 1.2697366450011032,
+    "max_child_rss_kib": 52508,
+    "boundary_continuity_relative": 0.03993867109876887
+  },
+  "r_Sigma_max_channel": {
+    "channel": "embedding_minus",
+    "component": "lesser",
+    "recomputed": 0.041878670587061205
+  },
+  "HDF5_selfenergy_groups": [
+    "IFR",
+    "LO",
+    "acoustic",
+    "alloy",
+    "embedding",
+    "embedding_minus",
+    "embedding_plus",
+    "impurity"
+  ],
+  "Hartree_all_zero": true
+}

@@ -1,0 +1,2099 @@
+{
+  "source_root_label": "fath-campaign-20261118",
+  "files": [
+    {
+      "source": "bands/passport.toml",
+      "destination": "bands/passport.toml",
+      "source_sha256": "cc7fde59f40fa83b896d33703e3ad1f0a657a41823af93bf71656e18f742a540",
+      "public_sha256": "cc7fde59f40fa83b896d33703e3ad1f0a657a41823af93bf71656e18f742a540",
+      "bytes": 1310,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "bands/native.jl",
+      "destination": "bands/native.jl",
+      "source_sha256": "264a875f2aadda3f69297edbb0f71ac82418430889101cb98f628fb36c3625b8",
+      "public_sha256": "264a875f2aadda3f69297edbb0f71ac82418430889101cb98f628fb36c3625b8",
+      "bytes": 4813,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "bands/compare.py",
+      "destination": "bands/compare.py",
+      "source_sha256": "0d0bf40fb838280f8b1aafc4919386c62ba61511de341840154ca2e74829780b",
+      "public_sha256": "0d0bf40fb838280f8b1aafc4919386c62ba61511de341840154ca2e74829780b",
+      "bytes": 11960,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "bands/scan_compare.py",
+      "destination": "bands/scan_compare.py",
+      "source_sha256": "af6c4dda75d2cf61a7b77dc62ece165c05309e61203b4f2d1bb9e1afd09cfbd1",
+      "public_sha256": "af6c4dda75d2cf61a7b77dc62ece165c05309e61203b4f2d1bb9e1afd09cfbd1",
+      "bytes": 7483,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "bands/bloch.csv",
+      "destination": "bands/bloch.csv",
+      "source_sha256": "c82b80937f9de0fe41e2c859226f6a09c9e3b23f7dc4fe23e687835031a2a298",
+      "public_sha256": "e6bff946030846166b2735d947f3cfcff85874beda6259261517e7f04c29bde2",
+      "bytes": 232740,
+      "mode": "projection",
+      "changes": "Normalize CRLF to LF only; all parsed CSV cells identical."
+    },
+    {
+      "source": "bands/finite_fd.csv",
+      "destination": "bands/finite_fd.csv",
+      "source_sha256": "793d9ab91ec5bbe015fb1e558c9ceb25f537fa62a5e094c3a5ed2535ac19178c",
+      "public_sha256": "ecd327e215d93bd84be99a62abc29ef8fe37403b35aa641f4dfa06937718f1ef",
+      "bytes": 34884,
+      "mode": "projection",
+      "changes": "Normalize CRLF to LF only; all parsed CSV cells identical."
+    },
+    {
+      "source": "bands/finite_pzp.csv",
+      "destination": "bands/finite_pzp.csv",
+      "source_sha256": "e6adfd839097294a6f505580c8afb8d063877588670eb8a75d7fa921f3dc4892",
+      "public_sha256": "8cdf69fb23b91dd8a765c5cb08e180b81a1c73b368f8fb8ecc7f08df8062a22d",
+      "bytes": 91367,
+      "mode": "projection",
+      "changes": "Normalize CRLF to LF only; all parsed CSV cells identical."
+    },
+    {
+      "source": "bands/summary.json",
+      "destination": "bands/summary.json",
+      "source_sha256": "d05c0eff27eac0b5520ffd42c22609e4c429c11136b6d9d828a55ed3b457111c",
+      "public_sha256": "d05c0eff27eac0b5520ffd42c22609e4c429c11136b6d9d828a55ed3b457111c",
+      "bytes": 60771,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "bands/basis_scan.csv",
+      "destination": "bands/basis_scan.csv",
+      "source_sha256": "966be72bfc206a87829203093dffc76385f97cc5b6a51899a9a0aa0fbfd4ef82",
+      "public_sha256": "930e7e0ac604598332ac2b87add08d03e05cc89f0c1f2d46e197378cced66e47",
+      "bytes": 26598,
+      "mode": "projection",
+      "changes": "Normalize CRLF to LF only; all parsed CSV cells identical."
+    },
+    {
+      "source": "bands/basis_scan.json",
+      "destination": "bands/basis_scan.json",
+      "source_sha256": "716b906c0a05d94b025b62d7e91ae57a6b9a0e54e6158db2f5a22412f451f283",
+      "public_sha256": "716b906c0a05d94b025b62d7e91ae57a6b9a0e54e6158db2f5a22412f451f283",
+      "bytes": 92838,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "bands/basis_refine.csv",
+      "destination": "bands/basis_refine.csv",
+      "source_sha256": "f91f22d1e77d3aaf31d7d37ac1694e330d0f3ccb08c47c606afe074d1f4aa7e2",
+      "public_sha256": "1fb3978594794a60b3f9e3332ba8059da100c4f1f9365ae486cd4bc3d86ddff4",
+      "bytes": 3377,
+      "mode": "projection",
+      "changes": "Normalize CRLF to LF only; all parsed CSV cells identical."
+    },
+    {
+      "source": "bands/basis_refine.json",
+      "destination": "bands/basis_refine.json",
+      "source_sha256": "15e266f17a40e35bdee5f34cb090cd889b6a3d56a0ce52345b65f8f638d3069e",
+      "public_sha256": "15e266f17a40e35bdee5f34cb090cd889b6a3d56a0ce52345b65f8f638d3069e",
+      "bytes": 11349,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "bands/scan_native.jl",
+      "destination": "bands/scan_native.jl",
+      "source_sha256": "c1278cc6dc2762f81cfd4e40401aa24a5429f7a4630a1ac3d727e4476cd770be",
+      "public_sha256": "5168a98816a3dc615e7487b8ee3d2a0112a1db880f216ff8a13e18d02aedcd82",
+      "bytes": 3055,
+      "mode": "projection",
+      "changes": "Replace unpublished runtime-input comment with the explicit numerical context already encoded below."
+    },
+    {
+      "source": "bands/report.md",
+      "destination": "bands/report.md",
+      "source_sha256": "9a0f9ad79423f22c5649a47009fbfbef13ef054e370231d9f26a29d45dd238e8",
+      "public_sha256": "ee17bf6fdb9aea432858ed724b004da44c4691bb22c1c14c74172a3912452b4a",
+      "bytes": 15442,
+      "mode": "projection",
+      "changes": "Resolve Core links to public pinned commit; replace unpublished raw-matrix/runtime-input links with reproducible scripts; link cell-basis report."
+    },
+    {
+      "source": "bands/reproduce.md",
+      "destination": "bands/reproduce.md",
+      "source_sha256": "0107ef1b0e87a43e586a2fa10b66147309e8b5c061d1669a42c2627537156139",
+      "public_sha256": "63f3b21aeef85e21ba5b7f4f553d390b08243098f8a089bf8600e3cc454d1192",
+      "bytes": 2367,
+      "mode": "projection",
+      "changes": "Require caller-selected Julia environment; disclose regeneration of excluded raw matrices and public pinned upstream."
+    },
+    {
+      "source": "transport/device.toml",
+      "destination": "transport/device.toml",
+      "source_sha256": "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502",
+      "public_sha256": "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502",
+      "bytes": 1153,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "reference.md",
+      "destination": "reference.md",
+      "source_sha256": "6388f7aeb8e9ad39b81dd224de27c57532810b9c29bbdc317cc67bc139c47bf9",
+      "public_sha256": "a032dad3c0beca2b30995b708d0078abf50b2b55fca26e6ec916b7e90203b817",
+      "bytes": 12205,
+      "mode": "projection",
+      "changes": "Replace private checkout locator by verified pinned public upstream links; remove local evidence path and process instruction; preserve physical conventions. Independent review: resolve included driver locators and explicitly define Nbar=Ns L0^2."
+    },
+    {
+      "source": "protocol.md",
+      "destination": "protocol.md",
+      "source_sha256": "1e104a83d474b3bc07ebb4d04d815c5c6c75d1b715eaca0b48e73134abceefa5",
+      "public_sha256": "e49a9e7fc83d313b0a487daeb1f87a1d891916da177d1bbbe1e2b57b8f49645b",
+      "bytes": 8457,
+      "mode": "projection",
+      "changes": "Extract preregistered scientific protocol; omit process/resource scheduling and empty report template; resolve upstream/model/source links. Scientific gates unchanged."
+    },
+    {
+      "source": "cell-basis/README.md",
+      "destination": "cell-basis/README.md",
+      "source_sha256": "99a532910e7c683da19861c29ea8ac8f36c90c0dad95a5f8ed232c747f069c50",
+      "public_sha256": "a311160c9525cb00490f6bcb171179f35595dcfdb67727b21da9bc3856afe8ad",
+      "bytes": 7351,
+      "mode": "projection",
+      "changes": "Disclose regeneration of excluded raw holdout/matrix evidence."
+    },
+    {
+      "source": "cell-basis/passport.toml",
+      "destination": "cell-basis/passport.toml",
+      "source_sha256": "80221e34e3d7807ad5d311647a9f833698c28eaee17a13d7baa48c2d44fb0e98",
+      "public_sha256": "80221e34e3d7807ad5d311647a9f833698c28eaee17a13d7baa48c2d44fb0e98",
+      "bytes": 1738,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis/CellBlochPOD.jl",
+      "destination": "cell-basis/CellBlochPOD.jl",
+      "source_sha256": "abd4f904012ea0c3c805a594d55b9aba1e77c637cf7087c04aae3bf2744acf6a",
+      "public_sha256": "abd4f904012ea0c3c805a594d55b9aba1e77c637cf7087c04aae3bf2744acf6a",
+      "bytes": 5686,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis/verify.jl",
+      "destination": "cell-basis/verify.jl",
+      "source_sha256": "f945291115d6ebd69fd0d5d12cb74f8693b912ec85f1229b6c0df328cc954c5a",
+      "public_sha256": "f945291115d6ebd69fd0d5d12cb74f8693b912ec85f1229b6c0df328cc954c5a",
+      "bytes": 7622,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis/holdout.py",
+      "destination": "cell-basis/holdout.py",
+      "source_sha256": "e40eed66e3673e543cc770b8df8ba9c3f584dd9d6b4e31b5a5de144c9a31629a",
+      "public_sha256": "e40eed66e3673e543cc770b8df8ba9c3f584dd9d6b4e31b5a5de144c9a31629a",
+      "bytes": 11449,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis/window_weight.py",
+      "destination": "cell-basis/window_weight.py",
+      "source_sha256": "5bb2ea53a0322df6c648e387ab4c38d37e95891219e29a7509d014fdd0ad9845",
+      "public_sha256": "5bb2ea53a0322df6c648e387ab4c38d37e95891219e29a7509d014fdd0ad9845",
+      "bytes": 5751,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis/window_weight.json",
+      "destination": "cell-basis/window_weight.json",
+      "source_sha256": "b67f553dd4acb74d553efefab98a1d23564c89c225a880c99f5e42099ec8b71d",
+      "public_sha256": "b67f553dd4acb74d553efefab98a1d23564c89c225a880c99f5e42099ec8b71d",
+      "bytes": 18121,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis/summary.csv",
+      "destination": "cell-basis/summary.csv",
+      "source_sha256": "22eb67b0fd0202edd45a9af96466adb264789fd45e32d1524465260bb0651e1a",
+      "public_sha256": "4c86a0471d8c969bf199396e6095d1bba296fed8cf8452f40fb7e1ee9508d9fb",
+      "bytes": 39967,
+      "mode": "projection",
+      "changes": "Normalize CRLF to LF only; all parsed CSV cells identical."
+    },
+    {
+      "source": "cell-basis/verification-summary.toml",
+      "destination": "cell-basis/verification-summary.toml",
+      "source_sha256": "6d183765bc1e37dff8f7e4ccc34f99aad0e117d84a8668dfd9fc8eff16844689",
+      "public_sha256": "6d183765bc1e37dff8f7e4ccc34f99aad0e117d84a8668dfd9fc8eff16844689",
+      "bytes": 1872,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/passport.toml",
+      "destination": "cell-basis-refinement/passport.toml",
+      "source_sha256": "7d873852a519f97607af09f0881f68525ed90276657d287b30958a14174d2e84",
+      "public_sha256": "7d873852a519f97607af09f0881f68525ed90276657d287b30958a14174d2e84",
+      "bytes": 2314,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/summary.csv",
+      "destination": "cell-basis-refinement/summary.csv",
+      "source_sha256": "74fb825d6749e57d26b8a96bd516d5442743d97d304b2973ccf4cca4b8efac77",
+      "public_sha256": "059234f54c70b7dd003e7e285653f901b0233a7304ddd578544bd3af709d5873",
+      "bytes": 3961,
+      "mode": "projection",
+      "changes": "CRLF to LF only, identical CSV cells."
+    },
+    {
+      "source": "cell-basis-refinement/resolved_grid.json",
+      "destination": "cell-basis-refinement/resolved_grid.json",
+      "source_sha256": "8a690e81772cd330379d77fcdf759058376397202f68840f0c589f3f2d147baa",
+      "public_sha256": "8a690e81772cd330379d77fcdf759058376397202f68840f0c589f3f2d147baa",
+      "bytes": 3717,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/preflight.toml",
+      "destination": "cell-basis-refinement/preflight.toml",
+      "source_sha256": "69a42742a711cbdb31c42773b5c37883e0c8d878bddc32d6d702592bfffbfc26",
+      "public_sha256": "69a42742a711cbdb31c42773b5c37883e0c8d878bddc32d6d702592bfffbfc26",
+      "bytes": 7839,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/adapter_holdout.json",
+      "destination": "cell-basis-refinement/adapter_holdout.json",
+      "source_sha256": "d84e55f518fce59022d3d141f89c913c58be28c8186028b1d2520338ab4fb9e8",
+      "public_sha256": "d84e55f518fce59022d3d141f89c913c58be28c8186028b1d2520338ab4fb9e8",
+      "bytes": 1129,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/verification-summary.toml",
+      "destination": "cell-basis-refinement/verification-summary.toml",
+      "source_sha256": "f65985aea81d97bb3f19558029f734713125a356d2a754a2e7c5c688733cccea",
+      "public_sha256": "f65985aea81d97bb3f19558029f734713125a356d2a754a2e7c5c688733cccea",
+      "bytes": 2013,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/RefinedCellBasis.jl",
+      "destination": "cell-basis-refinement/RefinedCellBasis.jl",
+      "source_sha256": "5d0a0cc61f1c7b873567a9965154e41d1872b9ca1313c837282b6490b20cad58",
+      "public_sha256": "5d0a0cc61f1c7b873567a9965154e41d1872b9ca1313c837282b6490b20cad58",
+      "bytes": 1803,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/verify.jl",
+      "destination": "cell-basis-refinement/verify.jl",
+      "source_sha256": "c938f11fb2a81893c3e8bb2765bc067633654dc57b46b6706060872cee07cce7",
+      "public_sha256": "c938f11fb2a81893c3e8bb2765bc067633654dc57b46b6706060872cee07cce7",
+      "bytes": 7580,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/verify_adapter.py",
+      "destination": "cell-basis-refinement/verify_adapter.py",
+      "source_sha256": "1d656b3b5f051e26b31197e07250c1e2adf2555a2fd20fa5c3954dc1a658f6b0",
+      "public_sha256": "1d656b3b5f051e26b31197e07250c1e2adf2555a2fd20fa5c3954dc1a658f6b0",
+      "bytes": 1177,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/refine.py",
+      "destination": "cell-basis-refinement/refine.py",
+      "source_sha256": "0311b8d9068192f4b3d35cfc2c50add0ffb86b23a19aa444c93841e2d426f791",
+      "public_sha256": "0311b8d9068192f4b3d35cfc2c50add0ffb86b23a19aa444c93841e2d426f791",
+      "bytes": 14362,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/resolved_grid.py",
+      "destination": "cell-basis-refinement/resolved_grid.py",
+      "source_sha256": "c706e9b12d7d764d04d43c44e0d13aa4d1438a74d674bc5b812b7f74ca5ef739",
+      "public_sha256": "c706e9b12d7d764d04d43c44e0d13aa4d1438a74d674bc5b812b7f74ca5ef739",
+      "bytes": 2773,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/preflight.jl",
+      "destination": "cell-basis-refinement/preflight.jl",
+      "source_sha256": "76a4ad45aabe3b9a24cce3da48f6e80213e02ed311def3b4c07978e6641e3e17",
+      "public_sha256": "76a4ad45aabe3b9a24cce3da48f6e80213e02ed311def3b4c07978e6641e3e17",
+      "bytes": 3119,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "cell-basis-refinement/results.json",
+      "destination": "cell-basis-refinement/results.json",
+      "source_sha256": "7c538a92b03e6a06132c11782a2e46f747f391bf14e2ee87dba42e191d6f244c",
+      "public_sha256": "eeed9b978f7d03541331144dab32c1afcd696079ddc88633735c7bd49f798502",
+      "bytes": 15142,
+      "mode": "projection",
+      "changes": "Select pod7-r9 at Nz144/192, retain upper-sector diagnostics and two representative coarse-grid cases; summarize all available sum-gate tests. Full scan regenerates from public code."
+    },
+    {
+      "source": "cell-basis-refinement/README.md",
+      "destination": "cell-basis-refinement/README.md",
+      "source_sha256": "1fbed36d6520064fa7009207ea66d0d7c08ed68d121c2fe78bad84c44f911d91",
+      "public_sha256": "6deac51412cb7dba73dcbffd4e601ee3bf1b54d1f88d5d3a90c2ba199aed5018",
+      "bytes": 9151,
+      "mode": "projection",
+      "changes": "Describe selective scalar projection and excluded regenerable basis matrices; preserve scientific results."
+    },
+    {
+      "source": "balance/edge_weights.c",
+      "destination": "balance/edge_weights.c",
+      "source_sha256": "9a28733ce96c3c3cc4fce1dbc4aed67e180e29d8ebe260191d741ec7d3a04813",
+      "public_sha256": "9a28733ce96c3c3cc4fce1dbc4aed67e180e29d8ebe260191d741ec7d3a04813",
+      "bytes": 6874,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "balance/edge_weights.csv",
+      "destination": "balance/edge_weights.csv",
+      "source_sha256": "0afd854669550ec7fa36850c9a64513b4b89a4e360bc9f719375eef9eafe6cb9",
+      "public_sha256": "0afd854669550ec7fa36850c9a64513b4b89a4e360bc9f719375eef9eafe6cb9",
+      "bytes": 1852,
+      "mode": "exact",
+      "changes": "CRLF to LF only, identical CSV cells."
+    },
+    {
+      "source": "balance/report.md",
+      "destination": "balance/report.md",
+      "source_sha256": "bb2995971c55ddce5f13aec77b9e6b8781344e1d2267c7d317e2bca52ebd9596",
+      "public_sha256": "dea6279e326b4ffc17a7372e5c6d55cc72bb4b12cfafde0dd9c8629cfdae1188",
+      "bytes": 7710,
+      "mode": "projection",
+      "changes": "Pin Core links, replace unavailable raw-output links by compact audit; add portable postprocessing invocation and missing-data limitation."
+    },
+    {
+      "source": "method/public-pilot-aggregates.json",
+      "destination": "method/public-pilot-aggregates.json",
+      "source_sha256": "12cb5b12cf6f22bad9e29abad0f36b4074b83085d737f764c32a09bf07637867",
+      "public_sha256": "12cb5b12cf6f22bad9e29abad0f36b4074b83085d737f764c32a09bf07637867",
+      "bytes": 9122,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/alpha-study/public-alpha-aggregates.json",
+      "destination": "method/alpha-study/public-alpha-aggregates.json",
+      "source_sha256": "a989eacf8394e03e61ae7c50805d181d0caf59ee04c5808d97e78d9dd8a3e258",
+      "public_sha256": "a989eacf8394e03e61ae7c50805d181d0caf59ee04c5808d97e78d9dd8a3e258",
+      "bytes": 14506,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/alpha-extended/public-extended-alpha-aggregates.json",
+      "destination": "method/alpha-extended/public-extended-alpha-aggregates.json",
+      "source_sha256": "a05581efce706526479b25f21b9ee75d30e75db647422067f4a5154de4d8797d",
+      "public_sha256": "a05581efce706526479b25f21b9ee75d30e75db647422067f4a5154de4d8797d",
+      "bytes": 8000,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/warm-pilot/public-warm-aggregates.json",
+      "destination": "method/warm-pilot/public-warm-aggregates.json",
+      "source_sha256": "d7771ab7868efc2944dddff41ec67072bf126b8b109d49a327bb8fa8718c5c8d",
+      "public_sha256": "d7771ab7868efc2944dddff41ec67072bf126b8b109d49a327bb8fa8718c5c8d",
+      "bytes": 14199,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/native54-03-independent-audit.json",
+      "destination": "method/native54-03-independent-audit.json",
+      "source_sha256": "3fb42fae0accb920533d0b58889786eb8394dc6c973ef02b2bf34cb72f169c03",
+      "public_sha256": "3fb42fae0accb920533d0b58889786eb8394dc6c973ef02b2bf34cb72f169c03",
+      "bytes": 2151,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/independent_current.c",
+      "destination": "method/independent_current.c",
+      "source_sha256": "9620e625fa177d29b5c039a6b760c6c5917410b81047b8c3c5eecb2578260709",
+      "public_sha256": "9620e625fa177d29b5c039a6b760c6c5917410b81047b8c3c5eecb2578260709",
+      "bytes": 7231,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/report.md",
+      "destination": "method/report.md",
+      "source_sha256": "99018a230e84ae1b119c26633531de6a87122dbbf95a598ec22a4aaf08c96ed4",
+      "public_sha256": "138a614eff3bfe1a34acd55bd712dcbe2dd9548fda9835d2982053e66ef63e3b",
+      "bytes": 9299,
+      "mode": "projection",
+      "changes": "Rewrite as compact scientific synthesis; replace unavailable raw ledger/recovery/scheduling links by five approved public scalar aggregates; pending scalar Aitken and final transport sync explicitly deferred. Independent review: resolve included driver locators and explicitly define Nbar=Ns L0^2.",
+      "source_snapshot_sha256": "99018a230e84ae1b119c26633531de6a87122dbbf95a598ec22a4aaf08c96ed4",
+      "source_final_sha256": "004a42dc7299390af54dcf790a643993daa6f1e845547dd3de2a9a2487e93ec1",
+      "source_version_note": "Projection used earlier source snapshot; final source extended or corrected after that snapshot. Public numerical claims remain tied to included scalar evidence."
+    },
+    {
+      "source": "poisson-response/README.md",
+      "destination": "poisson-response/README.md",
+      "source_sha256": "a523a5eeb7935d3c4447e11b9a3d62dbd2b4d6dcbfb2cf7c527323e25d3c9437",
+      "public_sha256": "a523a5eeb7935d3c4447e11b9a3d62dbd2b4d6dcbfb2cf7c527323e25d3c9437",
+      "bytes": 7204,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "poisson-response/sources.toml",
+      "destination": "poisson-response/sources.toml",
+      "source_sha256": "76b48e38afaed91a1a93a4425ef79e81a219b3da8481adb50802522e91a30e3e",
+      "public_sha256": "76b48e38afaed91a1a93a4425ef79e81a219b3da8481adb50802522e91a30e3e",
+      "bytes": 569,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "poisson-response/extract_and_native.jl",
+      "destination": "poisson-response/extract_and_native.jl",
+      "source_sha256": "24b4eda6487cb5c3ffcd0c62e12068e79146ef78c1ce2ed91e65c86a0a86e0a6",
+      "public_sha256": "24b4eda6487cb5c3ffcd0c62e12068e79146ef78c1ce2ed91e65c86a0a86e0a6",
+      "bytes": 6977,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "poisson-response/response.py",
+      "destination": "poisson-response/response.py",
+      "source_sha256": "4d1628845cad7fe82887afef09b41a3d5bfd6e83c04f92fe4656192ca30a3cf2",
+      "public_sha256": "4d1628845cad7fe82887afef09b41a3d5bfd6e83c04f92fe4656192ca30a3cf2",
+      "bytes": 5920,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "poisson-response/density-input.csv",
+      "destination": "poisson-response/density-input.csv",
+      "source_sha256": "dca7236f6a4b056f053c06163546773fdd8fc123e403d144c903bf8c7740edea",
+      "public_sha256": "dca7236f6a4b056f053c06163546773fdd8fc123e403d144c903bf8c7740edea",
+      "bytes": 98188,
+      "mode": "exact",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "poisson-response/density-sources.toml",
+      "destination": "poisson-response/density-sources.toml",
+      "source_sha256": "2e780bb64803217247acbd761f9b359264cd505bb080f30f9729aa70780911f9",
+      "public_sha256": "2e780bb64803217247acbd761f9b359264cd505bb080f30f9729aa70780911f9",
+      "bytes": 5438,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "poisson-response/response-summary.csv",
+      "destination": "poisson-response/response-summary.csv",
+      "source_sha256": "b05642afb52c661e80fc40bd1db9419e86b1b2fa487d82ee399c0bd5c5addeb7",
+      "public_sha256": "ed3e9f43c458861e4b7124a6fa77b13602022b86e43f74d39bb111dc43458c2d",
+      "bytes": 3042,
+      "mode": "projection",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "poisson-response/response-sensitivity.csv",
+      "destination": "poisson-response/response-sensitivity.csv",
+      "source_sha256": "ebfb0411ce831ad401e6802cf5e364e203756cd51ca6caa18b54cffa3478968b",
+      "public_sha256": "54ced2a5ffc36ecdb93144267e9fe54703ce336013111398a4793e23b1dede7b",
+      "bytes": 665,
+      "mode": "projection",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "spectral54/README.md",
+      "destination": "spectral54/README.md",
+      "source_sha256": "a533dd9d2329ce883efdcdeb97e5ab05d4e3245bdbcc982058c3d45b51fabca2",
+      "public_sha256": "a533dd9d2329ce883efdcdeb97e5ab05d4e3245bdbcc982058c3d45b51fabca2",
+      "bytes": 8894,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "spectral54/frozen.py",
+      "destination": "spectral54/frozen.py",
+      "source_sha256": "fa6380acbd013d6fa16155123cf1f025f893f97acefd583af45fc1dd821cec64",
+      "public_sha256": "fa6380acbd013d6fa16155123cf1f025f893f97acefd583af45fc1dd821cec64",
+      "bytes": 16300,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "spectral54/quadrature.csv",
+      "destination": "spectral54/quadrature.csv",
+      "source_sha256": "186c12ccedc3e943ad9414c4a7b1d91f3f3658451cb56ba1ee83f389552eb27e",
+      "public_sha256": "2b94532e7cbb9c1dc421fe6a7fa600e63e911382eab1882fd17ecc3a373635ce",
+      "bytes": 4618,
+      "mode": "projection",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "spectral54/diagnostics.json",
+      "destination": "spectral54/diagnostics.json",
+      "source_sha256": "c7afa9dc134dab61e314aeab7cce7631f432c8477fdddf9f6c6b2398a1a9167f",
+      "public_sha256": "c7afa9dc134dab61e314aeab7cce7631f432c8477fdddf9f6c6b2398a1a9167f",
+      "bytes": 14506,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/adaptive-scalar/public-adaptive-scalar-aggregates.json",
+      "destination": "method/adaptive-scalar/public-adaptive-scalar-aggregates.json",
+      "source_sha256": "05730b0c8a5802f06ef334f31969a74dca3c23021641537a1374a71e81bcbf52",
+      "public_sha256": "05730b0c8a5802f06ef334f31969a74dca3c23021641537a1374a71e81bcbf52",
+      "bytes": 14801,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/adaptive-scalar/aitken_controller.jl",
+      "destination": "method/adaptive-scalar/aitken_controller.jl",
+      "source_sha256": "4d177bed585cb81a6f11d8db1ebdc8e41671797bde31356d3c7c1333e14a60ff",
+      "public_sha256": "4d177bed585cb81a6f11d8db1ebdc8e41671797bde31356d3c7c1333e14a60ff",
+      "bytes": 1633,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/frozen-kinetic/public-frozen-kinetic-aggregates.json",
+      "destination": "method/frozen-kinetic/public-frozen-kinetic-aggregates.json",
+      "source_sha256": "aa8a1d305b0b75cbf9447df6a215a182efad9d2c5276c1e4e8f88d0ea54610fe",
+      "public_sha256": "aa8a1d305b0b75cbf9447df6a215a182efad9d2c5276c1e4e8f88d0ea54610fe",
+      "bytes": 7141,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/kinetic-correction/public-kinetic-correction-aggregates.json",
+      "destination": "method/kinetic-correction/public-kinetic-correction-aggregates.json",
+      "source_sha256": "6d9e2963e812cfcf5e36c4d3a1d1aa8afeb62ee46df06fa4f106e599e1473a4c",
+      "public_sha256": "6d9e2963e812cfcf5e36c4d3a1d1aa8afeb62ee46df06fa4f106e599e1473a4c",
+      "bytes": 17267,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/adaptive-scalar/report.md",
+      "destination": "method/adaptive-scalar/report.md",
+      "source_sha256": "c5c9057166ffc62611069614a1541b1d88e0a5526c6e19ac6cc07b8099623845",
+      "public_sha256": "75288b9fa72248fc2f1f5196cf777c777b32d2d96336b6003163d2b918136334",
+      "bytes": 7227,
+      "mode": "projection",
+      "changes": "Pin upstream; replace excluded service/raw links with approved scalar evidence; remove CPU affinity; disclose unavailable full replay; repair literal carriage-return rho typo."
+    },
+    {
+      "source": "method/frozen-kinetic/report.md",
+      "destination": "method/frozen-kinetic/report.md",
+      "source_sha256": "f0a6995a634a2b7055c3addf6dfa904f2e2568d7f2bd33773354493fb75690ab",
+      "public_sha256": "b4f94386ec779a05f0999252f10d2859cbbd66e58ba83001bb7d5c24fa0db129",
+      "bytes": 10455,
+      "mode": "projection",
+      "changes": "Pin upstream; replace excluded service/raw links with approved scalar evidence; remove CPU affinity; disclose unavailable full replay; repair literal carriage-return rho typo."
+    },
+    {
+      "source": "method/kinetic-correction/report.md",
+      "destination": "method/kinetic-correction/report.md",
+      "source_sha256": "0ad78d99b51cb9833e0f0c5aa33c137ceaa2b6d11df492d95b33dac19a7c2842",
+      "public_sha256": "f9b49726994c392b2881bce0698067f8d8af2e1aed6167e9e73e61186317d636",
+      "bytes": 7331,
+      "mode": "projection",
+      "changes": "Pin upstream; replace excluded service/raw links with approved scalar evidence; remove CPU affinity; disclose unavailable full replay; repair literal carriage-return rho typo."
+    },
+    {
+      "source": "equilibrium/fdt.py",
+      "destination": "equilibrium/fdt.py",
+      "source_sha256": "ca5a8b49d4f1247acf07cbccad1bcf775f71710624c4f49e7fd5f7456f3f0241",
+      "public_sha256": "ca5a8b49d4f1247acf07cbccad1bcf775f71710624c4f49e7fd5f7456f3f0241",
+      "bytes": 6945,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/fdt.json",
+      "destination": "equilibrium/fdt.json",
+      "source_sha256": "89a0e53f0769d23a0b9ba59044d302859e4af2fdd0484ae7bb698cded9f50259",
+      "public_sha256": "89a0e53f0769d23a0b9ba59044d302859e4af2fdd0484ae7bb698cded9f50259",
+      "bytes": 1005,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/matched_rows.csv",
+      "destination": "equilibrium/matched_rows.csv",
+      "source_sha256": "cd92ec2a32acf7c43f697bde77dd85511f45b1d95b412f2401e7d4955477bc04",
+      "public_sha256": "8c0733c9b1114bc6dc4de9e79af1bce35cac5acf88ea9e9e2301ff2cafa5b38e",
+      "bytes": 902,
+      "mode": "projection",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "equilibrium/kms.jl",
+      "destination": "equilibrium/kms.jl",
+      "source_sha256": "32ba913b45ea6e573f9b561d9529ca0d7d8840ad740d32852b5d7a4c5bc6761d",
+      "public_sha256": "32ba913b45ea6e573f9b561d9529ca0d7d8840ad740d32852b5d7a4c5bc6761d",
+      "bytes": 9614,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/kms-identity.toml",
+      "destination": "equilibrium/kms-identity.toml",
+      "source_sha256": "bdbb9c7a3a17f6bfa36ca655a60942224b7fe33208f84a6601e548a0a64467c4",
+      "public_sha256": "bdbb9c7a3a17f6bfa36ca655a60942224b7fe33208f84a6601e548a0a64467c4",
+      "bytes": 450,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/kms.csv",
+      "destination": "equilibrium/kms.csv",
+      "source_sha256": "655c6ecc9296662960982066a3b653148c058470fd32c675a3303ba6d1024848",
+      "public_sha256": "655c6ecc9296662960982066a3b653148c058470fd32c675a3303ba6d1024848",
+      "bytes": 11591,
+      "mode": "exact",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "equilibrium/attempt01/device.toml",
+      "destination": "equilibrium/attempt01/device.toml",
+      "source_sha256": "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502",
+      "public_sha256": "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502",
+      "bytes": 1153,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/attempt01/transport-run.jl",
+      "destination": "equilibrium/attempt01/transport-run.jl",
+      "source_sha256": "14ae01810caf594b20d6d0dbeea4d7ede750b5d52ed6fd5a3968d45d910ea070",
+      "public_sha256": "14ae01810caf594b20d6d0dbeea4d7ede750b5d52ed6fd5a3968d45d910ea070",
+      "bytes": 23271,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/attempt01/identity.toml",
+      "destination": "equilibrium/attempt01/identity.toml",
+      "source_sha256": "cce55d5a8ae7512dfd7dcdd16c6737eb89d9245b77a09a5fd41e08cbca276af7",
+      "public_sha256": "cce55d5a8ae7512dfd7dcdd16c6737eb89d9245b77a09a5fd41e08cbca276af7",
+      "bytes": 1484,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/attempt01/linear/execution.toml",
+      "destination": "equilibrium/attempt01/linear/execution.toml",
+      "source_sha256": "28ac9da93ec57cd116b4123aac49352a9de68cc0cb103802d735efbdf145fef3",
+      "public_sha256": "28ac9da93ec57cd116b4123aac49352a9de68cc0cb103802d735efbdf145fef3",
+      "bytes": 245,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/attempt01/linear/flux-048.toml",
+      "destination": "equilibrium/attempt01/linear/flux-048.toml",
+      "source_sha256": "d70278ed1504a497168a05d4c19a94f71452fca00a2ed4dfad17d815609cef55",
+      "public_sha256": "d70278ed1504a497168a05d4c19a94f71452fca00a2ed4dfad17d815609cef55",
+      "bytes": 166,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/attempt01/linear/flux-128.toml",
+      "destination": "equilibrium/attempt01/linear/flux-128.toml",
+      "source_sha256": "f61ec02c1f2920afe29326dcd745b07c0a59805bfe7e12c42f3b1af420cb81b9",
+      "public_sha256": "f61ec02c1f2920afe29326dcd745b07c0a59805bfe7e12c42f3b1af420cb81b9",
+      "bytes": 165,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/attempt01/linear/flux-256.toml",
+      "destination": "equilibrium/attempt01/linear/flux-256.toml",
+      "source_sha256": "162ac7b2866165f12f85426aa566d485658dc23e82b7eb9adaeda630fa9384cb",
+      "public_sha256": "162ac7b2866165f12f85426aa566d485658dc23e82b7eb9adaeda630fa9384cb",
+      "bytes": 170,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/run.jl",
+      "destination": "equilibrium/run.jl",
+      "source_sha256": "f525c855c2c4bf4b94167550f298b3f15d57c9c5fcaab1df165b53285e460899",
+      "public_sha256": "5c2beaf7b7b54ad76f71c163c6aa1a40e854796f2dd12167503475b1e88605e8",
+      "bytes": 8823,
+      "mode": "projection",
+      "changes": "Resolve the archived helper from its published attempt01 location; numerical operations and thresholds unchanged."
+    },
+    {
+      "source": "equilibrium/report.md",
+      "destination": "equilibrium/report.md",
+      "source_sha256": "42969d452644467d58115800eb78fa20fb54e598f79d63d7fed1b54037ff9a48",
+      "public_sha256": "483ee1568d91a61e12ec576c2fcb68a87b70b692c958ae0e3d2d2ec6b75bf3dd",
+      "bytes": 10709,
+      "mode": "projection",
+      "changes": "Resolve raw/service links to included scientific identity/status and reproduction boundary. Link later completed continuation without changing archived cold status. Link later completed continuation without changing archived cold status.",
+      "source_snapshot_sha256": "42969d452644467d58115800eb78fa20fb54e598f79d63d7fed1b54037ff9a48",
+      "source_final_sha256": "365f5ed5c27489b852f7ababdfee8285f8fe2eef9974858c62eb0638d9c5884e",
+      "source_version_note": "Projection used earlier source snapshot; final source extended or corrected after that snapshot. Public numerical claims remain tied to included scalar evidence."
+    },
+    {
+      "source": "equilibrium/projected-control/run.jl",
+      "destination": "equilibrium/projected-control/run.jl",
+      "source_sha256": "623e38cb20cfabb7dc36429b259555fa068ee2404f22ec42f43997da08580b73",
+      "public_sha256": "623e38cb20cfabb7dc36429b259555fa068ee2404f22ec42f43997da08580b73",
+      "bytes": 10257,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/independent.py",
+      "destination": "equilibrium/projected-control/independent.py",
+      "source_sha256": "417df96a22dfd0d1b65876620582a4926fc6f3ae484466dce2b81edc9a8e5d72",
+      "public_sha256": "417df96a22dfd0d1b65876620582a4926fc6f3ae484466dce2b81edc9a8e5d72",
+      "bytes": 6079,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/independent.json",
+      "destination": "equilibrium/projected-control/independent.json",
+      "source_sha256": "d80ae53f7e552cef2ebb2618c083ad90ba1e258f94b8b76b3aef4d0d14447b68",
+      "public_sha256": "d80ae53f7e552cef2ebb2618c083ad90ba1e258f94b8b76b3aef4d0d14447b68",
+      "bytes": 1906,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/spectral_refinement.py",
+      "destination": "equilibrium/projected-control/spectral_refinement.py",
+      "source_sha256": "dd1718677e8b692e23cf67b862a54eb8fc8fafe5ae81de99e31f2062f3d41264",
+      "public_sha256": "dd1718677e8b692e23cf67b862a54eb8fc8fafe5ae81de99e31f2062f3d41264",
+      "bytes": 8541,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/spectral_refinement.csv",
+      "destination": "equilibrium/projected-control/spectral_refinement.csv",
+      "source_sha256": "45ae749613e406c2895c48487f8587202d690605c37073431eb92a41fdc85bf5",
+      "public_sha256": "7b7e0a532285b5f3f9bef5e84fc440dd4578075941ee01d4597db5d97b6f26d3",
+      "bytes": 16113,
+      "mode": "projection",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "equilibrium/projected-control/spectral_refinement.json",
+      "destination": "equilibrium/projected-control/spectral_refinement.json",
+      "source_sha256": "fb951c2f37ba2afa54b08c86027afabcc3d723b28890b3479fe8b615ae823c7b",
+      "public_sha256": "fb951c2f37ba2afa54b08c86027afabcc3d723b28890b3479fe8b615ae823c7b",
+      "bytes": 2725,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/adaptive_poles.py",
+      "destination": "equilibrium/projected-control/adaptive_poles.py",
+      "source_sha256": "6a25b504132170cbc5d0d05b6545ff1a4b5b02b077cdb2a7889ea429a6fd45c6",
+      "public_sha256": "6a25b504132170cbc5d0d05b6545ff1a4b5b02b077cdb2a7889ea429a6fd45c6",
+      "bytes": 6034,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/adaptive_poles.json",
+      "destination": "equilibrium/projected-control/adaptive_poles.json",
+      "source_sha256": "309f094d3ccb69e161ebcfccec45f2d9621d0ce4eed0af1497397f429ee96875",
+      "public_sha256": "309f094d3ccb69e161ebcfccec45f2d9621d0ce4eed0af1497397f429ee96875",
+      "bytes": 3760,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/pole_candidates.csv",
+      "destination": "equilibrium/projected-control/pole_candidates.csv",
+      "source_sha256": "cbe5426ff2e5e86ff87c845a5234cd05c73f0a4de57610ae099ac606b22f8b3c",
+      "public_sha256": "f50d537b8ce66b4cf8f7717e7afa0da6761618f71b074b4095ff93196c0f5cd4",
+      "bytes": 2079,
+      "mode": "projection",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "equilibrium/projected-control/attempt01/summary.toml",
+      "destination": "equilibrium/projected-control/attempt01/summary.toml",
+      "source_sha256": "51aa46216181b46effb1979ff7a20670e202e9d49dab6530932c379b38d8a139",
+      "public_sha256": "51aa46216181b46effb1979ff7a20670e202e9d49dab6530932c379b38d8a139",
+      "bytes": 602,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/attempt01/handoff.toml",
+      "destination": "equilibrium/projected-control/attempt01/handoff.toml",
+      "source_sha256": "021720b11174bb6634d28c07d45f93083df506a3d771a9145d354daaf213e499",
+      "public_sha256": "021720b11174bb6634d28c07d45f93083df506a3d771a9145d354daaf213e499",
+      "bytes": 206,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/attempt01/stock.csv",
+      "destination": "equilibrium/projected-control/attempt01/stock.csv",
+      "source_sha256": "d9a55419d2e7326d6f889e54e890c3c8a1b8db1143345080da772501a8b847b2",
+      "public_sha256": "d9a55419d2e7326d6f889e54e890c3c8a1b8db1143345080da772501a8b847b2",
+      "bytes": 16463,
+      "mode": "exact",
+      "changes": " CSV CRLF normalized to LF."
+    },
+    {
+      "source": "equilibrium/projected-control/attempt01/projected.csv",
+      "destination": "equilibrium/projected-control/attempt01/projected.csv",
+      "source_sha256": "38020c138aae47f9be92b0934f458984ccce48c91b61e19b3c0b3feb250fdb13",
+      "public_sha256": "74f35c9e354f2a6d8fc75cf7a7dd0e26804816f0004b717dc57ef7fa7e82e232",
+      "bytes": 1731,
+      "mode": "projection",
+      "changes": "Select 13 landmark rows from 552; source hash identifies full history. Full-window trend aggregates retained in spectral_refinement.json; run.jl generates complete CSV. CSV CRLF normalized to LF."
+    },
+    {
+      "source": "equilibrium/projected-control/report.md",
+      "destination": "equilibrium/projected-control/report.md",
+      "source_sha256": "6fc19fca460d4ada762a7bef35985973dc40c2599c304f4cf7cd2d98a3ed8580",
+      "public_sha256": "854b5381971b690d9687d89296fbf7097c6a312c9a6121582df0e6ad0fcabb76",
+      "bytes": 7497,
+      "mode": "projection",
+      "changes": "Replace service links by generating code/status; disclose selective projected history and excluded HDF dependencies."
+    },
+    {
+      "source": "equilibrium/projected-control/refinement.md",
+      "destination": "equilibrium/projected-control/refinement.md",
+      "source_sha256": "54d0c56ec10bd621e28f06b10dffd4d3c186d54865c1fc0b2f4905121951cac5",
+      "public_sha256": "7486d42595d728488cd571141786e2c36346ba78a884b4602c806fe00e19312d",
+      "bytes": 7854,
+      "mode": "projection",
+      "changes": "Replace service links by generating code/status; disclose selective projected history and excluded HDF dependencies."
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/run.jl",
+      "destination": "equilibrium/projected-control/continuation/run.jl",
+      "source_sha256": "52f294fc04396dc4f7c01c3eaf0eeb870174938bb75816ee0098880409f8f4fc",
+      "public_sha256": "52f294fc04396dc4f7c01c3eaf0eeb870174938bb75816ee0098880409f8f4fc",
+      "bytes": 14839,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/audit_stock.py",
+      "destination": "equilibrium/projected-control/continuation/audit_stock.py",
+      "source_sha256": "13c85eb8fbecbe65a96ea4dec46ab2878064538268dd95f348c59d324e1157ea",
+      "public_sha256": "13c85eb8fbecbe65a96ea4dec46ab2878064538268dd95f348c59d324e1157ea",
+      "bytes": 543,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/audit_current.py",
+      "destination": "equilibrium/projected-control/continuation/audit_current.py",
+      "source_sha256": "e47688b2c3ebfdb4ee738f08370bc1b61a5f5c65b636296677bcfadd0779b1ab",
+      "public_sha256": "e47688b2c3ebfdb4ee738f08370bc1b61a5f5c65b636296677bcfadd0779b1ab",
+      "bytes": 6243,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/verify_projected_checkpoint.py",
+      "destination": "equilibrium/projected-control/continuation/verify_projected_checkpoint.py",
+      "source_sha256": "ae7c428bef238e902f6eedb9d098d4794235a648489404f15326c50f34c6a895",
+      "public_sha256": "ae7c428bef238e902f6eedb9d098d4794235a648489404f15326c50f34c6a895",
+      "bytes": 3407,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/independent.json",
+      "destination": "equilibrium/projected-control/continuation/independent.json",
+      "source_sha256": "d6cc4c07b846edacfcdce9fed89aa0847546dea88408941554d794cefc11715b",
+      "public_sha256": "d6cc4c07b846edacfcdce9fed89aa0847546dea88408941554d794cefc11715b",
+      "bytes": 1924,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/current_gate.csv",
+      "destination": "equilibrium/projected-control/continuation/current_gate.csv",
+      "source_sha256": "3d8ef3eb7293fd95b8aad6a688b3ee651460a67a9aeae328624f26d667cf86c6",
+      "public_sha256": "08850e134cfc0d42df5993f9a8d3c0bc7af32f78e9253e30c5b9af5ff9419ff1",
+      "bytes": 25683,
+      "mode": "projection",
+      "changes": " CSV line endings LF."
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/current_gate.json",
+      "destination": "equilibrium/projected-control/continuation/current_gate.json",
+      "source_sha256": "5e02f69e29a876d4320488d6743fa99d396a3d02834e54dc6504f1a733c6a8db",
+      "public_sha256": "5e02f69e29a876d4320488d6743fa99d396a3d02834e54dc6504f1a733c6a8db",
+      "bytes": 1859,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/summary.toml",
+      "destination": "equilibrium/projected-control/continuation/attempt01/summary.toml",
+      "source_sha256": "1c51866934e111bfc254299b5e827ae8fd4ad8bb3331f9905c133780ae922559",
+      "public_sha256": "1c51866934e111bfc254299b5e827ae8fd4ad8bb3331f9905c133780ae922559",
+      "bytes": 715,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/source-replay.toml",
+      "destination": "equilibrium/projected-control/continuation/attempt01/source-replay.toml",
+      "source_sha256": "549bf4cdd4674e62d1c4f3e6cafc9d6e75a84069d1203909277c705751940a70",
+      "public_sha256": "549bf4cdd4674e62d1c4f3e6cafc9d6e75a84069d1203909277c705751940a70",
+      "bytes": 194,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/handoff.toml",
+      "destination": "equilibrium/projected-control/continuation/attempt01/handoff.toml",
+      "source_sha256": "ae3014ae67b2c349ad523e5a075128a3e7387a59777a347849105de14e016a85",
+      "public_sha256": "ae3014ae67b2c349ad523e5a075128a3e7387a59777a347849105de14e016a85",
+      "bytes": 316,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/stock.csv",
+      "destination": "equilibrium/projected-control/continuation/attempt01/stock.csv",
+      "source_sha256": "c8a91dd94df33ece4d06f2b1ad70a83f5576137d9d83c085382ec9c29a8a2dd1",
+      "public_sha256": "c8a91dd94df33ece4d06f2b1ad70a83f5576137d9d83c085382ec9c29a8a2dd1",
+      "bytes": 42689,
+      "mode": "exact",
+      "changes": " CSV line endings LF."
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/audit-projected-256.json",
+      "destination": "equilibrium/projected-control/continuation/audit-projected-256.json",
+      "source_sha256": "3faac90c9242ae3a0c3504afe031e7339cbf8a5d692c069cd4fc283b2e46569f",
+      "public_sha256": "3faac90c9242ae3a0c3504afe031e7339cbf8a5d692c069cd4fc283b2e46569f",
+      "bytes": 494,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/audit-projected-512.json",
+      "destination": "equilibrium/projected-control/continuation/audit-projected-512.json",
+      "source_sha256": "3cdeb8e40831c4eb90ac58b127d12720d421e8a3c7ddb4b5cb49b60698988890",
+      "public_sha256": "3cdeb8e40831c4eb90ac58b127d12720d421e8a3c7ddb4b5cb49b60698988890",
+      "bytes": 496,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/audit-projected-768.json",
+      "destination": "equilibrium/projected-control/continuation/audit-projected-768.json",
+      "source_sha256": "df0beca2620bb81d170cdf73737fcc8c11992e7cdf2f8c782b70e000af6d5e20",
+      "public_sha256": "df0beca2620bb81d170cdf73737fcc8c11992e7cdf2f8c782b70e000af6d5e20",
+      "bytes": 497,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/audit-projected-handoff.json",
+      "destination": "equilibrium/projected-control/continuation/audit-projected-handoff.json",
+      "source_sha256": "4dfb705ec9991f9877f2c2224de74030bd177706ee3b11ea6a2522d3cce14061",
+      "public_sha256": "4dfb705ec9991f9877f2c2224de74030bd177706ee3b11ea6a2522d3cce14061",
+      "bytes": 498,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/projected-256.h5.toml",
+      "destination": "equilibrium/projected-control/continuation/attempt01/projected-256.h5.toml",
+      "source_sha256": "86c1d40cf5525f35db88819443cf617685d1a62aa38fbcd0b633ba6c3be2a0ce",
+      "public_sha256": "86c1d40cf5525f35db88819443cf617685d1a62aa38fbcd0b633ba6c3be2a0ce",
+      "bytes": 356,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/projected-512.h5.toml",
+      "destination": "equilibrium/projected-control/continuation/attempt01/projected-512.h5.toml",
+      "source_sha256": "f65a136d736729d8720a4374931306eb584fc938d7a2849bbd5342c36a66c19e",
+      "public_sha256": "f65a136d736729d8720a4374931306eb584fc938d7a2849bbd5342c36a66c19e",
+      "bytes": 357,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/projected-768.h5.toml",
+      "destination": "equilibrium/projected-control/continuation/attempt01/projected-768.h5.toml",
+      "source_sha256": "89477f215ecc6ecc607d10c8971d082073ee9e0b82b6a804b8ee8502c83a7e37",
+      "public_sha256": "89477f215ecc6ecc607d10c8971d082073ee9e0b82b6a804b8ee8502c83a7e37",
+      "bytes": 356,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/projected-handoff.h5.toml",
+      "destination": "equilibrium/projected-control/continuation/attempt01/projected-handoff.h5.toml",
+      "source_sha256": "9ae29979accedf07c4612ef7213ffef162161f89a96e8995cd1dbd2f50b113a9",
+      "public_sha256": "9ae29979accedf07c4612ef7213ffef162161f89a96e8995cd1dbd2f50b113a9",
+      "bytes": 356,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/attempt01/projected.csv",
+      "destination": "equilibrium/projected-control/continuation/attempt01/projected.csv",
+      "source_sha256": "8803d55c0629ee9caf903f63b7fae461339f06ff0ab680f94644d027fa2c019e",
+      "public_sha256": "a402df63453589cf8e1ba26394b642439bbd3d74dc248d532fbde59b91ae5897",
+      "bytes": 1646,
+      "mode": "projection",
+      "changes": "Select 12 maps including handoff three-row streak and audited checkpoints; complete 898-row history regenerates with run.jl or requires external archive. CSV line endings LF."
+    },
+    {
+      "source": "equilibrium/projected-control/continuation/report.md",
+      "destination": "equilibrium/projected-control/continuation/report.md",
+      "source_sha256": "6205ff7e213cda396141244432e32054ec31b931e653b42871800311706b30e3",
+      "public_sha256": "76978358afcd762353b471fa075c59ae3f8295fad557eace5bf367e59bde6f8e",
+      "bytes": 7476,
+      "mode": "projection",
+      "changes": "Resolve service links to included generator/summary; explicitly document selected projected history and external raw prerequisites."
+    },
+    {
+      "source": "transport/audit_saved_density.jl",
+      "destination": "transport/audit_saved_density.jl",
+      "source_sha256": "2f500a8cce2a9a7fd3317b55ee11a911b9d95c0b5e5ae35de739f8142486e6ab",
+      "public_sha256": "2f500a8cce2a9a7fd3317b55ee11a911b9d95c0b5e5ae35de739f8142486e6ab",
+      "bytes": 8576,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/summarize.py",
+      "destination": "transport/summarize.py",
+      "source_sha256": "b45264d900f6dcdc702b2dc47ecdf1937103cc5cd145bd87ebb1c7292c59e559",
+      "public_sha256": "b45264d900f6dcdc702b2dc47ecdf1937103cc5cd145bd87ebb1c7292c59e559",
+      "bytes": 4636,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/compare_warm.py",
+      "destination": "transport/compare_warm.py",
+      "source_sha256": "ae7d361ddcfc44cbe804904380d79d6c7e1b11fb8e3ea72b6fc98a9651af32d2",
+      "public_sha256": "ae7d361ddcfc44cbe804904380d79d6c7e1b11fb8e3ea72b6fc98a9651af32d2",
+      "bytes": 2488,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/compare_basis.py",
+      "destination": "transport/compare_basis.py",
+      "source_sha256": "e3d6397bf5fb76652ee51847b3b1cb94bb95b2bb31423619a4f632ad050230c4",
+      "public_sha256": "e3d6397bf5fb76652ee51847b3b1cb94bb95b2bb31423619a4f632ad050230c4",
+      "bytes": 2745,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/compare_window.py",
+      "destination": "transport/compare_window.py",
+      "source_sha256": "bddfc938a4d2ab3326ccaa447e04be58f5b10357d4a7ca866ba48f19fb73964c",
+      "public_sha256": "bddfc938a4d2ab3326ccaa447e04be58f5b10357d4a7ca866ba48f19fb73964c",
+      "bytes": 3888,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/summarize_long.py",
+      "destination": "transport/summarize_long.py",
+      "source_sha256": "f021b3f3b3b826f2b98f45419a724b54f94f5276795d096904f1e4d49075475c",
+      "public_sha256": "f021b3f3b3b826f2b98f45419a724b54f94f5276795d096904f1e4d49075475c",
+      "bytes": 4812,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/compare_refinement.py",
+      "destination": "transport/compare_refinement.py",
+      "source_sha256": "a94138dd42850be3d3c657e512585ee818c28e0f2b2172ea6b30a93ff0113795",
+      "public_sha256": "a94138dd42850be3d3c657e512585ee818c28e0f2b2172ea6b30a93ff0113795",
+      "bytes": 7801,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/native54-03.toml",
+      "destination": "transport/native54-03.toml",
+      "source_sha256": "b7f1a07cf0f6680127a29bcf29d44635d6f6fe4b62e0ca4f0933c092968a6e00",
+      "public_sha256": "b7f1a07cf0f6680127a29bcf29d44635d6f6fe4b62e0ca4f0933c092968a6e00",
+      "bytes": 507,
+      "mode": "exact",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/warm-alpha02-probe.toml",
+      "destination": "transport/warm-alpha02-probe.toml",
+      "source_sha256": "c9d323812d652c197c21cbcd4aab6ab2a13239127978cb152fd086a0c6a52cf6",
+      "public_sha256": "487f5df649511bbac623281451d7e48c622620edec50328c8ad86b12bf826894",
+      "bytes": 564,
+      "mode": "projection",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/warm-alpha04-probe.toml",
+      "destination": "transport/warm-alpha04-probe.toml",
+      "source_sha256": "ebcfdd1f9b6a4b2b4e27a44fd73ec2592959efcf2ab76c7200451a5777fc07db",
+      "public_sha256": "33aff9de739bf13d2426f857f3cd6a6f6f3d848dac3bbbbed099909ec7272e42",
+      "bytes": 564,
+      "mode": "projection",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/native54-long-alpha02.toml",
+      "destination": "transport/native54-long-alpha02.toml",
+      "source_sha256": "15cdf0248bc9de88d295c1f5886cc88dfbf115822a68243718c7e0f989538872",
+      "public_sha256": "fde5d68691de59b0941f3d18f76d6d336532fb2e799ebc676dd5fe6186e6e276",
+      "bytes": 757,
+      "mode": "projection",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/compact54-pzp7.toml",
+      "destination": "transport/compact54-pzp7.toml",
+      "source_sha256": "9bae04e0bd5e506864e9c230ab856aa97efb3d436ab2a1c859c220bc8f8835a6",
+      "public_sha256": "9bae04e0bd5e506864e9c230ab856aa97efb3d436ab2a1c859c220bc8f8835a6",
+      "bytes": 508,
+      "mode": "exact",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/compact54-bloch7.toml",
+      "destination": "transport/compact54-bloch7.toml",
+      "source_sha256": "21247e3ff202c2b9bfc9a873c7be427b999cefd726e46ef57ba7bd4be9929ce5",
+      "public_sha256": "21247e3ff202c2b9bfc9a873c7be427b999cefd726e46ef57ba7bd4be9929ce5",
+      "bytes": 691,
+      "mode": "exact",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper.toml",
+      "destination": "transport/compact54-pzp7-wide-upper.toml",
+      "source_sha256": "8909e5fbcf4ab58d2160048b29aa21ac997efeaac05c2d32b7ea39c5a516343d",
+      "public_sha256": "8909e5fbcf4ab58d2160048b29aa21ac997efeaac05c2d32b7ea39c5a516343d",
+      "bytes": 519,
+      "mode": "exact",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/wide54-pod9.toml",
+      "destination": "transport/wide54-pod9.toml",
+      "source_sha256": "1fa2f48be380472d581bf816dc1502f08c11d73dc1cfaba263be8ba626f92bbf",
+      "public_sha256": "1fa2f48be380472d581bf816dc1502f08c11d73dc1cfaba263be8ba626f92bbf",
+      "bytes": 731,
+      "mode": "exact",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/compact54-pzp7-de020.toml",
+      "destination": "transport/compact54-pzp7-de020.toml",
+      "source_sha256": "b82b102d14e95c6083f8a4d285e67c953137ad6f0ee08b9f4e132ab0dc808c59",
+      "public_sha256": "b82b102d14e95c6083f8a4d285e67c953137ad6f0ee08b9f4e132ab0dc808c59",
+      "bytes": 515,
+      "mode": "exact",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/compact54-pzp7-de010.toml",
+      "destination": "transport/compact54-pzp7-de010.toml",
+      "source_sha256": "ed54211aae4d0c7e64fce35a49571c4530051aa4f8c03c35c20d951355b57457",
+      "public_sha256": "ed54211aae4d0c7e64fce35a49571c4530051aa4f8c03c35c20d951355b57457",
+      "bytes": 515,
+      "mode": "exact",
+      "changes": "Replace absolute warm predecessor path by sibling case name; public driver resolves it relative to configuration."
+    },
+    {
+      "source": "transport/run.jl",
+      "destination": "transport/run.jl",
+      "source_sha256": "773fb299c86a3885a19addbdc8f838930a89a0da9ac3c13e3628c8e9f4293749",
+      "public_sha256": "ce86a95230be7def7de0198749cf73aebecb234af164b20a27a51ca5c2ada354",
+      "bytes": 30871,
+      "mode": "projection",
+      "changes": "Resolve adapters from published sibling directories and relative warm predecessor from config directory; no numerical changes. Resolve common device.toml fallback for published per-case inputs."
+    },
+    {
+      "source": "transport/baseline-summary.json",
+      "destination": "transport/baseline-summary.json",
+      "source_sha256": "14828e8e731dcf8c61c6029ec141566fe98d140e6a48a067e0d0950846b00133",
+      "public_sha256": "33b679cd4bf7afd510d2569bec690b367f1b3828aacf5971cb1b2339c8030d18",
+      "bytes": 7785,
+      "mode": "projection",
+      "changes": "Remove machine-local environment paths and express warm predecessor by public campaign-relative name."
+    },
+    {
+      "source": "transport/warm-alpha-comparison.json",
+      "destination": "transport/warm-alpha-comparison.json",
+      "source_sha256": "cfc6f71859edaf6579825744f46c4b5f0dd90a807904e65dcb45a70f8997cab6",
+      "public_sha256": "f2045101692b68f3c224fb2f4b27f7cefe5e7b1a9eeb22533e28cc359cf72e44",
+      "bytes": 736,
+      "mode": "projection",
+      "changes": "Remove machine-local environment paths and express warm predecessor by public campaign-relative name."
+    },
+    {
+      "source": "transport/compact-basis-comparison.json",
+      "destination": "transport/compact-basis-comparison.json",
+      "source_sha256": "7db56a0c2f4ae0e4170ea7afe403f40977ffc99c3f211266c6487fe4891ddac5",
+      "public_sha256": "7db56a0c2f4ae0e4170ea7afe403f40977ffc99c3f211266c6487fe4891ddac5",
+      "bytes": 2143,
+      "mode": "exact",
+      "changes": "Remove machine-local environment paths and express warm predecessor by public campaign-relative name."
+    },
+    {
+      "source": "transport/compact-window-comparison.json",
+      "destination": "transport/compact-window-comparison.json",
+      "source_sha256": "12649476a1b75468de0770b6b604abb75f9b674031a2ec8eae7e598681a1abb8",
+      "public_sha256": "12649476a1b75468de0770b6b604abb75f9b674031a2ec8eae7e598681a1abb8",
+      "bytes": 3712,
+      "mode": "exact",
+      "changes": "Remove machine-local environment paths and express warm predecessor by public campaign-relative name."
+    },
+    {
+      "source": "transport/wide-rank9-summary.json",
+      "destination": "transport/wide-rank9-summary.json",
+      "source_sha256": "ad093416bd8f1d607a0bae291ea4e056aeb48335a475a229797d53ab53525e4b",
+      "public_sha256": "d140961059cbb8f867e9c1f5c896a38737c725ecdb98b0e5705bb5f9e0b7b0d8",
+      "bytes": 8291,
+      "mode": "projection",
+      "changes": "Remove machine-local environment paths and express warm predecessor by public campaign-relative name."
+    },
+    {
+      "source": "transport/long-summary.json",
+      "destination": "transport/long-summary.json",
+      "source_sha256": "e77b30f54f59bd80854bd24c8fb106896407a8ae628701926cada4523e7a7b82",
+      "public_sha256": "e77b30f54f59bd80854bd24c8fb106896407a8ae628701926cada4523e7a7b82",
+      "bytes": 4251,
+      "mode": "exact",
+      "changes": "Remove machine-local environment paths and express warm predecessor by public campaign-relative name."
+    },
+    {
+      "source": "transport/native54-03/summary.toml",
+      "destination": "transport/native54-03/summary.toml",
+      "source_sha256": "833ee34b8ae20f6aae9d767e56319a790f9e50a957634d0abfe1cbcd1d51cce3",
+      "public_sha256": "6bd4a40d4a11e040dbee594443d59ded73ffcdd5ca28639fb922ce29d6bf849d",
+      "bytes": 1481,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/native54-03/resolved.toml",
+      "destination": "transport/native54-03/resolved.toml",
+      "source_sha256": "a5cd579d48a54fa6ea88cb2285e341546dc16559e8ec5302dc71ad8453378ef8",
+      "public_sha256": "a5cd579d48a54fa6ea88cb2285e341546dc16559e8ec5302dc71ad8453378ef8",
+      "bytes": 700,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/native54-03/history.csv",
+      "destination": "transport/native54-03/history-selected.csv",
+      "source_sha256": "9fef1b7cfa760581f117034e8a0dae96ecb557c3dc79284ee78a68513969b0cd",
+      "public_sha256": "d8f0ddf0147aad8a29b1597ef4879910b99afe237bff9c629a7cda8f53d3dbb9",
+      "bytes": 8466,
+      "mode": "projection",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/native54-03/terminal-observables.toml",
+      "destination": "transport/native54-03/terminal-observables.json",
+      "source_sha256": "6fd27ead9096acec752ef1f503a33484d2a49d88405a92e244d3509e13436f4a",
+      "public_sha256": "ebdc6f10e2c8ed8bc8615119c2552652df270cd80fa7f5605543cf668ca7e84f",
+      "bytes": 9207,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/warm-alpha02-probe/summary.toml",
+      "destination": "transport/warm-alpha02-probe/summary.toml",
+      "source_sha256": "7d9b64043f78732ceeee2ec03979d67e2604125494f39b3386a979e6d3775a49",
+      "public_sha256": "cf37ee3035d2560b874773d743e560b7052f593aaef773ad333cbf6b8c05c9ce",
+      "bytes": 1486,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/warm-alpha02-probe/resolved.toml",
+      "destination": "transport/warm-alpha02-probe/resolved.toml",
+      "source_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "public_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "bytes": 721,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/warm-alpha02-probe/history.csv",
+      "destination": "transport/warm-alpha02-probe/history-selected.csv",
+      "source_sha256": "1ff54fd9fe1c007e309d47baa30e19826426a159dd01c909351679ce46272d5e",
+      "public_sha256": "1ff54fd9fe1c007e309d47baa30e19826426a159dd01c909351679ce46272d5e",
+      "bytes": 5852,
+      "mode": "exact",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/warm-alpha02-probe/terminal-observables.toml",
+      "destination": "transport/warm-alpha02-probe/terminal-observables.json",
+      "source_sha256": "071872934f80003fc575ea61571cec98daee6653de186896949b792da1aeb1ff",
+      "public_sha256": "afc40c686b13c5a7e9d6f6b2e74de3d0e69ebcc9c40e1b6ff6173cdd40d8ef03",
+      "bytes": 9232,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/warm-alpha04-probe/summary.toml",
+      "destination": "transport/warm-alpha04-probe/summary.toml",
+      "source_sha256": "116f09e668924559cbe0351625041bbcd5528245924fb890b93f6a3cfc5776f5",
+      "public_sha256": "c3358d3e64315430c4cbecf0a492f47ca8b365b2e16b006d0761542a25723608",
+      "bytes": 1485,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/warm-alpha04-probe/resolved.toml",
+      "destination": "transport/warm-alpha04-probe/resolved.toml",
+      "source_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "public_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "bytes": 721,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/warm-alpha04-probe/history.csv",
+      "destination": "transport/warm-alpha04-probe/history-selected.csv",
+      "source_sha256": "a7b2778944d15075176ef8f97b4df06f496639698bfca732223cf88ef26a16e9",
+      "public_sha256": "a7b2778944d15075176ef8f97b4df06f496639698bfca732223cf88ef26a16e9",
+      "bytes": 5877,
+      "mode": "exact",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/warm-alpha04-probe/terminal-observables.toml",
+      "destination": "transport/warm-alpha04-probe/terminal-observables.json",
+      "source_sha256": "e48b351f57e9e186d13ea52cfce612151e1c8811557aa18b221f73e96856fd74",
+      "public_sha256": "93e7e5718c2d0400e6ac8472cc13fb8012167e00d44f086780692d17748b0372",
+      "bytes": 9209,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/native54-long-alpha02/summary.toml",
+      "destination": "transport/native54-long-alpha02/summary.toml",
+      "source_sha256": "7eb95cf874370f586118f617082c154177945c5cb5fead65b3b6f7a707e3b738",
+      "public_sha256": "d1a76600c93d9a7891c3acae2a81145ed8d5b606a0d07e1e9855ec0d2568d45e",
+      "bytes": 1486,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/native54-long-alpha02/resolved.toml",
+      "destination": "transport/native54-long-alpha02/resolved.toml",
+      "source_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "public_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "bytes": 721,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/native54-long-alpha02/history.csv",
+      "destination": "transport/native54-long-alpha02/history-selected.csv",
+      "source_sha256": "f8ea6d86e9725d375a0736e36947cb7d47bd6c6cc349155d203ad958e9705207",
+      "public_sha256": "2e23b323876cc80242c04d80a1ca0861249c927ff14c2813660a68acf623c1a7",
+      "bytes": 9894,
+      "mode": "projection",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/native54-long-alpha02/terminal-observables.toml",
+      "destination": "transport/native54-long-alpha02/terminal-observables.json",
+      "source_sha256": "8f0d85eb200b183b8c134f2b085c6e020b95f18e1c8a205480078a4c7b2684a1",
+      "public_sha256": "04c347cba0ff166ad751caebd0eaf5362474c38410063209493988b15a482575",
+      "bytes": 9180,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/compact54-pzp7/summary.toml",
+      "destination": "transport/compact54-pzp7/summary.toml",
+      "source_sha256": "611a9f065809b9602d16ee3b67949aa50e4fd379df995314231b7c0bbfb7561c",
+      "public_sha256": "38a71479baa7109210b1a67e7519e9cf40bb884242e93f0d52dcb193cd52e69b",
+      "bytes": 1464,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/compact54-pzp7/resolved.toml",
+      "destination": "transport/compact54-pzp7/resolved.toml",
+      "source_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "public_sha256": "a0a66cf8eea16dc9568bfbbc240e2aefcd8edd50f0bd416cd4390db36c5bae66",
+      "bytes": 721,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/compact54-pzp7/history.csv",
+      "destination": "transport/compact54-pzp7/history-selected.csv",
+      "source_sha256": "397a79bd161e579698e58f81e4ffef42ed9b271937dc10d022a835a995d14d04",
+      "public_sha256": "e9bfcea698215bb908b0c9c72ea35967418be08a080092a569448e59b55b6240",
+      "bytes": 7536,
+      "mode": "projection",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/compact54-pzp7/terminal-observables.toml",
+      "destination": "transport/compact54-pzp7/terminal-observables.json",
+      "source_sha256": "62abd559f06a7bde5a7cfae7ce0e8d2fa9720e805da4f1956cfd06819c875abe",
+      "public_sha256": "d04554e5f338a1fd51cace9a0ace97e1974ad45c1104cab44663ac4745542a1c",
+      "bytes": 9212,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/compact54-bloch7/summary.toml",
+      "destination": "transport/compact54-bloch7/summary.toml",
+      "source_sha256": "6a4f91465665fa42fe7c2be5d890e1d09c3e897cef92b5eda4803c297920ffdc",
+      "public_sha256": "e7a6a23c51b70f211273791fc631d01c6fb29b3d8f924770d5c8e6be26bf00cb",
+      "bytes": 1468,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/compact54-bloch7/resolved.toml",
+      "destination": "transport/compact54-bloch7/resolved.toml",
+      "source_sha256": "6f979e7f616b6d948cde92992b31d6c2fa0a5239441d4c06f92f5c7f837d849d",
+      "public_sha256": "6f979e7f616b6d948cde92992b31d6c2fa0a5239441d4c06f92f5c7f837d849d",
+      "bytes": 734,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/compact54-bloch7/history.csv",
+      "destination": "transport/compact54-bloch7/history-selected.csv",
+      "source_sha256": "2448da6071e32b2af68ab67b37d81dae87f66b0f67fa3f91d86ec7b0bc25a73d",
+      "public_sha256": "a4705896fee797db815c01769c28ef7a7cf7b65235b4130561d574a1c273bc4e",
+      "bytes": 7567,
+      "mode": "projection",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/compact54-bloch7/terminal-observables.toml",
+      "destination": "transport/compact54-bloch7/terminal-observables.json",
+      "source_sha256": "411a60a2dd50afd5b286d208f970255f17b30cc97d95bade978e118101eb683d",
+      "public_sha256": "4ba8342cb5386985d75287aac8284682a6906d5b2cc479febff65abc7b98c079",
+      "bytes": 9230,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper/summary.toml",
+      "destination": "transport/compact54-pzp7-wide-upper/summary.toml",
+      "source_sha256": "3e3837b3295b90fd1d9116b4373b5b0d74fb65d0b081e35d75db0bdd1f35f42d",
+      "public_sha256": "7f93e8904d41884ed8fc7ec9632a26b0768c718d25dcc36a06c3af155c6d2b06",
+      "bytes": 1462,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper/resolved.toml",
+      "destination": "transport/compact54-pzp7-wide-upper/resolved.toml",
+      "source_sha256": "189682d71b6eb3cc2fb024e4107f7d9b3f54d96882a2f167eb3f4c55fb3185ae",
+      "public_sha256": "189682d71b6eb3cc2fb024e4107f7d9b3f54d96882a2f167eb3f4c55fb3185ae",
+      "bytes": 690,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper/history.csv",
+      "destination": "transport/compact54-pzp7-wide-upper/history-selected.csv",
+      "source_sha256": "a4a4ef143e64b00a3ac13d7522dd9db2fc1b69d5199533d5258c81915020a8ae",
+      "public_sha256": "b33b204419c692ba2cc6769b776ac50ae78d79d07df9b852fb32094e4b204a05",
+      "bytes": 7529,
+      "mode": "projection",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper/terminal-observables.toml",
+      "destination": "transport/compact54-pzp7-wide-upper/terminal-observables.json",
+      "source_sha256": "49294eace51e3da72948e7a5972db5704e9a79b06b9dbcf74c36cd2170c4d0f7",
+      "public_sha256": "0fa1805724dbd42d596dbbc347580deef933f78f17f46db15a909a71a371311f",
+      "bytes": 9208,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/wide54-pod9/summary.toml",
+      "destination": "transport/wide54-pod9/summary.toml",
+      "source_sha256": "a7d7b4f50e419834fb386388ecfafde29fd04b851f5aa9c20f55987ee965247c",
+      "public_sha256": "4dfbec885893bdedb361edbb500b4c46381cd389661841412c83f5df961536db",
+      "bytes": 1506,
+      "mode": "projection",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/wide54-pod9/resolved.toml",
+      "destination": "transport/wide54-pod9/resolved.toml",
+      "source_sha256": "6f768a4f1b538af3810697e4ce8386178514a7aee32498299d2816e99f00e659",
+      "public_sha256": "6f768a4f1b538af3810697e4ce8386178514a7aee32498299d2816e99f00e659",
+      "bytes": 713,
+      "mode": "exact",
+      "changes": "Remove process wall-clock epoch only; retain scientific status and scalars."
+    },
+    {
+      "source": "transport/wide54-pod9/history.csv",
+      "destination": "transport/wide54-pod9/history-selected.csv",
+      "source_sha256": "ec836314f2afca6373269bb0a3f56576add5561502516a036abbb77a2f3ba37e",
+      "public_sha256": "a0b11b80fc3010d0ef42eb76f733f45db17a94105e1653574c155aaa2cac31d7",
+      "bytes": 8371,
+      "mode": "projection",
+      "changes": "Select first3, declared checkpoints and final16 rows; distinct filename prevents passing partial history as complete. Full history generated by driver or external archive. CSV line endings LF."
+    },
+    {
+      "source": "transport/wide54-pod9/terminal-observables.toml",
+      "destination": "transport/wide54-pod9/terminal-observables.json",
+      "source_sha256": "aaebe2d06468fa489c2e5df2cc5af83ef2f0655926346acf5b57bf0837f82966",
+      "public_sha256": "b0c36abaeb35f6a999e1dde7e359da1cd28a31b6ca8425ad857164d24c3f72f7",
+      "bytes": 9140,
+      "mode": "projection",
+      "changes": "Exclude raw density matrix and repeated zero Hartree profile; retain signed scalar/channel balance and observable bond-current curve."
+    },
+    {
+      "source": "transport/native54-long-alpha02/checkpoint-0128/summary.toml",
+      "destination": "transport/native54-long-alpha02/checkpoint-0128/summary.toml",
+      "source_sha256": "2c3b7082477032fe9bd451bf5b1ecc758c34da246d68a95abc419205d6fe81f7",
+      "public_sha256": "2c3b7082477032fe9bd451bf5b1ecc758c34da246d68a95abc419205d6fe81f7",
+      "bytes": 961,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/native54-long-alpha02/checkpoint-0256/summary.toml",
+      "destination": "transport/native54-long-alpha02/checkpoint-0256/summary.toml",
+      "source_sha256": "ea039dbe81b82667cacd73fc321bb9f86deb9afe2a3733b3868dcdf9e6c57ee4",
+      "public_sha256": "ea039dbe81b82667cacd73fc321bb9f86deb9afe2a3733b3868dcdf9e6c57ee4",
+      "bytes": 959,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/native54-long-alpha02/checkpoint-0512/summary.toml",
+      "destination": "transport/native54-long-alpha02/checkpoint-0512/summary.toml",
+      "source_sha256": "88c2c76a072466fcf0ec492d999c4598a7ab637f925bfde4e8e4dd09d83adbbf",
+      "public_sha256": "88c2c76a072466fcf0ec492d999c4598a7ab637f925bfde4e8e4dd09d83adbbf",
+      "bytes": 961,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/native54-long-alpha02/terminal-markers.toml",
+      "destination": "transport/native54-long-alpha02/terminal-markers.toml",
+      "source_sha256": "5552d641e7608e7d9491444fec57667ad7042fd7402dd9c8406f3cec4b0f4df5",
+      "public_sha256": "5552d641e7608e7d9491444fec57667ad7042fd7402dd9c8406f3cec4b0f4df5",
+      "bytes": 8999,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/alpha-extended/attempt01/linear/rows/048.toml",
+      "destination": "method/alpha-extended/attempt01/linear/rows/048.toml",
+      "source_sha256": "f948a2b1919c34c17abf51896924bd37e78d5f5e00741d379bc3ef7eb8fd5198",
+      "public_sha256": "f948a2b1919c34c17abf51896924bd37e78d5f5e00741d379bc3ef7eb8fd5198",
+      "bytes": 527,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/alpha-extended/attempt01/linear/rows/128.toml",
+      "destination": "method/alpha-extended/attempt01/linear/rows/128.toml",
+      "source_sha256": "77d9cb9c3d33e40d490efa7500364cb5875f989edd91b4056cc458f488733e71",
+      "public_sha256": "77d9cb9c3d33e40d490efa7500364cb5875f989edd91b4056cc458f488733e71",
+      "bytes": 544,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/alpha-extended/attempt01/linear/rows/256.toml",
+      "destination": "method/alpha-extended/attempt01/linear/rows/256.toml",
+      "source_sha256": "6952e478479464a243cd03f7da030296cb7ab0c3cbd2bb8ded908d6d0f27e269",
+      "public_sha256": "6952e478479464a243cd03f7da030296cb7ab0c3cbd2bb8ded908d6d0f27e269",
+      "bytes": 545,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/target54-transfer/run.jl",
+      "destination": "equilibrium/target54-transfer/run.jl",
+      "source_sha256": "dd0ffda0714bf08160017971fa5ef847d8399e63a438a609267b9d91e22bab67",
+      "public_sha256": "dd0ffda0714bf08160017971fa5ef847d8399e63a438a609267b9d91e22bab67",
+      "bytes": 9414,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/target54-transfer/compare.py",
+      "destination": "equilibrium/target54-transfer/compare.py",
+      "source_sha256": "23988c06842d985321a4424f41146076045112cbe39608afd2a75569e2a4eaf8",
+      "public_sha256": "23988c06842d985321a4424f41146076045112cbe39608afd2a75569e2a4eaf8",
+      "bytes": 5613,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/target54-transfer/matched.csv",
+      "destination": "equilibrium/target54-transfer/matched.csv",
+      "source_sha256": "881712e4888d91c9da713ec522dfbe626f049738eddfabf99e9fa4a663428a18",
+      "public_sha256": "eb82115997abfd4f972dd257bab4acd09c142c3e626174bc24ee7b8957d42712",
+      "bytes": 1167,
+      "mode": "projection",
+      "changes": " CSV line endings LF."
+    },
+    {
+      "source": "equilibrium/target54-transfer/independent.json",
+      "destination": "equilibrium/target54-transfer/independent.json",
+      "source_sha256": "b563c375a96bdd86e555022293f10d29000a31b8637de44a49165e8babf0fabe",
+      "public_sha256": "b563c375a96bdd86e555022293f10d29000a31b8637de44a49165e8babf0fabe",
+      "bytes": 742,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/target54-transfer/attempt02/seed.toml",
+      "destination": "equilibrium/target54-transfer/attempt02/seed.toml",
+      "source_sha256": "5820cd1ebfae483e3c62015ba852ede283640451fef6e320676d561d3a6731eb",
+      "public_sha256": "5820cd1ebfae483e3c62015ba852ede283640451fef6e320676d561d3a6731eb",
+      "bytes": 616,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/target54-transfer/attempt02/summary.toml",
+      "destination": "equilibrium/target54-transfer/attempt02/summary.toml",
+      "source_sha256": "e27f38b9b43b8c1c3a925d0cdd0cc8041d8ba78ed9b3369b1c9e4d3895fb573a",
+      "public_sha256": "e27f38b9b43b8c1c3a925d0cdd0cc8041d8ba78ed9b3369b1c9e4d3895fb573a",
+      "bytes": 364,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "equilibrium/target54-transfer/attempt02/rows.csv",
+      "destination": "equilibrium/target54-transfer/attempt02/rows-selected.csv",
+      "source_sha256": "dafbbab1fecb940acb9175b0da02e28442c6041323da64a887ea450ac3e401db",
+      "public_sha256": "112bad1a6df53af1f1ff2e52812208aebaf9d98fdb4d5e3aa8a640dd73dac355",
+      "bytes": 8155,
+      "mode": "projection",
+      "changes": "Select initial, comparison and final16 rows; complete native table requires generating run or external archive. CSV line endings LF."
+    },
+    {
+      "source": "equilibrium/target54-transfer/report.md",
+      "destination": "equilibrium/target54-transfer/report.md",
+      "source_sha256": "7ce064a7574aa1dc70a86c0b94a26ffa93c8aba441c2fa435aa31a303c85cde9",
+      "public_sha256": "510d7256e69ff5f31352c8fb50bc1979b760c7fb0e58fc46766c3c634ed622bd",
+      "bytes": 7762,
+      "mode": "projection",
+      "changes": "Resolve published inputs/aggregates; remove service resource links; disclose selected rows and excluded raw source/target requirements."
+    },
+    {
+      "source": "transport/native54-03/input.toml",
+      "destination": "transport/native54-03/input.toml",
+      "source_sha256": "b7f1a07cf0f6680127a29bcf29d44635d6f6fe4b62e0ca4f0933c092968a6e00",
+      "public_sha256": "b7f1a07cf0f6680127a29bcf29d44635d6f6fe4b62e0ca4f0933c092968a6e00",
+      "bytes": 507,
+      "mode": "exact",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/native54-03/identity.toml",
+      "destination": "transport/native54-03/identity.toml",
+      "source_sha256": "0e40b82dd8f2c16171e288ac962793ff8d9f2ae1c031ca5543e1c787617eb5ce",
+      "public_sha256": "ddd829123f8fde5aa6aee40ec87c3a73b65417cd60abc0fd443aac60b29770fd",
+      "bytes": 1677,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "transport/warm-alpha02-probe/input.toml",
+      "destination": "transport/warm-alpha02-probe/input.toml",
+      "source_sha256": "c9d323812d652c197c21cbcd4aab6ab2a13239127978cb152fd086a0c6a52cf6",
+      "public_sha256": "037a2addfa31712943165dd870d4d2e6c11daabc512f46525c06ae3243ddb0df",
+      "bytes": 567,
+      "mode": "projection",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/warm-alpha02-probe/identity.toml",
+      "destination": "transport/warm-alpha02-probe/identity.toml",
+      "source_sha256": "a63b61b99af11226f5d1f57f216a02db6ae39b7d8a72f63e6dbd3bf75059c326",
+      "public_sha256": "685622e4892a8dc85064cfc9d14f09412e5170711071192e5ff0964ea7a1504d",
+      "bytes": 1714,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "transport/warm-alpha04-probe/input.toml",
+      "destination": "transport/warm-alpha04-probe/input.toml",
+      "source_sha256": "ebcfdd1f9b6a4b2b4e27a44fd73ec2592959efcf2ab76c7200451a5777fc07db",
+      "public_sha256": "882dc6f18c7ab2a21ceffe9c76fc6d794da0e6d7be9000f8362a59f0c7a8221d",
+      "bytes": 567,
+      "mode": "projection",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/warm-alpha04-probe/identity.toml",
+      "destination": "transport/warm-alpha04-probe/identity.toml",
+      "source_sha256": "e02f96712971a511c195e0995bd24fe5175b6da16ecae10a3dba1400a8e224fd",
+      "public_sha256": "25a21c3b93e97fa1b54eeab62a0a16d2fb7df38eaef3f1836f4f29a40db68d68",
+      "bytes": 1714,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "transport/native54-long-alpha02/input.toml",
+      "destination": "transport/native54-long-alpha02/input.toml",
+      "source_sha256": "15cdf0248bc9de88d295c1f5886cc88dfbf115822a68243718c7e0f989538872",
+      "public_sha256": "624718812d9fdc35e08f59262d873584d9259e761cb7c1ea451941bdf6a6c557",
+      "bytes": 760,
+      "mode": "projection",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/native54-long-alpha02/identity.toml",
+      "destination": "transport/native54-long-alpha02/identity.toml",
+      "source_sha256": "09db152f669d5466b2af59b0110cac6807a235ef1013201b3a4f42fe4acd71b2",
+      "public_sha256": "8607f27f20b073707a93e505b85029ed4a8a579024a2f639c6d971f8d3bb0f84",
+      "bytes": 1714,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "transport/compact54-pzp7/input.toml",
+      "destination": "transport/compact54-pzp7/input.toml",
+      "source_sha256": "9bae04e0bd5e506864e9c230ab856aa97efb3d436ab2a1c859c220bc8f8835a6",
+      "public_sha256": "9bae04e0bd5e506864e9c230ab856aa97efb3d436ab2a1c859c220bc8f8835a6",
+      "bytes": 508,
+      "mode": "exact",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/compact54-pzp7/identity.toml",
+      "destination": "transport/compact54-pzp7/identity.toml",
+      "source_sha256": "0a9f56f1b3958f8b9e145a1473cae7b4d934daa2435ab390def848b9cbf39ea4",
+      "public_sha256": "266817d41176b63efe959895e4ac160761681e30bc303a74ade61a3bf040b64b",
+      "bytes": 1714,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "transport/compact54-bloch7/input.toml",
+      "destination": "transport/compact54-bloch7/input.toml",
+      "source_sha256": "21247e3ff202c2b9bfc9a873c7be427b999cefd726e46ef57ba7bd4be9929ce5",
+      "public_sha256": "21247e3ff202c2b9bfc9a873c7be427b999cefd726e46ef57ba7bd4be9929ce5",
+      "bytes": 691,
+      "mode": "exact",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/compact54-bloch7/identity.toml",
+      "destination": "transport/compact54-bloch7/identity.toml",
+      "source_sha256": "0182ef192456a7f5be99b2a7ee7e42d7b3a7b37a84a30431e76a80ad9fb2dde4",
+      "public_sha256": "874e49f44cc0bbded4933bf8698d220f64e13652e65c77549e8b167e0b29ab4c",
+      "bytes": 1949,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper/input.toml",
+      "destination": "transport/compact54-pzp7-wide-upper/input.toml",
+      "source_sha256": "8909e5fbcf4ab58d2160048b29aa21ac997efeaac05c2d32b7ea39c5a516343d",
+      "public_sha256": "8909e5fbcf4ab58d2160048b29aa21ac997efeaac05c2d32b7ea39c5a516343d",
+      "bytes": 519,
+      "mode": "exact",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper/identity.toml",
+      "destination": "transport/compact54-pzp7-wide-upper/identity.toml",
+      "source_sha256": "5ecd53e99fa51907c36d4e711e46350cf943d47c67a72a6828ba217ea287e1cb",
+      "public_sha256": "525a8bc3ff8743d0da01cf62b30e2a6d3757ae3e1c866d78de56339ae65113e8",
+      "bytes": 1701,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "transport/wide54-pod9/input.toml",
+      "destination": "transport/wide54-pod9/input.toml",
+      "source_sha256": "1fa2f48be380472d581bf816dc1502f08c11d73dc1cfaba263be8ba626f92bbf",
+      "public_sha256": "1fa2f48be380472d581bf816dc1502f08c11d73dc1cfaba263be8ba626f92bbf",
+      "bytes": 731,
+      "mode": "exact",
+      "changes": "Replace warm predecessor by sibling path relative to per-case input directory."
+    },
+    {
+      "source": "transport/wide54-pod9/identity.toml",
+      "destination": "transport/wide54-pod9/identity.toml",
+      "source_sha256": "479e766571f64778e90b133a4ddbf07f1e1e4b0cd042dda1960a68f9302d1103",
+      "public_sha256": "302236a01ef1c294df54b966be2399e4261a39191185bcfbca7fd4d0ea1bb815",
+      "bytes": 2093,
+      "mode": "projection",
+      "changes": "Exclude local package/environment paths; retain exact commits, tree, artifact hashes and numerical identities."
+    },
+    {
+      "source": "method/pauli-predictor/public-pauli-predictor-aggregates.json",
+      "destination": "method/pauli-predictor/public-pauli-predictor-aggregates.json",
+      "source_sha256": "218bf8795ee61820d72155792dcbf98d464ac479e428076804f3253a26fdd14a",
+      "public_sha256": "218bf8795ee61820d72155792dcbf98d464ac479e428076804f3253a26fdd14a",
+      "bytes": 9688,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "method/pauli-predictor/report.md",
+      "destination": "method/pauli-predictor/report.md",
+      "source_sha256": "8086e7ba53730057cf37021e71222b8e18fa0b76812628fb9d5f861b2a831b7b",
+      "public_sha256": "d6b508cdf5f62e97463da94dbb35f0c0797d26ed5054987b92a2f8a31fcf2ace",
+      "bytes": 7322,
+      "mode": "projection",
+      "changes": "Resolve excluded protocol/raw metadata to approved aggregate; repair carriage-return rho and remove CPU affinity; disclose incomplete raw/generator availability."
+    },
+    {
+      "source": "transport/compact-energy-comparison.json",
+      "destination": "transport/compact-energy-comparison.json",
+      "source_sha256": "eceae1f1e649e5c45503cf8d85ad23c9ed23b23abb70163067c706e7aaa4d654",
+      "public_sha256": "eceae1f1e649e5c45503cf8d85ad23c9ed23b23abb70163067c706e7aaa4d654",
+      "bytes": 57897,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/compact54-pzp7-de020/input.toml",
+      "destination": "transport/compact54-pzp7-de020/input.toml",
+      "source_sha256": "b82b102d14e95c6083f8a4d285e67c953137ad6f0ee08b9f4e132ab0dc808c59",
+      "public_sha256": "b82b102d14e95c6083f8a4d285e67c953137ad6f0ee08b9f4e132ab0dc808c59",
+      "bytes": 515,
+      "mode": "exact",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de020/identity.toml",
+      "destination": "transport/compact54-pzp7-de020/identity.toml",
+      "source_sha256": "fa654798121d88cfacda744f4836c0d3a6630420fb2c3ae6a71b1d0217f82a9a",
+      "public_sha256": "60319cba31cc2ac9b5b739869d6b75d4f09a2fd5da68d7697b7fddd967bf8762",
+      "bytes": 1714,
+      "mode": "projection",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de020/summary.toml",
+      "destination": "transport/compact54-pzp7-de020/summary.toml",
+      "source_sha256": "777e55cad473288feb8e49977480d4b688583edc810508a1a1e86e5f59c2a216",
+      "public_sha256": "1d356a07cf8a8a0fd06f82121591291c98e1648e48db4388fbeeb1511b763959",
+      "bytes": 1462,
+      "mode": "projection",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de020/resolved.toml",
+      "destination": "transport/compact54-pzp7-de020/resolved.toml",
+      "source_sha256": "f391d808e2a1a89f76355b52bfd9dc79c2a901fb5ec19cddf2b5c1fe544296bd",
+      "public_sha256": "f391d808e2a1a89f76355b52bfd9dc79c2a901fb5ec19cddf2b5c1fe544296bd",
+      "bytes": 873,
+      "mode": "exact",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de020/history.csv",
+      "destination": "transport/compact54-pzp7-de020/history-selected.csv",
+      "source_sha256": "109a2d6a0cf00fffe9a63a62688af2181975fd7fb25bd2fc3e210f749031602d",
+      "public_sha256": "97fbb60e494d05141516ed4ea8c8715acf425fecf99e10bb5ccf639c53420c52",
+      "bytes": 7509,
+      "mode": "projection",
+      "changes": "Select initial, checkpoint and final16 rows; full history is external or generated anew. CSV line endings LF."
+    },
+    {
+      "source": "transport/compact54-pzp7-de020/terminal-observables.toml",
+      "destination": "transport/compact54-pzp7-de020/terminal-observables.json",
+      "source_sha256": "50fef081b737d2bb6594ff81ae22695b2a8b9beec10b109248e7a751be0228c1",
+      "public_sha256": "2112cbb83239c6514f34b2781ab440436cb8fcd8a2ca6e2916d8dea41241420c",
+      "bytes": 9210,
+      "mode": "projection",
+      "changes": "Exclude raw sheet-density matrix and zero Hartree profile, retaining observable currents/balances."
+    },
+    {
+      "source": "transport/compact54-pzp7-de010/input.toml",
+      "destination": "transport/compact54-pzp7-de010/input.toml",
+      "source_sha256": "ed54211aae4d0c7e64fce35a49571c4530051aa4f8c03c35c20d951355b57457",
+      "public_sha256": "ed54211aae4d0c7e64fce35a49571c4530051aa4f8c03c35c20d951355b57457",
+      "bytes": 515,
+      "mode": "exact",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de010/identity.toml",
+      "destination": "transport/compact54-pzp7-de010/identity.toml",
+      "source_sha256": "b0b32cb0fc9d36bb5a9384328f4faa0c293904ab82b2b2f6ccb5c7d13788e89f",
+      "public_sha256": "05c636ae91c76ddbb2189c815f0be659c3a947f94dc8034b6913fea90732fa89",
+      "bytes": 1716,
+      "mode": "projection",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de010/summary.toml",
+      "destination": "transport/compact54-pzp7-de010/summary.toml",
+      "source_sha256": "e1dd31fbaf8e3428f0cc32825e2da12e44278532365a3f5e16d736bfb6a10fa5",
+      "public_sha256": "23e7c4d4ac54e75a3edb2230376429d7760a246339a3ec7c262dbb65761714d9",
+      "bytes": 1458,
+      "mode": "projection",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de010/resolved.toml",
+      "destination": "transport/compact54-pzp7-de010/resolved.toml",
+      "source_sha256": "723de4243d663f54d2a9b89926e7758748438e08def6b6fb7735bd3de33fc0c0",
+      "public_sha256": "723de4243d663f54d2a9b89926e7758748438e08def6b6fb7735bd3de33fc0c0",
+      "bytes": 873,
+      "mode": "exact",
+      "changes": "Remove local runtime paths/epoch only."
+    },
+    {
+      "source": "transport/compact54-pzp7-de010/history.csv",
+      "destination": "transport/compact54-pzp7-de010/history-selected.csv",
+      "source_sha256": "07c700dd9eb0151e4abd2431e09075bbfbf7b266c6759694e5daa0b021cf01f0",
+      "public_sha256": "f8e235014f8dfdcb08860983a9967146eab8cfe21bb04384c5f8bd81b5427f3c",
+      "bytes": 7530,
+      "mode": "projection",
+      "changes": "Select initial, checkpoint and final16 rows; full history is external or generated anew. CSV line endings LF."
+    },
+    {
+      "source": "transport/compact54-pzp7-de010/terminal-observables.toml",
+      "destination": "transport/compact54-pzp7-de010/terminal-observables.json",
+      "source_sha256": "1d0c3b01459a2d514967adafa3617fc951df083487ad9288f9aa508738932b8e",
+      "public_sha256": "395aedcbd1543b33ac851bdac98e7488f32a7a46cb65a5ae265fe4257c4adc80",
+      "bytes": 9212,
+      "mode": "projection",
+      "changes": "Exclude raw sheet-density matrix and zero Hartree profile, retaining observable currents/balances."
+    },
+    {
+      "source": "transport/native54-03/independent-density-audit.toml",
+      "destination": "transport/native54-03/independent-density-audit.json",
+      "source_sha256": "e2e02474746bf3cdbdd5b367a2ac9e2cc412c0cc60b5e1d646369ec005914bd7",
+      "public_sha256": "b07280bec73d4909626e2ec515ca72b416d1247c6e28826891c5ea15800b6904",
+      "bytes": 641,
+      "mode": "projection",
+      "changes": "Scalar-only projection of independent audit; exclude dense energy-index profiles/arrays; full data remain external."
+    },
+    {
+      "source": "transport/native54-long-alpha02/independent-density-audit.toml",
+      "destination": "transport/native54-long-alpha02/independent-density-audit.json",
+      "source_sha256": "779ec34bec80b5ba448377b574ad35244073ec77b545bcda2e3c7a72c8778e30",
+      "public_sha256": "afe44407221f8899444f6b91cae80a2cff92385db8754d6cbba244789d8d8595",
+      "bytes": 806,
+      "mode": "projection",
+      "changes": "Scalar-only projection of independent audit; exclude dense energy-index profiles/arrays; full data remain external."
+    },
+    {
+      "source": "transport/compact54-pzp7/independent-density-audit.toml",
+      "destination": "transport/compact54-pzp7/independent-density-audit.json",
+      "source_sha256": "cbd9e2f57249f76a94f0dc5fefec9c123c152b1134a5aeca45db773902c518cc",
+      "public_sha256": "39b78b10be823df61273ce9d4771f0451beb6b52c222d91a4b21b97e1b51a9a6",
+      "bytes": 641,
+      "mode": "projection",
+      "changes": "Scalar-only projection of independent audit; exclude dense energy-index profiles/arrays; full data remain external."
+    },
+    {
+      "source": "transport/compact54-bloch7/independent-density-audit.toml",
+      "destination": "transport/compact54-bloch7/independent-density-audit.json",
+      "source_sha256": "50043f881eae06c33432936658853bf8d1fde2fd3061997499b64cbdc4aa54c8",
+      "public_sha256": "b998c1e12b959545f68149146e2bc0fbc80019015dc166d2a2964c0a4c68fe56",
+      "bytes": 636,
+      "mode": "projection",
+      "changes": "Scalar-only projection of independent audit; exclude dense energy-index profiles/arrays; full data remain external."
+    },
+    {
+      "source": "transport/compact54-pzp7-wide-upper/independent-density-audit.toml",
+      "destination": "transport/compact54-pzp7-wide-upper/independent-density-audit.json",
+      "source_sha256": "6d1d572a5ae4fe288730bcad69bfb707b2d6d2c3d61e2be593313f7e2a563dbd",
+      "public_sha256": "f030e12d888f8b073a163300b49c224bd97fcb12293a8a24ea8d9d5c96520ba3",
+      "bytes": 643,
+      "mode": "projection",
+      "changes": "Scalar-only projection of independent audit; exclude dense energy-index profiles/arrays; full data remain external."
+    },
+    {
+      "source": "transport/wide54-pod9/independent-density-audit.toml",
+      "destination": "transport/wide54-pod9/independent-density-audit.json",
+      "source_sha256": "253bad5e821a7b7259757d938a0483a2a78a387fe3e6147966d0d97427d8715f",
+      "public_sha256": "bee7ddbef01a8ef84ba8d976998787550e3a0ff2f7fec8784d768da04ffeba72",
+      "bytes": 640,
+      "mode": "projection",
+      "changes": "Scalar-only projection of independent audit; exclude dense energy-index profiles/arrays; full data remain external."
+    },
+    {
+      "source": "transport/native54-03/terminal-markers.toml",
+      "destination": "transport/native54-03/terminal-markers.toml",
+      "source_sha256": "98b01e703bc8024b560236db3bc1377ddfa7c150b7427dfded0beb6b87923e5e",
+      "public_sha256": "98b01e703bc8024b560236db3bc1377ddfa7c150b7427dfded0beb6b87923e5e",
+      "bytes": 9018,
+      "mode": "exact",
+      "changes": null
+    },
+    {
+      "source": "transport/report.md",
+      "destination": "transport/report.md",
+      "source_sha256": "526142d8dfd858cc13a868663a5538c888ffb75568ac40baacafb4e7da9a22f8",
+      "public_sha256": "07a21cc50291d7c8e2ebfc56e27b073936adec32c755cc3da8ea132d3ca4dede",
+      "bytes": 33097,
+      "mode": "projection",
+      "changes": "Resolve pinned Core/source links, selected histories, scalar audit projections; remove service process links; disclose excluded raw dependencies."
+    },
+    {
+      "source": "report.md",
+      "destination": "report.md",
+      "source_sha256": "6883b0dc3224da035114b1499254c5a113dcc07aa02a66a45f36bc72ccc2d7ad",
+      "public_sha256": "fa7c1a539a4772d1492f26f36faa97c199f49fb1ed24b5fbddfc0751fae944ad",
+      "bytes": 18977,
+      "mode": "projection",
+      "changes": "Resolve selected history/scalar audit links, clarify baseline128 charge row among terminal910 measurements; trim trailing whitespace. Numerical values unchanged."
+    }
+  ]
+}

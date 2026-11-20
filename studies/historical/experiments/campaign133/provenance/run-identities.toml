@@ -1,0 +1,62 @@
+# Derived whitelist projection of raw identities and completed summaries.
+# Not a replacement for the unchanged original identity files on the VM.
+
+[[runs]]
+runname = "B0-256"
+start_utc = "2026-11-15T16:49:59.267Z"
+julia_version = "1.13.3"
+core_head = "a487b607743428a43aeb02158f9d2f5c8f3bc182"
+runner_head = "b77f77a2d1aa4bb390a37e1d92cc8dca69762f59"
+input_sha256 = "c1b925ba5e39fd800c540250b42c70b8286a6b7ed2c2a887d72b5f665fa09f1f"
+script_sha256 = "e13b978b18505c1e446eee460bb9d349503d59f0f97a50c88817b59bb055db71"
+state_sha256 = "fa1d77805b8d4dd66dc80a73b59653119b328cc15ffacd75a97153d80d05ae6d"
+
+[[runs]]
+runname = "B0-alpha02-attempt02"
+start_utc = "2026-11-15T16:45:07.826Z"
+julia_version = "1.13.3"
+core_head = "a487b607743428a43aeb02158f9d2f5c8f3bc182"
+runner_head = "a089a70b27005bbadaaa254ce8bc0ff1c11d99f6"
+input_sha256 = "2968b79fbfa3786cd4381e16b17498500b29b9ae33aeec950e5e317931982490"
+script_sha256 = "e13b978b18505c1e446eee460bb9d349503d59f0f97a50c88817b59bb055db71"
+state_sha256 = "4dae1f4afb73cafd46fd5ce1e749305356c7a3f95a13292a2b128fef812463bb"
+
+[[runs]]
+runname = "B0-alpha05"
+start_utc = "2026-11-15T16:47:42.420Z"
+julia_version = "1.13.3"
+core_head = "a487b607743428a43aeb02158f9d2f5c8f3bc182"
+runner_head = "a089a70b27005bbadaaa254ce8bc0ff1c11d99f6"
+input_sha256 = "076a34d6323e2d1ccfce94336f943ccee081c7e0ac41b999f16ddc2759db32a2"
+script_sha256 = "e13b978b18505c1e446eee460bb9d349503d59f0f97a50c88817b59bb055db71"
+state_sha256 = "2937ccf98d7186e65bf1915bdb2f868a134046fb68e28bd1b955c3d192541c44"
+
+[[runs]]
+runname = "S01-fixedU32"
+start_utc = "2026-11-15T17:06:52.798Z"
+julia_version = "1.13.3"
+core_head = "f50fa9bdfc04e299f82b6260f70fd8f829d838f3"
+runner_head = "18f45edb3bd086ebc7d5c984d68266a937358d4e"
+input_sha256 = "89403ec87e97043e026abaa4e17a81079a6020333d37e70482189aeeb7408567"
+script_sha256 = "400822878b8bd03ccc11d47604171e0c249c2bd8f3d2eb909c8a5fe369c2ce9b"
+state_sha256 = "155f8d296715f8e8a4ca951a0ed07aa392742112bd8b3b934beea54304374a2a"
+
+[[runs]]
+runname = "S01-warm-unmodified64"
+start_utc = "2026-11-15T17:56:24.547Z"
+julia_version = "1.13.3"
+core_head = "f50fa9bdfc04e299f82b6260f70fd8f829d838f3"
+runner_head = "18f45edb3bd086ebc7d5c984d68266a937358d4e"
+input_sha256 = "42c362e0aa7c0e2458556da2605cb68e35330ca5b8bd5e82c8af75cd933f7d38"
+script_sha256 = "77dd468dd2f073a7d76d5ed7b3b5220ef3ecd808dbea5a2d790045564932c6d2"
+state_sha256 = "2a4ba053931b1a9825d96ca2889ff41cbdded7c5b169ae0131c9ef251c2964f9"
+
+[[runs]]
+runname = "S01-warm-FD64"
+start_utc = "2026-11-15T18:14:03.783Z"
+julia_version = "1.13.3"
+core_head = "f50fa9bdfc04e299f82b6260f70fd8f829d838f3"
+runner_head = "18f45edb3bd086ebc7d5c984d68266a937358d4e"
+input_sha256 = "0fa0d0bc2fc27602fa99b8fe0797071eae99c66ab2661dfde05bd00ebe19b86e"
+script_sha256 = "77dd468dd2f073a7d76d5ed7b3b5220ef3ecd808dbea5a2d790045564932c6d2"
+state_sha256 = "e6fffb997f36397f877aee1e2c98b1dbad7d97417d45458a042b5f074ce57a6d"

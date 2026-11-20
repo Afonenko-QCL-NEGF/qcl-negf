@@ -1,0 +1,9 @@
+converged = false
+maps = 256
+model_sha256 = "006ad264fe19eb8fe76dbb2d4f18d28376ced559af54b526a950ca0f6c4047fa"
+r_sum = 0.008350934501914676
+reason = "max_iterations"
+runtime_seconds_before_exit = 442.82775807380676
+solver_seconds = 411.2714309692383
+state_sha256 = "0341c530089397a956d765424dcd986d8f6791ada05b4db0f8bd51040021f04c"
+stock_status = "max_iterations"

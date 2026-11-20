@@ -1,0 +1,63 @@
+adapter_sha256 = "5d0a0cc61f1c7b873567a9965154e41d1872b9ca1313c837282b6490b20cad58"
+basis_method = "bloch_snapshot_pod"
+basis_orthogonality_frobenius_residual = 2.8419718360109075e-15
+bias_mv = 54.00000000000001
+core_commit = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+device_sha256 = "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502"
+energy_unit_mev = 100.0
+full_verification_sha256 = "e291e94045cf79d372360b34f5f19bd4320d25aaa33541c1a50f0c4407657a24"
+julia_version = "1.13.4"
+n_b = 9
+n_e = 121
+n_k = 2
+n_phi = 4
+n_qz = 5
+n_z = 144
+native_seed_chemical_potential_mev = -36.89188298019926
+native_seed_donor_relative_error = 0.0
+native_structural_pass_zero_and_54mv = true
+production_cache_reuses_kernel_arrays = true
+reuses_identical_basis_and_kernels_after_retarget = true
+scba_iterations = 0
+train_bands = 7
+train_phase_count = 24
+training_eigensolve_scaled_max_residual = 1.3132983529283116e-15
+
+[basis_provenance]
+basis_method = "bloch_snapshot_pod"
+basis_rank = 9
+frozen_adapter_sha256 = "abd4f904012ea0c3c805a594d55b9aba1e77c637cf7087c04aae3bf2744acf6a"
+max_principal_angle_rad = "unbounded"
+pzp_translation_diagnostics = "inapplicable"
+refinement_identity = "fath-cbo149-unbounded-pod7-r9-v1"
+train_bands = 7
+train_phase_count = 24
+train_voltage_mv = 0
+
+[matrix_projection_max_relative_error]
+H0 = 0.0
+M_inverse = 0.0
+Tminus = 1.8025208758733552e-16
+Tplus = 0.0
+Z = 0.0
+
+[native_exact_parallel_vs_native_literal_max_relative_error]
+IFR = 7.330978355396006e-17
+LO = 4.404415264564078e-16
+LO_form_factor = 0.0
+acoustic = 0.0
+alloy = 0.0
+impurity = 5.877533182368464e-16
+
+[spectral_window]
+coupling_margin = 22.890763750276683
+estimate = "local_poles_not_interacting_spectrum"
+local_maximum = 16.938259053142666
+local_minimum = -0.26248977528857964
+local_spectrum_covered = true
+sampled_maximum = 40.0
+sampled_minimum = -4.0
+trusted_local_spectrum_covered = true
+trusted_maximum = 37.06666666666667
+trusted_minimum = -1.0666666666666667

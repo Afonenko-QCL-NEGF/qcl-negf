@@ -1,0 +1,69 @@
+scientific_acceptance = false
+bytes = 6840148013
+elapsed_process_seconds = 535.3691580295563
+execution = "complete"
+
+[[cases]]
+initialization = "native cold seed; FD only initialization, full Keldysh updates thereafter"
+scientific_acceptance = false
+EE = "none"
+maps_completed = 32
+quality = "unresolved"
+elapsed_seconds = 318.86363887786865
+model_sha256 = "91c53995b6b3ff51387de23e97fe50676fa829066072545759f28a1c36cf9e21"
+state_sha256 = "3caddc855578b8af691e105a1b871239bdd96e443a560472aa68e1408d46fae8"
+converged = false
+execution = "complete"
+data_bytes = 3420102723
+status = "max_iterations"
+
+    [cases.last_row]
+    r_K = 0.5317105319079968
+    "r_λ" = 0.03920184939403759
+    lambda_change = -0.00040763392351594874
+    J = -6.14983857818197e6
+    "ν" = 32
+    r_PSD = 0.0
+    r_A = 3.1275656738961616e-15
+    r_caus = 0.0
+    r_roundoff = 3.168921947115059e-16
+    raw_charge = 0.0467640832227317
+    "r_Σ" = 0.3160538647698913
+    "λ" = 1.0392018493940376
+    normalized_charge = 0.045000000000002385
+    r_population = 0.006840159801635528
+    r_Jchange = 0.0328017339714883
+    target_charge = 0.045000000000000005
+    r_D = 3.867978458483343e-16
+[[cases]]
+initialization = "native cold seed; FD only initialization, full Keldysh updates thereafter"
+scientific_acceptance = false
+EE = "none"
+maps_completed = 32
+quality = "unresolved"
+elapsed_seconds = 210.52134203910828
+model_sha256 = "ecb2b0dc93f6b44543a19f8be55302a7130aebb79fe4ab7a04cf981751284a94"
+state_sha256 = "0a9d838adeb6b93a8d953167e273f91fe5b263c8f85fcaeb6cfbb85c4f5adbe6"
+converged = false
+execution = "complete"
+data_bytes = 3420041637
+status = "max_iterations"
+
+    [cases.last_row]
+    r_K = 0.5031378394220615
+    "r_λ" = 0.025105130672650855
+    lambda_change = -0.0022508133442789013
+    J = 29597.788453788267
+    "ν" = 32
+    r_PSD = 0.0
+    r_A = 2.7541193324150866e-15
+    r_caus = 0.0
+    r_roundoff = 3.1707712587124992e-16
+    raw_charge = 0.046129730880269296
+    "r_Σ" = 0.21256736158994768
+    "λ" = 1.0251051306726509
+    normalized_charge = 0.04499999999999993
+    r_population = 0.006621421753415537
+    r_Jchange = 1.1070323618434605
+    target_charge = 0.045000000000000005
+    r_D = 2.299274857377446e-16

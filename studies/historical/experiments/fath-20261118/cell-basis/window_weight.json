@@ -1,0 +1,415 @@
+{
+  "energy_window_mev": [
+    -400.0,
+    560.0
+  ],
+  "trusted_window_mev": [
+    -140.0,
+    300.0
+  ],
+  "voltage_mv": 54.0,
+  "n_k": 17,
+  "max_k_inverse_nm": 0.6,
+  "broadening_mev": 0.5,
+  "thermal_reference_temperature_k": 10.0,
+  "active_reference": "Central restriction of full FD7 modes in [-100,80] meV with central weight >=0.10",
+  "spectral_reference": "Exact finite nine-cell cavity with projected kinetic operator, k; constant Lorentzian 0.5 meV",
+  "equilibrium_occupancy_reference": "10 K Fermi occupation of discrete poles; common mu from central sheet weight and donor target",
+  "candidates": {
+    "pzp7": {
+      "active_reference_weight_retained": 0.9953225473136175,
+      "maximum_local_pole_mev": 484.7734627393429,
+      "k0_local_poles_mev": [
+        -24.380364937962085,
+        8.209063088172591,
+        23.56849218792642,
+        33.71886065522318,
+        96.80241563347806,
+        136.7265360374218,
+        281.05995158728075
+      ],
+      "coupling_norm_mev": 56.634900031659676,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 598.0432628026623,
+      "exact_finite_cavity_maximum_pole_mev": 715.8599226742326,
+      "above_sampled_pole_count_on_k_grid": 16,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.0,
+      "sampled": {
+        "total_lower_fraction": 0.000284800427938957,
+        "total_upper_fraction": 0.000559414337354711,
+        "active_lower_fraction": 0.0003033599626585928,
+        "active_upper_fraction": 0.0004530828969428866,
+        "worst_single_orbital_upper_fraction": 0.001260934739055922
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005655880312571839,
+        "total_upper_fraction": 0.15107053413592061,
+        "active_lower_fraction": 0.0006369864154677677,
+        "active_upper_fraction": 0.10315094163017915,
+        "worst_single_orbital_upper_fraction": 0.9084385158628303
+      },
+      "thermal_reference_chemical_potential_mev": -23.979267437231094,
+      "thermal_reference_upper_sampled_occupancy_fraction": 1.1482586607489245e-303,
+      "thermal_reference_upper_trusted_occupancy_fraction": 2.520489978495876e-164
+    },
+    "pzp9": {
+      "active_reference_weight_retained": 0.9966895273151755,
+      "maximum_local_pole_mev": 694.8704776816049,
+      "k0_local_poles_mev": [
+        -25.166389357659533,
+        8.156908923831661,
+        23.28413534982667,
+        29.584849138078408,
+        94.86637560921389,
+        118.15336291811954,
+        140.0452674684404,
+        252.5864398547489,
+        492.76776623068986
+      ],
+      "coupling_norm_mev": 139.46271149246448,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 973.795900666534,
+      "exact_finite_cavity_maximum_pole_mev": 982.1963211261697,
+      "above_sampled_pole_count_on_k_grid": 98,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.41097116148829016,
+      "sampled": {
+        "total_lower_fraction": 0.0002704272155858681,
+        "total_upper_fraction": 0.09488560792379133,
+        "active_lower_fraction": 0.00030519740320846954,
+        "active_upper_fraction": 0.04198063332317464,
+        "worst_single_orbital_upper_fraction": 0.7326907169508194
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005213228423969652,
+        "total_upper_fraction": 0.19777519436435387,
+        "active_lower_fraction": 0.0006449738380461348,
+        "active_upper_fraction": 0.0559228613563455,
+        "worst_single_orbital_upper_fraction": 0.9023951129229516
+      },
+      "thermal_reference_chemical_potential_mev": -24.890449006197215,
+      "thermal_reference_upper_sampled_occupancy_fraction": 8.17393778354919e-296,
+      "thermal_reference_upper_trusted_occupancy_fraction": 2.5306516777373516e-164
+    },
+    "pod5_rank7": {
+      "active_reference_weight_retained": 0.9994201373552828,
+      "maximum_local_pole_mev": 1847.2488584243285,
+      "k0_local_poles_mev": [
+        -25.1061106448125,
+        8.152292544718357,
+        23.26398326064678,
+        30.135357500720584,
+        98.25577435317953,
+        369.87647764962713,
+        1672.9368256078637
+      ],
+      "coupling_norm_mev": 707.1841651799313,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 3261.617188784191,
+      "exact_finite_cavity_maximum_pole_mev": 2406.1611347958624,
+      "above_sampled_pole_count_on_k_grid": 153,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.9999999999599308,
+      "sampled": {
+        "total_lower_fraction": 0.0002699177915259755,
+        "total_upper_fraction": 0.14317245781465515,
+        "active_lower_fraction": 0.00031012554406762257,
+        "active_upper_fraction": 0.02425313499302023,
+        "worst_single_orbital_upper_fraction": 0.8293775766729318
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005519327993219341,
+        "total_upper_fraction": 0.1487978496050301,
+        "active_lower_fraction": 0.0006672076674387239,
+        "active_upper_fraction": 0.024980585686317575,
+        "worst_single_orbital_upper_fraction": 0.8506408226261939
+      },
+      "thermal_reference_chemical_potential_mev": -30.48495052532248,
+      "thermal_reference_upper_sampled_occupancy_fraction": 0.0,
+      "thermal_reference_upper_trusted_occupancy_fraction": 1.8038571196320387e-169
+    },
+    "pod5_rank9": {
+      "active_reference_weight_retained": 0.9999066478773309,
+      "maximum_local_pole_mev": 2644.293073318384,
+      "k0_local_poles_mev": [
+        -26.410202462529387,
+        8.088537164706286,
+        22.54748816594061,
+        25.848745744204418,
+        93.71596001626833,
+        110.96562447990657,
+        185.98915990831875,
+        1690.0605978864994,
+        2465.260908434027
+      ],
+      "coupling_norm_mev": 1769.1811883973894,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 6182.655450113163,
+      "exact_finite_cavity_maximum_pole_mev": 4507.023071781031,
+      "above_sampled_pole_count_on_k_grid": 196,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 1.0000000061475185,
+      "sampled": {
+        "total_lower_fraction": 0.00025524293702910517,
+        "total_upper_fraction": 0.11801907092927516,
+        "active_lower_fraction": 0.00031191534831771073,
+        "active_upper_fraction": 0.012213227742380017,
+        "worst_single_orbital_upper_fraction": 0.6298074547763296
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005024805062347759,
+        "total_upper_fraction": 0.2576024753846445,
+        "active_lower_fraction": 0.0006708838822234883,
+        "active_upper_fraction": 0.01742926051762967,
+        "worst_single_orbital_upper_fraction": 0.9575888774519898
+      },
+      "thermal_reference_chemical_potential_mev": -30.512397878262902,
+      "thermal_reference_upper_sampled_occupancy_fraction": 1.6057750117072243e-299,
+      "thermal_reference_upper_trusted_occupancy_fraction": 8.232922485468984e-167
+    },
+    "pod6_rank7": {
+      "active_reference_weight_retained": 0.9972720239115845,
+      "maximum_local_pole_mev": 1383.8288643342419,
+      "k0_local_poles_mev": [
+        -24.343405516995748,
+        8.187584706517685,
+        23.3918617851078,
+        34.178722573785635,
+        97.65700615056518,
+        269.59497478875363,
+        1206.9467433637942
+      ],
+      "coupling_norm_mev": 502.8263684597376,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 2389.481601253717,
+      "exact_finite_cavity_maximum_pole_mev": 1844.3277479461988,
+      "above_sampled_pole_count_on_k_grid": 153,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.9999999997377886,
+      "sampled": {
+        "total_lower_fraction": 0.0002728228570895353,
+        "total_upper_fraction": 0.143162598877237,
+        "active_lower_fraction": 0.00031023306010763315,
+        "active_upper_fraction": 0.026112847694960827,
+        "worst_single_orbital_upper_fraction": 0.8283168743732017
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005559089818049883,
+        "total_upper_fraction": 0.14730768543490755,
+        "active_lower_fraction": 0.0006668253091033145,
+        "active_upper_fraction": 0.026809050453474054,
+        "worst_single_orbital_upper_fraction": 0.8453721689650715
+      },
+      "thermal_reference_chemical_potential_mev": -30.139907668673217,
+      "thermal_reference_upper_sampled_occupancy_fraction": 0.0,
+      "thermal_reference_upper_trusted_occupancy_fraction": 6.256154870250974e-168
+    },
+    "pod6_rank9": {
+      "active_reference_weight_retained": 0.9999222654107461,
+      "maximum_local_pole_mev": 2438.732484996419,
+      "k0_local_poles_mev": [
+        -26.31407729913265,
+        8.09425192729991,
+        22.586024119235006,
+        25.93574984242098,
+        92.9826063572347,
+        109.25553985070991,
+        168.17529662540608,
+        1244.7727894929303,
+        2261.1374417212223
+      ],
+      "coupling_norm_mev": 1471.8789022928263,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 5382.4902895820715,
+      "exact_finite_cavity_maximum_pole_mev": 3920.1490664394,
+      "above_sampled_pole_count_on_k_grid": 180,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 1.000000015124421,
+      "sampled": {
+        "total_lower_fraction": 0.00025856174272242055,
+        "total_upper_fraction": 0.1116958708057206,
+        "active_lower_fraction": 0.0003115525616341688,
+        "active_upper_fraction": 0.014549091641775076,
+        "worst_single_orbital_upper_fraction": 0.6467334636723254
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005096410781287644,
+        "total_upper_fraction": 0.22960396917276074,
+        "active_lower_fraction": 0.0006702143311267437,
+        "active_upper_fraction": 0.01888394642358483,
+        "worst_single_orbital_upper_fraction": 0.9354651327293836
+      },
+      "thermal_reference_chemical_potential_mev": -30.51045681742952,
+      "thermal_reference_upper_sampled_occupancy_fraction": 1.1813762433188847e-301,
+      "thermal_reference_upper_trusted_occupancy_fraction": 1.9757311141374903e-166
+    },
+    "pod7_rank7": {
+      "active_reference_weight_retained": 0.9952339076722804,
+      "maximum_local_pole_mev": 480.91599046056854,
+      "k0_local_poles_mev": [
+        -24.429115003269647,
+        8.206321301628293,
+        23.567893488517736,
+        33.49067497450751,
+        96.86037760587246,
+        139.82786298887365,
+        277.2672928600923
+      ],
+      "coupling_norm_mev": 64.77299916818342,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 610.4619887969354,
+      "exact_finite_cavity_maximum_pole_mev": 717.6356999305791,
+      "above_sampled_pole_count_on_k_grid": 16,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.0,
+      "sampled": {
+        "total_lower_fraction": 0.0002849289211290677,
+        "total_upper_fraction": 0.0006282106079096597,
+        "active_lower_fraction": 0.00030366046337471927,
+        "active_upper_fraction": 0.0004620323684090517,
+        "worst_single_orbital_upper_fraction": 0.0016539319338596628
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005661408733820198,
+        "total_upper_fraction": 0.14891501214061723,
+        "active_lower_fraction": 0.0006380206472715062,
+        "active_upper_fraction": 0.10016469141506809,
+        "worst_single_orbital_upper_fraction": 0.8854395840507329
+      },
+      "thermal_reference_chemical_potential_mev": -24.11518661779695,
+      "thermal_reference_upper_sampled_occupancy_fraction": 1.1378035522264104e-303,
+      "thermal_reference_upper_trusted_occupancy_fraction": 1.350842250475569e-164
+    },
+    "pod7_rank9": {
+      "active_reference_weight_retained": 0.9999212044836645,
+      "maximum_local_pole_mev": 1693.8259065730253,
+      "k0_local_poles_mev": [
+        -26.248977509511057,
+        8.084569473221576,
+        22.63623580313548,
+        26.05656167265519,
+        92.93898572642053,
+        108.66177705992119,
+        136.51848392680375,
+        1126.7819881701298,
+        1518.3903772961323
+      ],
+      "coupling_norm_mev": 1144.5381886925402,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 3982.9022839581057,
+      "exact_finite_cavity_maximum_pole_mev": 2898.8434755510953,
+      "above_sampled_pole_count_on_k_grid": 173,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 1.0000000000037115,
+      "sampled": {
+        "total_lower_fraction": 0.00026246527354764675,
+        "total_upper_fraction": 0.11148908358505899,
+        "active_lower_fraction": 0.0003108826886800559,
+        "active_upper_fraction": 0.018226005257198852,
+        "worst_single_orbital_upper_fraction": 0.5678993006971372
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005179123163450348,
+        "total_upper_fraction": 0.18949570103910357,
+        "active_lower_fraction": 0.0006685527672776184,
+        "active_upper_fraction": 0.02188391920402661,
+        "worst_single_orbital_upper_fraction": 0.7810676369605087
+      },
+      "thermal_reference_chemical_potential_mev": -30.34090669510332,
+      "thermal_reference_upper_sampled_occupancy_fraction": 1.7985456497303572e-304,
+      "thermal_reference_upper_trusted_occupancy_fraction": 7.891900732554922e-168
+    },
+    "pod8_rank7": {
+      "active_reference_weight_retained": 0.9552790480375452,
+      "maximum_local_pole_mev": 342.01890471932643,
+      "k0_local_poles_mev": [
+        -25.316117515621304,
+        8.146472027573127,
+        23.297291597548455,
+        29.227949892280026,
+        95.17265565479457,
+        117.82182069906992,
+        142.2832617871105
+      ],
+      "coupling_norm_mev": 13.423372776853984,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 368.8656502730344,
+      "exact_finite_cavity_maximum_pole_mev": 558.8079971535456,
+      "above_sampled_pole_count_on_k_grid": 0,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.0,
+      "sampled": {
+        "total_lower_fraction": 0.0002925428421564427,
+        "total_upper_fraction": 0.0004125109996524843,
+        "active_lower_fraction": 0.000312413351069157,
+        "active_upper_fraction": 0.0003702852283171294,
+        "worst_single_orbital_upper_fraction": 0.0005199626325689128
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005864406102062783,
+        "total_upper_fraction": 0.03910641213086494,
+        "active_lower_fraction": 0.0006651712101766683,
+        "active_upper_fraction": 0.007120197708397753,
+        "worst_single_orbital_upper_fraction": 0.20174058851600643
+      },
+      "thermal_reference_chemical_potential_mev": -24.745359887917495,
+      "thermal_reference_upper_sampled_occupancy_fraction": 0.0,
+      "thermal_reference_upper_trusted_occupancy_fraction": 5.148173842735815e-164
+    },
+    "pod8_rank9": {
+      "active_reference_weight_retained": 0.9993634272243251,
+      "maximum_local_pole_mev": 1159.2641670007633,
+      "k0_local_poles_mev": [
+        -25.445929894072005,
+        8.137432943426598,
+        23.147307414147487,
+        28.60018531768182,
+        94.40189021942693,
+        115.46604861805687,
+        138.86720723291177,
+        565.7716723593177,
+        981.8637329282715
+      ],
+      "coupling_norm_mev": 626.4585223909346,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 2412.1812117826325,
+      "exact_finite_cavity_maximum_pole_mev": 1847.2923119982972,
+      "above_sampled_pole_count_on_k_grid": 154,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.9999999993689244,
+      "sampled": {
+        "total_lower_fraction": 0.0002667625097041031,
+        "total_upper_fraction": 0.11146887636689884,
+        "active_lower_fraction": 0.00030938184757468916,
+        "active_upper_fraction": 0.027094651521187566,
+        "worst_single_orbital_upper_fraction": 0.631995972808593
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005240758782852779,
+        "total_upper_fraction": 0.16665966998261145,
+        "active_lower_fraction": 0.0006635498032478189,
+        "active_upper_fraction": 0.029082182037786123,
+        "worst_single_orbital_upper_fraction": 0.7366787574746877
+      },
+      "thermal_reference_chemical_potential_mev": -29.30901481550842,
+      "thermal_reference_upper_sampled_occupancy_fraction": 1.58372637374e-312,
+      "thermal_reference_upper_trusted_occupancy_fraction": 1.0165279749870873e-167
+    },
+    "bounded_pod5_rank7_0p25rad": {
+      "active_reference_weight_retained": 0.9877859374984688,
+      "maximum_local_pole_mev": 433.637444000708,
+      "k0_local_poles_mev": [
+        -25.298534608701857,
+        8.136916167451782,
+        23.202554199771996,
+        29.354729599039427,
+        98.4331001887559,
+        164.67427383378242,
+        237.8939948420803
+      ],
+      "coupling_norm_mev": 109.35641684485121,
+      "conservative_maximum_local_plus_twice_coupling_norm_mev": 652.3502776904104,
+      "exact_finite_cavity_maximum_pole_mev": 699.4456696241912,
+      "above_sampled_pole_count_on_k_grid": 19,
+      "central_weighted_total_k0_spectral_mass_above_sampled_uncorrected": 0.0,
+      "sampled": {
+        "total_lower_fraction": 0.00028671671873231277,
+        "total_upper_fraction": 0.0008473778698637368,
+        "active_lower_fraction": 0.0003097855419974989,
+        "active_upper_fraction": 0.0004022958316730706,
+        "worst_single_orbital_upper_fraction": 0.0033516339522471077
+      },
+      "trusted": {
+        "total_lower_fraction": 0.0005737624135422783,
+        "total_upper_fraction": 0.147635733621096,
+        "active_lower_fraction": 0.0006585573147019085,
+        "active_upper_fraction": 0.04798189694130899,
+        "worst_single_orbital_upper_fraction": 0.6091615096775874
+      },
+      "thermal_reference_chemical_potential_mev": -26.312528472891856,
+      "thermal_reference_upper_sampled_occupancy_fraction": 1.2642094876359252e-298,
+      "thermal_reference_upper_trusted_occupancy_fraction": 6.490596293705595e-165
+    }
+  }
+}

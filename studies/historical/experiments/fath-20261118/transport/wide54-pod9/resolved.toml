@@ -1,0 +1,22 @@
+basis_method = "refined_bloch_pod_rank9"
+basis_sha256 = "8e9eb862346d47e4cdc6f35ed6ff19d3738e2c06afe92b3b238dbc73b45c1293"
+dark = true
+electron_electron = "none"
+field_kV_cm = 12.297882031427921
+period_nm = 43.91000000000001
+q_LO_nm_inverse = 0.2
+q_impurity_nm_inverse = 0.2
+scattering_channels = ["LO", "acoustic", "impurity", "IFR", "alloy"]
+voltage_mV = 54.00000000000001
+
+[spectral_window]
+coupling_margin = 22.890763750276683
+estimate = "local_poles_not_interacting_spectrum"
+local_maximum = 16.938259053142666
+local_minimum = -0.26248977528857964
+local_spectrum_covered = true
+sampled_maximum = 40.0
+sampled_minimum = -4.0
+trusted_local_spectrum_covered = true
+trusted_maximum = 37.4
+trusted_minimum = -1.4

@@ -1,0 +1,13 @@
+# Навигация по механизмам
+
+| Вопрос аудита | Точка входа и воспроизводимый контроль |
+|---|---|
+| Dyson, Keldysh, PSD, спектральная сумма, FDT, число и энергия | [Карта, §3](../mappings/model-to-sources.md#3-dyson-keldysh-и-причинное-замыкание). Найти Grange (17)–(19), (32)–(36), Kubis–Vogl (16)–(24), Lorentz and FDT candidates C3/C4. |
+| BenDaniel–Duke, Bloch, Wannier, Wannier–Stark, PzP, rank, POD, FD | [Карта, §1](../mappings/model-to-sources.md#1-pzp-bloch-wannier-и-усечение). Сравнить span and tails независимо, [#140](https://github.com/Afonenko-QCL-NEGF/qcl-negf/issues/140), Wang 2022 cutoff experiment и C1. |
+| LO, acoustic, impurity, IFR, alloy, Hartree/correlation e–e | [Карта, §2](../mappings/model-to-sources.md#2-проекция-scattering-vertices-и-корреляторов) и [трассировка построчно](../mappings/code-traceability.csv). Группа PzP/Bloch меняет projected vertices, Bose weights и реальная часть требуют отдельной проверки. |
+| Поле, периодичность, embedding, восстановление плотности/потоков | [Карта, §4](../mappings/model-to-sources.md#4-field-periodicity-embedding-и-непрерывность). Сначала matched full FD Schur, затем reduced basis и поэлементная continuity. |
+| Poisson, SCBA, нормировка, Jacobi/Anderson/Broyden | [Карта §5](../mappings/model-to-sources.md#5-реализация-к-которой-относится-сравнение). У Grange 2014 закреплены periodic gauge и charge factor; Walker–Ni имеет статус metadata-only. C4/C5 и Campaign 133 ограничивают выводы по остановке и истории. |
+| Quadrature, edges, FFT, Hilbert, shift/interpolation, roundoff | [Карта §3](../mappings/model-to-sources.md#3-dyson-keldysh-и-причинное-замыкание) и C3. Hałdaś 2019 относится к axial non-uniform grid; проверка роста окна энергии, \(k\)-sampling и tail model отдельна. |
+| RGF, LRA, DM, Büttiker probes и nextnano | [Матрица математических подходов](../mappings/methods-matrix.csv) и [Core numerical bibliography](https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/db26a0ef49673d8246ae336cbe73bafe6d7482ac/docs/src/references_optimization.md). Сначала установить, сохранён ли тот же оператор/объект наблюдения. |
+| Оптика и экспериментальные сопоставления | Lee–Wacker (22)–(29), Wacker 2013, различие bare bubble/vertex response в [карте](../mappings/model-to-sources.md), [Bosco data](../reference-2019/), измеренная и calculated I–V в [матрице результатов](../audit-preparation/candidate-contradictions.md). |
+| Отрицательные результаты и воспроизводимость | [Исходный индекс](../audit-preparation/evidence-index.md) и [пять различающих экспериментов](../audit-preparation/candidate-contradictions.md). Raw/effective inputs имеют точную историографию и привязку к версии. |

@@ -1,0 +1,61 @@
+schema_version: 1
+publication:
+  title: Thermoelectrically cooled THz quantum cascade laser operating up to 210 K
+  journal: Applied Physics Letters
+  volume: 115
+  article: '010601'
+  year: 2019
+  doi: 10.1063/1.5110305
+  arxiv: '1911.06582'
+  urls:
+    doi: https://doi.org/10.1063/1.5110305
+    arxiv_abstract: https://arxiv.org/abs/1911.06582
+    arxiv_pdf: https://arxiv.org/pdf/1911.06582
+    arxiv_source: https://export.arxiv.org/e-print/1911.06582
+source_artifacts:
+- name: 1911.06582.pdf
+  sha256: b103b3da9fa977d1dc682d1e2caf96d74b5f081731e4db0da944af675a58dc70
+- name: 1911.06582-source.tar.gz
+  sha256: ea0c353718290cec5b35a35963681bcba45f173d6e8ebed1e056b0fba7eff59c
+- name: Image_3_v10_APL.pdf
+  sha256: f1db70190545fc1ac1d6b8485d5776b739ed8ac5b8cf690de326f4f859051e2d
+digitization:
+  file: negf_iv_digitized.csv
+  source_figure: Fig.3b
+  source_curve: NEGF IV solid black
+  method: Vector path extracted from the author arXiv figure; horizontal scale converted
+    to voltage per period and vertical scale converted to J.
+  calibration: The publication statement that the maximum is at 56 mV/period fixes
+    the voltage-per-period scale.
+  uncertainty_scope: Digitization only; the article publishes neither raw NEGF values
+    nor model uncertainty.
+  caveat: Do not score points outside the published curve; the digitized data cover
+    40–60 mV per period.
+comparison_scope:
+  valid:
+  - exact epitaxial layer sequence and sheet doping
+  - active-region current density versus voltage per period at 200 K
+  - bias of the calculated current maximum
+  - diagnostic bare-bubble peak-energy trend
+  excluded:
+  - terminal device voltage and current
+  - threshold current
+  - light-current curve and output power
+  - maximum operating temperature
+  - absolute modal or material gain
+  reasons:
+  - contacts and series resistance are absent
+  - electric-field domains are absent
+  - cavity and waveguide losses are absent
+  - photon dynamics and lasing clamp are absent
+  - electron-electron self-energy and vertex corrections are absent
+device_periods:
+  status: not directly published
+  inferred_from_figure_and_56mV_anchor: approximately 391
+  policy: Compare J directly against voltage_per_period; never gate on terminal voltage.
+  model_output_value: 405
+data_files:
+  structure.csv:
+    sha256: 4aef262aa5c83d60ec1666a60e3b92b8c0ef73d51c9bc51840a8489296a24615
+  negf_iv_digitized.csv:
+    sha256: af6d222b4b1cbdf351f569628c5e62c7983e85909670e26663892bd08477da88

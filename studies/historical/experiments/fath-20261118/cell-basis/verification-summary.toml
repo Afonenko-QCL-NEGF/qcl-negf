@@ -1,0 +1,60 @@
+adapter_sha256 = "abd4f904012ea0c3c805a594d55b9aba1e77c637cf7087c04aae3bf2744acf6a"
+basis_method = "bounded_bloch_snapshot_pod"
+basis_orthogonality_frobenius_residual = 1.303278903920701e-15
+bias_mv = 54.00000000000001
+core_commit = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+device_sha256 = "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502"
+energy_unit_mev = 100.0
+full_verification_sha256 = "c16f60580fc2b268f66d4a34be722f776988c01188c48c5a52f0d93aed037c0e"
+julia_version = "1.13.4"
+n_b = 7
+n_e = 41
+n_k = 2
+n_phi = 4
+n_qz = 5
+n_z = 144
+native_seed_chemical_potential_mev = -41.62299621576115
+native_seed_donor_relative_error = 0.0
+native_structural_pass_zero_and_54mv = true
+production_cache_reuses_kernel_arrays = true
+reuses_identical_basis_and_kernels_after_retarget = true
+scba_iterations = 0
+train_bands = 5
+train_phase_count = 24
+training_eigensolve_scaled_max_residual = 1.3341664264984995e-15
+
+[basis_provenance]
+basis_method = "bounded_bloch_snapshot_pod"
+max_principal_angle_rad = 0.25
+pzp_translation_diagnostics = "inapplicable"
+train_bands = 5
+train_phase_count = 24
+train_voltage_mv = 0
+
+[matrix_projection_max_relative_error]
+H0 = 0.0
+M_inverse = 0.0
+Tminus = 3.2647470234445045e-18
+Tplus = 0.0
+Z = 0.0
+
+[native_exact_parallel_vs_native_literal_max_relative_error]
+IFR = 1.8177329564674783e-16
+LO = 4.404888033619058e-16
+LO_form_factor = 0.0
+acoustic = 0.0
+alloy = 0.0
+impurity = 1.1755066364736945e-16
+
+[spectral_window]
+coupling_margin = 2.187128334470012
+estimate = "local_poles_not_interacting_spectrum"
+local_maximum = 4.336374435254723
+local_minimum = -0.2529853462768344
+local_spectrum_covered = true
+sampled_maximum = 5.6000000000000005
+sampled_minimum = -4.0
+trusted_local_spectrum_covered = false
+trusted_maximum = 2.9600000000000004
+trusted_minimum = -1.3599999999999999

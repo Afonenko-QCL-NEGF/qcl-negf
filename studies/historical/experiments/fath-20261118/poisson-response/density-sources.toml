@@ -1,0 +1,110 @@
+E0_eV = 0.1
+L0_m = 1.0e-8
+cell_bias_mV = 54.0
+core_commit = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+density_csv_sha256 = "dca7236f6a4b056f053c06163546773fdd8fc123e403d144c903bf8c7740edea"
+julia_version = "1.13.4"
+lambda_P = 18.095128179727823
+
+[cases.compact54-bloch7]
+model_identity = "054296b6824189b687ff4fe0a77602ffb7c79d2d63ed3da94bde8fdc81848076"
+model_sha256 = "98ffcb7326685c036ebe12c0e0fb36a87dca5628412fba5d5961ab5e166bc23d"
+native_bordered_zeta = -5.656651995737657e-20
+native_neutrality_relative = 7.203619934355771e-15
+native_r_P_compatible = 5.936027948352009e-14
+native_r_P_raw = 5.927613967279547e-14
+recorded_state_sha256 = "6e9c124ecc9abbce6bc21faddc63dcdd4febcafdf17dc5936210a1b96947c49f"
+sheet_density_matrix_antihermitian_relative = 7.006207385785828e-17
+sheet_density_matrix_trace_m_minus_2 = 2.999999999999978e14
+source_kind = "terminal-observables sheet density matrix"
+source_maps = 64
+source_scientific_acceptance = false
+source_sha256 = "411a60a2dd50afd5b286d208f970255f17b30cc97d95bade978e118101eb683d"
+status = "max_iterations"
+target_donor_m_minus_2 = 3.0e14
+
+[cases.compact54-pzp7]
+model_identity = "2cb5eba42612a9d86649ab371489acb0ab07c6bc77a4473d122bb1978ed09ae5"
+model_sha256 = "c680b95ada2f480cb6b1a0b176f19e2a5f8b7a4edf0d0307afbe994736e90383"
+native_bordered_zeta = 1.7182968290731324e-19
+native_neutrality_relative = 1.4964248734825972e-16
+native_r_P_compatible = 1.4294548225626709e-13
+native_r_P_raw = 1.4294521033632026e-13
+recorded_state_sha256 = "378d0113923590fd67057daff93f2159cf148a3098612843edf2e128e001611a"
+sheet_density_matrix_antihermitian_relative = 1.0043878812584144e-16
+sheet_density_matrix_trace_m_minus_2 = 3.0000000000000006e14
+source_kind = "terminal-observables sheet density matrix"
+source_maps = 64
+source_scientific_acceptance = false
+source_sha256 = "62abd559f06a7bde5a7cfae7ce0e8d2fa9720e805da4f1956cfd06819c875abe"
+status = "max_iterations"
+target_donor_m_minus_2 = 3.0e14
+
+[cases.compact54-pzp7-wide-upper]
+model_identity = "5200b18a21ba144511df2632fab590a3d4bae07a3d6c88d86d903dde1156296c"
+model_sha256 = "ab07f0cc87aa95651cc7ee59d80c06b6a0988679301006d86fa24aad79c5d16f"
+native_bordered_zeta = 3.0735634891145395e-19
+native_neutrality_relative = 5.941202029767963e-15
+native_r_P_compatible = 1.1281989984179726e-13
+native_r_P_raw = 1.1281808101275118e-13
+recorded_state_sha256 = "3827dc95912d0f3a8dc0ae38019a7c0d626b53504095190bb7eabad67980cf45"
+sheet_density_matrix_antihermitian_relative = 1.3037088514142232e-16
+sheet_density_matrix_trace_m_minus_2 = 3.000000000000018e14
+source_kind = "terminal-observables sheet density matrix"
+source_maps = 64
+source_scientific_acceptance = false
+source_sha256 = "49294eace51e3da72948e7a5972db5704e9a79b06b9dbcf74c36cd2170c4d0f7"
+status = "max_iterations"
+target_donor_m_minus_2 = 3.0e14
+
+[cases.native54-03]
+model_identity = "62a8ec2b6be97cc7eac8ac0c9335de3765663f58bffd4a2ace1344efb83e238b"
+model_sha256 = "41b88f390e59f8ce63958c53fd2961d112fffde2fec3fff1d3d789c68af212e6"
+native_bordered_zeta = 4.821362392596395e-19
+native_neutrality_relative = 1.1255599678567744e-14
+native_r_P_compatible = 9.728487129623624e-14
+native_r_P_raw = 9.736868463413311e-14
+recorded_state_sha256 = "a51f7935e666d67473ce44132a6db5aa21cb48c88b2443472abb7c57676fdd42"
+sheet_density_matrix_antihermitian_relative = 5.515854939927504e-17
+sheet_density_matrix_trace_m_minus_2 = 3.000000000000034e14
+source_kind = "terminal-observables sheet density matrix"
+source_maps = 128
+source_scientific_acceptance = false
+source_sha256 = "6fd27ead9096acec752ef1f503a33484d2a49d88405a92e244d3509e13436f4a"
+status = "max_iterations"
+target_donor_m_minus_2 = 3.0e14
+
+[cases."native54-long-alpha02/checkpoint-0128"]
+model_identity = "62a8ec2b6be97cc7eac8ac0c9335de3765663f58bffd4a2ace1344efb83e238b"
+model_sha256 = "8a6f6c7462f7890d706eb2d987d8babf08fcf7c272c66b5d686f8274e40406ba"
+native_bordered_zeta = 4.0718124577449467e-19
+native_neutrality_relative = 9.970142477814617e-15
+native_r_P_compatible = 1.0336627839610962e-13
+native_r_P_raw = 1.0353583311147028e-13
+recorded_state_sha256 = "2618fa431d41574c7fc1fffcb5677a08fec4396def3ba59a38b709d5a2dfaefd"
+sheet_density_matrix_antihermitian_relative = 8.150065375081288e-17
+sheet_density_matrix_trace_m_minus_2 = 3.0000000000000294e14
+source_kind = "streamed checkpoint Gless only; state SHA as recorded"
+source_maps = 128
+source_scientific_acceptance = false
+source_sha256 = "2618fa431d41574c7fc1fffcb5677a08fec4396def3ba59a38b709d5a2dfaefd"
+status = "aligned_intermediate_checkpoint"
+target_donor_m_minus_2 = 3.0e14
+
+[cases.wide54-pod9]
+model_identity = "45146fcdbf1b76b095da4c8a37e019a7a090a3c2e6fe07a985440037cd9c7b45"
+model_sha256 = "d93b413199258444313a7f00ca934d39c63ff9c8c1b4877a2a4cc7107f9c7048"
+native_bordered_zeta = -2.177838597459657e-19
+native_neutrality_relative = 1.2014767074760197e-14
+native_r_P_compatible = 9.251116950256257e-14
+native_r_P_raw = 9.2674255108419e-14
+recorded_state_sha256 = "ed6af4dfbc948121c9dbe2695e1018a6308339c4eb64de71ad0ff9a47eaf4c46"
+sheet_density_matrix_antihermitian_relative = 1.194064934774972e-16
+sheet_density_matrix_trace_m_minus_2 = 2.999999999999964e14
+source_kind = "terminal-observables sheet density matrix"
+source_maps = 96
+source_scientific_acceptance = false
+source_sha256 = "aaebe2d06468fa489c2e5df2cc5af83ef2f0655926346acf5b57bf0837f82966"
+status = "max_iterations"
+target_donor_m_minus_2 = 3.0e14

@@ -1,0 +1,85 @@
+{
+  "source_state_sha256": "d6df731827b57e7b48565069080494a6363a3abd41aad885eb096ba053bdce15",
+  "source_model_sha256": "0a8eca5877b4c3770fc706922a9fb8562db734f92fbbbea98d74e514cd66d77e",
+  "energy_support_meV": [
+    -400.0,
+    560.0
+  ],
+  "coarse_GR_relative_reconstruction": 1.0959387017559589e-14,
+  "coarse_Gamma_min_eigenvalue_meV": -1.845938624954269e-15,
+  "coarse_Gamma_max_Frobenius_meV": 14359.994381888071,
+  "edge_width_meV": 36.7,
+  "electrostatics": "field zero and Hartree zero held fixed",
+  "spectral_sum_by_step": {
+    "0.8/aligned": 0.07836512092277242,
+    "0.8/half_offset": 0.17530737992803794,
+    "0.4/aligned": 0.0856380928437987,
+    "0.4/half_offset": 0.08718524237953149,
+    "0.2/aligned": 0.0864105281504915,
+    "0.2/half_offset": 0.08139754334996141,
+    "0.1/aligned": 0.08390211124429207,
+    "0.1/half_offset": 0.08671000097433569
+  },
+  "projected_trend": {
+    "windows": [
+      {
+        "first_map": 256,
+        "last_map": 319,
+        "max_family_median": 0.0005563710186409765,
+        "max_family_min_max": [
+          0.00038142226056628125,
+          0.0009366464618932261
+        ],
+        "total_median": 2.8298444836837896e-05,
+        "elapsed_seconds_end": 335.39065980911255
+      },
+      {
+        "first_map": 320,
+        "last_map": 383,
+        "max_family_median": 0.0002583289322163954,
+        "max_family_min_max": [
+          0.0001634948058670971,
+          0.00036797041277678515
+        ],
+        "total_median": 1.2548009330514123e-05,
+        "elapsed_seconds_end": 396.9516189098358
+      },
+      {
+        "first_map": 384,
+        "last_map": 447,
+        "max_family_median": 0.00011083915420377678,
+        "max_family_min_max": [
+          6.740826983036308e-05,
+          0.00019406053386829234
+        ],
+        "total_median": 5.890454542446894e-06,
+        "elapsed_seconds_end": 452.4870059490204
+      },
+      {
+        "first_map": 448,
+        "last_map": 511,
+        "max_family_median": 4.921607592363173e-05,
+        "max_family_min_max": [
+          3.283225837792411e-05,
+          7.758055369499007e-05
+        ],
+        "total_median": 2.3862047663662658e-06,
+        "elapsed_seconds_end": 512.7798519134521
+      },
+      {
+        "first_map": 512,
+        "last_map": 552,
+        "max_family_median": 2.6235013498094612e-05,
+        "max_family_min_max": [
+          1.9398322173154192e-05,
+          3.1747174502195964e-05
+        ],
+        "total_median": 1.1784900029145897e-06,
+        "elapsed_seconds_end": 552.8381898403168
+      }
+    ],
+    "log_slope_per_map": -0.01288772692169495,
+    "descriptive_half_life_maps": 53.783509285343,
+    "unvalidated_log_extrapolation_map_at_1e_8": 1139.0157123308625
+  }
+}

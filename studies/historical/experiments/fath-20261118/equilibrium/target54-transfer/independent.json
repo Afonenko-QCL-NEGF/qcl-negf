@@ -1,0 +1,20 @@
+{
+  "scope": "mixed archived state, original fresh metrics are in rows.csv",
+  "map": 256,
+  "state_sha256": "0341c530089397a956d765424dcd986d8f6791ada05b4db0f8bd51040021f04c",
+  "N_normalized_over_target": 0.9999999999999994,
+  "raw_lambda_mixed": 0.9999734679888446,
+  "rK_raw_mixed": 4.826795851807986e-06,
+  "spectral_identity_relative": 3.160283010824159e-13,
+  "minimum_eigenvalues": {
+    "A": -1.5488811708218937e-16,
+    "Gn": 5.8514637518564914e-36,
+    "Gp": 1.0259433057095516e-48
+  },
+  "Jplus_A_cm2": 30.732212923717086,
+  "Jminus_A_cm2": -31.401237606852263,
+  "r_sum": 0.008350934501914677,
+  "Jplus_abs_error": 9.237055564881302e-14,
+  "Jminus_abs_error": 1.4210854715202004e-14,
+  "r_sum_abs_error": 1.734723475976807e-18
+}

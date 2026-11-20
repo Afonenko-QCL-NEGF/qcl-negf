@@ -1,0 +1,70 @@
+case_sha256 = "1fa2f48be380472d581bf816dc1502f08c11d73dc1cfaba263be8ba626f92bbf"
+core_commit = "e171caa60cce676c6c4238dd671e7c527f2bd977"
+core_tree = "742ed5a6fe82f1e5c63fc1a2290ed77f89ca6da8"
+device_sha256 = "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502"
+discrete_doped_thickness_nm = 4.878888888888889
+driver_sha256 = "0b53a06fcdaa25d8ace2e454c1b1482bc63cb090fbc1b34b90c8df535f160187"
+effective_basis_localization = "bloch_snapshot_pod"
+estimated_peak_bytes = 12339368128
+field_bytes = 128315664
+integrated_donor_sheet_m_minus_2 = 3.0e14
+julia_version = "1.13.4"
+manifest_sha256 = "da0780fbe150c0e16e9fedf3566a1971095642f14f57f32524b52f430a4adb65"
+planned_budget_bytes = 16106127360
+spatial_layer_cell_counts = [14, 29, 8, 27, 14, 18, 16, 18]
+trust_energy_bounds_meV = [-140.0, 3740.0]
+
+[algorithm]
+anderson_damping = 1.0
+anderson_history_depth = 5
+anderson_regularization = 1.0e-12
+contraction = "dense_blas"
+elastic_retarded = "direct_green"
+embedding = "finite_chain"
+embedding_periods = 4
+energy_shift = "sparse_plan"
+hilbert = "product_integration"
+kernel_build = "direct"
+localization = "pzp"
+low_rank_maximum_rank = 0
+low_rank_relative_tolerance = 0.0
+mixing = "linear"
+occupation_normalization = "paired_convex"
+retarded_real_part = "kramers_kronig"
+self_energy_structure = "full"
+solver_backend = "production"
+transverse_momentum = "resolved"
+
+[effective_basis_construction]
+basis_method = "bloch_snapshot_pod"
+basis_rank = 9
+frozen_adapter_sha256 = "abd4f904012ea0c3c805a594d55b9aba1e77c637cf7087c04aae3bf2744acf6a"
+max_principal_angle_rad = "unbounded"
+pzp_translation_diagnostics = "inapplicable"
+refinement_identity = "fath-cbo149-unbounded-pod7-r9-v1"
+train_bands = 7
+train_phase_count = 24
+train_voltage_mv = 0
+
+[strict_thresholds]
+r_A = 1.0e-9
+r_C = 1.0e-8
+r_D = 1.0e-11
+r_J = 1.0e-6
+r_K = 1.0e-8
+r_P = 1.0e-11
+r_PSD = 1.0e-10
+r_U = 1.0e-7
+r_caus = 1.0e-10
+r_edge = 1.0e-6
+r_imag = 1.0e-10
+r_n = 1.0e-7
+r_neutral = 1.0e-10
+r_obs = 0.0001
+r_power = 0.0001
+r_roundoff = 1.0e-10
+r_sum = 0.001
+r_tail = 1.0e-6
+"r_Σ" = 1.0e-8
+"r_ζ" = 1.0e-10
+"r_λ" = 1.0e-8

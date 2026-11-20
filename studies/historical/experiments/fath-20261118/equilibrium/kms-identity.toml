@@ -1,0 +1,9 @@
+constructed_GR = "finite-window Hilbert(A) and archived spectral part A; terminal real GR unavailable"
+energy_step_meV = 0.8000000000000007
+mu_meV = 14.555311020465956
+near_grid_meV = [-400.0, 557.3913043478261]
+near_grid_step_meV = 0.7978260869565218
+relative_change_LO_retarded = 0.00041124570109030514
+source_map = 256
+state_sha256 = "decf65ef6237b4287bcd026f0c6597b49b2d578982de0661a8c4936809acff77"
+thermal_LO_occupation = 3.191641179393399e-19

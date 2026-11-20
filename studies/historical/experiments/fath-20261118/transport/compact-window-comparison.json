@@ -1,0 +1,108 @@
+{
+  "cold_equal_maps": 64,
+  "diagnostic_only": true,
+  "control": {
+    "status": "max_iterations",
+    "strict_rows": 0,
+    "last": {
+      "r_Σ": 0.1006488467108413,
+      "r_K": 0.059269679608708686,
+      "r_λ": 0.001761569596515522
+    },
+    "late_median": {
+      "r_Σ": 0.12002971214447805,
+      "r_K": 0.06378854198804698,
+      "r_λ": 0.003554371777743759
+    },
+    "largest_fresh_component": {
+      "channel": "embedding_plus",
+      "component": "lesser",
+      "residual_absolute": 0.09079886018138779,
+      "residual_relative": 0.10064884671084119,
+      "residual_scale": 0.9021351277103761
+    },
+    "terminal_observables": {
+      "J_plus_out_A_cm2": 185.30114516806088,
+      "J_minus_out_A_cm2": -163.63815023535602,
+      "boundary_continuity_relative": 0.11690696737495807,
+      "bond_J_average_A_cm2": 103.74048662530065,
+      "bond_J_min_A_cm2": 1.1189454880901886,
+      "bond_J_max_A_cm2": 201.27247402122777
+    },
+    "full_spectral_sum_residual": 0.030563432273642718,
+    "energy_support_diagnostics": {
+      "occupied_energy_bin_integral_dimensionless": {
+        "whole_grid_sum": 0.029999999999999992,
+        "uppermost_252_7meV_fraction": 0.049838339086936516,
+        "common_slice_307_3_to_560_fraction": 0.049838339086936516,
+        "above_560_meV_fraction": 0.0
+      },
+      "spectral_trace_bin_integral_dimensionless": {
+        "whole_grid_sum": 20.072410941902575,
+        "uppermost_252_7meV_fraction": 0.14146973117602432,
+        "common_slice_307_3_to_560_fraction": 0.14146973117602432,
+        "above_560_meV_fraction": 0.0
+      }
+    }
+  },
+  "upper_expanded": {
+    "status": "max_iterations",
+    "strict_rows": 0,
+    "last": {
+      "r_Σ": 0.10077014164825829,
+      "r_K": 0.05928544522846303,
+      "r_λ": 0.001777081346210685
+    },
+    "late_median": {
+      "r_Σ": 0.12051255978335834,
+      "r_K": 0.06380606865609133,
+      "r_λ": 0.003581494344089997
+    },
+    "largest_fresh_component": {
+      "channel": "embedding_plus",
+      "component": "lesser",
+      "residual_absolute": 0.08996212759835148,
+      "residual_relative": 0.10077014164825822,
+      "residual_scale": 0.8927458682390911
+    },
+    "terminal_observables": {
+      "J_plus_out_A_cm2": 185.41127397007295,
+      "J_minus_out_A_cm2": -163.49597040481703,
+      "boundary_continuity_relative": 0.11819833333755773,
+      "bond_J_average_A_cm2": 103.73140745655016,
+      "bond_J_min_A_cm2": 1.118839879201813,
+      "bond_J_max_A_cm2": 201.25223155368695
+    },
+    "full_spectral_sum_residual": 0.030542060419298227,
+    "energy_support_diagnostics": {
+      "occupied_energy_bin_integral_dimensionless": {
+        "whole_grid_sum": 0.03000000000000078,
+        "uppermost_252_7meV_fraction": 5.381494687286963e-09,
+        "common_slice_307_3_to_560_fraction": 0.04985125450018409,
+        "above_560_meV_fraction": 6.004122379638265e-07
+      },
+      "spectral_trace_bin_integral_dimensionless": {
+        "whole_grid_sum": 20.073767481933107,
+        "uppermost_252_7meV_fraction": 1.158549494006541e-06,
+        "common_slice_307_3_to_560_fraction": 0.14146708168583902,
+        "above_560_meV_fraction": 5.533359745990552e-05
+      }
+    }
+  },
+  "common_active_interval_meV": [
+    -100,
+    80
+  ],
+  "active_shapes": {
+    "occupied_energy_bin_integral_dimensionless": {
+      "old_active_mass": 0.02613408020994203,
+      "new_active_mass": 0.02613311568124225,
+      "active_relative_L1_using_control": 0.0003782280662174595
+    },
+    "spectral_trace_bin_integral_dimensionless": {
+      "old_active_mass": 3.9751869080166733,
+      "new_active_mass": 3.975235855888297,
+      "active_relative_L1_using_control": 0.00011481000220187153
+    }
+  }
+}

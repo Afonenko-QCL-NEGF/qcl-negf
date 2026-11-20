@@ -1,0 +1,1 @@
+UNRUN resource admission rejection BEFORE actual launch/input/Julia solver. MemAvailable14320840704B < old hard12884901888 + reserve1468006400 =14352908288B by32067584B. Old a257 source/input4761825/tiny14/plan evidence retained. Science/numerics unchanged in resource-only V2.

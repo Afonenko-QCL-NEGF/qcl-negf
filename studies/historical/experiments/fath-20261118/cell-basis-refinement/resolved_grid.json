@@ -1,0 +1,111 @@
+{
+  "rank": 9,
+  "method": "pod7-r9",
+  "eta_mev": 0.5,
+  "ne": 11001,
+  "energy_mev": [
+    -400.0,
+    4000.0
+  ],
+  "energy_step_mev": 0.4,
+  "eta_to_energy_step": 1.25,
+  "infinite_uniform_line_max_comb_alias": 0.0007767079283598373,
+  "rows": [
+    {
+      "nz": 144,
+      "nk": 9,
+      "analytic_both_edges_r_sum": 0.000372125467330504,
+      "analytic_lower_edge_only_r_sum": 0.00032872191680608567,
+      "analytic_upper_edge_only_r_sum": 5.3868067372924825e-05,
+      "discrete_r_sum": 0.0007916280843595514,
+      "worst_k_inverse_nm": 0.075,
+      "trusted_window_analytic_r_sum": 0.0009038290211991722,
+      "lowest_cavity_pole_mev": -242.24917795773382,
+      "highest_cavity_pole_mev": 2898.8434755510925
+    },
+    {
+      "nz": 144,
+      "nk": 13,
+      "analytic_both_edges_r_sum": 0.000372125467330504,
+      "analytic_lower_edge_only_r_sum": 0.00032872191680608567,
+      "analytic_upper_edge_only_r_sum": 5.3868067372924825e-05,
+      "discrete_r_sum": 0.0008782225084594153,
+      "worst_k_inverse_nm": 0.09999999999999999,
+      "trusted_window_analytic_r_sum": 0.0009038290211991722,
+      "lowest_cavity_pole_mev": -242.24917795773382,
+      "highest_cavity_pole_mev": 2898.8434755510925
+    },
+    {
+      "nz": 144,
+      "nk": 17,
+      "analytic_both_edges_r_sum": 0.000372125467330504,
+      "analytic_lower_edge_only_r_sum": 0.00032872191680608567,
+      "analytic_upper_edge_only_r_sum": 5.3868067372924825e-05,
+      "discrete_r_sum": 0.0007916280843595514,
+      "worst_k_inverse_nm": 0.075,
+      "trusted_window_analytic_r_sum": 0.0009038290211991722,
+      "lowest_cavity_pole_mev": -242.24917795773382,
+      "highest_cavity_pole_mev": 2898.8434755510925
+    },
+    {
+      "nz": 192,
+      "nk": 9,
+      "analytic_both_edges_r_sum": 0.00038130834627483787,
+      "analytic_lower_edge_only_r_sum": 0.00032842084589372063,
+      "analytic_upper_edge_only_r_sum": 9.410844129274565e-05,
+      "discrete_r_sum": 0.000654093825421977,
+      "worst_k_inverse_nm": 0.3,
+      "trusted_window_analytic_r_sum": 0.0009188118877366809,
+      "lowest_cavity_pole_mev": -242.30460207761558,
+      "highest_cavity_pole_mev": 3731.566834665285
+    },
+    {
+      "nz": 192,
+      "nk": 13,
+      "analytic_both_edges_r_sum": 0.00038130834627483787,
+      "analytic_lower_edge_only_r_sum": 0.00032842084589372063,
+      "analytic_upper_edge_only_r_sum": 9.410844129274565e-05,
+      "discrete_r_sum": 0.000737949346499648,
+      "worst_k_inverse_nm": 0.25,
+      "trusted_window_analytic_r_sum": 0.0009188118877366809,
+      "lowest_cavity_pole_mev": -242.30460207761558,
+      "highest_cavity_pole_mev": 3731.566834665285
+    },
+    {
+      "nz": 192,
+      "nk": 17,
+      "analytic_both_edges_r_sum": 0.00038130834627483787,
+      "analytic_lower_edge_only_r_sum": 0.00032842084589372063,
+      "analytic_upper_edge_only_r_sum": 9.410844129274565e-05,
+      "discrete_r_sum": 0.000752576945758726,
+      "worst_k_inverse_nm": 0.2625,
+      "trusted_window_analytic_r_sum": 0.0009188118877366809,
+      "lowest_cavity_pole_mev": -242.30460207761558,
+      "highest_cavity_pole_mev": 3731.566834665285
+    }
+  ],
+  "fd_bloch_energy_scale": [
+    {
+      "nz": 144,
+      "exact_fd_bloch_max_by_rank_mev": {
+        "4": 257.6385557949139,
+        "9": 462.37381709859295
+      },
+      "energy_scale_with_field_span_and_margin_mev": {
+        "4": 733.6385557949138,
+        "9": 938.373817098593
+      }
+    },
+    {
+      "nz": 192,
+      "exact_fd_bloch_max_by_rank_mev": {
+        "4": 257.09380258919714,
+        "9": 461.46285766252015
+      },
+      "energy_scale_with_field_span_and_margin_mev": {
+        "4": 733.0938025891971,
+        "9": 937.4628576625202
+      }
+    }
+  ]
+}

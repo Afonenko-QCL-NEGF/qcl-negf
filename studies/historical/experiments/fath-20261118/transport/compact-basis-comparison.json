@@ -1,0 +1,69 @@
+{
+  "diagnostic_only": true,
+  "control": {
+    "model_identity": "2cb5eba42612a9d86649ab371489acb0ab07c6bc77a4473d122bb1978ed09ae5",
+    "basis": "pzp",
+    "status": "max_iterations",
+    "quality": "unresolved",
+    "strict_rows": 0,
+    "late_median": {
+      "r_Σ": 0.12002971214447805,
+      "r_K": 0.06378854198804698,
+      "r_λ": 0.003554371777743759,
+      "r_PSD": 0.0,
+      "r_caus": 0.0,
+      "r_roundoff": 2.3742316534918784e-16
+    },
+    "last": {
+      "r_Σ": 0.1006488467108413,
+      "r_K": 0.059269679608708686,
+      "r_λ": 0.001761569596515522,
+      "r_PSD": 0.0,
+      "r_caus": 0.0,
+      "r_roundoff": 2.375283259346425e-16
+    },
+    "terminal_current": {
+      "J_plus_out_A_cm2": 185.30114516806088,
+      "J_minus_out_A_cm2": -163.63815023535602,
+      "boundary_continuity_relative": 0.11690696737495807,
+      "bond_J_average_A_cm2": 103.74048662530065,
+      "bond_J_min_A_cm2": 1.1189454880901886,
+      "bond_J_max_A_cm2": 201.27247402122777
+    },
+    "elapsed_seconds": 173.58482418200038,
+    "peak_GiB": 4.562915802001953
+  },
+  "alternate": {
+    "model_identity": "054296b6824189b687ff4fe0a77602ffb7c79d2d63ed3da94bde8fdc81848076",
+    "basis": "bounded_bloch_snapshot_pod",
+    "status": "max_iterations",
+    "quality": "unresolved",
+    "strict_rows": 0,
+    "late_median": {
+      "r_Σ": 0.10775096784307021,
+      "r_K": 0.08873664927269521,
+      "r_λ": 0.001177609682376346,
+      "r_PSD": 0.0,
+      "r_caus": 0.0,
+      "r_roundoff": 2.375648283719702e-16
+    },
+    "last": {
+      "r_Σ": 0.10445469476908632,
+      "r_K": 0.08270896656718303,
+      "r_λ": 0.0005145440255873712,
+      "r_PSD": 0.0,
+      "r_caus": 0.0,
+      "r_roundoff": 2.3702477808846507e-16
+    },
+    "terminal_current": {
+      "J_plus_out_A_cm2": 183.36452538699388,
+      "J_minus_out_A_cm2": -188.14513055221354,
+      "boundary_continuity_relative": 0.02540913576231491,
+      "bond_J_average_A_cm2": 108.08440719392472,
+      "bond_J_min_A_cm2": -109.96509845935745,
+      "bond_J_max_A_cm2": 296.47364290609784
+    },
+    "elapsed_seconds": 182.20273729099972,
+    "peak_GiB": 4.346515655517578
+  }
+}

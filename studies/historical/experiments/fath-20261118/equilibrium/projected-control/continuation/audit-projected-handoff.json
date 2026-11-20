@@ -1,0 +1,13 @@
+{
+  "file": "projected-handoff.h5",
+  "map": 898,
+  "sha256": "0596846088e66a92d4100028dade736d94e082c6342b92715f18658a04e5de98",
+  "rR_max_family": 9.243770137277117e-11,
+  "rR_total": 3.4085340477229936e-12,
+  "rR_max_abs_difference": 6.022908835151733e-24,
+  "rR_total_abs_difference": 6.403450136467055e-18,
+  "A_from_GR_relative": 0.0,
+  "Gless_FDT_relative": 9.10153283488859e-16,
+  "Ggreater_FDT_relative": 5.579767440861255e-17,
+  "number_relative_to_target_error": 8.881784197001252e-16
+}

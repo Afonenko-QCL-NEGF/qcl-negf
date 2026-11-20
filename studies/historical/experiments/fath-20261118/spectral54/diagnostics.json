@@ -1,0 +1,348 @@
+{
+  "core_commit": "e171caa60cce676c6c4238dd671e7c527f2bd977",
+  "energy_window_mev": [
+    -400,
+    560
+  ],
+  "retarded_working_eta_mev": 0,
+  "interpolation": "convex segment interpolation of stored total SigmaR with pointwise PSD broadening to roundoff, no extrapolation",
+  "scba_maps_completed": 0,
+  "records": [
+    {
+      "source_case": "native54-03",
+      "source_map_count": 128,
+      "source_status": "max_iterations",
+      "source_recorded_full_state_sha256": "a51f7935e666d67473ce44132a6db5aa21cb48c88b2443472abb7c57676fdd42",
+      "model_sha256": "41b88f390e59f8ce63958c53fd2961d112fffde2fec3fff1d3d789c68af212e6",
+      "model_identity": "62a8ec2b6be97cc7eac8ac0c9335de3765663f58bffd4a2ace1344efb83e238b",
+      "chosen_k_nm_inverse": 0.375,
+      "source_k_index_1based": 16,
+      "native_audit_r_sum": 0.011190344307642855,
+      "native_audit_occupied_sheet_outside_trust": 0.027230497140414187,
+      "native_audit_spectral_trace_outside_trust": 0.15417395045429927,
+      "slab_content_sha256": "fbccd117dba36fc7547ddad5b0903fc93e5fa510ac0d774e23bf358493aee456",
+      "GR_replay_fro_relative": 3.754182620903425e-14,
+      "A_replay_fro_relative": 2.979977556163242e-14,
+      "A_vs_GGammaGadj_replay_fro_relative": 9.719059536202696e-16,
+      "gamma_min_eig_mev": -8.393336887907302e-16,
+      "pencil_eigenvector_max_condition": 23.021978435977076,
+      "gauss_exact_matrix_difference": 4.782636041334565e-12,
+      "gauss_exact_max_interval_fro_difference": 1.2655467786310772e-11,
+      "analytic_r_sum": 0.005615565886998314,
+      "analytic_integral_eigenvalues": [
+        0.9998308872325982,
+        1.0003930154124459,
+        1.0006315866173419,
+        1.0033667997826783,
+        1.00437781147474,
+        1.0062683495107503,
+        1.0122624353228424
+      ],
+      "coarse_integral_eigenvalues": [
+        0.9998287925215582,
+        1.0005294229007076,
+        1.0008968618211371,
+        1.002935333912085,
+        1.0122289889924714,
+        1.0131185544953665,
+        1.0233493436594943
+      ],
+      "analytic_normalized_excess_r_sum": 0.005615202101571483,
+      "analytic_normalized_deficit_r_sum": 6.39186180101668e-05,
+      "native_trapezoid_vs_analytic_matrix_difference": 0.00800008362454324,
+      "coarse_r_sum_squared_cross_term": 2.9687887492690797e-05,
+      "fraction_r_sum_squared_in_strong_direction": 0.6811901589772016,
+      "strong_mode_h_rank_weights": [
+        0.00043810253861085703,
+        3.7493099959761085e-05,
+        5.301701995762317e-05,
+        0.00021801774014443918,
+        3.6696293230435624e-07,
+        0.000586122330015048,
+        0.9986668803083802
+      ],
+      "strong_mode_h_expectation_mev": 360.33506611811083,
+      "strong_mode_low_wing_36p8_weight": -3.0746923975132094e-22,
+      "strong_mode_high_wing_36p8_weight": 7.028309073771539e-05,
+      "strong_mode_upper_outside_trust_weight": 0.951429811753445,
+      "strong_mode_low_endpoint_A_over_mev": -2.9040234101924217e-22,
+      "strong_mode_high_endpoint_A_over_mev": 3.4263114851906393e-07,
+      "strong_mode_energy_at_max_node_mev": 375.20000000000005,
+      "strong_mode_energy_q05_q50_q95_mev": [
+        150.8033347140796,
+        373.9294956561239,
+        385.2957410008705
+      ],
+      "strong_mode_first_cell_where_cumulative_exceeds_one_mev": 429.20000000000005,
+      "strong_mode_integral_ending_at_300_mev": 0.06083262356939895,
+      "strong_mode_native_trapezoid_integral": 1.0122408699247774,
+      "total_trace_low_wing_36p8": 1.4362812963240913e-20,
+      "total_trace_high_wing_36p8": 0.0001051384309594176,
+      "fraction_r_sum_squared_in_weak_direction": 0.00012955903323820498,
+      "h_eigenvalues_mev": [
+        55.465545434286376,
+        86.92985822487638,
+        102.72339802308714,
+        112.66495065690137,
+        173.0803167657224,
+        213.49583608704194,
+        360.6330670577955
+      ],
+      "weak_mode_h_rank_weights": [
+        3.772050391415558e-05,
+        1.3541904729740454e-05,
+        0.00015482302416362008,
+        0.0055980904547869624,
+        0.681631156871602,
+        0.3124236593866247,
+        0.00014100785417978548
+      ],
+      "weak_mode_h_expectation_mev": 185.37882093395308,
+      "weak_mode_low_wing_36p8_weight": 2.2758129947549158e-21,
+      "weak_mode_high_wing_36p8_weight": 3.032468076274299e-06,
+      "weak_mode_lower_outside_trust_weight": 2.4836826235102665e-14,
+      "weak_mode_upper_outside_trust_weight": 0.006371864573439564,
+      "weak_mode_low_endpoint_A_over_mev": 2.8014422102640153e-22,
+      "weak_mode_high_endpoint_A_over_mev": 5.71124075311538e-08,
+      "weak_mode_energy_at_max_node_mev": 173.00000000000006,
+      "weak_mode_energy_q05_q50_q95_mev": [
+        162.51448234570572,
+        174.7825003283513,
+        206.2460991975805
+      ],
+      "minimum_node_singular_dyson_mev": 0.5413109702394855,
+      "minimum_node_singular_dyson_at_mev": 87.80000000000003,
+      "narrowest_local_pencil_halfwidth_proxy_mev": 0.02542301870367596,
+      "narrowest_poles": [
+        {
+          "energy_mev": 414.5496772469945,
+          "halfwidth_proxy_mev": 0.02542301870367596,
+          "segment_total_trace": 1.5728436358520754e-05,
+          "segment_weak_modal_weight": 7.81199791561113e-07
+        },
+        {
+          "energy_mev": 411.6154303969316,
+          "halfwidth_proxy_mev": 0.09474513294452848,
+          "segment_total_trace": 0.00011631992091845253,
+          "segment_weak_modal_weight": 7.678234350752526e-07
+        },
+        {
+          "energy_mev": 99.59073850459023,
+          "halfwidth_proxy_mev": 0.10589264355320882,
+          "segment_total_trace": 0.05129971758107326,
+          "segment_weak_modal_weight": 1.0136411606291832e-05
+        },
+        {
+          "energy_mev": 84.57181694197239,
+          "halfwidth_proxy_mev": 0.1315282841252484,
+          "segment_total_trace": 0.07239149911376644,
+          "segment_weak_modal_weight": 2.5589064190866916e-06
+        },
+        {
+          "energy_mev": 87.8357324547674,
+          "halfwidth_proxy_mev": 0.17476207155146975,
+          "segment_total_trace": 0.062165233930489616,
+          "segment_weak_modal_weight": 1.7674387835166808e-06
+        }
+      ],
+      "largest_coarse_matrix_interval_errors": [
+        {
+          "center_mev": 84.70000000000003,
+          "matrix_difference_div_sqrt_nb": 0.0056824869247169025,
+          "strong_modal_analytic_minus_coarse": -1.2624758489528272e-06
+        },
+        {
+          "center_mev": 99.70000000000005,
+          "matrix_difference_div_sqrt_nb": 0.004845538920234416,
+          "strong_modal_analytic_minus_coarse": -4.2195510834721174e-06
+        },
+        {
+          "center_mev": 87.70000000000002,
+          "matrix_difference_div_sqrt_nb": 0.0038774765645340813,
+          "strong_modal_analytic_minus_coarse": 8.594302140965248e-07
+        },
+        {
+          "center_mev": 375.5,
+          "matrix_difference_div_sqrt_nb": 0.0037393504870061813,
+          "strong_modal_analytic_minus_coarse": -0.009867995912981327
+        },
+        {
+          "center_mev": 87.50000000000003,
+          "matrix_difference_div_sqrt_nb": 0.0034679595351653366,
+          "strong_modal_analytic_minus_coarse": -7.713107655639136e-07
+        }
+      ]
+    },
+    {
+      "source_case": "native54-long-alpha02/checkpoint-0256",
+      "source_map_count": 256,
+      "source_status": "aligned_intermediate_checkpoint",
+      "source_recorded_full_state_sha256": "bb853140d30ddc679bc541671eebc93873c3854f9161b4d0dc1e5e0bc40c6e12",
+      "model_sha256": "8a6f6c7462f7890d706eb2d987d8babf08fcf7c272c66b5d686f8274e40406ba",
+      "model_identity": "62a8ec2b6be97cc7eac8ac0c9335de3765663f58bffd4a2ace1344efb83e238b",
+      "chosen_k_nm_inverse": 0.375,
+      "source_k_index_1based": 16,
+      "native_audit_r_sum": 0.011192554484325962,
+      "native_audit_occupied_sheet_outside_trust": 0.0033183835053767416,
+      "native_audit_spectral_trace_outside_trust": 0.15418388404254596,
+      "slab_content_sha256": "57a5544b4e166f7abb114fddfe82ef485c20a9f5aba7ffff380eddf7b36e24f3",
+      "GR_replay_fro_relative": 4.0875814505224195e-14,
+      "A_replay_fro_relative": 3.4347583315662085e-14,
+      "A_vs_GGammaGadj_replay_fro_relative": 9.64866960869209e-16,
+      "gamma_min_eig_mev": -1.2621676097632378e-15,
+      "pencil_eigenvector_max_condition": 25.344450790932466,
+      "gauss_exact_matrix_difference": 6.569764970496403e-12,
+      "gauss_exact_max_interval_fro_difference": 1.738144511633974e-11,
+      "analytic_r_sum": 0.005610302463932864,
+      "analytic_integral_eigenvalues": [
+        0.9998312303455985,
+        1.0004048939333516,
+        1.000636793362163,
+        1.003392594161589,
+        1.0042523998233943,
+        1.006242007335383,
+        1.012295335420388
+      ],
+      "coarse_integral_eigenvalues": [
+        0.9998294714109444,
+        1.0005363713893098,
+        1.0009177594724967,
+        1.0027146167152203,
+        1.0122459962819703,
+        1.0129591107868314,
+        1.0234623475645974
+      ],
+      "analytic_normalized_excess_r_sum": 0.005609939813293614,
+      "analytic_normalized_deficit_r_sum": 6.378893348580876e-05,
+      "native_trapezoid_vs_analytic_matrix_difference": 0.008017566909017304,
+      "coarse_r_sum_squared_cross_term": 2.9516403007224763e-05,
+      "fraction_r_sum_squared_in_strong_direction": 0.6861359432921215,
+      "strong_mode_h_rank_weights": [
+        0.00042096141077243454,
+        3.6842081515413e-05,
+        5.3281586512928204e-05,
+        0.000220775837544066,
+        3.6369681930621454e-07,
+        0.0005865309391831849,
+        0.9986812444476527
+      ],
+      "strong_mode_h_expectation_mev": 360.3396635559055,
+      "strong_mode_low_wing_36p8_weight": -1.6000020548989664e-21,
+      "strong_mode_high_wing_36p8_weight": 7.028347540001836e-05,
+      "strong_mode_upper_outside_trust_weight": 0.951475527738478,
+      "strong_mode_low_endpoint_A_over_mev": -5.026922503507916e-22,
+      "strong_mode_high_endpoint_A_over_mev": 3.426101444983375e-07,
+      "strong_mode_energy_at_max_node_mev": 375.20000000000005,
+      "strong_mode_energy_q05_q50_q95_mev": [
+        150.80557970415174,
+        373.92946344275083,
+        385.2970960005165
+      ],
+      "strong_mode_first_cell_where_cumulative_exceeds_one_mev": 429.20000000000005,
+      "strong_mode_integral_ending_at_300_mev": 0.06081980768191182,
+      "strong_mode_native_trapezoid_integral": 1.012258274329431,
+      "total_trace_low_wing_36p8": -1.4786192607019742e-20,
+      "total_trace_high_wing_36p8": 0.00010513980779606254,
+      "fraction_r_sum_squared_in_weak_direction": 0.0001292760669389601,
+      "h_eigenvalues_mev": [
+        55.465545434286376,
+        86.92985822487638,
+        102.72339802308714,
+        112.66495065690137,
+        173.0803167657224,
+        213.49583608704194,
+        360.6330670577955
+      ],
+      "weak_mode_h_rank_weights": [
+        3.960192203195849e-05,
+        1.3672738364914258e-05,
+        0.00015063069765128154,
+        0.0054360075053283205,
+        0.6812795480350118,
+        0.3129389149176703,
+        0.00014162418394177693
+      ],
+      "weak_mode_h_expectation_mev": 185.4096155541332,
+      "weak_mode_low_wing_36p8_weight": -6.937618854143391e-22,
+      "weak_mode_high_wing_36p8_weight": 3.0415739760523787e-06,
+      "weak_mode_lower_outside_trust_weight": 2.816211524574967e-14,
+      "weak_mode_upper_outside_trust_weight": 0.006393707378646937,
+      "weak_mode_low_endpoint_A_over_mev": -4.502217947839271e-23,
+      "weak_mode_high_endpoint_A_over_mev": 5.727364382121569e-08,
+      "weak_mode_energy_at_max_node_mev": 173.00000000000006,
+      "weak_mode_energy_q05_q50_q95_mev": [
+        162.54903357362838,
+        174.78967987487275,
+        206.25387419578269
+      ],
+      "minimum_node_singular_dyson_mev": 0.5411762746871355,
+      "minimum_node_singular_dyson_at_mev": 87.80000000000003,
+      "narrowest_local_pencil_halfwidth_proxy_mev": 0.02531006779991271,
+      "narrowest_poles": [
+        {
+          "energy_mev": 414.54998871721347,
+          "halfwidth_proxy_mev": 0.02531006779991271,
+          "segment_total_trace": 1.5673178532337626e-05,
+          "segment_weak_modal_weight": 7.81427326637066e-07
+        },
+        {
+          "energy_mev": 411.6157518976155,
+          "halfwidth_proxy_mev": 0.09472120041313321,
+          "segment_total_trace": 0.00011640193199078596,
+          "segment_weak_modal_weight": 7.714138038759976e-07
+        },
+        {
+          "energy_mev": 99.5903578845192,
+          "halfwidth_proxy_mev": 0.10565564431150884,
+          "segment_total_trace": 0.05146664221191726,
+          "segment_weak_modal_weight": 9.9242189007849e-06
+        },
+        {
+          "energy_mev": 84.5706752265931,
+          "halfwidth_proxy_mev": 0.13116963196434805,
+          "segment_total_trace": 0.07264200679679551,
+          "segment_weak_modal_weight": 2.5387092889294503e-06
+        },
+        {
+          "energy_mev": 87.83500029856366,
+          "halfwidth_proxy_mev": 0.17440712936648142,
+          "segment_total_trace": 0.06184484286245301,
+          "segment_weak_modal_weight": 1.7548042008176707e-06
+        }
+      ],
+      "largest_coarse_matrix_interval_errors": [
+        {
+          "center_mev": 84.70000000000003,
+          "matrix_difference_div_sqrt_nb": 0.0057039236361295705,
+          "strong_modal_analytic_minus_coarse": -1.2531744012015387e-06
+        },
+        {
+          "center_mev": 99.70000000000005,
+          "matrix_difference_div_sqrt_nb": 0.004912061718950671,
+          "strong_modal_analytic_minus_coarse": -4.273621972673402e-06
+        },
+        {
+          "center_mev": 87.70000000000002,
+          "matrix_difference_div_sqrt_nb": 0.0038885548043148936,
+          "strong_modal_analytic_minus_coarse": 8.526845993715748e-07
+        },
+        {
+          "center_mev": 375.5,
+          "matrix_difference_div_sqrt_nb": 0.0037353765426889588,
+          "strong_modal_analytic_minus_coarse": -0.009857639458810366
+        },
+        {
+          "center_mev": 87.50000000000003,
+          "matrix_difference_div_sqrt_nb": 0.00347377410325426,
+          "strong_modal_analytic_minus_coarse": -7.643159439052829e-07
+        }
+      ]
+    }
+  ],
+  "checkpoint_comparison": {
+    "relative_total_sigmaR_change": 0.0036696645054560277,
+    "normalized_integral_matrix_difference": 5.140936398890423e-05,
+    "leading_mode_squared_overlap": 0.9999998169937879,
+    "projected_h_max_abs_difference": 0.0
+  }
+}
