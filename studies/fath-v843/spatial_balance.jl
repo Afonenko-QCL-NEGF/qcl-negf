@@ -14,12 +14,23 @@ function add_hermitian_part!(destination, value, weight)
     return nothing
 end
 
-function local_source!(scratch, basis, source)
+function local_source!(scratch, basis, source, buffer)
     fill!(scratch, 0)
     @views for field in 1:3, (side, q) in enumerate(basis)
-        scratch[:, :, field] .+= q' * source[:, :, field, side] * q
+        mul!(buffer, source[:, :, field, side], q)
+        mul!(scratch[:, :, field], q', buffer, 1, 1)
     end
     return scratch
+end
+
+local_source!(scratch,basis,source) = local_source!(scratch,basis,source,similar(first(basis)))
+
+function trace_product(a,b)
+    sum = zero(eltype(a))
+    @inbounds for j in axes(a,2), i in axes(a,1)
+        sum += a[i,j]*b[j,i]
+    end
+    return sum
 end
 
 function current_metrics(profile, widths)
@@ -36,10 +47,23 @@ function current_metrics(profile, widths)
 end
 
 function ring_balance(p, state_total, anchor, collision_sources, dual, center_metric,
-        synchronized, energy_rule, k)
+        synchronized, energy_rule, coefficients, k)
     modes = size(p.h, 1)
     workspace = LT.TailWorkspace(p.geo)
     source = zeros(ComplexF64, modes, modes, 3)
+    vertex_buffer = similar(LT.centered_basis(p.geo))
+    hpart = zeros(ComplexF64, modes, modes)
+    node_residual = similar(hpart)
+    gain_greater, gain_lesser = similar(hpart), similar(hpart)
+    product, raw_term = similar(hpart), similar(hpart)
+    sum_lesser = similar(hpart)
+    qframe = LT.centered_basis(p.geo)
+    q_ret = similar(qframe)
+    q_product = similar(qframe)
+    q_image = zeros(ComplexF64,p.r,p.r)
+    previous_pair = similar(q_image)
+    kinetic_difference = 0.0
+    kinetic_reference = 0.0
     contributions = [zeros(ComplexF64, modes, modes) for _ in LT.COLLISION_CHANNELS]
     coherent = zeros(ComplexF64, modes, modes)
     kinetic = zeros(ComplexF64, modes, modes)
@@ -57,6 +81,7 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
         isapprox(sum(measure), sum(p.we); rtol=2e-12, atol=1e-14) ||
         throw(ArgumentError("energy measure changed across the independent profile"))
     dual_h = dual * @view(p.h[:, :, k])
+    gain_measure = center_metric * dual
     radial = p.wk[k] * p.spin_degeneracy / (2π)
     for start in 1:128:length(energies)
         window = start:min(start+127, length(energies))
@@ -73,23 +98,40 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
             current .+= weight .* @view(workspace.bond_profile[:, 1])
             radial_number += weight * imag(tr(@view workspace.local_green[:, :, 2]))
             occupation .-= im * weight .* lesser
-            hpart = dual_h * lesser
+            mul!(hpart, dual_h, lesser)
             add_hermitian_part!(coherent, hpart, weight)
-            node_residual = hpart + hpart'
+            node_residual .= hpart .+ hpart'
+            coherent_magnitude = norm(node_residual)
+            mul!(gain_greater, greater, gain_measure)
+            mul!(gain_lesser, lesser, gain_measure)
+            fill!(sum_lesser,0)
             for j in eachindex(contributions)
-                local_source!(source, p.geo.bases, @view kernels[j][:, :, :, i, :])
+                local_source!(source, p.geo.bases, @view(kernels[j][:, :, :, i, :]), vertex_buffer)
                 @views sr, sl, sg = (source[:, :, n] for n in 1:3)
-                gain_loss = dual * (sl * greater - sg * lesser)
-                gain = real(sum(gain_loss .* transpose(center_metric)))
+                gain = real(trace_product(sl,gain_greater) - trace_product(sg,gain_lesser))
                 particle_exchange[j] += weight * gain
                 electron_power[j] += node_energy * weight * gain
-                raw_term = -(dual * sr) * lesser + retarded * (sl * dual)
+                mul!(product,sl,dual)
+                mul!(raw_term,retarded,product)
+                mul!(product,sr,lesser)
+                mul!(raw_term,dual,product,-1,1)
                 add_hermitian_part!(contributions[j], raw_term, weight)
-                node_residual .-= raw_term + raw_term'
+                node_residual .-= raw_term .+ raw_term'
+                isnothing(coefficients) || (sum_lesser .+= sl)
+            end
+            if !isnothing(coefficients)
+                a,c = coefficients
+                @views previous_pair .= a.*workspace.local_green[:,:,2] .- c.*workspace.local_green[:,:,3]
+                mul!(q_ret,qframe,retarded)
+                mul!(q_product,q_ret,sum_lesser)
+                mul!(q_image,q_product,q_ret')
+                q_image .-= previous_pair
+                kinetic_difference += weight*sum(abs2,q_image)
+                kinetic_reference += weight*sum(abs2,previous_pair)
             end
             kinetic .+= weight .* node_residual
             residual = norm(node_residual)
-            max_coherent_ratio = max(max_coherent_ratio, residual / max(norm(hpart + hpart'), 1e-14))
+            max_coherent_ratio = max(max_coherent_ratio, residual / max(coherent_magnitude, 1e-14))
             if synchronized
                 max_dyson_residual = max(max_dyson_residual, residual / max(norm(lesser)*norm(dual_h), 1e-14))
             end
@@ -98,7 +140,8 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
     transverse_operator = dual * (@view(p.h[:, :, k]) - @view(p.h[:, :, 1]))
     transverse_energy = real(sum((transverse_operator * occupation) .* transpose(center_metric)))
     return (;current, coherent, kinetic, occupation, contributions, particle_exchange, electron_power,
-        radial_number, transverse_energy, max_dyson_residual, max_coherent_ratio)
+        radial_number, transverse_energy, max_dyson_residual, max_coherent_ratio,
+        kinetic_difference,kinetic_reference)
 end
 
 """
@@ -109,7 +152,7 @@ All terms use one positive energy and radial quadrature.
 """
 function spatial_balance(problem, state_sources, widths;
         collision_sources = state_sources, energy_rule = nothing, workers = 1,
-        progress = (_)->nothing)
+        progress = (_)->nothing, coefficients = nothing)
     p = problem
     length(widths) == p.nz-1 && all(>(0), widths) ||
         throw(ArgumentError("weights must match the positive interior face widths"))
@@ -131,7 +174,7 @@ function spatial_balance(problem, state_sources, widths;
     LT.N._production_worker_ranges!(p.nk, min(workers, Threads.nthreads(:default), p.nk)) do _, lo, hi
         for k in lo:hi
             balance = ring_balance(p, state_total, anchor, collision_sources, dual,
-                center_metric, synchronized, energy_rule, k)
+                center_metric, synchronized, energy_rule, coefficients, k)
             lateral_h = p.h[columns, columns, k] - p.h[columns, columns, 1]
             band_energy_meV = 100 .* real.(diag(bands.vectors' * lateral_h * bands.vectors))
             band_number = real.(diag(band_covectors' * balance.occupation * band_covectors))
@@ -165,6 +208,9 @@ function spatial_balance(problem, state_sources, widths;
         maximum_closure_error_A_cm2 = maximum(abs.(lifted_closure)),
         maximum_exact_dyson_residual = synchronized ? maximum(x.max_dyson_residual for x in ring_results) : nothing,
         maximum_mode_balance_relative_to_coherent = maximum(x.max_coherent_ratio for x in ring_results),
+        weighted_rK_Q = isnothing(coefficients) ? nothing :
+            sqrt(sum(x.kinetic_difference for x in ring_results) /
+                max(sum(x.kinetic_reference for x in ring_results),1e-300)),
         current = current_metrics(physical_profile, widths),
         raw_sheet_cm2 = sheet_number * p.density_scale,
         raw_ring_sheet_cm2 = radial_number .* p.density_scale,

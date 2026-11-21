@@ -50,6 +50,7 @@ function run_experiment(directory, workers, check_rotated)
         projector=LT.project_linked_economical, order=18, subdivisions=2,
         selected_rows=true, projection_for_collision=false, workers)
     println(stderr, "fresh linked map complete")
+    flush(stderr)
     nodal = spatial_balance(p, fresh.source, widths; workers)
     projected = fresh.summary["projected_fresh"]
     archived_nodal = fresh.summary["fresh"]["raw_profile_A_cm2"]
@@ -59,9 +60,13 @@ function run_experiment(directory, workers, check_rotated)
         error("independent nodal profile differs from the solver observation")
     resolved = spatial_balance(p, fresh.source, widths; workers, energy_rule=independent_energy_rule)
     println(stderr, "independent resolved profile complete")
+    flush(stderr)
+    pair = fresh.summary["input_pair_projection"]
     lagged = spatial_balance(p, saved.seed, widths;
-        collision_sources=fresh.source, workers, energy_rule=independent_energy_rule)
+        collision_sources=fresh.source, workers, energy_rule=independent_energy_rule,
+        coefficients=(pair["a"],pair["c"]))
     println(stderr, "lagged balance complete")
+    flush(stderr)
     unitary = if check_rotated
         rotated = spatial_balance(rotated_modes(p), fresh.source, widths; workers)
         (; profile_A_cm2=maxdiff(nodal.current_A_cm2,rotated.current_A_cm2),
