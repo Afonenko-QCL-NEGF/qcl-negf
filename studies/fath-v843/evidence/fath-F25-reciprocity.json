@@ -1,0 +1,18 @@
+{
+  "spec_sha256": "b56016c4bb821694bfe4924a798525fd5a18f147272acdd967a152308bfbeba6",
+  "radial_weights_sha256": "c3535b9f21123f4be4ae41eaa62b0bd85c1e045c1b9cf33e7d02bc1108a0bc9b",
+  "rings": 25,
+  "pair_measure": "w_k w_kprime",
+  "operators": {
+    "impurity_covariance": {
+      "sha256": "520233c7fb346f28b21b61a2e26e9952d43f6699b39d270114bf374ba1730c9c",
+      "maximum_pointwise_defect_solver_units": 1.6046192152785466e-17,
+      "relative_weighted_frobenius_defect": 1.256063415130238e-15
+    },
+    "ifr_pair": {
+      "sha256": "7efec07d325a4652497d6e6c6a1d5135828da544934394a14fba7510ae6e30cd",
+      "maximum_pointwise_defect_solver_units": 0.0,
+      "relative_weighted_frobenius_defect": 0.0
+    }
+  }
+}
