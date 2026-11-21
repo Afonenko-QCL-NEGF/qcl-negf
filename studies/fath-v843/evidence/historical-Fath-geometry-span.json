@@ -1,0 +1,92 @@
+{
+  "geometry_sha256": "10a607bf9783a00e69b2ee1c8fb29972553d34cc1a9dc68f5d374f70a0ab7f6a",
+  "results": {
+    "cell7": {
+      "basis_columns": 7,
+      "map_rank_rel_1e_12": 21,
+      "map_rank_rel_1e_10": 21,
+      "least_squares_error_Linf_at_unit_current": 0.09035127059017678,
+      "smallest_kept_singular_relative": 7.287893777480969e-07,
+      "primal_solver_objective": 0.03831213,
+      "dual_solver_objective": 0.03831213,
+      "primal_minimax_upper": 0.038312133522102165,
+      "dual_minimax_coefficient": 0.03831206643447406,
+      "Linf_minimax_range_A_cm2_at_108_175_A_cm2": [
+        4.144407786549231,
+        4.144415043753401
+      ],
+      "psd_trace_bound_slack_A_cm2": 4.679034068769128e-11,
+      "lower_A_cm2_at_108_175_A_cm2": 4.144407786502441,
+      "lower_exceeds_spatial_acceptance_at_108_175_A_cm2": true,
+      "trace_aware_svd_dual_lower_A_cm2_at_108_175_A_cm2": 35.01487999232684,
+      "trace_aware_svd_candidate_rank": 15
+    },
+    "cell9_exact_edges": {
+      "basis_columns": 9,
+      "map_rank_rel_1e_12": 23,
+      "map_rank_rel_1e_10": 23,
+      "least_squares_error_Linf_at_unit_current": 0.06839553506967966,
+      "smallest_kept_singular_relative": 8.081337377627769e-08,
+      "primal_solver_objective": 0.02905145,
+      "dual_solver_objective": 0.02905145,
+      "primal_minimax_upper": 0.029051449776781313,
+      "dual_minimax_coefficient": 0.02905142410271539,
+      "Linf_minimax_range_A_cm2_at_108_175_A_cm2": [
+        3.142637802311237,
+        3.1426405796033183
+      ],
+      "psd_trace_bound_slack_A_cm2": 2.0018872236553955e-10,
+      "lower_A_cm2_at_108_175_A_cm2": 3.1426378021110484,
+      "lower_exceeds_spatial_acceptance_at_108_175_A_cm2": true,
+      "trace_aware_svd_dual_lower_A_cm2_at_108_175_A_cm2": 32.70487337672965,
+      "trace_aware_svd_candidate_rank": 17
+    },
+    "cell9_lowest_complement": {
+      "basis_columns": 9,
+      "map_rank_rel_1e_12": 36,
+      "map_rank_rel_1e_10": 36,
+      "least_squares_error_Linf_at_unit_current": 0.0018804713127442696,
+      "smallest_kept_singular_relative": 2.886222154531599e-09,
+      "primal_solver_objective": 0.00081568,
+      "dual_solver_objective": 0.00081568,
+      "primal_minimax_upper": 0.0008188764968926066,
+      "dual_minimax_coefficient": 0.0008156828864163447,
+      "Linf_minimax_range_A_cm2_at_108_175_A_cm2": [
+        0.08823649623808809,
+        0.08858196505135771
+      ],
+      "psd_trace_bound_slack_A_cm2": 5.4716125361638755e-11,
+      "lower_A_cm2_at_108_175_A_cm2": 0.08823649618337197,
+      "lower_exceeds_spatial_acceptance_at_108_175_A_cm2": false,
+      "trace_aware_svd_dual_lower_A_cm2_at_108_175_A_cm2": 0.26573597041758107,
+      "trace_aware_svd_candidate_rank": 29
+    },
+    "cell9_soft_edges": {
+      "basis_columns": 9,
+      "map_rank_rel_1e_12": 29,
+      "map_rank_rel_1e_10": 29,
+      "least_squares_error_Linf_at_unit_current": 0.03066594526934696,
+      "smallest_kept_singular_relative": 1.302603238798068e-07,
+      "primal_solver_objective": 0.0132647,
+      "dual_solver_objective": 0.0132647,
+      "primal_minimax_upper": 0.013264700700515664,
+      "dual_minimax_coefficient": 0.01326469169522194,
+      "Linf_minimax_range_A_cm2_at_108_175_A_cm2": [
+        1.4349080241306333,
+        1.4349089982782819
+      ],
+      "psd_trace_bound_slack_A_cm2": 4.50401339302351e-11,
+      "lower_A_cm2_at_108_175_A_cm2": 1.4349080240855931,
+      "lower_exceeds_spatial_acceptance_at_108_175_A_cm2": true,
+      "trace_aware_svd_dual_lower_A_cm2_at_108_175_A_cm2": 26.88227668265352,
+      "trace_aware_svd_candidate_rank": 21
+    },
+    "tail7_center_columns": {
+      "basis_columns": 63,
+      "map_rank_rel_1e_12": 61,
+      "map_rank_rel_1e_10": 50,
+      "least_squares_error_Linf_at_unit_current": 1.212585587495596e-12,
+      "smallest_kept_singular_relative": 1.3387340403859384e-12
+    }
+  }
+}

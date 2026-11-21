@@ -1,0 +1,168 @@
+{
+  "window_k_nm_inverse": [
+    0.025,
+    0.075
+  ],
+  "window_u": [
+    0.0625,
+    0.5625
+  ],
+  "window_E_meV": [
+    -32.0,
+    -30.0
+  ],
+  "source_sha256": "9e37589cbc2f9e2d0393fff134bb1f50127135c347400146f9911323bbab09a0",
+  "input_spec_sha256": "34b496b9582130e4510ab1aed2ec1b9e72fab1c692733293b350612de95c16c8",
+  "coarse": {
+    "delta_lambda_contribution": -0.07928500117111781,
+    "delta_seams_A_cm2": [
+      1.5271079071945463e-06,
+      -0.8124417185268298
+    ],
+    "graded": true,
+    "nested_charge_cm2": 2699924641.382269,
+    "nested_raw_outward_left_right_A_cm2": [
+      -2.4707361495214666e-06,
+      4.678118187602889
+    ],
+    "native": {
+      "band_measure": 0.01999999999999957,
+      "charge_cm2": 5078474676.515803,
+      "energy_poles_meV": [
+        -31.31968408649584
+      ],
+      "lambda_contribution": 0.16928248921719344,
+      "num_samples": 72,
+      "raw_outward_left_right_A_cm2": [
+        -3.997844056716013e-06,
+        5.490559906129719
+      ]
+    },
+    "nested_rings": [
+      {
+        "band_measure": 0.019999999999999574,
+        "charge_cm2": 101958135.34546813,
+        "energy_poles_meV": [],
+        "k_nm_inverse": 0.025,
+        "lambda_contribution": 0.0033986045115156046,
+        "num_samples": 54,
+        "radial_weight": 0.006216989964527162,
+        "raw_outward_left_right_A_cm2": [
+          -1.989724867488055e-07,
+          1.882514397625355
+        ]
+      },
+      {
+        "band_measure": 0.01999999999999957,
+        "charge_cm2": 2539237338.2579017,
+        "energy_poles_meV": [
+          -31.31968408649584
+        ],
+        "k_nm_inverse": 0.05,
+        "lambda_contribution": 0.08464124460859672,
+        "num_samples": 72,
+        "radial_weight": 0.019894367886486918,
+        "raw_outward_left_right_A_cm2": [
+          -1.9989220283580064e-06,
+          2.7452799530648595
+        ]
+      },
+      {
+        "band_measure": 0.019999999999999574,
+        "charge_cm2": 58729167.77889908,
+        "energy_poles_meV": [],
+        "k_nm_inverse": 0.075,
+        "lambda_contribution": 0.001957638925963303,
+        "num_samples": 36,
+        "radial_weight": 0.013677377921959756,
+        "raw_outward_left_right_A_cm2": [
+          -2.728416344146545e-07,
+          0.05032383691267447
+        ]
+      }
+    ]
+  },
+  "fine": {
+    "delta_lambda_contribution": -0.07928500073774918,
+    "delta_seams_A_cm2": [
+      1.5271078957375087e-06,
+      -0.8124415227159343
+    ],
+    "graded": false,
+    "nested_charge_cm2": 2699924653.1267695,
+    "nested_raw_outward_left_right_A_cm2": [
+      -2.4707361600770476e-06,
+      4.678118383513904
+    ],
+    "native": {
+      "band_measure": 0.019999999999999574,
+      "charge_cm2": 5078474675.259245,
+      "energy_poles_meV": [
+        -31.319684086495847
+      ],
+      "lambda_contribution": 0.16928248917530817,
+      "num_samples": 150,
+      "raw_outward_left_right_A_cm2": [
+        -3.997844055814556e-06,
+        5.490559906229838
+      ]
+    },
+    "nested_rings": [
+      {
+        "band_measure": 0.019999999999999577,
+        "charge_cm2": 101958148.0202684,
+        "energy_poles_meV": [],
+        "k_nm_inverse": 0.025,
+        "lambda_contribution": 0.0033986049340089465,
+        "num_samples": 120,
+        "radial_weight": 0.006216989964527162,
+        "raw_outward_left_right_A_cm2": [
+          -1.9897249792411217e-07,
+          1.882514593910242
+        ]
+      },
+      {
+        "band_measure": 0.019999999999999574,
+        "charge_cm2": 2539237337.6296225,
+        "energy_poles_meV": [
+          -31.319684086495847
+        ],
+        "k_nm_inverse": 0.05,
+        "lambda_contribution": 0.08464124458765408,
+        "num_samples": 150,
+        "radial_weight": 0.019894367886486918,
+        "raw_outward_left_right_A_cm2": [
+          -1.998922027907278e-06,
+          2.745279953114919
+        ]
+      },
+      {
+        "band_measure": 0.01999999999999958,
+        "charge_cm2": 58729167.47687867,
+        "energy_poles_meV": [],
+        "k_nm_inverse": 0.075,
+        "lambda_contribution": 0.0019576389158959557,
+        "num_samples": 90,
+        "radial_weight": 0.013677377921959756,
+        "raw_outward_left_right_A_cm2": [
+          -2.7284163424565734e-07,
+          0.05032383648874275
+        ]
+      }
+    ]
+  },
+  "fine_minus_coarse_charge_native_cm2": -1.2565584182739258,
+  "fine_minus_coarse_charge_nested_cm2": 11.744500637054443,
+  "fine_minus_coarse_delta_seam_A_cm2": [
+    -1.1457037524779815e-14,
+    1.9581089549802755e-07
+  ],
+  "fine_native_to_nested_raw_charge_change": -0.4683591381719464,
+  "fine_native_to_nested_raw_charge_delta_cm2": -2378550022.1324754,
+  "fine_native_to_nested_raw_seams_delta_A_cm2": [
+    1.5271078957375087e-06,
+    -0.8124415227159343
+  ],
+  "replacement_only_counterfactual_full_lambda": 1.3375481795154485,
+  "fresh_SCBA_maps": 0
+}

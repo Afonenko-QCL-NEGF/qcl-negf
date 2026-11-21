@@ -209,7 +209,10 @@ function window_compare(p,seed,fresh,cuts,coefficients,window,workers,channel)
 end
 
 function run_elastic_experiment(path,workers,windows,channel)
-    saved = Runner._read_linked_checkpoint(path)
+    return run_elastic_on(Runner._read_linked_checkpoint(path),workers,windows,channel)
+end
+
+function run_elastic_on(saved,workers,windows,channel)
     p = saved.problem
     solver = LT.linked_fresh_map(p,saved.seed;projector=LT.project_linked_economical,
         projection_for_collision=false,selected_rows=true,workers)

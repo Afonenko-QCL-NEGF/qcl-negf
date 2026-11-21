@@ -54,7 +54,7 @@ def fath_profile(path, output):
     )
     raw = resolved["current_A_cm2"]
     current.plot(cuts, raw, color="#172d43", label="Физические связи BDD")
-    current.scatter([cuts[0], cuts[-1]], [raw[0], raw[-1]], color="#172d43", zorder=5)
+    current.scatter([cuts[0], cuts[-1]], [raw[0], raw[-1]], color="#172d43", zorder=5, clip_on=False)
     current.plot(cuts, resolved["coherent_projected_A_cm2"], color="#637b9b",
                  ls="--", label="Поднятый модовый коммутатор")
     current.set_ylabel(r"$J(z)$, А/см²")
