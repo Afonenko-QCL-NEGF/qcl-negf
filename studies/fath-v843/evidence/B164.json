@@ -1,0 +1,1341 @@
+{
+  "schema": "fath54-independent-hdf-audit-v1",
+  "model_file": ".build/fath54-20261119/attempt02/work/09-iterator/B641-continue128/model.h5",
+  "state_file": ".build/fath54-20261119/attempt02/work/09-iterator/B641-continue128/checkpoint-0129/state.h5",
+  "fresh_file": ".build/fath54-20261119/attempt02/work/09-iterator/B641-continue128/checkpoint-0129/fresh.h5",
+  "image_file": null,
+  "fresh_map_integer": 129,
+  "model_identity": "94fdec31137355747ed435fea64db9ee153ae84a586dd8bf5326a603f34bad52",
+  "per_mechanism_fingerprints": {
+    "IFR": "40aa9e79f723043832e58a6c9c072455ed22e1238c30638d5ba714290f2bb7c7",
+    "LO": "45f989d4e925135c1d5e61e6ae9bd603a7d3858bb06de178de20577e4be55df1",
+    "acoustic": "4fc8bb2e8cb639e8e7c68a156223b966e5aff11cc37f06c1ea4447b4ccb05346",
+    "alloy": "5b8f1e71a9669c762b70ace2a59d5f2b03ac3aae6ff573712c93728dabdc5261",
+    "impurity": "1f9dfd1289d5e5ccf7fb19755734605c662536cdfb7b42b03ff3dea7bb237141"
+  },
+  "dims_E_k_basis_z": [
+    4801,
+    25,
+    7,
+    144
+  ],
+  "voltage_V": 0.054,
+  "max_abs_hartree": 0.0,
+  "r_sigma": 0.0256133964305263,
+  "sigma_families": [
+    {
+      "family": "embedding_minus",
+      "component": "L",
+      "numerator": 0.009979782758938047,
+      "denominator": 0.38963137067772036,
+      "relative": 0.0256133964305263,
+      "relative_physical": 0.021370475085535412
+    },
+    {
+      "family": "embedding",
+      "component": "L",
+      "numerator": 0.010030446090446732,
+      "denominator": 1.6148360742999135,
+      "relative": 0.006211433005542194,
+      "relative_physical": 0.0039834147157179565
+    },
+    {
+      "family": "acoustic",
+      "component": "L",
+      "numerator": 2.1394358226141665e-07,
+      "denominator": 0.00013577749485110314,
+      "relative": 0.001575692514287993,
+      "relative_physical": 0.001575692500816926
+    },
+    {
+      "family": "impurity",
+      "component": "L",
+      "numerator": 1.5303230812761992e-05,
+      "denominator": 0.009787727792415327,
+      "relative": 0.0015635120977317211,
+      "relative_physical": 0.0016197159271083023
+    },
+    {
+      "family": "alloy",
+      "component": "L",
+      "numerator": 5.105097676984494e-07,
+      "denominator": 0.0003279595615916218,
+      "relative": 0.0015566241313573121,
+      "relative_physical": 0.0015566241258476907
+    },
+    {
+      "family": "IFR",
+      "component": "L",
+      "numerator": 7.73387834608075e-06,
+      "denominator": 0.005053623349337843,
+      "relative": 0.0015303630309288462,
+      "relative_physical": 0.0015387511283814295
+    },
+    {
+      "family": "LO",
+      "component": "L",
+      "numerator": 0.00013769094368442405,
+      "denominator": 0.09102765143909469,
+      "relative": 0.0015126276632165554,
+      "relative_physical": 0.0015202302922645377
+    },
+    {
+      "family": "embedding_plus",
+      "component": "L",
+      "numerator": 0.0010068685378912257,
+      "denominator": 1.5671255736065202,
+      "relative": 0.000642493846599703,
+      "relative_physical": 0.0005471333781135471
+    },
+    {
+      "family": "impurity",
+      "component": "G",
+      "numerator": 1.7582570445934357e-05,
+      "denominator": 0.5197546413379747,
+      "relative": 3.382859727942441e-05,
+      "relative_physical": 1.846323548326718e-05
+    },
+    {
+      "family": "IFR",
+      "component": "G",
+      "numerator": 1.5025300841592387e-05,
+      "denominator": 0.5551655775662319,
+      "relative": 2.7064539749494073e-05,
+      "relative_physical": 2.160762423229092e-05
+    },
+    {
+      "family": "LO",
+      "component": "R",
+      "numerator": 0.000210076397242354,
+      "denominator": 7.904257265053584,
+      "relative": 2.6577626486317257e-05,
+      "relative_physical": 2.264797138429424e-05
+    },
+    {
+      "family": "IFR",
+      "component": "R",
+      "numerator": 9.62343074648312e-06,
+      "denominator": 0.3854132422271974,
+      "relative": 2.4969123247742355e-05,
+      "relative_physical": 2.1088812878935837e-05
+    },
+    {
+      "family": "LO",
+      "component": "G",
+      "numerator": 0.00027634455289310444,
+      "denominator": 11.440091299924125,
+      "relative": 2.415579960405884e-05,
+      "relative_physical": 2.116150795883892e-05
+    },
+    {
+      "family": "acoustic",
+      "component": "R",
+      "numerator": 4.918855449869353e-07,
+      "denominator": 0.02350603271813471,
+      "relative": 2.0925927862222385e-05,
+      "relative_physical": 2.092607704084052e-05
+    },
+    {
+      "family": "acoustic",
+      "component": "G",
+      "numerator": 6.978107595818836e-07,
+      "denominator": 0.033959753377501026,
+      "relative": 2.054816923505666e-05,
+      "relative_physical": 2.054816923444641e-05
+    },
+    {
+      "family": "impurity",
+      "component": "R",
+      "numerator": 6.323605287155239e-06,
+      "denominator": 0.36641182252346033,
+      "relative": 1.7258191189369125e-05,
+      "relative_physical": 1.383440757596441e-05
+    },
+    {
+      "family": "alloy",
+      "component": "R",
+      "numerator": 1.1866265543939954e-06,
+      "denominator": 0.09209072014184741,
+      "relative": 1.2885408568486648e-05,
+      "relative_physical": 1.2885492293031162e-05
+    },
+    {
+      "family": "alloy",
+      "component": "G",
+      "numerator": 1.656999708268705e-06,
+      "denominator": 0.13326293866615568,
+      "relative": 1.243406249969935e-05,
+      "relative_physical": 1.243406249975362e-05
+    },
+    {
+      "family": "embedding_plus",
+      "component": "G",
+      "numerator": 0.007566184898932115,
+      "denominator": 1028.8622916189001,
+      "relative": 7.353933524987907e-06,
+      "relative_physical": 4.351720688141408e-06
+    },
+    {
+      "family": "embedding_plus",
+      "component": "R",
+      "numerator": 0.005686648902409393,
+      "denominator": 783.9111770114973,
+      "relative": 7.254200564008528e-06,
+      "relative_physical": 4.052267473226247e-06
+    },
+    {
+      "family": "embedding",
+      "component": "R",
+      "numerator": 0.01202856357275481,
+      "denominator": 1838.1062299950097,
+      "relative": 6.543998043457731e-06,
+      "relative_physical": 6.2074089217481975e-06
+    },
+    {
+      "family": "embedding_minus",
+      "component": "R",
+      "numerator": 0.010599439940923456,
+      "denominator": 1662.5622639060196,
+      "relative": 6.375364202012597e-06,
+      "relative_physical": 6.922161095566691e-06
+    },
+    {
+      "family": "embedding",
+      "component": "G",
+      "numerator": 0.013541606881332524,
+      "denominator": 2306.6742650007127,
+      "relative": 5.870619483123396e-06,
+      "relative_physical": 4.606756349896441e-06
+    },
+    {
+      "family": "embedding_minus",
+      "component": "G",
+      "numerator": 0.011230630769229363,
+      "denominator": 2064.493936604006,
+      "relative": 5.439895254767962e-06,
+      "relative_physical": 4.712856410754947e-06
+    }
+  ],
+  "K_unweighted": {
+    "r_K": 0.0014048461711396183,
+    "numerator": 0.9191758773631823,
+    "denominator": 654.2893423110818
+  },
+  "K_physical_weighted": {
+    "r_K": 0.0014899013518027283,
+    "numerator": 0.0014934709026910953,
+    "denominator": 1.0023958303575153
+  },
+  "K_max_sq_E_meV_k_nm_inverse": [
+    0.35264314743632597,
+    6.800000000000023,
+    0.0
+  ],
+  "charge": {
+    "target_dim": 0.030000000000000002,
+    "target_cm2": 30000000000.0,
+    "raw_dim": 0.02999911092754617,
+    "raw_cm2": 29999110927.546165,
+    "normalized_dim": 0.03000000000000063,
+    "normalized_cm2": 30000000000.000626,
+    "lambda": 0.999970364251539,
+    "lambda_minus_one": -2.963574846104322e-05,
+    "archived_lambda": 0.9999703642515194,
+    "raw_holes_dim": 40.080863169732766,
+    "paired_occupied_fraction": 1,
+    "paired_empty_transfer_fraction": 2.2181968738212232e-08
+  },
+  "state_spectral_vs_kinetic_identity_max_abs": 2.0548896570826683e-11,
+  "state_min_eigenvalues_i_occupation": {
+    "minus_i_GL": 1.8748804838022406e-34,
+    "plus_i_GG": 1.6789995828638042e-45
+  },
+  "retarded_affine_bounds_meV": [
+    -400.0,
+    560.0
+  ],
+  "retarded_spectra": {
+    "state": {
+      "nodal": {
+        "max_r_sum": 0.010363733643900589,
+        "worst_k_nm_inverse": 0.25,
+        "passing_rings": 0
+      },
+      "affine_inverse": {
+        "max_r_sum": 0.009925663971638955,
+        "worst_k_nm_inverse": 0.0,
+        "passing_rings": 0
+      },
+      "max_abs_F_error_Gauss_difference": 1.3498618200009535e-13
+    }
+  },
+  "collisions": {
+    "state_normalized": {
+      "J_plus_A_cm2": 114.98308117924445,
+      "J_minus_A_cm2": -114.62155218985028,
+      "J_sum_A_cm2": 0.36152898939417355,
+      "J_orientation_average_A_cm2": 114.80231668454736,
+      "boundary_relative": 0.003144192916787422,
+      "P_field_plus_W_m2": 62090.863836792,
+      "P_field_minus_W_m2": 61895.63818251915,
+      "P_field_average_W_m2": 61993.25100965558,
+      "P_\u03a3_by_family_W_m2": {
+        "LO": -62958.7088918412,
+        "acoustic": 4.608158071935847,
+        "impurity": 155.49027590218776,
+        "IFR": 43.89707382361502,
+        "alloy": 2.8423338805081912,
+        "embedding_plus": -3631.471625653091,
+        "embedding_minus": 64707.75368959282
+      },
+      "P_field_plus_LO_W_m2": -867.845055049198,
+      "P_field_plus_all_local_W_m2": -661.0072133709546,
+      "collision_imaginary_sheet_dimensionless": {
+        "LO": 2.6006416981632467e-23,
+        "acoustic": 7.835277416447352e-24,
+        "impurity": 6.919737391006227e-22,
+        "IFR": 1.1336557087352356e-22,
+        "alloy": 3.2996861990455595e-24,
+        "embedding_plus": 1.2060990092259404e-21,
+        "embedding_minus": 1.5158744187181773e-23
+      }
+    },
+    "state_raw": {
+      "J_plus_A_cm2": 114.79951827484737,
+      "J_minus_A_cm2": -114.79955516806318,
+      "J_sum_A_cm2": -3.689321580679916e-05,
+      "J_orientation_average_A_cm2": 114.79953672145527,
+      "boundary_relative": 3.2137072092995984e-07,
+      "P_field_plus_W_m2": 61991.73986841758,
+      "P_field_minus_W_m2": 61991.75979075411,
+      "P_field_average_W_m2": 61991.74982958584,
+      "P_\u03a3_by_family_W_m2": {
+        "LO": -62379.599818668124,
+        "acoustic": 8.833357132195308,
+        "impurity": 283.6047294842949,
+        "IFR": 82.90776174077975,
+        "alloy": 12.483968068549002,
+        "embedding_plus": -3281.3163702675247,
+        "embedding_minus": 65273.08637250996
+      },
+      "P_field_plus_LO_W_m2": -387.8599502505458,
+      "P_field_plus_all_local_W_m2": -0.030133824730000924,
+      "collision_imaginary_sheet_dimensionless": {
+        "LO": 3.369537795152712e-23,
+        "acoustic": 9.852395086216128e-24,
+        "impurity": 1.1427160595573745e-21,
+        "IFR": 3.9137985200630696e-23,
+        "alloy": 3.6627194140259447e-25,
+        "embedding_plus": 7.053018646798209e-22,
+        "embedding_minus": 1.4299398322639223e-21
+      }
+    },
+    "fresh_on_state_normalized": {
+      "J_plus_A_cm2": 115.09757931482106,
+      "J_minus_A_cm2": -114.332475561739,
+      "J_sum_A_cm2": 0.7651037530820588,
+      "J_orientation_average_A_cm2": 114.71502743828003,
+      "boundary_relative": 0.006647435659696248,
+      "P_field_plus_W_m2": 62152.69283000337,
+      "P_field_minus_W_m2": 61739.536803339055,
+      "P_field_average_W_m2": 61946.114816671216,
+      "P_\u03a3_by_family_W_m2": {
+        "LO": -62972.405317542194,
+        "acoustic": -3.3015781259181137e-13,
+        "impurity": 2.0126767107113353e-11,
+        "IFR": -8.842118184073996e-12,
+        "alloy": 6.669616463054161e-14,
+        "embedding_plus": -3761.243315777065,
+        "embedding_minus": 64316.86525981413
+      },
+      "P_field_plus_LO_W_m2": -819.7124875388254,
+      "P_field_plus_all_local_W_m2": -819.7124875388108,
+      "collision_imaginary_sheet_dimensionless": {
+        "LO": 2.9000402840628707e-24,
+        "acoustic": 8.01449228840398e-26,
+        "impurity": 1.0448778339364508e-24,
+        "IFR": 1.7144964614338418e-25,
+        "alloy": 1.552360761494706e-25,
+        "embedding_plus": 9.081432250836355e-22,
+        "embedding_minus": 4.1697429559380086e-22
+      }
+    },
+    "fresh_on_state_raw": {
+      "J_plus_A_cm2": 114.91401639829485,
+      "J_minus_A_cm2": -114.51047857244089,
+      "J_sum_A_cm2": 0.4035378258539595,
+      "J_orientation_average_A_cm2": 114.71224748536787,
+      "boundary_relative": 0.0035116501755128576,
+      "P_field_plus_W_m2": 62053.56885507922,
+      "P_field_minus_W_m2": 61835.658429118084,
+      "P_field_average_W_m2": 61944.613642098644,
+      "P_\u03a3_by_family_W_m2": {
+        "LO": -62393.29618182806,
+        "acoustic": 4.225199750468623,
+        "impurity": 128.11447963622143,
+        "IFR": 39.01068945030753,
+        "alloy": 9.64163412522911,
+        "embedding_plus": -3411.088042299747,
+        "embedding_minus": 64882.19801265614
+      },
+      "P_field_plus_LO_W_m2": -339.72732674884173,
+      "P_field_plus_all_local_W_m2": -158.73532378661184,
+      "collision_imaginary_sheet_dimensionless": {
+        "LO": 1.2892165908359606e-23,
+        "acoustic": 2.093398316187859e-24,
+        "impurity": 4.482726786721463e-22,
+        "IFR": 7.40630790196688e-23,
+        "alloy": 3.806346815503839e-24,
+        "embedding_plus": 1.4233348304139907e-21,
+        "embedding_minus": 1.8639120554435997e-21
+      }
+    }
+  },
+  "bond_summary": {
+    "state_normalized": {
+      "min_A_cm2": 1.0379679701953453,
+      "max_A_cm2": 184.58509006681874,
+      "mean_A_cm2": 85.43948086364935,
+      "max_deviation_A_cm2": 99.14560920316939,
+      "difference_from_oriented_plus_A_cm2": 29.5436003155951,
+      "difference_from_oriented_minus_A_cm2": 29.182071326200926,
+      "coordinate_sheet_cm2": 30000000000.000626
+    },
+    "state_raw": {
+      "min_A_cm2": 1.0379679932208075,
+      "max_A_cm2": 184.58509416157895,
+      "mean_A_cm2": 85.43948275889355,
+      "max_deviation_A_cm2": 99.1456114026854,
+      "difference_from_oriented_plus_A_cm2": 29.360035515953825,
+      "difference_from_oriented_minus_A_cm2": 29.360072409169632,
+      "coordinate_sheet_cm2": 29999110927.546165
+    }
+  },
+  "by_k": [
+    {
+      "k_nm_inverse": 0.0,
+      "w_k": 0.0012433979929054324,
+      "charge_raw_dimensionless": 0.0010733519822523235,
+      "charge_normalized_dimensionless": 0.001073352343165028,
+      "K_numerator_sq": 0.6110737482627194,
+      "K_denominator_sq": 324794.2942202002,
+      "K_trusted_numerator_sq": 0.6110737482522247,
+      "K_physical_numerator_sq": 4.837087145838956e-07,
+      "K_physical_denominator_sq": 0.2570979869583468,
+      "state_nodal": {
+        "r_sum": 0.0070697021327018154,
+        "eigenvalues": [
+          0.9877795575318111,
+          0.98801942042962,
+          0.9969541371326452,
+          0.9974668827653257,
+          0.9977869547933237,
+          1.0003653985588308,
+          1.0060221481242533
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.009925663971638955,
+        "eigenvalues": [
+          0.981122658097835,
+          0.9823839603225354,
+          0.9972928307193625,
+          0.997690401981287,
+          0.9979213067495242,
+          0.9991495251321567,
+          1.0022902978154586
+        ],
+        "abs_F_error_Gauss_difference": 7.75767329261455e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.025,
+      "w_k": 0.009947183943243459,
+      "charge_raw_dimensionless": 0.005894616890713755,
+      "charge_normalized_dimensionless": 0.005894619844668593,
+      "K_numerator_sq": 0.21582125207683722,
+      "K_denominator_sq": 96474.8402692986,
+      "K_trusted_numerator_sq": 0.2158212520611703,
+      "K_physical_numerator_sq": 1.3667040447247811e-06,
+      "K_physical_denominator_sq": 0.6109340629869254,
+      "state_nodal": {
+        "r_sum": 0.004090734736506375,
+        "eigenvalues": [
+          0.9903657939758292,
+          0.9972576597845023,
+          0.9988435839994648,
+          0.9994818163473412,
+          0.9995346596971462,
+          1.0008502995682846,
+          1.0037755868418097
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0038365122191394165,
+        "eigenvalues": [
+          0.9906996957307719,
+          0.9975395771932488,
+          0.9987959807231112,
+          0.9994479919573955,
+          0.9996343653916302,
+          1.0004523260305582,
+          1.0028965115850048
+        ],
+        "abs_F_error_Gauss_difference": 3.858984903160354e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.05,
+      "w_k": 0.019894367886486918,
+      "charge_raw_dimensionless": 0.003502687883745751,
+      "charge_normalized_dimensionless": 0.003502693969091873,
+      "K_numerator_sq": 0.008849217138037638,
+      "K_denominator_sq": 3310.7331945807077,
+      "K_trusted_numerator_sq": 0.008849216800620216,
+      "K_physical_numerator_sq": 1.1207664434175427e-07,
+      "K_physical_denominator_sq": 0.04193092574986193,
+      "state_nodal": {
+        "r_sum": 0.004080361487562986,
+        "eigenvalues": [
+          0.9910625358825415,
+          0.9943270427989387,
+          0.9987802934045125,
+          0.999022458980995,
+          0.9991136799905556,
+          0.9995524234822791,
+          1.001027415352771
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.002880864273836008,
+        "eigenvalues": [
+          0.9950022294768459,
+          0.9956634967598503,
+          0.9989007853152994,
+          0.9991123775203665,
+          0.9994384854504841,
+          1.0006291431234804,
+          1.0034066722688517
+        ],
+        "abs_F_error_Gauss_difference": 4.6998982507903874e-14,
+        "quadrature_max_order": 32
+      }
+    },
+    {
+      "k_nm_inverse": 0.075,
+      "w_k": 0.029841551829730376,
+      "charge_raw_dimensionless": 0.0032732087531890906,
+      "charge_normalized_dimensionless": 0.0032732179299215756,
+      "K_numerator_sq": 0.0016302219174626686,
+      "K_denominator_sq": 1597.1547098945985,
+      "K_trusted_numerator_sq": 0.001630221318016146,
+      "K_physical_numerator_sq": 3.097050267693732e-08,
+      "K_physical_denominator_sq": 0.030342301062460372,
+      "state_nodal": {
+        "r_sum": 0.009406071613868512,
+        "eigenvalues": [
+          0.9778471271616829,
+          0.9977414457884963,
+          0.9982563180131198,
+          0.9998271851798401,
+          1.0002654346535287,
+          1.0017214742541702,
+          1.0108334767883225
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0071309780353318464,
+        "eigenvalues": [
+          0.9849509789879525,
+          0.9984397485510558,
+          0.9995767766295327,
+          1.000077319533537,
+          1.001607533447747,
+          1.0022579260911957,
+          1.0109170062667028
+        ],
+        "abs_F_error_Gauss_difference": 7.654841076751913e-14,
+        "quadrature_max_order": 256
+      }
+    },
+    {
+      "k_nm_inverse": 0.1,
+      "w_k": 0.039788735772973836,
+      "charge_raw_dimensionless": 0.002345466856069069,
+      "charge_normalized_dimensionless": 0.0023454792090977445,
+      "K_numerator_sq": 0.0032466024945758754,
+      "K_denominator_sq": 265.1438901664784,
+      "K_trusted_numerator_sq": 0.0032466018260320063,
+      "K_physical_numerator_sq": 8.223740189164858e-08,
+      "K_physical_denominator_sq": 0.006716173196800402,
+      "state_nodal": {
+        "r_sum": 0.006554877207104045,
+        "eigenvalues": [
+          0.9984666719426656,
+          0.9999833013351469,
+          1.0013697849608554,
+          1.0017624963356455,
+          1.001978423482108,
+          1.011989882650958,
+          1.0120730850653106
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.00528090631211235,
+        "eigenvalues": [
+          0.9986638755740659,
+          0.9999054513432155,
+          1.0010414169511221,
+          1.0013493006052399,
+          1.002998539347136,
+          1.0089822127768382,
+          1.0100421654256924
+        ],
+        "abs_F_error_Gauss_difference": 7.029904184743326e-14,
+        "quadrature_max_order": 256
+      }
+    },
+    {
+      "k_nm_inverse": 0.125,
+      "w_k": 0.0497359197162173,
+      "charge_raw_dimensionless": 0.004422593531121629,
+      "charge_normalized_dimensionless": 0.004422608905901411,
+      "K_numerator_sq": 0.0026651578675460502,
+      "K_denominator_sq": 1111.6673197235516,
+      "K_trusted_numerator_sq": 0.0026650988616866793,
+      "K_physical_numerator_sq": 8.438654679170467e-08,
+      "K_physical_denominator_sq": 0.03519857770340483,
+      "state_nodal": {
+        "r_sum": 0.003653153152658928,
+        "eigenvalues": [
+          0.9976163455075229,
+          0.9988843495926683,
+          1.0004430444465053,
+          1.002086506541903,
+          1.0025400008860514,
+          1.002612417417496,
+          1.0082865001014436
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.003386016905930936,
+        "eigenvalues": [
+          0.9976410985975616,
+          0.9985984841347334,
+          1.0002775680629874,
+          1.0013419410031645,
+          1.0014602733391684,
+          1.0016227488269744,
+          1.0081291788759779
+        ],
+        "abs_F_error_Gauss_difference": 9.234956272064756e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.15,
+      "w_k": 0.05968310365946075,
+      "charge_raw_dimensionless": 0.003502014393539016,
+      "charge_normalized_dimensionless": 0.003502032827182025,
+      "K_numerator_sq": 0.001069028405178939,
+      "K_denominator_sq": 422.70546328384154,
+      "K_trusted_numerator_sq": 0.0010690145425498226,
+      "K_physical_numerator_sq": 4.0618208760004044e-08,
+      "K_physical_denominator_sq": 0.016060881702000596,
+      "state_nodal": {
+        "r_sum": 0.003257556085000845,
+        "eigenvalues": [
+          0.9937519920557182,
+          0.9965150892825632,
+          0.9981444534791551,
+          0.9983690478836607,
+          0.9993890423012721,
+          1.001204051372907,
+          1.0038953085671236
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0027948606395766487,
+        "eigenvalues": [
+          0.994620630613061,
+          0.9970592023686362,
+          0.9982479070375195,
+          0.9995176545255824,
+          0.9996834826434242,
+          1.0012880626309804,
+          1.0034685790705415
+        ],
+        "abs_F_error_Gauss_difference": 4.630592872866656e-14,
+        "quadrature_max_order": 256
+      }
+    },
+    {
+      "k_nm_inverse": 0.175,
+      "w_k": 0.06963028760270422,
+      "charge_raw_dimensionless": 0.0013434905650716255,
+      "charge_normalized_dimensionless": 0.0013435121579195922,
+      "K_numerator_sq": 0.00015912865292142867,
+      "K_denominator_sq": 19.71580763191254,
+      "K_trusted_numerator_sq": 0.00015912847069046298,
+      "K_physical_numerator_sq": 7.0538577661168325e-09,
+      "K_physical_denominator_sq": 0.0008739626725068817,
+      "state_nodal": {
+        "r_sum": 0.0019234672520856114,
+        "eigenvalues": [
+          0.9961657905085882,
+          0.9993525028631426,
+          0.9995108616827245,
+          0.9996483698750623,
+          1.000979424518044,
+          1.0012553826796773,
+          1.0028070466375678
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.001670034256905028,
+        "eigenvalues": [
+          0.9967849815457074,
+          0.9982606212273015,
+          0.9990706472871875,
+          0.999475024749001,
+          0.9997640989280168,
+          1.0010962921978523,
+          1.0019402364238645
+        ],
+        "abs_F_error_Gauss_difference": 3.089792190390685e-14,
+        "quadrature_max_order": 32
+      }
+    },
+    {
+      "k_nm_inverse": 0.2,
+      "w_k": 0.07957747154594767,
+      "charge_raw_dimensionless": 0.0013266723661407454,
+      "charge_normalized_dimensionless": 0.001326697027422085,
+      "K_numerator_sq": 5.930109092189237e-05,
+      "K_denominator_sq": 42.10708163995589,
+      "K_trusted_numerator_sq": 5.928101628625587e-05,
+      "K_physical_numerator_sq": 3.0042283617440133e-09,
+      "K_physical_denominator_sq": 0.002133169675742439,
+      "state_nodal": {
+        "r_sum": 0.0035635275861114033,
+        "eigenvalues": [
+          0.992268601064698,
+          0.9959747871820597,
+          0.9995299671608219,
+          1.000114869970524,
+          1.0014827773486725,
+          1.0016396954947955,
+          1.0027915727307237
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.002850659360683736,
+        "eigenvalues": [
+          0.9938355421053493,
+          0.9971331478745199,
+          0.9988923150732986,
+          0.9995182291051706,
+          0.9998895625554872,
+          1.0012188817847576,
+          1.002776236834993
+        ],
+        "abs_F_error_Gauss_difference": 4.5781709892288304e-14,
+        "quadrature_max_order": 128
+      }
+    },
+    {
+      "k_nm_inverse": 0.225,
+      "w_k": 0.08952465548919113,
+      "charge_raw_dimensionless": 0.0010680699810688182,
+      "charge_normalized_dimensionless": 0.0010680977810026047,
+      "K_numerator_sq": 4.683444492068466e-06,
+      "K_denominator_sq": 10.003866219975698,
+      "K_trusted_numerator_sq": 4.681685550353128e-06,
+      "K_physical_numerator_sq": 2.6692432844600494e-10,
+      "K_physical_denominator_sq": 0.0005701520061042397,
+      "state_nodal": {
+        "r_sum": 0.0035804978981281354,
+        "eigenvalues": [
+          0.9967465341341157,
+          0.9975947627826032,
+          0.9986018427662057,
+          1.0005963651362517,
+          1.000969249117183,
+          1.003343800526828,
+          1.0076771485159903
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0034585131484140817,
+        "eigenvalues": [
+          0.9954762926414912,
+          0.9990200787700595,
+          0.9997501411041879,
+          1.0005629513009457,
+          1.001227524328603,
+          1.0034996189722718,
+          1.0069405710095427
+        ],
+        "abs_F_error_Gauss_difference": 3.8845942829420944e-14,
+        "quadrature_max_order": 128
+      }
+    },
+    {
+      "k_nm_inverse": 0.25,
+      "w_k": 0.0994718394324346,
+      "charge_raw_dimensionless": 0.0016427478867628326,
+      "charge_normalized_dimensionless": 0.0016427788549510584,
+      "K_numerator_sq": 0.0002982574930119536,
+      "K_denominator_sq": 44.730074180923445,
+      "K_trusted_numerator_sq": 0.00029825705803945737,
+      "K_physical_numerator_sq": 1.888737638885466e-08,
+      "K_physical_denominator_sq": 0.0028325650377629607,
+      "state_nodal": {
+        "r_sum": 0.010363733643900589,
+        "eigenvalues": [
+          0.9970894066365863,
+          0.9975029165099688,
+          0.9977067001900857,
+          0.998340237340436,
+          0.9993412498337726,
+          1.01132273725568,
+          1.024504886834298
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.006961215472925519,
+        "eigenvalues": [
+          0.9976226262192699,
+          0.997769337589497,
+          0.9984289560521709,
+          0.9988782541578183,
+          0.9994216380403556,
+          1.009372381555561,
+          1.0153843866871806
+        ],
+        "abs_F_error_Gauss_difference": 4.60743969364151e-14,
+        "quadrature_max_order": 32
+      }
+    },
+    {
+      "k_nm_inverse": 0.275,
+      "w_k": 0.10941902337567805,
+      "charge_raw_dimensionless": 0.00018749453983954377,
+      "charge_normalized_dimensionless": 0.0001875286644629177,
+      "K_numerator_sq": 7.077839293364439e-06,
+      "K_denominator_sq": 0.5899589721339994,
+      "K_trusted_numerator_sq": 7.07733710267418e-06,
+      "K_physical_numerator_sq": 4.930303501983283e-10,
+      "K_physical_denominator_sq": 4.109554718296075e-05,
+      "state_nodal": {
+        "r_sum": 0.010141035747629005,
+        "eigenvalues": [
+          0.9982317540274912,
+          0.9987506901364473,
+          0.999813467805176,
+          0.9998362976786836,
+          1.0023393403833805,
+          1.0056932234901512,
+          1.0260240249277572
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.007157387015058874,
+        "eigenvalues": [
+          0.9935411750328499,
+          0.9984338930131254,
+          0.998946205127365,
+          0.9998147174113768,
+          0.9998341835797173,
+          1.000306602957194,
+          1.017696380912573
+        ],
+        "abs_F_error_Gauss_difference": 1.3498618200009535e-13,
+        "quadrature_max_order": 128
+      }
+    },
+    {
+      "k_nm_inverse": 0.3,
+      "w_k": 0.1193662073189215,
+      "charge_raw_dimensionless": 0.00023322711987460275,
+      "charge_normalized_dimensionless": 0.00023326416982312145,
+      "K_numerator_sq": 5.648451645092003e-07,
+      "K_denominator_sq": 0.8254263278373917,
+      "K_trusted_numerator_sq": 5.645997850184406e-07,
+      "K_physical_numerator_sq": 4.292308548204238e-11,
+      "K_physical_denominator_sq": 6.272487940952466e-05,
+      "state_nodal": {
+        "r_sum": 0.0025812119723530582,
+        "eigenvalues": [
+          0.995378432397272,
+          0.9979575240238109,
+          0.9993339282223751,
+          0.9995201505541228,
+          1.0003281475433574,
+          1.0003914302414363,
+          1.0044914569969954
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.003809949113842928,
+        "eigenvalues": [
+          0.9915734138645868,
+          0.9960589143274093,
+          0.9964847566740969,
+          0.9987112573009843,
+          0.99934380421723,
+          0.9994368072758589,
+          1.0005521804413862
+        ],
+        "abs_F_error_Gauss_difference": 8.275816029845278e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.325,
+      "w_k": 0.12931339126216496,
+      "charge_raw_dimensionless": 4.732332406981689e-05,
+      "charge_normalized_dimensionless": 4.736352895338225e-05,
+      "K_numerator_sq": 4.600687760120717e-09,
+      "K_denominator_sq": 0.005711330578782055,
+      "K_trusted_numerator_sq": 4.3480519949750626e-09,
+      "K_physical_numerator_sq": 3.787445426572005e-13,
+      "K_physical_denominator_sq": 4.7017650421208674e-07,
+      "state_nodal": {
+        "r_sum": 0.0034503917074766017,
+        "eigenvalues": [
+          0.9972695813040848,
+          0.9991864789313645,
+          0.9994642527828255,
+          1.0001242758622162,
+          1.0007187683841927,
+          1.0039115616121248,
+          1.0076876528248122
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0021569617361957404,
+        "eigenvalues": [
+          0.9973208415853505,
+          0.9995018357370288,
+          1.0000605051209541,
+          1.000510091415513,
+          1.001211291959872,
+          1.0018142182805725,
+          1.0044854051960483
+        ],
+        "abs_F_error_Gauss_difference": 8.751615563522885e-14,
+        "quadrature_max_order": 128
+      }
+    },
+    {
+      "k_nm_inverse": 0.35,
+      "w_k": 0.13926057520540844,
+      "charge_raw_dimensionless": 7.058989929086329e-05,
+      "charge_normalized_dimensionless": 7.063298189129682e-05,
+      "K_numerator_sq": 3.1880892252645435e-08,
+      "K_denominator_sq": 0.02608036979564532,
+      "K_trusted_numerator_sq": 2.9654953713112358e-08,
+      "K_physical_numerator_sq": 2.826433521285388e-12,
+      "K_physical_denominator_sq": 2.3121821953340774e-06,
+      "state_nodal": {
+        "r_sum": 0.00801278005954907,
+        "eigenvalues": [
+          0.9791546623955165,
+          0.9970654938164484,
+          0.998017319869127,
+          0.9991631616363432,
+          0.9994951238170818,
+          0.9996192761409053,
+          1.0011233494681244
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0028931773463132435,
+        "eigenvalues": [
+          0.9941448003720873,
+          0.9953444524553121,
+          0.9987341641945577,
+          0.999154977425132,
+          0.9995546570293589,
+          0.9997224041009444,
+          1.0002098742336012
+        ],
+        "abs_F_error_Gauss_difference": 9.965371756884534e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.375,
+      "w_k": 0.1492077591486519,
+      "charge_raw_dimensionless": 1.637780913343043e-05,
+      "charge_normalized_dimensionless": 1.6424430185746967e-05,
+      "K_numerator_sq": 3.0684204731919645e-09,
+      "K_denominator_sq": 0.00015174673648150048,
+      "K_trusted_numerator_sq": 1.5933417289290996e-09,
+      "K_physical_numerator_sq": 2.914649946151802e-13,
+      "K_physical_denominator_sq": 1.4414211519532079e-08,
+      "state_nodal": {
+        "r_sum": 0.01019895392551895,
+        "eigenvalues": [
+          0.999702268931284,
+          0.9999135151417022,
+          1.0000596408047149,
+          1.002427562709726,
+          1.0042930690665663,
+          1.0144764495325718,
+          1.0222292567124815
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0037895945483814755,
+        "eigenvalues": [
+          0.9996394314536107,
+          1.0000373580857411,
+          1.0002836912287263,
+          1.000986497939257,
+          1.0039050171495434,
+          1.0045992290663708,
+          1.007933476964362
+        ],
+        "abs_F_error_Gauss_difference": 7.078631208684551e-14,
+        "quadrature_max_order": 32
+      }
+    },
+    {
+      "k_nm_inverse": 0.4,
+      "w_k": 0.15915494309189535,
+      "charge_raw_dimensionless": 1.387239441452752e-05,
+      "charge_normalized_dimensionless": 1.3921691405963655e-05,
+      "K_numerator_sq": 1.0764599938396142e-09,
+      "K_denominator_sq": 0.00017694916489477796,
+      "K_trusted_numerator_sq": 8.87093668711213e-10,
+      "K_physical_numerator_sq": 1.0906820071945325e-13,
+      "K_physical_denominator_sq": 1.7928698831662123e-08,
+      "state_nodal": {
+        "r_sum": 0.0037239160852189914,
+        "eigenvalues": [
+          0.9935955655582263,
+          0.9941474528100945,
+          0.9954338048807612,
+          0.9992277864266158,
+          0.999553582355348,
+          0.9996862345916858,
+          1.0002440877392271
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0030319025478510323,
+        "eigenvalues": [
+          0.9942013127594979,
+          0.9956773536904386,
+          0.9967009444458435,
+          0.9990988952178562,
+          0.9995681169587642,
+          0.9996801159904208,
+          1.0002288677963944
+        ],
+        "abs_F_error_Gauss_difference": 7.766293804865998e-14,
+        "quadrature_max_order": 128
+      }
+    },
+    {
+      "k_nm_inverse": 0.425,
+      "w_k": 0.1691021270351388,
+      "charge_raw_dimensionless": 8.65730028802516e-06,
+      "charge_normalized_dimensionless": 8.70975050325921e-06,
+      "K_numerator_sq": 1.2674039762422991e-09,
+      "K_denominator_sq": 2.4927986001551047e-05,
+      "K_trusted_numerator_sq": 1.0452799358259266e-09,
+      "K_physical_numerator_sq": 1.3644080046499145e-13,
+      "K_physical_denominator_sq": 2.6835913629653284e-09,
+      "state_nodal": {
+        "r_sum": 0.00216201198760516,
+        "eigenvalues": [
+          0.9958913298374361,
+          0.9961904064384784,
+          0.9991096389624748,
+          0.9995017380583282,
+          1.000104895459349,
+          1.0002138191912486,
+          1.0004776691213713
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0016734826294235803,
+        "eigenvalues": [
+          0.9967788019446485,
+          0.9972052642130227,
+          0.9990823904955605,
+          0.9995111592420509,
+          1.0001092920154646,
+          1.0003271733982484,
+          1.000466030127383
+        ],
+        "abs_F_error_Gauss_difference": 5.681986351319819e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.45,
+      "w_k": 0.17904931097838225,
+      "charge_raw_dimensionless": 6.28995806367389e-06,
+      "charge_normalized_dimensionless": 6.345551311343273e-06,
+      "K_numerator_sq": 9.513431560309907e-10,
+      "K_denominator_sq": 1.2965519115190814e-05,
+      "K_trusted_numerator_sq": 8.05657202711016e-10,
+      "K_physical_numerator_sq": 1.084401164464839e-13,
+      "K_physical_denominator_sq": 1.4778919611995508e-09,
+      "state_nodal": {
+        "r_sum": 0.0030267290688622997,
+        "eigenvalues": [
+          0.9947308943636751,
+          0.9990576488116278,
+          0.9995556696046342,
+          0.999733184646859,
+          0.9998666962323696,
+          0.9998738033111305,
+          1.0059307509299782
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.00252909997842932,
+        "eigenvalues": [
+          0.9991082265810336,
+          0.9996712454227876,
+          0.9997766986347725,
+          0.9998155317823647,
+          0.9998972156454327,
+          0.999997066724396,
+          1.0066163904247514
+        ],
+        "abs_F_error_Gauss_difference": 4.4956137611355596e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.475,
+      "w_k": 0.1889964949216257,
+      "charge_raw_dimensionless": 5.178011454888859e-06,
+      "charge_normalized_dimensionless": 5.23675215616866e-06,
+      "K_numerator_sq": 1.1485787303166124e-09,
+      "K_denominator_sq": 7.977394784265564e-06,
+      "K_trusted_numerator_sq": 8.490762335532837e-10,
+      "K_physical_numerator_sq": 1.3819573579873398e-13,
+      "K_physical_denominator_sq": 9.598314097847486e-10,
+      "state_nodal": {
+        "r_sum": 0.0018207614165112094,
+        "eigenvalues": [
+          0.9986566288458372,
+          0.9997987233301541,
+          0.9998546261648843,
+          0.9999838599448785,
+          1.0013215434583844,
+          1.0025195120453327,
+          1.0036394002916744
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0018333495104403102,
+        "eigenvalues": [
+          0.998947438702496,
+          0.9997340981430902,
+          0.9998556320763113,
+          1.0000210485672258,
+          1.0006012533414463,
+          1.0019173058759887,
+          1.0042767687998344
+        ],
+        "abs_F_error_Gauss_difference": 7.430673480762443e-14,
+        "quadrature_max_order": 128
+      }
+    },
+    {
+      "k_nm_inverse": 0.5,
+      "w_k": 0.1989436788648692,
+      "charge_raw_dimensionless": 4.299478607648597e-06,
+      "charge_normalized_dimensionless": 4.361186463309067e-06,
+      "K_numerator_sq": 1.0947132042474813e-09,
+      "K_denominator_sq": 4.9256086968694235e-06,
+      "K_trusted_numerator_sq": 8.891553864159683e-10,
+      "K_physical_numerator_sq": 1.386470470040608e-13,
+      "K_physical_denominator_sq": 6.238356291572539e-10,
+      "state_nodal": {
+        "r_sum": 0.002371301029783383,
+        "eigenvalues": [
+          0.9938960404844659,
+          0.9990132757634661,
+          0.9991639869682427,
+          0.9995562399084912,
+          0.9997513058548764,
+          0.9998892688817362,
+          1.000399477864548
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0015129271310801808,
+        "eigenvalues": [
+          0.9962579637581822,
+          0.9987790400066188,
+          0.9995500765134252,
+          0.99968413379552,
+          0.9997622847554046,
+          0.9999069689723353,
+          1.0004021132609968
+        ],
+        "abs_F_error_Gauss_difference": 8.189981758640004e-14,
+        "quadrature_max_order": 32
+      }
+    },
+    {
+      "k_nm_inverse": 0.525,
+      "w_k": 0.20889086280811264,
+      "charge_raw_dimensionless": 3.885209857388114e-06,
+      "charge_normalized_dimensionless": 3.950003792176162e-06,
+      "K_numerator_sq": 1.7640361034909822e-09,
+      "K_denominator_sq": 3.811338380728834e-06,
+      "K_trusted_numerator_sq": 1.05837411734285e-09,
+      "K_physical_numerator_sq": 2.3458867161462663e-13,
+      "K_physical_denominator_sq": 5.068472272459367e-10,
+      "state_nodal": {
+        "r_sum": 0.002655723743222867,
+        "eigenvalues": [
+          0.9930393781986371,
+          0.9992272229215176,
+          0.9995578984620271,
+          0.9997462488191919,
+          0.9998699761821658,
+          1.0001355256016804,
+          1.0001659009163177
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.002093436527938563,
+        "eigenvalues": [
+          0.9945083770721669,
+          0.9994259435545916,
+          0.999735509111778,
+          0.9997645357990746,
+          0.9999189028334777,
+          1.0001524348660416,
+          1.000186172857466
+        ],
+        "abs_F_error_Gauss_difference": 2.92345057962316e-14,
+        "quadrature_max_order": 128
+      }
+    },
+    {
+      "k_nm_inverse": 0.55,
+      "w_k": 0.2188380467513561,
+      "charge_raw_dimensionless": 3.1556592255373945e-06,
+      "charge_normalized_dimensionless": 3.223639575606578e-06,
+      "K_numerator_sq": 1.4477708845095257e-09,
+      "K_denominator_sq": 2.155787738495204e-06,
+      "K_trusted_numerator_sq": 1.062847190554968e-09,
+      "K_physical_numerator_sq": 2.0169855703442909e-13,
+      "K_physical_denominator_sq": 3.0033707735071254e-10,
+      "state_nodal": {
+        "r_sum": 0.0014081446137629919,
+        "eigenvalues": [
+          0.9986149173347413,
+          0.999497177802149,
+          0.9997495187946863,
+          0.9999960179356894,
+          1.000367924173211,
+          1.0005726246041853,
+          1.003344068000959
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0013849228077995593,
+        "eigenvalues": [
+          0.9986196302517361,
+          0.9995305719281421,
+          0.9997990935839447,
+          0.9999913501477443,
+          1.0002713676019321,
+          1.0005219037352686,
+          1.0033036090622458
+        ],
+        "abs_F_error_Gauss_difference": 1.5053607763529588e-14,
+        "quadrature_max_order": 256
+      }
+    },
+    {
+      "k_nm_inverse": 0.575,
+      "w_k": 0.22878523069459955,
+      "charge_raw_dimensionless": 2.5592331141153846e-06,
+      "charge_normalized_dimensionless": 2.6302247647218917e-06,
+      "K_numerator_sq": 1.29639911261969e-09,
+      "K_denominator_sq": 1.2933018753715098e-06,
+      "K_trusted_numerator_sq": 8.253314847323741e-10,
+      "K_physical_numerator_sq": 1.888194955597879e-13,
+      "K_physical_denominator_sq": 1.8836838542802617e-10,
+      "state_nodal": {
+        "r_sum": 0.0010910421606262141,
+        "eigenvalues": [
+          0.9975795244927217,
+          0.9987236778723836,
+          0.9994223751278739,
+          0.9994530535812005,
+          0.9997003013559994,
+          0.9997382641010636,
+          0.9997680834565553
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.001042924712513937,
+        "eigenvalues": [
+          0.9976646073072012,
+          0.9988093185548401,
+          0.9994328033886427,
+          0.9994930946585675,
+          0.9997332185726335,
+          0.9997688630104573,
+          0.99980302106877
+        ],
+        "abs_F_error_Gauss_difference": 1.3993276367748508e-14,
+        "quadrature_max_order": 64
+      }
+    },
+    {
+      "k_nm_inverse": 0.6,
+      "w_k": 0.11812280932601607,
+      "charge_raw_dimensionless": 1.2799006375115057e-06,
+      "charge_normalized_dimensionless": 1.316574388027563e-06,
+      "K_numerator_sq": 2.4015072730420733e-09,
+      "K_denominator_sq": 1.2940321511552955e-06,
+      "K_trusted_numerator_sq": 1.1279278546413205e-09,
+      "K_physical_numerator_sq": 1.8059170424182385e-13,
+      "K_physical_denominator_sq": 9.731033262886693e-11,
+      "state_nodal": {
+        "r_sum": 0.0011031702623711635,
+        "eigenvalues": [
+          0.9972348802378452,
+          0.9997126887658874,
+          0.9997713476052256,
+          1.0001814898795065,
+          1.0002744555169716,
+          1.0004845043691593,
+          1.0006286227339367
+        ]
+      },
+      "state_affine_inverse": {
+        "r_sum": 0.0012020754801008102,
+        "eigenvalues": [
+          0.9974794707399286,
+          0.9997180046009275,
+          1.0001219508022268,
+          1.000267403226431,
+          1.000307625790479,
+          1.0006233001815164,
+          1.0017643117173922
+        ],
+        "abs_F_error_Gauss_difference": 4.2179225053828224e-14,
+        "quadrature_max_order": 32
+      }
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "convention": "S-orthonormalized principal eigenstates of the central H(k=0) block",
+  "publication_curve_sha256": "a6679df4cc50e177be4b4ebb6ad0a6011e1ece9f7152820b67980565fbb4f5c7",
+  "archive_spec_sha256": "2c245d89c4bb295678db759f49bbd369d9b986f9d75fcd5dbf816585ed05a7bd",
+  "central_eigenvalues_meV": [
+    -26.298857420548266,
+    4.272018011905183,
+    15.14935021640377,
+    48.745252040974385,
+    96.61210441636665,
+    163.65697456596502,
+    209.18648602535757,
+    248.18104054099854,
+    327.9893166129828,
+    364.4611698731332,
+    456.6447836305999
+  ],
+  "ranked_by_probability": [
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "single_shift_from_model_to_article_nm": -20.088888888888896,
+      "mean_probability_cosine": 0.906705984872795,
+      "probability_cosine": {
+        "u": 0.9876061375486458,
+        "l": 0.9637858582401846,
+        "e": 0.8070541774451064,
+        "i": 0.868377766257243
+      },
+      "energy_offset_model_minus_article_meV": -9.794484287816232,
+      "energy_rms_after_offset_meV": 1.789550157723687
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 3,
+        "l": 2,
+        "e": 7,
+        "i": 4
+      },
+      "single_shift_from_model_to_article_nm": -20.189333333333337,
+      "mean_probability_cosine": 0.8634711054110787,
+      "probability_cosine": {
+        "u": 0.9903673951614113,
+        "l": 0.959661066216853,
+        "e": 0.631864397770753,
+        "i": 0.871991562495298
+      },
+      "energy_offset_model_minus_article_meV": 49.076851573660235,
+      "energy_rms_after_offset_meV": 102.34666090133076
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 3,
+        "l": 2,
+        "e": 8,
+        "i": 4
+      },
+      "single_shift_from_model_to_article_nm": -20.59111111111112,
+      "mean_probability_cosine": 0.8502589441057617,
+      "probability_cosine": {
+        "u": 0.9939360019736965,
+        "l": 0.9301030176690891,
+        "e": 0.6033247975791126,
+        "i": 0.8736719592011486
+      },
+      "energy_offset_model_minus_article_meV": 58.82549020257048,
+      "energy_rms_after_offset_meV": 119.22967393267396
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 3,
+        "l": 2,
+        "e": 9,
+        "i": 4
+      },
+      "single_shift_from_model_to_article_nm": -20.189333333333337,
+      "mean_probability_cosine": 0.8490654943343952,
+      "probability_cosine": {
+        "u": 0.9903673951614113,
+        "l": 0.959661066216853,
+        "e": 0.5742419534640187,
+        "i": 0.871991562495298
+      },
+      "energy_offset_model_minus_article_meV": 78.77755922056654,
+      "energy_rms_after_offset_meV": 153.78477766047902
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 3,
+        "l": 1,
+        "e": 2,
+        "i": 4
+      },
+      "single_shift_from_model_to_article_nm": -20.490666666666673,
+      "mean_probability_cosine": 0.8394777088773707,
+      "probability_cosine": {
+        "u": 0.9942118640359708,
+        "l": 0.7729584487695436,
+        "e": 0.7155337473628459,
+        "i": 0.8752067753411222
+      },
+      "energy_offset_model_minus_article_meV": -9.794484287816232,
+      "energy_rms_after_offset_meV": 21.057395962742135
+    }
+  ],
+  "ranked_by_relative_energy": [
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "single_shift_from_model_to_article_nm": -20.088888888888896,
+      "mean_probability_cosine": 0.906705984872795,
+      "probability_cosine": {
+        "u": 0.9876061375486458,
+        "l": 0.9637858582401846,
+        "e": 0.8070541774451064,
+        "i": 0.868377766257243
+      },
+      "energy_offset_model_minus_article_meV": -9.794484287816232,
+      "energy_rms_after_offset_meV": 1.789550157723687
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 2,
+        "l": 3,
+        "e": 1,
+        "i": 4
+      },
+      "single_shift_from_model_to_article_nm": -20.189333333333337,
+      "mean_probability_cosine": 0.5700457831900986,
+      "probability_cosine": {
+        "u": 0.2823450525468502,
+        "l": 0.3218942871593516,
+        "e": 0.8039522305588948,
+        "i": 0.871991562495298
+      },
+      "energy_offset_model_minus_article_meV": -9.794484287816232,
+      "energy_rms_after_offset_meV": 8.840096642910876
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 4,
+        "l": 3,
+        "e": 2,
+        "i": 5
+      },
+      "single_shift_from_model_to_article_nm": -11.752000000000002,
+      "mean_probability_cosine": 0.5868803324368661,
+      "probability_cosine": {
+        "u": 0.7934530764375813,
+        "l": 0.7563438653982837,
+        "e": 0.7753964326970406,
+        "i": 0.022327955214558888
+      },
+      "energy_offset_model_minus_article_meV": 20.933256171412495,
+      "energy_rms_after_offset_meV": 11.44282685571397
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 4,
+        "l": 2,
+        "e": 3,
+        "i": 5
+      },
+      "single_shift_from_model_to_article_nm": -20.289777777777786,
+      "mean_probability_cosine": 0.5816939858782338,
+      "probability_cosine": {
+        "u": 0.5500890162553701,
+        "l": 0.9542338368943669,
+        "e": 0.7405996862492581,
+        "i": 0.08185340411394042
+      },
+      "energy_offset_model_minus_article_meV": 20.933256171412495,
+      "energy_rms_after_offset_meV": 16.95784794704113
+    },
+    {
+      "indices_in_ascending_energy_from_1": {
+        "u": 4,
+        "l": 3,
+        "e": 1,
+        "i": 5
+      },
+      "single_shift_from_model_to_article_nm": -12.55555555555556,
+      "mean_probability_cosine": 0.5699254192658897,
+      "probability_cosine": {
+        "u": 0.8757441074120536,
+        "l": 0.7038398128830298,
+        "e": 0.6727136082182258,
+        "i": 0.027404148550249658
+      },
+      "energy_offset_model_minus_article_meV": 13.290537313299135,
+      "energy_rms_after_offset_meV": 17.290036709471558
+    }
+  ]
+}

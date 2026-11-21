@@ -1,0 +1,154 @@
+{
+  "model": ".build/fath54-20261119/attempt02/work/09-iterator/B641-continue128/model.h5",
+  "state": ".build/fath54-20261119/attempt02/work/09-iterator/B641-continue128/checkpoint-0129/state.h5",
+  "kernel_source": ".build/fath54-20261119/attempt02/work/02-lo-b/normalized-LO-641.c128",
+  "kernel_model": ".build/fath54-20261119/attempt02/work/09-iterator/B641-continue128/model.h5",
+  "kernel_array_sha256": "45f989d4e925135c1d5e61e6ae9bd603a7d3858bb06de178de20577e4be55df1",
+  "qK": 0.008212022477612442,
+  "LO_energy_meV": 36.7,
+  "bath_K": 10.0,
+  "bose_occupation": 3.191641179390564e-19,
+  "kernel_bilinear_reciprocity_relative": 9.729112248195833e-17,
+  "fresh_reference": ".build/fath54-20261119/attempt02/work/09-iterator/B641-continue128/checkpoint-0129/fresh.h5",
+  "diagnostic_equilibrium_KMS_only": [
+    {
+      "temperature_K": 10.0,
+      "mu_meV": 6.6,
+      "energy_range_meV": [
+        5.400000000000023,
+        7.800000000000022
+      ],
+      "energy_count": 13,
+      "momentum_count": 25,
+      "bose_occupation": 3.191641179390564e-19,
+      "schemes": {
+        "separate_fermi_at_requested_E": {
+          "max_relative_matrix_KMS_defect": 3.724213903628414e-15,
+          "worst_energy_meV": 5.400000000000023,
+          "worst_k_index": 15,
+          "worst_denominator_frobenius": 1.6809003602000798e-20,
+          "absolute_max_defect_frobenius": 2.4402491115757287e-34,
+          "all_E_k_relative_frobenius": 1.5135953293755671e-15
+        },
+        "interpolate_occupied_and_empty_nodal_products": {
+          "max_relative_matrix_KMS_defect": 0.05255853799189148,
+          "worst_energy_meV": 5.400000000000023,
+          "worst_k_index": 17,
+          "worst_denominator_frobenius": 1.5295625220834008e-20,
+          "absolute_max_defect_frobenius": 1.5736041072464827e-21,
+          "all_E_k_relative_frobenius": 0.011077699494237416
+        },
+        "frozen_A_resample_0.16_meV": {
+          "max_relative_matrix_KMS_defect": 0.012599774205354252,
+          "worst_energy_meV": 5.600000000000023,
+          "worst_k_index": 10,
+          "worst_denominator_frobenius": 1.8779173726253823e-20,
+          "absolute_max_defect_frobenius": 9.656403406686353e-22,
+          "all_E_k_relative_frobenius": 0.005240544067867629
+        },
+        "frozen_A_resample_0.10_meV": {
+          "max_relative_matrix_KMS_defect": 2.7322833252974056e-14,
+          "worst_energy_meV": 6.600000000000023,
+          "worst_k_index": 24,
+          "worst_denominator_frobenius": 3.910896347287749e-20,
+          "absolute_max_defect_frobenius": 2.5705191685792612e-33,
+          "all_E_k_relative_frobenius": 1.489251301170612e-14
+        },
+        "frozen_A_resample_0.08_meV": {
+          "max_relative_matrix_KMS_defect": 0.006427949471764593,
+          "worst_energy_meV": 5.400000000000023,
+          "worst_k_index": 17,
+          "worst_denominator_frobenius": 1.4643063558441496e-20,
+          "absolute_max_defect_frobenius": 1.8405873612507147e-22,
+          "all_E_k_relative_frobenius": 0.001314230249322856
+        },
+        "frozen_A_resample_0.04_meV": {
+          "max_relative_matrix_KMS_defect": 0.0021999320186890385,
+          "worst_energy_meV": 5.400000000000023,
+          "worst_k_index": 17,
+          "worst_denominator_frobenius": 1.4586527295488316e-20,
+          "absolute_max_defect_frobenius": 6.280477533892815e-23,
+          "all_E_k_relative_frobenius": 0.00044377456095125785
+        }
+      }
+    },
+    {
+      "temperature_K": 300.0,
+      "mu_meV": 6.6,
+      "energy_range_meV": [
+        5.400000000000023,
+        7.800000000000022
+      ],
+      "energy_count": 13,
+      "momentum_count": 25,
+      "bose_occupation": 0.3189237132212373,
+      "schemes": {
+        "separate_fermi_at_requested_E": {
+          "max_relative_matrix_KMS_defect": 1.0639404396359886e-15,
+          "worst_energy_meV": 7.600000000000022,
+          "worst_k_index": 5,
+          "worst_denominator_frobenius": 0.0532135102075995,
+          "absolute_max_defect_frobenius": 6.629768310894946e-17,
+          "all_E_k_relative_frobenius": 3.776886050262258e-16
+        },
+        "interpolate_occupied_and_empty_nodal_products": {
+          "max_relative_matrix_KMS_defect": 0.0017331436281325578,
+          "worst_energy_meV": 5.400000000000023,
+          "worst_k_index": 17,
+          "worst_denominator_frobenius": 0.011633395713529414,
+          "absolute_max_defect_frobenius": 4.5248563959196824e-05,
+          "all_E_k_relative_frobenius": 0.000351669905535741
+        },
+        "frozen_A_resample_0.16_meV": {
+          "max_relative_matrix_KMS_defect": 0.0004899662686503075,
+          "worst_energy_meV": 5.600000000000023,
+          "worst_k_index": 10,
+          "worst_denominator_frobenius": 0.01526141819070596,
+          "absolute_max_defect_frobenius": 2.7168551872238573e-05,
+          "all_E_k_relative_frobenius": 0.00016841886791870862
+        },
+        "frozen_A_resample_0.10_meV": {
+          "max_relative_matrix_KMS_defect": 1.7159966682138855e-15,
+          "worst_energy_meV": 5.800000000000023,
+          "worst_k_index": 6,
+          "worst_denominator_frobenius": 0.03147412204777737,
+          "absolute_max_defect_frobenius": 8.066291574213526e-17,
+          "all_E_k_relative_frobenius": 6.228486596810485e-16
+        },
+        "frozen_A_resample_0.08_meV": {
+          "max_relative_matrix_KMS_defect": 0.0002080510734558251,
+          "worst_energy_meV": 5.400000000000023,
+          "worst_k_index": 17,
+          "worst_denominator_frobenius": 0.011623911912522409,
+          "absolute_max_defect_frobenius": 5.427258319859273e-06,
+          "all_E_k_relative_frobenius": 4.218838960765078e-05
+        },
+        "frozen_A_resample_0.04_meV": {
+          "max_relative_matrix_KMS_defect": 6.938744241249935e-05,
+          "worst_energy_meV": 5.400000000000023,
+          "worst_k_index": 17,
+          "worst_denominator_frobenius": 0.011623050751028072,
+          "absolute_max_defect_frobenius": 1.80994229814411e-06,
+          "all_E_k_relative_frobenius": 1.406688525140489e-05
+        }
+      }
+    }
+  ],
+  "driven_event_integrals": {
+    "incoming_emission_cm2_s": 1.0709828751441364e+21,
+    "outgoing_emission_cm2_s": 1.070982875144165e+21,
+    "incoming_absorption_cm2_s": 40489.13181066507,
+    "outgoing_absorption_cm2_s": 40489.13181066509,
+    "outgoing_absorption_over_emission": 3.7805582843903873e-17,
+    "particle_relative_gross": 1.333751708188584e-14,
+    "absolute_local_collision_cm2_s": 1.1365688312870481e+21,
+    "minimum_node_event_integrand": 0.0,
+    "power_from_energy_moment_W_m2": -62972.40531754226,
+    "power_from_emission_minus_absorption_W_m2": -62973.66718350343,
+    "moment_minus_event_power_W_m2": 1.261865961168951,
+    "fresh_L_G_relative_frobenius_error": [
+      1.2372338839012795e-14,
+      7.705063660283089e-15
+    ]
+  }
+}
