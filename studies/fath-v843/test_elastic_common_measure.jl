@@ -1,5 +1,5 @@
 using Test
-include("direct_continuum.jl")
+include("impurity_spectral_control.jl")
 let
     energy=[-2.0,-0.5,0.5,2.0]
     we=[0.75,1.25,1.25,0.75]
@@ -50,10 +50,25 @@ let
         @test combined["direct_RLG"].profile_A_cm2 ≈ arms["direct_RLG"].profile_A_cm2 atol=1e-12
         @test combined["direct_RLG"].spectral_defect_by_ring ≈ arms["direct_RLG"].spectral_defect_by_ring atol=1e-12
     end
-    pset=array_breakpoints(p,prepared_arms(p,seed,result.source),(-0.9,1.4),1,1)
+    prepared=prepared_arms(p,seed,result.source)
+    pset=array_breakpoints(p,prepared,(-0.9,1.4),1,1)
     nodes,weights=shared_measure(pset,3)
     @test sum(weights) ≈ 4.0 atol=1e-12
     @test all(>(0),weights)
-    @test length(canonical_on_shared_measure(p,prepared_arms(p,seed,result.source),nodes,weights,1)["raw_profile_A_cm2"]) == 3
+    @test length(canonical_on_shared_measure(p,prepared,nodes,weights,1)["raw_profile_A_cm2"]) == 3
+    work=LT.TailWorkspace(p.geo)
+    e=[0.35]
+    query=LT.shifted_queries(p.geo,e)
+    table=DirectImpurity.direct_convolution(p,prepared.seed_total,prepared.anchor,query,a,c)
+    fixed=LT.sample_packed_ring(LT.CausalRows(p.en,query),
+        prepared.fresh_other[:,:,:,1],prepared.anchor_other[:,:,1])
+    direct=fixed[:,:,:,1,:]+table.fields[:,:,:,table.location[1,:],1]
+    LT.sample_node!(work,p.geo,only(e),p.h[:,:,1],p.hops[:,1],direct)
+    @test only(only(candidate_inverse(p,prepared,e,(a,c),[1],1))) ≈ work.d atol=1e-13
+    poles=candidate_poles(p,prepared,(a,c),[1],pset,1)
+    @test all(x->x.width>0 && x.residual<1e-8,poles)
+    protected=protected_rules(p,poles,reference_poles(p,prepared,[1],1),pset,9)
+    @test all(>(0),protected.weights)
+    @test sum(protected.weights) ≈ 4.0 atol=1e-12
     println("Elastic L/G retained for both kernels, common measure and streamed accumulation passed.")
 end

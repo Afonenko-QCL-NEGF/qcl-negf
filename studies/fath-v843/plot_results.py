@@ -77,6 +77,39 @@ def fath_profile(path, output):
     plt.close(figure)
 
 
+def fath_convergence(path, output):
+    report = load_json(path)
+    history = report["history"]
+    it = [row["iteration"] for row in history]
+    figure, (residuals, current) = plt.subplots(2, 1, figsize=(7.8, 6), sharex=True,
+                                               layout="constrained")
+    residuals.semilogy(it, [row["rK"] for row in history], color="#3458a8", label=r"$r_K$")
+    residuals.semilogy(it, [row["rSigma"] for row in history], color="#a43532",
+                       label=r"max $r_\Sigma$")
+    residuals.semilogy(it, [max(abs(row["raw_lambda"]-1), 1e-15) for row in history],
+                       color="#2d736d", label=r"$|\lambda-1|$")
+    residuals.axhline(1e-8, color="#637b9b", ls=":", label="Строгий допуск")
+    residuals.set_ylabel("Относительная невязка")
+    residuals.set_title("Fath при 54 мВ, положительная энергетическая мера", loc="left")
+    residuals.legend(frameon=False, loc="best", ncol=2)
+    spatial = [row["spatial"] for row in history]
+    current.plot(it, [row["max_deviation_from_mean_A_cm2"] for row in spatial],
+                 color="#172d43", label="Отклонение профиля")
+    current.plot(it, [row["target_tolerance_A_cm2"] for row in spatial],
+                 color="#637b9b", ls=":", label="Допуск профиля")
+    selected = report["selected_iteration"]
+    observed = report["observed"]["current"]["max_deviation_from_mean_A_cm2"]
+    current.scatter([selected], [observed], marker="D", s=32, color="#a43532",
+                    label="Независимый GL20", zorder=5)
+    current.set(xlabel="Номер свежей карты", ylabel="Отклонение тока, А/см²")
+    current.legend(frameon=False, loc="best")
+    for ax in (residuals, current):
+        axes_style(ax)
+    residuals.yaxis.set_minor_locator(matplotlib.ticker.LogLocator(base=10, subs="auto"))
+    figure.savefig(output, dpi=200)
+    plt.close(figure)
+
+
 def v843_current(numerics, output):
     figure, ax = plt.subplots(figsize=(8.5, 5), layout="constrained")
     published = load_rows(ROOT / "jonasson-figure-2.csv")
@@ -122,11 +155,14 @@ def main():
     parser.add_argument("fath_report", type=Path)
     parser.add_argument("v843_comparison", type=Path)
     parser.add_argument("output_directory", type=Path)
+    parser.add_argument("--fath-continuation", type=Path)
     options = parser.parse_args()
     options.output_directory.mkdir(parents=True, exist_ok=True)
     fath_profile(options.fath_report, options.output_directory / "fath-spatial-balance.png")
     v843_current(load_json(options.v843_comparison)["cases"],
                  options.output_directory / "v843-current-field.png")
+    if options.fath_continuation:
+        fath_convergence(options.fath_continuation, options.output_directory / "fath-convergence.png")
 
 
 if __name__ == "__main__":
