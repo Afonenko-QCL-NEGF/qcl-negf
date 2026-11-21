@@ -29,7 +29,7 @@ function strictly_qualified(row)
         row.spatial.max_deviation_from_mean_A_cm2 <= row.spatial.target_tolerance_A_cm2
 end
 
-function run_continuation(directory,maps,alpha,measure,workers)
+function run_continuation(directory,maps,alpha,measure,workers; selected_control=nothing)
     maps >= 1 || throw(ArgumentError("requested map count must be positive"))
     0 < alpha <= 1 || throw(ArgumentError("fresh-source fraction must be in (0,1]"))
     measure in ("projected","normalized-nodal") || throw(ArgumentError("unknown collision measure"))
@@ -76,7 +76,7 @@ function run_continuation(directory,maps,alpha,measure,workers)
     independent_accepted = quadrature_difference <= observed.current.target_tolerance_A_cm2 &&
         observed.current.max_deviation_from_mean_A_cm2 <= observed.current.target_tolerance_A_cm2 &&
         lagged.weighted_rK_Q<1e-8
-    return (;
+    report = (;
         schema="qcl-negf-linked-continuation/v1",
         identity=data.identity,
         core=Runner._linked_package_identity(Runner.QCLNEGF),
@@ -92,6 +92,11 @@ function run_continuation(directory,maps,alpha,measure,workers)
         observed, lagged,
         stationary=confirmations>=3 && independent_accepted,
     )
+    isnothing(selected_control) && return report
+    controls = selected_control(data,fresh_source.previous,observed)
+    stationary = report.stationary && all((controls.energy.profile_max_difference_A_cm2,
+        controls.radial.profile_max_difference_A_cm2) .<= observed.current.target_tolerance_A_cm2)
+    return merge(report,(;fixed_grid_stationary=report.stationary,paired_controls=controls,stationary))
 end
 
 if abspath(PROGRAM_FILE)==abspath(@__FILE__)

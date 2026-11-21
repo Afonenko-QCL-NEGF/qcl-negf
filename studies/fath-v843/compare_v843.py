@@ -19,6 +19,12 @@ def read(path):
 
 def resolved(path, selection=None):
     document = read(path)
+    if selection in ("energy", "radial"):
+        selected = document["paired_controls"][selection]
+        observation = selected["observation"]
+        projected = selected["summary"]["projected_fresh"]["raw_profile_A_cm2"]
+        difference = max(abs(a - b) for a, b in zip(projected, observation["current_A_cm2"], strict=True))
+        return observation, difference, False
     if "measured" in document:
         metrics = document["measured"]
         return metrics["resolved"], metrics["independent_vs_production_A_cm2"], document["stationary"]
@@ -109,10 +115,29 @@ def compare_temperature(observation):
     }
 
 
+def transport_status(document, measured):
+    status = {
+        "raw_lambda": measured["raw_lambda"],
+        "raw_sheet_cm2": measured["raw_sheet_cm2"],
+        "spectral_energy_budget": measured.get("spectral_energy_budget"),
+    }
+    if "history" in document:
+        row = document["history"][document["selected_iteration"] - 1]
+        status.update({name: row[name] for name in
+                       ("rK", "rSigma", "maximum_spectral_defect", "iteration")})
+        status["independent_rK_Q"] = document["lagged"]["weighted_rK_Q"]
+        status["n_terminal_maps"] = len(document["history"])
+        status["strict_confirmations_at_terminal"] = document["history"][-1]["strict_confirmations"]
+        status["fixed_grid_stationary"] = document.get("fixed_grid_stationary")
+    return status
+
+
 def case(reference, directory):
     field = reference["field_kV_cm"]
     primary = reference["primary"]
-    measured, quadrature, stationary = resolved(directory / primary["file"], primary.get("selection"))
+    primary_path = directory / primary["file"]
+    measured, quadrature, stationary = resolved(primary_path, primary.get("selection"))
+    terminal = read(primary_path)
     current = measured["current"]
     mean = current["mean_internal_A_cm2"]
     alternatives = []
@@ -127,7 +152,9 @@ def case(reference, directory):
         alternatives.append({**source, "change_in_mean_A_cm2": changed_mean - compared_mean,
                              "own_quadrature_difference_A_cm2": change_quadrature,
                              "profile_range_A_cm2": changed["current"]["full_range_A_cm2"]})
-    sensitivity = max([quadrature, *(max(abs(x["change_in_mean_A_cm2"]),
+    recent = [row["spatial"]["mean_internal_A_cm2"] for row in terminal.get("history", [])[-5:]]
+    iteration_sensitivity = max((abs(value - mean) for value in recent), default=0.0)
+    sensitivity = max([quadrature, iteration_sensitivity, *(max(abs(x["change_in_mean_A_cm2"]),
                                          x["own_quadrature_difference_A_cm2"]) for x in alternatives)])
     observed = published_current(field)
     negf_bounds = [value for name in ("NEGF50", "NEGF50_original_raster")
@@ -141,6 +168,8 @@ def case(reference, directory):
         "spatial_tolerance_A_cm2": current["target_tolerance_A_cm2"],
         "observed_sensitivity_A_cm2": sensitivity,
         "primary_quadrature_difference_A_cm2": quadrature,
+        "iterative_sensitivity_last_five_A_cm2": iteration_sensitivity,
+        "transport_status": transport_status(terminal, measured),
         "sensitivity": alternatives,
         "published": observed,
         "published_negf_digitization_envelope_A_cm2": [min(negf_bounds), max(negf_bounds)],
