@@ -99,3 +99,21 @@ julia --threads=6,0 --gcthreads=1,0 --project=runner "$study/direct_continuum.jl
 julia --threads=5,0 --gcthreads=1,0 --project=runner "$study/profile_experiment.jl" \
   "$F25" "$OUT/fath-F25-profile.json" 5
 ```
+
+```sh
+# fe8c37e
+julia --threads=3,0 --gcthreads=1,0 --project=runner "$study/impurity_experiment.jl" \
+  "$F25" "$OUT/fath-F25-impurity.json" 3 25:26 26:27
+```
+
+```sh
+# fe8c37e
+julia --threads=6,0 --gcthreads=1,0 --project=runner "$study/continuation.jl" \
+  "$F13" "$OUT/fath-F13-positive-long.json" 48 0.35 projected 6
+# df77f18
+julia --threads=5,0 --gcthreads=1,0 --project=runner "$study/impurity_spectral_control.jl" \
+  "$F13" "$F13_REFERENCE" "$fresh" "$OUT/fath-F13-impurity-spectral.json" 5
+# текущая версия драйвера положительного отложенного входа
+julia --threads=6,0 --gcthreads=1,0 --project=runner "$study/projected_holdout.jl" \
+  "$F25" "$OUT/fath-F25-projected.json" 6
+```
