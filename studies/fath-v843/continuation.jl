@@ -58,7 +58,7 @@ function run_continuation(directory,maps,alpha,measure,workers)
             row.spatial.max_deviation_from_mean_A_cm2 / max(abs(row.spatial.mean_internal_A_cm2),1.0))
         if score < best_score || confirmations>=3
             best_score = score
-            fresh_source = (;iteration,source=image.source)
+            fresh_source = (;iteration,source=image.source,previous=copy(seed))
         end
         confirmations>=3 && break
         # A convex combination of the two L/G pairs keeps both kinetic sources
@@ -66,11 +66,16 @@ function run_continuation(directory,maps,alpha,measure,workers)
         seed .= (1-alpha) .* seed .+ alpha .* image.source
     end
     observed = spatial_balance(problem,fresh_source.source,widths;
-        workers,energy_rule=independent_energy_rule)
+        workers,energy_rule=independent_energy_rule,current_cuts=current_midpoints)
     row = history[fresh_source.iteration]
+    pair=row.fermionic_pair
+    lagged=spatial_balance(problem,fresh_source.previous,widths;
+        collision_sources=fresh_source.source,workers,energy_rule=independent_energy_rule,
+        coefficients=(pair.a,pair.c),current_cuts=current_midpoints)
     quadrature_difference = maximum(abs.(row.current_profile_A_cm2 .- observed.current_A_cm2))
     independent_accepted = quadrature_difference <= observed.current.target_tolerance_A_cm2 &&
-        observed.current.max_deviation_from_mean_A_cm2 <= observed.current.target_tolerance_A_cm2
+        observed.current.max_deviation_from_mean_A_cm2 <= observed.current.target_tolerance_A_cm2 &&
+        lagged.weighted_rK_Q<1e-8
     return (;
         schema="qcl-negf-linked-continuation/v1",
         identity=data.identity,
@@ -84,7 +89,7 @@ function run_continuation(directory,maps,alpha,measure,workers)
         current_midpoints_nm=current_midpoints,history,
         selected_iteration=fresh_source.iteration,
         independent_current_difference_A_cm2=quadrature_difference,
-        observed,
+        observed, lagged,
         stationary=confirmations>=3 && independent_accepted,
     )
 end

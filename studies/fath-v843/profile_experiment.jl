@@ -51,19 +51,20 @@ function run_experiment(directory, workers, check_rotated)
         selected_rows=true, projection_for_collision=false, workers)
     println(stderr, "fresh linked map complete")
     flush(stderr)
-    nodal = spatial_balance(p, fresh.source, widths; workers)
+    nodal = spatial_balance(p, fresh.source, widths; workers, current_cuts=cuts)
     projected = fresh.summary["projected_fresh"]
     archived_nodal = fresh.summary["fresh"]["raw_profile_A_cm2"]
     maxdiff(a,b) = maximum(abs.(a .- b))
     nodal_agreement = maxdiff(archived_nodal, nodal.current_A_cm2)
     nodal_agreement <= max(1e-8, 1e-10maximum(abs, archived_nodal)) ||
         error("independent nodal profile differs from the solver observation")
-    resolved = spatial_balance(p, fresh.source, widths; workers, energy_rule=independent_energy_rule)
+    resolved = spatial_balance(p, fresh.source, widths;
+        workers, energy_rule=independent_energy_rule, current_cuts=cuts)
     println(stderr, "independent resolved profile complete")
     flush(stderr)
     pair = fresh.summary["input_pair_projection"]
     lagged = spatial_balance(p, saved.seed, widths;
-        collision_sources=fresh.source, workers, energy_rule=independent_energy_rule,
+        collision_sources=fresh.source, workers, energy_rule=independent_energy_rule, current_cuts=cuts,
         coefficients=(pair["a"],pair["c"]))
     println(stderr, "lagged balance complete")
     flush(stderr)

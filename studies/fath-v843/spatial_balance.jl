@@ -65,10 +65,14 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
     kinetic_difference = 0.0
     kinetic_reference = 0.0
     contributions = [zeros(ComplexF64, modes, modes) for _ in LT.COLLISION_CHANNELS]
+    energy_contributions = [zero(c) for c in contributions]
     coherent = zeros(ComplexF64, modes, modes)
     kinetic = zeros(ComplexF64, modes, modes)
+    energy_coherent = zero(coherent)
+    energy_kinetic = zero(kinetic)
     occupation = zeros(ComplexF64, modes, modes)
     current = zeros(p.nz+1)
+    energy_current = zero(current)
     particle_exchange = zeros(length(contributions))
     electron_power = zeros(length(contributions))
     radial_number = 0.0
@@ -92,14 +96,17 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
             p.const_by_channel[:, :, k, j]) for j in eachindex(contributions)]
         for (i,node_energy) in enumerate(points)
             weight = radial * measure[window[i]]
+            energy_weight = node_energy*weight
             @views LT.sample_node!(workspace, p.geo, node_energy, p.h[:, :, k],
                 p.hops[:, k], image_source[:, :, :, i, :])
             @views retarded, lesser, greater = (workspace.mode_green[:, :, j] for j in 1:3)
             current .+= weight .* @view(workspace.bond_profile[:, 1])
+            energy_current .+= energy_weight .* @view(workspace.bond_profile[:, 1])
             radial_number += weight * imag(tr(@view workspace.local_green[:, :, 2]))
             occupation .-= im * weight .* lesser
             mul!(hpart, dual_h, lesser)
             add_hermitian_part!(coherent, hpart, weight)
+            add_hermitian_part!(energy_coherent, hpart, energy_weight)
             node_residual .= hpart .+ hpart'
             coherent_magnitude = norm(node_residual)
             mul!(gain_greater, greater, gain_measure)
@@ -116,6 +123,7 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
                 mul!(product,sr,lesser)
                 mul!(raw_term,dual,product,-1,1)
                 add_hermitian_part!(contributions[j], raw_term, weight)
+                add_hermitian_part!(energy_contributions[j], raw_term, energy_weight)
                 node_residual .-= raw_term .+ raw_term'
                 isnothing(coefficients) || (sum_lesser .+= sl)
             end
@@ -130,6 +138,7 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
                 kinetic_reference += weight*sum(abs2,previous_pair)
             end
             kinetic .+= weight .* node_residual
+            energy_kinetic .+= energy_weight .* node_residual
             residual = norm(node_residual)
             max_coherent_ratio = max(max_coherent_ratio, residual / max(coherent_magnitude, 1e-14))
             if synchronized
@@ -140,6 +149,7 @@ function ring_balance(p, state_total, anchor, collision_sources, dual, center_me
     transverse_operator = dual * (@view(p.h[:, :, k]) - @view(p.h[:, :, 1]))
     transverse_energy = real(sum((transverse_operator * occupation) .* transpose(center_metric)))
     return (;current, coherent, kinetic, occupation, contributions, particle_exchange, electron_power,
+        energy_current, energy_coherent, energy_kinetic, energy_contributions,
         radial_number, transverse_energy, max_dyson_residual, max_coherent_ratio,
         kinetic_difference,kinetic_reference)
 end
@@ -152,7 +162,7 @@ All terms use one positive energy and radial quadrature.
 """
 function spatial_balance(problem, state_sources, widths;
         collision_sources = state_sources, energy_rule = nothing, workers = 1,
-        progress = (_)->nothing, coefficients = nothing)
+        progress = (_)->nothing, coefficients = nothing, current_cuts = nothing)
     p = problem
     length(widths) == p.nz-1 && all(>(0), widths) ||
         throw(ArgumentError("weights must match the positive interior face widths"))
@@ -190,6 +200,32 @@ function spatial_balance(problem, state_sources, widths;
     kinetic = scale .* diagonal_in_coordinates(sum(x.kinetic for x in ring_results), center)
     stencil_gap = diff(physical_profile) - h
     lifted_closure = diff(physical_profile) - stencil_gap - kinetic - sum(collision)
+    energy_scale=1e3scale  # E₀/e = 0.1 V and A/cm² → A/m².
+    energy_flux=energy_scale .* sum(x.energy_current for x in ring_results)
+    energy_h=energy_scale .* diagonal_in_coordinates(sum(x.energy_coherent for x in ring_results),center)
+    energy_kinetic=energy_scale .* diagonal_in_coordinates(sum(x.energy_kinetic for x in ring_results),center)
+    energy_gap=diff(energy_flux) - energy_h
+    energy_collisions=[energy_scale .* diagonal_in_coordinates(
+        sum(x.energy_contributions[j] for x in ring_results),center) for j in eachindex(collision)]
+    energy_closure=diff(energy_flux)-energy_gap-energy_kinetic-sum(energy_collisions)
+    local_energy = if isnothing(current_cuts)
+        nothing
+    else
+        cuts = current_cuts
+        length(cuts)==p.nz+1 && all(>(0),diff(cuts)) ||
+            throw(ArgumentError("physical cut coordinates do not match energy flux"))
+        cell_fraction = (cuts .- first(cuts)) ./ (last(cuts)-first(cuts))
+        potential_shift = 0.1p.geo.voltage .* cell_fraction
+        avg_faces(x) = (x[1:end-1] .+ x[2:end])./2
+        local_flux = energy_flux .+ 1e4 .* potential_shift .* physical_profile
+        field_work = 1e4dot(diff(potential_shift),avg_faces(physical_profile))
+        offset_work = 1e4dot(avg_faces(potential_shift),diff(physical_profile))
+        (;outward_W_m2=[-first(local_flux),last(local_flux)],
+            field_work_W_m2=field_work,
+            offset_times_number_exchange_W_m2=offset_work,
+            net_relative_energy_minus_absolute_flux_and_work_W_m2=
+                last(local_flux)-first(local_flux)-(last(energy_flux)-first(energy_flux))-field_work-offset_work)
+    end
     prefix(v) = [0.0; cumsum(v)]
     radial_number = [x.radial_number for x in ring_results]
     sheet_number = sum(radial_number)
@@ -231,6 +267,16 @@ function spatial_balance(problem, state_sources, widths;
             sum(r.particle_exchange for r in ring_results))),
         carrier_power_W_m2 = Dict(string(n)=>1e3scale*x for (n,x) in zip(LT.COLLISION_CHANNELS,
             sum(r.electron_power for r in ring_results))),
+        spectral_energy_budget = (;
+            absolute_outward_W_m2=[-first(energy_flux),last(energy_flux)],
+            absolute_flux_difference_W_m2=last(energy_flux)-first(energy_flux),
+            projected_collision_power_W_m2=Dict(string(n)=>sum(v)
+                for (n,v) in zip(LT.COLLISION_CHANNELS,energy_collisions)),
+            projection_gap_W_m2=sum(energy_gap),
+            kinetic_remainder_W_m2=sum(energy_kinetic),
+            maximum_closure_error_W_m2=maximum(abs,energy_closure),
+            relative_to_local_potential=local_energy,
+        ),
     )
 end
 

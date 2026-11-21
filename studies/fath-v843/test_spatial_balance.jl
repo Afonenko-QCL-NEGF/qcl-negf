@@ -30,8 +30,9 @@ fields[1:rank,1,:,1,1] .= [0.07,0.12]
 fields[1:rank,2,:,1,1] .= [0.05,0.08]
 fields[1:rank,1,:,1,2] .= 0.01
 fields[1:rank,2,:,1,2] .= 0.02
-rotated = spatial_balance(test_problem(modal_change),fields,[1.0])
-original = spatial_balance(test_problem(I),fields,[1.0])
+cuts = [0.0,1.0,2.0]
+rotated = spatial_balance(test_problem(modal_change),fields,[1.0];current_cuts=cuts)
+original = spatial_balance(test_problem(I),fields,[1.0];current_cuts=cuts)
 @test original.maximum_exact_dyson_residual < 1e-12
 @test rotated.maximum_exact_dyson_residual < 1e-12
 @test maximum(abs.(original.spatial_projection_gap_A_cm2)) < 1e-12
@@ -40,6 +41,10 @@ original = spatial_balance(test_problem(I),fields,[1.0])
 @test original.maximum_closure_error_A_cm2 < 1e-12
 @test original.central_bands.fraction ≈ rotated.central_bands.fraction atol=1e-12
 @test original.central_bands.total_sheet_over_physical_sheet ≈ 1.0 atol=1e-12
+budget = original.spectral_energy_budget
+@test budget.absolute_outward_W_m2 ≈ rotated.spectral_energy_budget.absolute_outward_W_m2 atol=1e-12
+@test budget.maximum_closure_error_W_m2 < 1e-10
+@test abs(budget.relative_to_local_potential.net_relative_energy_minus_absolute_flux_and_work_W_m2) < 1e-10
 lagged = copy(fields)
 lagged[1, 1, :, :, 1] .*= 2
 inconsistent = spatial_balance(test_problem(I),fields,[1.0]; collision_sources=lagged)
