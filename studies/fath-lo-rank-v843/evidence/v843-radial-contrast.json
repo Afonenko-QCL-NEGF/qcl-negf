@@ -1,0 +1,105 @@
+{
+  "replay_verified": {
+    "5_rings": {
+      "profile_difference_A_cm2": 0.0,
+      "temperature_difference_K": 0.0,
+      "extractor_over_upper_difference": 0.0
+    },
+    "9_rings": {
+      "profile_difference_A_cm2": 0.0,
+      "temperature_difference_K": 0.0,
+      "extractor_over_upper_difference": 0.0
+    }
+  },
+  "conditions": {
+    "5": {
+      "current": {
+        "mean_internal_A_cm2": 1299.5995295620035,
+        "full_range_A_cm2": [
+          1077.837664613862,
+          1503.038641178538
+        ],
+        "max_deviation_from_mean_A_cm2": 221.76186494814146,
+        "max_deviation_from_left_A_cm2": 387.10961934771444,
+        "target_tolerance_A_cm2": 12.995995295620034,
+        "outward_A_cm2": [
+          -1464.9472839615764,
+          1464.4179383100231
+        ]
+      },
+      "raw_lambda": 1.004193652265649,
+      "raw_sheet_cm2": 32636293698.633587,
+      "temperature_K": 114.07970666885358,
+      "temperature_matched_four_bands_K": 113.57760531440981,
+      "matched_four_band_charge_fraction": 0.987675452338755,
+      "projected_to_physical_charge_ratio": 0.9999969765832335,
+      "extractor_over_upper": 1.9163998520199683,
+      "observer_difference_A_cm2": 7.91078491602093e-09,
+      "rK": 0.03743925371028872
+    },
+    "9": {
+      "current": {
+        "mean_internal_A_cm2": 1482.7396176412578,
+        "full_range_A_cm2": [
+          988.0224984233406,
+          1915.223548605344
+        ],
+        "max_deviation_from_mean_A_cm2": 494.71711921791723,
+        "max_deviation_from_left_A_cm2": 912.3977192484159,
+        "target_tolerance_A_cm2": 14.827396176412579,
+        "outward_A_cm2": [
+          -1900.4202176717565,
+          1899.5740044284007
+        ]
+      },
+      "raw_lambda": 0.9656306565561189,
+      "raw_sheet_cm2": 31382996338.07386,
+      "temperature_K": 117.32210478051685,
+      "temperature_matched_four_bands_K": 116.73127515502415,
+      "matched_four_band_charge_fraction": 0.9873035426475494,
+      "projected_to_physical_charge_ratio": 0.9999970672883683,
+      "extractor_over_upper": 2.09705873100235,
+      "observer_difference_A_cm2": 1.1255451681790873e-08,
+      "rK": 2.9254620652135337
+    },
+    "17": {
+      "current": {
+        "mean_internal_A_cm2": 1527.0321403831324,
+        "full_range_A_cm2": [
+          968.1273915621036,
+          1974.7918545544978
+        ],
+        "max_deviation_from_mean_A_cm2": 558.9047488210288,
+        "max_deviation_from_left_A_cm2": 994.6646610850191,
+        "target_tolerance_A_cm2": 15.270321403831325,
+        "outward_A_cm2": [
+          -1962.7920526471228,
+          1961.679779840454
+        ]
+      },
+      "raw_lambda": 0.9528048209688935,
+      "raw_sheet_cm2": 30966156681.489037,
+      "temperature_K": 145.75050252844852,
+      "temperature_matched_four_bands_K": 134.96943923837952,
+      "matched_four_band_charge_fraction": 0.9761905625268038,
+      "projected_to_physical_charge_ratio": 0.999995045374315,
+      "extractor_over_upper": 1.8032591503632909,
+      "observer_difference_A_cm2": 6.026084520271979e-09,
+      "rK": 1.367631467194129
+    }
+  },
+  "radial_steps": {
+    "5_to_9": {
+      "maximum_profile_change_A_cm2": 453.37918761611763,
+      "mean_change_A_cm2": 183.14008807925438,
+      "temperature_change_K": 3.2423981116632774,
+      "extractor_over_upper_change": 0.18065887898238153
+    },
+    "9_to_17": {
+      "maximum_profile_change_A_cm2": 127.53249191887039,
+      "mean_change_A_cm2": 44.29252274187456,
+      "temperature_change_K": 28.42839774793167,
+      "extractor_over_upper_change": -0.293799580639059
+    }
+  }
+}
