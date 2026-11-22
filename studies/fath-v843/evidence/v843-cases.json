@@ -1,0 +1,18 @@
+[
+  {
+    "field_kV_cm": 12.5,
+    "primary": {"file": "v843-f125.json"},
+    "sensitivity": [
+      {"file": "v843-f125.json", "selection": "energy"},
+      {"file": "v843-f125.json", "selection": "radial"}
+    ]
+  },
+  {
+    "field_kV_cm": 21.0,
+    "primary": {"file": "v843-f21.json"},
+    "sensitivity": [
+      {"file": "v843-f21.json", "selection": "energy"},
+      {"file": "v843-f21.json", "selection": "radial"}
+    ]
+  }
+]

@@ -117,3 +117,38 @@ julia --threads=5,0 --gcthreads=1,0 --project=runner "$study/impurity_spectral_c
 julia --threads=6,0 --gcthreads=1,0 --project=runner "$study/projected_holdout.jl" \
   "$F25" "$OUT/fath-F25-projected.json" 6
 ```
+
+## Прогоны V843
+
+Используется драйвер `fe2ee3e`. Для переменных `V843_21_COARSE`
+и `V843_125_COARSE` берутся `linked-input-q28-f21-step2` и
+`linked-input-q28-f125-step2` из `.build/fath-dupont-next/work/dupont/`.
+Все физические поля на общих узлах сопоставляются до контроля
+сеток. Полная начальная история грубой сетки заменяется
+неотрицательным консервативным переносом выбранного источника.
+
+```sh
+builder="$study/controls/v843-input/dupont/v843_linked_input.jl"
+julia --threads=5,0 --gcthreads=1,0 --project=runner "$study/v843_radial.jl" \
+  "$V843_21" "$V843_21_COARSE" "$builder" "$V843_GEOMETRY" "$OUT/v843-f21.json" 48 0.35 projected 5
+julia --threads=5,0 --gcthreads=1,0 --project=runner "$study/v843_radial.jl" \
+  "$V843_125" "$V843_125_COARSE" "$builder" "$V843_GEOMETRY" "$OUT/v843-f125.json" 48 0.35 projected 5
+```
+
+Сравнение с исходными рядами использует Python 3, а рисунки используют
+NumPy и Matplotlib. После выполнения команд скопируйте два отчёта V843
+в один каталог с `v843-cases.json`. Выход сравнения выбирается новым файлом.
+
+```sh
+python3 "$study/compare_v843.py" "$OUT/v843-cases.json" "$OUT/v843-comparison.json"
+python3 "$study/plot_results.py" "$OUT/fath-F13-profile.json" "$OUT/v843-comparison.json" "$OUT" \
+  --fath-continuation "$OUT/fath-F13-positive-long.json"
+```
+
+[Компактные отчёты, рисунки и контрольные суммы](evidence/) · [Квитанции ресурсов](evidence/run-receipts.tsv)
+
+В квитанциях V843 код 0 относится к процессу Julia. Внешний таймер
+был приостановлен на параллельной проверке сеток и возвращён
+после выхода Julia. Внешний таймер вернул 124 при обработке
+истёкшего сигнала. Оба терминальных JSON содержат выбранную
+карту и обе завершённые проверки.

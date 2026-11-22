@@ -1,0 +1,325 @@
+{
+  "schema": "qcl-negf-v843-comparison/v1",
+  "cases": [
+    {
+      "field_kV_cm": 12.5,
+      "primary": {
+        "file": "v843-f125.json"
+      },
+      "stationary": false,
+      "mean_internal_A_cm2": 229.44940744625302,
+      "resolved_min_max_A_cm2": [
+        189.89832554271837,
+        275.55992296627124
+      ],
+      "outward_A_cm2": [
+        -248.34455699650158,
+        248.31960819196118
+      ],
+      "spatial_deviation_A_cm2": 46.110515520018225,
+      "spatial_tolerance_A_cm2": 2.29449407446253,
+      "observed_sensitivity_A_cm2": 28.52326307155988,
+      "primary_quadrature_difference_A_cm2": 6.388341944330023e-08,
+      "iterative_sensitivity_last_five_A_cm2": 1.375338935990868,
+      "transport_status": {
+        "raw_lambda": 1.003914466746574,
+        "raw_sheet_cm2": 32627220169.263653,
+        "spectral_energy_budget": {
+          "absolute_outward_W_m2": [
+            -133022.3535279304,
+            21071.518150242224
+          ],
+          "absolute_flux_difference_W_m2": -111950.83537768817,
+          "projected_collision_power_W_m2": {
+            "alloy": 28.32008087081198,
+            "IFR": 9677.879536040147,
+            "LO": -123115.78195964961,
+            "acoustic": 196.59829869995798,
+            "impurity": 1272.3290154659717
+          },
+          "projection_gap_W_m2": -10.180349123157953,
+          "kinetic_remainder_W_m2": 1.3011504020439573e-10,
+          "maximum_closure_error_W_m2": 3.8403413782361895e-10,
+          "relative_to_local_potential": {
+            "outward_W_m2": [
+              -133022.3535279304,
+              133311.9810530087
+            ],
+            "field_work_W_m2": 103770.40278492084,
+            "offset_times_number_exchange_W_m2": 8470.060117845624,
+            "net_relative_energy_minus_absolute_flux_and_work_W_m2": 1.8189894035458565e-11
+          }
+        },
+        "rK": 0.021927207419787053,
+        "rSigma": 0.03943143740424886,
+        "maximum_spectral_defect": 6.011766727436393e-10,
+        "iteration": 48,
+        "independent_rK_Q": 0.020891083386006967,
+        "n_terminal_maps": 48,
+        "strict_confirmations_at_terminal": 0,
+        "fixed_grid_stationary": false
+      },
+      "sensitivity": [
+        {
+          "file": "v843-f125.json",
+          "selection": "energy",
+          "change_in_mean_A_cm2": 8.7171000480607,
+          "own_quadrature_difference_A_cm2": 3.676188953249948e-08,
+          "profile_range_A_cm2": [
+            163.04243503082571,
+            297.5446951418836
+          ]
+        },
+        {
+          "file": "v843-f125.json",
+          "selection": "radial",
+          "change_in_mean_A_cm2": -28.52326307155988,
+          "own_quadrature_difference_A_cm2": 3.360878508829046e-08,
+          "profile_range_A_cm2": [
+            143.5670719902211,
+            240.6898900725655
+          ]
+        }
+      ],
+      "published": {
+        "DM50": {
+          "current_A_cm2": 62.769580583571226,
+          "interpolation_bracket_kV_cm": [
+            12.500000000004198,
+            12.500000000004198
+          ],
+          "digitization_range_A_cm2": [
+            57.769580583571226,
+            67.8730806019503
+          ],
+          "status": "vertex"
+        },
+        "NEGF50": {
+          "current_A_cm2": 150.7644184036408,
+          "interpolation_bracket_kV_cm": [
+            11.991222222223826,
+            12.559194444442829
+          ],
+          "digitization_range_A_cm2": [
+            145.17641781675434,
+            156.3524189905273
+          ],
+          "status": "interpolated"
+        },
+        "experiment10": {
+          "current_A_cm2": 488.38078869006114,
+          "interpolation_bracket_kV_cm": [
+            12.248333333334942,
+            12.974833333331734
+          ],
+          "digitization_range_A_cm2": [
+            483.1420054829025,
+            493.61957189721977
+          ],
+          "status": "interpolated_current_driven_transition_region"
+        },
+        "NEGF50_original_raster": {
+          "current_A_cm2": 154.88045738045722,
+          "interpolation_bracket_kV_cm": [
+            12.495073626885459,
+            12.524930433640263
+          ],
+          "digitization_range_A_cm2": [
+            142.8066528066528,
+            173.25109355509343
+          ],
+          "status": "interpolated"
+        }
+      },
+      "published_negf_digitization_envelope_A_cm2": [
+        142.8066528066528,
+        173.25109355509343
+      ],
+      "difference_from_published_A_cm2": {
+        "DM50": 166.6798268626818,
+        "NEGF50": 78.68498904261222,
+        "experiment10": -258.9313812438081,
+        "NEGF50_original_raster": 74.5689500657958
+      },
+      "temperature": null
+    },
+    {
+      "field_kV_cm": 21.0,
+      "primary": {
+        "file": "v843-f21.json"
+      },
+      "stationary": false,
+      "mean_internal_A_cm2": 1299.5995295620035,
+      "resolved_min_max_A_cm2": [
+        1077.837664613862,
+        1503.038641178538
+      ],
+      "outward_A_cm2": [
+        -1464.9472839615764,
+        1464.4179383100231
+      ],
+      "spatial_deviation_A_cm2": 221.76186494814146,
+      "spatial_tolerance_A_cm2": 12.995995295620034,
+      "observed_sensitivity_A_cm2": 183.14008807925438,
+      "primary_quadrature_difference_A_cm2": 7.91078491602093e-09,
+      "iterative_sensitivity_last_five_A_cm2": 2.651386663330186,
+      "transport_status": {
+        "raw_lambda": 1.004193652265649,
+        "raw_sheet_cm2": 32636293698.633587,
+        "spectral_energy_budget": {
+          "absolute_outward_W_m2": [
+            -844079.5228007189,
+            -267992.8712122168
+          ],
+          "absolute_flux_difference_W_m2": -1112072.3940129357,
+          "projected_collision_power_W_m2": {
+            "alloy": -569.0351746542509,
+            "IFR": -35199.87123933531,
+            "LO": -907473.3593730396,
+            "acoustic": -305.4532553277761,
+            "impurity": -163336.07641396052
+          },
+          "projection_gap_W_m2": -5188.598556644881,
+          "kinetic_remainder_W_m2": 6.204986850362535e-10,
+          "maximum_closure_error_W_m2": 4.765752237290144e-10,
+          "relative_to_local_potential": {
+            "outward_W_m2": [
+              -844079.5228007189,
+              844027.5344228824
+            ],
+            "field_work_W_m2": 987734.4368850355,
+            "offset_times_number_exchange_W_m2": 124285.96875006381,
+            "net_relative_energy_minus_absolute_flux_and_work_W_m2": -1.3096723705530167e-10
+          }
+        },
+        "rK": 0.03743925371028872,
+        "rSigma": 0.046602586284626046,
+        "maximum_spectral_defect": 2.8096828748330527e-05,
+        "iteration": 48,
+        "independent_rK_Q": 0.03648879629396607,
+        "n_terminal_maps": 48,
+        "strict_confirmations_at_terminal": 0,
+        "fixed_grid_stationary": false
+      },
+      "sensitivity": [
+        {
+          "file": "v843-f21.json",
+          "selection": "energy",
+          "change_in_mean_A_cm2": 78.44984547477202,
+          "own_quadrature_difference_A_cm2": 1.474950295232702e-08,
+          "profile_range_A_cm2": [
+            1122.5174549974258,
+            1558.0021045276785
+          ]
+        },
+        {
+          "file": "v843-f21.json",
+          "selection": "radial",
+          "change_in_mean_A_cm2": 183.14008807925438,
+          "own_quadrature_difference_A_cm2": 1.1255451681790873e-08,
+          "profile_range_A_cm2": [
+            988.0224984233406,
+            1915.223548605344
+          ]
+        }
+      ],
+      "published": {
+        "DM50": {
+          "current_A_cm2": 1644.012005833571,
+          "interpolation_bracket_kV_cm": [
+            20.999999999997314,
+            20.999999999997314
+          ],
+          "digitization_range_A_cm2": [
+            1630.8810221069145,
+            1649.3905686208757
+          ],
+          "status": "vertex"
+        },
+        "NEGF50": {
+          "current_A_cm2": 1603.0758706414556,
+          "interpolation_bracket_kV_cm": [
+            20.994055555559974,
+            21.286138888890083
+          ],
+          "digitization_range_A_cm2": [
+            1595.0161414793,
+            1610.3013793433347
+          ],
+          "status": "interpolated"
+        },
+        "experiment10": {
+          "current_A_cm2": 1558.752425275414,
+          "interpolation_bracket_kV_cm": [
+            20.994277777778322,
+            21.12791666666463
+          ],
+          "digitization_range_A_cm2": [
+            1553.0695743198014,
+            1563.786800000001
+          ],
+          "status": "interpolated"
+        },
+        "NEGF50_original_raster": {
+          "current_A_cm2": 1616.4985446985445,
+          "interpolation_bracket_kV_cm": [
+            20.974406745249784,
+            21.004263552004588
+          ],
+          "digitization_range_A_cm2": [
+            1599.9940083160081,
+            1634.1170103950099
+          ],
+          "status": "interpolated"
+        }
+      },
+      "published_negf_digitization_envelope_A_cm2": [
+        1595.0161414793,
+        1634.1170103950099
+      ],
+      "difference_from_published_A_cm2": {
+        "DM50": -344.4124762715676,
+        "NEGF50": -303.47634107945214,
+        "experiment10": -259.15289571341054,
+        "NEGF50_original_raster": -316.89901513654104
+      },
+      "temperature": {
+        "physical_period_T_K": 114.07970666885358,
+        "central_all_bands_T_K": 114.33168055039111,
+        "matched_four_bands_T_K": 113.57760531440981,
+        "matched_band_fraction_of_central_projection": 0.987675452338755,
+        "published_four_bands_T_K": 159.0,
+        "band_data": {
+          "upper_lasing": {
+            "central_index_from_1": 3,
+            "computed_T_K": 140.65295150068735,
+            "published_T_K": 162.0,
+            "computed_population_relative_to_upper": 1.0,
+            "published_population_relative_to_upper": 1.0
+          },
+          "lower_lasing": {
+            "central_index_from_1": 2,
+            "computed_T_K": 156.85297114977845,
+            "published_T_K": 92.0,
+            "computed_population_relative_to_upper": 0.17791591278211172,
+            "published_population_relative_to_upper": 0.39
+          },
+          "extractor": {
+            "central_index_from_1": 1,
+            "computed_T_K": 101.70014154194432,
+            "published_T_K": 172.0,
+            "computed_population_relative_to_upper": 1.9163998520199683,
+            "published_population_relative_to_upper": 0.6
+          },
+          "injector": {
+            "central_index_from_1": 4,
+            "computed_T_K": 87.23166295819856,
+            "published_T_K": 203.0,
+            "computed_population_relative_to_upper": 0.455962152407105,
+            "published_population_relative_to_upper": 0.33
+          }
+        }
+      }
+    }
+  ]
+}
