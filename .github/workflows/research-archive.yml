@@ -1,0 +1,42 @@
+name: Research archive
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'docs/research-archive/**'
+      - 'studies/historical/literature/**'
+      - '.github/workflows/research-archive.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/research-archive/**'
+      - 'studies/historical/literature/**'
+      - '.github/workflows/research-archive.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  html:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install documentation dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends graphviz
+          python -m pip install -r docs/research-archive/requirements.txt
+      - name: Build archive
+        run: sphinx-build -n -W -b html docs/research-archive build/research-archive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: research-archive-html
+          path: build/research-archive
+          if-no-files-found: error
