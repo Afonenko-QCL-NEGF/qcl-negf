@@ -6,7 +6,8 @@
 
 ```{needtable}
 :filter: type == "qexperiment" and family == "Fath" and ("QP_FATH_54_10_DARK" in at or "QP_FATH_54_EARLY" in at) and "QPAM_RADIAL" in varies and "QO_JZ" in observes
-:columns: ID, TITLE, AT, SAME_INPUT, STATUS, STATIONARITY, VERDICT
+:columns: ID, TITLE as "Опыт или вариант", SAME_INPUT as "Общий вход", STATUS as "Исполнение", STATIONARITY as "Стационарность", VERDICT as "Исход"
+:colwidths: 17, 18, 14, 11, 14, 26
 :style: TABLE
 :sort: id
 ```
@@ -17,7 +18,7 @@
 
 ```{needtable}
 :filter: type == "qexperiment" and family == "Fath" and ("QP_FATH_54_10_DARK" in at or "QP_FATH_54_EARLY" in at) and "QPAM_RADIAL" in varies and "QO_JZ" in observes and stationarity == "passed"
-:columns: ID, TITLE, CRITERIA, VERDICT
+:columns: ID, TITLE as "Опыт или вариант", CRITERIA as "Критерий", VERDICT as "Исход"
 :style: TABLE
 :filter_warning: В этом срезе нет вариантов с тремя строгими подтверждениями.
 ```
@@ -30,7 +31,7 @@
 
 ```{needtable}
 :filter: type == "qexperiment" and lo_mode == "enabled" and "QM_LO" not in targets and "QPAM_LO_DISCRETIZATION" not in varies
-:columns: ID, TITLE, AT, VARIES, OBSERVES
+:columns: ID, TITLE as "Опыт или вариант", AT as "Рабочая точка", VARIES as "Изменённый фактор", OBSERVES as "Наблюдаемые"
 :style: TABLE
 :sort: id
 ```
@@ -39,7 +40,7 @@
 
 ```{needtable}
 :filter: type == "qexperiment" and "QM_LO" in targets
-:columns: ID, TITLE, AT, VARIES, VERDICT
+:columns: ID, TITLE as "Опыт или вариант", AT as "Рабочая точка", VARIES as "Изменённый фактор", VERDICT as "Исход"
 :style: TABLE
 :sort: id
 ```
@@ -48,7 +49,7 @@
 
 ```{needtable}
 :filter: type == "qexperiment" and "QPAM_LO_DISCRETIZATION" in varies
-:columns: ID, TITLE, BASELINE, VARIANTS, VERDICT
+:columns: ID, TITLE as "Опыт или вариант", BASELINE as "База", VARIANTS as "Варианты", VERDICT as "Исход"
 :style: TABLE
 :sort: id
 ```
@@ -59,7 +60,7 @@
 
 ```{needtable}
 :filter: type == "qrun" and ("QP_V843_21" in at or "QP_V843_125" in at) and same_input
-:columns: ID, TITLE, AT, SAME_INPUT, STATIONARITY, VERDICT
+:columns: ID, TITLE as "Опыт или вариант", AT as "Рабочая точка", SAME_INPUT as "Общий вход", STATIONARITY as "Стационарность", VERDICT as "Исход"
 :style: TABLE
 :sort: id
 ```
@@ -68,14 +69,14 @@
 
 ```{needtable}
 :filter: type in ["qexperiment", "qrun"] and stationarity in ["unverified", "not_measured"]
-:columns: ID, TITLE, STATUS, STATIONARITY, STAGE, VERDICT
+:columns: ID, TITLE as "Опыт или вариант", STATUS as "Исполнение", STATIONARITY as "Стационарность", STAGE as "Стадия", VERDICT as "Исход"
 :style: TABLE
 :sort: id
 ```
 
 ```{needtable}
 :filter: type == "qclaim" and status == "open"
-:columns: ID, TITLE, SUPPORTS_BACK, LIMITS_BACK, CONTRADICTS_BACK, EVIDENCE
+:columns: ID, TITLE as "Опыт или вариант", SUPPORTS_BACK as "Поддержано", LIMITS_BACK as "Ограничено", CONTRADICTS_BACK as "Возражения", EVIDENCE as "Свидетельства"
 :style: TABLE
 :sort: id
 ```

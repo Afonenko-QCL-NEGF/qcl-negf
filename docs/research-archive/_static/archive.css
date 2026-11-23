@@ -1,0 +1,28 @@
+div.sphinxsidebarwrapper h1.logo {
+    font-size: 1.45rem;
+    line-height: 1.25;
+}
+
+div.sphinxsidebar .search input[type="text"] {
+    min-width: 0;
+}
+
+table.NEEDS_TABLE td,
+table.NEEDS_TABLE th {
+    overflow-wrap: anywhere;
+    vertical-align: top;
+}
+
+@media (min-width: 900px) {
+    table.NEEDS_TABLE {
+        table-layout: fixed;
+    }
+}
+
+div.document {
+    max-width: 96vw;
+}
+
+div.body {
+    max-width: none;
+}

@@ -67,7 +67,7 @@
 
 ```{needtable}
 :filter: id == "QX_FATH_NIGHT_RADIAL"
-:columns: ID, TITLE, AT, VARIES, OBSERVES, VERDICT
+:columns: ID, TITLE as "Опыт или вариант", AT as "Рабочая точка", VARIES as "Изменённый фактор", OBSERVES as "Наблюдаемые", VERDICT as "Исход"
 ```
 
 ```{needflow} Радиальный опыт и его свидетельство
