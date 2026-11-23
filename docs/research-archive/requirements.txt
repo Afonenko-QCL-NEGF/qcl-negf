@@ -1,0 +1,4 @@
+Sphinx
+myst-parser
+sphinx-needs>=9.3
+sphinxcontrib-bibtex
