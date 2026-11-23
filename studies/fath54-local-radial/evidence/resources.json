@@ -1,0 +1,17 @@
+{
+  "execution": "workstation, Julia Runner",
+  "first_run_workers": 8,
+  "recovery_workers": 10,
+  "blas_threads": 1,
+  "gc_threads": 1,
+  "field_checkpoints": 0,
+  "interrupted_runs": 2,
+  "terminal_run": {
+    "user_cpu_seconds": 34194.1,
+    "system_cpu_seconds": 193.88,
+    "peak_resident_kib": 9126392,
+    "file_outputs": 4848,
+    "exit_status": 0,
+    "elapsed": "2:09:43"
+  }
+}

@@ -1,6 +1,9 @@
 # Fath 54 мВ на период. Локальное сгущение
 
-Кампания 23 ноября проверяет чувствительность к узлам в интервале 0,15–0,20 нм⁻¹. Срез включает компактное локальное состояние до K27. Физическая сессия продолжает работу независимо. За доступностью последующих стадий следите по этой карточке.
+Кампания 23 ноября 2026 года проверила интервал 0,15–0,20 нм⁻¹
+на одном побитово восстановленном входе 48-й карты F13. Все численные
+сведения относятся к новым свежим картам до смешивания.
+[Итоговый отчёт и данные](https://github.com/Afonenko-QCL-NEGF/qcl-negf/blob/main/studies/fath54-local-radial/README.md)
 
 ```{qexperiment} Вложенное сгущение K25, K27, K31
 :id: QX_FATH_LOCAL_RADIAL
@@ -12,18 +15,22 @@
 :baseline: QR_FATH_LOCAL_K25
 :variants: QR_FATH_LOCAL_K25, QR_FATH_LOCAL_K27, QR_FATH_LOCAL_K31
 :same_input: QE_FATH_MAP48
-:status: partial
+:status: completed
 :stationarity: failed
 :stage: single_fresh_map
 :lo_mode: enabled
 :criteria: Профиль max(1 А/см², 1% модуля среднего контрольной руки); заряд 3×10⁸ см⁻²
-:verdict: K25→K27, max разность профилей 4,5700 А/см² при допуске 2,5430; заряд в допуске
-:evidence: QE_FATH_LOCAL_K27
+:verdict: Профиль 4,5700 и 0,3894 А/см² на двух шагах; сырой заряд в допуске
+:evidence: QE_FATH_LOCAL_K27, QE_FATH_LOCAL_K31
 
-Сравнение сохраняет 481 энергию, семь мод, нулевой Хартри, пять каналов и температуру 10 К. K27 добавляет 0,1625 и 0,1875 нм⁻¹ к K25. Консервативный перенос из K13 сделан отдельно на каждую сетку. На новых радиусах заново применяются Дайсон, нормировка и оператор рассеяния. GL20/sub3 проверяет профиль независимо. Порог пространственного отклонения и три последовательные свежие проверки относятся к отдельному критерию стационарности.
+Сравнение сохраняет E481, семь мод, Q21, нулевой Хартри, пять каналов
+и 10 К. K27 добавляет 0,1625 и 0,1875 нм⁻¹. K31 ещё раз делит
+промежутки внутри окна пополам. Каждая рука получает прямой
+консервативный перенос F13. На новых радиусах пересчитаны физические
+парные ядра. Независимый GL20/sub3 измеряет 145 физических сечений.
 ```
 
-```{qrun} Опорная K25 в кампании локального сгущения
+```{qrun} K25, полный
 :id: QR_FATH_LOCAL_K25
 :at: QP_FATH_54_10_DARK
 :status: completed
@@ -31,11 +38,12 @@
 :stage: single_fresh_map
 :same_input: QE_FATH_MAP48
 :evidence: QE_FATH_LOCAL_K27
+:verdict: Среднее 254,298; макс. отклонение 17,763 А/см²
 
-Контрольная рука сравнения со средним 254,298 А/см².
+Полная исходная сетка с узлом 0,175 нм⁻¹. Архивный профиль повторён.
 ```
 
-```{qrun} K27 с двумя новыми радиусами
+```{qrun} K27
 :id: QR_FATH_LOCAL_K27
 :at: QP_FATH_54_10_DARK
 :status: completed
@@ -43,28 +51,160 @@
 :stage: single_fresh_map
 :same_input: QE_FATH_MAP48
 :evidence: QE_FATH_LOCAL_K27
-:verdict: среднее +3,0057; центрированное отличие 2,5828; изменение перепада +3,5222 А/см²
+:verdict: Среднее 257,304; макс. отклонение 19,008 А/см²
 
-Изменение сырого входного заряда −7,6293×10⁷ см⁻² и изменение сырого заряда свежего образа −3,5593×10⁷ см⁻² проходят сеточный допуск. Разность полного профиля превышает допуск с учётом разности независимых наблюдений.
+Новые радиусы 0,1625 и 0,1875 нм⁻¹. Вход перенесён напрямую с F13.
 ```
 
-```{qrun} K31 и условные контроли
+```{qrun} K31
 :id: QR_FATH_LOCAL_K31
 :at: QP_FATH_54_10_DARK
-:status: partial
-:stationarity: not_measured
-:stage: preflight
+:status: completed
+:stationarity: failed
+:stage: single_fresh_map
 :same_input: QE_FATH_MAP48
+:evidence: QE_FATH_LOCAL_K31
+:verdict: Среднее 257,172; макс. отклонение 18,943 А/см²
 
-В срезе доступны предварительные проверки сеток и входов. Итоги полной карты K31, проверки пути переноса, сдвинутых узлов или ранга в архиве пока отсутствуют.
+Ещё четыре радиуса внутри окна 0,15–0,20 нм⁻¹. Вход перенесён напрямую с F13.
 ```
 
-```{qevidence} Компактное состояние локального сравнения K25 и K27
+```{qevidence} Компактные свидетельства K25 и K27
 :id: QE_FATH_LOCAL_K27
-:availability: local
-:locator: Fath 54 local radial 2026-11-23 accepted K27; differences.K25_to_K27; metadata.replay
+:availability: published
+:locator: studies/fath54-local-radial/evidence/measurements.json, levels.K25, levels.K27, differences.K25_to_K27
 :role: independent
+:supports: QC_FATH_LOCAL_CHARGE, QC_FATH_LOCAL_PROFILE
 :limits: QC_FATH_NIGHT_STATIONARY_CURRENT
 
-Локальная идентичность `fath54-local-radial/accepted-K27`, поля `differences.K25_to_K27`, `levels.K25`, `levels.K27` и `metadata.replay`. Вход и свежий образ контрольной ночной карты 48 воспроизведены побитово. Компактный срез содержит 145 сечений. Полное вычислительное состояние остаётся в физической сессии.
+Сырой заряд на входе изменился на −7,6293×10⁷ см⁻². Разность полного
+профиля 4,5700 А/см² превышает допуск 2,5430 А/см². Отдельно
+зарегистрированы сдвиг среднего, центрированная форма и перепад
+на 33,8473–39,6410 нм.
+```
+
+```{qevidence} Компактные свидетельства K31 и сверка независимого наблюдателя
+:id: QE_FATH_LOCAL_K31
+:availability: published
+:locator: studies/fath54-local-radial/evidence/measurements.json, levels.K31, differences.K27_to_K31, metadata
+:role: independent
+:supports: QC_FATH_LOCAL_CHARGE, QC_FATH_LOCAL_PROFILE
+:limits: QC_FATH_NIGHT_STATIONARY_CURRENT
+
+Второй уровень меняет полный профиль на 0,3894 А/см² при допуске 2,5730 А/см². Профили на общих сечениях и заряд по ячейкам доступны в
+{download}`CSV профилей <../../studies/fath54-local-radial/evidence/profiles.csv>`
+и {download}`CSV радиального заряда <../../studies/fath54-local-radial/evidence/radial-charge.csv>`.
+```
+
+```{qparam} Путь консервативного переноса в радиальной мере
+:id: QPAM_RADIAL_TRANSFER
+
+Выбор между прямым переносом на целевую сетку и композицией консервативных переносов через промежуточную сетку.
+```
+
+```{qexperiment} Контроль переноса F13 → K25 → K31
+:id: QX_FATH_LOCAL_RADIAL_PATH
+:family: Fath
+:at: QP_FATH_54_10_DARK
+:varies: QPAM_RADIAL_TRANSFER
+:targets: QM_DYSON_NORMALIZATION
+:observes: QO_JZ, QO_CHARGE, QO_RESIDUAL
+:baseline: QR_FATH_LOCAL_K31
+:variants: QR_FATH_LOCAL_K31, QR_FATH_LOCAL_K31_PATH
+:same_input: QE_FATH_MAP48
+:status: completed
+:stationarity: failed
+:stage: single_fresh_map
+:lo_mode: enabled
+:criteria: Профиль max(1 А/см², 1% модуля среднего контрольной руки); заряд 3×10⁸ см⁻²
+:verdict: Макс. разность профилей 0,132 А/см²
+:evidence: QE_FATH_LOCAL_K31_PATH
+
+Целевая сетка и физика одинаковы. Последовательный перенос вводит промежуточную сетку K25.
+```
+
+```{qrun} K31 после последовательного переноса
+:id: QR_FATH_LOCAL_K31_PATH
+:at: QP_FATH_54_10_DARK
+:status: completed
+:stationarity: failed
+:stage: single_fresh_map
+:same_input: QE_FATH_MAP48
+:evidence: QE_FATH_LOCAL_K31_PATH
+:verdict: Среднее 257,114; макс. отклонение 18,910 А/см²
+
+Контроль выполняет полный оператор рассеяния и независимое наблюдение.
+```
+
+```{qevidence} Прямой и последовательный перенос на K31
+:id: QE_FATH_LOCAL_K31_PATH
+:availability: published
+:locator: studies/fath54-local-radial/evidence/measurements.json, followup.path и followup.path_difference
+:role: independent
+:limits: QC_FATH_LOCAL_PROFILE, QC_FATH_NIGHT_STATIONARY_CURRENT
+
+Разность входного сырого заряда 1,62×10⁷ см⁻². Изменение среднего −0,0575 А/см².
+```
+
+```{qexperiment} Радиальный контроль со сдвигом новых узлов K31
+:id: QX_FATH_LOCAL_RADIAL_SHIFT
+:family: Fath
+:at: QP_FATH_54_10_DARK
+:varies: QPAM_RADIAL
+:targets: QM_DYSON_NORMALIZATION
+:observes: QO_JZ, QO_CHARGE, QO_RESIDUAL
+:baseline: QR_FATH_LOCAL_K31
+:variants: QR_FATH_LOCAL_K31, QR_FATH_LOCAL_K31_SHIFT
+:same_input: QE_FATH_MAP48
+:status: completed
+:stationarity: failed
+:stage: single_fresh_map
+:lo_mode: enabled
+:criteria: Профиль max(1 А/см², 1% модуля среднего контрольной руки); заряд 3×10⁸ см⁻²
+:verdict: Макс. разность профилей 0,251 А/см²
+:evidence: QE_FATH_LOCAL_K31_SHIFT
+
+Шесть новых узлов сдвинуты внутри двух промежутков K25. Исходные узлы K25 сохранены. Пересчитаны веса, ядра и полный профиль.
+```
+
+```{qrun} K31 со сдвигом новых радиусов
+:id: QR_FATH_LOCAL_K31_SHIFT
+:at: QP_FATH_54_10_DARK
+:status: completed
+:stationarity: failed
+:stage: single_fresh_map
+:same_input: QE_FATH_MAP48
+:evidence: QE_FATH_LOCAL_K31_SHIFT
+:verdict: Среднее 257,229; макс. отклонение 19,016 А/см²
+
+Прямой перенос F13 и положительные веса ячеек в k².
+```
+
+```{qevidence} Профиль, сырой заряд и энергетический контроль сдвига
+:id: QE_FATH_LOCAL_K31_SHIFT
+:availability: published
+:locator: studies/fath54-local-radial/evidence/measurements.json, differences.K31_to_shift и followup.localization_shifted
+:role: independent
+:supports: QC_FATH_LOCAL_PROFILE
+:limits: QC_FATH_NIGHT_STATIONARY_CURRENT
+
+GL20 измеряет все сечения. На выбранных кольцах проверена чувствительность наблюдаемых к порядку энергетического интеграла. {download}`Энергетические данные сдвинутой сетки <../../studies/fath54-local-radial/evidence/localization-shifted.json>`.
+```
+
+```{qclaim} Сырой заряд на этой карте устойчив по инженерному допуску
+:id: QC_FATH_LOCAL_CHARGE
+:status: supported
+:evidence: QE_FATH_LOCAL_K27, QE_FATH_LOCAL_K31
+:limits: QC_FATH_NIGHT_STATIONARY_CURRENT
+
+На обоих вложенных шагах изменение сырого заряда укладывается в 3×10⁸ см⁻². На втором шаге вклад свежего заряда внутри окна почти компенсируется вкладом остальной области.
+```
+
+```{qclaim} Локальная радиальная мера влияет на форму и средний ток свежей карты
+:id: QC_FATH_LOCAL_PROFILE
+:status: supported
+:evidence: QE_FATH_LOCAL_K27, QE_FATH_LOCAL_K31
+:limits: QC_FATH_NIGHT_STATIONARY_CURRENT
+
+На первом шаге превышен допуск по полному и центрированному профилю. На втором шаге обе разности укладываются в допуск. Пространственная неоднородность на K31 сохраняется при больших свежих невязках.
 ```
