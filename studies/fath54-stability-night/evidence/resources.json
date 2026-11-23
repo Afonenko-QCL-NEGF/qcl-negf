@@ -1,0 +1,42 @@
+{
+  "expanded8": {
+    "cpu_user_seconds": 77992.66,
+    "cpu_system_seconds": 472.64,
+    "wall_seconds": 27934.0,
+    "peak_rss_KiB": 5611408.0,
+    "filesystem_output_blocks": 2616.0,
+    "exit_code": 0.0
+  },
+  "node-replay-startup": {
+    "cpu_user_seconds": 15.11,
+    "cpu_system_seconds": 4.64,
+    "wall_seconds": 12.35,
+    "peak_rss_KiB": 1394588.0,
+    "filesystem_output_blocks": 104.0,
+    "exit_code": 1.0
+  },
+  "node-replay": {
+    "cpu_user_seconds": 21854.03,
+    "cpu_system_seconds": 82.6,
+    "wall_seconds": 7115.0,
+    "peak_rss_KiB": 5666944.0,
+    "filesystem_output_blocks": 1976.0,
+    "exit_code": 0.0
+  },
+  "primary7": {
+    "cpu_user_seconds": 124414.86,
+    "cpu_system_seconds": 476.98,
+    "wall_seconds": 35574.0,
+    "peak_rss_KiB": 6665740.0,
+    "filesystem_output_blocks": 8880.0,
+    "exit_code": 0.0
+  },
+  "smoke7": {
+    "cpu_user_seconds": 378.67,
+    "cpu_system_seconds": 3.36,
+    "wall_seconds": 134.03,
+    "peak_rss_KiB": 3948600.0,
+    "filesystem_output_blocks": 8.0,
+    "exit_code": 0.0
+  }
+}

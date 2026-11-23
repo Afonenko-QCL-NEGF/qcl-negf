@@ -1,0 +1,2 @@
+Manufactured linked current, nonorthogonal lift and lagged remainder passed.
+Direct projected crossings and conditional LO decomposition passed.
