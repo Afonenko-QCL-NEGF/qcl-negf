@@ -1,0 +1,36 @@
+[
+  {
+    "phase": "coarse_replayed",
+    "input_matches": true,
+    "image_matches": true,
+    "delta": {
+      "rK": 0.0,
+      "rSigma": 0.0,
+      "raw_lambda": 0.0,
+      "input_raw_lambda": 0.0,
+      "maximum_profile_A_cm2": 0.0
+    }
+  },
+  {
+    "stage": "fresh_map",
+    "nk": 31,
+    "nb": 7,
+    "raw_sheet_cm2": 30321347386.24642,
+    "rK": 0.5574113630945677,
+    "rSigma": 1.183576587687223,
+    "mean": 257.1717999751556,
+    "deviation": 18.942953229343914,
+    "seconds": 238.54561722100001
+  },
+  {
+    "phase": "baseline_K31",
+    "check": {
+      "transfer_matches": true,
+      "image_matches": true,
+      "mean": 0.0,
+      "max_deviation": 0.0,
+      "fixed_segment": 0.0,
+      "maximum_profile": 0.0
+    }
+  }
+]
