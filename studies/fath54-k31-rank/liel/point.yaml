@@ -1,0 +1,111 @@
+run:
+  name: liel2014-dark-50mV-77K
+  description: LiEL2014, тёмная точка с разрешённым поперечным импульсом
+  classification: physics_changing
+physical:
+  layers:
+  - {thickness: 5.2 nm, material: AlGaAs, aluminium_fraction: 0.16, conduction_band_edge: 0.13296 eV, longitudinal_relative_mass: 0.08028, transverse_relative_mass: 0.08028, relative_permittivity: 12.9, doped: false}
+  - {thickness: 10.3 nm, material: GaAs, aluminium_fraction: 0.0, conduction_band_edge: 0 eV, longitudinal_relative_mass: 0.067, transverse_relative_mass: 0.067, relative_permittivity: 12.9, doped: false}
+  - {thickness: 1.7 nm, material: AlGaAs, aluminium_fraction: 0.16, conduction_band_edge: 0.13296 eV, longitudinal_relative_mass: 0.08028, transverse_relative_mass: 0.08028, relative_permittivity: 12.9, doped: false}
+  - {thickness: 10.75 nm, material: GaAs, aluminium_fraction: 0.0, conduction_band_edge: 0 eV, longitudinal_relative_mass: 0.067, transverse_relative_mass: 0.067, relative_permittivity: 12.9, doped: false}
+  - {thickness: 3.6 nm, material: AlGaAs, aluminium_fraction: 0.16, conduction_band_edge: 0.13296 eV, longitudinal_relative_mass: 0.08028, transverse_relative_mass: 0.08028, relative_permittivity: 12.9, doped: false}
+  - {thickness: 8.8 nm, material: GaAs, aluminium_fraction: 0.0, conduction_band_edge: 0 eV, longitudinal_relative_mass: 0.067, transverse_relative_mass: 0.067, relative_permittivity: 12.9, doped: false}
+  - {thickness: 3.95 nm, material: AlGaAs, aluminium_fraction: 0.16, conduction_band_edge: 0.13296 eV, longitudinal_relative_mass: 0.08028, transverse_relative_mass: 0.08028, relative_permittivity: 12.9, doped: false}
+  - {thickness: 17.2 nm, material: GaAs, aluminium_fraction: 0.0, conduction_band_edge: 0 eV, longitudinal_relative_mass: 0.067, transverse_relative_mass: 0.067, relative_permittivity: 12.9, doped: true}
+  interfaces: [0 nm, 5.2 nm, 15.5 nm, 17.2 nm, 27.95 nm, 31.55 nm, 40.35 nm, 44.30 nm]
+  donor_sheet_density: 5.16e14 m^-2
+  ionization_fraction: 1.0
+  voltage_per_period: 50 mV
+  field_bias: null
+  position_origin: 0 nm
+  reference_energy: 0 eV
+  lattice_temperature: 77 K
+  lo_temperature: 77 K
+  static_relative_permittivity: 12.9
+  high_frequency_relative_permittivity: 10.89
+  lo_phonon_energy: 36.7 meV
+  impurity_screening_wavenumber: 0.20 nm^-1
+  lo_screening_wavenumber: 0.20 nm^-1
+  interface_roughness_height: 0.20 nm
+  interface_correlation_length: 7.0 nm
+  acoustic_deformation_potential: 7.0 eV
+  mass_density: 5317 kg/m^3
+  sound_velocity: 5240 m/s
+  alloy_potential: 0.60 eV
+  primitive_cell_volume: 4.5168e-29 m^3
+  spin_degeneracy: 2
+physical_models:
+  screening: fixed
+  dispersion: parabolic
+  lo_population: thermal
+  electron_electron:
+    mode: none
+numerical:
+  spatial_nodes: 196
+  basis_states: 7
+  basis_periods: 3
+  energy_min: -0.14 eV
+  energy_max: 0.24 eV
+  energy_nodes: 761
+  energy_trust_margin: 70 meV
+  momentum_max: 0.55 nm^-1
+  momentum_nodes: 13
+  angular_nodes: 24
+  longitudinal_momentum_max: 10.0 nm^-1
+  longitudinal_momentum_nodes: 121
+  seed_broadening: 0.5 meV
+scattering:
+  lo_phonon: true
+  acoustic_phonon: true
+  ionized_impurity: true
+  interface_roughness: true
+  alloy_disorder: true
+solver:
+  self_energy_mixing: 0.15
+  poisson_mixing: 0.15
+  maximum_scba_iterations: 96
+  maximum_poisson_iterations: 12
+  convergence:
+    mode: research_continue
+production:
+  energy_chunk: 32
+  hilbert_columns: 32
+  parallel_backend: threads
+  worker_count: 8
+  checkpoint_every_outer: 0
+  checkpoint_every_scba: 0
+algorithms:
+  energy_shift: sparse_plan
+  hilbert: fft
+  contraction: dense_blas
+  kernel_build: direct
+  mixing: linear
+  localization: pzp
+  retarded_real_part: kramers_kronig
+  self_energy_structure: full
+  transverse_momentum: resolved
+execution:
+  strategy: manual
+  solver_backend: production
+  julia_threads: 8
+  blas_threads: 1
+  fail_on_thread_mismatch: true
+output:
+  directory: results/liel2014-dark-50mV-77K
+  resume: false
+  save_full_state: false
+  intermediate_checkpoints: false
+  debug_hdf5: false
+  save_plots: false
+  snapshot_every_outer: 0
+  snapshot_every_scba: 0
+  live_visualization: false
+  device_geometry:
+    periods: 180
+    ridge_width: 425 μm
+    cavity_length: 4.2 mm
+study:
+  mode: single
+  voltages_per_period: [50 mV]
+  temperatures: [77 K]
+  calculate_optical_response: false

@@ -1,0 +1,93 @@
+[
+  {
+    "P_basis": 3,
+    "periods": 7,
+    "basis_modes": 7,
+    "status": "static_rejected",
+    "message": "nodal shift quadrature-adjoint defect=0.01945878857634176; measured discretization error, assess collision and grid convergence; translation=0.14853910199555143 exceeds 0.1; translation_two_pairs=0.020923976829963248 exceeds 0.005",
+    "configuration": {
+      "kind": "configuration",
+      "reference_sha256": "0faeedd211f3292c9bc1278685a199540cf410dde993fd48f6147892e834c831",
+      "point_sha256": "7a76f6d038025c39675d686ce55ad62a41f9875d0a99c39a9f3bcb75b4baa211",
+      "driver_sha256": "3fb6cf6e344dc643ffc47895f0e874a630419d84a1ce7ea82e9f5dab93db536b",
+      "core": {
+        "version": "0.2.0",
+        "source_tree_sha256": "ab114fd74505ad03f0e4c79b19f5b3edc4bd5680cd9b2d7d5de304d139b21ef0",
+        "uuid": "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
+      },
+      "runner": {
+        "version": "0.2.0",
+        "source_tree_sha256": "4477e9fe53264fab7f668dc340a3a7d89d02acbc72f9ba93dc4764233ccd10f0",
+        "uuid": "5a147728-d76f-4a23-a474-c91379216907"
+      },
+      "runtime": {
+        "core_project_sha256": "226bd707fc4d86d03a4fbf3402a27e2455ad90ae1176ccbbe4efdc0faf75ae83",
+        "fftw_threads": 1,
+        "project_sha256": "ac5a17064aa91e99e6de7862bc9123d98fdb26e09703ca3b2677fc01c6e59596",
+        "architecture": "x86_64",
+        "runtime_binary_sha256": "67a838f879002604ac74b8de5c8f2d41e605fdfd4800b8bb3de9b5443e5315ff",
+        "kernel": "Linux",
+        "blas_threads": 1,
+        "julia_version": "1.13.4",
+        "runner_project_sha256": "ac5a17064aa91e99e6de7862bc9123d98fdb26e09703ca3b2677fc01c6e59596",
+        "manifest_sha256": "9604b6893c6675831ed7c594e5847ef1b392e3b643cabcc28436faf0aec21063",
+        "gc_threads": 1,
+        "fftw_provider": "fftw",
+        "preferences": [],
+        "blas_backend": "LBTConfig([ILP64] libopenblas64_.so)",
+        "schema": "qcl-negf-toolchain-provenance/v1",
+        "julia_threads": 8
+      }
+    }
+  },
+  {
+    "P_basis": 5,
+    "periods": 11,
+    "basis_modes": 7,
+    "status": "static_rejected",
+    "message": "nodal shift quadrature-adjoint defect=0.01945878857634176; measured discretization error, assess collision and grid convergence; translation=0.14854627022686753 exceeds 0.1",
+    "configuration": {
+      "kind": "configuration",
+      "reference_sha256": "0faeedd211f3292c9bc1278685a199540cf410dde993fd48f6147892e834c831",
+      "point_sha256": "7a76f6d038025c39675d686ce55ad62a41f9875d0a99c39a9f3bcb75b4baa211",
+      "driver_sha256": "a1c4ced128b52f55681933f974b8a46c6322a496401c496a547eac30d34922b2",
+      "overrides_sha256": [
+        "141f7b3f820adc6313cd4936d50d08bd579cf47b4847c42ee83474e4f51d5ca4"
+      ],
+      "core": {
+        "version": "0.2.0",
+        "source_tree_sha256": "ab114fd74505ad03f0e4c79b19f5b3edc4bd5680cd9b2d7d5de304d139b21ef0",
+        "uuid": "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
+      },
+      "runner": {
+        "version": "0.2.0",
+        "source_tree_sha256": "4477e9fe53264fab7f668dc340a3a7d89d02acbc72f9ba93dc4764233ccd10f0",
+        "uuid": "5a147728-d76f-4a23-a474-c91379216907"
+      },
+      "runtime": {
+        "core_project_sha256": "226bd707fc4d86d03a4fbf3402a27e2455ad90ae1176ccbbe4efdc0faf75ae83",
+        "fftw_threads": 1,
+        "project_sha256": "ac5a17064aa91e99e6de7862bc9123d98fdb26e09703ca3b2677fc01c6e59596",
+        "architecture": "x86_64",
+        "runtime_binary_sha256": "67a838f879002604ac74b8de5c8f2d41e605fdfd4800b8bb3de9b5443e5315ff",
+        "kernel": "Linux",
+        "blas_threads": 1,
+        "julia_version": "1.13.4",
+        "runner_project_sha256": "ac5a17064aa91e99e6de7862bc9123d98fdb26e09703ca3b2677fc01c6e59596",
+        "manifest_sha256": "9604b6893c6675831ed7c594e5847ef1b392e3b643cabcc28436faf0aec21063",
+        "gc_threads": 1,
+        "fftw_provider": "fftw",
+        "preferences": [],
+        "blas_backend": "LBTConfig([ILP64] libopenblas64_.so)",
+        "schema": "qcl-negf-toolchain-provenance/v1",
+        "julia_threads": 8
+      }
+    }
+  },
+  {
+    "P_basis": 5,
+    "periods": 11,
+    "basis_modes": 6,
+    "status": "static_accepted"
+  }
+]
