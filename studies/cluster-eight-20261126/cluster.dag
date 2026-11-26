@@ -1,24 +1,19 @@
-# The cluster-side launcher materializes site/*.sub and scientific payloads
-# from README.md before submitting this graph. One queue item per submit file.
-JOB C0 site/C0.sub
-JOB C1 site/C1.sub
-JOB C2_LO site/C2_LO.sub
-JOB C2_MOVING site/C2_MOVING.sub
-JOB C3_PEAK site/C3_PEAK.sub
-JOB C3_CONTROL site/C3_CONTROL.sub
-JOB C5_Z site/C5_Z.sub
-JOB C6_IMP site/C6_IMP.sub
-JOB C7_WINDOW site/C7_WINDOW.sub
-JOB C4_ACCEL site/C4_ACCEL.sub
-JOB C8_V843 site/C8_V843.sub
-JOB C9_W10 site/C9_W10.sub
-
-PARENT C0 CHILD C1 C2_LO C2_MOVING C3_PEAK C3_CONTROL C5_Z C6_IMP C7_WINDOW C4_ACCEL
-PARENT C1 CHILD C9_W10
-PARENT C1 C2_LO C2_MOVING C3_PEAK C3_CONTROL CHILD C8_V843
-
-PRIORITY C4_ACCEL -10
-PRIORITY C9_W10 -5
-PRIORITY C8_V843 -5
+# Independent native V843 trajectories. No parent input, checkpoints or replay.
+JOB D125K9 native.sub
+VARS D125K9 field="12.5" rings="9" angles="32"
+JOB D125K17 native.sub
+VARS D125K17 field="12.5" rings="17" angles="32"
+JOB D125K33 native.sub
+VARS D125K33 field="12.5" rings="33" angles="32"
+JOB D21K9 native.sub
+VARS D21K9 field="21" rings="9" angles="32"
+JOB D21K17 native.sub
+VARS D21K17 field="21" rings="17" angles="32"
+JOB D21K33 native.sub
+VARS D21K33 field="21" rings="33" angles="32"
+JOB D21K17A128 native.sub
+VARS D21K17A128 field="21" rings="17" angles="128"
+JOB D21K33A128 native.sub
+VARS D21K33A128 field="21" rings="33" angles="128"
 NODE_STATUS_FILE nodes.status 60
-FINAL COLLECT site/COLLECT.sub
+FINAL COLLECT collect.sub

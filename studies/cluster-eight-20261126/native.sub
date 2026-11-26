@@ -1,0 +1,20 @@
+universe = vanilla
+executable = run-native.sh
+workers = 4
+budget_gib = 8
+iterations = 128
+arguments = $(field) $(rings) $(angles) $(iterations) $(workers) $(budget_gib)
+request_cpus = $(workers)
+request_memory = 10 GB
+request_disk = 2 GB
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = v843-src.tar.gz
+transfer_output_files = summary.toml
+transfer_output_remaps = "summary.toml=results/$(JOB).toml"
+output = logs/$(JOB).out
+error = logs/$(JOB).err
+log = events.log
++QCLCampaign = "dupont-native-angular-radial-v1"
++QCLArm = "$(JOB)"
+queue 1

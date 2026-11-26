@@ -1,0 +1,7 @@
+universe = local
+executable = /usr/bin/env
+arguments = python3 collect_v843.py
+output = logs/collect.out
+error = logs/collect.err
+log = events.log
+queue 1
