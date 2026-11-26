@@ -11,11 +11,11 @@
 :varies: QPAM_RANK
 :targets: QM_LO, QM_DYSON_NORMALIZATION
 :observes: QO_JZ, QO_CHARGE, QO_RESIDUAL, QO_STATIONARITY
-:status: planned
-:stationarity: unknown
+:status: completed
+:stationarity: failed
 :criteria: На двух поздних сопоставимых отметках верхняя граница D89 ниже нижней границы D78; по каждой свежей невязке отношение до 1,25.
-:evidence: QE_FATH_K31_RANK_TRAJECTORY, QE_FATH_K31_RANK_BALANCE, QE_FATH_K31_RANK_CONTROL
-:verdict: Зарегистрирован прогноз, новые измерения ожидаются.
+:evidence: QE_FATH_K31_RANK_TRAJECTORY, QE_FATH_K31_RANK_BALANCE, QE_FATH_K31_RANK_CONTROL, QE_FATH_COMMON_Q_SNAPSHOT
+:verdict: 32 карты на трёх рангах. На картах 24 и 32 центральная оценка D89 превышает D78, чувствительность к старту измеряется.
 
 Пользователь просит отделить транспортный ранг от координатной проекции, проверить локальные сгущения по вкладу в пространственный ток и оценить результат при сопоставимых свежих невязках. Точка тёмная, 54 мВ/период, 10 К, CBO 149 мэВ, нулевой Хартри, пять прежних каналов без e–e. Общие E481/K31, хвосты, границы, метод интегрирования, 145 сечений и источник со входа карты 48 F13. Ветка 7/Q21 первой картой воспроизводит архив. Transfer K в мере k dk, вложения источника и причинных якорей проверяются обратным ограничением.
 
@@ -43,11 +43,12 @@ D = max по 145 сечениям от модуля разности J посл�
 :varies: QPAM_RADIAL, QPAM_BENCH_ENERGY
 :targets: QM_LO, QM_DYSON_NORMALIZATION
 :observes: QO_JZ, QO_CHARGE, QO_RESIDUAL
-:status: planned
+:status: completed
 :stationarity: unknown
 :depends: QX_FATH_K31_COMMON_Q_RANK
 :criteria: Две фазы межузлового поиска; на общей физической мере полный J(z) и знаковый перепад; отношение свежих невязок до 1,25.
-:verdict: Локальные области выбираются по измеренному сигналу.
+:evidence: QE_FATH_COMMON_Q_SNAPSHOT
+:verdict: Две фазы межузловых проб не разрешили эффект для выбора пересобранной сетки.
 ```
 
 ```{qpoint} Bosco 200 К, 56 мВ на период
@@ -82,7 +83,7 @@ D = max по 145 сечениям от модуля разности J посл�
 ```{qevidence} Побитовое воспроизведение F13 на карте 48
 :id: QE_FATH_COMMON_Q_REPLAY
 :source: QE_FATH_MAP48
-:availability: local_commit
+:availability: published
 :role: common_input
 :locator: studies/fath54-common-q/evidence/f13-replay.json
 
@@ -92,9 +93,24 @@ D = max по 145 сечениям от модуля разности J посл�
 ```{qevidence} Допуск девятой моды и общая Q28
 :id: QE_FATH_COMMON_Q_BASIS
 :source: QE_FATH_COMMON_Q_REPLAY
-:availability: local_commit
+:availability: published
 :role: qualification
 :locator: studies/fath54-common-q/evidence/basis-qualified.json
 
 Допущен первый кандидат W9. В общей проекции 28 направлений. У девятой моды вес центрального периода 0,7132, покрытие собственной полосой длинной FD-цепочки 0,9986 и вес в рабочем энергетическом окне не менее 0,9956 на трёх контрольных радиусах. Вложение источника и отсекаемый остаток проекции проверены. [Первичные значения](../../studies/fath54-common-q/evidence/basis-qualified.json).
 ```
+
+
+## Результат основной лестницы и очередь
+
+```{qevidence} Поздние свежие карты на Q28 и локальные пробы
+:id: QE_FATH_COMMON_Q_SNAPSHOT
+:source: QE_FATH_COMMON_Q_REPLAY, QE_FATH_COMMON_Q_BASIS
+:availability: published
+:role: fresh_trajectory
+:locator: studies/fath54-common-q/evidence/fath-snapshot.jsonl
+
+На картах 24 и 32 обе свежие невязки сопоставимы. D₇₈ равно 9,205 и 9,216 А/см², D₈₉ равно 9,704 и 9,659 А/см². Вторая история и перенос Bosco остаются на исходной машине. [Отчёт](https://github.com/Afonenko-QCL-NEGF/qcl-negf/blob/research/fath54-common-q-bosco/studies/fath54-common-q/README.md) · [Независимая сверка](https://github.com/Afonenko-QCL-NEGF/qcl-negf/blob/research/fath54-common-q-bosco/studies/fath54-common-q/evidence/independent-rank-review.md).
+```
+
+[Очередь для кластера](https://github.com/Afonenko-QCL-NEGF/qcl-negf/blob/research/fath54-common-q-bosco/studies/fath54-common-q/cluster-queue.md) · [Стартовый промпт](https://github.com/Afonenko-QCL-NEGF/qcl-negf/blob/research/fath54-common-q-bosco/studies/fath54-common-q/cluster-prompt.md).

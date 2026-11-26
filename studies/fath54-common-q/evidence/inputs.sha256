@@ -1,0 +1,5 @@
+25d608a98548c489f6537a3f9fd3918220d137f036c65680d181d4d80a9898e5  .build/fath-dupont-next/work/method/checkpoints/linked-E481x13-step9-alpha050/spec.toml
+580ef5a026014ce725fbf3ffaae93a08bfd94d51010b6d212a4a9a39fca558d9  .build/fath-dupont-next/work/method/checkpoints/linked-E481x13-step9-alpha050/seed_packed_LG.bin
+3f954e90fc47eeb141a1a726ad16358c77b5db845946b5b19355892ffa9548f3  .build/fath-dupont-next/work/baseline/radial-regrid/input-E481x25-x9/spec.toml
+9ad6f3815dfeda5e199a5201132dab00a4b9eef2858a7ea7bdd11416610399ba  .build/fath54-20261120/work/05-iterator/runs/causal-native-512/model.h5
+e5bc08c16ad4c4681db49a3c641e9214fafadf7f294ada67fd642551dd10cc3c  .build/fath54-stability-night/runs/primary7.jsonl.radial.json

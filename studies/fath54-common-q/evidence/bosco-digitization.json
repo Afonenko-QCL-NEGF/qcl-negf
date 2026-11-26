@@ -1,0 +1,37 @@
+{
+  "pdf_sha256": "b103b3da9fa977d1dc682d1e2caf96d74b5f081731e4db0da944af675a58dc70",
+  "archived_csv_sha256": "af6d222b4b1cbdf351f569628c5e62c7983e85909670e26663892bd08477da88",
+  "pdfplumber": "0.11.9",
+  "page_one_based": 4,
+  "curve_index_zero_based": 192,
+  "vertex_count": 61,
+  "x_zero": 347.40058,
+  "x_at_J_3p5": 504.25461999999993,
+  "x_at_I_10": 513.3853499999999,
+  "y_at_V_zero": 213.27183000000002,
+  "y_at_V_30": 84.22808999999995,
+  "x_right_border": 521.68588,
+  "border_in_amps": 10.500077808343507,
+  "peak": {
+    "vertex_zero_based": 55,
+    "x": 508.89527,
+    "y_top": 119.09257000000002,
+    "J_top_axis_kA_cm2": 3.6035502496461054,
+    "I_lower_axis_A": 9.729488434390703,
+    "area_cm2": 0.0026999999999999997,
+    "J_area_kA_cm2": 3.60351423495952,
+    "voltage_on_figure_V": 21.894729647482308,
+    "implied_voltage_ratio": 390.97731513361265,
+    "half_line_width_J_kA_cm2": 0.009262432768706502
+  },
+  "candidate_neighbour": {
+    "vertex": 56,
+    "J": 3.60272240995514,
+    "Vp_using_peak_anchor": 57.00976796802185
+  },
+  "lowest_model_vertex": {
+    "plotted_V": 0.3947638219413171,
+    "J_kA_cm2": 0.07245471649949121,
+    "Vp_using_peak_anchor": 1.0096847225174956
+  }
+}
