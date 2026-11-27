@@ -2,7 +2,7 @@
 
 julia_version = "1.13.4"
 manifest_format = "2.1"
-project_hash = "b1ac8281629ee62f56d2c32dc7c5d64137addf3f"
+project_hash = "cd6cb408a4c2b2723d504ba7a8d1a7b68ab01b60"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -362,8 +362,8 @@ version = "1.11.0"
 
 [[deps.QCLNEGF]]
 deps = ["FFTW", "LinearAlgebra", "Logging", "PrecompileTools", "Roots", "SHA", "SparseArrays", "Unitful"]
-git-tree-sha1 = "3cbe3fb1064a18aec5a4522222c2bcbf7da25ebf"
-repo-rev = "c2f45cae21c3e2e4257805ea9c30f9c1d80a7515"
+git-tree-sha1 = "8f9346f56da1ec40c58f4707035c2349bb31968f"
+repo-rev = "0eba158d21148e0cb3f8c4dae31195aad1f2a43d"
 repo-url = "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl.git"
 uuid = "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
 version = "0.2.0"
