@@ -91,7 +91,7 @@ function main(args)
         a, b, phases = spectra(v, mass, dz, nperiod, phi)
         delta = abs.(a .- b)
         out["boundary_phase_results"][name] = Dict(
-            "phase_radians" => phi, "bloch_phases_radians" => phases,
+            "phase_radians" => Float64(phi), "bloch_phases_radians" => phases,
             "count" => length(a), "max_abs_difference_meV" => 1000maximum(delta),
             "rms_difference_meV" => 1000sqrt(sum(abs2, delta)/length(delta)),
             "ring_spectrum_eV" => a, "primitive_union_spectrum_eV" => b)
