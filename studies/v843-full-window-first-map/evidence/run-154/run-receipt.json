@@ -1,0 +1,481 @@
+{
+  "dag_id": "154.0",
+  "core_commit": "0eba158d21148e0cb3f8c4dae31195aad1f2a43d",
+  "source_sha256": "5b59c814eaa3a2025e12b933983ac65cda192456edb2f302de741265d1f46daf",
+  "protocol_sha256": "10c9afcee7df57ba03815f8b4fb11f9fbe257cb41f4c80167b66bd256a4031d5",
+  "manifest_sha256": "0f682678bee9c0284ee4c6de0da17deb6add8a4e608561823afe4bb4afc45474",
+  "plans": {
+    "b11.json": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+    "b9.json": "78a2d4fe20bb4c29280ae9d40b5fcaab04b30b7dc5046dea132c7ec7e32c1229"
+  },
+  "planning_commit": "f413ff903c06ea10eaa2be6e2a2ba316f7284c78",
+  "executor_commit": "082de5a9c78a5251c222e2b2e9576dfff853f1a8",
+  "schema": "v843-full-window-run-receipt/1",
+  "date": "2026-11-27",
+  "placement": {
+    "machines": 7,
+    "linux_machines": 1,
+    "windows_machines": 6,
+    "slot_cpus_total": 208
+  },
+  "finalizer": {
+    "original_final_cluster": "165.0",
+    "original_final_exit_code": 1,
+    "recovery_source_commit": "6f3139a79b1badcb16b2902c0a54e5332f9132e5",
+    "dag_exit_code": 1,
+    "pre_final_dag_status": 0,
+    "failed_science_nodes_before_final": 0,
+    "recovered": true
+  },
+  "tasks": {
+    "BASIS": {
+      "process": "completed",
+      "scientific_status": "checks_passed",
+      "os": "linux",
+      "allocated_cpus": 28,
+      "allocated_memory_mib": 38912,
+      "threads": {
+        "julia": 1,
+        "blas": 28
+      },
+      "queue_seconds": 10,
+      "wall_seconds": 58.0,
+      "scheduler_cpu_seconds": 291.0,
+      "worker_plus_child_cpu_seconds": 291.760079996,
+      "worker_child_peak_memory_bytes": 1305579520,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 732.421875,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.6982026670011692
+        },
+        "runtime": {
+          "cpu_seconds": 11.364821,
+          "peak_rss_bytes": 493969408,
+          "memory_source": "wait4 ru_maxrss (Linux KiB)",
+          "wall_seconds": 8.32960436600115,
+          "exit_code": 0
+        },
+        "science": {
+          "cpu_seconds": 278.892022,
+          "peak_rss_bytes": 1305579520,
+          "memory_source": "wait4 ru_maxrss (Linux KiB)",
+          "wall_seconds": 48.09472794099929,
+          "exit_code": 0
+        }
+      },
+      "basis_sha256": null,
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "99a023fb55c5c116616461637f72a4e534ace3b52229d57cd843ad07b1bc20b8",
+      "parent_receipts_sha256": {},
+      "scheduler_exit_code": 0
+    },
+    "NEIGHBOR": {
+      "process": "completed",
+      "scientific_status": "checks_passed",
+      "os": "windows",
+      "allocated_cpus": 30,
+      "allocated_memory_mib": 19456,
+      "threads": {
+        "julia": 1,
+        "blas": 30
+      },
+      "queue_seconds": 15,
+      "wall_seconds": 92.0,
+      "scheduler_cpu_seconds": 36.0,
+      "worker_plus_child_cpu_seconds": 29.15625,
+      "worker_child_peak_memory_bytes": 1070325760,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 1220.703125,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.9330226993188262
+        },
+        "instantiate": {
+          "cpu_seconds": 2.296875,
+          "peak_rss_bytes": 344834048,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 12.240822999738157,
+          "exit_code": 0
+        },
+        "runtime": {
+          "cpu_seconds": 3.640625,
+          "peak_rss_bytes": 352059392,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 51.151986699551344,
+          "exit_code": 0
+        },
+        "science": {
+          "cpu_seconds": 22.4375,
+          "peak_rss_bytes": 1070325760,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 25.41908339969814,
+          "exit_code": 0
+        }
+      },
+      "basis_sha256": null,
+      "plan_sha256": "78a2d4fe20bb4c29280ae9d40b5fcaab04b30b7dc5046dea132c7ec7e32c1229",
+      "returned_sha256": "9ac78a45cbbb0186de11a3b48e435308d7349ce0be9dd2fd046e697bc7fd2d75",
+      "parent_receipts_sha256": {},
+      "scheduler_exit_code": 0
+    },
+    "HOP": {
+      "process": "completed",
+      "scientific_status": "reject",
+      "os": "windows",
+      "allocated_cpus": 30,
+      "allocated_memory_mib": 19456,
+      "threads": {
+        "julia": 1,
+        "blas": 30
+      },
+      "queue_seconds": 61,
+      "wall_seconds": 86.0,
+      "scheduler_cpu_seconds": 8.0,
+      "worker_plus_child_cpu_seconds": 19.65625,
+      "worker_child_peak_memory_bytes": 845529088,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 732.421875,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 1.0075741996988654
+        },
+        "instantiate": {
+          "cpu_seconds": 2.609375,
+          "peak_rss_bytes": 338092032,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 15.90201390068978,
+          "exit_code": 0
+        },
+        "runtime": {
+          "cpu_seconds": 3.078125,
+          "peak_rss_bytes": 355749888,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 51.12603319995105,
+          "exit_code": 0
+        },
+        "science": {
+          "cpu_seconds": 13.1875,
+          "peak_rss_bytes": 845529088,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 14.898678299970925,
+          "exit_code": 0
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "556855e8208428a2a802677499ccc0951d8bcfa1ac7def36a131d184b9f1a212",
+      "parent_receipts_sha256": {
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938"
+      },
+      "scheduler_exit_code": 0
+    },
+    "ELASTIC": {
+      "process": "completed",
+      "scientific_status": "reject",
+      "os": "windows",
+      "allocated_cpus": 30,
+      "allocated_memory_mib": 14336,
+      "threads": {
+        "julia": 1,
+        "blas": 30
+      },
+      "queue_seconds": 60,
+      "wall_seconds": 97.0,
+      "scheduler_cpu_seconds": 26.0,
+      "worker_plus_child_cpu_seconds": 25.4375,
+      "worker_child_peak_memory_bytes": 1503203328,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 1464.84375,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.9892787999706343
+        },
+        "instantiate": {
+          "cpu_seconds": 1.890625,
+          "peak_rss_bytes": 339927040,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 12.026663600001484,
+          "exit_code": 0
+        },
+        "runtime": {
+          "cpu_seconds": 3.015625,
+          "peak_rss_bytes": 354181120,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 51.600783800007775,
+          "exit_code": 0
+        },
+        "science": {
+          "cpu_seconds": 20.53125,
+          "peak_rss_bytes": 1503203328,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 28.848903200007044,
+          "exit_code": 0
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "66a67afa8fd89a807c699a9e017ea1dc29642b66983c04040b7c3b2fd1c5ec45",
+      "parent_receipts_sha256": {
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938"
+      },
+      "scheduler_exit_code": 0
+    },
+    "PHONON": {
+      "process": "completed",
+      "scientific_status": "checks_passed",
+      "os": "windows",
+      "allocated_cpus": 30,
+      "allocated_memory_mib": 15360,
+      "threads": {
+        "julia": 1,
+        "blas": 30
+      },
+      "queue_seconds": 60,
+      "wall_seconds": 95.0,
+      "scheduler_cpu_seconds": 26.0,
+      "worker_plus_child_cpu_seconds": 24.75,
+      "worker_child_peak_memory_bytes": 1458880512,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 1464.84375,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.9943969000014476
+        },
+        "instantiate": {
+          "cpu_seconds": 2.09375,
+          "peak_rss_bytes": 342155264,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 12.311589299992193,
+          "exit_code": 0
+        },
+        "runtime": {
+          "cpu_seconds": 3.046875,
+          "peak_rss_bytes": 354447360,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 52.19419760000892,
+          "exit_code": 0
+        },
+        "science": {
+          "cpu_seconds": 19.609375,
+          "peak_rss_bytes": 1458880512,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 25.98030130000552,
+          "exit_code": 0
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "e04b35af6d9a5d30b7cf307741c56f4379fa081d21b51344f37aabe885eecc49",
+      "parent_receipts_sha256": {
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938"
+      },
+      "scheduler_exit_code": 0
+    },
+    "CUTS": {
+      "process": "completed",
+      "scientific_status": "checks_passed",
+      "os": "windows",
+      "allocated_cpus": 30,
+      "allocated_memory_mib": 15360,
+      "threads": {
+        "julia": 1,
+        "blas": 30
+      },
+      "queue_seconds": 60,
+      "wall_seconds": 90.0,
+      "scheduler_cpu_seconds": 6.0,
+      "worker_plus_child_cpu_seconds": 19.96875,
+      "worker_child_peak_memory_bytes": 845172736,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 415.0390625,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.9933757999970112
+        },
+        "instantiate": {
+          "cpu_seconds": 2.515625,
+          "peak_rss_bytes": 341893120,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 14.698857299998053,
+          "exit_code": 0
+        },
+        "runtime": {
+          "cpu_seconds": 3.046875,
+          "peak_rss_bytes": 352333824,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 53.00754190000589,
+          "exit_code": 0
+        },
+        "science": {
+          "cpu_seconds": 13.53125,
+          "peak_rss_bytes": 845172736,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 15.347173999994993,
+          "exit_code": 0
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "a4b72a69ad5022f11c1713cac9a48be970f9da8e823d5a7c76e4e8ef4d3966ce",
+      "parent_receipts_sha256": {
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938"
+      },
+      "scheduler_exit_code": 0
+    },
+    "SEED": {
+      "process": "completed",
+      "scientific_status": "checks_passed",
+      "os": "windows",
+      "allocated_cpus": 30,
+      "allocated_memory_mib": 14336,
+      "threads": {
+        "julia": 1,
+        "blas": 30
+      },
+      "queue_seconds": 60,
+      "wall_seconds": 119.0,
+      "scheduler_cpu_seconds": 29.0,
+      "worker_plus_child_cpu_seconds": 29.890625,
+      "worker_child_peak_memory_bytes": 2257264640,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 2197.265625,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.9861733000725508
+        },
+        "instantiate": {
+          "cpu_seconds": 2.265625,
+          "peak_rss_bytes": 343642112,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 13.137158599682152,
+          "exit_code": 0
+        },
+        "runtime": {
+          "cpu_seconds": 3.234375,
+          "peak_rss_bytes": 353968128,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 52.23052670061588,
+          "exit_code": 0
+        },
+        "science": {
+          "cpu_seconds": 24.125,
+          "peak_rss_bytes": 2257264640,
+          "memory_source": "Windows PeakWorkingSetSize (bytes)",
+          "wall_seconds": 49.664856700226665,
+          "exit_code": 0
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "b1a987d10523ed89d3770bdb8e739a0ea899c58246a4faea8ca65606ef1b0cb3",
+      "parent_receipts_sha256": {
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938"
+      },
+      "scheduler_exit_code": 0
+    },
+    "ADMIT": {
+      "process": "completed",
+      "scientific_status": "reject",
+      "os": "linux",
+      "allocated_cpus": 28,
+      "allocated_memory_mib": 38912,
+      "threads": null,
+      "queue_seconds": 49,
+      "wall_seconds": 4.0,
+      "scheduler_cpu_seconds": 3.0,
+      "worker_plus_child_cpu_seconds": 3.3532932680000003,
+      "worker_child_peak_memory_bytes": null,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": null,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.7364390469992941
+        },
+        "science": {
+          "wall_seconds": 2.6176513860009436,
+          "cpu_seconds": 2.616915621
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "e9cc3569f5b5b9b01f9c24a9aef7fedf63f85c7a8517bc4cfbc5a899a2cf0949",
+      "parent_receipts_sha256": {
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938",
+        "CUTS": "96bca23c8d25e31cd8289d2346cf1c2aeba11b0bffe933d4fca5e59a43553183",
+        "ELASTIC": "7673a5b279c3070e134301cf70908874292e8c4c30c111655fb3902c975389a2",
+        "HOP": "a5305aeecb0247ba8b5482ef405bf276b17334487455d972dae996705fc29b9d",
+        "NEIGHBOR": "4b8b9665e7d207582c6861a68c6ae03297ef55efb1a398a5a5db5016c0036afb",
+        "PHONON": "ba93e38e129dc235e39af24d4adf0ab38692f7244f7df413df7c4b1482fab748",
+        "SEED": "a0e0fc580a9950a9008785b0827855389c642d6725e03e9d77e213c8430feac6"
+      },
+      "scheduler_exit_code": 0
+    },
+    "MAP": {
+      "process": "completed",
+      "scientific_status": "skipped_by_gate",
+      "os": "linux",
+      "allocated_cpus": 28,
+      "allocated_memory_mib": 38912,
+      "threads": null,
+      "queue_seconds": 290,
+      "wall_seconds": 0.0,
+      "scheduler_cpu_seconds": 0.0,
+      "worker_plus_child_cpu_seconds": 0.06523962999999999,
+      "worker_child_peak_memory_bytes": null,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": null,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.06521144399812329
+        },
+        "science": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "9f89760abaee77ce1e9555285e12400abd6b2ea45c450e81035496865cff5c7a",
+      "parent_receipts_sha256": {
+        "ADMIT": "df331f54046639a76ae25dae531e96942811b7d1862addf8af1ef5b5e30521d1",
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938",
+        "SEED": "a0e0fc580a9950a9008785b0827855389c642d6725e03e9d77e213c8430feac6"
+      },
+      "scheduler_exit_code": 0
+    },
+    "READ": {
+      "process": "completed",
+      "scientific_status": "skipped_by_gate",
+      "os": "windows",
+      "allocated_cpus": 30,
+      "allocated_memory_mib": 19456,
+      "threads": null,
+      "queue_seconds": 55,
+      "wall_seconds": 1.0,
+      "scheduler_cpu_seconds": 0.0,
+      "worker_plus_child_cpu_seconds": 0.015625,
+      "worker_child_peak_memory_bytes": null,
+      "scheduler_memory_usage_mib": null,
+      "scheduler_sampled_rss_mib": 1.708984375,
+      "phases": {
+        "delivery": {
+          "wall_seconds": 0.06397479958832264
+        },
+        "science": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0
+        }
+      },
+      "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+      "plan_sha256": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+      "returned_sha256": "4c1593fe2968e789b46f1de95479bf43d9bea6cb90c6b512c96abb02eafbf779",
+      "parent_receipts_sha256": {
+        "ADMIT": "df331f54046639a76ae25dae531e96942811b7d1862addf8af1ef5b5e30521d1",
+        "BASIS": "f382826701394532bccae936420efbb98581ecc32866044798fd917b23667938",
+        "MAP": "2f2bea41bf500e828a6c4d966a7d93ef0ea87a60c3ad127a09f193be9d66d57d"
+      },
+      "scheduler_exit_code": 0
+    }
+  }
+}

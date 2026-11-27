@@ -1,0 +1,1473 @@
+{
+  "dag_id": "154.0",
+  "core_commit": "0eba158d21148e0cb3f8c4dae31195aad1f2a43d",
+  "source_sha256": "5b59c814eaa3a2025e12b933983ac65cda192456edb2f302de741265d1f46daf",
+  "protocol_sha256": "10c9afcee7df57ba03815f8b4fb11f9fbe257cb41f4c80167b66bd256a4031d5",
+  "manifest_sha256": "0f682678bee9c0284ee4c6de0da17deb6add8a4e608561823afe4bb4afc45474",
+  "plans": {
+    "b11.json": "b7fbff6c750fcdd9c682d76cf0c05ad8b6ed2fc51ad4fd6610694a30553f3825",
+    "b9.json": "78a2d4fe20bb4c29280ae9d40b5fcaab04b30b7dc5046dea132c7ec7e32c1229"
+  },
+  "planning_commit": "f413ff903c06ea10eaa2be6e2a2ba316f7284c78",
+  "executor_commit": "082de5a9c78a5251c222e2b2e9576dfff853f1a8",
+  "schema": "v843-full-window-scientific-summary/1",
+  "decision": "reject",
+  "blocking": [
+    {
+      "operator": "Shifted neighboring projected H(k) blocks, relative Frobenius",
+      "value": 0.00047648545300338493,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "reject"
+    },
+    {
+      "operator": "impurity / local diagonal control quadrature",
+      "value": 0.04056420949910892,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "reject"
+    },
+    {
+      "operator": "impurity / local coherent control quadrature",
+      "value": 0.04824175205814913,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "reject"
+    }
+  ],
+  "fresh_map_calls": 0,
+  "current_A_cm2": null,
+  "basis_sha256": "230bb2c2e2728c318999807f3c2c3ea068aa508ca89eb5ba133bc46cba8a0d22",
+  "spectra": {
+    "BASIS": {
+      "periods": 11,
+      "modes_per_period": 11,
+      "spatial_nodes": 288,
+      "local_rank": 30,
+      "mode_metric_relative": 2.0417134424635238e-14,
+      "q_metric_relative": 9.820087763937293e-16,
+      "singular_cutoff": 9.801998315157668e-13,
+      "tail_loss_by_period": [
+        5.218672643093922e-14,
+        5.4860062142537933e-14,
+        5.382376140247714e-14,
+        5.414282164697962e-14,
+        5.6417774075164344e-14,
+        5.694128068229987e-14,
+        5.6091723157996403e-14,
+        5.175448718580456e-14,
+        5.5934089560477125e-14,
+        6.07921773248556e-14,
+        1.1232971880555507e-13
+      ],
+      "period_translation_errors": [
+        0.02169270889264674,
+        0.003665059179413621,
+        0.0009499943303482583,
+        0.0002910892775757068,
+        0.0001216145134960156,
+        0.00011892102344168709,
+        0.00027697424670880544,
+        0.0008430802446843799,
+        0.0029835401150415386,
+        0.026278145621679738
+      ],
+      "subspace_residual": 1.8783305571550682e-13,
+      "restricted_vs_cell_absolute_eV": 3.115285807098189e-13,
+      "plan_fingerprint": "684050c866d93184d4540cc545ec6596bbbe2b83893fd7f8f6e317fdc41dd0ca",
+      "fits": {
+        "full": {
+          "common_shift_nm": -20.18933333333333,
+          "energy_offset_model_minus_article_meV": -11.344549147530657,
+          "energy_rms_meV": 1.843003190764101,
+          "shape_margin": 0.04943102396705512,
+          "energy_margin_meV": 6.9292701287996685,
+          "mean_cosine": 0.9211424067690026,
+          "role_cosines": {
+            "u": 0.9958434053497006,
+            "l": 0.9815834625661067,
+            "e": 0.832676456293344,
+            "i": 0.8744663028668592
+          },
+          "role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 13.643983487412033,
+            "l": 2.9682043245726,
+            "e": -28.164835112180025,
+            "i": 47.22015071007276
+          },
+          "reasons": [],
+          "admitted": true
+        },
+        "restricted": {
+          "common_shift_nm": -19.586666666666666,
+          "energy_offset_model_minus_article_meV": -3.3663654359518747,
+          "energy_rms_meV": 13.210203277955022,
+          "shape_margin": 0.032087520362572786,
+          "energy_margin_meV": 6.626222198041893,
+          "mean_cosine": 0.8384692707765715,
+          "role_cosines": {
+            "u": 0.9479066074407628,
+            "l": 0.8496678207375309,
+            "e": 0.7166692926924256,
+            "i": 0.8396333622355671
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 11.512421811374583,
+            "l": 30.548802621859284,
+            "e": -22.94456616313876,
+            "i": 48.46357998609739
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      "central_translation": [
+        0.0001216145134960156,
+        0.00011892102344168709,
+        0.00027697424670880544
+      ],
+      "edge_translation": [
+        0.02169270889264674,
+        0.026278145621679738
+      ]
+    },
+    "NEIGHBOR": {
+      "periods": 9,
+      "modes_per_period": 11,
+      "spatial_nodes": 288,
+      "local_rank": 31,
+      "mode_metric_relative": 1.0308595138222562e-14,
+      "q_metric_relative": 9.57372438683434e-16,
+      "singular_cutoff": 5.935252289646069e-13,
+      "tail_loss_by_period": [
+        5.7131640676571115e-15,
+        5.4884787177546295e-15,
+        4.866317822153445e-15,
+        5.203885517807812e-15,
+        4.841240236313146e-15,
+        4.883619112191874e-15,
+        4.99536341191845e-15,
+        4.715756091932459e-15,
+        6.30437909338791e-15
+      ],
+      "period_translation_errors": [
+        0.021695049340266226,
+        0.0036696184189696224,
+        0.0009635185794960588,
+        0.00036881353025208785,
+        0.00035813565740827613,
+        0.0008700928314022693,
+        0.0029851692909655947,
+        0.026279378999365832
+      ],
+      "subspace_residual": 1.6941088360774102e-13,
+      "restricted_vs_cell_absolute_eV": 1.3766765505351941e-14,
+      "plan_fingerprint": "20e720de13a9f2b83f6f05b49d34a34d8058bf0cbbf9e00c158fbaa6936d2132",
+      "fits": {
+        "full": {
+          "common_shift_nm": -20.18933333333333,
+          "energy_offset_model_minus_article_meV": -11.338447768839155,
+          "energy_rms_meV": 1.8482940164016601,
+          "shape_margin": 0.04940370807205874,
+          "energy_margin_meV": 6.920287548472972,
+          "mean_cosine": 0.9210801062680505,
+          "role_cosines": {
+            "u": 0.9958146660095083,
+            "l": 0.9814660905899182,
+            "e": 0.8325733232621472,
+            "i": 0.874466345210628
+          },
+          "role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 13.64663974524974,
+            "l": 2.983093752681805,
+            "e": -28.158456634623075,
+            "i": 47.22063206133491
+          },
+          "reasons": [],
+          "admitted": true
+        },
+        "restricted": {
+          "common_shift_nm": -19.586666666666666,
+          "energy_offset_model_minus_article_meV": -3.364619412791165,
+          "energy_rms_meV": 13.21241335333357,
+          "shape_margin": 0.03207982667156106,
+          "energy_margin_meV": 6.626823493775222,
+          "mean_cosine": 0.8384583610915985,
+          "role_cosines": {
+            "u": 0.9479090705287105,
+            "l": 0.849645109671262,
+            "e": 0.7166476663484355,
+            "i": 0.839631597817986
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 11.512652300622626,
+            "l": 30.55443355186058,
+            "e": -22.943932913088265,
+            "i": 48.4640694094404
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      "central_translation": [
+        0.00036881353025208785,
+        0.00035813565740827613,
+        0.0008700928314022693
+      ],
+      "edge_translation": [
+        0.021695049340266226,
+        0.026279378999365832
+      ]
+    }
+  },
+  "operators": {
+    "alloy": [
+      {
+        "input": "local diagonal",
+        "same_discretization_absolute": 2.1037366903553636e-18,
+        "reference_refinement_relative": 0.0,
+        "minimum_psd_relative": -1.579103525965484e-17,
+        "reference_angular_nodes": [
+          128
+        ],
+        "same_discretization_relative": 3.4355169900931724e-16,
+        "quadrature_absolute": 2.1037366903553636e-18,
+        "quadrature_relative": 3.4355169900931724e-16
+      },
+      {
+        "input": "local coherent",
+        "same_discretization_absolute": 1.6045558076967854e-18,
+        "reference_refinement_relative": 0.0,
+        "minimum_psd_relative": -2.074013184521437e-17,
+        "reference_angular_nodes": [
+          128
+        ],
+        "same_discretization_relative": 3.5716566075983165e-16,
+        "quadrature_absolute": 1.6045558076967854e-18,
+        "quadrature_relative": 3.5716566075983165e-16
+      }
+    ],
+    "IFR": [
+      {
+        "input": "local diagonal",
+        "same_discretization_absolute": 1.5194492851638112e-16,
+        "reference_refinement_relative": 2.3460765176584587e-16,
+        "minimum_psd_relative": -2.4757820187053524e-16,
+        "reference_angular_nodes": [
+          128,
+          256,
+          512
+        ],
+        "same_discretization_relative": 2.5146561204537924e-16,
+        "quadrature_absolute": 1.5142640860635085e-10,
+        "quadrature_relative": 2.50607472687902e-10
+      },
+      {
+        "input": "local coherent",
+        "same_discretization_absolute": 1.5959548662808626e-16,
+        "reference_refinement_relative": 1.9130969125346458e-16,
+        "minimum_psd_relative": -1.6604708491904514e-16,
+        "reference_angular_nodes": [
+          128,
+          256,
+          512
+        ],
+        "same_discretization_relative": 2.793544701285539e-16,
+        "quadrature_absolute": 7.851736505137729e-11,
+        "quadrature_relative": 1.3743607274857467e-10
+      }
+    ],
+    "acoustic": [
+      {
+        "input": "local diagonal",
+        "same_discretization_absolute": 3.378072302952615e-19,
+        "reference_refinement_relative": 0.0,
+        "minimum_psd_relative": 0.05950387424275664,
+        "reference_angular_nodes": [
+          128
+        ],
+        "same_discretization_relative": 3.976276462305986e-16,
+        "quadrature_absolute": 3.378072302952615e-19,
+        "quadrature_relative": 3.976276462305986e-16
+      },
+      {
+        "input": "local coherent",
+        "same_discretization_absolute": 2.607542019942158e-19,
+        "reference_refinement_relative": 0.0,
+        "minimum_psd_relative": 0.0032233098051895606,
+        "reference_angular_nodes": [
+          128
+        ],
+        "same_discretization_relative": 5.217668499550043e-16,
+        "quadrature_absolute": 2.607542019942158e-19,
+        "quadrature_relative": 5.217668499550043e-16
+      }
+    ],
+    "impurity": [
+      {
+        "input": "local diagonal",
+        "same_discretization_absolute": 8.778926391767207e-19,
+        "reference_refinement_relative": 0.0005260696114401003,
+        "minimum_psd_relative": 0.009671712464360048,
+        "reference_angular_nodes": [
+          128,
+          1024,
+          2048
+        ],
+        "same_discretization_relative": 1.4896370668443868e-15,
+        "quadrature_absolute": 2.348208020258403e-05,
+        "quadrature_relative": 0.04056420949910892
+      },
+      {
+        "input": "local coherent",
+        "same_discretization_absolute": 1.191452681506977e-18,
+        "reference_refinement_relative": 0.0006196650523317661,
+        "minimum_psd_relative": -2.9082262383605534e-16,
+        "reference_angular_nodes": [
+          128,
+          1024,
+          2048
+        ],
+        "same_discretization_relative": 1.8464794786944325e-15,
+        "quadrature_absolute": 3.0448901640306556e-05,
+        "quadrature_relative": 0.04824175205814913
+      }
+    ],
+    "LO": [
+      {
+        "input": "local diagonal",
+        "same_discretization_absolute": 3.2080191680007967e-18,
+        "reference_refinement_relative": 4.978445584538915e-07,
+        "minimum_psd_relative": 0.07092156485677358,
+        "reference_angular_nodes": [
+          128,
+          256,
+          512
+        ],
+        "same_discretization_relative": 4.026679876738803e-16,
+        "quadrature_absolute": 1.7310566333566356e-06,
+        "quadrature_relative": 0.00021732683930281177
+      },
+      {
+        "input": "local coherent",
+        "same_discretization_absolute": 2.699132474475214e-18,
+        "reference_refinement_relative": 2.3558820087588586e-06,
+        "minimum_psd_relative": 0.0005215621164077299,
+        "reference_angular_nodes": [
+          128,
+          256,
+          512
+        ],
+        "same_discretization_relative": 4.474859137839978e-16,
+        "quadrature_absolute": 7.271221071886963e-06,
+        "quadrature_relative": 0.0012059060704220235
+      }
+    ]
+  },
+  "window_comparison": {
+    "admitted": true,
+    "role_cosines": {
+      "u": 0.9999998398566735,
+      "l": 0.9999995964292653,
+      "e": 0.9999998353457907,
+      "i": 0.9999999996745067
+    },
+    "relative_energy_max_change_meV": 0.014408076847052698,
+    "near_degenerate_adjacent_indices_zero_based": [
+      [],
+      []
+    ],
+    "near_degenerate_gap_meV": 0.001
+  },
+  "hamiltonian": {
+    "operator": "BDD Hamiltonian and transverse parabolic dispersion",
+    "reach": 10,
+    "period_drop_meV": 75.936,
+    "metric_relative": 2.041713442463515e-14,
+    "action_relative_by_ring": [
+      4.161561365084919e-15,
+      4.128613037964577e-15,
+      4.1718271897588006e-15,
+      4.166502810390927e-15,
+      4.107345752765915e-15,
+      4.077700158531542e-15,
+      4.017062711442192e-15,
+      3.961671846829342e-15,
+      3.904808441454571e-15,
+      3.817254754293123e-15,
+      3.665398380864718e-15,
+      3.616997669155881e-15,
+      3.4664231943876785e-15,
+      3.386425610101938e-15,
+      3.2583482871728954e-15,
+      3.097395862747857e-15,
+      3.0494023409239456e-15
+    ],
+    "hermiticity_relative_by_ring": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "aligned_central_block_rms_meV_by_ring": [
+      0.11166984325852418,
+      0.11168460008143595,
+      0.1117288863978958,
+      0.11180274968821279,
+      0.1119062688772321,
+      0.11203955402200613,
+      0.11220274587654426,
+      0.11239601533602028,
+      0.112619562762958,
+      0.11287361719909379,
+      0.1131584354665917,
+      0.11347430116336411,
+      0.11382152355778724,
+      0.11420043638820565,
+      0.11461139657406413,
+      0.11505478284521167,
+      0.11553099429682771
+    ],
+    "central_block_shift_relative_by_ring": [
+      0.00047648545300338493,
+      0.00047543699309663296,
+      0.00047230667896714886,
+      0.00046714054535136937,
+      0.000460017733129676,
+      0.00045105290186263456,
+      0.0004403975444582404,
+      0.000428238892171224,
+      0.0004147955690797429,
+      0.0004003099023551081,
+      0.0003850375890915199,
+      0.0003692360190791997,
+      0.0003531527917450235,
+      0.00033701581680894435,
+      0.0003210259531131787,
+      0.00030535258787646105,
+      0.0002901320517713802
+    ],
+    "coordinate_translation_relative_by_ring": [
+      1.1164276151118035e-16,
+      1.1350611359037457e-16,
+      1.6925733722775145e-16,
+      1.3519719010731008e-16,
+      1.35188244985493e-16,
+      1.3038993941836156e-16,
+      1.310863401494145e-16,
+      1.3139682102021895e-16,
+      1.071521924865333e-16,
+      1.2516248932703542e-16,
+      1.1024436253125656e-16,
+      1.060952340363137e-16,
+      8.514640680650127e-17,
+      7.960292820805564e-17,
+      7.430957527395506e-17,
+      7.171173790014605e-17,
+      6.55523092096451e-17
+    ],
+    "shift_gauge_overlap_singular_values": [
+      0.9999999991720558,
+      0.9999999714571421,
+      0.9999998473178942,
+      0.9999993633382962,
+      0.9999991651082013,
+      0.9999775617694394,
+      0.9998778080807079,
+      0.998441218678616,
+      0.9898664478215046,
+      0.9012683403582807,
+      0.8074327751523793
+    ],
+    "max_block_norm_meV_by_ring_and_reach": [
+      [
+        1925.474585919233,
+        99.99575595353485,
+        1.805849803220377,
+        0.45847522017896214,
+        0.16106263941438342,
+        0.06525121703825162,
+        0.028647914596913394,
+        0.013234772869602214,
+        0.00632995053915995,
+        0.0031202450075945667,
+        0.0015865866244993056
+      ],
+      [
+        1927.867949689864,
+        99.99634603719414,
+        1.8072869466471866,
+        0.4590987798363157,
+        0.16136253048498958,
+        0.06540348673042402,
+        0.02872787508946605,
+        0.013277820596622414,
+        0.006353690915782887,
+        0.0031336966648913725,
+        0.0015935812354585435
+      ],
+      [
+        1935.0500406155543,
+        99.99814632917902,
+        1.8116597905829948,
+        0.46100729759858394,
+        0.1622847977027409,
+        0.06587371237734642,
+        0.028975713547197877,
+        0.013411686252604514,
+        0.006427731650863404,
+        0.0031757890539795995,
+        0.001615786483622034
+      ],
+      [
+        1947.0267837667104,
+        100.0012469470573,
+        1.8191510893772356,
+        0.464312719089696,
+        0.16389593611803382,
+        0.06670118437118705,
+        0.029414619725513486,
+        0.013650065970098388,
+        0.006560207278405942,
+        0.0032515048751583305,
+        0.0016566984107710435
+      ],
+      [
+        1963.80781325804,
+        100.00579806796803,
+        1.8300604048879863,
+        0.46919630186014144,
+        0.1663024153159243,
+        0.06794814475363536,
+        0.0300809464153899,
+        0.01401420268029479,
+        0.006763590582553409,
+        0.00336838488568273,
+        0.0017215735893538727
+      ],
+      [
+        1985.4061273940013,
+        100.01200989820728,
+        1.8447963329882215,
+        0.47590041078482936,
+        0.1696439983795826,
+        0.06969485403053034,
+        0.031020749199963144,
+        0.014530528870417732,
+        0.007053103345502309,
+        0.0035354292924797727,
+        0.0018165882386660026
+      ],
+      [
+        2011.8376374336171,
+        100.02015262624717,
+        1.8638652523493116,
+        0.484716790166827,
+        0.17408436089851698,
+        0.07203281034983737,
+        0.032285143602821115,
+        0.015227589028187164,
+        0.007444707587264721,
+        0.0037617612593190504,
+        0.0019478130048674594
+      ],
+      [
+        2043.1206377330625,
+        100.03055635479537,
+        1.8878564338421129,
+        0.49597151449010884,
+        0.17979950297371633,
+        0.07505672391929076,
+        0.03392506091440055,
+        0.016132738030425135,
+        0.007953074842935708,
+        0.004055369251963519,
+        0.0021202884935933634
+      ],
+      [
+        2079.275228122475,
+        100.04361100626686,
+        1.9174235695849835,
+        0.5100073644524514,
+        0.18696505633968105,
+        0.07885635206570402,
+        0.03598632785267256,
+        0.017269311375516058,
+        0.008590022491524617,
+        0.004422264602175982,
+        0.0023374903756075626
+      ],
+      [
+        2120.322719776674,
+        100.05976619481297,
+        1.9532631419411934,
+        0.5271650202472308,
+        0.19574411426106375,
+        0.0835095677351865,
+        0.038506042231065664,
+        0.01865487657282175,
+        0.009363758412444238,
+        0.004866221985194897,
+        0.0026012842632469626
+      ],
+      [
+        2166.285053772215,
+        100.07953105685445,
+        1.9960905089577687,
+        0.5477649809882793,
+        0.2062773466796132,
+        0.08907782442511131,
+        0.04151084788839745,
+        0.02030079408967177,
+        0.010278954229902607,
+        0.005389022086487599,
+        0.00291223879693123
+      ],
+      [
+        2217.184257465157,
+        100.10347403089422,
+        2.0466150444127567,
+        0.5720922608825835,
+        0.21867674172140944,
+        0.09560452049402704,
+        0.045017099078999444,
+        0.022212866621603513,
+        0.01133738603286235,
+        0.005990961708370277,
+        0.0032700684169880718
+      ],
+      [
+        2273.041958414128,
+        100.13222257625483,
+        2.1055160189438458,
+        0.6003855434363788,
+        0.23302345762868004,
+        0.10311596958995732,
+        0.04903238524442055,
+        0.024392594571734937,
+        0.01253879153608629,
+        0.006671400398169977,
+        0.0036740310768061373
+      ],
+      [
+        2333.8789695032124,
+        100.16646281931389,
+        2.1734210283243134,
+        0.6328316657096414,
+        0.24936933213985613,
+        0.11162412517501717,
+        0.05355769033346673,
+        0.02683856062784805,
+        0.01388167404608853,
+        0.007429207703660112,
+        0.0041232096135593995
+      ],
+      [
+        2399.7149528361574,
+        100.20693911480889,
+        2.250888596442758,
+        0.6695653173175194,
+        0.26774094608034554,
+        0.12113006245916354,
+        0.058589571280405005,
+        0.029547633332391837,
+        0.01536392305502823,
+        0.008263071213000408,
+        0.004616678929453331
+      ],
+      [
+        2470.5681644077476,
+        100.25445350886785,
+        2.3383961136891718,
+        0.710672995678377,
+        0.28814494248066874,
+        0.13162741318031723,
+        0.06412199192240718,
+        0.0325158658860018,
+        0.016983231041520684,
+        0.009171681368987614,
+        0.005153589777971759
+      ],
+      [
+        2546.4552768820336,
+        100.30986508962752,
+        2.4363336101849282,
+        0.7561997849513362,
+        0.31057349173504534,
+        0.14310527878624227,
+        0.0701476852542328,
+        0.03573909310150841,
+        0.0187373414867093,
+        0.010153827545752692,
+        0.005733201154684401
+      ]
+    ]
+  },
+  "lo_transfer": {
+    "max_relative_row_mass_excess": 3.4861002973229915e-14,
+    "weighted_boundary_escape_minus": 8.015045773860429e-17,
+    "weighted_boundary_escape_plus": 7.719730718038822e-17,
+    "plus_linear_displacement_meV": 36.70000000000056,
+    "boundary_escape_relative": 2.886579864025407e-15,
+    "input": "Gaussian E profile centered in E239, width 1.1 solver energy units",
+    "relative_greater_action": 4.3122942105736766e-17,
+    "minus_linear_displacement_meV": -36.69999999999962,
+    "weighted_adjoint_relative": 0.0,
+    "shift_absolute_frobenius": 9.928463864714706e-14,
+    "relative_lesser_action": 5.323279324248748e-17,
+    "boundary_constant_escape_meV": [
+      36.7000000000001,
+      36.700000000000095
+    ],
+    "phonon_energy_meV": 36.7,
+    "bose_absolute": 0.0,
+    "bose": 0.00019993537156146293
+  },
+  "current_operator": {
+    "operator": "single physical BDD links",
+    "orientation": "+z",
+    "max_absolute_A_cm2": 6.2173057813197374e-09,
+    "coherent_relative": 4.635636917358614e-14,
+    "coherent_outward_A_cm2": [
+      23218.638754477313,
+      -23609.449954067743
+    ],
+    "max_equilibrium_absolute_A_cm2": 5.730887239149933e-11,
+    "cut_count": 289,
+    "seam_coordinates_nm": [
+      8.716985466783456e-16,
+      36.160000000000004
+    ]
+  },
+  "cold_source": {
+    "recipe": "V843 Fermi times finite-window Lorentz spectra; causal PV decays at infinity",
+    "kelvin": 50.0,
+    "donor_cm2": 32499999999.999996,
+    "target_cm2": 32499999999.999996,
+    "thermal_raw_cm2": 32499999999.999996,
+    "mu_meV": -60.47855262206407,
+    "broadening_meV": 0.5,
+    "spin": 2,
+    "screening_nm_inverse": 0.04637388592472258,
+    "lo_screening_nm_inverse": 0.054093116037301464,
+    "ifr_correlation": "exponential",
+    "self_energy_unit_eV": 0.1,
+    "charge_relative": 0.0,
+    "causal_jump_relative": 1.3186720567792512e-18,
+    "independent_pv_trace_max_relative": 6.412953083460491e-13,
+    "independent_pv_trace_max_absolute_meV": 2.373101715136272e-12,
+    "min_source_PSD_relative": -4.3115600727658445e-16,
+    "causal_width_min_relative": -2.1190756021356757e-16,
+    "plan_energy_weight_sum_bar": 16.5,
+    "plan_radial_weight_sum_bar": 2.864788975654116,
+    "memory": {
+      "rank": 30,
+      "runtime_allowance_bytes": 1073741824,
+      "nominal_sum_bytes": 2954922032,
+      "required_bytes": 4619648263,
+      "temporary_margin_fraction": 0.2,
+      "shape_seed": [
+        900,
+        2,
+        239,
+        17,
+        5
+      ],
+      "bytes_by_allocation": {
+        "nodal_cavities": 141587424,
+        "causal_shift_real_work": 56786400,
+        "scattering_buffers": 390225888,
+        "seed_and_fresh_channels": 585072000,
+        "covariances": 575299584,
+        "quadrature_moments_one_ring": 10324800,
+        "summed_channels": 117014400,
+        "input_response": 235979040,
+        "quadrature_returned_sample_tile": 11059200,
+        "nodal_and_projected_greens": 468057600,
+        "pair_projections": 117014400,
+        "causal_channel_anchors": 1224000,
+        "causal_shift_triplets_one_ring": 113572800,
+        "causal_weights": 10053296,
+        "quadrature_causal_source_tile": 121651200
+      }
+    }
+  },
+  "admit_checks": [
+    {
+      "operator": "PzP translation, all adjacent pairs",
+      "value": 0.026278145621679738,
+      "limit": 0.1,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "PzP translation, central→right",
+      "value": 0.00011892102344168709,
+      "limit": 0.1,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "PzP translation, two right pairs",
+      "value": 0.00027697424670880544,
+      "limit": 0.005,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "PzP mode metric",
+      "value": 2.0417134424635238e-14,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Q metric",
+      "value": 9.820087763937293e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "W projection loss",
+      "value": 1.1232971880555507e-13,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Cell spectrum independent public path, eV",
+      "value": 3.115285807098189e-13,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B11 full anchor, meV",
+      "value": 3.4638958368304884e-14,
+      "limit": 0.001,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B11 full role_indices",
+      "value": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "limit": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "kind": "equal",
+      "status": "pass"
+    },
+    {
+      "operator": "B11 full energy_best_role_indices",
+      "value": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "limit": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "kind": "equal",
+      "status": "pass"
+    },
+    {
+      "operator": "B11 restricted anchor, meV",
+      "value": 6.750155989720952e-14,
+      "limit": 0.001,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B11 restricted role_indices",
+      "value": {
+        "u": 2,
+        "l": 3,
+        "e": 1,
+        "i": 4
+      },
+      "limit": {
+        "u": 2,
+        "l": 3,
+        "e": 1,
+        "i": 4
+      },
+      "kind": "equal",
+      "status": "pass"
+    },
+    {
+      "operator": "B11 restricted energy_best_role_indices",
+      "value": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "limit": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "kind": "equal",
+      "status": "pass"
+    },
+    {
+      "operator": "Published Figure 1",
+      "value": [],
+      "limit": [],
+      "kind": "equal",
+      "status": "pass"
+    },
+    {
+      "operator": "PzP translation, all adjacent pairs",
+      "value": 0.026279378999365832,
+      "limit": 0.1,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "PzP translation, central→right",
+      "value": 0.00035813565740827613,
+      "limit": 0.1,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "PzP translation, two right pairs",
+      "value": 0.0008700928314022693,
+      "limit": 0.005,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "PzP mode metric",
+      "value": 1.0308595138222562e-14,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Q metric",
+      "value": 9.57372438683434e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "W projection loss",
+      "value": 6.30437909338791e-15,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Cell spectrum independent public path, eV",
+      "value": 1.3766765505351941e-14,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Published Figure 1",
+      "value": [],
+      "limit": [],
+      "kind": "equal",
+      "status": "pass"
+    },
+    {
+      "operator": "H(k) coordinate operator action",
+      "value": 4.1718271897588006e-15,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "H(k) Hermiticity",
+      "value": 0.0,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Mode metric",
+      "value": 2.041713442463515e-14,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Coordinate BDD translation and field once",
+      "value": 1.6925733722775145e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Shifted neighboring projected H(k) blocks, relative Frobenius",
+      "value": 0.00047648545300338493,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "reject"
+    },
+    {
+      "operator": "Period drop, meV",
+      "value": 0.0,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "alloy / local diagonal coordinate action",
+      "value": 3.4355169900931724e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "alloy / local diagonal covariance PSD deficit",
+      "value": 1.579103525965484e-17,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "alloy / local diagonal control quadrature",
+      "value": 3.4355169900931724e-16,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "alloy / local coherent coordinate action",
+      "value": 3.5716566075983165e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "alloy / local coherent covariance PSD deficit",
+      "value": 2.074013184521437e-17,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "alloy / local coherent control quadrature",
+      "value": 3.5716566075983165e-16,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "IFR / local diagonal coordinate action",
+      "value": 2.5146561204537924e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "IFR / local diagonal covariance PSD deficit",
+      "value": 2.4757820187053524e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "IFR / local diagonal control quadrature",
+      "value": 2.50607472687902e-10,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "IFR / local coherent coordinate action",
+      "value": 2.793544701285539e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "IFR / local coherent covariance PSD deficit",
+      "value": 1.6604708491904514e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "IFR / local coherent control quadrature",
+      "value": 1.3743607274857467e-10,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "acoustic / local diagonal coordinate action",
+      "value": 3.976276462305986e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "acoustic / local diagonal covariance PSD deficit",
+      "value": -0.05950387424275664,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "acoustic / local diagonal control quadrature",
+      "value": 3.976276462305986e-16,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "acoustic / local coherent coordinate action",
+      "value": 5.217668499550043e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "acoustic / local coherent covariance PSD deficit",
+      "value": -0.0032233098051895606,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "acoustic / local coherent control quadrature",
+      "value": 5.217668499550043e-16,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "impurity / local diagonal coordinate action",
+      "value": 1.4896370668443868e-15,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "impurity / local diagonal covariance PSD deficit",
+      "value": -0.009671712464360048,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "impurity / local diagonal control quadrature",
+      "value": 0.04056420949910892,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "reject"
+    },
+    {
+      "operator": "impurity / local coherent coordinate action",
+      "value": 1.8464794786944325e-15,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "impurity / local coherent covariance PSD deficit",
+      "value": 2.9082262383605534e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "impurity / local coherent control quadrature",
+      "value": 0.04824175205814913,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "reject"
+    },
+    {
+      "operator": "LO / local diagonal coordinate action",
+      "value": 4.026679876738803e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO / local diagonal covariance PSD deficit",
+      "value": -0.07092156485677358,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO / local diagonal control quadrature",
+      "value": 0.00021732683930281177,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO / local coherent coordinate action",
+      "value": 4.474859137839978e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO / local coherent covariance PSD deficit",
+      "value": -0.0005215621164077299,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO / local coherent control quadrature",
+      "value": 0.0012059060704220235,
+      "limit": 0.01,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO weighted_adjoint_relative",
+      "value": 0.0,
+      "limit": 1e-12,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO relative_lesser_action",
+      "value": 5.323279324248748e-17,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO relative_greater_action",
+      "value": 4.3122942105736766e-17,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO max_relative_row_mass_excess",
+      "value": 3.4861002973229915e-14,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO bose_absolute",
+      "value": 0.0,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO boundary_escape_relative",
+      "value": 2.886579864025407e-15,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO plus displacement, meV",
+      "value": 5.542233338928781e-13,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "LO minus displacement, meV",
+      "value": 3.836930773104541e-13,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Real-state null current, A/cm²",
+      "value": 5.730887239149933e-11,
+      "limit": 1.0,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Coherent current relative residual",
+      "value": 4.635636917358614e-14,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Both coherent seams are oriented and nonzero",
+      "value": true,
+      "limit": true,
+      "kind": "equal",
+      "status": "pass"
+    },
+    {
+      "operator": "Cold seed charge relative",
+      "value": 0.0,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Sheet charge, relative",
+      "value": 0.0,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Causal self-energy jump",
+      "value": 1.3186720567792512e-18,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Causal PV independent trace relative",
+      "value": 6.412953083460491e-13,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Cold occupation source PSD deficit",
+      "value": 4.3115600727658445e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Causal retarded width PSD deficit",
+      "value": 2.1190756021356757e-16,
+      "limit": 1e-10,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B9/B11 pairwise energy drift, meV",
+      "value": 0.014408076847052698,
+      "limit": 3.0,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B9/B11 density cosine deficit, u",
+      "value": 1.601433264886154e-07,
+      "limit": 0.050000000000000044,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B9/B11 density cosine deficit, l",
+      "value": 4.035707347194162e-07,
+      "limit": 0.050000000000000044,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B9/B11 density cosine deficit, e",
+      "value": 1.6465420926703445e-07,
+      "limit": 0.050000000000000044,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "B9/B11 density cosine deficit, i",
+      "value": 3.2549329898046153e-10,
+      "limit": 0.050000000000000044,
+      "kind": "upper",
+      "status": "pass"
+    },
+    {
+      "operator": "Complete MAP memory (bytes)",
+      "value": 4619648263,
+      "limit": 40802189312,
+      "kind": "upper",
+      "status": "pass"
+    }
+  ]
+}
