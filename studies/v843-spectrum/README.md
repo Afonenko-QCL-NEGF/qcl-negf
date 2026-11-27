@@ -30,3 +30,16 @@ julia --project=runner studies/v843-spectrum/check-plan.jl
 ```sh
 python -m qcl_negf_results.spectrum LEFT RIGHT --energy-atol-ev 1e-10 --projector-atol 1e-8
 ```
+
+`reproducible` относится к сравнению двух результатов. Допуск оператора
+записан отдельно в `operator_verdicts`. Полный проектор инвариантен к
+поворотам столбцов внутри сравниваемого подпространства. Для сопоставления
+профилей отдельных уровней нужна проверка назначения этих уровней.
+
+Исторический набор DAG 66 можно проверить без запуска решателя. Сборщик
+прочитает именованные результаты по описи и воспроизведёт статусы SELECT,
+пять пропусков и два Bloch-зазора. [Архив результатов](https://github.com/Afonenko-QCL-NEGF/qcl-negf/tree/6002cdad8493bc2dfc97abfc60dfaeb856d48269/studies/v843-basis-operators-20261127/evidence/dag-66)
+
+```sh
+python studies/v843-spectrum/collect-dag66.py PATH_TO_DAG_66 > dag66.json
+```

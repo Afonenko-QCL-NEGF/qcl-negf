@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 
 import numpy as np
@@ -28,15 +29,32 @@ def read_cell_spectrum(artifact_root: Path) -> dict:
     payload = json.loads(content)
     if payload.get("schema") != record["schema"] or payload.get("operation") != "structure_spectrum":
         raise ValueError("expected structure_spectrum diagnostic")
-    fingerprint = commit["identity"].get("plan_fingerprint")
-    if not isinstance(fingerprint, str) or not fingerprint:
-        raise ValueError("cell spectrum must identify its scientific plan")
+    identity = commit["identity"]
+    fingerprint = identity.get("plan_fingerprint")
+    if not isinstance(fingerprint, str) or re.fullmatch(r"[a-f0-9]{64}", fingerprint) is None:
+        raise ValueError("cell spectrum must identify its frozen plan")
+    if any(not isinstance(identity.get(key), str) or not identity[key]
+           for key in ("point_id", "execution_id")):
+        raise ValueError("cell spectrum must identify its execution and point")
     checks = payload["checks"]
+    if not checks or any(not isinstance(row, dict) or type(row.get("passed")) is not bool
+                         or not isinstance(row.get("name"), str) for row in checks):
+        raise ValueError("operator diagnostics must declare every check verdict")
+    if len({row["name"] for row in checks}) != len(checks):
+        raise ValueError("operator checks must have unique names")
     spectra = [row["cell_spectrum"] for row in checks if "cell_spectrum" in row]
     if len(spectra) != 1:
         raise ValueError("one named cell_spectrum output is required")
-    return {"plan_fingerprint": fingerprint, "spectrum": spectra[0],
-            "failed_checks": sorted(row["name"] for row in checks if row["passed"] is False)}
+    failed = sorted(row["name"] for row in checks if not row["passed"])
+    return {
+        "plan_fingerprint": fingerprint,
+        "execution_id": identity["execution_id"],
+        "point_id": identity["point_id"],
+        "result_sha256": record["sha256"],
+        "spectrum": spectra[0],
+        "operator_verdict": "failed" if failed else "passed",
+        "failed_checks": failed,
+    }
 
 
 def _weighted_basis(spectrum: dict) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -65,8 +83,8 @@ def compare_cell_spectra(first: dict, second: dict, *, energy_atol_eV: float,
     """Compare equal-rank spectra and U U† after orthogonalizing sqrt(M) W."""
     if any(not math.isfinite(t) or t < 0 for t in (energy_atol_eV, projector_atol)):
         raise ValueError("comparison tolerances must be finite and nonnegative")
-    if first["plan_fingerprint"] != second["plan_fingerprint"]:
-        raise ValueError("cell spectra belong to different plans")
+    if any(first[key] != second[key] for key in ("plan_fingerprint", "execution_id", "point_id")):
+        raise ValueError("cell spectra belong to different frozen plan points")
     a, b = first["spectrum"], second["spectrum"]
     reference = a["energy_reference_eV"]
     if not math.isfinite(reference) or reference != b["energy_reference_eV"]:
@@ -88,8 +106,12 @@ def compare_cell_spectra(first: dict, second: dict, *, energy_atol_eV: float,
         "projector_distance": projector_error,
         "projector_distance_limit": projector_atol,
         "same_failed_checks": matching_checks,
+        "operator_verdicts": [first["operator_verdict"], second["operator_verdict"]],
         "failed_checks": [first["failed_checks"], second["failed_checks"]],
-        "passed": energy_error <= energy_atol_eV and projector_error <= projector_atol and matching_checks,
+        "result_sha256": [first["result_sha256"], second["result_sha256"]],
+        "reproducible": (
+            energy_error <= energy_atol_eV and projector_error <= projector_atol and matching_checks
+        ),
     }
 
 
@@ -105,7 +127,7 @@ def main() -> int:
         energy_atol_eV=args.energy_atol_ev, projector_atol=args.projector_atol,
     )
     print(json.dumps(result, indent=2, allow_nan=False))
-    return 0 if result["passed"] else 1
+    return 0 if result["reproducible"] else 1
 
 
 if __name__ == "__main__":
