@@ -19,10 +19,15 @@ from typing import Any
 from qcl_negf_contracts.artifacts import (Artifact, CONTRACT_SET, EXPORT_SCHEMA, MODEL_SCHEMA,
     POINTER_SCHEMA, RECOVERY_SCHEMA, SCIENCE_MAX_BYTES, digest_value, relative_path,
     require_contract_set, validate_commit)
-from qcl_negf_contracts.messages import TERMINAL, ContractError
+from qcl_negf_contracts.messages import (
+    SCIENTIFIC_SERIES_SCHEMA, TERMINAL, ContractError, point_scientific_status,
+)
 from .commits import atomic_write, json_bytes, read_json, safe_path
 from .catalog import catalog_artifacts
-from .native import dataset_blocks as _dataset_blocks, validate_native_handle
+from .native import (
+    dataset_blocks as _dataset_blocks, read_native_scientific_status,
+    validate_native_handle, validate_operator_diagnostics,
+)
 
 CHUNK_BYTES = 1024 * 1024
 
@@ -65,6 +70,38 @@ def _pin(path: Path, expected_sha256: str | None = None) -> PinnedCommit:
     return PinnedCommit(path, value, digest, artifacts)
 
 
+def _series_point_commit(root: Path, series: dict, point: dict) -> PinnedCommit | None:
+    status = point["scientific_status"]
+    completed = status["process"] in ("completed", "completed_with_warnings")
+    data = point.get("data", {})
+    if not isinstance(data, dict):
+        raise ContractError("series point data must be an object", "corrupt_result")
+    reference = data.get("result_commit")
+    if reference is None:
+        if completed:
+            raise ContractError("completed point requires a result commit", "corrupt_result")
+        return None
+    if isinstance(reference, dict):
+        path = safe_path(root, relative_path(reference.get("path")))
+        digest = digest_value(reference.get("sha256"))
+    else:
+        path, digest = safe_path(root, relative_path(reference)), None
+    commit = _pin(path, digest)
+    committed_status = point_scientific_status(commit.value)
+    if completed:
+        expected = {"point_id": point.get("id"), "execution_id": point.get("execution_id"),
+                    "attempt": point.get("attempt"), "plan_fingerprint": series.get("plan_fingerprint")}
+        if (any(not isinstance(expected[key], str) or not expected[key]
+                for key in ("point_id", "execution_id", "plan_fingerprint"))
+                or type(expected["attempt"]) is not int or expected["attempt"] <= 0
+                or type(commit.value["identity"].get("attempt")) is not int
+                or any(commit.value["identity"].get(key) != value for key, value in expected.items())):
+            raise ContractError("series point identity differs from its result commit", "corrupt_result")
+        if committed_status != status:
+            raise ContractError("series point scientific status differs from commit", "corrupt_result")
+    return commit
+
+
 def _collect(root: Path) -> tuple[list[PinnedCommit], list[dict[str, Any]], dict[str, Any] | None]:
     """Capture the series once, then follow only explicit committed references."""
     commits: list[PinnedCommit] = []
@@ -91,34 +128,34 @@ def _collect(root: Path) -> tuple[list[PinnedCommit], list[dict[str, Any]], dict
             series, _ = read_json(index)
     if series is not None:
         require_contract_set(series)
-        if series.get("schema") != "qcl-negf-series-result-v3":
+        if series.get("schema") != SCIENTIFIC_SERIES_SCHEMA:
             raise ContractError("unsupported scientific series result schema", "incompatible_contract")
-        rows = series.get("points", [])
-        if not isinstance(rows, list):
-            raise ContractError("series points must be a list", "corrupt_result")
-        for point in rows:
-            if not isinstance(point, dict):
-                raise ContractError("series point must be an object", "corrupt_result")
-            data = point.get("data") or {}
-            if not isinstance(data, dict):
-                raise ContractError("series point data must be an object", "corrupt_result")
-            reference = data.get("result_commit")
-            entry = {key: point[key] for key in ("id", "execution_id", "status", "quality", "converged") if key in point}
-            if reference:
-                if isinstance(reference, dict):
-                    path = safe_path(root, reference["path"])
-                    expected = digest_value(reference.get("sha256"))
+        for field in ("points", "attempt_history"):
+            if field == "attempt_history" and field not in series:
+                continue
+            rows = series.get(field)
+            if not isinstance(rows, list):
+                raise ContractError(f"series {field} must be a list", "corrupt_result")
+            for point in rows:
+                if not isinstance(point, dict) or not isinstance(point.get("status"), str):
+                    raise ContractError(f"series {field} entry requires a process status", "corrupt_result")
+                status = point_scientific_status(point, process=point["status"])
+                if field == "attempt_history":
+                    if status["process"] in ("completed", "completed_with_warnings"):
+                        _series_point_commit(root, series, point)
+                    continue
+                commit = _series_point_commit(root, series, point)
+                entry = {key: point[key] for key in ("id", "execution_id", "status", "quality", "converged")
+                         if key in point}
+                entry["scientific_status"] = status
+                if commit is None:
+                    entry["availability"] = "no_committed_physical_record"
                 else:
-                    path, expected = safe_path(root, reference), None
-                commit = _pin(path, expected)
-                if path not in seen:
-                    commits.append(commit)
-                    seen.add(path)
-                entry["commit_sha256"] = commit.sha256
-                entry["scientific_accepted"] = commit.value.get("scientific_accepted", False)
-            else:
-                entry["availability"] = "no_committed_physical_record"
-            coverage.append(entry)
+                    if commit.path not in seen:
+                        commits.append(commit)
+                        seen.add(commit.path)
+                    entry["commit_sha256"] = commit.sha256
+                coverage.append(entry)
     # Standalone CLI point and explicit campaign commit use the same contract.
     for pointer in (root / "artifacts" / "current.json",):
         if pointer.exists():
@@ -399,6 +436,21 @@ def _capture(source: Path, destination: Path, artifact: Artifact,
     _validate_container(destination, artifact.media_type, role=artifact.role, declared_schema=artifact.schema)
 
 
+def _verify_payload_status(commit: PinnedCommit, artifact: Artifact, captured: Path) -> None:
+    if artifact.schema == "qcl-negf-physics-analysis-v4":
+        import h5py
+        with h5py.File(captured, "r") as handle:
+            status = read_native_scientific_status(handle["metadata"])
+        if status != commit.value["scientific_status"]:
+            raise ContractError("analysis payload scientific status differs from commit", "corrupt_result")
+    elif artifact.schema == "qcl-negf-operator-diagnostics-v4":
+        payload, _ = read_json(captured)
+        try:
+            validate_operator_diagnostics(payload, commit.value["scientific_status"])
+        except ValueError as error:
+            raise ContractError(str(error), "corrupt_result") from error
+
+
 def _verify_recovery_closure(commit: PinnedCommit, artifact: Artifact, captured: Path) -> None:
     if artifact.schema != RECOVERY_SCHEMA:
         return
@@ -555,8 +607,7 @@ def export_snapshot(job_root: Path, destination: Path, *, profile: str = "scienc
         selected.extend((commit, item) for item in artifacts)
         records.append({"source_commit_sha256": commit.sha256,
             "identity": commit.value["identity"], "generation": commit.value["generation"],
-            "scientific_accepted": commit.value.get("scientific_accepted"),
-            "terminal_status": commit.value.get("terminal_status"),
+            "scientific_status": commit.value.get("scientific_status"),
             "quality": commit.value.get("quality"),
             "science_parent_sha256": (commit.value.get("science_parent_commit") or {}).get("sha256"),
             "telemetry_catalog_watermark": commit.value.get("telemetry_catalog"),
@@ -579,7 +630,7 @@ def export_snapshot(job_root: Path, destination: Path, *, profile: str = "scienc
     identity = hashlib.sha256(json_bytes({"schema": EXPORT_SCHEMA, "contract_set": CONTRACT_SET, "profile": profile,
         "commits": [item.sha256 for item in commits], "coverage": coverage,
         "native_format": "4.0", "history_closure": "verified-cumulative-physical-markers-psd-v4", "inventory": "complete-performance-v2",
-        "derivation": derivation, "exporter_revision": 2,
+        "derivation": derivation, "exporter_revision": 3,
         "size_policy": "actual-compressed-independent-parts-v1",
         "maximum_bytes": maximum_bytes,
         "compressor": compressor,
@@ -611,6 +662,7 @@ def export_snapshot(job_root: Path, destination: Path, *, profile: str = "scienc
                 captured_bytes += artifact.size
                 report("capturing", completed_bytes=captured_bytes, total_bytes=unique_size,
                        completed_files=len(files), total_files=len(object_contracts))
+            _verify_payload_status(commit, artifact, files[name][0])
             _verify_recovery_closure(commit, artifact, files[name][0])
             window = profile == "science" and artifact.role == "performance.full"
             record_map[commit.sha256]["included"].append({
@@ -660,7 +712,7 @@ def export_snapshot(job_root: Path, destination: Path, *, profile: str = "scienc
         manifest = {"schema": EXPORT_SCHEMA, "contract_set": CONTRACT_SET, "job_id": job_id or root.name, "profile": profile,
             "snapshot_identity": identity, "job_status": job_status,
             "job_complete": job_complete, "snapshot_consistent": True,
-            "complete": job_complete and not missing, "scientific_accepted": None,
+            "complete": job_complete and not missing,
             "capabilities": (["stored_observables", "scientific_diagnostics", "complete_committed_performance"]
                 if profile == "science" else ["full_physical_state", "declared_recovery_capabilities"]),
             "requires_full_state": ["arbitrary_new_optical_response", "exact_restart"] if profile == "science" else [],
@@ -686,7 +738,7 @@ def export_snapshot(job_root: Path, destination: Path, *, profile: str = "scienc
                 "Objects are immutable, byte-verified and independently parsed before publication.\n"
                 "manifest.json maps scientific roles and native numerical sources to content-addressed files.\n"
                 "The science profile supports declared analyses, not arbitrary new full-matrix optics or exact restart.\n"
-                "Scientific acceptance is explicit per record; successful export does not imply convergence.\n\n"
+                "Each scientific point records six independent status fields; successful export does not imply convergence.\n\n"
                 "Every .tar.xz part is independently readable and at most 200000000 decimal bytes.\n"
                 "Part 1 contains the shared export-index.json, manifest, plan and prioritised diagnostics.\n"
                 "Later parts contain whole native objects or explicitly indexed transport chunks.\n"

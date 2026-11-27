@@ -1,0 +1,137 @@
+{
+  "driver_revision": "72fcca8cb10e6867651ea22d7260dc2b50cc3b44",
+  "core_source": {
+    "version": "0.2.0",
+    "source_tree_sha256": "f8d154b1ed8c4bde5f74536ab7f94d97f4b923a989eb234f38ea90409170c905",
+    "uuid": "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
+  },
+  "julia_version": "1.13.4",
+  "julia_threads": 2,
+  "blas_threads": 1,
+  "bloch": [
+    {
+      "minimum_gap_meV": 17.97845038883085,
+      "minimum_gap_phase_rad": -3.141592653589793,
+      "min_gap_stable": true,
+      "spatial_nodes": 144,
+      "periodic_oracle_error_meV": 7.496225862269057e-12
+    },
+    {
+      "minimum_gap_meV": 16.578594926867396,
+      "minimum_gap_phase_rad": -3.141592653589793,
+      "min_gap_stable": true,
+      "spatial_nodes": 288,
+      "periodic_oracle_error_meV": 9.265477274311706e-12
+    }
+  ],
+  "angular_impurity": {
+    "IMP17": {
+      "diagonal_relative_error_k_0p30_nm_inverse_at_zero_distance": {
+        "angles32": 0.22364196694652172,
+        "angles128": 0.016716706038313545,
+        "angles512": 0.0010635603712618735,
+        "adaptive_coarse": 2.7875888264361492e-08,
+        "adaptive_tight": 0.0
+      },
+      "ring_weighted_action_relative_l2": {
+        "angles32": {
+          "diagonal": 0.09188961843468503,
+          "gaussian_projector": 0.027100280023804914
+        },
+        "angles128": {
+          "diagonal": 0.00706909854132885,
+          "gaussian_projector": 0.0018940223794599949
+        },
+        "angles512": {
+          "diagonal": 0.0004520880673205169,
+          "gaussian_projector": 0.00011984257119233324
+        },
+        "adaptive_coarse": {
+          "diagonal": 4.5827631607081725e-09,
+          "gaussian_projector": 4.237634880901958e-09
+        }
+      }
+    },
+    "IMP33": {
+      "diagonal_relative_error_k_0p30_nm_inverse_at_zero_distance": {
+        "angles32": 0.22364196694652172,
+        "angles128": 0.016716706038313545,
+        "angles512": 0.0010635603712618735,
+        "adaptive_coarse": 2.7875888264361492e-08,
+        "adaptive_tight": 0.0
+      },
+      "ring_weighted_action_relative_l2": {
+        "angles32": {
+          "diagonal": 0.05254075452457169,
+          "gaussian_projector": 0.01592458520859367
+        },
+        "angles128": {
+          "diagonal": 0.003624318303073011,
+          "gaussian_projector": 0.0009615965283213592
+        },
+        "angles512": {
+          "diagonal": 0.00023161559702895208,
+          "gaussian_projector": 6.079299853062831e-05
+        },
+        "adaptive_coarse": {
+          "diagonal": 3.654959611798724e-09,
+          "gaussian_projector": 3.41957714845763e-09
+        }
+      }
+    }
+  },
+  "lo": {
+    "LO17": {
+      "angles32_qz161": {
+        "diagonal": 0.00012573666969867278,
+        "gaussian_projector": 0.00017677845831844
+      },
+      "angles128_qz161": {
+        "diagonal": 5.363309593635885e-10,
+        "gaussian_projector": 7.540895358845994e-10
+      },
+      "angles512_qz161": {
+        "diagonal": 1.5511701687014815e-16,
+        "gaussian_projector": 2.1229653393967229e-16
+      },
+      "exact_qz161": {
+        "diagonal": 0.00989361218845091,
+        "gaussian_projector": 0.014177153671594566
+      },
+      "exact_qz321": {
+        "diagonal": 0.0003231928256674516,
+        "gaussian_projector": 0.0004612943412837644
+      }
+    },
+    "LO33": {
+      "angles32_qz161": {
+        "diagonal": 0.0001252030424654687,
+        "gaussian_projector": 0.00017608660849589597
+      },
+      "angles128_qz161": {
+        "diagonal": 4.89404424323815e-10,
+        "gaussian_projector": 6.883388108400587e-10
+      },
+      "angles512_qz161": {
+        "diagonal": 1.5138842573974588e-16,
+        "gaussian_projector": 1.7346707340455862e-16
+      },
+      "exact_qz161": {
+        "diagonal": 0.009849250046473317,
+        "gaussian_projector": 0.01411837971553344
+      },
+      "exact_qz321": {
+        "diagonal": 0.00031987929732241817,
+        "gaussian_projector": 0.0004567392755682086
+      }
+    }
+  },
+  "shift": {
+    "E239_field_LO_maxima": [
+      0.03287979746107183,
+      0.033167906340332426
+    ],
+    "finite_volume_adjoint_pass": true,
+    "finite_volume_adjoint_relative_max": 0.033167906340332426
+  }
+}

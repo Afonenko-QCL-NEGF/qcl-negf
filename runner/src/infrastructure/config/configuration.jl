@@ -22,6 +22,10 @@ end
 
 function _load_yaml_mapping(path::AbstractString)
     isfile(path) || _configuration_error(path, "file does not exist")
+    return _parse_yaml_mapping(read(path), path)
+end
+
+function _parse_yaml_mapping(bytes::Vector{UInt8}, path::AbstractString)
     strict_mapping =
         (constructor, node) -> YAML.construct_mapping(
             Dict{Any,Any},
@@ -30,7 +34,7 @@ function _load_yaml_mapping(path::AbstractString)
             strict_unique_keys = true,
         )
     parsed = try
-        YAML.load_file(path, Dict("tag:yaml.org,2002:map" => strict_mapping))
+        YAML.load(String(bytes), Dict("tag:yaml.org,2002:map" => strict_mapping))
     catch error
         _configuration_error(path, "invalid YAML: $(sprint(showerror, error))")
     end

@@ -25,7 +25,7 @@ def _sources(handle: Any, identity: dict[str, Any]) -> tuple[dict[str, bytes], d
     metadata = handle["metadata"]
     if (_text(metadata.attrs["schema"]) != HISTORY_SCHEMA
             or _text(metadata.attrs["artifact_role"]) != "science.history"
-            or _text(metadata.attrs["representation"]) != "lossless consolidation of every local closed history segment"):
+            or _text(metadata.attrs["representation"]) != "committed history prefix and closed segments of the current attempt"):
         raise ValueError("history is not the native cumulative representation")
     payload = metadata["source_segments_json"][()]
     if isinstance(payload, str):

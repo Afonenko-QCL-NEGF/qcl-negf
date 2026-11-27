@@ -1,3 +1,17 @@
+const SCIENTIFIC_PLAN_SCHEMA = "qcl-negf-scientific-plan-v3"
+const SCIENTIFIC_MODEL_REVISION = "transport-contract-v3"
+
+const _LOADED_SCIENTIFIC_IMPLEMENTATION = Ref{Dict{String,Any}}()
+
+function __init__()
+    _LOADED_SCIENTIFIC_IMPLEMENTATION[] = Dict(
+        "core" => _package_source_identity(QCLNEGF),
+        "runner" => _package_source_identity(parentmodule(@__MODULE__)),
+    )
+end
+
+_scientific_implementation() = deepcopy(_LOADED_SCIENTIFIC_IMPLEMENTATION[])
+
 _policies_dict(p::ScientificPolicies) = Dict(
     "scba_to_poisson"=>String(p.scba_to_poisson),
     "voltage"=>Dict(
@@ -16,6 +30,7 @@ _point_dict(p::ScientificPoint) = Dict(
     "id"=>p.id,
     "execution_id"=>p.execution_id,
     "temperature_K"=>p.temperature_K,
+    "lo_temperature_K"=>p.lo_temperature_K,
     "voltage_per_period_V"=>p.voltage_per_period_V,
     "branch"=>p.branch,
     "order"=>p.order,
@@ -48,27 +63,40 @@ function _effective_scientific_inputs(configuration)
     )
 end
 
+function _resolved_lo_temperature(definition, configuration, temperature, index)
+    definition.lo_temperatures === nothing || return definition.lo_temperatures[index]
+    physical = configuration.physical
+    return physical.Tᴸᴼ == physical.Tᴸ ? temperature : _kelvin(physical.Tᴸᴼ)
+end
+
 """Собрать паспорт точки по физическим осям. Шаблон запуска может охватывать всю ветвь."""
 function _point_resolved_raw(configuration, point::ScientificPoint)
-    raw=deepcopy(configuration.raw)
+    raw=_freeze_configuration(configuration)
     physical=get!(raw, "physical", Dict{String,Any}())
+    delete!(physical, "field_bias")
     physical["voltage_per_period"]="$(point.voltage_per_period_V) V"
     physical["lattice_temperature"]="$(point.temperature_K) K"
-    physical["lo_temperature"]="$(point.temperature_K) K"
+    physical["lo_temperature"]="$(point.lo_temperature_K) K"
     study=get!(raw, "study", Dict{String,Any}())
     study["voltages_per_period"]=["$(point.voltage_per_period_V) V"]
     study["temperatures"]=["$(point.temperature_K) K"]
     return raw
 end
-function _point_passport(configuration, point::ScientificPoint)
+function _point_passport(configuration, point::ScientificPoint, operation)
+    physical_axes = operation in (:stationary, :structure_spectrum)
+    period_m = Float64(ustrip(u"m", period_length(configuration.physical)))
     return Dict{String,Any}(
         "temperature_K"=>point.temperature_K,
+        "lo_temperature_K"=>point.lo_temperature_K,
         "voltage_per_period_V"=>point.voltage_per_period_V,
+        "period_length_m"=>period_m,
+        "field_V_per_m"=>point.voltage_per_period_V / period_m,
         "configuration_hash"=>bytes2hex(
             sha256(canonical_bytes(_point_resolved_raw(configuration, point))),
         ),
         "hash_encoding"=>"qcl-negf-canonical-bytes-v1",
-        "axes_applied"=>true,
+        "axes_applied"=>physical_axes,
+        "axis_source"=>physical_axes ? "study_point" : "fixed_operator_fixture",
     )
 end
 
@@ -80,7 +108,9 @@ function scientific_plan_dict(plan::ScientificPlan)
             "variant_id"=>e.variant_id,
             "method_id"=>e.method_id,
             "point_ids"=>e.point_ids,
-            "resolved_configuration"=>deepcopy(e.configuration.raw),
+            "resolved_configuration"=>_freeze_configuration(e.configuration),
+            "author_inputs"=>deepcopy(e.author_inputs),
+            "author_device"=>e.author_device,
             "effective_inputs"=>_effective_scientific_inputs(e.configuration),
             "provenance"=>Dict("sources"=>e.configuration.provenance.sources),
             "policies"=>_policies_dict(e.policies),
@@ -103,8 +133,9 @@ function scientific_plan_dict(plan::ScientificPlan)
         "output_estimate_basis"=>"uncompressed native physical arrays; local full state is independent of the analytical archive budget",
     )
     data=Dict{String,Any}(
-        "schema"=>"qcl-negf-scientific-plan-v2",
-        "model_revision"=>"transport-contract-v2",
+        "schema"=>SCIENTIFIC_PLAN_SCHEMA,
+        "model_revision"=>SCIENTIFIC_MODEL_REVISION,
+        "implementation"=>_scientific_implementation(),
         "root_definition_id"=>plan.root_definition_id,
         "root_kind"=>String(plan.root_kind),
         "name"=>plan.name,
@@ -122,6 +153,7 @@ function scientific_plan_dict(plan::ScientificPlan)
                             e.configuration for e in plan.executions if e.id==p.execution_id
                         ),
                         p,
+                        only(e.operation for e in plan.executions if e.id==p.execution_id),
                     ),
                 ),
             ) for p in plan.points
@@ -141,23 +173,32 @@ function _plan_fingerprint(data::AbstractDict)
     return bytes2hex(sha256(canonical_bytes(canonical)))
 end
 
+function _controlled_key(container::AbstractDict, part, path)
+    haskey(container, part) || throw(ArgumentError("unknown controlled leaf: $path"))
+    return part
+end
+function _controlled_key(container::AbstractVector, part, path)
+    index = tryparse(Int, part)
+    index !== nothing && checkbounds(Bool, container, index) ||
+        throw(ArgumentError("invalid controlled array index: $path"))
+    return index
+end
+_controlled_key(_, _, path) = throw(ArgumentError("unknown controlled leaf: $path"))
+
 function _comparison_inputs(configuration, controlled_paths::Vector{String})
-    data=deepcopy(configuration.raw)
-    for key in ("run", "output", "study")
-        pop!(data, key, nothing)
-    end
+    data = _canonical_scientific_numbers(_scientific_configuration(_freeze_configuration(configuration)))
     for path in controlled_paths
-        occursin(r"^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)*$", path) ||
-            throw(ArgumentError("invalid controlled path: $path"))
-        parts=split(path, '.')
-        current=data
-        first(parts) in ("run", "output", "study") &&
-            throw(ArgumentError("presentation is not a scientific controlled axis"))
-        for part in parts[1:(end-1)]
-            current=get(current, part, nothing)
-            current isa AbstractDict || break
+        occursin(r"^[a-z][a-z0-9_]*(\.(?:[a-z][a-z0-9_]*|[1-9][0-9]*))+$", path) ||
+            throw(ArgumentError("controlled path must name a leaf: $path"))
+        parts = split(path, '.')
+        current = data
+        for part in parts[1:(end - 1)]
+            current = current[_controlled_key(current, part, path)]
         end
-        current isa AbstractDict && pop!(current, last(parts), nothing)
+        key = _controlled_key(current, last(parts), path)
+        current[key] isa Union{AbstractDict,AbstractVector} &&
+            throw(ArgumentError("controlled path must name a leaf: $path"))
+        current[key] = nothing
     end
     return data
 end
@@ -207,8 +248,16 @@ function resolve_scientific_plan(
     source::AbstractString;
     maximum_solver_runs::Int = 10000,
 )
-    maximum_solver_runs>0 || throw(ArgumentError("maximum_solver_runs must be positive"))
     root=read_scientific_definition(repository, String(source))
+    return _resolve_scientific_plan(repository, root; maximum_solver_runs)
+end
+
+function _resolve_scientific_plan(
+    repository::AbstractScientificDefinitionRepository,
+    root::ScientificDefinition;
+    maximum_solver_runs::Int = 10000,
+)
+    maximum_solver_runs>0 || throw(ArgumentError("maximum_solver_runs must be positive"))
     inclusions=ScientificInclusion[]
     executions=ScientificExecution{ResolvedRunConfiguration}[]
     points=ScientificPoint[]
@@ -277,19 +326,23 @@ function resolve_scientific_plan(
             (temperature_index, T) in enumerate(definition.temperatures),
             branch in units
 
+            author_inputs = Dict{String,String}[]
             config=resolve_scientific_configuration(
                 repository,
                 definition,
                 variant,
-                inherited_overrides,
+                inherited_overrides;
+                author_inputs,
             )
             _validate_controlled_variant(base, config, variant)
+            T_LO = _resolved_lo_temperature(definition, config, T, temperature_index)
             identity=Dict(
-                "configuration"=>deepcopy(config.raw),
+                "configuration"=>_freeze_configuration(config),
                 "policies"=>_policies_dict(definition.policies),
                 "outputs"=>_outputs_dict(definition.outputs),
                 "branch"=>Dict("id"=>branch.id, "voltages"=>branch.voltages),
                 "temperature"=>T,
+                "lo_temperature"=>T_LO,
                 "purpose"=>String(definition.purpose),
                 "operation"=>String(definition.operation),
             )
@@ -302,7 +355,7 @@ function resolve_scientific_plan(
             # after canonicalizing the effective seed used by the solver.
             effective=effective_seed_parameters(config.numerical, config.scales)
             identity["configuration"]["numerical"]["seed_broadening"]="$(effective.effective_eV) eV"
-            fingerprint=bytes2hex(sha256(canonical_bytes(identity)))
+            fingerprint=bytes2hex(sha256(canonical_bytes(_canonical_scientific_numbers(identity))))
             if haskey(owners, fingerprint)
                 push!(inclusion.execution_ids, owners[fingerprint])
                 continue
@@ -320,6 +373,7 @@ function resolve_scientific_plan(
                         point_id,
                         execution_id,
                         T,
+                        T_LO,
                         V,
                         "T$(temperature_index)/"*branch.id,
                         order,
@@ -344,6 +398,8 @@ function resolve_scientific_plan(
                     variant.method_id,
                     ids,
                     config,
+                    author_inputs,
+                    definition.device,
                     definition.policies,
                     definition.outputs,
                     definition.operation===:stationary ?
@@ -433,36 +489,106 @@ function _minimum_scientific_output_bytes(plan::ScientificPlan)
 end
 
 
-"""Идентификатор стационарной физической задачи определяется независимо от визуализации, расположения файлов и оптических сеток."""
-function _scientific_fingerprint(data::AbstractDict)
-    executions=Any[]
-    for execution in data["executions"]
-        inputs=deepcopy(execution["resolved_configuration"])
-        for key in ("run", "output", "study")
-            pop!(inputs, key, nothing)
-        end
-        push!(
-            executions,
-            Dict(
-                "id"=>execution["id"],
-                "inputs"=>inputs,
-                "effective_inputs"=>execution["effective_inputs"],
-                "policies"=>execution["policies"],
-                "purpose"=>execution["purpose"],
-                "repetition"=>execution["repetition"],
-                "operation"=>execution["operation"],
-            ),
-        )
+# Preserve solver selection and mathematical options in the scientific identity.
+# Placement and observation settings stay in the complete plan fingerprint.
+function _scientific_configuration(frozen_configuration)
+    data = deepcopy(frozen_configuration)
+    for field in ("run", "output", "study")
+        delete!(data, field)
     end
-    identity=Dict(
-        "model_revision"=>data["model_revision"],
-        "executions"=>executions,
-        "points"=>[
-            Dict(k=>v for (k, v) in point if k!="effective_inputs") for
-            point in data["points"]
-        ],
-        "nodes"=>data["nodes"],
-        "campaign"=>data["campaign"],
+    data["execution"] = Dict("solver_backend" => data["execution"]["solver_backend"])
+    data["production"] = Dict("verify_fft_roundoff" => data["production"]["verify_fft_roundoff"])
+    return data
+end
+
+function _scientific_point_configuration(frozen_configuration)
+    data = _scientific_configuration(frozen_configuration)
+    physical = data["physical"]
+    for field in ("field_bias", "voltage_per_period", "lattice_temperature", "lo_temperature")
+        pop!(physical, field, nothing)
+    end
+    return data
+end
+
+# Julia's validated numerical inputs use both real and integer fields. Equal
+# integral spellings of a real value get one scientific identity.
+_canonical_scientific_numbers(value) = value
+_canonical_scientific_numbers(value::AbstractDict) = Dict{String,Any}(
+    String(key) => _canonical_scientific_numbers(child) for (key, child) in value
+)
+_canonical_scientific_numbers(value::AbstractVector) =
+    Any[_canonical_scientific_numbers(child) for child in value]
+function _canonical_scientific_numbers(value::AbstractFloat)
+    isinteger(value) && typemin(Int64) <= value < 2.0^63 || return value
+    return Int64(value)
+end
+
+function _scientific_document(data::AbstractDict)
+    executions = [
+        Dict(
+            "id" => execution["id"],
+            "inputs" => _scientific_point_configuration(execution["resolved_configuration"]),
+            "effective_inputs" => execution["effective_inputs"],
+            "policies" => Dict(
+                field => execution["policies"][field] for field in ("scba_to_poisson", "voltage")
+            ),
+            "purpose" => execution["purpose"],
+            "repetition" => execution["repetition"],
+            "operation" => execution["operation"],
+        ) for execution in data["executions"]
+    ]
+    points = [
+        Dict(key => value for (key, value) in point if key ∉ ("effective_inputs", "branch"))
+        for point in data["points"]
+    ]
+    return _canonical_scientific_numbers(Dict(
+        "model_revision" => data["model_revision"], "executions" => executions, "points" => points,
+    ))
+end
+
+function _scientific_fingerprint(data::AbstractDict)
+    return bytes2hex(sha256(canonical_bytes(_scientific_document(data))))
+end
+
+"""Compare frozen science and implementation by leaf values, without executing a plan."""
+function compare_scientific_plans(left::AbstractDict, right::AbstractDict)
+    for plan in (left, right)
+        get(plan, "schema", nothing) == SCIENTIFIC_PLAN_SCHEMA ||
+            throw(ArgumentError("unsupported scientific plan schema"))
+        get(plan, "fingerprint", nothing) == _plan_fingerprint(plan) &&
+            get(plan, "scientific_fingerprint", nothing) == _scientific_fingerprint(plan) ||
+            throw(ArgumentError("frozen scientific plan fingerprint mismatch"))
+    end
+    return Dict(
+        "science" => _plan_leaf_changes(_scientific_document(left), _scientific_document(right)),
+        "implementation" => _plan_leaf_changes(left["implementation"], right["implementation"]),
+        "same_frozen_plan" => left["fingerprint"] == right["fingerprint"],
     )
-    return bytes2hex(sha256(canonical_bytes(identity)))
+end
+
+function _plan_leaf_changes(left, right)
+    changes = Dict{String,Any}[]
+    function visit(a, b, path)
+        isequal(a, b) && return
+        if a isa AbstractDict && b isa AbstractDict
+            for key in sort!(collect(union(keys(a), keys(b))))
+                if haskey(a, key) && haskey(b, key)
+                    visit(a[key], b[key], "$path/$key")
+                else
+                    push!(changes, Dict(
+                        "path" => "$path/$key", "left" => get(a, key, nothing),
+                        "right" => get(b, key, nothing), "presence" => haskey(a, key) ? "left" : "right",
+                    ))
+                end
+            end
+        elseif a isa AbstractVector && b isa AbstractVector && length(a) == length(b)
+            for i in eachindex(a, b)
+                visit(a[i], b[i], "$path/$i")
+            end
+        else
+            push!(changes, Dict("path" => path, "left" => a, "right" => b))
+        end
+    end
+    visit(left, right, "")
+    return changes
 end

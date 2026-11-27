@@ -278,7 +278,7 @@ using HDF5
             resume_from_checkpoints = true,
             checkpoint_prefix = "reference2019_state",
             fail_fast = false,
-            solution_observer = (_, it, iv) -> push!(observed_points, (it, iv)),
+            observation_sink = (_, it, iv) -> push!(observed_points, (it, iv)),
         )
         @test length(continued.records) == 2
         failed, subsequent = continued.records
@@ -320,7 +320,7 @@ using HDF5
             resume_from_checkpoints = true,
             checkpoint_prefix = "reference2019_state",
             fail_fast = true,
-            solution_observer = (_, it, iv) -> push!(observed_points, (it, iv)),
+            observation_sink = (_, it, iv) -> push!(observed_points, (it, iv)),
         )
         @test read(strict_checkpoint) == incompatible_bytes
         @test !isfile(joinpath(strict_directory, "reference2019_state_T1_V2.h5"))
@@ -340,7 +340,7 @@ using HDF5
             save_csv = false,
             Tᴸᴼ_of_Tᴸ = _ -> throw(InterruptException()),
             fail_fast = false,
-            solution_observer = (_, it, iv) -> push!(observed_points, (it, iv)),
+            observation_sink = (_, it, iv) -> push!(observed_points, (it, iv)),
         )
         @test isempty(observed_points)
 

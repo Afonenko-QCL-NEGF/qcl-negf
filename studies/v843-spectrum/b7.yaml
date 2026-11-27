@@ -1,0 +1,40 @@
+# Static operator fixture. No scattering kernels, Poisson or transport are evaluated.
+# Geometry and field source: studies/fath-v843/controls/v843-input/dupont/device.toml
+schema: qcl-negf-study-v2
+kind: study
+id: dupont-v843-b7
+name: Dupont V843 B7 static spectrum
+purpose: diagnostic
+operation: structure_spectrum
+configuration:
+  catalog: devices.yaml
+  device: dupont-v843
+  overrides:
+    numerical:
+      spatial_nodes: 144
+      basis_states: 7
+      basis_periods: 3
+      energy_min: -650 meV
+      energy_max: 1000 meV
+      energy_nodes: 239
+      energy_trust_margin: 390 meV
+      momentum_max: 0.6 nm^-1
+      momentum_nodes: 17
+      angular_nodes: 32
+      longitudinal_momentum_max: 10 nm^-1
+      longitudinal_momentum_nodes: 161
+      seed_broadening: 0.5 meV
+axes:
+  temperatures:
+    values:
+    - 50
+    unit: K
+  voltages:
+    values:
+    - 75.936
+    unit: mV
+outputs:
+  full_state: false
+  optical: false
+  projections: false
+  intermediate_history: 1

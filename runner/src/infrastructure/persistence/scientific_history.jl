@@ -14,32 +14,7 @@ mutable struct ScientificHistoryRecorder
     flush_interval_ns::UInt64
     last_flush_ns::UInt64
     clock_ns::Function
-    problem::Union{Nothing,NEGFProblem}
-end
-
-function scientific_history_counts(execution_directory)
-    scba=0
-    outer=0
-    isdir(execution_directory) || return scba, outer
-    for (root, _, files) in walkdir(execution_directory)
-        basename(root)=="history" || continue
-        occursin(
-            string(Base.Filesystem.path_separator)*"artifacts"*string(
-                Base.Filesystem.path_separator,
-            ),
-            root,
-        ) && continue
-        for name in files
-            endswith(name, ".h5") || continue
-            h5open(joinpath(root, name), "r") do file
-                _require_native_metadata(file, "qcl-negf-scientific-history-v4")
-                _require_native_scba_tables(file)
-                scba+=Int(read_attribute(file["metadata"], "scba_rows"))
-                outer+=Int(read_attribute(file["metadata"], "outer_rows"))
-            end
-        end
-    end
-    return scba, outer
+    grid::Union{Nothing,SolverHistoryGrid}
 end
 
 function ScientificHistoryRecorder(
@@ -79,25 +54,24 @@ function record_scientific_history!(
     kind,
     outer,
     row,
-    problem,
+    grid::SolverHistoryGrid,
 )
     # A domain rebuild starts a new segment; metadata identifies the actual grid.
-    problem_id=string(
-        problem.numerical.N_E,
-        "/",
-        problem.numerical.N_k,
-        "/",
-        problem.numerical.N_z,
-        "/",
-        problem.numerical.E_min,
-        "/",
-        problem.numerical.E_max,
-    )
-    if !isempty(recorder.problem_id) && recorder.problem_id!=problem_id
-        flush_scientific_history!(recorder)
+    previous = recorder.grid
+    if previous === nothing ||
+       previous.energy_eV != grid.energy_eV ||
+       previous.momentum_per_nm != grid.momentum_per_nm ||
+       previous.spatial_nodes != grid.spatial_nodes ||
+       previous.energy_scale_eV != grid.energy_scale_eV ||
+       previous.length_scale_m != grid.length_scale_m
+        previous === nothing || flush_scientific_history!(recorder)
+        recorder.problem_id = bytes2hex(sha256(sprint(
+            _light_json,
+            (; grid.energy_eV, grid.momentum_per_nm, grid.spatial_nodes,
+               grid.energy_scale_eV, grid.length_scale_m),
+        )))
+        recorder.grid = grid
     end
-    recorder.problem_id=problem_id
-    recorder.problem=problem
     if kind===:scba
         recorder.scba_count[]+=1
         push!(recorder.scba, (recorder.scba_count[], outer, row))
@@ -113,6 +87,9 @@ function record_scientific_history!(
     end
     return nothing
 end
+
+record_scientific_history!(recorder, kind, outer, row, problem::NEGFProblem) =
+    record_scientific_history!(recorder, kind, outer, row, SolverHistoryGrid(problem))
 
 function flush_scientific_history!(recorder::ScientificHistoryRecorder)
     isempty(recorder.scba) && isempty(recorder.outer) && return nothing
@@ -171,7 +148,7 @@ function flush_scientific_history!(recorder::ScientificHistoryRecorder)
             _write_psd_history!(
                 file,
                 SCBAIteration[last(item) for item in recorder.scba];
-                problem = recorder.problem,
+                grid = recorder.grid,
                 sequences = Int64[first(item) for item in recorder.scba],
             )
             _write_physical_markers!(
@@ -225,21 +202,37 @@ function flush_scientific_history!(recorder::ScientificHistoryRecorder)
     return destination
 end
 
-function scientific_history_sources(point_directory)
-    paths=String[]
-    isdir(point_directory) || return paths
-    for attempt in sort(readdir(point_directory; join = true))
-        history=joinpath(attempt, "history")
-        isdir(history) || continue
-        append!(
-            paths,
-            filter(path->endswith(path, ".h5"), sort(readdir(history; join = true))),
-        )
+scientific_history_sources(recorder::ScientificHistoryRecorder) =
+    [joinpath(recorder.directory, segment["path"]) for segment in recorder.segments]
+
+function _history_boundary(file)
+    boundary = Dict{String,Int}()
+    for kind in ("scba", "outer")
+        sequence = file[kind * "/sequence"]
+        rows = Int(read_attribute(file["metadata"], kind * "_rows"))
+        rows == length(sequence) ||
+            throw(ArgumentError("saved $kind history length differs from its metadata"))
+        last_sequence = rows == 0 ? 0 : Int(sequence[rows])
+        last_sequence == rows ||
+            throw(ArgumentError("saved $kind history does not end at its declared sequence"))
+        boundary[kind * "_sequence"] = last_sequence
     end
-    return paths
+    return boundary
 end
 
-"""Собирает единую таблицу истории для экспорта без потерь. Локальные сегменты служат входом при возобновлении."""
+"""Возвращает только историю, включённую в уже проверенное поколение контрольной точки."""
+function scientific_history_prefix(commit_path, commit)
+    boundary = get(commit, "history_boundary", nothing)
+    boundary === nothing && return (paths = String[], scba = 0, outer = 0)
+    history = only(item for item in commit["artifacts"] if item["role"] == "science.history")
+    return (
+        paths = [joinpath(dirname(commit_path), history["path"])],
+        scba = Int(boundary["scba_sequence"]),
+        outer = Int(boundary["outer_sequence"]),
+    )
+end
+
+"""Собирает проверенный префикс и закрытые сегменты текущей попытки с исходными идентификаторами."""
 function consolidate_scientific_history(destination, paths)
     isempty(paths) && throw(
         ArgumentError(
@@ -253,9 +246,13 @@ function consolidate_scientific_history(destination, paths)
             _require_native_metadata(file, "qcl-negf-scientific-history-v4")
             _require_native_scba_tables(file)
             metadata=file["metadata"]
-            push!(
-                sources,
-                Dict(
+            if haskey(metadata, "source_segments_json")
+                prior = YAML.load(String(read(metadata["source_segments_json"])))
+                prior isa AbstractVector ||
+                    throw(ArgumentError("consolidated history does not identify its source segments"))
+                append!(sources, prior)
+            else
+                push!(sources, Dict(
                     "sha256"=>bytes2hex(open(sha256, path)),
                     "identity"=>YAML.load(
                         String(read(metadata["identity_json"]));
@@ -272,8 +269,8 @@ function consolidate_scientific_history(destination, paths)
                         Int(file["scba/sequence"][length(file["scba/sequence"])])
                     ),
                     "outer_rows"=>Int(read_attribute(metadata, "outer_rows")),
-                ),
-            )
+                ))
+            end
             for kind in ("scba", "outer"), name in keys(file[kind])
                 values=read(file[kind][name])
                 append!(get!(tables[kind], name, eltype(values)[]), values)
@@ -287,15 +284,15 @@ function consolidate_scientific_history(destination, paths)
         attributes(metadata)["schema_version"]=_CHECKPOINT_SCHEMA_VERSION
         attributes(metadata)["contract_set"]=_RESULT_CONTRACT_SET
         attributes(metadata)["artifact_role"]="science.history"
-        attributes(metadata)["representation"]="lossless consolidation of every local closed history segment"
+        attributes(metadata)["representation"]="committed history prefix and closed segments of the current attempt"
         metadata["source_segments_json"]=sprint(_light_json, sources)
         for kind in ("scba", "outer")
             table=tables[kind]
             group=create_group(file, kind)
             sequence=get(table, "sequence", Int64[])
             order=sortperm(sequence)
-            length(unique(sequence))==length(sequence) ||
-                throw(ArgumentError("duplicate scientific history sequence"))
+            sequence[order] == collect(1:length(sequence)) ||
+                throw(ArgumentError("scientific history sequence must be contiguous and point-local"))
             attributes(metadata)[kind*"_rows"]=length(sequence)
             for (name, values) in table
                 _physical_dataset(
@@ -304,7 +301,7 @@ function consolidate_scientific_history(destination, paths)
                     values[order];
                     units = name=="J" ? "A/m^2" : "dimensionless",
                     axes = "iteration",
-                    description = "Complete $(kind) $(name), ordered by immutable execution sequence",
+                    description = "Complete $(kind) $(name), ordered by the point sequence",
                 )
             end
         end

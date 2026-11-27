@@ -55,6 +55,7 @@ import QCLNEGF: AbstractProductionKernel,
     ProductionKernelOptions,
     ProductionMemoryEstimate,
     ProductionOptions,
+    ProductionObservation,
     ProductionResidualWorkspace,
     ProductionSweepRecord,
     ProductionSweepResult,
@@ -85,6 +86,7 @@ import QCLNEGF: AbstractProductionKernel,
     SelfEnergyFamily,
     SheetDensityQuantity,
     SolverEvent,
+    SolverHistoryGrid,
     SolverMetric,
     SolverOptions,
     SolverTolerances,
@@ -294,3 +296,4 @@ import QCLNEGF: AbstractProductionKernel,
 import QCLNEGF: retarget_problem, retarget_production_cache
 const CHECKPOINT_NONE = QCLNumerics.CHECKPOINT_NONE
 const CHECKPOINT_STATE_ONLY = QCLNumerics.CHECKPOINT_STATE_ONLY
+const CHECKPOINT_STATE_AND_ANALYSIS = QCLNumerics.CHECKPOINT_STATE_AND_ANALYSIS

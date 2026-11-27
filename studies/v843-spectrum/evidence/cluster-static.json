@@ -1,0 +1,109 @@
+{
+  "runner_source": "0b554b0e25722283173780f984bb30aa50f97f6f",
+  "core_source": "1124e48da4cdcfc03cfd39cfd70033981351d52c",
+  "runs": [
+    {
+      "worker": "qcl-condor",
+      "job": "80.0",
+      "operating_system": "Ubuntu26",
+      "process_exit_code": 0,
+      "runtime": {
+        "julia": "1.13.4",
+        "core_tree": "9acda1807508f7b57d054c1d25803e69ea06693e",
+        "plan_sha256": "5a8f852d4602c2f97fec7caa2da7fc4c9062eaf6df5b9bea99a0c394ad871826",
+        "architecture": "x86_64",
+        "threads": 2,
+        "os": "Linux",
+        "blas_threads": 1,
+        "blas": "LBTConfig([ILP64] libopenblas64_.so)"
+      },
+      "failed_checks": [
+        {
+          "name": "structure_translation",
+          "value": 0.1622847595137896,
+          "threshold": 0.1
+        },
+        {
+          "name": "structure_translation_nearest",
+          "value": 0.1622847595137896,
+          "threshold": 0.1
+        },
+        {
+          "name": "structure_translation_two_pairs",
+          "value": 0.1622847595137896,
+          "threshold": 0.005
+        }
+      ]
+    },
+    {
+      "worker": "qcl-win-1",
+      "job": "82.0",
+      "operating_system": "WINDOWS1000",
+      "process_exit_code": 0,
+      "runtime": {
+        "julia": "1.13.4",
+        "core_tree": "7640d208aa286b0ddb23fd407021c666a0d4ee14",
+        "plan_sha256": "5a8f852d4602c2f97fec7caa2da7fc4c9062eaf6df5b9bea99a0c394ad871826",
+        "architecture": "x86_64",
+        "threads": 2,
+        "os": "NT",
+        "blas_threads": 1,
+        "blas": "LBTConfig([ILP64] libopenblas64_.dll)"
+      },
+      "failed_checks": [
+        {
+          "name": "structure_translation",
+          "value": 0.1622847595137891,
+          "threshold": 0.1
+        },
+        {
+          "name": "structure_translation_nearest",
+          "value": 0.1622847595137891,
+          "threshold": 0.1
+        },
+        {
+          "name": "structure_translation_two_pairs",
+          "value": 0.1622847595137891,
+          "threshold": 0.005
+        }
+      ]
+    }
+  ],
+  "comparison": {
+    "plan_fingerprint": "f5d9f285e373e380590f885a8b32b5201c9244f903822599cbf5091655cc92a8",
+    "rank": 7,
+    "spatial_nodes": 144,
+    "max_energy_error_eV": 1.2212453270876722e-15,
+    "max_energy_error_limit_eV": 1e-10,
+    "projector_distance": 1.542376027507449e-14,
+    "projector_distance_limit": 1e-08,
+    "same_failed_checks": true,
+    "operator_verdicts": [
+      "failed",
+      "failed"
+    ],
+    "failed_checks": [
+      [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ]
+    ],
+    "result_sha256": [
+      "b15bfc27598d96ec0ef2d35b3c586bdca97740d2d059d5cf7a47087106fb7f15",
+      "6181a15ee283639ace787c7c96487b8f6c950b0b9e73c48caaf71fd38fc982b7"
+    ],
+    "reproducible": true
+  },
+  "technical_negative": {
+    "input": "frozen point voltage increased by 0.001 V",
+    "exit_code": 2,
+    "reason": "frozen scientific plan fingerprint mismatch",
+    "series_result": null
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "v843-new-rank11-domains-v1",
+  "configuration_source_plan_fingerprint": "290eb5eea4bd4173bfdac03fc7df4dd104de42e999901ed4ad334d1c87cf451c",
+  "configuration_source_execution_id": "execution-10",
+  "configuration_source_point_id": "point-10",
+  "voltage_per_period_V": 0.075936,
+  "temperature_K": 50.0,
+  "lo_temperature_K": 50.0,
+  "driver_sha256": "425fe65bbb5083592e94dc27f5f0cc1253e0c7a071068b43c8de6aeba83cc3d3",
+  "case": "w11-wannier-proxy",
+  "spatial_nodes_per_period": 144,
+  "rank": 11,
+  "hamiltonian_periods": 9,
+  "observed_periods": 1,
+  "energy_reference_eV": 0.0,
+  "historical_w11_reproduction": false,
+  "localization": "bloch_wannier",
+  "boundary": "periodic",
+  "fits": {
+    "whole_window_observed_in_cell": {
+      "common_shift_nm": -20.08888888888889,
+      "energy_offset_model_minus_article_meV": -9.785767180938409,
+      "energy_rms_meV": 1.7962606375368244,
+      "shape_margin": 0.042048667452511124,
+      "energy_margin_meV": 7.038581493283298,
+      "mean_cosine": 0.9051964634366274,
+      "role_cosines": {
+        "u": 0.987300883486094,
+        "l": 0.9589628702859073,
+        "e": 0.8060669926986532,
+        "i": 0.8684551072758546
+      },
+      "role_indices": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "energy_best_role_indices": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "role_energies_meV": {
+        "u": 15.153650995448736,
+        "l": 4.293290589273111,
+        "e": -26.291702199611226,
+        "i": 48.74739189113574
+      },
+      "reasons": [],
+      "admitted": true,
+      "retained_probability_range": [
+        0.9109737071083885,
+        0.9996731958923986
+      ]
+    },
+    "both_operator_and_basis_restricted_to_cell": {
+      "common_shift_nm": -19.68711111111111,
+      "energy_offset_model_minus_article_meV": -3.735151915244117,
+      "energy_rms_meV": 11.419263977456152,
+      "shape_margin": 0.03491360815447608,
+      "energy_margin_meV": 6.073076948450539,
+      "mean_cosine": 0.8394426723428201,
+      "role_cosines": {
+        "u": 0.9361466650627406,
+        "l": 0.8682034103369433,
+        "e": 0.7091748648658912,
+        "i": 0.8442457491057056
+      },
+      "role_indices": {
+        "u": 2,
+        "l": 3,
+        "e": 1,
+        "i": 4
+      },
+      "energy_best_role_indices": {
+        "u": 3,
+        "l": 2,
+        "e": 1,
+        "i": 4
+      },
+      "role_energies_meV": {
+        "u": 12.339914732387255,
+        "l": 27.117545216816836,
+        "e": -22.82327669626704,
+        "i": 49.47090908608648
+      },
+      "reasons": [
+        "shape_and_relative_energy_match_different_roles",
+        "energy_rms_above_threshold",
+        "role_cosine_below_threshold"
+      ],
+      "admitted": false,
+      "retained_probability_range": [
+        1.0,
+        1.0000000000000009
+      ]
+    }
+  },
+  "control_sha256": "2a618ca0504d0664e887ccf519da808eb41724d1c3fb00142f46733888138136",
+  "rule_sha256": "814c5149c0ddb62616f1486fdffc7ff40977cd0e076f8263b8e28ac2d4c42a58",
+  "figure_sha256": "a6679df4cc50e177be4b4ebb6ad0a6011e1ece9f7152820b67980565fbb4f5c7"
+}

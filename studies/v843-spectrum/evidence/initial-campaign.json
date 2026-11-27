@@ -1,0 +1,838 @@
+{
+  "schema": "v843-basis-admission-result-v1",
+  "rule_sha256": "814c5149c0ddb62616f1486fdffc7ff40977cd0e076f8263b8e28ac2d4c42a58",
+  "criterion_source": "https://github.com/Afonenko-QCL-NEGF/qcl-negf/blob/72fcca8cb10e6867651ea22d7260dc2b50cc3b44/studies/v843-basis-operators-20261127/forecasts.md#L19-L29",
+  "figure_sha256": "a6679df4cc50e177be4b4ebb6ad0a6011e1ece9f7152820b67980565fbb4f5c7",
+  "frozen_plan_sha256": "367c371484a493023d250b6b4137b0c83ea73c65a29489286bbc407847bb4dec",
+  "selection": {
+    "status": "rejected",
+    "reason": "no_static_and_figure_admitted_rank_stable_under_window_expansion",
+    "baseline_reproduced": true,
+    "candidates": [
+      {
+        "window_periods": 7,
+        "rank": 6,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-1",
+          "point_id": "point-1",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+          "sha256": "65587cf024dca63ff41f2969aa61770bd40426d963202006aaa2b5a49a0b166c"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.03396089331596376,
+          "structure_translation_nearest": 4.883675273105151e-05,
+          "structure_translation_two_pairs": 0.0008179972034646477
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "shape_margin_below_threshold",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -20.59111111111111,
+          "energy_offset_model_minus_article_meV": 75.89570817060373,
+          "energy_rms_meV": 113.09660530975871,
+          "shape_margin": 0.0003686522395839331,
+          "energy_margin_meV": 6.468335523463423,
+          "mean_cosine": 0.7954182822336708,
+          "role_cosines": {
+            "u": 0.989452979060076,
+            "l": 0.7706330245055562,
+            "e": 0.6090728711021802,
+            "i": 0.812514254266871
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 6,
+            "e": 3,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.991978428990878,
+            "l": 277.00527090455114,
+            "e": 42.55517420579444,
+            "i": 52.076109143078455
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "shape_margin_below_threshold",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 7,
+        "rank": 7,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-2",
+          "point_id": "point-2",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-2/point-2/attempt-1/artifacts",
+          "sha256": "a8c815534d4a502702456f37611adb92ed046560825dd19d668e62db4894aa22"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.16228475951366483,
+          "structure_translation_nearest": 0.16228475951366483,
+          "structure_translation_two_pairs": 0.16228475951366483
+        },
+        "reasons": [
+          "structure_translation",
+          "structure_translation_nearest",
+          "structure_translation_two_pairs"
+        ],
+        "status": "static_rejected"
+      },
+      {
+        "window_periods": 7,
+        "rank": 8,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-3",
+          "point_id": "point-3",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-3/point-3/attempt-1/artifacts",
+          "sha256": "929e4051e0bd2fbe4c883c6414562c90201c8f97c1e8d487f0fc7a4fee1a795e"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.06933066903335913,
+          "structure_translation_nearest": 8.986335580702272e-05,
+          "structure_translation_two_pairs": 0.0017709933631257818
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -19.68711111111111,
+          "energy_offset_model_minus_article_meV": -3.356130887888666,
+          "energy_rms_meV": 11.909122234540872,
+          "shape_margin": 0.03274535342941043,
+          "energy_margin_meV": 6.251510304655515,
+          "mean_cosine": 0.83592738072373,
+          "role_cosines": {
+            "u": 0.9353029766530365,
+            "l": 0.858730105464004,
+            "e": 0.7054659007787744,
+            "i": 0.8442105399991048
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.421474832108437,
+            "l": 28.360316580737557,
+            "e": -22.690767230640155,
+            "i": 49.5301522662395
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 7,
+        "rank": 9,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-4",
+          "point_id": "point-4",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-4/point-4/attempt-1/artifacts",
+          "sha256": "40bdc822b8988a18a1a2a03b74d22b9f02904aa739cde461748755f2c6c29e4a"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.11215452961517336,
+          "structure_translation_nearest": 0.0006373159302222375,
+          "structure_translation_two_pairs": 0.0014576741936192588
+        },
+        "reasons": [
+          "structure_translation"
+        ],
+        "status": "static_rejected"
+      },
+      {
+        "window_periods": 7,
+        "rank": 11,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-5",
+          "point_id": "point-5",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-5/point-5/attempt-1/artifacts",
+          "sha256": "129f70149172ba2b00168cdba541207199af7044a16c9296335613ad892957a8"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.026146687262210262,
+          "structure_translation_nearest": 0.000821805770291359,
+          "structure_translation_two_pairs": 0.002625174482823669
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -19.68711111111111,
+          "energy_offset_model_minus_article_meV": -3.393447400574828,
+          "energy_rms_meV": 11.820442438498553,
+          "shape_margin": 0.03333307380927086,
+          "energy_margin_meV": 6.225961661510164,
+          "mean_cosine": 0.8364516091753853,
+          "role_cosines": {
+            "u": 0.9376018418668338,
+            "l": 0.859137031290508,
+            "e": 0.7049896107711989,
+            "i": 0.8440779527730002
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.434997572717672,
+            "l": 28.171520689954978,
+            "e": -22.706766602842308,
+            "i": 49.572158737870346
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 9,
+        "rank": 6,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-6",
+          "point_id": "point-6",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-6/point-6/attempt-1/artifacts",
+          "sha256": "141f2c63c8dd841daf3be89e580890b5ceb09cf7091ad4ee2022d32d2bc83945"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.033960893186291675,
+          "structure_translation_nearest": 2.9137350302924444e-06,
+          "structure_translation_two_pairs": 4.7589643198889225e-05
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "shape_margin_below_threshold",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -20.59111111111111,
+          "energy_offset_model_minus_article_meV": 75.89748257918036,
+          "energy_rms_meV": 113.09977635610534,
+          "shape_margin": 0.00036933450116061195,
+          "energy_margin_meV": 6.468379169943223,
+          "mean_cosine": 0.79541957172177,
+          "role_cosines": {
+            "u": 0.9894529877450339,
+            "l": 0.7706286663790247,
+            "e": 0.6090740189339815,
+            "i": 0.8125226138290401
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 6,
+            "e": 3,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.991973034390744,
+            "l": 277.01274969151393,
+            "e": 42.5549609043016,
+            "i": 52.07594668651514
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "shape_margin_below_threshold",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 9,
+        "rank": 7,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-7",
+          "point_id": "point-7",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-7/point-7/attempt-1/artifacts",
+          "sha256": "03879766e418a66703096b9f77732c7106c5bda26a595fa90c8b4ff808208020"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.1695032445712809,
+          "structure_translation_nearest": 0.1695032445712809,
+          "structure_translation_two_pairs": 0.1695032445712809
+        },
+        "reasons": [
+          "structure_translation",
+          "structure_translation_nearest",
+          "structure_translation_two_pairs"
+        ],
+        "status": "static_rejected"
+      },
+      {
+        "window_periods": 9,
+        "rank": 8,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-8",
+          "point_id": "point-8",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-8/point-8/attempt-1/artifacts",
+          "sha256": "aa6230df3d16240faf9acfce4f2a4edfdbc38331e04cb9453b213dd9604d211b"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.06933066910735107,
+          "structure_translation_nearest": 4.894983624189598e-06,
+          "structure_translation_two_pairs": 8.987134522735748e-05
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -19.68711111111111,
+          "energy_offset_model_minus_article_meV": -3.356286841965611,
+          "energy_rms_meV": 11.908926581808783,
+          "shape_margin": 0.03274572798343478,
+          "energy_margin_meV": 6.2514431774967205,
+          "mean_cosine": 0.8359281554701637,
+          "role_cosines": {
+            "u": 0.9353023057378334,
+            "l": 0.858731888633823,
+            "e": 0.7054679738516627,
+            "i": 0.8442104536573356
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.421437823949933,
+            "l": 28.359814291416612,
+            "e": -22.690817073349297,
+            "i": 49.530117590120305
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 9,
+        "rank": 9,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-9",
+          "point_id": "point-9",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-9/point-9/attempt-1/artifacts",
+          "sha256": "9515de99c47b5ac8f31a8e613a20a69848cbede9ea590acfec43615b2e2dd554"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.11234672447828599,
+          "structure_translation_nearest": 0.0001721341652999161,
+          "structure_translation_two_pairs": 0.0002722988054130879
+        },
+        "reasons": [
+          "structure_translation"
+        ],
+        "status": "static_rejected"
+      },
+      {
+        "window_periods": 9,
+        "rank": 11,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-10",
+          "point_id": "point-10",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-10/point-10/attempt-1/artifacts",
+          "sha256": "88e0eb77e33069eb3161dc84d1ccc9e8b6d8485fa0f1ba5483b4039737c94bc4"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.02614328253479286,
+          "structure_translation_nearest": 0.00023010274714268346,
+          "structure_translation_two_pairs": 0.0006740136892195381
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -19.68711111111111,
+          "energy_offset_model_minus_article_meV": -3.3944100904019696,
+          "energy_rms_meV": 11.819083605688908,
+          "shape_margin": 0.03333500293497049,
+          "energy_margin_meV": 6.22550661933091,
+          "mean_cosine": 0.8364425982038483,
+          "role_cosines": {
+            "u": 0.9375973710870991,
+            "l": 0.8590949868097313,
+            "e": 0.7050019793183946,
+            "i": 0.844076055600168
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.434817225878492,
+            "l": 28.168145785522974,
+            "e": -22.706972215713396,
+            "i": 49.57206884270405
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 11,
+        "rank": 6,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-11",
+          "point_id": "point-11",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-11/point-11/attempt-1/artifacts",
+          "sha256": "ee0eb14311c4257c2227815ad1e849bd0cea746aa64f675f2b00ae779fffc61a"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.03396089318592128,
+          "structure_translation_nearest": 1.7485045589379342e-07,
+          "structure_translation_two_pairs": 2.84122918334166e-06
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "shape_margin_below_threshold",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -20.59111111111111,
+          "energy_offset_model_minus_article_meV": 75.89758022309921,
+          "energy_rms_meV": 113.09995075691711,
+          "shape_margin": 0.0003693710910285253,
+          "energy_margin_meV": 6.468381401975989,
+          "mean_cosine": 0.7954196414930949,
+          "role_cosines": {
+            "u": 0.9894529882987986,
+            "l": 0.7706284271846142,
+            "e": 0.6090740797506776,
+            "i": 0.8125230707382891
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 6,
+            "e": 3,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.99197274296087,
+            "l": 277.01316102172643,
+            "e": 42.55494939387914,
+            "i": 52.07593773383036
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "shape_margin_below_threshold",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 11,
+        "rank": 7,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-12",
+          "point_id": "point-12",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-12/point-12/attempt-1/artifacts",
+          "sha256": "108e06ca4d1b7e187291b17f62b79b5d2073e3fdaf0abd0668eee723e56edc98"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.17212618462106405,
+          "structure_translation_nearest": 0.17212618462106405,
+          "structure_translation_two_pairs": 0.17212618462106405
+        },
+        "reasons": [
+          "structure_translation",
+          "structure_translation_nearest",
+          "structure_translation_two_pairs"
+        ],
+        "status": "static_rejected"
+      },
+      {
+        "window_periods": 11,
+        "rank": 8,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-13",
+          "point_id": "point-13",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-13/point-13/attempt-1/artifacts",
+          "sha256": "6526b6e04aea20f03d8d30122648e8cc01731cda51343ea36a463cdbc6955e21"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.06933066910710937,
+          "structure_translation_nearest": 2.6367332628985904e-07,
+          "structure_translation_two_pairs": 4.8953818336785795e-06
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -19.68711111111111,
+          "energy_offset_model_minus_article_meV": -3.3562946241847453,
+          "energy_rms_meV": 11.908916825150252,
+          "shape_margin": 0.032745747282293625,
+          "energy_margin_meV": 6.251439837036934,
+          "mean_cosine": 0.8359281946896433,
+          "role_cosines": {
+            "u": 0.9353022721202724,
+            "l": 0.8587319798862565,
+            "e": 0.7054680771819015,
+            "i": 0.8442104495701429
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.421435961958084,
+            "l": 28.359789238781747,
+            "e": -22.690819568624203,
+            "i": 49.53011587114539
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      },
+      {
+        "window_periods": 11,
+        "rank": 9,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-14",
+          "point_id": "point-14",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-14/point-14/attempt-1/artifacts",
+          "sha256": "43c6f6e359f783e9296522db76d0c51aa3bc328048d21d874948394c4a427187"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.1123905068190935,
+          "structure_translation_nearest": 4.826842018139634e-05,
+          "structure_translation_two_pairs": 4.942061824745826e-05
+        },
+        "reasons": [
+          "structure_translation"
+        ],
+        "status": "static_rejected"
+      },
+      {
+        "window_periods": 11,
+        "rank": 11,
+        "source": {
+          "plan_fingerprint": "aa2654cad7dc66390fbfc1c463f754ca3da935ee3cc5f9e308f77cca47f8350f",
+          "execution_id": "execution-15",
+          "point_id": "point-15",
+          "output": "cell_spectrum",
+          "artifact_root": "executions/execution-15/point-15/attempt-1/artifacts",
+          "sha256": "ebf782176a08b7a8d77a463b0607632d69b7a79dfa3ab765edaaf051ebfcf9df"
+        },
+        "translation_metrics": {
+          "structure_translation": 0.026142972106269265,
+          "structure_translation_nearest": 6.671622889761775e-05,
+          "structure_translation_two_pairs": 0.0001879049827321334
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "status": "figure_rejected",
+        "figure_comparison": {
+          "common_shift_nm": -19.68711111111111,
+          "energy_offset_model_minus_article_meV": -3.3946595156882378,
+          "energy_rms_meV": 11.818729742907568,
+          "shape_margin": 0.03333547529239378,
+          "energy_margin_meV": 6.225387681192629,
+          "mean_cosine": 0.8364400549047908,
+          "role_cosines": {
+            "u": 0.9375962155580225,
+            "l": 0.8590832913596121,
+            "e": 0.7050051900950479,
+            "i": 0.8440755226064806
+          },
+          "role_indices": {
+            "u": 2,
+            "l": 3,
+            "e": 1,
+            "i": 4
+          },
+          "energy_best_role_indices": {
+            "u": 3,
+            "l": 2,
+            "e": 1,
+            "i": 4
+          },
+          "role_energies_meV": {
+            "u": 12.43477214188481,
+            "l": 28.16726812396586,
+            "e": -22.707024079970967,
+            "i": 49.57204575136734
+          },
+          "reasons": [
+            "shape_and_relative_energy_match_different_roles",
+            "energy_rms_above_threshold",
+            "role_cosine_below_threshold"
+          ],
+          "admitted": false
+        }
+      }
+    ],
+    "expansion_checks": [],
+    "selected_source": null
+  },
+  "routing": {
+    "PILOT": "skipped_by_gate",
+    "T17A32": "skipped_by_gate",
+    "T17A128": "skipped_by_gate",
+    "T33A32": "skipped_by_gate",
+    "T33A128": "skipped_by_gate"
+  },
+  "transport_current_A_cm2": null,
+  "independent_comparison": {
+    "comparison_status": "measured",
+    "comparison_driver": "72fcca8cb10e6867651ea22d7260dc2b50cc3b44",
+    "implementation": {
+      "runner": {
+        "version": "0.2.0",
+        "source_tree_sha256": "8b1137bb167b7a75effee3e374249b229c3a26193e2f01c20512666881ec30a1",
+        "uuid": "5a147728-d76f-4a23-a474-c91379216907"
+      },
+      "core": {
+        "version": "0.2.0",
+        "source_tree_sha256": "f8d154b1ed8c4bde5f74536ab7f94d97f4b923a989eb234f38ea90409170c905",
+        "uuid": "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
+      }
+    },
+    "frozen_plan_sha256": "367c371484a493023d250b6b4137b0c83ea73c65a29489286bbc407847bb4dec",
+    "max_energy_error_eV": 6.661338147750939e-16,
+    "max_projector_distance": 7.942873394868008e-16,
+    "candidate_comparisons": [
+      {
+        "window": 7,
+        "rank": 6,
+        "max_error_eV": 1.1102230246251565e-16,
+        "spectral_projector_difference": 5.180191591938318e-16
+      },
+      {
+        "window": 7,
+        "rank": 7,
+        "max_error_eV": 1.1102230246251565e-16,
+        "spectral_projector_difference": 7.280786256154136e-16
+      },
+      {
+        "window": 7,
+        "rank": 8,
+        "max_error_eV": 2.220446049250313e-16,
+        "spectral_projector_difference": 5.198480138361535e-16
+      },
+      {
+        "window": 7,
+        "rank": 9,
+        "max_error_eV": 6.661338147750939e-16,
+        "spectral_projector_difference": 6.72708423993719e-16
+      },
+      {
+        "window": 7,
+        "rank": 11,
+        "max_error_eV": 1.6653345369377348e-16,
+        "spectral_projector_difference": 4.763433132384525e-16
+      },
+      {
+        "window": 9,
+        "rank": 6,
+        "max_error_eV": 1.1102230246251565e-16,
+        "spectral_projector_difference": 3.4551614736524816e-16
+      },
+      {
+        "window": 9,
+        "rank": 7,
+        "max_error_eV": 1.1102230246251565e-16,
+        "spectral_projector_difference": 5.760838840493897e-16
+      },
+      {
+        "window": 9,
+        "rank": 8,
+        "max_error_eV": 4.440892098500626e-16,
+        "spectral_projector_difference": 5.407790513841352e-16
+      },
+      {
+        "window": 9,
+        "rank": 9,
+        "max_error_eV": 6.661338147750939e-16,
+        "spectral_projector_difference": 6.098926598061397e-16
+      },
+      {
+        "window": 9,
+        "rank": 11,
+        "max_error_eV": 1.1102230246251565e-16,
+        "spectral_projector_difference": 5.803242239381742e-16
+      },
+      {
+        "window": 11,
+        "rank": 6,
+        "max_error_eV": 1.6653345369377348e-16,
+        "spectral_projector_difference": 4.889701349859152e-16
+      },
+      {
+        "window": 11,
+        "rank": 7,
+        "max_error_eV": 1.6653345369377348e-16,
+        "spectral_projector_difference": 4.971631804846014e-16
+      },
+      {
+        "window": 11,
+        "rank": 8,
+        "max_error_eV": 1.1449174941446927e-16,
+        "spectral_projector_difference": 4.821942601475127e-16
+      },
+      {
+        "window": 11,
+        "rank": 9,
+        "max_error_eV": 4.440892098500626e-16,
+        "spectral_projector_difference": 6.84213683131077e-16
+      },
+      {
+        "window": 11,
+        "rank": 11,
+        "max_error_eV": 1.6653345369377348e-16,
+        "spectral_projector_difference": 7.942873394868008e-16
+      }
+    ],
+    "matched_selection_status_and_reasons": true,
+    "max_energy_difference_limit_eV": 1e-10,
+    "projector_difference_limit": 1e-08
+  },
+  "runtime": {
+    "julia": "1.13.4",
+    "julia_threads": 2,
+    "blas_threads": 1,
+    "worker_count": 1,
+    "platform": "Linux x86_64",
+    "series_status": "completed_with_warnings",
+    "completed_point_count": 15
+  },
+  "negative_examples": {
+    "corrupted_named_output": "cell spectrum artifact does not match its commit",
+    "different_valid_parent": "wrong result identity for parent b7-r6"
+  }
+}

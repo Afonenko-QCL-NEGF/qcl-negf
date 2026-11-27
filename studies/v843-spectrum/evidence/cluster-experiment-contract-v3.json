@@ -1,0 +1,146 @@
+{
+  "schema": "qcl-negf-v843-cluster-qualification/v1",
+  "core_source_commit": "7e0ce43c2abdd639d8b9901e779b24751d20bc68",
+  "runner_source_commit": "7925a8878cf4250de747d9b4ae62ba86321e3a95",
+  "install": "isolated depot per node; Julia Pkg develop of the candidate Core",
+  "staged_source_tar_sha256": "91aa8d94be88de5e73f010e6d584581ae3530a4b1c3cfc255caea1e5042f7f09",
+  "operator": {
+    "plan_fingerprint": "6f094f13917de9b23a40f68da4ba427cb2ba0349f118a3b6d08065369d60ce86",
+    "rank": 7,
+    "spatial_nodes": 144,
+    "max_energy_error_eV": 1.2212453270876722e-15,
+    "max_energy_error_limit_eV": 1e-10,
+    "projector_distance": 1.542376027507449e-14,
+    "projector_distance_limit": 1e-08,
+    "same_failed_checks": true,
+    "operator_verdicts": [
+      "failed",
+      "failed"
+    ],
+    "failed_checks": [
+      [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ]
+    ],
+    "result_sha256": [
+      "b15bfc27598d96ec0ef2d35b3c586bdca97740d2d059d5cf7a47087106fb7f15",
+      "6181a15ee283639ace787c7c96487b8f6c950b0b9e73c48caaf71fd38fc982b7"
+    ],
+    "reproducible": true
+  },
+  "worker_runs": [
+    {
+      "worker": "qcl-condor",
+      "job": "87.0",
+      "operating_system": "Ubuntu26",
+      "request_cpus": 2,
+      "request_memory_MiB": 8192,
+      "runtime": {
+        "julia": "1.13.4",
+        "core_tree": "7339c1072a8dd63743befad63aa579359fe61026",
+        "plan_sha256": "949600cfce7f298d2219acee6d63a17c164d99f425ad41bcb855bdb816d68fb7",
+        "architecture": "x86_64",
+        "threads": 2,
+        "os": "Linux",
+        "blas_threads": 1,
+        "blas": "LBTConfig([ILP64] libopenblas64_.so)",
+        "implementation": {
+          "runner": {
+            "version": "0.2.0",
+            "source_tree_sha256": "82a47715ee009000d927648881ffe84e79dd29e75e42d1b02ffbcd1c6d0fe4d8",
+            "uuid": "5a147728-d76f-4a23-a474-c91379216907"
+          },
+          "core": {
+            "version": "0.2.0",
+            "source_tree_sha256": "108a5606ff38ac111f10a2a88bc75f7f2d6d1c389ab7726223b907aee9950307",
+            "uuid": "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
+          }
+        }
+      },
+      "b7_scientific_status": {
+        "operator": "failed",
+        "campaign_verdict": "unknown",
+        "physical_candidate": "unknown",
+        "process": "completed",
+        "iterative_convergence": "unknown",
+        "discretization": "unknown"
+      },
+      "checkpoint_tests": {
+        "scientific_recovery_checkpoint_cadence": {
+          "passed": 45,
+          "sha256": "4101c4e55d1c59920ba449ba6969733a01e3d933201104f9184622577b84fae8"
+        },
+        "production_observation_and_outer_restart": {
+          "passed": 73,
+          "sha256": "90c5f19979280167701de6efd533008a52cfb3760149ef053fdcbe20b05054b3"
+        }
+      }
+    },
+    {
+      "worker": "qcl-win-1",
+      "job": "86.0",
+      "operating_system": "WINDOWS1000",
+      "request_cpus": 2,
+      "request_memory_MiB": 4096,
+      "runtime": {
+        "julia": "1.13.4",
+        "core_tree": "9d4635265a4b111d30d074f975d0df0a7a1b5b74",
+        "plan_sha256": "949600cfce7f298d2219acee6d63a17c164d99f425ad41bcb855bdb816d68fb7",
+        "architecture": "x86_64",
+        "threads": 2,
+        "os": "NT",
+        "blas_threads": 1,
+        "blas": "LBTConfig([ILP64] libopenblas64_.dll)",
+        "implementation": {
+          "runner": {
+            "version": "0.2.0",
+            "source_tree_sha256": "82a47715ee009000d927648881ffe84e79dd29e75e42d1b02ffbcd1c6d0fe4d8",
+            "uuid": "5a147728-d76f-4a23-a474-c91379216907"
+          },
+          "core": {
+            "version": "0.2.0",
+            "source_tree_sha256": "108a5606ff38ac111f10a2a88bc75f7f2d6d1c389ab7726223b907aee9950307",
+            "uuid": "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
+          }
+        }
+      },
+      "b7_scientific_status": {
+        "operator": "failed",
+        "campaign_verdict": "unknown",
+        "physical_candidate": "unknown",
+        "process": "completed",
+        "iterative_convergence": "unknown",
+        "discretization": "unknown"
+      },
+      "checkpoint_tests": {
+        "scientific_recovery_checkpoint_cadence": {
+          "passed": 45,
+          "sha256": "a5ca8b143e3ec9bdf03f9875ca20dd6ef1496a95115151333c5de0f3ff8ce7d1"
+        },
+        "production_observation_and_outer_restart": {
+          "passed": 73,
+          "sha256": "9688b5821ae5017967f868b1eb37981edeadcd0e0e6c530981df315ba2ac7b3d"
+        }
+      }
+    }
+  ],
+  "prior_linux_attempt": {
+    "job": "85.0",
+    "request_memory_MiB": 4096,
+    "reported_memory_usage_MiB": 3418,
+    "process_exit_code": 1,
+    "b7_result": "completed",
+    "checkpoint_case": "preparation_failed",
+    "warning": "automatic execution reserve (2147483648 bytes) leaves no safe memory budget",
+    "log_sha256": "dcfcf17611132a694f79a951018ff40537d5aab8481613cf8759027985efd7aa"
+  },
+  "checkpoint_scope": "independent uninterrupted/resumed trajectory comparison on each node",
+  "windows_transfer": "Restored nested separators on a separate local copy and verified artifact SHA-256"
+}

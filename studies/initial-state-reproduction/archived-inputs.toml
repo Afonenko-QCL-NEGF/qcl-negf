@@ -1,0 +1,45 @@
+schema = "qcl-negf-study-archive-catalog-v1"
+
+[datasets.fath-f13-map48]
+source_revision = "d76b588c1af2ef5d3a4b09b67d0094a9a809db11"
+source = "studies/fath54-common-q/evidence/inputs.sha256"
+comparison = "studies/fath54-common-q/evidence/f13-replay.json"
+committed_updates_before_input = 47
+fresh_fraction = 0.35
+scattering_channels = ["LO", "acoustic", "impurity", "IFR", "alloy"]
+
+[datasets.fath-f13-map48.roles.specification]
+sha256 = "25d608a98548c489f6537a3f9fd3918220d137f036c65680d181d4d80a9898e5"
+representation = "Legacy linked input spec.toml, dimensionless scales and physical axis units"
+
+[datasets.fath-f13-map48.roles.base_seed]
+sha256 = "580ef5a026014ce725fbf3ffaae93a08bfd94d51010b6d212a4a9a39fca558d9"
+representation = "seed_packed_LG.bin, packed rank² × LG × E × k × channel, scaled Float64"
+
+[datasets.fath-f13-map48.roles.geometry]
+sha256 = "9ad6f3815dfeda5e199a5201132dab00a4b9eef2858a7ea7bdd11416610399ba"
+representation = "Historical Fath BDD HDF5 model with coordinate units in metadata"
+
+[datasets.fath-f13-map48.roles.map_input]
+sha256 = "326055b8a545b2401bcdebf5115e97817d7c9e3d4f53245303d339feb5c8372f"
+representation = "Packed scaled Float64 source after 47 updates, before fresh map 48"
+
+[datasets.fath-f13-map48.roles.fresh_map_image]
+sha256 = "d74202bbc508cbd3ae8b3085a750c0caac15816891204fbc689593e1cbd8f9b3"
+representation = "Packed scaled Float64 fresh map 48 before mixing"
+
+[datasets.v843-w11]
+source_revision = "planning/experiment-contract"
+source = "docs/implementation/experiment-contract.md"
+
+[datasets.v843-w11.roles.specification]
+sha256 = "2c245d89c4bb295678db759f49bbd369d9b986f9d75fcd5dbf816585ed05a7bd"
+representation = "Historical linked input spec.toml with axes, scales and dimensions"
+
+[datasets.v843-w11.roles.hamiltonian]
+sha256 = "47d8af51e5b57d7b444acf8092a1fb476f47b96a9653fc91f501a1fa8dc42b1c"
+representation = "Historical H.bin in the declared measure and common energy reference"
+
+[datasets.v843-w11.roles.basis]
+sha256 = "820226ba092ed1cc360679545d40ee92e002616ac23a2d045bdd446022b6aaf6"
+representation = "Historical W.bin in the declared metric and solve domain"

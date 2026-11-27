@@ -9,13 +9,14 @@ import pytest
 
 from qcl_negf_results.presentation import atomic_json, committed_generation
 from qcl_negf_results.render import materialize, materialize_series
-from native_result_fixtures import declare_native
+from native_result_fixtures import declare_native, point_status
 
 
 def generation_fixture(root: Path, *, generation=1, quality="unconverged"):
     destination = root / "artifacts" / f"generation-{generation:06d}"
     destination.mkdir(parents=True)
     path = destination / "analysis.h5"
+    status = point_status("completed", physical_candidate="failed")
     with h5py.File(path, "w") as file:
         file["axes/z_nm"] = np.array([0., 1., 2.])
         file["axes/energy_eV"] = np.array([-.1, .2])
@@ -40,11 +41,12 @@ def generation_fixture(root: Path, *, generation=1, quality="unconverged"):
                            **{f"observables/potential_{name}_eV":"z" for name in ("structure", "external", "hartree", "total")}}.items():
             file[name].attrs["logical_axis_order"]=axes
             file[name].attrs["logical_shape"]=",".join(str(size) for size in file[name].shape)
-        declare_native(file, "qcl-negf-physics-analysis-v4", "physics.analysis", scba_rows=5)
+        declare_native(file, "qcl-negf-physics-analysis-v4", "physics.analysis", scba_rows=5,
+                       scientific_status=status)
 
     identity = {"point_id":"p1", "execution_id":"ex1", "attempt":1, "plan_fingerprint":"f"*64}
     commit = {"schema":"qcl-negf.artifact-commit.v2", "contract_set": "qcl-negf.results.v1", "identity":identity, "generation":generation,
-              "quality":quality, "terminal_status":"completed", "scientific_accepted":False,
+              "quality":quality, "scientific_status":status,
               "physics_ready":True, "checkpoint_ready":True, "artifacts":[{"role":"physics.analysis", "path":"analysis.h5", "schema":"qcl-negf-physics-analysis-v4", "contract_set": "qcl-negf.results.v1", "media_type":"application/x-hdf5", "profile":"science", "dependencies":[], "sha256":hashlib.sha256(path.read_bytes()).hexdigest(), "bytes":path.stat().st_size}]}
     atomic_json(destination / "commit.json", commit)
     digest = hashlib.sha256((destination / "commit.json").read_bytes()).hexdigest()
@@ -56,7 +58,8 @@ def test_native_fields_materialize_without_json_arrays_and_preserve_scientific_e
     generation, commit, digest = generation_fixture(tmp_path / "point")
     source_before = (generation / "analysis.h5").read_bytes()
     view = materialize(generation, commit, digest, tmp_path / "views")
-    assert view["scientific_accepted"] is False and view["presentation_ready"] is True
+    assert view["scientific_status"] == commit["scientific_status"]
+    assert view["presentation_ready"] is True
     assert view["validation"]["metrics"][0]["value"] == .43
     assert len(view["positivity"]["matrices"]) == 4
     assert {figure["id"] for figure in view["figures"]} >= {"potentials", "density", "wavefunctions", "spectra", "energy-density", "convergence-scba", "convergence-outer"}
@@ -102,10 +105,11 @@ def test_pointer_hash_and_path_escape_are_rejected(tmp_path):
 
 
 def test_series_graph_has_explicit_unaccepted_marker_not_interpolated_line(tmp_path):
-    rows=[{"id":f"p{i}","execution_id":"ex","scientific_accepted":i!=1,"coordinates":{"temperature_K":70,"voltage_per_period_V":i*.01,"branch":"forward","order":i},"observables":{"current_density_A_per_m2":i+1}} for i in range(3)]
+    rows=[{"id":f"p{i}","execution_id":"ex","scientific_status":point_status(
+        "completed", physical_candidate="failed" if i == 1 else "passed"),"coordinates":{"temperature_K":70,"voltage_per_period_V":i*.01,"branch":"forward","order":i},"observables":{"current_density_A_per_m2":i+1}} for i in range(3)]
     figures=materialize_series(rows,tmp_path)
     svg=(tmp_path/figures[0]["path"]).read_text()
-    assert "непринята" in svg and svg.count("<circle") == 3
+    assert "стационарность не подтверждена" in svg and svg.count("<circle") == 3
     assert "<polyline" not in svg  # neither isolated accepted endpoint disappears or crosses the failure
     assert rows[1]["observables"]["current_density_A_per_m2"]==2
 

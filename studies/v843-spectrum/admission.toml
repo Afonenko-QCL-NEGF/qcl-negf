@@ -1,0 +1,30 @@
+schema = "v843-basis-admission-v1"
+source = "https://github.com/Afonenko-QCL-NEGF/qcl-negf/blob/72fcca8cb10e6867651ea22d7260dc2b50cc3b44/studies/v843-basis-operators-20261127/forecasts.md#L19-L29"
+figure_sha256 = "a6679df4cc50e177be4b4ebb6ad0a6011e1ece9f7152820b67980565fbb4f5c7"
+period_nm = 36.16
+field_kV_cm = 21.0
+spatial_nodes = 144
+temperature_K = 50.0
+windows = [7, 9, 11]
+ranks = [6, 7, 8, 9, 11]
+
+[baseline]
+window = 7
+rank = 7
+translation_rounded = 0.162285
+rounding_digits = 6
+
+[translation_limits]
+structure_translation = 0.1
+structure_translation_nearest = 0.1
+structure_translation_two_pairs = 0.005
+
+[figure]
+shift_samples = 361
+minimum_shape_margin = 0.02
+minimum_energy_margin_meV = 3.0
+maximum_energy_rms_meV = 5.0
+minimum_role_cosine = 0.8
+minimum_clipped_e_cosine = 0.75
+maximum_confirmation_energy_meV = 3.0
+minimum_confirmation_cosine = 0.95

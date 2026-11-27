@@ -69,6 +69,18 @@ function _scientific_validate_checkpoint_identity(commit, old, point, fingerprin
     return nothing
 end
 
+function _scientific_checkpoint_file(commit_path, commit, role)
+    artifact = only(item for item in commit["artifacts"] if item["role"] == role)
+    return normpath(joinpath(dirname(commit_path), artifact["path"]))
+end
+
+function _scientific_checkpoint_payload(root, old, commit_path, commit)
+    physical = _scientific_checkpoint_file(commit_path, commit, "physics.full")
+    normpath(joinpath(root, old.data["full_state"])) == physical ||
+        throw(ArgumentError("point history and recovery payload refer to different commits"))
+    return physical, _scientific_checkpoint_file(commit_path, commit, "model")
+end
+
 function _initialization(
     kind::String;
     source = nothing,
@@ -100,7 +112,11 @@ function _point_result(
     observables = Dict{String,Any}(),
     data = Dict{String,Any}(),
     postprocessing = Dict{String,Any}(),
+    scientific_status = _point_scientific_status(
+        status; assessment = get(observables, "scientific_assessment", nothing),
+    ),
 )
+    _validate_point_scientific_status(scientific_status; process = status)
     return ScientificPointResult(
         point.id,
         point.execution_id,
@@ -110,6 +126,7 @@ function _point_result(
         status,
         quality,
         converged,
+        scientific_status,
         warnings,
         observables,
         data,
@@ -138,7 +155,10 @@ function _scientific_resume_result(item)
         ),
         Symbol(item["status"]),
         Symbol(item["quality"]),
-        Bool(item["converged"]),
+        item["converged"],
+        Dict{String,String}(_validate_point_scientific_status(
+            item["scientific_status"]; process = item["status"],
+        )),
         Dict{String,Any}[_mapping_input(w, "warning") for w in item["warnings"]],
         _mapping_input(item["observables"], "observables"),
         _mapping_input(item["data"], "data"),
@@ -427,7 +447,7 @@ function execute_scientific_plan(
                 _initialization("interrupted"),
                 :cancelled,
                 :unconverged,
-                false;
+                nothing;
                 warnings = [
                     Dict{String,Any}(
                         "code"=>"CANCELLED",
@@ -454,7 +474,7 @@ function execute_scientific_plan(
                     _initialization("not_started"),
                     :skipped,
                     :unconverged,
-                    false;
+                    nothing;
                     warnings = [
                         Dict{String,Any}(
                             "code"=>"CAMPAIGN_STOPPED",
@@ -502,7 +522,7 @@ function execute_scientific_plan(
                     execution.configuration;
                     point,
                 )
-                accepted=all(row["passed"] for row in checks)
+                operator_verdict=_operator_verdict(checks)
                 identity=Dict{String,Any}(
                     "point_id"=>point.id,
                     "execution_id"=>execution.id,
@@ -514,7 +534,6 @@ function execute_scientific_plan(
                     checks;
                     identity,
                     operation = String(execution.operation),
-                    accepted,
                 )
                 ledger=joinpath(dirname(commit), "operator_checks.json")
                 record=_point_result(
@@ -522,9 +541,11 @@ function execute_scientific_plan(
                     attempt,
                     _initialization("analytic_fixture"),
                     :completed,
-                    accepted ? :strict : :unconverged,
-                    accepted;
-                    observables = Dict{String,Any}("operator_checks_passed"=>accepted),
+                    :not_evaluated,
+                    nothing;
+                    scientific_status = _point_scientific_status(
+                        :completed; operator = operator_verdict,
+                    ),
                     data = Dict{String,Any}(
                         "artifact_root"=>replace(relpath(directory, root), '\\'=>'/'),
                         "operator_checks"=>replace(relpath(ledger, root), '\\'=>'/'),
@@ -578,10 +599,6 @@ function execute_scientific_plan(
         end
         previous=nothing
         previous_id=nothing
-        stored_scba, stored_outer=preparation_error===nothing ?
-                                  scientific_history_counts(execution_dir) : (0, 0)
-        scba_count=Ref(stored_scba)
-        outer_count=Ref(stored_outer)
         for point_id in execution.point_ids
             point=points[point_id]
             old=get(existing, point_id, nothing)
@@ -611,11 +628,11 @@ function execute_scientific_plan(
                old!==nothing &&
                old.status===:completed &&
                get(old.data, "full_state", nothing)!==nothing
-                verify_point_artifacts(joinpath(root, old.data["result_commit"]))
-                recovery=joinpath(root, old.data["full_state"])
-                raw=load_resolved_configuration_envelope(
-                    joinpath(dirname(recovery), "resolved_configuration.json"),
-                )
+                source_path = joinpath(root, old.data["result_commit"])
+                source_commit = verify_point_artifacts(source_path)
+                _scientific_validate_checkpoint_identity(source_commit, old, point, plan.fingerprint)
+                recovery, saved_inputs = _scientific_checkpoint_payload(root, old, source_path, source_commit)
+                raw=load_resolved_configuration_envelope(saved_inputs)
                 restored_config=_resolve_configuration(
                     raw,
                     ConfigurationProvenance(
@@ -631,30 +648,17 @@ function execute_scientific_plan(
                     algorithms = config.algorithms,
                     solver_options = config.solver,
                 )
-                state=saved.scba
-                restored_scba=SCBAResult(
-                    state.green,
-                    state.scattering,
-                    state.embedding,
-                    state.embedding_plus,
-                    state.embedding_minus,
-                    state.history,
-                    saved.original_scba_converged,
-                    saved.original_scba_status,
-                    saved.original_scba_quality,
-                    state.restart_contract,
-                    state.mixer_state,
-                )
+                saved.completed || throw(ArgumentError("completed point references an in-progress checkpoint"))
                 candidate=NEGFSolution(
                     saved_problem,
                     config.solver,
                     saved.Uᴴ,
-                    _electron_density_bar(saved_problem, state.green.Gˡ),
-                    restored_scba,
+                    _electron_density_bar(saved_problem, saved.scba.green.Gˡ),
+                    saved.scba,
                     saved.outer_history,
-                    Dict{Symbol,Any}(:warnings=>saved.warnings),
-                    ConvergenceReport(old.converged, Dict{Symbol,Float64}(), String[]),
-                    old.converged,
+                    Dict{Symbol,Any}(),
+                    saved.report,
+                    saved.converged,
                     saved.status,
                 )
                 previous=_usable_voltage_state(candidate, execution.policies.voltage.mode) ?
@@ -697,7 +701,7 @@ function execute_scientific_plan(
                         ),
                         :skipped,
                         :unconverged,
-                        false;
+                        nothing;
                         warnings = [
                             Dict{String,Any}(
                                 "code"=>"DEPENDENCY_UNAVAILABLE",
@@ -721,7 +725,7 @@ function execute_scientific_plan(
                     initialization,
                     stop_campaign ? :skipped : :failed,
                     :invalid,
-                    false;
+                    nothing;
                     warnings = [
                         Dict{String,Any}(
                             "code"=>stop_campaign ? "CAMPAIGN_STOPPED" :
@@ -789,26 +793,24 @@ function execute_scientific_plan(
                     configured.problem;
                     V_period = point.voltage_per_period_V*u"V",
                     Tᴸ = point.temperature_K*u"K",
-                    Tᴸᴼ = point.temperature_K*u"K",
+                    Tᴸᴼ = point.lo_temperature_K*u"K",
                     energy_shift = config.algorithms.energy_shift,
                 )
                 cache=base_cache===nothing ? nothing :
                       retarget_production_cache(base_cache, problem)
                 restart=nothing
+                history_prefix = (paths = String[], scba = 0, outer = 0)
                 if restoring
-                    recovery=joinpath(root, old.data["full_state"])
-                    source_commit =
-                        verify_point_artifacts(joinpath(root, old.data["result_commit"]))
+                    source_path = joinpath(root, old.data["result_commit"])
+                    source_commit = verify_point_artifacts(source_path)
                     _scientific_validate_checkpoint_identity(
                         source_commit,
                         old,
                         point,
                         plan.fingerprint,
                     )
-                    saved_inputs=joinpath(dirname(recovery), "resolved_configuration.json")
-                    isfile(saved_inputs) || throw(
-                        ArgumentError("checkpoint has no immutable resolved configuration"),
-                    )
+                    history_prefix = scientific_history_prefix(source_path, source_commit)
+                    recovery, saved_inputs = _scientific_checkpoint_payload(root, old, source_path, source_commit)
                     inputs=load_resolved_configuration_envelope(saved_inputs)
                     restored_config=_resolve_configuration(
                         inputs,
@@ -827,15 +829,11 @@ function execute_scientific_plan(
                         algorithms = config.algorithms,
                         solver_options = config.solver,
                     )
-                    if restart.status in (:running, :snapshot)
-                        candidate, _, _, _=solve_periodic_poisson(
-                            problem,
-                            _electron_density_bar(problem, restart.scba.green.Gˡ),
-                        )
-                        updated=(1-config.solver.α_P) .* restart.Uᴴ .+
-                                config.solver.α_P .* candidate
-                        restart=merge(restart, (Uᴴ = updated,))
-                    end
+                    restart.completed &&
+                        throw(ArgumentError("returned result requires reuse through its completed point record"))
+                    history_prefix.scba >= length(restart.scba.history) &&
+                    history_prefix.outer >= length(restart.outer_history) ||
+                        throw(ArgumentError("checkpoint history does not cover its accepted logical state"))
                 end
                 coverage=_scientific_representation_preflight(problem)
                 coverage["voltage_per_period_V"]=point.voltage_per_period_V
@@ -862,9 +860,10 @@ function execute_scientific_plan(
                 history_recorder=ScientificHistoryRecorder(
                     directory,
                     identity,
-                    scba_count,
-                    outer_count,
+                    Ref(history_prefix.scba),
+                    Ref(history_prefix.outer),
                 )
+                history_paths() = vcat(history_prefix.paths, scientific_history_sources(history_recorder))
                 pause_path = joinpath(root, "control", "pause.json")
                 function history_observer(kind, outer, row, source)
                     record_scientific_history!(history_recorder, kind, outer, row, source)
@@ -888,23 +887,22 @@ function execute_scientific_plan(
                 end
                 checkpoint_clock=CheckpointDeadline()
                 function durable_state(state; analysis = true)
-                    state.observables[:representation_preflight]=coverage
-                    state.observables[:model_capabilities]=model_capabilities(
-                        state.problem,
-                        config.algorithms,
+                    state = _with_checkpoint_metadata(
+                        state;
+                        representation_preflight = coverage,
+                        model_capabilities = model_capabilities(state.problem, config.algorithms),
                     )
                     flush_scientific_history!(history_recorder)
-                    history_paths=scientific_history_sources(dirname(directory))
                     commit=commit_point_artifacts(
                         directory,
                         state;
                         identity,
                         algorithms = config.algorithms,
                         configuration = _point_resolved_raw(config, point),
-                        history_paths,
+                        history_paths = history_paths(),
                         analysis,
                         terminal_status = state.status in
-                                          (:running, :running_scba, :snapshot) ? "running" :
+                                          (:running, :running_scba) ? "running" :
                                           "completed",
                         checkpoint_metadata = checkpoint_policy(checkpoint_clock),
                     )
@@ -924,7 +922,7 @@ function execute_scientific_plan(
                         initialization,
                         :running,
                         Symbol(solution_quality(state)),
-                        false;
+                        nothing;
                         data = current_data,
                     )
                     index=findfirst(r->r.id==point.id, results)
@@ -934,14 +932,12 @@ function execute_scientific_plan(
                     isfile(pause_path) && throw(_ScientificPause(commit))
                     return nothing
                 end
-                function observer(state)
-                    state.status===:snapshot || return
-                    outer=length(state.outer_history)
-                    cadence=config.output.snapshot_every_outer
-                    cadence>0 && (outer==1 || outer%cadence==0) || return
-                    durable_state(state)
-                end
                 function checkpoint_request(context)
+                    analysis_cadence = config.output.snapshot_every_outer
+                    if context.stage === :outer && analysis_cadence > 0 &&
+                       (context.iteration == 1 || context.iteration % analysis_cadence == 0)
+                        return CHECKPOINT_STATE_AND_ANALYSIS
+                    end
                     cadence =
                         context.stage === :scba ? config.production.checkpoint_every_scba :
                         config.production.checkpoint_every_outer
@@ -952,9 +948,9 @@ function execute_scientific_plan(
                 end
                 runtime_options =
                     with_production_options(runtime_options; checkpoint_request)
-                function checkpoint_sink(state)
+                function checkpoint_sink(state, analysis)
                     state.status in (:running, :running_scba) || return nothing
-                    durable_state(state; analysis = false)
+                    durable_state(state; analysis)
                 end
                 !intermediate_checkpoints && isfile(pause_path) &&
                     throw(_ScientificPause(nothing, :paused))
@@ -978,6 +974,8 @@ function execute_scientific_plan(
                         initial_warnings = restart===nothing ? Dict{String,Any}[] :
                                            restart.warnings,
                         resume_scba = restart!==nothing && restart.resume_scba,
+                        resume_outer = restart!==nothing && restart.resume_outer,
+                        initial_poisson_streak = restart===nothing ? nothing : restart.poisson_streak,
                         # A loaded checkpoint belongs exclusively to this
                         # attempt. Transfer its arrays and release this outer
                         # owner before solving; voltage warm starts stay shared
@@ -988,7 +986,6 @@ function execute_scientific_plan(
                             restart=nothing
                             adaptation
                         end,
-                        state_observer = intermediate_checkpoints ? observer : nothing,
                         checkpoint_sink = intermediate_checkpoints ? checkpoint_sink : nothing,
                         history_observer,
                     )
@@ -1011,9 +1008,9 @@ function execute_scientific_plan(
                 merge!(observables, _scientific_charge_observables(solution))
                 observables["representation_preflight"]=coverage
                 solution.observables[:representation_preflight]=coverage
-                observables["scientific_assessment"]=solution_scientific_assessment(
-                    solution,
-                )
+                assessment=solution_scientific_assessment(solution)
+                observables["scientific_assessment"]=assessment
+                final_scientific_status=_point_scientific_status(:completed; assessment)
                 warnings=Dict{String,Any}[
                     deepcopy(w) for
                     w in get(solution.observables, :warnings, Dict{String,Any}[])
@@ -1071,14 +1068,14 @@ function execute_scientific_plan(
                     config.algorithms,
                 )
                 flush_scientific_history!(history_recorder)
-                history_paths=scientific_history_sources(dirname(directory))
                 commit=commit_point_artifacts(
                     directory,
                     solution;
                     identity,
                     algorithms = config.algorithms,
                     configuration = _point_resolved_raw(config, point),
-                    history_paths,
+                    history_paths = history_paths(),
+                    scientific_status = final_scientific_status,
                     checkpoint_metadata = intermediate_checkpoints ? checkpoint_policy(checkpoint_clock) :
                         Dict{String,Any}("boundary" => "terminal_state_only"),
                 )
@@ -1102,6 +1099,7 @@ function execute_scientific_plan(
                     :completed,
                     Symbol(solution_quality(solution)),
                     solution.converged;
+                    scientific_status = final_scientific_status,
                     warnings,
                     observables,
                     data,
@@ -1116,7 +1114,8 @@ function execute_scientific_plan(
                             identity,
                             algorithms = config.algorithms,
                             configuration = _point_resolved_raw(config, point),
-                            history_paths,
+                            history_paths = history_paths(),
+                            scientific_status = final_scientific_status,
                         )
                         data["result_commit"] = replace(relpath(optics_commit, root), '\\'=>'/')
                         for (key, file) in (("analysis_physics", "analysis.h5"), ("full_state", "physics.h5"))
@@ -1158,7 +1157,7 @@ function execute_scientific_plan(
                         initialization,
                         error.reason,
                         :unconverged,
-                        false;
+                        nothing;
                         data,
                         warnings = resource_pressure ?
                                    [
@@ -1201,7 +1200,7 @@ function execute_scientific_plan(
                     initialization,
                     :failed,
                     solution===nothing ? :invalid : Symbol(solution_quality(solution)),
-                    solution===nothing ? false : solution.converged;
+                    solution===nothing ? nothing : solution.converged;
                     warnings,
                     observables = prior===nothing ? Dict{String,Any}() : prior.observables,
                     data = prior===nothing ? Dict{String,Any}() : prior.data,
@@ -1254,7 +1253,7 @@ function execute_scientific_plan(
                  all(r->r.status===:completed, results) ?
                  (
         all(
-            r->r.converged &&
+            r->(r.converged === true || r.scientific_status["operator"] == "passed") &&
                all(get(op, "status", "")!="failed" for op in values(r.postprocessing)),
             results,
         ) ? :completed : :completed_with_warnings

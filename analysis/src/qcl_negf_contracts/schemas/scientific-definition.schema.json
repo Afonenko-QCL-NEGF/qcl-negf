@@ -71,8 +71,48 @@
         },
         "overrides": {
           "type": "object"
+        },
+        "catalog": {
+          "type": "string",
+          "minLength": 1
+        },
+        "device": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,95}$"
         }
-      }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "sources"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "catalog"
+                ]
+              },
+              {
+                "required": [
+                  "device"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "catalog",
+            "device"
+          ],
+          "not": {
+            "required": [
+              "sources"
+            ]
+          }
+        }
+      ]
     },
     "variants": {
       "type": "array",
@@ -366,6 +406,82 @@
             },
             "additionalProperties": false
           }
+        },
+        "lo_temperatures": {
+          "type": "object",
+          "properties": {
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "number"
+              }
+            },
+            "start": {
+              "type": "number"
+            },
+            "stop": {
+              "type": "number"
+            },
+            "step": {
+              "type": "number",
+              "not": {
+                "const": 0
+              }
+            },
+            "unit": {
+              "enum": [
+                "K",
+                "V",
+                "mV"
+              ]
+            },
+            "question": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "unit"
+          ],
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "required": [
+                "values"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "start"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "stop"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "step"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "required": [
+                "start",
+                "stop",
+                "step"
+              ],
+              "not": {
+                "required": [
+                  "values"
+                ]
+              }
+            }
+          ]
         }
       },
       "not": {

@@ -3,6 +3,29 @@ include("../support/common.jl")
 using HDF5, SHA
 include("../support/native_physics_fixture.jl")
 
+@testset "Scientific status records the measured axes" begin
+    status = QCLNEGFRunner._point_scientific_status
+    assessment = Dict{String,Any}(
+        "iterative_converged"=>true,
+        "stationary_candidate_accepted"=>true,
+        "discretization_verified"=>"not_measured",
+        "metrics"=>Dict(
+            "fixed_point"=>Dict("category"=>"nonlinear_fixed_point", "status"=>"pass"),
+            "charge"=>Dict("category"=>"physical_and_algebraic", "status"=>"pass"),
+        ),
+    )
+    result = status(:completed; assessment)
+    @test result["process"] == "completed"
+    @test result["iterative_convergence"] == result["physical_candidate"] == "passed"
+    @test result["discretization"] == result["campaign_verdict"] == result["operator"] == "unknown"
+
+    assessment["stationary_candidate_accepted"] = false
+    assessment["metrics"]["charge"]["status"] = "not_measured"
+    @test status(:completed; assessment)["physical_candidate"] == "unknown"
+    assessment["metrics"]["charge"]["status"] = "fail"
+    @test status(:completed; assessment)["physical_candidate"] == "failed"
+end
+
 @testset "Native physics, immutable commits and explicit scientific capabilities" begin
     solution=native_physics_fixture()
     original=copy(solution.scba.green.Gˡ)
@@ -26,12 +49,22 @@ include("../support/native_physics_fixture.jl")
             "physics.analysis",
             "recovery",
         ])
-        @test !manifest["scientific_accepted"]
+        @test manifest["scientific_status"]["discretization"] == "unknown"
+        @test manifest["scientific_status"]["campaign_verdict"] == "unknown"
         @test !manifest["presentation_ready"]
+        wrong_status = deepcopy(manifest)
+        wrong_status["scientific_status"]["campaign_verdict"] = "accepted"
+        invalid_path = joinpath(dirname(first_commit), "invalid_status.json")
+        open(invalid_path, "w") do io
+            QCLNEGFRunner._light_json(io, wrong_status)
+        end
+        @test_throws ArgumentError QCLNEGFRunner.verify_point_artifacts(invalid_path)
         analysis=joinpath(dirname(first_commit), "analysis.h5")
         HDF5.h5open(analysis, "r") do file
             @test read_attribute(file["metadata"], "schema")=="qcl-negf-physics-analysis-v4"
             @test read_attribute(file["metadata"], "native_grid")
+            @test QCLNEGFRunner.YAML.load(read(file["metadata/scientific_status_json"])) ==
+                  manifest["scientific_status"]
             @test length(read(file["axes/energy_eV"]))==513
             @test QCLNEGFRunner._read_array(file["observables"], "spatial_energy_density")==spatial_energy_density(
                 solution.problem,

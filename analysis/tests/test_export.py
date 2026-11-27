@@ -14,16 +14,21 @@ from qcl_negf_contracts.messages import ContractError
 from qcl_negf_results.commits import artifact_row, atomic_write, json_bytes, publish_pointer
 from qcl_negf_results.export import export_snapshot
 import qcl_negf_results.export as exporter
-from native_result_fixtures import declare_native
+from native_result_fixtures import declare_native, point_status
 
 
-def fixture(root: Path, *, status: str = "unconverged", data: bytes | None = None) -> Path:
+def fixture(root: Path, *, status: str = "running", data: bytes | None = None,
+            scientific_status: dict[str, str] | None = None) -> Path:
+    scientific_status = scientific_status or point_status(status)
     generation = root / "point-1" / "artifacts" / "generation-000001"
     generation.mkdir(parents=True)
     path = generation / "analysis.h5"
     if data is None:
         with h5py.File(path, "w") as handle:
-            declare_native(handle, "qcl-negf-physics-analysis-v4", "physics.analysis")
+            declare_native(
+                handle, "qcl-negf-physics-analysis-v4", "physics.analysis",
+                scientific_status=scientific_status,
+            )
             ds = handle.create_dataset("density", data=np.array([1.0, -0.0, np.nan, np.inf]))
             ds.attrs["units"] = "m^-3"
             ds.attrs["axes"] = "z"
@@ -35,14 +40,18 @@ def fixture(root: Path, *, status: str = "unconverged", data: bytes | None = Non
     rows = [artifact_row(path, relative="analysis.h5", role="physics.analysis", schema="qcl-negf-physics-analysis-v4", media_type="application/x-hdf5"),
         artifact_row(generation / "recovery.h5", relative="recovery.h5", role="recovery", schema="qcl-negf-checkpoint-v4",
                      media_type="application/x-hdf5", profile="full-state")]
-    commit = {"schema": COMMIT_SCHEMA, "contract_set": "qcl-negf.results.v1", "identity": {"point_id": "point-1", "execution_id": "e-1"},
-        "generation": 1, "scientific_accepted": False, "terminal_status": status,
+    commit = {"schema": COMMIT_SCHEMA, "contract_set": "qcl-negf.results.v1", "identity": {"point_id": "point-1", "execution_id": "e-1", "attempt": 1,
+                     "plan_fingerprint": "a" * 64},
+        "generation": 1, "scientific_status": scientific_status,
         "quality": "unconverged", "artifacts": rows}
     payload = json_bytes(commit)
     atomic_write(generation / "commit.json", payload, immutable=True)
     publish_pointer(generation.parent / "current.json", "generation-000001/commit.json", payload, 1)
-    series = {"schema": "qcl-negf-series-result-v3", "contract_set": "qcl-negf.results.v1", "points": [{"id": "point-1", "status": status,
-        "data": {"result_commit": "point-1/artifacts/generation-000001/commit.json"}}]}
+    series = {"schema": "qcl-negf-series-result-v4", "contract_set": "qcl-negf.results.v1",
+        "plan_fingerprint": "a" * 64,
+        "points": [{"id": "point-1", "execution_id": "e-1", "attempt": 1, "status": status,
+                    "scientific_status": scientific_status,
+                    "data": {"result_commit": "point-1/artifacts/generation-000001/commit.json"}}]}
     atomic_write(root / "series_result.json", json_bytes(series))
     return generation
 
@@ -59,12 +68,76 @@ def test_running_science_pins_complete_native_hdf5_without_recovery(tmp_path: Pa
     receipt = export_snapshot(root, output)
     manifest, members = unpack(receipt, output)
     assert receipt["job_complete"] is False and receipt["snapshot_consistent"] is True
-    assert manifest["records"][0]["scientific_accepted"] is False
+    assert manifest["records"][0]["scientific_status"] == point_status("running")
     included = manifest["records"][0]["included"]
     assert [item["role"] for item in included] == ["physics.analysis"]
     assert members[included[0]["object"]] == (generation / "analysis.h5").read_bytes()
     assert manifest["records"][0]["omitted_by_policy"][0]["role"] == "recovery"
     assert receipt["bytes"] <= 200_000_000
+
+
+def test_converged_stationary_candidate_preserves_unknown_campaign_decision(tmp_path: Path) -> None:
+    root, output = tmp_path / "run", tmp_path / "exports"
+    status = point_status("completed", iterative_convergence="passed", physical_candidate="passed")
+    fixture(root, status="completed", scientific_status=status)
+    series_file = root / "series_result.json"
+    series = json.loads(series_file.read_bytes())
+    point = series["points"][0]
+    point["converged"] = True
+    atomic_write(series_file, json_bytes(series))
+    receipt = export_snapshot(root, output, job_status="completed")
+    manifest, _ = unpack(receipt, output)
+    assert manifest["coverage"][0]["scientific_status"] == manifest["records"][0]["scientific_status"] == status
+    assert status["discretization"] == status["campaign_verdict"] == "unknown"
+
+    point["scientific_status"] = {**status, "campaign_verdict": "accepted"}
+    atomic_write(series_file, json_bytes(series))
+    with pytest.raises(ContractError, match="scientific status differs from commit"):
+        export_snapshot(root, output, job_status="completed")
+
+    del point["scientific_status"]["discretization"]
+    atomic_write(series_file, json_bytes(series))
+    with pytest.raises(ContractError, match="must declare all six axes"):
+        export_snapshot(root, output, job_status="completed")
+
+
+def test_status_is_bound_to_matching_native_hdf5_and_attempt_rows(tmp_path: Path) -> None:
+    root, output = tmp_path / "run", tmp_path / "exports"
+    generation = fixture(root, status="completed")
+    series_file = root / "series_result.json"
+    commit_file = generation / "commit.json"
+    series = json.loads(series_file.read_bytes())
+    point = series["points"][0]
+    series["attempt_history"] = [{**point, "scientific_accepted": True}]
+    atomic_write(series_file, json_bytes(series))
+    with pytest.raises(ContractError, match="obsolete point scientific acceptance"):
+        export_snapshot(root, output)
+
+    series.pop("attempt_history")
+    saved_data = point.pop("data")
+    atomic_write(series_file, json_bytes(series))
+    with pytest.raises(ContractError, match="completed point requires a result commit"):
+        export_snapshot(root, output)
+
+    point["data"] = saved_data
+    point["attempt"] = 2
+    atomic_write(series_file, json_bytes(series))
+    with pytest.raises(ContractError, match="identity differs"):
+        export_snapshot(root, output)
+    point["attempt"] = 1
+
+    point["scientific_status"]["physical_candidate"] = "passed"
+    atomic_write(series_file, json_bytes(series))
+    commit = json.loads(commit_file.read_bytes())
+    commit["scientific_status"] = point["scientific_status"]
+    atomic_write(commit_file, json_bytes(commit))
+    with pytest.raises(ContractError, match="analysis payload scientific status differs from commit"):
+        export_snapshot(root, output)
+
+    series.pop("points")
+    atomic_write(series_file, json_bytes(series))
+    with pytest.raises(ContractError, match="points must be a list"):
+        export_snapshot(root, output)
 
 
 def test_full_state_includes_recovery(tmp_path: Path) -> None:
@@ -149,7 +222,7 @@ def test_progress_reports_frozen_prefix_without_reading_live_recovery(tmp_path: 
             atomic_write(new_generation / "commit.json", commit_payload, immutable=True)
             publish_pointer(generation.parent / "current.json", "generation-000002/commit.json", commit_payload, 2)
             atomic_write(root / "series_result.json", json_bytes({
-                "schema": "qcl-negf-series-result-v3", "contract_set": "qcl-negf.results.v1", "points": [{"id": "point-1", "status": "running",
+                "schema": "qcl-negf-series-result-v4", "contract_set": "qcl-negf.results.v1", "points": [{"id": "point-1", "status": "running", "scientific_status": point_status("running"),
                 "data": {"result_commit": "point-1/artifacts/generation-000002/commit.json"}}]}))
 
     receipt = export_snapshot(root, output, progress=progress)
@@ -210,7 +283,7 @@ def test_running_series_advancement_does_not_mix_generations(tmp_path: Path, mon
     fixture(root)
     original = exporter._capture
     def advance_series(source: Path, destination: Path, artifact: object, on_bytes=None) -> None:
-        atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v3", "contract_set": "qcl-negf.results.v1", "points": [{"id": "point-2", "data": {}}]}))
+        atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v4", "contract_set": "qcl-negf.results.v1", "points": [{"id": "point-2", "status": "running", "scientific_status": point_status("running"), "data": {}}]}))
         original(source, destination, artifact, on_bytes)
     monkeypatch.setattr(exporter, "_capture", advance_series)
     receipt = export_snapshot(root, output)
@@ -294,7 +367,7 @@ def test_recovery_generation_keeps_its_previous_native_analysis(tmp_path: Path) 
     value["artifacts"] = [item for item in value["artifacts"] if item["role"] == "recovery"]
     value["science_parent_commit"] = {"path": "generation-000001/commit.json", "sha256": parent_sha}
     atomic_write(recovery / "commit.json", json_bytes(value), immutable=True)
-    atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v3", "contract_set": "qcl-negf.results.v1", "points": [{"id": "point-1", "status": "paused",
+    atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v4", "contract_set": "qcl-negf.results.v1", "points": [{"id": "point-1", "status": "paused", "scientific_status": point_status("paused"),
         "data": {"result_commit": "point-1/artifacts/generation-000002/commit.json"}}]}))
     manifest, _ = unpack(export_snapshot(root, output), output)
     assert len(manifest["records"]) == 2
@@ -351,8 +424,8 @@ def test_campaign_commit_pins_series_instead_of_live_projection(tmp_path: Path) 
                           "generation": 1, "artifacts": [series, control]})
     atomic_write(generation / "commit.json", payload, immutable=True)
     publish_pointer(root / "current-commit.json", "control/generations/000001/commit.json", payload, 1)
-    atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v3", "contract_set": "qcl-negf.results.v1",
-                                                        "points": [{"id": "new-uncommitted-point", "data": {}}]}))
+    atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v4", "contract_set": "qcl-negf.results.v1",
+                                                        "points": [{"id": "new-uncommitted-point", "status": "running", "scientific_status": point_status("running"), "data": {}}]}))
     receipt = export_snapshot(root, output)
     manifest, _ = unpack(receipt, output)
     assert [item["id"] for item in manifest["coverage"]] == ["point-1"]
@@ -387,7 +460,7 @@ def cumulative_fixture(root: Path, *, corrupt_prefix: bool = False, dependent: b
         with h5py.File(generation / "history.h5", "w") as handle:
             metadata = handle.create_group("metadata")
             metadata.attrs.update(schema="qcl-negf-scientific-history-v4", artifact_role="science.history",
-                representation="lossless consolidation of every local closed history segment",
+                representation="committed history prefix and closed segments of the current attempt",
                 scba_rows=number * 2, outer_rows=number)
             metadata.create_dataset("source_segments_json", data=json.dumps(sources))
             for table, count in (("scba", number * 2), ("outer", number)):
@@ -415,7 +488,7 @@ def cumulative_fixture(root: Path, *, corrupt_prefix: bool = False, dependent: b
                 physical["dependencies"] = ["history.h5"]
             artifacts.append(physical)
         value = {"schema": COMMIT_SCHEMA, "contract_set": "qcl-negf.results.v1", "identity": identity, "generation": number,
-            "terminal_status": "running", "scientific_accepted": False, "artifacts": artifacts}
+            "scientific_status": point_status("running"), "artifacts": artifacts}
         if foreign_plan and number == 1:
             value["identity"] = {**identity, "plan_fingerprint": "b" * 64}
         if previous_payload is not None:
@@ -424,8 +497,9 @@ def cumulative_fixture(root: Path, *, corrupt_prefix: bool = False, dependent: b
         previous_payload = json_bytes(value)
         (generation / "commit.json").write_bytes(previous_payload)
         generations.append(generation)
-    atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v3", "contract_set": "qcl-negf.results.v1", "points": [{
-        "id": "point-1", "status": "running", "data": {"result_commit": "point-1/artifacts/generation-000003/commit.json"}}]}))
+    atomic_write(root / "series_result.json", json_bytes({"schema": "qcl-negf-series-result-v4", "contract_set": "qcl-negf.results.v1", "points": [{
+        "id": "point-1", "status": "running", "scientific_status": point_status("running"),
+        "data": {"result_commit": "point-1/artifacts/generation-000003/commit.json"}}]}))
     return generations
 
 

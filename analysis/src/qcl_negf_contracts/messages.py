@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import re
 from dataclasses import dataclass
 from typing import TypeAlias, cast
 
@@ -86,8 +87,18 @@ def fingerprint(value: Object) -> str:
 
 def scientific_plan(value: object) -> Object:
     plan = object_value(value, 'scientific plan')
-    if plan.get('schema') != 'qcl-negf-scientific-plan-v2':
+    if (plan.get('schema') != 'qcl-negf-scientific-plan-v3'
+            or plan.get('model_revision') != 'transport-contract-v3'):
         raise ContractError('unsupported scientific plan', 'incompatible_contract')
+    implementation = object_value(plan.get('implementation'), 'implementation')
+    if set(implementation) != {'core', 'runner'}:
+        raise ContractError('implementation requires core and runner identities')
+    for role, value in implementation.items():
+        identity = object_value(value, role)
+        for field in ('version', 'uuid', 'source_tree_sha256'):
+            string(identity, field)
+        if re.fullmatch(r'[0-9a-f]{64}', string(identity, 'source_tree_sha256')) is None:
+            raise ContractError(f'{role} source identity requires a SHA-256 digest')
     for field in ('root_definition_id', 'name', 'fingerprint'):
         string(plan, field)
     if plan.get('root_kind') not in {'study', 'meta'}:
@@ -106,22 +117,43 @@ def scientific_plan(value: object) -> Object:
     return plan
 
 
+SCIENTIFIC_SERIES_SCHEMA = "qcl-negf-series-result-v4"
+POINT_PROCESS_STATES = (
+    "running", "saving", "completed", "completed_with_warnings",
+    "failed", "skipped", "cancelled", "paused",
+)
+SCIENCE_FIELDS = ("iterative_convergence", "physical_candidate", "discretization", "operator")
+
+
+def point_scientific_status(record: dict, *, process: str | None = None) -> dict[str, str]:
+    if "scientific_accepted" in record:
+        raise ContractError("obsolete point scientific acceptance field", "incompatible_contract")
+    status = record.get("scientific_status")
+    if not isinstance(status, dict) or set(status) != {"process", *SCIENCE_FIELDS, "campaign_verdict"}:
+        raise ContractError("point scientific status must declare all six axes", "corrupt_result")
+    if status["process"] not in POINT_PROCESS_STATES or (process is not None and status["process"] != process):
+        raise ContractError("invalid point process status", "corrupt_result")
+    if (any(status[key] not in ("passed", "failed", "unknown") for key in SCIENCE_FIELDS)
+            or status["campaign_verdict"] not in ("accepted", "rejected", "unknown")):
+        raise ContractError("invalid point scientific verdict", "corrupt_result")
+    return status
+
+
 @dataclass(frozen=True)
 class ScientificPointOutcome:
     identifier: str
     execution_id: str
     status: str
     quality: str
-    converged: bool
+    converged: bool | None
+    scientific_status: dict[str, str]
 
     @classmethod
     def from_json(cls, item: object) -> ScientificPointOutcome:
         value = object_value(item, 'point result')
         converged = value.get('converged')
-        if not isinstance(converged, bool):
-            raise ContractError('point.converged must be Boolean', 'corrupt_result')
+        if 'converged' not in value or converged is not None and not isinstance(converged, bool):
+            raise ContractError('point.converged must be Boolean or null', 'corrupt_result')
         status = string(value, 'status')
-        if status not in {'completed', 'completed_with_warnings', 'failed', 'skipped', 'cancelled', 'paused'}:
-            raise ContractError('unknown scientific point status', 'corrupt_result')
         return cls(string(value, 'id'), string(value, 'execution_id'), status,
-                   string(value, 'quality'), converged)
+                   string(value, 'quality'), converged, point_scientific_status(value, process=status))

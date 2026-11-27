@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scientific point status",
+  "type": "object",
+  "required": [
+    "process",
+    "iterative_convergence",
+    "physical_candidate",
+    "discretization",
+    "operator",
+    "campaign_verdict"
+  ],
+  "properties": {
+    "process": {
+      "enum": ["running", "saving", "completed", "completed_with_warnings", "failed", "skipped", "cancelled", "paused"]
+    },
+    "iterative_convergence": { "$ref": "#/$defs/check" },
+    "physical_candidate": { "$ref": "#/$defs/check" },
+    "discretization": { "$ref": "#/$defs/check" },
+    "operator": { "$ref": "#/$defs/check" },
+    "campaign_verdict": { "enum": ["accepted", "rejected", "unknown"] }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "check": { "enum": ["passed", "failed", "unknown"] }
+  }
+}

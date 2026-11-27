@@ -20,7 +20,7 @@ from qcl_negf_contracts.artifacts import CONTRACT_SET
 
 from .presentation import atomic_json, inside, read_contract_json
 
-RENDERER_REVISION = "qcl-negf-materialized-v4.0"
+RENDERER_REVISION = "qcl-negf-materialized-v4.1"
 CONVERGENCE_REFERENCES = ((1e-4, "10⁻⁴"), (1e-6, "10⁻⁶"), (1e-8, "10⁻⁸"))
 COLORS = ("#176d52", "#a43b31", "#365b9e", "#8a651d", "#7b488c")
 MAX_CURVE_POINTS = 4096
@@ -298,13 +298,23 @@ def materialize(generation: Path, commit: dict[str, Any], commit_hash: str, dest
     target = destination / key
     index_path = target / "index.json"
     if index_path.is_file():
-        return read_contract_json(index_path, "qcl-negf.materialized-point.v3")
+        return read_contract_json(index_path, "qcl-negf.materialized-point.v4")
     artifacts = [a for a in commit.get("artifacts", []) if a.get("role") == "physics.analysis"]
-    if not artifacts and any(a.get("schema") == "qcl-negf-operator-diagnostics-v4" for a in commit.get("artifacts", [])):
-        return {"schema": "qcl-negf.materialized-point.v3", "contract_set": CONTRACT_SET, "source_commit": commit_hash,
+    diagnostics = [a for a in commit["artifacts"] if a.get("schema") == "qcl-negf-operator-diagnostics-v4"]
+    if not artifacts and diagnostics:
+        from .commits import read_json as read_committed_json
+        from .native import validate_operator_diagnostics
+        if len(diagnostics) != 1:
+            raise ValueError("point commit must declare one operator diagnostic")
+        item = diagnostics[0]
+        payload, content = read_committed_json(inside(generation, item["path"]))
+        if len(content) != item["bytes"] or hashlib.sha256(content).hexdigest() != item["sha256"]:
+            raise ValueError("operator diagnostic payload does not match its commit")
+        validate_operator_diagnostics(payload, commit["scientific_status"])
+        return {"schema": "qcl-negf.materialized-point.v4", "contract_set": CONTRACT_SET, "source_commit": commit_hash,
                 "renderer_revision": RENDERER_REVISION, "generation": commit.get("generation"),
                 "identity": commit.get("identity", {}), "quality": commit.get("quality"),
-                "scientific_accepted": commit.get("scientific_accepted") is True,
+                "scientific_status": commit["scientific_status"],
                 "physics_ready": False, "checkpoint_ready": False, "presentation_ready": True,
                 "figures": [], "validation": None, "positivity": None}
     if len(artifacts) != 1:
@@ -330,7 +340,10 @@ def materialize(generation: Path, commit: dict[str, Any], commit_hash: str, dest
     validation, positivity = None, None
     with h5py.File(source, "r") as record:
         from .native import validate_native_handle
-        validate_native_handle(record, "physics.analysis", "qcl-negf-physics-analysis-v4")
+        validate_native_handle(
+            record, "physics.analysis", "qcl-negf-physics-analysis-v4",
+            scientific_status=commit["scientific_status"],
+        )
         def array(name: str):
             if name not in record:
                 return None
@@ -408,13 +421,15 @@ def materialize(generation: Path, commit: dict[str, Any], commit_hash: str, dest
                             curves.append((name, np.arange(1, len(values) + 1), values))
                             datasets.append(f"diagnostics/{phase}/{name}")
             add_curve(f"convergence-{phase}", f"История сходимости: {phase}", "Номер сохранённого шага", "невязка, log₁₀", curves, datasets, True)
-    result = {"schema": "qcl-negf.materialized-point.v3", "contract_set": CONTRACT_SET, "source_commit": commit_hash, "renderer_revision": RENDERER_REVISION, "generation": commit.get("generation"), "identity": commit.get("identity", {}), "quality": quality, "scientific_accepted": commit.get("scientific_accepted") is True, "physics_ready": commit.get("physics_ready") is True, "checkpoint_ready": commit.get("checkpoint_ready") is True, "presentation_ready": True, "figures": figures, "validation": validation, "positivity": positivity}
+    result = {"schema": "qcl-negf.materialized-point.v4", "contract_set": CONTRACT_SET, "source_commit": commit_hash, "renderer_revision": RENDERER_REVISION, "generation": commit.get("generation"), "identity": commit.get("identity", {}), "quality": quality, "scientific_status": commit["scientific_status"], "physics_ready": commit.get("physics_ready") is True, "checkpoint_ready": commit.get("checkpoint_ready") is True, "presentation_ready": True, "figures": figures, "validation": validation, "positivity": positivity}
     atomic_json(index_path, result)
     return result
 
 
 def materialize_series(points: list[dict[str, Any]], destination: Path) -> list[dict[str, Any]]:
-    """Render already-published scalar currents; invalid points break the line."""
+    """Render scalar currents with continuous lines reserved for stationary candidates."""
+    from qcl_negf_contracts.messages import point_scientific_status
+
     groups: dict[tuple[str, Any, Any], list[dict[str, Any]]] = {}
     for point in points:
         coordinates = point.get("coordinates") or {}
@@ -426,11 +441,17 @@ def materialize_series(points: list[dict[str, Any]], destination: Path) -> list[
     for key, rows in groups.items():
         rows.sort(key=lambda p: p["coordinates"].get("order", 0))
         xs = [p["coordinates"]["voltage_per_period_V"] for p in rows]
-        ys = [p["observables"]["current_density_A_per_m2"] if p.get("scientific_accepted") else float("nan") for p in rows]
+        statuses = [point_scientific_status(row, process=row.get("status")) for row in rows]
+        candidates = [status["process"] == "completed" and status["physical_candidate"] == "passed"
+                      for status in statuses]
+        ys = [p["observables"]["current_density_A_per_m2"] if candidate else float("nan")
+              for p, candidate in zip(rows, candidates, strict=True)]
         curves.append((f"{key[0]} · {key[1]} K · {key[2]}", xs, ys))
-        for point in rows:
-            if not point.get("scientific_accepted"):
-                curves.append((f"{point['id']} · непринята", [point["coordinates"]["voltage_per_period_V"]], [point["observables"]["current_density_A_per_m2"]]))
+        for point, candidate in zip(rows, candidates, strict=True):
+            if not candidate:
+                curves.append((f"{point['id']} · стационарность не подтверждена",
+                               [point["coordinates"]["voltage_per_period_V"]],
+                               [point["observables"]["current_density_A_per_m2"]]))
     if not curves:
         return []
     render_key = hashlib.sha256(json.dumps(points, sort_keys=True, ensure_ascii=False, allow_nan=False).encode() + CONTRACT_SET.encode() + RENDERER_REVISION.encode()).hexdigest()
@@ -438,5 +459,5 @@ def materialize_series(points: list[dict[str, Any]], destination: Path) -> list[
     target.mkdir(parents=True, exist_ok=True)
     path = target / "current-voltage.svg"
     if not path.is_file():
-        path.write_text(_svg("Ток и напряжение на период", "V периода, V", "J, A/m²", curves, "научно принятые точки соединены; непринятые показаны отдельно"), encoding="utf-8")
+        path.write_text(_svg("Ток и напряжение на период", "V периода, V", "J, A/m²", curves, "стационарные кандидаты соединены, остальные точки показаны отдельно"), encoding="utf-8")
     return [{"id": "current-voltage", "title": "Ток и напряжение на период", "path": f"{render_key}/current-voltage.svg", "media_type": "image/svg+xml", "source_commit": render_key, "units": {"x": "V", "y": "A/m²"}}]

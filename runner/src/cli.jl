@@ -2,7 +2,7 @@
 function main(arguments::AbstractVector{<:AbstractString}=ARGS)
     try
         isempty(arguments) && throw(ArgumentError(
-            "usage: qcl-negf plan CONFIG [--max-runs N] | run-plan PLAN OUTPUT [--execution-id ID] [--scratch-root DIRECTORY] | run-linked INPUT OUTPUT [OPTIONS] | analyze RESULTS [OUTPUT]"))
+            "usage: qcl-negf plan CONFIG [--max-runs N] | run-plan PLAN OUTPUT [--execution-id ID] [--scratch-root DIRECTORY] | compare-plans LEFT RIGHT | run-linked INPUT OUTPUT [OPTIONS] | analyze RESULTS [OUTPUT]"))
         command = first(arguments)
         if command == "plan"
             length(arguments) in (2, 4) || throw(ArgumentError("plan expects CONFIG [--max-runs N]"))
@@ -12,6 +12,11 @@ function main(arguments::AbstractVector{<:AbstractString}=ARGS)
                 maximum = parse(Int, arguments[4])
             end
             write_scientific_plan(stdout, resolve_scientific_plan(arguments[2]; maximum_solver_runs=maximum))
+        elseif command == "compare-plans"
+            length(arguments) == 3 || throw(ArgumentError("compare-plans expects LEFT RIGHT"))
+            left, right = _load_yaml_mapping.(arguments[2:3])
+            _light_json(stdout, compare_scientific_plans(left, right))
+            println()
         elseif command == "run-plan"
             length(arguments) >= 3 && isodd(length(arguments)) ||
                 throw(ArgumentError("run-plan expects PLAN OUTPUT [--execution-id ID] [--scratch-root DIRECTORY]"))

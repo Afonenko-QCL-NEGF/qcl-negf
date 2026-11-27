@@ -24,4 +24,8 @@ runner/bin/qcl-negf analyze stationary-result stationary-report
 читателя описана в [analysis](analysis/README.md), а запуск того же плана
 через очередь в [lab](lab/README.md).
 
+[Проверочная кампания](studies/experiment-contract-smoke.yaml) объединяет
+этот расчёт с независимой спектральной проверкой V843 B7. Для кампании
+передайте её YAML команде `plan` с `--max-runs 2`.
+
 [Документация программы](docs/index.md) · [Участие в разработке](CONTRIBUTING.md) · [Лицензия MIT](LICENSE)

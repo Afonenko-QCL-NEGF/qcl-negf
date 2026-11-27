@@ -50,3 +50,26 @@ function _runtime_toolchain_provenance()
         "fftw_threads" => FFTW.get_num_threads(),
     )
 end
+
+"""Content identity of the loadable package source, independent of paths and file modes."""
+function _package_source_identity(package::Module)
+    root = pkgdir(package)
+    paths = ["Project.toml"]
+    for directory in ("src", "ext", "schema")
+        source = joinpath(root, directory)
+        isdir(source) || continue
+        for (dir, _, files) in walkdir(source), file in files
+            push!(paths, replace(relpath(joinpath(dir, file), root), '\\' => '/'))
+        end
+    end
+    context = SHA.SHA2_256_CTX()
+    for path in sort!(paths)
+        digest = bytes2hex(open(sha256, joinpath(root, path)))
+        SHA.update!(context, codeunits(path * "\0" * digest * "\n"))
+    end
+    return Dict(
+        "version" => string(Base.pkgversion(package)),
+        "uuid" => string(Base.PkgId(package).uuid),
+        "source_tree_sha256" => bytes2hex(SHA.digest!(context)),
+    )
+end

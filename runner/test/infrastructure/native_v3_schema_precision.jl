@@ -53,6 +53,7 @@ end
             commit=Dict(
                 "schema"=>BN.POINT_COMMIT_SCHEMA,
                 "contract_set"=>BN._RESULT_CONTRACT_SET,
+                "scientific_status"=>BN._point_scientific_status(:completed),
                 "artifacts"=>[
                     Dict("schema"=>schema, "role"=>role, "media_type"=>media_type),
                 ],

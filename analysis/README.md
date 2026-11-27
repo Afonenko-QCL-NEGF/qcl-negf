@@ -12,7 +12,12 @@ uv pip install '.[test]'
 .venv/bin/python -m pytest tests contracts-tests
 ```
 
-The migrated sources are Results `cefffb3460545410e3e5f17c74ade999efc76cf7` and Contracts `bd1270d00502120b37377e8522a0bf4eb3926401`. The reader remains independent of the solver and retains its own scientific calculations. Its bundled contract resources are the current copy for this distribution; runner and analysis must eventually consume a single shared schema source in the application. The Runner and Contracts copies of `results-contract-set.json` match; their `run.schema.json` files differ, including the `human_every` field. Reconcile that schema against the actual Runner configuration and validate consumers before choosing one authoritative copy. Until then, schema changes must be checked against both copies.
+The migrated sources are Results `cefffb3460545410e3e5f17c74ade999efc76cf7`
+and Contracts `bd1270d00502120b37377e8522a0bf4eb3926401`. The reader retains its
+independent scientific calculations. Runner owns the resolved configuration
+schema in [runner/schema/run.schema.json](../runner/schema/run.schema.json).
+The Python package bundles the same schema for standalone use. A contract test
+checks the copies.
 
 ## Inspect and export
 
@@ -45,7 +50,15 @@ Telemetry identifies CPU intervals by `allocation_id` (for example, a Slurm job/
 
 Every archive part is at most 200,000,000 decimal bytes. Receipts describe all parts and hashes. The receiving command verifies the complete part set before restoring objects. Archive metadata and paths are checked; incomplete, altered or unsupported input fails explicitly. Disk usage includes a temporary captured snapshot in addition to the published archive.
 
-Only `qcl-negf.results.v1` / native HDF5 `4.0` is accepted. Missing declarations are errors. Snapshot consistency, process completion and scientific acceptance are separate fields: none is inferred from the others.
+Scientific series v4 and committed point records declare `scientific_status`
+with six independent fields for the process, iterative convergence, the
+stationary physical candidate, discretization, the operator check and the
+campaign verdict. Each unmeasured scientific field is recorded as `unknown`.
+A valid artifact can contain a failed operator check or an unresolved campaign
+verdict. The analysis layer preserves both outcomes in its views and exports.
+The nullable `converged` field mirrors the solver's joint convergence and
+final validation flag. The iterative field reports the iteration assessment.
+Payloads use the `qcl-negf.results.v1` contract set and native HDF5 `4.0`.
 
 ## Modules
 

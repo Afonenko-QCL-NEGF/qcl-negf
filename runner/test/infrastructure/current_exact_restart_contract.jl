@@ -32,6 +32,20 @@ end
         @test restored.scba.embedding_plus.Σᴿ == solution.scba.embedding_plus.Σᴿ
         @test restored.scba.restart_contract["algorithms"]["elastic_retarded"] == "hilbert"
         @test_throws ArgumentError load_production_restart(modern,problem;algorithms=direct)
+        for (field, invalid) in (
+            ("checkpoint_boundary", "after_poisson_evaluation"),
+            ("poisson_convergence_streak", 1),
+            ("core_source_sha256", repeat("0", 64)),
+        )
+            corrupted = joinpath(directory, field * ".h5")
+            cp(modern, corrupted)
+            h5open(corrupted, "r+") do file
+                metadata = file["metadata"]
+                HDF5.delete_attribute(metadata, field)
+                HDF5.write_attribute(metadata, field, invalid)
+            end
+            @test_throws ArgumentError load_production_restart(corrupted, problem)
+        end
 
         for (label,change) in (
             ("unknown", contract->(contract["algorithms"]["future_switch"]="unqualified")),

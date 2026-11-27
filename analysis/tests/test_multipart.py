@@ -17,6 +17,7 @@ from qcl_negf_contracts.messages import ContractError
 from qcl_negf_results.commits import artifact_row, json_bytes
 from qcl_negf_results.export import export_snapshot
 from qcl_negf_results.multipart import receive
+from native_result_fixtures import point_status
 from test_export import fixture
 
 
@@ -138,7 +139,7 @@ def test_first_page_provides_scalar_diagnostics_without_later_native_parts(tmp_p
     assert np.signbit(values["values"][0])
     assert values["rows"] == 6 and values["units"] == "A/m^2"
     assert row["source_sha256"] in {item["sha256"] for item in index["objects"]}
-    assert row["scientific_accepted"] is False
+    assert row["scientific_status"]["campaign_verdict"] == "unknown"
 
 
 def test_live_series_advancement_during_multipart_encoding_keeps_pinned_cut(tmp_path: Path) -> None:
@@ -150,7 +151,8 @@ def test_live_series_advancement_during_multipart_encoding_keeps_pinned_cut(tmp_
         if value['phase'] == 'compressing' and not advanced:
             advanced = True
             series = json.loads((root / 'series_result.json').read_bytes())
-            series['points'] = [{'id': 'later-point', 'status': 'running', 'data': {}}]
+            series['points'] = [{'id': 'later-point', 'status': 'running',
+                                 'scientific_status': point_status('running'), 'data': {}}]
             (root / 'series_result.json').write_bytes(json_bytes(series))
     receipt = export_snapshot(root, output, maximum_bytes=10_000, progress=progress)
     assert advanced and receipt['part_count'] > 1

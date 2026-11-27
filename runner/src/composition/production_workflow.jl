@@ -72,7 +72,10 @@ end
 
 В границе сохранения состояния решатель может вызвать переданную функцию
 `checkpoint_request(context, temperature_index, voltage_index)`.
-Она возвращает `:none`, `:state_only` или `:state_and_markers`.
+Она возвращает `:none`, `:state_only`, `:state_and_markers` для SCBA
+или `:state_and_analysis` для внешней границы. `observation_sink` получает
+компактный профиль, а `checkpoint_observer` заимствует тяжёлое состояние
+для синхронного чтения.
 
 См. [серийные расчёты и возобновление](https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl/blob/main/docs/src/theory/19_production.md)
 и [схему контрольных точек HDF5](@ref native-result-formats).
@@ -93,7 +96,7 @@ function run_production_sweep(
     photon_energies = nothing,
     optical_edge_tolerance::Real = 1e-4,
     incompatible_checkpoint::Symbol = :error,
-    solution_observer::Union{Nothing,Function} = nothing,
+    observation_sink::Union{Nothing,Function} = nothing,
     checkpoint_observer::Union{Nothing,Function} = nothing,
     checkpoint_request::Union{Nothing,Function} = nothing,
     history_observer::Union{Nothing,Function} = nothing,
@@ -175,15 +178,6 @@ function run_production_sweep(
                         initial_scba = restart.scba
                         initial_outer_history = restart.outer_history
                         resume_scba = restart.resume_scba
-                        if restart.status === :running
-                            # Outer checkpoint stores the accepted pre-update U with completed μ.
-                            candidate, _, _, _ = solve_periodic_poisson(
-                                problem,
-                                _electron_density_bar(problem, restart.scba.green.Gˡ),
-                            )
-                            initial_Uᴴ =
-                                (1-options.α_P) .* initial_Uᴴ .+ options.α_P .* candidate
-                        end
                         production_options.event_sink === nothing &&
                             @info("Resuming $point_label from $(basename(checkpoint))")
                     end
@@ -192,21 +186,21 @@ function run_production_sweep(
                     "Solving $point_label | peak≤$(compact_number(cache.estimate.peak_bytes / 1024.0^3)) GiB"
                 )
                 solve_started = time_ns()
-                point_checkpoint =
-                    checkpoint_observer===nothing ?
-                    (
-                        save_full_state ? (state->_atomic_checkpoint(checkpoint, state)) :
-                        nothing
-                    ) :
-                    (
-                        state->begin
-                            checkpoint_observer(state, it, iv)
-                            save_full_state &&
-                                !(state.status in (:running, :running_scba, :snapshot)) &&
-                                _atomic_checkpoint(checkpoint, state)
-                            nothing
+                point_checkpoint = if checkpoint_observer === nothing && !save_full_state
+                    nothing
+                else
+                    function (state, analysis)
+                        checkpoint_observer === nothing ||
+                            checkpoint_observer(state, analysis, it, iv)
+                        if save_full_state &&
+                           (checkpoint_observer === nothing || !(state.status in (:running, :running_scba)))
+                            _atomic_checkpoint(checkpoint, state)
                         end
-                    )
+                        return nothing
+                    end
+                end
+                point_observation = observation_sink === nothing ? nothing :
+                                    (measurement -> observation_sink(measurement, it, iv))
                 point_options =
                     checkpoint_request === nothing ? production_options :
                     with_production_options(
@@ -231,8 +225,7 @@ function run_production_sweep(
                         initial_Uᴴ,
                         initial_scba,
                         checkpoint_sink = point_checkpoint,
-                        state_observer = solution_observer===nothing ? nothing :
-                                         (state->solution_observer(state, it, iv)),
+                        observation_sink = point_observation,
                         history_observer = history_observer===nothing ? nothing :
                                            (
                             (kind, outer, row, source)->history_observer(
@@ -258,6 +251,8 @@ function run_production_sweep(
                         initial_warnings = restart === nothing ? Dict{String,Any}[] :
                                            get(restart, :warnings, Dict{String,Any}[]),
                         resume_scba,
+                        resume_outer = restart !== nothing && restart.resume_outer,
+                        initial_poisson_streak = restart === nothing ? nothing : restart.poisson_streak,
                         history_observer = history_observer===nothing ? nothing :
                                            (
                             (kind, outer, row, source)->history_observer(
@@ -269,12 +264,11 @@ function run_production_sweep(
                                 iv,
                             )
                         ),
-                        state_observer = solution_observer === nothing ? nothing :
-                                         (state -> solution_observer(state, it, iv)),
+                        observation_sink = point_observation,
                     )
                 end
-                if restart !== nothing && restart.completed && solution_observer !== nothing
-                    solution_observer(solution, it, iv)
+                if restart !== nothing && restart.completed
+                    point_observation === nothing || point_observation(ProductionObservation(solution))
                 end
                 wall_seconds = (time_ns() - solve_started) * 1e-9
                 current =
@@ -567,23 +561,15 @@ end
 
 
 function _completed_restart_solution(problem::NEGFProblem, options::SolverOptions, restart)
-    q = restart.status === :converged ? :strictly_converged : :approximate_fixed_point
-    old = restart.scba
-    scba = SCBAResult(
-        old.green,
-        old.scattering,
-        old.embedding,
-        old.embedding_plus,
-        old.embedding_minus,
-        old.history,
-        q === :strictly_converged,
-        q === :strictly_converged ? :converged : :approximate,
-        q,
-        old.restart_contract,
-        old.mixer_state,
-    )
+    restart.completed || throw(ArgumentError("only a returned solver result can be reused"))
+    scba = restart.scba
     observables = _collect_observables(problem, scba, restart.Uᴴ)
     observables[:warnings] = deepcopy(get(restart, :warnings, Dict{String,Any}[]))
+    observables[:restart_contract] = scba.restart_contract
+    observables[:poisson_convergence_streak] = restart.poisson_streak
+    observables[:acceptance_measurement_context] = restart.measurement_context
+    restart.adaptation === nothing || (observables[:adaptation_checkpoint] = restart.adaptation)
+    QCLNEGF._publish_charge_diagnostics!(observables, restart.report)
     push!(
         observables[:warnings],
         Dict{String,Any}(
@@ -593,22 +579,6 @@ function _completed_restart_solution(problem::NEGFProblem, options::SolverOption
         ),
     )
     n = _electron_density_bar(problem, scba.green.Gˡ)
-    provisional = NEGFSolution(
-        problem,
-        options,
-        restart.Uᴴ,
-        n,
-        scba,
-        restart.outer_history,
-        observables,
-        ConvergenceReport(false, Dict{Symbol,Float64}(), String[]),
-        false,
-        restart.status,
-    )
-    assessment = _final_quality_report(provisional, true)
-    status =
-        assessment.converged ? :converged :
-        assessment.approximate ? :approximate : :validation_failed
     result = NEGFSolution(
         problem,
         options,
@@ -617,11 +587,11 @@ function _completed_restart_solution(problem::NEGFProblem, options::SolverOption
         scba,
         restart.outer_history,
         observables,
-        assessment.report,
-        assessment.converged,
-        status,
+        restart.report,
+        restart.converged,
+        restart.status,
     )
     observables[:quality] = solution_quality(result)
-    observables[:termination_reason] = String(status)
+    observables[:termination_reason] = String(restart.status)
     return result
 end

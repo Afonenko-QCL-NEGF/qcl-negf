@@ -1,0 +1,7 @@
+schema: qcl-negf-study-v2
+kind: meta
+id: experiment-contract-smoke
+name: Сквозная проверка кампании Core и Runner
+includes:
+  - v843-spectrum/b7.yaml
+  - ../runner/examples/config/stationary-smoke.yaml

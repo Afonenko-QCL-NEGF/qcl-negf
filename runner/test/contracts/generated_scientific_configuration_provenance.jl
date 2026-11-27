@@ -102,8 +102,11 @@ const Workflow = QCLNEGFRunner.QCLScientificWorkflow
         frozen = scientific_plan_dict(plan)
         loaded = load_scientific_plan(frozen)
         @test length(loaded.executions) == 4
-        for (restored, original) in zip(loaded.executions, plan.executions)
-            @test restored.configuration.raw == original.configuration.raw
+        @test scientific_plan_dict(loaded) == frozen
+        for (restored, original, serialized) in zip(
+            loaded.executions, plan.executions, frozen["executions"],
+        )
+            @test restored.configuration.raw == serialized["resolved_configuration"]
             @test restored.configuration.provenance.sources == original.configuration.provenance.sources
         end
         @test first(loaded.executions).configuration.provenance.sources["physical.lattice_temperature"] ==

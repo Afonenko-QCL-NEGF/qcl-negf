@@ -18,7 +18,7 @@ YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 
 [sources]
-QCLNEGF = {rev = "c2f45cae21c3e2e4257805ea9c30f9c1d80a7515", url = "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl.git"}
+QCLNEGF = {rev = "0eba158d21148e0cb3f8c4dae31195aad1f2a43d", url = "https://github.com/Afonenko-QCL-NEGF/QCLNEGF.jl.git"}
 
 [extensions]
 QCLNEGFRunnerPlotsExt = "CairoMakie"
