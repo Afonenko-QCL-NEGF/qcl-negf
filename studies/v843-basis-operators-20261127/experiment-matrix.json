@@ -1,0 +1,153 @@
+{
+  "schema": "v843-basis-operators-matrix-v1",
+  "plan_revision": "7202e8c5768fab4e12c0dadd66581bf3fe3ce6b3",
+  "core_revision": "c2f45cae21c3e2e4257805ea9c30f9c1d80a7515",
+  "criteria": {
+    "translation_max": 0.1,
+    "translation_nearest_max": 0.1,
+    "translation_two_pairs_max": 0.005,
+    "energy_assignment_rms_meV_max": 5.0,
+    "energy_assignment_gap_meV_min": 3.0,
+    "shape_gap_min": 0.02,
+    "shape_cosine_min": 0.8,
+    "clipped_e_cosine_min": 0.75,
+    "confirmation_energy_meV_max": 3.0,
+    "confirmation_shape_cosine_min": 0.95,
+    "transport_terminal_residual_max": 1e-08,
+    "transport_drift_samples": 8
+  },
+  "nodes": [
+    {
+      "node": "B7",
+      "direction": "B7",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": []
+    },
+    {
+      "node": "B9",
+      "direction": "B9",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": []
+    },
+    {
+      "node": "B11",
+      "direction": "B11",
+      "part": null,
+      "os": "LINUX",
+      "parents": []
+    },
+    {
+      "node": "BLOCH144",
+      "direction": "BLOCH",
+      "part": "144",
+      "os": "WINDOWS",
+      "parents": []
+    },
+    {
+      "node": "BLOCH288",
+      "direction": "BLOCH",
+      "part": "288",
+      "os": "WINDOWS",
+      "parents": []
+    },
+    {
+      "node": "IMP17",
+      "direction": "IMP17",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": []
+    },
+    {
+      "node": "IMP33",
+      "direction": "IMP33",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": []
+    },
+    {
+      "node": "LO17",
+      "direction": "LO",
+      "part": "17",
+      "os": "WINDOWS",
+      "parents": []
+    },
+    {
+      "node": "LO33",
+      "direction": "LO",
+      "part": "33",
+      "os": "LINUX",
+      "parents": []
+    },
+    {
+      "node": "SHIFT",
+      "direction": "SHIFT",
+      "part": null,
+      "os": "LINUX",
+      "parents": []
+    },
+    {
+      "node": "SELECT",
+      "direction": "SELECT",
+      "part": null,
+      "os": "LINUX",
+      "parents": [
+        "B7",
+        "B9",
+        "B11",
+        "BLOCH144",
+        "BLOCH288"
+      ]
+    },
+    {
+      "node": "PILOT",
+      "direction": "PILOT",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": [
+        "SELECT"
+      ]
+    },
+    {
+      "node": "T17A32",
+      "direction": "T17A32",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ]
+    },
+    {
+      "node": "T17A128",
+      "direction": "T17A128",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ]
+    },
+    {
+      "node": "T33A32",
+      "direction": "T33A32",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ]
+    },
+    {
+      "node": "T33A128",
+      "direction": "T33A128",
+      "part": null,
+      "os": "WINDOWS",
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ]
+    }
+  ]
+}
