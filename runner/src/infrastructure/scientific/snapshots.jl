@@ -1,15 +1,18 @@
 """Читает зафиксированный план без обращения к исходным файлам постановки."""
 function load_scientific_plan(path::AbstractString)
-    data=_mapping_input(YAML.load_file(path; dicttype = Dict{String,Any}), "plan")
+    data=_load_yaml_mapping(path)
     return load_scientific_plan(data)
 end
 function load_scientific_plan(data::AbstractDict)
-    get(data, "schema", nothing)=="qcl-negf-scientific-plan-v2" ||
+    get(data, "schema", nothing)==SCIENTIFIC_PLAN_SCHEMA &&
+        get(data, "model_revision", nothing)==SCIENTIFIC_MODEL_REVISION ||
         throw(ArgumentError("unsupported scientific plan schema"))
     get(data, "fingerprint", nothing)==_plan_fingerprint(data) ||
         throw(ArgumentError("frozen scientific plan fingerprint mismatch"))
     get(data, "scientific_fingerprint", nothing)==_scientific_fingerprint(data) ||
         throw(ArgumentError("scientific identity mismatch"))
+    get(data, "implementation", nothing)==_scientific_implementation() ||
+        throw(ArgumentError("frozen implementation differs from the loaded packages"))
     executions=ScientificExecution{ResolvedRunConfiguration}[]
     for raw in _vector_input(data["executions"], "executions")
         item=_mapping_input(raw, "execution")
@@ -28,12 +31,29 @@ function load_scientific_plan(data::AbstractDict)
             configuration,
             ConfigurationProvenance(String[], String[], sources),
         )
+        configuration == _freeze_configuration(config) ||
+            throw(ArgumentError("frozen configuration must contain canonical effective values"))
         get(item, "effective_inputs", nothing)==_effective_scientific_inputs(config) ||
             throw(
                 ArgumentError(
                     "effective scientific inputs differ from resolved configuration",
                 ),
             )
+        operation = Symbol(item["operation"])
+        operation in SCIENTIFIC_OPERATIONS && item["method_id"] == String(operation) ||
+            throw(ArgumentError("frozen plan has an unknown method binding"))
+        author_inputs = Dict{String,String}[]
+        for input in _vector_input(get(item, "author_inputs", nothing), "author inputs")
+            record = _keys_input(_mapping_input(input, "author input"), ("name", "sha256"), "author input")
+            name = _string_input(get(record, "name", nothing), "input name")
+            digest = _string_input(get(record, "sha256", nothing), "input SHA-256")
+            occursin(r"^[0-9a-f]{64}$", digest) || throw(ArgumentError("invalid author input SHA-256"))
+            push!(author_inputs, Dict("name" => name, "sha256" => digest))
+        end
+        policy = _parse_scientific_policies(item["policies"])
+        outputs = _parse_scientific_outputs(item["outputs"])
+        item["policies"] == _policies_dict(policy) && item["outputs"] == _outputs_dict(outputs) ||
+            throw(ArgumentError("frozen plan requires explicit policies and output profile"))
         push!(
             executions,
             ScientificExecution(
@@ -43,12 +63,15 @@ function load_scientific_plan(data::AbstractDict)
                 String(item["method_id"]),
                 String.(item["point_ids"]),
                 config,
-                _parse_scientific_policies(item["policies"]),
-                _parse_scientific_outputs(item["outputs"]),
+                author_inputs,
+                item["author_device"] === nothing ? nothing :
+                    _identifier_input(item["author_device"], "author device"),
+                policy,
+                outputs,
                 Int(item["estimated_peak_bytes"]),
                 Symbol(item["purpose"]),
                 Int(item["repetition"]),
-                Symbol(item["operation"]),
+                operation,
                 String(item["label"]),
             ),
         )
@@ -58,6 +81,7 @@ function load_scientific_plan(data::AbstractDict)
             String(p["id"]),
             String(p["execution_id"]),
             p["temperature_K"],
+            p["lo_temperature_K"],
             p["voltage_per_period_V"],
             String(p["branch"]),
             Int(p["order"]),
@@ -66,8 +90,9 @@ function load_scientific_plan(data::AbstractDict)
         ) for p in data["points"]
     ]
     for (point, raw) in zip(points, data["points"])
-        config=only(e.configuration for e in executions if e.id==point.execution_id)
-        get(raw, "effective_inputs", nothing)==_point_passport(config, point) || throw(
+        execution=only(e for e in executions if e.id==point.execution_id)
+        get(raw, "effective_inputs", nothing)==
+            _point_passport(execution.configuration, point, execution.operation) || throw(
             ArgumentError("effective point passport differs from actual scientific axes"),
         )
     end
@@ -99,7 +124,8 @@ function load_scientific_plan(data::AbstractDict)
             predecessor=only(q for q in points if q.id==p.predecessor_id)
             predecessor.execution_id==p.execution_id &&
             predecessor.branch==p.branch &&
-            predecessor.temperature_K==p.temperature_K || throw(
+            predecessor.temperature_K==p.temperature_K &&
+            predecessor.lo_temperature_K==p.lo_temperature_K || throw(
                 ArgumentError("continuation crosses execution, branch or temperature"),
             )
         end
@@ -177,7 +203,7 @@ function _scientific_result_dict(result::ScientificPointResult)
 end
 function _series_document(plan, results, status)
     return Dict{String,Any}(
-        "schema"=>"qcl-negf-series-result-v3",
+        "schema"=>"qcl-negf-series-result-v4",
         "contract_set"=>"qcl-negf.results.v1",
         "plan_fingerprint"=>plan.fingerprint,
         "plan_scientific_fingerprint"=>scientific_plan_dict(plan)["scientific_fingerprint"],
@@ -213,10 +239,62 @@ function _read_series(directory)
     )
     data=_mapping_input(YAML.load_file(path; dicttype = Dict{String,Any}), "series result")
     get(data, "contract_set", nothing)=="qcl-negf.results.v1" &&
-    get(data, "schema", nothing)=="qcl-negf-series-result-v3" ||
+    get(data, "schema", nothing)=="qcl-negf-series-result-v4" ||
         throw(ArgumentError("unsupported series result schema"))
-    return data, dirname(abspath(path))
+    root = dirname(abspath(path))
+    _validate_scientific_result_points(data; root)
+    return data, root
 end
+
+function _validate_scientific_result_points(data; root = nothing)
+    for field in ("points", "attempt_history")
+        field == "attempt_history" && !haskey(data, field) && continue
+        for row in _vector_input(get(data, field, nothing), field)
+            item = _mapping_input(row, "series point")
+            haskey(item, "scientific_accepted") &&
+                throw(ArgumentError("obsolete point scientific acceptance field"))
+            process = get(item, "status", nothing)
+            process isa Union{Symbol,AbstractString} ||
+                throw(ArgumentError("series point requires a process status"))
+            status = _validate_point_scientific_status(
+                get(item, "scientific_status", nothing); process,
+            )
+            root === nothing && continue
+            status["process"] in ("completed", "completed_with_warnings") || continue
+            fingerprint = _string_input(get(data, "plan_fingerprint", nothing), "series plan fingerprint")
+            _validate_committed_series_point(root, item, fingerprint, status)
+        end
+    end
+    return data
+end
+
+function _validate_committed_series_point(root, point, fingerprint, status)
+    references = _mapping_input(get(point, "data", nothing), "series point data")
+    reference = _string_input(get(references, "result_commit", nothing), "result commit")
+    !isabspath(reference) && !occursin('\\', reference) &&
+    all(part -> !(part in ("", ".", "..")), split(reference, '/')) ||
+        throw(ArgumentError("result commit path must be a portable relative path"))
+    path = _result_path(root, reference)
+    _result_path(realpath(root), realpath(path))
+    commit = _load_yaml_mapping(path)
+    get(commit, "schema", nothing) == POINT_COMMIT_SCHEMA &&
+    get(commit, "contract_set", nothing) == _RESULT_CONTRACT_SET ||
+        throw(ArgumentError("series point references an incompatible result commit"))
+    identity = _mapping_input(get(commit, "identity", nothing), "point commit identity")
+    expected = Dict(
+        "point_id"=>_identifier_input(get(point, "id", nothing), "point id"),
+        "execution_id"=>_identifier_input(get(point, "execution_id", nothing), "execution id"),
+        "attempt"=>_positive_integer(get(point, "attempt", nothing), "point attempt"),
+        "plan_fingerprint"=>fingerprint,
+    )
+    _positive_integer(get(identity, "attempt", nothing), "result commit attempt")
+    all(get(identity, key, nothing) == value for (key, value) in expected) ||
+        throw(ArgumentError("series point identity differs from its result commit"))
+    !haskey(commit, "scientific_accepted") && get(commit, "scientific_status", nothing) == status ||
+        throw(ArgumentError("series point scientific status differs from its result commit"))
+    return nothing
+end
+
 function _result_path(root, path)
     path isa AbstractString || throw(ArgumentError("result artifact path must be a string"))
     candidate=abspath(joinpath(root, path))
@@ -236,9 +314,9 @@ end
 """Записывает проверенный результат по открытому контракту с сохранением его научного статуса."""
 function write_scientific_result(io::IO, result::AbstractDict)
     get(result, "contract_set", nothing)=="qcl-negf.results.v1" &&
-    get(result, "schema", nothing)=="qcl-negf-series-result-v3" ||
+    get(result, "schema", nothing)=="qcl-negf-series-result-v4" ||
         throw(ArgumentError("unsupported scientific result schema"))
-    _light_json(io, result)
+    _light_json(io, _validate_scientific_result_points(result))
     println(io)
     return nothing
 end

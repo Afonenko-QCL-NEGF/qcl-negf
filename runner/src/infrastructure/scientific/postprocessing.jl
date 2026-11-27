@@ -90,8 +90,8 @@ function postprocess_series(
                             "x"=>[item["voltage_per_period_V"] for item in selected],
                             "y"=>[item[field] for item in selected],
                             "quality"=>[item["quality"] for item in selected],
-                            "accepted"=>[item["converged"] for item in selected],
-                            "connect"=>[item["converged"] for item in selected],
+                            "scientific_status"=>[item["scientific_status"] for item in selected],
+                            "connect"=>[_stationary_candidate(item) for item in selected],
                         ),
                     )
                 end
@@ -126,18 +126,18 @@ function postprocess_series(
         )
         println(io, "Result status: `", series["status"], "`")
         println(io, "\nFrozen plan: `", series["plan_fingerprint"], "`\n")
-        println(io, "| Point | T (K) | Bias per period (V) | Point status | Iterative convergence | Physical gates passed | Scientific acceptance |")
-        println(io, "|---|---|---|---|---|---|---|")
+        println(io, "| Point | T (K) | Bias per period (V) | Process | Iterative convergence | Physical candidate | Discretization | Operator | Campaign verdict |")
+        println(io, "|---|---|---|---|---|---|---|---|---|")
         for row in rows
             coordinates = row["coordinates"]
-            assessment = get(row["observables"], "scientific_assessment", Dict())
+            status = row["scientific_status"]
             println(
                 io,
                 "| `", row["id"], "` | ", coordinates["temperature_K"],
-                " | ", coordinates["voltage_per_period_V"], " | ", row["status"],
-                " | ", get(assessment, "iterative_converged", "not recorded"),
-                " | ", get(assessment, "physical_gates_passed", "not recorded"),
-                " | ", get(assessment, "scientific_accepted", "not recorded"), " |",
+                " | ", coordinates["voltage_per_period_V"], " | ", status["process"],
+                " | ", status["iterative_convergence"], " | ", status["physical_candidate"],
+                " | ", status["discretization"], " | ", status["operator"],
+                " | ", status["campaign_verdict"], " |",
             )
         end
         println(io)
@@ -153,6 +153,10 @@ function postprocess_series(
     end
     return derived
 end
+_stationary_candidate(row) =
+    row["scientific_status"]["process"] == "completed" &&
+    row["scientific_status"]["physical_candidate"] == "passed"
+
 function _scalar_series(rows, operation)
     field=operation=="gain_voltage" ? "gain_peak_per_cm" : "current_density_A_per_m2"
     output=Any[]
@@ -172,7 +176,7 @@ function _scalar_series(rows, operation)
                 "voltage_per_period_V"=>coordinates["voltage_per_period_V"],
                 field=>value,
                 "quality"=>point["quality"],
-                "converged"=>point["converged"],
+                "scientific_status"=>point["scientific_status"],
             ),
         )
     end
@@ -185,9 +189,9 @@ function _scalar_series(rows, operation)
                 p in output if (p["execution_id"], p["branch"], p["temperature_K"])==key
             ]
             sort!(selected; by = p->p["order"])
-            all(p->p["converged"], selected) || throw(
+            all(_stationary_candidate, selected) || throw(
                 ArgumentError(
-                    "dJ/dV requires strictly accepted points; branch $key contains nonaccepted data",
+                    "dJ/dV requires measured stationary candidates in branch $key",
                 ),
             )
             derivative=differential_conductance(

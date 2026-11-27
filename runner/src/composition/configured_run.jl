@@ -539,7 +539,7 @@ function _run_educational_sweep(
                 )
                 continue
             end
-            storage.solution(solution, temperature_index, voltage_index)
+            storage.checkpoint(solution, true, temperature_index, voltage_index)
             wall_seconds = (time_ns() - started) * 1e-9
             checkpoint =
                 configuration.output.save_full_state ?
@@ -782,7 +782,6 @@ function run_from_configuration(
                 checkpoint_prefix = configuration.output.checkpoint_prefix,
                 save_full_state = configuration.output.save_full_state,
                 save_csv = configuration.output.save_csv,
-                solution_observer = storage.solution,
                 checkpoint_observer = storage.checkpoint,
                 checkpoint_request = storage.request,
                 history_observer = storage.history,
@@ -838,12 +837,11 @@ function _configured_storage_observers(
                     sha256(sprint(_light_json, configuration.raw)),
                 ),
             )
-            previous_scba, previous_outer=scientific_history_counts(parent)
             ScientificHistoryRecorder(
                 joinpath(parent, "attempt-$(attempt)"),
                 identity,
-                Ref(previous_scba),
-                Ref(previous_outer),
+                Ref(0),
+                Ref(0),
             )
         end
     end
@@ -855,11 +853,11 @@ function _configured_storage_observers(
         source,
     )
     function persist(solution::NEGFSolution, it::Integer, iv::Integer; analysis = true)
-        solution.observables[:model_capabilities]=model_capabilities(
-            solution.problem,
-            configuration.algorithms,
+        solution = _with_checkpoint_metadata(
+            solution;
+            model_capabilities = model_capabilities(solution.problem, configuration.algorithms),
         )
-        terminal=!(solution.status in (:running, :running_scba, :snapshot))
+        terminal=!(solution.status in (:running, :running_scba))
         saved=recorder(it, iv)
         flush_scientific_history!(saved)
         clock=get!(() -> CheckpointDeadline(storage_started), clocks, (it, iv))
@@ -870,7 +868,7 @@ function _configured_storage_observers(
             identity = saved.identity,
             algorithms = configuration.algorithms,
             configuration = configuration.raw,
-            history_paths = scientific_history_sources(dirname(directory)),
+            history_paths = scientific_history_sources(saved),
             analysis,
             terminal_status = terminal ? "completed" : "running",
             checkpoint_metadata = checkpoint_policy(clock),
@@ -878,16 +876,13 @@ function _configured_storage_observers(
         checkpoint_completed!(clock)
         return nothing
     end
-    function solution_observer(solution::NEGFSolution, it::Integer, iv::Integer)
-        outer=length(solution.outer_history)
-        terminal=solution.status!==:snapshot
-        cadence=output.snapshot_every_outer
-        !terminal && (!output.intermediate_checkpoints || cadence==0 ||
-            (outer>1 && outer%cadence!=0)) && return nothing
-        persist(solution, it, iv)
-    end
     function checkpoint_request(context, it::Integer, iv::Integer)
         output.intermediate_checkpoints || return CHECKPOINT_NONE
+        analysis_cadence = output.snapshot_every_outer
+        if context.stage === :outer && analysis_cadence > 0 &&
+           (context.iteration == 1 || context.iteration % analysis_cadence == 0)
+            return CHECKPOINT_STATE_AND_ANALYSIS
+        end
         clock = get!(() -> CheckpointDeadline(storage_started), clocks, (it, iv))
         cadence =
             context.stage === :scba ? configuration.production.checkpoint_every_scba :
@@ -895,17 +890,9 @@ function _configured_storage_observers(
         due = checkpoint_due(clock) || (cadence > 0 && context.iteration % cadence == 0)
         return due ? CHECKPOINT_STATE_ONLY : CHECKPOINT_NONE
     end
-    function checkpoint_observer(solution::NEGFSolution, it::Integer, iv::Integer)
-        output.intermediate_checkpoints || return nothing
-        solution.status in (:running, :running_scba) || return nothing
-        persist(solution, it, iv; analysis = false)
-    end
     return (
-        solution = solution_observer,
-        checkpoint = checkpoint_observer,
+        checkpoint = (solution, analysis, it, iv) -> persist(solution, it, iv; analysis),
         request = checkpoint_request,
         history = history,
     )
 end
-_configured_light_observer(configuration, output_directory) =
-    _configured_storage_observers(configuration, output_directory).solution

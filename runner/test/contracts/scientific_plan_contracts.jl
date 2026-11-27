@@ -153,6 +153,125 @@ end
     end
 end
 
+@testset "Frozen plan captures defaults, units, implementation, and separate temperatures" begin
+    examples = normpath(joinpath(@__DIR__, "..", "..", "examples", "config"))
+    original = YAML.load_file(joinpath(examples, "reference-2019-70k.yaml"))
+    definition = YAML.load_file(joinpath(examples, "operator-algebra.yaml"))
+    workflow = QCLNEGFRunner.QCLScientificWorkflow
+    function rehash!(frozen)
+        frozen["scientific_fingerprint"] = workflow._scientific_fingerprint(frozen)
+        frozen["fingerprint"] = workflow._plan_fingerprint(frozen)
+        return frozen
+    end
+    mktempdir() do directory
+        source = joinpath(directory, "initial.yaml")
+        definition["configuration"]["sources"] = [source]
+        original["physical"]["interface_roughness_height"] = "1 nm"
+        original["physical"]["ionization_fraction"] = 1
+        original["physical"]["lo_temperature"] = "200 K"
+        YAML.write_file(source, original)
+        first = scientific_plan_dict(resolve_scientific_plan(definition; base_directory=directory))
+        values = only(first["executions"])["resolved_configuration"]
+        @test values["algorithms"]["embedding"] == "full_cell_resolvent"
+        @test values["kernel_construction"]["impurity_angular_tolerance"] > 0
+        @test values["solver"]["convergence"]["trend"]["window"] > 0
+        @test only(first["points"])["effective_inputs"]["lo_temperature_K"] == 200
+        @test only(first["points"])["effective_inputs"]["axes_applied"] === false
+        @test only(first["points"])["effective_inputs"]["axis_source"] == "fixed_operator_fixture"
+        @test length(first["implementation"]["core"]["source_tree_sha256"]) == 64
+
+        relocated = mkpath(joinpath(directory, "relocated"))
+        source_changed = joinpath(relocated, "initial.yaml")
+        original["physical"]["interface_roughness_height"] = "10 Å"
+        original["physical"]["ionization_fraction"] = 1.0
+        original["run"]["name"] = "another run"
+        original["output"]["directory"] = "elsewhere"
+        original["production"]["worker_count"] = 2
+        YAML.write_file(source_changed, original)
+        definition["configuration"]["sources"] = [source_changed]
+        equivalent = scientific_plan_dict(resolve_scientific_plan(definition; base_directory=directory))
+        @test equivalent["scientific_fingerprint"] == first["scientific_fingerprint"]
+        diff = compare_scientific_plans(first, equivalent)
+        @test isempty(diff["science"]) && isempty(diff["implementation"])
+        @test !diff["same_frozen_plan"]
+
+        definition["configuration"]["overrides"] = Dict("numerical" => Dict("basis_states" => 8))
+        altered = scientific_plan_dict(resolve_scientific_plan(definition; base_directory=directory))
+        @test only(compare_scientific_plans(first, altered)["science"])["path"] ==
+              "/executions/1/inputs/numerical/basis_states"
+
+        delete!(definition["configuration"], "overrides")
+        definition["axes"]["temperatures"]["values"] = [70, 160]
+        definition["axes"]["lo_temperatures"] = Dict("unit" => "K", "values" => [70])
+        fixed_lo = scientific_plan_dict(resolve_scientific_plan(definition; base_directory=directory))
+        @test [point["lo_temperature_K"] for point in fixed_lo["points"]] == [70, 70]
+        delete!(definition["axes"], "lo_temperatures")
+        definition["axes"]["temperatures"]["values"] = [70]
+        original["physical"]["field_bias"] = "21 kV/cm"
+        delete!(original["physical"], "voltage_per_period")
+        YAML.write_file(source_changed, original)
+        field = scientific_plan_dict(resolve_scientific_plan(definition; base_directory=directory))
+        @test field["scientific_fingerprint"] == first["scientific_fingerprint"]
+
+        changes = Dict("numerical" => Dict("basis_states" => 8, "angular_nodes" => 48))
+        definition["variants"] = [Dict(
+            "id" => "changed", "overrides" => changes, "controlled_paths" => ["numerical"],
+        )]
+        @test_throws ArgumentError resolve_scientific_plan(definition; base_directory=directory)
+        definition["variants"][1]["controlled_paths"] = ["numerical.basis_states"]
+        @test_throws ArgumentError resolve_scientific_plan(definition; base_directory=directory)
+
+        rm(source)
+        rm(source_changed)
+        @test scientific_plan_dict(load_scientific_plan(first)) == first
+
+        incomplete = deepcopy(first)
+        delete!(only(incomplete["executions"])["resolved_configuration"]["algorithms"], "embedding")
+        @test_throws ArgumentError load_scientific_plan(rehash!(incomplete))
+
+        foreign = deepcopy(first)
+        foreign["implementation"]["core"]["source_tree_sha256"] = repeat("0", 64)
+        rehash!(foreign)
+        @test isempty(compare_scientific_plans(first, foreign)["science"])
+        @test length(compare_scientific_plans(first, foreign)["implementation"]) == 1
+        @test_throws ArgumentError load_scientific_plan(foreign)
+
+        v2 = deepcopy(first)
+        v2["schema"] = "qcl-negf-scientific-plan-v2"
+        @test_throws ArgumentError load_scientific_plan(rehash!(v2))
+    end
+end
+
+@testset "Short device and method names bind verified author inputs" begin
+    examples = normpath(joinpath(@__DIR__, "..", "..", "examples", "config"))
+    definition = YAML.load_file(joinpath(examples, "operator-algebra.yaml"))
+    mktempdir() do directory
+        source = joinpath(directory, "initial.yaml")
+        cp(joinpath(examples, "reference-2019-70k.yaml"), source)
+        digest = bytes2hex(open(sha256, source))
+        catalog = Dict(
+            "schema" => "qcl-negf-device-catalog-v1",
+            "devices" => Dict("example" => [Dict("path"=>"initial.yaml", "sha256"=>digest)]),
+        )
+        catalog_path = joinpath(directory, "catalog.yaml")
+        YAML.write_file(catalog_path, catalog)
+        definition["configuration"] = Dict("device"=>"example", "catalog"=>"catalog.yaml")
+        definition["variants"] = [Dict("id"=>"first", "method_id"=>"operator_algebra")]
+        plan = scientific_plan_dict(resolve_scientific_plan(definition; base_directory=directory))
+        execution = only(plan["executions"])
+        @test execution["author_inputs"] == [Dict("name"=>"initial.yaml", "sha256"=>digest)]
+        @test execution["method_id"] == "operator_algebra"
+        definition["variants"][1]["method_id"] = "missing-method"
+        @test_throws ArgumentError resolve_scientific_plan(definition; base_directory=directory)
+        definition["variants"][1]["method_id"] = "operator_algebra"
+        open(io->println(io, "# changed"), source, "a")
+        @test_throws ArgumentError resolve_scientific_plan(definition; base_directory=directory)
+        rm(source)
+        rm(catalog_path)
+        @test scientific_plan_dict(load_scientific_plan(plan)) == plan
+    end
+end
+
 @testset "Offline derivative and analytic campaign ledger" begin
     voltage=[0.0, 0.3, 0.9, 1.4]
     derivative=differential_conductance(voltage, voltage .^ 2)

@@ -34,10 +34,19 @@ function validate_configuration_source(
     additional_sources::AbstractString...;
     schema_path::AbstractString = default_configuration_schema(),
 )
+    return _validate_configuration_sources((source, additional_sources...); schema_path)
+end
+
+function _validate_configuration_sources(
+    sources_input;
+    schema_path::AbstractString = default_configuration_schema(),
+    expected_sha256 = Dict{String,String}(),
+    receipts = nothing,
+)
     schema = _load_configuration_schema(schema_path)
     manifests = String[]
     files = String[]
-    for item in (source, additional_sources...)
+    for item in sources_input
         _collect_contract_source!(item, manifests, files, schema)
     end
     isempty(files) &&
@@ -46,7 +55,15 @@ function validate_configuration_source(
     merged = Dict{String,Any}()
     sources = Dict{String,Vector{String}}()
     for file in files
-        _deep_merge!(merged, _load_yaml_mapping(file), sources, file)
+        bytes = read(file)
+        expected = get(expected_sha256, file, nothing)
+        if expected !== nothing || receipts !== nothing
+            digest = bytes2hex(sha256(bytes))
+            expected === nothing || digest == expected ||
+                throw(ArgumentError("device source does not match its catalog: $(basename(file))"))
+            receipts === nothing || push!(receipts, Dict("name" => basename(file), "sha256" => digest))
+        end
+        _deep_merge!(merged, _parse_yaml_mapping(bytes, file), sources, file)
     end
     _validate_schema_node(merged, schema, schema)
     schema_id = String(get(schema, "\$id", basename(schema_path)))

@@ -58,6 +58,7 @@ struct ScientificPoint
     id::String
     execution_id::String
     temperature_K::Float64
+    lo_temperature_K::Float64
     voltage_per_period_V::Float64
     branch::String
     order::Int
@@ -67,6 +68,7 @@ struct ScientificPoint
         id::String,
         execution::String,
         T::Real,
+        T_LO::Real,
         V::Real,
         branch::String,
         order::Int,
@@ -77,8 +79,8 @@ struct ScientificPoint
         _scientific_identity(execution, "execution id")
         predecessor===nothing || _scientific_identity(predecessor, "predecessor id")
         isempty(branch) && throw(ArgumentError("branch must not be empty"))
-        all(isfinite, (T, V)) && T>0 && V>=0 ||
-            throw(ArgumentError("operating coordinates must be finite, T>0 and V>=0"))
+        all(isfinite, (T, T_LO, V)) && T>0 && T_LO>0 && V>=0 ||
+            throw(ArgumentError("operating coordinates must be finite, temperatures positive and V>=0"))
         order>0 || throw(ArgumentError("point order must be positive"))
         initialization in (:cold, :predecessor) ||
             throw(ArgumentError("invalid point initialization"))
@@ -88,6 +90,7 @@ struct ScientificPoint
             id,
             execution,
             Float64(T),
+            Float64(T_LO),
             Float64(V),
             branch,
             order,
@@ -97,6 +100,12 @@ struct ScientificPoint
     end
 end
 
+const SCIENTIFIC_OPERATIONS = (
+    :stationary, :operator_algebra, :operator_metrics, :operator_representation,
+    :operator_continuum, :operator_cavity, :operator_lo_equilibrium,
+    :operator_spectral_resolution, :structure_spectrum,
+)
+
 struct ScientificExecution{C}
     id::String
     definition_id::String
@@ -104,6 +113,8 @@ struct ScientificExecution{C}
     method_id::String
     point_ids::Vector{String}
     configuration::C
+    author_inputs::Vector{Dict{String,String}}
+    author_device::Union{Nothing,String}
     policies::ScientificPolicies
     outputs::ScientificOutputs
     estimated_peak_bytes::Int
@@ -169,7 +180,8 @@ struct ScientificPointResult
     }
     status::Symbol
     quality::Symbol
-    converged::Bool
+    converged::Union{Nothing,Bool}
+    scientific_status::Dict{String,String}
     warnings::Vector{Dict{String,Any}}
     observables::Dict{String,Any}
     data::Dict{String,Any}
@@ -199,9 +211,12 @@ struct ScientificDefinition
     tags::Vector{String}
     children::Vector{ScientificChild}
     configuration_sources::Vector{String}
+    expected_source_sha256::Dict{String,String}
+    device::Union{Nothing,String}
     overrides::Dict{String,Any}
     variants::Vector{ScientificVariant}
     temperatures::Vector{Float64}
+    lo_temperatures::Union{Nothing,Vector{Float64}}
     branches::Vector{ScientificBranch}
     policies::ScientificPolicies
     outputs::ScientificOutputs

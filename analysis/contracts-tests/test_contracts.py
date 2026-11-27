@@ -107,7 +107,10 @@ def test_commit_checks_inventory_and_dependency_closure():
 
 
 def test_scientific_plan_requires_unique_ids_and_matching_count():
-    plan = {"schema": "qcl-negf-scientific-plan-v2", "root_definition_id": "study",
+    package = {"version": "0.2.0", "uuid": "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f",
+               "source_tree_sha256": "b" * 64}
+    plan = {"schema": "qcl-negf-scientific-plan-v3", "model_revision": "transport-contract-v3",
+            "implementation": {"core": package, "runner": package}, "root_definition_id": "study",
             "name": "study", "fingerprint": "a" * 64, "root_kind": "study",
             "computation_count": 1, "inclusions": [{"id": "i1"}],
             "executions": [{"id": "e1"}], "points": [{"id": "p1"}]}

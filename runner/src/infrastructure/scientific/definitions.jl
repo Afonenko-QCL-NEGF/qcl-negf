@@ -175,6 +175,36 @@ function read_scientific_definition(::FilesystemScientificDefinitions, requested
     return _parse_scientific_definition(document, source)
 end
 
+function _named_device_sources(configuration, definition_path)
+    name = _identifier_input(get(configuration, "device", nothing), "configuration.device")
+    catalog_path = joinpath(
+        dirname(definition_path),
+        _string_input(get(configuration, "catalog", nothing), "configuration.catalog"),
+    )
+    catalog = _keys_input(_load_yaml_mapping(catalog_path), ("schema", "devices"), "device catalog")
+    get(catalog, "schema", nothing) == "qcl-negf-device-catalog-v1" ||
+        throw(ArgumentError("unsupported device catalog schema"))
+    devices = _mapping_input(get(catalog, "devices", nothing), "device catalog devices")
+    haskey(devices, name) || throw(ArgumentError("unknown device: $name"))
+    sources = _vector_input(devices[name], "device $name")
+    isempty(sources) && throw(ArgumentError("device $name requires configuration sources"))
+    paths = String[]
+    digests = Dict{String,String}()
+    for raw in sources
+        entry = _keys_input(_mapping_input(raw, "device $name source"), ("path", "sha256"), "device source")
+        path = abspath(dirname(catalog_path), _string_input(get(entry, "path", nothing), "device source path"))
+        expected = _string_input(get(entry, "sha256", nothing), "device source SHA-256")
+        occursin(r"^[0-9a-f]{64}$", expected) ||
+            throw(ArgumentError("invalid device source SHA-256: $name"))
+        isfile(path) || throw(ArgumentError("missing device $name source: $(basename(path))"))
+        path = realpath(path)
+        haskey(digests, path) && throw(ArgumentError("duplicate device $name source: $(basename(path))"))
+        digests[path] = expected
+        push!(paths, path)
+    end
+    return paths, digests, name
+end
+
 function _parse_scientific_definition(document, source)
     data=_keys_input(
         _mapping_input(document, source),
@@ -220,9 +250,12 @@ function _parse_scientific_definition(document, source)
             tags,
             _scientific_children(source, data),
             String[],
+            Dict{String,String}(),
+            nothing,
             Dict(),
             ScientificVariant[],
             Float64[],
+            nothing,
             ScientificBranch[],
             policies,
             outputs,
@@ -235,21 +268,30 @@ function _parse_scientific_definition(document, source)
         throw(ArgumentError("study cannot include studies; use kind: meta"))
     configuration=_keys_input(
         _mapping_input(get(data, "configuration", Dict()), "configuration"),
-        ("sources", "overrides"),
+        ("sources", "catalog", "device", "overrides"),
         "configuration",
     )
-    sources=[
-        abspath(joinpath(dirname(source), _string_input(item, "source"))) for
-        item in _vector_input(get(configuration, "sources", Any[]), "sources")
-    ]
-    isempty(sources) && throw(ArgumentError("study requires explicit configuration.sources"))
+    sources, expected_source_sha256, device = if haskey(configuration, "device") || haskey(configuration, "catalog")
+        haskey(configuration, "sources") &&
+            throw(ArgumentError("configuration.sources and named device are exclusive"))
+        _named_device_sources(configuration, source)
+    else
+        paths = [
+            abspath(joinpath(dirname(source), _string_input(item, "source"))) for
+            item in _vector_input(get(configuration, "sources", Any[]), "sources")
+        ]
+        paths, Dict{String,String}(), nothing
+    end
+    isempty(sources) && throw(ArgumentError("study requires configuration sources or a named device"))
+    operation = Symbol(get(data, "operation", "stationary"))
+    operation in SCIENTIFIC_OPERATIONS || throw(ArgumentError("unsupported scientific operation"))
     overrides=_mapping_input(
         get(configuration, "overrides", Dict()),
         "configuration.overrides",
     )
     variants=ScientificVariant[]
     for item in _vector_input(
-        get(data, "variants", [Dict("id"=>"baseline", "method_id"=>"configured")]),
+        get(data, "variants", [Dict("id"=>"baseline")]),
         "variants",
     )
         variant=_keys_input(
@@ -257,14 +299,14 @@ function _parse_scientific_definition(document, source)
             ("id", "method_id", "overrides", "controlled_paths", "comparison_kind"),
             "variant",
         )
+        method = _identifier_input(get(variant, "method_id", String(operation)), "variant.method_id")
+        method in ("configured", String(operation)) ||
+            throw(ArgumentError("method $method is unavailable for operation $operation"))
         push!(
             variants,
             ScientificVariant(
                 _identifier_input(get(variant, "id", nothing), "variant.id"),
-                _identifier_input(
-                    get(variant, "method_id", "configured"),
-                    "variant.method_id",
-                ),
+                String(operation),
                 _mapping_input(get(variant, "overrides", Dict()), "variant.overrides"),
                 String.(
                     _vector_input(
@@ -281,13 +323,21 @@ function _parse_scientific_definition(document, source)
         throw(ArgumentError("duplicate variant id"))
     axes=_keys_input(
         _mapping_input(get(data, "axes", Dict()), "axes"),
-        ("temperatures", "voltages", "branches"),
+        ("temperatures", "lo_temperatures", "voltages", "branches"),
         "axes",
     )
     temperatures=_axis_values(
         get(axes, "temperatures", nothing),
         :temperature,
     )
+    lo_temperatures = if haskey(axes, "lo_temperatures")
+        values = _axis_values(axes["lo_temperatures"], :temperature)
+        length(values) in (1, length(temperatures)) ||
+            throw(ArgumentError("lo_temperatures needs one value or one per lattice temperature"))
+        length(values) == 1 ? fill(only(values), length(temperatures)) : values
+    else
+        nothing
+    end
     branches=ScientificBranch[]
     if haskey(axes, "branches")
         haskey(axes, "voltages") &&
@@ -328,18 +378,6 @@ function _parse_scientific_definition(document, source)
                 "explicit repetitions require reproducibility or benchmark purpose",
             ),
         )
-    operation=Symbol(get(data, "operation", "stationary"))
-    operation in (
-        :stationary,
-        :operator_algebra,
-        :operator_metrics,
-        :operator_representation,
-        :operator_continuum,
-        :operator_cavity,
-        :operator_lo_equilibrium,
-        :operator_spectral_resolution,
-        :structure_spectrum,
-    ) || throw(ArgumentError("unsupported scientific operation"))
     return ScientificDefinition(
         source,
         id,
@@ -348,9 +386,12 @@ function _parse_scientific_definition(document, source)
         tags,
         ScientificChild[],
         sources,
+        expected_source_sha256,
+        device,
         overrides,
         variants,
         temperatures,
+        lo_temperatures,
         branches,
         policies,
         outputs,
@@ -364,9 +405,15 @@ function resolve_scientific_configuration(
     ::FilesystemScientificDefinitions,
     definition,
     variant,
-    inherited_overrides,
+    inherited_overrides;
+    author_inputs = nothing,
 )
-    base=load_run_configuration(definition.configuration_sources)
+    source = _validate_configuration_sources(
+        definition.configuration_sources;
+        expected_sha256 = definition.expected_source_sha256,
+        receipts = author_inputs,
+    )
+    base = _resolve_configuration(source.data, source.provenance)
     raw=deepcopy(base.raw)
     provenance=deepcopy(base.provenance.sources)
     for (override, origin) in (
@@ -393,12 +440,19 @@ function resolve_scientific_configuration(
             "mode"=>String(definition.policies.scba_to_poisson),
         )),
     ), provenance, definition.source*"#generated:convergence-policy")
-    _deep_merge!(raw, Dict{String,Any}(
-        "physical"=>Dict{String,Any}(
-            "lattice_temperature"=>"$(first(definition.temperatures)) K",
-            "lo_temperature"=>"$(first(definition.temperatures)) K",
-        ),
-    ), provenance, definition.source*"#generated:temperature-axis")
+    physical = raw["physical"]
+    lattice = _untyped_quantity(physical["lattice_temperature"], "physical.lattice_temperature")
+    phonon = _untyped_quantity(physical["lo_temperature"], "physical.lo_temperature")
+    if definition.lo_temperatures !== nothing || lattice == phonon
+        lo_K = definition.lo_temperatures === nothing ?
+               first(definition.temperatures) : first(definition.lo_temperatures)
+        _deep_merge!(raw, Dict{String,Any}(
+            "physical"=>Dict{String,Any}(
+                "lattice_temperature"=>"$(first(definition.temperatures)) K",
+                "lo_temperature"=>"$lo_K K",
+            ),
+        ), provenance, definition.source*"#generated:temperature-axis")
+    end
     _deep_merge!(raw, Dict{String,Any}(
         "output"=>Dict{String,Any}(
             "resume"=>false,
@@ -500,6 +554,6 @@ function resolve_scientific_plan(
     maximum_solver_runs::Int = 10000,
 )
     source = joinpath(realpath(base_directory), "in-memory-study.yaml")
-    root = _parse_scientific_definition(definition, source)
+    root = _parse_scientific_definition(_string_keyed_yaml(definition, source), source)
     return _resolve_scientific_plan(FilesystemScientificDefinitions(), root; maximum_solver_runs)
 end

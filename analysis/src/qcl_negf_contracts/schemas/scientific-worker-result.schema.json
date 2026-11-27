@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "QCL-NEGF Julia execution result v2",
+  "title": "QCL-NEGF Julia execution result v4",
   "type": "object",
   "required": [
     "schema",
@@ -19,7 +19,7 @@
   ],
   "properties": {
     "schema": {
-      "const": "qcl-negf-series-result-v3"
+      "const": "qcl-negf-series-result-v4"
     },
     "plan_fingerprint": {
       "type": "string"
@@ -171,6 +171,7 @@
           "status",
           "quality",
           "converged",
+          "scientific_status",
           "warnings",
           "observables",
           "data",
@@ -228,6 +229,7 @@
           },
           "status": {
             "enum": [
+              "running",
               "saving",
               "completed",
               "failed",
@@ -249,7 +251,10 @@
             ]
           },
           "converged": {
-            "type": "boolean"
+            "type": ["boolean", "null"]
+          },
+          "scientific_status": {
+            "$ref": "scientific-status.schema.json"
           },
           "warnings": {
             "type": "array",
@@ -303,6 +308,7 @@
           "status",
           "quality",
           "converged",
+          "scientific_status",
           "warnings",
           "observables",
           "data",
@@ -360,6 +366,7 @@
           },
           "status": {
             "enum": [
+              "running",
               "saving",
               "completed",
               "failed",
@@ -381,7 +388,10 @@
             ]
           },
           "converged": {
-            "type": "boolean"
+            "type": ["boolean", "null"]
+          },
+          "scientific_status": {
+            "$ref": "scientific-status.schema.json"
           },
           "warnings": {
             "type": "array",

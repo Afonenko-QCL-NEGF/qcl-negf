@@ -65,11 +65,11 @@ def summary(manifest: dict[str, Any], files: dict[str, tuple[Path, dict[str, Any
             with h5py.File(path, "r") as handle:
                 rows.append({"identity": record["identity"], "generation": record["generation"],
                     "source_object": name, "source_sha256": description["sha256"],
-                    "scientific_accepted": record["scientific_accepted"],
+                    "scientific_status": record["scientific_status"],
                     "quality": record["quality"], "tables": _tables(handle)})
-    return json_bytes({"schema": "qcl-negf.diagnostic-page.v1", "contract_set": CONTRACT_SET,
+    return json_bytes({"schema": "qcl-negf.diagnostic-page.v2", "contract_set": CONTRACT_SET,
         "snapshot_identity": manifest["snapshot_identity"], "job_status": manifest["job_status"],
-        "snapshot_consistent": True, "scientific_acceptance": "per-record, never inferred from export success",
+        "snapshot_consistent": True,
         "coverage": manifest["coverage"], "missing_records": manifest["missing_records"],
         "freshness": manifest["freshness"],
         "scalar_history_tails": rows,

@@ -6,12 +6,12 @@ from pathlib import PurePosixPath
 import re
 from typing import Any, Mapping
 
-from .messages import ContractError
+from .messages import ContractError, point_scientific_status
 
 CONTRACT_SET = "qcl-negf.results.v1"
 COMMIT_SCHEMA = "qcl-negf.artifact-commit.v2"
 POINTER_SCHEMA = "qcl-negf.artifact-pointer.v2"
-EXPORT_SCHEMA = "qcl-negf.science-export.v2"
+EXPORT_SCHEMA = "qcl-negf.science-export.v3"
 NATIVE_SCHEMA_VERSION = "4.0"
 MODEL_SCHEMA = "qcl-negf-resolved-configuration-v3"
 RECOVERY_SCHEMA = "qcl-negf-recovery-reference-v1"
@@ -122,6 +122,9 @@ def validate_commit(value: Mapping[str, Any]) -> tuple[Artifact, ...]:
     if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
         raise ContractError("artifact inventory must be objects", "corrupt_result")
     artifacts = tuple(Artifact.parse(row) for row in rows)
+    if ("scientific_status" in value or "scientific_accepted" in value
+            or any(item.role in SCHEMA_BOUND_ROLES - {"model"} for item in artifacts)):
+        point_scientific_status(value)
     paths = {item.path for item in artifacts}
     if len(paths) != len(artifacts):
         raise ContractError("duplicate artifact paths", "corrupt_result")

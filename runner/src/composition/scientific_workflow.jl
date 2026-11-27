@@ -5,9 +5,15 @@ using SHA
 using YAML
 using Unitful
 import ..QCLNEGFRunner:
+    QCLNEGF,
     ResolvedRunConfiguration,
+    _package_source_identity,
+    _untyped_quantity,
+    _string_keyed_yaml,
+    _load_yaml_mapping,
     ConfigurationProvenance,
     load_run_configuration,
+    _validate_configuration_sources,
     _resolve_configuration,
     _deep_merge!,
     _package_path,
@@ -42,6 +48,11 @@ import ..QCLNEGFRunner:
     commit_point_artifacts,
     commit_operator_artifacts,
     verify_point_artifacts,
+    _point_scientific_status,
+    _validate_point_scientific_status,
+    _operator_verdict,
+    POINT_COMMIT_SCHEMA,
+    _RESULT_CONTRACT_SET,
     save_checkpoint,
     solution_quality,
     h5open,
@@ -57,7 +68,6 @@ import ..QCLNEGFRunner:
     _metres,
     period_length,
     ScientificHistoryRecorder,
-    scientific_history_counts,
     record_scientific_history!,
     flush_scientific_history!,
     CheckpointDeadline,
@@ -65,6 +75,7 @@ import ..QCLNEGFRunner:
     checkpoint_completed!,
     checkpoint_policy,
     scientific_history_sources,
+    scientific_history_prefix,
     OuterIteration,
     SCBAResult,
     NEGFSolution,
@@ -72,14 +83,17 @@ import ..QCLNEGFRunner:
     solve_periodic_poisson,
     _electron_density_bar,
     _completed_restart_solution,
+    _with_checkpoint_metadata,
     model_capabilities,
     _configured_optical_response!,
     psd_error_budget,
     representation_coverage
 import ..QCLNumerics:
-    CHECKPOINT_NONE, CHECKPOINT_STATE_ONLY, effective_seed_parameters, solution_scientific_assessment
+    CHECKPOINT_NONE, CHECKPOINT_STATE_ONLY, CHECKPOINT_STATE_AND_ANALYSIS,
+    effective_seed_parameters, solution_scientific_assessment
 import ..QCLApplicationRuntime: canonical_bytes
 include("../application/scientific/contracts.jl")
+include("../infrastructure/scientific/frozen_configuration.jl")
 include("../application/scientific/planning.jl")
 include("../application/scientific/postprocessing.jl")
 include("../infrastructure/scientific/definitions.jl")
@@ -98,6 +112,7 @@ export ScientificPlan,
     VoltageContinuation,
     resolve_scientific_plan,
     scientific_plan_dict,
+    compare_scientific_plans,
     load_scientific_plan,
     is_scientific_definition,
     execute_scientific_plan,

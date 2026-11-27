@@ -330,12 +330,14 @@ end
         @test_throws ArgumentError BN.verify_point_artifacts(checkpoint)
         operator=BN.commit_operator_artifacts(
             joinpath(directory, "operator"),
-            Dict("passed"=>true);
+            [Dict("name"=>"fixture", "passed"=>true)];
             identity,
             operation = "fixture",
-            accepted = true,
         )
         commit=BN.verify_point_artifacts(operator)
+        @test commit["scientific_status"]["operator"] == "passed"
+        @test commit["scientific_status"]["iterative_convergence"] ==
+              commit["scientific_status"]["campaign_verdict"] == "unknown"
         only(commit["artifacts"])["schema"]="qcl-negf-operator-diagnostics-v2"
         open(operator, "w") do io
             BN._light_json(io, commit)

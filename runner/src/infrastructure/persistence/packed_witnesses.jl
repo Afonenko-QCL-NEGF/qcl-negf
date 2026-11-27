@@ -73,15 +73,15 @@ function _write_packed_column(parent, name, data)
     return _write_native_dataset(parent, name, data)
 end
 
-function _witness_record(sequence, iteration, witness; problem = nothing)
+function _witness_record(sequence, iteration, witness; grid = nothing)
     attrs=Dict{String,Any}(
         "sequence"=>sequence,
         "iteration"=>iteration,
         "matrix_kind"=>String(witness.matrix_kind),
     )
-    if problem!==nothing
-        attrs["E0_eV"]=problem.scales.E₀_eV
-        attrs["L0_m"]=problem.scales.L₀_m
+    if grid !== nothing
+        attrs["E0_eV"]=grid.energy_scale_eV
+        attrs["L0_m"]=grid.length_scale_m
     end
     groups=Dict{String,Any}("matrices_dimensionless"=>Dict{String,Any}())
     payloads=Any[]

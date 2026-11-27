@@ -1,10 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "QCL-NEGF immutable scientific plan v2",
+  "title": "QCL-NEGF immutable scientific plan v3",
   "type": "object",
   "required": [
     "schema",
     "model_revision",
+    "implementation",
     "root_definition_id",
     "root_kind",
     "name",
@@ -22,10 +23,66 @@
   ],
   "properties": {
     "schema": {
-      "const": "qcl-negf-scientific-plan-v2"
+      "const": "qcl-negf-scientific-plan-v3"
     },
     "model_revision": {
-      "const": "transport-contract-v2"
+      "const": "transport-contract-v3"
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "core",
+        "runner"
+      ],
+      "properties": {
+        "core": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "version",
+            "uuid",
+            "source_tree_sha256"
+          ],
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uuid": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "source_tree_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "runner": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "version",
+            "uuid",
+            "source_tree_sha256"
+          ],
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uuid": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "source_tree_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      }
     },
     "root_definition_id": {
       "type": "string",
@@ -127,7 +184,9 @@
           "purpose",
           "repetition",
           "operation",
-          "effective_inputs"
+          "effective_inputs",
+          "author_inputs",
+          "author_device"
         ],
         "properties": {
           "id": {
@@ -227,6 +286,38 @@
               }
             },
             "additionalProperties": false
+          },
+          "author_inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "sha256"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          },
+          "author_device": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,95}$"
+              }
+            ]
           }
         },
         "additionalProperties": false
@@ -240,6 +331,7 @@
           "id",
           "execution_id",
           "temperature_K",
+          "lo_temperature_K",
           "voltage_per_period_V",
           "branch",
           "order",
@@ -297,7 +389,11 @@
               "voltage_per_period_V",
               "configuration_hash",
               "hash_encoding",
-              "axes_applied"
+              "axes_applied",
+              "lo_temperature_K",
+              "period_length_m",
+              "field_V_per_m",
+              "axis_source"
             ],
             "properties": {
               "temperature_K": {
@@ -315,9 +411,31 @@
                 "const": "qcl-negf-canonical-bytes-v1"
               },
               "axes_applied": {
-                "const": true
+                "type": "boolean"
+              },
+              "lo_temperature_K": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "period_length_m": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "field_V_per_m": {
+                "type": "number",
+                "minimum": 0
+              },
+              "axis_source": {
+                "enum": [
+                  "study_point",
+                  "fixed_operator_fixture"
+                ]
               }
             }
+          },
+          "lo_temperature_K": {
+            "type": "number",
+            "exclusiveMinimum": 0
           }
         },
         "additionalProperties": false

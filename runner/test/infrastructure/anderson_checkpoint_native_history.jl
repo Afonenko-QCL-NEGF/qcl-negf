@@ -166,7 +166,13 @@ end
         QCLNEGFRunner.flush_scientific_history!(recorder)
         # A resumed attempt continues immutable sequence numbers; previous rows
         # are retained even though the new attempt starts its own segment index.
-        stored_scba, stored_outer=QCLNEGFRunner.scientific_history_counts(directory)
+        first_paths = QCLNEGFRunner.scientific_history_sources(recorder)
+        checkpoint_history = QCLNEGFRunner.consolidate_scientific_history(
+            joinpath(directory, "checkpoint-history.h5"),
+            first_paths,
+        )
+        boundary = HDF5.h5open(QCLNEGFRunner._history_boundary, checkpoint_history, "r")
+        stored_scba, stored_outer = boundary["scba_sequence"], boundary["outer_sequence"]
         @test (stored_scba, stored_outer)==(3897, 0)
         resumed_identity=merge(identity, Dict("attempt"=>2))
         resumed=QCLNEGFRunner.ScientificHistoryRecorder(
@@ -186,8 +192,9 @@ end
             )
         end
         QCLNEGFRunner.flush_scientific_history!(resumed)
-        paths=QCLNEGFRunner.scientific_history_sources(directory)
-        @test length(paths)==5
+        @test length(first_paths)==4
+        paths = vcat(checkpoint_history, QCLNEGFRunner.scientific_history_sources(resumed))
+        @test length(paths)==2
         consolidated=QCLNEGFRunner.consolidate_scientific_history(
             joinpath(directory, "history.h5"),
             paths,

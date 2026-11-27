@@ -279,9 +279,11 @@ function _write_checkpoint(
         attributes(metadata)["schema"] =
             artifact_role == "recovery" ? "qcl-negf-checkpoint-v4" : "qcl-negf-physics-v4"
         attributes(metadata)["native_grid"] = true
-        attributes(
-            metadata,
-        )["checkpoint_boundary"] = "accepted Green/selfenergy evaluation before next mixing step"
+        attributes(metadata)["checkpoint_boundary"] = _checkpoint_boundary(solution.status)
+        streak = get(solution.observables, :poisson_convergence_streak, 0)
+        0 <= streak <= length(solution.outer_history) ||
+            throw(ArgumentError("checkpoint Poisson streak is outside the completed history"))
+        attributes(metadata)["poisson_convergence_streak"] = streak
         metadata["point_identity_json"] = sprint(_light_json, identity)
         _persist_model_scope!(metadata, solution)
         attributes(metadata)["package_version"] = _software_version()
@@ -297,6 +299,8 @@ function _write_checkpoint(
             sprint(_light_json, get(solution.observables, :warnings, Any[]))
         metadata["adaptation_checkpoint_json"] =
             sprint(_light_json, get(solution.observables, :adaptation_checkpoint, nothing))
+        metadata["acceptance_measurement_context_json"] =
+            sprint(_light_json, get(solution.observables, :acceptance_measurement_context, Dict()))
         attributes(metadata)["julia_threads"] = Base.Threads.nthreads(:default)
         attributes(metadata)["blas_threads"] = BLAS.get_num_threads()
         attributes(metadata)["runtime_architecture"] = string(Sys.ARCH)
@@ -305,6 +309,8 @@ function _write_checkpoint(
             _solver_restart_contract(solution.options, algorithms)
         if contract !== nothing
             metadata["restart_contract_yaml"] = YAML.write(contract)
+            attributes(metadata)["core_source_sha256"] =
+                _package_source_identity(QCLNEGF)["source_tree_sha256"]
         end
         metadata["physical_models_identity_yaml"] = YAML.write(
             Dict(String(k)=>v for (k, v) in pairs(physical_model_identity(problem.models))),
@@ -598,6 +604,8 @@ function _write_checkpoint(
         convergence["metric_names"] = String.(metric_names)
         convergence["metric_values"] =
             [solution.report.metrics[name] for name in metric_names]
+        attributes(convergence)["report_passed"] = solution.report.passed
+        convergence["report_messages"] = solution.report.messages
         if artifact_role in ("recovery", "physics.full")
             algorithm = create_group(file, "algorithm_state")
             mixer = solution.scba.mixer_state

@@ -1,5 +1,11 @@
 # Optional production checkpoint and summary persistence adapter.
 
+function _checkpoint_boundary(status::Symbol)
+    status === :running_scba && return "before_scba_mix"
+    status === :running && return "after_poisson_evaluation"
+    return "returned_solution"
+end
+
 function _atomic_checkpoint(path::AbstractString, solution::NEGFSolution)
     directory = dirname(abspath(path))
     mkpath(directory)
@@ -353,6 +359,11 @@ function _load_production_restart(
             throw(ArgumentError("invalid exact restart contract"))
         _matches_restart_contract_fields(contract, expected_contract) ||
             _restart_mismatch("checkpoint does not contain the complete exact restart contract")
+        haskey(attributes(metadata), "core_source_sha256") ||
+            _restart_mismatch("checkpoint lacks the loaded Core source identity")
+        String(read_attribute(metadata, "core_source_sha256")) ==
+        _package_source_identity(QCLNEGF)["source_tree_sha256"] ||
+            _restart_mismatch("exact restart requires the same loaded Core source")
         haskey(metadata, "kernel_identity_yaml") ||
             _restart_mismatch("checkpoint lacks the exact scattering-operator identity")
         kernel_identity = YAML.load(
@@ -443,8 +454,26 @@ function _load_production_restart(
         ]
         all(i -> outer_history[i].μ == i, eachindex(outer_history)) ||
             throw(ArgumentError("Poisson checkpoint history is not contiguous"))
-        stored_status = Symbol(String(read_attribute(file["metadata"], "status")))
-        stored_quality = Symbol(String(read_attribute(file["metadata"], "scba_quality")))
+        stored_status = Symbol(String(read_attribute(metadata, "status")))
+        stored_quality = Symbol(String(read_attribute(metadata, "scba_quality")))
+        scba_status = Symbol(String(read_attribute(metadata, "scba_status")))
+        scba_converged = Bool(read_attribute(metadata, "scba_converged"))
+        for field in ("checkpoint_boundary", "poisson_convergence_streak")
+            haskey(attributes(metadata), field) ||
+                throw(ArgumentError("exact checkpoint lacks metadata/$field"))
+        end
+        boundary = String(read_attribute(metadata, "checkpoint_boundary"))
+        boundary == _checkpoint_boundary(stored_status) ||
+            throw(ArgumentError("checkpoint boundary differs from the solver status"))
+        poisson_streak = read_attribute(metadata, "poisson_convergence_streak")
+        poisson_streak isa Integer && !(poisson_streak isa Bool) &&
+            0 <= poisson_streak <= length(outer_history) ||
+            throw(ArgumentError("checkpoint Poisson streak is outside the completed history"))
+        resume_outer = boundary == "after_poisson_evaluation"
+        resume_scba = boundary == "before_scba_mix"
+        completed = boundary == "returned_solution"
+        resume_outer && isempty(outer_history) &&
+            throw(ArgumentError("outer checkpoint lacks completed outer history"))
         haskey(file, "algorithm_state") ||
             throw(ArgumentError("checkpoint lacks algorithm state"))
         algorithm = file["algorithm_state"]
@@ -476,9 +505,9 @@ function _load_production_restart(
             plus,
             minus,
             history,
-            false,
-            :restart,
-            stored_quality === :strictly_converged ? :unresolved : stored_quality,
+            !resume_scba && scba_converged,
+            resume_scba ? :restart : scba_status,
+            resume_scba && stored_quality === :strictly_converged ? :unresolved : stored_quality,
             contract,
             mixer,
         )
@@ -488,7 +517,7 @@ function _load_production_restart(
         all(isfinite, Uᴴ) ||
             throw(ArgumentError("restart Hartree field contains non-finite values"))
         metadata=file["metadata"]
-        for name in ("warnings_json", "adaptation_checkpoint_json")
+        for name in ("warnings_json", "adaptation_checkpoint_json", "acceptance_measurement_context_json")
             haskey(metadata, name) ||
                 throw(ArgumentError("native v4 recovery requires metadata/$name"))
         end
@@ -503,6 +532,21 @@ function _load_production_restart(
             String(read(metadata["adaptation_checkpoint_json"]));
             dicttype = Dict{String,Any},
         )
+        measurement_context = YAML.load(
+            String(read(metadata["acceptance_measurement_context_json"]));
+            dicttype = Dict{String,Any},
+        )
+        measurement_context isa Dict{String,Any} ||
+            throw(ArgumentError("checkpoint acceptance measurement context must be a mapping"))
+        metric_names = Symbol.(read(convergence["metric_names"]))
+        metric_values = Float64.(read(convergence["metric_values"]))
+        length(metric_names) == length(metric_values) == length(unique(metric_names)) ||
+            throw(ArgumentError("checkpoint final report metrics are inconsistent"))
+        report = ConvergenceReport(
+            Bool(read_attribute(convergence, "report_passed")),
+            Dict(zip(metric_names, metric_values)),
+            String.(read(convergence["report_messages"])),
+        )
         return (;
             Uᴴ,
             scba,
@@ -510,11 +554,13 @@ function _load_production_restart(
             warnings,
             adaptation,
             status = stored_status,
-            original_scba_status = Symbol(String(read_attribute(metadata, "scba_status"))),
-            original_scba_converged = Bool(read_attribute(metadata, "scba_converged")),
-            original_scba_quality = stored_quality,
-            resume_scba = !(stored_status in (:running, :snapshot)),
-            completed = stored_status in (:converged, :approximate),
+            resume_scba,
+            resume_outer,
+            poisson_streak = Int(poisson_streak),
+            completed,
+            converged = Bool(read_attribute(metadata, "converged")),
+            report,
+            measurement_context,
         )
     end
 end
@@ -546,12 +592,14 @@ end
 
 Загружает полное состояние функций Грина и самоэнергий для точного возобновления.
 Передайте заново собранную задачу `problem`. Загрузка проверяет размеры массивов,
-имена механизмов, полноту численного контракта и сохранённую историю. Если заданы
+имена механизмов, идентичность Core, численный контракт и сохранённую историю. Если заданы
 `algorithms` или `solver_options`, сохранённые значения должны совпасть с ними.
 Возобновление на той же стадии линейного смешивания сохраняет логический счётчик
 итераций и продолжает расчёт в пределах оставшегося лимита. Для смешивания
 Андерсона сохраняются состояние и история невязок на принятой границе итерации.
-Следующий шаг использует восстановленную историю.
+Следующий шаг использует восстановленную историю. На внешней границе Core
+восстанавливает счётчик успешных проходов и применяет смешанный образ Хартри
+только перед следующим циклом.
 
 При несовместимости метаданных `incompatible=:error` (значение по умолчанию)
 вызывает `ArgumentError`. Режим `:ignore` сообщает о несовместимости и возвращает

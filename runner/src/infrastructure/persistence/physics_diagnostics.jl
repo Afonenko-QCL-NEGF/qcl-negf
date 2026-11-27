@@ -64,6 +64,7 @@ function _write_psd_history!(
     parent,
     rows;
     problem = nothing,
+    grid = problem === nothing ? nothing : SolverHistoryGrid(problem),
     sequences = collect(eachindex(rows)),
 )
     table=create_group(parent, "psd_history")
@@ -97,18 +98,17 @@ function _write_psd_history!(
             description = "Measured PSD witness $(field)",
         )
     end
-    if problem!==nothing
+    if grid !== nothing
         for (name, field, coordinates) in (
             (
                 "energy_eV",
                 :energy_index,
-                problem.grids.ε .* problem.scales.E₀_eV .+
-                _electronvolts(problem.physical.E_ref),
+                grid.energy_eV,
             ),
             (
                 "momentum_per_nm",
                 :momentum_index,
-                problem.grids.κ ./ problem.scales.L₀_m .* 1e-9,
+                grid.momentum_per_nm,
             ),
         )
             table[name]=Float64[
@@ -121,7 +121,7 @@ function _write_psd_history!(
         haskey(table, name) || (table[name]=fill(NaN, length(rows)))
     end
     records=[
-        _witness_record(sequences[index], rows[index].ν, rows[index].witness; problem) for
+        _witness_record(sequences[index], rows[index].ν, rows[index].witness; grid) for
         index in _selected_witness_indices(rows)
     ]
     _write_packed_witness_records!(table, records)

@@ -10,12 +10,15 @@ from pathlib import Path
 
 import numpy as np
 
+from .commits import decode_json
+from .native import validate_operator_diagnostics
 from .presentation import committed_generation, inside
 
 
 def read_cell_spectrum(artifact_root: Path) -> dict:
     generation, commit, _ = committed_generation(artifact_root)
-    if commit.get("terminal_status") != "completed":
+    status = commit["scientific_status"]
+    if status["process"] != "completed":
         raise ValueError("the spectrum requires a completed diagnostic process")
     records = [
         item for item in commit["artifacts"]
@@ -28,11 +31,10 @@ def read_cell_spectrum(artifact_root: Path) -> dict:
     content = inside(generation, record["path"]).read_bytes()
     if len(content) != record["bytes"] or hashlib.sha256(content).hexdigest() != record["sha256"]:
         raise ValueError("cell spectrum artifact does not match its commit")
-    payload = json.loads(content)
-    if (payload.get("schema") != record["schema"]
-            or payload.get("contract_set") != commit["contract_set"]
-            or payload.get("operation") != "structure_spectrum"):
+    payload = decode_json(content, "operator diagnostics")
+    if payload.get("operation") != "structure_spectrum":
         raise ValueError("expected structure_spectrum diagnostic")
+    checks = validate_operator_diagnostics(payload, status)
     identity = commit["identity"]
     fingerprint = identity.get("plan_fingerprint")
     if not isinstance(fingerprint, str) or re.fullmatch(r"[a-f0-9]{64}", fingerprint) is None:
@@ -40,23 +42,20 @@ def read_cell_spectrum(artifact_root: Path) -> dict:
     if any(not isinstance(identity.get(key), str) or not identity[key]
            for key in ("point_id", "execution_id")):
         raise ValueError("cell spectrum must identify its execution and point")
-    checks = payload["checks"]
-    if not checks or any(not isinstance(row, dict) or type(row.get("passed")) is not bool
-                         or not isinstance(row.get("name"), str) for row in checks):
-        raise ValueError("operator diagnostics must declare every check verdict")
-    if len({row["name"] for row in checks}) != len(checks):
-        raise ValueError("operator checks must have unique names")
-    spectra = [row["cell_spectrum"] for row in checks if "cell_spectrum" in row]
+    spectra = [row["cell_spectrum"] for row in checks.values() if "cell_spectrum" in row]
     if len(spectra) != 1:
         raise ValueError("one named cell_spectrum output is required")
-    failed = sorted(row["name"] for row in checks if not row["passed"])
+    _weighted_basis(spectra[0])
+    failed = sorted(name for name, row in checks.items() if not row["passed"])
     return {
         "plan_fingerprint": fingerprint,
         "execution_id": identity["execution_id"],
         "point_id": identity["point_id"],
         "result_sha256": record["sha256"],
         "spectrum": spectra[0],
-        "operator_verdict": "failed" if failed else "passed",
+        "operator_verdict": status["operator"],
+        "scientific_status": status,
+        "checks": checks,
         "failed_checks": failed,
     }
 

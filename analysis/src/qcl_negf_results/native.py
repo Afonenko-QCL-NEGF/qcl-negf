@@ -6,6 +6,7 @@ import itertools
 from typing import Any
 
 from qcl_negf_contracts.artifacts import ARTIFACT_SCHEMA_CONTRACTS, CONTRACT_SET, NATIVE_SCHEMA_VERSION
+from qcl_negf_contracts.messages import decode, point_scientific_status
 
 
 def dataset_blocks(dataset: Any, maximum_bytes: int = 1024 * 1024) -> Iterator[tuple[slice, ...]]:
@@ -171,8 +172,45 @@ def _scba_count(parent: Any) -> int:
     raise ValueError("native SCBA history has no row count")
 
 
+def read_native_scientific_status(metadata: Any) -> dict[str, str]:
+    import h5py
+    name = "scientific_status_json"
+    if not isinstance(metadata.get(name, getlink=True), h5py.HardLink):
+        raise ValueError("native analysis requires metadata/scientific_status_json")
+    dataset = metadata[name]
+    if not isinstance(dataset, h5py.Dataset) or dataset.shape != () or h5py.check_string_dtype(dataset.dtype) is None:
+        raise ValueError("native scientific status must be one UTF-8 JSON object")
+    payload = dataset[()]
+    if isinstance(payload, str):
+        payload = payload.encode("utf-8")
+    return point_scientific_status({"scientific_status": decode(payload, maximum=4096)})
+
+
+def validate_operator_diagnostics(payload: dict[str, Any], status: dict[str, str]) -> dict[str, dict]:
+    if (payload.get("schema") != "qcl-negf-operator-diagnostics-v4"
+            or payload.get("schema_version") != NATIVE_SCHEMA_VERSION
+            or payload.get("contract_set") != CONTRACT_SET):
+        raise ValueError("unsupported operator diagnostic native format")
+    checks = payload.get("checks")
+    if (not isinstance(checks, list) or not checks
+            or any(not isinstance(row, dict) or type(row.get("passed")) is not bool
+                   or not isinstance(row.get("name"), str) or not row["name"] for row in checks)):
+        raise ValueError("operator diagnostics require named Boolean check verdicts")
+    by_name = {row["name"]: row for row in checks}
+    if len(by_name) != len(checks):
+        raise ValueError("operator checks must have unique names")
+    verdict = "passed" if all(row["passed"] for row in checks) else "failed"
+    if status["process"] != "completed" or status["operator"] != verdict:
+        raise ValueError("operator diagnostic verdict differs from commit")
+    if any(status[key] != "unknown" for key in
+           ("iterative_convergence", "physical_candidate", "discretization", "campaign_verdict")):
+        raise ValueError("operator diagnostic cannot attest a stationary or campaign verdict")
+    return by_name
+
+
 def validate_native_handle(handle: Any, role: str | None = None,
-                           declared_schema: str | None = None) -> str:
+                           declared_schema: str | None = None, *,
+                           scientific_status: dict[str, str] | None = None) -> str:
     """Accept only the current format; no legacy layout, version or marker fallback."""
     import h5py
     if "metadata" not in handle or not isinstance(handle["metadata"], h5py.Group):
@@ -188,6 +226,10 @@ def validate_native_handle(handle: Any, role: str | None = None,
         raise ValueError("native schema does not match its declared scientific role")
     if declared_schema is not None and schema != declared_schema:
         raise ValueError("native schema differs from the committed artifact schema")
+    if schema == "qcl-negf-physics-analysis-v4":
+        saved_status = read_native_scientific_status(metadata)
+        if scientific_status is not None and saved_status != scientific_status:
+            raise ValueError("analysis payload scientific status differs from commit")
     parents = {HISTORY_SCHEMA: "", "qcl-negf-physics-analysis-v4": "diagnostics",
                "qcl-negf-checkpoint-v4": "convergence", "qcl-negf-physics-v4": "convergence"}
     if schema in parents:

@@ -66,6 +66,83 @@ end
 """Хранит научные данные на расчётной сетке и публикует неизменяемые артефакты."""
 const POINT_COMMIT_SCHEMA = "qcl-negf.artifact-commit.v2"
 
+const _POINT_PROCESS_STATES = (
+    "running", "saving", "completed", "completed_with_warnings",
+    "failed", "skipped", "cancelled", "paused",
+)
+const _POINT_SCIENCE_FIELDS = (
+    "iterative_convergence", "physical_candidate", "discretization", "operator",
+)
+
+function _point_scientific_status(process; assessment = nothing, operator = "unknown")
+    iterative = "unknown"
+    physical = "unknown"
+    discretization = "unknown"
+    if assessment !== nothing
+        metrics = values(assessment["metrics"])
+        failures(category) = any(
+            row -> row["category"] == category && row["status"] in ("fail", "error"),
+            metrics,
+        )
+        complete(category) =
+            any(row -> row["category"] == category, metrics) &&
+            all(
+                row -> row["category"] != category || row["status"] != "not_measured",
+                metrics,
+            )
+        iterative = if assessment["iterative_converged"]
+            "passed"
+        elseif failures("nonlinear_fixed_point") || complete("nonlinear_fixed_point")
+            "failed"
+        else
+            "unknown"
+        end
+        physical = if assessment["stationary_candidate_accepted"]
+            "passed"
+        elseif iterative == "failed" || failures("physical_and_algebraic") ||
+               (iterative == "passed" && complete("physical_and_algebraic"))
+            "failed"
+        else
+            "unknown"
+        end
+        discretization = get(
+            Dict("pass"=>"passed", "fail"=>"failed"),
+            assessment["discretization_verified"],
+            "unknown",
+        )
+    end
+    return Dict(
+        "process"=>String(process),
+        "iterative_convergence"=>iterative,
+        "physical_candidate"=>physical,
+        "discretization"=>discretization,
+        "operator"=>operator,
+        "campaign_verdict"=>"unknown",
+    )
+end
+
+function _validate_point_scientific_status(status; process = nothing)
+    status isa AbstractDict &&
+    Set(keys(status)) == Set(("process", _POINT_SCIENCE_FIELDS..., "campaign_verdict")) ||
+        throw(ArgumentError("point scientific status must declare all six axes"))
+    status["process"] in _POINT_PROCESS_STATES &&
+    (process === nothing || status["process"] == String(process)) ||
+        throw(ArgumentError("invalid point process status"))
+    all(key -> status[key] in ("passed", "failed", "unknown"), _POINT_SCIENCE_FIELDS) &&
+    status["campaign_verdict"] in ("accepted", "rejected", "unknown") ||
+        throw(ArgumentError("invalid point scientific verdict"))
+    return status
+end
+
+function _solution_point_status(process, solution::NEGFSolution)
+    assessment = process == "completed" ? solution_scientific_assessment(solution) : nothing
+    return _point_scientific_status(process; assessment)
+end
+
+_point_process(solution::NEGFSolution) =
+    solution.status in (:running_scba, :running) ? "running" : "completed"
+
+
 function _resolved_configuration_envelope(configuration)
     return Dict(
         "schema"=>"qcl-negf-resolved-configuration-v3",
@@ -106,6 +183,11 @@ function _verify_recovery_reference(path, envelope)
     filesize(physical)==payload["bytes"] &&
     bytes2hex(open(sha256, physical))==payload["sha256"] ||
         throw(ArgumentError("recovery payload identity differs"))
+    h5open(physical, "r") do file
+        String(read_attribute(file["metadata"], "checkpoint_boundary")) ==
+        get(envelope, "restart_boundary", nothing) ||
+            throw(ArgumentError("recovery reference does not identify the checkpoint boundary"))
+    end
     return physical
 end
 
@@ -277,6 +359,7 @@ function save_analysis_physics(
     path::AbstractString,
     solution::NEGFSolution;
     identity = Dict{String,Any}(),
+    scientific_status = _solution_point_status(_point_process(solution), solution),
 )
     problem=solution.problem
     grids=problem.grids
@@ -308,8 +391,8 @@ function save_analysis_physics(
         attributes(metadata)["artifact_role"]="physics.analysis"
         attributes(metadata)["native_grid"]=true
         attributes(metadata)["quality"]=String(solution_quality(solution))
-        attributes(metadata)["scientific_accepted"]=solution.converged
         attributes(metadata)["status"]=String(solution.status)
+        metadata["scientific_status_json"]=sprint(_light_json, scientific_status)
         attributes(metadata)["current_convention"]="positive electron flow toward +z"
         attributes(metadata)["energy_reference"]="absolute physical energy = scaled energy * E0 + E_ref"
         metadata["identity_json"]=sprint(_light_json, identity)
@@ -516,9 +599,11 @@ function commit_point_artifacts(
     configuration = nothing,
     history_paths = String[],
     analysis::Bool = true,
-    terminal_status = String(solution.status),
+    terminal_status = _point_process(solution),
+    scientific_status = _solution_point_status(terminal_status, solution),
     checkpoint_metadata = Dict{String,Any}(),
 )
+    _validate_point_scientific_status(scientific_status; process = terminal_status)
     checkpoint_started=time_ns()
     root=joinpath(directory, "artifacts")
     mkpath(root)
@@ -580,7 +665,7 @@ function commit_point_artifacts(
                     "payload"=>Dict(
                         key=>physical[key] for key in ("path", "sha256", "bytes")
                     ),
-                    "restart_boundary"=>"accepted Green/selfenergy evaluation before next mixing step",
+                    "restart_boundary"=>_checkpoint_boundary(solution.status),
                 ),
             )
         end
@@ -595,7 +680,7 @@ function commit_point_artifacts(
         push!(artifacts, recovery)
         if analysis
             path=joinpath(stage, "analysis.h5")
-            save_analysis_physics(path, solution; identity)
+            save_analysis_physics(path, solution; identity, scientific_status)
             push!(
                 artifacts,
                 _artifact_record(
@@ -606,9 +691,11 @@ function commit_point_artifacts(
                 ),
             )
         end
+        history_boundary = nothing
         if !isempty(history_paths)
             destination=joinpath(stage, "history.h5")
             consolidate_scientific_history(destination, history_paths)
+            history_boundary = h5open(_history_boundary, destination, "r")
             push!(
                 artifacts,
                 _artifact_record(
@@ -658,8 +745,8 @@ function commit_point_artifacts(
             "physics_ready"=>true,
             "checkpoint_ready"=>true,
             "presentation_ready"=>false,
-            "terminal_status"=>terminal_status,
-            "scientific_accepted"=>solution.converged,
+            "scientific_status"=>scientific_status,
+            "history_boundary"=>history_boundary,
             "quality"=>String(solution_quality(solution)),
             "artifacts"=>artifacts,
         )
@@ -739,7 +826,11 @@ function verify_point_artifacts(commit_path::AbstractString)
         throw(ArgumentError("unknown result commit schema"))
     get(commit, "contract_set", nothing)==_RESULT_CONTRACT_SET ||
         throw(ArgumentError("unsupported result contract set"))
+    haskey(commit, "scientific_accepted") &&
+        throw(ArgumentError("obsolete point scientific acceptance field"))
+    scientific_status = _validate_point_scientific_status(get(commit, "scientific_status", nothing))
     root=dirname(abspath(commit_path))
+    history_boundary = nothing
     for artifact in commit["artifacts"]
         schema=String(artifact["schema"])
         expected_role=schema=="qcl-negf-recovery-reference-v1" ? "recovery" :
@@ -760,9 +851,10 @@ function verify_point_artifacts(commit_path::AbstractString)
         relative=String(artifact["path"])
         isabspath(relative) && throw(ArgumentError("absolute artifact path"))
         path=abspath(joinpath(root, relative))
-        if relpath(path, root)==".." || startswith(relpath(path, root), "../")
+        if first(splitpath(relpath(path, root))) == ".."
             throw(ArgumentError("artifact escapes commit root"))
         end
+        islink(path) && throw(ArgumentError("point artifact cannot be a symbolic link"))
         filesize(path)==artifact["bytes"] ||
             throw(ArgumentError("artifact byte count differs"))
         bytes2hex(open(sha256, path))==artifact["sha256"] ||
@@ -775,8 +867,16 @@ function verify_point_artifacts(commit_path::AbstractString)
                     _require_native_scba_tables(file["convergence"])
                 elseif schema=="qcl-negf-physics-analysis-v4"
                     _require_native_scba_tables(file["diagnostics"])
+                    haskey(file, "metadata/scientific_status_json") ||
+                        throw(ArgumentError("analysis payload lacks scientific status"))
+                    saved_status=YAML.load(read(file["metadata/scientific_status_json"]))
+                    saved_status == scientific_status ||
+                        throw(ArgumentError("analysis payload scientific status differs from commit"))
                 elseif schema=="qcl-negf-scientific-history-v4"
                     _require_native_scba_tables(file)
+                    history_boundary === nothing ||
+                        throw(ArgumentError("point commit declares multiple history artifacts"))
+                    history_boundary = _history_boundary(file)
                 end
             end
         elseif artifact["media_type"]=="application/json"
@@ -791,10 +891,34 @@ function verify_point_artifacts(commit_path::AbstractString)
                 get(payload, "schema", nothing)=="qcl-negf-operator-diagnostics-v4" &&
                 get(payload, "schema_version", nothing)==_CHECKPOINT_SCHEMA_VERSION ||
                     throw(ArgumentError("unsupported operator diagnostic native format"))
+                verdict = _operator_verdict(get(payload, "checks", nothing))
+                scientific_status == _point_scientific_status(:completed; operator = verdict) ||
+                    throw(ArgumentError("operator diagnostic scientific status differs from commit"))
             end
         end
     end
+    declared_history = get(commit, "history_boundary", nothing)
+    if declared_history !== nothing
+        declared_history isa AbstractDict &&
+        all(value -> value isa Integer && !(value isa Bool) && value >= 0, values(declared_history)) ||
+            throw(ArgumentError("invalid point commit history boundary"))
+    end
+    history_boundary == declared_history ||
+        throw(ArgumentError("point commit history boundary differs from its stored history"))
     return commit
+end
+
+function _operator_verdict(checks)
+    checks isa AbstractVector && !isempty(checks) &&
+    all(
+        row -> row isa AbstractDict && get(row, "passed", nothing) isa Bool &&
+               get(row, "name", nothing) isa AbstractString && !isempty(row["name"]),
+        checks,
+    ) ||
+        throw(ArgumentError("operator result requires named Boolean check verdicts"))
+    allunique(row["name"] for row in checks) ||
+        throw(ArgumentError("operator checks must have unique names"))
+    return all(row -> row["passed"], checks) ? "passed" : "failed"
 end
 
 function commit_operator_artifacts(
@@ -802,8 +926,10 @@ function commit_operator_artifacts(
     checks;
     identity,
     operation,
-    accepted,
 )
+    scientific_status = _point_scientific_status(
+        :completed; operator = _operator_verdict(checks),
+    )
     root=joinpath(directory, "artifacts")
     mkpath(root)
     final=joinpath(root, "generation-000001")
@@ -837,9 +963,8 @@ function commit_operator_artifacts(
             "physics_ready"=>true,
             "checkpoint_ready"=>false,
             "presentation_ready"=>false,
-            "terminal_status"=>"completed",
-            "scientific_accepted"=>accepted,
-            "quality"=>accepted ? "strict" : "unconverged",
+            "scientific_status"=>scientific_status,
+            "quality"=>"not_evaluated",
             "artifacts"=>[record],
         )
         _observability_atomic_text(joinpath(stage, "commit.json")) do io

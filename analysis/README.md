@@ -45,7 +45,15 @@ Telemetry identifies CPU intervals by `allocation_id` (for example, a Slurm job/
 
 Every archive part is at most 200,000,000 decimal bytes. Receipts describe all parts and hashes. The receiving command verifies the complete part set before restoring objects. Archive metadata and paths are checked; incomplete, altered or unsupported input fails explicitly. Disk usage includes a temporary captured snapshot in addition to the published archive.
 
-Only `qcl-negf.results.v1` / native HDF5 `4.0` is accepted. Missing declarations are errors. Snapshot consistency, process completion and scientific acceptance are separate fields: none is inferred from the others.
+Scientific series v4 and committed point records declare `scientific_status`
+with six independent fields for the process, iterative convergence, the
+stationary physical candidate, discretization, the operator check and the
+campaign verdict. Each unmeasured scientific field is recorded as `unknown`.
+A valid artifact can contain a failed operator check or an unresolved campaign
+verdict. The analysis layer preserves both outcomes in its views and exports.
+The nullable `converged` field mirrors the solver's joint convergence and
+final validation flag. The iterative field reports the iteration assessment.
+Payloads use the `qcl-negf.results.v1` contract set and native HDF5 `4.0`.
 
 ## Modules
 

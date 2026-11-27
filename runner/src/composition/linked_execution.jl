@@ -59,23 +59,6 @@ function _linked_current_state(checkpoint, projected)
     )
 end
 
-function _linked_package_identity(package::Module)
-    root = pkgdir(package)
-    directory = joinpath(root,"src")
-    context = SHA.SHA2_256_CTX()
-    for (path,_,files) in walkdir(directory), file in sort(files)
-        endswith(file,".jl") || continue
-        full_path = joinpath(path,file)
-        label = joinpath(relpath(path,root),file)
-        SHA.update!(context,codeunits(replace(label,'\\'=>'/') * "\0" * _linked_file_digest(full_path) * "\n"))
-    end
-    return Dict(
-        "version"=>string(Base.pkgversion(package)),
-        "uuid"=>string(Base.PkgId(package).uuid),
-        "source_tree_sha256"=>bytes2hex(SHA.digest!(context)),
-    )
-end
-
 function _execute_linked_run(directory, options)
     start = time_ns()
     former_blas_threads = BLAS.get_num_threads()
@@ -84,8 +67,8 @@ function _execute_linked_run(directory, options)
         event = Dict{String,Any}(
             "schema"=>"qcl-negf-linked-run/v1",
             "input"=>Dict{String,Any}("directory"=>abspath(directory)),
-            "core"=>_linked_package_identity(QCLNEGF),
-            "runner"=>_linked_package_identity(@__MODULE__),
+            "core"=>_package_source_identity(QCLNEGF),
+            "runner"=>_package_source_identity(@__MODULE__),
             "environment"=>_runtime_toolchain_provenance(),
             "mode"=>Dict(
                 "projector"=>options.projector,"solve"=>options.solver,"collision_measure"=>options.measure,

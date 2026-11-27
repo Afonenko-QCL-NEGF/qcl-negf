@@ -89,6 +89,14 @@ def test_native_julia_continues_during_scientific_snapshot(tmp_path: Path) -> No
                 with h5py.File(io.BytesIO(archive.extractfile(analyses[0]["object"]).read()), "r") as native_analysis:
                     assert _text(native_analysis["metadata"].attrs["schema_version"]) == "4.0"
                     assert validate_native_handle(native_analysis, "physics.analysis") == "qcl-negf-physics-analysis-v4"
+                    status = json.loads(native_analysis["metadata/scientific_status_json"][()])
+                    owner = next(row for row in manifest["records"] if analyses[0] in row["included"])
+                    assert owner["scientific_status"] == status
+                    assert status == {
+                        "process": "running", "iterative_convergence": "unknown",
+                        "physical_candidate": "unknown", "discretization": "unknown",
+                        "operator": "unknown", "campaign_verdict": "unknown",
+                    }
                     certification = json.loads(native_analysis["metadata/physical_certification_json"][()])
                     assert certification["quantitative_physics_certified"] is False
                     assert "model_capabilities_json" in native_analysis["metadata"]

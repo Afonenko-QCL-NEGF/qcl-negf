@@ -18,10 +18,19 @@ function solve_production(
     sink = if checkpoint_path===nothing
         checkpoint_sink
     else
-        function (solution)
-            checkpoint_sink===nothing || checkpoint_sink(solution)
+        function (solution, analysis)
+            checkpoint_sink===nothing || checkpoint_sink(solution, analysis)
             _atomic_checkpoint(checkpoint_path, solution)
         end
     end
     return QCLNEGF.solve_production(problem; checkpoint_sink = sink, kwargs...)
+end
+
+"""Добавить метаданные записи, сохранив заимствованные численные массивы только для чтения."""
+function _with_checkpoint_metadata(solution::NEGFSolution; metadata...)
+    return NEGFSolution(
+        solution.problem, solution.options, solution.Uᴴ, solution.n, solution.scba,
+        solution.outer_history, merge(solution.observables, Dict{Symbol,Any}(metadata)),
+        solution.report, solution.converged, solution.status,
+    )
 end

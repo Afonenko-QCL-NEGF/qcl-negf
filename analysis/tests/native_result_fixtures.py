@@ -4,6 +4,8 @@ This is test support, never a numerical producer or data migration adapter.
 """
 from __future__ import annotations
 
+import json
+
 import h5py
 import numpy as np
 
@@ -51,10 +53,12 @@ def diagnostic_tables(parent, count=0, sequence=None):
     empty_packed(psd)
 
 
-def declare_native(handle, schema, role, *, scba_rows=0):
+def declare_native(handle, schema, role, *, scba_rows=0, scientific_status=None):
     metadata = handle.require_group("metadata")
     metadata.attrs.update(schema=schema, schema_version="4.0", artifact_role=role,
                           contract_set=CONTRACT_SET)
+    if schema == "qcl-negf-physics-analysis-v4":
+        metadata["scientific_status_json"] = json.dumps(scientific_status or point_status("running"))
     containers = {"qcl-negf-scientific-history-v4": "", "qcl-negf-physics-analysis-v4": "diagnostics",
                   "qcl-negf-checkpoint-v4": "convergence", "qcl-negf-physics-v4": "convergence"}
     if schema in containers:
@@ -70,3 +74,7 @@ def declare_native(handle, schema, role, *, scba_rows=0):
         sequence = scba["sequence"][()] if isinstance(scba, h5py.Group) and "sequence" in scba else None
         diagnostic_tables(parent, scba_rows, sequence)
     return metadata
+
+def point_status(process, **checks):
+    return {"process": process, "iterative_convergence": "unknown", "physical_candidate": "unknown",
+            "discretization": "unknown", "operator": "unknown", "campaign_verdict": "unknown", **checks}

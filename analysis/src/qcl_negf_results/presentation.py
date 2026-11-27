@@ -9,24 +9,9 @@ from typing import Any
 
 from qcl_negf_contracts.artifacts import require_contract_set, validate_commit
 
+from .commits import decode_json
+
 SCHEMA = "qcl-negf.presentation-index.v3"
-
-
-def accepted_result(record: dict[str, Any]) -> bool:
-    """Project the native point contract; acceptance is never inferred from readiness.
-
-    Native Julia result rows publish ``converged`` and ``quality``. The explicit
-    acceptance flag belongs to artifact commits and is optional on those rows.
-    An explicit rejection must nevertheless remain a rejection.
-    """
-    return (record.get("status") == "completed" and record.get("quality") == "strict"
-            and record.get("converged") is True
-            and record.get("scientific_accepted", True) is True)
-
-
-def acceptance_kind(record: dict[str, Any]) -> str:
-    """Analytical operator checks are distinct from stationary reference evidence."""
-    return "operator" if "operator_checks_passed" in (record.get("observables") or {}) or "operator_checks" in (record.get("data") or {}) else "stationary"
 
 
 def inside(root: Path, relative: str) -> Path:
@@ -81,14 +66,13 @@ def committed_generation(artifact_root: Path) -> tuple[Path, dict[str, Any], str
     if not isinstance(relative, str):
         raise ValueError("artifact pointer requires explicit commit_path")
     path = inside(artifact_root, relative)
-    commit = read_json(path)
-    if commit.get("schema") != "qcl-negf.artifact-commit.v2":
-        raise ValueError("unsupported artifact commit schema")
-    validate_commit(commit)
-    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    payload = path.read_bytes()
+    digest = hashlib.sha256(payload).hexdigest()
     expected = pointer.get("sha256")
     if not isinstance(expected, str) or len(expected) != 64 or digest != expected:
         raise ValueError("artifact commit hash differs from current pointer")
+    commit = decode_json(payload, "point commit")
+    validate_commit(commit)
     return path.parent, commit, digest
 
 

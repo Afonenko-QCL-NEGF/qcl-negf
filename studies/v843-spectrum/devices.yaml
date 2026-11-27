@@ -1,0 +1,7 @@
+schema: qcl-negf-device-catalog-v1
+devices:
+  dupont-v843:
+    - path: ../../runner/examples/config/reference-2019-70k.yaml
+      sha256: 0faeedd211f3292c9bc1278685a199540cf410dde993fd48f6147892e834c831
+    - path: dupont-v843.yaml
+      sha256: b38eead7c664ac861e483fa300512caa7a71f4028478cb0f1b5614a24a629725

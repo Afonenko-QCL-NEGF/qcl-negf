@@ -1,8 +1,14 @@
 from copy import deepcopy
+import shutil
 
 import pytest
 
-from qcl_negf_results.spectrum import compare_cell_spectra
+from qcl_negf_contracts.artifacts import COMMIT_SCHEMA, CONTRACT_SET
+from qcl_negf_results.commits import artifact_row, json_bytes, publish_pointer
+from qcl_negf_results.export import export_snapshot
+from qcl_negf_results.render import materialize
+from qcl_negf_results.spectrum import compare_cell_spectra, read_cell_spectrum
+from native_result_fixtures import point_status
 
 
 def record():
@@ -59,3 +65,61 @@ def test_comparison_rejects_mismatched_axes_and_measures(key, changed):
     second["spectrum"][key] = changed
     with pytest.raises(ValueError, match="share coordinates, measure and rank"):
         compare(first, second)
+
+
+def test_named_cell_result_requires_agreement_with_hash_bound_operator_verdict(tmp_path):
+    generation = tmp_path / "generation-000001"
+    generation.mkdir()
+    cell = record()
+    diagnostic = generation / "operator_checks.json"
+    schema = "qcl-negf-operator-diagnostics-v4"
+    checks = [
+        {"name": "central_spectrum", "passed": True, "cell_spectrum": cell["spectrum"]},
+        {"name": "structure_translation", "passed": False, "value": 0.162},
+    ]
+    diagnostic.write_bytes(json_bytes({
+        "schema": schema, "schema_version": "4.0", "contract_set": CONTRACT_SET,
+        "operation": "structure_spectrum", "checks": checks,
+    }))
+    commit = {
+        "schema": COMMIT_SCHEMA, "contract_set": CONTRACT_SET, "generation": 1,
+        "identity": {key: cell[key] for key in ("plan_fingerprint", "execution_id", "point_id")},
+        "scientific_status": point_status("completed", operator="failed"),
+        "artifacts": [artifact_row(diagnostic, relative=diagnostic.name, role="science.comparison",
+                                   media_type="application/json", schema=schema)],
+    }
+
+    def publish():
+        payload = json_bytes(commit)
+        (generation / "commit.json").write_bytes(payload)
+        publish_pointer(tmp_path / "current.json", "generation-000001/commit.json", payload, 1)
+
+    publish()
+    result = read_cell_spectrum(tmp_path)
+    assert result["checks"]["structure_translation"]["value"] == 0.162
+    assert result["failed_checks"] == ["structure_translation"]
+    assert result["scientific_status"]["process"] == "completed"
+    assert result["scientific_status"]["operator"] == "failed"
+    assert result["scientific_status"]["campaign_verdict"] == "unknown"
+
+    commit["scientific_status"]["operator"] = "passed"
+    publish()
+    with pytest.raises(ValueError, match="verdict differs from commit"):
+        read_cell_spectrum(tmp_path)
+    with pytest.raises(ValueError, match="verdict differs from commit"):
+        materialize(generation, commit, "fixture", tmp_path / "figures")
+
+    run = tmp_path / "run"
+    shutil.copytree(tmp_path / "generation-000001", run / "artifacts/generation-000001")
+    shutil.copyfile(tmp_path / "current.json", run / "artifacts/current.json")
+    with pytest.raises(ValueError, match="verdict differs from commit"):
+        export_snapshot(run, tmp_path / "exports")
+
+    commit["scientific_status"] = point_status("completed", operator="failed", campaign_verdict="accepted")
+    publish()
+    with pytest.raises(ValueError, match="cannot attest a stationary or campaign verdict"):
+        read_cell_spectrum(tmp_path)
+
+    diagnostic.write_bytes(diagnostic.read_bytes() + bytes([10]))
+    with pytest.raises(ValueError, match="artifact does not match its commit"):
+        read_cell_spectrum(tmp_path)

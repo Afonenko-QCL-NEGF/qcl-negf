@@ -61,11 +61,34 @@ end
         write(pause, "{}")
         paused = execute_scientific_plan(plan, root)
         @test paused["status"] == "paused"
+        paused["status"] == "paused" ||
+            error("pause fixture returned ", paused["status"], ": ", repr(paused["points"]))
         saved = only(paused["points"])
         @test saved["data"]["resume_kind"] == "checkpoint"
         paused_commit = Runner.verify_point_artifacts(joinpath(root, saved["data"]["result_commit"]))
+        saved_path = joinpath(root, saved["data"]["result_commit"])
+        mismatched = (; data = Dict("full_state" => "different-generation/physics.h5"))
+        @test_throws ArgumentError Runner.QCLScientificWorkflow._scientific_checkpoint_payload(
+            root, mismatched, saved_path, paused_commit,
+        )
         @test paused_commit["restart_coordinates"]["last_inner"] == 1
         @test paused_commit["analysis_coordinates"]["last_inner"] == 1
+        @test paused_commit["history_boundary"] == Dict("scba_sequence" => 1, "outer_sequence" => 0)
+        # A flush can become durable before the next checkpoint publishes.
+        # Reproduce that suffix in the original attempt and leave its bytes in place.
+        attempt_dir = joinpath(root, saved["data"]["artifact_root"])
+        original_index = YAML.load_file(joinpath(attempt_dir, "history", "index.json"))
+        orphan_recorder = Runner.ScientificHistoryRecorder(
+            attempt_dir, paused_commit["identity"], Ref(1), Ref(0),
+        )
+        orphan_recorder.segment = 1
+        orphan_recorder.published_scba = 1
+        append!(orphan_recorder.segments, original_index["segments"])
+        orphan_row = SCBAIteration(2, ntuple(_ -> -9e9, 16)..., nothing, nothing)
+        source_problem = Runner.build_configured_problem(config).problem
+        Runner.record_scientific_history!(orphan_recorder, :scba, 1, orphan_row, source_problem)
+        orphan = Runner.flush_scientific_history!(orphan_recorder)
+        orphan_hash = bytes2hex(open(sha256, orphan))
         rm(pause)
 
         plan_path = joinpath(directory, "plan.json")
@@ -100,7 +123,8 @@ end
         second = joinpath(artifacts, "generation-000002", "commit.json")
         second_commit = Runner.verify_point_artifacts(second)
         @test second_commit["restart_coordinates"]["last_inner"] == 4
-        @test second_commit["science_parent_commit"]["path"] == relpath(first, artifacts)
+        @test second_commit["science_parent_commit"]["path"] ==
+              replace(relpath(first, artifacts), '\\' => '/')
         @test second_commit["science_parent_commit"]["sha256"] == bytes2hex(open(sha256, first))
         @test !isfile(joinpath(dirname(second), "analysis.h5"))
 
@@ -116,9 +140,14 @@ end
         @test isequal(history, scba_history(joinpath(dirname(reference_path), "history.h5")))
         h5open(joinpath(dirname(terminal_path), "history.h5"), "r") do file
             @test read(file["physical_markers/available"]) == Int8[1, 0, 0, 0, 1]
+            sources = YAML.load(read(file["metadata/source_segments_json"]))
+            @test all(source -> source["sha256"] != orphan_hash, sources)
         end
+        @test bytes2hex(open(sha256, orphan)) == orphan_hash
         terminal = Runner.verify_point_artifacts(terminal_path)
-        @test !terminal["scientific_accepted"]
+        @test terminal["history_boundary"] == Dict("scba_sequence" => 5, "outer_sequence" => 0)
+        @test terminal["scientific_status"]["discretization"] ==
+              terminal["scientific_status"]["campaign_verdict"] == "unknown"
 
         memory_plan = recovery_plan(joinpath(directory, "memory-definition"); intermediate_checkpoints = false)
         memory_config = only(memory_plan.executions).configuration
