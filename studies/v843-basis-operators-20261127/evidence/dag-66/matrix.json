@@ -1,0 +1,170 @@
+{
+  "campaign": "v843-basis-operators-v1",
+  "revision": "72fcca8cb10e6867651ea22d7260dc2b50cc3b44",
+  "nodes": [
+    {
+      "node": "B7",
+      "direction": "B7",
+      "part": null,
+      "parents": [],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "B9",
+      "direction": "B9",
+      "part": null,
+      "parents": [],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "B11",
+      "direction": "B11",
+      "part": null,
+      "parents": [],
+      "os": "LINUX",
+      "cpus": 28,
+      "memory_mib": 16384
+    },
+    {
+      "node": "BLOCH144",
+      "direction": "BLOCH",
+      "part": "144",
+      "parents": [],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "BLOCH288",
+      "direction": "BLOCH",
+      "part": "288",
+      "parents": [],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "IMP17",
+      "direction": "IMP17",
+      "part": null,
+      "parents": [],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "IMP33",
+      "direction": "IMP33",
+      "part": null,
+      "parents": [],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "LO17",
+      "direction": "LO",
+      "part": "17",
+      "parents": [],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "LO33",
+      "direction": "LO",
+      "part": "33",
+      "parents": [],
+      "os": "LINUX",
+      "cpus": 28,
+      "memory_mib": 16384
+    },
+    {
+      "node": "SHIFT",
+      "direction": "SHIFT",
+      "part": null,
+      "parents": [],
+      "os": "LINUX",
+      "cpus": 9,
+      "memory_mib": 4096
+    },
+    {
+      "node": "SELECT",
+      "direction": "SELECT",
+      "part": null,
+      "parents": [
+        "B7",
+        "B9",
+        "B11",
+        "BLOCH144",
+        "BLOCH288"
+      ],
+      "os": "LINUX",
+      "cpus": 1,
+      "memory_mib": 4096
+    },
+    {
+      "node": "PILOT",
+      "direction": "PILOT",
+      "part": null,
+      "parents": [
+        "SELECT"
+      ],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "T17A32",
+      "direction": "T17A32",
+      "part": null,
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "T17A128",
+      "direction": "T17A128",
+      "part": null,
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "T33A32",
+      "direction": "T33A32",
+      "part": null,
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    },
+    {
+      "node": "T33A128",
+      "direction": "T33A128",
+      "part": null,
+      "parents": [
+        "SELECT",
+        "PILOT"
+      ],
+      "os": "WINDOWS",
+      "cpus": 30,
+      "memory_mib": 16384
+    }
+  ]
+}
