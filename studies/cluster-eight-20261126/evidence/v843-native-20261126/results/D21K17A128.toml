@@ -1,0 +1,50 @@
+alpha_sigma = 0.2
+angular_nodes = 128
+basis = "pzp"
+basis_periods = 3
+basis_states = 7
+blas_threads = 1
+channels = ["LO", "acoustic", "impurity", "IFR", "alloy"]
+cold_start = true
+completed_iterations = 0
+device_sha256 = "82372d9c9537343c4e17aa130f8298b96a07e14f81741f3951a50adf4d3cf145"
+driver_sha256 = "93d2870d553f122c1945a1aac885972c06a8e5721f594f210aa5750d54f3de8f"
+electron_electron_collisions = "none"
+embedding_periods = 4
+energy_max_meV = 1000.0
+energy_min_meV = -650.0
+energy_nodes = 239
+energy_trust_margin_meV = 390.0
+error = """nodal shift quadrature-adjoint defect=0.033167906340332426; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137891 exceeds 0.1\ntranslation=0.1622847595137891 exceeds 0.1\ntranslation_two_pairs=0.1622847595137891 exceeds 0.005"""
+field_kV_cm = 21.0
+hartree = "fixed U_H=0; no Poisson loop"
+ifr_correlation = "exponential"
+interpretation = "new native diagnostic; not equivalent to archived linked solver; finite iterations do not establish stationarity or grid convergence"
+julia_version = "1.13.4"
+k_max_nm_inverse = 0.6
+light = "dark"
+manifest_sha256 = "9604b6893c6675831ed7c594e5847ef1b392e3b643cabcc28436faf0aec21063"
+max_scba = 128
+memory_budget_GiB = 8.0
+method = "native production SCBA; finite-chain embedding; linear mixing; direct elastic retarded; paired convex occupation; product integration; nodal-linear energy shifts"
+qz_max_nm_inverse = 10.0
+qz_nodes = 161
+radial_nodes = 17
+schema = "qcl-v843-native-fixed-u-diagnostic-v1"
+screening = "density_temperature"
+seed_eta_meV = 0.5
+spatial_nodes = 144
+status = "failed"
+temperature_K = 50.0
+voltage_mV_per_period = 75.936
+workers = 4
+
+[core]
+source_tree_sha256 = "ab114fd74505ad03f0e4c79b19f5b3edc4bd5680cd9b2d7d5de304d139b21ef0"
+uuid = "25d1ffa8-5cfa-41e3-b02e-8fca5bf51027"
+version = "0.2.0"
+
+[runner]
+source_tree_sha256 = "4477e9fe53264fab7f668dc340a3a7d89d02acbc72f9ba93dc4764233ccd10f0"
+uuid = "5a147728-d76f-4a23-a474-c91379216907"
+version = "0.2.0"

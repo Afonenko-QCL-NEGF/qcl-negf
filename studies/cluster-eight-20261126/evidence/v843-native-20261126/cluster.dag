@@ -1,0 +1,19 @@
+# Independent native V843 trajectories. No parent input, checkpoints or replay.
+JOB D125K9 native.sub
+VARS D125K9 field="12.5" rings="9" angles="32"
+JOB D125K17 native.sub
+VARS D125K17 field="12.5" rings="17" angles="32"
+JOB D125K33 native.sub
+VARS D125K33 field="12.5" rings="33" angles="32"
+JOB D21K9 native-windows.sub
+VARS D21K9 field="21" rings="9" angles="32"
+JOB D21K17 native-windows.sub
+VARS D21K17 field="21" rings="17" angles="32"
+JOB D21K33 native-windows.sub
+VARS D21K33 field="21" rings="33" angles="32"
+JOB D21K17A128 native-windows.sub
+VARS D21K17A128 field="21" rings="17" angles="128"
+JOB D21K33A128 native-windows.sub
+VARS D21K33A128 field="21" rings="33" angles="128"
+NODE_STATUS_FILE nodes.status 60
+FINAL COLLECT collect.sub

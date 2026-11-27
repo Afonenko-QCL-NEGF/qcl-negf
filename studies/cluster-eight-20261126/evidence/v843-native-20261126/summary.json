@@ -1,0 +1,209 @@
+{
+  "cross_difference": {
+    "status": "inconclusive",
+    "definition": "(J33-J17)128 - (J33-J17)32"
+  },
+  "schema": "v843-collection-v1",
+  "dag_sha256": "a6de30b2af017253940e79e8f2797bb5f4b4bec7d2b2be4b78ebb0e31ade8716",
+  "cases": {
+    "D125K9": {
+      "parameters": {
+        "field_kV_cm": 12.5,
+        "radial_nodes": 9,
+        "angular_nodes": 32
+      },
+      "status": "failed",
+      "sha256": "0c683805811158341b53ecde4a2f2afc2bc28ac81bd64a78952b26b3f895e0b5",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.03287979746107182; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137896 exceeds 0.1\ntranslation=0.1622847595137896 exceeds 0.1\ntranslation_two_pairs=0.1622847595137896 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    },
+    "D125K17": {
+      "parameters": {
+        "field_kV_cm": 12.5,
+        "radial_nodes": 17,
+        "angular_nodes": 32
+      },
+      "status": "failed",
+      "sha256": "e66550ac7df9153b06d51a88b5543711ee4be30bd08ba700ec6b465f1e450c6a",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.03287979746107182; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137896 exceeds 0.1\ntranslation=0.1622847595137896 exceeds 0.1\ntranslation_two_pairs=0.1622847595137896 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    },
+    "D125K33": {
+      "parameters": {
+        "field_kV_cm": 12.5,
+        "radial_nodes": 33,
+        "angular_nodes": 32
+      },
+      "status": "failed",
+      "sha256": "099c565a05b86575297c44ad4c18439f368708973cf49783e9e03609808431ec",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.03287979746107182; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137896 exceeds 0.1\ntranslation=0.1622847595137896 exceeds 0.1\ntranslation_two_pairs=0.1622847595137896 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    },
+    "D21K9": {
+      "parameters": {
+        "field_kV_cm": 21.0,
+        "radial_nodes": 9,
+        "angular_nodes": 32
+      },
+      "status": "failed",
+      "sha256": "92d634418a91b19604efb80bc43ab0799abb7892c94c0ca734fb898add7102d4",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.033167906340332426; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137891 exceeds 0.1\ntranslation=0.1622847595137891 exceeds 0.1\ntranslation_two_pairs=0.1622847595137891 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    },
+    "D21K17": {
+      "parameters": {
+        "field_kV_cm": 21.0,
+        "radial_nodes": 17,
+        "angular_nodes": 32
+      },
+      "status": "failed",
+      "sha256": "6d08947d6fb9642fa218deb730d77ac89a559f4f26278e373d1961c2cb1c52a1",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.033167906340332426; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137891 exceeds 0.1\ntranslation=0.1622847595137891 exceeds 0.1\ntranslation_two_pairs=0.1622847595137891 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    },
+    "D21K33": {
+      "parameters": {
+        "field_kV_cm": 21.0,
+        "radial_nodes": 33,
+        "angular_nodes": 32
+      },
+      "status": "failed",
+      "sha256": "460812ca591c8b83749b65452bb46f2ed5e067610198ca87a357535484e6ed7c",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.033167906340332426; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137891 exceeds 0.1\ntranslation=0.1622847595137891 exceeds 0.1\ntranslation_two_pairs=0.1622847595137891 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    },
+    "D21K17A128": {
+      "parameters": {
+        "field_kV_cm": 21.0,
+        "radial_nodes": 17,
+        "angular_nodes": 128
+      },
+      "status": "failed",
+      "sha256": "e194ab391ddd55165bcafe16aef496e912898fbc8c979072dac93b130ed08a69",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.033167906340332426; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137891 exceeds 0.1\ntranslation=0.1622847595137891 exceeds 0.1\ntranslation_two_pairs=0.1622847595137891 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    },
+    "D21K33A128": {
+      "parameters": {
+        "field_kV_cm": 21.0,
+        "radial_nodes": 33,
+        "angular_nodes": 128
+      },
+      "status": "failed",
+      "sha256": "c82555881ef7dd0d401fcd9e2cb82d5688fe7ce9dbad97826329e97da95ae3c6",
+      "issues": [
+        "nodal shift quadrature-adjoint defect=0.033167906340332426; measured discretization error, assess collision and grid convergence\ntranslation_nearest=0.1622847595137891 exceeds 0.1\ntranslation=0.1622847595137891 exceeds 0.1\ntranslation_two_pairs=0.1622847595137891 exceeds 0.005"
+      ],
+      "native_status": "failed",
+      "scba_converged": null
+    }
+  },
+  "pairs": [
+    {
+      "kind": "radial",
+      "nodes": [
+        "D125K9",
+        "D125K17"
+      ],
+      "status": "inconclusive",
+      "reasons": [
+        "D125K9: failed",
+        "D125K17: failed"
+      ]
+    },
+    {
+      "kind": "radial",
+      "nodes": [
+        "D125K17",
+        "D125K33"
+      ],
+      "status": "inconclusive",
+      "reasons": [
+        "D125K17: failed",
+        "D125K33: failed"
+      ]
+    },
+    {
+      "kind": "radial",
+      "nodes": [
+        "D21K9",
+        "D21K17"
+      ],
+      "status": "inconclusive",
+      "reasons": [
+        "D21K9: failed",
+        "D21K17: failed"
+      ]
+    },
+    {
+      "kind": "radial",
+      "nodes": [
+        "D21K17",
+        "D21K33"
+      ],
+      "status": "inconclusive",
+      "reasons": [
+        "D21K17: failed",
+        "D21K33: failed"
+      ]
+    },
+    {
+      "kind": "radial",
+      "nodes": [
+        "D21K17A128",
+        "D21K33A128"
+      ],
+      "status": "inconclusive",
+      "reasons": [
+        "D21K17A128: failed",
+        "D21K33A128: failed"
+      ]
+    },
+    {
+      "kind": "angular",
+      "nodes": [
+        "D21K17",
+        "D21K17A128"
+      ],
+      "status": "inconclusive",
+      "reasons": [
+        "D21K17: failed",
+        "D21K17A128: failed"
+      ]
+    },
+    {
+      "kind": "angular",
+      "nodes": [
+        "D21K33",
+        "D21K33A128"
+      ],
+      "status": "inconclusive",
+      "reasons": [
+        "D21K33: failed",
+        "D21K33A128: failed"
+      ]
+    }
+  ],
+  "qualification": "Native SCBA checks alone do not establish full transport convergence; observed drifts are not error bounds."
+}

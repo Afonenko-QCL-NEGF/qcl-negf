@@ -1,0 +1,75 @@
+{
+  "source": "HTCondor 26.0.1 condor_history; worker addresses and names omitted",
+  "dagman": {
+    "job_id": "51.0",
+    "job_status": 4,
+    "exit_code": 0,
+    "dag_status": 2,
+    "nodes_total": 9,
+    "nodes_done": 1,
+    "nodes_failed": 8
+  },
+  "collector": {
+    "job_id": "60.0",
+    "job_status": 4,
+    "exit_code": 0
+  },
+  "arms": [
+    {
+      "job_id": "53.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D125K17",
+      "platform": "linux"
+    },
+    {
+      "job_id": "54.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D125K33",
+      "platform": "linux"
+    },
+    {
+      "job_id": "52.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D125K9",
+      "platform": "linux"
+    },
+    {
+      "job_id": "56.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D21K17",
+      "platform": "windows"
+    },
+    {
+      "job_id": "58.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D21K17A128",
+      "platform": "windows"
+    },
+    {
+      "job_id": "57.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D21K33",
+      "platform": "windows"
+    },
+    {
+      "job_id": "59.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D21K33A128",
+      "platform": "windows"
+    },
+    {
+      "job_id": "55.0",
+      "job_status": 4,
+      "exit_code": 1,
+      "arm": "D21K9",
+      "platform": "windows"
+    }
+  ]
+}
