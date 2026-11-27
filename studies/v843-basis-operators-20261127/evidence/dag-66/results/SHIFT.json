@@ -1,0 +1,3088 @@
+{
+  "E239_baseline_matches": [
+    true,
+    true
+  ],
+  "E239_field_LO_maxima": [
+    0.03287979746107183,
+    0.033167906340332426
+  ],
+  "central_gaussian_center_meV": 175.0,
+  "control_peak_height": 1.0,
+  "edge_gaussian_center_meV": 980.0,
+  "energy_max_meV": 1000.0,
+  "energy_min_meV": -650.0,
+  "error_norm": "Energy weights are trapezoidal widths in meV for both sampled and cell-average fields.",
+  "finite_volume_adjoint_pass": true,
+  "gaussian_sigma_meV": 20.0,
+  "interior_definition": "At least one energy spacing plus absolute shift from each window edge.",
+  "quadrature_reference": "Cell averages evaluated by independent composited eight-point Gauss-Legendre; node control uses exact point values; zero continuation.",
+  "status": "measured",
+  "task": "SHIFT",
+  "rows": [
+    {
+      "energy_nodes": 239,
+      "shift_meV": 36.7,
+      "shift_pair": "LO",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 38.13025210084038,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": -1.4302521008394251,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.148097687177724,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.210811210906005,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.49523958124368,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 1.4210854715202004e-14,
+              "exact_escaped_weight_meV": 9.947598300641403e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 6.394884621840902e-14,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.06383816547619366,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010722052568044874
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.06383816547619366,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010722052568044874
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.8674917502780914,
+              "exact_escaped_weight_meV": 1.7053025658242404e-13,
+              "field": "edge_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": -0.9894486868570382,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.05893619301133882,
+                "reference_weighted_l2": 5.6723535746730445,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010390077458233183
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.008482204060842668,
+                "reference_weighted_l2": 1.9797895312974791,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.004284396864793882
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.05832261191802033,
+                "reference_weighted_l2": 5.3156399885499175,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010971888999941563
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 38.13025210084038,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": -1.4302521008394251,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.148097687177724,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.210811210906005,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.49523958124368,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.1316282072803006e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": -7.105427357601002e-15,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.06383816547619428,
+                "reference_weighted_l2": 5.9539127486141705,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010722052568044975
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.06383816547619428,
+                "reference_weighted_l2": 5.9539127486141705,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010722052568044975
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 31.673708693898202,
+              "exact_escaped_weight_meV": 32.059068356150284,
+              "field": "edge_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 0.2634027256729663,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.024849429328984696,
+                "reference_weighted_l2": 2.0928325375789147,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01187358705619689
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.02480455850681921,
+                "reference_weighted_l2": 2.092788816510089,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.011852394427538566
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0014926537635994435,
+                "reference_weighted_l2": 0.013527743318873221,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.11034018966910532
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.03280893574623896,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 36.70000000000073,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 2.2737367544323206e-13,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 4.352306703938179e-13,
+                "reference_weighted_l2": 40.15177223039682,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.083963785947977e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 8.128462703768135e-14,
+                "reference_weighted_l2": 7.231242193553497,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.124075571831143e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 4.275728544456456e-13,
+                "reference_weighted_l2": 39.49523958124367,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.082593393480009e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 9.947598300641403e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 7.815970093361102e-14,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0630494537251005,
+                "reference_weighted_l2": 5.939078911732035,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01061603232793436
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0630494537251005,
+                "reference_weighted_l2": 5.939078911732035,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01061603232793436
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -7.105427357601002e-15,
+              "exact_escaped_weight_meV": 1.7053025658242404e-13,
+              "field": "edge_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 1.8474111129762605e-13,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.06790143395141073,
+                "reference_weighted_l2": 5.665009029977957,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.011986112218372745
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.03598650495456828,
+                "reference_weighted_l2": 2.0047834702300995,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01795032006645482
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.057581040228643195,
+                "reference_weighted_l2": 5.298412077898807,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01086760323320834
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.70000000000073,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 2.2737367544323206e-13,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 3.6899783797921e-13,
+                "reference_weighted_l2": 40.15177223039682,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.190075991212685e-15
+              },
+              "edge": {
+                "absolute_weighted_l2": 8.415620411639068e-14,
+                "reference_weighted_l2": 7.231242193553497,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.1637862743888484e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 3.592730684897655e-13,
+                "reference_weighted_l2": 39.49523958124367,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.096617017621148e-15
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.1316282072803006e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 0.0,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.06304945372510377,
+                "reference_weighted_l2": 5.939078911732036,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01061603232793491
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.06304945372510377,
+                "reference_weighted_l2": 5.939078911732036,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01061603232793491
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 31.947363812075107,
+              "exact_escaped_weight_meV": 32.059068356150284,
+              "field": "edge_gaussian",
+              "interior_nodes": 225,
+              "retained_weight_error_meV": 0.11170454407518626,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.03182181791447609,
+                "reference_weighted_l2": 2.039403165087594,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.015603495404553478
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.03178464039085232,
+                "reference_weighted_l2": 2.0393537136120425,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.015585643715800684
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0015377680599722315,
+                "reference_weighted_l2": 0.014202131743759488,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.10827727046314277
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 1.4634758051877063e-16,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 5.097082783275534e-17,
+            "row_mass": 8.410780489584519e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 239,
+      "shift_meV": 45.2,
+      "shift_pair": "field_12p5",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 45.063025210084106,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": 0.1369747899148024,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.061664653255754,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.676494735787385,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.31931336329959,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": -1.4210854715202004e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": -4.263256414560601e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.07684286024468147,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01290627919641036
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.07684286024468147,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01290627919641036
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -0.08307940969169891,
+              "exact_escaped_weight_meV": -7.105427357601002e-14,
+              "field": "edge_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": -0.038877526887489466,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.07093081574009918,
+                "reference_weighted_l2": 5.725794823817564,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01238794227223242
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.008804738790705854,
+                "reference_weighted_l2": 1.8603121690645597,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.004732936190560552
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.07038222216144743,
+                "reference_weighted_l2": 5.41516066225983,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01299725466170672
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 45.063025210084106,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": 0.1369747899148024,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.061664653255754,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.676494735787385,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.31931336329959,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.842170943040401e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": 0.0,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.07684286024468166,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.012906279196410393
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.07684286024468166,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.012906279196410393
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.56873392395165,
+              "exact_escaped_weight_meV": 36.97327163243404,
+              "field": "edge_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": 0.28258077190327313,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.02873288826905966,
+                "reference_weighted_l2": 1.1950861812098044,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.02404252406297001
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.028732243686816032,
+                "reference_weighted_l2": 1.1950859168866366,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.02404199001998742
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0001924603951123196,
+                "reference_weighted_l2": 0.0007948445513129364,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.24213589285403112
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.03287979746107183,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 45.2000000000005,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": -1.5916157281026244e-12,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 3.7152453290743585e-13,
+                "reference_weighted_l2": 40.05827918795162,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.27460041816224e-15
+              },
+              "edge": {
+                "absolute_weighted_l2": 9.5157920905725e-14,
+                "reference_weighted_l2": 7.658807226881233,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.2424639775725828e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 3.5913151997699705e-13,
+                "reference_weighted_l2": 39.319313363299585,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.1337179939721e-15
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 1.4210854715202004e-14,
+              "exact_escaped_weight_meV": -1.4210854715202004e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": -4.263256414560601e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.07589321247401568,
+                "reference_weighted_l2": 5.939078911732035,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01277861661748533
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.07589321247401568,
+                "reference_weighted_l2": 5.939078911732035,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.01277861661748533
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": -7.105427357601002e-14,
+              "field": "edge_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": -6.394884621840902e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.09171345738808008,
+                "reference_weighted_l2": 5.698153172100094,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.016095295197948927
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.05985401948593999,
+                "reference_weighted_l2": 1.8260149192492403,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.032778494225309374
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.06948996055152067,
+                "reference_weighted_l2": 5.397649403897363,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.012874115258643062
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 45.200000000000955,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": -2.0463630789890885e-12,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 3.6413447283228353e-13,
+                "reference_weighted_l2": 40.05827918795162,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.090117703852959e-15
+              },
+              "edge": {
+                "absolute_weighted_l2": 9.433968091548053e-14,
+                "reference_weighted_l2": 7.658807226881233,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.2317803297667917e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 3.5170149119617095e-13,
+                "reference_weighted_l2": 39.319313363299585,
+                "relative_defined": true,
+                "relative_weighted_l2": 8.944751602006536e-15
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.842170943040401e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.07589321247401687,
+                "reference_weighted_l2": 5.939078911732034,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.012778616617485533
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.07589321247401687,
+                "reference_weighted_l2": 5.939078911732034,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.012778616617485533
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.960849856291226,
+              "exact_escaped_weight_meV": 36.97327163243404,
+              "field": "edge_gaussian",
+              "interior_nodes": 223,
+              "retained_weight_error_meV": 0.012421776142820917,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.08090467114516216,
+                "reference_weighted_l2": 1.1404877521319219,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.07093865847653907
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.08090441557386928,
+                "reference_weighted_l2": 1.1404874299173349,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0709384544288519
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.00020335623298150033,
+                "reference_weighted_l2": 0.0008573001084658173,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.23720542080114368
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 1.4634758051877063e-16,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.0,
+            "row_mass": 8.410780489584519e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 239,
+      "shift_meV": 75.936,
+      "shift_pair": "field_21",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 72.79411764705901,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 3.14188235294273,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.71405144722642,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 9.309117244161566,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 38.60759275696168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 1.4210854715202004e-14,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.013711851817265221,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.002302998447610236
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.013711851817265221,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.002302998447610236
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -1.9056479762688951,
+              "exact_escaped_weight_meV": 0.0,
+              "field": "edge_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 1.7836910396897778,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.012653761899367701,
+                "reference_weighted_l2": 5.805711722945551,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0021795367223207155
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.001104133854341284,
+                "reference_weighted_l2": 1.6229143718733068,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0006803401790488786
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.012605497952781842,
+                "reference_weighted_l2": 5.5742656513225555,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0022613737380440505
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 72.79411764705901,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 3.14188235294273,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.71405144722642,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 9.309117244161566,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 38.60759275696168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.013711851817265606,
+                "reference_weighted_l2": 5.95391274861417,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0023029984476103
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.013711851817265606,
+                "reference_weighted_l2": 5.95391274861417,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0023029984476103
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 41.91227059164262,
+              "exact_escaped_weight_meV": 42.04939981177127,
+              "field": "edge_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 0.01517228354954095,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.001052366686101592,
+                "reference_weighted_l2": 0.04221684957017696,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.024927646113247878
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0010523666861015919,
+                "reference_weighted_l2": 0.04221684957017696,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.024927646113247874
+              },
+              "interior": {
+                "absolute_weighted_l2": 2.4031844575180325e-11,
+                "reference_weighted_l2": 8.198452245485798e-11,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.2931266031147849
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.033167906340332426,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 75.93600000000015,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 1.5916157281026244e-12,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 4.365961749074361e-13,
+                "reference_weighted_l2": 39.65281825897577,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.1010470228269554e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.061790404926523e-13,
+                "reference_weighted_l2": 9.044322937177956,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.1739855070431915e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 4.234881713860073e-13,
+                "reference_weighted_l2": 38.607592756961665,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.0969038501102727e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 2.1316282072803006e-14,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.01354262605723565,
+                "reference_weighted_l2": 5.939078911732036,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.002280256965517598
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.01354262605723565,
+                "reference_weighted_l2": 5.939078911732036,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.002280256965517598
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 0.0,
+              "field": "edge_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.016685976051657368,
+                "reference_weighted_l2": 5.638103927917716,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00295950132615237
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.011112913836700112,
+                "reference_weighted_l2": 0.9555017176779376,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.011630448832375457
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.012446884865481901,
+                "reference_weighted_l2": 5.556548602281428,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0022400388723984913
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 75.9360000000006,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 1.1368683772161603e-12,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 3.7038234787679733e-13,
+                "reference_weighted_l2": 39.65281825897578,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.340631111206274e-15
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.717224511809066e-13,
+                "reference_weighted_l2": 9.044322937177956,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.8986766878371562e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 3.2816837656780713e-13,
+                "reference_weighted_l2": 38.60759275696167,
+                "relative_defined": true,
+                "relative_weighted_l2": 8.500099413958728e-15
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 2.1316282072803006e-14,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.013542626057235396,
+                "reference_weighted_l2": 5.939078911732037,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.002280256965517555
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.013542626057235396,
+                "reference_weighted_l2": 5.939078911732037,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.002280256965517555
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 42.03296461901794,
+              "exact_escaped_weight_meV": 42.04939981177127,
+              "field": "edge_gaussian",
+              "interior_nodes": 215,
+              "retained_weight_error_meV": 0.016435192753345734,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.007472634560789431,
+                "reference_weighted_l2": 0.03598397712730364,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.2076656100117239
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.007472634560789431,
+                "reference_weighted_l2": 0.03598397712730364,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.2076656100117239
+              },
+              "interior": {
+                "absolute_weighted_l2": 2.928843719233383e-11,
+                "reference_weighted_l2": 1.0275683868621806e-10,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.28502664705139524
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 1.4634758051877063e-16,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 6.7688621838196e-17,
+            "row_mass": 8.410780489584519e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 477,
+      "shift_meV": 36.7,
+      "shift_pair": "LO",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 36.39705882352837,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 0.30294117647076746,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.1696768866325,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 6.582539930207268,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.62667169020993,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 9.947598300641403e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 7.105427357601002e-14,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.01874027845558403,
+                "reference_weighted_l2": 5.9539127486141705,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0031475567827133526
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.01874027845558403,
+                "reference_weighted_l2": 5.9539127486141705,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0031475567827133526
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -0.18374311161882417,
+              "exact_escaped_weight_meV": 1.7053025658242404e-13,
+              "field": "edge_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 0.1533460863275522,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.017299495600961192,
+                "reference_weighted_l2": 5.726163848304866,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.003021131783730292
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0006997316816767103,
+                "reference_weighted_l2": 1.2098688133763325,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0005783533503306008
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.017285338400544362,
+                "reference_weighted_l2": 5.596889303180199,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0030883831114406155
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.39705882352928,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 0.30294117646985796,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.1696768866325,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 6.582539930207268,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.62667169020993,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.1316282072803006e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": -7.105427357601002e-15,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.018740278455584507,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0031475567827134333
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.018740278455584507,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0031475567827134333
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 31.956710781792815,
+              "exact_escaped_weight_meV": 32.059068356150284,
+              "field": "edge_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 0.07196054906603067,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0072877199337491585,
+                "reference_weighted_l2": 2.0625294970533585,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.003533389434750286
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.007220000176619538,
+                "reference_weighted_l2": 2.0622681684117863,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0035009996697858525
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0009911908405441743,
+                "reference_weighted_l2": 0.03283181034724899,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.030189953891081343
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.023180714250534667,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 36.69999999999868,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 9.094947017729282e-13,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 7.250294827975786e-13,
+                "reference_weighted_l2": 40.1624642427022,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.8052415270542605e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.6635826818372673e-13,
+                "reference_weighted_l2": 6.538380900700741,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.5443343040155025e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 7.056859624029908e-13,
+                "reference_weighted_l2": 39.62667169020993,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.7808358166435055e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -7.105427357601002e-15,
+              "exact_escaped_weight_meV": 9.947598300641403e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 8.526512829121202e-14,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.018681825226052242,
+                "reference_weighted_l2": 5.950191068349217,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00313970173586967
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.018681825226052242,
+                "reference_weighted_l2": 5.950191068349217,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00313970173586967
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 1.7053025658242404e-13,
+              "field": "edge_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 1.8474111129762605e-13,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.028722714689897497,
+                "reference_weighted_l2": 5.701888493057726,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.005037403787336167
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.022980095764949998,
+                "reference_weighted_l2": 1.1117166922022776,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.020670820116433723
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.017231063164847977,
+                "reference_weighted_l2": 5.592460852213713,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.003081123609122316
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.69999999999891,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 6.821210263296962e-13,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 6.14431253548806e-13,
+                "reference_weighted_l2": 40.16246424270219,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.529864427231834e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.6800611043099052e-13,
+                "reference_weighted_l2": 6.538380900700741,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.5695369080284805e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 5.910158307485568e-13,
+                "reference_weighted_l2": 39.62667169020993,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.491459679906884e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 2.1316282072803006e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 0.0,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.01868182522605392,
+                "reference_weighted_l2": 5.950191068349218,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0031397017358699513
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.01868182522605392,
+                "reference_weighted_l2": 5.950191068349218,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0031397017358699513
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 32.0447682518227,
+              "exact_escaped_weight_meV": 32.059068356150284,
+              "field": "edge_gaussian",
+              "interior_nodes": 453,
+              "retained_weight_error_meV": 0.01430010432760831,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.023489914334720183,
+                "reference_weighted_l2": 2.0488558945706843,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.011464893356807919
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.023468785592809464,
+                "reference_weighted_l2": 2.04858749726129,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.011456081629017238
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0009960814480913921,
+                "reference_weighted_l2": 0.033162369966036824,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.030036497666226118
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 7.317379025938531e-17,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 4.318031377205683e-17,
+            "row_mass": 4.2053902447922597e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 477,
+      "shift_meV": 45.2,
+      "shift_pair": "field_12p5",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 46.79621848739362,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -1.596218487396527,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.04002724165647,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.3300062480627295,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.36336863018656,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": -1.4210854715202004e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -4.263256414560601e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.002933459720740466,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000492694442225956
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.002933459720740466,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000492694442225956
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.968155452205167,
+              "exact_escaped_weight_meV": -7.105427357601002e-14,
+              "field": "edge_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -0.9985524774966805,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0027080511540899005,
+                "reference_weighted_l2": 5.660878586938726,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004783800098341895
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.00015373819036464695,
+                "reference_weighted_l2": 1.3154393498694053,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00011687212365960456
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0027036837133790344,
+                "reference_weighted_l2": 5.505920966820769,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000491050222055802
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 46.79621848739475,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -1.596218487397664,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.04002724165647,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.3300062480627295,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.36336863018656,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.842170943040401e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": 0.0,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0029334597207411146,
+                "reference_weighted_l2": 5.953912748614167,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000492694442226065
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0029334597207411146,
+                "reference_weighted_l2": 5.953912748614167,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000492694442226065
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.908038256957546,
+              "exact_escaped_weight_meV": 36.97327163243404,
+              "field": "edge_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": 0.03483635018505282,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.001092573894339213,
+                "reference_weighted_l2": 1.1623011711430078,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0009400092862891767
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0010925398717924089,
+                "reference_weighted_l2": 1.162300497728024,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0009399805591824336
+              },
+              "interior": {
+                "absolute_weighted_l2": 8.622246539087432e-06,
+                "reference_weighted_l2": 0.0012511680923192627,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.006891357437915927
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.023255813953488223,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 45.19999999999891,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -1.3642420526593924e-12,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 6.101989612115454e-13,
+                "reference_weighted_l2": 40.04920493519077,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.5236231585595614e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.5866438390140475e-13,
+                "reference_weighted_l2": 7.379974662893865,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.1499312822733817e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 5.892099672823232e-13,
+                "reference_weighted_l2": 39.36336863018656,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.496848434944351e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": -1.4210854715202004e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -3.552713678800501e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0029243130130393803,
+                "reference_weighted_l2": 5.950191068349216,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004914653965642625
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0029243130130393803,
+                "reference_weighted_l2": 5.950191068349216,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004914653965642625
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": -7.105427357601002e-14,
+              "field": "edge_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -5.684341886080802e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0036834569515462228,
+                "reference_weighted_l2": 5.6822521841644225,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0006482389081236944
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.00251075555876772,
+                "reference_weighted_l2": 1.4217768258277872,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00176592803677603
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0026951737676838548,
+                "reference_weighted_l2": 5.501503480138899,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004898976756833404
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 45.19999999999891,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": -1.3642420526593924e-12,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 6.092588402850129e-13,
+                "reference_weighted_l2": 40.049204935190765,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.5212757438529432e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.8522450935811456e-13,
+                "reference_weighted_l2": 7.379974662893866,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.5098258167390992e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 5.804207229230228e-13,
+                "reference_weighted_l2": 39.36336863018655,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.4745199486761305e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.842170943040401e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": 1.4210854715202004e-14,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0029243130130407404,
+                "reference_weighted_l2": 5.950191068349217,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000491465396564491
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0029243130130407404,
+                "reference_weighted_l2": 5.950191068349217,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000491465396564491
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.93070500259174,
+              "exact_escaped_weight_meV": 36.97327163243404,
+              "field": "edge_gaussian",
+              "interior_nodes": 447,
+              "retained_weight_error_meV": 0.042566629842314185,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.02780636231945862,
+                "reference_weighted_l2": 1.1480769941591222,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.02421994557936825
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0278063609465286,
+                "reference_weighted_l2": 1.1480762875957768,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.024219959289254887
+              },
+              "interior": {
+                "absolute_weighted_l2": 8.737984738954533e-06,
+                "reference_weighted_l2": 0.0012737259298133614,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.006860176537534183
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 7.317379025938531e-17,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 7.08690271890978e-18,
+            "row_mass": 4.2053902447922597e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 477,
+      "shift_meV": 75.936,
+      "shift_pair": "field_21",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 74.52731092436852,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 1.4086890756314006,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.69222454178674,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 9.025524030969805,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 38.65245923666445,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.006558804171155768,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0011015956141920949
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.006558804171155768,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0011015956141920949
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -0.8544131143720151,
+              "exact_escaped_weight_meV": 0.0,
+              "field": "edge_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 0.8240160890805726,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.006054410512499102,
+                "reference_weighted_l2": 5.758532288198363,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010513808396815135
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.00018891258571542328,
+                "reference_weighted_l2": 1.1475737576367215,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00016461912313546113
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0060514625247801,
+                "reference_weighted_l2": 5.643028316870881,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010723785501285063
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 74.52731092436943,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 1.408689075630491,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.69222454178674,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 9.025524030969805,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 38.65245923666445,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.006558804171155825,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0011015956141921044
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.006558804171155825,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0011015956141921044
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 42.01458412600631,
+              "exact_escaped_weight_meV": 42.04939981177127,
+              "field": "edge_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 0.004418660473522934,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0004171697576867491,
+                "reference_weighted_l2": 0.038286166273560754,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010896096378676433
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0004171697576867488,
+                "reference_weighted_l2": 0.038286166273560754,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.010896096378676424
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.60989029699497e-11,
+                "reference_weighted_l2": 1.9938670905468489e-10,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.08074210686497828
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.023459704442428373,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 75.93599999999856,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 1.8189894035458565e-12,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 7.357763222222611e-13,
+                "reference_weighted_l2": 39.6639355293278,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.8550260139421182e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.7271804547682276e-13,
+                "reference_weighted_l2": 8.900290817308509,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.940588785491546e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 7.152169412909503e-13,
+                "reference_weighted_l2": 38.652459236664455,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.8503788773484273e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 1.4210854715202004e-14,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.00653835181985817,
+                "reference_weighted_l2": 5.950191068349217,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010988473722528928
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.00653835181985817,
+                "reference_weighted_l2": 5.950191068349217,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010988473722528928
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 0.0,
+              "field": "edge_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 2.1316282072803006e-14,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.010095396359715429,
+                "reference_weighted_l2": 5.682481559536662,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.001776582335365922
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.008094816548252877,
+                "reference_weighted_l2": 0.7047629620378112,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.011485871114518901
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0060324930758258585,
+                "reference_weighted_l2": 5.63860850226489,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010698549249168045
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 75.93599999999901,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 1.3642420526593924e-12,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 6.252440990295657e-13,
+                "reference_weighted_l2": 39.663935529327794,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.5763541632606168e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 2.1028175401456892e-13,
+                "reference_weighted_l2": 8.900290817308504,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.362639135404783e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 5.888223563179729e-13,
+                "reference_weighted_l2": 38.65245923666446,
+                "relative_defined": true,
+                "relative_weighted_l2": 1.523376178246985e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.006538351819860278,
+                "reference_weighted_l2": 5.950191068349219,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010988473722532467
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.006538351819860278,
+                "reference_weighted_l2": 5.950191068349219,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010988473722532467
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 42.04543610040826,
+              "exact_escaped_weight_meV": 42.04939981177127,
+              "field": "edge_gaussian",
+              "interior_nodes": 431,
+              "retained_weight_error_meV": 0.003963711363038913,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.002051314557493805,
+                "reference_weighted_l2": 0.0365231929831793,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.05616471041944593
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.002051314557493805,
+                "reference_weighted_l2": 0.0365231929831793,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.05616471041944593
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.692544750493751e-11,
+                "reference_weighted_l2": 2.1085571607277035e-10,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.08027028064582425
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 7.317379025938531e-17,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 1.9906455077439933e-17,
+            "row_mass": 4.2053902447922597e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 953,
+      "shift_meV": 36.7,
+      "shift_pair": "LO",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 37.26365546218426,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": -0.5636554621842151,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.15888873634062,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 6.382009246060893,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.648534683150395,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 9.947598300641403e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 7.815970093361102e-14,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.002791388021109822,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004688325373527761
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.002791388021109822,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004688325373527761
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.34187431932962653,
+              "exact_escaped_weight_meV": 1.7053025658242404e-13,
+              "field": "edge_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": -0.34946785907828826,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0025768172700693526,
+                "reference_weighted_l2": 5.696709463039649,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004523343320890399
+              },
+              "edge": {
+                "absolute_weighted_l2": 4.6869791632201795e-05,
+                "reference_weighted_l2": 0.8555064422845263,
+                "relative_defined": true,
+                "relative_weighted_l2": 5.478601833440517e-05
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0025763909769210155,
+                "reference_weighted_l2": 5.63210506236302,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00045744725078691244
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 37.263655462184715,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": -0.5636554621846699,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.15888873634062,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 6.382009246060893,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.648534683150395,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 2.1316282072803006e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": -7.105427357601002e-15,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0027913880211101446,
+                "reference_weighted_l2": 5.9539127486141705,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004688325373528301
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0027913880211101446,
+                "reference_weighted_l2": 5.9539127486141705,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004688325373528301
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 32.037685818442625,
+              "exact_escaped_weight_meV": 32.059068356150284,
+              "field": "edge_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 0.013788997958830151,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0010787344485232366,
+                "reference_weighted_l2": 2.0549303570017523,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000524949395412682
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0010677698324274493,
+                "reference_weighted_l2": 2.054580129238366,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0005197022093381543
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0001534131525932119,
+                "reference_weighted_l2": 0.03793764181136149,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.004043824161660676
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.01639344262295011,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 36.69999999999936,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 1.1368683772161603e-12,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 1.5629326670876653e-12,
+                "reference_weighted_l2": 40.16117095063688,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.891651139875144e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 1.89275922217085e-13,
+                "reference_weighted_l2": 6.396354399601123,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.959121874624211e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.5514293883766134e-12,
+                "reference_weighted_l2": 39.64853468315045,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.9129551716722805e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": 9.947598300641403e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 7.815970093361102e-14,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.00278920620885776,
+                "reference_weighted_l2": 5.952981498920432,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004685393712988323
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.00278920620885776,
+                "reference_weighted_l2": 5.952981498920432,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004685393712988323
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -7.105427357601002e-15,
+              "exact_escaped_weight_meV": 1.7053025658242404e-13,
+              "field": "edge_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 1.8474111129762605e-13,
+              "signed_shift_meV": 36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0043983053362652924,
+                "reference_weighted_l2": 5.701695378927181,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0007714030729387841
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.003566187747069596,
+                "reference_weighted_l2": 0.8950847889929756,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0039841898677350695
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0025743726971187418,
+                "reference_weighted_l2": 5.6309993264600005,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004571786547765677
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.69999999999959,
+              "exact_escaped_weight_meV": 36.699999999997544,
+              "field": "constant",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 9.094947017729282e-13,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 1.5045141886872102e-12,
+                "reference_weighted_l2": 40.16117095063686,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.746191042428638e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 5.682880405503716e-13,
+                "reference_weighted_l2": 6.396354399601123,
+                "relative_defined": true,
+                "relative_weighted_l2": 8.884561502499142e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.3930583788659227e-12,
+                "reference_weighted_l2": 39.64853468315043,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.5135179395619265e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 2.1316282072803006e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0027892062088573444,
+                "reference_weighted_l2": 5.952981498920434,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004685393712987624
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0027892062088573444,
+                "reference_weighted_l2": 5.952981498920434,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004685393712987624
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 32.04939793259603,
+              "exact_escaped_weight_meV": 32.059068356150284,
+              "field": "edge_gaussian",
+              "interior_nodes": 907,
+              "retained_weight_error_meV": 0.009670423554265284,
+              "signed_shift_meV": -36.7,
+              "all": {
+                "absolute_weighted_l2": 0.0035753692636550957,
+                "reference_weighted_l2": 2.0514748689951188,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0017428286925135143
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0035720685003018922,
+                "reference_weighted_l2": 2.0511223523102835,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0017415189768072536
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.00015359687705343559,
+                "reference_weighted_l2": 0.03802938300404378,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0040389000536007425
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 1.249000902703301e-16,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 2.1757503908340156e-17,
+            "row_mass": 2.1026951223961299e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 953,
+      "shift_meV": 45.2,
+      "shift_pair": "field_12p5",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 45.92962184873909,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -0.7296218487410897,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.050847408653304,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.028229393194374,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.42935923582669,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 7.105427357601002e-15,
+              "exact_escaped_weight_meV": -1.4210854715202004e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -4.263256414560601e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0014085300224878057,
+                "reference_weighted_l2": 5.953912748614172,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023657216387923285
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0014085300224878057,
+                "reference_weighted_l2": 5.953912748614172,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023657216387923285
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.44253802125672337,
+              "exact_escaped_weight_meV": -7.105427357601002e-14,
+              "field": "edge_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -0.4501315610056267,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0013002590710126812,
+                "reference_weighted_l2": 5.6909988486556395,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00022847642489329196
+              },
+              "edge": {
+                "absolute_weighted_l2": 2.4923200106291158e-05,
+                "reference_weighted_l2": 0.8620937966638791,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.8910079393609697e-05
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0013000201867075843,
+                "reference_weighted_l2": 5.625323295700743,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023110141735340772
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 45.92962184873909,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -0.7296218487410897,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 40.050847408653304,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 7.028229393194374,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.42935923582669,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 2.842170943040401e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": 7.105427357601002e-15,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0014085300224883435,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023657216387932333
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0014085300224883435,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023657216387932333
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.95547261144777,
+              "exact_escaped_weight_meV": 36.97327163243404,
+              "field": "edge_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": 0.010205481237436587,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0005292208868532582,
+                "reference_weighted_l2": 1.153952222243916,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00045861594323564156
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.000529172820257249,
+                "reference_weighted_l2": 1.1539502784972797,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00045857506178373565
+              },
+              "interior": {
+                "absolute_weighted_l2": 7.132557937961578e-06,
+                "reference_weighted_l2": 0.0021180126824373504,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0033675709296290086
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.016437677572823484,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 45.19999999999936,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -9.094947017729282e-13,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 1.3894470281379256e-12,
+                "reference_weighted_l2": 40.054681709380766,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.468875469337505e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 2.526765270685276e-13,
+                "reference_weighted_l2": 7.050046602110344,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.5840405224114694e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.3662787477926675e-12,
+                "reference_weighted_l2": 39.429359235826745,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.465130487211225e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": -1.4210854715202004e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -2.842170943040401e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.001407429116244141,
+                "reference_weighted_l2": 5.952981498920433,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023642423825764901
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.001407429116244141,
+                "reference_weighted_l2": 5.952981498920433,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023642423825764901
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -1.4210854715202004e-14,
+              "exact_escaped_weight_meV": -7.105427357601002e-14,
+              "field": "edge_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -4.973799150320701e-14,
+              "signed_shift_meV": 45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0021932813372985186,
+                "reference_weighted_l2": 5.700184703403777,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0003847737312773101
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0017672231535032072,
+                "reference_weighted_l2": 0.9275164983746178,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0019053279985855706
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.001299001674465494,
+                "reference_weighted_l2": 5.62421717203037,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023096577438821552
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 45.19999999999959,
+              "exact_escaped_weight_meV": 45.1999999999955,
+              "field": "constant",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": -1.1368683772161603e-12,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 1.5046131146970575e-12,
+                "reference_weighted_l2": 40.05468170938074,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.756397630653696e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 6.516099932665624e-13,
+                "reference_weighted_l2": 7.050046602110348,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.242633844030345e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.3561950603042064e-12,
+                "reference_weighted_l2": 39.429359235826716,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.439556428479635e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 2.842170943040401e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": 1.4210854715202004e-14,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.0014074291162441209,
+                "reference_weighted_l2": 5.952981498920434,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023642423825764557
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0014074291162441209,
+                "reference_weighted_l2": 5.952981498920434,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00023642423825764557
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 36.96282362909005,
+              "exact_escaped_weight_meV": 36.97327163243404,
+              "field": "edge_gaussian",
+              "interior_nodes": 897,
+              "retained_weight_error_meV": 0.010448003343990209,
+              "signed_shift_meV": -45.2,
+              "all": {
+                "absolute_weighted_l2": 0.008012140541294309,
+                "reference_weighted_l2": 1.1503313519689031,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.006965071870449116
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.008012137347732533,
+                "reference_weighted_l2": 1.1503293858580403,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.006965080998740385
+              },
+              "interior": {
+                "absolute_weighted_l2": 7.15363693116958e-06,
+                "reference_weighted_l2": 0.0021268178267818375,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0033635400461138687
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 1.249000902703301e-16,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 9.453330926959211e-17,
+            "row_mass": 2.1026951223961299e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "energy_nodes": 953,
+      "shift_meV": 75.936,
+      "shift_pair": "field_21",
+      "schemes": [
+        {
+          "scheme": "nodal_linear",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 75.39390756302464,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 0.5420924369761906,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.681306586816746,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 8.880331869792206,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 38.67487295802407,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -7.105427357601002e-15,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 2.1316282072803006e-14,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.002945008664343627,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004946341655794514
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.002945008664343627,
+                "reference_weighted_l2": 5.953912748614168,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004946341655794514
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -0.32879568342355725,
+              "exact_escaped_weight_meV": 0.0,
+              "field": "edge_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 0.321202143674725,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0027186117248809262,
+                "reference_weighted_l2": 5.732326599973858,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00047425974034580033
+              },
+              "edge": {
+                "absolute_weighted_l2": 3.195566919090471e-05,
+                "reference_weighted_l2": 0.8114571859366534,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.938059794740586e-05
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.002718423908419474,
+                "reference_weighted_l2": 5.674601790800797,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00047905104333952764
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 75.3939075630251,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 0.5420924369757358,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 39.681306586816746,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 8.880331869792206,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 38.67487295802407,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 1.4210854715202004e-14,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0029450086643437504,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004946341655794721
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0029450086643437504,
+                "reference_weighted_l2": 5.953912748614169,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004946341655794721
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 42.04043477092304,
+              "exact_escaped_weight_meV": 42.04939981177127,
+              "field": "edge_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 0.0013715010994010401,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0001725348667760836,
+                "reference_weighted_l2": 0.03718826785188293,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.004639497259277371
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.00017253486677608337,
+                "reference_weighted_l2": 0.03718826785188293,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.004639497259277365
+              },
+              "interior": {
+                "absolute_weighted_l2": 8.313032302721352e-12,
+                "reference_weighted_l2": 2.89828135462186e-10,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.02868262699708102
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 0.0,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 0.01659079897155856,
+            "row_mass": 0.0,
+            "wrap": 0.0
+          }
+        },
+        {
+          "scheme": "finite_volume_piecewise_constant",
+          "actions": [
+            {
+              "discrete_escaped_weight_meV": 75.93599999999947,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 1.8189894035458565e-12,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 1.582777367547244e-12,
+                "reference_weighted_l2": 39.66978016459543,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.989881872246533e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 2.3719309291437743e-13,
+                "reference_weighted_l2": 8.828683932955204,
+                "relative_defined": true,
+                "relative_weighted_l2": 2.6866189198256003e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.5649037132978806e-12,
+                "reference_weighted_l2": 38.674872958024146,
+                "relative_defined": true,
+                "relative_weighted_l2": 4.0463060214738184e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 2.1316282072803006e-14,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0029427067710913065,
+                "reference_weighted_l2": 5.952981498920434,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000494324864208794
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0029427067710913065,
+                "reference_weighted_l2": 5.952981498920434,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.000494324864208794
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": -7.105427357601002e-15,
+              "exact_escaped_weight_meV": 0.0,
+              "field": "edge_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 1.4210854715202004e-14,
+              "signed_shift_meV": 75.936,
+              "all": {
+                "absolute_weighted_l2": 0.005893837023000564,
+                "reference_weighted_l2": 5.701571928906256,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0010337214186704456
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.005230587958720898,
+                "reference_weighted_l2": 0.5650848840888762,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.009256287163218887
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0027162960920665653,
+                "reference_weighted_l2": 5.673499936923069,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.00047876903538659495
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 75.93599999999992,
+              "exact_escaped_weight_meV": 75.93599999999833,
+              "field": "constant",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 1.3642420526593924e-12,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 1.5668073468871783e-12,
+                "reference_weighted_l2": 39.669780164595366,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.949624475825879e-14
+              },
+              "edge": {
+                "absolute_weighted_l2": 8.275411751585919e-13,
+                "reference_weighted_l2": 8.828683932955204,
+                "relative_defined": true,
+                "relative_weighted_l2": 9.373324285283266e-14
+              },
+              "interior": {
+                "absolute_weighted_l2": 1.330436344090454e-12,
+                "reference_weighted_l2": 38.67487295802412,
+                "relative_defined": true,
+                "relative_weighted_l2": 3.4400535601873774e-14
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 0.0,
+              "exact_escaped_weight_meV": 3.552713678800501e-14,
+              "field": "central_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 2.1316282072803006e-14,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0029427067710913095,
+                "reference_weighted_l2": 5.952981498920435,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004943248642087945
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0,
+                "reference_weighted_l2": 0.0,
+                "relative_defined": false
+              },
+              "interior": {
+                "absolute_weighted_l2": 0.0029427067710913095,
+                "reference_weighted_l2": 5.952981498920435,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.0004943248642087945
+              }
+            },
+            {
+              "discrete_escaped_weight_meV": 42.0485188912174,
+              "exact_escaped_weight_meV": 42.04939981177127,
+              "field": "edge_gaussian",
+              "interior_nodes": 863,
+              "retained_weight_error_meV": 0.0008809205538851672,
+              "signed_shift_meV": -75.936,
+              "all": {
+                "absolute_weighted_l2": 0.0003375840375543297,
+                "reference_weighted_l2": 0.036725148391608974,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.009192176269911588
+              },
+              "edge": {
+                "absolute_weighted_l2": 0.0003375840375543296,
+                "reference_weighted_l2": 0.03672514839160897,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.009192176269911586
+              },
+              "interior": {
+                "absolute_weighted_l2": 8.417660585531256e-12,
+                "reference_weighted_l2": 2.9386672846230097e-10,
+                "relative_defined": true,
+                "relative_weighted_l2": 0.02864448326483862
+              }
+            }
+          ],
+          "core_metrics": {
+            "cell_weights": 1.249000902703301e-16,
+            "nonnegative": 0.0,
+            "quadrature_adjoint": 3.4878841139662775e-17,
+            "row_mass": 2.1026951223961299e-19,
+            "wrap": 0.0
+          }
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "allocated_cpus": 9,
+    "blas_threads": 1,
+    "compute_seconds": 13.943446881,
+    "condor_slot_cpus": 28,
+    "julia_threads": 9,
+    "julia_version": "1.13.4",
+    "manifest_sha256": "9604b6893c6675831ed7c594e5847ef1b392e3b643cabcc28436faf0aec21063",
+    "op_sys": "LINUX",
+    "peak_memory_mib": 813.30859375,
+    "setup_seconds": 0.0,
+    "visible_cpus": 30
+  }
+}

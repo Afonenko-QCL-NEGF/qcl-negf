@@ -1,0 +1,589 @@
+{
+  "baseline_reproduced": true,
+  "expansion_checks": [],
+  "field_kV_cm": 21.0,
+  "figure_sha256": "a6679df4cc50e177be4b4ebb6ad0a6011e1ece9f7152820b67980565fbb4f5c7",
+  "qualified": false,
+  "reason": "no_static_and_figure_admitted_rank_stable_under_window_expansion",
+  "schema": "v843-basis-selection-v1",
+  "selection_rule": "smallest qualified rank; prefer the larger window confirmed by its adjacent smaller window",
+  "spatial_nodes": 144,
+  "status": "rejected",
+  "task": "SELECT",
+  "bloch_zero_field_diagnostics": [
+    {
+      "minimum_gap_meV": 17.978450388830453,
+      "minimum_gap_phase_rad": -3.141592653589793,
+      "spatial_nodes": 144,
+      "stable": true
+    },
+    {
+      "minimum_gap_meV": 16.578594926908636,
+      "minimum_gap_phase_rad": -3.141592653589793,
+      "spatial_nodes": 288,
+      "stable": true
+    }
+  ],
+  "candidates": [
+    {
+      "p_basis": 3,
+      "rank": 6,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 7,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -20.59111111111111,
+        "energy_margin_meV": 6.468335523463088,
+        "energy_offset_model_minus_article_meV": 75.8957081706088,
+        "energy_rms_meV": 113.09660530976767,
+        "mean_cosine": 0.795418282233678,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "shape_margin_below_threshold",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.000368652239583267,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.6090728711021818,
+          "i": 0.8125142542669076,
+          "l": 0.7706330245055474,
+          "u": 0.9894529790600756
+        },
+        "role_energies_meV": {
+          "e": 42.5551742057944,
+          "i": 52.07610914307793,
+          "l": 277.00527090457217,
+          "u": 12.991978428990677
+        },
+        "role_indices": {
+          "e": 3,
+          "i": 4,
+          "l": 6,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.03396089331586551,
+        "translation_nearest": 4.883675277280769e-05,
+        "translation_two_pairs": 0.0008179972033914516
+      }
+    },
+    {
+      "p_basis": 4,
+      "rank": 6,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 9,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -20.59111111111111,
+        "energy_margin_meV": 6.468379169944155,
+        "energy_offset_model_minus_article_meV": 75.8974825791775,
+        "energy_rms_meV": 113.09977635610086,
+        "mean_cosine": 0.79541957172179,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "shape_margin_below_threshold",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.00036933450117793143,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.6090740189339803,
+          "i": 0.8125226138291184,
+          "l": 0.7706286663790288,
+          "u": 0.9894529877450329
+        },
+        "role_energies_meV": {
+          "e": 42.55496090430051,
+          "i": 52.075946686515394,
+          "l": 277.0127496915033,
+          "u": 12.991973034390789
+        },
+        "role_indices": {
+          "e": 3,
+          "i": 4,
+          "l": 6,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.03396089318624746,
+        "translation_nearest": 2.9137352189321087e-06,
+        "translation_two_pairs": 4.758964311930686e-05
+      }
+    },
+    {
+      "p_basis": 5,
+      "rank": 6,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 11,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -20.59111111111111,
+        "energy_margin_meV": 6.4683814019769095,
+        "energy_offset_model_minus_article_meV": 75.89758022309373,
+        "energy_rms_meV": 113.09995075690995,
+        "mean_cosine": 0.7954196414931235,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "shape_margin_below_threshold",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.0003693710910396275,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.6090740797507036,
+          "i": 0.8125230707383774,
+          "l": 0.7706284271846143,
+          "u": 0.9894529882987987
+        },
+        "role_energies_meV": {
+          "e": 42.5549493938765,
+          "i": 52.075937733828894,
+          "l": 277.01316102170847,
+          "u": 12.991972742961025
+        },
+        "role_indices": {
+          "e": 3,
+          "i": 4,
+          "l": 6,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.03396089318586822,
+        "translation_nearest": 1.7485040283888784e-07,
+        "translation_two_pairs": 2.841229285521478e-06
+      }
+    },
+    {
+      "p_basis": 3,
+      "rank": 7,
+      "reported_static_pass": false,
+      "status": "static_rejected",
+      "window_periods": 7,
+      "translation_metrics": {
+        "translation": 0.1622847595137891,
+        "translation_nearest": 0.1622847595137891,
+        "translation_two_pairs": 0.1622847595137891
+      }
+    },
+    {
+      "p_basis": 4,
+      "rank": 7,
+      "reported_static_pass": false,
+      "status": "static_rejected",
+      "window_periods": 9,
+      "translation_metrics": {
+        "translation": 0.1695032445712406,
+        "translation_nearest": 0.1695032445712406,
+        "translation_two_pairs": 0.1695032445712406
+      }
+    },
+    {
+      "p_basis": 5,
+      "rank": 7,
+      "reported_static_pass": false,
+      "status": "static_rejected",
+      "window_periods": 11,
+      "translation_metrics": {
+        "translation": 0.17212618462084397,
+        "translation_nearest": 0.17212618462084397,
+        "translation_two_pairs": 0.17212618462084397
+      }
+    },
+    {
+      "p_basis": 3,
+      "rank": 8,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 7,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -19.68711111111111,
+        "energy_margin_meV": 6.2515103046556115,
+        "energy_offset_model_minus_article_meV": -3.356130887888662,
+        "energy_rms_meV": 11.909122234540854,
+        "mean_cosine": 0.8359273807237306,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.03274535342941087,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.7054659007787757,
+          "i": 0.8442105399991038,
+          "l": 0.8587301054640072,
+          "u": 0.935302976653036
+        },
+        "role_energies_meV": {
+          "e": -22.69076723064029,
+          "i": 49.53015226623978,
+          "l": 28.360316580737553,
+          "u": 12.421474832108304
+        },
+        "role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 3,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.06933066903331,
+        "translation_nearest": 8.986335575937156e-05,
+        "translation_two_pairs": 0.0017709933631444494
+      }
+    },
+    {
+      "p_basis": 4,
+      "rank": 8,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 9,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -19.68711111111111,
+        "energy_margin_meV": 6.251443177496723,
+        "energy_offset_model_minus_article_meV": -3.3562868419654364,
+        "energy_rms_meV": 11.908926581808473,
+        "mean_cosine": 0.8359281554701612,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.03274572798343223,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.7054679738516649,
+          "i": 0.8442104536573237,
+          "l": 0.858731888633825,
+          "u": 0.9353023057378315
+        },
+        "role_energies_meV": {
+          "e": -22.690817073349017,
+          "i": 49.53011759012091,
+          "l": 28.359814291416246,
+          "u": 12.421437823950116
+        },
+        "role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 3,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.06933066910734813,
+        "translation_nearest": 4.894983651699549e-06,
+        "translation_two_pairs": 8.987134523619996e-05
+      }
+    },
+    {
+      "p_basis": 5,
+      "rank": 8,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 11,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -19.68711111111111,
+        "energy_margin_meV": 6.251439837036831,
+        "energy_offset_model_minus_article_meV": -3.3562946241850873,
+        "energy_rms_meV": 11.90891682514981,
+        "mean_cosine": 0.8359281946896446,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.03274574728229451,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.7054680771819031,
+          "i": 0.8442104495701395,
+          "l": 0.8587319798862657,
+          "u": 0.9353022721202698
+        },
+        "role_energies_meV": {
+          "e": -22.690819568624455,
+          "i": 49.5301158711455,
+          "l": 28.359789238780653,
+          "u": 12.421435961957956
+        },
+        "role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 3,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.06933066910714082,
+        "translation_nearest": 2.6367327814744473e-07,
+        "translation_two_pairs": 4.895381919155928e-06
+      }
+    },
+    {
+      "p_basis": 3,
+      "rank": 9,
+      "reported_static_pass": false,
+      "status": "static_rejected",
+      "window_periods": 7,
+      "translation_metrics": {
+        "translation": 0.1121545296151741,
+        "translation_nearest": 0.0006373159303863147,
+        "translation_two_pairs": 0.0014576741936438212
+      }
+    },
+    {
+      "p_basis": 4,
+      "rank": 9,
+      "reported_static_pass": false,
+      "status": "static_rejected",
+      "window_periods": 9,
+      "translation_metrics": {
+        "translation": 0.11234672447829384,
+        "translation_nearest": 0.00017213416522573747,
+        "translation_two_pairs": 0.00027229880547007283
+      }
+    },
+    {
+      "p_basis": 5,
+      "rank": 9,
+      "reported_static_pass": false,
+      "status": "static_rejected",
+      "window_periods": 11,
+      "translation_metrics": {
+        "translation": 0.11239050681909069,
+        "translation_nearest": 4.826842024820622e-05,
+        "translation_two_pairs": 4.9420618260230736e-05
+      }
+    },
+    {
+      "p_basis": 3,
+      "rank": 11,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 7,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -19.68711111111111,
+        "energy_margin_meV": 6.225961661510422,
+        "energy_offset_model_minus_article_meV": -3.393447400574487,
+        "energy_rms_meV": 11.820442438499269,
+        "mean_cosine": 0.8364516091753853,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.03333307380926742,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.704989610771201,
+          "i": 0.8440779527730007,
+          "l": 0.859137031290506,
+          "u": 0.9376018418668334
+        },
+        "role_energies_meV": {
+          "e": -22.70676660284292,
+          "i": 49.572158737870566,
+          "l": 28.171520689956708,
+          "u": 12.434997572717693
+        },
+        "role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 3,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.026146687262113978,
+        "translation_nearest": 0.0008218057703586601,
+        "translation_two_pairs": 0.00262517448283595
+      }
+    },
+    {
+      "p_basis": 4,
+      "rank": 11,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 9,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -19.68711111111111,
+        "energy_margin_meV": 6.225506619330928,
+        "energy_offset_model_minus_article_meV": -3.3944100904016783,
+        "energy_rms_meV": 11.81908360568839,
+        "mean_cosine": 0.8364425982038405,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.03333500293497427,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.7050019793183895,
+          "i": 0.844076055600167,
+          "l": 0.8590949868097038,
+          "u": 0.9375973710871017
+        },
+        "role_energies_meV": {
+          "e": -22.706972215712806,
+          "i": 49.572068842705015,
+          "l": 28.16814578552233,
+          "u": 12.434817225878747
+        },
+        "role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 3,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.02614328253478107,
+        "translation_nearest": 0.00023010274715447342,
+        "translation_two_pairs": 0.0006740136891920282
+      }
+    },
+    {
+      "p_basis": 5,
+      "rank": 11,
+      "reported_static_pass": true,
+      "status": "figure_rejected",
+      "window_periods": 11,
+      "figure_comparison": {
+        "admitted": false,
+        "common_shift_nm": -19.68711111111111,
+        "energy_margin_meV": 6.225387681191847,
+        "energy_offset_model_minus_article_meV": -3.3946595156903774,
+        "energy_rms_meV": 11.818729742904674,
+        "mean_cosine": 0.8364400549048112,
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "shape_margin": 0.033335475292403105,
+        "energy_best_role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 2,
+          "u": 3
+        },
+        "role_cosines": {
+          "e": 0.7050051900950771,
+          "i": 0.8440755226064784,
+          "l": 0.859083291359681,
+          "u": 0.9375962155580084
+        },
+        "role_energies_meV": {
+          "e": -22.707024079971898,
+          "i": 49.572045751367625,
+          "l": 28.16726812395866,
+          "u": 12.434772141884103
+        },
+        "role_indices": {
+          "e": 1,
+          "i": 4,
+          "l": 3,
+          "u": 2
+        }
+      },
+      "translation_metrics": {
+        "translation": 0.026142972106253545,
+        "translation_nearest": 6.671622881312291e-05,
+        "translation_two_pairs": 0.0001879049828461032
+      }
+    }
+  ],
+  "literature_thresholds": {
+    "energy_margin_meV": 3.0,
+    "energy_rms_meV": 5.0,
+    "expanded_window_cosine": 0.95,
+    "expanded_window_energy_max_meV": 3.0,
+    "minimum_clipped_e_cosine": 0.75,
+    "minimum_role_cosine": 0.8,
+    "shape_margin": 0.02,
+    "shift_samples": 361
+  },
+  "parent_sha256": {
+    "B11": "b6d0c210fb43910b6e3be8661601d6ac68f35cf9c55dd5019d47f88c43868e2e",
+    "B7": "0942c9ae98b123a31557374a8cd980ce2158a024ba488b83fa0d865242c66047",
+    "B9": "c9477bde065630d96d7aff69bf991cea157963835656000c8b7708363148492a",
+    "BLOCH144": "5bf05fa3ebd74531d3bfdf7b288e66247e836f5bea810c323737077ec9485d34",
+    "BLOCH288": "6d19603f82eb5d6811dec030e9f170ef7798460e3dd368e6ab883eba3d59159b"
+  },
+  "runtime": {
+    "allocated_cpus": 1,
+    "blas_threads": 1,
+    "compute_seconds": 12.288664811,
+    "condor_slot_cpus": 28,
+    "julia_threads": 1,
+    "julia_version": "1.13.4",
+    "manifest_sha256": "9604b6893c6675831ed7c594e5847ef1b392e3b643cabcc28436faf0aec21063",
+    "op_sys": "LINUX",
+    "peak_memory_mib": 479.234375,
+    "setup_seconds": 0.0,
+    "visible_cpus": 30
+  },
+  "translation_limits": {
+    "translation": 0.1,
+    "translation_nearest": 0.1,
+    "translation_two_pairs": 0.005
+  }
+}

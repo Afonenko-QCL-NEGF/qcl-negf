@@ -1,0 +1,89 @@
+{
+  "blas_threads": 1,
+  "field_kV_cm": 0.0,
+  "fixture": false,
+  "gap_definition": "direct eigenvalue gap E8-E7 at equal phase",
+  "julia_threads": 30,
+  "near_group_threshold_meV": 0.1,
+  "phase_bracket_tolerance_rad": 0.0030679615757712823,
+  "phase_gap_threshold_meV": 0.01,
+  "status": "measured",
+  "task": "BLOCH",
+  "tracked_bands": 11,
+  "grids": [
+    {
+      "guard_band_11_12_min_gap_meV": 27.549599737595372,
+      "initial_phase_count": 65,
+      "initial_reverse_phase_error_meV": 0.0,
+      "min_gap_stable": true,
+      "minimum_gap_meV": 16.578594926908636,
+      "minimum_gap_phase_rad": -3.141592653589793,
+      "periodic_endpoint_error_meV": 0.0,
+      "periodic_oracle_error_meV": 1.958255779754836e-11,
+      "spatial_nodes": 288,
+      "refinements": [
+        {
+          "gap_meV": 16.578594926908636,
+          "max_neighbor_step_rad": 0.09817477042468115,
+          "phase_count": 65,
+          "phase_rad": -3.141592653589793,
+          "refinement": 0
+        },
+        {
+          "gap_change_meV": 0.0,
+          "gap_meV": 16.578594926908636,
+          "max_neighbor_step_rad": 0.04908738521234035,
+          "phase_count": 67,
+          "phase_rad": -3.141592653589793,
+          "refinement": 1
+        },
+        {
+          "gap_change_meV": 0.0,
+          "gap_meV": 16.578594926908636,
+          "max_neighbor_step_rad": 0.024543692606170175,
+          "phase_count": 69,
+          "phase_rad": -3.141592653589793,
+          "refinement": 2
+        },
+        {
+          "gap_change_meV": 0.0,
+          "gap_meV": 16.578594926908636,
+          "max_neighbor_step_rad": 0.012271846303085088,
+          "phase_count": 71,
+          "phase_rad": -3.141592653589793,
+          "refinement": 3
+        },
+        {
+          "gap_change_meV": 0.0,
+          "gap_meV": 16.578594926908636,
+          "max_neighbor_step_rad": 0.006135923151542322,
+          "phase_count": 73,
+          "phase_rad": -3.141592653589793,
+          "refinement": 4
+        },
+        {
+          "gap_change_meV": 0.0,
+          "gap_meV": 16.578594926908636,
+          "max_neighbor_step_rad": 0.003067961575771161,
+          "phase_count": 75,
+          "phase_rad": -3.141592653589793,
+          "refinement": 5
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "affinity_cpus": 32,
+    "allocated_cpus": 30,
+    "blas_threads": 1,
+    "compute_seconds": 22.3406862,
+    "condor_slot_cpus": 30,
+    "julia_threads": 30,
+    "julia_version": "1.13.4",
+    "manifest_sha256": "9604b6893c6675831ed7c594e5847ef1b392e3b643cabcc28436faf0aec21063",
+    "op_sys": "WINDOWS",
+    "peak_memory_mib": 1163.37890625,
+    "setup_seconds": 36.9443167,
+    "visible_cpus": 32
+  }
+}

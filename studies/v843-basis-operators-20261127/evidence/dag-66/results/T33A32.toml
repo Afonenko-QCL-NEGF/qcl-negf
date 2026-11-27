@@ -1,0 +1,4 @@
+task = "T33A32"
+status = "skipped_by_gate"
+qualified = false
+reason = "PILOT did not qualify; see results/PILOT.toml"
