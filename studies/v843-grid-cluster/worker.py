@@ -37,7 +37,7 @@ def main():
     source, plan, jobfile, output = map(Path, sys.argv[1:])
     job = json.loads(jobfile.read_text(encoding='utf-8'))
     status = {'job': job, 'platform': platform.platform(), 'python': sys.version, 'ok': False,
-              'logical_cpus_visible': os.cpu_count(), 'julia_threads_requested': 2, 'blas_threads_requested': 1}
+              'logical_cpus_visible': os.cpu_count()}
     if hasattr(os, 'sched_getaffinity'):
         status['affinity_cpus'] = len(os.sched_getaffinity(0))
     started = time.monotonic()
@@ -62,17 +62,32 @@ def main():
                     raise ValueError(f'source checksum mismatch: {name}')
             frozen = root / 'plan.json'
             frozen.write_bytes(plan.read_bytes())
+            cpus = job['request_cpus']
+            visible = status.get('affinity_cpus') or status['logical_cpus_visible']
+            if type(cpus) is not int or cpus < 1 or (visible is not None and cpus > visible):
+                raise ValueError(f'invalid CPU grant ({cpus}) for available CPUs ({visible})')
+            status.update(julia_threads_requested=1, blas_threads_requested=cpus)
+            if expected_os == 'Windows':
+                home = root / 'julia-home'
+                home.mkdir()
+                os.environ.update(HOME=str(home), USERPROFILE=str(home))
+                if 'JULIA_DEPOT_PATH' not in os.environ:
+                    depot = root / 'julia-depot'
+                    depot.mkdir()
+                    os.environ['JULIA_DEPOT_PATH'] = str(depot) + os.pathsep
             julia = os.environ.get('QCL_JULIA', 'julia')
             os.environ.pop('QCL_NEGF_PROJECT', None)
-            os.environ.update(JULIA_NUM_THREADS='2', OPENBLAS_NUM_THREADS='1', OMP_NUM_THREADS='1', MKL_NUM_THREADS='1')
+            threads = str(cpus)
+            os.environ.update(JULIA_NUM_THREADS='1,0', OPENBLAS_NUM_THREADS=threads,
+                              OMP_NUM_THREADS=threads, MKL_NUM_THREADS=threads)
             project = f'--project={app / "runner"}'
             status['julia_version'] = subprocess.check_output([julia, '--version'], text=True).strip()
             if status['julia_version'] != 'julia version 1.13.4':
                 raise ValueError('expected Julia 1.13.4')
             status['thread_probe'] = subprocess.check_output([julia, '--startup-file=no', project, '-e',
                 'using LinearAlgebra; print(Threads.nthreads(), \" \", BLAS.get_num_threads())'], text=True).strip()
-            if status['thread_probe'] != '2 1':
-                raise ValueError('Julia thread configuration differs from 2 Julia / 1 BLAS')
+            if status['thread_probe'] != f'1 {cpus}':
+                raise ValueError(f"expected 1 Julia / {cpus} BLAS threads, observed {status['thread_probe']}")
             if os.environ.get('QCL_INSTANTIATE') == '1':
                 subprocess.run([julia, '--startup-file=no', project, '-e', 'using Pkg; Pkg.instantiate()'], check=True)
             result = root / 'result'

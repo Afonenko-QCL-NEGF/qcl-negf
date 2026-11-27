@@ -1,0 +1,2735 @@
+{
+  "schema": "v843-grid-readout-v1",
+  "status": "complete",
+  "rule_sha256": "814c5149c0ddb62616f1486fdffc7ff40977cd0e076f8263b8e28ac2d4c42a58",
+  "figure_sha256": "a6679df4cc50e177be4b4ebb6ad0a6011e1ece9f7152820b67980565fbb4f5c7",
+  "cases": [
+    {
+      "id": "b7-r7-z96",
+      "window": 7,
+      "rank": 7,
+      "nz": 96,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.13143941560533814,
+        "structure_translation_nearest": 0.012796058264299501,
+        "structure_translation_two_pairs": 0.012796058264299501
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -2.1597201972203237,
+        "energy_rms_meV": 14.383961445891668,
+        "shape_margin": 0.02262646556755432,
+        "energy_margin_meV": 6.672631720856512,
+        "mean_cosine": 0.8206891063549094,
+        "role_cosines": {
+          "u": 0.9383470742587421,
+          "l": 0.8218781883176391,
+          "e": 0.6872726715266739,
+          "i": 0.8352584913165827
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.455764739320923,
+          "l": 33.286387389036285,
+          "e": -20.438718946248105,
+          "i": 49.1033860290096
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "6a7120cc3e818261da17d91a86a6bd860a204f2f82178e98b20ffcdf79df74d2",
+        "plan_fingerprint": "9aad5a5d6bfda0cf5a6fce505a59249d7cd5a7a0fadecb8f3786fdaa65b382f7",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "f64ec25f00411d64d7d121ebc13f8b94e176565f33660be655a2df284fa85660"
+      }
+    },
+    {
+      "id": "b7-r7-z144",
+      "window": 7,
+      "rank": 7,
+      "nz": 144,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.1622847595137896,
+        "structure_translation_nearest": 0.1622847595137896,
+        "structure_translation_two_pairs": 0.1622847595137896
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.787555555555553,
+        "energy_offset_model_minus_article_meV": -3.7329503715915138,
+        "energy_rms_meV": 11.452643948463738,
+        "shape_margin": 0.03545642896112977,
+        "energy_margin_meV": 6.069545613597686,
+        "mean_cosine": 0.8399794058470844,
+        "role_cosines": {
+          "u": 0.9434415149634062,
+          "l": 0.8581744719904832,
+          "e": 0.7056108345959909,
+          "i": 0.8526908018384575
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.34657366701009,
+          "l": 27.177532408293892,
+          "e": -22.826620372940642,
+          "i": 49.416412811270604
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "9aa15607c540bfb12ff9de6b1ca85ff79c781e0b3d8e442534a6867bfec0df38",
+        "plan_fingerprint": "742d62741c4efeb44322b6aaf7da40f5f57bcad91dbd0944b51cd0c876a3c353",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "60b8bfae93522b7719d7397d4e9eef45b0b59858c0abbb786ed8dbb3abede891"
+      },
+      "crosscheck": {
+        "plan_fingerprint": "742d62741c4efeb44322b6aaf7da40f5f57bcad91dbd0944b51cd0c876a3c353",
+        "rank": 7,
+        "spatial_nodes": 144,
+        "max_energy_error_eV": 1.2212453270876722e-15,
+        "max_energy_error_limit_eV": 1e-10,
+        "projector_distance": 1.5423760275074485e-14,
+        "projector_distance_limit": 1e-08,
+        "same_failed_checks": true,
+        "operator_verdicts": [
+          "failed",
+          "failed"
+        ],
+        "failed_checks": [
+          [
+            "structure_translation",
+            "structure_translation_nearest",
+            "structure_translation_two_pairs"
+          ],
+          [
+            "structure_translation",
+            "structure_translation_nearest",
+            "structure_translation_two_pairs"
+          ]
+        ],
+        "result_sha256": [
+          "60b8bfae93522b7719d7397d4e9eef45b0b59858c0abbb786ed8dbb3abede891",
+          "4400443fd04a570d97eca2d6d002826d81d4433ab50b6e6b034721522b01b941"
+        ],
+        "reproducible": true
+      }
+    },
+    {
+      "id": "b7-r7-z216",
+      "window": 7,
+      "rank": 7,
+      "nz": 216,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.12336216133544377,
+        "structure_translation_nearest": 0.12336216133544377,
+        "structure_translation_two_pairs": 0.12336216133544377
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.48622222222222,
+        "energy_offset_model_minus_article_meV": -2.124896938401559,
+        "energy_rms_meV": 16.003230799331917,
+        "shape_margin": 0.032228342006213384,
+        "energy_margin_meV": 6.532801418488342,
+        "mean_cosine": 0.8320235814457496,
+        "role_cosines": {
+          "u": 0.9515388762293882,
+          "l": 0.8720334644535791,
+          "e": 0.6805221558349267,
+          "i": 0.8239998292651047
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.543784991487335,
+          "l": 36.36413467405342,
+          "e": -21.90953600717485,
+          "i": 48.54772858802786
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "0fc52388fcf9e97ac61f15943591c8039c9f7dfa6e11b4e34e72502423deb13d",
+        "plan_fingerprint": "55e5bb780d84884f16ee8711a343b50e0a86420f6df3a78cfd0ccec99af27062",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "e5f2ed0e405152cdddcb4b8760ad7ade38ba02621d18622fd48b5393c4948933"
+      }
+    },
+    {
+      "id": "b7-r7-z288",
+      "window": 7,
+      "rank": 7,
+      "nz": 288,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.12898336071302596,
+        "structure_translation_nearest": 0.12898336071302596,
+        "structure_translation_two_pairs": 0.12898336071302596
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.48622222222222,
+        "energy_offset_model_minus_article_meV": -1.7742042927065373,
+        "energy_rms_meV": 15.353813801526675,
+        "shape_margin": 0.04082349425704879,
+        "energy_margin_meV": 7.053420006332676,
+        "mean_cosine": 0.8375251564336825,
+        "role_cosines": {
+          "u": 0.9467382919143826,
+          "l": 0.8694992615482847,
+          "e": 0.6983444336760359,
+          "i": 0.8355186385960266
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.689385778864686,
+          "l": 35.90463412380749,
+          "e": -22.441752996671926,
+          "i": 48.7966159231736
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "4f9cc72efc91b9f6760f03910705f2a0c95944505ffaf11efeadcbd148026c5b",
+        "plan_fingerprint": "d8424deb143f30f11a736741d0bcc4ad908e6a7f97d83edf4178956d80e6c92d",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "dec1ded5bd8e49db7b20230e9fa86ecace2897ce11868a27ceb7da785a5e2bc9"
+      }
+    },
+    {
+      "id": "b7-r8-z96",
+      "window": 7,
+      "rank": 8,
+      "nz": 96,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06884871230209946,
+        "structure_translation_nearest": 6.19272797704909e-05,
+        "structure_translation_two_pairs": 0.0014993310155261372
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.787555555555553,
+        "energy_offset_model_minus_article_meV": -4.284014104786211,
+        "energy_rms_meV": 11.653134200685088,
+        "shape_margin": 0.03035178045042819,
+        "energy_margin_meV": 6.718579588030098,
+        "mean_cosine": 0.8396620315329775,
+        "role_cosines": {
+          "u": 0.9476126518634237,
+          "l": 0.8579563578008316,
+          "e": 0.7027932658491929,
+          "i": 0.8502858506184616
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.065800469260608,
+          "l": 26.240794297112835,
+          "e": -21.16142514081109,
+          "i": 48.7644739552928
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "5a2170a7fb0dcc95cc073c57055223fee73c37a8a24062f64c8399cf4136de55",
+        "plan_fingerprint": "5d46fa485cfd2bcd3bc4f3bce0bd20296fb103398ddc106be3a7957479078ada",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "c492f2973cc7648b4346f68225a2a9c470393a3d553aa5aa47ab733874c5e12e"
+      }
+    },
+    {
+      "id": "b7-r8-z144",
+      "window": 7,
+      "rank": 8,
+      "nz": 144,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06933066903331,
+        "structure_translation_nearest": 8.986335575937156e-05,
+        "structure_translation_two_pairs": 0.0017709933631444494
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -3.3561308878886598,
+        "energy_rms_meV": 11.90912223454086,
+        "shape_margin": 0.032745353429411206,
+        "energy_margin_meV": 6.25151030465562,
+        "mean_cosine": 0.8359273807237309,
+        "role_cosines": {
+          "u": 0.9353029766530359,
+          "l": 0.8587301054640076,
+          "e": 0.705465900778776,
+          "i": 0.8442105399991038
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.421474832108299,
+          "l": 28.360316580737567,
+          "e": -22.69076723064031,
+          "i": 49.5301522662398
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "ef10161c2972009e6589228b39a651b9de7a493db144c6e550bd3760a6cedccd",
+        "plan_fingerprint": "2096698f965c06bd488abd352ab287298d0bc3f15e504b3b1aaafd4e45c61cb9",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "d9d87096fb4aad62dc650561f3ba46ead29e565024ac0635f7129243d32480de"
+      }
+    },
+    {
+      "id": "b7-r8-z216",
+      "window": 7,
+      "rank": 8,
+      "nz": 216,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.0724135467973105,
+        "structure_translation_nearest": 9.83775559174527e-05,
+        "structure_translation_two_pairs": 0.0019218858751086265
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -4.305167570582307,
+        "energy_rms_meV": 13.426100072409247,
+        "shape_margin": 0.03342948612076324,
+        "energy_margin_meV": 6.6728537175910585,
+        "mean_cosine": 0.8355694447631549,
+        "role_cosines": {
+          "u": 0.9504196543082674,
+          "l": 0.8495268995131512,
+          "e": 0.702973549203636,
+          "i": 0.8393576760275648
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.299478491968822,
+          "l": 29.568269110849435,
+          "e": -22.50576936178763,
+          "i": 47.463051476640146
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "e4226c8e571cdbd35d9754025b0c276bd3f4d3a17ee2bc06bb0412924d7fa4c8",
+        "plan_fingerprint": "18032f05a23ed8fcaad6668e0f60581f74802f3c189d048ab5c8f4da6f7260e9",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "00ad0126784a050f27ee287783ae5a66394feee1cc5825ffba0363208bccf6ad"
+      }
+    },
+    {
+      "id": "b7-r8-z288",
+      "window": 7,
+      "rank": 8,
+      "nz": 288,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.0676237508228441,
+        "structure_translation_nearest": 7.144033589258934e-05,
+        "structure_translation_two_pairs": 0.0015633728459253733
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -3.714543352635226,
+        "energy_rms_meV": 12.859973381308912,
+        "shape_margin": 0.041015288797844995,
+        "energy_margin_meV": 6.508032387665751,
+        "mean_cosine": 0.8405155485716819,
+        "role_cosines": {
+          "u": 0.9450499028335514,
+          "l": 0.8556185182504479,
+          "e": 0.7211071390079821,
+          "i": 0.8402866341947465
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.429552682245252,
+          "l": 29.57639752712904,
+          "e": -23.074413208775557,
+          "i": 48.25598958886036
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "de5c3d3b98de3c77dd2e04ec05e61ff62168e3769fcdb8a3ebcdb5093e40488e",
+        "plan_fingerprint": "7cd200668aa1d713c3d310a44a70fe686fdc9ad0ea0a0b8fdb5170deb32987d3",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "24de990347cda79b0d844bc16b37047135102419761984e9be707bd4375b03dc"
+      }
+    },
+    {
+      "id": "b7-r11-z96",
+      "window": 7,
+      "rank": 11,
+      "nz": 96,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.02481186016749323,
+        "structure_translation_nearest": 0.0003372989362660638,
+        "structure_translation_two_pairs": 0.001689635299171331
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.787555555555553,
+        "energy_offset_model_minus_article_meV": -4.479426106964912,
+        "energy_rms_meV": 11.388177772416135,
+        "shape_margin": 0.029554323561579388,
+        "energy_margin_meV": 6.625161604477583,
+        "mean_cosine": 0.8413264215867801,
+        "role_cosines": {
+          "u": 0.9487588660863722,
+          "l": 0.86260505437807,
+          "e": 0.70384325695151,
+          "i": 0.8500985089311682
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.034739388424214,
+          "l": 25.565112386988634,
+          "e": -21.22993878908043,
+          "i": 48.758082585807934
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "f40df29c06d350413f9b055bb67f65a7a4d8b0533394cd4c6ba53b92efde4dd5",
+        "plan_fingerprint": "ef79560b45b56f355e6e40209a84ae40ed0ae343c51589420d8c9fb9acdd8f87",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "9833fff85aaa1872b3350822aa2c5c9b6897971183386c817db0164e9eb2ccbb"
+      }
+    },
+    {
+      "id": "b7-r11-z144",
+      "window": 7,
+      "rank": 11,
+      "nz": 144,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.026146687262113978,
+        "structure_translation_nearest": 0.0008218057703586601,
+        "structure_translation_two_pairs": 0.00262517448283595
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -3.393447400574494,
+        "energy_rms_meV": 11.820442438499281,
+        "shape_margin": 0.033333073809267755,
+        "energy_margin_meV": 6.225961661510408,
+        "mean_cosine": 0.8364516091753853,
+        "role_cosines": {
+          "u": 0.9376018418668332,
+          "l": 0.859137031290506,
+          "e": 0.7049896107712013,
+          "i": 0.8440779527730006
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.434997572717682,
+          "l": 28.171520689956697,
+          "e": -22.7067666028428,
+          "i": 49.572158737870446
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "763338ed0aea0daf96f2b9442dfa5a40f767be828693225542e7248eb3bac9aa",
+        "plan_fingerprint": "0118220725d3549e7ced435112b0f3eb1034691bca8d8ea564aa00edc9f4031c",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "91f1ea426d5ba991f2135afa31e3777558b6a210151f5eed2864d561c77c1d7b"
+      }
+    },
+    {
+      "id": "b7-r11-z216",
+      "window": 7,
+      "rank": 11,
+      "nz": 216,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.02617223994448126,
+        "structure_translation_nearest": 0.0007031869051338283,
+        "structure_translation_two_pairs": 0.002507525397165714
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -4.044254154343144,
+        "energy_rms_meV": 13.682977202510157,
+        "shape_margin": 0.029465514729962727,
+        "energy_margin_meV": 6.174060495553804,
+        "mean_cosine": 0.8336463306730422,
+        "role_cosines": {
+          "u": 0.9530029351965845,
+          "l": 0.8440944968520806,
+          "e": 0.6991341202244918,
+          "i": 0.8383537704190117
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.357882017949274,
+          "l": 30.29831375720179,
+          "e": -22.429412648050647,
+          "i": 47.641900255527005
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "20737147976da96a521a6cd7e94ef2231be1e5a08d2e31cdcb0a385515bc01c6",
+        "plan_fingerprint": "9601cfd0cb534b82ef2411e4abf6bea21bf962cd52fe30d62cf15596f3c61486",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "da5343cbe47d12d3a1c3f9ddaa7b8cc091ca1217c1bc3e64a87cd88bda7cf4c6"
+      }
+    },
+    {
+      "id": "b7-r11-z288",
+      "window": 7,
+      "rank": 11,
+      "nz": 288,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.026289454147847287,
+        "structure_translation_nearest": 0.0011181262997251537,
+        "structure_translation_two_pairs": 0.002999494513245337
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -3.3589172768713977,
+        "energy_rms_meV": 13.21963058747181,
+        "shape_margin": 0.03205475454046458,
+        "energy_margin_meV": 6.628783673105874,
+        "mean_cosine": 0.8384226742898222,
+        "role_cosines": {
+          "u": 0.9479171341344963,
+          "l": 0.8495707652765172,
+          "e": 0.7165771144664346,
+          "i": 0.8396256832818405
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.513407869323707,
+          "l": 30.57282293762752,
+          "e": -22.94186797775767,
+          "i": 48.46566806332085
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "893b68fb84146db14f1c5df33c9238c4afee8061ec69aae8efa169e4018463a5",
+        "plan_fingerprint": "3a840d5083942578a2707b08c5700f975f0e17fd358efac319fa1f22222b6873",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "6571994ed068ea623c1452482940e8952c5eb1808293b1b27bf3548c7ce6faa8"
+      }
+    },
+    {
+      "id": "b9-r7-z96",
+      "window": 9,
+      "rank": 7,
+      "nz": 96,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.15102030955526144,
+        "structure_translation_nearest": 0.004009895795359473,
+        "structure_translation_two_pairs": 0.004009895795359473
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -1.1909372056399858,
+        "energy_rms_meV": 15.580613651419185,
+        "shape_margin": 0.02101529314720818,
+        "energy_margin_meV": 6.001561413036002,
+        "mean_cosine": 0.8153419127433355,
+        "role_cosines": {
+          "u": 0.9401600003767244,
+          "l": 0.8086090912617168,
+          "e": 0.6770185732361648,
+          "i": 0.8355799860987363
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.578780446745021,
+          "l": 36.40024751004619,
+          "e": -20.159360101879475,
+          "i": 49.462283322528314
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "b3f78db7fe93f4af5619c02b6f1fb0027c3d83c8480195b5edb7fc288956581e",
+        "plan_fingerprint": "a2bbe55b2fbf3a022b2f333c15adada44c484f05c010da61e897a5e5b01aaa3d",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "35a6778c97e4de3d58bf9fd235485b6c99b713b819efb343f7a025cc7a06443b"
+      }
+    },
+    {
+      "id": "b9-r7-z144",
+      "window": 9,
+      "rank": 7,
+      "nz": 144,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.1695032445712406,
+        "structure_translation_nearest": 0.1695032445712406,
+        "structure_translation_two_pairs": 0.1695032445712406
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -3.4778502199938206,
+        "energy_rms_meV": 11.74774140521756,
+        "shape_margin": 0.03343639227595063,
+        "energy_margin_meV": 6.164555085685308,
+        "mean_cosine": 0.8361170873234218,
+        "role_cosines": {
+          "u": 0.9362353018789152,
+          "l": 0.8556375994948855,
+          "e": 0.7076817443752511,
+          "i": 0.8449137035446357
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.45080321458218,
+          "l": 27.95696557238348,
+          "e": -22.731456262881828,
+          "i": 49.45798659594088
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "7d1750edf6ca6493939d00b749fa31b9f1c93226c5b795dc89e09ddc6f1d7179",
+        "plan_fingerprint": "d60a205605a04ed544b8279dde2016eba6b95f221f58f0deb5a26325be3c8e53",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "4ce0de9d45b75519a7a213bf9bea6d82dbd66045a2f0e6f5c6326afa699312cc"
+      }
+    },
+    {
+      "id": "b9-r7-z216",
+      "window": 9,
+      "rank": 7,
+      "nz": 216,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.12724176112062366,
+        "structure_translation_nearest": 0.12724176112062366,
+        "structure_translation_two_pairs": 0.12724176112062366
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.48622222222222,
+        "energy_offset_model_minus_article_meV": -2.500069240703002,
+        "energy_rms_meV": 15.70628345917238,
+        "shape_margin": 0.037040297670460465,
+        "energy_margin_meV": 6.550586862026963,
+        "mean_cosine": 0.8345979843012323,
+        "role_cosines": {
+          "u": 0.9512935780830253,
+          "l": 0.8700632299094757,
+          "e": 0.6846468093132674,
+          "i": 0.832388319899161
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.507356246108406,
+          "l": 35.451677492419556,
+          "e": -22.017349359592433,
+          "i": 48.10373865825246
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "47763fc627bcdc1a71f6512b6a7e9a0023519b565dc9e150fac2826e0360520c",
+        "plan_fingerprint": "ca6d96df1dc44bbd872ddac5b6c8499bbda218d7be075e348d7b4f43357e6900",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "ad5fa44fbee734d84e0fb38a686c2bb09af81febc02cd2679c3434240f4b19b6"
+      }
+    },
+    {
+      "id": "b9-r7-z288",
+      "window": 9,
+      "rank": 7,
+      "nz": 288,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.1614840263418491,
+        "structure_translation_nearest": 0.1360174881449741,
+        "structure_translation_two_pairs": 0.1614840263418491
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -2.7577072643437246,
+        "energy_rms_meV": 14.151259615084266,
+        "shape_margin": 0.04522158862634573,
+        "energy_margin_meV": 6.792595297250348,
+        "mean_cosine": 0.8416177844005039,
+        "role_cosines": {
+          "u": 0.9524403333477601,
+          "l": 0.8617702418756097,
+          "e": 0.706430428566438,
+          "i": 0.8458301338122078
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.6010017927908,
+          "l": 32.80683751861849,
+          "e": -22.771656355565398,
+          "i": 48.37868798678121
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "a28cdbac51f3d7d4760d9499f200a0c2422dd10061d51c5cb626e71272e18c63",
+        "plan_fingerprint": "18bab897e05b7fd5985b7204e926331574664ff39a9cbda2dbe42b14ab80a5db",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "c21af1ad124b3dcb27d3fa47b2f385e2d521b8934e9b436a8212797d47a283c7"
+      }
+    },
+    {
+      "id": "b9-r8-z96",
+      "window": 9,
+      "rank": 8,
+      "nz": 96,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06884871217171114,
+        "structure_translation_nearest": 2.7498489878957393e-06,
+        "structure_translation_two_pairs": 6.193202553670945e-05
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.787555555555553,
+        "energy_offset_model_minus_article_meV": -4.284080060181211,
+        "energy_rms_meV": 11.653051136491776,
+        "shape_margin": 0.030351910780433977,
+        "energy_margin_meV": 6.718550213680306,
+        "mean_cosine": 0.8396623200507539,
+        "role_cosines": {
+          "u": 0.9476124229406787,
+          "l": 0.8579568278631107,
+          "e": 0.7027942166632076,
+          "i": 0.8502858127360184
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.06578662627791,
+          "l": 26.24057638425542,
+          "e": -21.16144603041298,
+          "i": 48.764462779154805
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "6f027aa270d7aebee19e2b2491add61d1215fb33cd89a88e113b3571e444cc98",
+        "plan_fingerprint": "2139f3ffc47642effb9bdd444966ce09ded33d10f0fcb7a574132e0508f7881d",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "430dea590af67c5228126d6aea82687d90cd7e6cef4696d8a137a13cd255c358"
+      }
+    },
+    {
+      "id": "b9-r8-z144",
+      "window": 9,
+      "rank": 8,
+      "nz": 144,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06933066910734813,
+        "structure_translation_nearest": 4.894983651699549e-06,
+        "structure_translation_two_pairs": 8.987134523619996e-05
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -3.3562868419654497,
+        "energy_rms_meV": 11.908926581808498,
+        "shape_margin": 0.03274572798343223,
+        "energy_margin_meV": 6.251443177496723,
+        "mean_cosine": 0.835928155470161,
+        "role_cosines": {
+          "u": 0.9353023057378314,
+          "l": 0.8587318886338244,
+          "e": 0.7054679738516644,
+          "i": 0.8442104536573238
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.421437823950116,
+          "l": 28.359814291416278,
+          "e": -22.690817073349077,
+          "i": 49.53011759012088
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "f6ccd214c3f1cf2f7c30e66ba81b847455158e82c59f7c3e5202cac450fe1355",
+        "plan_fingerprint": "8960c3ce2fca6d44dd9ffcff946b350550526e2a48ad182d119bd2ef6dcac3a9",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "8084f0e91b8db051effd35deecb722f3e2771775d6673727bb60ddfee1a2510e"
+      }
+    },
+    {
+      "id": "b9-r8-z216",
+      "window": 9,
+      "rank": 8,
+      "nz": 216,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.07241354710547697,
+        "structure_translation_nearest": 5.377860546511255e-06,
+        "structure_translation_two_pairs": 9.838446596176918e-05
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -4.305372153320272,
+        "energy_rms_meV": 13.42584826621135,
+        "shape_margin": 0.03342997068485509,
+        "energy_margin_meV": 6.672880048617982,
+        "mean_cosine": 0.8355706992503418,
+        "role_cosines": {
+          "u": 0.9504192716523647,
+          "l": 0.8495296207660669,
+          "e": 0.7029760718662788,
+          "i": 0.8393578327166568
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.29945068018716,
+          "l": 29.567612567193244,
+          "e": -22.505832263917487,
+          "i": 47.46298040325599
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "290a64fbadc5403ce1321f37288fe1926212c0927b4db3f656287d304ced9932",
+        "plan_fingerprint": "24dd86fcd10b23f0dc7c30f5953a81edb599380959032c3c16734748559b9790",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "744cac6ae8c97409961d42181e9e06f20256d2938c31b54d5c608ce86db108bf"
+      }
+    },
+    {
+      "id": "b9-r8-z288",
+      "window": 9,
+      "rank": 8,
+      "nz": 288,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06762375101018489,
+        "structure_translation_nearest": 3.460575566763735e-06,
+        "structure_translation_two_pairs": 7.144312301759408e-05
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -3.7146896603246984,
+        "energy_rms_meV": 12.85979123273252,
+        "shape_margin": 0.04101568009089196,
+        "energy_margin_meV": 6.507978513031119,
+        "mean_cosine": 0.8405166140880531,
+        "role_cosines": {
+          "u": 0.9450495919662214,
+          "l": 0.8556210488810454,
+          "e": 0.7211091523402023,
+          "i": 0.8402866631647435
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.429529364292376,
+          "l": 29.57593077551207,
+          "e": -23.074468787743406,
+          "i": 48.25595000664016
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "dd309b6d7b58f6f17802f3d0db156a096ab3aed149a370a477e37e50999edbbf",
+        "plan_fingerprint": "db3fed82aa6ca7c5d8b8d62e415908a99c81e4c3e35224f5cc983c1d7ce11884",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "f8b690a0234d0cd6e1ff91be3f45c2b0d83630ba4d569ecfc0e7cfe424f9a909"
+      }
+    },
+    {
+      "id": "b9-r11-z96",
+      "window": 9,
+      "rank": 11,
+      "nz": 96,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.024811318036735048,
+        "structure_translation_nearest": 7.170634703343275e-05,
+        "structure_translation_two_pairs": 0.00028420782898224605
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.787555555555553,
+        "energy_offset_model_minus_article_meV": -4.478890773573635,
+        "energy_rms_meV": 11.388782363047572,
+        "shape_margin": 0.029576529218043435,
+        "energy_margin_meV": 6.625392760867754,
+        "mean_cosine": 0.8413133621932911,
+        "role_cosines": {
+          "u": 0.9487606507427829,
+          "l": 0.8625588703713387,
+          "e": 0.7038357271878938,
+          "i": 0.8500982004711491
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.034888453643937,
+          "l": 25.566743781758397,
+          "e": -21.22969378890932,
+          "i": 48.758198459212444
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "9cb3c983449ff0c1f2316a92efe35d6c955a23a436ca9e04551709843fc3f44d",
+        "plan_fingerprint": "320ecd5db8b40beeb65d27aa75a861ec852369b16222e9cf08992bb36c792ae4",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "a53ac5c40a7ba6247709e5cc4b6d9a6f7a64cbe7287e5050bb17ab992ec79822"
+      }
+    },
+    {
+      "id": "b9-r11-z144",
+      "window": 9,
+      "rank": 11,
+      "nz": 144,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.02614328253478107,
+        "structure_translation_nearest": 0.00023010274715545593,
+        "structure_translation_two_pairs": 0.0006740136891910457
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -3.39441009040168,
+        "energy_rms_meV": 11.819083605688391,
+        "shape_margin": 0.03333500293497382,
+        "energy_margin_meV": 6.225506619330944,
+        "mean_cosine": 0.8364425982038401,
+        "role_cosines": {
+          "u": 0.9375973710871024,
+          "l": 0.8590949868097029,
+          "e": 0.7050019793183884,
+          "i": 0.8440760556001669
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.434817225878719,
+          "l": 28.16814578552232,
+          "e": -22.706972215712792,
+          "i": 49.57206884270503
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "cdb6b3ed419c5e2473a64b3bee69ac8c32048f26ac5ad3df6b1f7e305fae2e22",
+        "plan_fingerprint": "73a8e1f4a683f1dd480ac1d38090b06185029a6a2eeb8d21aa72616c72d847ed",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "73a06b1f85ae2bc008c7b5499271828e1c4075f71a82e98c28d90c6922d6c575"
+      }
+    },
+    {
+      "id": "b9-r11-z216",
+      "window": 9,
+      "rank": 11,
+      "nz": 216,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.026168090925147654,
+        "structure_translation_nearest": 0.00019635295076816616,
+        "structure_translation_two_pairs": 0.000544774269027272
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -4.046411841438529,
+        "energy_rms_meV": 13.680190978383685,
+        "shape_margin": 0.029474446378298325,
+        "energy_margin_meV": 6.1747199931663515,
+        "mean_cosine": 0.8336500086031471,
+        "role_cosines": {
+          "u": 0.9530008837379098,
+          "l": 0.8440833626563715,
+          "e": 0.6991586061020257,
+          "i": 0.8383571819162812
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.357657198375922,
+          "l": 30.29115625404325,
+          "e": -22.429979066557028,
+          "i": 47.64121824838374
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "264d46cf3157e41b6ed76e43f407115be99febb299f2e48c5e6a629fab724c1c",
+        "plan_fingerprint": "0189b985d2e320e6528ba13a3083833aaa904e7112f0c17515df278fe1952326",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "d13ac9d7a04fb6fe9315c741e3c6088e04e8c6e20d0ad136c70cebda82806dc0"
+      }
+    },
+    {
+      "id": "b9-r11-z288",
+      "window": 9,
+      "rank": 11,
+      "nz": 288,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.026279378999364823,
+        "structure_translation_nearest": 0.00035813565740955137,
+        "structure_translation_two_pairs": 0.0008700928314039827
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -3.364619412788708,
+        "energy_rms_meV": 13.212413353333691,
+        "shape_margin": 0.032079826671561396,
+        "energy_margin_meV": 6.626823493775178,
+        "mean_cosine": 0.8384583610915983,
+        "role_cosines": {
+          "u": 0.9479090705287138,
+          "l": 0.8496451096712582,
+          "e": 0.7166476663484348,
+          "i": 0.8396315978179866
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.512652300625154,
+          "l": 30.554433551863248,
+          "e": -22.943932913085852,
+          "i": 48.464069409442615
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "83d1ee7d0569cc89ce77b2c1d5106e46d9995c758dd3e1ce7c734ca5637ae583",
+        "plan_fingerprint": "390e43e75f4abdbc292950d0968699518bcaea6f528d112ed1f2ff9104209895",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "03fe6ca146173d85d670a078032efc9f2bc76e17b8b35819a40c44c49c36bd08"
+      }
+    },
+    {
+      "id": "b11-r7-z96",
+      "window": 11,
+      "rank": 7,
+      "nz": 96,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.15844600707927387,
+        "structure_translation_nearest": 0.0016020766275602527,
+        "structure_translation_two_pairs": 0.0016020766275602527
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.48622222222222,
+        "energy_offset_model_minus_article_meV": -0.7130609508678711,
+        "energy_rms_meV": 16.145279991201402,
+        "shape_margin": 0.02039630784902713,
+        "energy_margin_meV": 5.742306801977838,
+        "mean_cosine": 0.8123326984354785,
+        "role_cosines": {
+          "u": 0.9321644795467335,
+          "l": 0.8160462979202873,
+          "e": 0.6772140755486201,
+          "i": 0.8239059407262732
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.629086705508673,
+          "l": 37.88885898010735,
+          "e": -20.02954472162766,
+          "i": 49.70505523254015
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "5db97662fd71710c21591f495be69c0c9cd159c84f823e3b6f8cf0c69c2d02f2",
+        "plan_fingerprint": "da00ab6f2b5a1a66c2648d8f2a9fd7d2e4da635f70ce0796717bd0d4996878bc",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "a60ebb22c1e2b899592f78b2abe2f4c97f48d5f3b4266fddcca5c053f335f5ea"
+      }
+    },
+    {
+      "id": "b11-r7-z144",
+      "window": 11,
+      "rank": 7,
+      "nz": 144,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.17212618462084792,
+        "structure_translation_nearest": 0.17212618462084792,
+        "structure_translation_two_pairs": 0.17212618462084792
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -2.929167189070831,
+        "energy_rms_meV": 12.411828399056013,
+        "shape_margin": 0.03109058981324353,
+        "energy_margin_meV": 6.372482827134544,
+        "mean_cosine": 0.8313366759695885,
+        "role_cosines": {
+          "u": 0.9384512771146574,
+          "l": 0.8407615540678289,
+          "e": 0.700845954100489,
+          "i": 0.8452879185953788
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.61382366347661,
+          "l": 29.6791051250914,
+          "e": -22.533282735955744,
+          "i": 49.56938519110441
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "2435f46b3d96bdf3b3df95f2390b52ee47a896003196f153c38bf95fc8504f59",
+        "plan_fingerprint": "d0a57e6bb3d1e057a17d6421a870f4a0e4d025bdf814d81c6b400c90cdd108eb",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "6818a9fe3bbfd710ffbc8b1ecffeaebdfdc34008016fd947431e96fa2dfa14e9"
+      }
+    },
+    {
+      "id": "b11-r7-z216",
+      "window": 11,
+      "rank": 7,
+      "nz": 216,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.15390067510421349,
+        "structure_translation_nearest": 0.138699076502414,
+        "structure_translation_two_pairs": 0.15390067510421349
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.48622222222222,
+        "energy_offset_model_minus_article_meV": -3.205742635034881,
+        "energy_rms_meV": 14.886368679689784,
+        "shape_margin": 0.039641829766906445,
+        "energy_margin_meV": 6.703314535708305,
+        "mean_cosine": 0.8374809671878428,
+        "role_cosines": {
+          "u": 0.9499929739707031,
+          "l": 0.8709350919265109,
+          "e": 0.6929208086836512,
+          "i": 0.836074994170506
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.451172569536952,
+          "l": 33.28304408163045,
+          "e": -22.218921837075815,
+          "i": 47.707434645768885
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "a962e36dba3863facdc540efc7d539715e5532457d16d4add546d3e83550a829",
+        "plan_fingerprint": "095c68639c162021db6e022b77c6e2489ec62ac75ba69cba6e40eab68550cba1",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "7e59f67f3c5f11ffdbe924d3e4836235859912b7f5a5b17709c69282b12f057c"
+      }
+    },
+    {
+      "id": "b11-r7-z288",
+      "window": 11,
+      "rank": 7,
+      "nz": 288,
+      "status": "static_rejected",
+      "static_reasons": [
+        "structure_translation",
+        "structure_translation_two_pairs"
+      ],
+      "translation_metrics": {
+        "structure_translation": 0.1437347989150745,
+        "structure_translation_nearest": 0.06763643563146154,
+        "structure_translation_two_pairs": 0.1437347989150745
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -3.2351591204138628,
+        "energy_rms_meV": 13.482311029569438,
+        "shape_margin": 0.04618097551665734,
+        "energy_margin_meV": 6.645281344395228,
+        "mean_cosine": 0.8431477579006124,
+        "role_cosines": {
+          "u": 0.9507980545998237,
+          "l": 0.8639899829301098,
+          "e": 0.7131783789092396,
+          "i": 0.8446246151632762
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.560992414124874,
+          "l": 31.15863186000244,
+          "e": -22.933694305697042,
+          "i": 48.31913354991428
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "diagnostic_only_static_rejected",
+      "source": {
+        "plan_sha256": "2632d70ea741c41bbc12c7234545635aed89f6ec6f305c8b2d746ac9f45f4f30",
+        "plan_fingerprint": "f1764bb3b674f19e4612d48d5be3304f00b830efbb99919c2adcace58e960af0",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "4a9de707a45973de611e55ae45ceccca7bd195dc1fba9d75a4154a6283105e75"
+      }
+    },
+    {
+      "id": "b11-r8-z96",
+      "window": 11,
+      "rank": 8,
+      "nz": 96,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06884871217126214,
+        "structure_translation_nearest": 1.2019685566422985e-07,
+        "structure_translation_two_pairs": 2.75002617359548e-06
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.787555555555553,
+        "energy_offset_model_minus_article_meV": -4.2840827065306275,
+        "energy_rms_meV": 11.653047805328136,
+        "shape_margin": 0.03035191621057487,
+        "energy_margin_meV": 6.718549038131402,
+        "mean_cosine": 0.8396623318105433,
+        "role_cosines": {
+          "u": 0.9476124137092832,
+          "l": 0.8579568474488352,
+          "e": 0.7027942548432508,
+          "i": 0.8502858112408038
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.065786066585229,
+          "l": 26.240567644204503,
+          "e": -21.161446871723,
+          "i": 48.76446233481076
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "e3355c77456f137d72e38aa7ef2e3fa345b5bed05db90b8ab8ce4d45e58f2ec5",
+        "plan_fingerprint": "122406084bd146792a112545f395acee2618314ac7f001c9f499e3e05c17f7f4",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "24dc445c290f54cd6cf95f67926a48f6d19e3e9377c00a5b66144ad67cab607a"
+      }
+    },
+    {
+      "id": "b11-r8-z144",
+      "window": 11,
+      "rank": 8,
+      "nz": 144,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06933066910714278,
+        "structure_translation_nearest": 2.6367327814744473e-07,
+        "structure_translation_two_pairs": 4.89538191817343e-06
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -3.356294624185146,
+        "energy_rms_meV": 11.908916825149777,
+        "shape_margin": 0.03274574728229496,
+        "energy_margin_meV": 6.251439837036857,
+        "mean_cosine": 0.8359281946896449,
+        "role_cosines": {
+          "u": 0.9353022721202692,
+          "l": 0.8587319798862671,
+          "e": 0.7054680771819045,
+          "i": 0.8442104495701385
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.42143596195785,
+          "l": 28.359789238780525,
+          "e": -22.690819568624462,
+          "i": 49.530115871145505
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "8df12ec7ebd433223d15003333cbf837bdcf230a34d4d086ed8f98e479ac0982",
+        "plan_fingerprint": "3e80cba652134e95d119a88e0befa1cd17775fb6d199a55fcd1a12716a8e711d",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "ffecb4300645e1420a4508bbb289465000df4ed354fff8fdb93c7cfefbd872f1"
+      }
+    },
+    {
+      "id": "b11-r8-z216",
+      "window": 11,
+      "rank": 8,
+      "nz": 216,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.07241354710597903,
+        "structure_translation_nearest": 2.8972705282101907e-07,
+        "structure_translation_two_pairs": 5.3781893022163135e-06
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -4.305382378754929,
+        "energy_rms_meV": 13.425835682016523,
+        "shape_margin": 0.033429995516838784,
+        "energy_margin_meV": 6.672881675213459,
+        "mean_cosine": 0.8355707626651809,
+        "role_cosines": {
+          "u": 0.9504192524628073,
+          "l": 0.8495297596402394,
+          "e": 0.7029761977780971,
+          "i": 0.83935784077958
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.299449279688625,
+          "l": 29.56757975623879,
+          "e": -22.505835417632515,
+          "i": 47.46297686668539
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "a657b75bf7eac6afb0cac2a3ada7480962ada2bc70ad985a41adae584a47e253",
+        "plan_fingerprint": "c9927bfc9d92cece67d0043a903e4539235f21f9ea7f48d8637401c2beb6aac6",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "f242376f8ab1676f415a450fc9b7a6e2253882c6e947e68842055f601e2adf13"
+      }
+    },
+    {
+      "id": "b11-r8-z288",
+      "window": 11,
+      "rank": 8,
+      "nz": 288,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.06762375101059656,
+        "structure_translation_nearest": 1.6509160140232783e-07,
+        "structure_translation_two_pairs": 3.460703071456871e-06
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -3.714696148122231,
+        "energy_rms_meV": 12.859783160023557,
+        "shape_margin": 0.04101569787631032,
+        "energy_margin_meV": 6.507976127885186,
+        "mean_cosine": 0.8405166616700787,
+        "role_cosines": {
+          "u": 0.9450495781571853,
+          "l": 0.8556211625052371,
+          "e": 0.7211092413431303,
+          "i": 0.8402866646747621
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.429528322660747,
+          "l": 29.575910085984848,
+          "e": -23.074471255964706,
+          "i": 48.25594825483019
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "99d02c913600999ab011a907e94005d9e1061e3f9381a61fc3e160907b0b089b",
+        "plan_fingerprint": "fbd7bed57df50770fec5813f556957b80946b2caed361e40ec4cdee3eaa082f5",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "9ca82ac2d3dfa559b9e8e13086891d50e72c158e9b1d9ba7ce2aa0961328bf5b"
+      }
+    },
+    {
+      "id": "b11-r11-z96",
+      "window": 11,
+      "rank": 11,
+      "nz": 96,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.024811290552149153,
+        "structure_translation_nearest": 1.570783228488359e-05,
+        "structure_translation_two_pairs": 6.025202366457871e-05
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.787555555555553,
+        "energy_offset_model_minus_article_meV": -4.478773089590679,
+        "energy_rms_meV": 11.388915971141522,
+        "shape_margin": 0.029581159477790386,
+        "energy_margin_meV": 6.625443634909387,
+        "mean_cosine": 0.8413105910743497,
+        "role_cosines": {
+          "u": 0.9487610479439951,
+          "l": 0.8625491109177594,
+          "e": 0.7038340699374912,
+          "i": 0.850098135498153
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 10.034921172359867,
+          "l": 25.567103799308143,
+          "e": -21.229640487613114,
+          "i": 48.758223157582385
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "be3a8a1f39c2d6ddbfacb73945c31e187d785fe01a8063581944554d9f1a29de",
+        "plan_fingerprint": "a5fb47bb1632b5a0d222f73c38e0fd661571d58e0875637bce1d69c72a8e99af",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "46334cd697e46f670b79d92198b1e3d92bf87c93f5bff9e286f57fc27f667cf6"
+      }
+    },
+    {
+      "id": "b11-r11-z144",
+      "window": 11,
+      "rank": 11,
+      "nz": 144,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.02614297210625158,
+        "structure_translation_nearest": 6.67162288141054e-05,
+        "structure_translation_two_pairs": 0.0001879049828451207
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.68711111111111,
+        "energy_offset_model_minus_article_meV": -3.3946595156904524,
+        "energy_rms_meV": 11.818729742904619,
+        "shape_margin": 0.033335475292402994,
+        "energy_margin_meV": 6.225387681191874,
+        "mean_cosine": 0.8364400549048117,
+        "role_cosines": {
+          "u": 0.9375962155580103,
+          "l": 0.859083291359682,
+          "e": 0.7050051900950765,
+          "i": 0.8440755226064779
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 12.434772141884006,
+          "l": 28.167268123958504,
+          "e": -22.707024079972037,
+          "i": 49.57204575136772
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "4eb49fdf85cd4c97183d4d92ffb3a6627c842f59606be318444e5ac4255d6240",
+        "plan_fingerprint": "6067baac4a234ceecd9f5c52151b419ca6f561a161ffea602613c35a77bf0bd7",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "4bfae820ee1d857176354db66a737e7d278e60165bc3cc0868cdc01fa3bc00fe"
+      }
+    },
+    {
+      "id": "b11-r11-z216",
+      "window": 11,
+      "rank": 11,
+      "nz": 216,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.02616771293769609,
+        "structure_translation_nearest": 5.668923598121748e-05,
+        "structure_translation_two_pairs": 0.00015114080627284045
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -4.0469789713556965,
+        "energy_rms_meV": 13.679457838771132,
+        "shape_margin": 0.02947679737579978,
+        "energy_margin_meV": 6.174883040473557,
+        "mean_cosine": 0.8336508730041551,
+        "role_cosines": {
+          "u": 0.9530003609257992,
+          "l": 0.8440800132526524,
+          "e": 0.6991650547203564,
+          "i": 0.8383580631178124
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 9.357598954572568,
+          "l": 30.28927355252956,
+          "e": -22.430127561110805,
+          "i": 47.64103916858589
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "0d894b14a88338469dbaabfa1c336d74975ea9e1c19c61ddd490f023370a7d39",
+        "plan_fingerprint": "eb8159fd069d7dc93bb98c6839336ebfcff55e1e56759cb2c1166a1b6dd7c8d7",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "44da68472ee6ff4fd9ec5bafe96461b89bd1abbe0c4436dbc8b3effab315fe22"
+      }
+    },
+    {
+      "id": "b11-r11-z288",
+      "window": 11,
+      "rank": 11,
+      "nz": 288,
+      "status": "figure_rejected",
+      "static_reasons": [],
+      "translation_metrics": {
+        "structure_translation": 0.02627814562170818,
+        "structure_translation_nearest": 0.00011892102349103698,
+        "structure_translation_two_pairs": 0.0002769742466267236
+      },
+      "figure_comparison": {
+        "common_shift_nm": -19.586666666666666,
+        "energy_offset_model_minus_article_meV": -3.366365435951825,
+        "energy_rms_meV": 13.210203277952132,
+        "shape_margin": 0.03208752036258744,
+        "energy_margin_meV": 6.626222198040595,
+        "mean_cosine": 0.8384692707765875,
+        "role_cosines": {
+          "u": 0.9479066074407658,
+          "l": 0.849667820737569,
+          "e": 0.7166692926924464,
+          "i": 0.8396333622355688
+        },
+        "role_indices": {
+          "u": 2,
+          "l": 3,
+          "e": 1,
+          "i": 4
+        },
+        "energy_best_role_indices": {
+          "u": 3,
+          "l": 2,
+          "e": 1,
+          "i": 4
+        },
+        "role_energies_meV": {
+          "u": 11.512421811377362,
+          "l": 30.548802621854026,
+          "e": -22.944566163136045,
+          "i": 48.46357998609736
+        },
+        "reasons": [
+          "shape_and_relative_energy_match_different_roles",
+          "energy_rms_above_threshold",
+          "role_cosine_below_threshold"
+        ],
+        "admitted": false
+      },
+      "figure_interpretation": "registered_gate",
+      "source": {
+        "plan_sha256": "8f80cb2eba5ef641cda892e5b1465d530342e083bfb3c64e8c868f11417a2c9e",
+        "plan_fingerprint": "a7b6c4edbbeb925faea1ed4928dc6f2ad30e92b10d73f8a2e225d40fd5771f79",
+        "execution_id": "execution-1",
+        "point_id": "point-1",
+        "artifact_root": "executions/execution-1/point-1/attempt-1/artifacts",
+        "sha256": "0a674a39890d7a4474a50bfe289f5e6e18d09c195045323012acc564e4479a07"
+      }
+    }
+  ],
+  "grid_contrasts": [
+    {
+      "window": 7,
+      "rank": 7,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9970216692673431,
+        "l": 0.9889045022172172,
+        "e": 0.9977725718371288,
+        "i": 0.9992803106872189
+      },
+      "relative_energy_max_change_meV": 7.999663908431559,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 7,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9910139790009934,
+        "l": 0.9478657106944868,
+        "e": 0.9962403263335955,
+        "i": 0.969774050042035
+      },
+      "relative_energy_max_change_meV": 11.989390941282279,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 7,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": true,
+      "role_cosines": {
+        "u": 0.999624354579229,
+        "l": 0.9926357737734895,
+        "e": 0.9977654331716896,
+        "i": 0.9957006259502041
+      },
+      "relative_energy_max_change_meV": 2.677817776874427,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 8,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9996548796650633,
+        "l": 0.9962560266294281,
+        "e": 0.9995485087988207,
+        "i": 0.9996975996758746
+      },
+      "relative_energy_max_change_meV": 3.8850164526769113,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 8,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9954482491302248,
+        "l": 0.9975799643120151,
+        "e": 0.9998600033016243,
+        "i": 0.9958525549428321
+      },
+      "relative_energy_max_change_meV": 4.329948870251345,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 8,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": true,
+      "role_cosines": {
+        "u": 0.9996366735680267,
+        "l": 0.9977335850131148,
+        "e": 0.997854130194347,
+        "i": 0.9996236424449974
+      },
+      "relative_energy_max_change_meV": 2.6987180372643547,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 11,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9996949586429603,
+        "l": 0.9955115022667581,
+        "e": 0.9996461183101963,
+        "i": 0.9996725771877033
+      },
+      "relative_energy_max_change_meV": 4.083236116730436,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 11,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9950632077310169,
+        "l": 0.9958697157173435,
+        "e": 0.9997155472189403,
+        "i": 0.9949864319650358
+      },
+      "relative_energy_max_change_meV": 5.2039086220135005,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 7,
+      "rank": 11,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": true,
+      "role_cosines": {
+        "u": 0.9996523401374087,
+        "l": 0.9980421009411148,
+        "e": 0.9981659986486103,
+        "i": 0.9996068779537767
+      },
+      "relative_energy_max_change_meV": 2.6679811810814567,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 7,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9969378558377984,
+        "l": 0.9847421230277639,
+        "e": 0.9966107949027867,
+        "i": 0.9965516465695186
+      },
+      "relative_energy_max_change_meV": 10.31530470549987,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 7,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.992530210385832,
+        "l": 0.9627591737820457,
+        "e": 0.9973315082050643,
+        "i": 0.9794867120479084
+      },
+      "relative_energy_max_change_meV": 10.438158888509848,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 7,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9994877158862625,
+        "l": 0.9910050286259837,
+        "e": 0.9967336487336139,
+        "i": 0.9944638792395871
+      },
+      "relative_energy_max_change_meV": 4.738485520483463,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 8,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9996548352603902,
+        "l": 0.996256674892885,
+        "e": 0.9995485306446977,
+        "i": 0.999697632485868
+      },
+      "relative_energy_max_change_meV": 3.885022240608304,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 8,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9954481454509323,
+        "l": 0.9975801809936115,
+        "e": 0.9998600167098065,
+        "i": 0.9958527722792742
+      },
+      "relative_energy_max_change_meV": 4.329785419539922,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 8,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": true,
+      "role_cosines": {
+        "u": 0.9996366782562827,
+        "l": 0.997733434762397,
+        "e": 0.9978541562414166,
+        "i": 0.9996237109530791
+      },
+      "relative_energy_max_change_meV": 2.6987152079311354,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 11,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.999694360286718,
+        "l": 0.9955195798038162,
+        "e": 0.9996468232765464,
+        "i": 0.9996730544650408
+      },
+      "relative_energy_max_change_meV": 4.078680430567395,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 11,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9950626831319149,
+        "l": 0.9958793396205368,
+        "e": 0.9997161086950981,
+        "i": 0.9949902598165336
+      },
+      "relative_energy_max_change_meV": 5.200170496023729,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 9,
+      "rank": 11,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": true,
+      "role_cosines": {
+        "u": 0.9996515848241097,
+        "l": 0.9980506621553525,
+        "e": 0.9981613473773169,
+        "i": 0.9996053260931195
+      },
+      "relative_energy_max_change_meV": 2.6689489487780573,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 7,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9979857222689592,
+        "l": 0.9849853544617854,
+        "e": 0.996944935781686,
+        "i": 0.99360986380543
+      },
+      "relative_energy_max_change_meV": 10.194490812983888,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 7,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9949359920924572,
+        "l": 0.9849380764285377,
+        "e": 0.9990798501646838,
+        "i": 0.9897701343598743
+      },
+      "relative_energy_max_change_meV": 6.766590050478708,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 7,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9994885980783675,
+        "l": 0.9957944331167707,
+        "e": 0.9970542717962377,
+        "i": 0.997766454683073
+      },
+      "relative_energy_max_change_meV": 4.234232066215931,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 8,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9996548328044358,
+        "l": 0.9962567103739356,
+        "e": 0.999548531886274,
+        "i": 0.9996976342561292
+      },
+      "relative_energy_max_change_meV": 3.8850225922740815,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 8,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9954481402763862,
+        "l": 0.9975801918880941,
+        "e": 0.9998600173861141,
+        "i": 0.9958527831712942
+      },
+      "relative_energy_max_change_meV": 4.329777199727488,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 8,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": true,
+      "role_cosines": {
+        "u": 0.9996366786878887,
+        "l": 0.9977334253950761,
+        "e": 0.9978541585981681,
+        "i": 0.9996237147756716
+      },
+      "relative_energy_max_change_meV": 2.698714881304314,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 11,
+      "nz": [
+        96,
+        144
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9996941900046321,
+        "l": 0.9955211480807322,
+        "e": 0.9996470210123258,
+        "i": 0.9996731758425305
+      },
+      "relative_energy_max_change_meV": 4.077547917009284,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 11,
+      "nz": [
+        144,
+        216
+      ],
+      "admitted": false,
+      "role_cosines": {
+        "u": 0.9950625490523389,
+        "l": 0.9958819119048423,
+        "e": 0.9997162586194737,
+        "i": 0.9949912602090849
+      },
+      "relative_energy_max_change_meV": 5.199178615882495,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    },
+    {
+      "window": 11,
+      "rank": 11,
+      "nz": [
+        216,
+        288
+      ],
+      "admitted": true,
+      "role_cosines": {
+        "u": 0.9996513301565462,
+        "l": 0.998053457302664,
+        "e": 0.9981598266540495,
+        "i": 0.9996047844037813
+      },
+      "relative_energy_max_change_meV": 2.669261458830034,
+      "interpretation": "diagnostic_grid_comparison_not_a_registered_grid_gate"
+    }
+  ],
+  "window_confirmations": [],
+  "technical_failures": [],
+  "portability": {
+    "plan_fingerprint": "742d62741c4efeb44322b6aaf7da40f5f57bcad91dbd0944b51cd0c876a3c353",
+    "rank": 7,
+    "spatial_nodes": 144,
+    "max_energy_error_eV": 1.2212453270876722e-15,
+    "max_energy_error_limit_eV": 1e-10,
+    "projector_distance": 1.5423760275074485e-14,
+    "projector_distance_limit": 1e-08,
+    "same_failed_checks": true,
+    "operator_verdicts": [
+      "failed",
+      "failed"
+    ],
+    "failed_checks": [
+      [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ],
+      [
+        "structure_translation",
+        "structure_translation_nearest",
+        "structure_translation_two_pairs"
+      ]
+    ],
+    "result_sha256": [
+      "60b8bfae93522b7719d7397d4e9eef45b0b59858c0abbb786ed8dbb3abede891",
+      "4400443fd04a570d97eca2d6d002826d81d4433ab50b6e6b034721522b01b941"
+    ],
+    "reproducible": true
+  }
+}
