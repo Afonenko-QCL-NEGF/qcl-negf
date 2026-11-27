@@ -3,6 +3,46 @@ using Test
 using YAML
 using QCLNEGFRunner
 using SHA
+using Unitful
+
+@testset "Field-authored study has one canonical bias in the point passport" begin
+    mktempdir() do directory
+        examples = normpath(joinpath(@__DIR__, "..", "..", "examples", "config"))
+        configuration = YAML.load_file(joinpath(examples, "reference-2019-70k.yaml"))
+        physical = configuration["physical"]
+        delete!(physical, "voltage_per_period")
+        physical["field_bias"] = "21 kV/cm"
+        source_path = joinpath(directory, "field.yaml")
+        YAML.write_file(source_path, configuration)
+        source = load_run_configuration(source_path)
+        period_m = ustrip(u"m", QCLNEGFRunner.period_length(source.physical))
+        voltage = 2.1e6 * period_m
+
+        study = YAML.load_file(joinpath(examples, "operator-algebra.yaml"))
+        study["configuration"]["sources"] = [source_path]
+        study["axes"]["voltages"] = Dict("values" => [voltage], "unit" => "V")
+        definition = joinpath(directory, "study.yaml")
+        YAML.write_file(definition, study)
+        plan = resolve_scientific_plan(definition)
+        frozen = scientific_plan_dict(plan)
+        @test only(load_scientific_plan(frozen).points).voltage_per_period_V ≈ voltage
+        passport = only(frozen["points"])["effective_inputs"]
+        @test passport["field_V_per_m"] ≈ 2.1e6
+        @test passport["period_length_m"] ≈ period_m
+
+        workflow = QCLNEGFRunner.QCLScientificWorkflow
+        point_configuration = workflow._point_resolved_raw(
+            only(plan.executions).configuration, only(plan.points),
+        )
+        @test !haskey(point_configuration["physical"], "field_bias")
+        point_path = joinpath(directory, "point.yaml")
+        YAML.write_file(point_path, point_configuration)
+        @test ustrip(u"V/m", load_run_configuration(point_path).physical.F_bias) ≈ 2.1e6
+        point_configuration["physical"]["field_bias"] = "21 kV/cm"
+        YAML.write_file(point_path, point_configuration)
+        @test_throws QCLNEGFRunner.ConfigurationError load_run_configuration(point_path)
+    end
+end
 
 @testset "Scientific plan freeze, shared inclusions and explicit repeats" begin
     base=normpath(joinpath(@__DIR__, "..", "fixtures", "research-inputs", "model", "reference-2019-70k.yaml"))

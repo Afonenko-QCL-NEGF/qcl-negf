@@ -52,6 +52,7 @@ end
 function _point_resolved_raw(configuration, point::ScientificPoint)
     raw=deepcopy(configuration.raw)
     physical=get!(raw, "physical", Dict{String,Any}())
+    delete!(physical, "field_bias")
     physical["voltage_per_period"]="$(point.voltage_per_period_V) V"
     physical["lattice_temperature"]="$(point.temperature_K) K"
     physical["lo_temperature"]="$(point.temperature_K) K"
@@ -61,9 +62,12 @@ function _point_resolved_raw(configuration, point::ScientificPoint)
     return raw
 end
 function _point_passport(configuration, point::ScientificPoint)
+    period_m = Float64(ustrip(u"m", period_length(configuration.physical)))
     return Dict{String,Any}(
         "temperature_K"=>point.temperature_K,
         "voltage_per_period_V"=>point.voltage_per_period_V,
+        "period_length_m"=>period_m,
+        "field_V_per_m"=>point.voltage_per_period_V / period_m,
         "configuration_hash"=>bytes2hex(
             sha256(canonical_bytes(_point_resolved_raw(configuration, point))),
         ),

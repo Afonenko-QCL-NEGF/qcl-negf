@@ -629,7 +629,7 @@ function commit_point_artifacts(
                     period_length(solution.problem.physical),
                 ),
             )*" V"
-            resolved["physical"]["field_bias"]=nothing
+            delete!(resolved["physical"], "field_bias")
             resolved["physical"]["lattice_temperature"]=string(
                 _kelvin(solution.problem.physical.Tᴸ),
             )*" K"
