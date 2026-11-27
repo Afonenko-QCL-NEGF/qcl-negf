@@ -399,39 +399,32 @@ function _operator_lo_equilibrium_checks()
 end
 function _structure_spectrum_checks(configuration, point)
     bn=_DIAGNOSTIC_CORE
-    raw=deepcopy(configuration.raw)
-    if point!==nothing
-        raw["physical"]["voltage_per_period"]="$(point.voltage_per_period_V) V"
-        raw["physical"]["lattice_temperature"]="$(point.temperature_K) K"
-        raw["physical"]["lo_temperature"]="$(point.temperature_K) K"
-    end
-    c=_resolve_configuration(raw, configuration.provenance)
-    grids=bn.build_grids(c.physical, c.numerical, c.scales)
-    profiles=bn.build_profiles(c.physical, c.numerical, c.scales, grids)
-    basis=bn.build_basis(
-        c.physical,
-        c.numerical,
-        c.scales,
-        grids,
-        profiles;
+    raw = point === nothing ? configuration.raw : _point_resolved_raw(configuration, point)
+    c = _resolve_configuration(raw, configuration.provenance)
+    grids = bn.build_grids(c.physical, c.numerical, c.scales)
+    profiles = bn.build_profiles(c.physical, c.numerical, c.scales, grids)
+    spectrum = bn.QCLNEGF.localized_cell_spectrum(
+        c.physical, c.numerical, c.scales, grids, profiles;
         localization = c.algorithms.localization,
     )
-    projected=bn.project_hamiltonians(
-        basis,
-        grids,
-        profiles,
-        c.physical,
-        c.scales,
-        zeros(length(grids.x)),
-    )
+    basis = spectrum.basis
+    projected = spectrum.hamiltonians_dimensionless
+    modes = spectrum.amplitudes_per_sqrt_nm
     limits=bn.QCLNumerics._STRUCTURAL_VALIDATION_LIMITS
     row=_gate("structure_basis_orthonormal", basis.r_orth, limits[:basis_orthogonality])
     merge!(
         row,
         Dict(
             "scope"=>"single-electron_basis_no_scattering_no_stationary_certificate",
-            "energies_eV"=>eigvals(Hermitian(Matrix(view(projected, 1, :, :)))) .*
-                           c.scales.E₀_eV,
+            "energies_eV"=>spectrum.energies_eV .- spectrum.energy_reference_eV,
+            "cell_spectrum"=>Dict(
+                "energies_eV"=>spectrum.energies_eV,
+                "energy_reference_eV"=>spectrum.energy_reference_eV,
+                "z_nm"=>spectrum.z_nm,
+                "metric_nm"=>spectrum.metric_nm,
+                "amplitudes_real_per_sqrt_nm"=>[real.(column) for column in eachcol(modes)],
+                "amplitudes_imag_per_sqrt_nm"=>[imag.(column) for column in eachcol(modes)],
+            ),
             "zero_field_basis_energies_eV"=>eigvals(Hermitian(basis.H₀)) .* c.scales.E₀_eV,
             "hartree_eV"=>0.0,
             "window_energies_eV"=>basis.window_eigenvalues .* c.scales.E₀_eV,

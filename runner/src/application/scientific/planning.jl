@@ -211,8 +211,16 @@ function resolve_scientific_plan(
     source::AbstractString;
     maximum_solver_runs::Int = 10000,
 )
-    maximum_solver_runs>0 || throw(ArgumentError("maximum_solver_runs must be positive"))
     root=read_scientific_definition(repository, String(source))
+    return _resolve_scientific_plan(repository, root; maximum_solver_runs)
+end
+
+function _resolve_scientific_plan(
+    repository::AbstractScientificDefinitionRepository,
+    root::ScientificDefinition;
+    maximum_solver_runs::Int = 10000,
+)
+    maximum_solver_runs>0 || throw(ArgumentError("maximum_solver_runs must be positive"))
     inclusions=ScientificInclusion[]
     executions=ScientificExecution{ResolvedRunConfiguration}[]
     points=ScientificPoint[]

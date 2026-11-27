@@ -171,8 +171,13 @@ end
 function read_scientific_definition(::FilesystemScientificDefinitions, requested::String)
     isfile(requested) || throw(ArgumentError("scientific definition not found: $requested"))
     source=realpath(requested)
+    document = YAML.load_file(source; dicttype = Dict{String,Any})
+    return _parse_scientific_definition(document, source)
+end
+
+function _parse_scientific_definition(document, source)
     data=_keys_input(
-        _mapping_input(YAML.load_file(source; dicttype = Dict{String,Any}), source),
+        _mapping_input(document, source),
         (
             "schema",
             "kind",
@@ -481,4 +486,20 @@ function is_scientific_definition(path::AbstractString)
     return document isa AbstractDict &&
            get(document, "schema", nothing)=="qcl-negf-study-v2" &&
            get(document, "kind", nothing) in ("study", "meta")
+end
+
+"""
+    resolve_scientific_plan(definition::AbstractDict; base_directory, maximum_solver_runs)
+
+Resolve an in-memory Julia study definition with the same rules as an authored
+YAML study. Resolve relative external sources against `base_directory`.
+"""
+function resolve_scientific_plan(
+    definition::AbstractDict;
+    base_directory::AbstractString,
+    maximum_solver_runs::Int = 10000,
+)
+    source = joinpath(realpath(base_directory), "in-memory-study.yaml")
+    root = _parse_scientific_definition(definition, source)
+    return _resolve_scientific_plan(FilesystemScientificDefinitions(), root; maximum_solver_runs)
 end
