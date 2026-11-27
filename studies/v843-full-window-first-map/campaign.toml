@@ -1,0 +1,105 @@
+# Протокол опыта. Runner получает развёрнутые численные входы отдельно.
+schema = "v843-full-window-first-map/1"
+application_base = "6a000d57d726bd7e99e4a9c5d03ceb68c98e5f3e"
+core_commit = "0eba158d21148e0cb3f8c4dae31195aad1f2a43d"
+device = "studies/fath-v843/controls/v843-input/dupont/device.toml"
+static_source = "studies/v843-spectrum/b7.yaml"
+literature_rule = "studies/v843-spectrum/admission.toml"
+previous_results = "studies/v843-grid-cluster/evidence/run-95/summary.json"
+
+[point]
+field_kV_cm = 21.0
+voltage_mV_per_period = 75.936
+temperature_K = 50
+lo_temperature_K = 50
+hartree = "fixed_zero"
+light = "dark"
+electron_electron = false
+channels = ["LO", "acoustic", "impurity", "IFR", "alloy"]
+
+[representation]
+localization = "pzp_tails"
+rank_per_period = 11
+spatial_nodes_per_period = 288
+hamiltonian_periods = 11
+confirmation_periods = 9
+observation_periods = 1
+
+[map]
+energy_min_meV = -650.0
+energy_max_meV = 1000.0
+energy_nodes = 239
+energy_trust_margin_meV = 390.0
+radial_max_nm_inverse = 0.6
+radial_nodes = 17
+angular_nodes = 128
+qz_max_nm_inverse = 10.0
+qz_nodes = 321
+seed_broadening_meV = 0.5
+maximum_fresh_maps = 1
+
+[checks]
+anchor_rms_atol_meV = 0.001
+algebra_relative = 1e-10
+algebra_floor = 1e-14
+weighted_lo_adjoint_relative = 1e-12
+operator_action_relative = 0.01
+current_atol_A_cm2 = 1.0
+current_rtol = 0.01
+
+[resources]
+policy = "full-machine"
+julia_compute_threads = 1
+blas_threads = "allocated_slot_cpus"
+jobs_per_machine = 1
+
+[[task]]
+id = "BASIS"
+parents = []
+purpose = "Геометрия B11, полный W и парный спектр по прежним критериям"
+
+[[task]]
+id = "NEIGHBOR"
+parents = []
+purpose = "Независимый полный PzP на B9 с тем же рангом и сеткой"
+
+[[task]]
+id = "HOP"
+parents = ["BASIS"]
+purpose = "H(k), межпериодные блоки, трансляция и единицы"
+
+[[task]]
+id = "ELASTIC"
+parents = ["BASIS"]
+purpose = "Действие примесного, акустического, интерфейсного и сплавного операторов"
+
+[[task]]
+id = "PHONON"
+parents = ["BASIS"]
+purpose = "Действие LO, поглощение, испускание и взвешенная сопряжённость"
+
+[[task]]
+id = "CUTS"
+parents = ["BASIS"]
+purpose = "Токовый оператор на сечениях и двух швах, независимая сверка знаков"
+
+[[task]]
+id = "SEED"
+parents = ["BASIS"]
+purpose = "Холодный вход на собственных параметрах V843, нормировка, объём памяти"
+
+[[task]]
+id = "ADMIT"
+parents = ["BASIS", "NEIGHBOR", "HOP", "ELASTIC", "PHONON", "CUTS", "SEED"]
+purpose = "Допуск собранной задачи по первичным квитанциям, соседнему окну и памяти"
+
+[[task]]
+id = "MAP"
+parents = ["ADMIT"]
+prefer_memory = true
+purpose = "Один свежий образ без смешивания на допущенном полном окне"
+
+[[task]]
+id = "READ"
+parents = ["ADMIT", "MAP"]
+purpose = "Независимый пересчёт тока и вердикта из компактных измерений"
