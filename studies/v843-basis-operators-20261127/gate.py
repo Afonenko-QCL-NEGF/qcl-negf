@@ -14,8 +14,11 @@ with (Path("results") / f"{parent}.toml").open("rb") as stream:
     verdict = tomllib.load(stream)
 if verdict.get("task") != parent or type(verdict.get("qualified")) is not bool:
     raise ValueError(f"Missing explicit verdict from {parent}")
-if verdict["qualified"]:
+status = verdict.get("status")
+if status == "admitted" and verdict["qualified"]:
     sys.exit(0)
+if status not in {"rejected", "skipped_by_gate"} or verdict["qualified"]:
+    raise ValueError(f"Inconsistent scientific verdict from {parent}: {status!r}")
 out = Path("results") / f"{child}.toml"
 temporary = out.with_suffix(".tmp")
 message = f"{parent} did not qualify; see results/{parent}.toml"

@@ -162,9 +162,15 @@ end
 
 function read_basis_candidate_results(parent)
     candidates = Dict{Tuple{Int,Int},Dict{String,Any}}()
+    baseline_reproduced = false
     for window in (7,9,11)
         report = TOML.parsefile(joinpath(parent, "B$window.toml"))
         p_basis = (window-1)÷2
+        if window == 7
+            baseline = get(report, "baseline_reproduced", nothing)
+            baseline isa Bool || error("Missing explicit B7 baseline verdict")
+            baseline_reproduced = baseline
+        end
         report["field_kV_cm"] == 21 && report["spatial_nodes"] == 144 &&
             report["window_periods"] == window && report["p_basis"] == p_basis ||
             error("Basis direction has mismatched scientific input")
@@ -178,7 +184,7 @@ function read_basis_candidate_results(parent)
         end
     end
     length(candidates) == 3length(RANKS) || error("Incomplete basis candidate matrix")
-    return candidates
+    return (; candidates, baseline_reproduced)
 end
 
 function bloch_diagnostics(parent)
@@ -200,7 +206,7 @@ end
 function run_select(task::String, args::Vector{String})
     task == "SELECT" && isempty(args) || error("SELECT takes no positional inputs")
     parent = ENV["QCL_PARENT_RESULTS"]
-    candidates = read_basis_candidate_results(parent)
+    (; candidates, baseline_reproduced) = read_basis_candidate_results(parent)
     bloch = bloch_diagnostics(parent)
     fig = joinpath(@__DIR__, "..", "fath-v843", "controls", "fig1", "fig1_profiles.csv")
     reference = figure_profiles(fig)
@@ -214,10 +220,14 @@ function run_select(task::String, args::Vector{String})
             row["reason"] = get(candidate, "reason", "basis extraction did not provide identifiable reference modes")
         elseif candidate["status"] == "measured"
             metrics = Dict(string(name)=>candidate[string(name)] for name in keys(TRANSLATION_LIMITS))
-            structural = all(isfinite(metrics[string(name)]) && 0 <= metrics[string(name)] <= limit
-                             for (name,limit) in pairs(TRANSLATION_LIMITS))
-            candidate["static_pass"] == structural || error("Inconsistent basis gate for $id")
+            translation_pass = all(isfinite(metrics[string(name)]) && 0 <= metrics[string(name)] <= limit
+                                    for (name,limit) in pairs(TRANSLATION_LIMITS))
+            reported_static_pass = candidate["static_pass"]
+            reported_static_pass isa Bool || error("Missing explicit static gate for $id")
+            reported_static_pass && !translation_pass && error("Inconsistent translation gate for $id")
+            structural = translation_pass && reported_static_pass
             row["translation_metrics"] = metrics
+            row["reported_static_pass"] = reported_static_pass
             row["status"] = structural ? "static_admitted" : "static_rejected"
             if structural
                 fit = compare_figure(candidate, reference)
@@ -236,13 +246,13 @@ function run_select(task::String, args::Vector{String})
         haskey(fits, small) && haskey(fits, large) || continue
         push!(expansions, confirm_expansion(candidates[small], candidates[large], fits[small], fits[large]))
     end
-    compatible = filter(x -> x["admitted"], expansions)
+    compatible = filter(x -> baseline_reproduced && x["admitted"], expansions)
     input_hashes = Dict(name => bytes2hex(open(sha256, joinpath(parent, name * ".toml")))
                         for name in ("B7","B9","B11","BLOCH144","BLOCH288"))
     report = Dict{String,Any}(
         "schema"=>"v843-basis-selection-v1",
         "status"=>isempty(compatible) ? "rejected" : "admitted",
-        "qualified"=>!isempty(compatible),
+        "qualified"=>!isempty(compatible), "baseline_reproduced"=>baseline_reproduced,
         "field_kV_cm"=>21.0, "spatial_nodes"=>144, "candidates"=>rows,
         "expansion_checks"=>expansions, "bloch_zero_field_diagnostics"=>bloch,
         "figure_sha256"=>bytes2hex(open(sha256,fig)), "parent_sha256"=>input_hashes,
@@ -251,7 +261,9 @@ function run_select(task::String, args::Vector{String})
         "selection_rule"=>"smallest qualified rank; prefer the larger window confirmed by its adjacent smaller window",
     )
     if isempty(compatible)
-        report["reason"] = "no_static_and_figure_admitted_rank_stable_under_window_expansion"
+        report["reason"] = baseline_reproduced ?
+            "no_static_and_figure_admitted_rank_stable_under_window_expansion" :
+            "b7_archive_baseline_did_not_reproduce"
         return report
     end
     best = first(sort!(compatible; by=x -> (x["rank"],-x["larger_p_basis"])))

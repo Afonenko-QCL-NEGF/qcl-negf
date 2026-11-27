@@ -53,7 +53,7 @@ def inventory():
 def submit(task, part, os_name, cpus, ram, parents, policy, revision):
     archive = "source.zip" if os_name == "WINDOWS" else "source.tar.gz"
     files = [archive, *(f"results/{p}.toml" for p in parents)]
-    args = [task, str(cpus), "8"]
+    args = [task, str(cpus), str((ram - 2048) // 1024)]
     if part:
         args.append(part)
     if os_name == "WINDOWS":
@@ -126,11 +126,6 @@ def write_stage(source, run):
 
     windows_policy = f'TARGET.OpSys == "WINDOWS" && TARGET.TotalSlotCpus == {windows_cpu} && regexp("^qcl-win-[1-6]$", TARGET.QCLWorkerId)'
     linux_policy = f'TARGET.OpSys == "LINUX" && TARGET.TotalSlotCpus == {linux_cpu} && TARGET.Machine == "qcl-condor"'
-    if any(row["id"] == "dell" for row in rows):
-        # SHIFT has nine independent combinations and does not need a full 28-CPU slot.
-        shift_policy = 'TARGET.OpSys == "LINUX" && TARGET.Machine == "dell"'
-    else:
-        shift_policy = linux_policy
     matrix = []
     dag = []
     plan = json.loads((run / "experiment-matrix.json").read_text())
@@ -142,7 +137,6 @@ def write_stage(source, run):
         policy = windows_policy if os_name == "WINDOWS" else linux_policy
         if node in {"SHIFT", "SELECT"}:
             cpus, ram = (9, 4096) if node == "SHIFT" else (1, 4096)
-            policy = shift_policy if node == "SHIFT" else linux_policy
         sub = f"site/{node}.sub"
         (run / sub).write_text(submit(task, part, os_name, cpus, ram, parents, policy, revision))
         matrix.append({"node": node, "direction": task, "part": part or None,
