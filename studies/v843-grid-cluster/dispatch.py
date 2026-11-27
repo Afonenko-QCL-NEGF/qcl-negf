@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Prepare or collect the V843 grid without contacting a scheduler.
 
-  python dispatch.py prepare WORK PACK --commit COMMIT [--linux-only] [--analysis-python PYTHON]
+  python dispatch.py prepare WORK PACK --commit COMMIT --workers INVENTORY [--linux-only]
   python dispatch.py collect PACK WORK
 
 WORK contains index.json and plans/<id>.json. COMMIT must contain this script,
 worker.py and domain.jl. Prepare writes a fresh PACK; no git working-tree files
 are used as source. PACK includes a DAG, isolated jobs, and editable site submit
-files. Supply --linux-weight and --windows-weight according to usable 2-CPU slots;
---linux-python and --windows-python are absolute interpreter paths on worker OSes.
+files. INVENTORY lists idle partitionable workers and their measured resource
+grants. A job requests all advertised CPUs of its selected worker, so campaign
+jobs do not share that worker. The memory grant must fit the measured available
+memory and the slot. OS weights follow the number of eligible workers.
+--linux-python and --windows-python select the site executables.
 On the submit host inspect site-*.sub: set the absolute executable path to
 Python 3 on each OS, available CPUs/memory/disk, optional Julia/depot environment
 and site requirements. Transfer is enabled, no shared output directories are used.
@@ -18,7 +21,7 @@ even after failed jobs. The analysis Python must have its dependencies installed
 Submit the DAG only after site adaptation and pool inventory/capacity checks.
 There is no automatic retry: retain failed archives/logs and choose a new attempt.
 
-Julia 1.13 and a writable prepared depot are required on workers. Alternatively set
+Julia 1.13.4 and a writable prepared depot are required on workers. Alternatively set
 QCL_INSTANTIATE=1 in site environment and allow network for Julia Pkg; Manifest
 must resolve its pinned published dependencies. Linux/Windows depots are separate.
 --linux-only omits the Windows duplicate and marks cross-OS confirmation unavailable.
@@ -58,6 +61,8 @@ def archive(commit):
                 continue
             if not m.isfile():
                 raise ValueError(f'unsupported source entry: {m.name}')
+            if m.name.startswith('studies/v843-grid-cluster/evidence/'):
+                continue
             if not (m.name.startswith(('runner/', 'analysis/src/', 'studies/v843-spectrum/', 'studies/v843-grid-cluster/')) or m.name == 'studies/fath-v843/controls/fig1/fig1_profiles.csv'):
                 continue
             files[m.name] = t.extractfile(m).read()
@@ -66,6 +71,9 @@ def archive(commit):
     for name in required:
         if name not in files:
             raise ValueError(f'commit lacks {name}; commit all campaign source first')
+    worker = files['studies/v843-grid-cluster/worker.py']
+    if worker != Path(__file__).with_name('worker.py').read_bytes():
+        raise ValueError('the archived worker must match the dispatch checkout')
     # The only permitted path entry is the project package itself, relative to runner/.
     paths = re.findall(rb'^path\s*=\s*"([^"]+)"', files['runner/Manifest.toml'], re.M)
     if paths != [b'.']:
@@ -75,10 +83,34 @@ def archive(commit):
     with zipfile.ZipFile(buf, 'w', compression=zipfile.ZIP_DEFLATED, allowZip64=True) as z:
         for name, data in sorted(files.items()):
             z.writestr(name, data)
-    return buf.getvalue(), files['studies/v843-grid-cluster/worker.py']
+    return buf.getvalue(), worker
 
 
-def prepare(work, pack, commit, linux_only, analysis_python, linux_weight, windows_weight, linux_python, windows_python):
+def load_workers(inventory, linux_only):
+    rows = json.loads(inventory.read_text(encoding='utf-8'))
+    workers = {'linux': [], 'windows': []}
+    seen = set()
+    if not isinstance(rows, list) or not rows:
+        raise ValueError('worker inventory must be a non-empty JSON list')
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError('expected an object for each worker')
+        os_name = row.get('os')
+        domain = row.get('filesystem_domain')
+        if (os_name not in ('linux', 'windows') or not isinstance(domain, str)
+                or not re.fullmatch(r'[A-Za-z0-9_.-]+', domain) or domain in seen):
+            raise ValueError(f'expected a unique, portable worker domain and a supported OS: {row}')
+        for key in ('cpus', 'memory_mib'):
+            if type(row.get(key)) is not int or row[key] < 1:
+                raise ValueError(f'{key} must be a positive integer for {domain}')
+        seen.add(domain)
+        workers[os_name].append(row)
+    if not workers['linux'] or linux_only != (not workers['windows']):
+        raise ValueError('a Linux worker is required; use --linux-only for an all-Linux inventory')
+    return workers
+
+
+def prepare(work, pack, commit, linux_only, analysis_python, inventory, linux_python, windows_python):
     work, pack = work.resolve(), pack.resolve()
     analysis_python = Path(os.path.abspath(analysis_python))
     if not analysis_python.is_file():
@@ -86,8 +118,8 @@ def prepare(work, pack, commit, linux_only, analysis_python, linux_weight, windo
     for path in (work, pack, analysis_python):
         if not re.fullmatch(r'[A-Za-z0-9_./-]+', str(path)):
             raise ValueError(f'Use portable absolute paths without spaces or special characters: {path}')
-    if linux_weight < 1 or windows_weight < 1:
-        raise ValueError('OS weights must be positive integers')
+    workers = load_workers(inventory, linux_only)
+    linux_weight, windows_weight = len(workers['linux']), len(workers['windows'])
     for executable in (linux_python, windows_python):
         if not re.fullmatch(r'[A-Za-z0-9_./:-]+', executable):
             raise ValueError('worker Python paths must use portable characters and forward slashes')
@@ -131,12 +163,19 @@ def prepare(work, pack, commit, linux_only, analysis_python, linux_weight, windo
             jobs.append(('domain-' + i, i, 'domain', preset, assign()))
     dag = []
     records = []
+    worker_counts = {'linux': 0, 'windows': 0}
     for name, case, kind, preset, osname in jobs:
+        eligible = workers[osname]
+        slot = eligible[worker_counts[osname] % len(eligible)]
+        worker_counts[osname] += 1
+        domain, cpus, memory = slot['filesystem_domain'], slot['cpus'], slot['memory_mib']
         job = {'name': name, 'case': case, 'kind': kind, 'preset': preset,
-               'source_commit': revision, 'source_sha256': sha(source), 'plan_sha256': sha(plans[case]), 'target_os': osname}
+               'source_commit': revision, 'source_sha256': sha(source), 'plan_sha256': sha(plans[case]),
+               'target_os': osname, 'request_cpus': cpus, 'request_memory_mib': memory}
         records.append(job)
         (pack / 'jobs' / ('job-' + name + '.json')).write_text(json.dumps(job, indent=2) + '\n', encoding='utf-8')
-        dag += [f'JOB {name} site-{osname}.sub', f'VARS {name} job="{name}" case="{case}"']
+        dag += [f'JOB {name} site-{osname}.sub',
+                f'VARS {name} job="{name}" case="{case}" worker="{domain}" cpus="{cpus}" memory="{memory}"']
     dag.append('FINAL FINALIZE final.sub')
     final_sub = f'''universe = local
 executable = {analysis_python}
@@ -148,10 +187,14 @@ queue 1
 '''
     (pack / 'final.sub').write_text(final_sub, encoding='utf-8')
     (pack / 'campaign.dag').write_text('\n'.join(dag) + '\n', encoding='utf-8')
-    (pack / 'manifest.json').write_text(json.dumps({'commit': revision, 'cross_os_requested': not linux_only, 'jobs': records}, indent=2) + '\n', encoding='utf-8')
+    manifest = {'commit': revision, 'resource_policy': 'full-machine',
+                'cross_os_requested': not linux_only, 'jobs': records}
+    (pack / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     for osname, condor_os, python in [('linux', 'LINUX', linux_python), ('windows', 'WINDOWS', windows_python)]:
+        if not workers[osname]:
+            continue
         # Paths are simple relative names. HTCondor transfers basename inputs to scratch.
-        submit = f'''# EDIT executable, resources, environment and site-specific requirements before use.
+        submit = f'''# Verify the site paths, transfer settings and requirements before use.
 # Python and Julia must be installed on each matching execute worker.
 universe = vanilla
 executable = {python}
@@ -165,10 +208,10 @@ transfer_output_remaps = "result-$(job).zip=returned/$(job).zip"
 output = logs/$(job).out
 error = logs/$(job).err
 log = logs/$(job).log
-request_cpus = 2
-request_memory = 8192MB
+request_cpus = $(cpus)
+request_memory = $(memory)MB
 request_disk = 4096MB
-requirements = (OpSys == "{condor_os}")
+requirements = (TARGET.OpSys == "{condor_os}") && (TARGET.FileSystemDomain == "$(worker)")
 # environment = "QCL_JULIA=... QCL_INSTANTIATE=1 JULIA_DEPOT_PATH=..."
 queue 1
 '''
@@ -243,8 +286,7 @@ def main():
     prep.add_argument('pack', type=Path)
     prep.add_argument('--commit', required=True)
     prep.add_argument('--linux-only', action='store_true')
-    prep.add_argument('--linux-weight', type=int, default=1, help='relative number of usable Linux 2-CPU slots')
-    prep.add_argument('--windows-weight', type=int, default=1, help='relative number of usable Windows 2-CPU slots')
+    prep.add_argument('--workers', type=Path, required=True, help='private JSON inventory of whole-worker grants')
     prep.add_argument('--linux-python', default='/EDIT/PATH/TO/PYTHON')
     prep.add_argument('--windows-python', default='C:/EDIT/PATH/TO/PYTHON.EXE')
     prep.add_argument('--analysis-python', default=sys.executable, help='absolute Python executable on submit host, with analysis dependencies')
@@ -256,7 +298,7 @@ def main():
     final.add_argument('work', type=Path)
     args = p.parse_args()
     if args.command == 'prepare':
-        prepare(args.work, args.pack, args.commit, args.linux_only, args.analysis_python, args.linux_weight, args.windows_weight, args.linux_python, args.windows_python)
+        prepare(args.work, args.pack, args.commit, args.linux_only, args.analysis_python, args.workers, args.linux_python, args.windows_python)
         return 0
     if args.command == 'final':
         try:
