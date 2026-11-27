@@ -6,29 +6,6 @@ using SHA
 using TOML
 using Unitful
 
-length(ARGS) == 3 || error("Usage: domain-control.jl FROZEN_PLAN b11-pzp|w11-wannier-proxy OUTPUT_TOML")
-plan = load_scientific_plan(ARGS[1])
-request = ARGS[2]
-variant, localization, half_window = if request == "b11-pzp"
-    ("b11-r11", :pzp_tails, 5)
-elseif request == "w11-wannier-proxy"
-    ("b9-r11", :bloch_wannier, 4)
-else
-    error("unknown domain-control input")
-end
-execution = only(filter(e -> e.variant_id == variant, plan.executions))
-execution.operation === :structure_spectrum ||
-    error("domain control requires the frozen structure_spectrum operation")
-point = only(filter(p -> p.execution_id == execution.id, plan.points))
-workflow = QCLNEGFRunner.QCLScientificWorkflow
-configuration = execution.configuration
-raw = workflow._point_resolved_raw(configuration, point)
-resolved = QCLNEGFRunner._resolve_configuration(raw, configuration.provenance)
-p, n, s = resolved.physical, resolved.numerical, resolved.scales
-@assert n.N_z == 144 && n.P_basis == half_window && n.N_b == 11
-@assert ustrip(u"kV/cm", p.F_bias) ≈ 21.0
-@assert point.temperature_K == point.lo_temperature_K == 50.0
-
 function rank11_observation_control(p, n, s, localization)
     grids = build_grids(p, n, s)
     profiles = build_profiles(p, n, s, grids)
@@ -85,16 +62,45 @@ function observation(spectrum)
     )
 end
 
-report = rank11_observation_control(p, n, s, localization)
-report["configuration_source_plan_fingerprint"] = plan.fingerprint
-report["configuration_source_execution_id"] = execution.id
-report["configuration_source_point_id"] = point.id
-report["voltage_per_period_V"] = point.voltage_per_period_V
-report["temperature_K"] = point.temperature_K
-report["lo_temperature_K"] = point.lo_temperature_K
-report["driver_sha256"] = bytes2hex(open(sha256, @__FILE__))
-report["case"] = request
-!ispath(ARGS[3]) || error("domain-control output already exists")
-open(ARGS[3], "w") do io
-    TOML.print(io, report)
+function main()
+    length(ARGS) == 3 || error("Usage: domain-control.jl FROZEN_PLAN b11-pzp|w11-wannier-proxy OUTPUT_TOML")
+    plan = load_scientific_plan(ARGS[1])
+    request = ARGS[2]
+    variant, localization, half_window = if request == "b11-pzp"
+        ("b11-r11", :pzp_tails, 5)
+    elseif request == "w11-wannier-proxy"
+        ("b9-r11", :bloch_wannier, 4)
+    else
+        error("unknown domain-control input")
+    end
+    execution = only(filter(e -> e.variant_id == variant, plan.executions))
+    execution.operation === :structure_spectrum ||
+        error("domain control requires the frozen structure_spectrum operation")
+    point = only(filter(p -> p.execution_id == execution.id, plan.points))
+    workflow = QCLNEGFRunner.QCLScientificWorkflow
+    configuration = execution.configuration
+    raw = workflow._point_resolved_raw(configuration, point)
+    resolved = QCLNEGFRunner._resolve_configuration(raw, configuration.provenance)
+    p, n, s = resolved.physical, resolved.numerical, resolved.scales
+    @assert n.N_z == 144 && n.P_basis == half_window && n.N_b == 11
+    @assert ustrip(u"kV/cm", p.F_bias) ≈ 21.0
+    @assert point.temperature_K == point.lo_temperature_K == 50.0
+
+    report = rank11_observation_control(p, n, s, localization)
+    report["configuration_source_plan_fingerprint"] = plan.fingerprint
+    report["configuration_source_execution_id"] = execution.id
+    report["configuration_source_point_id"] = point.id
+    report["voltage_per_period_V"] = point.voltage_per_period_V
+    report["temperature_K"] = point.temperature_K
+    report["lo_temperature_K"] = point.lo_temperature_K
+    report["driver_sha256"] = bytes2hex(open(sha256, @__FILE__))
+    report["case"] = request
+    !ispath(ARGS[3]) || error("domain-control output already exists")
+    open(ARGS[3], "w") do io
+        TOML.print(io, report)
+    end
+end
+
+if abspath(PROGRAM_FILE) == @__FILE__
+    main()
 end
