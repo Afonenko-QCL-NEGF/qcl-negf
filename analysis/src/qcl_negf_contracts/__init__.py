@@ -36,7 +36,10 @@ def schema_validator(name: str):
         document = load_schema(resource_name)
         document.setdefault("$id", base + resource_name)
         documents[resource_name] = document
-        registry = registry.with_resource(base + resource_name, Resource.from_contents(document))
+        resource = Resource.from_contents(document)
+        registry = registry.with_resource(base + resource_name, resource)
+        if document["$id"] != base + resource_name:
+            registry = registry.with_resource(document["$id"], resource)
     if name not in documents:
         raise ValueError(f"not a validation schema: {name}")
     return Draft202012Validator(documents[name], registry=registry)

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pytest
 from jsonschema import Draft202012Validator
 
@@ -119,6 +121,14 @@ def test_scientific_plan_requires_unique_ids_and_matching_count():
         scientific_plan({**plan, "computation_count": 2})
     with pytest.raises(ContractError, match="duplicate"):
         scientific_plan({**plan, "points": [{"id": "p1"}, {"id": "p1"}]})
+
+
+def test_bundled_run_schema_matches_runner():
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[2]
+    runner = root / "runner" / "schema" / "run.schema.json"
+    assert load_schema("run.schema.json") == json.loads(runner.read_text(encoding="utf-8"))
 
 
 def test_offline_validator_resolves_bundled_schema_references():

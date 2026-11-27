@@ -1,22 +1,141 @@
 {
+  "schema": "qcl-negf-initial-state-controls/v1",
+  "provenance": {
+    "historical_source_revision": "d76b588c1af2ef5d3a4b09b67d0094a9a809db11",
+    "historical_file_sha256": {
+      "studies/fath54-common-q/runner/bosco.jl": "85fb3ba8ec6d51639cc1d90e9c4344626b79d38d91bd76cb921bf58f4956c76c",
+      "studies/fath54-common-q/evidence/f13-replay.json": "fbfce93710cc6b509743b032084aa3ed390aab1a5ee0bce3e83073aecbdf6841",
+      "studies/fath-lo-rank-v843/fath_factorial.jl": "e80ab0b4a53e031e57c39db741bca5343887ab8a027b33130b53c9925ef63687",
+      "runner/examples/config/reference-2019-70k.yaml": "0faeedd211f3292c9bc1278685a199540cf410dde993fd48f6147892e834c831",
+      "studies/fath54-common-q/runner/bosco_vertices.jl": "aba5da3136b87bfb0b7553eff0fd68a0a7e3318aaadb7d830cb08ea10e1e754d",
+      "studies/fath-v843/fath-device.toml": "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502",
+      "studies/fath54-common-q/runner/followup.jl": "f2ad821d044c288329a3a0e98f7a47cc7b9dab244f3c9f6cf0a2d82bb4364ef8"
+    },
+    "control_sha256": "3c2f2ac817f7825c18645a8e7bcdbd18847ef33f96e4c0049cdb080413dfa360",
+    "toolchain": {
+      "core_project_sha256": "226bd707fc4d86d03a4fbf3402a27e2455ad90ae1176ccbbe4efdc0faf75ae83",
+      "fftw_threads": 1,
+      "project_sha256": "b352299b374be1c4810fae146db6d46737e26492ef7e97c96595a6a95554e1e6",
+      "architecture": "x86_64",
+      "runtime_binary_sha256": "67a838f879002604ac74b8de5c8f2d41e605fdfd4800b8bb3de9b5443e5315ff",
+      "kernel": "Linux",
+      "blas_threads": 1,
+      "julia_version": "1.13.4",
+      "runner_project_sha256": "ac5a17064aa91e99e6de7862bc9123d98fdb26e09703ca3b2677fc01c6e59596",
+      "manifest_sha256": "0d2cdbec95a8df56e1727f3472b5053857991e3ca02791bffbf8cf7c510da76b",
+      "gc_threads": 1,
+      "fftw_provider": "fftw",
+      "preferences": [],
+      "blas_backend": "LBTConfig([ILP64] libopenblas64_.so)",
+      "schema": "qcl-negf-toolchain-provenance/v1",
+      "julia_threads": 2
+    },
+    "core": {
+      "version": "0.2.0",
+      "git_head": "7e0ce43c2abdd639d8b9901e779b24751d20bc68",
+      "source_tree_sha256": "108a5606ff38ac111f10a2a88bc75f7f2d6d1c389ab7726223b907aee9950307"
+    },
+    "runner": {
+      "version": "0.2.0",
+      "git_head": "86188264db813ec22347086c44e0df693ea2677e",
+      "source_tree_sha256": "7ae4fdf4c6fe1848f6dac35f6db83dc9cc7c861963bd6e7d3dc9ab234b6931b2"
+    }
+  },
+  "fath": {
+    "geometry": {
+      "period_nm": 43.91000000000001,
+      "voltage_per_period_V": 0.05400000000000003,
+      "field_V_per_m": 1229788.2031427922,
+      "lattice_temperature_K": 10.0,
+      "lo_temperature_K": 10.0,
+      "donor_interval_nm": [
+        33.41,
+        38.41
+      ],
+      "donors_selected_cells": 16,
+      "donor_sheet_cm2": 30000000000.0,
+      "position_nodes": 144,
+      "cuts": 145,
+      "dz_nm": 0.30493055555555565,
+      "energy_nodes": 481,
+      "energy_min_max_eV": [
+        -0.4,
+        0.56
+      ],
+      "energy_weight_sum_eV": 0.9600000000000004,
+      "radial_nodes": 13,
+      "radial_max_nm_inverse": 0.6000000000000001,
+      "radial_measure_nm_minus_2": 0.028647889756541166
+    },
+    "cut_error_nm": 7.105427357601002e-15,
+    "historical_profile_arithmetic": {
+      "mean_A_cm2": 256.38656774101673,
+      "max_deviation_A_cm2": 19.154463866388994,
+      "range_A_cm2": [
+        240.38588865970613,
+        275.5410316074057
+      ],
+      "tolerance_A_cm2": 2.5638656774101674,
+      "input_sha256": "326055b8a545b2401bcdebf5115e97817d7c9e3d4f53245303d339feb5c8372f",
+      "fresh_image_sha256": "d74202bbc508cbd3ae8b3085a750c0caac15816891204fbc689593e1cbd8f9b3",
+      "input_lambda": 1.0003044417637188,
+      "fresh_lambda": 1.0003173530837697,
+      "rK": 0.012579186136166676,
+      "rSigma": 0.009800794273224871,
+      "stationarity": "failed"
+    },
+    "fresh_dyson_map": "unknown"
+  },
   "bosco": {
-    "LO_bose_occupation": 0.13495160228109962,
+    "geometry": {
+      "period_nm": 29.610000000000007,
+      "voltage_per_period_V": 0.05600000000000001,
+      "field_V_per_m": 1891252.955082742,
+      "lattice_temperature_K": 200.0,
+      "lo_temperature_K": 200.0,
+      "donor_interval_nm": [
+        21.55,
+        24.45
+      ],
+      "donors_selected_cells": 10,
+      "donor_sheet_cm2": 45000000000.00001,
+      "position_nodes": 98,
+      "cuts": 99,
+      "dz_nm": 0.3021428571428572,
+      "energy_nodes": 481,
+      "energy_min_max_eV": [
+        -0.4,
+        0.56
+      ],
+      "energy_weight_sum_eV": 0.9600000000000004,
+      "radial_nodes": 31,
+      "radial_max_nm_inverse": 0.6000000000000001,
+      "radial_measure_nm_minus_2": 0.028647889756541155,
+      "angular_nodes": 32,
+      "qz_nodes": 641
+    },
     "cold_seed": {
-      "broadening_meV": 0.5,
-      "chemical_potential_meV": -78.53783826222481,
+      "label": "unrefined W5 control",
+      "periods": 9,
+      "rank": 5,
       "collision_coordinate_rank": 18,
       "coverage_error": 1.3179974947311333e-11,
-      "independent_sum_difference_cm2": 0.0,
-      "label": "unrefined W5 control",
       "metric_condition": 1.1011192664581793,
-      "periods": 9,
+      "broadening_meV": 0.5,
+      "chemical_potential_meV": -78.53783826222481,
+      "raw_sheet_cm2": 44999999999.99998,
+      "relative_charge_error": 6.16790569236198e-16,
+      "independent_sum_difference_cm2": 0.0,
       "pole_range_meV": [
         -244.90390312371838,
         576.4920161929211
-      ],
-      "rank": 5,
-      "raw_sheet_cm2": 44999999999.99998,
-      "relative_charge_error": 6.16790569236198e-16
+      ]
+    },
+    "LO_bose_occupation": 0.13495160228109962,
+    "radial_pair_reciprocity": {
+      "LO": 1.1298930521159497e-16,
+      "impurity": 0.0,
+      "IFR": 0.0
     },
     "diagonal_local_channels": {
       "acoustic_range": [
@@ -30,159 +149,40 @@
     },
     "five_channel_projected_comparison": [
       {
-        "incoming_nm_inverse": 0.0,
         "outgoing_nm_inverse": 0.0,
+        "incoming_nm_inverse": 0.0,
         "relative_frobenius": {
+          "alloy": 1.8581228686348405e-16,
           "IFR": 4.96225681803481e-16,
           "LO": 1.1568679607943034e-15,
           "acoustic": 1.8354896405786925e-16,
-          "alloy": 1.8581228686348405e-16,
           "impurity": 5.230379470636569e-16
         }
       },
       {
-        "incoming_nm_inverse": 0.6,
         "outgoing_nm_inverse": 0.0,
+        "incoming_nm_inverse": 0.6,
         "relative_frobenius": {
+          "alloy": 1.8581228686348405e-16,
           "IFR": 6.695112851195154e-16,
           "LO": 8.367456257903837e-16,
           "acoustic": 1.8354896405786925e-16,
-          "alloy": 1.8581228686348405e-16,
           "impurity": 3.198165013280563e-16
         }
       },
       {
-        "incoming_nm_inverse": 0.3,
         "outgoing_nm_inverse": 0.3,
+        "incoming_nm_inverse": 0.3,
         "relative_frobenius": {
+          "alloy": 1.8581228686348405e-16,
           "IFR": 2.459837005112523e-16,
           "LO": 5.114219618968523e-16,
           "acoustic": 1.8354896405786925e-16,
-          "alloy": 1.8581228686348405e-16,
           "impurity": 4.3401929667285516e-16
         }
       }
     ],
-    "fresh_dyson_map": "unknown",
-    "geometry": {
-      "angular_nodes": 32,
-      "cuts": 99,
-      "donor_interval_nm": [
-        21.55,
-        24.45
-      ],
-      "donor_sheet_cm2": 45000000000.00001,
-      "donors_selected_cells": 10,
-      "dz_nm": 0.3021428571428572,
-      "energy_min_max_eV": [
-        -0.4,
-        0.56
-      ],
-      "energy_nodes": 481,
-      "energy_weight_sum_eV": 0.9600000000000004,
-      "field_V_per_m": 1891252.955082742,
-      "lattice_temperature_K": 200.0,
-      "lo_temperature_K": 200.0,
-      "period_nm": 29.610000000000007,
-      "position_nodes": 98,
-      "qz_nodes": 641,
-      "radial_max_nm_inverse": 0.6000000000000001,
-      "radial_measure_nm_minus_2": 0.028647889756541155,
-      "radial_nodes": 31,
-      "voltage_per_period_V": 0.05600000000000001
-    },
-    "radial_pair_reciprocity": {
-      "IFR": 0.0,
-      "LO": 1.1298930521159497e-16,
-      "impurity": 0.0
-    },
-    "selected_scheme": "unknown"
-  },
-  "fath": {
-    "cut_error_nm": 7.105427357601002e-15,
-    "fresh_dyson_map": "unknown",
-    "geometry": {
-      "cuts": 145,
-      "donor_interval_nm": [
-        33.41,
-        38.41
-      ],
-      "donor_sheet_cm2": 30000000000.0,
-      "donors_selected_cells": 16,
-      "dz_nm": 0.30493055555555565,
-      "energy_min_max_eV": [
-        -0.4,
-        0.56
-      ],
-      "energy_nodes": 481,
-      "energy_weight_sum_eV": 0.9600000000000004,
-      "field_V_per_m": 1229788.2031427922,
-      "lattice_temperature_K": 10.0,
-      "lo_temperature_K": 10.0,
-      "period_nm": 43.91000000000001,
-      "position_nodes": 144,
-      "radial_max_nm_inverse": 0.6000000000000001,
-      "radial_measure_nm_minus_2": 0.028647889756541166,
-      "radial_nodes": 13,
-      "voltage_per_period_V": 0.05400000000000003
-    },
-    "historical_profile_arithmetic": {
-      "fresh_image_sha256": "d74202bbc508cbd3ae8b3085a750c0caac15816891204fbc689593e1cbd8f9b3",
-      "fresh_lambda": 1.0003173530837697,
-      "input_lambda": 1.0003044417637188,
-      "input_sha256": "326055b8a545b2401bcdebf5115e97817d7c9e3d4f53245303d339feb5c8372f",
-      "max_deviation_A_cm2": 19.154463866388994,
-      "mean_A_cm2": 256.38656774101673,
-      "rK": 0.012579186136166676,
-      "rSigma": 0.009800794273224871,
-      "range_A_cm2": [
-        240.38588865970613,
-        275.5410316074057
-      ],
-      "stationarity": "failed",
-      "tolerance_A_cm2": 2.5638656774101674
-    }
-  },
-  "provenance": {
-    "control_sha256": "3c2f2ac817f7825c18645a8e7bcdbd18847ef33f96e4c0049cdb080413dfa360",
-    "core": {
-      "git_head": "1124e48da4cdcfc03cfd39cfd70033981351d52c",
-      "source_tree_sha256": "e772432eec404508ef217957d60aef889a363e187bf334f8bd99d18720bcc10a",
-      "version": "0.2.0"
-    },
-    "historical_file_sha256": {
-      "runner/examples/config/reference-2019-70k.yaml": "0faeedd211f3292c9bc1278685a199540cf410dde993fd48f6147892e834c831",
-      "studies/fath-lo-rank-v843/fath_factorial.jl": "e80ab0b4a53e031e57c39db741bca5343887ab8a027b33130b53c9925ef63687",
-      "studies/fath-v843/fath-device.toml": "4e4314af4696465084b48fc7e22cd0310c03889256f19abaa2500ee6a923d502",
-      "studies/fath54-common-q/evidence/f13-replay.json": "fbfce93710cc6b509743b032084aa3ed390aab1a5ee0bce3e83073aecbdf6841",
-      "studies/fath54-common-q/runner/bosco.jl": "85fb3ba8ec6d51639cc1d90e9c4344626b79d38d91bd76cb921bf58f4956c76c",
-      "studies/fath54-common-q/runner/bosco_vertices.jl": "aba5da3136b87bfb0b7553eff0fd68a0a7e3318aaadb7d830cb08ea10e1e754d",
-      "studies/fath54-common-q/runner/followup.jl": "f2ad821d044c288329a3a0e98f7a47cc7b9dab244f3c9f6cf0a2d82bb4364ef8"
-    },
-    "historical_source_revision": "d76b588c1af2ef5d3a4b09b67d0094a9a809db11",
-    "runner": {
-      "git_head": "c2802fd8f457f32e4d61923740bfd5f8f752e23c",
-      "source_tree_sha256": "d77cdcf7b742020f79451bcb908945ec689aae35e02b29cfdf38de136c085b71",
-      "version": "0.2.0"
-    },
-    "toolchain": {
-      "architecture": "x86_64",
-      "blas_backend": "LBTConfig([ILP64] libopenblas64_.so)",
-      "blas_threads": 1,
-      "core_project_sha256": "226bd707fc4d86d03a4fbf3402a27e2455ad90ae1176ccbbe4efdc0faf75ae83",
-      "fftw_provider": "fftw",
-      "fftw_threads": 1,
-      "gc_threads": 1,
-      "julia_threads": 2,
-      "julia_version": "1.13.4",
-      "kernel": "Linux",
-      "manifest_sha256": "0df4934a03775afc67040bdd93413cd532d27641793a22a916d13e870b1c9fa6",
-      "preferences": [],
-      "project_sha256": "a6d93514dd464a5bc2b43ef6954e0cad4ece5685449b21f073b732fb7cb48565",
-      "runner_project_sha256": "ac5a17064aa91e99e6de7862bc9123d98fdb26e09703ca3b2677fc01c6e59596",
-      "runtime_binary_sha256": "67a838f879002604ac74b8de5c8f2d41e605fdfd4800b8bb3de9b5443e5315ff",
-      "schema": "qcl-negf-toolchain-provenance/v1"
-    }
-  },
-  "schema": "qcl-negf-initial-state-controls/v1"
+    "selected_scheme": "unknown",
+    "fresh_dyson_map": "unknown"
+  }
 }

@@ -12,7 +12,12 @@ uv pip install '.[test]'
 .venv/bin/python -m pytest tests contracts-tests
 ```
 
-The migrated sources are Results `cefffb3460545410e3e5f17c74ade999efc76cf7` and Contracts `bd1270d00502120b37377e8522a0bf4eb3926401`. The reader remains independent of the solver and retains its own scientific calculations. Its bundled contract resources are the current copy for this distribution; runner and analysis must eventually consume a single shared schema source in the application. The Runner and Contracts copies of `results-contract-set.json` match; their `run.schema.json` files differ, including the `human_every` field. Reconcile that schema against the actual Runner configuration and validate consumers before choosing one authoritative copy. Until then, schema changes must be checked against both copies.
+The migrated sources are Results `cefffb3460545410e3e5f17c74ade999efc76cf7`
+and Contracts `bd1270d00502120b37377e8522a0bf4eb3926401`. The reader retains its
+independent scientific calculations. Runner owns the resolved configuration
+schema in [runner/schema/run.schema.json](../runner/schema/run.schema.json).
+The Python package bundles the same schema for standalone use. A contract test
+checks the copies.
 
 ## Inspect and export
 
