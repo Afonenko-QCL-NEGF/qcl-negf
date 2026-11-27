@@ -1,0 +1,394 @@
+{
+  "case_counts": {
+    "H": 24,
+    "RH": 4,
+    "G": 27,
+    "RG": 8,
+    "I": 8,
+    "RI": 4,
+    "F": 6
+  },
+  "transport_maps": 0,
+  "transport_map_admission": "not_assessed",
+  "units": "Error ratios are fractional unless specified. k in nm^-1, energies in eV unless marked meV.",
+  "H": {
+    "detected_cases": 28,
+    "relative_limit": 1e-10,
+    "TOML_fields": [
+      "pairs.<side>.k_results[].paired_H_relative_residual",
+      "pairs.<side>.k_results[].translation_covariance_relative_residual"
+    ],
+    "sample_columns": [
+      "max_paired_relative",
+      "max_covariance_relative"
+    ],
+    "samples": {
+      "H_B11_R11_Z288": [
+        0.000528003976523118,
+        1.580610629213399e-05
+      ],
+      "H_B15_R11_Z288": [
+        5.955324734010106e-05,
+        1.3576763839047558e-06
+      ],
+      "RH_B15_R11": [
+        3.804613140115178e-05,
+        9.346430955763318e-07
+      ],
+      "RH_B19_R11": [
+        3.827338183206589e-06,
+        7.639204833869248e-08
+      ],
+      "H_B11_R14_Z288": [
+        0.000764404616528872,
+        9.484970373753335e-06
+      ],
+      "H_B15_R8_Z288": [
+        1.3825463622584552e-09,
+        1.0736768329016811e-11
+      ],
+      "H_B7_R14_Z216": [
+        0.012563373092209871,
+        0.00011113298329849848
+      ]
+    },
+    "worst_side_and_k_nm_inverse": {
+      "H_B11_R11_Z288": [
+        "plus",
+        0.0
+      ],
+      "H_B15_R11_Z288": [
+        "plus",
+        0.0
+      ],
+      "RH_B15_R11": [
+        "plus",
+        0.0
+      ],
+      "RH_B19_R11": [
+        "plus",
+        0.0
+      ]
+    },
+    "width_comparisons_decreasing_both": [
+      20,
+      20
+    ],
+    "rank_comparisons_increasing_paired": [
+      18,
+      18
+    ],
+    "RH_maximum_lost_probability": 7.275095569303502e-07,
+    "RH_minimum_principal_singular_value": 0.9999907694591549
+  },
+  "G": {
+    "detected_cases": 32,
+    "cases_not_detected_at_all_k": [
+      "G_B9_R14_ETA1p0",
+      "G_B11_R14_ETA1p0",
+      "G_B15_R14_ETA1p0"
+    ],
+    "working_limit": 0.01,
+    "TOML_fields": [
+      "energy_eV",
+      "cases[].probes[kind=fixed_gaussian].coordinate_per_eV",
+      "cases[].probes[kind=fixed_gaussian].galerkin_per_eV"
+    ],
+    "per_k_counts": {
+      "G": {
+        "detected": 201,
+        "unresolved": 16,
+        "not_detected": 242
+      },
+      "RG": {
+        "detected": 81,
+        "unresolved": 12,
+        "not_detected": 171
+      }
+    },
+    "Dfine_range": {
+      "G": [
+        1.3376268492306276e-05,
+        0.23886022857227077
+      ],
+      "RG": [
+        1.919626201656915e-05,
+        0.09279488626410654
+      ]
+    },
+    "maximum_G": {
+      "case": "G_B9_R8_ETA0p25",
+      "k_nm_inverse": 0.4875,
+      "Dfine": 0.23886022857227077
+    },
+    "maximum_RG": {
+      "case": "RG_B15_R11_ETA0p25",
+      "k_nm_inverse": 0.50625,
+      "Dfine": 0.09279488626410654,
+      "Dcoarse": 0.10209647935949676
+    },
+    "sample_common_k_nm_inverse": 0.4875,
+    "sample_columns": [
+      "Dfine",
+      "Dcoarse"
+    ],
+    "samples": {
+      "G_B11_R11_ETA0p5": [
+        0.03769681359971749,
+        0.03907953938664018
+      ],
+      "G_B11_R14_ETA0p5": [
+        0.019336073203776415,
+        0.019535783770010178
+      ],
+      "G_B11_R14_ETA1p0": [
+        0.007461999106938038,
+        0.007599192058385905
+      ],
+      "RG_B11_R11_ETA0p5": [
+        0.033185157236871425,
+        0.033309590073719794
+      ],
+      "RG_B11_R14_ETA0p5": [
+        0.017563380530122713,
+        0.017227932555575722
+      ],
+      "RG_B15_R11_ETA0p25": [
+        0.06927841357224641,
+        0.06860530753252955
+      ]
+    },
+    "rank_comparisons_decreasing_max_Dfine": [
+      22,
+      22
+    ],
+    "common_grid_pairs": {
+      "case_pairs": 8,
+      "common_k_per_pair": 17,
+      "Dfine_change_range": [
+        -0.02722309615259874,
+        0.010410380012507828
+      ]
+    },
+    "gaussian_projected_weight_range": {
+      "G": [
+        0.9575524903785065,
+        0.9971092749670798
+      ],
+      "RG": [
+        0.9904860811234925,
+        0.9971015892307862
+      ]
+    },
+    "global_peak_within_two_eta_of_edge_per_curve": {
+      "G": [
+        81,
+        459
+      ],
+      "RG": [
+        40,
+        264
+      ]
+    }
+  },
+  "I": {
+    "reference_angles": 4096,
+    "control_angles": 2048,
+    "control_limit": 0.001,
+    "diagnostic_limit": 0.01,
+    "TOML_fields": [
+      "results.<part>_<probe>.comparisons.<angle>.weighted_relative_frobenius_error",
+      "results.<part>_<probe>.comparisons.<angle>.worst_pair_error_over_full_reference",
+      "results.<part>_<probe>.reference_norm_over_full",
+      "peak"
+    ],
+    "control_maxima": [
+      0.000334538921057523,
+      0.00044708022121303545
+    ],
+    "full_metric_columns": [
+      "within_limit",
+      "comparisons",
+      "maximum_weighted_relative",
+      "maximum_worst_pair_relative"
+    ],
+    "full_metrics": {
+      "128": [
+        0,
+        24,
+        0.04909539943776242,
+        0.13949105174494342
+      ],
+      "512": [
+        24,
+        24,
+        0.0032062055870597586,
+        0.009330011649654817
+      ],
+      "1024": [
+        24,
+        24,
+        0.0007660043575392234,
+        0.0022325659495258765
+      ]
+    },
+    "smallest_eligible_full_angles": 512,
+    "coherent_at_128": {
+      "I_K17_Z288": {
+        "weighted_relative": 0.04004547974322827,
+        "worst_pair_relative": 0.13809943268194755,
+        "pair_1based": [
+          17,
+          17
+        ],
+        "forward_error_over_full_reference_norm": 0.03720042637660854
+      },
+      "I_K65_Z288": {
+        "weighted_relative": 0.021423017368189953,
+        "worst_pair_relative": 0.13809943268194755,
+        "pair_1based": [
+          65,
+          65
+        ],
+        "forward_error_over_full_reference_norm": 0.019954736372769864
+      },
+      "RI_K65_Z288": {
+        "weighted_relative": 0.021423017368189953,
+        "worst_pair_relative": 0.13809943268194755,
+        "pair_1based": [
+          65,
+          65
+        ],
+        "forward_error_over_full_reference_norm": 0.01742996425824947
+      }
+    },
+    "at_128_forward_error_norm_over_full_error_norm": {
+      "I": [
+        0.9260172652027479,
+        0.939849411026049
+      ],
+      "RI": [
+        0.8019955186571787,
+        0.8243613550171764
+      ]
+    },
+    "at_128_rest_error_norm_over_full_error_norm": {
+      "I": [
+        0.08761262754766458,
+        0.1870725854349462
+      ],
+      "RI": [
+        0.28442551527556126,
+        0.4083553582895828
+      ]
+    },
+    "equal_ring_peak_zero_over_average": 40.853586469863615
+  },
+  "F": {
+    "within_limit": 6,
+    "relative_limit": 1e-10,
+    "TOML_fields": [
+      "boundary_phase_results.<phase>.ring_spectrum_eV",
+      "boundary_phase_results.<phase>.primitive_union_spectrum_eV"
+    ],
+    "relative_difference_range": [
+      7.894419673027578e-15,
+      1.0445222611007484e-14
+    ],
+    "absolute_difference_eV_range": [
+      2.8421709430404007e-13,
+      1.5063505998114124e-12
+    ],
+    "maximum": {
+      "case": "F_N9_Z288",
+      "phase": "antiperiodic",
+      "normalizer_eV": 144.2143126967898
+    }
+  },
+  "artifacts": {
+    "H_B11_R11_Z288": {
+      "path": "collected/H_B11_R11_Z288.toml",
+      "sha256": "55c2f5c806bb670f0f7c7a7e9209535cfa6499a45aae3de74d6f06062e88a6bc"
+    },
+    "H_B15_R11_Z288": {
+      "path": "collected/H_B15_R11_Z288.toml",
+      "sha256": "fd12f14f2893a47f0e176b929cd67a8e5e836cd39fb759176d21c5ffb40605be"
+    },
+    "RH_B15_R11": {
+      "path": "collected/RH_B15_R11.toml",
+      "sha256": "bde13c63f87eb9a94b848b86ca3200073134d67e5c5769986c3277541103a63b"
+    },
+    "RH_B19_R11": {
+      "path": "collected/RH_B19_R11.toml",
+      "sha256": "068afce54444c148b349242b40b94c5753085cea813002c5cb9e39ab22063879"
+    },
+    "H_B11_R14_Z288": {
+      "path": "collected/H_B11_R14_Z288.toml",
+      "sha256": "1247846a3940406b342022fdea97e9eb6924488fdc5753364357226fcd14d67d"
+    },
+    "H_B15_R8_Z288": {
+      "path": "collected/H_B15_R8_Z288.toml",
+      "sha256": "26dfe3f5eaaf7c2c414a14a236fe4939f3964c4c50c118ba16ca7b92fe8ef2ba"
+    },
+    "H_B7_R14_Z216": {
+      "path": "collected/H_B7_R14_Z216.toml",
+      "sha256": "363169a0ee95a0a5e7f6d1c95c3d3308bcafaf3db5a6720e7e4c8946f7c49703"
+    },
+    "G_B11_R11_ETA0p5": {
+      "path": "collected/G_B11_R11_ETA0p5.toml",
+      "sha256": "3d3d562dc235f47bd2801abcafc07ded31d7da4b132dd5f0a21c289f0c8f945f"
+    },
+    "G_B11_R14_ETA0p5": {
+      "path": "collected/G_B11_R14_ETA0p5.toml",
+      "sha256": "2b5282da16f1366236fc88e95e58677e11018c252b1326c716a548ad487fa3d9"
+    },
+    "G_B11_R14_ETA1p0": {
+      "path": "collected/G_B11_R14_ETA1p0.toml",
+      "sha256": "1bde430faa902781ca1e9ec7c45b5aefd36d623a8a83f6c8596a3253ee391250"
+    },
+    "RG_B11_R11_ETA0p5": {
+      "path": "collected/RG_B11_R11_ETA0p5.toml",
+      "sha256": "f25dcf819a4f086441d8b63d47fb9f779cfacc99c8f35aa65e1285323f2f343b"
+    },
+    "RG_B11_R14_ETA0p5": {
+      "path": "collected/RG_B11_R14_ETA0p5.toml",
+      "sha256": "ff19d9d551d68a648c4c5d9ee3ba38ee66a600481a0439af40e7b4c51cf501ca"
+    },
+    "G_B9_R8_ETA0p25": {
+      "path": "collected/G_B9_R8_ETA0p25.toml",
+      "sha256": "a71281f2de2dbaf2787ae9908886b4f354dfb9c490890ff479decf4851103c61"
+    },
+    "RG_B15_R11_ETA0p25": {
+      "path": "collected/RG_B15_R11_ETA0p25.toml",
+      "sha256": "438dfab80cd1330b50970a8999cec4b2daddb187a4b62a1fddf06d0e10f43d49"
+    },
+    "I_K17_Z288": {
+      "path": "collected/I_K17_Z288.toml",
+      "sha256": "fa6fb9effd9452a9f577b12974cbd747a187adf3f18d573937a3c517c6ff1ab5"
+    },
+    "I_K65_Z288": {
+      "path": "collected/I_K65_Z288.toml",
+      "sha256": "9f8dded69e9e9b39bbc22aa2ca6dad631ee0d69bcc23b99d5156119f63728cc7"
+    },
+    "RI_K65_Z288": {
+      "path": "collected/RI_K65_Z288.toml",
+      "sha256": "683b46eed6e37460bbb5e8c94b5aa1d9dd2e8b3ad636db94be982f06ef63062d"
+    },
+    "I_K9_Z216": {
+      "path": "collected/I_K9_Z216.toml",
+      "sha256": "e5762c6e22e776e9498d9d0e1f71e80855bce1d66568f81fbf29a12c67996a61"
+    },
+    "RI_K65_Z384": {
+      "path": "collected/RI_K65_Z384.toml",
+      "sha256": "414844ca43077e6cd73664f6aa7fa2786c6befedc8667fe8b84c73bbd5157d09"
+    },
+    "F_N9_Z288": {
+      "path": "recovery-floquet-87b3e4d/collected/F_N9_Z288.toml",
+      "sha256": "1a8fd280c2c77682725c70259ace8f28545748199f4d10a8855868cd120a357e"
+    },
+    "F_N11_Z144": {
+      "path": "recovery-floquet-87b3e4d/collected/F_N11_Z144.toml",
+      "sha256": "57fd3e858ed100c4a94d77d861e848471e9c26507af3023d5949e51a341b382f"
+    }
+  }
+}
