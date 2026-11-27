@@ -15,6 +15,8 @@ from .presentation import committed_generation, inside
 
 def read_cell_spectrum(artifact_root: Path) -> dict:
     generation, commit, _ = committed_generation(artifact_root)
+    if commit.get("terminal_status") != "completed":
+        raise ValueError("the spectrum requires a completed diagnostic process")
     records = [
         item for item in commit["artifacts"]
         if item.get("role") == "science.comparison"
@@ -27,7 +29,9 @@ def read_cell_spectrum(artifact_root: Path) -> dict:
     if len(content) != record["bytes"] or hashlib.sha256(content).hexdigest() != record["sha256"]:
         raise ValueError("cell spectrum artifact does not match its commit")
     payload = json.loads(content)
-    if payload.get("schema") != record["schema"] or payload.get("operation") != "structure_spectrum":
+    if (payload.get("schema") != record["schema"]
+            or payload.get("contract_set") != commit["contract_set"]
+            or payload.get("operation") != "structure_spectrum"):
         raise ValueError("expected structure_spectrum diagnostic")
     identity = commit["identity"]
     fingerprint = identity.get("plan_fingerprint")
